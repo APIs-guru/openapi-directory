@@ -1,0 +1,1815 @@
+swagger: '2.0'
+schemes:
+  - https
+host: videointelligence.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text.'
+  title: Cloud Video Intelligence
+  version: v1p1beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - media
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.11
+      format: google
+      url: 'https://videointelligence.googleapis.com/$discovery/rest?version=v1p1beta1'
+      version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: videointelligence
+externalDocs:
+  url: 'https://cloud.google.com/video-intelligence/docs/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: videos
+paths:
+  '/v1p1beta1/videos:annotate':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Performs asynchronous video annotation. Progress and results can be
+        retrieved through the `google.longrunning.Operations` interface.
+        `Operation.metadata` contains `AnnotateVideoProgress` (progress).
+        `Operation.response` contains `AnnotateVideoResponse` (results).
+      operationId: videointelligence.videos.annotate
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleLongrunning_Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - videos
+definitions:
+  GoogleCloudVideointelligenceV1_AnnotateVideoProgress:
+    description: |-
+      Video annotation progress. Included in the `metadata`
+      field of the `Operation` returned by the `GetOperation`
+      call of the `google::longrunning::Operations` service.
+    properties:
+      annotationProgress:
+        description: Progress metadata for all videos specified in `AnnotateVideoRequest`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoAnnotationProgress'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1_AnnotateVideoResponse:
+    description: |-
+      Video annotation response. Included in the `response`
+      field of the `Operation` returned by the `GetOperation`
+      call of the `google::longrunning::Operations` service.
+    properties:
+      annotationResults:
+        description: Annotation results for all videos specified in `AnnotateVideoRequest`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoAnnotationResults'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1_Entity:
+    description: Detected entity from video analysis.
+    properties:
+      description:
+        description: 'Textual description, e.g. `Fixed-gear bicycle`.'
+        type: string
+      entityId:
+        description: |-
+          Opaque entity ID. Some IDs may be available in
+          [Google Knowledge Graph Search
+          API](https://developers.google.com/knowledge-graph/).
+        type: string
+      languageCode:
+        description: Language code for `description` in BCP-47 format.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1_ExplicitContentAnnotation:
+    description: |-
+      Explicit content annotation (based on per-frame visual signals only).
+      If no explicit content has been detected in a frame, no annotations are
+      present for that frame.
+    properties:
+      frames:
+        description: All video frames where explicit content was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_ExplicitContentFrame'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1_ExplicitContentFrame:
+    description: Video frame level annotation results for explicit content.
+    properties:
+      pornographyLikelihood:
+        description: Likelihood of the pornography content..
+        enum:
+          - LIKELIHOOD_UNSPECIFIED
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      timeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video, corresponding to the
+          video frame for this location.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1_LabelAnnotation:
+    description: Label annotation.
+    properties:
+      categoryEntities:
+        description: |-
+          Common categories for the detected entity.
+          E.g. when the label is `Terrier` the category is likely `dog`. And in some
+          cases there might be more than one categories e.g. `Terrier` could also be
+          a `pet`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_Entity'
+        type: array
+      entity:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1_Entity'
+        description: Detected entity.
+      frames:
+        description: All video frames where a label was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelFrame'
+        type: array
+      segments:
+        description: All video segments where a label was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelSegment'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1_LabelFrame:
+    description: Video frame level annotation results for label detection.
+    properties:
+      confidence:
+        description: 'Confidence that the label is accurate. Range: [0, 1].'
+        format: float
+        type: number
+      timeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video, corresponding to the
+          video frame for this location.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1_LabelSegment:
+    description: Video segment level annotation results for label detection.
+    properties:
+      confidence:
+        description: 'Confidence that the label is accurate. Range: [0, 1].'
+        format: float
+        type: number
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoSegment'
+        description: Video segment where a label was detected.
+    type: object
+  GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative:
+    description: Alternative hypotheses (a.k.a. n-best list).
+    properties:
+      confidence:
+        description: |-
+          The confidence estimate between 0.0 and 1.0. A higher number
+          indicates an estimated greater likelihood that the recognized words are
+          correct. This field is typically provided only for the top hypothesis, and
+          only for `is_final=true` results. Clients should not rely on the
+          `confidence` field as it is not guaranteed to be accurate or consistent.
+          The default of 0.0 is a sentinel value indicating `confidence` was not set.
+        format: float
+        type: number
+      transcript:
+        description: Transcript text representing the words that the user spoke.
+        type: string
+      words:
+        description: A list of word-specific information for each recognized word.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_WordInfo'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1_SpeechTranscription:
+    description: A speech recognition result corresponding to a portion of the audio.
+    properties:
+      alternatives:
+        description: |-
+          May contain one or more recognition hypotheses (up to the maximum specified
+          in `max_alternatives`).  These alternatives are ordered in terms of
+          accuracy, with the top (first) alternative being the most probable, as
+          ranked by the recognizer.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative'
+        type: array
+      languageCode:
+        description: |-
+          Output only. The
+          [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+          language in this result. This language code was detected to have the most
+          likelihood of being spoken in the audio.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1_VideoAnnotationProgress:
+    description: Annotation progress for a single video.
+    properties:
+      inputUri:
+        description: |-
+          Video file location in
+          [Google Cloud Storage](https://cloud.google.com/storage/).
+        type: string
+      progressPercent:
+        description: |-
+          Approximate percentage processed thus far. Guaranteed to be
+          100 when fully processed.
+        format: int32
+        type: integer
+      startTime:
+        description: Time when the request was received.
+        format: google-datetime
+        type: string
+      updateTime:
+        description: Time of the most recent update.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1_VideoAnnotationResults:
+    description: Annotation results for a single video.
+    properties:
+      error:
+        $ref: '#/definitions/GoogleRpc_Status'
+        description: |-
+          If set, indicates an error. Note that for a single `AnnotateVideoRequest`
+          some videos may succeed and some may fail.
+      explicitAnnotation:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1_ExplicitContentAnnotation'
+        description: Explicit content annotation.
+      frameLabelAnnotations:
+        description: |-
+          Label annotations on frame level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelAnnotation'
+        type: array
+      inputUri:
+        description: |-
+          Video file location in
+          [Google Cloud Storage](https://cloud.google.com/storage/).
+        type: string
+      segmentLabelAnnotations:
+        description: |-
+          Label annotations on video level or user specified segment level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelAnnotation'
+        type: array
+      shotAnnotations:
+        description: Shot annotations. Each shot is represented as a video segment.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoSegment'
+        type: array
+      shotLabelAnnotations:
+        description: |-
+          Label annotations on shot level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelAnnotation'
+        type: array
+      speechTranscriptions:
+        description: Speech transcription.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_SpeechTranscription'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1_VideoSegment:
+    description: Video segment.
+    properties:
+      endTimeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video,
+          corresponding to the end of the segment (inclusive).
+        format: google-duration
+        type: string
+      startTimeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video,
+          corresponding to the start of the segment (inclusive).
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1_WordInfo:
+    description: |-
+      Word-specific information for recognized words. Word information is only
+      included in the response when certain request parameters are set, such
+      as `enable_word_time_offsets`.
+    properties:
+      confidence:
+        description: |-
+          Output only. The confidence estimate between 0.0 and 1.0. A higher number
+          indicates an estimated greater likelihood that the recognized words are
+          correct. This field is set only for the top alternative.
+          This field is not guaranteed to be accurate and users should not rely on it
+          to be always provided.
+          The default of 0.0 is a sentinel value indicating `confidence` was not set.
+        format: float
+        type: number
+      endTime:
+        description: |-
+          Time offset relative to the beginning of the audio, and
+          corresponding to the end of the spoken word. This field is only set if
+          `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+          experimental feature and the accuracy of the time offset can vary.
+        format: google-duration
+        type: string
+      speakerTag:
+        description: |-
+          Output only. A distinct integer value is assigned for every speaker within
+          the audio. This field specifies which one of those speakers was detected to
+          have spoken this word. Value ranges from 1 up to diarization_speaker_count,
+          and is only set if speaker diarization is enabled.
+        format: int32
+        type: integer
+      startTime:
+        description: |-
+          Time offset relative to the beginning of the audio, and
+          corresponding to the start of the spoken word. This field is only set if
+          `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+          experimental feature and the accuracy of the time offset can vary.
+        format: google-duration
+        type: string
+      word:
+        description: The word corresponding to this set of information.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress:
+    description: |-
+      Video annotation progress. Included in the `metadata`
+      field of the `Operation` returned by the `GetOperation`
+      call of the `google::longrunning::Operations` service.
+    properties:
+      annotationProgress:
+        description: Progress metadata for all videos specified in `AnnotateVideoRequest`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse:
+    description: |-
+      Video annotation response. Included in the `response`
+      field of the `Operation` returned by the `GetOperation`
+      call of the `google::longrunning::Operations` service.
+    properties:
+      annotationResults:
+        description: Annotation results for all videos specified in `AnnotateVideoRequest`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1beta2_Entity:
+    description: Detected entity from video analysis.
+    properties:
+      description:
+        description: 'Textual description, e.g. `Fixed-gear bicycle`.'
+        type: string
+      entityId:
+        description: |-
+          Opaque entity ID. Some IDs may be available in
+          [Google Knowledge Graph Search
+          API](https://developers.google.com/knowledge-graph/).
+        type: string
+      languageCode:
+        description: Language code for `description` in BCP-47 format.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation:
+    description: |-
+      Explicit content annotation (based on per-frame visual signals only).
+      If no explicit content has been detected in a frame, no annotations are
+      present for that frame.
+    properties:
+      frames:
+        description: All video frames where explicit content was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame:
+    description: Video frame level annotation results for explicit content.
+    properties:
+      pornographyLikelihood:
+        description: Likelihood of the pornography content..
+        enum:
+          - LIKELIHOOD_UNSPECIFIED
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      timeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video, corresponding to the
+          video frame for this location.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1beta2_LabelAnnotation:
+    description: Label annotation.
+    properties:
+      categoryEntities:
+        description: |-
+          Common categories for the detected entity.
+          E.g. when the label is `Terrier` the category is likely `dog`. And in some
+          cases there might be more than one categories e.g. `Terrier` could also be
+          a `pet`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_Entity'
+        type: array
+      entity:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_Entity'
+        description: Detected entity.
+      frames:
+        description: All video frames where a label was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_LabelFrame'
+        type: array
+      segments:
+        description: All video segments where a label was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_LabelSegment'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1beta2_LabelFrame:
+    description: Video frame level annotation results for label detection.
+    properties:
+      confidence:
+        description: 'Confidence that the label is accurate. Range: [0, 1].'
+        format: float
+        type: number
+      timeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video, corresponding to the
+          video frame for this location.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1beta2_LabelSegment:
+    description: Video segment level annotation results for label detection.
+    properties:
+      confidence:
+        description: 'Confidence that the label is accurate. Range: [0, 1].'
+        format: float
+        type: number
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_VideoSegment'
+        description: Video segment where a label was detected.
+    type: object
+  GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative:
+    description: Alternative hypotheses (a.k.a. n-best list).
+    properties:
+      confidence:
+        description: |-
+          The confidence estimate between 0.0 and 1.0. A higher number
+          indicates an estimated greater likelihood that the recognized words are
+          correct. This field is typically provided only for the top hypothesis, and
+          only for `is_final=true` results. Clients should not rely on the
+          `confidence` field as it is not guaranteed to be accurate or consistent.
+          The default of 0.0 is a sentinel value indicating `confidence` was not set.
+        format: float
+        type: number
+      transcript:
+        description: Transcript text representing the words that the user spoke.
+        type: string
+      words:
+        description: A list of word-specific information for each recognized word.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_WordInfo'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1beta2_SpeechTranscription:
+    description: A speech recognition result corresponding to a portion of the audio.
+    properties:
+      alternatives:
+        description: |-
+          May contain one or more recognition hypotheses (up to the maximum specified
+          in `max_alternatives`).  These alternatives are ordered in terms of
+          accuracy, with the top (first) alternative being the most probable, as
+          ranked by the recognizer.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative'
+        type: array
+      languageCode:
+        description: |-
+          Output only. The
+          [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+          language in this result. This language code was detected to have the most
+          likelihood of being spoken in the audio.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress:
+    description: Annotation progress for a single video.
+    properties:
+      inputUri:
+        description: |-
+          Video file location in
+          [Google Cloud Storage](https://cloud.google.com/storage/).
+        type: string
+      progressPercent:
+        description: |-
+          Approximate percentage processed thus far. Guaranteed to be
+          100 when fully processed.
+        format: int32
+        type: integer
+      startTime:
+        description: Time when the request was received.
+        format: google-datetime
+        type: string
+      updateTime:
+        description: Time of the most recent update.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults:
+    description: Annotation results for a single video.
+    properties:
+      error:
+        $ref: '#/definitions/GoogleRpc_Status'
+        description: |-
+          If set, indicates an error. Note that for a single `AnnotateVideoRequest`
+          some videos may succeed and some may fail.
+      explicitAnnotation:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation'
+        description: Explicit content annotation.
+      frameLabelAnnotations:
+        description: |-
+          Label annotations on frame level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_LabelAnnotation'
+        type: array
+      inputUri:
+        description: |-
+          Video file location in
+          [Google Cloud Storage](https://cloud.google.com/storage/).
+        type: string
+      segmentLabelAnnotations:
+        description: |-
+          Label annotations on video level or user specified segment level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_LabelAnnotation'
+        type: array
+      shotAnnotations:
+        description: Shot annotations. Each shot is represented as a video segment.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_VideoSegment'
+        type: array
+      shotLabelAnnotations:
+        description: |-
+          Label annotations on shot level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_LabelAnnotation'
+        type: array
+      speechTranscriptions:
+        description: Speech transcription.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta2_SpeechTranscription'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1beta2_VideoSegment:
+    description: Video segment.
+    properties:
+      endTimeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video,
+          corresponding to the end of the segment (inclusive).
+        format: google-duration
+        type: string
+      startTimeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video,
+          corresponding to the start of the segment (inclusive).
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1beta2_WordInfo:
+    description: |-
+      Word-specific information for recognized words. Word information is only
+      included in the response when certain request parameters are set, such
+      as `enable_word_time_offsets`.
+    properties:
+      confidence:
+        description: |-
+          Output only. The confidence estimate between 0.0 and 1.0. A higher number
+          indicates an estimated greater likelihood that the recognized words are
+          correct. This field is set only for the top alternative.
+          This field is not guaranteed to be accurate and users should not rely on it
+          to be always provided.
+          The default of 0.0 is a sentinel value indicating `confidence` was not set.
+        format: float
+        type: number
+      endTime:
+        description: |-
+          Time offset relative to the beginning of the audio, and
+          corresponding to the end of the spoken word. This field is only set if
+          `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+          experimental feature and the accuracy of the time offset can vary.
+        format: google-duration
+        type: string
+      speakerTag:
+        description: |-
+          Output only. A distinct integer value is assigned for every speaker within
+          the audio. This field specifies which one of those speakers was detected to
+          have spoken this word. Value ranges from 1 up to diarization_speaker_count,
+          and is only set if speaker diarization is enabled.
+        format: int32
+        type: integer
+      startTime:
+        description: |-
+          Time offset relative to the beginning of the audio, and
+          corresponding to the start of the spoken word. This field is only set if
+          `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+          experimental feature and the accuracy of the time offset can vary.
+        format: google-duration
+        type: string
+      word:
+        description: The word corresponding to this set of information.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress:
+    description: |-
+      Video annotation progress. Included in the `metadata`
+      field of the `Operation` returned by the `GetOperation`
+      call of the `google::longrunning::Operations` service.
+    properties:
+      annotationProgress:
+        description: Progress metadata for all videos specified in `AnnotateVideoRequest`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoRequest:
+    description: Video annotation request.
+    properties:
+      features:
+        description: Requested video annotation features.
+        items:
+          enum:
+            - FEATURE_UNSPECIFIED
+            - LABEL_DETECTION
+            - SHOT_CHANGE_DETECTION
+            - EXPLICIT_CONTENT_DETECTION
+            - SPEECH_TRANSCRIPTION
+          type: string
+        type: array
+      inputContent:
+        description: |-
+          The video data bytes.
+          If unset, the input video(s) should be specified via `input_uri`.
+          If set, `input_uri` should be unset.
+        format: byte
+        type: string
+      inputUri:
+        description: |-
+          Input video location. Currently, only
+          [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
+          supported, which must be specified in the following format:
+          `gs://bucket-id/object-id` (other URI formats return
+          google.rpc.Code.INVALID_ARGUMENT). For more information, see
+          [Request URIs](/storage/docs/reference-uris).
+          A video URI may include wildcards in `object-id`, and thus identify
+          multiple videos. Supported wildcards: '*' to match 0 or more characters;
+          '?' to match 1 character. If unset, the input video should be embedded
+          in the request as `input_content`. If set, `input_content` should be unset.
+        type: string
+      locationId:
+        description: |-
+          Optional cloud region where annotation should take place. Supported cloud
+          regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
+          is specified, a region will be determined based on video file location.
+        type: string
+      outputUri:
+        description: |-
+          Optional location where the output (in JSON format) should be stored.
+          Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
+          URIs are supported, which must be specified in the following format:
+          `gs://bucket-id/object-id` (other URI formats return
+          google.rpc.Code.INVALID_ARGUMENT). For more information, see
+          [Request URIs](/storage/docs/reference-uris).
+        type: string
+      videoContext:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_VideoContext'
+        description: Additional video context and/or feature-specific parameters.
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse:
+    description: |-
+      Video annotation response. Included in the `response`
+      field of the `Operation` returned by the `GetOperation`
+      call of the `google::longrunning::Operations` service.
+    properties:
+      annotationResults:
+        description: Annotation results for all videos specified in `AnnotateVideoRequest`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_Entity:
+    description: Detected entity from video analysis.
+    properties:
+      description:
+        description: 'Textual description, e.g. `Fixed-gear bicycle`.'
+        type: string
+      entityId:
+        description: |-
+          Opaque entity ID. Some IDs may be available in
+          [Google Knowledge Graph Search
+          API](https://developers.google.com/knowledge-graph/).
+        type: string
+      languageCode:
+        description: Language code for `description` in BCP-47 format.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation:
+    description: |-
+      Explicit content annotation (based on per-frame visual signals only).
+      If no explicit content has been detected in a frame, no annotations are
+      present for that frame.
+    properties:
+      frames:
+        description: All video frames where explicit content was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig:
+    description: Config for EXPLICIT_CONTENT_DETECTION.
+    properties:
+      model:
+        description: |-
+          Model to use for explicit content detection.
+          Supported values: "builtin/stable" (the default if unset) and
+          "builtin/latest".
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame:
+    description: Video frame level annotation results for explicit content.
+    properties:
+      pornographyLikelihood:
+        description: Likelihood of the pornography content..
+        enum:
+          - LIKELIHOOD_UNSPECIFIED
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      timeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video, corresponding to the
+          video frame for this location.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation:
+    description: Label annotation.
+    properties:
+      categoryEntities:
+        description: |-
+          Common categories for the detected entity.
+          E.g. when the label is `Terrier` the category is likely `dog`. And in some
+          cases there might be more than one categories e.g. `Terrier` could also be
+          a `pet`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_Entity'
+        type: array
+      entity:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_Entity'
+        description: Detected entity.
+      frames:
+        description: All video frames where a label was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_LabelFrame'
+        type: array
+      segments:
+        description: All video segments where a label was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_LabelSegment'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig:
+    description: Config for LABEL_DETECTION.
+    properties:
+      labelDetectionMode:
+        description: |-
+          What labels should be detected with LABEL_DETECTION, in addition to
+          video-level labels or segment-level labels.
+          If unspecified, defaults to `SHOT_MODE`.
+        enum:
+          - LABEL_DETECTION_MODE_UNSPECIFIED
+          - SHOT_MODE
+          - FRAME_MODE
+          - SHOT_AND_FRAME_MODE
+        type: string
+      model:
+        description: |-
+          Model to use for label detection.
+          Supported values: "builtin/stable" (the default if unset) and
+          "builtin/latest".
+        type: string
+      stationaryCamera:
+        description: |-
+          Whether the video has been shot from a stationary (i.e. non-moving) camera.
+          When set to true, might improve detection accuracy for moving objects.
+          Should be used with `SHOT_AND_FRAME_MODE` enabled.
+        type: boolean
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_LabelFrame:
+    description: Video frame level annotation results for label detection.
+    properties:
+      confidence:
+        description: 'Confidence that the label is accurate. Range: [0, 1].'
+        format: float
+        type: number
+      timeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video, corresponding to the
+          video frame for this location.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_LabelSegment:
+    description: Video segment level annotation results for label detection.
+    properties:
+      confidence:
+        description: 'Confidence that the label is accurate. Range: [0, 1].'
+        format: float
+        type: number
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
+        description: Video segment where a label was detected.
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig:
+    description: Config for SHOT_CHANGE_DETECTION.
+    properties:
+      model:
+        description: |-
+          Model to use for shot change detection.
+          Supported values: "builtin/stable" (the default if unset) and
+          "builtin/latest".
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_SpeechContext:
+    description: |-
+      Provides "hints" to the speech recognizer to favor specific words and phrases
+      in the results.
+    properties:
+      phrases:
+        description: |-
+          *Optional* A list of strings containing words and phrases "hints" so that
+          the speech recognition is more likely to recognize them. This can be used
+          to improve the accuracy for specific words and phrases, for example, if
+          specific commands are typically spoken by the user. This can also be used
+          to add additional words to the vocabulary of the recognizer. See
+          [usage limits](https://cloud.google.com/speech/limits#content).
+        items:
+          type: string
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative:
+    description: Alternative hypotheses (a.k.a. n-best list).
+    properties:
+      confidence:
+        description: |-
+          The confidence estimate between 0.0 and 1.0. A higher number
+          indicates an estimated greater likelihood that the recognized words are
+          correct. This field is typically provided only for the top hypothesis, and
+          only for `is_final=true` results. Clients should not rely on the
+          `confidence` field as it is not guaranteed to be accurate or consistent.
+          The default of 0.0 is a sentinel value indicating `confidence` was not set.
+        format: float
+        type: number
+      transcript:
+        description: Transcript text representing the words that the user spoke.
+        type: string
+      words:
+        description: A list of word-specific information for each recognized word.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_WordInfo'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription:
+    description: A speech recognition result corresponding to a portion of the audio.
+    properties:
+      alternatives:
+        description: |-
+          May contain one or more recognition hypotheses (up to the maximum specified
+          in `max_alternatives`).  These alternatives are ordered in terms of
+          accuracy, with the top (first) alternative being the most probable, as
+          ranked by the recognizer.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative'
+        type: array
+      languageCode:
+        description: |-
+          Output only. The
+          [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+          language in this result. This language code was detected to have the most
+          likelihood of being spoken in the audio.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig:
+    description: Config for SPEECH_TRANSCRIPTION.
+    properties:
+      audioTracks:
+        description: |-
+          *Optional* For file formats, such as MXF or MKV, supporting multiple audio
+          tracks, specify up to two tracks. Default: track 0.
+        items:
+          format: int32
+          type: integer
+        type: array
+      diarizationSpeakerCount:
+        description: |-
+          *Optional*
+          If set, specifies the estimated number of speakers in the conversation.
+          If not set, defaults to '2'.
+          Ignored unless enable_speaker_diarization is set to true.
+        format: int32
+        type: integer
+      enableAutomaticPunctuation:
+        description: |-
+          *Optional* If 'true', adds punctuation to recognition result hypotheses.
+          This feature is only available in select languages. Setting this for
+          requests in other languages has no effect at all. The default 'false' value
+          does not add punctuation to result hypotheses. NOTE: "This is currently
+          offered as an experimental service, complimentary to all users. In the
+          future this may be exclusively available as a premium feature."
+        type: boolean
+      enableSpeakerDiarization:
+        description: |-
+          *Optional* If 'true', enables speaker detection for each recognized word in
+          the top alternative of the recognition result using a speaker_tag provided
+          in the WordInfo.
+          Note: When this is true, we send all the words from the beginning of the
+          audio for the top alternative in every consecutive responses.
+          This is done in order to improve our speaker tags as our models learn to
+          identify the speakers in the conversation over time.
+        type: boolean
+      enableWordConfidence:
+        description: |-
+          *Optional* If `true`, the top result includes a list of words and the
+          confidence for those words. If `false`, no word-level confidence
+          information is returned. The default is `false`.
+        type: boolean
+      filterProfanity:
+        description: |-
+          *Optional* If set to `true`, the server will attempt to filter out
+          profanities, replacing all but the initial character in each filtered word
+          with asterisks, e.g. "f***". If set to `false` or omitted, profanities
+          won't be filtered out.
+        type: boolean
+      languageCode:
+        description: |-
+          *Required* The language of the supplied audio as a
+          [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
+          Example: "en-US".
+          See [Language Support](https://cloud.google.com/speech/docs/languages)
+          for a list of the currently supported language codes.
+        type: string
+      maxAlternatives:
+        description: |-
+          *Optional* Maximum number of recognition hypotheses to be returned.
+          Specifically, the maximum number of `SpeechRecognitionAlternative` messages
+          within each `SpeechTranscription`. The server may return fewer than
+          `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will
+          return a maximum of one. If omitted, will return a maximum of one.
+        format: int32
+        type: integer
+      speechContexts:
+        description: '*Optional* A means to provide context to assist the speech recognition.'
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_SpeechContext'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress:
+    description: Annotation progress for a single video.
+    properties:
+      inputUri:
+        description: |-
+          Video file location in
+          [Google Cloud Storage](https://cloud.google.com/storage/).
+        type: string
+      progressPercent:
+        description: |-
+          Approximate percentage processed thus far. Guaranteed to be
+          100 when fully processed.
+        format: int32
+        type: integer
+      startTime:
+        description: Time when the request was received.
+        format: google-datetime
+        type: string
+      updateTime:
+        description: Time of the most recent update.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults:
+    description: Annotation results for a single video.
+    properties:
+      error:
+        $ref: '#/definitions/GoogleRpc_Status'
+        description: |-
+          If set, indicates an error. Note that for a single `AnnotateVideoRequest`
+          some videos may succeed and some may fail.
+      explicitAnnotation:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation'
+        description: Explicit content annotation.
+      frameLabelAnnotations:
+        description: |-
+          Label annotations on frame level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation'
+        type: array
+      inputUri:
+        description: |-
+          Video file location in
+          [Google Cloud Storage](https://cloud.google.com/storage/).
+        type: string
+      segmentLabelAnnotations:
+        description: |-
+          Label annotations on video level or user specified segment level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation'
+        type: array
+      shotAnnotations:
+        description: Shot annotations. Each shot is represented as a video segment.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
+        type: array
+      shotLabelAnnotations:
+        description: |-
+          Label annotations on shot level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation'
+        type: array
+      speechTranscriptions:
+        description: Speech transcription.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_VideoContext:
+    description: Video context and/or feature-specific parameters.
+    properties:
+      explicitContentDetectionConfig:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_ExplicitContentDetectionConfig'
+        description: Config for EXPLICIT_CONTENT_DETECTION.
+      labelDetectionConfig:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_LabelDetectionConfig'
+        description: Config for LABEL_DETECTION.
+      segments:
+        description: |-
+          Video segments to annotate. The segments may overlap and are not required
+          to be contiguous or span the whole video. If unspecified, each video is
+          treated as a single segment.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
+        type: array
+      shotChangeDetectionConfig:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_ShotChangeDetectionConfig'
+        description: Config for SHOT_CHANGE_DETECTION.
+      speechTranscriptionConfig:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p1beta1_SpeechTranscriptionConfig'
+        description: Config for SPEECH_TRANSCRIPTION.
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_VideoSegment:
+    description: Video segment.
+    properties:
+      endTimeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video,
+          corresponding to the end of the segment (inclusive).
+        format: google-duration
+        type: string
+      startTimeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video,
+          corresponding to the start of the segment (inclusive).
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p1beta1_WordInfo:
+    description: |-
+      Word-specific information for recognized words. Word information is only
+      included in the response when certain request parameters are set, such
+      as `enable_word_time_offsets`.
+    properties:
+      confidence:
+        description: |-
+          Output only. The confidence estimate between 0.0 and 1.0. A higher number
+          indicates an estimated greater likelihood that the recognized words are
+          correct. This field is set only for the top alternative.
+          This field is not guaranteed to be accurate and users should not rely on it
+          to be always provided.
+          The default of 0.0 is a sentinel value indicating `confidence` was not set.
+        format: float
+        type: number
+      endTime:
+        description: |-
+          Time offset relative to the beginning of the audio, and
+          corresponding to the end of the spoken word. This field is only set if
+          `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+          experimental feature and the accuracy of the time offset can vary.
+        format: google-duration
+        type: string
+      speakerTag:
+        description: |-
+          Output only. A distinct integer value is assigned for every speaker within
+          the audio. This field specifies which one of those speakers was detected to
+          have spoken this word. Value ranges from 1 up to diarization_speaker_count,
+          and is only set if speaker diarization is enabled.
+        format: int32
+        type: integer
+      startTime:
+        description: |-
+          Time offset relative to the beginning of the audio, and
+          corresponding to the start of the spoken word. This field is only set if
+          `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+          experimental feature and the accuracy of the time offset can vary.
+        format: google-duration
+        type: string
+      word:
+        description: The word corresponding to this set of information.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress:
+    description: |-
+      Video annotation progress. Included in the `metadata`
+      field of the `Operation` returned by the `GetOperation`
+      call of the `google::longrunning::Operations` service.
+    properties:
+      annotationProgress:
+        description: Progress metadata for all videos specified in `AnnotateVideoRequest`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse:
+    description: |-
+      Video annotation response. Included in the `response`
+      field of the `Operation` returned by the `GetOperation`
+      call of the `google::longrunning::Operations` service.
+    properties:
+      annotationResults:
+        description: Annotation results for all videos specified in `AnnotateVideoRequest`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_Entity:
+    description: Detected entity from video analysis.
+    properties:
+      description:
+        description: 'Textual description, e.g. `Fixed-gear bicycle`.'
+        type: string
+      entityId:
+        description: |-
+          Opaque entity ID. Some IDs may be available in
+          [Google Knowledge Graph Search
+          API](https://developers.google.com/knowledge-graph/).
+        type: string
+      languageCode:
+        description: Language code for `description` in BCP-47 format.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation:
+    description: |-
+      Explicit content annotation (based on per-frame visual signals only).
+      If no explicit content has been detected in a frame, no annotations are
+      present for that frame.
+    properties:
+      frames:
+        description: All video frames where explicit content was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame:
+    description: Video frame level annotation results for explicit content.
+    properties:
+      pornographyLikelihood:
+        description: Likelihood of the pornography content..
+        enum:
+          - LIKELIHOOD_UNSPECIFIED
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      timeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video, corresponding to the
+          video frame for this location.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation:
+    description: Label annotation.
+    properties:
+      categoryEntities:
+        description: |-
+          Common categories for the detected entity.
+          E.g. when the label is `Terrier` the category is likely `dog`. And in some
+          cases there might be more than one categories e.g. `Terrier` could also be
+          a `pet`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_Entity'
+        type: array
+      entity:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_Entity'
+        description: Detected entity.
+      frames:
+        description: All video frames where a label was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_LabelFrame'
+        type: array
+      segments:
+        description: All video segments where a label was detected.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_LabelSegment'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_LabelFrame:
+    description: Video frame level annotation results for label detection.
+    properties:
+      confidence:
+        description: 'Confidence that the label is accurate. Range: [0, 1].'
+        format: float
+        type: number
+      timeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video, corresponding to the
+          video frame for this location.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_LabelSegment:
+    description: Video segment level annotation results for label detection.
+    properties:
+      confidence:
+        description: 'Confidence that the label is accurate. Range: [0, 1].'
+        format: float
+        type: number
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
+        description: Video segment where a label was detected.
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox:
+    description: |-
+      Normalized bounding box.
+      The normalized vertex coordinates are relative to the original image.
+      Range: [0, 1].
+    properties:
+      bottom:
+        description: Bottom Y coordinate.
+        format: float
+        type: number
+      left:
+        description: Left X coordinate.
+        format: float
+        type: number
+      right:
+        description: Right X coordinate.
+        format: float
+        type: number
+      top:
+        description: Top Y coordinate.
+        format: float
+        type: number
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly:
+    description: |-
+      Normalized bounding polygon for text (that might not be aligned with axis).
+      Contains list of the corner points in clockwise order starting from
+      top-left corner. For example, for a rectangular bounding box:
+      When the text is horizontal it might look like:
+              0----1
+              |    |
+              3----2
+
+      When it's clockwise rotated 180 degrees around the top-left corner it
+      becomes:
+              2----3
+              |    |
+              1----0
+
+      and the vertex order will still be (0, 1, 2, 3). Note that values can be less
+      than 0, or greater than 1 due to trignometric calculations for location of
+      the box.
+    properties:
+      vertices:
+        description: Normalized vertices of the bounding polygon.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex:
+    description: |-
+      A vertex represents a 2D point in the image.
+      NOTE: the normalized vertex coordinates are relative to the original image
+      and range from 0 to 1.
+    properties:
+      x:
+        description: X coordinate.
+        format: float
+        type: number
+      'y':
+        description: Y coordinate.
+        format: float
+        type: number
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation:
+    description: Annotations corresponding to one tracked object.
+    properties:
+      confidence:
+        description: Object category's labeling confidence of this track.
+        format: float
+        type: number
+      entity:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_Entity'
+        description: Entity to specify the object category that this track is labeled as.
+      frames:
+        description: Information corresponding to all frames where this object track appears.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame'
+        type: array
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
+        description: Each object track corresponds to one video segment where it appears.
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame:
+    description: |-
+      Video frame level annotations for object detection and tracking. This field
+      stores per frame location, time offset, and confidence.
+    properties:
+      normalizedBoundingBox:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox'
+        description: The normalized bounding box location of this object track for the frame.
+      timeOffset:
+        description: The timestamp of the frame in microseconds.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative:
+    description: Alternative hypotheses (a.k.a. n-best list).
+    properties:
+      confidence:
+        description: |-
+          The confidence estimate between 0.0 and 1.0. A higher number
+          indicates an estimated greater likelihood that the recognized words are
+          correct. This field is typically provided only for the top hypothesis, and
+          only for `is_final=true` results. Clients should not rely on the
+          `confidence` field as it is not guaranteed to be accurate or consistent.
+          The default of 0.0 is a sentinel value indicating `confidence` was not set.
+        format: float
+        type: number
+      transcript:
+        description: Transcript text representing the words that the user spoke.
+        type: string
+      words:
+        description: A list of word-specific information for each recognized word.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_WordInfo'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription:
+    description: A speech recognition result corresponding to a portion of the audio.
+    properties:
+      alternatives:
+        description: |-
+          May contain one or more recognition hypotheses (up to the maximum specified
+          in `max_alternatives`).  These alternatives are ordered in terms of
+          accuracy, with the top (first) alternative being the most probable, as
+          ranked by the recognizer.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative'
+        type: array
+      languageCode:
+        description: |-
+          Output only. The
+          [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+          language in this result. This language code was detected to have the most
+          likelihood of being spoken in the audio.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_TextAnnotation:
+    description: |-
+      Annotations related to one detected OCR text snippet. This will contain the
+      corresponding text, confidence value, and frame level information for each
+      detection.
+    properties:
+      segments:
+        description: All video segments where OCR detected text appears.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_TextSegment'
+        type: array
+      text:
+        description: The detected text.
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_TextFrame:
+    description: |-
+      Video frame level annotation results for text annotation (OCR).
+      Contains information regarding timestamp and bounding box locations for the
+      frames containing detected OCR text snippets.
+    properties:
+      rotatedBoundingBox:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly'
+        description: Bounding polygon of the detected text for this frame.
+      timeOffset:
+        description: Timestamp of this frame.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_TextSegment:
+    description: Video segment level annotation results for text detection.
+    properties:
+      confidence:
+        description: |-
+          Confidence for the track of detected text. It is calculated as the highest
+          over all frames where OCR detected text appears.
+        format: float
+        type: number
+      frames:
+        description: Information related to the frames where OCR detected text appears.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_TextFrame'
+        type: array
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
+        description: Video segment where a text snippet was detected.
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress:
+    description: Annotation progress for a single video.
+    properties:
+      inputUri:
+        description: |-
+          Video file location in
+          [Google Cloud Storage](https://cloud.google.com/storage/).
+        type: string
+      progressPercent:
+        description: |-
+          Approximate percentage processed thus far. Guaranteed to be
+          100 when fully processed.
+        format: int32
+        type: integer
+      startTime:
+        description: Time when the request was received.
+        format: google-datetime
+        type: string
+      updateTime:
+        description: Time of the most recent update.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults:
+    description: Annotation results for a single video.
+    properties:
+      error:
+        $ref: '#/definitions/GoogleRpc_Status'
+        description: |-
+          If set, indicates an error. Note that for a single `AnnotateVideoRequest`
+          some videos may succeed and some may fail.
+      explicitAnnotation:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation'
+        description: Explicit content annotation.
+      frameLabelAnnotations:
+        description: |-
+          Label annotations on frame level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation'
+        type: array
+      inputUri:
+        description: |-
+          Video file location in
+          [Google Cloud Storage](https://cloud.google.com/storage/).
+        type: string
+      objectAnnotations:
+        description: Annotations for list of objects detected and tracked in video.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation'
+        type: array
+      segmentLabelAnnotations:
+        description: |-
+          Label annotations on video level or user specified segment level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation'
+        type: array
+      shotAnnotations:
+        description: Shot annotations. Each shot is represented as a video segment.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
+        type: array
+      shotLabelAnnotations:
+        description: |-
+          Label annotations on shot level.
+          There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation'
+        type: array
+      speechTranscriptions:
+        description: Speech transcription.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription'
+        type: array
+      textAnnotations:
+        description: |-
+          OCR text detection and tracking.
+          Annotations for list of detected text snippets. Each will have list of
+          frame information associated with it.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_TextAnnotation'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_VideoSegment:
+    description: Video segment.
+    properties:
+      endTimeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video,
+          corresponding to the end of the segment (inclusive).
+        format: google-duration
+        type: string
+      startTimeOffset:
+        description: |-
+          Time-offset, relative to the beginning of the video,
+          corresponding to the start of the segment (inclusive).
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1p2beta1_WordInfo:
+    description: |-
+      Word-specific information for recognized words. Word information is only
+      included in the response when certain request parameters are set, such
+      as `enable_word_time_offsets`.
+    properties:
+      confidence:
+        description: |-
+          Output only. The confidence estimate between 0.0 and 1.0. A higher number
+          indicates an estimated greater likelihood that the recognized words are
+          correct. This field is set only for the top alternative.
+          This field is not guaranteed to be accurate and users should not rely on it
+          to be always provided.
+          The default of 0.0 is a sentinel value indicating `confidence` was not set.
+        format: float
+        type: number
+      endTime:
+        description: |-
+          Time offset relative to the beginning of the audio, and
+          corresponding to the end of the spoken word. This field is only set if
+          `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+          experimental feature and the accuracy of the time offset can vary.
+        format: google-duration
+        type: string
+      speakerTag:
+        description: |-
+          Output only. A distinct integer value is assigned for every speaker within
+          the audio. This field specifies which one of those speakers was detected to
+          have spoken this word. Value ranges from 1 up to diarization_speaker_count,
+          and is only set if speaker diarization is enabled.
+        format: int32
+        type: integer
+      startTime:
+        description: |-
+          Time offset relative to the beginning of the audio, and
+          corresponding to the start of the spoken word. This field is only set if
+          `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+          experimental feature and the accuracy of the time offset can vary.
+        format: google-duration
+        type: string
+      word:
+        description: The word corresponding to this set of information.
+        type: string
+    type: object
+  GoogleLongrunning_Operation:
+    description: |-
+      This resource represents a long-running operation that is the result of a
+      network API call.
+    properties:
+      done:
+        description: |-
+          If the value is `false`, it means the operation is still in progress.
+          If `true`, the operation is completed, and either `error` or `response` is
+          available.
+        type: boolean
+      error:
+        $ref: '#/definitions/GoogleRpc_Status'
+        description: The error result of the operation in case of failure or cancellation.
+      metadata:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          Service-specific metadata associated with the operation.  It typically
+          contains progress information and common metadata such as create time.
+          Some services might not provide such metadata.  Any method that returns a
+          long-running operation should document the metadata type, if any.
+        type: object
+      name:
+        description: |-
+          The server-assigned name, which is only unique within the same service that
+          originally returns it. If you use the default HTTP mapping, the
+          `name` should have the format of `operations/some/unique/name`.
+        type: string
+      response:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          The normal response of the operation in case of success.  If the original
+          method returns no data on success, such as `Delete`, the response is
+          `google.protobuf.Empty`.  If the original method is standard
+          `Get`/`Create`/`Update`, the response should be the resource.  For other
+          methods, the response should have the type `XxxResponse`, where `Xxx`
+          is the original method name.  For example, if the original method name
+          is `TakeSnapshot()`, the inferred response type is
+          `TakeSnapshotResponse`.
+        type: object
+    type: object
+  GoogleRpc_Status:
+    description: |-
+      The `Status` type defines a logical error model that is suitable for different
+      programming environments, including REST APIs and RPC APIs. It is used by
+      [gRPC](https://github.com/grpc). The error model is designed to be:
+
+      - Simple to use and understand for most users
+      - Flexible enough to meet unexpected needs
+
+      # Overview
+
+      The `Status` message contains three pieces of data: error code, error message,
+      and error details. The error code should be an enum value of
+      google.rpc.Code, but it may accept additional error codes if needed.  The
+      error message should be a developer-facing English message that helps
+      developers *understand* and *resolve* the error. If a localized user-facing
+      error message is needed, put the localized message in the error details or
+      localize it in the client. The optional error details may contain arbitrary
+      information about the error. There is a predefined set of error detail types
+      in the package `google.rpc` that can be used for common error conditions.
+
+      # Language mapping
+
+      The `Status` message is the logical representation of the error model, but it
+      is not necessarily the actual wire format. When the `Status` message is
+      exposed in different client libraries and different wire protocols, it can be
+      mapped differently. For example, it will likely be mapped to some exceptions
+      in Java, but more likely mapped to some error codes in C.
+
+      # Other uses
+
+      The error model and the `Status` message can be used in a variety of
+      environments, either with or without APIs, to provide a
+      consistent developer experience across different environments.
+
+      Example uses of this error model include:
+
+      - Partial errors. If a service needs to return partial errors to the client,
+          it may embed the `Status` in the normal response to indicate the partial
+          errors.
+
+      - Workflow errors. A typical workflow has multiple steps. Each step may
+          have a `Status` message for error reporting.
+
+      - Batch operations. If a client uses batch request and batch response, the
+          `Status` message should be used directly inside batch response, one for
+          each error sub-response.
+
+      - Asynchronous operations. If an API call embeds asynchronous operation
+          results in its response, the status of those operations should be
+          represented directly using the `Status` message.
+
+      - Logging. If some API errors are stored in logs, the message `Status` could
+          be used directly after any stripping needed for security/privacy reasons.
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: |-
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          type: object
+        type: array
+      message:
+        description: |-
+          A developer-facing error message, which should be in English. Any
+          user-facing error message should be localized and sent in the
+          google.rpc.Status.details field, or localized by the client.
+        type: string
+    type: object

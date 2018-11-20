@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/stable/2016-05-01/LogicalSubnet.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/preview/2016-05-01/LogicalSubnet.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: azsadmin-LogicalSubnet
@@ -26,7 +26,7 @@ produces:
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow
+    description: Authorization uses an Azure Active Directory OAuth2 flow.
     flow: implicit
     scopes:
       user_impersonation: impersonate your user account
@@ -50,16 +50,22 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks/{logicalNetwork}/logicalSubnets':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks/{logicalNetwork}/logicalSubnets':
     get:
-      description: Get a list of all logical subnets.
+      description: Returns a list of all logical subnets.
       operationId: LogicalSubnets_List
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+        - description: Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
+        - description: Name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Location of the resource.
           in: path
           name: location
@@ -68,7 +74,7 @@ paths:
           x-ms-parameter-location: method
         - $ref: '#/parameters/LogicalNetworkParameter'
         - default: '2016-05-01'
-          description: Client Api Version.
+          description: Client API Version.
           in: query
           name: api-version
           required: true
@@ -83,41 +89,51 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/LogicalSubnetList'
+        '404':
+          description: NOT FOUND
       tags:
         - LogicalSubnets
       x-ms-examples:
-        List all logical subnets:
+        Returns a list of all logical subnets.:
           parameters:
             api-version: '2016-05-01'
             location: local
             logicalNetwork: 00000000-2222-1111-9999-000000000001
+            resourceGroupName: System.local
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/logicalNetworks/00000000-2222-1111-9999-000000000001/logicalSubnets/9ea1839b-4025-416b-b67c-405d667691bb
+                  - id: /subscriptions/36e98cad-c8a5-4580-bef7-af878a237908/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/logicalNetworks/00000000-2222-1111-9999-000000000001/logicalSubnets/de2b8680-ed17-4df9-a5f9-c05c090e8f4a
                     location: local
-                    name: 9ea1839b-4025-416b-b67c-405d667691bb
+                    name: de2b8680-ed17-4df9-a5f9-c05c090e8f4a
                     properties:
                       ipPools:
-                        - cdda477d-c28a-4018-b76b-2af713358d95
+                        - 8b13b443-ed0e-462b-bf8e-415c69288fb5
                       isPublic: false
                     tags: {}
                     type: Microsoft.Fabric.Admin/fabricLocations/logicalNetworks/logicalSubnets
+            '404': {}
       x-ms-odata: '#/definitions/LogicalSubnet'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks/{logicalNetwork}/logicalSubnets/{logicalSubnet}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/logicalNetworks/{logicalNetwork}/logicalSubnets/{logicalSubnet}':
     get:
-      description: Get a list of all volumes at a location.
+      description: Returns the requested logical subnet.
       operationId: LogicalSubnets_Get
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+        - description: Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
+        - description: Name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Location of the resource.
           in: path
           name: location
@@ -127,7 +143,7 @@ paths:
         - $ref: '#/parameters/LogicalNetworkParameter'
         - $ref: '#/parameters/LogicalSubnetParameter'
         - default: '2016-05-01'
-          description: Client Api Version.
+          description: Client API Version.
           in: query
           name: api-version
           required: true
@@ -137,39 +153,43 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/LogicalSubnet'
+        '404':
+          description: NOT FOUND
       tags:
         - LogicalSubnets
       x-ms-examples:
-        Get a logical subnet:
+        Returns the requested logical subnet.:
           parameters:
             api-version: '2016-05-01'
             location: local
             logicalNetwork: 00000000-2222-1111-9999-000000000001
             logicalSubnet: 9ea1839b-4025-416b-b67c-405d667691bb
+            resourceGroupName: System.local
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
-                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/logicalNetworks/00000000-2222-1111-9999-000000000001/logicalSubnets/9ea1839b-4025-416b-b67c-405d667691bb
+                id: /subscriptions/36e98cad-c8a5-4580-bef7-af878a237908/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/logicalNetworks/00000000-2222-1111-9999-000000000001/logicalSubnets/de2b8680-ed17-4df9-a5f9-c05c090e8f4a
                 location: local
-                name: 9ea1839b-4025-416b-b67c-405d667691bb
+                name: de2b8680-ed17-4df9-a5f9-c05c090e8f4a
                 properties:
                   ipPools:
-                    - cdda477d-c28a-4018-b76b-2af713358d95
+                    - 8b13b443-ed0e-462b-bf8e-415c69288fb5
                   isPublic: false
                 tags: {}
                 type: Microsoft.Fabric.Admin/fabricLocations/logicalNetworks/logicalSubnets
+            '404': {}
 definitions:
   LogicalSubnet:
     allOf:
-      - description: Base Resource Object
+      - description: Base resource object.
         properties:
           id:
             description: URI of the resource.
             readOnly: true
             type: string
           location:
-            description: Region Location of resource.
+            description: The region where the resource is located.
             type: string
           name:
             description: Name of the resource.
@@ -178,7 +198,7 @@ definitions:
           tags:
             additionalProperties:
               type: string
-            description: List of key value pairs.
+            description: List of key-value pairs.
             type: object
           type:
             description: Type of resource.
@@ -186,7 +206,7 @@ definitions:
             type: string
         type: object
         x-ms-azure-resource: true
-    description: This resource represents a Logical Subnet.  A Logical Subnet comprises of subnet/vlan pair.
+    description: This resource represents a logical subnet.  A logical subnet is made of a subnet-vlan pair.
     properties:
       properties:
         $ref: '#/definitions/LogicalSubnetModel'
@@ -200,7 +220,7 @@ definitions:
         description: URI to the next page.
         type: string
       value:
-        description: List of logical subnets on this page.
+        description: List of logical subnets.
         items:
           $ref: '#/definitions/LogicalSubnet'
         type: array
@@ -209,16 +229,16 @@ definitions:
     description: Properties of a logical subnet.
     properties:
       ipPools:
-        description: All ip pools which belong to this subnet.
+        description: All IP pools which belong to this subnet.
         items:
           type: string
         type: array
       isPublic:
-        description: The visiblity status of the ip pool.  If is true the associated pools are public ip address pools.
+        description: The visiblity status of the IP pool.  If is true the associated pools are public IP address pools.
         type: boolean
       metadata:
         additionalProperties:
           type: string
-        description: Metadata related to this Logical Network.
+        description: Metadata related to the logical network.
         type: object
     type: object

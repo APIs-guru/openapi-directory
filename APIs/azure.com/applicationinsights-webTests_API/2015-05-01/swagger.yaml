@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/microsoft.insights/stable/2015-05-01/webTests_API.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2015-05-01/webTests_API.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: applicationinsights-webTests_API
@@ -41,6 +41,13 @@ parameters:
     name: api-version
     required: true
     type: string
+  ComponentNameParameter:
+    description: The name of the Application Insights component resource.
+    in: path
+    name: componentName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ResourceGroupNameParameter:
     description: The name of the resource group.
     in: path
@@ -62,7 +69,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/providers/microsoft.insights/webtests':
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Insights/webtests':
     get:
       description: Get all Application Insights web test alerts definitioned within a subscription.
       operationId: WebTests_List
@@ -85,7 +92,7 @@ paths:
               body:
                 nextLink: ''
                 value:
-                  - id: /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/webtests/my-webtest-my-component
+                  - id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/webtests/my-webtest-my-component
                     kind: ping
                     location: southcentralus
                     name: my-webtest-my-component
@@ -103,10 +110,10 @@ paths:
                       Timeout: 120
                       provisioningState: Succeeded
                     tags:
+                      'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component': Resource
                       'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Web/sites/mytestwebapp': Resource
-                      'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component': Resource
-                    type: microsoft.insights/webtests
-                  - id: /subscriptions/subid/resourceGroups/my-other-resource-group/providers/microsoft.insights/webtests/my-webtest-my-other-component
+                    type: Microsoft.Insights/webtests
+                  - id: /subscriptions/subid/resourceGroups/my-other-resource-group/providers/Microsoft.Insights/webtests/my-webtest-my-other-component
                     kind: ping
                     location: southcentralus
                     name: my-webtest-my-other-component
@@ -125,11 +132,61 @@ paths:
                       provisioningState: Succeeded
                     tags:
                       Test: You can delete this synthetic monitor anytime
-                      'hidden-link:/subscriptions/subid/resourceGroups/my-other-resource-group/providers/microsoft.insights/components/my-other-component': Resource
-                    type: microsoft.insights/webtests
+                      'hidden-link:/subscriptions/subid/resourceGroups/my-other-resource-group/providers/Microsoft.Insights/components/my-other-component': Resource
+                    type: Microsoft.Insights/webtests
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/webtests':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{componentName}/webtests':
+    get:
+      description: Get all Application Insights web tests defined for the specified component.
+      operationId: WebTests_ListByComponent
+      parameters:
+        - $ref: '#/parameters/ComponentNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: A list containing 0 or more web test definitions.
+          schema:
+            $ref: '#/definitions/webTestListResult'
+      x-ms-examples:
+        webTestListByComponent:
+          parameters:
+            api-version: '2015-05-01'
+            componentName: my-component
+            resourceGroupName: my-resource-group
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                nextLink: ''
+                value:
+                  - id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/webtests/my-webtest-my-component
+                    kind: ping
+                    location: southcentralus
+                    name: my-webtest-my-component
+                    properties:
+                      Configuration:
+                        WebTest: '<WebTest Name="my-webtest" Id="678ddf96-1ab8-44c8-9274-123456789abc" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="120" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="" ResultsLocale=""><Items><Request Method="GET" Guid="a4162485-9114-fcfc-e086-123456789abc" Version="1.1" Url="http://my-component.azurewebsites.net" ThinkTime="0" Timeout="120" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="200" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False" /></Items></WebTest>'
+                      Description: ''
+                      Enabled: false
+                      Frequency: 900
+                      Kind: ping
+                      Locations:
+                        - Id: apac-hk-hkn-azr
+                      Name: my-webtest
+                      RetryEnabled: true
+                      SyntheticMonitorId: my-webtest-my-component
+                      Timeout: 120
+                      provisioningState: Succeeded
+                    tags:
+                      'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component': Resource
+                      'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Web/sites/mytestwebapp': Resource
+                    type: Microsoft.Insights/webtests
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/webtests':
     get:
       description: Get all Application Insights web tests defined within a specified resource group.
       operationId: WebTests_ListByResourceGroup
@@ -153,7 +210,7 @@ paths:
               body:
                 nextLink: ''
                 value:
-                  - id: /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/webtests/my-webtest-my-component
+                  - id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/webtests/my-webtest-my-component
                     kind: ping
                     location: southcentralus
                     name: my-webtest-my-component
@@ -172,10 +229,10 @@ paths:
                       Timeout: 120
                       provisioningState: Succeeded
                     tags:
+                      'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component': Resource
                       'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Web/sites/mytestwebapp': Resource
-                      'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component': Resource
-                    type: microsoft.insights/webtests
-                  - id: /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/webtests/my-webtest-my-other-component
+                    type: Microsoft.Insights/webtests
+                  - id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/webtests/my-webtest-my-other-component
                     kind: ping
                     location: southcentralus
                     name: my-webtest-my-other-component
@@ -195,11 +252,11 @@ paths:
                       provisioningState: Succeeded
                     tags:
                       Test: You can delete this synthetic monitor anytime
-                      'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-other-component': Resource
-                    type: microsoft.insights/webtests
+                      'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-other-component': Resource
+                    type: Microsoft.Insights/webtests
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/webtests/{webTestName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/webtests/{webTestName}':
     delete:
       description: Deletes an Application Insights web test.
       operationId: WebTests_Delete
@@ -221,8 +278,8 @@ paths:
             subscriptionId: subid
             webTestName: my-webtest-01-mywebservice
           responses:
-            '200':
-              body: {}
+            '200': {}
+            '204': {}
     get:
       description: Get a specific Application Insights web test definition.
       operationId: WebTests_Get
@@ -246,7 +303,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/my-test-resources/providers/microsoft.insights/webtests/my-webtest-01-mywebservice
+                id: /subscriptions/subid/resourceGroups/my-test-resources/providers/Microsoft.Insights/webtests/my-webtest-01-mywebservice
                 kind: ping
                 location: southcentralus
                 name: my-webtest-01-mywebservice
@@ -266,9 +323,9 @@ paths:
                   Timeout: 30
                   provisioningState: Succeeded
                 tags:
+                  'hidden-link:/subscriptions/subid/resourceGroups/my-test-resources/providers/Microsoft.Insights/components/mytester': Resource
                   'hidden-link:/subscriptions/subid/resourceGroups/my-test-resources/providers/Microsoft.Web/sites/mytester': Resource
-                  'hidden-link:/subscriptions/subid/resourceGroups/my-test-resources/providers/microsoft.insights/components/mytester': Resource
-                type: microsoft.insights/webtests
+                type: Microsoft.Insights/webtests
     patch:
       description: Creates or updates an Application Insights web test definition.
       operationId: WebTests_UpdateTags
@@ -296,8 +353,8 @@ paths:
                 Color: AzureBlue
                 CustomField-01: This is a random value
                 SystemType: A08
+                'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component': Resource
                 'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Web/sites/mytestwebapp': Resource
-                'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component': Resource
             api-version: '2015-05-01'
             resourceGroupName: my-resource-group
             subscriptionId: subid
@@ -305,7 +362,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/webtests/my-webtest-my-component
+                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/webtests/my-webtest-my-component
                 kind: ping
                 location: southcentralus
                 name: my-webtest-my-component
@@ -328,9 +385,9 @@ paths:
                   Color: AzureBlue
                   CustomField-01: This is a random value
                   SystemType: A08
+                  'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component': Resource
                   'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Web/sites/mytestwebapp': Resource
-                  'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component': Resource
-                type: microsoft.insights/webtests
+                type: Microsoft.Insights/webtests
     put:
       description: Creates or updates an Application Insights web test definition.
       operationId: WebTests_CreateOrUpdate
@@ -376,7 +433,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/webtests/my-webtest-my-component
+                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/webtests/my-webtest-my-component
                 kind: ping
                 location: southcentralus
                 name: my-webtest-my-component
@@ -395,9 +452,9 @@ paths:
                   Timeout: 120
                   provisioningState: Succeeded
                 tags:
+                  'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component': Resource
                   'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Web/sites/mytestwebapp': Resource
-                  'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component': Resource
-                type: microsoft.insights/webtests
+                type: Microsoft.Insights/webtests
         webTestUpdate:
           parameters:
             WebTestDefinition:
@@ -421,7 +478,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/webtests/my-webtest-my-component
+                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/webtests/my-webtest-my-component
                 kind: ping
                 location: southcentralus
                 name: my-webtest-my-component
@@ -441,38 +498,10 @@ paths:
                   Timeout: 30
                   provisioningState: Succeeded
                 tags:
+                  'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component': Resource
                   'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Web/sites/mytestwebapp': Resource
-                  'hidden-link:/subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component': Resource
-                type: microsoft.insights/webtests
+                type: Microsoft.Insights/webtests
 definitions:
-  Resource:
-    description: An azure resource object
-    properties:
-      id:
-        description: Azure resource Id
-        readOnly: true
-        type: string
-      location:
-        description: Resource location
-        type: string
-        x-ms-mutability:
-          - create
-          - read
-      name:
-        description: Azure resource name
-        readOnly: true
-        type: string
-      tags:
-        additionalProperties:
-          type: string
-        description: Resource tags
-      type:
-        description: Azure resource type
-        readOnly: true
-        type: string
-    required:
-      - location
-    x-ms-azure-resource: true
   TagsResource:
     description: 'A container holding only the Tags for a resource, allowing the user to update the tags on a WebTest instance.'
     properties:
@@ -482,7 +511,7 @@ definitions:
         description: Resource tags
   WebTest:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/WebtestsResource'
     description: An Application Insights web test definition.
     properties:
       kind:
@@ -568,6 +597,34 @@ definitions:
       - Kind
       - Locations
       - SyntheticMonitorId
+  WebtestsResource:
+    description: An azure resource object
+    properties:
+      id:
+        description: Azure resource Id
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        type: string
+        x-ms-mutability:
+          - create
+          - read
+      name:
+        description: Azure resource name
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+      type:
+        description: Azure resource type
+        readOnly: true
+        type: string
+    required:
+      - location
+    x-ms-azure-resource: true
   webTestListResult:
     description: A list of 0 or more Application Insights web test definitions.
     properties:

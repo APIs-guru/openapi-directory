@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/microsoft.insights/stable/2015-05-01/componentAnnotations_API.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: applicationinsights-componentAnnotations_API
@@ -83,7 +83,7 @@ parameters:
     required: true
     type: string
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/Annotations':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/Annotations':
     get:
       description: Gets the list of annotations for a component for given time range
       operationId: Annotations_List
@@ -98,9 +98,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            items:
-              $ref: '#/definitions/Annotation'
-            type: array
+            $ref: '#/definitions/AnnotationsListResult'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -122,11 +120,13 @@ paths:
                   EventTime: '2018-01-29T20:30:31+00:00'
                   Id: 4de4524f-fca5-44a8-b7e6-a67d5107796e
                   Properties: '{"ReleaseDefinitionName":"InsightsPortal-PPEProd-KeyVault","ReleaseRequestedFor":"6a970e9b-6220-47f3-a78c-b8be97506698","TeamFoundationCollectionUri":"https://mseng.visualstudio.com/","BuildNumber":"20180126.1","ReleaseDescription":"Triggered by InsightsPortal_master_PROD1_vNext 20180126.1.","ReleaseId":"31075","ReleaseWebUrl":"https://mseng.visualstudio.com/96a62c4a-58c2-4dbb-94b6-5979ebc7f2af/_release?releaseId=31075\u0026_a=release-summary","SourceBranch":"refs/heads/master","BuildRepositoryProvider":"TfsGit","ReleaseEnvironmentName":"AIMON VIP SWAP","BuildRepositoryName":"InsightsPortal","ReleaseName":"InsightsPortal-20180126-1"}'
+                  RelatedAnnotation: null
                 - AnnotationName: InsightsPortal-20180125-1
                   Category: Deployment
                   EventTime: '2018-01-29T20:38:35+00:00'
                   Id: 9a82214f-8f98-4699-b5bc-cad6101ed223
                   Properties: '{"ReleaseDefinitionName":"InsightsPortal-PPEProd-KeyVault","ReleaseRequestedFor":"6a970e9b-6220-47f3-a78c-b8be97506698","TeamFoundationCollectionUri":"https://mseng.visualstudio.com/","BuildNumber":"20180125.1","ReleaseDescription":"Triggered by InsightsPortal_master_PROD1_vNext 20180125.1.","ReleaseId":"31035","ReleaseWebUrl":"https://mseng.visualstudio.com/96a62c4a-58c2-4dbb-94b6-5979ebc7f2af/_release?releaseId=31035\u0026_a=release-summary","SourceBranch":"refs/heads/master","BuildRepositoryProvider":"TfsGit","ReleaseEnvironmentName":"Prod VIP Swap ","BuildRepositoryName":"InsightsPortal","ReleaseName":"InsightsPortal-20180125-1"}'
+                  RelatedAnnotation: null
       x-ms-pageable: {}
     put:
       description: Create an Annotation of an Application Insights component.
@@ -174,7 +174,8 @@ paths:
                   EventTime: '2018-01-31T13:41:38.657+00:00'
                   Id: 444e2c08-274a-4bbb-a89e-d77bb720f44a
                   Properties: '{"Comments":"Testing","Label":"Success"}'
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/Annotations/{annotationId}':
+                  RelatedAnnotation: null
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/Annotations/{annotationId}':
     delete:
       description: Delete an Annotation of an Application Insights component.
       operationId: Annotations_Delete
@@ -235,6 +236,7 @@ paths:
                   EventTime: '2018-01-31T13:41:38.657+00:00'
                   Id: 444e2c08-274a-4bbb-a89e-d77bb720f44a
                   Properties: '{"Comments":"Testing","Label":"Success"}'
+                  RelatedAnnotation: null
 definitions:
   Annotation:
     description: Annotation associated with an application insights resource.
@@ -272,6 +274,15 @@ definitions:
         description: Error message
         type: string
     type: object
+  AnnotationsListResult:
+    description: Annotations list result.
+    properties:
+      value:
+        description: An array of annotations.
+        items:
+          $ref: '#/definitions/Annotation'
+        readOnly: true
+        type: array
   InnerError:
     description: Inner error
     properties:

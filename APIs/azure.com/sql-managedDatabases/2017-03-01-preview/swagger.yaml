@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/2017-03-01-preview/managedDatabases.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: sql-managedDatabases
@@ -39,6 +39,15 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: client
+  BlobAuditingPolicyNameParameter:
+    description: The name of the blob auditing policy.
+    enum:
+      - default
+    in: path
+    name: blobAuditingPolicyName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   DatabaseNameParameter:
     description: The name of the database.
     in: path
@@ -117,7 +126,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/CompleteManagedDatabaseRestoreDefinition'
+            $ref: '#/definitions/CompleteDatabaseRestoreDefinition'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
@@ -133,15 +142,13 @@ paths:
 
              * 400 InvalidDatabaseCompleteRestoreRequestLastBackupName - The last backup name is invalid
 
-             * 400 TokenTooLong - The provided token is too long.
-
              * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.
+
+             * 400 TokenTooLong - The provided token is too long.
 
              * 400 SourceDatabaseNotFound - The source database does not exist.
 
              * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.
-          schema:
-            $ref: '#/definitions/Error'
       tags:
         - ManagedDatabases
       x-ms-examples:
@@ -176,8 +183,6 @@ paths:
             *** Error Responses: ***
 
              * 404 SubscriptionDoesNotHaveServer - The requested server was not found
-          schema:
-            $ref: '#/definitions/Error'
       tags:
         - ManagedDatabases
       x-ms-examples:
@@ -249,11 +254,11 @@ paths:
 
              * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.
 
+             * 409 ServerDisabled - Server is disabled.
+
              * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.
 
              * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.
-          schema:
-            $ref: '#/definitions/Error'
       tags:
         - ManagedDatabases
       x-ms-examples:
@@ -292,8 +297,6 @@ paths:
              * 404 SubscriptionDoesNotHaveServer - The requested server was not found
 
              * 404 ResourceNotFound - The requested resource was not found.
-          schema:
-            $ref: '#/definitions/Error'
       tags:
         - ManagedDatabases
       x-ms-examples:
@@ -345,8 +348,6 @@ paths:
              * 404 SubscriptionDoesNotHaveServer - The requested server was not found
 
              * 404 ResourceNotFound - The requested resource was not found.
-          schema:
-            $ref: '#/definitions/Error'
       tags:
         - ManagedDatabases
       x-ms-examples:
@@ -431,7 +432,19 @@ paths:
           description: |-
             *** Error Responses: ***
 
+             * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.
+
+             * 400 SourceDatabaseNotFound - The source database does not exist.
+
+             * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.
+
+             * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.
+
+             * 400 SubscriptionNotFound - The requested subscription was not found.
+
              * 400 InvalidServerName - Invalid server name specified.
+
+             * 400 SourceServerNotFound - The server part of a source database id provided in a CreateDatabaseAsCopy API call doesn't map to an existing server.
 
              * 400 TokenTooLong - The provided token is too long.
 
@@ -439,21 +452,9 @@ paths:
 
              * 400 InvalidCollation - Collation is not recognized by the server.
 
-             * 400 SourceDatabaseNotFound - The source database does not exist.
-
-             * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.
-
-             * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.
-
-             * 400 SourceServerNotFound - The server part of a source database id provided in a CreateDatabaseAsCopy API call doesn't map to an existing server.
-
              * 400 ServerNotFound - The requested server was not found.
 
              * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.
-
-             * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.
-
-             * 400 SubscriptionNotFound - The requested subscription was not found.
 
              * 400 CurrentDatabaseLogSizeExceedsMaxSize - User attempted to change the database to a sku with lower max log size than the current usage.
 
@@ -485,17 +486,17 @@ paths:
 
              * 404 ResourceNotFound - The requested resource was not found.
 
+             * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions
+
              * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.
 
              * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.
 
-             * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions
-
              * 409 RemoteDatabaseExists - The destination database name already exists on the destination server.
 
-             * 409 SubscriptionDisabled - Subscription is disabled.
-
              * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.
+
+             * 409 SubscriptionDisabled - Subscription is disabled.
 
              * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.
 
@@ -508,8 +509,6 @@ paths:
              * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.
 
              * 504 RequestTimeout - Service request exceeded the allowed timeout.
-          schema:
-            $ref: '#/definitions/Error'
       tags:
         - ManagedDatabases
       x-ms-examples:
@@ -670,8 +669,8 @@ paths:
             '202': {}
       x-ms-long-running-operation: true
 definitions:
-  CompleteManagedDatabaseRestoreDefinition:
-    description: Contains the information necessary to perform a complete managed database restore operation.
+  CompleteDatabaseRestoreDefinition:
+    description: Contains the information necessary to perform a complete database restore operation.
     properties:
       lastBackupName:
         description: The last backup name to apply
@@ -679,33 +678,41 @@ definitions:
     required:
       - lastBackupName
     type: object
-  Error:
-    description: An error response.
-    properties:
-      error:
-        $ref: '#/definitions/ErrorProperties'
-    x-ms-external: true
-  ErrorProperties:
-    description: An error response.
-    properties:
-      code:
-        description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
-        type: string
-      details:
-        description: A list of additional details about the error.
-        items:
-          $ref: '#/definitions/Error'
-        type: array
-      message:
-        description: 'A message describing the error, intended to be suitable for display in a user interface.'
-        type: string
-      target:
-        description: 'The target of the particular error. For example, the name of the property in error.'
-        type: string
-    x-ms-external: true
   ManagedDatabase:
     allOf:
-      - $ref: '#/definitions/TrackedResource'
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            type: object
+            x-ms-azure-resource: true
+        description: ARM tracked top level resource.
+        properties:
+          location:
+            description: Resource location.
+            type: string
+            x-ms-mutability:
+              - read
+              - create
+          tags:
+            additionalProperties:
+              type: string
+            description: Resource tags.
+            type: object
+        required:
+          - location
+        type: object
     description: A managed database resource.
     properties:
       properties:
@@ -771,6 +778,15 @@ definitions:
         description: Geo paired region.
         readOnly: true
         type: string
+      earliestRestorePoint:
+        description: Earliest restore point in time for point in time restore.
+        format: date-time
+        readOnly: true
+        type: string
+      failoverGroupId:
+        description: Instance Failover Group resource identifier that this managed database belongs to.
+        readOnly: true
+        type: string
       restorePointInTime:
         description: 'Conditional. If createMode is PointInTimeRestore, this value is required. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.'
         format: date-time
@@ -818,40 +834,4 @@ definitions:
           type: string
         description: Resource tags.
         type: object
-    type: object
-  Resource:
-    description: ARM resource.
-    properties:
-      id:
-        description: Resource ID.
-        readOnly: true
-        type: string
-      name:
-        description: Resource name.
-        readOnly: true
-        type: string
-      type:
-        description: Resource type.
-        readOnly: true
-        type: string
-    type: object
-    x-ms-azure-resource: true
-  TrackedResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: ARM tracked top level resource.
-    properties:
-      location:
-        description: Resource location.
-        type: string
-        x-ms-mutability:
-          - read
-          - create
-      tags:
-        additionalProperties:
-          type: string
-        description: Resource tags.
-        type: object
-    required:
-      - location
     type: object

@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/microsoft.insights/stable/2015-05-01/componentWorkItemConfigs_API.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: applicationinsights-componentWorkItemConfigs_API
@@ -69,7 +69,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/DefaultWorkItemConfig':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/DefaultWorkItemConfig':
     get:
       description: Gets default work item configurations that exist for the application
       operationId: WorkItemConfigurations_GetDefault
@@ -98,8 +98,7 @@ paths:
                 ConnectorId: d334e2a4-6733-488e-8645-a9fdc1694f41
                 Id: Visual Studio Team Services
                 IsDefault: true
-      x-ms-pageable: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/WorkItemConfigs':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/WorkItemConfigs':
     get:
       description: Gets the list work item configurations that exist for the application
       operationId: WorkItemConfigurations_List
@@ -112,9 +111,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            items:
-              $ref: '#/definitions/WorkItemConfiguration'
-            type: array
+            $ref: '#/definitions/WorkItemConfigurationsListResult'
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -183,7 +180,7 @@ paths:
           responses:
             '200':
               body: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/WorkItemConfigs/{workItemConfigId}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/WorkItemConfigs/{workItemConfigId}':
     delete:
       description: Delete an workitem configuration of an Application Insights component.
       operationId: WorkItemConfigurations_Delete
@@ -251,6 +248,15 @@ definitions:
         description: Error message
         type: string
     type: object
+  WorkItemConfigurationsListResult:
+    description: Work item configuration list result.
+    properties:
+      value:
+        description: An array of work item configurations.
+        items:
+          $ref: '#/definitions/WorkItemConfiguration'
+        readOnly: true
+        type: array
   WorkItemCreateConfiguration:
     description: Work item configuration creation payload
     properties:

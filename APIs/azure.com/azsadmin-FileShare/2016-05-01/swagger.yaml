@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/stable/2016-05-01/FileShare.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/preview/2016-05-01/FileShare.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: azsadmin-FileShare
@@ -26,7 +26,7 @@ produces:
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow
+    description: Authorization uses an Azure Active Directory OAuth2 flow.
     flow: implicit
     scopes:
       user_impersonation: impersonate your user account
@@ -43,16 +43,22 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/fileShares':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/fileShares':
     get:
-      description: Get a list of all fabric file shares at a certain location.
+      description: Returns a list of all fabric file shares at a certain location.
       operationId: FileShares_List
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+        - description: Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
+        - description: Name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Location of the resource.
           in: path
           name: location
@@ -60,7 +66,7 @@ paths:
           type: string
           x-ms-parameter-location: method
         - default: '2016-05-01'
-          description: Client Api Version.
+          description: Client API Version.
           in: query
           name: api-version
           required: true
@@ -75,78 +81,88 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/FileShareList'
+        '404':
+          description: NOT FOUND
       tags:
         - FileShares
       x-ms-examples:
-        List all file shares:
+        Returns a list of all fabric file shares at a certain location.:
           parameters:
             api-version: '2016-05-01'
             location: local
+            resourceGroupName: System.local
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_Infrastructure_1
+                  - id: /subscriptions/23a94a7f-64b3-42d8-807c-733284339015/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_Infrastructure_1
                     location: local
                     name: SU1_Infrastructure_1
                     properties:
-                      associatedVolume: 28fbffa4
-                      uncPath: \\SU1FileServer.azurestack.local\SU1_Infrastructure_1
+                      associatedVolume: 05c1cbb7
+                      uncPath: \\\\SU1FileServer.azurestack.local\\SU1_Infrastructure_1
                     tags: {}
                     type: Microsoft.Fabric.Admin/fabricLocations/fileShares
-                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_Infrastructure_2
+                  - id: /subscriptions/23a94a7f-64b3-42d8-807c-733284339015/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_Infrastructure_2
                     location: local
                     name: SU1_Infrastructure_2
                     properties:
-                      associatedVolume: 28fbffa4
-                      uncPath: \\SU1FileServer.azurestack.local\SU1_Infrastructure_2
+                      associatedVolume: 05c1cbb7
+                      uncPath: \\\\SU1FileServer.azurestack.local\\SU1_Infrastructure_2
                     tags: {}
                     type: Microsoft.Fabric.Admin/fabricLocations/fileShares
-                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_Infrastructure_3
+                  - id: /subscriptions/23a94a7f-64b3-42d8-807c-733284339015/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_Infrastructure_3
                     location: local
                     name: SU1_Infrastructure_3
                     properties:
-                      associatedVolume: 28fbffa4
-                      uncPath: \\SU1FileServer.azurestack.local\SU1_Infrastructure_3
+                      associatedVolume: 05c1cbb7
+                      uncPath: \\\\SU1FileServer.azurestack.local\\SU1_Infrastructure_3
                     tags: {}
                     type: Microsoft.Fabric.Admin/fabricLocations/fileShares
-                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_ObjStore
+                  - id: /subscriptions/23a94a7f-64b3-42d8-807c-733284339015/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_ObjStore
                     location: local
                     name: SU1_ObjStore
                     properties:
-                      associatedVolume: 28fbffa4
-                      uncPath: \\SU1FileServer.azurestack.local\SU1_ObjStore
+                      associatedVolume: 05c1cbb7
+                      uncPath: \\\\SU1FileServer.azurestack.local\\SU1_ObjStore
                     tags: {}
                     type: Microsoft.Fabric.Admin/fabricLocations/fileShares
-                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_Public
+                  - id: /subscriptions/23a94a7f-64b3-42d8-807c-733284339015/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_Public
                     location: local
                     name: SU1_Public
                     properties:
-                      associatedVolume: 28fbffa4
-                      uncPath: \\SU1FileServer.azurestack.local\SU1_Public
+                      associatedVolume: 05c1cbb7
+                      uncPath: \\\\SU1FileServer.azurestack.local\\SU1_Public
                     tags: {}
                     type: Microsoft.Fabric.Admin/fabricLocations/fileShares
-                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_VmTemp
+                  - id: /subscriptions/23a94a7f-64b3-42d8-807c-733284339015/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_VmTemp
                     location: local
                     name: SU1_VmTemp
                     properties:
-                      associatedVolume: 28fbffa4
-                      uncPath: \\SU1FileServer.azurestack.local\SU1_VmTemp
+                      associatedVolume: 05c1cbb7
+                      uncPath: \\\\SU1FileServer.azurestack.local\\SU1_VmTemp
                     tags: {}
                     type: Microsoft.Fabric.Admin/fabricLocations/fileShares
+            '404': {}
       x-ms-odata: '#/definitions/FileShare'
       x-ms-pageable: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/fileShares/{fileShare}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/fileShares/{fileShare}':
     get:
-      description: Get a fabric file share.
+      description: Returns the requested fabric file share.
       operationId: FileShares_Get
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+        - description: Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
+        - description: Name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Location of the resource.
           in: path
           name: location
@@ -155,7 +171,7 @@ paths:
           x-ms-parameter-location: method
         - $ref: '#/parameters/FileShareParameter'
         - default: '2016-05-01'
-          description: Client Api Version.
+          description: Client API Version.
           in: query
           name: api-version
           required: true
@@ -165,37 +181,41 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/FileShare'
+        '404':
+          description: NOT FOUND
       tags:
         - FileShares
       x-ms-examples:
-        Get a file share:
+        Returns the requested fabric file share.:
           parameters:
             api-version: '2016-05-01'
             fileShare: SU1_Public
             location: local
+            resourceGroupName: System.local
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
-                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_Public
+                id: /subscriptions/23a94a7f-64b3-42d8-807c-733284339015/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/fileShares/SU1_VmTemp
                 location: local
-                name: SU1_Public
+                name: SU1_VmTemp
                 properties:
-                  associatedVolume: 28fbffa4
-                  uncPath: \\SU1FileServer.azurestack.local\SU1_Public
+                  associatedVolume: 05c1cbb7
+                  uncPath: \\\\SU1FileServer.azurestack.local\\SU1_VmTemp
                 tags: {}
                 type: Microsoft.Fabric.Admin/fabricLocations/fileShares
+            '404': {}
 definitions:
   FileShare:
     allOf:
-      - description: Base Resource Object
+      - description: Base resource object.
         properties:
           id:
             description: URI of the resource.
             readOnly: true
             type: string
           location:
-            description: Region Location of resource.
+            description: The region where the resource is located.
             type: string
           name:
             description: Name of the resource.
@@ -204,7 +224,7 @@ definitions:
           tags:
             additionalProperties:
               type: string
-            description: List of key value pairs.
+            description: List of key-value pairs.
             type: object
           type:
             description: Type of resource.
@@ -212,7 +232,7 @@ definitions:
             type: string
         type: object
         x-ms-azure-resource: true
-    description: Representation of a file share resource.
+    description: Object that contains properties of the file share resource.
     properties:
       properties:
         $ref: '#/definitions/FileShareModel'
@@ -223,7 +243,7 @@ definitions:
     description: Pageable list of fabric file share locations.
     properties:
       value:
-        description: List of fabric file shares for this page.
+        description: List of fabric file shares.
         items:
           $ref: '#/definitions/FileShare'
         type: array
@@ -232,7 +252,7 @@ definitions:
     description: Properties of a file share resource.
     properties:
       associatedVolume:
-        description: Associated volume Id.
+        description: Associated volume ID.
         type: string
       uncPath:
         description: The UNCPath for the fileshare.

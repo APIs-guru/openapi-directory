@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/InfrastructureInsights/Microsoft.InfrastructureInsights.Admin/stable/2016-05-01/ResourceHealth.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/infrastructureinsights/Microsoft.InfrastructureInsights.Admin/preview/2016-05-01/ResourceHealth.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: azsadmin-ResourceHealth
@@ -26,7 +26,7 @@ produces:
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow
+    description: Authorization uses an Azure Active Directory OAuth2 flow.
     flow: implicit
     scopes:
       user_impersonation: impersonate your user account
@@ -35,30 +35,36 @@ security:
   - azure_auth:
       - user_impersonation
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceRegistrationId}/resourceHealths':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceRegistrationId}/resourceHealths':
     get:
-      description: Get a list of resources?.
+      description: Returns a list of each resource's health under a service.
       operationId: ResourceHealths_List
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+        - description: Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: Location name.
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of the region
           in: path
           name: location
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: Service registration id.
+        - description: Service registration ID.
           in: path
           name: serviceRegistrationId
           required: true
           type: string
           x-ms-parameter-location: method
         - default: '2016-05-01'
-          description: Client Api Version.
+          description: Client API Version.
           in: query
           name: api-version
           required: true
@@ -76,10 +82,11 @@ paths:
       tags:
         - Resources
       x-ms-examples:
-        Get a list of resource health items:
+        Returns a list of each resource's health under a service.:
           parameters:
             api-version: '2016-05-01'
             location: local
+            resourceGroupName: System.local
             serviceRegistrationId: e56bc7b8-c8b5-4e25-b00c-4f951effb22c
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
@@ -830,36 +837,42 @@ paths:
       x-ms-odata: '#/definitions/ResourceHealth'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceRegistrationId}/resourceHealths/{resourceRegistrationId}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}/serviceHealths/{serviceRegistrationId}/resourceHealths/{resourceRegistrationId}':
     get:
-      description: Get health information about a resources.
+      description: Returns the requested health information about a resource.
       operationId: ResourceHealths_Get
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+        - description: Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: Location name.
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of the region
           in: path
           name: location
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: Service registration id.
+        - description: Service registration ID.
           in: path
           name: serviceRegistrationId
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: Resource registration id.
+        - description: Resource registration ID.
           in: path
           name: resourceRegistrationId
           required: true
           type: string
           x-ms-parameter-location: method
         - default: '2016-05-01'
-          description: Client Api Version.
+          description: Client API Version.
           in: query
           name: api-version
           required: true
@@ -877,10 +890,11 @@ paths:
       tags:
         - Resources
       x-ms-examples:
-        Get health information about a resource:
+        Returns the requested health information about a resource.:
           parameters:
             api-version: '2016-05-01'
             location: local
+            resourceGroupName: System.local
             resourceRegistrationId: e388fe4c-63a0-4253-9b29-6dd4bf024501
             serviceRegistrationId: e56bc7b8-c8b5-4e25-b00c-4f951effb22c
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
@@ -910,31 +924,39 @@ paths:
 definitions:
   ResourceHealth:
     allOf:
-      - description: Base Resource Object
+      - allOf:
+          - description: The core properties of ARM resources
+            properties:
+              id:
+                description: Fully qualified resource Id for the resource
+                readOnly: true
+                type: string
+              name:
+                description: The name of the resource
+                readOnly: true
+                type: string
+              type:
+                description: The type of the resource.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
+        description: The resource model definition for a ARM tracked top level resource
         properties:
-          id:
-            description: URI of the resource.
-            type: string
           location:
-            description: Location where resource is location.
-            readOnly: true
+            description: The Azure Region where the resource lives
             type: string
-          name:
-            description: Name of the resource.
-            readOnly: true
-            type: string
+            x-ms-mutability:
+              - read
+              - create
           tags:
             additionalProperties:
               type: string
-            description: List of key value pairs.
-            readOnly: true
+            description: Resource tags.
             type: object
-          type:
-            description: Type of resource.
-            readOnly: true
-            type: string
-        type: object
-        x-ms-azure-resource: true
+            x-ms-mutability:
+              - read
+              - create
+              - update
     description: Health information related to a resource.
     properties:
       properties:
@@ -942,13 +964,13 @@ definitions:
         description: Health information related to a resource.
         x-ms-client-flatten: true
   ResourceHealthList:
-    description: Pageable list of resource healths.
+    description: Pageable list of resource health objects.
     properties:
       nextLink:
         description: URI to next page.
         type: string
       value:
-        description: Array of of resource healths
+        description: List of resource health objects.
         items:
           $ref: '#/definitions/ResourceHealth'
         type: array
@@ -960,45 +982,45 @@ definitions:
             description: Summary of the alerts.
             properties:
               criticalAlertCount:
-                description: How many critical alerts this service has.
+                description: The number of critical alerts for the service.
                 type: integer
               warningAlertCount:
-                description: How many warning alerts this service has.
+                description: The number of warning alerts for the service.
                 type: integer
           healthState:
-            description: Gets or sets the health status.
+            description: Health state.
             type: string
           namespace:
-            description: Gets or sets the name space.
+            description: Namespace of the health resource.
             type: string
           registrationId:
-            description: Gets or sets the registration id.
+            description: Registration ID.
             type: string
           routePrefix:
-            description: Gets or sets the route prefix.
+            description: Route prefix.
             type: string
     description: Health information related to a resource.
     properties:
       resourceDisplayName:
-        description: Gets or sets the resource display name.
+        description: Resource display name.
         type: string
       resourceLocation:
-        description: Gets or sets the resource location.
+        description: Resource location.
         type: string
       resourceName:
-        description: Gets or sets the resource name.
+        description: Resource name.
         type: string
       resourceType:
-        description: Gets or sets the resource type.
+        description: Resource type.
         type: string
       resourceURI:
-        description: Gets or sets the resource uri.
+        description: Gets or sets the resource URI.
         type: string
       rpRegistrationId:
-        description: Gets or sets the resource provider registration id.
+        description: Gets or sets the resource provider registration ID.
         type: string
       usageMetrics:
-        description: Gets or sets the usage metrics.
+        description: Usage metrics.
         items:
           description: Metrics of resource usage.
           properties:
@@ -1008,17 +1030,17 @@ definitions:
                 description: Metrics for a source.
                 properties:
                   maCounterName:
-                    description: Name of the usage metric.
+                    description: Name of the counter.
                     type: string
                   name:
                     description: Name of the usage metric.
                     type: string
                   observedTimestamp:
-                    description: Name of the usage metric.
+                    description: Time counter was observed.
                     format: date-time
                     type: string
                   sourceName:
-                    description: What created the metric.
+                    description: The origin of the metric.
                     enum:
                       - PhysicalNode
                       - VirtualMachine
@@ -1028,7 +1050,7 @@ definitions:
                       modelAsString: true
                       name: MetricsSourceType
                   sourceType:
-                    description: Name of the usage metric.
+                    description: Type of the source.
                     type: string
                   unit:
                     description: The unit of the metric.

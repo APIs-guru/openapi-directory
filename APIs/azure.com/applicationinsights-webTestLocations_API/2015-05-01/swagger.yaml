@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/microsoft.insights/stable/2015-05-01/webTestLocations_API.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: applicationinsights-webTestLocations_API
@@ -62,7 +62,7 @@ parameters:
     required: true
     type: string
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/syntheticmonitorlocations':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/syntheticmonitorlocations':
     get:
       description: Gets a list of web test locations available to this Application Insights component.
       operationId: webTestLocations_List

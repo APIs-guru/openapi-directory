@@ -1,0 +1,251 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Azure Virtual Machine Serial Console allows you to access serial console of a Virtual Machine
+  title: MicrosoftSerialConsoleClient
+  version: '2018-05-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/serialconsole/resource-manager/Microsoft.SerialConsole/stable/2018-05-01/serialconsole.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: serialconsole
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: The API version to use for this operation.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  SubscriptionIdParameter:
+    description: The ID of the target subscription.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+  default:
+    description: Default string modeled as parameter for URL to work correctly.
+    enum:
+      - default
+    in: path
+    name: default
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}':
+    get:
+      description: Gets if Serial Console is disabled for a subscription.
+      operationId: ListConsole_Disabled
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/default'
+      responses:
+        '200':
+          description: OK - Returns a JSON object
+          schema:
+            $ref: '#/definitions/GetDisabledResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/DeploymentValidateResult'
+      tags:
+        - ConsoleDisabled
+      x-ms-examples:
+        Get whether or not Serial Console is disabled and receive error:
+          parameters:
+            api-version: '2018-05-01'
+            default: default
+            subscriptionId: 00000000-00000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                disabled: true
+            default:
+              body:
+                errorMessage: This message contains details on failure
+        Successfully get whether or not Serial Console is disabled:
+          parameters:
+            api-version: '2018-05-01'
+            default: default
+            subscriptionId: 00000000-00000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                disabled: true
+            default:
+              body:
+                errorMessage: This message contains details on failure
+  '/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}/disableConsole':
+    post:
+      description: Disables Serial Console for a subscription
+      operationId: Console_DisableConsole
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/default'
+      responses:
+        '200':
+          description: OK - Serial Console disabled
+          schema:
+            $ref: '#/definitions/SetDisabledResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/DeploymentValidateResult'
+      tags:
+        - DisableConsole
+      x-ms-examples:
+        Disable console with error:
+          parameters:
+            api-version: '2018-05-01'
+            default: default
+            subscriptionId: 00000000-00000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                disabled: true
+            default:
+              body:
+                errorMessage: This message will contain details on failure
+        Enable console successfully:
+          parameters:
+            api-version: '2018-05-01'
+            default: default
+            subscriptionId: 00000000-00000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                disabled: true
+            default:
+              body:
+                errorMessage: This message will contain details on failure
+  '/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}/enableConsole':
+    post:
+      description: Enables Serial Console for a subscription
+      operationId: Console_EnableConsole
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/default'
+      responses:
+        '200':
+          description: OK - Serial Console disabled
+          schema:
+            $ref: '#/definitions/SetDisabledResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/DeploymentValidateResult'
+      tags:
+        - EnableConsole
+      x-ms-examples:
+        Enable console successfully:
+          parameters:
+            api-version: '2018-05-01'
+            default: default
+            subscriptionId: 00000000-00000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                disabled: false
+            default:
+              body:
+                errorMessage: This message will contain details on failure
+        Enable console with error:
+          parameters:
+            api-version: '2018-05-01'
+            default: default
+            subscriptionId: 00000000-00000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                disabled: false
+            default:
+              body:
+                errorMessage: This message will contain details on failure
+  '/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/operations':
+    get:
+      description: Gets a list of Serial Console API operations.
+      operationId: List_Operations
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK - returns a JSON object
+          schema:
+            $ref: '#/definitions/SerialConsoleOperations'
+      tags:
+        - SerialConsole
+      x-ms-examples:
+        List all Serial Console management operations supported by Serial Console RP:
+          parameters:
+            api-version: '2018-05-01'
+            subscriptionId: 00000000-00000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                value: Get operations response
+definitions:
+  DeploymentValidateResult:
+    description: Details on Failure
+    properties:
+      errorMessage:
+        description: Error message
+        type: string
+    title: Details on Failure
+  GetDisabledResult:
+    description: Returns whether or not Serial Console is disabled for this given subscription
+    properties:
+      disabled:
+        description: Disabled result
+        type: boolean
+    title: Get Disabled result
+  SerialConsoleGetResult:
+    description: Returns whether or not Serial Console is disabled.
+    properties:
+      value:
+        description: Whether or not Serial Console is disabled.
+        type: boolean
+    title: Serial Console GET Result
+  SerialConsoleOperations:
+    description: Serial Console operations
+    properties:
+      value:
+        description: Serial Console operations
+        type: string
+    title: Serial Console operations
+    type: object
+  SetDisabledResult:
+    description: Sets disable status and returns whether or not Serial Console is now disabled for this given subscription
+    properties:
+      disabled:
+        description: Disabled result
+        type: boolean
+    title: Set Disabled result

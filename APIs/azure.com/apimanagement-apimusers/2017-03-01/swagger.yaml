@@ -1,0 +1,1175 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  description: Use these REST APIs for performing operations on User entity in Azure API Management deployment. The User entity in API Management represents the developers that call the APIs of the products to which they are subscribed.
+  title: ApiManagementClient
+  version: '2017-03-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimusers.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: apimanagement-apimusers
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  apim_key:
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - apim_key: []
+parameters:
+  UserIdParameter:
+    description: User identifier. Must be unique in the current API Management service instance.
+    in: path
+    maxLength: 256
+    minLength: 1
+    name: uid
+    pattern: '^[^*#&+:<>?]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  /users:
+    get:
+      description: Lists a collection of registered users in the specified service instance.
+      operationId: User_List
+      parameters:
+        - description: |-
+            | Field            | Supported operators    | Supported functions               |
+            |------------------|------------------------|-----------------------------------|
+            | id               | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | firstName        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | lastName         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | email            | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | state            | eq                     | N/A                               |
+            | registrationDate | ge, le, eq, ne, gt, lt | N/A                               |
+            | note             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: Number of records to return.
+          format: int32
+          in: query
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+          x-ms-parameter-location: method
+        - description: Number of records to skip.
+          format: int32
+          in: query
+          minimum: 0
+          name: $skip
+          required: false
+          type: integer
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Lists a collection of User entities.
+          schema:
+            $ref: '#/definitions/UserCollection'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Users
+      x-ms-examples:
+        ApiManagementListUsers:
+          parameters:
+            Accept: application/json
+            api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            expandGroups: 'False'
+          responses:
+            '200':
+              body:
+                count: 1
+                value:
+                  - email: admin@contoso.com
+                    firstName: Administrator
+                    id: /users/1
+                    identities:
+                      - id: admin@contoso.com
+                        provider: Azure
+                    lastName: ''
+                    registrationDate: '2018-01-12T13:39:28.527Z'
+                    state: active
+      x-ms-odata: '#/definitions/UserContract'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/users/{uid}':
+    delete:
+      description: Deletes specific user.
+      operationId: User_Delete
+      parameters:
+        - $ref: '#/parameters/UserIdParameter'
+        - default: 'False'
+          description: Whether to delete user's subscription or not.
+          enum:
+            - 'False'
+            - 'True'
+          in: query
+          name: deleteSubscriptions
+          required: false
+          type: string
+        - default: 'False'
+          description: Send an Account Closed Email notification to the User.
+          enum:
+            - 'False'
+            - 'True'
+          in: query
+          name: notify
+          required: false
+          type: string
+        - description: The entity state (Etag) version of the user to delete. A value of "*" can be used for If-Match to unconditionally apply the operation.
+          in: header
+          name: If-Match
+          required: true
+          type: string
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '204':
+          description: The user details were successfully deleted.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Users
+      x-ms-examples:
+        ApiManagementDeleteUsers:
+          parameters:
+            If-Match: '"AAAAAAAACqkAAAAAAAAKqw=="'
+            api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            deleteSubscriptions: 'False'
+            notify: 'False'
+            uid: 5a58bb00a40f7ef2e05bd23e
+          responses:
+            '204': {}
+    get:
+      description: Gets the details of the user specified by its identifier.
+      operationId: User_Get
+      parameters:
+        - $ref: '#/parameters/UserIdParameter'
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Gets the specified user entity.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+          schema:
+            $ref: '#/definitions/UserContract'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Users
+      x-ms-examples:
+        ApiManagementGetUsers:
+          parameters:
+            Accept: application/json
+            api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            uid: 5a58badfa40f7ef2e05bcd37
+          responses:
+            '200':
+              body:
+                email: 5a58badfa40f7ef2e05bcd38@contoso.com
+                firstName: 5a58badfa40f7ef2e05bcd39
+                id: /users/5a58badfa40f7ef2e05bcd37
+                identities:
+                  - id: 5a58badfa40f7ef2e05bcd38@contoso.com
+                    provider: Basic
+                lastName: 5a58badfa40f7ef2e05bcd3a
+                registrationDate: '2018-01-12T13:40:47.3Z'
+                state: active
+    patch:
+      description: Updates the details of the user specified by its identifier.
+      operationId: User_Update
+      parameters:
+        - $ref: '#/parameters/UserIdParameter'
+        - description: Update parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/UserUpdateParameters'
+        - description: The entity state (Etag) version of the user to update. A value of "*" can be used for If-Match to unconditionally apply the operation.
+          in: header
+          name: If-Match
+          required: true
+          type: string
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '204':
+          description: The user details were successfully updated.
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 405 Administrator user cannot be modified
+
+             * 4XX Error response giving details why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Users
+      x-ms-examples:
+        ApiManagementPatchUsers:
+          parameters:
+            If-Match: '"AAAAAAAAClEAAAAAAAAKUw=="'
+            api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            parameters:
+              state: active
+            uid: 5a58baf0a40f7ef2e05bcf5e
+          responses:
+            '204': {}
+    put:
+      description: Creates or Updates a user.
+      operationId: User_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/UserIdParameter'
+        - description: Create or update parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/UserCreateParameters'
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User was successfully updated.
+          schema:
+            $ref: '#/definitions/UserContract'
+        '201':
+          description: User was successfully created.
+          schema:
+            $ref: '#/definitions/UserContract'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Users
+      x-ms-examples:
+        ApiManagementPutUsers:
+          parameters:
+            api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            parameters:
+              email: 5a58bac2a40f7ef2e05bc7d1@contoso.com
+              firstName: 5a58bac2a40f7ef2e05bc7d2
+              lastName: 5a58bac2a40f7ef2e05bc7d3
+              password: 5a58bac2a40f7ef2e05bc7d4
+            uid: 5a58bac2a40f7ef2e05bc7d0
+          responses:
+            '200':
+              body:
+                email: 5a58bac2a40f7ef2e05bc7d1@contoso.com
+                firstName: 5a58bac2a40f7ef2e05bc7d2
+                groups:
+                  - builtIn: true
+                    description: Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.
+                    id: /groups/developers
+                    name: Developers
+                    type: system
+                id: /users/5a58bac2a40f7ef2e05bc7d0
+                identities:
+                  - id: 5a58bac2a40f7ef2e05bc7d1@contoso.com
+                    provider: Basic
+                lastName: 5a58bac2a40f7ef2e05bc7d3
+                registrationDate: '2018-01-12T13:40:18.223Z'
+                state: active
+            '201':
+              body:
+                email: 5a58bac2a40f7ef2e05bc7d1@contoso.com
+                firstName: 5a58bac2a40f7ef2e05bc7d2
+                groups:
+                  - builtIn: true
+                    description: Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.
+                    id: /groups/developers
+                    name: Developers
+                    type: system
+                id: /users/5a58bac2a40f7ef2e05bc7d0
+                identities:
+                  - id: 5a58bac2a40f7ef2e05bc7d1@contoso.com
+                    provider: Basic
+                lastName: 5a58bac2a40f7ef2e05bc7d3
+                registrationDate: '2018-01-12T13:40:18.223Z'
+                state: active
+  '/users/{uid}/generateSsoUrl':
+    post:
+      description: Retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.
+      operationId: User_GenerateSsoUrl
+      parameters:
+        - $ref: '#/parameters/UserIdParameter'
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body contains the single sign-on URL.
+          schema:
+            $ref: '#/definitions/GenerateSsoUrlResult'
+            x-ms-client-flatten: true
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Users
+      x-ms-examples:
+        ApiManagementPostUsersGeneratessourl:
+          parameters:
+            Accept: application/json
+            api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            uid: 5a58bb61a40f7ef2e05bdc0f
+          responses:
+            '200':
+              body:
+                value: 'https://portal.apim.net/signin-sso?token=5a58bb61a40f7ef2e05bdc0f%26201801121347%26sR2koAEheTKPKakx88NkU1bZe5xmQ4xhX8Tk1CHFKKGVh4BMvy3ltuoSSt4B38L%2fIRxDs0saqAVc0l9I4Z8nLg%3d%3d'
+  '/users/{uid}/groups':
+    get:
+      description: Lists all user groups.
+      operationId: UserGroup_List
+      parameters:
+        - $ref: '#/parameters/UserIdParameter'
+        - description: |-
+            | Field       | Supported operators    | Supported functions                         |
+            |-------------|------------------------|---------------------------------------------|
+            | id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: Number of records to return.
+          format: int32
+          in: query
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+          x-ms-parameter-location: method
+        - description: Number of records to skip.
+          format: int32
+          in: query
+          minimum: 0
+          name: $skip
+          required: false
+          type: integer
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Lists a collection of Group entities.
+          schema:
+            description: Paged Group list representation.
+            properties:
+              count:
+                description: Total number of entities
+                type: integer
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: Developer group.
+                      properties:
+                        builtIn:
+                          description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
+                          readOnly: true
+                          type: boolean
+                        description:
+                          description: Group description. Can contain HTML formatting tags.
+                          maxLength: 1000
+                          type: string
+                        externalId:
+                          description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
+                          type: string
+                        name:
+                          description: Group name.
+                          maxLength: 300
+                          minLength: 1
+                          type: string
+                        type:
+                          description: Group type.
+                          enum:
+                            - custom
+                            - system
+                            - external
+                          type: string
+                          x-ms-enum:
+                            modelAsString: false
+                            name: GroupType
+                      required:
+                        - name
+                  description: Contract details.
+                  properties:
+                    id:
+                      description: Identifier of the Group entity.
+                      type: string
+                type: array
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - UserGroups
+      x-ms-examples:
+        ApiManagementListUsersGroups:
+          parameters:
+            Accept: application/json
+            api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            uid: 5a58bae5a40f7ef2e05bcd76
+          responses:
+            '200':
+              body:
+                count: 1
+                value:
+                  - builtIn: true
+                    description: Developers is a built-in group. Its membership is managed by the system. Signed-in users fall into this group.
+                    id: /groups/developers
+                    name: Developers
+                    type: system
+      x-ms-odata: './apimgroups.json#/definitions/GroupContract'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/users/{uid}/identities':
+    get:
+      description: Lists all user identities.
+      operationId: UserIdentities_List
+      parameters:
+        - $ref: '#/parameters/UserIdParameter'
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Lists of User Identities.
+          schema:
+            $ref: '#/definitions/UserIdentityCollection'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - UserIdentities
+      x-ms-examples:
+        ApiManagementListUsersIdentities:
+          parameters:
+            Accept: application/json
+            api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            uid: 5a58bb0aa40f7ef2e05bd3c2
+          responses:
+            '200':
+              body:
+                count: 1
+                value:
+                  - id: 5a58bb09a40f7ef2e05bd3c1@contoso.com
+                    provider: Basic
+      x-ms-pageable: {}
+  '/users/{uid}/subscriptions':
+    get:
+      description: Lists the collection of subscriptions of the specified user.
+      operationId: UserSubscription_List
+      parameters:
+        - $ref: '#/parameters/UserIdParameter'
+        - description: |-
+            | Field        | Supported operators    | Supported functions                         |
+            |--------------|------------------------|---------------------------------------------|
+            | id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | userId       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | productId    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+            | state        | eq                     |                                             |
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: Number of records to return.
+          format: int32
+          in: query
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+          x-ms-parameter-location: method
+        - description: Number of records to skip.
+          format: int32
+          in: query
+          minimum: 0
+          name: $skip
+          required: false
+          type: integer
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Lists a collection of Subscription entities.
+          schema:
+            description: Paged Subscriptions list representation.
+            properties:
+              count:
+                description: Total number of entities
+                type: integer
+              nextLink:
+                description: Next page link if any.
+                type: string
+              value:
+                description: Page values.
+                items:
+                  allOf:
+                    - description: Subscription details.
+                      properties:
+                        createdDate:
+                          description: |
+                            Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                          format: date-time
+                          readOnly: true
+                          type: string
+                        endDate:
+                          description: |
+                            Date when subscription was cancelled or expired. The setting is for audit purposes only and the subscription is not automatically cancelled. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                          format: date-time
+                          type: string
+                        expirationDate:
+                          description: |
+                            Subscription expiration date. The setting is for audit purposes only and the subscription is not automatically expired. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                          format: date-time
+                          type: string
+                        name:
+                          description: 'The name of the subscription, or null if the subscription has no name.'
+                          maxLength: 100
+                          minLength: 0
+                          type: string
+                        notificationDate:
+                          description: |
+                            Upcoming subscription expiration notification date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                          format: date-time
+                          type: string
+                        primaryKey:
+                          description: Subscription primary key.
+                          maxLength: 256
+                          minLength: 1
+                          type: string
+                        productId:
+                          description: 'The product resource identifier of the subscribed product. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier.'
+                          type: string
+                        secondaryKey:
+                          description: Subscription secondary key.
+                          maxLength: 256
+                          minLength: 1
+                          type: string
+                        startDate:
+                          description: |
+                            Subscription activation date. The setting is for audit purposes only and the subscription is not automatically activated. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+                          format: date-time
+                          type: string
+                        state:
+                          description: 'Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.'
+                          enum:
+                            - suspended
+                            - active
+                            - expired
+                            - submitted
+                            - rejected
+                            - cancelled
+                          type: string
+                          x-ms-enum:
+                            modelAsString: false
+                            name: SubscriptionState
+                        stateComment:
+                          description: Optional subscription comment added by an administrator.
+                          type: string
+                        userId:
+                          description: 'The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{uid} where {uid} is a user identifier.'
+                          type: string
+                      required:
+                        - userId
+                        - productId
+                        - state
+                        - primaryKey
+                        - secondaryKey
+                  description: Subscription details.
+                  properties:
+                    id:
+                      description: Identifier of the Subscription.
+                      type: string
+                type: array
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - UserSubscriptions
+      x-ms-examples:
+        ApiManagementListUsersSubscriptions:
+          parameters:
+            $skip: 0
+            $top: 10000
+            Accept: application/json
+            api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            uid: '1'
+          responses:
+            '200':
+              body:
+                count: 1
+                value:
+                  - createdDate: '2018-01-12T13:39:28.57Z'
+                    id: /subscriptions/5a58ba90a40f7e0034070001
+                    primaryKey: 2D9B138F40C1244CB6B48D0378865469
+                    productId: /products/starter
+                    secondaryKey: 5163734D7AF0CC4AB5A59345E1B6BF6D
+                    state: active
+                    userId: /users/1
+      x-ms-odata: './apimsubscriptions.json#/definitions/SubscriptionContract'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/users/{uid}/token':
+    post:
+      description: Gets the Shared Access Authorization Token for the User.
+      operationId: User_GetSharedAccessToken
+      parameters:
+        - $ref: '#/parameters/UserIdParameter'
+        - description: Create Authorization Token parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/UserTokenParameters'
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The response body contains the authorization token for the user.
+          schema:
+            $ref: '#/definitions/UserTokenResult'
+            x-ms-client-flatten: true
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - Users
+      x-ms-examples:
+        ApiManagementPostUsersToken:
+          parameters:
+            api-version: '2017-03-01'
+            apimBaseUrl: apimservice1.management.azure-api.net
+            parameters:
+              expiry: '2017-05-13T10:39:35Z'
+              keyType: primary
+            uid: '1'
+          responses:
+            '200':
+              body:
+                value: 57f2af53bb17172280f44057&201705131039&***************************/tJVExvjA==
+definitions:
+  GenerateSsoUrlResult:
+    description: Generate SSO Url operations response details.
+    properties:
+      value:
+        description: Redirect Url containing the SSO URL value.
+        type: string
+  UserCollection:
+    description: Paged Users list representation.
+    properties:
+      count:
+        description: Total number of entities
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: Page values.
+        items:
+          $ref: '#/definitions/UserContract'
+        type: array
+  UserContract:
+    allOf:
+      - $ref: '#/definitions/UserContractProperties'
+    description: User details.
+    properties:
+      id:
+        description: Identifier of the entity.
+        type: string
+  UserContractProperties:
+    allOf:
+      - $ref: '#/definitions/UserEntityBaseParameters'
+    description: User profile.
+    properties:
+      email:
+        description: Email address.
+        type: string
+      firstName:
+        description: First name.
+        type: string
+      groups:
+        description: Collection of groups user is part of.
+        items:
+          allOf:
+            - description: Developer group.
+              properties:
+                builtIn:
+                  description: 'true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false.'
+                  readOnly: true
+                  type: boolean
+                description:
+                  description: Group description. Can contain HTML formatting tags.
+                  maxLength: 1000
+                  type: string
+                externalId:
+                  description: 'For external groups, this property contains the id of the group from the external identity provider, e.g. for Azure Active Directory aad://<tenant>.onmicrosoft.com/groups/<group object id>; otherwise the value is null.'
+                  type: string
+                name:
+                  description: Group name.
+                  maxLength: 300
+                  minLength: 1
+                  type: string
+                type:
+                  description: Group type.
+                  enum:
+                    - custom
+                    - system
+                    - external
+                  type: string
+                  x-ms-enum:
+                    modelAsString: false
+                    name: GroupType
+              required:
+                - name
+          description: Contract details.
+          properties:
+            id:
+              description: Identifier of the Group entity.
+              type: string
+        readOnly: true
+        type: array
+      lastName:
+        description: Last name.
+        type: string
+      registrationDate:
+        description: |
+          Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+        format: date-time
+        type: string
+  UserCreateParameters:
+    allOf:
+      - $ref: '#/definitions/UserEntityBaseParameters'
+    description: Parameters supplied to the Create User operation.
+    properties:
+      email:
+        description: Email address. Must not be empty and must be unique within the service instance.
+        maxLength: 254
+        minLength: 1
+        type: string
+      firstName:
+        description: First name.
+        maxLength: 100
+        minLength: 1
+        type: string
+      lastName:
+        description: Last name.
+        maxLength: 100
+        minLength: 1
+        type: string
+      password:
+        description: 'User Password. If no value is provided, a default password is generated.'
+        type: string
+    required:
+      - email
+      - firstName
+      - lastName
+  UserEntityBaseParameters:
+    description: User Entity Base Parameters set.
+    properties:
+      identities:
+        description: Collection of user identities.
+        items:
+          $ref: '#/definitions/UserIdentityContract'
+        readOnly: true
+        type: array
+      note:
+        description: Optional note about a user set by the administrator.
+        type: string
+      state:
+        default: active
+        description: Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.
+        enum:
+          - active
+          - blocked
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: UserState
+  UserIdentityCollection:
+    description: List of Users Identity list representation.
+    properties:
+      count:
+        description: Total record count number across all pages.
+        format: int64
+        type: integer
+      nextLink:
+        description: Next page link if any.
+        type: string
+      value:
+        description: User Identity values.
+        items:
+          $ref: '#/definitions/UserIdentityContract'
+        type: array
+  UserIdentityContract:
+    description: User identity details.
+    properties:
+      id:
+        description: Identifier value within provider.
+        type: string
+      provider:
+        description: Identity provider name.
+        type: string
+  UserTokenParameters:
+    description: Parameters supplied to the Get User Token operation.
+    properties:
+      expiry:
+        description: |
+          The Expiry time of the Token. Maximum token expiry time is set to 30 days. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+        format: date-time
+        type: string
+      keyType:
+        default: primary
+        description: The Key to be used to generate token for user.
+        enum:
+          - primary
+          - secondary
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: KeyType
+    required:
+      - keyType
+      - expiry
+  UserTokenResult:
+    description: Get User Token response details.
+    properties:
+      value:
+        description: Shared Access Authorization token for the User.
+        type: string
+  UserUpdateParameters:
+    allOf:
+      - $ref: '#/definitions/UserEntityBaseParameters'
+    description: Parameters supplied to the Update User operation.
+    properties:
+      email:
+        description: Email address. Must not be empty and must be unique within the service instance.
+        maxLength: 254
+        minLength: 1
+        type: string
+      firstName:
+        description: First name.
+        maxLength: 100
+        minLength: 1
+        type: string
+      lastName:
+        description: Last name.
+        maxLength: 100
+        minLength: 1
+        type: string
+      password:
+        description: User Password.
+        type: string
+x-ms-parameterized-host:
+  hostTemplate: '{apimBaseUrl}'
+  parameters:
+    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
+      in: path
+      name: apimBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

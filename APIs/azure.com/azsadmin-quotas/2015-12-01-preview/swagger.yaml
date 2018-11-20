@@ -1,0 +1,608 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adminmanagement.local.azurestack.external
+info:
+  description: The Admin Storage Management Client.
+  title: StorageManagementClient
+  version: 2015-12-01-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/storage/Microsoft.Storage.Admin/preview/2016-05-01/quotas.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: azsadmin-quotas
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Authorization uses an Azure Active Directory OAuth2 flow.
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  QuotaNameParameter:
+    description: The name of the storage quota.
+    in: path
+    name: quotaName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  StorgeQuotaParameters:
+    description: The properties of quota being created or updated.
+    in: body
+    name: quotaObject
+    required: true
+    schema:
+      allOf:
+        - description: Base resource object.
+          properties:
+            id:
+              description: Resource ID.
+              readOnly: true
+              type: string
+            location:
+              description: Resource location.
+              readOnly: true
+              type: string
+            name:
+              description: Resource Name.
+              readOnly: true
+              type: string
+            tags:
+              additionalProperties:
+                type: string
+              description: Resource tags.
+              readOnly: true
+              type: object
+            type:
+              description: Resource type.
+              readOnly: true
+              type: string
+          type: object
+          x-ms-azure-resource: true
+      description: Storage quota.
+      properties:
+        properties:
+          description: Storage quota properties.
+          properties:
+            capacityInGb:
+              default: 500
+              description: Maxium capacity (GB).
+              format: int32
+              type: integer
+            numberOfStorageAccounts:
+              default: 20
+              description: Total number of storage accounts.
+              format: int32
+              type: integer
+          type: object
+      type: object
+    x-ms-parameter-location: method
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/quotas':
+    get:
+      description: Returns a list of storage quotas at the given location.
+      operationId: StorageQuotas_List
+      parameters:
+        - description: Subscription Id.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Resource location.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: REST Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK -- The list of storage quotas has been returned.
+          schema:
+            description: Pageable list of storage quotas.
+            properties:
+              nextLink:
+                description: URI to the next page.
+                type: string
+              value:
+                description: List of storage quotas.
+                items:
+                  allOf:
+                    - description: Base resource object.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        location:
+                          description: Resource location.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource Name.
+                          readOnly: true
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: Resource tags.
+                          readOnly: true
+                          type: object
+                        type:
+                          description: Resource type.
+                          readOnly: true
+                          type: string
+                      type: object
+                      x-ms-azure-resource: true
+                  description: Storage quota.
+                  properties:
+                    properties:
+                      description: Storage quota properties.
+                      properties:
+                        capacityInGb:
+                          default: 500
+                          description: Maxium capacity (GB).
+                          format: int32
+                          type: integer
+                        numberOfStorageAccounts:
+                          default: 20
+                          description: Total number of storage accounts.
+                          format: int32
+                          type: integer
+                      type: object
+                  type: object
+                type: array
+            type: object
+        '404':
+          description: OK -- The location does not exist.
+      tags:
+        - StorageQuotas
+      x-ms-examples:
+        Returns a list of storage quotas at the given location.:
+          parameters:
+            api-version: 2015-12-01-preview
+            location: local
+            resourceGroupName: System.local
+            subscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/providers/Microsoft.Storage.Admin/locations/local/quotas/TestCreateQuota
+                    location: local
+                    name: local/TestCreateQuota
+                    properties:
+                      capacityInGb: -100000000
+                      numberOfStorageAccounts: -1000000000
+                    type: Microsoft.Storage.Admin/locations/quotas
+            '404': {}
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/quotas/{quotaName}':
+    delete:
+      description: Delete an existing quota
+      operationId: StorageQuotas_Delete
+      parameters:
+        - description: Subscription Id.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: REST Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Resource location.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the storage quota.
+          in: path
+          name: quotaName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK -- The storage quota has been deleted.
+        '404':
+          description: NOT FOUND -- The location or storage quota cannot be found.
+      tags:
+        - StorageQuotas
+      x-ms-examples:
+        Delete an existing storage quota.:
+          parameters:
+            api-version: 2015-12-01-preview
+            location: local
+            quotaName: TestCreateQuota
+            resourceGroupName: System.local
+            subscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
+          responses:
+            '200': {}
+            '404': {}
+    get:
+      description: Returns the specified storage quota.
+      operationId: StorageQuotas_Get
+      parameters:
+        - description: Subscription Id.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: REST Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Resource location.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the storage quota.
+          in: path
+          name: quotaName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK -- The storage quota has been returned.
+          schema:
+            allOf:
+              - description: Base resource object.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  location:
+                    description: Resource location.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource Name.
+                    readOnly: true
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Resource tags.
+                    readOnly: true
+                    type: object
+                  type:
+                    description: Resource type.
+                    readOnly: true
+                    type: string
+                type: object
+                x-ms-azure-resource: true
+            description: Storage quota.
+            properties:
+              properties:
+                description: Storage quota properties.
+                properties:
+                  capacityInGb:
+                    default: 500
+                    description: Maxium capacity (GB).
+                    format: int32
+                    type: integer
+                  numberOfStorageAccounts:
+                    default: 20
+                    description: Total number of storage accounts.
+                    format: int32
+                    type: integer
+                type: object
+            type: object
+        '404':
+          description: NOT FOUND -- The location or storage quota cannot be found.
+      tags:
+        - StorageQuotas
+      x-ms-examples:
+        Returns the specified storage quota.:
+          parameters:
+            api-version: 2015-12-01-preview
+            location: local
+            quotaName: TestCreateQuota
+            resourceGroupName: System.local
+            subscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
+          responses:
+            '200':
+              body:
+                id: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/providers/Microsoft.Storage.Admin/locations/local/quotas/TestCreateQuota
+                location: local
+                name: local/TestCreateQuota
+                properties:
+                  capacityInGb: -100000000
+                  numberOfStorageAccounts: -1000000000
+                type: Microsoft.Storage.Admin/locations/quotas
+            '404': {}
+    put:
+      description: Create or update an existing storage quota.
+      operationId: StorageQuotas_CreateOrUpdate
+      parameters:
+        - description: Subscription Id.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Resource location.
+          in: path
+          name: location
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: REST Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The name of the storage quota.
+          in: path
+          name: quotaName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The properties of quota being created or updated.
+          in: body
+          name: quotaObject
+          required: true
+          schema:
+            allOf:
+              - description: Base resource object.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  location:
+                    description: Resource location.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource Name.
+                    readOnly: true
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Resource tags.
+                    readOnly: true
+                    type: object
+                  type:
+                    description: Resource type.
+                    readOnly: true
+                    type: string
+                type: object
+                x-ms-azure-resource: true
+            description: Storage quota.
+            properties:
+              properties:
+                description: Storage quota properties.
+                properties:
+                  capacityInGb:
+                    default: 500
+                    description: Maxium capacity (GB).
+                    format: int32
+                    type: integer
+                  numberOfStorageAccounts:
+                    default: 20
+                    description: Total number of storage accounts.
+                    format: int32
+                    type: integer
+                type: object
+            type: object
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK -- The storage quota has been created or updated.
+          schema:
+            allOf:
+              - description: Base resource object.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  location:
+                    description: Resource location.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource Name.
+                    readOnly: true
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Resource tags.
+                    readOnly: true
+                    type: object
+                  type:
+                    description: Resource type.
+                    readOnly: true
+                    type: string
+                type: object
+                x-ms-azure-resource: true
+            description: Storage quota.
+            properties:
+              properties:
+                description: Storage quota properties.
+                properties:
+                  capacityInGb:
+                    default: 500
+                    description: Maxium capacity (GB).
+                    format: int32
+                    type: integer
+                  numberOfStorageAccounts:
+                    default: 20
+                    description: Total number of storage accounts.
+                    format: int32
+                    type: integer
+                type: object
+            type: object
+        '404':
+          description: NOT FOUND -- The location or quota was not found.
+      tags:
+        - StorageQuotas
+      x-ms-examples:
+        Create or update an existing storage quota.:
+          parameters:
+            api-version: 2015-12-01-preview
+            location: local
+            quotaName: TestCreateQuota
+            quotaObject:
+              properties:
+                capacityInGb: 1000
+                numberOfStorageAccounts: 10000
+            resourceGroupName: System.local
+            subscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
+          responses:
+            '200':
+              body:
+                id: /subscriptions/9ad61516-995c-4873-a21f-7e44904f0ed2/providers/Microsoft.Storage.Admin/locations/local/quotas/TestCreateQuota
+                location: local
+                name: local/TestCreateQuota
+                properties:
+                  capacityInGb: 1000
+                  numberOfStorageAccounts: 10000
+                type: Microsoft.Storage.Admin/locations/quotas
+            '404': {}
+definitions:
+  StorageQuota:
+    allOf:
+      - description: Base resource object.
+        properties:
+          id:
+            description: Resource ID.
+            readOnly: true
+            type: string
+          location:
+            description: Resource location.
+            readOnly: true
+            type: string
+          name:
+            description: Resource Name.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: Resource tags.
+            readOnly: true
+            type: object
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
+    description: Storage quota.
+    properties:
+      properties:
+        description: Storage quota properties.
+        properties:
+          capacityInGb:
+            default: 500
+            description: Maxium capacity (GB).
+            format: int32
+            type: integer
+          numberOfStorageAccounts:
+            default: 20
+            description: Total number of storage accounts.
+            format: int32
+            type: integer
+        type: object
+    type: object
+  StorageQuotaList:
+    description: Pageable list of storage quotas.
+    properties:
+      nextLink:
+        description: URI to the next page.
+        type: string
+      value:
+        description: List of storage quotas.
+        items:
+          allOf:
+            - description: Base resource object.
+              properties:
+                id:
+                  description: Resource ID.
+                  readOnly: true
+                  type: string
+                location:
+                  description: Resource location.
+                  readOnly: true
+                  type: string
+                name:
+                  description: Resource Name.
+                  readOnly: true
+                  type: string
+                tags:
+                  additionalProperties:
+                    type: string
+                  description: Resource tags.
+                  readOnly: true
+                  type: object
+                type:
+                  description: Resource type.
+                  readOnly: true
+                  type: string
+              type: object
+              x-ms-azure-resource: true
+          description: Storage quota.
+          properties:
+            properties:
+              description: Storage quota properties.
+              properties:
+                capacityInGb:
+                  default: 500
+                  description: Maxium capacity (GB).
+                  format: int32
+                  type: integer
+                numberOfStorageAccounts:
+                  default: 20
+                  description: Total number of storage accounts.
+                  format: int32
+                  type: integer
+              type: object
+          type: object
+        type: array
+    type: object
+  StorageQuotaProperties:
+    description: Storage quota properties.
+    properties:
+      capacityInGb:
+        default: 500
+        description: Maxium capacity (GB).
+        format: int32
+        type: integer
+      numberOfStorageAccounts:
+        default: 20
+        description: Total number of storage accounts.
+        format: int32
+        type: integer
+    type: object

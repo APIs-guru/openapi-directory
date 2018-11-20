@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/microsoft.insights/stable/2015-05-01/components_API.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2015-05-01/components_API.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: applicationinsights-components_API
@@ -41,6 +41,21 @@ parameters:
     name: api-version
     required: true
     type: string
+  ComponentPurgeIdParameter:
+    description: 'In a purge status request, this is the Id of the operation the status of which is returned.'
+    in: path
+    name: purgeId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ComponentPurgeParameter:
+    description: Describes the body of a request to purge data in a single table of an Application Insights component
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/ComponentPurgeBody'
+    x-ms-parameter-location: method
   ResourceGroupNameParameter:
     description: The name of the resource group.
     in: path
@@ -62,7 +77,7 @@ parameters:
     required: true
     type: string
 paths:
-  '/subscriptions/{subscriptionId}/providers/microsoft.insights/components':
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Insights/components':
     get:
       description: Gets a list of all Application Insights components within a subscription.
       operationId: Components_List
@@ -84,7 +99,7 @@ paths:
               body:
                 nextLink: ''
                 value:
-                  - id: /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component
+                  - id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component
                     kind: web
                     location: South Central US
                     name: my-component
@@ -102,8 +117,8 @@ paths:
                       TenantId: f438d567-7177-4fe1-a5e3-123456789abc
                       provisioningState: Succeeded
                     tags: ''
-                    type: microsoft.insights/components
-                  - id: /subscriptions/subid/resourceGroups/my-other-resource-group/providers/microsoft.insights/components/my-other-component
+                    type: Microsoft.Insights/components
+                  - id: /subscriptions/subid/resourceGroups/my-other-resource-group/providers/Microsoft.Insights/components/my-other-component
                     kind: web
                     location: South Central US
                     name: my-other-component
@@ -121,10 +136,10 @@ paths:
                       TenantId: f438d567-7177-4fe1-a5e3-123456789abc
                       provisioningState: Succeeded
                     tags: ''
-                    type: microsoft.insights/components
+                    type: Microsoft.Insights/components
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components':
     get:
       description: Gets a list of Application Insights components within a resource group.
       operationId: Components_ListByResourceGroup
@@ -148,7 +163,7 @@ paths:
               body:
                 nextLink: ''
                 value:
-                  - id: /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component
+                  - id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component
                     kind: web
                     location: South Central US
                     name: my-component
@@ -166,8 +181,8 @@ paths:
                       TenantId: f438d567-7177-4fe1-a5e3-123456789abc
                       provisioningState: Succeeded
                     tags: ''
-                    type: microsoft.insights/components
-                  - id: /subscriptions/subid/resourceGroups/my-other-resource-group/providers/microsoft.insights/components/my-other-component
+                    type: Microsoft.Insights/components
+                  - id: /subscriptions/subid/resourceGroups/my-other-resource-group/providers/Microsoft.Insights/components/my-other-component
                     kind: web
                     location: South Central US
                     name: my-other-component
@@ -185,10 +200,10 @@ paths:
                       TenantId: f438d567-7177-4fe1-a5e3-123456789abc
                       provisioningState: Succeeded
                     tags: ''
-                    type: microsoft.insights/components
+                    type: Microsoft.Insights/components
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}':
     delete:
       description: Deletes an Application Insights component.
       operationId: Components_Delete
@@ -203,15 +218,15 @@ paths:
         '204':
           description: The specified component does not exist.
       x-ms-examples:
-        webTestDelete:
+        ComponentsDelete:
           parameters:
             api-version: '2015-05-01'
             resourceGroupName: my-resource-group
             resourceName: my-component
             subscriptionId: subid
           responses:
-            '200':
-              body: {}
+            '200': {}
+            '204': {}
     get:
       description: Returns an Application Insights component.
       operationId: Components_Get
@@ -235,7 +250,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component
+                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component
                 kind: web
                 location: South Central US
                 name: my-component
@@ -253,7 +268,7 @@ paths:
                   TenantId: f438d567-7177-4fe1-a5e3-123456789abc
                   provisioningState: Succeeded
                 tags: ''
-                type: microsoft.insights/components
+                type: Microsoft.Insights/components
     patch:
       description: Updates an existing component's tags. To update other fields use the CreateOrUpdate method.
       operationId: Components_UpdateTags
@@ -290,7 +305,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component
+                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component
                 kind: web
                 location: South Central US
                 name: my-component
@@ -313,7 +328,7 @@ paths:
                   Color: AzureBlue
                   CustomField_01: Custom text in some random field named randomly
                   NodeType: Edge
-                type: microsoft.insights/components
+                type: Microsoft.Insights/components
     put:
       description: 'Creates (or updates) an Application Insights component. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.'
       operationId: Components_CreateOrUpdate
@@ -352,7 +367,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component
+                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component
                 kind: web
                 location: South Central US
                 name: my-component
@@ -370,7 +385,7 @@ paths:
                   TenantId: f438d567-7177-4fe1-a5e3-123456789abc
                   provisioningState: Succeeded
                 tags: ''
-                type: microsoft.insights/components
+                type: Microsoft.Insights/components
         ComponentUpdate:
           parameters:
             InsightProperties:
@@ -387,7 +402,7 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component
+                id: /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component
                 kind: web
                 location: South Central US
                 name: my-component
@@ -407,11 +422,72 @@ paths:
                 tags:
                   ApplicationGatewayType: Internal-Only
                   BillingEntity: Self
-                type: microsoft.insights/components
+                type: Microsoft.Insights/components
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/operations/{purgeId}':
+    get:
+      description: Get status for an ongoing purge operation.
+      operationId: Components_GetPurgeStatus
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+        - $ref: '#/parameters/ComponentPurgeIdParameter'
+      responses:
+        '200':
+          description: 'Returns status of purge operation in body of response. e.g.:  running, completed.'
+          schema:
+            $ref: '#/definitions/ComponentPurgeStatusResponse'
+      x-ms-examples:
+        ComponentPurge:
+          parameters:
+            api-version: '2015-05-01'
+            purgeId: purge-970318e7-b859-4edb-8903-83b1b54d0b74
+            resourceGroupName: OIAutoRest5123
+            resourceName: aztest5048
+            subscriptionId: 00000000-0000-0000-0000-00000000000
+          responses:
+            '200':
+              body:
+                status: completed
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/purge':
+    post:
+      description: Purges data in an Application Insights component by a set of user-defined filters.
+      operationId: Components_Purge
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceNameParameter'
+        - $ref: '#/parameters/ComponentPurgeParameter'
+      responses:
+        '202':
+          description: Accepted request for purging an Application Insights component.
+          schema:
+            $ref: '#/definitions/ComponentPurgeResponse'
+      x-ms-examples:
+        ComponentPurge:
+          parameters:
+            api-version: '2015-03-20'
+            body:
+              filters:
+                - column: TimeGenerated
+                  operator: '>'
+                  value: '2017-09-01T00:00:00'
+              table: Heartbeat
+            resourceGroupName: OIAutoRest5123
+            resourceName: aztest5048
+            subscriptionId: 00000000-0000-0000-0000-00000000000
+          responses:
+            '202':
+              body:
+                operationId: 7d7cf277-9113-4ab3-8359-d0364b74d01d
+              headers:
+                x-ms-status-location: 'https://management.azure.com/subscriptions/b96161de-b34a-480f-7343-59b099299283/resourceGroups/example/providers/microsoft.insights/components/test/operations/purge-970318e7-b859-4edb-8903-83b1b54d0b74?api-version=2015-05-01'
 definitions:
   ApplicationInsightsComponent:
     allOf:
-      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/ComponentsResource'
     description: An Application Insights component definition.
     properties:
       kind:
@@ -514,7 +590,57 @@ definitions:
         type: string
     required:
       - Application_Type
-  Resource:
+  ComponentPurgeBody:
+    description: Describes the body of a purge request for an App Insights component
+    properties:
+      filters:
+        description: The set of columns and filters (queries) to run over them to purge the resulting data.
+        items:
+          $ref: '#/definitions/ComponentPurgeBodyFilters'
+        type: array
+      table:
+        description: Table from which to purge data.
+        type: string
+    required:
+      - table
+      - filters
+  ComponentPurgeBodyFilters:
+    description: User-defined filters to return data which will be purged from the table.
+    properties:
+      column:
+        description: The column of the table over which the given query should run
+        type: string
+      key:
+        description: 'When filtering over custom dimensions, this key will be used as the name of the custom dimension.'
+        type: string
+      operator:
+        description: A query operator to evaluate over the provided column and value(s).
+        type: string
+      value:
+        description: 'the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= ''2017-09-01'') or array of values.'
+  ComponentPurgeResponse:
+    description: Response containing operationId for a specific purge action.
+    properties:
+      operationId:
+        description: Id to use when querying for status for a particular purge operation.
+        type: string
+    required:
+      - operationId
+  ComponentPurgeStatusResponse:
+    description: Response containing status for a specific purge operation.
+    properties:
+      status:
+        description: Status of the operation represented by the requested Id.
+        enum:
+          - pending
+          - completed
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: PurgeState
+    required:
+      - status
+  ComponentsResource:
     description: An azure resource object
     properties:
       id:
@@ -524,6 +650,9 @@ definitions:
       location:
         description: Resource location
         type: string
+        x-ms-mutability:
+          - create
+          - read
       name:
         description: Azure resource name
         readOnly: true

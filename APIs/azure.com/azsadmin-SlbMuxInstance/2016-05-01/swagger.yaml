@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/stable/2016-05-01/SlbMuxInstance.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/fabric/Microsoft.Fabric.Admin/preview/2016-05-01/SlbMuxInstance.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: azsadmin-SlbMuxInstance
@@ -26,7 +26,7 @@ produces:
 securityDefinitions:
   azure_auth:
     authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow
+    description: Authorization uses an Azure Active Directory OAuth2 flow.
     flow: implicit
     scopes:
       user_impersonation: impersonate your user account
@@ -36,23 +36,29 @@ security:
       - user_impersonation
 parameters:
   SLBMuxInstanceParameter:
-    description: Name of a SLB Mux instance.
+    description: Name of a SLB MUX instance.
     in: path
     name: slbMuxInstance
     required: true
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/slbMuxInstances':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/slbMuxInstances':
     get:
-      description: Get a list of all software load balancer instances at a location.
+      description: Returns a list of all software load balancer instances at a location.
       operationId: SlbMuxInstances_List
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+        - description: Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
+        - description: Name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Location of the resource.
           in: path
           name: location
@@ -60,7 +66,7 @@ paths:
           type: string
           x-ms-parameter-location: method
         - default: '2016-05-01'
-          description: Client Api Version.
+          description: Client API Version.
           in: query
           name: api-version
           required: true
@@ -75,21 +81,24 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SlbMuxInstanceList'
+        '404':
+          description: NOT FOUND
       tags:
         - SlbMuxInstances
       x-ms-examples:
-        List all Software Load Balancer Mux Instances:
+        Returns all software load balancer MUX Instances:
           parameters:
             api-version: '2016-05-01'
             location: local
+            resourceGroupName: System.local
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
                 value:
-                  - id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/slbMuxInstances/AzS-SLB01
+                  - id: /subscriptions/36e98cad-c8a5-4580-bef7-af878a237908/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/slbMuxInstances/AzS-SLB01
                     location: local
-                    name: AzS-SLB01
+                    name: local/AzS-SLB01
                     properties:
                       bgpPeers:
                         - BGPGateway-64000-64001
@@ -97,19 +106,26 @@ paths:
                       virtualServer: AzS-SLB01
                     tags: {}
                     type: Microsoft.Fabric.Admin/fabricLocations/slbMuxInstances
+            '404': {}
       x-ms-odata: '#/definitions/SlbMuxInstance'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/System.{location}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/slbMuxInstances/{slbMuxInstance}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/slbMuxInstances/{slbMuxInstance}':
     get:
-      description: Get a software load balancer multiplexer instance.
+      description: Returns the requested software load balancer multiplexer instance.
       operationId: SlbMuxInstances_Get
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+        - description: Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
           in: path
           name: subscriptionId
           required: true
           type: string
+        - description: Name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Location of the resource.
           in: path
           name: location
@@ -118,7 +134,7 @@ paths:
           x-ms-parameter-location: method
         - $ref: '#/parameters/SLBMuxInstanceParameter'
         - default: '2016-05-01'
-          description: Client Api Version.
+          description: Client API Version.
           in: query
           name: api-version
           required: true
@@ -128,21 +144,24 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SlbMuxInstance'
+        '404':
+          description: NOT FOUND
       tags:
         - SlbMuxInstances
       x-ms-examples:
-        Get a Software Load Balancer Mux Instance:
+        Returns the requested sftware load balancer MUX Instance:
           parameters:
             api-version: '2016-05-01'
             location: local
+            resourceGroupName: System.local
             slbMuxInstance: AzS-SLB01
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
-                id: /subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/slbMuxInstances/AzS-SLB01
+                id: /subscriptions/36e98cad-c8a5-4580-bef7-af878a237908/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/slbMuxInstances/AzS-SLB01
                 location: local
-                name: AzS-SLB01
+                name: local/AzS-SLB01
                 properties:
                   bgpPeers:
                     - BGPGateway-64000-64001
@@ -150,17 +169,18 @@ paths:
                   virtualServer: AzS-SLB01
                 tags: {}
                 type: Microsoft.Fabric.Admin/fabricLocations/slbMuxInstances
+            '404': {}
 definitions:
   SlbMuxInstance:
     allOf:
-      - description: Base Resource Object
+      - description: Base resource object.
         properties:
           id:
             description: URI of the resource.
             readOnly: true
             type: string
           location:
-            description: Region Location of resource.
+            description: The region where the resource is located.
             type: string
           name:
             description: Name of the resource.
@@ -169,7 +189,7 @@ definitions:
           tags:
             additionalProperties:
               type: string
-            description: List of key value pairs.
+            description: List of key-value pairs.
             type: object
           type:
             description: Type of resource.
@@ -181,23 +201,23 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/SlbMuxInstanceModel'
-        description: Properties of a SLB MUX
+        description: Properties of a SLB MUX.
         x-ms-client-flatten: true
     type: object
   SlbMuxInstanceList:
-    description: A pageable list of SLB Mux instances.
+    description: A pageable list of SLB MUX instances.
     properties:
       nextLink:
         description: URI to the next page.
         type: string
       value:
-        description: List of SLB Mux instances on this page.
+        description: List of SLB MUX instances.
         items:
           $ref: '#/definitions/SlbMuxInstance'
         type: array
     type: object
   SlbMuxInstanceModel:
-    description: Properties of a SLB MUX
+    description: Properties of a SLB MUX.
     properties:
       bgpPeers:
         description: List of BGP peers.

@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/microsoft.insights/stable/2015-05-01/componentApiKeys_API.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: applicationinsights-componentApiKeys_API
@@ -69,7 +69,7 @@ parameters:
     required: true
     type: string
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/APIKeys/{keyId}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/APIKeys/{keyId}':
     delete:
       description: Delete an API Key of an Application Insights component.
       operationId: APIKeys_Delete
@@ -96,14 +96,14 @@ paths:
             '200':
               body:
                 createdDate: 'Thu, 28 Sep 2017 16:59:18 GMT'
-                id: /subscriptions/subid/resourcegroups/my-resource-group/providers/microsoft.insights/components/my-component/apikeys/bb820f1b-3110-4a8b-ba2c-8c1129d7eb6a
+                id: /subscriptions/subid/resourcegroups/my-resource-group/providers/Microsoft.Insights/components/my-component/apikeys/bb820f1b-3110-4a8b-ba2c-8c1129d7eb6a
                 linkedReadProperties:
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/api
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/draft
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/extendqueries
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/search
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/aggregate
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/agentconfig
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/api
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/draft
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/extendqueries
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/search
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/aggregate
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/agentconfig
                 linkedWriteProperties: []
                 name: test2
     get:
@@ -132,17 +132,17 @@ paths:
             '200':
               body:
                 createdDate: 'Thu, 28 Sep 2017 16:59:18 GMT'
-                id: /subscriptions/subid/resourcegroups/my-resource-group/providers/microsoft.insights/components/my-component/apikeys/bb820f1b-3110-4a8b-ba2c-8c1129d7eb6a
+                id: /subscriptions/subid/resourcegroups/my-resource-group/providers/Microsoft.Insights/components/my-component/apikeys/bb820f1b-3110-4a8b-ba2c-8c1129d7eb6a
                 linkedReadProperties:
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/api
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/draft
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/extendqueries
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/search
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/aggregate
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/agentconfig
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/api
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/draft
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/extendqueries
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/search
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/aggregate
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/agentconfig
                 linkedWriteProperties: []
                 name: test2
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/ApiKeys':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ApiKeys':
     get:
       description: Gets a list of API keys of an Application Insights component.
       operationId: APIKeys_List
@@ -168,26 +168,26 @@ paths:
               body:
                 value:
                   - createdDate: 'Thu, 28 Sep 2017 16:58:52 GMT'
-                    id: /subscriptions/subid/resourcegroups/my-resource-group/providers/microsoft.insights/components/my-component/apikeys/fe2e0138-47c1-46c5-8726-872f54c1ca08
+                    id: /subscriptions/subid/resourcegroups/my-resource-group/providers/Microsoft.Insights/components/my-component/apikeys/fe2e0138-47c1-46c5-8726-872f54c1ca08
                     linkedReadProperties:
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/api
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/draft
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/extendqueries
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/search
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/aggregate
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/agentconfig
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/api
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/draft
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/extendqueries
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/search
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/aggregate
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/agentconfig
                     linkedWriteProperties:
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/annotations
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/annotations
                     name: test
                   - createdDate: 'Thu, 28 Sep 2017 16:59:18 GMT'
-                    id: /subscriptions/subid/resourcegroups/my-resource-group/providers/microsoft.insights/components/my-component/apikeys/bb820f1b-3110-4a8b-ba2c-8c1129d7eb6a
+                    id: /subscriptions/subid/resourcegroups/my-resource-group/providers/Microsoft.Insights/components/my-component/apikeys/bb820f1b-3110-4a8b-ba2c-8c1129d7eb6a
                     linkedReadProperties:
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/api
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/draft
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/extendqueries
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/search
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/aggregate
-                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/agentconfig
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/api
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/draft
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/extendqueries
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/search
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/aggregate
+                      - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/agentconfig
                     linkedWriteProperties: []
                     name: test2
       x-ms-pageable: {}
@@ -215,10 +215,10 @@ paths:
           parameters:
             APIKeyProperties:
               linkedReadProperties:
-                - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/api
-                - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/agentconfig
+                - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/api
+                - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/agentconfig
               linkedWriteProperties:
-                - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/annotations
+                - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/annotations
               name: test2
             api-version: '2015-05-01'
             resourceGroupName: my-resource-group
@@ -229,12 +229,12 @@ paths:
               body:
                 apiKey: eip8wlzuzlf4wzczhnzao54zcswew25azs4kadhb
                 createdDate: 'Thu, 28 Sep 2017 16:58:52 GMT'
-                id: /subscriptions/subid/resourcegroups/my-resource-group/providers/microsoft.insights/components/my-component/apikeys/fe2e0138-47c1-46c5-8726-872f54c1ca08
+                id: /subscriptions/subid/resourcegroups/my-resource-group/providers/Microsoft.Insights/components/my-component/apikeys/fe2e0138-47c1-46c5-8726-872f54c1ca08
                 linkedReadProperties:
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/api
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/agentconfig
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/api
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/agentconfig
                 linkedWriteProperties:
-                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.insights/components/my-component/annotations
+                  - /subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Insights/components/my-component/annotations
                 name: test
 definitions:
   APIKeyRequest:

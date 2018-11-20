@@ -1,0 +1,137 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: The HDInsight Management Client.
+  title: HDInsightManagementClient
+  version: 2018-06-01-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2018-06-01-preview/locations.json'
+      version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: hdinsight-locations
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: The HDInsight client API Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  LocationParameter:
+    description: The location to get capabilities for.
+    in: path
+    name: location
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/usages':
+    get:
+      description: Lists the usages for the specified location.
+      operationId: Locations_ListUsages
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/LocationParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK response definition.
+          schema:
+            $ref: '#/definitions/UsagesListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Regions
+      x-ms-examples:
+        Get the subscription usages for specific location:
+          parameters:
+            api-version: 2018-06-01-preview
+            location: West US
+            subscriptionId: subid
+          responses:
+            '200':
+              Body:
+                value:
+                  - currentValue: 0
+                    limit: 5000
+                    name:
+                      localizedValue: Cores
+                      value: cores
+                    unit: Count
+definitions:
+  LocalizedName:
+    description: The details about the localizable name of a type of usage.
+    properties:
+      localizedValue:
+        description: The localized name of the used resource.
+        type: string
+      value:
+        description: The name of the used resource.
+        type: string
+    readOnly: true
+  Usage:
+    description: The details about the usage of a particular limited resource.
+    properties:
+      currentValue:
+        description: The current usage.
+        type: integer
+      limit:
+        description: The maximum allowed usage.
+        type: integer
+      name:
+        $ref: '#/definitions/LocalizedName'
+        description: The details about the localizable name of the used resource.
+      unit:
+        description: The type of measurement for usage.
+        type: string
+    readOnly: true
+  UsagesListResult:
+    description: The response for the operation to get regional usages for a subscription.
+    properties:
+      value:
+        description: The list of usages.
+        items:
+          $ref: '#/definitions/Usage'
+        type: array
+    readOnly: true

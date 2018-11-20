@@ -7,7 +7,7 @@ info:
   contact:
     x-twitter: microsoft
   description: The Spell Check API - V7 lets you check a text string for spelling and grammar errors.
-  title: Spell Check
+  title: Spell Check Client
   version: '1.0'
   x-apisguru-categories:
     - cloud
@@ -15,7 +15,7 @@ info:
     url: 'https://twitter.com/microsoft/profile_image?size=original'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/SpellCheck/stable/V1.0/SpellCheck.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/SpellCheck/stable/v1.0/SpellCheck.json'
       version: '2.0'
   x-providerName: microsoft.com
   x-serviceName: cognitiveservices-SpellCheck
@@ -384,3 +384,15 @@ definitions:
       - suggestion
     type: object
     x-ms-discriminator-value: Spelling/TokenSuggestion
+x-ms-parameterized-host:
+  hostTemplate: '{Endpoint}'
+  parameters:
+    - default: 'https://api.cognitive.microsoft.com'
+      description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: "https://westus.api.cognitive.microsoft.com", "https://api.cognitive.microsoft.com").'
+      in: path
+      name: Endpoint
+      required: true
+      type: string
+      x-ms-parameter-location: client
+      x-ms-skip-url-encoding: true
+  useSchemePrefix: false

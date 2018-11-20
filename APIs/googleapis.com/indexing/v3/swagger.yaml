@@ -1,0 +1,217 @@
+swagger: '2.0'
+schemes:
+  - https
+host: indexing.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Notifies Google when your web pages change.
+  title: Indexing
+  version: v3
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.11
+      format: google
+      url: 'https://indexing.googleapis.com/$discovery/rest?version=v3'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: indexing
+externalDocs:
+  url: 'https://developers.google.com/search/apis/indexing-api/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/indexing': Submit data to Google for indexing
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: urlNotifications
+paths:
+  /v3/urlNotifications/metadata:
+    get:
+      description: |-
+        Gets metadata about a Web Document. This method can _only_ be used to query
+        URLs that were previously seen in successful Indexing API notifications.
+        Includes the latest `UrlNotification` received via this API.
+      operationId: indexing.urlNotifications.getMetadata
+      parameters:
+        - description: URL that is being queried.
+          in: query
+          name: url
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UrlNotificationMetadata'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/indexing'
+      tags:
+        - urlNotifications
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v3/urlNotifications:publish':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Notifies that a URL has been updated or deleted.
+      operationId: indexing.urlNotifications.publish
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UrlNotification'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PublishUrlNotificationResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/indexing'
+      tags:
+        - urlNotifications
+definitions:
+  PublishUrlNotificationResponse:
+    description: Output for PublishUrlNotification
+    properties:
+      urlNotificationMetadata:
+        $ref: '#/definitions/UrlNotificationMetadata'
+        description: Description of the notification events received for this URL.
+    type: object
+  UrlNotification:
+    description: |-
+      `UrlNotification` is the resource used in all Indexing API calls.
+      It describes one event in the life cycle of a Web Document.
+    properties:
+      notifyTime:
+        description: |-
+          Creation timestamp for this notification.
+          Users should _not_ specify it, the field is ignored at the request time.
+        format: google-datetime
+        type: string
+      type:
+        description: The URL life cycle event that Google is being notified about.
+        enum:
+          - URL_NOTIFICATION_TYPE_UNSPECIFIED
+          - URL_UPDATED
+          - URL_DELETED
+        type: string
+      url:
+        description: |-
+          The object of this notification. The URL must be owned by the publisher
+          of this notification and, in case of `URL_UPDATED` notifications, it _must_
+          be crawlable by Google.
+        type: string
+    type: object
+  UrlNotificationMetadata:
+    description: |-
+      Summary of the most recent Indexing API notifications successfully received,
+      for a given URL.
+    properties:
+      latestRemove:
+        $ref: '#/definitions/UrlNotification'
+        description: Latest notification received with type `URL_REMOVED`.
+      latestUpdate:
+        $ref: '#/definitions/UrlNotification'
+        description: Latest notification received with type `URL_UPDATED`.
+      url:
+        description: URL to which this metadata refers.
+        type: string
+    type: object

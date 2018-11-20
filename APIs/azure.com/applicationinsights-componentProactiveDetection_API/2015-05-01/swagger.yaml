@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/microsoft.insights/stable/2015-05-01/componentProactiveDetection_API.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: applicationinsights-componentProactiveDetection_API
@@ -69,7 +69,7 @@ parameters:
     required: true
     type: string
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/ProactiveDetectionConfigs':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs':
     get:
       description: Gets a list of ProactiveDetection configurations of an Application Insights component.
       operationId: ProactiveDetectionConfigurations_List
@@ -97,6 +97,7 @@ paths:
                     - foo@microsoft.com
                     - foo2@microsoft.com
                   Enabled: true
+                  LastUpdatedTime: null
                   Name: slowpageloadtime
                   RuleDefinitions:
                     Description: Smart Detection rules notify you of performance anomaly issues.
@@ -110,6 +111,7 @@ paths:
                   SendEmailsToSubscriptionOwners: true
                 - CustomEmails: []
                   Enabled: true
+                  LastUpdatedTime: null
                   Name: slowpageloadtime
                   RuleDefinitions:
                     Description: Smart Detection rules notify you of performance anomaly issues.
@@ -121,7 +123,7 @@ paths:
                     Name: slowserverresponsetime
                     SupportsEmailNotifications: true
                   SendEmailsToSubscriptionOwners: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/ProactiveDetectionConfigs/{ConfigurationId}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs/{ConfigurationId}':
     get:
       description: Get the ProactiveDetection configuration for this configuration id.
       operationId: ProactiveDetectionConfigurations_Get
@@ -151,6 +153,7 @@ paths:
                   - foo@microsoft.com
                   - foo2@microsoft.com
                 Enabled: true
+                LastUpdatedTime: null
                 Name: slowpageloadtime
                 RuleDefinitions:
                   Description: Smart Detection rules notify you of performance anomaly issues.
@@ -191,6 +194,7 @@ paths:
                 - foo@microsoft.com
                 - foo2@microsoft.com
               Enabled: true
+              LastUpdatedTime: null
               Name: slowpageloadtime
               RuleDefinitions:
                 Description: Smart Detection rules notify you of performance anomaly issues.
@@ -213,6 +217,7 @@ paths:
                   - foo@microsoft.com
                   - foo2@microsoft.com
                 Enabled: true
+                LastUpdatedTime: null
                 Name: slowpageloadtime
                 RuleDefinitions:
                   Description: Smart Detection rules notify you of performance anomaly issues.

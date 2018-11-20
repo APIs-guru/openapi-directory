@@ -15,7 +15,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/migrate/resource-manager/Microsoft.Migrate/2017-11-11-preview/migrate.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/migrate/resource-manager/Microsoft.Migrate/preview/2017-11-11-preview/migrate.json'
       version: '2.0'
   x-preferred: false
   x-providerName: azure.com
@@ -44,6 +44,7 @@ parameters:
     in: header
     name: Accept-Language
     type: string
+    x-ms-parameter-location: client
   api-version:
     description: Standard request header. Used by service to identify API version used by client.
     enum:

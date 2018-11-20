@@ -1,0 +1,371 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adminmanagement.local.azurestack.external
+info:
+  description: The Admin Storage Management Client.
+  title: StorageManagementClient
+  version: 2015-12-01-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/storage/Microsoft.Storage.Admin/preview/2016-05-01/acquisitions.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: azsadmin-acquisitions
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Authorization uses an Azure Active Directory OAuth2 flow.
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters: {}
+paths:
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/acquisitions':
+    get:
+      description: Returns a list of BLOB acquistions.
+      operationId: Acquisitions_List
+      parameters:
+        - description: Subscription Id.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Farm Id.
+          in: path
+          name: farmId
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: REST Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Filter string
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: OK -- The list of acquisitions has been returned.
+          schema:
+            description: The list of page BLOB acquisitions.
+            items:
+              allOf:
+                - description: Base resource object.
+                  properties:
+                    id:
+                      description: Resource ID.
+                      readOnly: true
+                      type: string
+                    location:
+                      description: Resource location.
+                      readOnly: true
+                      type: string
+                    name:
+                      description: Resource Name.
+                      readOnly: true
+                      type: string
+                    tags:
+                      additionalProperties:
+                        type: string
+                      description: Resource tags.
+                      readOnly: true
+                      type: object
+                    type:
+                      description: Resource type.
+                      readOnly: true
+                      type: string
+                  type: object
+                  x-ms-azure-resource: true
+              description: The acquisition of the page BLOB.
+              properties:
+                properties:
+                  description: The Properties of page BLOB acquisition.
+                  properties:
+                    acquisitionid:
+                      description: The ID of page BLOB acquisition.
+                      readOnly: true
+                      type: string
+                    blob:
+                      description: The name of the page BLOB.
+                      readOnly: true
+                      type: string
+                    container:
+                      description: The container associated with the the page BLOB.
+                      readOnly: true
+                      type: string
+                    filePath:
+                      description: The file path of the page BLOB file on storage cluster.
+                      readOnly: true
+                      type: string
+                    maximumblobsize:
+                      description: The maximum size of the page BLOB.
+                      format: int64
+                      readOnly: true
+                      type: integer
+                    status:
+                      description: The status of page BLOB acquisition.
+                      enum:
+                        - InProgress
+                        - Success
+                        - Failed
+                      type: string
+                      x-ms-enum:
+                        modelAsString: true
+                        name: AcquisitionStatus
+                    storageaccount:
+                      description: The storage account that holds the page BLOB.
+                      readOnly: true
+                      type: string
+                    susbcriptionid:
+                      description: ID of the subscription associated with the page BLOB.
+                      readOnly: true
+                      type: string
+                  type: object
+              type: object
+            type: array
+        '404':
+          description: NOT FOUND -- The specified farm cannot be found.
+      tags:
+        - Acquisitions
+      x-ms-examples:
+        Returns a list of page BLOB acquistions.:
+          parameters:
+            api-version: 2015-12-01-preview
+            farmId: 3cf03497-c44a-4e51-a56f-3987d88c70af
+            resourceGroupName: System.local
+            subscriptionId: 9ad61516-995c-4873-a21f-7e44904f0ed2
+          responses:
+            '200':
+              body: []
+            '404': {}
+      x-ms-pageable: {}
+definitions:
+  Acquisition:
+    allOf:
+      - description: Base resource object.
+        properties:
+          id:
+            description: Resource ID.
+            readOnly: true
+            type: string
+          location:
+            description: Resource location.
+            readOnly: true
+            type: string
+          name:
+            description: Resource Name.
+            readOnly: true
+            type: string
+          tags:
+            additionalProperties:
+              type: string
+            description: Resource tags.
+            readOnly: true
+            type: object
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        type: object
+        x-ms-azure-resource: true
+    description: The acquisition of the page BLOB.
+    properties:
+      properties:
+        description: The Properties of page BLOB acquisition.
+        properties:
+          acquisitionid:
+            description: The ID of page BLOB acquisition.
+            readOnly: true
+            type: string
+          blob:
+            description: The name of the page BLOB.
+            readOnly: true
+            type: string
+          container:
+            description: The container associated with the the page BLOB.
+            readOnly: true
+            type: string
+          filePath:
+            description: The file path of the page BLOB file on storage cluster.
+            readOnly: true
+            type: string
+          maximumblobsize:
+            description: The maximum size of the page BLOB.
+            format: int64
+            readOnly: true
+            type: integer
+          status:
+            description: The status of page BLOB acquisition.
+            enum:
+              - InProgress
+              - Success
+              - Failed
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: AcquisitionStatus
+          storageaccount:
+            description: The storage account that holds the page BLOB.
+            readOnly: true
+            type: string
+          susbcriptionid:
+            description: ID of the subscription associated with the page BLOB.
+            readOnly: true
+            type: string
+        type: object
+    type: object
+  AcquisitionList:
+    description: The list of page BLOB acquisitions.
+    items:
+      allOf:
+        - description: Base resource object.
+          properties:
+            id:
+              description: Resource ID.
+              readOnly: true
+              type: string
+            location:
+              description: Resource location.
+              readOnly: true
+              type: string
+            name:
+              description: Resource Name.
+              readOnly: true
+              type: string
+            tags:
+              additionalProperties:
+                type: string
+              description: Resource tags.
+              readOnly: true
+              type: object
+            type:
+              description: Resource type.
+              readOnly: true
+              type: string
+          type: object
+          x-ms-azure-resource: true
+      description: The acquisition of the page BLOB.
+      properties:
+        properties:
+          description: The Properties of page BLOB acquisition.
+          properties:
+            acquisitionid:
+              description: The ID of page BLOB acquisition.
+              readOnly: true
+              type: string
+            blob:
+              description: The name of the page BLOB.
+              readOnly: true
+              type: string
+            container:
+              description: The container associated with the the page BLOB.
+              readOnly: true
+              type: string
+            filePath:
+              description: The file path of the page BLOB file on storage cluster.
+              readOnly: true
+              type: string
+            maximumblobsize:
+              description: The maximum size of the page BLOB.
+              format: int64
+              readOnly: true
+              type: integer
+            status:
+              description: The status of page BLOB acquisition.
+              enum:
+                - InProgress
+                - Success
+                - Failed
+              type: string
+              x-ms-enum:
+                modelAsString: true
+                name: AcquisitionStatus
+            storageaccount:
+              description: The storage account that holds the page BLOB.
+              readOnly: true
+              type: string
+            susbcriptionid:
+              description: ID of the subscription associated with the page BLOB.
+              readOnly: true
+              type: string
+          type: object
+      type: object
+    type: array
+  AcquisitionProperties:
+    description: The Properties of page BLOB acquisition.
+    properties:
+      acquisitionid:
+        description: The ID of page BLOB acquisition.
+        readOnly: true
+        type: string
+      blob:
+        description: The name of the page BLOB.
+        readOnly: true
+        type: string
+      container:
+        description: The container associated with the the page BLOB.
+        readOnly: true
+        type: string
+      filePath:
+        description: The file path of the page BLOB file on storage cluster.
+        readOnly: true
+        type: string
+      maximumblobsize:
+        description: The maximum size of the page BLOB.
+        format: int64
+        readOnly: true
+        type: integer
+      status:
+        description: The status of page BLOB acquisition.
+        enum:
+          - InProgress
+          - Success
+          - Failed
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AcquisitionStatus
+      storageaccount:
+        description: The storage account that holds the page BLOB.
+        readOnly: true
+        type: string
+      susbcriptionid:
+        description: ID of the subscription associated with the page BLOB.
+        readOnly: true
+        type: string
+    type: object
+  AcquisitionStatus:
+    description: The status of page BLOB acquisition.
+    enum:
+      - InProgress
+      - Success
+      - Failed
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: AcquisitionStatus

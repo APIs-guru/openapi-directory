@@ -1,0 +1,794 @@
+swagger: '2.0'
+schemes:
+  - https
+host: binaryauthorization.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: |
+    The management interface for Binary Authorization, a system providing policy control for images deployed to Kubernetes Engine clusters.
+  title: Binary Authorization
+  version: v1beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.11
+      format: google
+      url: 'https://binaryauthorization.googleapis.com/$discovery/rest?version=v1beta1'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: binaryauthorization
+externalDocs:
+  url: 'https://cloud.google.com/binary-authorization/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: projects
+paths:
+  '/v1beta1/{name}':
+    delete:
+      description: |-
+        Deletes an attestor. Returns NOT_FOUND if the
+        attestor does not exist.
+      operationId: binaryauthorization.projects.attestors.delete
+      parameters:
+        - description: |-
+            Required. The name of the attestors to delete, in the format
+            `projects/*/attestors/*`.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: |-
+        Gets an attestor.
+        Returns NOT_FOUND if the attestor does not exist.
+      operationId: binaryauthorization.projects.attestors.get
+      parameters:
+        - description: |-
+            Required. The name of the attestor to retrieve, in the format
+            `projects/*/attestors/*`.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Attestor'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    put:
+      description: |-
+        Updates an attestor.
+        Returns NOT_FOUND if the attestor does not exist.
+      operationId: binaryauthorization.projects.attestors.update
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Attestor'
+        - description: |-
+            Required. The resource name, in the format:
+            `projects/*/attestors/*`. This field may not be updated.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Attestor'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1beta1/{parent}/attestors':
+    get:
+      description: |-
+        Lists attestors.
+        Returns INVALID_ARGUMENT if the project does not exist.
+      operationId: binaryauthorization.projects.attestors.list
+      parameters:
+        - description: |-
+            Requested page size. The server may return fewer results than requested. If
+            unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A token identifying a page of results the server should return. Typically,
+            this is the value of ListAttestorsResponse.next_page_token returned
+            from the previous call to the `ListAttestors` method.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Required. The resource name of the project associated with the
+            attestors, in the format `projects/*`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListAttestorsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates an attestor, and returns a copy of the new
+        attestor. Returns NOT_FOUND if the project does not exist,
+        INVALID_ARGUMENT if the request is malformed, ALREADY_EXISTS if the
+        attestor already exists.
+      operationId: binaryauthorization.projects.attestors.create
+      parameters:
+        - description: Required. The attestors ID.
+          in: query
+          name: attestorId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Attestor'
+        - description: Required. The parent of this attestor.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Attestor'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1beta1/{resource}:getIamPolicy':
+    get:
+      description: |-
+        Gets the access control policy for a resource.
+        Returns an empty policy if the resource exists and does not have a policy
+        set.
+      operationId: binaryauthorization.projects.attestors.getIamPolicy
+      parameters:
+        - description: |-
+            REQUIRED: The resource for which the policy is being requested.
+            See the operation documentation for the appropriate value for this field.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IamPolicy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1beta1/{resource}:setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Sets the access control policy on the specified resource. Replaces any
+        existing policy.
+      operationId: binaryauthorization.projects.attestors.setIamPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetIamPolicyRequest'
+        - description: |-
+            REQUIRED: The resource for which the policy is being specified.
+            See the operation documentation for the appropriate value for this field.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IamPolicy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1beta1/{resource}:testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns permissions that a caller has on the specified resource.
+        If the resource does not exist, this will return an empty set of
+        permissions, not a NOT_FOUND error.
+
+        Note: This operation is designed to be used for building permission-aware
+        UIs and command-line tools, not for authorization checking. This operation
+        may "fail open" without warning.
+      operationId: binaryauthorization.projects.attestors.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestIamPermissionsRequest'
+        - description: |-
+            REQUIRED: The resource for which the policy detail is being requested.
+            See the operation documentation for the appropriate value for this field.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestIamPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+definitions:
+  AdmissionRule:
+    description: |-
+      An admission rule specifies either that all container images
+      used in a pod creation request must be attested to by one or more
+      attestors, that all pod creations will be allowed, or that all
+      pod creations will be denied.
+
+      Images matching an admission whitelist pattern
+      are exempted from admission rules and will never block a pod creation.
+    properties:
+      enforcementMode:
+        description: Required. The action when a pod creation is denied by the admission rule.
+        enum:
+          - ENFORCEMENT_MODE_UNSPECIFIED
+          - ENFORCED_BLOCK_AND_AUDIT_LOG
+        type: string
+      evaluationMode:
+        description: Required. How this admission rule will be evaluated.
+        enum:
+          - EVALUATION_MODE_UNSPECIFIED
+          - ALWAYS_ALLOW
+          - REQUIRE_ATTESTATION
+          - ALWAYS_DENY
+        type: string
+      requireAttestationsBy:
+        description: |-
+          Optional. The resource names of the attestors that must attest to
+          a container image, in the format `projects/*/attestors/*`. Each
+          attestor must exist before a policy can reference it.  To add an attestor
+          to a policy the principal issuing the policy change request must be able
+          to read the attestor resource.
+
+          Note: this field must be non-empty when the evaluation_mode field specifies
+          REQUIRE_ATTESTATION, otherwise it must be empty.
+        items:
+          type: string
+        type: array
+    type: object
+  AdmissionWhitelistPattern:
+    description: |-
+      An admission whitelist pattern exempts images
+      from checks by admission rules.
+    properties:
+      namePattern:
+        description: |-
+          An image name pattern to whitelist, in the form `registry/path/to/image`.
+          This supports a trailing `*` as a wildcard, but this is allowed only in
+          text after the `registry/` part.
+        type: string
+    type: object
+  Attestor:
+    description: |-
+      An attestor that attests to container image
+      artifacts. An existing attestor cannot be modified except where
+      indicated.
+    properties:
+      description:
+        description: |-
+          Optional. A descriptive comment.  This field may be updated.
+          The field may be displayed in chooser dialogs.
+        type: string
+      name:
+        description: |-
+          Required. The resource name, in the format:
+          `projects/*/attestors/*`. This field may not be updated.
+        type: string
+      updateTime:
+        description: Output only. Time when the attestor was last updated.
+        format: google-datetime
+        type: string
+      userOwnedDrydockNote:
+        $ref: '#/definitions/UserOwnedDrydockNote'
+        description: 'A Drydock ATTESTATION_AUTHORITY Note, created by the user.'
+    type: object
+  AttestorPublicKey:
+    description: |-
+      An attestator public key that will be used to
+      verify attestations signed by this attestor.
+    properties:
+      asciiArmoredPgpPublicKey:
+        description: |-
+          ASCII-armored representation of a PGP public key, as the entire output by
+          the command `gpg --export --armor foo@example.com` (either LF or CRLF
+          line endings).
+        type: string
+      comment:
+        description: Optional. A descriptive comment. This field may be updated.
+        type: string
+      id:
+        description: |-
+          Output only. This field will be overwritten with key ID information, for
+          example, an identifier extracted from a PGP public key. This field may not
+          be updated.
+        type: string
+    type: object
+  Binding:
+    description: Associates `members` with a `role`.
+    properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          Unimplemented. The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
+      members:
+        description: |+
+          Specifies the identities requesting access for a Cloud Platform resource.
+          `members` can have the following values:
+
+          * `allUsers`: A special identifier that represents anyone who is
+             on the internet; with or without a Google account.
+
+          * `allAuthenticatedUsers`: A special identifier that represents anyone
+             who is authenticated with a Google account or a service account.
+
+          * `user:{emailid}`: An email address that represents a specific Google
+             account. For example, `alice@gmail.com` .
+
+
+          * `serviceAccount:{emailid}`: An email address that represents a service
+             account. For example, `my-other-app@appspot.gserviceaccount.com`.
+
+          * `group:{emailid}`: An email address that represents a Google group.
+             For example, `admins@example.com`.
+
+
+          * `domain:{domain}`: A Google Apps domain name that represents all the
+             users of that domain. For example, `google.com` or `example.com`.
+
+        items:
+          type: string
+        type: array
+      role:
+        description: |-
+          Role that is assigned to `members`.
+          For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+        type: string
+    type: object
+  Empty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
+    type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          Common Expression Language syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
+        type: string
+    type: object
+  IamPolicy:
+    description: |-
+      Defines an Identity and Access Management (IAM) policy. It is used to
+      specify access control policies for Cloud Platform resources.
+
+
+      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
+      `members` to a `role`, where the members can be user accounts, Google groups,
+      Google domains, and service accounts. A `role` is a named list of permissions
+      defined by IAM.
+
+      **JSON Example**
+
+          {
+            "bindings": [
+              {
+                "role": "roles/owner",
+                "members": [
+                  "user:mike@example.com",
+                  "group:admins@example.com",
+                  "domain:google.com",
+                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
+                ]
+              },
+              {
+                "role": "roles/viewer",
+                "members": ["user:sean@example.com"]
+              }
+            ]
+          }
+
+      **YAML Example**
+
+          bindings:
+          - members:
+            - user:mike@example.com
+            - group:admins@example.com
+            - domain:google.com
+            - serviceAccount:my-other-app@appspot.gserviceaccount.com
+            role: roles/owner
+          - members:
+            - user:sean@example.com
+            role: roles/viewer
+
+
+      For a description of IAM and its features, see the
+      [IAM developer's guide](https://cloud.google.com/iam/docs).
+    properties:
+      bindings:
+        description: |-
+          Associates a list of `members` to a `role`.
+          `bindings` with no members will result in an error.
+        items:
+          $ref: '#/definitions/Binding'
+        type: array
+      etag:
+        description: |-
+          `etag` is used for optimistic concurrency control as a way to help
+          prevent simultaneous updates of a policy from overwriting each other.
+          It is strongly suggested that systems make use of the `etag` in the
+          read-modify-write cycle to perform policy updates in order to avoid race
+          conditions: An `etag` is returned in the response to `getIamPolicy`, and
+          systems are expected to put that etag in the request to `setIamPolicy` to
+          ensure that their change will be applied to the same version of the policy.
+
+          If no `etag` is provided in the call to `setIamPolicy`, then the existing
+          policy is overwritten blindly.
+        format: byte
+        type: string
+      version:
+        description: Deprecated.
+        format: int32
+        type: integer
+    type: object
+  ListAttestorsResponse:
+    description: Response message for BinauthzManagementService.ListAttestors.
+    properties:
+      attestors:
+        description: The list of attestors.
+        items:
+          $ref: '#/definitions/Attestor'
+        type: array
+      nextPageToken:
+        description: |-
+          A token to retrieve the next page of results. Pass this value in the
+          ListAttestorsRequest.page_token field in the subsequent call to the
+          `ListAttestors` method to retrieve the next page of results.
+        type: string
+    type: object
+  Policy:
+    description: A policy for container image binary authorization.
+    properties:
+      admissionWhitelistPatterns:
+        description: |-
+          Optional. Admission policy whitelisting. A matching admission request will
+          always be permitted. This feature is typically used to exclude Google or
+          third-party infrastructure images from Binary Authorization policies.
+        items:
+          $ref: '#/definitions/AdmissionWhitelistPattern'
+        type: array
+      clusterAdmissionRules:
+        additionalProperties:
+          $ref: '#/definitions/AdmissionRule'
+        description: |-
+          Optional. Per-cluster admission rules. Cluster spec format:
+          `location.clusterId`. There can be at most one admission rule per cluster
+          spec.
+          A `location` is either a compute zone (e.g. us-central1-a) or a region
+          (e.g. us-central1).
+          For `clusterId` syntax restrictions see
+          https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters.
+        type: object
+      defaultAdmissionRule:
+        $ref: '#/definitions/AdmissionRule'
+        description: |-
+          Required. Default admission rule for a cluster without a per-cluster
+          admission rule.
+      description:
+        description: Optional. A descriptive comment.
+        type: string
+      name:
+        description: |-
+          Output only. The resource name, in the format `projects/*/policy`. There is
+          at most one policy per project.
+        type: string
+      updateTime:
+        description: Output only. Time when the policy was last updated.
+        format: google-datetime
+        type: string
+    type: object
+  SetIamPolicyRequest:
+    description: Request message for `SetIamPolicy` method.
+    properties:
+      policy:
+        $ref: '#/definitions/IamPolicy'
+        description: |-
+          REQUIRED: The complete policy to be applied to the `resource`. The size of
+          the policy is limited to a few 10s of KB. An empty policy is a
+          valid policy but certain Cloud Platform services (such as Projects)
+          might reject them.
+    type: object
+  TestIamPermissionsRequest:
+    description: Request message for `TestIamPermissions` method.
+    properties:
+      permissions:
+        description: |-
+          The set of permissions to check for the `resource`. Permissions with
+          wildcards (such as '*' or 'storage.*') are not allowed. For more
+          information see
+          [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+        items:
+          type: string
+        type: array
+    type: object
+  TestIamPermissionsResponse:
+    description: Response message for `TestIamPermissions` method.
+    properties:
+      permissions:
+        description: |-
+          A subset of `TestPermissionsRequest.permissions` that the caller is
+          allowed.
+        items:
+          type: string
+        type: array
+    type: object
+  UserOwnedDrydockNote:
+    description: |-
+      An user owned drydock note references a Drydock
+      ATTESTATION_AUTHORITY Note created by the user.
+    properties:
+      delegationServiceAccountEmail:
+        description: |-
+          Output only. This field will contain the service account email address
+          that this Attestor will use as the principal when querying Container
+          Analysis. Attestor administrators must grant this service account the
+          IAM role needed to read attestations from the note_reference in
+          Container Analysis (`containeranalysis.notes.occurrences.viewer`).
+
+          This email address is fixed for the lifetime of the Attestor, but callers
+          should not make any other assumptions about the service account email;
+          future versions may use an email based on a different naming pattern.
+        type: string
+      noteReference:
+        description: |-
+          Required. The Drydock resource name of a ATTESTATION_AUTHORITY Note,
+          created by the user, in the format: `projects/*/notes/*` (or the legacy
+          `providers/*/notes/*`). This field may not be updated.
+
+          An attestation by this attestor is stored as a Drydock
+          ATTESTATION_AUTHORITY Occurrence that names a container image and that
+          links to this Note. Drydock is an external dependency.
+        type: string
+      publicKeys:
+        description: |-
+          Optional. Public keys that verify attestations signed by this
+          attestor.  This field may be updated.
+
+          If this field is non-empty, one of the specified public keys must
+          verify that an attestation was signed by this attestor for the
+          image specified in the admission request.
+
+          If this field is empty, this attestor always returns that no
+          valid attestations exist.
+        items:
+          $ref: '#/definitions/AttestorPublicKey'
+        type: array
+    type: object
