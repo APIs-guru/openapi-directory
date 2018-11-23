@@ -4593,6 +4593,12 @@ definitions:
     description: Placeholder documentation for __integerMin0Max3600
     minimum: 0
     maximum: 3600
+  HlsRedundantManifest:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: HLS Redundant Manifest
   HlsSegmentationMode:
     type: string
     enum:
@@ -4711,6 +4717,9 @@ definitions:
       ProgramDateTimePeriod:
         $ref: '#/definitions/__integerMin0Max3600'
         description: 'Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.'
+      RedundantManifest:
+        $ref: '#/definitions/HlsRedundantManifest'
+        description: 'When set to "enabled", includes the media playlists from both pipelines in the master manifest (.m3u8) file.'
       SegmentLength:
         $ref: '#/definitions/__integerMin1'
         description: 'Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.'
@@ -4921,6 +4930,12 @@ definitions:
       - EMIT_OUTPUT
       - PAUSE_OUTPUT
     description: Placeholder documentation for InputLossActionForMsSmoothOut
+  InputLossActionForRtmpOut:
+    type: string
+    enum:
+      - EMIT_OUTPUT
+      - PAUSE_OUTPUT
+    description: Input Loss Action
   InputLossActionForUdpOut:
     type: string
     enum:
@@ -5598,6 +5613,13 @@ definitions:
       CaptionData:
         $ref: '#/definitions/RtmpCaptionData'
         description: 'Controls the types of data that passes to onCaptionInfo outputs.  If set to ''all'' then 608 and 708 carried DTVCC data will be passed.  If set to ''field1AndField2608'' then DTVCC data will be stripped out, but 608 data from both fields will be passed. If set to ''field1608'' then only the data carried in 608 from field 1 video will be passed.'
+      InputLossAction:
+        $ref: '#/definitions/InputLossActionForRtmpOut'
+        description: |-
+          Controls the behavior of this RTMP group if input becomes unavailable.
+
+          - emitOutput: Emit a slate until input returns.
+          - pauseOutput: Stop transmitting data until input returns. This does not close the underlying RTMP connection.
       RestartDelay:
         $ref: '#/definitions/__integerMin0'
         description: 'If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.'

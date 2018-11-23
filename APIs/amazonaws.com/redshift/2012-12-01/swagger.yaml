@@ -153,7 +153,7 @@ paths:
   '/#AuthorizeClusterSecurityGroupIngress':
     post:
       operationId: AuthorizeClusterSecurityGroupIngress
-      description: '<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2034,7 +2034,7 @@ paths:
   '/#DescribeOrderableClusterOptions':
     post:
       operationId: DescribeOrderableClusterOptions
-      description: 'Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.'
+      description: 'Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.'
       responses:
         '200':
           description: Success
@@ -3016,7 +3016,7 @@ paths:
   '/#ModifySnapshotCopyRetentionPeriod':
     post:
       operationId: ModifySnapshotCopyRetentionPeriod
-      description: 'Modifies the number of days to retain snapshots in the destination region after they are copied from the source region. By default, this only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots will be updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option only newly copied manual snapshots will have the new retention period '
+      description: 'Modifies the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. '
       responses:
         '200':
           description: Success
@@ -3061,7 +3061,7 @@ paths:
   '/#ModifySnapshotSchedule':
     post:
       operationId: ModifySnapshotSchedule
-      description: Modifies a snapshot schedule. Any schedule associate with a cluster will be modified asynchronously.
+      description: Modifies a snapshot schedule. Any schedule associated with a cluster is modified asynchronously.
       responses:
         '200':
           description: Success
@@ -3637,7 +3637,7 @@ definitions:
     properties:
       Identifiers:
         $ref: '#/definitions/DeleteClusterSnapshotMessageList'
-        description: A list of indentifiers for the snapshots you want to delete.
+        description: A list of identifiers for the snapshots that you want to delete.
   BatchDeleteRequestSizeExceededFault: {}
   BatchModifyClusterSnapshotsOutputMessage:
     type: object
@@ -3804,7 +3804,7 @@ definitions:
         description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>Default: <code>1</code> </p> <p>Constraints: Must be a value from 0 to 35.</p>'
       ManualSnapshotRetentionPeriod:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p>The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting does not change the retention period of existing snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653</p>'
+        description: '<p>The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn''t change the retention period of existing snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
       Port:
         $ref: '#/definitions/IntegerOptional'
         description: '<p>The port number on which the cluster accepts incoming connections.</p> <p>The cluster is accessible only via the JDBC and ODBC connection strings. Part of the connection string requires the port on which the cluster will listen for incoming connections.</p> <p>Default: <code>5439</code> </p> <p>Valid Values: <code>1150-65535</code> </p>'
@@ -4005,7 +4005,7 @@ definitions:
         description: '<p>Specifies the Amazon Redshift event severity to be published by the event notification subscription.</p> <p>Values: ERROR, INFO</p>'
       Enabled:
         $ref: '#/definitions/BooleanOptional'
-        description: 'A Boolean value; set to <code>true</code> to activate the subscription, set to <code>false</code> to create the subscription but not active it. '
+        description: 'A boolean value; set to <code>true</code> to activate the subscription, and set to <code>false</code> to create the subscription but not activate it. '
       Tags:
         $ref: '#/definitions/TagList'
         description: A list of tag instances.
@@ -4122,7 +4122,7 @@ definitions:
     properties:
       ScheduleDefinitions:
         $ref: '#/definitions/ScheduleDefinitionList'
-        description: 'The definition of the snapshot schedule. The definition is made up of schedule expressions. For example, "cron(30 12 *)" or "rate(12 hours)". '
+        description: 'The definition of the snapshot schedule. The definition is made up of schedule expressions, for example "cron(30 12 *)" or "rate(12 hours)". '
       ScheduleIdentifier:
         $ref: '#/definitions/String'
         description: A unique identifier for a snapshot schedule. Only alphanumeric characters are allowed for the identifier.
@@ -5014,7 +5014,7 @@ definitions:
         description: '<p>The unique identifier of the source cluster to copy snapshots from.</p> <p>Constraints: Must be the valid name of an existing cluster that does not already have cross-region snapshot copy enabled.</p>'
       DestinationRegion:
         $ref: '#/definitions/String'
-        description: '<p>The destination region that you want to copy snapshots to.</p> <p>Constraints: Must be the name of a valid region. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </p>'
+        description: '<p>The destination AWS Region that you want to copy snapshots to.</p> <p>Constraints: Must be the name of a valid AWS Region. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </p>'
       RetentionPeriod:
         $ref: '#/definitions/IntegerOptional'
         description: '<p>The number of days to retain automated snapshots in the destination region after they are copied from the source region.</p> <p>Default: 7.</p> <p>Constraints: Must be at least 1 and no more than 35.</p>'
@@ -5023,7 +5023,7 @@ definitions:
         description: The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.
       ManualSnapshotRetentionPeriod:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p>The number of days to retain newly copied snapshots in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
+        description: '<p>The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
     description: <p/>
   IncompatibleOrderableOptions: {}
   CopyToRegionDisabledFault: {}
@@ -5130,7 +5130,7 @@ definitions:
         description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted.</p> <p>Default: Uses existing setting.</p> <p>Constraints: Must be a value from 0 to 35.</p>'
       ManualSnapshotRetentionPeriod:
         $ref: '#/definitions/IntegerOptional'
-        description: '<p>The default for number of days that a newly created manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. This value will not retroactively change the retention periods of existing manual snapshots</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p> <p>The default value is -1.</p>'
+        description: '<p>The default for number of days that a newly created manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. This value doesn''t retroactively change the retention periods of existing manual snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p> <p>The default value is -1.</p>'
       PreferredMaintenanceWindow:
         $ref: '#/definitions/String'
         description: '<p>The weekly time range (in UTC) during which system maintenance can occur, if necessary. If system maintenance is necessary during the window, it may result in an outage.</p> <p>This maintenance window change is made immediately. If the new maintenance window indicates the current time, there must be at least 120 minutes between the current time and end of the window in order to ensure that pending changes are applied.</p> <p>Default: Uses existing setting.</p> <p>Format: ddd:hh24:mi-ddd:hh24:mi, for example <code>wed:07:30-wed:08:00</code>.</p> <p>Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun</p> <p>Constraints: Must be at least 30 minutes.</p>'
@@ -5288,7 +5288,7 @@ definitions:
         description: 'A unique identifier for the cluster whose snapshot schedule you want to modify. '
       ScheduleIdentifier:
         $ref: '#/definitions/String'
-        description: A unique alphanumeric identifier for the schedule you want to associate with the cluster.
+        description: A unique alphanumeric identifier for the schedule that you want to associate with the cluster.
       DisassociateSchedule:
         $ref: '#/definitions/BooleanOptional'
         description: A boolean to indicate whether to remove the assoiciation between the cluster and the schedule.
@@ -5359,10 +5359,10 @@ definitions:
     properties:
       ClusterIdentifier:
         $ref: '#/definitions/String'
-        description: '<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>'
+        description: '<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination AWS Region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>'
       RetentionPeriod:
         $ref: '#/definitions/Integer'
-        description: '<p>The number of days to retain automated snapshots in the destination region after they are copied from the source region.</p> <p>By default, this only changes the retention period of copied automated snapshots. </p> <p>If you decrease the retention period for automated snapshots that are copied to a destination region, Amazon Redshift will delete any existing automated snapshots that were copied to the destination region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p> <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will have the new retention period. </p> <p>If you specify the value of -1 newly copied manual snapshots are retained indefinitely.</p> <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.</p>'
+        description: '<p>The number of days to retain automated snapshots in the destination AWS Region after they are copied from the source AWS Region.</p> <p>By default, this only changes the retention period of copied automated snapshots. </p> <p>If you decrease the retention period for automated snapshots that are copied to a destination AWS Region, Amazon Redshift deletes any existing automated snapshots that were copied to the destination AWS Region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p> <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will have the new retention period. </p> <p>If you specify the value of -1 newly copied manual snapshots are retained indefinitely.</p> <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.</p>'
       Manual:
         $ref: '#/definitions/Boolean'
         description: Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots.
@@ -5379,7 +5379,7 @@ definitions:
         description: A unique alphanumeric identifier of the schedule to modify.
       ScheduleDefinitions:
         $ref: '#/definitions/ScheduleDefinitionList'
-        description: 'An updated list of schedule definitions. A schedule definition is made up of schedule expressions. For example, "cron(30 12 *)" or "rate(12 hours)".'
+        description: 'An updated list of schedule definitions. A schedule definition is made up of schedule expressions, for example, "cron(30 12 *)" or "rate(12 hours)".'
   SnapshotScheduleUpdateInProgressFault: {}
   PurchaseReservedNodeOfferingResult:
     type: object
@@ -5759,10 +5759,10 @@ definitions:
         description: The identifier of the cluster for which the snapshot was taken.
       SnapshotCreateTime:
         $ref: '#/definitions/TStamp'
-        description: The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time.
+        description: The time (in UTC format) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time.
       Status:
         $ref: '#/definitions/String'
-        description: '<p>The snapshot status. The value of the status depends on the API operation used. </p> <ul> <li> <p> <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as "creating". </p> </li> <li> <p> <a>DescribeClusterSnapshots</a> returns status as "creating", "available", "final snapshot", or "failed".</p> </li> <li> <p> <a>DeleteClusterSnapshot</a> returns status as "deleted".</p> </li> </ul>'
+        description: '<p>The snapshot status. The value of the status depends on the API operation used: </p> <ul> <li> <p> <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as "creating". </p> </li> <li> <p> <a>DescribeClusterSnapshots</a> returns status as "creating", "available", "final snapshot", or "failed".</p> </li> <li> <p> <a>DeleteClusterSnapshot</a> returns status as "deleted".</p> </li> </ul>'
       Port:
         $ref: '#/definitions/Integer'
         description: The port that the cluster is listening on.
@@ -5780,7 +5780,7 @@ definitions:
         description: The version ID of the Amazon Redshift engine that is running on the cluster.
       SnapshotType:
         $ref: '#/definitions/String'
-        description: 'The snapshot type. Snapshots created using <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> will be of type "manual". '
+        description: 'The snapshot type. Snapshots created using <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> are of type "manual". '
       NodeType:
         $ref: '#/definitions/String'
         description: The node type of the nodes in the cluster.
@@ -6100,7 +6100,7 @@ definitions:
         description: The node type for the nodes in the cluster.
       ClusterStatus:
         $ref: '#/definitions/String'
-        description: '<p> The current state of the cluster. Possible values are the following:</p> <ul> <li> <p> <code>available</code> </p> </li> <li> <p> <code>cancelling-resize</code> </p> </li> <li> <p> <code>creating</code> </p> </li> <li> <p> <code>deleting</code> </p> </li> <li> <p> <code>final-snapshot</code> </p> </li> <li> <p> <code>hardware-failure</code> </p> </li> <li> <p> <code>incompatible-hsm</code> </p> </li> <li> <p> <code>incompatible-network</code> </p> </li> <li> <p> <code>incompatible-parameters</code> </p> </li> <li> <p> <code>incompatible-restore</code> </p> </li> <li> <p> <code>modifying</code> </p> </li> <li> <p> <code>rebooting</code> </p> </li> <li> <p> <code>renaming</code> </p> </li> <li> <p> <code>resizing</code> </p> </li> <li> <p> <code>rotating-keys</code> </p> </li> <li> <p> <code>storage-full</code> </p> </li> <li> <p> <code>updating-hsm</code> </p> </li> </ul>'
+        description: '<p> The current state of the cluster. Possible values are the following:</p> <ul> <li> <p> <code>available</code> </p> </li> <li> <p> <code>available, prep-for-resize</code> </p> </li> <li> <p> <code>available, resize-cleanup</code> </p> </li> <li> <p> <code>cancelling-resize</code> </p> </li> <li> <p> <code>creating</code> </p> </li> <li> <p> <code>deleting</code> </p> </li> <li> <p> <code>final-snapshot</code> </p> </li> <li> <p> <code>hardware-failure</code> </p> </li> <li> <p> <code>incompatible-hsm</code> </p> </li> <li> <p> <code>incompatible-network</code> </p> </li> <li> <p> <code>incompatible-parameters</code> </p> </li> <li> <p> <code>incompatible-restore</code> </p> </li> <li> <p> <code>modifying</code> </p> </li> <li> <p> <code>rebooting</code> </p> </li> <li> <p> <code>renaming</code> </p> </li> <li> <p> <code>resizing</code> </p> </li> <li> <p> <code>rotating-keys</code> </p> </li> <li> <p> <code>storage-full</code> </p> </li> <li> <p> <code>updating-hsm</code> </p> </li> </ul>'
       ModifyStatus:
         $ref: '#/definitions/String'
         description: 'The status of a modify operation, if any, initiated for the cluster.'
@@ -6121,7 +6121,7 @@ definitions:
         description: The number of days that automatic cluster snapshots are retained.
       ManualSnapshotRetentionPeriod:
         $ref: '#/definitions/Integer'
-        description: '<p>The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting does not change the retention period of existing snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653</p>'
+        description: '<p>The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn''t change the retention period of existing snapshots.</p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
       ClusterSecurityGroups:
         $ref: '#/definitions/ClusterSecurityGroupMembershipList'
         description: '<p>A list of cluster security group that are associated with the cluster. Each security group is represented by an element that contains <code>ClusterSecurityGroup.Name</code> and <code>ClusterSecurityGroup.Status</code> subelements. </p> <p>Cluster security groups are used when the cluster is not created in an Amazon Virtual Private Cloud (VPC). Clusters that are created in a VPC use VPC security groups, which are listed by the <b>VpcSecurityGroups</b> parameter. </p>'
@@ -6151,16 +6151,16 @@ definitions:
         description: The version ID of the Amazon Redshift engine that is running on the cluster.
       AllowVersionUpgrade:
         $ref: '#/definitions/Boolean'
-        description: 'A Boolean value that, if <code>true</code>, indicates that major version upgrades will be applied automatically to the cluster during the maintenance window. '
+        description: 'A boolean value that, if <code>true</code>, indicates that major version upgrades will be applied automatically to the cluster during the maintenance window. '
       NumberOfNodes:
         $ref: '#/definitions/Integer'
         description: The number of compute nodes in the cluster.
       PubliclyAccessible:
         $ref: '#/definitions/Boolean'
-        description: 'A Boolean value that, if <code>true</code>, indicates that the cluster can be accessed from a public network.'
+        description: 'A boolean value that, if <code>true</code>, indicates that the cluster can be accessed from a public network.'
       Encrypted:
         $ref: '#/definitions/Boolean'
-        description: 'A Boolean value that, if <code>true</code>, indicates that data in the cluster is encrypted at rest.'
+        description: 'A boolean value that, if <code>true</code>, indicates that data in the cluster is encrypted at rest.'
       RestoreStatus:
         $ref: '#/definitions/RestoreStatus'
         description: A value that describes the status of a cluster restore action. This parameter returns null if the cluster was not created by restoring a snapshot.
@@ -6453,7 +6453,7 @@ definitions:
         description: '<p>The event severity specified in the Amazon Redshift event notification subscription.</p> <p>Values: ERROR, INFO</p>'
       Enabled:
         $ref: '#/definitions/Boolean'
-        description: A Boolean value indicating whether the subscription is enabled. <code>true</code> indicates the subscription is enabled.
+        description: A boolean value indicating whether the subscription is enabled; <code>true</code> indicates that the subscription is enabled.
       Tags:
         $ref: '#/definitions/TagList'
         description: The list of tags for the event subscription.
@@ -6984,7 +6984,7 @@ definitions:
         description: The tag for the resource.
       ResourceName:
         $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) with which the tag is associated. For example, <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>.'
+        description: 'The Amazon Resource Name (ARN) with which the tag is associated, for example: <code>arn:aws:redshift:us-east-1:123456789:cluster:t1</code>.'
       ResourceType:
         $ref: '#/definitions/String'
         description: '<p>The type of resource with which the tag is associated. Valid resource types are: </p> <ul> <li> <p>Cluster</p> </li> <li> <p>CIDR/IP</p> </li> <li> <p>EC2 security group</p> </li> <li> <p>Snapshot</p> </li> <li> <p>Cluster security group</p> </li> <li> <p>Subnet group</p> </li> <li> <p>HSM connection</p> </li> <li> <p>HSM certificate</p> </li> <li> <p>Parameter group</p> </li> </ul> <p>For more information about Amazon Redshift resource types and constructing ARNs, go to <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions">Constructing an Amazon Redshift Amazon Resource Name (ARN)</a> in the Amazon Redshift Cluster Management Guide. </p>'

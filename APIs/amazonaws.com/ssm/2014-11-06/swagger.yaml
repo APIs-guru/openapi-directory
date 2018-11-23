@@ -4323,21 +4323,29 @@ paths:
           schema:
             $ref: '#/definitions/DuplicateDocumentContent'
         '484':
+          description: DuplicateDocumentVersionName
+          schema:
+            $ref: '#/definitions/DuplicateDocumentVersionName'
+        '485':
           description: InvalidDocumentContent
           schema:
             $ref: '#/definitions/InvalidDocumentContent'
-        '485':
+        '486':
           description: InvalidDocumentVersion
           schema:
             $ref: '#/definitions/InvalidDocumentVersion'
-        '486':
+        '487':
           description: InvalidDocumentSchemaVersion
           schema:
             $ref: '#/definitions/InvalidDocumentSchemaVersion'
-        '487':
+        '488':
           description: InvalidDocument
           schema:
             $ref: '#/definitions/InvalidDocument'
+        '489':
+          description: InvalidDocumentOperation
+          schema:
+            $ref: '#/definitions/InvalidDocumentOperation'
       parameters:
         - name: body
           in: body
@@ -4733,12 +4741,18 @@ definitions:
       Content:
         $ref: '#/definitions/DocumentContent'
         description: A valid JSON or YAML string.
+      Attachments:
+        $ref: '#/definitions/AttachmentsSourceList'
+        description: A list of key and value pairs that describe attachments to a version of a document.
       Name:
         $ref: '#/definitions/DocumentName'
         description: '<p>A name for the Systems Manager document.</p> <important> <p>Do not use the following to begin the names of documents you create. They are reserved by AWS for use as document prefixes:</p> <ul> <li> <p> <code>aws</code> </p> </li> <li> <p> <code>amazon</code> </p> </li> <li> <p> <code>amzn</code> </p> </li> </ul> </important>'
+      VersionName:
+        $ref: '#/definitions/DocumentVersionName'
+        description: 'An optional field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.'
       DocumentType:
         $ref: '#/definitions/DocumentType'
-        description: 'The type of document to create. Valid document types include: Policy, Automation, and Command.'
+        description: 'The type of document to create. Valid document types include: <code>Command</code>, <code>Policy</code>, <code>Automation</code>, <code>Session</code>, and <code>Package</code>.'
       DocumentFormat:
         $ref: '#/definitions/DocumentFormat'
         description: Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.
@@ -5278,6 +5292,9 @@ definitions:
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version for which you want information. Can be a specific version or the default version.
+      VersionName:
+        $ref: '#/definitions/DocumentVersionName'
+        description: 'An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.'
   DescribeDocumentPermissionResponse:
     type: object
     properties:
@@ -5976,9 +5993,18 @@ definitions:
       Name:
         $ref: '#/definitions/DocumentARN'
         description: The name of the Systems Manager document.
+      VersionName:
+        $ref: '#/definitions/DocumentVersionName'
+        description: 'The version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.'
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version.
+      Status:
+        $ref: '#/definitions/DocumentStatus'
+        description: 'The status of the Systems Manager document, such as <code>Creating</code>, <code>Active</code>, <code>Updating</code>, <code>Failed</code>, and <code>Deleting</code>.'
+      StatusInformation:
+        $ref: '#/definitions/DocumentStatusInformation'
+        description: 'A message returned by AWS Systems Manager that explains the <code>Status</code> value. For example, a <code>Failed</code> status might be explained by the <code>StatusInformation</code> message, "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct."'
       Content:
         $ref: '#/definitions/DocumentContent'
         description: The contents of the Systems Manager document.
@@ -5988,6 +6014,9 @@ definitions:
       DocumentFormat:
         $ref: '#/definitions/DocumentFormat'
         description: 'The document format, either JSON or YAML.'
+      AttachmentsContent:
+        $ref: '#/definitions/AttachmentContentList'
+        description: 'A description of the document attachments, including names, locations, sizes, etc.'
   GetDocumentRequest:
     type: object
     required:
@@ -5996,6 +6025,9 @@ definitions:
       Name:
         $ref: '#/definitions/DocumentARN'
         description: The name of the Systems Manager document.
+      VersionName:
+        $ref: '#/definitions/DocumentVersionName'
+        description: 'An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.'
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version for which you want information.
@@ -7377,10 +7409,16 @@ definitions:
     properties:
       Content:
         $ref: '#/definitions/DocumentContent'
-        description: The content in a document that you want to update.
+        description: A valid JSON or YAML string.
+      Attachments:
+        $ref: '#/definitions/AttachmentsSourceList'
+        description: A list of key and value pairs that describe attachments to a version of a document.
       Name:
         $ref: '#/definitions/DocumentName'
         description: The name of the document that you want to update.
+      VersionName:
+        $ref: '#/definitions/DocumentVersionName'
+        description: 'An optional field specifying the version of the artifact you are updating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.'
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The version of the document that you want to update.
@@ -7392,6 +7430,7 @@ definitions:
         description: Specify a new target type for the document.
   DocumentVersionLimitExceeded: {}
   DuplicateDocumentContent: {}
+  DuplicateDocumentVersionName: {}
   UpdateDocumentDefaultVersionResult:
     type: object
     properties:
@@ -8305,6 +8344,83 @@ definitions:
     items:
       $ref: '#/definitions/AssociationVersionInfo'
     minItems: 1
+  AttachmentName:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
+  ContentLength:
+    type: integer
+  AttachmentHash:
+    type: string
+    maxLength: 256
+  AttachmentHashType:
+    type: string
+    enum:
+      - Sha256
+  AttachmentUrl:
+    type: string
+  AttachmentContent:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/AttachmentName'
+        description: The name of an attachment.
+      Size:
+        $ref: '#/definitions/ContentLength'
+        description: The size of an attachment in bytes.
+      Hash:
+        $ref: '#/definitions/AttachmentHash'
+        description: The cryptographic hash value of the document content.
+      HashType:
+        $ref: '#/definitions/AttachmentHashType'
+        description: The hash algorithm used to calculate the hash value.
+      Url:
+        $ref: '#/definitions/AttachmentUrl'
+        description: The URL location of the attachment content.
+    description: A structure that includes attributes that describe a document attachment.
+  AttachmentContentList:
+    type: array
+    items:
+      $ref: '#/definitions/AttachmentContent'
+  AttachmentInformation:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/AttachmentName'
+    description: 'An attribute of an attachment, such as the attachment name or size.'
+  AttachmentInformationList:
+    type: array
+    items:
+      $ref: '#/definitions/AttachmentInformation'
+  AttachmentsSourceKey:
+    type: string
+    enum:
+      - SourceUrl
+  AttachmentsSourceValues:
+    type: array
+    items:
+      $ref: '#/definitions/AttachmentsSourceValue'
+    minItems: 1
+    maxItems: 1
+  AttachmentsSource:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/AttachmentsSourceKey'
+        description: The key of a key and value pair that identifies the location of an attachment to a document.
+      Values:
+        $ref: '#/definitions/AttachmentsSourceValues'
+        description: 'The URL of the location of a document attachment, such as the URL of an Amazon S3 bucket.'
+    description: A key and value pair that identifies the location of an attachment to a document.
+  AttachmentsSourceList:
+    type: array
+    items:
+      $ref: '#/definitions/AttachmentsSource'
+    minItems: 0
+    maxItems: 1
+  AttachmentsSourceValue:
+    type: string
+    minLength: 1
+    maxLength: 1024
   AttributeName:
     type: string
     minLength: 1
@@ -9254,6 +9370,9 @@ definitions:
   DocumentContent:
     type: string
     minLength: 1
+  DocumentVersionName:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-.]{1,128}$'
   DocumentType:
     type: string
     enum:
@@ -9261,6 +9380,7 @@ definitions:
       - Policy
       - Automation
       - Session
+      - Package
   DocumentFormat:
     type: string
     enum:
@@ -9281,10 +9401,13 @@ definitions:
         description: <p>The Sha256 or Sha1 hash created by the system when the document was created. </p> <note> <p>Sha1 hashes have been deprecated.</p> </note>
       HashType:
         $ref: '#/definitions/DocumentHashType'
-        description: <p>Sha256 or Sha1.</p> <note> <p>Sha1 hashes have been deprecated.</p> </note>
+        description: <p>The hash type of the document. Valid values include <code>Sha256</code> or <code>Sha1</code>.</p> <note> <p>Sha1 hashes have been deprecated.</p> </note>
       Name:
         $ref: '#/definitions/DocumentARN'
         description: The name of the Systems Manager document.
+      VersionName:
+        $ref: '#/definitions/DocumentVersionName'
+        description: The version of the artifact associated with the document.
       Owner:
         $ref: '#/definitions/DocumentOwner'
         description: The AWS user account that created the document.
@@ -9294,6 +9417,9 @@ definitions:
       Status:
         $ref: '#/definitions/DocumentStatus'
         description: The status of the Systems Manager document.
+      StatusInformation:
+        $ref: '#/definitions/DocumentStatusInformation'
+        description: 'A message returned by AWS Systems Manager that explains the <code>Status</code> value. For example, a <code>Failed</code> status might be explained by the <code>StatusInformation</code> message, "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct."'
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version.
@@ -9308,7 +9434,7 @@ definitions:
         description: 'The list of OS platforms compatible with this Systems Manager document. '
       DocumentType:
         $ref: '#/definitions/DocumentType'
-        description: 'The type of document. '
+        description: The type of document.
       SchemaVersion:
         $ref: '#/definitions/DocumentSchemaVersion'
         description: The schema version.
@@ -9327,6 +9453,9 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: 'The tags, or metadata, that have been applied to the document.'
+      AttachmentsInformation:
+        $ref: '#/definitions/AttachmentInformationList'
+        description: 'Details about the document attachments, including names, locations, sizes, etc.'
     description: 'Describes a Systems Manager document. '
   MaintenanceWindowName:
     type: string
@@ -9726,6 +9855,9 @@ definitions:
       DefaultVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The default version of the document.
+      DefaultVersionName:
+        $ref: '#/definitions/DocumentVersionName'
+        description: The default version of the artifact associated with the document.
     description: A default version of a document.
   DocumentSha1:
     type: string
@@ -9746,6 +9878,10 @@ definitions:
       - Active
       - Updating
       - Deleting
+      - Failed
+    description: The status of a document.
+  DocumentStatusInformation:
+    type: string
   DocumentParameterList:
     type: array
     items:
@@ -9794,6 +9930,9 @@ definitions:
       Owner:
         $ref: '#/definitions/DocumentOwner'
         description: The AWS user account that created the document.
+      VersionName:
+        $ref: '#/definitions/DocumentVersionName'
+        description: 'An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.'
       PlatformTypes:
         $ref: '#/definitions/PlatformTypeList'
         description: 'The operating system platform. '
@@ -9884,6 +10023,9 @@ definitions:
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version.
+      VersionName:
+        $ref: '#/definitions/DocumentVersionName'
+        description: 'The version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.'
       CreatedDate:
         $ref: '#/definitions/DateTime'
         description: The date the document was created.
@@ -9893,6 +10035,12 @@ definitions:
       DocumentFormat:
         $ref: '#/definitions/DocumentFormat'
         description: 'The document format, either JSON or YAML.'
+      Status:
+        $ref: '#/definitions/DocumentStatus'
+        description: 'The status of the Systems Manager document, such as <code>Creating</code>, <code>Active</code>, <code>Failed</code>, and <code>Deleting</code>.'
+      StatusInformation:
+        $ref: '#/definitions/DocumentStatusInformation'
+        description: 'A message returned by AWS Systems Manager that explains the <code>Status</code> value. For example, a <code>Failed</code> status might be explained by the <code>StatusInformation</code> message, "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct."'
     description: Version information about the document.
   DocumentVersionList:
     type: array

@@ -173,6 +173,37 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}#CreateMultipartUpload':
+    post:
+      operationId: CreateMultipartUpload
+      description: '<p>Initiates a multipart upload and returns an upload ID.</p> <p> <b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p><p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadInitiate.html</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateMultipartUploadOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateMultipartUploadRequest'
+        - name: uploads
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}#DeleteBucket':
     delete:
       operationId: DeleteBucket
       description: 'Deletes the bucket. All objects (including all object versions and Delete Markers) in the bucket must be deleted before the bucket itself can be deleted.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETE.html</p>'
@@ -189,35 +220,9 @@ paths:
           in: path
           type: string
           required: true
-  '/{Bucket}/{Key}?uploads':
-    post:
-      operationId: CreateMultipartUpload
-      description: '<p>Initiates a multipart upload and returns an upload ID.</p> <p> <b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p><p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadInitiate.html</p>'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/CreateMultipartUploadOutput'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CreateMultipartUploadRequest'
-        - name: Bucket
-          in: path
-          type: string
-          required: true
-        - name: Key
-          in: path
-          type: array
-          required: true
-          items:
-            type: string
-          collectionFormat: csv
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?analytics':
+  '/{Bucket}#DeleteBucketAnalyticsConfiguration':
     delete:
       operationId: DeleteBucketAnalyticsConfiguration
       description: Deletes an analytics configuration for the bucket (specified by the analytics configuration ID).
@@ -230,13 +235,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBucketAnalyticsConfigurationRequest'
+        - name: analytics
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?cors':
+  '/{Bucket}#DeleteBucketCors':
     delete:
       operationId: DeleteBucketCors
       description: 'Deletes the CORS configuration information set for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html</p>'
@@ -249,13 +259,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBucketCorsRequest'
+        - name: cors
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?encryption':
+  '/{Bucket}#DeleteBucketEncryption':
     delete:
       operationId: DeleteBucketEncryption
       description: Deletes the server-side encryption configuration from the bucket.
@@ -268,13 +283,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBucketEncryptionRequest'
+        - name: encryption
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?inventory':
+  '/{Bucket}#DeleteBucketInventoryConfiguration':
     delete:
       operationId: DeleteBucketInventoryConfiguration
       description: Deletes an inventory configuration (identified by the inventory ID) from the bucket.
@@ -287,13 +307,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBucketInventoryConfigurationRequest'
+        - name: inventory
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?lifecycle':
+  '/{Bucket}#DeleteBucketLifecycle':
     delete:
       operationId: DeleteBucketLifecycle
       description: 'Deletes the lifecycle configuration from the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html</p>'
@@ -306,13 +331,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBucketLifecycleRequest'
+        - name: lifecycle
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?metrics':
+  '/{Bucket}#DeleteBucketMetricsConfiguration':
     delete:
       operationId: DeleteBucketMetricsConfiguration
       description: Deletes a metrics configuration (specified by the metrics configuration ID) from the bucket.
@@ -325,13 +355,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBucketMetricsConfigurationRequest'
+        - name: metrics
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?policy':
+  '/{Bucket}#DeleteBucketPolicy':
     delete:
       operationId: DeleteBucketPolicy
       description: 'Deletes the policy from the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html</p>'
@@ -344,13 +379,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBucketPolicyRequest'
+        - name: policy
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?replication':
+  '/{Bucket}#DeleteBucketReplication':
     delete:
       operationId: DeleteBucketReplication
       description: ' Deletes the replication configuration from the bucket. For information about replication configuration, see <a href=" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html">Cross-Region Replication (CRR)</a> in the <i>Amazon S3 Developer Guide</i>. '
@@ -363,13 +403,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBucketReplicationRequest'
+        - name: replication
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?tagging':
+  '/{Bucket}#DeleteBucketTagging':
     delete:
       operationId: DeleteBucketTagging
       description: 'Deletes the tags from the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html</p>'
@@ -382,13 +427,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBucketTaggingRequest'
+        - name: tagging
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?website':
+  '/{Bucket}#DeleteBucketWebsite':
     delete:
       operationId: DeleteBucketWebsite
       description: 'This operation removes the website configuration from the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html</p>'
@@ -401,6 +451,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteBucketWebsiteRequest'
+        - name: website
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -432,7 +487,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}/{Key}?tagging#DeleteObjectTagging':
+  '/{Bucket}/{Key}#DeleteObjectTagging':
     delete:
       operationId: DeleteObjectTagging
       description: Removes the tag-set from an existing object.
@@ -447,6 +502,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteObjectTaggingRequest'
+        - name: tagging
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -457,7 +517,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?delete#DeleteObjects':
+  '/{Bucket}#DeleteObjects':
     post:
       operationId: DeleteObjects
       description: 'This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/multiobjectdeleteapi.html</p>'
@@ -472,13 +532,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteObjectsRequest'
+        - name: delete
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?publicAccessBlock#DeletePublicAccessBlock':
+  '/{Bucket}#DeletePublicAccessBlock':
     delete:
       operationId: DeletePublicAccessBlock
       description: Removes the Public Access Block configuration for an Amazon S3 bucket.
@@ -491,13 +556,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeletePublicAccessBlockRequest'
+        - name: publicAccessBlock
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?accelerate#GetBucketAccelerateConfiguration':
+  '/{Bucket}#GetBucketAccelerateConfiguration':
     get:
       operationId: GetBucketAccelerateConfiguration
       description: Returns the accelerate configuration of a bucket.
@@ -512,13 +582,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketAccelerateConfigurationRequest'
+        - name: accelerate
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?acl#GetBucketAcl':
+  '/{Bucket}#GetBucketAcl':
     get:
       operationId: GetBucketAcl
       description: 'Gets the access control policy for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETacl.html</p>'
@@ -533,13 +608,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketAclRequest'
+        - name: acl
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?analytics#GetBucketAnalyticsConfiguration':
+  '/{Bucket}#GetBucketAnalyticsConfiguration':
     get:
       operationId: GetBucketAnalyticsConfiguration
       description: Gets an analytics configuration for the bucket (specified by the analytics configuration ID).
@@ -554,13 +634,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketAnalyticsConfigurationRequest'
+        - name: analytics
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?cors#GetBucketCors':
+  '/{Bucket}#GetBucketCors':
     get:
       operationId: GetBucketCors
       description: 'Returns the CORS configuration for the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html</p>'
@@ -575,13 +660,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketCorsRequest'
+        - name: cors
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?encryption#GetBucketEncryption':
+  '/{Bucket}#GetBucketEncryption':
     get:
       operationId: GetBucketEncryption
       description: Returns the server-side encryption configuration of a bucket.
@@ -596,13 +686,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketEncryptionRequest'
+        - name: encryption
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?inventory#GetBucketInventoryConfiguration':
+  '/{Bucket}#GetBucketInventoryConfiguration':
     get:
       operationId: GetBucketInventoryConfiguration
       description: Returns an inventory configuration (identified by the inventory ID) from the bucket.
@@ -617,13 +712,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketInventoryConfigurationRequest'
+        - name: inventory
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?lifecycle#GetBucketLifecycle':
+  '/{Bucket}#GetBucketLifecycle':
     get:
       operationId: GetBucketLifecycle
       description: 'Deprecated, see the GetBucketLifecycleConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html</p>'
@@ -638,13 +738,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketLifecycleRequest'
+        - name: lifecycle
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?lifecycle#GetBucketLifecycleConfiguration':
+  '/{Bucket}#GetBucketLifecycleConfiguration':
     get:
       operationId: GetBucketLifecycleConfiguration
       description: Returns the lifecycle configuration information set on the bucket.
@@ -659,13 +764,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketLifecycleConfigurationRequest'
+        - name: lifecycle
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?location#GetBucketLocation':
+  '/{Bucket}#GetBucketLocation':
     get:
       operationId: GetBucketLocation
       description: 'Returns the region the bucket resides in.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlocation.html</p>'
@@ -680,13 +790,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketLocationRequest'
+        - name: location
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?logging#GetBucketLogging':
+  '/{Bucket}#GetBucketLogging':
     get:
       operationId: GetBucketLogging
       description: 'Returns the logging status of a bucket and the permissions users have to view and modify that status. To use GET, you must be the bucket owner.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlogging.html</p>'
@@ -701,13 +816,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketLoggingRequest'
+        - name: logging
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?metrics#GetBucketMetricsConfiguration':
+  '/{Bucket}#GetBucketMetricsConfiguration':
     get:
       operationId: GetBucketMetricsConfiguration
       description: Gets a metrics configuration (specified by the metrics configuration ID) from the bucket.
@@ -722,13 +842,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketMetricsConfigurationRequest'
+        - name: metrics
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?notification#GetBucketNotification':
+  '/{Bucket}#GetBucketNotification':
     get:
       operationId: GetBucketNotification
       description: 'Deprecated, see the GetBucketNotificationConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETnotification.html</p>'
@@ -743,13 +868,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketNotificationConfigurationRequest'
+        - name: notification
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?notification#GetBucketNotificationConfiguration':
+  '/{Bucket}#GetBucketNotificationConfiguration':
     get:
       operationId: GetBucketNotificationConfiguration
       description: Returns the notification configuration of a bucket.
@@ -764,13 +894,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketNotificationConfigurationRequest'
+        - name: notification
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?policy#GetBucketPolicy':
+  '/{Bucket}#GetBucketPolicy':
     get:
       operationId: GetBucketPolicy
       description: 'Returns the policy of a specified bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETpolicy.html</p>'
@@ -785,13 +920,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketPolicyRequest'
+        - name: policy
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?policyStatus#GetBucketPolicyStatus':
+  '/{Bucket}#GetBucketPolicyStatus':
     get:
       operationId: GetBucketPolicyStatus
       description: 'Retrieves the policy status for an Amazon S3 bucket, indicating whether the bucket is public.'
@@ -806,13 +946,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketPolicyStatusRequest'
+        - name: policyStatus
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?replication#GetBucketReplication':
+  '/{Bucket}#GetBucketReplication':
     get:
       operationId: GetBucketReplication
       description: '<p>Returns the replication configuration of a bucket.</p> <note> <p> It can take a while to propagate the put or delete a replication configuration to all Amazon S3 systems. Therefore, a get request soon after put or delete can return a wrong result. </p> </note>'
@@ -827,13 +972,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketReplicationRequest'
+        - name: replication
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?requestPayment#GetBucketRequestPayment':
+  '/{Bucket}#GetBucketRequestPayment':
     get:
       operationId: GetBucketRequestPayment
       description: 'Returns the request payment configuration of a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentGET.html</p>'
@@ -848,13 +998,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketRequestPaymentRequest'
+        - name: requestPayment
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?tagging#GetBucketTagging':
+  '/{Bucket}#GetBucketTagging':
     get:
       operationId: GetBucketTagging
       description: 'Returns the tag set associated with the bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETtagging.html</p>'
@@ -869,13 +1024,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketTaggingRequest'
+        - name: tagging
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?versioning#GetBucketVersioning':
+  '/{Bucket}#GetBucketVersioning':
     get:
       operationId: GetBucketVersioning
       description: 'Returns the versioning state of a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html</p>'
@@ -890,13 +1050,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketVersioningRequest'
+        - name: versioning
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?website#GetBucketWebsite':
+  '/{Bucket}#GetBucketWebsite':
     get:
       operationId: GetBucketWebsite
       description: 'Returns the website configuration for a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETwebsite.html</p>'
@@ -911,6 +1076,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBucketWebsiteRequest'
+        - name: website
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -946,7 +1116,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}/{Key}?acl#GetObjectAcl':
+  '/{Bucket}/{Key}#GetObjectAcl':
     get:
       operationId: GetObjectAcl
       description: 'Returns the access control list (ACL) of an object.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETacl.html</p>'
@@ -965,6 +1135,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetObjectAclRequest'
+        - name: acl
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -975,7 +1150,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}/{Key}?tagging#GetObjectTagging':
+  '/{Bucket}/{Key}#GetObjectTagging':
     get:
       operationId: GetObjectTagging
       description: Returns the tag-set of an object.
@@ -990,6 +1165,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetObjectTaggingRequest'
+        - name: tagging
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -1000,7 +1180,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}/{Key}?torrent#GetObjectTorrent':
+  '/{Bucket}/{Key}#GetObjectTorrent':
     get:
       operationId: GetObjectTorrent
       description: 'Return torrent files from a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETtorrent.html</p>'
@@ -1015,6 +1195,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetObjectTorrentRequest'
+        - name: torrent
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -1025,7 +1210,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?publicAccessBlock#GetPublicAccessBlock':
+  '/{Bucket}#GetPublicAccessBlock':
     get:
       operationId: GetPublicAccessBlock
       description: Retrieves the Public Access Block configuration for an Amazon S3 bucket.
@@ -1040,6 +1225,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetPublicAccessBlockRequest'
+        - name: publicAccessBlock
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -1140,7 +1330,7 @@ paths:
               state: success
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?analytics#ListBucketAnalyticsConfigurations':
+  '/{Bucket}#ListBucketAnalyticsConfigurations':
     get:
       operationId: ListBucketAnalyticsConfigurations
       description: Lists the analytics configurations for the bucket.
@@ -1155,13 +1345,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListBucketAnalyticsConfigurationsRequest'
+        - name: analytics
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?inventory#ListBucketInventoryConfigurations':
+  '/{Bucket}#ListBucketInventoryConfigurations':
     get:
       operationId: ListBucketInventoryConfigurations
       description: Returns a list of inventory configurations for the bucket.
@@ -1176,13 +1371,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListBucketInventoryConfigurationsRequest'
+        - name: inventory
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?metrics#ListBucketMetricsConfigurations':
+  '/{Bucket}#ListBucketMetricsConfigurations':
     get:
       operationId: ListBucketMetricsConfigurations
       description: Lists the metrics configurations for the bucket.
@@ -1197,6 +1397,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListBucketMetricsConfigurationsRequest'
+        - name: metrics
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -1214,7 +1419,7 @@ paths:
             $ref: '#/definitions/ListBucketsOutput'
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?uploads#ListMultipartUploads':
+  '/{Bucket}#ListMultipartUploads':
     get:
       operationId: ListMultipartUploads
       description: 'This operation lists in-progress multipart uploads.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadListMPUpload.html</p>'
@@ -1244,13 +1449,18 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: uploads
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?versions#ListObjectVersions':
+  '/{Bucket}#ListObjectVersions':
     get:
       operationId: ListObjectVersions
       description: 'Returns metadata about all of the versions of objects in a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETVersion.html</p>'
@@ -1280,6 +1490,11 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: versions
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -1321,7 +1536,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?list-type=2#ListObjectsV2':
+  '/{Bucket}#ListObjectsV2':
     get:
       operationId: ListObjectsV2
       description: 'Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend you use this revised API for new application development.'
@@ -1350,6 +1565,12 @@ paths:
           in: query
           description: Pagination token
           required: false
+        - name: list-type
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2'
         - name: Bucket
           in: path
           type: string
@@ -1391,7 +1612,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?accelerate#PutBucketAccelerateConfiguration':
+  '/{Bucket}#PutBucketAccelerateConfiguration':
     put:
       operationId: PutBucketAccelerateConfiguration
       description: Sets the accelerate configuration of an existing bucket.
@@ -1404,13 +1625,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketAccelerateConfigurationRequest'
+        - name: accelerate
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?acl#PutBucketAcl':
+  '/{Bucket}#PutBucketAcl':
     put:
       operationId: PutBucketAcl
       description: 'Sets the permissions on a bucket using access control lists (ACL).<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTacl.html</p>'
@@ -1423,13 +1649,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketAclRequest'
+        - name: acl
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?analytics#PutBucketAnalyticsConfiguration':
+  '/{Bucket}#PutBucketAnalyticsConfiguration':
     put:
       operationId: PutBucketAnalyticsConfiguration
       description: Sets an analytics configuration for the bucket (specified by the analytics configuration ID).
@@ -1442,13 +1673,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketAnalyticsConfigurationRequest'
+        - name: analytics
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?cors#PutBucketCors':
+  '/{Bucket}#PutBucketCors':
     put:
       operationId: PutBucketCors
       description: 'Sets the CORS configuration for a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTcors.html</p>'
@@ -1461,13 +1697,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketCorsRequest'
+        - name: cors
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?encryption#PutBucketEncryption':
+  '/{Bucket}#PutBucketEncryption':
     put:
       operationId: PutBucketEncryption
       description: 'Creates a new server-side encryption configuration (or replaces an existing one, if present).'
@@ -1480,13 +1721,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketEncryptionRequest'
+        - name: encryption
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?inventory#PutBucketInventoryConfiguration':
+  '/{Bucket}#PutBucketInventoryConfiguration':
     put:
       operationId: PutBucketInventoryConfiguration
       description: Adds an inventory configuration (identified by the inventory ID) from the bucket.
@@ -1499,13 +1745,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketInventoryConfigurationRequest'
+        - name: inventory
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?lifecycle#PutBucketLifecycle':
+  '/{Bucket}#PutBucketLifecycle':
     put:
       operationId: PutBucketLifecycle
       description: 'Deprecated, see the PutBucketLifecycleConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html</p>'
@@ -1518,13 +1769,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketLifecycleRequest'
+        - name: lifecycle
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?lifecycle#PutBucketLifecycleConfiguration':
+  '/{Bucket}#PutBucketLifecycleConfiguration':
     put:
       operationId: PutBucketLifecycleConfiguration
       description: 'Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it.'
@@ -1537,13 +1793,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketLifecycleConfigurationRequest'
+        - name: lifecycle
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?logging#PutBucketLogging':
+  '/{Bucket}#PutBucketLogging':
     put:
       operationId: PutBucketLogging
       description: 'Set the logging parameters for a bucket and to specify permissions for who can view and modify the logging parameters. To set the logging status of a bucket, you must be the bucket owner.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlogging.html</p>'
@@ -1556,13 +1817,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketLoggingRequest'
+        - name: logging
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?metrics#PutBucketMetricsConfiguration':
+  '/{Bucket}#PutBucketMetricsConfiguration':
     put:
       operationId: PutBucketMetricsConfiguration
       description: Sets a metrics configuration (specified by the metrics configuration ID) for the bucket.
@@ -1575,13 +1841,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketMetricsConfigurationRequest'
+        - name: metrics
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?notification#PutBucketNotification':
+  '/{Bucket}#PutBucketNotification':
     put:
       operationId: PutBucketNotification
       description: 'Deprecated, see the PutBucketNotificationConfiguraiton operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTnotification.html</p>'
@@ -1594,13 +1865,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketNotificationRequest'
+        - name: notification
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?notification#PutBucketNotificationConfiguration':
+  '/{Bucket}#PutBucketNotificationConfiguration':
     put:
       operationId: PutBucketNotificationConfiguration
       description: Enables notifications of specified events for a bucket.
@@ -1613,13 +1889,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketNotificationConfigurationRequest'
+        - name: notification
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?policy#PutBucketPolicy':
+  '/{Bucket}#PutBucketPolicy':
     put:
       operationId: PutBucketPolicy
       description: 'Replaces a policy on a bucket. If the bucket already has a policy, the one in this request completely replaces it.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html</p>'
@@ -1632,13 +1913,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketPolicyRequest'
+        - name: policy
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?replication#PutBucketReplication':
+  '/{Bucket}#PutBucketReplication':
     put:
       operationId: PutBucketReplication
       description: ' Creates a replication configuration or replaces an existing one. For more information, see <a href=" https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html">Cross-Region Replication (CRR)</a> in the <i>Amazon S3 Developer Guide</i>. '
@@ -1651,13 +1937,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketReplicationRequest'
+        - name: replication
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?requestPayment#PutBucketRequestPayment':
+  '/{Bucket}#PutBucketRequestPayment':
     put:
       operationId: PutBucketRequestPayment
       description: 'Sets the request payment configuration for a bucket. By default, the bucket owner pays for downloads from the bucket. This configuration parameter enables the bucket owner (only) to specify that the person requesting the download will be charged for the download. Documentation on requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTrequestPaymentPUT.html</p>'
@@ -1670,13 +1961,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketRequestPaymentRequest'
+        - name: requestPayment
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?tagging#PutBucketTagging':
+  '/{Bucket}#PutBucketTagging':
     put:
       operationId: PutBucketTagging
       description: 'Sets the tags for a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTtagging.html</p>'
@@ -1689,13 +1985,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketTaggingRequest'
+        - name: tagging
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?versioning#PutBucketVersioning':
+  '/{Bucket}#PutBucketVersioning':
     put:
       operationId: PutBucketVersioning
       description: 'Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html</p>'
@@ -1708,13 +2009,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketVersioningRequest'
+        - name: versioning
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?website#PutBucketWebsite':
+  '/{Bucket}#PutBucketWebsite':
     put:
       operationId: PutBucketWebsite
       description: 'Set the website configuration for a bucket.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html</p>'
@@ -1727,6 +2033,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutBucketWebsiteRequest'
+        - name: website
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -1758,7 +2069,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}/{Key}?acl#PutObjectAcl':
+  '/{Bucket}/{Key}#PutObjectAcl':
     put:
       operationId: PutObjectAcl
       description: 'uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUTacl.html</p>'
@@ -1777,6 +2088,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutObjectAclRequest'
+        - name: acl
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -1787,7 +2103,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}/{Key}?tagging#PutObjectTagging':
+  '/{Bucket}/{Key}#PutObjectTagging':
     put:
       operationId: PutObjectTagging
       description: Sets the supplied tag-set to an object that already exists in a bucket
@@ -1802,6 +2118,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutObjectTaggingRequest'
+        - name: tagging
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -1812,7 +2133,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}?publicAccessBlock#PutPublicAccessBlock':
+  '/{Bucket}#PutPublicAccessBlock':
     put:
       operationId: PutPublicAccessBlock
       description: Creates or modifies the Public Access Block configuration for an Amazon S3 bucket.
@@ -1825,13 +2146,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutPublicAccessBlockRequest'
+        - name: publicAccessBlock
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}/{Key}?restore#RestoreObject':
+  '/{Bucket}/{Key}#RestoreObject':
     post:
       operationId: RestoreObject
       description: 'Restores an archived copy of an object back into Amazon S3<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectRestore.html</p>'
@@ -1850,6 +2176,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RestoreObjectRequest'
+        - name: restore
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
         - name: Bucket
           in: path
           type: string
@@ -1860,7 +2191,7 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
-  '/{Bucket}/{Key}?select&select-type=2#SelectObjectContent':
+  '/{Bucket}/{Key}#SelectObjectContent':
     post:
       operationId: SelectObjectContent
       description: 'This operation filters the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response.'
@@ -1875,6 +2206,17 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SelectObjectContentRequest'
+        - name: select
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
+        - name: select-type
+          in: query
+          required: true
+          type: string
+          enum:
+            - '2'
         - name: Bucket
           in: path
           type: string

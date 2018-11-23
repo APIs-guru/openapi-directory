@@ -6159,7 +6159,7 @@ paths:
   '/#ModifyIdFormat':
     post:
       operationId: ModifyIdFormat
-      description: '<p>Modifies the ID format for the specified resource on a per-region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created.</p> <p>This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you''re using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>'
+      description: '<p>Modifies the ID format for the specified resource on a per-region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created.</p> <p>This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you''re using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>'
       responses:
         '200':
           description: Success
@@ -6641,7 +6641,7 @@ paths:
   '/#ModifyVpcPeeringConnectionOptions':
     post:
       operationId: ModifyVpcPeeringConnectionOptions
-      description: '<p>Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:</p> <ul> <li> <p>Enable/disable communication over the peering connection between an EC2-Classic instance that''s linked to your VPC (using ClassicLink) and instances in the peer VPC.</p> </li> <li> <p>Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that''s linked to the peer VPC.</p> </li> <li> <p>Enable/disable the ability to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.</p> </li> </ul> <p>If the peered VPCs are in different accounts, each owner must initiate a separate request to modify the peering connection options, depending on whether their VPC was the requester or accepter for the VPC peering connection. If the peered VPCs are in the same account, you can modify the requester and accepter options in the same request. To confirm which VPC is the accepter and requester for a VPC peering connection, use the <a>DescribeVpcPeeringConnections</a> command.</p>'
+      description: '<p>Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:</p> <ul> <li> <p>Enable/disable communication over the peering connection between an EC2-Classic instance that''s linked to your VPC (using ClassicLink) and instances in the peer VPC.</p> </li> <li> <p>Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that''s linked to the peer VPC.</p> </li> <li> <p>Enable/disable the ability to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.</p> </li> </ul> <p>If the peered VPCs are in the same AWS account, you can enable DNS resolution for queries from the local VPC. This ensures that queries from the local VPC resolve to private IP addresses in the peer VPC. This option is not available if the peered VPCs are in different AWS accounts or different regions. For peered VPCs in different AWS accounts, each AWS account owner must initiate a separate request to modify the peering connection options. For inter-region peering connections, you must use the region for the requester VPC to modify the requester VPC peering options and the region for the accepter VPC to modify the accepter VPC peering options. To verify which VPCs are the accepter and the requester for a VPC peering connection, use the <a>DescribeVpcPeeringConnections</a> command.</p>'
       responses:
         '200':
           description: Success
@@ -8771,7 +8771,7 @@ definitions:
         description: Indicates whether running instances should be terminated when the EC2 Fleet expires.
       Type:
         $ref: '#/definitions/FleetType'
-        description: 'The type of request. <code>instant</code> indicates whether the EC2 Fleet submits a one-time request for your desired capacity. <code>request</code> indicates whether the EC2 Fleet submits ongoing requests until your desired capacity is fulfilled, but does not attempt to submit requests in alternative capacity pools if capacity is unavailable or maintain the capacity. <code>maintain</code> indicates whether the EC2 Fleet submits ongoing requests until your desired capacity is fulfilled, and continues to maintain your desired capacity by replenishing interrupted Spot Instances. Default: <code>maintain</code>.'
+        description: 'The type of the request. By default, the EC2 Fleet places an asynchronous request for your desired capacity, and maintains it by replenishing interrupted Spot Instances (<code>maintain</code>). A value of <code>instant</code> places a synchronous one-time request, and returns errors for any instances that could not be launched. A value of <code>request</code> places an asynchronous one-time request without maintaining capacity or submitting requests in alternative capacity pools if capacity is unavailable. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type">EC2 Fleet Request Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       ValidFrom:
         $ref: '#/definitions/DateTime'
         description: 'The start date and time of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). The default is to start fulfilling the request immediately.'
@@ -10523,7 +10523,6 @@ definitions:
       AccountAttributes:
         $ref: '#/definitions/AccountAttributeList'
         description: Information about one or more account attributes.
-    description: Contains the output of DescribeAccountAttributes.
   DescribeAccountAttributesRequest:
     type: object
     example:
@@ -10536,7 +10535,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DescribeAccountAttributes.
   DescribeAddressesResult:
     type: object
     example:
@@ -10607,20 +10605,21 @@ definitions:
       AvailabilityZones:
         $ref: '#/definitions/AvailabilityZoneList'
         description: Information about one or more Availability Zones.
-    description: Contains the output of DescribeAvailabiltyZones.
   DescribeAvailabilityZonesRequest:
     type: object
     properties:
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>message</code> - Information about the Availability Zone.</p> </li> <li> <p> <code>region-name</code> - The name of the region for the Availability Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p> <code>state</code> - The state of the Availability Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>).</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>message</code> - Information about the Availability Zone.</p> </li> <li> <p> <code>region-name</code> - The name of the region for the Availability Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p> <code>state</code> - The state of the Availability Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>zone-id</code> - The ID of the Availability Zone (for example, <code>use1-az1</code>).</p> </li> <li> <p> <code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>).</p> </li> </ul>'
       ZoneNames:
         $ref: '#/definitions/ZoneNameStringList'
         description: The names of one or more Availability Zones.
+      ZoneIds:
+        $ref: '#/definitions/ZoneIdStringList'
+        description: The IDs of one or more Availability Zones.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DescribeAvailabilityZones.
   DescribeBundleTasksResult:
     type: object
     properties:
@@ -11160,21 +11159,18 @@ definitions:
       Statuses:
         $ref: '#/definitions/IdFormatList'
         description: Information about the ID format for the resource.
-    description: Contains the output of DescribeIdFormat.
   DescribeIdFormatRequest:
     type: object
     properties:
       Resource:
         $ref: '#/definitions/String'
         description: 'The type of resource: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code> '
-    description: Contains the parameters for DescribeIdFormat.
   DescribeIdentityIdFormatResult:
     type: object
     properties:
       Statuses:
         $ref: '#/definitions/IdFormatList'
         description: Information about the ID format for the resources.
-    description: Contains the output of DescribeIdentityIdFormat.
   DescribeIdentityIdFormatRequest:
     type: object
     required:
@@ -11186,7 +11182,6 @@ definitions:
       Resource:
         $ref: '#/definitions/String'
         description: 'The type of resource: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code> '
-    description: Contains the parameters for DescribeIdentityIdFormat.
   ImageAttribute:
     type: object
     example:
@@ -12092,7 +12087,6 @@ definitions:
       Regions:
         $ref: '#/definitions/RegionList'
         description: Information about one or more regions.
-    description: Contains the output of DescribeRegions.
   DescribeRegionsRequest:
     type: object
     properties:
@@ -12105,7 +12099,6 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    description: Contains the parameters for DescribeRegions.
   DescribeReservedInstancesResult:
     type: object
     properties:
@@ -14270,7 +14263,6 @@ definitions:
       UseLongIds:
         $ref: '#/definitions/Boolean'
         description: Indicate whether the resource should use longer IDs (17-character IDs).
-    description: Contains the parameters of ModifyIdFormat.
   ModifyIdentityIdFormatRequest:
     type: object
     required:
@@ -14287,7 +14279,6 @@ definitions:
       UseLongIds:
         $ref: '#/definitions/Boolean'
         description: Indicates whether the resource should use longer IDs (17-character IDs)
-    description: Contains the parameters of ModifyIdentityIdFormat.
   ModifyImageAttributeRequest:
     type: object
     required:
@@ -16438,6 +16429,9 @@ definitions:
       ZoneName:
         $ref: '#/definitions/String'
         description: The name of the Availability Zone.
+      ZoneId:
+        $ref: '#/definitions/String'
+        description: The ID of the Availability Zone.
     description: Describes an Availability Zone.
   AvailabilityZoneList:
     type: array
@@ -18324,6 +18318,10 @@ definitions:
     items:
       $ref: '#/definitions/IdFormat'
   ZoneNameStringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ZoneIdStringList:
     type: array
     items:
       $ref: '#/definitions/String'
@@ -21563,19 +21561,25 @@ definitions:
       - customer-gateway
       - dedicated-host
       - dhcp-options
+      - elastic-ip
+      - fleet
+      - fpga-image
       - image
       - instance
       - internet-gateway
+      - launch-template
+      - natgateway
       - network-acl
       - network-interface
       - reserved-instances
       - route-table
+      - security-group
       - snapshot
       - spot-instances-request
       - subnet
-      - security-group
       - volume
       - vpc
+      - vpc-peering-connection
       - vpn-connection
       - vpn-gateway
   LaunchTemplateTagSpecification:

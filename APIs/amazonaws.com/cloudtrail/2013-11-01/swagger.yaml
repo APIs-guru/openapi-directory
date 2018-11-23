@@ -140,6 +140,10 @@ paths:
           description: OperationNotPermittedException
           schema:
             $ref: '#/definitions/OperationNotPermittedException'
+        '488':
+          description: NotOrganizationMasterAccountException
+          schema:
+            $ref: '#/definitions/NotOrganizationMasterAccountException'
       parameters:
         - name: body
           in: body
@@ -249,6 +253,26 @@ paths:
           description: OperationNotPermittedException
           schema:
             $ref: '#/definitions/OperationNotPermittedException'
+        '501':
+          description: CloudTrailAccessNotEnabledException
+          schema:
+            $ref: '#/definitions/CloudTrailAccessNotEnabledException'
+        '502':
+          description: InsufficientDependencyServiceAccessPermissionException
+          schema:
+            $ref: '#/definitions/InsufficientDependencyServiceAccessPermissionException'
+        '503':
+          description: NotOrganizationMasterAccountException
+          schema:
+            $ref: '#/definitions/NotOrganizationMasterAccountException'
+        '504':
+          description: OrganizationsNotInUseException
+          schema:
+            $ref: '#/definitions/OrganizationsNotInUseException'
+        '505':
+          description: OrganizationNotInAllFeaturesModeException
+          schema:
+            $ref: '#/definitions/OrganizationNotInAllFeaturesModeException'
       parameters:
         - name: body
           in: body
@@ -286,6 +310,22 @@ paths:
           description: InvalidHomeRegionException
           schema:
             $ref: '#/definitions/InvalidHomeRegionException'
+        '483':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+        '485':
+          description: NotOrganizationMasterAccountException
+          schema:
+            $ref: '#/definitions/NotOrganizationMasterAccountException'
+        '486':
+          description: InsufficientDependencyServiceAccessPermissionException
+          schema:
+            $ref: '#/definitions/InsufficientDependencyServiceAccessPermissionException'
       parameters:
         - name: body
           in: body
@@ -587,6 +627,14 @@ paths:
           description: OperationNotPermittedException
           schema:
             $ref: '#/definitions/OperationNotPermittedException'
+        '486':
+          description: NotOrganizationMasterAccountException
+          schema:
+            $ref: '#/definitions/NotOrganizationMasterAccountException'
+        '487':
+          description: InsufficientDependencyServiceAccessPermissionException
+          schema:
+            $ref: '#/definitions/InsufficientDependencyServiceAccessPermissionException'
       parameters:
         - name: body
           in: body
@@ -640,6 +688,10 @@ paths:
           description: OperationNotPermittedException
           schema:
             $ref: '#/definitions/OperationNotPermittedException'
+        '487':
+          description: NotOrganizationMasterAccountException
+          schema:
+            $ref: '#/definitions/NotOrganizationMasterAccountException'
       parameters:
         - name: body
           in: body
@@ -677,6 +729,22 @@ paths:
           description: InvalidHomeRegionException
           schema:
             $ref: '#/definitions/InvalidHomeRegionException'
+        '483':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+        '485':
+          description: NotOrganizationMasterAccountException
+          schema:
+            $ref: '#/definitions/NotOrganizationMasterAccountException'
+        '486':
+          description: InsufficientDependencyServiceAccessPermissionException
+          schema:
+            $ref: '#/definitions/InsufficientDependencyServiceAccessPermissionException'
       parameters:
         - name: body
           in: body
@@ -714,6 +782,22 @@ paths:
           description: InvalidHomeRegionException
           schema:
             $ref: '#/definitions/InvalidHomeRegionException'
+        '483':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+        '485':
+          description: NotOrganizationMasterAccountException
+          schema:
+            $ref: '#/definitions/NotOrganizationMasterAccountException'
+        '486':
+          description: InsufficientDependencyServiceAccessPermissionException
+          schema:
+            $ref: '#/definitions/InsufficientDependencyServiceAccessPermissionException'
       parameters:
         - name: body
           in: body
@@ -823,6 +907,26 @@ paths:
           description: OperationNotPermittedException
           schema:
             $ref: '#/definitions/OperationNotPermittedException'
+        '501':
+          description: CloudTrailAccessNotEnabledException
+          schema:
+            $ref: '#/definitions/CloudTrailAccessNotEnabledException'
+        '502':
+          description: InsufficientDependencyServiceAccessPermissionException
+          schema:
+            $ref: '#/definitions/InsufficientDependencyServiceAccessPermissionException'
+        '503':
+          description: OrganizationsNotInUseException
+          schema:
+            $ref: '#/definitions/OrganizationsNotInUseException'
+        '504':
+          description: NotOrganizationMasterAccountException
+          schema:
+            $ref: '#/definitions/NotOrganizationMasterAccountException'
+        '505':
+          description: OrganizationNotInAllFeaturesModeException
+          schema:
+            $ref: '#/definitions/OrganizationNotInAllFeaturesModeException'
       parameters:
         - name: body
           in: body
@@ -864,6 +968,7 @@ definitions:
   InvalidTagParameterException: {}
   UnsupportedOperationException: {}
   OperationNotPermittedException: {}
+  NotOrganizationMasterAccountException: {}
   CreateTrailResponse:
     type: object
     properties:
@@ -903,6 +1008,9 @@ definitions:
       KmsKeyId:
         $ref: '#/definitions/String'
         description: '<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <p> <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code> </p>'
+      IsOrganizationTrail:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the trail is an organization trail.
     description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
   CreateTrailRequest:
     type: object
@@ -940,6 +1048,9 @@ definitions:
       KmsKeyId:
         $ref: '#/definitions/String'
         description: '<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.</p> <p>Examples:</p> <ul> <li> <p>alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-2:123456789012:alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</p> </li> <li> <p>12345678-1234-1234-1234-123456789012</p> </li> </ul>'
+      IsOrganizationTrail:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations.'
     description: Specifies the settings for each trail.
   MaximumNumberOfTrailsExceededException: {}
   TrailAlreadyExistsException: {}
@@ -959,6 +1070,10 @@ definitions:
   InvalidCloudWatchLogsLogGroupArnException: {}
   InvalidCloudWatchLogsRoleArnException: {}
   CloudWatchLogsDeliveryUnavailableException: {}
+  CloudTrailAccessNotEnabledException: {}
+  InsufficientDependencyServiceAccessPermissionException: {}
+  OrganizationsNotInUseException: {}
+  OrganizationNotInAllFeaturesModeException: {}
   DeleteTrailResponse:
     type: object
     properties: {}
@@ -989,7 +1104,7 @@ definitions:
         description: '<p>Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:</p> <p> <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code> </p> <p>If an empty list is specified, information for the trail in the current region is returned.</p> <ul> <li> <p>If an empty list is specified and <code>IncludeShadowTrails</code> is false, then information for all trails in the current region is returned.</p> </li> <li> <p>If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned.</p> </li> </ul> <note> <p>If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current region. To return information about a trail in another region, you must specify its trail ARN.</p> </note>'
       includeShadowTrails:
         $ref: '#/definitions/Boolean'
-        description: Specifies whether to include shadow trails in the response. A shadow trail is the replication in a region of a trail that was created in a different region. The default is true.
+        description: 'Specifies whether to include shadow trails in the response. A shadow trail is the replication in a region of a trail that was created in a different region, or in the case of an organization trail, the replication of an organization trail in member accounts. If you do not include shadow trails, organization trails in a member account and region replication trails will not be returned. The default is true.'
     description: Returns information about the trail.
   GetEventSelectorsResponse:
     type: object
@@ -1254,6 +1369,9 @@ definitions:
       KmsKeyId:
         $ref: '#/definitions/String'
         description: '<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p> <p> <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code> </p>'
+      IsOrganizationTrail:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the trail is an organization trail.
     description: 'Returns the objects or data listed below if successful. Otherwise, returns an error.'
   UpdateTrailRequest:
     type: object
@@ -1290,6 +1408,9 @@ definitions:
       KmsKeyId:
         $ref: '#/definitions/String'
         description: '<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.</p> <p>Examples:</p> <ul> <li> <p>alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-2:123456789012:alias/MyAliasName</p> </li> <li> <p>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</p> </li> <li> <p>12345678-1234-1234-1234-123456789012</p> </li> </ul>'
+      IsOrganizationTrail:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies whether the trail is applied to all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations. If the trail is not an organization trail and this is set to true, the trail will be created in all AWS accounts that belong to the organization. If the trail is an organization trail and this is set to false, the trail will remain in the current AWS account but be deleted from all member accounts in the organization.'
     description: Specifies settings to update for the trail.
   String:
     type: string
@@ -1533,4 +1654,7 @@ definitions:
       HasCustomEventSelectors:
         $ref: '#/definitions/Boolean'
         description: Specifies if the trail has custom event selectors.
+      IsOrganizationTrail:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the trail is an organization trail.
     description: The settings for a trail.
