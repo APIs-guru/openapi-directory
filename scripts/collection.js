@@ -1186,8 +1186,10 @@ function parseHost(swagger, altSource) {
     if (swHost.indexOf(':')>=0) port = swHost.split(':')[1];
     swHost = altSource;
     let pd = parseDomain(swHost,{ customTlds: ["local"] });
-    swagger.host = pd.domain+'.local';
-    if (port) swagger.host += ':'+port;
+    if (swagger.swagger) {
+      swagger.host = pd.domain+'.local';
+      if (port) swagger.host += ':'+port;
+    }
   }
 
   assert(swHost, 'Missing host');
