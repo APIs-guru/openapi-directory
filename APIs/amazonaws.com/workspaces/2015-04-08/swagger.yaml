@@ -477,6 +477,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeClientProperties':
+    post:
+      operationId: DescribeClientProperties
+      description: Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeClientPropertiesResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeClientPropertiesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeIpGroups':
     post:
       operationId: DescribeIpGroups
@@ -862,6 +899,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ModifyAccountRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyClientProperties':
+    post:
+      operationId: ModifyClientProperties
+      description: Modifies the properties of the specified Amazon WorkSpaces client.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyClientPropertiesResult'
+        '480':
+          description: InvalidParameterValuesException
+          schema:
+            $ref: '#/definitions/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyClientPropertiesRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1329,6 +1403,20 @@ definitions:
       NextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+  DescribeClientPropertiesResult:
+    type: object
+    properties:
+      ClientPropertiesList:
+        $ref: '#/definitions/ClientPropertiesList'
+        description: Information about the specified Amazon WorkSpaces clients.
+  DescribeClientPropertiesRequest:
+    type: object
+    required:
+      - ResourceIds
+    properties:
+      ResourceIds:
+        $ref: '#/definitions/ResourceIdList'
+        description: 'The resource identifiers, in the form of directory IDs.'
   DescribeIpGroupsResult:
     type: object
     properties:
@@ -1549,6 +1637,20 @@ definitions:
       DedicatedTenancyManagementCidrRange:
         $ref: '#/definitions/DedicatedTenancyManagementCidrRange'
         description: 'The IP address range, specified as an IPv4 CIDR block, for the management network interface. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block). The CIDR block size must be /16 (for example, 203.0.113.25/16). It must also be specified as available by the <code>ListAvailableManagementCidrRanges</code> operation.'
+  ModifyClientPropertiesResult:
+    type: object
+    properties: {}
+  ModifyClientPropertiesRequest:
+    type: object
+    required:
+      - ResourceId
+    properties:
+      ResourceId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The resource identifiers, in the form of directory IDs.'
+      ClientProperties:
+        $ref: '#/definitions/ClientProperties'
+        description: Information about the Amazon WorkSpaces client.
   ModifyWorkspacePropertiesResult:
     type: object
     properties: {}
@@ -1789,6 +1891,35 @@ definitions:
       $ref: '#/definitions/WorkspaceBundle'
   BundleOwner:
     type: string
+  ReconnectEnum:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+  ClientProperties:
+    type: object
+    properties:
+      ReconnectEnabled:
+        $ref: '#/definitions/ReconnectEnum'
+        description: 'Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. '
+    description: Describes an Amazon WorkSpaces client.
+  ClientPropertiesResult:
+    type: object
+    properties:
+      ResourceId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The resource identifier, in the form of a directory ID.'
+      ClientProperties:
+        $ref: '#/definitions/ClientProperties'
+        description: Information about the Amazon WorkSpaces client.
+    description: Information about the Amazon WorkSpaces client.
+  ClientPropertiesList:
+    type: array
+    items:
+      $ref: '#/definitions/ClientPropertiesResult'
+  NonEmptyString:
+    type: string
+    minLength: 1
   Compute:
     type: string
     enum:
@@ -1818,9 +1949,6 @@ definitions:
     type: string
   IpGroupDesc:
     type: string
-  NonEmptyString:
-    type: string
-    minLength: 1
   TagList:
     type: array
     items:
@@ -1882,6 +2010,12 @@ definitions:
     type: string
     minLength: 1
     maxLength: 63
+  ResourceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+    minItems: 1
+    maxItems: 25
   Limit:
     type: integer
     minimum: 1

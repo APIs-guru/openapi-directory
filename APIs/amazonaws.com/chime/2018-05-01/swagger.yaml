@@ -99,7 +99,7 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
-  '/console/accounts/{accountId}/users?operation=suspend':
+  '/console/accounts/{accountId}/users':
     post:
       operationId: BatchSuspendUser
       description: '<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href="http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are dissociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and are no longer able to sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action. </p> <p>To sign out users without suspending them, use the <a>LogoutUser</a> action.</p>'
@@ -142,6 +142,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchSuspendUserRequest'
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - suspend
         - name: accountId
           in: path
           type: string
@@ -156,7 +162,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/console/accounts/{accountId}/users?operation=unsuspend':
+  '/console/accounts/{accountId}/users#BatchUnsuspendUser':
     post:
       operationId: BatchUnsuspendUser
       description: '<p>Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime <code>EnterpriseLWA</code> account. Only users on <code>EnterpriseLWA</code> accounts can be unsuspended using this action. For more information about different account types, see <a href="http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Previously suspended users who are unsuspended using this action are returned to <code>Registered</code> status. Users who are not previously suspended are ignored.</p>'
@@ -199,6 +205,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/BatchUnsuspendUserRequest'
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - unsuspend
         - name: accountId
           in: path
           type: string
@@ -213,7 +225,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/console/accounts/{accountId}/users':
+  '/console/accounts/{accountId}/users#BatchUpdateUser':
     post:
       operationId: BatchUpdateUser
       description: 'Updates user details within the <a>UpdateUserRequestItem</a> object for up to 20 users for the specified Amazon Chime account. Currently, only <code>LicenseType</code> updates are supported for this action.'
@@ -270,63 +282,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    get:
-      operationId: ListUsers
-      description: Lists the users that belong to the specified Amazon Chime account. You can specify an email address to list only the user that the email address belongs to.
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListUsersResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListUsersRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-        - name: accountId
-          in: path
-          type: string
-          required: true
-  /console/accounts:
+  '/console/accounts#CreateAccount':
     post:
       operationId: CreateAccount
       description: 'Creates an Amazon Chime account under the administrator''s AWS account. Only <code>Team</code> account types are currently supported for this action. For more information about different account types, see <a href="http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.'
@@ -379,59 +335,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    get:
-      operationId: ListAccounts
-      description: 'Lists the Amazon Chime accounts under the administrator''s AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, you can filter by the user''s email address, which returns one account result.'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ListAccountsResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ListAccountsRequest'
-        - name: MaxResults
-          type: string
-          in: query
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          type: string
-          in: query
-          description: Pagination token
-          required: false
-  '/console/accounts/{accountId}':
+  '/console/accounts/{accountId}#DeleteAccount':
     delete:
       operationId: DeleteAccount
       description: '<p>Deletes the specified Amazon Chime account. You must suspend all users before deleting a <code>Team</code> account. You can use the <a>BatchSuspendUser</a> action to do so.</p> <p>For <code>EnterpriseLWA</code> and <code>EnterpriseAD</code> accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended.</p> <p>Deleted accounts appear in your <code>Disabled</code> accounts list for 90 days. To restore a deleted account from your <code>Disabled</code> accounts list, you must contact AWS Support.</p> <p>After 90 days, deleted accounts are permanently removed from your <code>Disabled</code> accounts list.</p>'
@@ -492,6 +396,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/console/accounts/{accountId}#GetAccount':
     get:
       operationId: GetAccount
       description: 'Retrieves details for the specified Amazon Chime account, such as account type and supported licenses.'
@@ -538,53 +443,17 @@ paths:
           in: path
           type: string
           required: true
-    post:
-      operationId: UpdateAccount
-      description: 'Updates account details for the specified Amazon Chime account. Currently, only account name updates are supported for this action.'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/UpdateAccountResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateAccountRequest'
-        - name: accountId
-          in: path
-          type: string
-          required: true
-  '/console/accounts/{accountId}/settings':
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/console/accounts/{accountId}/settings#GetAccountSettings':
     get:
       operationId: GetAccountSettings
       description: 'Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dial out settings. For more information about these settings, see <a href="http://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
@@ -641,57 +510,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    put:
-      operationId: UpdateAccountSettings
-      description: 'Updates the settings for the specified Amazon Chime account. You can update settings for remote control of shared screens, or for the dial-out option. For more information about these settings, see <a href="http://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
-      responses:
-        '204':
-          description: Success
-          schema:
-            $ref: '#/definitions/UpdateAccountSettingsResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '483':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '484':
-          description: ConflictException
-          schema:
-            $ref: '#/definitions/ConflictException'
-        '485':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '486':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '487':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateAccountSettingsRequest'
-        - name: accountId
-          in: path
-          type: string
-          required: true
-  '/console/accounts/{accountId}/users/{userId}':
+  '/console/accounts/{accountId}/users/{userId}#GetUser':
     get:
       operationId: GetUser
       description: '<p>Retrieves details for the specified user ID, such as primary email address, license type, and personal meeting PIN.</p> <p>To retrieve user details with an email address instead of a user ID, use the <a>ListUsers</a> action, and then filter by email address.</p>'
@@ -752,57 +571,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-    post:
-      operationId: UpdateUser
-      description: 'Updates user details for a specified user ID. Currently, only <code>LicenseType</code> updates are supported for this action.'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/UpdateUserResponse'
-        '480':
-          description: UnauthorizedClientException
-          schema:
-            $ref: '#/definitions/UnauthorizedClientException'
-        '481':
-          description: NotFoundException
-          schema:
-            $ref: '#/definitions/NotFoundException'
-        '482':
-          description: ForbiddenException
-          schema:
-            $ref: '#/definitions/ForbiddenException'
-        '483':
-          description: BadRequestException
-          schema:
-            $ref: '#/definitions/BadRequestException'
-        '484':
-          description: ThrottledClientException
-          schema:
-            $ref: '#/definitions/ThrottledClientException'
-        '485':
-          description: ServiceUnavailableException
-          schema:
-            $ref: '#/definitions/ServiceUnavailableException'
-        '486':
-          description: ServiceFailureException
-          schema:
-            $ref: '#/definitions/ServiceFailureException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateUserRequest'
-        - name: accountId
-          in: path
-          type: string
-          required: true
-        - name: userId
-          in: path
-          type: string
-          required: true
-  '/console/accounts/{accountId}/users?operation=add':
+  '/console/accounts/{accountId}/users#InviteUsers':
     post:
       operationId: InviteUsers
       description: 'Sends email invites to as many as 50 users, inviting them to the specified Amazon Chime <code>Team</code> account. Only <code>Team</code> account types are currently supported for this action. '
@@ -845,6 +614,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/InviteUsersRequest'
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - add
         - name: accountId
           in: path
           type: string
@@ -859,7 +634,137 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/console/accounts/{accountId}/users/{userId}?operation=logout':
+  '/console/accounts#ListAccounts':
+    get:
+      operationId: ListAccounts
+      description: 'Lists the Amazon Chime accounts under the administrator''s AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, you can filter by the user''s email address, which returns one account result.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAccountsResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAccountsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/console/accounts/{accountId}/users#ListUsers':
+    get:
+      operationId: ListUsers
+      description: Lists the users that belong to the specified Amazon Chime account. You can specify an email address to list only the user that the email address belongs to.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListUsersResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListUsersRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: accountId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/console/accounts/{accountId}/users/{userId}#LogoutUser':
     post:
       operationId: LogoutUser
       description: Logs out the specified user from all of the devices they are currently logged into.
@@ -902,6 +807,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/LogoutUserRequest'
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - logout
         - name: accountId
           in: path
           type: string
@@ -920,7 +831,7 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/console/accounts/{accountId}/users/{userId}?operation=reset-personal-pin':
+  '/console/accounts/{accountId}/users/{userId}#ResetPersonalPIN':
     post:
       operationId: ResetPersonalPIN
       description: Resets the personal meeting PIN for the specified user on an Amazon Chime account. Returns the <a>User</a> object with the updated personal meeting PIN.
@@ -963,6 +874,191 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ResetPersonalPINRequest'
+        - name: operation
+          in: query
+          required: true
+          type: string
+          enum:
+            - reset-personal-pin
+        - name: accountId
+          in: path
+          type: string
+          required: true
+        - name: userId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/console/accounts/{accountId}#UpdateAccount':
+    post:
+      operationId: UpdateAccount
+      description: 'Updates account details for the specified Amazon Chime account. Currently, only account name updates are supported for this action.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateAccountResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAccountRequest'
+        - name: accountId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/console/accounts/{accountId}/settings#UpdateAccountSettings':
+    put:
+      operationId: UpdateAccountSettings
+      description: 'Updates the settings for the specified Amazon Chime account. You can update settings for remote control of shared screens, or for the dial-out option. For more information about these settings, see <a href="http://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
+      responses:
+        '204':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateAccountSettingsResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '484':
+          description: ConflictException
+          schema:
+            $ref: '#/definitions/ConflictException'
+        '485':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAccountSettingsRequest'
+        - name: accountId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/console/accounts/{accountId}/users/{userId}#UpdateUser':
+    post:
+      operationId: UpdateUser
+      description: 'Updates user details for a specified user ID. Currently, only <code>LicenseType</code> updates are supported for this action.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateUserResponse'
+        '480':
+          description: UnauthorizedClientException
+          schema:
+            $ref: '#/definitions/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          schema:
+            $ref: '#/definitions/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          schema:
+            $ref: '#/definitions/ServiceFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateUserRequest'
         - name: accountId
           in: path
           type: string

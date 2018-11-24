@@ -136,6 +136,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /CreateGroup:
+    post:
+      operationId: CreateGroup
+      description: 'Creates a group resource with a name and a filter expression. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateGroupResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /CreateSamplingRule:
     post:
       operationId: CreateSamplingRule
@@ -163,6 +196,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateSamplingRuleRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /DeleteGroup:
+    post:
+      operationId: DeleteGroup
+      description: Deletes a group resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteGroupResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteGroupRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -229,6 +295,72 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetEncryptionConfigRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /GetGroup:
+    post:
+      operationId: GetGroup
+      description: Retrieves group resource details.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetGroupResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /Groups:
+    post:
+      operationId: GetGroups
+      description: Retrieves all active group details.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetGroupsResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetGroupsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -551,6 +683,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /UpdateGroup:
+    post:
+      operationId: UpdateGroup
+      description: Updates a group resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateGroupResult'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          schema:
+            $ref: '#/definitions/ThrottledException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /UpdateSamplingRule:
     post:
       operationId: UpdateSamplingRule
@@ -610,6 +775,23 @@ definitions:
         description: Pagination token. Not used.
   InvalidRequestException: {}
   ThrottledException: {}
+  CreateGroupResult:
+    type: object
+    properties:
+      Group:
+        $ref: '#/definitions/Group'
+        description: 'The group that was created. Contains the name of the group that was created, the ARN of the group that was generated based on the group name, and the filter expression that was assigned to the group.'
+  CreateGroupRequest:
+    type: object
+    required:
+      - GroupName
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The case-sensitive name of the new group. Default is a reserved name and names must be unique.
+      FilterExpression:
+        $ref: '#/definitions/FilterExpression'
+        description: The filter expression defining criteria by which to group traces.
   CreateSamplingRuleResult:
     type: object
     properties:
@@ -625,6 +807,18 @@ definitions:
         $ref: '#/definitions/SamplingRule'
         description: The rule definition.
   RuleLimitExceededException: {}
+  DeleteGroupResult:
+    type: object
+    properties: {}
+  DeleteGroupRequest:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The case-sensitive name of the group.
+      GroupARN:
+        $ref: '#/definitions/GroupARN'
+        description: The ARN of the group that was generated on creation.
   DeleteSamplingRuleResult:
     type: object
     properties:
@@ -649,6 +843,36 @@ definitions:
   GetEncryptionConfigRequest:
     type: object
     properties: {}
+  GetGroupResult:
+    type: object
+    properties:
+      Group:
+        $ref: '#/definitions/Group'
+        description: 'The group that was requested. Contains the name of the group, the ARN of the group, and the filter expression that assigned to the group.'
+  GetGroupRequest:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The case-sensitive name of the group.
+      GroupARN:
+        $ref: '#/definitions/GroupARN'
+        description: The ARN of the group that was generated on creation.
+  GetGroupsResult:
+    type: object
+    properties:
+      Groups:
+        $ref: '#/definitions/GroupSummaryList'
+        description: The collection of all active groups.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Pagination token. Not used.
+  GetGroupsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/GetGroupsNextToken'
+        description: Pagination token. Not used.
   GetSamplingRulesResult:
     type: object
     properties:
@@ -711,6 +935,9 @@ definitions:
       Services:
         $ref: '#/definitions/ServiceList'
         description: The services that have processed a traced request during the specified time frame.
+      ContainsOldGroupVersions:
+        $ref: '#/definitions/Boolean'
+        description: 'A flag indicating whether or not the group''s filter expression has been consistent, or if the returned service graph may show traces from an older version of the group''s filter expression.'
       NextToken:
         $ref: '#/definitions/String'
         description: Pagination token. Not used.
@@ -726,6 +953,12 @@ definitions:
       EndTime:
         $ref: '#/definitions/Timestamp'
         description: The end of the time frame for which to generate a graph.
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The name of a group to generate a graph based on.
+      GroupARN:
+        $ref: '#/definitions/GroupARN'
+        description: The ARN of a group to generate a graph based on.
       NextToken:
         $ref: '#/definitions/String'
         description: Pagination token. Not used.
@@ -836,6 +1069,24 @@ definitions:
       TraceSegmentDocuments:
         $ref: '#/definitions/TraceSegmentDocumentList'
         description: A string containing a JSON document defining one or more segments or subsegments.
+  UpdateGroupResult:
+    type: object
+    properties:
+      Group:
+        $ref: '#/definitions/Group'
+        description: 'The group that was updated. Contains the name of the group that was updated, the ARN of the group that was updated, and the updated filter expression assigned to the group.'
+  UpdateGroupRequest:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The case-sensitive name of the group.
+      GroupARN:
+        $ref: '#/definitions/GroupARN'
+        description: The ARN that was generated upon create.
+      FilterExpression:
+        $ref: '#/definitions/FilterExpression'
+        description: The updated filter expression defining criteria by which to group traces.
   UpdateSamplingRuleResult:
     type: object
     properties:
@@ -960,6 +1211,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TraceId'
+  Boolean:
+    type: boolean
   BorrowCount:
     type: integer
     minimum: 0
@@ -967,6 +1220,27 @@ definitions:
     type: string
     minLength: 24
     maxLength: 24
+  GroupName:
+    type: string
+    minLength: 1
+    maxLength: 32
+  FilterExpression:
+    type: string
+    minLength: 1
+    maxLength: 2000
+  Group:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/String'
+        description: The unique case-sensitive name of the group.
+      GroupARN:
+        $ref: '#/definitions/String'
+        description: The ARN of the group generated based on the GroupName.
+      FilterExpression:
+        $ref: '#/definitions/String'
+        description: The filter expression defining the parameters to include traces.
+    description: Details and metadata for a group.
   SamplingRule:
     type: object
     required:
@@ -1034,6 +1308,10 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: When the rule was last modified.
     description: A <a>SamplingRule</a> and its metadata.
+  GroupARN:
+    type: string
+    minLength: 1
+    maxLength: 400
   Double:
     type: number
     format: double
@@ -1144,15 +1422,19 @@ definitions:
     type: string
     minLength: 1
     maxLength: 3000
-  FilterExpression:
-    type: string
-    minLength: 1
-    maxLength: 2000
   FixedRate:
     type: number
     format: double
     minimum: 0
     maximum: 1
+  GetGroupsNextToken:
+    type: string
+    minLength: 1
+    maxLength: 100
+  GroupSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupSummary'
   SamplingRuleRecordList:
     type: array
     items:
@@ -1182,6 +1464,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TraceSummary'
+  GroupSummary:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/String'
+        description: The unique case-sensitive name of the group.
+      GroupARN:
+        $ref: '#/definitions/String'
+        description: The ARN of the group generated based on the GroupName.
+      FilterExpression:
+        $ref: '#/definitions/String'
+        description: The filter expression defining the parameters to include traces.
+    description: Details for a group without metadata.
   HTTPMethod:
     type: string
     maxLength: 10

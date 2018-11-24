@@ -8161,6 +8161,16 @@ definitions:
       - CreateDiskSnapshot
       - DeleteDiskSnapshot
       - CreateDiskFromSnapshot
+      - CreateRelationalDatabase
+      - UpdateRelationalDatabase
+      - DeleteRelationalDatabase
+      - CreateRelationalDatabaseFromSnapshot
+      - CreateRelationalDatabaseSnapshot
+      - DeleteRelationalDatabaseSnapshot
+      - UpdateRelationalDatabaseParameters
+      - StartRelationalDatabase
+      - RebootRelationalDatabase
+      - StopRelationalDatabase
   OperationStatus:
     type: string
     enum:

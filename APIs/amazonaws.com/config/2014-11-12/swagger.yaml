@@ -101,6 +101,39 @@ security:
 paths:
   /:
     post:
+      operationId: BatchGetAggregateResourceConfig
+      description: '<p>Returns the current configuration items for resources that are present in your AWS Config aggregator. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty <code>unprocessedResourceIdentifiers</code> list. </p> <note> <ul> <li> <p>The API does not return results for deleted resources.</p> </li> <li> <p> The API does not return tags and relationships.</p> </li> </ul> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchGetAggregateResourceConfigResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: NoSuchConfigurationAggregatorException
+          schema:
+            $ref: '#/definitions/NoSuchConfigurationAggregatorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchGetAggregateResourceConfigRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#BatchGetResourceConfig':
+    post:
       operationId: BatchGetResourceConfig
       description: '<p>Returns the current configuration for one or more requested resources. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceKeys list. </p> <note> <ul> <li> <p>The API does not return results for deleted resources.</p> </li> <li> <p> The API does not return any tags for the requested resources. This information is filtered out of the supplementaryConfiguration section of the API response.</p> </li> </ul> </note>'
       responses:
@@ -975,6 +1008,88 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetAggregateDiscoveredResourceCounts':
+    post:
+      operationId: GetAggregateDiscoveredResourceCounts
+      description: '<p>Returns the resource counts across accounts and regions that are present in your AWS Config aggregator. You can request the resource counts by providing filters and GroupByKey.</p> <p>For example, if the input contains accountID 12345678910 and region us-east-1 in filters, the API returns the count of resources in account ID 12345678910 and region us-east-1. If the input contains ACCOUNT_ID as a GroupByKey, the API returns resource counts for all source accounts that are present in your aggregator.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAggregateDiscoveredResourceCountsResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: InvalidLimitException
+          schema:
+            $ref: '#/definitions/InvalidLimitException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '483':
+          description: NoSuchConfigurationAggregatorException
+          schema:
+            $ref: '#/definitions/NoSuchConfigurationAggregatorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAggregateDiscoveredResourceCountsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetAggregateResourceConfig':
+    post:
+      operationId: GetAggregateResourceConfig
+      description: Returns configuration item that is aggregated for your specific resource in a specific source account and region.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAggregateResourceConfigResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: NoSuchConfigurationAggregatorException
+          schema:
+            $ref: '#/definitions/NoSuchConfigurationAggregatorException'
+        '482':
+          description: OversizedConfigurationItemException
+          schema:
+            $ref: '#/definitions/OversizedConfigurationItemException'
+        '483':
+          description: ResourceNotDiscoveredException
+          schema:
+            $ref: '#/definitions/ResourceNotDiscoveredException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAggregateResourceConfigRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetComplianceDetailsByConfigRule':
     post:
       operationId: GetComplianceDetailsByConfigRule
@@ -1175,6 +1290,47 @@ paths:
           in: query
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListAggregateDiscoveredResources':
+    post:
+      operationId: ListAggregateDiscoveredResources
+      description: '<p>Accepts a resource type and returns a list of resource identifiers that are aggregated for a specific resource type across accounts and regions. A resource identifier includes the resource type, ID, (if available) the custom resource name, source account, and source region. You can narrow the results to include only resources that have specific resource IDs, or a resource name, or source account ID, or source region.</p> <p>For example, if the input consists of accountID 12345678910 and the region is us-east-1 for resource type <code>AWS::EC2::Instance</code> then the API returns all the EC2 instance identifiers of accountID 12345678910 and region us-east-1.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAggregateDiscoveredResourcesResponse'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: InvalidLimitException
+          schema:
+            $ref: '#/definitions/InvalidLimitException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '483':
+          description: NoSuchConfigurationAggregatorException
+          schema:
+            $ref: '#/definitions/NoSuchConfigurationAggregatorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAggregateDiscoveredResourcesRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1607,6 +1763,29 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  BatchGetAggregateResourceConfigResponse:
+    type: object
+    properties:
+      BaseConfigurationItems:
+        $ref: '#/definitions/BaseConfigurationItems'
+        description: A list that contains the current configuration of one or more resources.
+      UnprocessedResourceIdentifiers:
+        $ref: '#/definitions/UnprocessedResourceIdentifierList'
+        description: A list of resource identifiers that were not processed with current scope. The list is empty if all the resources are processed.
+  BatchGetAggregateResourceConfigRequest:
+    type: object
+    required:
+      - ConfigurationAggregatorName
+      - ResourceIdentifiers
+    properties:
+      ConfigurationAggregatorName:
+        $ref: '#/definitions/ConfigurationAggregatorName'
+        description: The name of the configuration aggregator.
+      ResourceIdentifiers:
+        $ref: '#/definitions/ResourceIdentifiersList'
+        description: 'A list of aggregate ResourceIdentifiers objects. '
+  ValidationException: {}
+  NoSuchConfigurationAggregatorException: {}
   BatchGetResourceConfigResponse:
     type: object
     properties:
@@ -1624,7 +1803,6 @@ definitions:
       resourceKeys:
         $ref: '#/definitions/ResourceKeys'
         description: A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID.
-  ValidationException: {}
   NoAvailableConfigurationRecorderException: {}
   DeleteAggregationAuthorizationRequest:
     type: object
@@ -1658,7 +1836,6 @@ definitions:
       ConfigurationAggregatorName:
         $ref: '#/definitions/ConfigurationAggregatorName'
         description: The name of the configuration aggregator.
-  NoSuchConfigurationAggregatorException: {}
   DeleteConfigurationRecorderRequest:
     type: object
     required:
@@ -2081,6 +2258,63 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+  GetAggregateDiscoveredResourceCountsResponse:
+    type: object
+    required:
+      - TotalDiscoveredResources
+    properties:
+      TotalDiscoveredResources:
+        $ref: '#/definitions/Long'
+        description: The total number of resources that are present in an aggregator with the filters that you provide.
+      GroupByKey:
+        $ref: '#/definitions/StringWithCharLimit256'
+        description: 'The key passed into the request object. If <code>GroupByKey</code> is not provided, the result will be empty.'
+      GroupedResourceCounts:
+        $ref: '#/definitions/GroupedResourceCountList'
+        description: Returns a list of GroupedResourceCount objects.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
+  GetAggregateDiscoveredResourceCountsRequest:
+    type: object
+    required:
+      - ConfigurationAggregatorName
+    properties:
+      ConfigurationAggregatorName:
+        $ref: '#/definitions/ConfigurationAggregatorName'
+        description: The name of the configuration aggregator.
+      Filters:
+        $ref: '#/definitions/ResourceCountFilters'
+        description: Filters the results based on the <code>ResourceCountFilters</code> object.
+      GroupByKey:
+        $ref: '#/definitions/ResourceCountGroupKey'
+        description: The key to group the resource counts.
+      Limit:
+        $ref: '#/definitions/GroupByAPILimit'
+        description: 'The maximum number of <a>GroupedResourceCount</a> objects returned on each page. The default is 1000. You cannot specify a number greater than 1000. If you specify 0, AWS Config uses the default.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
+  GetAggregateResourceConfigResponse:
+    type: object
+    properties:
+      ConfigurationItem:
+        $ref: '#/definitions/ConfigurationItem'
+        description: Returns a <code>ConfigurationItem</code> object.
+  GetAggregateResourceConfigRequest:
+    type: object
+    required:
+      - ConfigurationAggregatorName
+      - ResourceIdentifier
+    properties:
+      ConfigurationAggregatorName:
+        $ref: '#/definitions/ConfigurationAggregatorName'
+        description: The name of the configuration aggregator.
+      ResourceIdentifier:
+        $ref: '#/definitions/AggregateResourceIdentifier'
+        description: An object that identifies aggregate resource.
+  OversizedConfigurationItemException: {}
+  ResourceNotDiscoveredException: {}
   GetComplianceDetailsByConfigRuleResponse:
     type: object
     properties:
@@ -2222,7 +2456,36 @@ definitions:
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
     description: The input for the <a>GetResourceConfigHistory</a> action.
   InvalidTimeRangeException: {}
-  ResourceNotDiscoveredException: {}
+  ListAggregateDiscoveredResourcesResponse:
+    type: object
+    properties:
+      ResourceIdentifiers:
+        $ref: '#/definitions/DiscoveredResourceIdentifierList'
+        description: Returns a list of <code>ResourceIdentifiers</code> objects.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
+  ListAggregateDiscoveredResourcesRequest:
+    type: object
+    required:
+      - ConfigurationAggregatorName
+      - ResourceType
+    properties:
+      ConfigurationAggregatorName:
+        $ref: '#/definitions/ConfigurationAggregatorName'
+        description: 'The name of the configuration aggregator. '
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of resources that you want AWS Config to list in the response.
+      Filters:
+        $ref: '#/definitions/ResourceFilters'
+        description: Filters the results based on the <code>ResourceFilters</code> object.
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: 'The maximum number of resource identifiers returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   ListDiscoveredResourcesResponse:
     type: object
     properties:
@@ -2561,6 +2824,103 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AggregateEvaluationResult'
+  ResourceId:
+    type: string
+    minLength: 1
+    maxLength: 768
+  ResourceType:
+    type: string
+    enum:
+      - 'AWS::EC2::CustomerGateway'
+      - 'AWS::EC2::EIP'
+      - 'AWS::EC2::Host'
+      - 'AWS::EC2::Instance'
+      - 'AWS::EC2::InternetGateway'
+      - 'AWS::EC2::NetworkAcl'
+      - 'AWS::EC2::NetworkInterface'
+      - 'AWS::EC2::RouteTable'
+      - 'AWS::EC2::SecurityGroup'
+      - 'AWS::EC2::Subnet'
+      - 'AWS::CloudTrail::Trail'
+      - 'AWS::EC2::Volume'
+      - 'AWS::EC2::VPC'
+      - 'AWS::EC2::VPNConnection'
+      - 'AWS::EC2::VPNGateway'
+      - 'AWS::IAM::Group'
+      - 'AWS::IAM::Policy'
+      - 'AWS::IAM::Role'
+      - 'AWS::IAM::User'
+      - 'AWS::ACM::Certificate'
+      - 'AWS::RDS::DBInstance'
+      - 'AWS::RDS::DBSubnetGroup'
+      - 'AWS::RDS::DBSecurityGroup'
+      - 'AWS::RDS::DBSnapshot'
+      - 'AWS::RDS::EventSubscription'
+      - 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+      - 'AWS::S3::Bucket'
+      - 'AWS::SSM::ManagedInstanceInventory'
+      - 'AWS::Redshift::Cluster'
+      - 'AWS::Redshift::ClusterSnapshot'
+      - 'AWS::Redshift::ClusterParameterGroup'
+      - 'AWS::Redshift::ClusterSecurityGroup'
+      - 'AWS::Redshift::ClusterSubnetGroup'
+      - 'AWS::Redshift::EventSubscription'
+      - 'AWS::CloudWatch::Alarm'
+      - 'AWS::CloudFormation::Stack'
+      - 'AWS::DynamoDB::Table'
+      - 'AWS::AutoScaling::AutoScalingGroup'
+      - 'AWS::AutoScaling::LaunchConfiguration'
+      - 'AWS::AutoScaling::ScalingPolicy'
+      - 'AWS::AutoScaling::ScheduledAction'
+      - 'AWS::CodeBuild::Project'
+      - 'AWS::WAF::RateBasedRule'
+      - 'AWS::WAF::Rule'
+      - 'AWS::WAF::WebACL'
+      - 'AWS::WAFRegional::RateBasedRule'
+      - 'AWS::WAFRegional::Rule'
+      - 'AWS::WAFRegional::WebACL'
+      - 'AWS::CloudFront::Distribution'
+      - 'AWS::CloudFront::StreamingDistribution'
+      - 'AWS::WAF::RuleGroup'
+      - 'AWS::WAFRegional::RuleGroup'
+      - 'AWS::Lambda::Function'
+      - 'AWS::ElasticBeanstalk::Application'
+      - 'AWS::ElasticBeanstalk::ApplicationVersion'
+      - 'AWS::ElasticBeanstalk::Environment'
+      - 'AWS::ElasticLoadBalancing::LoadBalancer'
+      - 'AWS::XRay::EncryptionConfig'
+      - 'AWS::SSM::AssociationCompliance'
+      - 'AWS::SSM::PatchCompliance'
+      - 'AWS::Shield::Protection'
+      - 'AWS::ShieldRegional::Protection'
+      - 'AWS::Config::ResourceCompliance'
+      - 'AWS::CodePipeline::Pipeline'
+  ResourceName:
+    type: string
+  AggregateResourceIdentifier:
+    type: object
+    required:
+      - SourceAccountId
+      - SourceRegion
+      - ResourceId
+      - ResourceType
+    properties:
+      SourceAccountId:
+        $ref: '#/definitions/AccountId'
+        description: The 12-digit account ID of the source account.
+      SourceRegion:
+        $ref: '#/definitions/AwsRegion'
+        description: The source region where data is aggregated.
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: The ID of the AWS resource.
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of the AWS resource.
+      ResourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the AWS resource.
+    description: 'The details that identify a resource that is collected by AWS Config aggregator, including the resource type, ID, (if available) the custom resource name, the source account, and source region.'
   String:
     type: string
   AggregatedSourceType:
@@ -2647,79 +3007,6 @@ definitions:
       - ResourceDeletedNotRecorded
   ConfigurationStateId:
     type: string
-  ResourceType:
-    type: string
-    enum:
-      - 'AWS::EC2::CustomerGateway'
-      - 'AWS::EC2::EIP'
-      - 'AWS::EC2::Host'
-      - 'AWS::EC2::Instance'
-      - 'AWS::EC2::InternetGateway'
-      - 'AWS::EC2::NetworkAcl'
-      - 'AWS::EC2::NetworkInterface'
-      - 'AWS::EC2::RouteTable'
-      - 'AWS::EC2::SecurityGroup'
-      - 'AWS::EC2::Subnet'
-      - 'AWS::CloudTrail::Trail'
-      - 'AWS::EC2::Volume'
-      - 'AWS::EC2::VPC'
-      - 'AWS::EC2::VPNConnection'
-      - 'AWS::EC2::VPNGateway'
-      - 'AWS::IAM::Group'
-      - 'AWS::IAM::Policy'
-      - 'AWS::IAM::Role'
-      - 'AWS::IAM::User'
-      - 'AWS::ACM::Certificate'
-      - 'AWS::RDS::DBInstance'
-      - 'AWS::RDS::DBSubnetGroup'
-      - 'AWS::RDS::DBSecurityGroup'
-      - 'AWS::RDS::DBSnapshot'
-      - 'AWS::RDS::EventSubscription'
-      - 'AWS::ElasticLoadBalancingV2::LoadBalancer'
-      - 'AWS::S3::Bucket'
-      - 'AWS::SSM::ManagedInstanceInventory'
-      - 'AWS::Redshift::Cluster'
-      - 'AWS::Redshift::ClusterSnapshot'
-      - 'AWS::Redshift::ClusterParameterGroup'
-      - 'AWS::Redshift::ClusterSecurityGroup'
-      - 'AWS::Redshift::ClusterSubnetGroup'
-      - 'AWS::Redshift::EventSubscription'
-      - 'AWS::CloudWatch::Alarm'
-      - 'AWS::CloudFormation::Stack'
-      - 'AWS::DynamoDB::Table'
-      - 'AWS::AutoScaling::AutoScalingGroup'
-      - 'AWS::AutoScaling::LaunchConfiguration'
-      - 'AWS::AutoScaling::ScalingPolicy'
-      - 'AWS::AutoScaling::ScheduledAction'
-      - 'AWS::CodeBuild::Project'
-      - 'AWS::WAF::RateBasedRule'
-      - 'AWS::WAF::Rule'
-      - 'AWS::WAF::WebACL'
-      - 'AWS::WAFRegional::RateBasedRule'
-      - 'AWS::WAFRegional::Rule'
-      - 'AWS::WAFRegional::WebACL'
-      - 'AWS::CloudFront::Distribution'
-      - 'AWS::CloudFront::StreamingDistribution'
-      - 'AWS::WAF::RuleGroup'
-      - 'AWS::WAFRegional::RuleGroup'
-      - 'AWS::Lambda::Function'
-      - 'AWS::ElasticBeanstalk::Application'
-      - 'AWS::ElasticBeanstalk::ApplicationVersion'
-      - 'AWS::ElasticBeanstalk::Environment'
-      - 'AWS::ElasticLoadBalancing::LoadBalancer'
-      - 'AWS::XRay::EncryptionConfig'
-      - 'AWS::SSM::AssociationCompliance'
-      - 'AWS::SSM::PatchCompliance'
-      - 'AWS::Shield::Protection'
-      - 'AWS::ShieldRegional::Protection'
-      - 'AWS::Config::ResourceCompliance'
-      - 'AWS::CodePipeline::Pipeline'
-  ResourceId:
-    type: string
-    minLength: 1
-    maxLength: 768
-  ResourceName:
-    type: string
   ResourceCreationTime:
     type: string
     format: date-time
@@ -2742,7 +3029,7 @@ definitions:
         description: The version number of the resource configuration.
       accountId:
         $ref: '#/definitions/AccountId'
-        description: The 12 digit AWS account ID associated with the resource.
+        description: The 12-digit AWS account ID associated with the resource.
       configurationItemCaptureTime:
         $ref: '#/definitions/ConfigurationItemCaptureTime'
         description: The time when the configuration recording was initiated.
@@ -2788,6 +3075,21 @@ definitions:
     type: string
     minLength: 1
     maxLength: 768
+  ConfigurationAggregatorName:
+    type: string
+    pattern: '[\w\-]+'
+    minLength: 1
+    maxLength: 256
+  ResourceIdentifiersList:
+    type: array
+    items:
+      $ref: '#/definitions/AggregateResourceIdentifier'
+    minItems: 1
+    maxItems: 100
+  UnprocessedResourceIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/AggregateResourceIdentifier'
   ResourceKeys:
     type: array
     items:
@@ -3100,11 +3402,6 @@ definitions:
         $ref: '#/definitions/Date'
         description: The time from the last status change.
     description: A list that contains the status of the delivery of the configuration stream notification to the Amazon SNS topic.
-  ConfigurationAggregatorName:
-    type: string
-    pattern: '[\w\-]+'
-    minLength: 1
-    maxLength: 256
   ConfigurationAggregatorArn:
     type: string
     pattern: 'arn:aws[a-z\-]*:config:[a-z\-\d]+:\d+:config-aggregator/config-aggregator-[a-z\d]+'
@@ -3396,6 +3693,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RetentionConfiguration'
+  DiscoveredResourceIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/AggregateResourceIdentifier'
   EarlierTime:
     type: string
     format: date-time
@@ -3475,14 +3776,37 @@ definitions:
     type: string
     enum:
       - aws.config
+  ResourceCountFilters:
+    type: object
+    properties:
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of the AWS resource.
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: The 12-digit ID of the account.
+      Region:
+        $ref: '#/definitions/AwsRegion'
+        description: The region where the account is located.
+    description: 'Filters the resource count based on account ID, region, and resource type.'
+  ResourceCountGroupKey:
+    type: string
+    enum:
+      - RESOURCE_TYPE
+      - ACCOUNT_ID
+      - AWS_REGION
+  Long:
+    type: integer
+  GroupedResourceCountList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupedResourceCount'
   ResourceTypes:
     type: array
     items:
       $ref: '#/definitions/StringWithCharLimit256'
     minItems: 0
     maxItems: 20
-  Long:
-    type: integer
   ResourceCounts:
     type: array
     items:
@@ -3490,8 +3814,37 @@ definitions:
   LaterTime:
     type: string
     format: date-time
+  GroupedResourceCount:
+    type: object
+    required:
+      - GroupName
+      - ResourceCount
+    properties:
+      GroupName:
+        $ref: '#/definitions/StringWithCharLimit256'
+        description: 'The name of the group that can be region, account ID, or resource type. For example, region1, region2 if the region was chosen as <code>GroupByKey</code>.'
+      ResourceCount:
+        $ref: '#/definitions/Long'
+        description: The number of resources in the group.
+    description: The count of resources that are grouped by the group name.
   IncludeGlobalResourceTypes:
     type: boolean
+  ResourceFilters:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: The 12-digit source account ID.
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: The ID of the resource.
+      ResourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the resource.
+      Region:
+        $ref: '#/definitions/AwsRegion'
+        description: The source region.
+    description: 'Filters the results by resource account ID, region, resource ID, and resource name.'
   ResourceIdList:
     type: array
     items:

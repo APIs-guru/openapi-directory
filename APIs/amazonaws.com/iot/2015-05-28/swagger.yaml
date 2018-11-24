@@ -154,6 +154,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /billing-groups/addThingToBillingGroup:
+    put:
+      operationId: AddThingToBillingGroup
+      description: Adds a thing to a billing group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AddThingToBillingGroupResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddThingToBillingGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /thing-groups/addThingToThingGroup:
     put:
       operationId: AddThingToThingGroup
@@ -622,7 +663,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DetachThingPrincipal
-      description: Detaches the specified principal from the specified thing.
+      description: <p>Detaches the specified principal from the specified thing.</p> <note> <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p> </note>
       responses:
         '200':
           description: Success
@@ -1233,6 +1274,157 @@ paths:
           in: path
           type: string
           required: true
+  '/billing-groups/{billingGroupName}':
+    post:
+      operationId: CreateBillingGroup
+      description: Creates a billing group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateBillingGroupResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateBillingGroupRequest'
+        - name: billingGroupName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteBillingGroup
+      description: Deletes the billing group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteBillingGroupResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: VersionConflictException
+          schema:
+            $ref: '#/definitions/VersionConflictException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBillingGroupRequest'
+        - name: billingGroupName
+          in: path
+          type: string
+          required: true
+    get:
+      operationId: DescribeBillingGroup
+      description: Returns information about a billing group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeBillingGroupResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeBillingGroupRequest'
+        - name: billingGroupName
+          in: path
+          type: string
+          required: true
+    patch:
+      operationId: UpdateBillingGroup
+      description: Updates information about the billing group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateBillingGroupResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: VersionConflictException
+          schema:
+            $ref: '#/definitions/VersionConflictException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateBillingGroupRequest'
+        - name: billingGroupName
+          in: path
+          type: string
+          required: true
   /certificates:
     post:
       operationId: CreateCertificateFromCsr
@@ -1312,6 +1504,148 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListCertificatesRequest'
+  '/dynamic-thing-groups/{thingGroupName}':
+    post:
+      operationId: CreateDynamicThingGroup
+      description: Creates a dynamic thing group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDynamicThingGroupResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: InvalidQueryException
+          schema:
+            $ref: '#/definitions/InvalidQueryException'
+        '486':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDynamicThingGroupRequest'
+        - name: thingGroupName
+          in: path
+          type: string
+          required: true
+        - name: thingGroupName
+          in: query
+          type: string
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteDynamicThingGroup
+      description: Deletes a dynamic thing group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDynamicThingGroupResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: VersionConflictException
+          schema:
+            $ref: '#/definitions/VersionConflictException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDynamicThingGroupRequest'
+        - name: thingGroupName
+          in: path
+          type: string
+          required: true
+        - name: thingGroupName
+          in: query
+          type: string
+    patch:
+      operationId: UpdateDynamicThingGroup
+      description: Updates a dynamic thing group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDynamicThingGroupResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: VersionConflictException
+          schema:
+            $ref: '#/definitions/VersionConflictException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: InvalidQueryException
+          schema:
+            $ref: '#/definitions/InvalidQueryException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDynamicThingGroupRequest'
+        - name: thingGroupName
+          in: path
+          type: string
+          required: true
+        - name: thingGroupName
+          in: query
+          type: string
   '/jobs/{jobId}':
     put:
       operationId: CreateJob
@@ -1435,6 +1769,38 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeJobRequest'
+        - name: jobId
+          in: path
+          type: string
+          required: true
+    patch:
+      operationId: UpdateJob
+      description: Updates supported fields of the specified job.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateJobRequest'
         - name: jobId
           in: path
           type: string
@@ -2629,7 +2995,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeleteThing
-      description: Deletes the specified thing.
+      description: Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist.
       responses:
         '200':
           description: Success
@@ -2991,7 +3357,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeleteThingType
-      description: 'Deletes the specified thing type . You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling <a>DeprecateThingType</a>, then remove any associated things by calling <a>UpdateThing</a> to change the thing type on any associated thing, and finally use <a>DeleteThingType</a> to delete the thing type.'
+      description: 'Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling <a>DeprecateThingType</a>, then remove any associated things by calling <a>UpdateThing</a> to change the thing type on any associated thing, and finally use <a>DeleteThingType</a> to delete the thing type.'
       responses:
         '200':
           description: Success
@@ -3106,6 +3472,10 @@ paths:
           description: ServiceUnavailableException
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: ConflictingResourceUpdateException
+          schema:
+            $ref: '#/definitions/ConflictingResourceUpdateException'
       parameters:
         - name: body
           in: body
@@ -3148,6 +3518,10 @@ paths:
           description: UnauthorizedException
           schema:
             $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: ConflictingResourceUpdateException
+          schema:
+            $ref: '#/definitions/ConflictingResourceUpdateException'
       parameters:
         - name: body
           in: body
@@ -3218,6 +3592,10 @@ paths:
           description: UnauthorizedException
           schema:
             $ref: '#/definitions/UnauthorizedException'
+        '485':
+          description: ConflictingResourceUpdateException
+          schema:
+            $ref: '#/definitions/ConflictingResourceUpdateException'
       parameters:
         - name: body
           in: body
@@ -4361,6 +4739,10 @@ paths:
           description: UnauthorizedException
           schema:
             $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: ConflictingResourceUpdateException
+          schema:
+            $ref: '#/definitions/ConflictingResourceUpdateException'
       parameters:
         - name: body
           in: body
@@ -4404,6 +4786,10 @@ paths:
           description: UnauthorizedException
           schema:
             $ref: '#/definitions/UnauthorizedException'
+        '484':
+          description: ConflictingResourceUpdateException
+          schema:
+            $ref: '#/definitions/ConflictingResourceUpdateException'
       parameters:
         - name: body
           in: body
@@ -4960,6 +5346,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListAuthorizersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /billing-groups:
+    get:
+      operationId: ListBillingGroups
+      description: Lists the billing groups you have created.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBillingGroupsResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBillingGroupsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5730,6 +6157,81 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /tags:
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags (metadata) you have assigned to the resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
   '/policy-targets/{policyName}':
     post:
       operationId: ListTargetsForPolicy
@@ -6116,6 +6618,51 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RegisterThingRequest'
+  '/billing-groups/{billingGroupName}/things':
+    get:
+      operationId: ListThingsInBillingGroup
+      description: Lists the things you have added to the given billing group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListThingsInBillingGroupResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListThingsInBillingGroupRequest'
+        - name: billingGroupName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/thing-groups/{thingGroupName}/things':
     get:
       operationId: ListThingsInThingGroup
@@ -6401,6 +6948,47 @@ paths:
           in: path
           type: string
           required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /billing-groups/removeThingFromBillingGroup:
+    put:
+      operationId: RemoveThingFromBillingGroup
+      description: Removes the given thing from the billing group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RemoveThingFromBillingGroupResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RemoveThingFromBillingGroupRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -6729,6 +7317,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /untag:
+    post:
+      operationId: UntagResource
+      description: Removes the given tags (metadata) from the resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   /thing-groups/updateThingGroupsForThing:
     put:
       operationId: UpdateThingGroupsForThing
@@ -6819,6 +7448,24 @@ definitions:
   UnauthorizedException: {}
   ServiceUnavailableException: {}
   InternalFailureException: {}
+  AddThingToBillingGroupResponse:
+    type: object
+    properties: {}
+  AddThingToBillingGroupRequest:
+    type: object
+    properties:
+      billingGroupName:
+        $ref: '#/definitions/BillingGroupName'
+        description: The name of the billing group.
+      billingGroupArn:
+        $ref: '#/definitions/BillingGroupArn'
+        description: The ARN of the billing group.
+      thingName:
+        $ref: '#/definitions/ThingName'
+        description: The name of the thing to be added to the billing group.
+      thingArn:
+        $ref: '#/definitions/ThingArn'
+        description: The ARN of the thing to be added to the billing group.
   AddThingToThingGroupResponse:
     type: object
     properties: {}
@@ -6837,6 +7484,9 @@ definitions:
       thingArn:
         $ref: '#/definitions/ThingArn'
         description: The ARN of the thing to add to a group.
+      overrideDynamicGroups:
+        $ref: '#/definitions/OverrideDynamicGroups'
+        description: 'Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.'
   AssociateTargetsWithJobResponse:
     type: object
     properties:
@@ -6868,7 +7518,7 @@ definitions:
     properties:
       target:
         $ref: '#/definitions/PolicyTarget'
-        description: The identity to which the policy is attached.
+        description: 'The <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html">identity</a> to which the policy is attached.'
   AttachPrincipalPolicyRequest:
     type: object
     properties: {}
@@ -6913,6 +7563,9 @@ definitions:
   CancelJobRequest:
     type: object
     properties:
+      reasonCode:
+        $ref: '#/definitions/ReasonCode'
+        description: (Optional)A reason code string that explains why the job was canceled.
       comment:
         $ref: '#/definitions/Comment'
         description: An optional comment string describing why the job was canceled.
@@ -6961,6 +7614,27 @@ definitions:
         $ref: '#/definitions/AuthorizerStatus'
         description: The status of the create authorizer request.
   ResourceAlreadyExistsException: {}
+  CreateBillingGroupResponse:
+    type: object
+    properties:
+      billingGroupName:
+        $ref: '#/definitions/BillingGroupName'
+        description: The name you gave to the billing group.
+      billingGroupArn:
+        $ref: '#/definitions/BillingGroupArn'
+        description: The ARN of the billing group.
+      billingGroupId:
+        $ref: '#/definitions/BillingGroupId'
+        description: The ID of the billing group.
+  CreateBillingGroupRequest:
+    type: object
+    properties:
+      billingGroupProperties:
+        $ref: '#/definitions/BillingGroupProperties'
+        description: The properties of the billing group.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the billing group.
   CreateCertificateFromCsrResponse:
     type: object
     properties:
@@ -6983,6 +7657,48 @@ definitions:
         $ref: '#/definitions/CertificateSigningRequest'
         description: The certificate signing request (CSR).
     description: The input for the CreateCertificateFromCsr operation.
+  CreateDynamicThingGroupResponse:
+    type: object
+    properties:
+      thingGroupName:
+        $ref: '#/definitions/ThingGroupName'
+        description: The dynamic thing group name.
+      thingGroupArn:
+        $ref: '#/definitions/ThingGroupArn'
+        description: The dynamic thing group ARN.
+      thingGroupId:
+        $ref: '#/definitions/ThingGroupId'
+        description: The dynamic thing group ID.
+      indexName:
+        $ref: '#/definitions/IndexName'
+        description: The dynamic thing group index name.
+      queryString:
+        $ref: '#/definitions/QueryString'
+        description: The dynamic thing group search query string.
+      queryVersion:
+        $ref: '#/definitions/QueryVersion'
+        description: The dynamic thing group query version.
+  CreateDynamicThingGroupRequest:
+    type: object
+    required:
+      - queryString
+    properties:
+      thingGroupProperties:
+        $ref: '#/definitions/ThingGroupProperties'
+        description: The dynamic thing group properties.
+      indexName:
+        $ref: '#/definitions/IndexName'
+        description: '<p>The dynamic thing group index name.</p> <note> <p>Currently one index is supported: "AWS_Things".</p> </note>'
+      queryString:
+        $ref: '#/definitions/QueryString'
+        description: '<p>The dynamic thing group search query string.</p> <p>See <a href="http://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html">Query Syntax</a> for information about query string syntax.</p>'
+      queryVersion:
+        $ref: '#/definitions/QueryVersion'
+        description: '<p>The dynamic thing group query version.</p> <note> <p>Currently one query version is supported: "2017-09-30". If not specified, the query version defaults to this value.</p> </note>'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the dynamic thing group.
+  InvalidQueryException: {}
   CreateJobResponse:
     type: object
     properties:
@@ -7008,7 +7724,7 @@ definitions:
         description: An S3 link to the job document.
       document:
         $ref: '#/definitions/JobDocument'
-        description: The job document.
+        description: '<p>The job document.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>'
       description:
         $ref: '#/definitions/JobDescription'
         description: A short text description of the job.
@@ -7021,9 +7737,15 @@ definitions:
       jobExecutionsRolloutConfig:
         $ref: '#/definitions/JobExecutionsRolloutConfig'
         description: Allows you to create a staged rollout of the job.
+      abortConfig:
+        $ref: '#/definitions/AbortConfig'
+        description: Allows you to create criteria to abort a job.
       timeoutConfig:
         $ref: '#/definitions/TimeoutConfig'
         description: 'Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to <code>TIMED_OUT</code>.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the job.
   CreateKeysAndCertificateResponse:
     type: object
     properties:
@@ -7209,6 +7931,9 @@ definitions:
       alertTargets:
         $ref: '#/definitions/AlertTargets'
         description: Specifies the destinations to which alerts are sent. (Alerts are always sent to the console.) Alerts are generated when a device (thing) violates a behavior.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the security profile.
   CreateStreamResponse:
     type: object
     properties:
@@ -7261,6 +7986,9 @@ definitions:
       attributePayload:
         $ref: '#/definitions/AttributePayload'
         description: '<p>The attribute payload, which consists of up to three name/value pairs in a JSON document. For example:</p> <p> <code>{\"attributes\":{\"string1\":\"string2\"}}</code> </p>'
+      billingGroupName:
+        $ref: '#/definitions/BillingGroupName'
+        description: The name of the billing group the thing will be added to.
     description: The input for the CreateThing operation.
   CreateThingGroupResponse:
     type: object
@@ -7283,6 +8011,9 @@ definitions:
       thingGroupProperties:
         $ref: '#/definitions/ThingGroupProperties'
         description: The thing group properties.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the thing group.
   CreateThingTypeResponse:
     type: object
     properties:
@@ -7302,6 +8033,9 @@ definitions:
       thingTypeProperties:
         $ref: '#/definitions/ThingTypeProperties'
         description: 'The ThingTypeProperties for the thing type to create. It contains information about the new thing type including a description, and a list of searchable thing attribute names.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the thing type.
     description: The input for the CreateThingType operation.
   CreateTopicRuleRequest:
     type: object
@@ -7314,6 +8048,7 @@ definitions:
     description: The input for the CreateTopicRule operation.
   SqlParseException: {}
   InternalException: {}
+  ConflictingResourceUpdateException: {}
   DeleteAccountAuditConfigurationResponse:
     type: object
     properties: {}
@@ -7327,6 +8062,12 @@ definitions:
     type: object
     properties: {}
   DeleteConflictException: {}
+  DeleteBillingGroupResponse:
+    type: object
+    properties: {}
+  DeleteBillingGroupRequest:
+    type: object
+    properties: {}
   DeleteCACertificateResponse:
     type: object
     properties: {}
@@ -7340,6 +8081,12 @@ definitions:
     type: object
     properties: {}
     description: The input for the DeleteCertificate operation.
+  DeleteDynamicThingGroupResponse:
+    type: object
+    properties: {}
+  DeleteDynamicThingGroupRequest:
+    type: object
+    properties: {}
   DeleteJobRequest:
     type: object
     properties: {}
@@ -7480,6 +8227,30 @@ definitions:
   DescribeAuthorizerRequest:
     type: object
     properties: {}
+  DescribeBillingGroupResponse:
+    type: object
+    properties:
+      billingGroupName:
+        $ref: '#/definitions/BillingGroupName'
+        description: The name of the billing group.
+      billingGroupId:
+        $ref: '#/definitions/BillingGroupId'
+        description: The ID of the billing group.
+      billingGroupArn:
+        $ref: '#/definitions/BillingGroupArn'
+        description: The ARN of the billing group.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the billing group.
+      billingGroupProperties:
+        $ref: '#/definitions/BillingGroupProperties'
+        description: The properties of the billing group.
+      billingGroupMetadata:
+        $ref: '#/definitions/BillingGroupMetadata'
+        description: Additional information about the billing group.
+  DescribeBillingGroupRequest:
+    type: object
+    properties: {}
   DescribeCACertificateResponse:
     type: object
     properties:
@@ -7551,7 +8322,7 @@ definitions:
         description: The index status.
       schema:
         $ref: '#/definitions/IndexSchema'
-        description: '<p>Contains a value that specifies the type of indexing performed. Valid values are:</p> <ol> <li> <p>REGISTRY – Your thing index will contain only registry data.</p> </li> <li> <p>REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.</p> </li> </ol>'
+        description: '<p>Contains a value that specifies the type of indexing performed. Valid values are:</p> <ul> <li> <p>REGISTRY – Your thing index will contain only registry data.</p> </li> <li> <p>REGISTRY_AND_SHADOW - Your thing index will contain registry data and shadow data.</p> </li> <li> <p>REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index will contain registry data and thing connectivity status data.</p> </li> <li> <p>REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index will contain registry data, shadow data, and thing connectivity status data.</p> </li> </ul>'
   DescribeIndexRequest:
     type: object
     properties: {}
@@ -7672,6 +8443,9 @@ definitions:
       version:
         $ref: '#/definitions/Version'
         description: '<p>The current version of the thing record in the registry.</p> <note> <p>To avoid unintentional changes to the information in the registry, you can pass the version information in the <code>expectedVersion</code> parameter of the <code>UpdateThing</code> and <code>DeleteThing</code> calls.</p> </note>'
+      billingGroupName:
+        $ref: '#/definitions/BillingGroupName'
+        description: The name of the billing group the thing belongs to.
     description: The output from the DescribeThing operation.
   DescribeThingRequest:
     type: object
@@ -7698,6 +8472,18 @@ definitions:
       thingGroupMetadata:
         $ref: '#/definitions/ThingGroupMetadata'
         description: Thing group metadata.
+      indexName:
+        $ref: '#/definitions/IndexName'
+        description: The dynamic thing group index name.
+      queryString:
+        $ref: '#/definitions/QueryString'
+        description: The dynamic thing group search query string.
+      queryVersion:
+        $ref: '#/definitions/QueryVersion'
+        description: The dynamic thing group query version.
+      status:
+        $ref: '#/definitions/DynamicGroupStatus'
+        description: The dynamic thing group status.
   DescribeThingGroupRequest:
     type: object
     properties: {}
@@ -8042,6 +8828,18 @@ definitions:
   ListAuthorizersRequest:
     type: object
     properties: {}
+  ListBillingGroupsResponse:
+    type: object
+    properties:
+      billingGroups:
+        $ref: '#/definitions/BillingGroupNameAndArnList'
+        description: The list of billing groups.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token used to get the next set of results, or <b>null</b> if there are no additional results.'
+  ListBillingGroupsRequest:
+    type: object
+    properties: {}
   ListCACertificatesResponse:
     type: object
     properties:
@@ -8285,6 +9083,18 @@ definitions:
   ListStreamsRequest:
     type: object
     properties: {}
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The list of tags assigned to the resource.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token used to get the next set of results, or <b>null</b> if there are no additional results.'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   ListTargetsForPolicyResponse:
     type: object
     properties:
@@ -8399,6 +9209,18 @@ definitions:
     type: object
     properties: {}
     description: The input for the ListThings operation.
+  ListThingsInBillingGroupResponse:
+    type: object
+    properties:
+      things:
+        $ref: '#/definitions/ThingNameList'
+        description: A list of things in the billing group.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token used to get the next set of results, or <b>null</b> if there are no additional results.'
+  ListThingsInBillingGroupRequest:
+    type: object
+    properties: {}
   ListThingsInThingGroupResponse:
     type: object
     properties:
@@ -8523,7 +9345,6 @@ definitions:
       parameters:
         $ref: '#/definitions/Parameters'
         description: 'The parameters for provisioning a thing. See <a href="http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'
-  ConflictingResourceUpdateException: {}
   ResourceRegistrationFailureException: {}
   RejectCertificateTransferRequest:
     type: object
@@ -8532,6 +9353,24 @@ definitions:
         $ref: '#/definitions/Message'
         description: The reason the certificate transfer was rejected.
     description: The input for the RejectCertificateTransfer operation.
+  RemoveThingFromBillingGroupResponse:
+    type: object
+    properties: {}
+  RemoveThingFromBillingGroupRequest:
+    type: object
+    properties:
+      billingGroupName:
+        $ref: '#/definitions/BillingGroupName'
+        description: The name of the billing group.
+      billingGroupArn:
+        $ref: '#/definitions/BillingGroupArn'
+        description: The ARN of the billing group.
+      thingName:
+        $ref: '#/definitions/ThingName'
+        description: The name of the thing to be removed from the billing group.
+      thingArn:
+        $ref: '#/definitions/ThingArn'
+        description: The ARN of the thing to be removed from the billing group.
   RemoveThingFromThingGroupResponse:
     type: object
     properties: {}
@@ -8591,7 +9430,6 @@ definitions:
       queryVersion:
         $ref: '#/definitions/QueryVersion'
         description: The query version.
-  InvalidQueryException: {}
   IndexNotReadyException: {}
   SetDefaultAuthorizerResponse:
     type: object
@@ -8693,6 +9531,21 @@ definitions:
   StopThingRegistrationTaskRequest:
     type: object
     properties: {}
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - resourceArn
+      - tags
+    properties:
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The ARN of the resource.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The new or modified tags for the resource.
   TestAuthorizationResponse:
     type: object
     properties:
@@ -8765,6 +9618,21 @@ definitions:
         description: The transfer message.
     description: The input for the TransferCertificate operation.
   TransferConflictException: {}
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - resourceArn
+      - tagKeys
+    properties:
+      resourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The ARN of the resource.
+      tagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: A list of the keys of the tags to be removed from the resource.
   UpdateAccountAuditConfigurationResponse:
     type: object
     properties: {}
@@ -8804,6 +9672,23 @@ definitions:
       status:
         $ref: '#/definitions/AuthorizerStatus'
         description: The status of the update authorizer request.
+  UpdateBillingGroupResponse:
+    type: object
+    properties:
+      version:
+        $ref: '#/definitions/Version'
+        description: The latest version of the billing group.
+  UpdateBillingGroupRequest:
+    type: object
+    required:
+      - billingGroupProperties
+    properties:
+      billingGroupProperties:
+        $ref: '#/definitions/BillingGroupProperties'
+        description: The properties of the billing group.
+      expectedVersion:
+        $ref: '#/definitions/OptionalVersion'
+        description: 'The expected version of the billing group. If the version of the billing group does not match the expected version specified in the request, the <code>UpdateBillingGroup</code> request is rejected with a <code>VersionConflictException</code>.'
   UpdateCACertificateRequest:
     type: object
     properties:
@@ -8818,6 +9703,32 @@ definitions:
     type: object
     properties: {}
     description: The input for the UpdateCertificate operation.
+  UpdateDynamicThingGroupResponse:
+    type: object
+    properties:
+      version:
+        $ref: '#/definitions/Version'
+        description: The dynamic thing group version.
+  UpdateDynamicThingGroupRequest:
+    type: object
+    required:
+      - thingGroupProperties
+    properties:
+      thingGroupProperties:
+        $ref: '#/definitions/ThingGroupProperties'
+        description: The dynamic thing group properties to update.
+      expectedVersion:
+        $ref: '#/definitions/OptionalVersion'
+        description: The expected version of the dynamic thing group to update.
+      indexName:
+        $ref: '#/definitions/IndexName'
+        description: '<p>The dynamic thing group index to update.</p> <note> <p>Currently one index is supported: ''AWS_Things''.</p> </note>'
+      queryString:
+        $ref: '#/definitions/QueryString'
+        description: The dynamic thing group search query string to update.
+      queryVersion:
+        $ref: '#/definitions/QueryVersion'
+        description: '<p>The dynamic thing group query version to update.</p> <note> <p>Currently one query version is supported: "2017-09-30". If not specified, the query version defaults to this value.</p> </note>'
   UpdateEventConfigurationsResponse:
     type: object
     properties: {}
@@ -8839,6 +9750,24 @@ definitions:
       thingGroupIndexingConfiguration:
         $ref: '#/definitions/ThingGroupIndexingConfiguration'
         description: Thing group indexing configuration.
+  UpdateJobRequest:
+    type: object
+    properties:
+      description:
+        $ref: '#/definitions/JobDescription'
+        description: A short text description of the job.
+      presignedUrlConfig:
+        $ref: '#/definitions/PresignedUrlConfig'
+        description: Configuration information for pre-signed S3 URLs.
+      jobExecutionsRolloutConfig:
+        $ref: '#/definitions/JobExecutionsRolloutConfig'
+        description: Allows you to create a staged rollout of the job.
+      abortConfig:
+        $ref: '#/definitions/AbortConfig'
+        description: Allows you to create criteria to abort a job.
+      timeoutConfig:
+        $ref: '#/definitions/TimeoutConfig'
+        description: 'Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to <code>TIMED_OUT</code>. '
   UpdateRoleAliasResponse:
     type: object
     properties:
@@ -8996,6 +9925,9 @@ definitions:
       thingGroupsToRemove:
         $ref: '#/definitions/ThingGroupList'
         description: The groups from which the thing will be removed.
+      overrideDynamicGroups:
+        $ref: '#/definitions/OverrideDynamicGroups'
+        description: 'Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.'
   ValidateSecurityProfileBehaviorsResponse:
     type: object
     properties:
@@ -9013,6 +9945,59 @@ definitions:
       behaviors:
         $ref: '#/definitions/Behaviors'
         description: 'Specifies the behaviors that, when violated by a device (thing), cause an alert.'
+  AbortAction:
+    type: string
+    enum:
+      - CANCEL
+  AbortCriteriaList:
+    type: array
+    items:
+      $ref: '#/definitions/AbortCriteria'
+    minItems: 1
+  AbortConfig:
+    type: object
+    required:
+      - criteriaList
+    properties:
+      criteriaList:
+        $ref: '#/definitions/AbortCriteriaList'
+        description: The list of abort criteria to define rules to abort the job.
+    description: Details of abort criteria to abort the job.
+  JobExecutionFailureType:
+    type: string
+    enum:
+      - FAILED
+      - REJECTED
+      - TIMED_OUT
+      - ALL
+  AbortThresholdPercentage:
+    type: number
+    format: double
+    maximum: 100
+  MinimumNumberOfExecutedThings:
+    type: integer
+    minimum: 1
+  AbortCriteria:
+    type: object
+    required:
+      - failureType
+      - action
+      - thresholdPercentage
+      - minNumberOfExecutedThings
+    properties:
+      failureType:
+        $ref: '#/definitions/JobExecutionFailureType'
+        description: The type of job execution failure to define a rule to initiate a job abort.
+      action:
+        $ref: '#/definitions/AbortAction'
+        description: The type of abort action to initiate a job abort.
+      thresholdPercentage:
+        $ref: '#/definitions/AbortThresholdPercentage'
+        description: '<p>The threshold as a percentage of the total number of executed things that will initiate a job abort.</p> <p>AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>'
+      minNumberOfExecutedThings:
+        $ref: '#/definitions/MinimumNumberOfExecutedThings'
+        description: Minimum number of executed things before evaluating an abort rule.
+    description: Details of abort criteria to define rules to abort the job.
   CertificateId:
     type: string
     pattern: '(0x)?[a-fA-F0-9]+'
@@ -9428,6 +10413,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ActiveViolation'
+  BillingGroupName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  BillingGroupArn:
+    type: string
+  ThingArn:
+    type: string
   ThingGroupName:
     type: string
     pattern: '[a-zA-Z0-9:_-]+'
@@ -9435,8 +10429,8 @@ definitions:
     maxLength: 128
   ThingGroupArn:
     type: string
-  ThingArn:
-    type: string
+  OverrideDynamicGroups:
+    type: boolean
   AttributeKey:
     type: string
   Value:
@@ -9978,6 +10972,46 @@ definitions:
     items:
       $ref: '#/definitions/Behavior'
     maxItems: 100
+  BillingGroupDescription:
+    type: string
+    pattern: '[\p{Graph}\x20]*'
+    maxLength: 2028
+  BillingGroupId:
+    type: string
+    pattern: '[a-zA-Z0-9\-]+'
+    minLength: 1
+    maxLength: 128
+  CreationDate:
+    type: string
+    format: date-time
+  BillingGroupMetadata:
+    type: object
+    properties:
+      creationDate:
+        $ref: '#/definitions/CreationDate'
+        description: The date the billing group was created.
+    description: Additional information about the billing group.
+  GroupNameAndArn:
+    type: object
+    properties:
+      groupName:
+        $ref: '#/definitions/ThingGroupName'
+        description: The group name.
+      groupArn:
+        $ref: '#/definitions/ThingGroupArn'
+        description: The group ARN.
+    description: The name and ARN of a group.
+  BillingGroupNameAndArnList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupNameAndArn'
+  BillingGroupProperties:
+    type: object
+    properties:
+      billingGroupDescription:
+        $ref: '#/definitions/BillingGroupDescription'
+        description: The description of the billing group.
+    description: The properties of a billing group.
   Boolean:
     type: boolean
   BucketName:
@@ -10079,6 +11113,10 @@ definitions:
           $ref: '#/definitions/DetailsKey'
         value:
           $ref: '#/definitions/DetailsValue'
+  ReasonCode:
+    type: string
+    pattern: '[\p{Upper}\p{Digit}_]+'
+    maxLength: 128
   CanceledChecksCount:
     type: integer
   CanceledThings:
@@ -10289,8 +11327,39 @@ definitions:
         $ref: '#/definitions/Enabled'
         description: True to enable the configuration.
     description: Configuration.
+  ConnectivityTimestamp:
+    type: integer
   Count:
     type: integer
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  ThingGroupProperties:
+    type: object
+    properties:
+      thingGroupDescription:
+        $ref: '#/definitions/ThingGroupDescription'
+        description: The thing group description.
+      attributePayload:
+        $ref: '#/definitions/AttributePayload'
+        description: The thing group attributes in JSON format.
+    description: Thing group properties.
+  IndexName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  QueryString:
+    type: string
+    minLength: 1
+  QueryVersion:
+    type: string
+  ThingGroupId:
+    type: string
+    pattern: '[a-zA-Z0-9\-]+'
+    minLength: 1
+    maxLength: 128
   JobDocumentSource:
     type: string
     minLength: 1
@@ -10319,13 +11388,16 @@ definitions:
       maximumPerMinute:
         $ref: '#/definitions/MaxJobExecutionsPerMin'
         description: 'The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.'
+      exponentialRate:
+        $ref: '#/definitions/ExponentialRolloutRate'
+        description: The rate of increase for a job rollout. This parameter allows you to define an exponential rate for a job rollout.
     description: Allows you to create a staged rollout of a job.
   TimeoutConfig:
     type: object
     properties:
       inProgressTimeoutInMinutes:
         $ref: '#/definitions/InProgressTimeoutInMinutes'
-        description: 'Specifies the amount of time, in minutes, this device has to finish execution of this job. A timer is started, or restarted, whenever this job''s execution status is specified as <code>IN_PROGRESS</code> with this field populated. If the job execution status is not set to a terminal state before the timer expires, or before another job execution status update is sent with this field populated, the status will be automatically set to <code>TIMED_OUT</code>. Note that setting/resetting this timer has no effect on the job execution timeout timer which may have been specified when the job was created (<code>CreateJobExecution</code> using the field <code>timeoutConfig</code>).'
+        description: 'Specifies the amount of time, in minutes, this device has to finish execution of this job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress timer can''t be updated and will apply to all job executions for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and switch to the terminal <code>TIMED_OUT</code> status.'
     description: 'Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.'
   KeyPair:
     type: object
@@ -10439,21 +11511,6 @@ definitions:
     type: integer
     minimum: 0
     maximum: 65535
-  ThingGroupProperties:
-    type: object
-    properties:
-      thingGroupDescription:
-        $ref: '#/definitions/ThingGroupDescription'
-        description: The thing group description.
-      attributePayload:
-        $ref: '#/definitions/AttributePayload'
-        description: The thing group attributes in JSON format.
-    description: Thing group properties.
-  ThingGroupId:
-    type: string
-    pattern: '[a-zA-Z0-9\-]+'
-    minLength: 1
-    maxLength: 128
   ThingTypeName:
     type: string
     pattern: '[a-zA-Z0-9:_-]+'
@@ -10508,15 +11565,14 @@ definitions:
   CreatedAtDate:
     type: string
     format: date-time
-  CreationDate:
-    type: string
-    format: date-time
   HashAlgorithm:
     type: string
   SignatureAlgorithm:
     type: string
   DeleteScheduledAudits:
     type: boolean
+  OptionalVersion:
+    type: integer
   ForceDelete:
     type: boolean
   ExecutionNumber:
@@ -10525,8 +11581,6 @@ definitions:
     type: boolean
   ForceDeleteAWSJob:
     type: boolean
-  OptionalVersion:
-    type: integer
   LogTargetType:
     type: string
     enum:
@@ -10580,6 +11634,8 @@ definitions:
         $ref: '#/definitions/CanceledChecksCount'
         description: The number of checks that did not run because the audit was canceled.
     description: Statistics for the checks performed during the audit.
+  Version:
+    type: integer
   RegistrationConfig:
     type: object
     properties:
@@ -10606,11 +11662,6 @@ definitions:
   LastModifiedDate:
     type: string
     format: date-time
-  IndexName:
-    type: string
-    pattern: '[a-zA-Z0-9:_-]+'
-    minLength: 1
-    maxLength: 128
   IndexStatus:
     type: string
     enum:
@@ -10654,7 +11705,7 @@ definitions:
         description: The version of the job execution. Job execution versions are incremented each time they are updated by a device.
       approximateSecondsBeforeTimedOut:
         $ref: '#/definitions/ApproximateSecondsBeforeTimedOut'
-        description: The estimated number of seconds that remain before the job execution status will be changed to <code>TIMED_OUT</code>.
+        description: The estimated number of seconds that remain before the job execution status will be changed to <code>TIMED_OUT</code>. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The actual job execution timeout can occur up to 60 seconds later than the estimated duration. This value will not be included if the job execution has reached a terminal status.
     description: The job execution object represents the execution of a job on a particular device.
   Job:
     type: object
@@ -10674,6 +11725,9 @@ definitions:
       forceCanceled:
         $ref: '#/definitions/Forced'
         description: Will be <code>true</code> if the job was canceled with the optional <code>force</code> parameter set to <code>true</code>.
+      reasonCode:
+        $ref: '#/definitions/ReasonCode'
+        description: 'If the job was updated, provides the reason code for the update.'
       comment:
         $ref: '#/definitions/Comment'
         description: 'If the job was updated, describes the reason for the update.'
@@ -10689,6 +11743,9 @@ definitions:
       jobExecutionsRolloutConfig:
         $ref: '#/definitions/JobExecutionsRolloutConfig'
         description: Allows you to create a staged rollout of a job.
+      abortConfig:
+        $ref: '#/definitions/AbortConfig'
+        description: Configuration for criteria to abort the job.
       createdAt:
         $ref: '#/definitions/DateType'
         description: 'The time, in milliseconds since the epoch, when the job was created.'
@@ -10730,8 +11787,6 @@ definitions:
         $ref: '#/definitions/DateType'
         description: The UNIX timestamp of when the role alias was last modified.
     description: Role alias description.
-  Version:
-    type: integer
   StreamInfo:
     type: object
     properties:
@@ -10773,6 +11828,12 @@ definitions:
         $ref: '#/definitions/CreationDate'
         description: The UNIX timestamp of when the thing group was created.
     description: Thing group metadata.
+  DynamicGroupStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - BUILDING
+      - REBUILDING
   TaskId:
     type: string
     maxLength: 40
@@ -10927,6 +11988,42 @@ definitions:
     type: integer
     minimum: 60
     maximum: 3600
+  RolloutRatePerMinute:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  IncrementFactor:
+    type: number
+    format: double
+    minimum: 1
+    maximum: 5
+  RateIncreaseCriteria:
+    type: object
+    properties:
+      numberOfNotifiedThings:
+        $ref: '#/definitions/NumberOfThings'
+        description: The threshold for number of notified things that will initiate the increase in rate of rollout.
+      numberOfSucceededThings:
+        $ref: '#/definitions/NumberOfThings'
+        description: The threshold for number of succeeded things that will initiate the increase in rate of rollout.
+    description: Allows you to define a criteria to initiate the increase in rate of rollout for a job.
+  ExponentialRolloutRate:
+    type: object
+    required:
+      - baseRatePerMinute
+      - incrementFactor
+      - rateIncreaseCriteria
+    properties:
+      baseRatePerMinute:
+        $ref: '#/definitions/RolloutRatePerMinute'
+        description: 'The minimum number of things that will be notified of a pending job, per minute at the start of job rollout. This parameter allows you to define the initial rate of rollout.'
+      incrementFactor:
+        $ref: '#/definitions/IncrementFactor'
+        description: The exponential factor to increase the rate of rollout for a job.
+      rateIncreaseCriteria:
+        $ref: '#/definitions/RateIncreaseCriteria'
+        description: '<p>The criteria to initiate the increase in rate of rollout for a job.</p> <p>AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>'
+    description: Allows you to create an exponential rate of rollout for a job.
   FailedChecksCount:
     type: integer
   FailedThings:
@@ -10988,8 +12085,11 @@ definitions:
     properties:
       thingIndexingMode:
         $ref: '#/definitions/ThingIndexingMode'
-        description: '<p>Thing indexing mode. Valid values are: </p> <ul> <li> <p>REGISTRY – Your thing index will contain only registry data.</p> </li> <li> <p>REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.</p> </li> <li> <p>OFF - Thing indexing is disabled.</p> </li> </ul>'
-    description: Thing indexing configuration.
+        description: '<p>Thing indexing mode. Valid values are:</p> <ul> <li> <p>REGISTRY – Your thing index will contain only registry data.</p> </li> <li> <p>REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.</p> </li> <li> <p>OFF - Thing indexing is disabled.</p> </li> </ul>'
+      thingConnectivityIndexingMode:
+        $ref: '#/definitions/ThingConnectivityIndexingMode'
+        description: '<p>Thing connectivity indexing mode. Valid values are: </p> <ul> <li> <p>STATUS – Your thing index will contain connectivity status. In order to enable thing connectivity indexing, thingIndexMode must not be set to OFF.</p> </li> <li> <p>OFF - Thing connectivity status indexing is disabled.</p> </li> </ul>'
+    description: 'The thing indexing configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html">Managing Thing Indexing</a>.'
   ThingGroupIndexingConfiguration:
     type: object
     required:
@@ -11088,16 +12188,6 @@ definitions:
         $ref: '#/definitions/Action'
         description: The action to perform when an error occurs.
     description: Describes a rule.
-  GroupNameAndArn:
-    type: object
-    properties:
-      groupName:
-        $ref: '#/definitions/ThingGroupName'
-        description: The group name.
-      groupArn:
-        $ref: '#/definitions/ThingGroupArn'
-        description: The group ARN.
-    description: The name and ARN of a group.
   InProgressChecksCount:
     type: integer
   InProgressThings:
@@ -11220,7 +12310,6 @@ definitions:
   MaxJobExecutionsPerMin:
     type: integer
     minimum: 1
-    maximum: 1000
   ProcessingTargetNameList:
     type: array
     items:
@@ -11331,6 +12420,10 @@ definitions:
         $ref: '#/definitions/AwsAccountId'
         description: The account with which the resource is associated.
     description: Information identifying the non-compliant resource.
+  RegistryMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 250
   QueryMaxResults:
     type: integer
     minimum: 1
@@ -11351,10 +12444,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PolicyVersion'
-  RegistryMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 250
   ThingNameList:
     type: array
     items:
@@ -11379,6 +12468,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/StreamSummary'
+  ResourceArn:
+    type: string
   PolicyTargets:
     type: array
     items:
@@ -11503,6 +12594,9 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/String'
+  NumberOfThings:
+    type: integer
+    minimum: 1
   OTAUpdateFileVersion:
     type: string
   OTAUpdateFile:
@@ -11628,11 +12722,6 @@ definitions:
     maxLength: 128
   ProcessingTargetName:
     type: string
-  QueryString:
-    type: string
-    minLength: 1
-  QueryVersion:
-    type: string
   QueueUrl:
     type: string
   SetAsActiveFlag:
@@ -11666,8 +12755,6 @@ definitions:
   TopicPattern:
     type: string
   Resource:
-    type: string
-  ResourceArn:
     type: string
   ResourceLogicalId:
     type: string
@@ -11801,6 +12888,24 @@ definitions:
         $ref: '#/definitions/StreamDescription'
         description: A description of the stream.
     description: A summary of a stream.
+  TagKey:
+    type: string
+  TagValue:
+    type: string
+  Tag:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: The tag's key.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The tag's value.
+    description: A set of key/value pairs that are used to manage the resource.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
   Target:
     type: string
   TotalChecksCount:
@@ -11835,6 +12940,21 @@ definitions:
         $ref: '#/definitions/Version'
         description: The version of the thing record in the registry.
     description: 'The properties of the thing, including thing name, thing type name, and a list of thing attributes.'
+  ThingConnectivity:
+    type: object
+    properties:
+      connected:
+        $ref: '#/definitions/Boolean'
+        description: 'True if the thing is connected to the AWS IoT service, false if it is not connected.'
+      timestamp:
+        $ref: '#/definitions/ConnectivityTimestamp'
+        description: 'The epoch time (in milliseconds) when the thing last connected or disconnected. Note that if the thing has been disconnected for more than a few weeks, the time value can be missing.'
+    description: The connectivity status of the thing.
+  ThingConnectivityIndexingMode:
+    type: string
+    enum:
+      - 'OFF'
+      - STATUS
   ThingGroupNameList:
     type: array
     items:
@@ -11860,6 +12980,9 @@ definitions:
       shadow:
         $ref: '#/definitions/JsonDocument'
         description: The shadow.
+      connectivity:
+        $ref: '#/definitions/ThingConnectivity'
+        description: Indicates whether or not the thing is connected to the AWS IoT service.
     description: The thing search index document.
   ThingGroupDescription:
     type: string
