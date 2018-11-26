@@ -1,0 +1,3178 @@
+swagger: '2.0'
+info:
+  version: '2018-06-29'
+  x-release: v4
+  title: AWS RoboMaker
+  description: his section provides documentation for the AWS RoboMaker API operations.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: robomaker
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/robomaker-2018-06-29.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/robomaker/'
+host: robomaker.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /batchDescribeSimulationJob:
+    post:
+      operationId: BatchDescribeSimulationJob
+      description: Describes one or more simulation jobs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchDescribeSimulationJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchDescribeSimulationJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /cancelSimulationJob:
+    post:
+      operationId: CancelSimulationJob
+      description: Cancels the specified simulation job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CancelSimulationJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CancelSimulationJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /createDeploymentJob:
+    post:
+      operationId: CreateDeploymentJob
+      description: Creates a deployment job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDeploymentJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: ConcurrentDeploymentException
+          schema:
+            $ref: '#/definitions/ConcurrentDeploymentException'
+        '486':
+          description: IdempotentParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDeploymentJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /createFleet:
+    post:
+      operationId: CreateFleet
+      description: 'Creates a fleet, a logical group of robots running the same robot application.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateFleetResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /createRobot:
+    post:
+      operationId: CreateRobot
+      description: Creates a robot.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateRobotResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateRobotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /createRobotApplication:
+    post:
+      operationId: CreateRobotApplication
+      description: 'Creates a robot application. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateRobotApplicationResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '485':
+          description: IdempotentParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateRobotApplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /createRobotApplicationVersion:
+    post:
+      operationId: CreateRobotApplicationVersion
+      description: Creates a version of a robot application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateRobotApplicationVersionResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: IdempotentParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateRobotApplicationVersionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /createSimulationApplication:
+    post:
+      operationId: CreateSimulationApplication
+      description: Creates a simulation application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSimulationApplicationResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '485':
+          description: IdempotentParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSimulationApplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /createSimulationApplicationVersion:
+    post:
+      operationId: CreateSimulationApplicationVersion
+      description: Creates a simulation application with a specific revision id.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSimulationApplicationVersionResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: IdempotentParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSimulationApplicationVersionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /createSimulationJob:
+    post:
+      operationId: CreateSimulationJob
+      description: Creates a simulation job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSimulationJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: IdempotentParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSimulationJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /deleteFleet:
+    post:
+      operationId: DeleteFleet
+      description: Deletes a fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteFleetResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /deleteRobot:
+    post:
+      operationId: DeleteRobot
+      description: Deletes a robot.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteRobotResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRobotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /deleteRobotApplication:
+    post:
+      operationId: DeleteRobotApplication
+      description: Deletes a robot application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteRobotApplicationResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRobotApplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /deleteSimulationApplication:
+    post:
+      operationId: DeleteSimulationApplication
+      description: Deletes a simulation application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSimulationApplicationResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSimulationApplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /deregisterRobot:
+    post:
+      operationId: DeregisterRobot
+      description: Deregisters a robot.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeregisterRobotResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeregisterRobotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeDeploymentJob:
+    post:
+      operationId: DescribeDeploymentJob
+      description: 'Describes a deployment job. [Does it work regardless of deployment status, e.g. Failed?]'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDeploymentJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDeploymentJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeFleet:
+    post:
+      operationId: DescribeFleet
+      description: Describes a fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeFleetResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeRobot:
+    post:
+      operationId: DescribeRobot
+      description: Describes a robot.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeRobotResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeRobotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeRobotApplication:
+    post:
+      operationId: DescribeRobotApplication
+      description: Describes a robot application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeRobotApplicationResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeRobotApplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeSimulationApplication:
+    post:
+      operationId: DescribeSimulationApplication
+      description: Describes a simulation application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSimulationApplicationResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSimulationApplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeSimulationJob:
+    post:
+      operationId: DescribeSimulationJob
+      description: Describes a simulation job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSimulationJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSimulationJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listDeploymentJobs:
+    post:
+      operationId: ListDeploymentJobs
+      description: Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDeploymentJobsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDeploymentJobsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listFleets:
+    post:
+      operationId: ListFleets
+      description: Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListFleetsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListFleetsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listRobotApplications:
+    post:
+      operationId: ListRobotApplications
+      description: Returns a list of robot application. You can optionally provide filters to retrieve specific robot applications.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListRobotApplicationsResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListRobotApplicationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listRobots:
+    post:
+      operationId: ListRobots
+      description: Returns a list of robots. You can optionally provide filters to retrieve specific robots.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListRobotsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListRobotsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listSimulationApplications:
+    post:
+      operationId: ListSimulationApplications
+      description: Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSimulationApplicationsResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListSimulationApplicationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listSimulationJobs:
+    post:
+      operationId: ListSimulationJobs
+      description: Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSimulationJobsResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListSimulationJobsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /registerRobot:
+    post:
+      operationId: RegisterRobot
+      description: Registers a robot with a fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterRobotResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterRobotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /restartSimulationJob:
+    post:
+      operationId: RestartSimulationJob
+      description: Restarts a running simulation job.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestartSimulationJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RestartSimulationJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /syncDeploymentJob:
+    post:
+      operationId: SyncDeploymentJob
+      description: Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SyncDeploymentJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: ConcurrentDeploymentException
+          schema:
+            $ref: '#/definitions/ConcurrentDeploymentException'
+        '486':
+          description: IdempotentParameterMismatchException
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatchException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SyncDeploymentJobRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /updateRobotApplication:
+    post:
+      operationId: UpdateRobotApplication
+      description: Updates a robot application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateRobotApplicationResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateRobotApplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /updateSimulationApplication:
+    post:
+      operationId: UpdateSimulationApplication
+      description: Updates a simulation application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSimulationApplicationResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSimulationApplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  BatchDescribeSimulationJobResponse:
+    type: object
+    properties:
+      jobs:
+        $ref: '#/definitions/SimulationJobs'
+        description: A list of simulation jobs.
+      unprocessedJobs:
+        $ref: '#/definitions/Arns'
+        description: A list of unprocessed simulation job Amazon Resource Names (ARNs).
+  BatchDescribeSimulationJobRequest:
+    type: object
+    required:
+      - jobs
+    properties:
+      jobs:
+        $ref: '#/definitions/Arns'
+        description: A list of Amazon Resource Names (ARNs) of simulation jobs to describe.
+  ResourceNotFoundException: {}
+  InvalidParameterException: {}
+  InternalServerException: {}
+  ThrottlingException: {}
+  CancelSimulationJobResponse:
+    type: object
+    properties: {}
+  CancelSimulationJobRequest:
+    type: object
+    required:
+      - job
+    properties:
+      job:
+        $ref: '#/definitions/Arn'
+        description: The simulation job ARN to cancel.
+  CreateDeploymentJobResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the deployment job.
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The target fleet for the deployment job.
+      status:
+        $ref: '#/definitions/DeploymentStatus'
+        description: The status of the deployment job.
+      deploymentApplicationConfigs:
+        $ref: '#/definitions/DeploymentApplicationConfigs'
+        description: The deployment application configuration.
+      failureReason:
+        $ref: '#/definitions/GenericString'
+        description: The failure reason of the deployment job if it failed.
+      failureCode:
+        $ref: '#/definitions/DeploymentJobErrorCode'
+        description: The failure code of the deployment job if it failed.
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the fleet was created.'
+      deploymentConfig:
+        $ref: '#/definitions/DeploymentConfig'
+        description: The deployment configuration.
+  CreateDeploymentJobRequest:
+    type: object
+    required:
+      - clientRequestToken
+      - fleet
+      - deploymentApplicationConfigs
+    properties:
+      deploymentConfig:
+        $ref: '#/definitions/DeploymentConfig'
+        description: The requested deployment configuration.
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet to deploy.
+      deploymentApplicationConfigs:
+        $ref: '#/definitions/DeploymentApplicationConfigs'
+        description: The deployment application configuration.
+  LimitExceededException: {}
+  ConcurrentDeploymentException: {}
+  IdempotentParameterMismatchException: {}
+  CreateFleetResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the fleet.
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the fleet was created.'
+  CreateFleetRequest:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the fleet.
+  CreateRobotResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the robot.
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the robot was created.'
+      greengrassGroupId:
+        $ref: '#/definitions/Id'
+        description: The Amazon Resource Name (ARN) of the Greengrass group associated with the robot.
+      architecture:
+        $ref: '#/definitions/Architecture'
+        description: The target architecture of the robot.
+  CreateRobotRequest:
+    type: object
+    required:
+      - name
+      - architecture
+      - greengrassGroupId
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name for the robot.
+      architecture:
+        $ref: '#/definitions/Architecture'
+        description: The target architecture of the robot.
+      greengrassGroupId:
+        $ref: '#/definitions/Id'
+        description: The Greengrass group id.
+  ResourceAlreadyExistsException: {}
+  CreateRobotApplicationResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot application.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the robot application.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the robot application.
+      sources:
+        $ref: '#/definitions/Sources'
+        description: The sources of the robot application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: The robot software suite used by the robot application.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
+      revisionId:
+        $ref: '#/definitions/RevisionId'
+        description: The revision id of the robot application.
+  CreateRobotApplicationRequest:
+    type: object
+    required:
+      - name
+      - sources
+      - robotSoftwareSuite
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the robot application.
+      sources:
+        $ref: '#/definitions/SourceConfigs'
+        description: The sources of the robot application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: The robot software suite used by the robot application.
+  CreateRobotApplicationVersionResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot application.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the robot application.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the robot application.
+      sources:
+        $ref: '#/definitions/Sources'
+        description: The sources of the robot application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: The robot software suite used by the robot application.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
+      revisionId:
+        $ref: '#/definitions/RevisionId'
+        description: The revision id of the robot application.
+  CreateRobotApplicationVersionRequest:
+    type: object
+    required:
+      - application
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the robot application.
+      currentRevisionId:
+        $ref: '#/definitions/RevisionId'
+        description: 'The current revision id for the robot application. If you provide a value and it matches the latest revision ID, a new version will be created.'
+  CreateSimulationApplicationResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the simulation application.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the simulation application.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the simulation application.
+      sources:
+        $ref: '#/definitions/Sources'
+        description: The sources of the simulation application.
+      simulationSoftwareSuite:
+        $ref: '#/definitions/SimulationSoftwareSuite'
+        description: The simulation software suite used by the simulation application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: Information about the robot software suite.
+      renderingEngine:
+        $ref: '#/definitions/RenderingEngine'
+        description: The rendering engine for the simulation application.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
+      revisionId:
+        $ref: '#/definitions/RevisionId'
+        description: The revision id of the simulation application.
+  CreateSimulationApplicationRequest:
+    type: object
+    required:
+      - name
+      - sources
+      - simulationSoftwareSuite
+      - robotSoftwareSuite
+      - renderingEngine
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the simulation application.
+      sources:
+        $ref: '#/definitions/SourceConfigs'
+        description: The sources of the simulation application.
+      simulationSoftwareSuite:
+        $ref: '#/definitions/SimulationSoftwareSuite'
+        description: The simulation software suite used by the simulation application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: The robot software suite of the simulation application.
+      renderingEngine:
+        $ref: '#/definitions/RenderingEngine'
+        description: The rendering engine for the simulation application.
+  CreateSimulationApplicationVersionResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the simulation application.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the simulation application.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the simulation application.
+      sources:
+        $ref: '#/definitions/Sources'
+        description: The sources of the simulation application.
+      simulationSoftwareSuite:
+        $ref: '#/definitions/SimulationSoftwareSuite'
+        description: The simulation software suite used by the simulation application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: Information about the robot software suite.
+      renderingEngine:
+        $ref: '#/definitions/RenderingEngine'
+        description: The rendering engine for the simulation application.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
+      revisionId:
+        $ref: '#/definitions/RevisionId'
+        description: The revision ID of the simulation application.
+  CreateSimulationApplicationVersionRequest:
+    type: object
+    required:
+      - application
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the simulation application.
+      currentRevisionId:
+        $ref: '#/definitions/RevisionId'
+        description: 'The current revision id for the simulation application. If you provide a value and it matches the latest revision ID, a new version will be created.'
+  CreateSimulationJobResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the simulation job.
+      status:
+        $ref: '#/definitions/SimulationJobStatus'
+        description: The status of the simulation job.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job was last updated.'
+      failureBehavior:
+        $ref: '#/definitions/FailureBehavior'
+        description: the failure behavior for the simulation job.
+      failureCode:
+        $ref: '#/definitions/SimulationJobErrorCode'
+        description: The failure code of the simulation job if it failed.
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      outputLocation:
+        $ref: '#/definitions/OutputLocation'
+        description: Simulation job output files location.
+      maxJobDurationInSeconds:
+        $ref: '#/definitions/JobDuration'
+        description: 'The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less. '
+      simulationTimeMillis:
+        $ref: '#/definitions/SimulationTimeMillis'
+        description: The simulation job execution duration in milliseconds.
+      iamRole:
+        $ref: '#/definitions/IamRole'
+        description: The IAM role that allows the simulation job to call the AWS APIs that are specified in its associated policies on your behalf.
+      robotApplications:
+        $ref: '#/definitions/RobotApplicationConfigs'
+        description: The robot application used by the simulation job.
+      simulationApplications:
+        $ref: '#/definitions/SimulationApplicationConfigs'
+        description: The simulation application used by the simulation job.
+      vpcConfig:
+        $ref: '#/definitions/VPCConfigResponse'
+        description: Information about the vpc configuration.
+  CreateSimulationJobRequest:
+    type: object
+    required:
+      - maxJobDurationInSeconds
+      - iamRole
+    properties:
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      outputLocation:
+        $ref: '#/definitions/OutputLocation'
+        description: Location for output files generated by the simulation job.
+      maxJobDurationInSeconds:
+        $ref: '#/definitions/JobDuration'
+        description: 'The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds. When <code>maxJobDurationInSeconds</code> is reached, the simulation job will status will transition to <code>Completed</code>.'
+      iamRole:
+        $ref: '#/definitions/IamRole'
+        description: 'The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. See how to <a href="https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials">specify AWS security credentials for your application</a>. '
+      failureBehavior:
+        $ref: '#/definitions/FailureBehavior'
+        description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
+      robotApplications:
+        $ref: '#/definitions/RobotApplicationConfigs'
+        description: The robot application to use in the simulation job.
+      simulationApplications:
+        $ref: '#/definitions/SimulationApplicationConfigs'
+        description: The simulation application to use in the simulation job.
+      vpcConfig:
+        $ref: '#/definitions/VPCConfig'
+        description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID. '
+  DeleteFleetResponse:
+    type: object
+    properties: {}
+  DeleteFleetRequest:
+    type: object
+    required:
+      - fleet
+    properties:
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+  DeleteRobotResponse:
+    type: object
+    properties: {}
+  DeleteRobotRequest:
+    type: object
+    required:
+      - robot
+    properties:
+      robot:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot.
+  DeleteRobotApplicationResponse:
+    type: object
+    properties: {}
+  DeleteRobotApplicationRequest:
+    type: object
+    required:
+      - application
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the the robot application.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the robot application to delete.
+  DeleteSimulationApplicationResponse:
+    type: object
+    properties: {}
+  DeleteSimulationApplicationRequest:
+    type: object
+    required:
+      - application
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the simulation application to delete.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the simulation application to delete.
+  DeregisterRobotResponse:
+    type: object
+    properties:
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      robot:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot.
+  DeregisterRobotRequest:
+    type: object
+    required:
+      - fleet
+      - robot
+    properties:
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      robot:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot.
+  DescribeDeploymentJobResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the deployment job.
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      status:
+        $ref: '#/definitions/DeploymentStatus'
+        description: The status of the deployment job.
+      deploymentConfig:
+        $ref: '#/definitions/DeploymentConfig'
+        description: The deployment configuration.
+      deploymentApplicationConfigs:
+        $ref: '#/definitions/DeploymentApplicationConfigs'
+        description: The deployment application configuration.
+      failureReason:
+        $ref: '#/definitions/GenericString'
+        description: A short description of the reason why the deployment job failed.
+      failureCode:
+        $ref: '#/definitions/DeploymentJobErrorCode'
+        description: The deployment job failure code.
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the deployment job was created.'
+      robotDeploymentSummary:
+        $ref: '#/definitions/RobotDeploymentSummary'
+        description: A list of robot deployment summaries.
+  DescribeDeploymentJobRequest:
+    type: object
+    required:
+      - job
+    properties:
+      job:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the deployment job.
+  DescribeFleetResponse:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the fleet.
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      robots:
+        $ref: '#/definitions/Robots'
+        description: A list of robots.
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the fleet was created.'
+      lastDeploymentStatus:
+        $ref: '#/definitions/DeploymentStatus'
+        description: The status of the last deployment.
+      lastDeploymentJob:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the last deployment job.
+      lastDeploymentTime:
+        $ref: '#/definitions/CreatedAt'
+        description: The time of the last deployment.
+  DescribeFleetRequest:
+    type: object
+    required:
+      - fleet
+    properties:
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+  DescribeRobotResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the robot.
+      fleetArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      status:
+        $ref: '#/definitions/RobotStatus'
+        description: The status of the fleet.
+      greengrassGroupId:
+        $ref: '#/definitions/Id'
+        description: The Greengrass group id.
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the robot was created.'
+      architecture:
+        $ref: '#/definitions/Architecture'
+        description: The target architecture of the robot application.
+      lastDeploymentJob:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the last deployment job.
+      lastDeploymentTime:
+        $ref: '#/definitions/CreatedAt'
+        description: The time of the last deployment job.
+  DescribeRobotRequest:
+    type: object
+    required:
+      - robot
+    properties:
+      robot:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot to be described.
+  DescribeRobotApplicationResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot application.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the robot application.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the robot application.
+      sources:
+        $ref: '#/definitions/Sources'
+        description: The sources of the robot application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: The robot software suite used by the robot application.
+      revisionId:
+        $ref: '#/definitions/RevisionId'
+        description: The revision id of the robot application.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
+  DescribeRobotApplicationRequest:
+    type: object
+    required:
+      - application
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot application.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the robot application to describe.
+  DescribeSimulationApplicationResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot simulation application.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the simulation application.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the simulation application.
+      sources:
+        $ref: '#/definitions/Sources'
+        description: The sources of the simulation application.
+      simulationSoftwareSuite:
+        $ref: '#/definitions/SimulationSoftwareSuite'
+        description: The simulation software suite used by the simulation application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: Information about the robot software suite.
+      renderingEngine:
+        $ref: '#/definitions/RenderingEngine'
+        description: The rendering engine for the simulation application.
+      revisionId:
+        $ref: '#/definitions/RevisionId'
+        description: The revision id of the simulation application.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
+  DescribeSimulationApplicationRequest:
+    type: object
+    required:
+      - application
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the simulation application.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the simulation application to describe.
+  DescribeSimulationJobResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the simulation job.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the simulation job.
+      status:
+        $ref: '#/definitions/SimulationJobStatus'
+        description: The status of the simulation job.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job was last updated.'
+      failureBehavior:
+        $ref: '#/definitions/FailureBehavior'
+        description: The failure behavior for the simulation job.
+      failureCode:
+        $ref: '#/definitions/SimulationJobErrorCode'
+        description: '<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally (segfault, etc.)</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally (segfault, etc.)</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, etc.)</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, etc.)</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation</p> </dd> </dl>'
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      outputLocation:
+        $ref: '#/definitions/OutputLocation'
+        description: Location for output files generated by the simulation job.
+      maxJobDurationInSeconds:
+        $ref: '#/definitions/JobDuration'
+        description: 'The maximum job duration in seconds. The value must be 8 days (691,200 seconds) or less.'
+      simulationTimeMillis:
+        $ref: '#/definitions/SimulationTimeMillis'
+        description: The simulation job execution duration in milliseconds.
+      iamRole:
+        $ref: '#/definitions/IamRole'
+        description: The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf.
+      robotApplications:
+        $ref: '#/definitions/RobotApplicationConfigs'
+        description: A list of robot applications.
+      simulationApplications:
+        $ref: '#/definitions/SimulationApplicationConfigs'
+        description: A list of simulation applications.
+      vpcConfig:
+        $ref: '#/definitions/VPCConfigResponse'
+        description: The VPC configuration.
+  DescribeSimulationJobRequest:
+    type: object
+    required:
+      - job
+    properties:
+      job:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the simulation job to be described.
+  ListDeploymentJobsResponse:
+    type: object
+    properties:
+      deploymentJobs:
+        $ref: '#/definitions/DeploymentJobs'
+        description: A list of deployment jobs that meet the criteria of the request.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>ListDeploymentJobs</code> request. When the results of a <code>ListDeploymentJobs</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+  ListDeploymentJobsRequest:
+    type: object
+    properties:
+      filters:
+        $ref: '#/definitions/Filters'
+        description: Optional filters to limit results.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of deployment job results returned by <code>ListDeploymentJobs</code> in paginated output. When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+  ListFleetsResponse:
+    type: object
+    properties:
+      fleetDetails:
+        $ref: '#/definitions/Fleets'
+        description: A list of fleet details meeting the request criteria.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>ListDeploymentJobs</code> request. When the results of a <code>ListFleets</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+  ListFleetsRequest:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListFleets</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of deployment job results returned by <code>ListFleets</code> in paginated output. When this parameter is used, <code>ListFleets</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListFleets</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+      filters:
+        $ref: '#/definitions/Filters'
+        description: Optional filters to limit results.
+  ListRobotApplicationsResponse:
+    type: object
+    properties:
+      robotApplicationSummaries:
+        $ref: '#/definitions/RobotApplicationSummaries'
+        description: A list of robot application summaries that meet the criteria of the request.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>ListRobotApplications</code> request. When the results of a <code>ListRobotApplications</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+  ListRobotApplicationsRequest:
+    type: object
+    properties:
+      versionQualifier:
+        $ref: '#/definitions/VersionQualifier'
+        description: The version qualifier of the robot application.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+      filters:
+        $ref: '#/definitions/Filters'
+        description: Optional filters to limit results.
+  ListRobotsResponse:
+    type: object
+    properties:
+      robots:
+        $ref: '#/definitions/Robots'
+        description: A list of robots that meet the criteria of the request.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>ListRobots</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+  ListRobotsRequest:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+      filters:
+        $ref: '#/definitions/Filters'
+        description: Optional filters to limit results.
+  ListSimulationApplicationsResponse:
+    type: object
+    properties:
+      simulationApplicationSummaries:
+        $ref: '#/definitions/SimulationApplicationSummaries'
+        description: A list of simulation application summaries that meet the criteria of the request.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>ListSimulationApplications</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+  ListSimulationApplicationsRequest:
+    type: object
+    properties:
+      versionQualifier:
+        $ref: '#/definitions/VersionQualifier'
+        description: The version qualifier of the simulation application.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+      filters:
+        $ref: '#/definitions/Filters'
+        description: Optional list of filters to limit results. The only valid filter name is <code>name</code>.
+  ListSimulationJobsResponse:
+    type: object
+    required:
+      - simulationJobSummaries
+    properties:
+      simulationJobSummaries:
+        $ref: '#/definitions/SimulationJobSummaries'
+        description: A list of simulation job summaries that meet the criteria of the request.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: 'The <code>nextToken</code> value to include in a future <code>ListSimulationJobs</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+  ListSimulationJobsRequest:
+    type: object
+    properties:
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+      filters:
+        $ref: '#/definitions/Filters'
+        description: Optional filters to limit results.
+  RegisterRobotResponse:
+    type: object
+    properties:
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet that the robot will join.
+      robot:
+        $ref: '#/definitions/Arn'
+        description: Information about the robot registration.
+  RegisterRobotRequest:
+    type: object
+    required:
+      - fleet
+      - robot
+    properties:
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      robot:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot.
+  RestartSimulationJobResponse:
+    type: object
+    properties: {}
+  RestartSimulationJobRequest:
+    type: object
+    required:
+      - job
+    properties:
+      job:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the simulation job.
+  SyncDeploymentJobResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the synchronization request.
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      status:
+        $ref: '#/definitions/DeploymentStatus'
+        description: The status of the synchronization job.
+      deploymentConfig:
+        $ref: '#/definitions/DeploymentConfig'
+        description: Information about the deployment configuration.
+      deploymentApplicationConfigs:
+        $ref: '#/definitions/DeploymentApplicationConfigs'
+        description: Information about the deployment application configurations.
+      failureReason:
+        $ref: '#/definitions/GenericString'
+        description: The failure reason if the job fails.
+      failureCode:
+        $ref: '#/definitions/DeploymentJobErrorCode'
+        description: The failure code if the job fails.
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the fleet was created.'
+  SyncDeploymentJobRequest:
+    type: object
+    required:
+      - clientRequestToken
+      - fleet
+    properties:
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The target fleet for the synchronization.
+  UpdateRobotApplicationResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the updated robot application.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the robot application.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the robot application.
+      sources:
+        $ref: '#/definitions/Sources'
+        description: The sources of the robot application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: The robot software suite used by the robot application.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
+      revisionId:
+        $ref: '#/definitions/RevisionId'
+        description: The revision id of the robot application.
+  UpdateRobotApplicationRequest:
+    type: object
+    required:
+      - application
+      - sources
+      - robotSoftwareSuite
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the robot application.
+      sources:
+        $ref: '#/definitions/SourceConfigs'
+        description: The sources of the robot application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: The robot software suite used by the robot application.
+      currentRevisionId:
+        $ref: '#/definitions/RevisionId'
+        description: The revision id for the robot application.
+  UpdateSimulationApplicationResponse:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the updated simulation application.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the simulation application.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the robot application.
+      sources:
+        $ref: '#/definitions/Sources'
+        description: The sources of the simulation application.
+      simulationSoftwareSuite:
+        $ref: '#/definitions/SimulationSoftwareSuite'
+        description: The simulation software suite used by the simulation application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: Information about the robot software suite.
+      renderingEngine:
+        $ref: '#/definitions/RenderingEngine'
+        description: The rendering engine for the simulation application.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
+      revisionId:
+        $ref: '#/definitions/RevisionId'
+        description: The revision id of the simulation application.
+  UpdateSimulationApplicationRequest:
+    type: object
+    required:
+      - application
+      - sources
+      - simulationSoftwareSuite
+      - robotSoftwareSuite
+      - renderingEngine
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the simulation application.
+      sources:
+        $ref: '#/definitions/SourceConfigs'
+        description: The sources of the simulation application.
+      simulationSoftwareSuite:
+        $ref: '#/definitions/SimulationSoftwareSuite'
+        description: The simulation software suite used by the simulation application.
+      robotSoftwareSuite:
+        $ref: '#/definitions/RobotSoftwareSuite'
+        description: Information about the robot software suite.
+      renderingEngine:
+        $ref: '#/definitions/RenderingEngine'
+        description: The rendering engine for the simulation application.
+      currentRevisionId:
+        $ref: '#/definitions/RevisionId'
+        description: The revision id for the robot application.
+  Architecture:
+    type: string
+    enum:
+      - X86_64
+      - ARM64
+      - ARMHF
+  Arn:
+    type: string
+    pattern: 'arn:.*'
+    minLength: 1
+    maxLength: 1224
+  Arns:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+    minItems: 1
+    maxItems: 100
+  SimulationJobs:
+    type: array
+    items:
+      $ref: '#/definitions/SimulationJob'
+  Boolean:
+    type: boolean
+  ClientRequestToken:
+    type: string
+    pattern: '[a-zA-Z0-9_\-=]*'
+    minLength: 1
+    maxLength: 64
+  DeploymentConfig:
+    type: object
+    properties:
+      concurrentDeploymentPercentage:
+        $ref: '#/definitions/Percentage'
+        description: The percentage of robots receiving the deployment at the same time.
+      failureThresholdPercentage:
+        $ref: '#/definitions/Percentage'
+        description: The percentage of deployments that need to fail before stopping deployment.
+    description: Information about a deployment configuration.
+  DeploymentApplicationConfigs:
+    type: array
+    items:
+      $ref: '#/definitions/DeploymentApplicationConfig'
+    minItems: 1
+    maxItems: 1
+  DeploymentStatus:
+    type: string
+    enum:
+      - Pending
+      - Preparing
+      - InProgress
+      - Failed
+      - Succeeded
+  GenericString:
+    type: string
+  DeploymentJobErrorCode:
+    type: string
+    enum:
+      - ResourceNotFound
+      - FailureThresholdBreached
+      - RobotDeploymentNoResponse
+      - GreengrassDeploymentFailed
+      - MissingRobotArchitecture
+      - MissingRobotApplicationArchitecture
+      - MissingRobotDeploymentResource
+      - GreengrassGroupVersionDoesNotExist
+      - ExtractingBundleFailure
+      - PreLaunchFileFailure
+      - PostLaunchFileFailure
+      - BadPermissionError
+      - InternalServerError
+  CreatedAt:
+    type: string
+    format: date-time
+  Name:
+    type: string
+    pattern: '[a-zA-Z0-9_\-]*'
+    minLength: 1
+    maxLength: 255
+  SourceConfigs:
+    type: array
+    items:
+      $ref: '#/definitions/SourceConfig'
+  RobotSoftwareSuite:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/RobotSoftwareSuiteType'
+        description: The name of the robot software suite.
+      version:
+        $ref: '#/definitions/RobotSoftwareSuiteVersionType'
+        description: The version of the robot software suite.
+    description: Information about a robot software suite.
+  Version:
+    type: string
+    pattern: '(\$LATEST)|[0-9]*'
+    minLength: 1
+    maxLength: 255
+  Sources:
+    type: array
+    items:
+      $ref: '#/definitions/Source'
+  LastUpdatedAt:
+    type: string
+    format: date-time
+  RevisionId:
+    type: string
+    pattern: '[a-zA-Z0-9_.\-]*'
+    minLength: 1
+    maxLength: 40
+  Id:
+    type: string
+    minLength: 1
+    maxLength: 1224
+  SimulationSoftwareSuite:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/SimulationSoftwareSuiteType'
+        description: The name of the simulation software suite.
+      version:
+        $ref: '#/definitions/SimulationSoftwareSuiteVersionType'
+        description: The version of the simulation software suite.
+    description: Information about a simulation software suite.
+  RenderingEngine:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/RenderingEngineType'
+        description: The name of the rendering engine.
+      version:
+        $ref: '#/definitions/RenderingEngineVersionType'
+        description: The version of the rendering engine.
+    description: Information about a rendering engine.
+  OutputLocation:
+    type: object
+    properties:
+      s3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The S3 bucket for output.
+      s3Prefix:
+        $ref: '#/definitions/S3Key'
+        description: The S3 folder in the <code>s3Bucket</code> where output files will be placed.
+    description: The output location.
+  JobDuration:
+    type: integer
+  IamRole:
+    type: string
+    pattern: 'arn:.*'
+    minLength: 1
+    maxLength: 255
+  FailureBehavior:
+    type: string
+    enum:
+      - Fail
+      - Continue
+  RobotApplicationConfigs:
+    type: array
+    items:
+      $ref: '#/definitions/RobotApplicationConfig'
+    minItems: 1
+    maxItems: 1
+  SimulationApplicationConfigs:
+    type: array
+    items:
+      $ref: '#/definitions/SimulationApplicationConfig'
+    minItems: 1
+    maxItems: 1
+  VPCConfig:
+    type: object
+    required:
+      - subnets
+    properties:
+      subnets:
+        $ref: '#/definitions/Subnets'
+        description: A list of one or more subnet IDs in your VPC.
+      securityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: A list of one or more security groups IDs in your VPC.
+      assignPublicIp:
+        $ref: '#/definitions/Boolean'
+        description: A boolean indicating whether to assign a public IP address.
+    description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and two subnet IDs.'
+  SimulationJobStatus:
+    type: string
+    enum:
+      - Pending
+      - Preparing
+      - Running
+      - Restarting
+      - Completed
+      - Failed
+      - RunningFailed
+      - Terminating
+      - Terminated
+      - Canceled
+  SimulationJobErrorCode:
+    type: string
+    enum:
+      - InternalServiceError
+      - RobotApplicationCrash
+      - SimulationApplicationCrash
+      - BadPermissionsRobotApplication
+      - BadPermissionsSimulationApplication
+      - BadPermissionsS3Output
+      - BadPermissionsCloudwatchLogs
+      - SubnetIpLimitExceeded
+      - ENILimitExceeded
+      - BadPermissionsUserCredentials
+      - InvalidBundleRobotApplication
+      - InvalidBundleSimulationApplication
+      - RobotApplicationVersionMismatchedEtag
+      - SimulationApplicationVersionMismatchedEtag
+  SimulationTimeMillis:
+    type: integer
+  VPCConfigResponse:
+    type: object
+    properties:
+      subnets:
+        $ref: '#/definitions/Subnets'
+        description: A list of subnet IDs associated with the simulation job.
+      securityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: A list of security group IDs associated with the simulation job.
+      vpcId:
+        $ref: '#/definitions/GenericString'
+        description: The VPC ID associated with your simulation job.
+      assignPublicIp:
+        $ref: '#/definitions/Boolean'
+        description: A boolean indicating if a public IP was assigned.
+    description: VPC configuration associated with your simulation job.
+  DeploymentLaunchConfig:
+    type: object
+    required:
+      - packageName
+      - launchFile
+    properties:
+      packageName:
+        $ref: '#/definitions/GenericString'
+        description: The package name.
+      preLaunchFile:
+        $ref: '#/definitions/GenericString'
+        description: The deployment pre-launch file. This file will be executed prior to the deployment launch file.
+      launchFile:
+        $ref: '#/definitions/GenericString'
+        description: The deployment launch file.
+      postLaunchFile:
+        $ref: '#/definitions/GenericString'
+        description: The deployment post-launch file. This file will be executed after the deployment launch file.
+      environmentVariables:
+        $ref: '#/definitions/EnvironmentVariableMap'
+        description: An array of key/value pairs specifying environment variables for the deployment application.
+    description: Configuration information for a deployment launch.
+  DeploymentApplicationConfig:
+    type: object
+    required:
+      - application
+      - applicationVersion
+      - launchConfig
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the application.
+      launchConfig:
+        $ref: '#/definitions/DeploymentLaunchConfig'
+        description: 'The launch configuration, usually <code>roslaunch</code>.'
+    description: Information about a deployment application configuration.
+  Percentage:
+    type: integer
+    minimum: 1
+    maximum: 100
+  DeploymentJob:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the deployment job.
+      fleet:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      status:
+        $ref: '#/definitions/DeploymentStatus'
+        description: The status of the deployment job.
+      deploymentApplicationConfigs:
+        $ref: '#/definitions/DeploymentApplicationConfigs'
+        description: The deployment application configuration.
+      deploymentConfig:
+        $ref: '#/definitions/DeploymentConfig'
+        description: The deployment configuration.
+      failureReason:
+        $ref: '#/definitions/GenericString'
+        description: A short description of the reason why the deployment job failed.
+      failureCode:
+        $ref: '#/definitions/DeploymentJobErrorCode'
+        description: The deployment job failure code.
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the deployment job was created.'
+    description: Information about a deployment job.
+  DeploymentJobs:
+    type: array
+    items:
+      $ref: '#/definitions/DeploymentJob'
+    minItems: 0
+    maxItems: 200
+  EnvironmentVariableMap:
+    type: array
+    minItems: 0
+    maxItems: 16
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/EnvironmentVariableKey'
+        value:
+          $ref: '#/definitions/EnvironmentVariableValue'
+  RobotDeploymentSummary:
+    type: array
+    items:
+      $ref: '#/definitions/RobotDeployment'
+  Robots:
+    type: array
+    items:
+      $ref: '#/definitions/Robot'
+    minItems: 0
+    maxItems: 1000
+  RobotStatus:
+    type: string
+    enum:
+      - Available
+      - Registered
+      - PendingNewDeployment
+      - Deploying
+      - Failed
+      - InSync
+      - NoResponse
+  EnvironmentVariableKey:
+    type: string
+    pattern: '[A-Z_][A-Z0-9_]*'
+    minLength: 1
+    maxLength: 1024
+  EnvironmentVariableValue:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  FilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/Name'
+    minItems: 1
+    maxItems: 1
+  Filter:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the filter.
+      values:
+        $ref: '#/definitions/FilterValues'
+        description: A list of values.
+    description: Information about a filter.
+  Filters:
+    type: array
+    items:
+      $ref: '#/definitions/Filter'
+    minItems: 1
+    maxItems: 1
+  Fleet:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the fleet.
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the fleet was created.'
+      lastDeploymentStatus:
+        $ref: '#/definitions/DeploymentStatus'
+        description: The status of the last fleet deployment.
+      lastDeploymentJob:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the last deployment job.
+      lastDeploymentTime:
+        $ref: '#/definitions/CreatedAt'
+        description: The time of the last deployment.
+    description: Information about a fleet.
+  Fleets:
+    type: array
+    items:
+      $ref: '#/definitions/Fleet'
+    minItems: 0
+    maxItems: 200
+  LaunchConfig:
+    type: object
+    required:
+      - packageName
+      - launchFile
+    properties:
+      packageName:
+        $ref: '#/definitions/GenericString'
+        description: The package name.
+      launchFile:
+        $ref: '#/definitions/GenericString'
+        description: The launch file.
+      environmentVariables:
+        $ref: '#/definitions/EnvironmentVariableMap'
+        description: The environment variables for the application launch.
+    description: Information about a launch configuration.
+  PaginationToken:
+    type: string
+    pattern: '[a-zA-Z0-9_.\-\/+=]*'
+    minLength: 1
+    maxLength: 2048
+  MaxResults:
+    type: integer
+  VersionQualifier:
+    type: string
+    pattern: ALL
+  RobotApplicationSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/RobotApplicationSummary'
+    minItems: 0
+    maxItems: 100
+  SimulationApplicationSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SimulationApplicationSummary'
+    minItems: 0
+    maxItems: 100
+  SimulationJobSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SimulationJobSummary'
+    minItems: 0
+    maxItems: 100
+  S3Bucket:
+    type: string
+    pattern: '[a-z0-9][a-z0-9\-]*[a-z0-9]'
+    minLength: 3
+    maxLength: 63
+  S3Key:
+    type: string
+    pattern: .*
+    minLength: 1
+    maxLength: 1024
+  ProgressDetail:
+    type: object
+    properties:
+      currentProgress:
+        $ref: '#/definitions/GenericString'
+        description: The current progress status.
+      targetResource:
+        $ref: '#/definitions/GenericString'
+        description: The Amazon Resource Name (ARN) of the deployment job.
+    description: Information about the progress of a deployment job.
+  RenderingEngineType:
+    type: string
+    enum:
+      - OGRE
+  RenderingEngineVersionType:
+    type: string
+    pattern: 1.x
+  Robot:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the robot.
+      fleetArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the fleet.
+      status:
+        $ref: '#/definitions/RobotStatus'
+        description: The status of the robot.
+      greenGrassGroupId:
+        $ref: '#/definitions/Id'
+        description: The Greengrass group associated with the robot.
+      createdAt:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the robot was created.'
+      architecture:
+        $ref: '#/definitions/Architecture'
+        description: The architecture of the robot.
+      lastDeploymentJob:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the last deployment job.
+      lastDeploymentTime:
+        $ref: '#/definitions/CreatedAt'
+        description: The time of the last deployment.
+    description: Information about a robot.
+  RobotApplicationConfig:
+    type: object
+    required:
+      - application
+      - launchConfig
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the robot application.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the robot application.
+      launchConfig:
+        $ref: '#/definitions/LaunchConfig'
+        description: The launch configuration for the robot application.
+    description: Application configuration information for a robot.
+  RobotApplicationNames:
+    type: array
+    items:
+      $ref: '#/definitions/Name'
+    minItems: 1
+    maxItems: 1
+  RobotApplicationSummary:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the robot application.
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the robot.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the robot application.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
+    description: Summary information for a robot application.
+  RobotDeployment:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The robot deployment Amazon Resource Name (ARN).
+      deploymentStartTime:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the deployment was started.'
+      deploymentFinishTime:
+        $ref: '#/definitions/CreatedAt'
+        description: 'The time, in milliseconds since the epoch, when the deployment finished.'
+      status:
+        $ref: '#/definitions/RobotStatus'
+        description: The status of the robot deployment.
+      progressDetail:
+        $ref: '#/definitions/ProgressDetail'
+        description: Information about how the deployment is progressing.
+      failureReason:
+        $ref: '#/definitions/GenericString'
+        description: A short description of the reason why the robot deployment failed.
+      failureCode:
+        $ref: '#/definitions/DeploymentJobErrorCode'
+        description: The robot deployment failure code.
+    description: Information about a robot deployment.
+  RobotSoftwareSuiteType:
+    type: string
+    enum:
+      - ROS
+  RobotSoftwareSuiteVersionType:
+    type: string
+    enum:
+      - Kinetic
+  S3Etag:
+    type: string
+  SecurityGroups:
+    type: array
+    items:
+      $ref: '#/definitions/GenericString'
+    minItems: 1
+    maxItems: 5
+  SimulationApplicationConfig:
+    type: object
+    required:
+      - application
+      - launchConfig
+    properties:
+      application:
+        $ref: '#/definitions/Arn'
+        description: The application information for the simulation application.
+      applicationVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the simulation application.
+      launchConfig:
+        $ref: '#/definitions/LaunchConfig'
+        description: The launch configuration for the simulation application.
+    description: Information about a simulation application configuration.
+  SimulationApplicationNames:
+    type: array
+    items:
+      $ref: '#/definitions/Name'
+    minItems: 1
+    maxItems: 1
+  SimulationApplicationSummary:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the simulation application.
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the simulation application.
+      version:
+        $ref: '#/definitions/Version'
+        description: The version of the simulation application.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
+    description: Summary information for a simulation application.
+  SimulationJob:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the simulation job.
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the simulation job.
+      status:
+        $ref: '#/definitions/SimulationJobStatus'
+        description: Status of the simulation job.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job was last updated.'
+      failureBehavior:
+        $ref: '#/definitions/FailureBehavior'
+        description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
+      failureCode:
+        $ref: '#/definitions/SimulationJobErrorCode'
+        description: The failure code of the simulation job if it failed.
+      clientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: A unique identifier for this <code>SimulationJob</code> request.
+      outputLocation:
+        $ref: '#/definitions/OutputLocation'
+        description: Location for output files generated by the simulation job.
+      maxJobDurationInSeconds:
+        $ref: '#/definitions/JobDuration'
+        description: 'The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less.'
+      simulationTimeMillis:
+        $ref: '#/definitions/SimulationTimeMillis'
+        description: The simulation job execution duration in milliseconds.
+      iamRole:
+        $ref: '#/definitions/IamRole'
+        description: 'The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. See how to <a href="https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials">specify AWS security credentials for your application</a>. '
+      robotApplications:
+        $ref: '#/definitions/RobotApplicationConfigs'
+        description: A list of robot applications.
+      simulationApplications:
+        $ref: '#/definitions/SimulationApplicationConfigs'
+        description: A list of simulation applications.
+      vpcConfig:
+        $ref: '#/definitions/VPCConfigResponse'
+        description: VPC configuration information.
+    description: Information about a simulation job.
+  SimulationJobSummary:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the simulation job.
+      lastUpdatedAt:
+        $ref: '#/definitions/LastUpdatedAt'
+        description: 'The time, in milliseconds since the epoch, when the simulation job was last updated.'
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the simulation job.
+      status:
+        $ref: '#/definitions/SimulationJobStatus'
+        description: The status of the simulation job.
+      simulationApplicationNames:
+        $ref: '#/definitions/SimulationApplicationNames'
+        description: A list of simulation job simulation application names.
+      robotApplicationNames:
+        $ref: '#/definitions/RobotApplicationNames'
+        description: A list of simulation job robot application names.
+    description: Summary information for a simulation job.
+  SimulationSoftwareSuiteType:
+    type: string
+    enum:
+      - Gazebo
+  SimulationSoftwareSuiteVersionType:
+    type: string
+    pattern: '7'
+  Source:
+    type: object
+    properties:
+      s3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The s3 bucket name.
+      s3Key:
+        $ref: '#/definitions/S3Key'
+        description: The s3 object key.
+      etag:
+        $ref: '#/definitions/S3Etag'
+        description: A hash of the object specified by <code>s3Bucket</code> and <code>s3Key</code>.
+      architecture:
+        $ref: '#/definitions/Architecture'
+        description: The taget processor architecture for the application.
+    description: Information about a source.
+  SourceConfig:
+    type: object
+    properties:
+      s3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The Amazon S3 bucket name.
+      s3Key:
+        $ref: '#/definitions/S3Key'
+        description: The s3 object key.
+      architecture:
+        $ref: '#/definitions/Architecture'
+        description: The target processor architecture for the application.
+    description: Information about a source configuration.
+  Subnets:
+    type: array
+    items:
+      $ref: '#/definitions/GenericString'
+    minItems: 1
+    maxItems: 16

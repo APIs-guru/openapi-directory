@@ -546,7 +546,7 @@ paths:
   '/{Bucket}#DeletePublicAccessBlock':
     delete:
       operationId: DeletePublicAccessBlock
-      description: Removes the Public Access Block configuration for an Amazon S3 bucket.
+      description: Removes the <code>PublicAccessBlock</code> configuration from an Amazon S3 bucket.
       responses:
         '200':
           description: Success
@@ -1213,7 +1213,7 @@ paths:
   '/{Bucket}#GetPublicAccessBlock':
     get:
       operationId: GetPublicAccessBlock
-      description: Retrieves the Public Access Block configuration for an Amazon S3 bucket.
+      description: Retrieves the <code>PublicAccessBlock</code> configuration for an Amazon S3 bucket.
       responses:
         '200':
           description: Success
@@ -2136,7 +2136,7 @@ paths:
   '/{Bucket}#PutPublicAccessBlock':
     put:
       operationId: PutPublicAccessBlock
-      description: Creates or modifies the Public Access Block configuration for an Amazon S3 bucket.
+      description: Creates or modifies the <code>PublicAccessBlock</code> configuration for an Amazon S3 bucket.
       responses:
         '200':
           description: Success
@@ -2451,10 +2451,12 @@ definitions:
     type: object
     example:
       Deleted:
-        - Key: HappyFace.jpg
-          VersionId: yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd
-        - Key: HappyFace.jpg
-          VersionId: 2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b
+        - DeleteMarker: 'true'
+          DeleteMarkerVersionId: A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F
+          Key: objectkey1
+        - DeleteMarker: 'true'
+          DeleteMarkerVersionId: iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt
+          Key: objectkey2
     properties:
       Deleted:
         $ref: '#/definitions/DeletedObjects'
@@ -2468,10 +2470,8 @@ definitions:
       Bucket: examplebucket
       Delete:
         Objects:
-          - Key: HappyFace.jpg
-            VersionId: 2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b
-          - Key: HappyFace.jpg
-            VersionId: yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd
+          - Key: objectkey1
+          - Key: objectkey2
         Quiet: false
     properties:
       Delete:
@@ -2665,7 +2665,7 @@ definitions:
     properties:
       PolicyStatus:
         $ref: '#/definitions/PolicyStatus'
-        description: The public-policy status for this bucket.
+        description: The policy status for the specified bucket.
   GetBucketPolicyStatusRequest:
     type: object
     properties: {}
@@ -2855,7 +2855,7 @@ definitions:
     properties:
       PublicAccessBlockConfiguration:
         $ref: '#/definitions/PublicAccessBlockConfiguration'
-        description: The Public Access Block configuration currently in effect for this Amazon S3 bucket.
+        description: The <code>PublicAccessBlock</code> configuration currently in effect for this Amazon S3 bucket.
   GetPublicAccessBlockRequest:
     type: object
     properties: {}
@@ -3521,16 +3521,16 @@ definitions:
     example:
       ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
       ServerSideEncryption: AES256
-      VersionId: Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt
+      VersionId: CG612hodqujkf8FaaNfp8U..FIhLROcp
     properties: {}
   PutObjectRequest:
     type: object
     example:
-      Body: filetoupload
+      Body: HappyFace.jpg
       Bucket: examplebucket
-      Key: exampleobject
+      Key: HappyFace.jpg
       ServerSideEncryption: AES256
-      Tagging: key1=value1&key2=value2
+      StorageClass: STANDARD_IA
     properties:
       Body:
         $ref: '#/definitions/Body'
@@ -3582,7 +3582,7 @@ definitions:
     properties:
       PublicAccessBlockConfiguration:
         $ref: '#/definitions/PublicAccessBlockConfiguration'
-        description: The Public Access Block configuration that you want to apply to this Amazon S3 bucket.
+        description: 'The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when &amp;S3; considers a bucket or object public, see For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the Amazon Simple Storage Service Developer Guide.'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   RestoreObjectOutput:
@@ -4271,6 +4271,7 @@ definitions:
       - REDUCED_REDUNDANCY
       - STANDARD_IA
       - ONEZONE_IA
+      - INTELLIGENT_TIERING
   WebsiteRedirectLocation:
     type: string
   SSECustomerKey:
@@ -4589,8 +4590,8 @@ definitions:
     properties:
       IsPublic:
         $ref: '#/definitions/IsPublic'
-        description: The public-policy status for this bucket. <code>TRUE</code> indicates that this bucket is public. <code>FALSE</code> indicates that the bucket is not public.
-    description: The container element for this bucket's public-policy status.
+        description: The policy status for this bucket. <code>TRUE</code> indicates that this bucket is public. <code>FALSE</code> indicates that the bucket is not public.
+    description: The container element for a bucket's policy status.
   ReplicationConfiguration:
     type: object
     required:
@@ -4682,17 +4683,16 @@ definitions:
     properties:
       BlockPublicAcls:
         $ref: '#/definitions/Setting'
-        description: '<p/> <p>Specifies whether Amazon S3 should block public ACLs for this bucket. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls will fail if the specified ACL allows public access.</p> </li> <li> <p>PUT Object calls will fail if the request includes an object ACL.</p> </li> </ul> <p>Note that enabling this setting doesn''t affect existing policies or ACLs.</p>'
+        description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p>'
       IgnorePublicAcls:
         $ref: '#/definitions/Setting'
-        description: <p>Specifies whether Amazon S3 should ignore public ACLs for this bucket. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on this bucket and any objects that it contains. </p> <p>Note that enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>
+        description: <p>Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket.</p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>
       BlockPublicPolicy:
         $ref: '#/definitions/Setting'
-        description: <p>Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Note that enabling this setting doesn't affect existing bucket policies.</p>
+        description: <p>Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p>
       RestrictPublicBuckets:
         $ref: '#/definitions/Setting'
-        description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for this bucket. If this element is set to <code>TRUE</code>, then only the bucket owner and AWS Services can access this bucket if it has a public policy.</p> <p>Note that enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
-    description: '<p>The container element for all Public Access Block configuration options. You can enable the configuration options in any combination.</p> <p>Amazon S3 considers a bucket policy public unless at least one of the following conditions is true:</p> <ol> <li> <p>The policy limits access to a set of CIDRs using <code>aws:SourceIp</code>. For more information on CIDR, see <a href="http://www.rfc-editor.org/rfc/rfc4632.txt">http://www.rfc-editor.org/rfc/rfc4632.txt</a> </p> </li> <li> <p>The policy grants permissions, not including any "bad actions," to one of the following:</p> <ul> <li> <p>A fixed AWS principal, user, role, or service principal</p> </li> <li> <p>A fixed <code>aws:SourceArn</code> </p> </li> <li> <p>A fixed <code>aws:SourceVpc</code> </p> </li> <li> <p>A fixed <code>aws:SourceVpce</code> </p> </li> <li> <p>A fixed <code>aws:SourceOwner</code> </p> </li> <li> <p>A fixed <code>aws:SourceAccount</code> </p> </li> <li> <p>A fixed value of <code>s3:x-amz-server-side-encryption-aws-kms-key-id</code> </p> </li> <li> <p>A fixed value of <code>aws:userid</code> outside the pattern "<code>AROLEID:*</code>"</p> </li> </ul> </li> </ol> <p>"Bad actions" are those that could expose the data inside a bucket to reads or writes by the public. These actions are <code>s3:Get*</code>, <code>s3:List*</code>, <code>s3:AbortMultipartUpload</code>, <code>s3:Delete*</code>, <code>s3:Put*</code>, and <code>s3:RestoreObject</code>.</p> <p>The star notation for bad actions indicates that all matching operations are considered bad actions. For example, because <code>s3:Get*</code> is a bad action, <code>s3:GetObject</code>, <code>s3:GetObjectVersion</code>, and <code>s3:GetObjectAcl</code> are all bad actions.</p>'
+        description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to <code>TRUE</code> restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
   Tier:
     type: string
     enum:
@@ -5176,6 +5176,7 @@ definitions:
       - GLACIER
       - STANDARD_IA
       - ONEZONE_IA
+      - INTELLIGENT_TIERING
   NoncurrentVersionTransition:
     type: object
     properties:
@@ -5185,7 +5186,7 @@ definitions:
       StorageClass:
         $ref: '#/definitions/TransitionStorageClass'
         description: The class of storage used to store the object.
-    description: 'Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, or GLACIER storage class at a specific period in the object''s lifetime.'
+    description: 'Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING or GLACIER storage class at a specific period in the object''s lifetime.'
   TopicConfigurationList:
     type: array
     items:
@@ -5238,6 +5239,7 @@ definitions:
       - GLACIER
       - STANDARD_IA
       - ONEZONE_IA
+      - INTELLIGENT_TIERING
   Object:
     type: object
     properties:
