@@ -3,7 +3,7 @@ info:
   version: '2017-06-07'
   x-release: v4
   title: AWS Greengrass
-  description: 'AWS Greengrass seamlessly extends AWS onto physical devices so they can act locally on the data they generate, while still using the cloud for management, analytics, and durable storage. AWS Greengrass ensures your devices can respond quickly to local events and operate with intermittent connectivity. AWS Greengrass minimizes the cost of transmitting data to the cloud by allowing you to author AWS Lambda functions that execute locally.'
+  description: 'AWS IoT Greengrass seamlessly extends AWS onto physical devices so they can act locally on the data they generate, while still using the cloud for management, analytics, and durable storage. AWS IoT Greengrass ensures your devices can respond quickly to local events and operate with intermittent connectivity. AWS IoT Greengrass minimizes the cost of transmitting data to the cloud by allowing you to author AWS Lambda functions that execute locally.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -102,7 +102,7 @@ paths:
   '/greengrass/groups/{GroupId}/role':
     put:
       operationId: AssociateRoleToGroup
-      description: Associates a role with a group. Your AWS Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
+      description: Associates a role with a group. Your Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
       responses:
         '200':
           description: Success
@@ -191,7 +191,7 @@ paths:
   /greengrass/servicerole:
     put:
       operationId: AssociateServiceRoleToAccount
-      description: Associates a role with your account. AWS Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
+      description: Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
       responses:
         '200':
           description: Success
@@ -257,10 +257,108 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetServiceRoleForAccountRequest'
+  /greengrass/definition/connectors:
+    post:
+      operationId: CreateConnectorDefinition
+      description: Creates a connector definition. You may provide the initial version of the connector definition now or use ''CreateConnectorDefinitionVersion'' at a later time.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateConnectorDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateConnectorDefinitionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListConnectorDefinitions
+      description: Retrieves a list of connector definitions.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListConnectorDefinitionsResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListConnectorDefinitionsRequest'
+  '/greengrass/definition/connectors/{ConnectorDefinitionId}/versions':
+    post:
+      operationId: CreateConnectorDefinitionVersion
+      description: Creates a version of a connector definition which has already been defined.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateConnectorDefinitionVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateConnectorDefinitionVersionRequest'
+        - name: ConnectorDefinitionId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListConnectorDefinitionVersions
+      description: 'Lists the versions of a connector definition, which are containers for connectors. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListConnectorDefinitionVersionsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListConnectorDefinitionVersionsRequest'
+        - name: ConnectorDefinitionId
+          in: path
+          type: string
+          required: true
   /greengrass/definition/cores:
     post:
       operationId: CreateCoreDefinition
-      description: Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
+      description: Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. Greengrass groups must each contain exactly one Greengrass core.
       responses:
         '200':
           description: Success
@@ -303,7 +401,7 @@ paths:
   '/greengrass/definition/cores/{CoreDefinitionId}/versions':
     post:
       operationId: CreateCoreDefinitionVersion
-      description: Creates a version of a core definition that has already been defined. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
+      description: Creates a version of a core definition that has already been defined. Greengrass groups must each contain exactly one Greengrass core.
       responses:
         '200':
           description: Success
@@ -609,7 +707,7 @@ paths:
   /greengrass/groups:
     post:
       operationId: CreateGroup
-      description: Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time.
+      description: 'Creates a group. You may provide the initial version of the group or use ''''CreateGroupVersion'''' at a later time. Tip: You can use the ''''gg_group_setup'''' package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.'
       responses:
         '200':
           description: Success
@@ -1091,6 +1189,83 @@ paths:
           schema:
             $ref: '#/definitions/ListSubscriptionDefinitionVersionsRequest'
         - name: SubscriptionDefinitionId
+          in: path
+          type: string
+          required: true
+  '/greengrass/definition/connectors/{ConnectorDefinitionId}':
+    delete:
+      operationId: DeleteConnectorDefinition
+      description: Deletes a connector definition.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteConnectorDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteConnectorDefinitionRequest'
+        - name: ConnectorDefinitionId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetConnectorDefinition
+      description: Retrieves information about a connector definition.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetConnectorDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetConnectorDefinitionRequest'
+        - name: ConnectorDefinitionId
+          in: path
+          type: string
+          required: true
+    put:
+      operationId: UpdateConnectorDefinition
+      description: Updates a connector definition.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateConnectorDefinitionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateConnectorDefinitionRequest'
+        - name: ConnectorDefinitionId
           in: path
           type: string
           required: true
@@ -1729,6 +1904,43 @@ paths:
           in: path
           type: string
           required: true
+  '/greengrass/definition/connectors/{ConnectorDefinitionId}/versions/{ConnectorDefinitionVersionId}':
+    get:
+      operationId: GetConnectorDefinitionVersion
+      description: 'Retrieves information about a connector definition version, including the connectors that the version contains. Connectors are prebuilt modules that interact with local infrastructure, device protocols, AWS, and other cloud services.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetConnectorDefinitionVersionResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetConnectorDefinitionVersionRequest'
+        - name: ConnectorDefinitionId
+          in: path
+          type: string
+          required: true
+        - name: ConnectorDefinitionVersionId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/greengrass/definition/cores/{CoreDefinitionId}/versions/{CoreDefinitionVersionId}':
     get:
       operationId: GetCoreDefinitionVersion
@@ -2302,6 +2514,60 @@ definitions:
       RoleArn:
         $ref: '#/definitions/__string'
         description: The ARN of the service role you wish to associate with your account.
+  CreateConnectorDefinitionResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the definition.
+      CreationTimestamp:
+        $ref: '#/definitions/__string'
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The ID of the definition.
+      LastUpdatedTimestamp:
+        $ref: '#/definitions/__string'
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+      LatestVersion:
+        $ref: '#/definitions/__string'
+        description: The latest version of the definition.
+      LatestVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the latest version of the definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  CreateConnectorDefinitionRequest:
+    type: object
+    properties:
+      InitialVersion:
+        $ref: '#/definitions/ConnectorDefinitionVersion'
+        description: Information about the initial version of the connector definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the connector definition.
+  CreateConnectorDefinitionVersionResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the version.
+      CreationTimestamp:
+        $ref: '#/definitions/__string'
+        description: 'The time, in milliseconds since the epoch, when the version was created.'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The ID of the version.
+      Version:
+        $ref: '#/definitions/__string'
+        description: The unique ID of the version.
+  CreateConnectorDefinitionVersionRequest:
+    type: object
+    properties:
+      Connectors:
+        $ref: '#/definitions/__listOfConnector'
+        description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
   CreateCoreDefinitionResponse:
     type: object
     properties:
@@ -2483,6 +2749,9 @@ definitions:
   CreateFunctionDefinitionVersionRequest:
     type: object
     properties:
+      DefaultConfig:
+        $ref: '#/definitions/FunctionDefaultConfig'
+        description: Default configuration that will apply to all Lambda functions in this function definition version
       Functions:
         $ref: '#/definitions/__listOfFunction'
         description: A list of Lambda functions in this function definition version.
@@ -2547,6 +2816,9 @@ definitions:
   CreateGroupVersionRequest:
     type: object
     properties:
+      ConnectorDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the connector definition version for this group.
       CoreDefinitionVersionArn:
         $ref: '#/definitions/__string'
         description: The ARN of the core definition version for this group.
@@ -2561,7 +2833,7 @@ definitions:
         description: The ARN of the logger definition version for this group.
       ResourceDefinitionVersionArn:
         $ref: '#/definitions/__string'
-        description: The resource definition version ARN for this group.
+        description: The ARN of the resource definition version for this group.
       SubscriptionDefinitionVersionArn:
         $ref: '#/definitions/__string'
         description: The ARN of the subscription definition version for this group.
@@ -2751,6 +3023,12 @@ definitions:
       Subscriptions:
         $ref: '#/definitions/__listOfSubscription'
         description: A list of subscriptions.
+  DeleteConnectorDefinitionResponse:
+    type: object
+    properties: {}
+  DeleteConnectorDefinitionRequest:
+    type: object
+    properties: {}
   DeleteCoreDefinitionResponse:
     type: object
     properties: {}
@@ -2854,6 +3132,57 @@ definitions:
         $ref: '#/definitions/__string'
         description: A message about the connectivity info request.
   GetConnectivityInfoRequest:
+    type: object
+    properties: {}
+  GetConnectorDefinitionResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the definition.
+      CreationTimestamp:
+        $ref: '#/definitions/__string'
+        description: 'The time, in milliseconds since the epoch, when the definition was created.'
+      Id:
+        $ref: '#/definitions/__string'
+        description: The ID of the definition.
+      LastUpdatedTimestamp:
+        $ref: '#/definitions/__string'
+        description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+      LatestVersion:
+        $ref: '#/definitions/__string'
+        description: The latest version of the definition.
+      LatestVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the latest version of the definition.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
+  GetConnectorDefinitionRequest:
+    type: object
+    properties: {}
+  GetConnectorDefinitionVersionResponse:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the connector definition version.
+      CreationTimestamp:
+        $ref: '#/definitions/__string'
+        description: 'The time, in milliseconds since the epoch, when the connector definition version was created.'
+      Definition:
+        $ref: '#/definitions/ConnectorDefinitionVersion'
+        description: Information about the connector definition version.
+      Id:
+        $ref: '#/definitions/__string'
+        description: The ID of the connector definition version.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+      Version:
+        $ref: '#/definitions/__string'
+        description: The version of the connector definition version.
+  GetConnectorDefinitionVersionRequest:
     type: object
     properties: {}
   GetCoreDefinitionResponse:
@@ -3291,6 +3620,30 @@ definitions:
   ListBulkDeploymentsRequest:
     type: object
     properties: {}
+  ListConnectorDefinitionVersionsResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+      Versions:
+        $ref: '#/definitions/__listOfVersionInformation'
+        description: Information about a version.
+  ListConnectorDefinitionVersionsRequest:
+    type: object
+    properties: {}
+  ListConnectorDefinitionsResponse:
+    type: object
+    properties:
+      Definitions:
+        $ref: '#/definitions/__listOfDefinitionInformation'
+        description: Information about a definition.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+  ListConnectorDefinitionsRequest:
+    type: object
+    properties: {}
   ListCoreDefinitionVersionsResponse:
     type: object
     properties:
@@ -3513,7 +3866,7 @@ definitions:
         description: 'The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''''greengrass:CreateDeployment'''' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.'
       InputFileUri:
         $ref: '#/definitions/__string'
-        description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100MB. Currently, Greengrass; supports only ''''NewDeployment'''' deployment types.'
+        description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''''NewDeployment'''' deployment types.'
   StopBulkDeploymentResponse:
     type: object
     properties: {}
@@ -3536,6 +3889,15 @@ definitions:
         $ref: '#/definitions/__listOfConnectivityInfo'
         description: A list of connectivity info.
     description: Connectivity information.
+  UpdateConnectorDefinitionResponse:
+    type: object
+    properties: {}
+  UpdateConnectorDefinitionRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The name of the definition.
   UpdateCoreDefinitionResponse:
     type: object
     properties: {}
@@ -3631,7 +3993,7 @@ definitions:
       CreatedAt:
         $ref: '#/definitions/__string'
         description: 'The time, in ISO format, when the deployment was created.'
-    description: Information about a bulk deployment.
+    description: Information about a bulk deployment. You cannot start a new bulk deployment while another one is still running or in a non-terminal state.
   __integer:
     type: integer
   BulkDeploymentMetrics:
@@ -3722,6 +4084,39 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The port of the Greengrass core. Usually 8883.
     description: Information about a Greengrass core's connectivity.
+  __mapOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
+  Connector:
+    type: object
+    properties:
+      ConnectorArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the connector.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'A descriptive or arbitrary ID for the connector. This value must be unique within the connector definition version. Max length is 128 characters with pattern [a-zA-Z0-9:_-]+.'
+      Parameters:
+        $ref: '#/definitions/__mapOf__string'
+        description: The parameters or configuration that the connector uses.
+    description: 'Information about a connector. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.'
+  __listOfConnector:
+    type: array
+    items:
+      $ref: '#/definitions/Connector'
+  ConnectorDefinitionVersion:
+    type: object
+    properties:
+      Connectors:
+        $ref: '#/definitions/__listOfConnector'
+        description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
+    description: 'Information about the connector definition version, which is a container for connectors.'
   __boolean:
     type: boolean
   Core:
@@ -3732,7 +4127,7 @@ definitions:
         description: The ARN of the certificate associated with the core.
       Id:
         $ref: '#/definitions/__string'
-        description: 'A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
+        description: 'A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
       SyncShadow:
         $ref: '#/definitions/__boolean'
         description: 'If true, the core''s local shadow is automatically synced with the cloud.'
@@ -3765,10 +4160,19 @@ definitions:
   FunctionDefinitionVersion:
     type: object
     properties:
+      DefaultConfig:
+        $ref: '#/definitions/FunctionDefaultConfig'
+        description: Default configuration that will apply to all Lambda functions in this function definition version
       Functions:
         $ref: '#/definitions/__listOfFunction'
         description: A list of Lambda functions in this function definition version.
     description: Information about a function definition version.
+  FunctionDefaultConfig:
+    type: object
+    properties:
+      Execution:
+        $ref: '#/definitions/FunctionDefaultExecutionConfig'
+    description: Default configuration that will apply to all Lambda functions in the group.
   __listOfFunction:
     type: array
     items:
@@ -3776,6 +4180,9 @@ definitions:
   GroupVersion:
     type: object
     properties:
+      ConnectorDefinitionVersionArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the connector definition version for this group.
       CoreDefinitionVersionArn:
         $ref: '#/definitions/__string'
         description: The ARN of the core definition version for this group.
@@ -3790,7 +4197,7 @@ definitions:
         description: The ARN of the logger definition version for this group.
       ResourceDefinitionVersionArn:
         $ref: '#/definitions/__string'
-        description: The resource definition version ARN for this group.
+        description: The ARN of the resource definition version for this group.
       SubscriptionDefinitionVersionArn:
         $ref: '#/definitions/__string'
         description: The ARN of the subscription definition version for this group.
@@ -3924,7 +4331,7 @@ definitions:
         description: The ARN of the certificate associated with the device.
       Id:
         $ref: '#/definitions/__string'
-        description: 'A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
+        description: 'A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
       SyncShadow:
         $ref: '#/definitions/__boolean'
         description: 'If true, the device''s local shadow will be automatically synced with the cloud.'
@@ -3964,13 +4371,13 @@ definitions:
         description: The name of the function executable.
       MemorySize:
         $ref: '#/definitions/__integer'
-        description: 'The memory size, in KB, which the function requires.'
+        description: 'The memory size, in KB, which the function requires. This setting is not applicable and should be cleared when you run the Lambda function without containerization.'
       Pinned:
         $ref: '#/definitions/__boolean'
         description: True if the function is pinned. Pinned means the function is long-lived and starts when the core starts.
       Timeout:
         $ref: '#/definitions/__integer'
-        description: 'The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned lambdas for each request.'
+        description: 'The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned Lambda functions for each request.'
     description: The configuration of the Lambda function.
   Function:
     type: object
@@ -3983,34 +4390,58 @@ definitions:
         description: The configuration of the Lambda function.
       Id:
         $ref: '#/definitions/__string'
-        description: 'A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
+        description: 'A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
     description: Information about a Lambda function.
   FunctionConfigurationEnvironment:
     type: object
     properties:
       AccessSysfs:
         $ref: '#/definitions/__boolean'
-        description: 'If true, the Lambda function is allowed to access the host''s /sys folder. Use this when the Lambda function needs to read device information from /sys.'
+        description: 'If true, the Lambda function is allowed to access the host''s /sys folder. Use this when the Lambda function needs to read device information from /sys. This setting applies only when you run the Lambda function in a Greengrass container.'
+      Execution:
+        $ref: '#/definitions/FunctionExecutionConfig'
+        description: Configuration related to executing the Lambda function
       ResourceAccessPolicies:
         $ref: '#/definitions/__listOfResourceAccessPolicy'
-        description: 'A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources.'
+        description: 'A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources. ResourceAccessPolicies apply only when you run the Lambda function in a Greengrass container.'
       Variables:
         $ref: '#/definitions/__mapOf__string'
         description: Environment variables for the Lambda function's configuration.
     description: The environment configuration of the function.
+  FunctionExecutionConfig:
+    type: object
+    properties:
+      IsolationMode:
+        $ref: '#/definitions/FunctionIsolationMode'
+      RunAs:
+        $ref: '#/definitions/FunctionRunAsConfig'
+    description: 'Configuration information that specifies how the Lambda function runs. '
   __listOfResourceAccessPolicy:
     type: array
     items:
       $ref: '#/definitions/ResourceAccessPolicy'
-  __mapOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
+  FunctionDefaultExecutionConfig:
+    type: object
+    properties:
+      IsolationMode:
+        $ref: '#/definitions/FunctionIsolationMode'
+    description: Configuration that defines the default containerization used for when running Lambda functions in the group. Individual Lambda functions can be override this setting.
+  FunctionIsolationMode:
+    type: string
+    enum:
+      - GreengrassContainer
+      - NoContainer
+    description: 'Specifies whether the Lambda function runs in a Greengrass container (default) or without containerization. Unless your scenario requires that you run without containerization, we recommend that you run in a Greengrass container. Omit this value to run the Lambda function with the default containerization for the group.'
+  FunctionRunAsConfig:
+    type: object
+    properties:
+      Gid:
+        $ref: '#/definitions/__integer'
+        description: The Group ID whose permissions are used to run a Lambda function.
+      Uid:
+        $ref: '#/definitions/__integer'
+        description: The User ID whose permissions are used to run a Lambda function.
+    description: 'Specifies the user and/or group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values (ggc_user/ggc_group). We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set IsolationMode to NoContainer and you must update config.json in greengrass-root/config to set allowFunctionsToRunAsRoot to yes.'
   __listOfConnectivityInfo:
     type: array
     items:
@@ -4055,7 +4486,7 @@ definitions:
     properties:
       AutoAddGroupOwner:
         $ref: '#/definitions/__boolean'
-        description: 'If true, GreenGrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group.'
+        description: 'If true, AWS IoT Greengrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group.'
       GroupOwner:
         $ref: '#/definitions/__string'
         description: The name of the Linux OS group whose privileges will be added to the Lambda process. This field is optional.
@@ -4091,13 +4522,13 @@ definitions:
     properties:
       DestinationPath:
         $ref: '#/definitions/__string'
-        description: The absolute local path of the resource inside the lambda environment.
+        description: The absolute local path of the resource inside the Lambda environment.
       GroupOwnerSetting:
         $ref: '#/definitions/GroupOwnerSetting'
         description: Allows you to configure additional group privileges for the Lambda process. This field is optional.
       SourcePath:
         $ref: '#/definitions/__string'
-        description: The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/proc'' or ''/sys''.
+        description: The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
     description: Attributes that define a local volume resource.
   LoggerComponent:
     type: string
@@ -4125,7 +4556,7 @@ definitions:
         description: The component that will be subject to logging.
       Id:
         $ref: '#/definitions/__string'
-        description: 'A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
+        description: 'A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
       Level:
         $ref: '#/definitions/LoggerLevel'
         description: The level of the logs.
@@ -4153,11 +4584,14 @@ definitions:
         description: Attributes that define the local volume resource.
       S3MachineLearningModelResourceData:
         $ref: '#/definitions/S3MachineLearningModelResourceData'
-        description: Attributes that define an S3 machine learning resource.
+        description: Attributes that define an Amazon S3 machine learning resource.
       SageMakerMachineLearningModelResourceData:
         $ref: '#/definitions/SageMakerMachineLearningModelResourceData'
-        description: Attributes that define an SageMaker machine learning resource.
-    description: 'A container for resource data. The container takes only one of the following supported resource data types: ''''LocalDeviceResourceData'''', ''''LocalVolumeResourceData'''', ''''SageMakerMachineLearningModelResourceData'''', ''''S3MachineLearningModelResourceData''''.'
+        description: Attributes that define an Amazon SageMaker machine learning resource.
+      SecretsManagerSecretResourceData:
+        $ref: '#/definitions/SecretsManagerSecretResourceData'
+        description: 'Attributes that define a secret resource, which references a secret from AWS Secrets Manager.'
+    description: 'A container for resource data. The container takes only one of the following supported resource data types: ''''LocalDeviceResourceData'''', ''''LocalVolumeResourceData'''', ''''SageMakerMachineLearningModelResourceData'''', ''''S3MachineLearningModelResourceData'''', ''''SecretsManagerSecretResourceData''''.'
   Resource:
     type: object
     properties:
@@ -4166,7 +4600,7 @@ definitions:
         description: 'The resource ID, used to refer to a resource in the Lambda function configuration. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
       Name:
         $ref: '#/definitions/__string'
-        description: 'The descriptive resource name, which is displayed on the Greengrass console. Max length 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
+        description: 'The descriptive resource name, which is displayed on the AWS IoT Greengrass console. Max length 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
       ResourceDataContainer:
         $ref: '#/definitions/ResourceDataContainer'
         description: A container of data for all resource types.
@@ -4190,7 +4624,7 @@ definitions:
       S3Uri:
         $ref: '#/definitions/__string'
         description: The URI of the source model in an S3 bucket. The model package must be in tar.gz or .zip format.
-    description: Attributes that define an S3 machine learning resource.
+    description: Attributes that define an Amazon S3 machine learning resource.
   SageMakerMachineLearningModelResourceData:
     type: object
     properties:
@@ -4199,23 +4633,37 @@ definitions:
         description: The absolute local path of the resource inside the Lambda environment.
       SageMakerJobArn:
         $ref: '#/definitions/__string'
-        description: The ARN of the SageMaker training job that represents the source model.
-    description: Attributes that define an SageMaker machine learning resource.
+        description: The ARN of the Amazon SageMaker training job that represents the source model.
+    description: Attributes that define an Amazon SageMaker machine learning resource.
+  SecretsManagerSecretResourceData:
+    type: object
+    properties:
+      ARN:
+        $ref: '#/definitions/__string'
+        description: The ARN of the Secrets Manager secret to make available on the core. The value of the secret's latest version (represented by the ''AWSCURRENT'' staging label) is included by default.
+      AdditionalStagingLabelsToDownload:
+        $ref: '#/definitions/__listOf__string'
+        description: 'Optional. The staging labels whose values you want to make available on the core, in addition to ''''AWSCURRENT''''.'
+    description: 'Attributes that define a secret resource, which references a secret from AWS Secrets Manager. AWS IoT Greengrass stores a local, encrypted copy of the secret on the Greengrass core, where it can be securely accessed by connectors and Lambda functions.'
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
   Subscription:
     type: object
     properties:
       Id:
         $ref: '#/definitions/__string'
-        description: 'A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''''[a&#8209;zA&#8209;Z0&#8209;9:_&#8209;]+''''.'
+        description: 'A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
       Source:
         $ref: '#/definitions/__string'
-        description: 'The source of the subscription. Can be a thing ARN, a Lambda function ARN, ''cloud'' (which represents the IoT cloud), or ''GGShadowService''.'
+        description: 'The source of the subscription. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
       Subject:
         $ref: '#/definitions/__string'
         description: The subject of the message.
       Target:
         $ref: '#/definitions/__string'
-        description: 'Where the message is sent to. Can be a thing ARN, a Lambda function ARN, ''cloud'' (which represents the IoT cloud), or ''GGShadowService''.'
+        description: 'Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
     description: Information about a subscription.
   VersionInformation:
     type: object

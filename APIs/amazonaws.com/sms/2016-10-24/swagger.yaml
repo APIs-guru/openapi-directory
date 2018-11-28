@@ -3,7 +3,7 @@ info:
   version: '2016-10-24'
   x-release: v4
   title: AWS Server Migration Service
-  description: Amazon Server Migration Service automates the process of migrating servers to EC2.
+  description: '<fullname>AAWS Sever Migration Service</fullname> <p>This is the <i>AWS Sever Migration Service API Reference</i>. It provides descriptions, syntax, and usage examples for each of the actions and data types for the AWS Sever Migration Service (AWS SMS). The topic for each action shows the Query API request parameters and the XML response. You can also view the XML request elements in the WSDL.</p> <p>Alternatively, you can use one of the AWS SDKs to access an API that''s tailored to the programming language or platform that you''re using. For more information, see <a href="http://aws.amazon.com/tools/#SDKs">AWS SDKs</a>.</p> <p>To learn more about the Server Migration Service, see the following resources:</p> <ul> <li> <p> <a href="https://aws.amazon.com/server-migration-service/">AWS Sever Migration Service product page</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/server-migration-service/latest/userguide/server-migration.html">AWS Sever Migration Service User Guide</a> </p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -101,8 +101,53 @@ security:
 paths:
   /:
     post:
+      operationId: CreateApp
+      description: Creates an application. An application consists of one or more server groups. Each server group contain one or more servers.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateAppResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateAppRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateReplicationJob':
+    post:
       operationId: CreateReplicationJob
-      description: 'The CreateReplicationJob API is used to create a ReplicationJob to replicate a server on AWS. Call this API to first create a ReplicationJob, which will then schedule periodic ReplicationRuns to replicate your server to AWS. Each ReplicationRun will result in the creation of an AWS AMI.'
+      description: Creates a replication job. The replication job schedules periodic replication runs to replicate your server to AWS. Each replication run creates an Amazon Machine Image (AMI).
       responses:
         '200':
           description: Success
@@ -140,6 +185,10 @@ paths:
           description: InternalError
           schema:
             $ref: '#/definitions/InternalError'
+        '488':
+          description: TemporarilyUnavailableException
+          schema:
+            $ref: '#/definitions/TemporarilyUnavailableException'
       parameters:
         - name: body
           in: body
@@ -156,10 +205,145 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteApp':
+    post:
+      operationId: DeleteApp
+      description: Deletes an existing application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteAppResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteAppRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteAppLaunchConfiguration':
+    post:
+      operationId: DeleteAppLaunchConfiguration
+      description: Deletes existing launch configuration for an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteAppLaunchConfigurationResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteAppLaunchConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteAppReplicationConfiguration':
+    post:
+      operationId: DeleteAppReplicationConfiguration
+      description: Deletes existing replication configuration for an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteAppReplicationConfigurationResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteAppReplicationConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteReplicationJob':
     post:
       operationId: DeleteReplicationJob
-      description: 'The DeleteReplicationJob API is used to delete a ReplicationJob, resulting in no further ReplicationRuns. This will delete the contents of the S3 bucket used to store SMS artifacts, but will not delete any AMIs created by the SMS service.'
+      description: '<p>Deletes the specified replication job.</p> <p>After you delete a replication job, there are no further replication runs. AWS deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts. The AMIs created by the replication runs are not deleted.</p>'
       responses:
         '200':
           description: Success
@@ -204,7 +388,7 @@ paths:
   '/#DeleteServerCatalog':
     post:
       operationId: DeleteServerCatalog
-      description: The DeleteServerCatalog API clears all servers from your server catalog. This means that these servers will no longer be accessible to the Server Migration Service.
+      description: Deletes all servers from your server catalog.
       responses:
         '200':
           description: Success
@@ -245,7 +429,7 @@ paths:
   '/#DisassociateConnector':
     post:
       operationId: DisassociateConnector
-      description: 'The DisassociateConnector API will disassociate a connector from the Server Migration Service, rendering it unavailable to support replication jobs.'
+      description: '<p>Disassociates the specified connector from AWS SMS.</p> <p>After you disassociate a connector, it is no longer available to support replication jobs.</p>'
       responses:
         '200':
           description: Success
@@ -283,10 +467,235 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GenerateChangeSet':
+    post:
+      operationId: GenerateChangeSet
+      description: Generates a target change set for a currently launched stack and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GenerateChangeSetResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GenerateChangeSetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GenerateTemplate':
+    post:
+      operationId: GenerateTemplate
+      description: Generates an Amazon CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GenerateTemplateResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GenerateTemplateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetApp':
+    post:
+      operationId: GetApp
+      description: Retrieve information about an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAppResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAppRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetAppLaunchConfiguration':
+    post:
+      operationId: GetAppLaunchConfiguration
+      description: Retrieves the application launch configuration associated with an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAppLaunchConfigurationResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAppLaunchConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetAppReplicationConfiguration':
+    post:
+      operationId: GetAppReplicationConfiguration
+      description: Retrieves an application replication configuration associatd with an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAppReplicationConfigurationResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAppReplicationConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetConnectors':
     post:
       operationId: GetConnectors
-      description: The GetConnectors API returns a list of connectors that are registered with the Server Migration Service.
+      description: Describes the connectors registered with the AWS SMS.
       responses:
         '200':
           description: Success
@@ -325,7 +734,7 @@ paths:
   '/#GetReplicationJobs':
     post:
       operationId: GetReplicationJobs
-      description: 'The GetReplicationJobs API will return all of your ReplicationJobs and their details. This API returns a paginated list, that may be consecutively called with nextToken to retrieve all ReplicationJobs.'
+      description: Describes the specified replication job or all of your replication jobs.
       responses:
         '200':
           description: Success
@@ -372,7 +781,7 @@ paths:
   '/#GetReplicationRuns':
     post:
       operationId: GetReplicationRuns
-      description: 'The GetReplicationRuns API will return all ReplicationRuns for a given ReplicationJob. This API returns a paginated list, that may be consecutively called with nextToken to retrieve all ReplicationRuns for a ReplicationJob.'
+      description: Describes the replication runs for the specified replication job.
       responses:
         '200':
           description: Success
@@ -419,7 +828,7 @@ paths:
   '/#GetServers':
     post:
       operationId: GetServers
-      description: 'The GetServers API returns a list of all servers in your server catalog. For this call to succeed, you must previously have called ImportServerCatalog.'
+      description: '<p>Describes the servers in your server catalog.</p> <p>Before you can describe your servers, you must import them using <a>ImportServerCatalog</a>.</p>'
       responses:
         '200':
           description: Success
@@ -458,7 +867,7 @@ paths:
   '/#ImportServerCatalog':
     post:
       operationId: ImportServerCatalog
-      description: 'The ImportServerCatalog API is used to gather the complete list of on-premises servers on your premises. This API call requires connectors to be installed and monitoring all servers you would like imported. This API call returns immediately, but may take some time to retrieve all of the servers.'
+      description: '<p>Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers that you want to import.</p> <p>This call returns immediately, but might take additional time to retrieve all the servers.</p>'
       responses:
         '200':
           description: Success
@@ -500,10 +909,235 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#LaunchApp':
+    post:
+      operationId: LaunchApp
+      description: Launches an application stack.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/LaunchAppResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/LaunchAppRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListApps':
+    post:
+      operationId: ListApps
+      description: Returns a list of summaries for all applications.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAppsResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAppsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutAppLaunchConfiguration':
+    post:
+      operationId: PutAppLaunchConfiguration
+      description: Creates a launch configuration for an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutAppLaunchConfigurationResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutAppLaunchConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutAppReplicationConfiguration':
+    post:
+      operationId: PutAppReplicationConfiguration
+      description: Creates or updates a replication configuration for an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutAppReplicationConfigurationResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutAppReplicationConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartAppReplication':
+    post:
+      operationId: StartAppReplication
+      description: Starts replicating an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartAppReplicationResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartAppReplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#StartOnDemandReplicationRun':
     post:
       operationId: StartOnDemandReplicationRun
-      description: The StartOnDemandReplicationRun API is used to start a ReplicationRun on demand (in addition to those that are scheduled based on your frequency). This ReplicationRun will start immediately. StartOnDemandReplicationRun is subject to limits on how many on demand ReplicationRuns you may call per 24-hour period.
+      description: <p>Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled.</p> <p>There is a limit on the number of on-demand replications runs you can request in a 24-hour period.</p>
       responses:
         '200':
           description: Success
@@ -545,10 +1179,145 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopAppReplication':
+    post:
+      operationId: StopAppReplication
+      description: Stops replicating an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopAppReplicationResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopAppReplicationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#TerminateApp':
+    post:
+      operationId: TerminateApp
+      description: Terminates the stack for an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TerminateAppResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TerminateAppRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateApp':
+    post:
+      operationId: UpdateApp
+      description: Updates an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateAppResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: MissingRequiredParameterException
+          schema:
+            $ref: '#/definitions/MissingRequiredParameterException'
+        '483':
+          description: InternalError
+          schema:
+            $ref: '#/definitions/InternalError'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAppRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateReplicationJob':
     post:
       operationId: UpdateReplicationJob
-      description: The UpdateReplicationJob API is used to change the settings of your existing ReplicationJob created using CreateReplicationJob. Calling this API will affect the next scheduled ReplicationRun.
+      description: Updates the specified settings for the specified replication job.
       responses:
         '200':
           description: Success
@@ -582,6 +1351,10 @@ paths:
           description: InternalError
           schema:
             $ref: '#/definitions/InternalError'
+        '487':
+          description: TemporarilyUnavailableException
+          schema:
+            $ref: '#/definitions/TemporarilyUnavailableException'
       parameters:
         - name: body
           in: body
@@ -599,78 +1372,123 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  CreateAppResponse:
+    type: object
+    properties:
+      appSummary:
+        $ref: '#/definitions/AppSummary'
+        description: Summary description of the application.
+      serverGroups:
+        $ref: '#/definitions/ServerGroups'
+        description: List of server groups included in the application.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: List of taags associated with the application.
+  CreateAppRequest:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/AppName'
+        description: Name of the new application.
+      description:
+        $ref: '#/definitions/AppDescription'
+        description: Description of the new application
+      roleName:
+        $ref: '#/definitions/RoleName'
+        description: Name of service role in customer's account to be used by AWS SMS.
+      clientToken:
+        $ref: '#/definitions/ClientToken'
+        description: 'A unique, case-sensitive identifier you provide to ensure idempotency of application creation.'
+      serverGroups:
+        $ref: '#/definitions/ServerGroups'
+        description: List of server groups to include in the application.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: List of tags to be associated with the application.
+  UnauthorizedOperationException: {}
+  InvalidParameterException: {}
+  MissingRequiredParameterException: {}
+  InternalError: {}
+  OperationNotPermittedException: {}
   CreateReplicationJobResponse:
     type: object
     properties:
       replicationJobId:
         $ref: '#/definitions/ReplicationJobId'
+        description: The unique identifier of the replication job.
   CreateReplicationJobRequest:
     type: object
     required:
       - serverId
       - seedReplicationTime
-      - frequency
     properties:
       serverId:
         $ref: '#/definitions/ServerId'
+        description: The identifier of the server.
       seedReplicationTime:
         $ref: '#/definitions/Timestamp'
+        description: The seed replication time.
       frequency:
         $ref: '#/definitions/Frequency'
+        description: 'The time between consecutive replication runs, in hours.'
+      runOnce:
+        $ref: '#/definitions/RunOnce'
+        description: <p/>
       licenseType:
         $ref: '#/definitions/LicenseType'
+        description: The license type to be used for the AMI created by a successful replication run.
       roleName:
         $ref: '#/definitions/RoleName'
+        description: The name of the IAM role to be used by the AWS SMS.
       description:
         $ref: '#/definitions/Description'
-  InvalidParameterException:
+        description: The description of the replication job.
+      numberOfRecentAmisToKeep:
+        $ref: '#/definitions/NumberOfRecentAmisToKeep'
+        description: The maximum number of SMS-created AMIs to retain. The oldest will be deleted once the maximum number is reached and a new AMI is created.
+      encrypted:
+        $ref: '#/definitions/Encrypted'
+        description: 'When <i>true</i>, the replication job produces encrypted AMIs. See also <code>KmsKeyId</code> below.'
+      kmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: '<p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer''s default KMS key for EBS is used. </p>'
+  ServerCannotBeReplicatedException: {}
+  ReplicationJobAlreadyExistsException: {}
+  NoConnectorsAvailableException: {}
+  TemporarilyUnavailableException: {}
+  DeleteAppResponse:
+    type: object
+    properties: {}
+  DeleteAppRequest:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'A parameter specified in the request is not valid, is unsupported, or cannot be used.'
-  MissingRequiredParameterException:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application to delete.
+      forceStopAppReplication:
+        $ref: '#/definitions/ForceStopAppReplication'
+        description: 'While deleting the application, stop all replication jobs corresponding to the servers in the application.'
+      forceTerminateApp:
+        $ref: '#/definitions/ForceTerminateApp'
+        description: 'While deleting the application, terminate the stack corresponding to the application.'
+  DeleteAppLaunchConfigurationResponse:
+    type: object
+    properties: {}
+  DeleteAppLaunchConfigurationRequest:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The request is missing a required parameter. Ensure that you have supplied all the required parameters for the request.
-  UnauthorizedOperationException:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application associated with the launch configuration.
+  DeleteAppReplicationConfigurationResponse:
+    type: object
+    properties: {}
+  DeleteAppReplicationConfigurationRequest:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: This user does not have permissions to perform this operation.
-  OperationNotPermittedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The specified operation is not allowed. This error can occur for a number of reasons; for example, you might be trying to start a Replication Run before seed Replication Run.'
-  ServerCannotBeReplicatedException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The provided server cannot be replicated.
-  ReplicationJobAlreadyExistsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: An active Replication Job already exists for the specified server.
-  NoConnectorsAvailableException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: No connectors are available to handle this request. Please associate connector(s) and verify any existing connectors are healthy and can respond to requests.
-  InternalError:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: An internal error has occured.
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application associated with the replication configuration.
   DeleteReplicationJobResponse:
     type: object
     properties: {}
@@ -681,12 +1499,8 @@ definitions:
     properties:
       replicationJobId:
         $ref: '#/definitions/ReplicationJobId'
-  ReplicationJobNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The specified Replication Job cannot be found.
+        description: The identifier of the replication job.
+  ReplicationJobNotFoundException: {}
   DeleteServerCatalogResponse:
     type: object
     properties: {}
@@ -703,45 +1517,136 @@ definitions:
     properties:
       connectorId:
         $ref: '#/definitions/ConnectorId'
+        description: The identifier of the connector.
+  GenerateChangeSetResponse:
+    type: object
+    properties:
+      s3Location:
+        $ref: '#/definitions/S3Location'
+        description: Location of the Amazon S3 object.
+  GenerateChangeSetRequest:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application associated with the change set.
+      changesetFormat:
+        $ref: '#/definitions/OutputFormat'
+        description: Format for the change set.
+  GenerateTemplateResponse:
+    type: object
+    properties:
+      s3Location:
+        $ref: '#/definitions/S3Location'
+        description: Location of the Amazon S3 object.
+  GenerateTemplateRequest:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application associated with the Amazon CloudFormation template.
+      templateFormat:
+        $ref: '#/definitions/OutputFormat'
+        description: Format for generating the Amazon CloudFormation template.
+  GetAppResponse:
+    type: object
+    properties:
+      appSummary:
+        $ref: '#/definitions/AppSummary'
+        description: Information about the application.
+      serverGroups:
+        $ref: '#/definitions/ServerGroups'
+        description: List of server groups belonging to the application.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: List of tags associated with the application.
+  GetAppRequest:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application whose information is being retrieved.
+  GetAppLaunchConfigurationResponse:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application associated with the launch configuration.
+      roleName:
+        $ref: '#/definitions/RoleName'
+        description: Name of the service role in the customer's account that Amazon CloudFormation uses to launch the application.
+      serverGroupLaunchConfigurations:
+        $ref: '#/definitions/ServerGroupLaunchConfigurations'
+        description: List of launch configurations for server groups in this application.
+  GetAppLaunchConfigurationRequest:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application launch configuration.
+  GetAppReplicationConfigurationResponse:
+    type: object
+    properties:
+      serverGroupReplicationConfigurations:
+        $ref: '#/definitions/ServerGroupReplicationConfigurations'
+        description: Replication configurations associated with server groups in this application.
+  GetAppReplicationConfigurationRequest:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application associated with the replication configuration.
   GetConnectorsResponse:
     type: object
     properties:
       connectorList:
         $ref: '#/definitions/ConnectorList'
+        description: Information about the registered connectors.
       nextToken:
         $ref: '#/definitions/NextToken'
+        description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
   GetConnectorsRequest:
     type: object
     properties:
       nextToken:
         $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
       maxResults:
         $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
   GetReplicationJobsResponse:
     type: object
     properties:
       replicationJobList:
         $ref: '#/definitions/ReplicationJobList'
+        description: Information about the replication jobs.
       nextToken:
         $ref: '#/definitions/NextToken'
+        description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
   GetReplicationJobsRequest:
     type: object
     properties:
       replicationJobId:
         $ref: '#/definitions/ReplicationJobId'
+        description: The identifier of the replication job.
       nextToken:
         $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
       maxResults:
         $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
   GetReplicationRunsResponse:
     type: object
     properties:
       replicationJob:
         $ref: '#/definitions/ReplicationJob'
+        description: Information about the replication job.
       replicationRunList:
         $ref: '#/definitions/ReplicationRunList'
+        description: Information about the replication runs.
       nextToken:
         $ref: '#/definitions/NextToken'
+        description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
   GetReplicationRunsRequest:
     type: object
     required:
@@ -749,39 +1654,118 @@ definitions:
     properties:
       replicationJobId:
         $ref: '#/definitions/ReplicationJobId'
+        description: The identifier of the replication job.
       nextToken:
         $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
       maxResults:
         $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
   GetServersResponse:
     type: object
     properties:
       lastModifiedOn:
         $ref: '#/definitions/Timestamp'
+        description: The time when the server was last modified.
       serverCatalogStatus:
         $ref: '#/definitions/ServerCatalogStatus'
+        description: The status of the server catalog.
       serverList:
         $ref: '#/definitions/ServerList'
+        description: Information about the servers.
       nextToken:
         $ref: '#/definitions/NextToken'
+        description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
   GetServersRequest:
     type: object
     properties:
       nextToken:
         $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
       maxResults:
         $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+      vmServerAddressList:
+        $ref: '#/definitions/VmServerAddressList'
+        description: List of <code>VmServerAddress</code> objects
   ImportServerCatalogResponse:
     type: object
     properties: {}
   ImportServerCatalogRequest:
     type: object
     properties: {}
+  LaunchAppResponse:
+    type: object
+    properties: {}
+  LaunchAppRequest:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application to launch.
+  ListAppsResponse:
+    type: object
+    properties:
+      apps:
+        $ref: '#/definitions/Apps'
+        description: A list of application summaries.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
+  ListAppsRequest:
+    type: object
+    properties:
+      appIds:
+        $ref: '#/definitions/AppIds'
+        description: <p/>
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of results.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. '
+  PutAppLaunchConfigurationResponse:
+    type: object
+    properties: {}
+  PutAppLaunchConfigurationRequest:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application associated with the launch configuration.
+      roleName:
+        $ref: '#/definitions/RoleName'
+        description: Name of service role in the customer's account that Amazon CloudFormation uses to launch the application.
+      serverGroupLaunchConfigurations:
+        $ref: '#/definitions/ServerGroupLaunchConfigurations'
+        description: Launch configurations for server groups in the application.
+  PutAppReplicationConfigurationResponse:
+    type: object
+    properties: {}
+  PutAppReplicationConfigurationRequest:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application tassociated with the replication configuration.
+      serverGroupReplicationConfigurations:
+        $ref: '#/definitions/ServerGroupReplicationConfigurations'
+        description: Replication configurations for server groups in the application.
+  StartAppReplicationResponse:
+    type: object
+    properties: {}
+  StartAppReplicationRequest:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application to replicate.
   StartOnDemandReplicationRunResponse:
     type: object
     properties:
       replicationRunId:
         $ref: '#/definitions/ReplicationRunId'
+        description: The identifier of the replication run.
   StartOnDemandReplicationRunRequest:
     type: object
     required:
@@ -789,14 +1773,62 @@ definitions:
     properties:
       replicationJobId:
         $ref: '#/definitions/ReplicationJobId'
+        description: The identifier of the replication job.
       description:
         $ref: '#/definitions/Description'
-  ReplicationRunLimitExceededException:
+        description: The description of the replication run.
+  ReplicationRunLimitExceededException: {}
+  StopAppReplicationResponse:
+    type: object
+    properties: {}
+  StopAppReplicationRequest:
     type: object
     properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: This user has exceeded the maximum allowed Replication Run limit.
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application to stop replicating.
+  TerminateAppResponse:
+    type: object
+    properties: {}
+  TerminateAppRequest:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application to terminate.
+  UpdateAppResponse:
+    type: object
+    properties:
+      appSummary:
+        $ref: '#/definitions/AppSummary'
+        description: Summary description of the application.
+      serverGroups:
+        $ref: '#/definitions/ServerGroups'
+        description: List of updated server groups in the application.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: List of tags associated with the application.
+  UpdateAppRequest:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: ID of the application to update.
+      name:
+        $ref: '#/definitions/AppName'
+        description: New name of the application.
+      description:
+        $ref: '#/definitions/AppDescription'
+        description: New description of the application.
+      roleName:
+        $ref: '#/definitions/RoleName'
+        description: Name of the service role in the customer's account used by AWS SMS.
+      serverGroups:
+        $ref: '#/definitions/ServerGroups'
+        description: List of server groups in the application to update.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: List of tags to associate with the application.
   UpdateReplicationJobResponse:
     type: object
     properties: {}
@@ -807,124 +1839,313 @@ definitions:
     properties:
       replicationJobId:
         $ref: '#/definitions/ReplicationJobId'
+        description: The identifier of the replication job.
       frequency:
         $ref: '#/definitions/Frequency'
+        description: 'The time between consecutive replication runs, in hours.'
       nextReplicationRunStartTime:
         $ref: '#/definitions/Timestamp'
+        description: The start time of the next replication run.
       licenseType:
         $ref: '#/definitions/LicenseType'
+        description: The license type to be used for the AMI created by a successful replication run.
       roleName:
         $ref: '#/definitions/RoleName'
+        description: The name of the IAM role to be used by AWS SMS.
       description:
         $ref: '#/definitions/Description'
+        description: The description of the replication job.
+      numberOfRecentAmisToKeep:
+        $ref: '#/definitions/NumberOfRecentAmisToKeep'
+        description: The maximum number of SMS-created AMIs to retain. The oldest will be deleted once the maximum number is reached and a new AMI is created.
+      encrypted:
+        $ref: '#/definitions/Encrypted'
+        description: 'When true, the replication job produces encrypted AMIs . See also <code>KmsKeyId</code> below.'
+      kmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: '<p/> <p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer''s default KMS key for EBS is used. </p>'
   AmiId:
     type: string
-    description: The AMI id for the image resulting from a Replication Run.
+  AppDescription:
+    type: string
+  AppId:
+    type: string
+  AppIds:
+    type: array
+    items:
+      $ref: '#/definitions/AppId'
+  AppLaunchStatus:
+    type: string
+    enum:
+      - READY_FOR_CONFIGURATION
+      - CONFIGURATION_IN_PROGRESS
+      - CONFIGURATION_INVALID
+      - READY_FOR_LAUNCH
+      - VALIDATION_IN_PROGRESS
+      - LAUNCH_PENDING
+      - LAUNCH_IN_PROGRESS
+      - LAUNCHED
+      - DELTA_LAUNCH_IN_PROGRESS
+      - DELTA_LAUNCH_FAILED
+      - LAUNCH_FAILED
+      - TERMINATE_IN_PROGRESS
+      - TERMINATE_FAILED
+      - TERMINATED
+  AppLaunchStatusMessage:
+    type: string
+  AppName:
+    type: string
+  AppReplicationStatus:
+    type: string
+    enum:
+      - READY_FOR_CONFIGURATION
+      - CONFIGURATION_IN_PROGRESS
+      - CONFIGURATION_INVALID
+      - READY_FOR_REPLICATION
+      - VALIDATION_IN_PROGRESS
+      - REPLICATION_PENDING
+      - REPLICATION_IN_PROGRESS
+      - REPLICATED
+      - DELTA_REPLICATION_IN_PROGRESS
+      - DELTA_REPLICATED
+      - DELTA_REPLICATION_FAILED
+      - REPLICATION_FAILED
+      - REPLICATION_STOPPING
+      - REPLICATION_STOP_FAILED
+      - REPLICATION_STOPPED
+  AppReplicationStatusMessage:
+    type: string
+  AppStatus:
+    type: string
+    enum:
+      - CREATING
+      - ACTIVE
+      - UPDATING
+      - DELETING
+      - DELETED
+      - DELETE_FAILED
+  AppStatusMessage:
+    type: string
+  Timestamp:
+    type: string
+    format: date-time
+  LaunchDetails:
+    type: object
+    properties:
+      latestLaunchTime:
+        $ref: '#/definitions/Timestamp'
+        description: Latest time this application was launched successfully.
+      stackName:
+        $ref: '#/definitions/StackName'
+        description: Name of the latest stack launched for this application.
+      stackId:
+        $ref: '#/definitions/StackId'
+        description: Identifier of the latest stack launched for this application.
+    description: Details about the latest launch of an application.
+  RoleName:
+    type: string
+  TotalServerGroups:
+    type: integer
+  TotalServers:
+    type: integer
+  AppSummary:
+    type: object
+    properties:
+      appId:
+        $ref: '#/definitions/AppId'
+        description: Unique ID of the application.
+      name:
+        $ref: '#/definitions/AppName'
+        description: Name of the application.
+      description:
+        $ref: '#/definitions/AppDescription'
+        description: Description of the application.
+      status:
+        $ref: '#/definitions/AppStatus'
+        description: Status of the application.
+      statusMessage:
+        $ref: '#/definitions/AppStatusMessage'
+        description: A message related to the status of the application
+      replicationStatus:
+        $ref: '#/definitions/AppReplicationStatus'
+        description: Replication status of the application.
+      replicationStatusMessage:
+        $ref: '#/definitions/AppReplicationStatusMessage'
+        description: A message related to the replication status of the application.
+      latestReplicationTime:
+        $ref: '#/definitions/Timestamp'
+        description: Timestamp of the application's most recent successful replication.
+      launchStatus:
+        $ref: '#/definitions/AppLaunchStatus'
+        description: Launch status of the application.
+      launchStatusMessage:
+        $ref: '#/definitions/AppLaunchStatusMessage'
+        description: A message related to the launch status of the application.
+      launchDetails:
+        $ref: '#/definitions/LaunchDetails'
+        description: Details about the latest launch of the application.
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: Time of creation of this application.
+      lastModified:
+        $ref: '#/definitions/Timestamp'
+        description: Timestamp of the application's creation.
+      roleName:
+        $ref: '#/definitions/RoleName'
+        description: Name of the service role in the customer's account used by AWS SMS.
+      totalServerGroups:
+        $ref: '#/definitions/TotalServerGroups'
+        description: Number of server groups present in the application.
+      totalServers:
+        $ref: '#/definitions/TotalServers'
+        description: Number of servers present in the application.
+    description: Information about the application.
+  Apps:
+    type: array
+    items:
+      $ref: '#/definitions/AppSummary'
+  AssociatePublicIpAddress:
+    type: boolean
+  BucketName:
+    type: string
+  ClientToken:
+    type: string
   ConnectorId:
     type: string
-    description: Unique Identifier for Connector
   ConnectorVersion:
     type: string
-    description: Connector version string
   ConnectorStatus:
     type: string
     enum:
       - HEALTHY
       - UNHEALTHY
-    description: Status of on-premise Connector
   ConnectorCapabilityList:
     type: array
-    description: List of Connector Capabilities
     items:
       $ref: '#/definitions/ConnectorCapability'
   VmManagerName:
     type: string
-    description: VM Manager Name
   VmManagerType:
     type: string
     enum:
       - VSPHERE
-    description: VM Management Product
+      - SCVMM
+      - HYPERV-MANAGER
   VmManagerId:
     type: string
-    description: Unique Identifier for VM Manager
   IpAddress:
     type: string
-    description: Internet Protocol (IP) Address
   MacAddress:
     type: string
-    description: Hardware (MAC) address
-  Timestamp:
-    type: string
-    description: Timestamp of an operation
-    format: date-time
   Connector:
     type: object
     properties:
       connectorId:
         $ref: '#/definitions/ConnectorId'
+        description: The identifier of the connector.
       version:
         $ref: '#/definitions/ConnectorVersion'
+        description: The connector version.
       status:
         $ref: '#/definitions/ConnectorStatus'
+        description: The status of the connector.
       capabilityList:
         $ref: '#/definitions/ConnectorCapabilityList'
+        description: The capabilities of the connector.
       vmManagerName:
         $ref: '#/definitions/VmManagerName'
+        description: The name of the VM manager.
       vmManagerType:
         $ref: '#/definitions/VmManagerType'
+        description: The VM management product.
       vmManagerId:
         $ref: '#/definitions/VmManagerId'
+        description: The identifier of the VM manager.
       ipAddress:
         $ref: '#/definitions/IpAddress'
+        description: The IP address of the connector.
       macAddress:
         $ref: '#/definitions/MacAddress'
+        description: The MAC address of the connector.
       associatedOn:
         $ref: '#/definitions/Timestamp'
-    description: Object representing a Connector
+        description: The time the connector was associated.
+    description: Represents a connector.
   ConnectorCapability:
     type: string
     enum:
       - VSPHERE
-    description: Capabilities for a Connector
+      - SCVMM
+      - HYPERV-MANAGER
+      - SNAPSHOT_BATCHING
   ConnectorList:
     type: array
-    description: List of connectors
     items:
       $ref: '#/definitions/Connector'
+  ServerGroups:
+    type: array
+    items:
+      $ref: '#/definitions/ServerGroup'
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   ServerId:
     type: string
-    description: Unique Identifier for a server
   Frequency:
     type: integer
-    description: 'Interval between Replication Runs. This value is specified in hours, and represents the time between consecutive Replication Runs.'
+  RunOnce:
+    type: boolean
   LicenseType:
     type: string
     enum:
       - AWS
       - BYOL
-    description: The license type to be used for the Amazon Machine Image (AMI) created after a successful ReplicationRun.
-  RoleName:
-    type: string
-    description: Name of service role in customer's account to be used by SMS service.
   Description:
     type: string
-    description: The description for a Replication Job/Run.
+  NumberOfRecentAmisToKeep:
+    type: integer
+  Encrypted:
+    type: boolean
+  KmsKeyId:
+    type: string
   ReplicationJobId:
     type: string
-    description: The unique identifier for a Replication Job.
-  ErrorMessage:
+  ForceStopAppReplication:
+    type: boolean
+  ForceTerminateApp:
+    type: boolean
+  EC2KeyName:
     type: string
-    description: Error Message string
+  OutputFormat:
+    type: string
+    enum:
+      - JSON
+      - YAML
+  S3Location:
+    type: object
+    properties:
+      bucket:
+        $ref: '#/definitions/BucketName'
+        description: Amazon S3 bucket name.
+      key:
+        $ref: '#/definitions/KeyName'
+        description: Amazon S3 bucket key.
+    description: Location of the Amazon S3 object in the customer's account.
+  ServerGroupLaunchConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/ServerGroupLaunchConfiguration'
+  ServerGroupReplicationConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/ServerGroupReplicationConfiguration'
   NextToken:
     type: string
-    description: Pagination token to pass as input to API call
   MaxResults:
     type: integer
-    description: 'The maximum number of results to return in one API call. If left empty, this will default to 50.'
   ReplicationJobList:
     type: array
-    description: List of Replication Jobs
     items:
       $ref: '#/definitions/ReplicationJob'
   ReplicationJob:
@@ -932,38 +2153,67 @@ definitions:
     properties:
       replicationJobId:
         $ref: '#/definitions/ReplicationJobId'
+        description: The identifier of the replication job.
       serverId:
         $ref: '#/definitions/ServerId'
+        description: The identifier of the server.
       serverType:
         $ref: '#/definitions/ServerType'
+        description: The type of server.
       vmServer:
         $ref: '#/definitions/VmServer'
+        description: Information about the VM server.
       seedReplicationTime:
         $ref: '#/definitions/Timestamp'
+        description: The seed replication time.
       frequency:
         $ref: '#/definitions/Frequency'
+        description: 'The time between consecutive replication runs, in hours.'
+      runOnce:
+        $ref: '#/definitions/RunOnce'
+        description: <p/>
       nextReplicationRunStartTime:
         $ref: '#/definitions/Timestamp'
+        description: The start time of the next replication run.
       licenseType:
         $ref: '#/definitions/LicenseType'
+        description: The license type to be used for the AMI created by a successful replication run.
       roleName:
         $ref: '#/definitions/RoleName'
+        description: The name of the IAM role to be used by the Server Migration Service.
       latestAmiId:
         $ref: '#/definitions/AmiId'
+        description: The ID of the latest Amazon Machine Image (AMI).
       state:
         $ref: '#/definitions/ReplicationJobState'
+        description: The state of the replication job.
       statusMessage:
         $ref: '#/definitions/ReplicationJobStatusMessage'
+        description: The description of the current status of the replication job.
       description:
         $ref: '#/definitions/Description'
+        description: The description of the replication job.
+      numberOfRecentAmisToKeep:
+        $ref: '#/definitions/NumberOfRecentAmisToKeep'
+        description: 'Number of recent AMIs to keep in the customer''s account for a replication job. By default the value is set to zero, meaning that all AMIs are kept.'
+      encrypted:
+        $ref: '#/definitions/Encrypted'
+        description: Whether the replication job should produce encrypted AMIs or not. See also <code>KmsKeyId</code> below.
+      kmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: '<p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer''s default KMS key for EBS is used. </p>'
       replicationRunList:
         $ref: '#/definitions/ReplicationRunList'
-    description: Object representing a Replication Job
+        description: Information about the replication runs.
+    description: Represents a replication job.
   ReplicationRunList:
     type: array
-    description: List of Replication Runs
     items:
       $ref: '#/definitions/ReplicationRun'
+  VmServerAddressList:
+    type: array
+    items:
+      $ref: '#/definitions/VmServerAddress'
   ServerCatalogStatus:
     type: string
     enum:
@@ -972,31 +2222,45 @@ definitions:
       - AVAILABLE
       - DELETED
       - EXPIRED
-    description: Status of Server catalog
   ServerList:
     type: array
-    description: List of servers from catalog
     items:
       $ref: '#/definitions/Server'
+  InstanceType:
+    type: string
+  KeyName:
+    type: string
+  StackName:
+    type: string
+  StackId:
+    type: string
+  LaunchOrder:
+    type: integer
+  LogicalId:
+    type: string
   ServerType:
     type: string
     enum:
       - VIRTUAL_MACHINE
-    description: Type of server.
   VmServer:
     type: object
     properties:
       vmServerAddress:
         $ref: '#/definitions/VmServerAddress'
+        description: Information about the VM server location.
       vmName:
         $ref: '#/definitions/VmName'
+        description: The name of the VM.
       vmManagerName:
         $ref: '#/definitions/VmManagerName'
+        description: The name of the VM manager.
       vmManagerType:
         $ref: '#/definitions/VmManagerType'
+        description: The type of VM management product.
       vmPath:
         $ref: '#/definitions/VmPath'
-    description: Object representing a VM server
+        description: The VM folder path in the vCenter Server virtual machine inventory tree.
+    description: Represents a VM server.
   ReplicationJobState:
     type: string
     enum:
@@ -1005,16 +2269,15 @@ definitions:
       - FAILED
       - DELETING
       - DELETED
-    description: Current state of Replication Job
+      - COMPLETED
+      - PAUSED_ON_FAILURE
+      - FAILING
   ReplicationJobStatusMessage:
     type: string
-    description: String describing current status of Replication Job
   ReplicationJobTerminated:
     type: boolean
-    description: An indicator of the Replication Job being deleted or failed.
   ReplicationRunId:
     type: string
-    description: The unique identifier for a Replication Run.
   ReplicationRunState:
     type: string
     enum:
@@ -1025,64 +2288,237 @@ definitions:
       - COMPLETED
       - DELETING
       - DELETED
-    description: Current state of Replication Run
   ReplicationRunType:
     type: string
     enum:
       - ON_DEMAND
       - AUTOMATIC
-    description: Type of Replication Run
+  ReplicationRunStageDetails:
+    type: object
+    properties:
+      stage:
+        $ref: '#/definitions/ReplicationRunStage'
+        description: String describing the current stage of a replication run.
+      stageProgress:
+        $ref: '#/definitions/ReplicationRunStageProgress'
+        description: String describing the progress of the current stage of a replication run.
+    description: Details of the current stage of a replication run.
   ReplicationRunStatusMessage:
     type: string
-    description: String describing current status of Replication Run
   ReplicationRun:
     type: object
     properties:
       replicationRunId:
         $ref: '#/definitions/ReplicationRunId'
+        description: The identifier of the replication run.
       state:
         $ref: '#/definitions/ReplicationRunState'
+        description: The state of the replication run.
       type:
         $ref: '#/definitions/ReplicationRunType'
+        description: The type of replication run.
+      stageDetails:
+        $ref: '#/definitions/ReplicationRunStageDetails'
+        description: Details of the current stage of the replication run.
       statusMessage:
         $ref: '#/definitions/ReplicationRunStatusMessage'
+        description: The description of the current status of the replication job.
       amiId:
         $ref: '#/definitions/AmiId'
+        description: The identifier of the Amazon Machine Image (AMI) from the replication run.
       scheduledStartTime:
         $ref: '#/definitions/Timestamp'
+        description: The start time of the next replication run.
       completedTime:
         $ref: '#/definitions/Timestamp'
+        description: The completion time of the last replication run.
       description:
         $ref: '#/definitions/Description'
-    description: Object representing a Replication Run
+        description: The description of the replication run.
+      encrypted:
+        $ref: '#/definitions/Encrypted'
+        description: Whether the replication run should produce encrypted AMI or not. See also <code>KmsKeyId</code> below.
+      kmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: '<p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer''s default KMS key for EBS is used. </p>'
+    description: Represents a replication run.
+  ReplicationRunStage:
+    type: string
+  ReplicationRunStageProgress:
+    type: string
+  SecurityGroup:
+    type: string
   Server:
     type: object
     properties:
       serverId:
         $ref: '#/definitions/ServerId'
+        description: The identifier of the server.
       serverType:
         $ref: '#/definitions/ServerType'
+        description: The type of server.
       vmServer:
         $ref: '#/definitions/VmServer'
+        description: Information about the VM server.
       replicationJobId:
         $ref: '#/definitions/ReplicationJobId'
+        description: The identifier of the replication job.
       replicationJobTerminated:
         $ref: '#/definitions/ReplicationJobTerminated'
-    description: Object representing a server
+        description: Indicates whether the replication job is deleted or failed.
+    description: Represents a server.
+  ServerGroupId:
+    type: string
+  ServerGroupName:
+    type: string
+  ServerGroup:
+    type: object
+    properties:
+      serverGroupId:
+        $ref: '#/definitions/ServerGroupId'
+        description: Identifier of a server group.
+      name:
+        $ref: '#/definitions/ServerGroupName'
+        description: Name of a server group.
+      serverList:
+        $ref: '#/definitions/ServerList'
+        description: List of servers belonging to a server group.
+    description: A logical grouping of servers.
+  ServerLaunchConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/ServerLaunchConfiguration'
+  ServerGroupLaunchConfiguration:
+    type: object
+    properties:
+      serverGroupId:
+        $ref: '#/definitions/ServerGroupId'
+        description: Identifier of the server group the launch configuration is associated with.
+      launchOrder:
+        $ref: '#/definitions/LaunchOrder'
+        description: Launch order of servers in the server group.
+      serverLaunchConfigurations:
+        $ref: '#/definitions/ServerLaunchConfigurations'
+        description: Launch configuration for servers in the server group.
+    description: Launch configuration for a server group.
+  ServerReplicationConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/ServerReplicationConfiguration'
+  ServerGroupReplicationConfiguration:
+    type: object
+    properties:
+      serverGroupId:
+        $ref: '#/definitions/ServerGroupId'
+        description: Identifier of the server group this replication configuration is associated with.
+      serverReplicationConfigurations:
+        $ref: '#/definitions/ServerReplicationConfigurations'
+        description: Replication configuration for servers in the server group.
+    description: Replication configuration for a server group.
+  VPC:
+    type: string
+  Subnet:
+    type: string
+  UserData:
+    type: object
+    properties:
+      s3Location:
+        $ref: '#/definitions/S3Location'
+        description: Amazon S3 location of the user-data script.
+    description: A script that runs on first launch of an Amazon EC2 instance. Used for configuring the server during launch.
+  ServerLaunchConfiguration:
+    type: object
+    properties:
+      server:
+        $ref: '#/definitions/Server'
+        description: Identifier of the server the launch configuration is associated with.
+      logicalId:
+        $ref: '#/definitions/LogicalId'
+        description: Logical ID of the server in the Amazon CloudFormation template.
+      vpc:
+        $ref: '#/definitions/VPC'
+        description: Identifier of the VPC the server should be launched into.
+      subnet:
+        $ref: '#/definitions/Subnet'
+        description: Identifier of the subnet the server should be launched into.
+      securityGroup:
+        $ref: '#/definitions/SecurityGroup'
+        description: Identifier of the security group that applies to the launched server.
+      ec2KeyName:
+        $ref: '#/definitions/EC2KeyName'
+        description: Name of the EC2 SSH Key to be used for connecting to the launched server.
+      userData:
+        $ref: '#/definitions/UserData'
+        description: Location of the user-data script to be executed when launching the server.
+      instanceType:
+        $ref: '#/definitions/InstanceType'
+        description: Instance type to be used for launching the server.
+      associatePublicIpAddress:
+        $ref: '#/definitions/AssociatePublicIpAddress'
+        description: 'If true, a publicly accessible IP address is created when launching the server.'
+    description: Launch configuration for a server.
+  ServerReplicationParameters:
+    type: object
+    properties:
+      seedTime:
+        $ref: '#/definitions/Timestamp'
+        description: Seed time for creating a replication job for the server.
+      frequency:
+        $ref: '#/definitions/Frequency'
+        description: Frequency of creating replication jobs for the server.
+      runOnce:
+        $ref: '#/definitions/RunOnce'
+        description: <p/>
+      licenseType:
+        $ref: '#/definitions/LicenseType'
+        description: License type for creating a replication job for the server.
+      numberOfRecentAmisToKeep:
+        $ref: '#/definitions/NumberOfRecentAmisToKeep'
+        description: Number of recent AMIs to keep when creating a replication job for this server.
+      encrypted:
+        $ref: '#/definitions/Encrypted'
+        description: 'When true, the replication job produces encrypted AMIs. See also <code>KmsKeyId</code> below.'
+      kmsKeyId:
+        $ref: '#/definitions/KmsKeyId'
+        description: '<p/> <p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer''s default KMS key for EBS is used. </p>'
+    description: Replication parameters for replicating a server.
+  ServerReplicationConfiguration:
+    type: object
+    properties:
+      server:
+        $ref: '#/definitions/Server'
+        description: Identifier of the server this replication configuration is associated with.
+      serverReplicationParameters:
+        $ref: '#/definitions/ServerReplicationParameters'
+        description: Parameters for replicating the server.
+    description: Replication configuration of a server.
+  TagKey:
+    type: string
+  TagValue:
+    type: string
+  Tag:
+    type: object
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: Tag key.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: Tag value.
+    description: A label that can be assigned to an application.
   VmId:
     type: string
-    description: Unique Identifier for a VM
   VmName:
     type: string
-    description: Name of Virtual Machine
   VmPath:
     type: string
-    description: Path to VM
   VmServerAddress:
     type: object
     properties:
       vmManagerId:
         $ref: '#/definitions/VmManagerId'
+        description: The identifier of the VM manager.
       vmId:
         $ref: '#/definitions/VmId'
-    description: Object representing a server's location
+        description: The identifier of the VM.
+    description: Represents a VM server location.

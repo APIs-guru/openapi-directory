@@ -273,6 +273,10 @@ paths:
           description: BatchLimitExceededException
           schema:
             $ref: '#/definitions/BatchLimitExceededException'
+        '486':
+          description: DeploymentConfigDoesNotExistException
+          schema:
+            $ref: '#/definitions/DeploymentConfigDoesNotExistException'
       parameters:
         - name: body
           in: body
@@ -292,7 +296,7 @@ paths:
   '/#BatchGetDeploymentInstances':
     post:
       operationId: BatchGetDeploymentInstances
-      description: Gets information about one or more instance that are part of a deployment group.
+      description: '<note> <p> This method works, but is considered deprecated. Use <code>BatchGetDeploymentTargets</code> instead. </p> </note> <p> Returns an array of instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer <code>BatchGetDeploymentTargets</code> works with all compute platforms. </p>'
       responses:
         '200':
           description: Success
@@ -322,12 +326,69 @@ paths:
           description: BatchLimitExceededException
           schema:
             $ref: '#/definitions/BatchLimitExceededException'
+        '486':
+          description: InvalidComputePlatformException
+          schema:
+            $ref: '#/definitions/InvalidComputePlatformException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/BatchGetDeploymentInstancesInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#BatchGetDeploymentTargets':
+    post:
+      operationId: BatchGetDeploymentTargets
+      description: '<p> Returns an array of targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated <code>BatchGetDeploymentInstances</code>. </p> <p> The type of targets returned depends on the deployment''s compute platform: </p> <ul> <li> <p> <b>EC2/On-premises</b> - Information about EC2 instance targets. </p> </li> <li> <p> <b>AWS Lambda</b> - Information about Lambda functions targets. </p> </li> <li> <p> <b>Amazon ECS</b> - Information about ECS service targets. </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchGetDeploymentTargetsOutput'
+        '480':
+          description: InvalidDeploymentIdException
+          schema:
+            $ref: '#/definitions/InvalidDeploymentIdException'
+        '481':
+          description: DeploymentIdRequiredException
+          schema:
+            $ref: '#/definitions/DeploymentIdRequiredException'
+        '482':
+          description: DeploymentDoesNotExistException
+          schema:
+            $ref: '#/definitions/DeploymentDoesNotExistException'
+        '483':
+          description: DeploymentTargetIdRequiredException
+          schema:
+            $ref: '#/definitions/DeploymentTargetIdRequiredException'
+        '484':
+          description: InvalidDeploymentTargetIdException
+          schema:
+            $ref: '#/definitions/InvalidDeploymentTargetIdException'
+        '485':
+          description: DeploymentTargetDoesNotExistException
+          schema:
+            $ref: '#/definitions/DeploymentTargetDoesNotExistException'
+        '486':
+          description: DeploymentTargetListSizeExceededException
+          schema:
+            $ref: '#/definitions/DeploymentTargetListSizeExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchGetDeploymentTargetsInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -443,6 +504,14 @@ paths:
           description: UnsupportedActionForDeploymentTypeException
           schema:
             $ref: '#/definitions/UnsupportedActionForDeploymentTypeException'
+        '486':
+          description: InvalidDeploymentWaitTypeException
+          schema:
+            $ref: '#/definitions/InvalidDeploymentWaitTypeException'
+        '487':
+          description: InvalidDeploymentStatusException
+          schema:
+            $ref: '#/definitions/InvalidDeploymentStatusException'
       parameters:
         - name: body
           in: body
@@ -624,7 +693,7 @@ paths:
   '/#CreateDeploymentConfig':
     post:
       operationId: CreateDeploymentConfig
-      description: Creates a deployment configuration.
+      description: ' Creates a deployment configuration. '
       responses:
         '200':
           description: Success
@@ -791,6 +860,22 @@ paths:
           description: InvalidInputException
           schema:
             $ref: '#/definitions/InvalidInputException'
+        '507':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '508':
+          description: InvalidECSServiceException
+          schema:
+            $ref: '#/definitions/InvalidECSServiceException'
+        '509':
+          description: InvalidTargetGroupPairException
+          schema:
+            $ref: '#/definitions/InvalidTargetGroupPairException'
+        '510':
+          description: ECSServiceMappingLimitExceededException
+          schema:
+            $ref: '#/definitions/ECSServiceMappingLimitExceededException'
       parameters:
         - name: body
           in: body
@@ -1159,6 +1244,10 @@ paths:
           description: DeploymentConfigDoesNotExistException
           schema:
             $ref: '#/definitions/DeploymentConfigDoesNotExistException'
+        '483':
+          description: InvalidComputePlatformException
+          schema:
+            $ref: '#/definitions/InvalidComputePlatformException'
       parameters:
         - name: body
           in: body
@@ -1208,6 +1297,10 @@ paths:
           description: DeploymentGroupDoesNotExistException
           schema:
             $ref: '#/definitions/DeploymentGroupDoesNotExistException'
+        '486':
+          description: DeploymentConfigDoesNotExistException
+          schema:
+            $ref: '#/definitions/DeploymentConfigDoesNotExistException'
       parameters:
         - name: body
           in: body
@@ -1257,6 +1350,10 @@ paths:
           description: InvalidInstanceNameException
           schema:
             $ref: '#/definitions/InvalidInstanceNameException'
+        '486':
+          description: InvalidComputePlatformException
+          schema:
+            $ref: '#/definitions/InvalidComputePlatformException'
       parameters:
         - name: body
           in: body
@@ -1273,10 +1370,63 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetDeploymentTarget':
+    post:
+      operationId: GetDeploymentTarget
+      description: ' Returns information about a deployment target. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetDeploymentTargetOutput'
+        '480':
+          description: InvalidDeploymentIdException
+          schema:
+            $ref: '#/definitions/InvalidDeploymentIdException'
+        '481':
+          description: DeploymentIdRequiredException
+          schema:
+            $ref: '#/definitions/DeploymentIdRequiredException'
+        '482':
+          description: DeploymentDoesNotExistException
+          schema:
+            $ref: '#/definitions/DeploymentDoesNotExistException'
+        '483':
+          description: DeploymentTargetIdRequiredException
+          schema:
+            $ref: '#/definitions/DeploymentTargetIdRequiredException'
+        '484':
+          description: InvalidDeploymentTargetIdException
+          schema:
+            $ref: '#/definitions/InvalidDeploymentTargetIdException'
+        '485':
+          description: DeploymentTargetDoesNotExistException
+          schema:
+            $ref: '#/definitions/DeploymentTargetDoesNotExistException'
+        '486':
+          description: InvalidInstanceNameException
+          schema:
+            $ref: '#/definitions/InvalidInstanceNameException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetDeploymentTargetInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetOnPremisesInstance':
     post:
       operationId: GetOnPremisesInstance
-      description: Gets information about an on-premises instance.
+      description: ' Gets information about an on-premises instance. '
       responses:
         '200':
           description: Success
@@ -1497,7 +1647,7 @@ paths:
   '/#ListDeploymentInstances':
     post:
       operationId: ListDeploymentInstances
-      description: Lists the instance for a deployment associated with the applicable IAM user or AWS account.
+      description: <note> <p> The newer BatchGetDeploymentTargets should be used instead because it works with all compute types. <code>ListDeploymentInstances</code> throws an exception if it is used with a compute platform other than EC2/On-premises or AWS Lambda. </p> </note> <p> Lists the instance for a deployment associated with the applicable IAM user or AWS account. </p>
       responses:
         '200':
           description: Success
@@ -1535,6 +1685,14 @@ paths:
           description: InvalidDeploymentInstanceTypeException
           schema:
             $ref: '#/definitions/InvalidDeploymentInstanceTypeException'
+        '488':
+          description: InvalidTargetFilterNameException
+          schema:
+            $ref: '#/definitions/InvalidTargetFilterNameException'
+        '489':
+          description: InvalidComputePlatformException
+          schema:
+            $ref: '#/definitions/InvalidComputePlatformException'
       parameters:
         - name: body
           in: body
@@ -1546,6 +1704,63 @@ paths:
           in: query
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListDeploymentTargets':
+    post:
+      operationId: ListDeploymentTargets
+      description: ' Returns an array of target IDs that are associated a deployment. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDeploymentTargetsOutput'
+        '480':
+          description: DeploymentIdRequiredException
+          schema:
+            $ref: '#/definitions/DeploymentIdRequiredException'
+        '481':
+          description: DeploymentDoesNotExistException
+          schema:
+            $ref: '#/definitions/DeploymentDoesNotExistException'
+        '482':
+          description: DeploymentNotStartedException
+          schema:
+            $ref: '#/definitions/DeploymentNotStartedException'
+        '483':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '484':
+          description: InvalidDeploymentIdException
+          schema:
+            $ref: '#/definitions/InvalidDeploymentIdException'
+        '485':
+          description: InvalidInstanceStatusException
+          schema:
+            $ref: '#/definitions/InvalidInstanceStatusException'
+        '486':
+          description: InvalidInstanceTypeException
+          schema:
+            $ref: '#/definitions/InvalidInstanceTypeException'
+        '487':
+          description: InvalidDeploymentInstanceTypeException
+          schema:
+            $ref: '#/definitions/InvalidDeploymentInstanceTypeException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDeploymentTargetsInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1699,7 +1914,7 @@ paths:
   '/#PutLifecycleEventHookExecutionStatus':
     post:
       operationId: PutLifecycleEventHookExecutionStatus
-      description: Sets the result of a Lambda validation function. The function validates one or both lifecycle events (<code>BeforeAllowTraffic</code> and <code>AfterAllowTraffic</code>) and returns <code>Succeeded</code> or <code>Failed</code>.
+      description: ' Sets the result of a Lambda validation function. The function validates one or both lifecycle events (<code>BeforeAllowTraffic</code> and <code>AfterAllowTraffic</code>) and returns <code>Succeeded</code> or <code>Failed</code>. '
       responses:
         '200':
           description: Success
@@ -1975,10 +2190,14 @@ paths:
           schema:
             $ref: '#/definitions/DeploymentDoesNotExistException'
         '482':
+          description: DeploymentGroupDoesNotExistException
+          schema:
+            $ref: '#/definitions/DeploymentGroupDoesNotExistException'
+        '483':
           description: DeploymentAlreadyCompletedException
           schema:
             $ref: '#/definitions/DeploymentAlreadyCompletedException'
-        '483':
+        '484':
           description: InvalidDeploymentIdException
           schema:
             $ref: '#/definitions/InvalidDeploymentIdException'
@@ -2150,6 +2369,22 @@ paths:
           description: InvalidInputException
           schema:
             $ref: '#/definitions/InvalidInputException'
+        '506':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '507':
+          description: InvalidECSServiceException
+          schema:
+            $ref: '#/definitions/InvalidECSServiceException'
+        '508':
+          description: InvalidTargetGroupPairException
+          schema:
+            $ref: '#/definitions/InvalidTargetGroupPairException'
+        '509':
+          description: ECSServiceMappingLimitExceededException
+          schema:
+            $ref: '#/definitions/ECSServiceMappingLimitExceededException'
       parameters:
         - name: body
           in: body
@@ -2180,34 +2415,13 @@ definitions:
         $ref: '#/definitions/InstanceNameList'
         description: The names of the on-premises instances to which to add tags.
     description: 'Represents the input of, and adds tags to, an on-premises instance operation.'
-  InstanceNameRequiredException:
-    type: object
-    properties: {}
-    description: An on-premises instance name was not specified.
-  InvalidInstanceNameException:
-    type: object
-    properties: {}
-    description: The specified on-premises instance name was specified in an invalid format.
-  TagRequiredException:
-    type: object
-    properties: {}
-    description: A tag was not specified.
-  InvalidTagException:
-    type: object
-    properties: {}
-    description: The specified tag was specified in an invalid format.
-  TagLimitExceededException:
-    type: object
-    properties: {}
-    description: The maximum allowed number of tags was exceeded.
-  InstanceLimitExceededException:
-    type: object
-    properties: {}
-    description: The maximum number of allowed on-premises instances in a single call was exceeded.
-  InstanceNotRegisteredException:
-    type: object
-    properties: {}
-    description: The specified on-premises instance is not registered.
+  InstanceNameRequiredException: {}
+  InvalidInstanceNameException: {}
+  TagRequiredException: {}
+  InvalidTagException: {}
+  TagLimitExceededException: {}
+  InstanceLimitExceededException: {}
+  InstanceNotRegisteredException: {}
   BatchGetApplicationRevisionsOutput:
     type: object
     properties:
@@ -2234,30 +2448,12 @@ definitions:
         $ref: '#/definitions/RevisionLocationList'
         description: 'Information to get about the application revisions, including type and location.'
     description: Represents the input of a BatchGetApplicationRevisions operation.
-  ApplicationDoesNotExistException:
-    type: object
-    properties: {}
-    description: The application does not exist with the applicable IAM user or AWS account.
-  ApplicationNameRequiredException:
-    type: object
-    properties: {}
-    description: The minimum number of required application names was not specified.
-  InvalidApplicationNameException:
-    type: object
-    properties: {}
-    description: The application name was specified in an invalid format.
-  RevisionRequiredException:
-    type: object
-    properties: {}
-    description: The revision ID was not specified.
-  InvalidRevisionException:
-    type: object
-    properties: {}
-    description: The revision was specified in an invalid format.
-  BatchLimitExceededException:
-    type: object
-    properties: {}
-    description: The maximum number of names or IDs allowed for this request (100) was exceeded.
+  ApplicationDoesNotExistException: {}
+  ApplicationNameRequiredException: {}
+  InvalidApplicationNameException: {}
+  RevisionRequiredException: {}
+  InvalidRevisionException: {}
+  BatchLimitExceededException: {}
   BatchGetApplicationsOutput:
     type: object
     properties:
@@ -2297,14 +2493,9 @@ definitions:
         $ref: '#/definitions/DeploymentGroupsList'
         description: The deployment groups' names.
     description: Represents the input of a BatchGetDeploymentGroups operation.
-  DeploymentGroupNameRequiredException:
-    type: object
-    properties: {}
-    description: The deployment group name was not specified.
-  InvalidDeploymentGroupNameException:
-    type: object
-    properties: {}
-    description: The deployment group name was specified in an invalid format.
+  DeploymentGroupNameRequiredException: {}
+  InvalidDeploymentGroupNameException: {}
+  DeploymentConfigDoesNotExistException: {}
   BatchGetDeploymentInstancesOutput:
     type: object
     properties:
@@ -2323,34 +2514,42 @@ definitions:
     properties:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
-        description: The unique ID of a deployment.
+        description: ' The unique ID of a deployment. '
       instanceIds:
         $ref: '#/definitions/InstancesList'
-        description: The unique IDs of instances in the deployment group.
-    description: Represents the input of a BatchGetDeploymentInstances operation.
-  DeploymentIdRequiredException:
+        description: The unique IDs of instances of the deployment.
+    description: ' Represents the input of a BatchGetDeploymentInstances operation. '
+  DeploymentIdRequiredException: {}
+  DeploymentDoesNotExistException: {}
+  InstanceIdRequiredException: {}
+  InvalidDeploymentIdException: {}
+  InvalidComputePlatformException: {}
+  BatchGetDeploymentTargetsOutput:
     type: object
-    properties: {}
-    description: At least one deployment ID must be specified.
-  DeploymentDoesNotExistException:
+    properties:
+      deploymentTargets:
+        $ref: '#/definitions/DeploymentTargetList'
+        description: '<p> A list of target objects for a deployment. Each target object contains details about the target, such as its status and lifecycle events. The type of the target objects depends on the deployment'' compute platform. </p> <ul> <li> <p> <b>EC2/On-premises</b> - Each target object is an EC2 or on-premises instance. </p> </li> <li> <p> <b>AWS Lambda</b> - The target object is a specific version of an AWS Lambda function. </p> </li> <li> <p> <b>Amazon ECS</b> - The target object is an Amazon ECS service. </p> </li> </ul>'
+  BatchGetDeploymentTargetsInput:
     type: object
-    properties: {}
-    description: The deployment does not exist with the applicable IAM user or AWS account.
-  InstanceIdRequiredException:
-    type: object
-    properties: {}
-    description: The instance ID was not specified.
-  InvalidDeploymentIdException:
-    type: object
-    properties: {}
-    description: At least one of the deployment IDs was specified in an invalid format.
+    properties:
+      deploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: ' The unique ID of a deployment. '
+      targetIds:
+        $ref: '#/definitions/TargetIdList'
+        description: '<p> The unique IDs of the deployment targets. The compute platform of the deployment determines the type of the targets and their formats. </p> <ul> <li> <p> For deployments that use the EC2/On-premises compute platform, the target IDs are EC2 or on-premises instances IDs and their target type is <code>instanceTarget</code>. </p> </li> <li> <p> For deployments that use the AWS Lambda compute platform, the target IDs are the names of Lambda functions and their target type is <code>instanceTarget</code>. </p> </li> <li> <p> For deployments that use the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS clusters and services specified using the format <code>&lt;clustername&gt;:&lt;servicename&gt;</code>. Their target type is <code>ecsTarget</code>. </p> </li> </ul>'
+  DeploymentTargetIdRequiredException: {}
+  InvalidDeploymentTargetIdException: {}
+  DeploymentTargetDoesNotExistException: {}
+  DeploymentTargetListSizeExceededException: {}
   BatchGetDeploymentsOutput:
     type: object
     properties:
       deploymentsInfo:
         $ref: '#/definitions/DeploymentsInfoList'
-        description: Information about the deployments.
-    description: Represents the output of a BatchGetDeployments operation.
+        description: ' Information about the deployments. '
+    description: ' Represents the output of a BatchGetDeployments operation. '
   BatchGetDeploymentsInput:
     type: object
     required:
@@ -2358,8 +2557,8 @@ definitions:
     properties:
       deploymentIds:
         $ref: '#/definitions/DeploymentsList'
-        description: 'A list of deployment IDs, separated by spaces.'
-    description: Represents the input of a BatchGetDeployments operation.
+        description: ' A list of deployment IDs, separated by spaces. '
+    description: ' Represents the input of a BatchGetDeployments operation. '
   BatchGetOnPremisesInstancesOutput:
     type: object
     properties:
@@ -2381,19 +2580,15 @@ definitions:
     properties:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
-        description: The deployment ID of the blue/green deployment for which you want to start rerouting traffic to the replacement environment.
-  DeploymentAlreadyCompletedException:
-    type: object
-    properties: {}
-    description: The deployment is already complete.
-  DeploymentIsNotInReadyStateException:
-    type: object
-    properties: {}
-    description: The deployment does not have a status of Ready and can't continue yet.
-  UnsupportedActionForDeploymentTypeException:
-    type: object
-    properties: {}
-    description: A call was submitted that is not supported for the specified deployment type.
+        description: ' The unique ID of a blue/green deployment for which you want to start rerouting traffic to the replacement environment. '
+      deploymentWaitType:
+        $ref: '#/definitions/DeploymentWaitType'
+        description: ' The status of the deployment''s waiting period. READY_WAIT indicates the deployment is ready to start shifting traffic. TERMINATION_WAIT indicates the traffic is shifted, but the original target is not terminated. '
+  DeploymentAlreadyCompletedException: {}
+  DeploymentIsNotInReadyStateException: {}
+  UnsupportedActionForDeploymentTypeException: {}
+  InvalidDeploymentWaitTypeException: {}
+  InvalidDeploymentStatusException: {}
   CreateApplicationOutput:
     type: object
     properties:
@@ -2413,25 +2608,15 @@ definitions:
         $ref: '#/definitions/ComputePlatform'
         description: ' The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>).'
     description: Represents the input of a CreateApplication operation.
-  ApplicationAlreadyExistsException:
-    type: object
-    properties: {}
-    description: An application with the specified name already exists with the applicable IAM user or AWS account.
-  ApplicationLimitExceededException:
-    type: object
-    properties: {}
-    description: More applications were attempted to be created than are allowed.
-  InvalidComputePlatformException:
-    type: object
-    properties: {}
-    description: The computePlatform is invalid. The computePlatform should be <code>Lambda</code> or <code>Server</code>.
+  ApplicationAlreadyExistsException: {}
+  ApplicationLimitExceededException: {}
   CreateDeploymentOutput:
     type: object
     properties:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
-        description: A unique deployment ID.
-    description: Represents the output of a CreateDeployment operation.
+        description: ' The unique ID of a deployment. '
+    description: ' Represents the output of a CreateDeployment operation. '
   CreateDeploymentInput:
     type: object
     required:
@@ -2445,7 +2630,7 @@ definitions:
         description: The name of the deployment group.
       revision:
         $ref: '#/definitions/RevisionLocation'
-        description: The type and location of the revision to deploy.
+        description: ' The type and location of the revision to deploy. '
       deploymentConfigName:
         $ref: '#/definitions/DeploymentConfigName'
         description: '<p>The name of a deployment configuration associated with the applicable IAM user or AWS account.</p> <p>If not specified, the value configured in the deployment group will be used as the default. If the deployment group does not have a deployment configuration associated with it, then CodeDeployDefault.OneAtATime will be used by default.</p>'
@@ -2454,84 +2639,35 @@ definitions:
         description: A comment about the deployment.
       ignoreApplicationStopFailures:
         $ref: '#/definitions/Boolean'
-        description: '<p>If set to true, then if the deployment causes the ApplicationStop deployment lifecycle event to an instance to fail, the deployment to that instance will not be considered to have failed at that point and will continue on to the BeforeInstall deployment lifecycle event.</p> <p>If set to false or not specified, then if the deployment causes the ApplicationStop deployment lifecycle event to fail to an instance, the deployment to that instance will stop, and the deployment to that instance will be considered to have failed.</p>'
+        description: '<p> If set to true, then if the deployment causes the ApplicationStop deployment lifecycle event to an instance to fail, the deployment to that instance will not be considered to have failed at that point and will continue on to the BeforeInstall deployment lifecycle event. </p> <p> If set to false or not specified, then if the deployment causes the ApplicationStop deployment lifecycle event to fail to an instance, the deployment to that instance will stop, and the deployment to that instance will be considered to have failed. </p>'
       targetInstances:
         $ref: '#/definitions/TargetInstances'
-        description: Information about the instances that will belong to the replacement environment in a blue/green deployment.
+        description: ' Information about the instances that will belong to the replacement environment in a blue/green deployment. '
       autoRollbackConfiguration:
         $ref: '#/definitions/AutoRollbackConfiguration'
         description: Configuration information for an automatic rollback that is added when a deployment is created.
       updateOutdatedInstancesOnly:
         $ref: '#/definitions/Boolean'
-        description: Indicates whether to deploy to all instances or only to instances that are not running the latest application revision.
+        description: ' Indicates whether to deploy to all instances or only to instances that are not running the latest application revision. '
       fileExistsBehavior:
         $ref: '#/definitions/FileExistsBehavior'
         description: '<p>Information about how AWS CodeDeploy handles files that already exist in a deployment target location but weren''t part of the previous successful deployment.</p> <p>The fileExistsBehavior parameter takes any of the following values:</p> <ul> <li> <p>DISALLOW: The deployment fails. This is also the default behavior if no option is specified.</p> </li> <li> <p>OVERWRITE: The version of the file from the application revision currently being deployed replaces the version already on the instance.</p> </li> <li> <p>RETAIN: The version of the file already on the instance is kept and used as part of the new deployment.</p> </li> </ul>'
     description: Represents the input of a CreateDeployment operation.
-  DeploymentGroupDoesNotExistException:
-    type: object
-    properties: {}
-    description: The named deployment group does not exist with the applicable IAM user or AWS account.
-  RevisionDoesNotExistException:
-    type: object
-    properties: {}
-    description: The named revision does not exist with the applicable IAM user or AWS account.
-  InvalidDeploymentConfigNameException:
-    type: object
-    properties: {}
-    description: The deployment configuration name was specified in an invalid format.
-  DeploymentConfigDoesNotExistException:
-    type: object
-    properties: {}
-    description: The deployment configuration does not exist with the applicable IAM user or AWS account.
-  DescriptionTooLongException:
-    type: object
-    properties: {}
-    description: The description is too long.
-  DeploymentLimitExceededException:
-    type: object
-    properties: {}
-    description: The number of allowed deployments was exceeded.
-  InvalidTargetInstancesException:
-    type: object
-    properties: {}
-    description: '<p>The target instance configuration is invalid. Possible causes include:</p> <ul> <li> <p>Configuration data for target instances was entered for an in-place deployment.</p> </li> <li> <p>The limit of 10 tags for a tag type was exceeded.</p> </li> <li> <p>The combined length of the tag names exceeded the limit. </p> </li> <li> <p>A specified tag is not currently applied to any instances.</p> </li> </ul>'
-  InvalidAutoRollbackConfigException:
-    type: object
-    properties: {}
-    description: 'The automatic rollback configuration was specified in an invalid format. For example, automatic rollback is enabled but an invalid triggering event type or no event types were listed.'
-  InvalidLoadBalancerInfoException:
-    type: object
-    properties: {}
-    description: 'An invalid load balancer name, or no load balancer name, was specified.'
-  InvalidFileExistsBehaviorException:
-    type: object
-    properties: {}
-    description: 'An invalid fileExistsBehavior option was specified to determine how AWS CodeDeploy handles files or directories that already exist in a deployment target location but weren''t part of the previous successful deployment. Valid values include "DISALLOW", "OVERWRITE", and "RETAIN".'
-  InvalidRoleException:
-    type: object
-    properties: {}
-    description: 'The service role ARN was specified in an invalid format. Or, if an Auto Scaling group was specified, the specified service role does not grant the appropriate permissions to Auto Scaling.'
-  InvalidAutoScalingGroupException:
-    type: object
-    properties: {}
-    description: The Auto Scaling group was specified in an invalid format or does not exist.
-  ThrottlingException:
-    type: object
-    properties: {}
-    description: An API function was called too frequently.
-  InvalidUpdateOutdatedInstancesOnlyValueException:
-    type: object
-    properties: {}
-    description: 'The UpdateOutdatedInstancesOnly value is invalid. For AWS Lambda deployments, <code>false</code> is expected. For EC2/On-premises deployments, <code>true</code> or <code>false</code> is expected.'
-  InvalidIgnoreApplicationStopFailuresValueException:
-    type: object
-    properties: {}
-    description: 'The IgnoreApplicationStopFailures value is invalid. For AWS Lambda deployments, <code>false</code> is expected. For EC2/On-premises deployments, <code>true</code> or <code>false</code> is expected.'
-  InvalidGitHubAccountTokenException:
-    type: object
-    properties: {}
-    description: The GitHub token is not valid.
+  DeploymentGroupDoesNotExistException: {}
+  RevisionDoesNotExistException: {}
+  InvalidDeploymentConfigNameException: {}
+  DescriptionTooLongException: {}
+  DeploymentLimitExceededException: {}
+  InvalidTargetInstancesException: {}
+  InvalidAutoRollbackConfigException: {}
+  InvalidLoadBalancerInfoException: {}
+  InvalidFileExistsBehaviorException: {}
+  InvalidRoleException: {}
+  InvalidAutoScalingGroupException: {}
+  ThrottlingException: {}
+  InvalidUpdateOutdatedInstancesOnlyValueException: {}
+  InvalidIgnoreApplicationStopFailuresValueException: {}
+  InvalidGitHubAccountTokenException: {}
   CreateDeploymentConfigOutput:
     type: object
     properties:
@@ -2557,26 +2693,11 @@ definitions:
         $ref: '#/definitions/ComputePlatform'
         description: The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>&gt;).
     description: Represents the input of a CreateDeploymentConfig operation.
-  DeploymentConfigNameRequiredException:
-    type: object
-    properties: {}
-    description: The deployment configuration name was not specified.
-  DeploymentConfigAlreadyExistsException:
-    type: object
-    properties: {}
-    description: A deployment configuration with the specified name already exists with the applicable IAM user or AWS account.
-  InvalidMinimumHealthyHostValueException:
-    type: object
-    properties: {}
-    description: The minimum healthy instance value was specified in an invalid format.
-  DeploymentConfigLimitExceededException:
-    type: object
-    properties: {}
-    description: The deployment configurations limit was exceeded.
-  InvalidTrafficRoutingConfigurationException:
-    type: object
-    properties: {}
-    description: ' The configuration that specifies how traffic is routed during a deployment is invalid.'
+  DeploymentConfigNameRequiredException: {}
+  DeploymentConfigAlreadyExistsException: {}
+  InvalidMinimumHealthyHostValueException: {}
+  DeploymentConfigLimitExceededException: {}
+  InvalidTrafficRoutingConfigurationException: {}
   CreateDeploymentGroupOutput:
     type: object
     properties:
@@ -2633,70 +2754,31 @@ definitions:
       ec2TagSet:
         $ref: '#/definitions/EC2TagSet'
         description: Information about groups of tags applied to EC2 instances. The deployment group will include only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.
+      ecsServices:
+        $ref: '#/definitions/ECSServiceList'
+        description: ' The target ECS services in the deployment group. This only applies to deployment groups that use the Amazon ECS compute platform. A target ECS service is specified as an Amazon ECS cluster and service name pair using the format <code>&lt;clustername&gt;:&lt;servicename&gt;</code>. '
       onPremisesTagSet:
         $ref: '#/definitions/OnPremisesTagSet'
         description: Information about groups of tags applied to on-premises instances. The deployment group will include only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
     description: Represents the input of a CreateDeploymentGroup operation.
-  DeploymentGroupAlreadyExistsException:
-    type: object
-    properties: {}
-    description: A deployment group with the specified name already exists with the applicable IAM user or AWS account.
-  InvalidEC2TagException:
-    type: object
-    properties: {}
-    description: The tag was specified in an invalid format.
-  RoleRequiredException:
-    type: object
-    properties: {}
-    description: The role ID was not specified.
-  DeploymentGroupLimitExceededException:
-    type: object
-    properties: {}
-    description: ' The deployment groups limit was exceeded.'
-  LifecycleHookLimitExceededException:
-    type: object
-    properties: {}
-    description: The limit for lifecycle hooks was exceeded.
-  InvalidTriggerConfigException:
-    type: object
-    properties: {}
-    description: The trigger was specified in an invalid format.
-  TriggerTargetsLimitExceededException:
-    type: object
-    properties: {}
-    description: The maximum allowed number of triggers was exceeded.
-  InvalidAlarmConfigException:
-    type: object
-    properties: {}
-    description: '<p>The format of the alarm configuration is invalid. Possible causes include:</p> <ul> <li> <p>The alarm list is null.</p> </li> <li> <p>The alarm object is null.</p> </li> <li> <p>The alarm name is empty or null or exceeds the 255 character limit.</p> </li> <li> <p>Two alarms with the same name have been specified.</p> </li> <li> <p>The alarm configuration is enabled but the alarm list is empty.</p> </li> </ul>'
-  AlarmsLimitExceededException:
-    type: object
-    properties: {}
-    description: The maximum number of alarms for a deployment group (10) was exceeded.
-  InvalidDeploymentStyleException:
-    type: object
-    properties: {}
-    description: An invalid deployment style was specified. Valid deployment types include "IN_PLACE" and "BLUE_GREEN". Valid deployment options include "WITH_TRAFFIC_CONTROL" and "WITHOUT_TRAFFIC_CONTROL".
-  InvalidBlueGreenDeploymentConfigurationException:
-    type: object
-    properties: {}
-    description: 'The configuration for the blue/green deployment group was provided in an invalid format. For information about deployment configuration format, see <a>CreateDeploymentConfig</a>.'
-  InvalidEC2TagCombinationException:
-    type: object
-    properties: {}
-    description: 'A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but only one of these data types can be used in a single call.'
-  InvalidOnPremisesTagCombinationException:
-    type: object
-    properties: {}
-    description: 'A call was submitted that specified both OnPremisesTagFilters and OnPremisesTagSet, but only one of these data types can be used in a single call.'
-  TagSetListLimitExceededException:
-    type: object
-    properties: {}
-    description: The number of tag groups included in the tag set list exceeded the maximum allowed limit of 3.
-  InvalidInputException:
-    type: object
-    properties: {}
-    description: The specified input was specified in an invalid format.
+  DeploymentGroupAlreadyExistsException: {}
+  InvalidEC2TagException: {}
+  RoleRequiredException: {}
+  DeploymentGroupLimitExceededException: {}
+  LifecycleHookLimitExceededException: {}
+  InvalidTriggerConfigException: {}
+  TriggerTargetsLimitExceededException: {}
+  InvalidAlarmConfigException: {}
+  AlarmsLimitExceededException: {}
+  InvalidDeploymentStyleException: {}
+  InvalidBlueGreenDeploymentConfigurationException: {}
+  InvalidEC2TagCombinationException: {}
+  InvalidOnPremisesTagCombinationException: {}
+  TagSetListLimitExceededException: {}
+  InvalidInputException: {}
+  InvalidECSServiceException: {}
+  InvalidTargetGroupPairException: {}
+  ECSServiceMappingLimitExceededException: {}
   DeleteApplicationInput:
     type: object
     required:
@@ -2715,14 +2797,8 @@ definitions:
         $ref: '#/definitions/DeploymentConfigName'
         description: The name of a deployment configuration associated with the applicable IAM user or AWS account.
     description: Represents the input of a DeleteDeploymentConfig operation.
-  DeploymentConfigInUseException:
-    type: object
-    properties: {}
-    description: The deployment configuration is still in use.
-  InvalidOperationException:
-    type: object
-    properties: {}
-    description: An invalid operation was detected.
+  DeploymentConfigInUseException: {}
+  InvalidOperationException: {}
   DeleteDeploymentGroupOutput:
     type: object
     properties:
@@ -2757,26 +2833,11 @@ definitions:
         $ref: '#/definitions/GitHubAccountTokenName'
         description: The name of the GitHub account connection to delete.
     description: Represents the input of a DeleteGitHubAccount operation.
-  GitHubAccountTokenNameRequiredException:
-    type: object
-    properties: {}
-    description: The call is missing a required GitHub account connection name.
-  GitHubAccountTokenDoesNotExistException:
-    type: object
-    properties: {}
-    description: No GitHub account connection exists with the named specified in the call.
-  InvalidGitHubAccountTokenNameException:
-    type: object
-    properties: {}
-    description: The format of the specified GitHub account connection name is invalid.
-  ResourceValidationException:
-    type: object
-    properties: {}
-    description: The specified resource could not be validated.
-  OperationNotSupportedException:
-    type: object
-    properties: {}
-    description: The API used does not support the deployment.
+  GitHubAccountTokenNameRequiredException: {}
+  GitHubAccountTokenDoesNotExistException: {}
+  InvalidGitHubAccountTokenNameException: {}
+  ResourceValidationException: {}
+  OperationNotSupportedException: {}
   DeregisterOnPremisesInstanceInput:
     type: object
     required:
@@ -2842,7 +2903,7 @@ definitions:
     properties:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
-        description: A deployment ID associated with the applicable IAM user or AWS account.
+        description: ' The unique ID of a deployment associated with the applicable IAM user or AWS account. '
     description: Represents the input of a GetDeployment operation.
   GetDeploymentConfigOutput:
     type: object
@@ -2885,8 +2946,8 @@ definitions:
     properties:
       instanceSummary:
         $ref: '#/definitions/InstanceSummary'
-        description: Information about the instance.
-    description: Represents the output of a GetDeploymentInstance operation.
+        description: ' Information about the instance. '
+    description: ' Represents the output of a GetDeploymentInstance operation. '
   GetDeploymentInstanceInput:
     type: object
     required:
@@ -2895,22 +2956,34 @@ definitions:
     properties:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
-        description: The unique ID of a deployment.
+        description: ' The unique ID of a deployment. '
       instanceId:
         $ref: '#/definitions/InstanceId'
-        description: The unique ID of an instance in the deployment group.
-    description: Represents the input of a GetDeploymentInstance operation.
-  InstanceDoesNotExistException:
+        description: ' The unique ID of an instance in the deployment group. '
+    description: ' Represents the input of a GetDeploymentInstance operation. '
+  InstanceDoesNotExistException: {}
+  GetDeploymentTargetOutput:
     type: object
-    properties: {}
-    description: The specified instance does not exist in the deployment group.
+    properties:
+      deploymentTarget:
+        $ref: '#/definitions/DeploymentTarget'
+        description: ' A deployment target that contains information about a deployment such as its status, lifecyle events, and when it was updated last. It also contains metadata about the deployment target. The deployment target metadata depends on the deployment target''s type (<code>instanceTarget</code>, <code>lambdaTarget</code>, or <code>ecsTarget</code>). '
+  GetDeploymentTargetInput:
+    type: object
+    properties:
+      deploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: ' The unique ID of a deployment. '
+      targetId:
+        $ref: '#/definitions/TargetId'
+        description: ' The unique ID of a deployment target. '
   GetOnPremisesInstanceOutput:
     type: object
     properties:
       instanceInfo:
         $ref: '#/definitions/InstanceInfo'
-        description: Information about the on-premises instance.
-    description: Represents the output of a GetOnPremisesInstance operation.
+        description: ' Information about the on-premises instance. '
+    description: ' Represents the output of a GetOnPremisesInstance operation. '
   GetOnPremisesInstanceInput:
     type: object
     required:
@@ -2918,8 +2991,8 @@ definitions:
     properties:
       instanceName:
         $ref: '#/definitions/InstanceName'
-        description: The name of the on-premises instance about which to get information.
-    description: Represents the input of a GetOnPremisesInstance operation.
+        description: ' The name of the on-premises instance about which to get information. '
+    description: ' Represents the input of a GetOnPremisesInstance operation. '
   ListApplicationRevisionsOutput:
     type: object
     properties:
@@ -2937,54 +3010,33 @@ definitions:
     properties:
       applicationName:
         $ref: '#/definitions/ApplicationName'
-        description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+        description: ' The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account. '
       sortBy:
         $ref: '#/definitions/ApplicationRevisionSortBy'
-        description: '<p>The column name to use to sort the list results:</p> <ul> <li> <p>registerTime: Sort by the time the revisions were registered with AWS CodeDeploy.</p> </li> <li> <p>firstUsedTime: Sort by the time the revisions were first used in a deployment.</p> </li> <li> <p>lastUsedTime: Sort by the time the revisions were last used in a deployment.</p> </li> </ul> <p>If not specified or set to null, the results will be returned in an arbitrary order.</p>'
+        description: '<p>The column name to use to sort the list results:</p> <ul> <li> <p>registerTime: Sort by the time the revisions were registered with AWS CodeDeploy.</p> </li> <li> <p>firstUsedTime: Sort by the time the revisions were first used in a deployment.</p> </li> <li> <p>lastUsedTime: Sort by the time the revisions were last used in a deployment.</p> </li> </ul> <p> If not specified or set to null, the results will be returned in an arbitrary order. </p>'
       sortOrder:
         $ref: '#/definitions/SortOrder'
-        description: '<p>The order in which to sort the list results:</p> <ul> <li> <p>ascending: ascending order.</p> </li> <li> <p>descending: descending order.</p> </li> </ul> <p>If not specified, the results will be sorted in ascending order.</p> <p>If set to null, the results will be sorted in an arbitrary order.</p>'
+        description: '<p> The order in which to sort the list results: </p> <ul> <li> <p>ascending: ascending order.</p> </li> <li> <p>descending: descending order.</p> </li> </ul> <p>If not specified, the results will be sorted in ascending order.</p> <p>If set to null, the results will be sorted in an arbitrary order.</p>'
       s3Bucket:
         $ref: '#/definitions/S3Bucket'
-        description: '<p>An Amazon S3 bucket name to limit the search for revisions.</p> <p>If set to null, all of the user''s buckets will be searched.</p>'
+        description: '<p> An Amazon S3 bucket name to limit the search for revisions. </p> <p> If set to null, all of the user''s buckets are searched. </p>'
       s3KeyPrefix:
         $ref: '#/definitions/S3Key'
-        description: A key prefix for the set of Amazon S3 objects to limit the search for revisions.
+        description: ' A key prefix for the set of Amazon S3 objects to limit the search for revisions. '
       deployed:
         $ref: '#/definitions/ListStateFilterAction'
-        description: '<p>Whether to list revisions based on whether the revision is the target revision of an deployment group:</p> <ul> <li> <p>include: List revisions that are target revisions of a deployment group.</p> </li> <li> <p>exclude: Do not list revisions that are target revisions of a deployment group.</p> </li> <li> <p>ignore: List all revisions.</p> </li> </ul>'
+        description: '<p> Whether to list revisions based on whether the revision is the target revision of an deployment group: </p> <ul> <li> <p>include: List revisions that are target revisions of a deployment group.</p> </li> <li> <p>exclude: Do not list revisions that are target revisions of a deployment group.</p> </li> <li> <p>ignore: List all revisions.</p> </li> </ul>'
       nextToken:
         $ref: '#/definitions/NextToken'
-        description: An identifier returned from the previous list application revisions call. It can be used to return the next set of applications in the list.
-    description: Represents the input of a ListApplicationRevisions operation.
-  InvalidSortByException:
-    type: object
-    properties: {}
-    description: The column name to sort by is either not present or was specified in an invalid format.
-  InvalidSortOrderException:
-    type: object
-    properties: {}
-    description: The sort order was specified in an invalid format.
-  InvalidBucketNameFilterException:
-    type: object
-    properties: {}
-    description: The bucket name either doesn't exist or was specified in an invalid format.
-  InvalidKeyPrefixFilterException:
-    type: object
-    properties: {}
-    description: The specified key prefix filter was specified in an invalid format.
-  BucketNameFilterRequiredException:
-    type: object
-    properties: {}
-    description: 'A bucket name is required, but was not provided.'
-  InvalidDeployedStateFilterException:
-    type: object
-    properties: {}
-    description: The deployed state filter was specified in an invalid format.
-  InvalidNextTokenException:
-    type: object
-    properties: {}
-    description: The next token was specified in an invalid format.
+        description: An identifier returned from the previous <code>ListApplicationRevisions</code> call. It can be used to return the next set of applications in the list.
+    description: ' Represents the input of a ListApplicationRevisions operation. '
+  InvalidSortByException: {}
+  InvalidSortOrderException: {}
+  InvalidBucketNameFilterException: {}
+  InvalidKeyPrefixFilterException: {}
+  BucketNameFilterRequiredException: {}
+  InvalidDeployedStateFilterException: {}
+  InvalidNextTokenException: {}
   ListApplicationsOutput:
     type: object
     properties:
@@ -3017,7 +3069,7 @@ definitions:
     properties:
       nextToken:
         $ref: '#/definitions/NextToken'
-        description: 'An identifier returned from the previous list deployment configurations call. It can be used to return the next set of deployment configurations in the list. '
+        description: 'An identifier returned from the previous <code>ListDeploymentConfigs</code> call. It can be used to return the next set of deployment configurations in the list. '
     description: Represents the input of a ListDeploymentConfigs operation.
   ListDeploymentGroupsOutput:
     type: object
@@ -3061,7 +3113,7 @@ definitions:
     properties:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
-        description: The unique ID of a deployment.
+        description: ' The unique ID of a deployment. '
       nextToken:
         $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list deployment instances call. It can be used to return the next set of deployment instances in the list.
@@ -3071,23 +3123,33 @@ definitions:
       instanceTypeFilter:
         $ref: '#/definitions/InstanceTypeList'
         description: 'The set of instances in a blue/green deployment, either those in the original environment ("BLUE") or those in the replacement environment ("GREEN"), for which you want to view instance information.'
-    description: Represents the input of a ListDeploymentInstances operation.
-  DeploymentNotStartedException:
+    description: ' Represents the input of a ListDeploymentInstances operation. '
+  DeploymentNotStartedException: {}
+  InvalidInstanceStatusException: {}
+  InvalidInstanceTypeException: {}
+  InvalidDeploymentInstanceTypeException: {}
+  InvalidTargetFilterNameException: {}
+  ListDeploymentTargetsOutput:
     type: object
-    properties: {}
-    description: The specified deployment has not started.
-  InvalidInstanceStatusException:
+    properties:
+      targetIds:
+        $ref: '#/definitions/TargetIdList'
+        description: ' The unique IDs of deployment targets. '
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' If a large amount of information is returned, a token identifier will also be returned. It can be used in a subsequent <code>ListDeploymentTargets</code> call to return the next set of deployment targets in the list. '
+  ListDeploymentTargetsInput:
     type: object
-    properties: {}
-    description: The specified instance status does not exist.
-  InvalidInstanceTypeException:
-    type: object
-    properties: {}
-    description: An invalid instance type was specified for instances in a blue/green deployment. Valid values include "Blue" for an original environment and "Green" for a replacement environment.
-  InvalidDeploymentInstanceTypeException:
-    type: object
-    properties: {}
-    description: An instance type was specified for an in-place deployment. Instance types are supported for blue/green deployments only.
+    properties:
+      deploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: ' The unique ID of a deployment. '
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' A token identifier returned from the previous <code>ListDeploymentTargets</code> call. It can be used to return the next set of deployment targets in the list. '
+      targetFilters:
+        $ref: '#/definitions/TargetFilters'
+        description: ' A key used to filter the returned targets. '
   ListDeploymentsOutput:
     type: object
     properties:
@@ -3117,14 +3179,7 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list deployments call. It can be used to return the next set of deployments in the list.
     description: Represents the input of a ListDeployments operation.
-  InvalidTimeRangeException:
-    type: object
-    properties: {}
-    description: The specified time range was specified in an invalid format.
-  InvalidDeploymentStatusException:
-    type: object
-    properties: {}
-    description: The specified deployment status doesn't exist or cannot be determined.
+  InvalidTimeRangeException: {}
   ListGitHubAccountTokenNamesOutput:
     type: object
     properties:
@@ -3165,14 +3220,8 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list on-premises instances call. It can be used to return the next set of on-premises instances in the list.
     description: Represents the input of a ListOnPremisesInstances operation.
-  InvalidRegistrationStatusException:
-    type: object
-    properties: {}
-    description: The registration status was specified in an invalid format.
-  InvalidTagFilterException:
-    type: object
-    properties: {}
-    description: The specified tag filter was specified in an invalid format.
+  InvalidRegistrationStatusException: {}
+  InvalidTagFilterException: {}
   PutLifecycleEventHookExecutionStatusOutput:
     type: object
     properties:
@@ -3184,25 +3233,16 @@ definitions:
     properties:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
-        description: The ID of the deployment. Pass this ID to a Lambda function that validates a deployment lifecycle event.
+        description: ' The unique ID of a deployment. Pass this ID to a Lambda function that validates a deployment lifecycle event. '
       lifecycleEventHookExecutionId:
         $ref: '#/definitions/LifecycleEventHookExecutionId'
-        description: The execution ID of a deployment's lifecycle hook. A deployment lifecycle hook is specified in the <code>hooks</code> section of the AppSpec file.
+        description: ' The execution ID of a deployment''s lifecycle hook. A deployment lifecycle hook is specified in the <code>hooks</code> section of the AppSpec file. '
       status:
         $ref: '#/definitions/LifecycleEventStatus'
         description: The result of a Lambda function that validates a deployment lifecycle event (<code>Succeeded</code> or <code>Failed</code>).
-  InvalidLifecycleEventHookExecutionStatusException:
-    type: object
-    properties: {}
-    description: The result of a Lambda validation function that verifies a lifecycle event is invalid. It should return <code>Succeeded</code> or <code>Failed</code>.
-  InvalidLifecycleEventHookExecutionIdException:
-    type: object
-    properties: {}
-    description: A lifecycle event hook is invalid. Review the <code>hooks</code> section in your AppSpec file to ensure the lifecycle events and <code>hooks</code> functions are valid.
-  LifecycleEventAlreadyCompletedException:
-    type: object
-    properties: {}
-    description: An attempt to return the status of an already completed lifecycle event occurred.
+  InvalidLifecycleEventHookExecutionStatusException: {}
+  InvalidLifecycleEventHookExecutionIdException: {}
+  LifecycleEventAlreadyCompletedException: {}
   RegisterApplicationRevisionInput:
     type: object
     required:
@@ -3234,38 +3274,14 @@ definitions:
         $ref: '#/definitions/IamUserArn'
         description: The ARN of the IAM user to associate with the on-premises instance.
     description: Represents the input of the register on-premises instance operation.
-  InstanceNameAlreadyRegisteredException:
-    type: object
-    properties: {}
-    description: The specified on-premises instance name is already registered.
-  IamArnRequiredException:
-    type: object
-    properties: {}
-    description: No IAM ARN was included in the request. You must use an IAM session ARN or IAM user ARN in the request.
-  IamSessionArnAlreadyRegisteredException:
-    type: object
-    properties: {}
-    description: The request included an IAM session ARN that has already been used to register a different instance.
-  IamUserArnAlreadyRegisteredException:
-    type: object
-    properties: {}
-    description: The specified IAM user ARN is already registered with an on-premises instance.
-  IamUserArnRequiredException:
-    type: object
-    properties: {}
-    description: An IAM user ARN was not specified.
-  InvalidIamSessionArnException:
-    type: object
-    properties: {}
-    description: The IAM session ARN was specified in an invalid format.
-  InvalidIamUserArnException:
-    type: object
-    properties: {}
-    description: The IAM user ARN was specified in an invalid format.
-  MultipleIamArnsProvidedException:
-    type: object
-    properties: {}
-    description: Both an IAM user ARN and an IAM session ARN were included in the request. Use only one ARN type.
+  InstanceNameAlreadyRegisteredException: {}
+  IamArnRequiredException: {}
+  IamSessionArnAlreadyRegisteredException: {}
+  IamUserArnAlreadyRegisteredException: {}
+  IamUserArnRequiredException: {}
+  InvalidIamSessionArnException: {}
+  InvalidIamUserArnException: {}
+  MultipleIamArnsProvidedException: {}
   RemoveTagsFromOnPremisesInstancesInput:
     type: object
     required:
@@ -3284,7 +3300,7 @@ definitions:
     properties:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
-        description: The ID of the blue/green deployment for which you want to skip the instance termination wait time.
+        description: ' The unique ID of a blue/green deployment for which you want to skip the instance termination wait time. '
   StopDeploymentOutput:
     type: object
     properties:
@@ -3294,7 +3310,7 @@ definitions:
       statusMessage:
         $ref: '#/definitions/Message'
         description: An accompanying status message.
-    description: Represents the output of a StopDeployment operation.
+    description: ' Represents the output of a StopDeployment operation. '
   StopDeploymentInput:
     type: object
     required:
@@ -3302,11 +3318,11 @@ definitions:
     properties:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
-        description: The unique ID of a deployment.
+        description: ' The unique ID of a deployment. '
       autoRollbackEnabled:
         $ref: '#/definitions/NullableBoolean'
-        description: 'Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.'
-    description: Represents the input of a StopDeployment operation.
+        description: ' Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision. '
+    description: ' Represents the input of a StopDeployment operation. '
   UpdateApplicationInput:
     type: object
     properties:
@@ -3375,6 +3391,9 @@ definitions:
       ec2TagSet:
         $ref: '#/definitions/EC2TagSet'
         description: Information about groups of tags applied to on-premises instances. The deployment group will include only EC2 instances identified by all the tag groups.
+      ecsServices:
+        $ref: '#/definitions/ECSServiceList'
+        description: ' The target ECS services in the deployment group. This only applies to deployment groups that use the Amazon ECS compute platform. A target ECS service is specified as an Amazon ECS cluster and service name pair using the format <code>&lt;clustername&gt;:&lt;servicename&gt;</code>. '
       onPremisesTagSet:
         $ref: '#/definitions/OnPremisesTagSet'
         description: Information about an on-premises instance tag set. The deployment group will include only on-premises instances identified by all the tag groups.
@@ -3389,6 +3408,7 @@ definitions:
       $ref: '#/definitions/InstanceName'
   AdditionalDeploymentStatusInfo:
     type: string
+    description: 'AdditionalDeploymentStatusInfo is deprecated, use DeploymentStatusMessageList instead.'
   AlarmName:
     type: string
   Alarm:
@@ -3417,6 +3437,20 @@ definitions:
         $ref: '#/definitions/AlarmList'
         description: A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
     description: Information about alarms associated with the deployment group.
+  RawStringContent:
+    type: string
+  RawStringSha256:
+    type: string
+  AppSpecContent:
+    type: object
+    properties:
+      content:
+        $ref: '#/definitions/RawStringContent'
+        description: '<p> The YAML-formatted or JSON-formatted revision string. </p> <p> For an AWS Lambda deployment the content includes a Lambda function name, the alias for its original version, and the alias for its replacement version. The deployment shifts traffic from the original version of the Lambda function to the replacement version. </p> <p> For an Amazon ECS deployment the content includes the task name, information about the load balancer that serves traffic to the container, and more. </p> <p> For both types of deployments, the content can specify Lambda functions that run at specified hooks, such as <code>BeforeInstall</code>, during a deployment. </p>'
+      sha256:
+        $ref: '#/definitions/RawStringSha256'
+        description: ' The SHA256 hash value of the revision content. '
+    description: ' A revision for an AWS Lambda or Amazon ECS deployment that is a YAML-formatted or JSON-formatted string. For AWS Lambda and Amazon ECS deployments, the revision is the same as the AppSpec file. This method replaces the deprecated <code>RawString</code> data type. '
   ApplicationId:
     type: string
   ApplicationName:
@@ -3433,6 +3467,7 @@ definitions:
     enum:
       - Server
       - Lambda
+      - ECS
   ApplicationInfo:
     type: object
     properties:
@@ -3539,6 +3574,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InstanceSummary'
+  TargetIdList:
+    type: array
+    items:
+      $ref: '#/definitions/TargetId'
+  DeploymentTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/DeploymentTarget'
   DeploymentsList:
     type: array
     items:
@@ -3608,6 +3651,11 @@ definitions:
       - JSON
   CommitId:
     type: string
+  DeploymentWaitType:
+    type: string
+    enum:
+      - READY_WAIT
+      - TERMINATION_WAIT
   DeploymentConfigName:
     type: string
     minLength: 1
@@ -3674,6 +3722,9 @@ definitions:
       targetGroupInfoList:
         $ref: '#/definitions/TargetGroupInfoList'
         description: '<p>An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.</p> <note> <p> Adding more than one target group to the array is not supported. </p> </note>'
+      targetGroupPairInfoList:
+        $ref: '#/definitions/TargetGroupPairInfoList'
+        description: ' The target group pair information. This is an array of <code>TargeGroupPairInfo</code> objects with a maximum size of one. '
     description: Information about the Elastic Load Balancing load balancer or target group used in a deployment.
   EC2TagSet:
     type: object
@@ -3682,6 +3733,10 @@ definitions:
         $ref: '#/definitions/EC2TagSetList'
         description: 'A list containing other lists of EC2 instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.'
     description: Information about groups of EC2 instance tags.
+  ECSServiceList:
+    type: array
+    items:
+      $ref: '#/definitions/ECSService'
   OnPremisesTagSet:
     type: object
     properties:
@@ -3706,6 +3761,9 @@ definitions:
       string:
         $ref: '#/definitions/RawString'
         description: Information about the location of an AWS Lambda deployment revision stored as a RawString.
+      appSpecContent:
+        $ref: '#/definitions/AppSpecContent'
+        description: ' The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The content is formatted as JSON or YAML and stored as a RawString. '
     description: Information about the location of an application revision.
   Description:
     type: string
@@ -3765,7 +3823,7 @@ definitions:
     properties:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
-        description: The deployment ID.
+        description: ' The unique ID of a deployment. '
       status:
         $ref: '#/definitions/DeploymentStatus'
         description: The status of the most recent deployment.
@@ -3839,6 +3897,9 @@ definitions:
       computePlatform:
         $ref: '#/definitions/ComputePlatform'
         description: The destination platform type for the deployment group (<code>Lambda</code> or <code>Server</code>).
+      ecsServices:
+        $ref: '#/definitions/ECSServiceList'
+        description: ' The target ECS services in the deployment group. This only applies to deployment groups that use the Amazon ECS compute platform. A target ECS service is specified as an Amazon ECS cluster and service name pair using the format <code>&lt;clustername&gt;:&lt;servicename&gt;</code>. '
     description: Information about a deployment group.
   DeploymentStatus:
     type: string
@@ -3907,13 +3968,13 @@ definitions:
         description: The application name.
       deploymentGroupName:
         $ref: '#/definitions/DeploymentGroupName'
-        description: The deployment group name.
+        description: ' The deployment group name. '
       deploymentConfigName:
         $ref: '#/definitions/DeploymentConfigName'
-        description: The deployment configuration name.
+        description: ' The deployment configuration name. '
       deploymentId:
         $ref: '#/definitions/DeploymentId'
-        description: The deployment ID.
+        description: ' The unique ID of a deployment. '
       previousRevision:
         $ref: '#/definitions/RevisionLocation'
         description: Information about the application revision that was deployed to the deployment group before the most recent successful deployment.
@@ -3982,7 +4043,7 @@ definitions:
         description: Messages that contain information about the status of a deployment.
       computePlatform:
         $ref: '#/definitions/ComputePlatform'
-        description: The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>).
+        description: ' The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>). '
     description: Information about a deployment.
   DeploymentOption:
     type: string
@@ -4005,6 +4066,100 @@ definitions:
     enum:
       - IN_PLACE
       - BLUE_GREEN
+  DeploymentTargetType:
+    type: string
+    enum:
+      - InstanceTarget
+      - LambdaTarget
+      - ECSTarget
+  InstanceTarget:
+    type: object
+    properties:
+      deploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: ' The unique ID of a deployment. '
+      targetId:
+        $ref: '#/definitions/TargetId'
+        description: ' The unique ID of a deployment target that has a type of <code>instanceTarget</code>. '
+      targetArn:
+        $ref: '#/definitions/TargetArn'
+        description: ' The ARN of the target. '
+      status:
+        $ref: '#/definitions/TargetStatus'
+        description: ' The status an EC2/On-premises deployment''s target instance. '
+      lastUpdatedAt:
+        $ref: '#/definitions/Time'
+        description: ' The date and time when the target instance was updated by a deployment. '
+      lifecycleEvents:
+        $ref: '#/definitions/LifecycleEventList'
+        description: ' The lifecycle events of the deployment to this target instance. '
+      instanceLabel:
+        $ref: '#/definitions/TargetLabel'
+        description: ' A label that identifies whether the instance is an original target (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). '
+    description: ' A target Amazon EC2 or on-premises instance during a deployment that uses the EC2/On-premises compute platform. '
+  LambdaTarget:
+    type: object
+    properties:
+      deploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: ' The unique ID of a deployment. '
+      targetId:
+        $ref: '#/definitions/TargetId'
+        description: ' The unique ID of a deployment target that has a type of <code>lambdaTarget</code>. '
+      targetArn:
+        $ref: '#/definitions/TargetArn'
+        description: ' The ARN of the target. '
+      status:
+        $ref: '#/definitions/TargetStatus'
+        description: ' The status an AWS Lambda deployment''s target Lambda function. '
+      lastUpdatedAt:
+        $ref: '#/definitions/Time'
+        description: ' The date and time when the target Lambda function was updated by a deployment. '
+      lifecycleEvents:
+        $ref: '#/definitions/LifecycleEventList'
+        description: ' The lifecycle events of the deployment to this target Lambda function. '
+    description: ' Information about the target AWS Lambda function during an AWS Lambda deployment. '
+  ECSTarget:
+    type: object
+    properties:
+      deploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: ' The unique ID of a deployment. '
+      targetId:
+        $ref: '#/definitions/TargetId'
+        description: ' The unique ID of a deployment target that has a type of <code>ecsTarget</code>. '
+      targetArn:
+        $ref: '#/definitions/TargetArn'
+        description: ' The ARN of the target. '
+      lastUpdatedAt:
+        $ref: '#/definitions/Time'
+        description: ' The date and time when the target Amazon ECS application was updated by a deployment. '
+      lifecycleEvents:
+        $ref: '#/definitions/LifecycleEventList'
+        description: ' The lifecycle events of the deployment to this target Amazon ECS application. '
+      status:
+        $ref: '#/definitions/TargetStatus'
+        description: ' The status an Amazon ECS deployment''s target ECS application. '
+      taskSetsInfo:
+        $ref: '#/definitions/ECSTaskSetList'
+        description: ' The <code>ECSTaskSet</code> objects associated with the ECS target. '
+    description: ' Information about the target of an Amazon ECS deployment. '
+  DeploymentTarget:
+    type: object
+    properties:
+      deploymentTargetType:
+        $ref: '#/definitions/DeploymentTargetType'
+        description: ' The deployment type which is specific to the deployment''s compute platform. '
+      instanceTarget:
+        $ref: '#/definitions/InstanceTarget'
+        description: ' Information about the target for a deployment that uses the EC2/On-premises compute platform. '
+      lambdaTarget:
+        $ref: '#/definitions/LambdaTarget'
+        description: ' Information about the target for a deployment that uses the AWS Lambda compute platform. '
+      ecsTarget:
+        $ref: '#/definitions/ECSTarget'
+        description: ' Information about the target for a deployment that uses the Amazon ECS compute platform. '
+    description: ' Information about the deployment target. '
   InstanceName:
     type: string
   LifecycleErrorCode:
@@ -4065,6 +4220,94 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EC2TagFilterList'
+  ECSClusterName:
+    type: string
+  ECSServiceName:
+    type: string
+  ECSService:
+    type: object
+    properties:
+      serviceName:
+        $ref: '#/definitions/ECSServiceName'
+        description: ' The name of the target ECS service. '
+      clusterName:
+        $ref: '#/definitions/ECSClusterName'
+        description: ' The name of the cluster that the ECS service is associated with. '
+    description: ' Contains the service and cluster names used to identify an Amazon ECS deployment''s target. '
+  TargetId:
+    type: string
+  TargetArn:
+    type: string
+  Time:
+    type: string
+    format: date-time
+  LifecycleEventList:
+    type: array
+    items:
+      $ref: '#/definitions/LifecycleEvent'
+  TargetStatus:
+    type: string
+    enum:
+      - Pending
+      - InProgress
+      - Succeeded
+      - Failed
+      - Skipped
+      - Unknown
+      - Ready
+  ECSTaskSetList:
+    type: array
+    items:
+      $ref: '#/definitions/ECSTaskSet'
+  ECSTaskSetIdentifier:
+    type: string
+  ECSTaskSetCount:
+    type: integer
+  ECSTaskSetStatus:
+    type: string
+  TrafficWeight:
+    type: number
+    format: double
+  TargetGroupInfo:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/TargetGroupName'
+        description: 'For blue/green deployments, the name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes. '
+    description: 'Information about a target group in Elastic Load Balancing to use in a deployment. Instances are registered as targets in a target group, and traffic is routed to the target group.'
+  TargetLabel:
+    type: string
+    enum:
+      - Blue
+      - Green
+  ECSTaskSet:
+    type: object
+    properties:
+      identifer:
+        $ref: '#/definitions/ECSTaskSetIdentifier'
+        description: ' A unique ID of an <code>ECSTaskSet</code>. '
+      desiredCount:
+        $ref: '#/definitions/ECSTaskSetCount'
+        description: ' The number of tasks in a task set. During a deployment that uses the Amazon ECS compute type, CodeDeploy asks Amazon ECS to create a new task set and uses this value to determine how many tasks to create. After the updated task set is created, CodeDeploy shifts traffic to the new task set. '
+      pendingCount:
+        $ref: '#/definitions/ECSTaskSetCount'
+        description: ' The number of tasks in the task set that are in the <code>PENDING</code> status during an Amazon ECS deployment. A task in the <code>PENDING</code> state is preparing to enter the <code>RUNNING</code> state. A task set enters the <code>PENDING</code> status when it launches for the first time, or when it is restarted after being in the <code>STOPPED</code> state. '
+      runningCount:
+        $ref: '#/definitions/ECSTaskSetCount'
+        description: ' The number of tasks in the task set that are in the <code>RUNNING</code> status during an Amazon ECS deployment. A task in the <code>RUNNING</code> state is running and ready for use. '
+      status:
+        $ref: '#/definitions/ECSTaskSetStatus'
+        description: '<p> The status of the task set. There are three valid task set statuses: </p> <ul> <li> <p> <code>PRIMARY</code> - indicates the task set is serving production traffic. </p> </li> <li> <p> <code>ACTIVE</code> - indicates the task set is not serving production traffic. </p> </li> <li> <p> <code>DRAINING</code> - indicates the tasks in the task set are being stopped and their corresponding targets are being deregistered from their target group. </p> </li> </ul>'
+      trafficWeight:
+        $ref: '#/definitions/TrafficWeight'
+        description: ' The percentage of traffic served by this task set. '
+      targetGroup:
+        $ref: '#/definitions/TargetGroupInfo'
+        description: ' The target group associated with the task set. The target group is used by AWS CodeDeploy to manage traffic to a task set. '
+      taskSetLabel:
+        $ref: '#/definitions/TargetLabel'
+        description: ' A label that identifies whether the ECS task set is an original target (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). '
+    description: ' A set of Amazon ECS tasks. A task set runs a specified number of instances of a task definition simultaneously inside an Amazon ECS service. Information about a set of Amazon ECS tasks in an AWS CodeDeploy deployment. An Amazon ECS task set includes details such as the desired number of tasks, how many tasks are running, and whether the task set serves production traffic or not. '
   ELBName:
     type: string
   ELBInfo:
@@ -4109,6 +4352,16 @@ definitions:
       - INVALID_LAMBDA_CONFIGURATION
       - INVALID_LAMBDA_FUNCTION
       - HOOK_EXECUTION_FAILURE
+      - AUTOSCALING_VALIDATION_ERROR
+      - INVALID_ECS_SERVICE
+      - ECS_UPDATE_ERROR
+      - INVALID_REVISION
+  FilterValue:
+    type: string
+  FilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/FilterValue'
   GenericRevisionInfo:
     type: object
     properties:
@@ -4135,7 +4388,7 @@ definitions:
     properties:
       deploymentId:
         $ref: '#/definitions/DeploymentId'
-        description: The deployment ID.
+        description: ' The unique ID of a deployment. '
       instanceId:
         $ref: '#/definitions/InstanceId'
         description: The instance ID.
@@ -4152,6 +4405,7 @@ definitions:
         $ref: '#/definitions/InstanceType'
         description: '<p>Information about which environment an instance belongs to in a blue/green deployment.</p> <ul> <li> <p>BLUE: The instance is part of the original environment.</p> </li> <li> <p>GREEN: The instance is part of the replacement environment.</p> </li> </ul>'
     description: Information about an instance in a deployment.
+    x-deprecation: 'InstanceSummary is deprecated, use DeploymentTarget instead.'
   InstanceInfo:
     type: object
     properties:
@@ -4214,14 +4468,11 @@ definitions:
       - Skipped
       - Unknown
       - Ready
+    description: 'InstanceStatus is deprecated, use TargetStatus instead.'
   InstanceStatusList:
     type: array
     items:
       $ref: '#/definitions/InstanceStatus'
-  LifecycleEventList:
-    type: array
-    items:
-      $ref: '#/definitions/LifecycleEvent'
   InstanceType:
     type: string
     enum:
@@ -4231,10 +4482,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InstanceType'
-  InvalidInstanceIdException:
-    type: object
-    properties: {}
-    description: ' '
   LifecycleEventName:
     type: string
   LifecycleEventStatus:
@@ -4284,6 +4531,15 @@ definitions:
       - ignore
   NextToken:
     type: string
+  TargetFilters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TargetFilterName'
+        value:
+          $ref: '#/definitions/FilterValueList'
   TimeRange:
     type: object
     properties:
@@ -4299,10 +4555,20 @@ definitions:
     enum:
       - Registered
       - Deregistered
+  ListenerArn:
+    type: string
+  ListenerArnList:
+    type: array
+    items:
+      $ref: '#/definitions/ListenerArn'
   TargetGroupInfoList:
     type: array
     items:
       $ref: '#/definitions/TargetGroupInfo'
+  TargetGroupPairInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGroupPairInfo'
   Message:
     type: string
   MinimumHealthyHostsValue:
@@ -4320,10 +4586,6 @@ definitions:
       $ref: '#/definitions/TagFilterList'
   Percentage:
     type: integer
-  RawStringContent:
-    type: string
-  RawStringSha256:
-    type: string
   RawString:
     type: object
     properties:
@@ -4332,8 +4594,9 @@ definitions:
         description: The YAML-formatted or JSON-formatted revision string. It includes information about which Lambda function to update and optional Lambda functions that validate deployment lifecycle events.
       sha256:
         $ref: '#/definitions/RawStringSha256'
-        description: The SHA256 hash value of the revision that is specified as a RawString.
+        description: The SHA256 hash value of the revision content.
     description: 'A revision for an AWS Lambda deployment that is a YAML-formatted or JSON-formatted string. For AWS Lambda deployments, the revision is the same as the AppSpec file.'
+    x-deprecation: 'RawString and String revision type are deprecated, use AppSpecContent type instead.'
   RevisionInfo:
     type: object
     properties:
@@ -4350,6 +4613,7 @@ definitions:
       - S3
       - GitHub
       - String
+      - AppSpecContent
   S3Location:
     type: object
     properties:
@@ -4405,15 +4669,33 @@ definitions:
         $ref: '#/definitions/TagFilterType'
         description: '<p>The on-premises instance tag filter type:</p> <ul> <li> <p>KEY_ONLY: Key only.</p> </li> <li> <p>VALUE_ONLY: Value only.</p> </li> <li> <p>KEY_AND_VALUE: Key and value.</p> </li> </ul>'
     description: Information about an on-premises instance tag filter.
+  TargetFilterName:
+    type: string
+    enum:
+      - TargetStatus
+      - ServerInstanceLabel
   TargetGroupName:
     type: string
-  TargetGroupInfo:
+  TrafficRoute:
     type: object
     properties:
-      name:
-        $ref: '#/definitions/TargetGroupName'
-        description: 'For blue/green deployments, the name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes. '
-    description: 'Information about a target group in Elastic Load Balancing to use in a deployment. Instances are registered as targets in a target group, and traffic is routed to the target group.'
+      listenerArns:
+        $ref: '#/definitions/ListenerArnList'
+        description: ' The ARN of one listener. The listener identifies the route between a target group and a load balancer. This is an array of strings with a maximum size of one. '
+    description: ' Information about a listener. The listener contains the path used to route traffic that is received from the load balancer to a target group. '
+  TargetGroupPairInfo:
+    type: object
+    properties:
+      targetGroups:
+        $ref: '#/definitions/TargetGroupInfoList'
+        description: ' One pair of target groups. One is associated with the original task set. The second target is associated with the task set that serves traffic after the deployment completes. '
+      prodTrafficRoute:
+        $ref: '#/definitions/TrafficRoute'
+        description: ' The path used by a load balancer to route production traffic when an Amazon ECS deployment is complete. '
+      testTrafficRoute:
+        $ref: '#/definitions/TrafficRoute'
+        description: ' An optional path used by a load balancer to route test traffic after an Amazon ECS deployment. Validation can happen while test traffic is served during a deployment. '
+    description: ' Information about two target groups and how traffic routes during an Amazon ECS deployment. An optional test traffic route can be specified. '
   WaitTimeInMins:
     type: integer
   TimeBasedCanary:

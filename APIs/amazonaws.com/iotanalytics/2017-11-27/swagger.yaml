@@ -1649,6 +1649,8 @@ definitions:
       triggers:
         $ref: '#/definitions/DatasetTriggers'
         description: A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.
+      contentDeliveryRules:
+        $ref: '#/definitions/DatasetContentDeliveryRules'
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: '[Optional] How long, in days, message data is kept for the data set. If not given or set to null, the latest version of the dataset content plus the latest succeeded version (if they are different) are retained for at most 90 days.'
@@ -1951,6 +1953,8 @@ definitions:
       triggers:
         $ref: '#/definitions/DatasetTriggers'
         description: A list of "DatasetTrigger" objects. The list can be empty or can contain up to five <b>DataSetTrigger</b> objects.
+      contentDeliveryRules:
+        $ref: '#/definitions/DatasetContentDeliveryRules'
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, message data is kept for the data set.'
@@ -2228,6 +2232,12 @@ definitions:
       $ref: '#/definitions/DatasetTrigger'
     minItems: 0
     maxItems: 5
+  DatasetContentDeliveryRules:
+    type: array
+    items:
+      $ref: '#/definitions/DatasetContentDeliveryRule'
+    minItems: 0
+    maxItems: 20
   DatasetArn:
     type: string
   DatastoreName:
@@ -2266,6 +2276,8 @@ definitions:
       triggers:
         $ref: '#/definitions/DatasetTriggers'
         description: The "DatasetTrigger" objects that specify when the data set is automatically updated.
+      contentDeliveryRules:
+        $ref: '#/definitions/DatasetContentDeliveryRules'
       status:
         $ref: '#/definitions/DatasetStatus'
         description: The status of the data set.
@@ -2330,6 +2342,32 @@ definitions:
     enum:
       - QUERY
       - CONTAINER
+  IotEventsDestinationConfiguration:
+    type: object
+    required:
+      - inputName
+      - roleArn
+    properties:
+      inputName:
+        $ref: '#/definitions/IotEventsInputName'
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+  DatasetContentDeliveryDestination:
+    type: object
+    properties:
+      iotEventsDestinationConfiguration:
+        $ref: '#/definitions/IotEventsDestinationConfiguration'
+  EntryName:
+    type: string
+  DatasetContentDeliveryRule:
+    type: object
+    required:
+      - destination
+    properties:
+      entryName:
+        $ref: '#/definitions/EntryName'
+      destination:
+        $ref: '#/definitions/DatasetContentDeliveryDestination'
   DatasetContentState:
     type: string
     enum:
@@ -2391,8 +2429,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DatasetEntry'
-  EntryName:
-    type: string
   PresignedURI:
     type: string
   DatasetSummary:
@@ -2650,6 +2686,11 @@ definitions:
         $ref: '#/definitions/ActivityName'
         description: The next activity in the pipeline.
     description: An activity that filters a message based on its attributes.
+  IotEventsInputName:
+    type: string
+    pattern: '^[a-zA-Z][a-zA-Z0-9_]*$'
+    minLength: 1
+    maxLength: 128
   LambdaName:
     type: string
     pattern: '^[a-zA-Z0-9_-]+$'

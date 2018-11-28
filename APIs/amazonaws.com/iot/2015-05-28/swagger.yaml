@@ -10260,6 +10260,22 @@ definitions:
         $ref: '#/definitions/AwsArn'
         description: 'The ARN of the role which has a policy that grants IoT Analytics permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).'
     description: Sends messge data to an AWS IoT Analytics channel.
+  IotEventsAction:
+    type: object
+    required:
+      - inputName
+      - roleArn
+    properties:
+      inputName:
+        $ref: '#/definitions/InputName'
+        description: The name of the AWS IoT Events input.
+      messageId:
+        $ref: '#/definitions/MessageId'
+        description: '[Optional] Use this to ensure that only one input (message) with a given messageId will be processed by an AWS IoT Events detector.'
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: 'The ARN of the role that grants AWS IoT permission to send an input to an AWS IoT Events detector. ("Action":"iotevents:BatchPutMessage").'
+    description: Sends an input to an AWS IoT Events detector.
   StepFunctionsAction:
     type: object
     required:
@@ -10321,6 +10337,9 @@ definitions:
       iotAnalytics:
         $ref: '#/definitions/IotAnalyticsAction'
         description: Sends message data to an AWS IoT Analytics channel.
+      iotEvents:
+        $ref: '#/definitions/IotEventsAction'
+        description: Sends an input to an AWS IoT Events detector.
       stepFunctions:
         $ref: '#/definitions/StepFunctionsAction'
         description: Starts execution of a Step Functions state machine.
@@ -12198,6 +12217,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/IndexName'
+  InputName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  MessageId:
+    type: string
+    maxLength: 128
   IsAuthenticated:
     type: boolean
   IsDisabled:

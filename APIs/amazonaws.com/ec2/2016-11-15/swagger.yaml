@@ -122,6 +122,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AcceptTransitGatewayVpcAttachment':
+    post:
+      operationId: AcceptTransitGatewayVpcAttachment
+      description: <p>Accepts a request to attach a VPC to a transit gateway.</p> <p>The VPC attachment must be in the <code>pendingAcceptance</code> state. Use <a>DescribeTransitGatewayVpcAttachments</a> to view your pending VPC attachment requests. Use <a>RejectTransitGatewayVpcAttachment</a> to reject a VPC attachment request.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AcceptTransitGatewayVpcAttachmentResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AcceptTransitGatewayVpcAttachmentRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#AcceptVpcEndpointConnections':
     post:
       operationId: AcceptVpcEndpointConnections
@@ -408,6 +433,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateSubnetCidrBlockRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AssociateTransitGatewayRouteTable':
+    post:
+      operationId: AssociateTransitGatewayRouteTable
+      description: Associates the specified attachment with the specified transit gateway route table. You can associate only one route table with an attachment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateTransitGatewayRouteTableResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateTransitGatewayRouteTableRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1652,6 +1702,106 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateTransitGateway':
+    post:
+      operationId: CreateTransitGateway
+      description: '<p>Creates a transit gateway.</p> <p>You can use a transit gateway to interconnect your virtual private clouds (VPC) and on-premises networks. After the transit gateway enters the <code>available</code> state, you can attach your VPCs and VPN connections to the transit gateway.</p> <p>To attach your VPCs, use <a>CreateTransitGatewayVpcAttachment</a>.</p> <p>To attach a VPN connection, use <a>CreateCustomerGateway</a> to create a customer gateway and specify the ID of the customer gateway and the ID of the transit gateway in a call to <a>CreateVpnConnection</a>.</p> <p>When you create a transit gateway, we create a default transit gateway route table and use it as the default association route table and the default propagation route table. You can use <a>CreateTransitGatewayRouteTable</a> to create additional transit gateway route tables. If you disable automatic route propagation, we do not create a default transit gateway route table. You can use <a>EnableTransitGatewayRouteTablePropagation</a> to propagate routes from a resource attachment to a transit gateway route table. If you disable automatic associations, you can use <a>AssociateTransitGatewayRouteTable</a> to associate a resource attachment with a transit gateway route table.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTransitGatewayResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTransitGatewayRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateTransitGatewayRoute':
+    post:
+      operationId: CreateTransitGatewayRoute
+      description: Creates a static route for the specified transit gateway route table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTransitGatewayRouteResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTransitGatewayRouteRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateTransitGatewayRouteTable':
+    post:
+      operationId: CreateTransitGatewayRouteTable
+      description: Creates a route table for the specified transit gateway.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTransitGatewayRouteTableResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTransitGatewayRouteTableRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateTransitGatewayVpcAttachment':
+    post:
+      operationId: CreateTransitGatewayVpcAttachment
+      description: '<p>Attaches the specified VPC to the specified transit gateway.</p> <p>If you attach a VPC with a CIDR range that overlaps the CIDR range of a VPC that is already attached, the new VPC CIDR range is not propagated to the default propagation route table.</p> <p>To send VPC traffic to an attached transit gateway, add a route to the VPC route table using <a>CreateRoute</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTransitGatewayVpcAttachmentResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTransitGatewayVpcAttachmentRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateVolume':
     post:
       operationId: CreateVolume
@@ -2420,6 +2570,106 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTransitGateway':
+    post:
+      operationId: DeleteTransitGateway
+      description: Deletes the specified transit gateway.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTransitGatewayResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTransitGatewayRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTransitGatewayRoute':
+    post:
+      operationId: DeleteTransitGatewayRoute
+      description: Deletes the specified route from the specified transit gateway route table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTransitGatewayRouteResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTransitGatewayRouteRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTransitGatewayRouteTable':
+    post:
+      operationId: DeleteTransitGatewayRouteTable
+      description: Deletes the specified transit gateway route table. You must disassociate the route table from any transit gateway route tables before you can delete it.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTransitGatewayRouteTableResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTransitGatewayRouteTableRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTransitGatewayVpcAttachment':
+    post:
+      operationId: DeleteTransitGatewayVpcAttachment
+      description: Deletes the specified VPC attachment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteTransitGatewayVpcAttachmentResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTransitGatewayVpcAttachmentRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteVolume':
     post:
       operationId: DeleteVolume
@@ -3049,7 +3299,7 @@ paths:
   '/#DescribeElasticGpus':
     post:
       operationId: DescribeElasticGpus
-      description: 'Describes the Elastic GPUs associated with your instances. For more information about Elastic GPUs, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-gpus.html">Amazon EC2 Elastic GPUs</a>.'
+      description: 'Describes the Elastic Graphics accelerator associated with your instances. For more information about Elastic Graphics, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html">Amazon Elastic Graphics</a>.'
       responses:
         '200':
           description: Success
@@ -4812,6 +5062,106 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTransitGatewayAttachments':
+    post:
+      operationId: DescribeTransitGatewayAttachments
+      description: 'Describes one or more attachments between resources and transit gateways. By default, all attachments are described. Alternatively, you can filter the results by attachment ID, attachment state, resource ID, or resource owner.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTransitGatewayAttachmentsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeTransitGatewayAttachmentsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTransitGatewayRouteTables':
+    post:
+      operationId: DescribeTransitGatewayRouteTables
+      description: 'Describes one or more transit gateway route tables. By default, all transit gateway route tables are described. Alternatively, you can filter the results.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTransitGatewayRouteTablesResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeTransitGatewayRouteTablesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTransitGatewayVpcAttachments':
+    post:
+      operationId: DescribeTransitGatewayVpcAttachments
+      description: 'Describes one or more VPC attachments. By default, all VPC attachments are described. Alternatively, you can filter the results.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTransitGatewayVpcAttachmentsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeTransitGatewayVpcAttachmentsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTransitGateways':
+    post:
+      operationId: DescribeTransitGateways
+      description: 'Describes one or more transit gateways. By default, all transit gateways are described. Alternatively, you can filter the results.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTransitGatewaysResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeTransitGatewaysRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeVolumeAttribute':
     post:
       operationId: DescribeVolumeAttribute
@@ -5482,6 +5832,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisableTransitGatewayRouteTablePropagation':
+    post:
+      operationId: DisableTransitGatewayRouteTablePropagation
+      description: Disables the specified resource attachment from propagating routes to the specified propagation route table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisableTransitGatewayRouteTablePropagationResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisableTransitGatewayRouteTablePropagationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DisableVgwRoutePropagation':
     post:
       operationId: DisableVgwRoutePropagation
@@ -5651,6 +6026,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateTransitGatewayRouteTable':
+    post:
+      operationId: DisassociateTransitGatewayRouteTable
+      description: Disassociates a resource attachment from a transit gateway route table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateTransitGatewayRouteTableResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateTransitGatewayRouteTableRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DisassociateVpcCidrBlock':
     post:
       operationId: DisassociateVpcCidrBlock
@@ -5666,6 +6066,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateVpcCidrBlockRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#EnableTransitGatewayRouteTablePropagation':
+    post:
+      operationId: EnableTransitGatewayRouteTablePropagation
+      description: Enables the specified attachment to propagate routes to the specified propagation route table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnableTransitGatewayRouteTablePropagationResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/EnableTransitGatewayRouteTablePropagationRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5762,6 +6187,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/EnableVpcClassicLinkDnsSupportRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ExportTransitGatewayRoutes':
+    post:
+      operationId: ExportTransitGatewayRoutes
+      description: 'Exports routes from the specified transit gateway route table to the specified S3 bucket. By default, all routes are exported. Alternatively, you can filter by CIDR range.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExportTransitGatewayRoutesResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ExportTransitGatewayRoutesRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5921,6 +6371,81 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetReservedInstancesExchangeQuoteRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetTransitGatewayAttachmentPropagations':
+    post:
+      operationId: GetTransitGatewayAttachmentPropagations
+      description: Lists the route tables to which the specified resource attachment propagates routes.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetTransitGatewayAttachmentPropagationsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetTransitGatewayAttachmentPropagationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetTransitGatewayRouteTableAssociations':
+    post:
+      operationId: GetTransitGatewayRouteTableAssociations
+      description: Gets information about the associations for the specified transit gateway route table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetTransitGatewayRouteTableAssociationsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetTransitGatewayRouteTableAssociationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetTransitGatewayRouteTablePropagations':
+    post:
+      operationId: GetTransitGatewayRouteTablePropagations
+      description: Gets information about the route table propagations for the specified transit gateway route table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetTransitGatewayRouteTablePropagationsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetTransitGatewayRouteTablePropagationsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -6467,6 +6992,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyTransitGatewayVpcAttachment':
+    post:
+      operationId: ModifyTransitGatewayVpcAttachment
+      description: Modifies the specified VPC attachment.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyTransitGatewayVpcAttachmentResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyTransitGatewayVpcAttachmentRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ModifyVolume':
     post:
       operationId: ModifyVolume
@@ -6886,6 +7436,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RejectTransitGatewayVpcAttachment':
+    post:
+      operationId: RejectTransitGatewayVpcAttachment
+      description: <p>Rejects a request to attach a VPC to a transit gateway.</p> <p>The VPC attachment must be in the <code>pendingAcceptance</code> state. Use <a>DescribeTransitGatewayVpcAttachments</a> to view your pending VPC attachment requests. Use <a>AcceptTransitGatewayVpcAttachment</a> to accept a VPC attachment request.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RejectTransitGatewayVpcAttachmentResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RejectTransitGatewayVpcAttachmentRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#RejectVpcEndpointConnections':
     post:
       operationId: RejectVpcEndpointConnections
@@ -7095,6 +7670,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ReplaceRouteTableAssociationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ReplaceTransitGatewayRoute':
+    post:
+      operationId: ReplaceTransitGatewayRoute
+      description: Replaces the specified route in the specified transit gateway route table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ReplaceTransitGatewayRouteResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ReplaceTransitGatewayRouteRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -7416,6 +8016,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#SearchTransitGatewayRoutes':
+    post:
+      operationId: SearchTransitGatewayRoutes
+      description: Searches for routes in the specified transit gateway route table.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchTransitGatewayRoutesResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SearchTransitGatewayRoutesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#StartInstances':
     post:
       operationId: StartInstances
@@ -7662,6 +8287,23 @@ definitions:
         $ref: '#/definitions/TargetConfigurationRequestSet'
         description: The configuration of the target Convertible Reserved Instance to exchange for your current Convertible Reserved Instances.
     description: Contains the parameters for accepting the quote.
+  AcceptTransitGatewayVpcAttachmentResult:
+    type: object
+    properties:
+      TransitGatewayVpcAttachment:
+        $ref: '#/definitions/TransitGatewayVpcAttachment'
+        description: The VPC attachment.
+  AcceptTransitGatewayVpcAttachmentRequest:
+    type: object
+    required:
+      - TransitGatewayAttachmentId
+    properties:
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   AcceptVpcEndpointConnectionsResult:
     type: object
     properties:
@@ -7956,6 +8598,27 @@ definitions:
       SubnetId:
         $ref: '#/definitions/String'
         description: The ID of your subnet.
+  AssociateTransitGatewayRouteTableResult:
+    type: object
+    properties:
+      Association:
+        $ref: '#/definitions/TransitGatewayAssociation'
+        description: The ID of the association.
+  AssociateTransitGatewayRouteTableRequest:
+    type: object
+    required:
+      - TransitGatewayRouteTableId
+      - TransitGatewayAttachmentId
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway route table.
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   AssociateVpcCidrBlockResult:
     type: object
     properties:
@@ -9382,6 +10045,9 @@ definitions:
       NatGatewayId:
         $ref: '#/definitions/String'
         description: '[IPv4 traffic only] The ID of a NAT gateway.'
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+        description: The ID of a transit gateway.
       NetworkInterfaceId:
         $ref: '#/definitions/String'
         description: The ID of a network interface.
@@ -9584,6 +10250,9 @@ definitions:
       AvailabilityZone:
         $ref: '#/definitions/String'
         description: '<p>The Availability Zone for the subnet.</p> <p>Default: AWS selects one for you. If you create more than one subnet in your VPC, we may not necessarily select a different zone for each subnet.</p>'
+      AvailabilityZoneId:
+        $ref: '#/definitions/String'
+        description: The AZ ID of the subnet.
       CidrBlock:
         $ref: '#/definitions/String'
         description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>.'
@@ -9617,6 +10286,105 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: 'One or more tags. The <code>value</code> parameter is required, but if you don''t want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. '
+  CreateTransitGatewayResult:
+    type: object
+    properties:
+      TransitGateway:
+        $ref: '#/definitions/TransitGateway'
+        description: Information about the transit gateway.
+  CreateTransitGatewayRequest:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/String'
+        description: A description of the transit gateway.
+      Options:
+        $ref: '#/definitions/TransitGatewayRequestOptions'
+        description: The transit gateway options.
+      TagSpecifications:
+        $ref: '#/definitions/TagSpecificationList'
+        description: The tags to apply to the transit gateway.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  CreateTransitGatewayRouteResult:
+    type: object
+    properties:
+      Route:
+        $ref: '#/definitions/TransitGatewayRoute'
+        description: Information about the route.
+  CreateTransitGatewayRouteRequest:
+    type: object
+    required:
+      - DestinationCidrBlock
+      - TransitGatewayRouteTableId
+    properties:
+      DestinationCidrBlock:
+        $ref: '#/definitions/String'
+        description: The CIDR range used for destination matches. Routing decisions are based on the most specific match.
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway route table.
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      Blackhole:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether traffic matching this route is to be dropped.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  CreateTransitGatewayRouteTableResult:
+    type: object
+    properties:
+      TransitGatewayRouteTable:
+        $ref: '#/definitions/TransitGatewayRouteTable'
+        description: Information about the transit gateway route table.
+  CreateTransitGatewayRouteTableRequest:
+    type: object
+    required:
+      - TransitGatewayId
+    properties:
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway.
+      TagSpecifications:
+        $ref: '#/definitions/TagSpecificationList'
+        description: The tags to apply to the transit gateway route table.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  CreateTransitGatewayVpcAttachmentResult:
+    type: object
+    properties:
+      TransitGatewayVpcAttachment:
+        $ref: '#/definitions/TransitGatewayVpcAttachment'
+        description: Information about the VPC attachment.
+  CreateTransitGatewayVpcAttachmentRequest:
+    type: object
+    required:
+      - TransitGatewayId
+      - VpcId
+      - SubnetIds
+    properties:
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway.
+      VpcId:
+        $ref: '#/definitions/String'
+        description: The ID of the VPC.
+      SubnetIds:
+        $ref: '#/definitions/ValueStringList'
+        description: 'The IDs of one or more subnets. You can specify only one subnet per Availability Zone. You must specify at least one subnet, but we recommend that you specify two subnets for better availability. The transit gateway uses one IP address from each specified subnet.'
+      Options:
+        $ref: '#/definitions/CreateTransitGatewayVpcAttachmentRequestOptions'
+        description: The VPC attachment options.
+      TagSpecifications:
+        $ref: '#/definitions/TagSpecificationList'
+        description: The tags to apply to the VPC attachment.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   Volume:
     type: object
     example:
@@ -9660,7 +10428,7 @@ definitions:
         description: The ID of the volume.
       Iops:
         $ref: '#/definitions/Integer'
-        description: '<p>The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraint: Range is 100-32000 IOPS for io1 volumes and 100-10000 IOPS for <code>gp2</code> volumes.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>'
+        description: '<p>The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-10,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most regions. Maximum <code>io1</code>IOPS of 64,000 is guaranteed only on <a href="AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>'
       Tags:
         $ref: '#/definitions/TagList'
         description: Any tags assigned to the volume.
@@ -9686,13 +10454,13 @@ definitions:
         description: 'Specifies whether the volume should be encrypted. Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are automatically encrypted. There is no way to create an encrypted volume from an unencrypted snapshot or vice versa. If your AMI uses encrypted volumes, you can only launch it on supported instance types. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       Iops:
         $ref: '#/definitions/Integer'
-        description: '<p>The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000 IOPS for volumes in most regions. For exceptions, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This parameter is valid only for Provisioned IOPS SSD (io1) volumes.</p>'
+        description: '<p>The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed only on <a href="AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This parameter is valid only for Provisioned IOPS SSD (io1) volumes.</p>'
       KmsKeyId:
         $ref: '#/definitions/String'
         description: '<p>An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set. </p> <p>The CMK identifier may be provided in any of the following formats: </p> <ul> <li> <p>Key ID</p> </li> <li> <p>Key alias</p> </li> <li> <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>. </p> </li> <li> <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p> </li> </ul> <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. The action will eventually fail. </p>'
       Size:
         $ref: '#/definitions/Integer'
-        description: '<p>The size of the volume, in GiBs.</p> <p>Constraints: 1-16384 for <code>gp2</code>, 4-16384 for <code>io1</code>, 500-16384 for <code>st1</code>, 500-16384 for <code>sc1</code>, and 1-1024 for <code>standard</code>. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.</p> <p>Default: If you''re creating the volume from a snapshot and don''t specify a volume size, the default is the snapshot size.</p>'
+        description: '<p>The size of the volume, in GiBs.</p> <p>Constraints: 1-16,384 for <code>gp2</code>, 4-16,384 for <code>io1</code>, 500-16,384 for <code>st1</code>, 500-16,384 for <code>sc1</code>, and 1-1,024 for <code>standard</code>. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.</p> <p>Default: If you''re creating the volume from a snapshot and don''t specify a volume size, the default is the snapshot size.</p>'
       SnapshotId:
         $ref: '#/definitions/String'
         description: The snapshot from which to create the volume.
@@ -9880,7 +10648,6 @@ definitions:
     required:
       - CustomerGatewayId
       - Type
-      - VpnGatewayId
     properties:
       CustomerGatewayId:
         $ref: '#/definitions/String'
@@ -9890,7 +10657,10 @@ definitions:
         description: The type of VPN connection (<code>ipsec.1</code>).
       VpnGatewayId:
         $ref: '#/definitions/String'
-        description: The ID of the virtual private gateway.
+        description: 'The ID of the virtual private gateway. If you specify a virtual private gateway, you cannot specify a transit gateway.'
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+        description: 'The ID of the transit gateway. If you specify a transit gateway, you cannot specify a virtual private gateway.'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -10333,6 +11103,78 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: '<p>One or more tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string.</p> <p>If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete AWS-generated tags (tags that have the <code>aws:</code> prefix).</p>'
+  DeleteTransitGatewayResult:
+    type: object
+    properties:
+      TransitGateway:
+        $ref: '#/definitions/TransitGateway'
+        description: Information about the deleted transit gateway.
+  DeleteTransitGatewayRequest:
+    type: object
+    required:
+      - TransitGatewayId
+    properties:
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  DeleteTransitGatewayRouteResult:
+    type: object
+    properties:
+      Route:
+        $ref: '#/definitions/TransitGatewayRoute'
+        description: Information about the route.
+  DeleteTransitGatewayRouteRequest:
+    type: object
+    required:
+      - TransitGatewayRouteTableId
+      - DestinationCidrBlock
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway route table.
+      DestinationCidrBlock:
+        $ref: '#/definitions/String'
+        description: The CIDR range for the route. This must match the CIDR for the route exactly.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  DeleteTransitGatewayRouteTableResult:
+    type: object
+    properties:
+      TransitGatewayRouteTable:
+        $ref: '#/definitions/TransitGatewayRouteTable'
+        description: Information about the deleted transit gateway route table.
+  DeleteTransitGatewayRouteTableRequest:
+    type: object
+    required:
+      - TransitGatewayRouteTableId
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway route table.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  DeleteTransitGatewayVpcAttachmentResult:
+    type: object
+    properties:
+      TransitGatewayVpcAttachment:
+        $ref: '#/definitions/TransitGatewayVpcAttachment'
+        description: Information about the deleted VPC attachment.
+  DeleteTransitGatewayVpcAttachmentRequest:
+    type: object
+    required:
+      - TransitGatewayAttachmentId
+    properties:
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   DeleteVolumeRequest:
     type: object
     required:
@@ -10789,7 +11631,7 @@ definitions:
         description: '<p>The IDs of one or more DHCP options sets.</p> <p>Default: Describes all your DHCP options sets.</p>'
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>dhcp-options-id</code> - The ID of a set of DHCP options.</p> </li> <li> <p> <code>key</code> - The key for one of the options (for example, <code>domain-name</code>).</p> </li> <li> <p> <code>value</code> - The value for one of the options.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>dhcp-options-id</code> - The ID of a DHCP options set.</p> </li> <li> <p> <code>key</code> - The key for one of the options (for example, <code>domain-name</code>).</p> </li> <li> <p> <code>value</code> - The value for one of the options.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the DHCP options set.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -10822,7 +11664,7 @@ definitions:
     properties:
       ElasticGpuSet:
         $ref: '#/definitions/ElasticGpuSet'
-        description: Information about the Elastic GPUs.
+        description: Information about the Elastic Graphics accelerators.
       MaxResults:
         $ref: '#/definitions/Integer'
         description: The total number of items to return. If the total number of items available is more than the value specified in max-items then a Next-Token will be provided in the output that you can use to resume pagination.
@@ -10834,13 +11676,13 @@ definitions:
     properties:
       ElasticGpuIds:
         $ref: '#/definitions/ElasticGpuIdSet'
-        description: One or more Elastic GPU IDs.
+        description: One or more Elastic Graphics accelerator IDs.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone in which the Elastic GPU resides.</p> </li> <li> <p> <code>elastic-gpu-health</code> - The status of the Elastic GPU (<code>OK</code> | <code>IMPAIRED</code>).</p> </li> <li> <p> <code>elastic-gpu-state</code> - The state of the Elastic GPU (<code>ATTACHED</code>).</p> </li> <li> <p> <code>elastic-gpu-type</code> - The type of Elastic GPU; for example, <code>eg1.medium</code>.</p> </li> <li> <p> <code>instance-id</code> - The ID of the instance to which the Elastic GPU is associated.</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone in which the Elastic Graphics accelerator resides.</p> </li> <li> <p> <code>elastic-gpu-health</code> - The status of the Elastic Graphics accelerator (<code>OK</code> | <code>IMPAIRED</code>).</p> </li> <li> <p> <code>elastic-gpu-state</code> - The state of the Elastic Graphics accelerator (<code>ATTACHED</code>).</p> </li> <li> <p> <code>elastic-gpu-type</code> - The type of Elastic Graphics accelerator; for example, <code>eg1.medium</code>.</p> </li> <li> <p> <code>instance-id</code> - The ID of the instance to which the Elastic Graphics accelerator is associated.</p> </li> </ul>'
       MaxResults:
         $ref: '#/definitions/Integer'
         description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 5 and 1000.'
@@ -11563,7 +12405,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>attachment.state</code> - The current state of the attachment between the gateway and the VPC (<code>available</code>). Present only if a VPC is attached.</p> </li> <li> <p> <code>attachment.vpc-id</code> - The ID of an attached VPC.</p> </li> <li> <p> <code>internet-gateway-id</code> - The ID of the Internet gateway.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>attachment.state</code> - The current state of the attachment between the gateway and the VPC (<code>available</code>). Present only if a VPC is attached.</p> </li> <li> <p> <code>attachment.vpc-id</code> - The ID of an attached VPC.</p> </li> <li> <p> <code>internet-gateway-id</code> - The ID of the Internet gateway.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the internet gateway.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -11819,7 +12661,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>association.association-id</code> - The ID of an association ID for the ACL.</p> </li> <li> <p> <code>association.network-acl-id</code> - The ID of the network ACL involved in the association.</p> </li> <li> <p> <code>association.subnet-id</code> - The ID of the subnet involved in the association.</p> </li> <li> <p> <code>default</code> - Indicates whether the ACL is the default network ACL for the VPC.</p> </li> <li> <p> <code>entry.cidr</code> - The IPv4 CIDR range specified in the entry.</p> </li> <li> <p> <code>entry.icmp.code</code> - The ICMP code specified in the entry, if any.</p> </li> <li> <p> <code>entry.icmp.type</code> - The ICMP type specified in the entry, if any.</p> </li> <li> <p> <code>entry.ipv6-cidr</code> - The IPv6 CIDR range specified in the entry.</p> </li> <li> <p> <code>entry.port-range.from</code> - The start of the port range specified in the entry. </p> </li> <li> <p> <code>entry.port-range.to</code> - The end of the port range specified in the entry. </p> </li> <li> <p> <code>entry.protocol</code> - The protocol specified in the entry (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>entry.rule-action</code> - Allows or denies the matching traffic (<code>allow</code> | <code>deny</code>).</p> </li> <li> <p> <code>entry.rule-number</code> - The number of an entry (in other words, rule) in the set of ACL entries.</p> </li> <li> <p> <code>network-acl-id</code> - The ID of the network ACL.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the network ACL.</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>association.association-id</code> - The ID of an association ID for the ACL.</p> </li> <li> <p> <code>association.network-acl-id</code> - The ID of the network ACL involved in the association.</p> </li> <li> <p> <code>association.subnet-id</code> - The ID of the subnet involved in the association.</p> </li> <li> <p> <code>default</code> - Indicates whether the ACL is the default network ACL for the VPC.</p> </li> <li> <p> <code>entry.cidr</code> - The IPv4 CIDR range specified in the entry.</p> </li> <li> <p> <code>entry.icmp.code</code> - The ICMP code specified in the entry, if any.</p> </li> <li> <p> <code>entry.icmp.type</code> - The ICMP type specified in the entry, if any.</p> </li> <li> <p> <code>entry.ipv6-cidr</code> - The IPv6 CIDR range specified in the entry.</p> </li> <li> <p> <code>entry.port-range.from</code> - The start of the port range specified in the entry. </p> </li> <li> <p> <code>entry.port-range.to</code> - The end of the port range specified in the entry. </p> </li> <li> <p> <code>entry.protocol</code> - The protocol specified in the entry (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>entry.rule-action</code> - Allows or denies the matching traffic (<code>allow</code> | <code>deny</code>).</p> </li> <li> <p> <code>entry.rule-number</code> - The number of an entry (in other words, rule) in the set of ACL entries.</p> </li> <li> <p> <code>network-acl-id</code> - The ID of the network ACL.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the network ACL.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the network ACL.</p> </li> </ul>'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -12259,7 +13101,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>association.route-table-association-id</code> - The ID of an association ID for the route table.</p> </li> <li> <p> <code>association.route-table-id</code> - The ID of the route table involved in the association.</p> </li> <li> <p> <code>association.subnet-id</code> - The ID of the subnet involved in the association.</p> </li> <li> <p> <code>association.main</code> - Indicates whether the route table is the main route table for the VPC (<code>true</code> | <code>false</code>). Route tables that do not have an association ID are not returned in the response.</p> </li> <li> <p> <code>route-table-id</code> - The ID of the route table.</p> </li> <li> <p> <code>route.destination-cidr-block</code> - The IPv4 CIDR range specified in a route in the table.</p> </li> <li> <p> <code>route.destination-ipv6-cidr-block</code> - The IPv6 CIDR range specified in a route in the route table.</p> </li> <li> <p> <code>route.destination-prefix-list-id</code> - The ID (prefix) of the AWS service specified in a route in the table.</p> </li> <li> <p> <code>route.egress-only-internet-gateway-id</code> - The ID of an egress-only Internet gateway specified in a route in the route table.</p> </li> <li> <p> <code>route.gateway-id</code> - The ID of a gateway specified in a route in the table.</p> </li> <li> <p> <code>route.instance-id</code> - The ID of an instance specified in a route in the table.</p> </li> <li> <p> <code>route.nat-gateway-id</code> - The ID of a NAT gateway.</p> </li> <li> <p> <code>route.origin</code> - Describes how the route was created. <code>CreateRouteTable</code> indicates that the route was automatically created when the route table was created; <code>CreateRoute</code> indicates that the route was manually added to the route table; <code>EnableVgwRoutePropagation</code> indicates that the route was propagated by route propagation.</p> </li> <li> <p> <code>route.state</code> - The state of a route in the route table (<code>active</code> | <code>blackhole</code>). The blackhole state indicates that the route''s target isn''t available (for example, the specified gateway isn''t attached to the VPC, the specified NAT instance has been terminated, and so on).</p> </li> <li> <p> <code>route.vpc-peering-connection-id</code> - The ID of a VPC peering connection specified in a route in the table.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the route table.</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>association.route-table-association-id</code> - The ID of an association ID for the route table.</p> </li> <li> <p> <code>association.route-table-id</code> - The ID of the route table involved in the association.</p> </li> <li> <p> <code>association.subnet-id</code> - The ID of the subnet involved in the association.</p> </li> <li> <p> <code>association.main</code> - Indicates whether the route table is the main route table for the VPC (<code>true</code> | <code>false</code>). Route tables that do not have an association ID are not returned in the response.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the route table.</p> </li> <li> <p> <code>route-table-id</code> - The ID of the route table.</p> </li> <li> <p> <code>route.destination-cidr-block</code> - The IPv4 CIDR range specified in a route in the table.</p> </li> <li> <p> <code>route.destination-ipv6-cidr-block</code> - The IPv6 CIDR range specified in a route in the route table.</p> </li> <li> <p> <code>route.destination-prefix-list-id</code> - The ID (prefix) of the AWS service specified in a route in the table.</p> </li> <li> <p> <code>route.egress-only-internet-gateway-id</code> - The ID of an egress-only Internet gateway specified in a route in the route table.</p> </li> <li> <p> <code>route.gateway-id</code> - The ID of a gateway specified in a route in the table.</p> </li> <li> <p> <code>route.instance-id</code> - The ID of an instance specified in a route in the table.</p> </li> <li> <p> <code>route.nat-gateway-id</code> - The ID of a NAT gateway.</p> </li> <li> <p> <code>route.transit-gateway-id</code> - The ID of a transit gateway.</p> </li> <li> <p> <code>route.origin</code> - Describes how the route was created. <code>CreateRouteTable</code> indicates that the route was automatically created when the route table was created; <code>CreateRoute</code> indicates that the route was manually added to the route table; <code>EnableVgwRoutePropagation</code> indicates that the route was propagated by route propagation.</p> </li> <li> <p> <code>route.state</code> - The state of a route in the route table (<code>active</code> | <code>blackhole</code>). The blackhole state indicates that the route''s target isn''t available (for example, the specified gateway isn''t attached to the VPC, the specified NAT instance has been terminated, and so on).</p> </li> <li> <p> <code>route.vpc-peering-connection-id</code> - The ID of a VPC peering connection specified in a route in the table.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of a transit gateway.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the route table.</p> </li> </ul>'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -12906,7 +13748,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>availabilityZone</code> - The Availability Zone for the subnet. You can also use <code>availability-zone</code> as the filter name.</p> </li> <li> <p> <code>available-ip-address-count</code> - The number of IPv4 addresses in the subnet that are available.</p> </li> <li> <p> <code>cidrBlock</code> - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet''s CIDR block for information to be returned for the subnet. You can also use <code>cidr</code> or <code>cidr-block</code> as the filter names.</p> </li> <li> <p> <code>defaultForAz</code> - Indicates whether this is the default subnet for the Availability Zone. You can also use <code>default-for-az</code> as the filter name.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - An association ID for an IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>state</code> - The state of the subnet (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the subnet.</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone for the subnet. You can also use <code>availabilityZone</code> as the filter name.</p> </li> <li> <p> <code>availability-zone-id</code> - The ID of the Availability Zone for the subnet. You can also use <code>availabilityZoneId</code> as the filter name.</p> </li> <li> <p> <code>available-ip-address-count</code> - The number of IPv4 addresses in the subnet that are available.</p> </li> <li> <p> <code>cidr-block</code> - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet''s CIDR block for information to be returned for the subnet. You can also use <code>cidr</code> or <code>cidrBlock</code> as the filter names.</p> </li> <li> <p> <code>default-for-az</code> - Indicates whether this is the default subnet for the Availability Zone. You can also use <code>defaultForAz</code> as the filter name.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - An association ID for an IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the subnet.</p> </li> <li> <p> <code>state</code> - The state of the subnet (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>subnet-arn</code> - The Amazon Resource Name (ARN) of the subnet.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the subnet.</p> </li> </ul>'
       SubnetIds:
         $ref: '#/definitions/SubnetIdStringList'
         description: '<p>One or more subnet IDs.</p> <p>Default: Describes all your subnets.</p>'
@@ -12952,6 +13794,114 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to retrieve the next page of results.
+  DescribeTransitGatewayAttachmentsResult:
+    type: object
+    properties:
+      TransitGatewayAttachments:
+        $ref: '#/definitions/TransitGatewayAttachmentList'
+        description: Information about the attachments.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DescribeTransitGatewayAttachmentsRequest:
+    type: object
+    properties:
+      TransitGatewayAttachmentIds:
+        $ref: '#/definitions/TransitGatewayAttachmentIdStringList'
+        description: The IDs of the attachments.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>association-id</code> - The ID of the association.</p> </li> <li> <p> <code>association-route-table-id</code> - The ID of the route table for the transit gateway.</p> </li> <li> <p> <code>associate-state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code>).</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>vpc</code> | <code>vpn</code>).</p> </li> <li> <p> <code>state</code> - The state of the attachment (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>modifying</code> | <code>deleting</code> | <code>deleted</code> | <code>failed</code> | <code>rejected</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-owner</code> - The ID of the AWS account that owns the transit gateway.</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/TransitGatewayMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  DescribeTransitGatewayRouteTablesResult:
+    type: object
+    properties:
+      TransitGatewayRouteTables:
+        $ref: '#/definitions/TransitGatewayRouteTableList'
+        description: Information about the transit gateway route tables.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DescribeTransitGatewayRouteTablesRequest:
+    type: object
+    properties:
+      TransitGatewayRouteTableIds:
+        $ref: '#/definitions/TransitGatewayRouteTableIdStringList'
+        description: The IDs of the transit gateway route tables.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>default-association-route-table</code> - Indicates whether this is the default association route table for the transit gateway (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>default-propagation-route-table</code> - Indicates whether this is the default propagation route table for the transit gateway (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-route-table-id</code> - The ID of the transit gateway route table.</p> </li> <li> <p> <code>transit-gateway-route-table-state</code> - The state (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/TransitGatewayMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  DescribeTransitGatewayVpcAttachmentsResult:
+    type: object
+    properties:
+      TransitGatewayVpcAttachments:
+        $ref: '#/definitions/TransitGatewayVpcAttachmentList'
+        description: Information about the VPC attachments.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DescribeTransitGatewayVpcAttachmentsRequest:
+    type: object
+    properties:
+      TransitGatewayAttachmentIds:
+        $ref: '#/definitions/TransitGatewayAttachmentIdStringList'
+        description: The IDs of the attachments.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-attachment-state</code> - The state of the attachment (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>modifying</code> | <code>deleting</code> | <code>deleted</code> | <code>failed</code> | <code>rejected</code>).</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/TransitGatewayMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  DescribeTransitGatewaysResult:
+    type: object
+    properties:
+      TransitGateways:
+        $ref: '#/definitions/TransitGatewayList'
+        description: Information about the transit gateways.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DescribeTransitGatewaysRequest:
+    type: object
+    properties:
+      TransitGatewayIds:
+        $ref: '#/definitions/TransitGatewayIdStringList'
+        description: The IDs of the transit gateways.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>amazon-side-asn</code> - The private ASN for the Amazon side of a BGP session.</p> </li> <li> <p> <code>association-default-route-table-id</code> - The ID of the default association route table.</p> </li> <li> <p> <code>default-route-table-association</code> - Indicates whether resource attachments are automatically associated with the default association route table (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>default-route-table-propagation</code> - Indicates whether resource attachments automatically propagate routes to the default propagation route table (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>owner-account-id</code> - The ID of the AWS account that owns the transit gateway.</p> </li> <li> <p> <code>propagation-default-route-table-id</code> - The ID of the default propagation route table.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-state</code> - The state of the transit gateway (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/TransitGatewayMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   DescribeVolumeAttributeResult:
     type: object
     example:
@@ -13388,7 +14338,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>cidr</code> - The primary IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC''s CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, <code>/28</code>).</p> </li> <li> <p> <code>cidr-block-association.cidr-block</code> - An IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.association-id</code> - The association ID for an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.state</code> - The state of an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>dhcp-options-id</code> - The ID of a set of DHCP options.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - The association ID for an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>isDefault</code> - Indicates whether the VPC is the default VPC.</p> </li> <li> <p> <code>state</code> - The state of the VPC (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>cidr</code> - The primary IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC''s CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, <code>/28</code>).</p> </li> <li> <p> <code>cidr-block-association.cidr-block</code> - An IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.association-id</code> - The association ID for an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>cidr-block-association.state</code> - The state of an IPv4 CIDR block associated with the VPC.</p> </li> <li> <p> <code>dhcp-options-id</code> - The ID of a set of DHCP options.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - The association ID for an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the VPC.</p> </li> <li> <p> <code>isDefault</code> - Indicates whether the VPC is the default VPC.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the VPC.</p> </li> <li> <p> <code>state</code> - The state of the VPC (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>'
       VpcIds:
         $ref: '#/definitions/VpcIdStringList'
         description: '<p>One or more VPC IDs.</p> <p>Default: Describes all your VPCs.</p>'
@@ -13530,6 +14480,27 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for DetachVpnGateway.
+  DisableTransitGatewayRouteTablePropagationResult:
+    type: object
+    properties:
+      Propagation:
+        $ref: '#/definitions/TransitGatewayPropagation'
+        description: Information about route propagation.
+  DisableTransitGatewayRouteTablePropagationRequest:
+    type: object
+    required:
+      - TransitGatewayRouteTableId
+      - TransitGatewayAttachmentId
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the propagation route table.
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   DisableVgwRoutePropagationRequest:
     type: object
     required:
@@ -13643,6 +14614,27 @@ definitions:
       AssociationId:
         $ref: '#/definitions/String'
         description: The association ID for the CIDR block.
+  DisassociateTransitGatewayRouteTableResult:
+    type: object
+    properties:
+      Association:
+        $ref: '#/definitions/TransitGatewayAssociation'
+        description: Information about the association.
+  DisassociateTransitGatewayRouteTableRequest:
+    type: object
+    required:
+      - TransitGatewayRouteTableId
+      - TransitGatewayAttachmentId
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway route table.
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   DisassociateVpcCidrBlockResult:
     type: object
     properties:
@@ -13663,6 +14655,27 @@ definitions:
       AssociationId:
         $ref: '#/definitions/String'
         description: The association ID for the CIDR block.
+  EnableTransitGatewayRouteTablePropagationResult:
+    type: object
+    properties:
+      Propagation:
+        $ref: '#/definitions/TransitGatewayPropagation'
+        description: Information about route propagation.
+  EnableTransitGatewayRouteTablePropagationRequest:
+    type: object
+    required:
+      - TransitGatewayRouteTableId
+      - TransitGatewayAttachmentId
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the propagation route table.
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   EnableVgwRoutePropagationRequest:
     type: object
     required:
@@ -13722,6 +14735,30 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
+  ExportTransitGatewayRoutesResult:
+    type: object
+    properties:
+      S3Location:
+        $ref: '#/definitions/String'
+        description: 'The URL of the exported file in Amazon S3. For example, s3://<i>bucket_name</i>/VPCTransitGateway/TransitGatewayRouteTables/<i>file_name</i>.'
+  ExportTransitGatewayRoutesRequest:
+    type: object
+    required:
+      - TransitGatewayRouteTableId
+      - S3Bucket
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the route table.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>transit-gateway-route-destination-cidr-block</code> - The CIDR range.</p> </li> <li> <p> <code>transit-gateway-route-state</code> - The state of the route (<code>active</code> | <code>blackhole</code>).</p> </li> <li> <p> <code>transit-gateway-route-transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-route-type</code> - The route type (<code>static</code> | <code>propagated</code>).</p> </li> <li> <p> <code>transit-gateway-route-vpn-connection-id</code> - The ID of the VPN connection.</p> </li> </ul>'
+      S3Bucket:
+        $ref: '#/definitions/String'
+        description: The name of the S3 bucket.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   GetConsoleOutputResult:
     type: object
     example:
@@ -13933,6 +14970,93 @@ definitions:
         $ref: '#/definitions/TargetConfigurationRequestSet'
         description: The configuration of the target Convertible Reserved Instance to exchange for your current Convertible Reserved Instances.
     description: Contains the parameters for GetReservedInstanceExchangeQuote.
+  GetTransitGatewayAttachmentPropagationsResult:
+    type: object
+    properties:
+      TransitGatewayAttachmentPropagations:
+        $ref: '#/definitions/TransitGatewayAttachmentPropagationList'
+        description: Information about the propagation route tables.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  GetTransitGatewayAttachmentPropagationsRequest:
+    type: object
+    required:
+      - TransitGatewayAttachmentId
+    properties:
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>transit-gateway-route-table-id</code> - The ID of the transit gateway route table.</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/TransitGatewayMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  GetTransitGatewayRouteTableAssociationsResult:
+    type: object
+    properties:
+      Associations:
+        $ref: '#/definitions/TransitGatewayRouteTableAssociationList'
+        description: Information about the associations.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  GetTransitGatewayRouteTableAssociationsRequest:
+    type: object
+    required:
+      - TransitGatewayRouteTableId
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway route table.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>association-id</code> - The ID of the association.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>vpc</code> | <code>vpn</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/TransitGatewayMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  GetTransitGatewayRouteTablePropagationsResult:
+    type: object
+    properties:
+      TransitGatewayRouteTablePropagations:
+        $ref: '#/definitions/TransitGatewayRouteTablePropagationList'
+        description: Information about the route table propagations.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  GetTransitGatewayRouteTablePropagationsRequest:
+    type: object
+    required:
+      - TransitGatewayRouteTableId
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway route table.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>vpc</code> | <code>vpn</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/TransitGatewayMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   ImportImageResult:
     type: object
     properties:
@@ -14613,6 +15737,32 @@ definitions:
       SubnetId:
         $ref: '#/definitions/String'
         description: The ID of the subnet.
+  ModifyTransitGatewayVpcAttachmentResult:
+    type: object
+    properties:
+      TransitGatewayVpcAttachment:
+        $ref: '#/definitions/TransitGatewayVpcAttachment'
+        description: Information about the modified attachment.
+  ModifyTransitGatewayVpcAttachmentRequest:
+    type: object
+    required:
+      - TransitGatewayAttachmentId
+    properties:
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      AddSubnetIds:
+        $ref: '#/definitions/ValueStringList'
+        description: The IDs of one or more subnets to add. You can specify at most one subnet per Availability Zone.
+      RemoveSubnetIds:
+        $ref: '#/definitions/ValueStringList'
+        description: The IDs of one or more subnets to remove.
+      Options:
+        $ref: '#/definitions/ModifyTransitGatewayVpcAttachmentRequestOptions'
+        description: The new VPC attachment options.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   ModifyVolumeResult:
     type: object
     properties:
@@ -15087,6 +16237,23 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The type of virtualization (<code>hvm</code> | <code>paravirtual</code>).</p> <p>Default: <code>paravirtual</code> </p>'
     description: Contains the parameters for RegisterImage.
+  RejectTransitGatewayVpcAttachmentResult:
+    type: object
+    properties:
+      TransitGatewayVpcAttachment:
+        $ref: '#/definitions/TransitGatewayVpcAttachment'
+        description: Information about the attachment.
+  RejectTransitGatewayVpcAttachmentRequest:
+    type: object
+    required:
+      - TransitGatewayAttachmentId
+    properties:
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   RejectVpcEndpointConnectionsResult:
     type: object
     properties:
@@ -15279,6 +16446,9 @@ definitions:
       NatGatewayId:
         $ref: '#/definitions/String'
         description: '[IPv4 traffic only] The ID of a NAT gateway.'
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+        description: The ID of a transit gateway.
       NetworkInterfaceId:
         $ref: '#/definitions/String'
         description: The ID of a network interface.
@@ -15314,6 +16484,33 @@ definitions:
       RouteTableId:
         $ref: '#/definitions/String'
         description: The ID of the new route table to associate with the subnet.
+  ReplaceTransitGatewayRouteResult:
+    type: object
+    properties:
+      Route:
+        $ref: '#/definitions/TransitGatewayRoute'
+        description: Information about the modified route.
+  ReplaceTransitGatewayRouteRequest:
+    type: object
+    required:
+      - DestinationCidrBlock
+      - TransitGatewayRouteTableId
+    properties:
+      DestinationCidrBlock:
+        $ref: '#/definitions/String'
+        description: The CIDR range used for the destination match. Routing decisions are based on the most specific match.
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the route table.
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      Blackhole:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether traffic matching this route is to be dropped.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   ReportInstanceStatusRequest:
     type: object
     required:
@@ -15809,6 +17006,33 @@ definitions:
         $ref: '#/definitions/String'
         description: The Scheduled Instance ID.
     description: Contains the parameters for RunScheduledInstances.
+  SearchTransitGatewayRoutesResult:
+    type: object
+    properties:
+      Routes:
+        $ref: '#/definitions/TransitGatewayRouteList'
+        description: Information about the routes.
+      AdditionalRoutesAvailable:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether there are additional routes available.
+  SearchTransitGatewayRoutesRequest:
+    type: object
+    required:
+      - TransitGatewayRouteTableId
+      - Filters
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway route table.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>transit-gateway-route-destination-cidr-block</code> - The CIDR range.</p> </li> <li> <p> <code>transit-gateway-route-state</code> - The state of the route (<code>active</code> | <code>blackhole</code>).</p> </li> <li> <p> <code>transit-gateway-route-transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-route-type</code> - The route type (<code>static</code> | <code>propagated</code>).</p> </li> <li> <p> <code>transit-gateway-route-vpn-connection-id</code> - The ID of the VPN connection.</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/TransitGatewayMaxResults'
+        description: The maximum number of routes to return.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   StartInstancesResult:
     type: object
     example:
@@ -16060,6 +17284,37 @@ definitions:
       $ref: '#/definitions/TargetConfigurationRequest'
   String:
     type: string
+  TransitGatewayVpcAttachment:
+    type: object
+    properties:
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway.
+      VpcId:
+        $ref: '#/definitions/String'
+        description: The ID of the VPC.
+      VpcOwnerId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS account that owns the VPC.
+      State:
+        $ref: '#/definitions/TransitGatewayAttachmentState'
+        description: The state of the VPC attachment.
+      SubnetIds:
+        $ref: '#/definitions/ValueStringList'
+        description: The IDs of the subnets.
+      CreationTime:
+        $ref: '#/definitions/DateTime'
+        description: The creation time.
+      Options:
+        $ref: '#/definitions/TransitGatewayVpcAttachmentOptions'
+        description: The VPC attachment options.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the VPC attachment.
+    description: Describes a VPC attachment.
   ValueStringList:
     type: array
     items:
@@ -16284,6 +17539,7 @@ definitions:
     enum:
       - i386
       - x86_64
+      - arm64
   Ipv6AddressList:
     type: array
     items:
@@ -16334,6 +17590,25 @@ definitions:
         $ref: '#/definitions/SubnetCidrBlockState'
         description: Information about the state of the CIDR block.
     description: Describes an IPv6 CIDR block associated with a subnet.
+  TransitGatewayAssociation:
+    type: object
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway route table.
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      ResourceId:
+        $ref: '#/definitions/String'
+        description: The ID of the resource.
+      ResourceType:
+        $ref: '#/definitions/TransitGatewayAttachmentResourceType'
+        description: The resource type.
+      State:
+        $ref: '#/definitions/TransitGatewayAssociationState'
+        description: The state of the association.
+    description: Describes an association between a resource attachment and a transit gateway route table.
   VpcIpv6CidrBlockAssociation:
     type: object
     properties:
@@ -16403,6 +17678,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/IpPermission'
+  AutoAcceptSharedAttachmentsValue:
+    type: string
+    enum:
+      - enable
+      - disable
   AvailabilityZoneState:
     type: string
     enum:
@@ -16500,7 +17780,7 @@ definitions:
         description: Indicates whether the EBS volume is deleted on instance termination.
       Iops:
         $ref: '#/definitions/Integer'
-        description: '<p>The number of I/O operations per second (IOPS) that the volume supports. For <code>io1</code>, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code>, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraint: Range is 100-20000 IOPS for <code>io1</code> volumes and 100-10000 IOPS for <code>gp2</code> volumes.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>'
+        description: '<p>The number of I/O operations per second (IOPS) that the volume supports. For <code>io1</code>, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code>, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-10,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most regions. Maximum <code>io1</code>IOPS of 64,000 is guaranteed only on <a href="AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>'
       SnapshotId:
         $ref: '#/definitions/String'
         description: The ID of the snapshot.
@@ -17109,6 +18389,9 @@ definitions:
       AvailabilityZone:
         $ref: '#/definitions/String'
         description: The Availability Zone of the subnet.
+      AvailabilityZoneId:
+        $ref: '#/definitions/String'
+        description: The AZ ID of the subnet.
       AvailableIpAddressCount:
         $ref: '#/definitions/Integer'
         description: The number of unused private IPv4 addresses in the subnet. The IPv4 addresses for any stopped instances are considered unavailable.
@@ -17130,6 +18413,9 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC the subnet is in.
+      OwnerId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS account that owns the subnet.
       AssignIpv6AddressOnCreation:
         $ref: '#/definitions/Boolean'
         description: Indicates whether a network interface created in this subnet (including a network interface created by <a>RunInstances</a>) receives an IPv6 address.
@@ -17139,6 +18425,9 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: Any tags assigned to the subnet.
+      SubnetArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the subnet.
     description: Describes a subnet.
   Vpc:
     type: object
@@ -17155,6 +18444,9 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
+      OwnerId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS account that owns the VPC.
       InstanceTenancy:
         $ref: '#/definitions/Tenancy'
         description: The allowed tenancy of instances launched into the VPC.
@@ -17184,6 +18476,9 @@ definitions:
       DhcpOptionsId:
         $ref: '#/definitions/String'
         description: The ID of the set of DHCP options.
+      OwnerId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS account that owns the DHCP options set.
       Tags:
         $ref: '#/definitions/TagList'
         description: Any tags assigned to the DHCP options set.
@@ -17353,6 +18648,12 @@ definitions:
       - c5d.4xlarge
       - c5d.9xlarge
       - c5d.18xlarge
+      - c5n.large
+      - c5n.xlarge
+      - c5n.2xlarge
+      - c5n.4xlarge
+      - c5n.9xlarge
+      - c5n.18xlarge
       - cc1.4xlarge
       - cc2.8xlarge
       - g2.2xlarge
@@ -17406,6 +18707,11 @@ definitions:
       - u-6tb1.metal
       - u-9tb1.metal
       - u-12tb1.metal
+      - a1.medium
+      - a1.large
+      - a1.xlarge
+      - a1.2xlarge
+      - a1.4xlarge
   PlatformValues:
     type: string
     enum:
@@ -17581,6 +18887,9 @@ definitions:
       InternetGatewayId:
         $ref: '#/definitions/String'
         description: The ID of the internet gateway.
+      OwnerId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS account that owns the internet gateway.
       Tags:
         $ref: '#/definitions/TagList'
         description: Any tags assigned to the internet gateway.
@@ -17799,6 +19108,9 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC for the network ACL.
+      OwnerId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS account that owns the network ACL.
     description: Describes a network ACL.
   InterfacePermissionType:
     type: string
@@ -17933,6 +19245,9 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
+      OwnerId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS account that owns the route table.
     description: Describes a route table.
   SpotDatafeedSubscription:
     type: object
@@ -17957,6 +19272,117 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  TransitGatewayRequestOptions:
+    type: object
+    properties:
+      AmazonSideAsn:
+        $ref: '#/definitions/Long'
+        description: A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs.
+      AutoAcceptSharedAttachments:
+        $ref: '#/definitions/AutoAcceptSharedAttachmentsValue'
+        description: Enable or disable automatic acceptance of attachment requests. The default is <code>disable</code>.
+      DefaultRouteTableAssociation:
+        $ref: '#/definitions/DefaultRouteTableAssociationValue'
+        description: Enable or disable automatic association with the default association route table. The default is <code>enable</code>.
+      DefaultRouteTablePropagation:
+        $ref: '#/definitions/DefaultRouteTablePropagationValue'
+        description: Enable or disable automatic propagation of routes to the default propagation route table. The default is <code>enable</code>.
+      VpnEcmpSupport:
+        $ref: '#/definitions/VpnEcmpSupportValue'
+        description: Enable or disable Equal Cost Multipath Protocol support.
+      DnsSupport:
+        $ref: '#/definitions/DnsSupportValue'
+        description: Enable or disable DNS support.
+    description: Describes the options for a transit gateway.
+  TransitGateway:
+    type: object
+    properties:
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway.
+      TransitGatewayArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the transit gateway.
+      State:
+        $ref: '#/definitions/TransitGatewayState'
+        description: The state of the transit gateway.
+      OwnerId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS account ID that owns the transit gateway.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description of the transit gateway.
+      CreationTime:
+        $ref: '#/definitions/DateTime'
+        description: The creation time.
+      Options:
+        $ref: '#/definitions/TransitGatewayOptions'
+        description: The transit gateway options.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the transit gateway.
+    description: Describes a transit gateway.
+  TransitGatewayRoute:
+    type: object
+    properties:
+      DestinationCidrBlock:
+        $ref: '#/definitions/String'
+        description: The CIDR block used for destination matches.
+      TransitGatewayAttachments:
+        $ref: '#/definitions/TransitGatewayRouteAttachmentList'
+        description: The attachments.
+      Type:
+        $ref: '#/definitions/TransitGatewayRouteType'
+        description: The route type.
+      State:
+        $ref: '#/definitions/TransitGatewayRouteState'
+        description: The state of the route.
+    description: Describes a route for a transit gateway route table.
+  TransitGatewayRouteTable:
+    type: object
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway route table.
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway.
+      State:
+        $ref: '#/definitions/TransitGatewayRouteTableState'
+        description: The state of the transit gateway route table.
+      DefaultAssociationRouteTable:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether this is the default association route table for the transit gateway.
+      DefaultPropagationRouteTable:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether this is the default propagation route table for the transit gateway.
+      CreationTime:
+        $ref: '#/definitions/DateTime'
+        description: The creation time.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: Any tags assigned to the route table.
+    description: Describes a transit gateway route table.
+  CreateTransitGatewayVpcAttachmentRequestOptions:
+    type: object
+    properties:
+      DnsSupport:
+        $ref: '#/definitions/DnsSupportValue'
+        description: Enable or disable DNS support. The default is <code>enable</code>.
+      Ipv6Support:
+        $ref: '#/definitions/Ipv6SupportValue'
+        description: Enable or disable IPv6 support. The default is <code>enable</code>.
+    description: Describes the options for a VPC attachment.
+  DnsSupportValue:
+    type: string
+    enum:
+      - enable
+      - disable
+  Ipv6SupportValue:
+    type: string
+    enum:
+      - enable
+      - disable
   PermissionGroup:
     type: string
     enum:
@@ -18112,6 +19538,9 @@ definitions:
       VpnGatewayId:
         $ref: '#/definitions/String'
         description: The ID of the virtual private gateway at the AWS side of the VPN connection.
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway associated with the VPN connection.
       Options:
         $ref: '#/definitions/VpnConnectionOptions'
         description: The VPN connection options.
@@ -18185,6 +19614,16 @@ definitions:
     enum:
       - Active
       - Inactive
+  DefaultRouteTableAssociationValue:
+    type: string
+    enum:
+      - enable
+      - disable
+  DefaultRouteTablePropagationValue:
+    type: string
+    enum:
+      - enable
+      - disable
   DefaultTargetCapacityType:
     type: string
     enum:
@@ -18865,6 +20304,38 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagDescription'
+  TransitGatewayAttachmentIdStringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  TransitGatewayMaxResults:
+    type: integer
+    minimum: 5
+    maximum: 1000
+  TransitGatewayAttachmentList:
+    type: array
+    items:
+      $ref: '#/definitions/TransitGatewayAttachment'
+  TransitGatewayRouteTableIdStringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  TransitGatewayRouteTableList:
+    type: array
+    items:
+      $ref: '#/definitions/TransitGatewayRouteTable'
+  TransitGatewayVpcAttachmentList:
+    type: array
+    items:
+      $ref: '#/definitions/TransitGatewayVpcAttachment'
+  TransitGatewayIdStringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  TransitGatewayList:
+    type: array
+    items:
+      $ref: '#/definitions/TransitGateway'
   VolumeAttributeName:
     type: string
     enum:
@@ -18966,6 +20437,25 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DhcpConfiguration'
+  TransitGatewayPropagation:
+    type: object
+    properties:
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      ResourceId:
+        $ref: '#/definitions/String'
+        description: The ID of the resource.
+      ResourceType:
+        $ref: '#/definitions/TransitGatewayAttachmentResourceType'
+        description: The resource type.
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway route table.
+      State:
+        $ref: '#/definitions/TransitGatewayPropagationState'
+        description: The state.
+    description: Describes route propagation.
   DiskImageDetail:
     type: object
     required:
@@ -19090,17 +20580,17 @@ definitions:
     properties:
       ElasticGpuId:
         $ref: '#/definitions/String'
-        description: The ID of the Elastic GPU.
+        description: The ID of the Elastic Graphics accelerator.
       ElasticGpuAssociationId:
         $ref: '#/definitions/String'
         description: The ID of the association.
       ElasticGpuAssociationState:
         $ref: '#/definitions/String'
-        description: The state of the association between the instance and the Elastic GPU.
+        description: The state of the association between the instance and the Elastic Graphics accelerator.
       ElasticGpuAssociationTime:
         $ref: '#/definitions/String'
-        description: The time the Elastic GPU was associated with the instance.
-    description: Describes the association between an instance and an Elastic GPU.
+        description: The time the Elastic Graphics accelerator was associated with the instance.
+    description: Describes the association between an instance and an Elastic Graphics accelerator.
   ElasticGpuAssociationList:
     type: array
     items:
@@ -19116,29 +20606,29 @@ definitions:
       Status:
         $ref: '#/definitions/ElasticGpuStatus'
         description: The health status.
-    description: Describes the status of an Elastic GPU.
+    description: Describes the status of an Elastic Graphics accelerator.
   ElasticGpus:
     type: object
     properties:
       ElasticGpuId:
         $ref: '#/definitions/String'
-        description: The ID of the Elastic GPU.
+        description: The ID of the Elastic Graphics accelerator.
       AvailabilityZone:
         $ref: '#/definitions/String'
-        description: The Availability Zone in the which the Elastic GPU resides.
+        description: The Availability Zone in the which the Elastic Graphics accelerator resides.
       ElasticGpuType:
         $ref: '#/definitions/String'
-        description: The type of Elastic GPU.
+        description: The type of Elastic Graphics accelerator.
       ElasticGpuHealth:
         $ref: '#/definitions/ElasticGpuHealth'
-        description: The status of the Elastic GPU.
+        description: The status of the Elastic Graphics accelerator.
       ElasticGpuState:
         $ref: '#/definitions/ElasticGpuState'
-        description: The state of the Elastic GPU.
+        description: The state of the Elastic Graphics accelerator.
       InstanceId:
         $ref: '#/definitions/String'
-        description: The ID of the instance to which the Elastic GPU is attached.
-    description: Describes an Elastic GPU.
+        description: The ID of the instance to which the Elastic Graphics accelerator is attached.
+    description: Describes an Elastic Graphics accelerator.
   ElasticGpuSpecification:
     type: object
     required:
@@ -19146,8 +20636,8 @@ definitions:
     properties:
       Type:
         $ref: '#/definitions/String'
-        description: The type of Elastic GPU.
-    description: A specification for an Elastic GPU.
+        description: The type of Elastic Graphics accelerator.
+    description: A specification for an Elastic Graphics accelerator.
   ElasticGpuSpecificationList:
     type: array
     items:
@@ -19724,6 +21214,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TargetReservationValue'
+  TransitGatewayAttachmentPropagationList:
+    type: array
+    items:
+      $ref: '#/definitions/TransitGatewayAttachmentPropagation'
+  TransitGatewayRouteTableAssociationList:
+    type: array
+    items:
+      $ref: '#/definitions/TransitGatewayRouteTableAssociation'
+  TransitGatewayRouteTablePropagationList:
+    type: array
+    items:
+      $ref: '#/definitions/TransitGatewayRouteTablePropagation'
   GroupIdentifier:
     type: object
     properties:
@@ -21577,6 +23079,9 @@ definitions:
       - snapshot
       - spot-instances-request
       - subnet
+      - transit-gateway
+      - transit-gateway-attachment
+      - transit-gateway-route-table
       - volume
       - vpc
       - vpc-peering-connection
@@ -21727,6 +23232,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReservedInstancesConfiguration'
+  ModifyTransitGatewayVpcAttachmentRequestOptions:
+    type: object
+    properties:
+      DnsSupport:
+        $ref: '#/definitions/DnsSupportValue'
+        description: Enable or disable DNS support. The default is <code>enable</code>.
+      Ipv6Support:
+        $ref: '#/definitions/Ipv6SupportValue'
+        description: Enable or disable IPv6 support. The default is <code>enable</code>.
+    description: Describes the options for a VPC attachment.
   VolumeModification:
     type: object
     properties:
@@ -22767,6 +24282,9 @@ definitions:
       NatGatewayId:
         $ref: '#/definitions/String'
         description: The ID of a NAT gateway.
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+        description: The ID of a transit gateway.
       NetworkInterfaceId:
         $ref: '#/definitions/String'
         description: The ID of the network interface.
@@ -22778,7 +24296,7 @@ definitions:
         description: 'The state of the route. The <code>blackhole</code> state indicates that the route''s target isn''t available (for example, the specified gateway isn''t attached to the VPC, or the specified NAT instance has been terminated).'
       VpcPeeringConnectionId:
         $ref: '#/definitions/String'
-        description: The ID of the VPC peering connection.
+        description: The ID of a VPC peering connection.
     description: Describes a route in a route table.
   RouteList:
     type: array
@@ -23061,6 +24579,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the subnet.
     description: Describes a network interface for a Scheduled Instance.
+  TransitGatewayRouteList:
+    type: array
+    items:
+      $ref: '#/definitions/TransitGatewayRoute'
   SecurityGroup:
     type: object
     properties:
@@ -23557,6 +25079,213 @@ definitions:
     enum:
       - UP
       - DOWN
+  TransitGatewayState:
+    type: string
+    enum:
+      - pending
+      - available
+      - modifying
+      - deleting
+      - deleted
+  TransitGatewayOptions:
+    type: object
+    properties:
+      AmazonSideAsn:
+        $ref: '#/definitions/Long'
+        description: A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs.
+      AutoAcceptSharedAttachments:
+        $ref: '#/definitions/AutoAcceptSharedAttachmentsValue'
+        description: Indicates whether attachment requests are automatically accepted.
+      DefaultRouteTableAssociation:
+        $ref: '#/definitions/DefaultRouteTableAssociationValue'
+        description: Indicates whether resource attachments are automatically associated with the default association route table.
+      AssociationDefaultRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the default association route table.
+      DefaultRouteTablePropagation:
+        $ref: '#/definitions/DefaultRouteTablePropagationValue'
+        description: Indicates whether resource attachments automatically propagate routes to the default propagation route table.
+      PropagationDefaultRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the default propagation route table.
+      VpnEcmpSupport:
+        $ref: '#/definitions/VpnEcmpSupportValue'
+        description: Indicates whether Equal Cost Multipath Protocol support is enabled.
+      DnsSupport:
+        $ref: '#/definitions/DnsSupportValue'
+        description: Indicates whether DNS support is enabled.
+    description: Describes the options for a transit gateway.
+  TransitGatewayAttachmentResourceType:
+    type: string
+    enum:
+      - vpc
+      - vpn
+  TransitGatewayAssociationState:
+    type: string
+    enum:
+      - associating
+      - associated
+      - disassociating
+      - disassociated
+  TransitGatewayAttachmentState:
+    type: string
+    enum:
+      - pendingAcceptance
+      - rollingBack
+      - pending
+      - available
+      - modifying
+      - deleting
+      - deleted
+      - failed
+      - rejected
+      - rejecting
+      - failing
+  TransitGatewayAttachmentAssociation:
+    type: object
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the route table for the transit gateway.
+      State:
+        $ref: '#/definitions/TransitGatewayAssociationState'
+        description: The state of the association.
+    description: Describes an association.
+  TransitGatewayAttachment:
+    type: object
+    properties:
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      TransitGatewayId:
+        $ref: '#/definitions/String'
+        description: The ID of the transit gateway.
+      TransitGatewayOwnerId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS account that owns the transit gateway.
+      ResourceOwnerId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS account that owns the resource.
+      ResourceType:
+        $ref: '#/definitions/TransitGatewayAttachmentResourceType'
+        description: The resource type.
+      ResourceId:
+        $ref: '#/definitions/String'
+        description: The ID of the resource.
+      State:
+        $ref: '#/definitions/TransitGatewayAttachmentState'
+        description: The attachment state.
+      Association:
+        $ref: '#/definitions/TransitGatewayAttachmentAssociation'
+        description: The association.
+      CreationTime:
+        $ref: '#/definitions/DateTime'
+        description: The creation time.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the attachment.
+    description: Describes an attachment between a resource and a transit gateway.
+  TransitGatewayPropagationState:
+    type: string
+    enum:
+      - enabling
+      - enabled
+      - disabling
+      - disabled
+  TransitGatewayAttachmentPropagation:
+    type: object
+    properties:
+      TransitGatewayRouteTableId:
+        $ref: '#/definitions/String'
+        description: The ID of the propagation route table.
+      State:
+        $ref: '#/definitions/TransitGatewayPropagationState'
+        description: The state of the propagation route table.
+    description: Describes a propagation route table.
+  VpnEcmpSupportValue:
+    type: string
+    enum:
+      - enable
+      - disable
+  TransitGatewayRouteAttachmentList:
+    type: array
+    items:
+      $ref: '#/definitions/TransitGatewayRouteAttachment'
+  TransitGatewayRouteType:
+    type: string
+    enum:
+      - static
+      - propagated
+  TransitGatewayRouteState:
+    type: string
+    enum:
+      - pending
+      - active
+      - blackhole
+      - deleting
+      - deleted
+  TransitGatewayRouteAttachment:
+    type: object
+    properties:
+      ResourceId:
+        $ref: '#/definitions/String'
+        description: The ID of the resource.
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      ResourceType:
+        $ref: '#/definitions/TransitGatewayAttachmentResourceType'
+        description: The resource type.
+    description: Describes a route attachment.
+  TransitGatewayRouteTableState:
+    type: string
+    enum:
+      - pending
+      - available
+      - deleting
+      - deleted
+  TransitGatewayRouteTableAssociation:
+    type: object
+    properties:
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      ResourceId:
+        $ref: '#/definitions/String'
+        description: The ID of the resource.
+      ResourceType:
+        $ref: '#/definitions/TransitGatewayAttachmentResourceType'
+        description: The resource type.
+      State:
+        $ref: '#/definitions/TransitGatewayAssociationState'
+        description: The state of the association.
+    description: Describes an association between a route table and a resource attachment.
+  TransitGatewayRouteTablePropagation:
+    type: object
+    properties:
+      TransitGatewayAttachmentId:
+        $ref: '#/definitions/String'
+        description: The ID of the attachment.
+      ResourceId:
+        $ref: '#/definitions/String'
+        description: The ID of the resource.
+      ResourceType:
+        $ref: '#/definitions/TransitGatewayAttachmentResourceType'
+        description: The type of resource.
+      State:
+        $ref: '#/definitions/TransitGatewayPropagationState'
+        description: The state of the resource.
+    description: Describes a route table propagation.
+  TransitGatewayVpcAttachmentOptions:
+    type: object
+    properties:
+      DnsSupport:
+        $ref: '#/definitions/DnsSupportValue'
+        description: Indicates whether DNS support is enabled.
+      Ipv6Support:
+        $ref: '#/definitions/Ipv6SupportValue'
+        description: Indicates whether IPv6 support is enabled.
+    description: Describes the VPC attachment options.
   VpnTunnelOptionsSpecification:
     type: object
     properties:

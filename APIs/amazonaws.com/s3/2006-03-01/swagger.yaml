@@ -1150,6 +1150,92 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}#GetObjectLegalHold':
+    get:
+      operationId: GetObjectLegalHold
+      description: Gets an object's current Legal Hold status.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetObjectLegalHoldOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetObjectLegalHoldRequest'
+        - name: legal-hold
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}#GetObjectLockConfiguration':
+    get:
+      operationId: GetObjectLockConfiguration
+      description: Gets the Object Lock configuration for a bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetObjectLockConfigurationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetObjectLockConfigurationRequest'
+        - name: object-lock
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}#GetObjectRetention':
+    get:
+      operationId: GetObjectRetention
+      description: Retrieves an object's retention settings.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetObjectRetentionOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetObjectRetentionRequest'
+        - name: retention
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}/{Key}#GetObjectTagging':
     get:
       operationId: GetObjectTagging
@@ -2103,6 +2189,92 @@ paths:
           required: true
     parameters:
       - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}#PutObjectLegalHold':
+    put:
+      operationId: PutObjectLegalHold
+      description: Applies a Legal Hold configuration to the specified object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutObjectLegalHoldOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutObjectLegalHoldRequest'
+        - name: legal-hold
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}#PutObjectLockConfiguration':
+    put:
+      operationId: PutObjectLockConfiguration
+      description: Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutObjectLockConfigurationOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutObjectLockConfigurationRequest'
+        - name: object-lock
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
+  '/{Bucket}/{Key}#PutObjectRetention':
+    put:
+      operationId: PutObjectRetention
+      description: Places an Object Retention configuration on an object.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutObjectRetentionOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutObjectRetentionRequest'
+        - name: retention
+          in: query
+          required: true
+          type: string
+          allowEmptyValue: true
+        - name: Bucket
+          in: path
+          type: string
+          required: true
+        - name: Key
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/x-amz-security-token'
   '/{Bucket}/{Key}#PutObjectTagging':
     put:
       operationId: PutObjectTagging
@@ -2818,6 +2990,33 @@ definitions:
     example:
       Bucket: examplebucket
       Key: HappyFace.jpg
+    properties: {}
+  GetObjectLegalHoldOutput:
+    type: object
+    properties:
+      LegalHold:
+        $ref: '#/definitions/ObjectLockLegalHold'
+        description: The current Legal Hold status for the specified object.
+  GetObjectLegalHoldRequest:
+    type: object
+    properties: {}
+  GetObjectLockConfigurationOutput:
+    type: object
+    properties:
+      ObjectLockConfiguration:
+        $ref: '#/definitions/ObjectLockConfiguration'
+        description: The specified bucket's Object Lock configuration.
+  GetObjectLockConfigurationRequest:
+    type: object
+    properties: {}
+  GetObjectRetentionOutput:
+    type: object
+    properties:
+      Retention:
+        $ref: '#/definitions/ObjectLockRetention'
+        description: The container element for an object's retention settings.
+  GetObjectRetentionRequest:
+    type: object
     properties: {}
   GetObjectTaggingOutput:
     type: object
@@ -3552,6 +3751,39 @@ definitions:
         $ref: '#/definitions/AccessControlPolicy'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutObjectLegalHoldOutput:
+    type: object
+    properties: {}
+  PutObjectLegalHoldRequest:
+    type: object
+    properties:
+      LegalHold:
+        $ref: '#/definitions/ObjectLockLegalHold'
+        description: Container element for the Legal Hold configuration you want to apply to the specified object.
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutObjectLockConfigurationOutput:
+    type: object
+    properties: {}
+  PutObjectLockConfigurationRequest:
+    type: object
+    properties:
+      ObjectLockConfiguration:
+        $ref: '#/definitions/ObjectLockConfiguration'
+        description: The Object Lock configuration that you want to apply to the specified bucket.
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
+  PutObjectRetentionOutput:
+    type: object
+    properties: {}
+  PutObjectRetentionRequest:
+    type: object
+    properties:
+      Retention:
+        $ref: '#/definitions/ObjectLockRetention'
+        description: The container element for the Object Retention configuration.
+    xml:
+      namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutObjectTaggingOutput:
     type: object
     example:
@@ -3582,7 +3814,7 @@ definitions:
     properties:
       PublicAccessBlockConfiguration:
         $ref: '#/definitions/PublicAccessBlockConfiguration'
-        description: 'The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when &amp;S3; considers a bucket or object public, see For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the Amazon Simple Storage Service Developer Guide.'
+        description: 'The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   RestoreObjectOutput:
@@ -3955,6 +4187,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Bucket'
+  BypassGovernanceRetention:
+    type: boolean
   BytesProcessed:
     type: integer
   BytesReturned:
@@ -4087,6 +4321,8 @@ definitions:
       - 's3:ObjectRemoved:*'
       - 's3:ObjectRemoved:Delete'
       - 's3:ObjectRemoved:DeleteMarkerCreated'
+      - 's3:ObjectRestore:Post'
+      - 's3:ObjectRestore:Completed'
     description: The bucket event for which to send notifications.
   EventList:
     type: array
@@ -4272,6 +4508,7 @@ definitions:
       - STANDARD_IA
       - ONEZONE_IA
       - INTELLIGENT_TIERING
+      - GLACIER
   WebsiteRedirectLocation:
     type: string
   SSECustomerKey:
@@ -4286,6 +4523,19 @@ definitions:
     type: string
   TaggingHeader:
     type: string
+  ObjectLockMode:
+    type: string
+    enum:
+      - GOVERNANCE
+      - COMPLIANCE
+  ObjectLockRetainUntilDate:
+    type: string
+    format: date-time
+  ObjectLockLegalHoldStatus:
+    type: string
+    enum:
+      - 'ON'
+      - 'OFF'
   LastModified:
     type: string
     format: date-time
@@ -4308,11 +4558,33 @@ definitions:
         description: 'Specifies the region where the bucket will be created. If you don''t specify a region, the bucket will be created in US Standard.'
   GrantWrite:
     type: string
+  ObjectLockEnabledForBucket:
+    type: boolean
   Date:
     type: string
     format: date-time
   Days:
     type: integer
+  ObjectLockRetentionMode:
+    type: string
+    enum:
+      - GOVERNANCE
+      - COMPLIANCE
+  Years:
+    type: integer
+  DefaultRetention:
+    type: object
+    properties:
+      Mode:
+        $ref: '#/definitions/ObjectLockRetentionMode'
+        description: The default Object Lock retention mode you want to apply to new objects placed in the specified bucket.
+      Days:
+        $ref: '#/definitions/Days'
+        description: The number of days that you want to specify for the default retention period.
+      Years:
+        $ref: '#/definitions/Years'
+        description: The number of years that you want to specify for the default retention period.
+    description: The container element for specifying the default Object Lock retention settings for new objects placed in the specified bucket.
   ObjectIdentifierList:
     type: array
     items:
@@ -4638,6 +4910,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RoutingRule'
+  ObjectLockLegalHold:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/ObjectLockLegalHoldStatus'
+        description: Indicates whether the specified object has a Legal Hold in place.
+    description: A Legal Hold configuration for an object.
+  ObjectLockConfiguration:
+    type: object
+    properties:
+      ObjectLockEnabled:
+        $ref: '#/definitions/ObjectLockEnabled'
+        description: Indicates whether this object has an Object Lock configuration enabled.
+      Rule:
+        $ref: '#/definitions/ObjectLockRule'
+        description: The Object Lock rule in place for the specified object.
+    description: The container element for Object Lock configuration parameters.
   Restore:
     type: string
   MissingMeta:
@@ -4678,6 +4967,16 @@ definitions:
   ResponseExpires:
     type: string
     format: date-time
+  ObjectLockRetention:
+    type: object
+    properties:
+      Mode:
+        $ref: '#/definitions/ObjectLockRetentionMode'
+        description: Indicates the Retention mode for the specified object.
+      RetainUntilDate:
+        $ref: '#/definitions/Date'
+        description: <p/>
+    description: A Retention configuration for an object.
   PublicAccessBlockConfiguration:
     type: object
     properties:
@@ -4904,6 +5203,9 @@ definitions:
       - IsMultipartUploaded
       - ReplicationStatus
       - EncryptionStatus
+      - ObjectLockRetainUntilDate
+      - ObjectLockMode
+      - ObjectLockLegalHoldStatus
   IsPublic:
     type: boolean
   IsTruncated:
@@ -5267,6 +5569,19 @@ definitions:
       VersionId:
         $ref: '#/definitions/ObjectVersionId'
         description: VersionId for the specific version of the object to delete.
+  ObjectLockEnabled:
+    type: string
+    enum:
+      - Enabled
+  ObjectLockRule:
+    type: object
+    properties:
+      DefaultRetention:
+        $ref: '#/definitions/DefaultRetention'
+        description: The default retention period that you want to apply to new objects placed in the specified bucket.
+    description: The container element for an Object Lock rule.
+  ObjectLockToken:
+    type: string
   ObjectVersionStorageClass:
     type: string
     enum:

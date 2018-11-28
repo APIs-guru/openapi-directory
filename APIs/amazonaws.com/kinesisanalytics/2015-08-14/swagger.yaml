@@ -123,6 +123,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '484':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -168,6 +172,10 @@ paths:
           description: CodeValidationException
           schema:
             $ref: '#/definitions/CodeValidationException'
+        '485':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -209,6 +217,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '484':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -228,7 +240,7 @@ paths:
   '/#AddApplicationOutput':
     post:
       operationId: AddApplicationOutput
-      description: '<p>Adds an external destination to your Amazon Kinesis Analytics application.</p> <p>If you want Amazon Kinesis Analytics to deliver data from an in-application stream within your application to an external destination (such as an Amazon Kinesis stream, an Amazon Kinesis Firehose delivery stream, or an Amazon Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.</p> <p> You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors. For conceptual information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Understanding Application Output (Destination)</a>. </p> <p> Note that any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version.</p> <p>For the limits on the number of application inputs and outputs you can configure, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html">Limits</a>.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationOutput</code> action.</p>'
+      description: '<p>Adds an external destination to your Amazon Kinesis Analytics application.</p> <p>If you want Amazon Kinesis Analytics to deliver data from an in-application stream within your application to an external destination (such as an Amazon Kinesis stream, an Amazon Kinesis Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.</p> <p> You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors. For more information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Understanding Application Output (Destination)</a>. </p> <p> Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version.</p> <p>For the limits on the number of application inputs and outputs you can configure, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html">Limits</a>.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationOutput</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -250,6 +262,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '484':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -291,6 +307,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '484':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -369,6 +389,10 @@ paths:
           description: ResourceInUseException
           schema:
             $ref: '#/definitions/ResourceInUseException'
+        '483':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -410,6 +434,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '484':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -451,6 +479,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '484':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -492,6 +524,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '484':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -533,6 +569,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '484':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -562,6 +602,10 @@ paths:
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -669,6 +713,10 @@ paths:
           description: InvalidApplicationConfigurationException
           schema:
             $ref: '#/definitions/InvalidApplicationConfigurationException'
+        '484':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -702,6 +750,10 @@ paths:
           description: ResourceInUseException
           schema:
             $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -747,6 +799,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '485':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
       parameters:
         - name: body
           in: body
@@ -783,34 +839,11 @@ definitions:
       CloudWatchLoggingOption:
         $ref: '#/definitions/CloudWatchLoggingOption'
         description: 'Provides the CloudWatch log stream Amazon Resource Name (ARN) and the IAM role ARN. Note: To write application messages to CloudWatch, the IAM role that is used must have the <code>PutLogEvents</code> policy action enabled.'
-  ResourceNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: <p/>
-    description: Specified application can't be found.
-  ResourceInUseException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: <p/>
-    description: Application is not available for this operation.
-  InvalidArgumentException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: <p/>
-    description: Specified input parameter value is invalid.
-  ConcurrentModificationException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: <p/>
-    description: 'Exception thrown as a result of concurrent modification to an application. For example, two individuals attempting to edit the same application at the same time.'
+  ResourceNotFoundException: {}
+  ResourceInUseException: {}
+  InvalidArgumentException: {}
+  ConcurrentModificationException: {}
+  UnsupportedOperationException: {}
   AddApplicationInputResponse:
     type: object
     properties: {}
@@ -832,13 +865,7 @@ definitions:
         $ref: '#/definitions/Input'
         description: The <a>Input</a> to add.
     description: <p/>
-  CodeValidationException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: Test
-    description: User-provided application code (query) is invalid. This can be a simple syntax error.
+  CodeValidationException: {}
   AddApplicationInputProcessingConfigurationResponse:
     type: object
     properties: {}
@@ -881,7 +908,7 @@ definitions:
         description: 'Version of the application to which you want to add the output configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. '
       Output:
         $ref: '#/definitions/Output'
-        description: 'An array of objects, each describing one output configuration. In the output configuration, you specify the name of an in-application stream, a destination (that is, an Amazon Kinesis stream, an Amazon Kinesis Firehose delivery stream, or an Amazon Lambda function), and record the formation to use when writing to the destination.'
+        description: 'An array of objects, each describing one output configuration. In the output configuration, you specify the name of an in-application stream, a destination (that is, an Amazon Kinesis stream, an Amazon Kinesis Firehose delivery stream, or an AWS Lambda function), and record the formation to use when writing to the destination.'
     description: <p/>
   AddApplicationReferenceDataSourceResponse:
     type: object
@@ -929,7 +956,7 @@ definitions:
         description: '<p>Use this parameter to configure the application input.</p> <p>You can configure your application to receive input from a single streaming source. In this configuration, you map this streaming source to an in-application stream that is created. Your application code can then query the in-application stream like a table (you can think of it as a constantly updating table).</p> <p>For the streaming source, you provide its Amazon Resource Name (ARN) and format of data on the stream (for example, JSON, CSV, etc.). You also must provide an IAM role that Amazon Kinesis Analytics can assume to read this stream on your behalf.</p> <p>To create the in-application stream, you need to specify a schema to transform your data into a schematized version used in SQL. In the schema, you provide the necessary mapping of the data elements in the streaming source to record columns in the in-app stream.</p>'
       Outputs:
         $ref: '#/definitions/Outputs'
-        description: '<p>You can configure application output to write data from any of the in-application streams to up to three destinations.</p> <p>These destinations can be Amazon Kinesis streams, Amazon Kinesis Firehose delivery streams, Amazon Lambda destinations, or any combination of the three.</p> <p>In the configuration, you specify the in-application stream name, the destination stream or Lambda function Amazon Resource Name (ARN), and the format to use when writing data. You must also provide an IAM role that Amazon Kinesis Analytics can assume to write to the destination stream or Lambda function on your behalf.</p> <p>In the output configuration, you also provide the output stream or Lambda function ARN. For stream destinations, you provide the format of data in the stream (for example, JSON, CSV). You also must provide an IAM role that Amazon Kinesis Analytics can assume to write to the stream or Lambda function on your behalf.</p>'
+        description: '<p>You can configure application output to write data from any of the in-application streams to up to three destinations.</p> <p>These destinations can be Amazon Kinesis streams, Amazon Kinesis Firehose delivery streams, AWS Lambda destinations, or any combination of the three.</p> <p>In the configuration, you specify the in-application stream name, the destination stream or Lambda function Amazon Resource Name (ARN), and the format to use when writing data. You must also provide an IAM role that Amazon Kinesis Analytics can assume to write to the destination stream or Lambda function on your behalf.</p> <p>In the output configuration, you also provide the output stream or Lambda function ARN. For stream destinations, you provide the format of data in the stream (for example, JSON, CSV). You also must provide an IAM role that Amazon Kinesis Analytics can assume to write to the stream or Lambda function on your behalf.</p>'
       CloudWatchLoggingOptions:
         $ref: '#/definitions/CloudWatchLoggingOptions'
         description: 'Use this parameter to configure a CloudWatch log stream to monitor application configuration errors. For more information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html">Working with Amazon CloudWatch Logs</a>.'
@@ -937,13 +964,7 @@ definitions:
         $ref: '#/definitions/ApplicationCode'
         description: '<p>One or more SQL statements that read input data, transform it, and generate output. For example, you can write a SQL statement that reads data from one in-application stream, generates a running average of the number of advertisement clicks by vendor, and insert resulting rows in another in-application stream using pumps. For more information about the typical pattern, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html">Application Code</a>. </p> <p>You can provide such series of SQL statements, where output of one statement can be used as the input for the next statement. You store intermediate results by creating in-application streams and pumps.</p> <p>Note that the application code must create the streams with names specified in the <code>Outputs</code>. For example, if your <code>Outputs</code> defines output streams named <code>ExampleOutputStream1</code> and <code>ExampleOutputStream2</code>, then your application code must create these streams. </p>'
     description: TBD
-  LimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: <p/>
-    description: Exceeded the number of applications allowed.
+  LimitExceededException: {}
   DeleteApplicationResponse:
     type: object
     properties: {}
@@ -1087,32 +1108,13 @@ definitions:
         description: Point at which you want Amazon Kinesis Analytics to start reading records from the specified streaming source discovery purposes.
       S3Configuration:
         $ref: '#/definitions/S3Configuration'
-        description: Specify this parameter to discover a schema from data in an S3 object.
+        description: Specify this parameter to discover a schema from data in an Amazon S3 object.
       InputProcessingConfiguration:
         $ref: '#/definitions/InputProcessingConfiguration'
         description: The <a>InputProcessingConfiguration</a> to use to preprocess the records before discovering the schema of the records.
-  UnableToDetectSchemaException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-      RawInputRecords:
-        $ref: '#/definitions/RawInputRecords'
-      ProcessedInputRecords:
-        $ref: '#/definitions/ProcessedInputRecords'
-    description: 'Data format is not valid, Amazon Kinesis Analytics is not able to detect schema for the given streaming source.'
-  ResourceProvisionedThroughputExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Discovery failed to get a record from the streaming source because of the Amazon Kinesis Streams ProvisionedThroughputExceededException. For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html">GetRecords</a> in the Amazon Kinesis Streams API Reference.'
-  ServiceUnavailableException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The service is unavailable, back off and retry the operation. '
+  UnableToDetectSchemaException: {}
+  ResourceProvisionedThroughputExceededException: {}
+  ServiceUnavailableException: {}
   ListApplicationsResponse:
     type: object
     required:
@@ -1153,13 +1155,7 @@ definitions:
         $ref: '#/definitions/InputConfigurations'
         description: 'Identifies the specific input, by ID, that the application starts consuming. Amazon Kinesis Analytics starts reading the streaming source associated with the input. You can also specify where in the streaming source you want Amazon Kinesis Analytics to start reading.'
     description: <p/>
-  InvalidApplicationConfigurationException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: test
-    description: User-provided application configuration is not valid.
+  InvalidApplicationConfigurationException: {}
   StopApplicationResponse:
     type: object
     properties: {}
@@ -1294,7 +1290,7 @@ definitions:
   ApplicationCode:
     type: string
     minLength: 0
-    maxLength: 51200
+    maxLength: 102400
   ApplicationDescription:
     type: string
     minLength: 0
@@ -1458,7 +1454,7 @@ definitions:
       RecordColumnDelimiter:
         $ref: '#/definitions/RecordColumnDelimiter'
         description: 'Column delimiter. For example, in a CSV format, a comma (",") is the typical column delimiter.'
-    description: '<p>Provides additional mapping information when the record format uses delimiters, such as CSV. For example, the following sample records use CSV format, where the records use the <i>''\n''</i> as the row delimiter and a comma (",") as the column delimiter: </p> <p> <code>"name1", "address1" </code> </p> <p> <code>"name2, "address2"</code> </p>'
+    description: '<p>Provides additional mapping information when the record format uses delimiters, such as CSV. For example, the following sample records use CSV format, where the records use the <i>''\n''</i> as the row delimiter and a comma (",") as the column delimiter: </p> <p> <code>"name1", "address1"</code> </p> <p> <code>"name2", "address2"</code> </p>'
   LogStreamARN:
     type: string
     pattern: 'arn:.*'
@@ -1504,8 +1500,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CloudWatchLoggingOption'
-  ErrorMessage:
-    type: string
   Inputs:
     type: array
     items:
@@ -1521,6 +1515,8 @@ definitions:
       - CSV
   DestinationSchema:
     type: object
+    required:
+      - RecordFormatType
     properties:
       RecordFormatType:
         $ref: '#/definitions/RecordFormatType'
@@ -1549,7 +1545,7 @@ definitions:
       FileKey:
         $ref: '#/definitions/FileKey'
         description: The name of the object that contains the data.
-    description: 'Provides a description of an Amazon S3 data source, including the Amazon Resource Name (ARN) of the S3 bucket, the ARN of the IAM role that is used to access the bucket, and the name of the S3 object that contains the data.'
+    description: 'Provides a description of an Amazon S3 data source, including the Amazon Resource Name (ARN) of the S3 bucket, the ARN of the IAM role that is used to access the bucket, and the name of the Amazon S3 object that contains the data.'
   SourceSchema:
     type: object
     required:
@@ -1620,7 +1616,7 @@ definitions:
         description: ARN of the input delivery stream.
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to make sure the role has necessary permissions to access the stream.
+        description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to make sure that the role has the necessary permissions to access the stream.
     description: ' Identifies an Amazon Kinesis Firehose delivery stream as the streaming source. You provide the delivery stream''s Amazon Resource Name (ARN) and an IAM role ARN that enables Amazon Kinesis Analytics to access the stream on your behalf.'
   InputParallelism:
     type: object
@@ -1815,7 +1811,7 @@ definitions:
         description: Amazon Resource Name (ARN) of the input Amazon Kinesis Firehose delivery stream to read.
       RoleARNUpdate:
         $ref: '#/definitions/RoleARN'
-        description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant necessary permissions to this role.
+        description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.
     description: 'When updating application input configuration, provides information about an Amazon Kinesis Firehose delivery stream as the streaming source.'
   InputUpdate:
     type: object
@@ -1887,7 +1883,7 @@ definitions:
         description: Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery stream to write to.
       RoleARNUpdate:
         $ref: '#/definitions/RoleARN'
-        description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant necessary permissions to this role.
+        description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.
     description: ' When updating an output configuration using the <a>UpdateApplication</a> operation, provides information about an Amazon Kinesis Firehose delivery stream configured as the destination. '
   KinesisStreamsOutput:
     type: object
