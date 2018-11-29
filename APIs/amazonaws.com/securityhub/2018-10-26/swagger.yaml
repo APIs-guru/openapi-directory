@@ -1,0 +1,2762 @@
+swagger: '2.0'
+info:
+  version: '2018-10-26'
+  x-release: v4
+  title: AWS SecurityHub
+  description: 'AWS Security Hub provides you with a comprehensive view of your security state within AWS and your compliance with the security industry standards and best practices. Security Hub collects security data from across AWS accounts, services, and supported third-party partners and helps you analyze your security trends and identify the highest priority security issues. For more information, see <a href="">AWS Security Hub User Guide</a>. '
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: securityhub
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/securityhub-2018-10-26.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/securityhub/'
+host: securityhub.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /master:
+    post:
+      operationId: AcceptInvitation
+      description: Accepts the invitation to be monitored by a master SecurityHub account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AcceptInvitationResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AcceptInvitationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetMasterAccount
+      description: 'Provides the details for the Security Hub master account to the current member account. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMasterAccountResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMasterAccountRequest'
+  /standards/deregister:
+    post:
+      operationId: BatchDisableStandards
+      description: 'Disables the standards specified by the standards subscription ARNs. In the context of Security Hub, supported standards (for example, CIS AWS Foundations) are automated and continuous checks that help determine your compliance status against security industry (including AWS) best practices. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchDisableStandardsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchDisableStandardsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /standards/register:
+    post:
+      operationId: BatchEnableStandards
+      description: 'Enables the standards specified by the standards ARNs. In the context of Security Hub, supported standards (for example, CIS AWS Foundations) are automated and continuous checks that help determine your compliance status against security industry (including AWS) best practices. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchEnableStandardsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchEnableStandardsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /findings/import:
+    post:
+      operationId: BatchImportFindings
+      description: Imports security findings that are generated by the integrated third-party products into Security Hub.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BatchImportFindingsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchImportFindingsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /insights:
+    post:
+      operationId: CreateInsight
+      description: 'Creates an insight, which is a consolidation of findings that identifies a security area that requires attention or intervention.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateInsightResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateInsightRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /members:
+    post:
+      operationId: CreateMembers
+      description: Creates member Security Hub accounts in the current AWS account (which becomes the master Security Hub account) that has Security Hub enabled.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateMembersResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateMembersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListMembers
+      description: Lists details about all member accounts for the current Security Hub master account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMembersResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListMembersRequest'
+  /invitations/decline:
+    post:
+      operationId: DeclineInvitations
+      description: 'Declines invitations that are sent to this AWS account (invitee) by the AWS accounts (inviters) that are specified by the account IDs. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeclineInvitationsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeclineInvitationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/insights/{InsightArn}':
+    delete:
+      operationId: DeleteInsight
+      description: Deletes an insight that is specified by the insight ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteInsightResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteInsightRequest'
+        - name: InsightArn
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdateInsight
+      description: Updates the AWS Security Hub insight specified by the insight ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateInsightResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateInsightRequest'
+        - name: InsightArn
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
+  /invitations/delete:
+    post:
+      operationId: DeleteInvitations
+      description: 'Deletes invitations that are sent to this AWS account (invitee) by the AWS accounts (inviters) that are specified by their account IDs. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteInvitationsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteInvitationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /members/delete:
+    post:
+      operationId: DeleteMembers
+      description: Deletes the Security Hub member accounts that are specified by the account IDs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteMembersResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteMembersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/productSubscriptions/{ProductSubscriptionArn}':
+    delete:
+      operationId: DisableImportFindingsForProduct
+      description: Stops you from being able to import findings generated by integrated third-party providers into Security Hub.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisableImportFindingsForProductResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisableImportFindingsForProductRequest'
+        - name: ProductSubscriptionArn
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /accounts:
+    delete:
+      operationId: DisableSecurityHub
+      description: Disables the AWS Security Hub Service.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisableSecurityHubResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisableSecurityHubRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: EnableSecurityHub
+      description: Enables the AWS Security Hub service.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnableSecurityHubResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/EnableSecurityHubRequest'
+  /master/disassociate:
+    post:
+      operationId: DisassociateFromMasterAccount
+      description: Disassociates the current Security Hub member account from its master account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateFromMasterAccountResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateFromMasterAccountRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /members/disassociate:
+    post:
+      operationId: DisassociateMembers
+      description: 'Disassociates the Security Hub member accounts that are specified by the account IDs from their master account. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateMembersResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateMembersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /productSubscriptions:
+    post:
+      operationId: EnableImportFindingsForProduct
+      description: Enables you to import findings generated by integrated third-party providers into Security Hub.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EnableImportFindingsForProductResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/EnableImportFindingsForProductRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListEnabledProductsForImport
+      description: Lists all Security Hub-integrated third-party findings providers.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListEnabledProductsForImportResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListEnabledProductsForImportRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+  /standards/get:
+    post:
+      operationId: GetEnabledStandards
+      description: Lists and describes enabled standards.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetEnabledStandardsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetEnabledStandardsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /findings:
+    post:
+      operationId: GetFindings
+      description: Lists and describes Security Hub-aggregated findings that are specified by filter attributes.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetFindingsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetFindingsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdateFindings
+      description: Updates the AWS Security Hub-aggregated findings specified by the filter attributes.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateFindingsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFindingsRequest'
+  '/insights/results/{InsightArn}':
+    get:
+      operationId: GetInsightResults
+      description: Lists the results of the Security Hub insight specified by the insight ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetInsightResultsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetInsightResultsRequest'
+        - name: InsightArn
+          in: path
+          type: array
+          required: true
+          items:
+            type: string
+          collectionFormat: csv
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /insights/get:
+    post:
+      operationId: GetInsights
+      description: Lists and describes insights that are specified by insight ARNs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetInsightsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetInsightsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /invitations/count:
+    get:
+      operationId: GetInvitationsCount
+      description: 'Returns the count of all Security Hub membership invitations that were sent to the current member account, not including the currently accepted invitation. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetInvitationsCountResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetInvitationsCountRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /members/get:
+    post:
+      operationId: GetMembers
+      description: 'Returns the details on the Security Hub member accounts that are specified by the account IDs. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetMembersResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetMembersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /members/invite:
+    post:
+      operationId: InviteMembers
+      description: 'Invites other AWS accounts to enable Security Hub and become Security Hub member accounts. When an account accepts the invitation and becomes a member account, the master account can view Security Hub findings of the member account. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InviteMembersResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/InviteMembersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /invitations:
+    get:
+      operationId: ListInvitations
+      description: 'Lists all Security Hub membership invitations that were sent to the current AWS account. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListInvitationsResponse'
+        '480':
+          description: InternalException
+          schema:
+            $ref: '#/definitions/InternalException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListInvitationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AcceptInvitationResponse:
+    type: object
+    properties: {}
+  AcceptInvitationRequest:
+    type: object
+    properties:
+      MasterId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The account ID of the master Security Hub account whose invitation you''re accepting. '
+      InvitationId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The ID of the invitation that is sent to the AWS account by the Security Hub master account. '
+  InternalException: {}
+  InvalidInputException: {}
+  LimitExceededException: {}
+  ResourceNotFoundException: {}
+  BatchDisableStandardsResponse:
+    type: object
+    properties:
+      StandardsSubscriptions:
+        $ref: '#/definitions/StandardsSubscriptions'
+        description: The details of the standards subscriptions that were disabled.
+  BatchDisableStandardsRequest:
+    type: object
+    required:
+      - StandardsSubscriptionArns
+    properties:
+      StandardsSubscriptionArns:
+        $ref: '#/definitions/StandardsSubscriptionArns'
+        description: The ARNS of the standards subscriptions that you want to disable.
+  BatchEnableStandardsResponse:
+    type: object
+    properties:
+      StandardsSubscriptions:
+        $ref: '#/definitions/StandardsSubscriptions'
+        description: The details of the standards subscriptions that were enabled.
+  BatchEnableStandardsRequest:
+    type: object
+    required:
+      - StandardsSubscriptionRequests
+    properties:
+      StandardsSubscriptionRequests:
+        $ref: '#/definitions/StandardsSubscriptionRequests'
+        description: The list of standards that you want to enable.
+  BatchImportFindingsResponse:
+    type: object
+    required:
+      - FailedCount
+      - SuccessCount
+    properties:
+      FailedCount:
+        $ref: '#/definitions/Integer'
+        description: The number of findings that cannot be imported.
+      SuccessCount:
+        $ref: '#/definitions/Integer'
+        description: The number of findings that were successfully imported
+      FailedFindings:
+        $ref: '#/definitions/ImportFindingsErrorList'
+        description: The list of the findings that cannot be imported.
+  BatchImportFindingsRequest:
+    type: object
+    required:
+      - Findings
+    properties:
+      Findings:
+        $ref: '#/definitions/AwsSecurityFindingList'
+        description: A list of findings that you want to import. Must be submitted in the AWSSecurityFinding format.
+  CreateInsightResponse:
+    type: object
+    required:
+      - InsightArn
+    properties:
+      InsightArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ARN Of the created insight.
+  CreateInsightRequest:
+    type: object
+    required:
+      - Name
+      - Filters
+      - GroupByAttribute
+    properties:
+      Name:
+        $ref: '#/definitions/NonEmptyString'
+        description: The user-defined name that identifies the insight that you want to create.
+      Filters:
+        $ref: '#/definitions/AwsSecurityFindingFilters'
+        description: A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.
+      GroupByAttribute:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The attribute by which the insight''s findings are grouped. This attribute is used as a findings aggregator for the purposes of viewing and managing multiple related findings under a single operand. '
+  CreateMembersResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/ResultList'
+        description: A list of account ID and email address pairs of the AWS accounts that could not be processed.
+  CreateMembersRequest:
+    type: object
+    properties:
+      AccountDetails:
+        $ref: '#/definitions/AccountDetailsList'
+        description: A list of account ID and email address pairs of the accounts that you want to associate with the master Security Hub account.
+  DeclineInvitationsResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/ResultList'
+        description: 'A list of account ID and email address pairs of the AWS accounts that could not be processed. '
+  DeclineInvitationsRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIdList'
+        description: 'A list of account IDs specifying accounts whose invitations to Security Hub you want to decline. '
+  DeleteInsightResponse:
+    type: object
+    required:
+      - InsightArn
+    properties:
+      InsightArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ARN of the insight that was deleted.
+  DeleteInsightRequest:
+    type: object
+    properties: {}
+  DeleteInvitationsResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/ResultList'
+        description: 'A list of account ID and email address pairs of the AWS accounts that could not be processed. '
+  DeleteInvitationsRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIdList'
+        description: 'A list of account IDs specifying accounts whose invitations to Security Hub you want to delete. '
+  DeleteMembersResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/ResultList'
+        description: 'A list of account ID and email address pairs of the AWS accounts that could not be processed. '
+  DeleteMembersRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIdList'
+        description: 'A list of account IDs of the Security Hub member accounts that you want to delete. '
+  DisableImportFindingsForProductResponse:
+    type: object
+    properties: {}
+  DisableImportFindingsForProductRequest:
+    type: object
+    properties: {}
+  DisableSecurityHubResponse:
+    type: object
+    properties: {}
+  DisableSecurityHubRequest:
+    type: object
+    properties: {}
+  DisassociateFromMasterAccountResponse:
+    type: object
+    properties: {}
+  DisassociateFromMasterAccountRequest:
+    type: object
+    properties: {}
+  DisassociateMembersResponse:
+    type: object
+    properties: {}
+  DisassociateMembersRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIdList'
+        description: The account IDs of the member accounts that you want to disassociate from the master account.
+  EnableImportFindingsForProductResponse:
+    type: object
+    properties:
+      ProductSubscriptionArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ARN of a resource that represents your subscription to the product that generates the findings that you want to import into Security Hub.
+  EnableImportFindingsForProductRequest:
+    type: object
+    required:
+      - ProductArn
+    properties:
+      ProductArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ARN of the product that generates findings that you want to import into Security Hub.
+  EnableSecurityHubResponse:
+    type: object
+    properties: {}
+  EnableSecurityHubRequest:
+    type: object
+    properties: {}
+  GetEnabledStandardsResponse:
+    type: object
+    properties:
+      StandardsSubscriptions:
+        $ref: '#/definitions/StandardsSubscriptions'
+        description: The standards subscription details returned by the operation.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token that is required for pagination.
+  GetEnabledStandardsRequest:
+    type: object
+    properties:
+      StandardsSubscriptionArns:
+        $ref: '#/definitions/StandardsSubscriptionArns'
+        description: The list of standards subscription ARNS that you want to list and describe.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'Paginates results. Set the value of this parameter to NULL on your first call to the GetEnabledStandards operation. For subsequent calls to the operation, fill nextToken in the request with the value of nextToken from the previous response to continue listing data.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: Indicates the maximum number of items that you want in the response.
+  GetFindingsResponse:
+    type: object
+    required:
+      - Findings
+    properties:
+      Findings:
+        $ref: '#/definitions/AwsSecurityFindingList'
+        description: Findings details returned by the operation.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token that is required for pagination.
+  GetFindingsRequest:
+    type: object
+    properties:
+      Filters:
+        $ref: '#/definitions/AwsSecurityFindingFilters'
+        description: A collection of attributes that is use for querying findings.
+      SortCriteria:
+        $ref: '#/definitions/SortCriteria'
+        description: A collection of attributes used for sorting findings.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'Paginates results. Set the value of this parameter to NULL on your first call to the GetFindings operation. For subsequent calls to the operation, fill nextToken in the request with the value of nextToken from the previous response to continue listing data.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: Indicates the maximum number of items that you want in the response.
+  GetInsightResultsResponse:
+    type: object
+    required:
+      - InsightResults
+    properties:
+      InsightResults:
+        $ref: '#/definitions/InsightResults'
+        description: The insight results returned by the operation.
+  GetInsightResultsRequest:
+    type: object
+    properties: {}
+  GetInsightsResponse:
+    type: object
+    required:
+      - Insights
+    properties:
+      Insights:
+        $ref: '#/definitions/InsightList'
+        description: The insights returned by the operation.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token that is required for pagination.
+  GetInsightsRequest:
+    type: object
+    properties:
+      InsightArns:
+        $ref: '#/definitions/ArnList'
+        description: The ARNS of the insights that you want to describe.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'Paginates results. Set the value of this parameter to NULL on your first call to the GetInsights operation. For subsequent calls to the operation, fill nextToken in the request with the value of nextToken from the previous response to continue listing data.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: Indicates the maximum number of items that you want in the response.
+  GetInvitationsCountResponse:
+    type: object
+    properties:
+      InvitationsCount:
+        $ref: '#/definitions/Integer'
+        description: 'The number of all membership invitations sent to this Security Hub member account, not including the currently accepted invitation. '
+  GetInvitationsCountRequest:
+    type: object
+    properties: {}
+  GetMasterAccountResponse:
+    type: object
+    properties:
+      Master:
+        $ref: '#/definitions/Invitation'
+        description: 'A list of details about the Security Hub master account for the current member account. '
+  GetMasterAccountRequest:
+    type: object
+    properties: {}
+  GetMembersResponse:
+    type: object
+    properties:
+      Members:
+        $ref: '#/definitions/MemberList'
+        description: A list of details about the Security Hub member accounts.
+      UnprocessedAccounts:
+        $ref: '#/definitions/ResultList'
+        description: A list of account ID and email address pairs of the AWS accounts that could not be processed.
+  GetMembersRequest:
+    type: object
+    required:
+      - AccountIds
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIdList'
+        description: 'A list of account IDs for the Security Hub member accounts on which you want to return the details. '
+  InviteMembersResponse:
+    type: object
+    properties:
+      UnprocessedAccounts:
+        $ref: '#/definitions/ResultList'
+        description: 'A list of account ID and email address pairs of the AWS accounts that could not be processed. '
+  InviteMembersRequest:
+    type: object
+    properties:
+      AccountIds:
+        $ref: '#/definitions/AccountIdList'
+        description: 'A list of IDs of the AWS accounts that you want to invite to Security Hub as members. '
+  ListEnabledProductsForImportResponse:
+    type: object
+    properties:
+      ProductSubscriptions:
+        $ref: '#/definitions/ProductSubscriptionArnList'
+        description: 'A list of ARNs for the resources that represent your subscriptions to products. '
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token that is required for pagination.
+  ListEnabledProductsForImportRequest:
+    type: object
+    properties: {}
+  ListInvitationsResponse:
+    type: object
+    properties:
+      Invitations:
+        $ref: '#/definitions/InvitationList'
+        description: The details of the invitations returned by the operation.
+      NextToken:
+        $ref: '#/definitions/NonEmptyString'
+        description: The token that is required for pagination.
+  ListInvitationsRequest:
+    type: object
+    properties: {}
+  ListMembersResponse:
+    type: object
+    properties:
+      Members:
+        $ref: '#/definitions/MemberList'
+        description: Member details returned by the operation.
+      NextToken:
+        $ref: '#/definitions/NonEmptyString'
+        description: The token that is required for pagination.
+  ListMembersRequest:
+    type: object
+    properties: {}
+  UpdateFindingsResponse:
+    type: object
+    properties: {}
+  UpdateFindingsRequest:
+    type: object
+    required:
+      - Filters
+    properties:
+      Filters:
+        $ref: '#/definitions/AwsSecurityFindingFilters'
+        description: A collection of attributes that specify what findings you want to update.
+      Note:
+        $ref: '#/definitions/NoteUpdate'
+        description: The updated note for the finding.
+      RecordState:
+        $ref: '#/definitions/RecordState'
+        description: The updated record state for the finding.
+  UpdateInsightResponse:
+    type: object
+    properties: {}
+  UpdateInsightRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/NonEmptyString'
+        description: The updated name for the insight.
+      Filters:
+        $ref: '#/definitions/AwsSecurityFindingFilters'
+        description: The updated filters that define this insight.
+      GroupByAttribute:
+        $ref: '#/definitions/NonEmptyString'
+        description: The updated GroupBy attribute that defines this insight.
+  NonEmptyString:
+    type: string
+    pattern: .*\S.*
+  AccountId:
+    type: string
+  AccountDetails:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: The ID of an AWS account.
+      Email:
+        $ref: '#/definitions/NonEmptyString'
+        description: The email of an AWS account.
+    description: The details of an AWS account.
+  AccountDetailsList:
+    type: array
+    items:
+      $ref: '#/definitions/AccountDetails'
+  AccountIdList:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+  ArnList:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+  AwsEc2InstanceDetails:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The instance type of the instance. '
+      ImageId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Machine Image (AMI) ID of the instance.
+      IpV4Addresses:
+        $ref: '#/definitions/StringList'
+        description: The IPv4 addresses associated with the instance.
+      IpV6Addresses:
+        $ref: '#/definitions/StringList'
+        description: The IPv6 addresses associated with the instance.
+      KeyName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The key name associated with the instance.
+      IamInstanceProfileArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The IAM profile ARN of the instance.
+      VpcId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The identifier of the VPC in which the instance was launched.
+      SubnetId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The identifier of the subnet in which the instance was launched.
+      LaunchedAt:
+        $ref: '#/definitions/NonEmptyString'
+        description: The date/time the instance was launched.
+    description: The details of an AWS EC2 instance.
+  AwsIamAccessKeyStatus:
+    type: string
+    enum:
+      - Active
+      - Inactive
+  AwsIamAccessKeyDetails:
+    type: object
+    properties:
+      UserName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The user associated with the IAM access key related to a finding.
+      Status:
+        $ref: '#/definitions/AwsIamAccessKeyStatus'
+        description: The status of the IAM access key related to a finding.
+      CreatedAt:
+        $ref: '#/definitions/NonEmptyString'
+        description: The creation date/time of the IAM access key related to a finding.
+    description: AWS IAM access key details related to a finding.
+  AwsS3BucketDetails:
+    type: object
+    properties:
+      OwnerId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The canonical user ID of the owner of the S3 bucket.
+      OwnerName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The display name of the owner of the S3 bucket.
+    description: The details of an AWS S3 Bucket.
+  TypeList:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+  Severity:
+    type: object
+    required:
+      - Normalized
+    properties:
+      Product:
+        $ref: '#/definitions/Double'
+        description: The native severity as defined by the security findings provider's solution that generated the finding.
+      Normalized:
+        $ref: '#/definitions/Integer'
+        description: The normalized severity of a finding.
+    description: A finding's severity.
+  Integer:
+    type: integer
+  Remediation:
+    type: object
+    properties:
+      Recommendation:
+        $ref: '#/definitions/Recommendation'
+        description: Provides a recommendation on how to remediate the issue identified within a finding.
+    description: 'The remediation options for a finding. '
+  FieldMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/NonEmptyString'
+        value:
+          $ref: '#/definitions/NonEmptyString'
+  MalwareList:
+    type: array
+    items:
+      $ref: '#/definitions/Malware'
+  Network:
+    type: object
+    properties:
+      Direction:
+        $ref: '#/definitions/NetworkDirection'
+        description: Indicates the direction of network traffic associated with a finding.
+      Protocol:
+        $ref: '#/definitions/NonEmptyString'
+        description: The protocol of network-related information about a finding.
+      SourceIpV4:
+        $ref: '#/definitions/NonEmptyString'
+        description: The source IPv4 address of network-related information about a finding.
+      SourceIpV6:
+        $ref: '#/definitions/NonEmptyString'
+        description: The source IPv6 address of network-related information about a finding.
+      SourcePort:
+        $ref: '#/definitions/Integer'
+        description: The source port of network-related information about a finding.
+      SourceDomain:
+        $ref: '#/definitions/NonEmptyString'
+        description: The source domain of network-related information about a finding.
+      SourceMac:
+        $ref: '#/definitions/NonEmptyString'
+        description: The source media access control (MAC) address of network-related information about a finding.
+      DestinationIpV4:
+        $ref: '#/definitions/NonEmptyString'
+        description: The destination IPv4 address of network-related information about a finding.
+      DestinationIpV6:
+        $ref: '#/definitions/NonEmptyString'
+        description: The destination IPv6 address of network-related information about a finding.
+      DestinationPort:
+        $ref: '#/definitions/Integer'
+        description: The destination port of network-related information about a finding.
+      DestinationDomain:
+        $ref: '#/definitions/NonEmptyString'
+        description: The destination domain of network-related information about a finding.
+    description: The details of network-related information about a finding.
+  ProcessDetails:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the process.
+      Path:
+        $ref: '#/definitions/NonEmptyString'
+        description: The path to the process executable.
+      Pid:
+        $ref: '#/definitions/Integer'
+        description: The process ID.
+      ParentPid:
+        $ref: '#/definitions/Integer'
+        description: The parent process ID.
+      LaunchedAt:
+        $ref: '#/definitions/NonEmptyString'
+        description: The date/time that the process was launched.
+      TerminatedAt:
+        $ref: '#/definitions/NonEmptyString'
+        description: The date/time that the process was terminated.
+    description: The details of process-related information about a finding.
+  ThreatIntelIndicatorList:
+    type: array
+    items:
+      $ref: '#/definitions/ThreatIntelIndicator'
+  ResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/Resource'
+  Compliance:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/ComplianceStatus'
+        description: Indicates the result of a compliance check.
+    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, AWS CIS Foundations). Contains compliance-related finding details.'
+  VerificationState:
+    type: string
+    enum:
+      - UNKNOWN
+      - TRUE_POSITIVE
+      - FALSE_POSITIVE
+      - BENIGN_POSITIVE
+  WorkflowState:
+    type: string
+    enum:
+      - NEW
+      - ASSIGNED
+      - IN_PROGRESS
+      - DEFERRED
+      - RESOLVED
+  RecordState:
+    type: string
+    enum:
+      - ACTIVE
+      - ARCHIVED
+  RelatedFindingList:
+    type: array
+    items:
+      $ref: '#/definitions/RelatedFinding'
+  Note:
+    type: object
+    required:
+      - Text
+      - UpdatedBy
+      - UpdatedAt
+    properties:
+      Text:
+        $ref: '#/definitions/NonEmptyString'
+        description: The text of a note.
+      UpdatedBy:
+        $ref: '#/definitions/NonEmptyString'
+        description: The principal that created a note.
+      UpdatedAt:
+        $ref: '#/definitions/NonEmptyString'
+        description: The timestamp of when the note was updated.
+    description: A user-defined note added to a finding.
+  AwsSecurityFinding:
+    type: object
+    required:
+      - SchemaVersion
+      - Id
+      - ProductArn
+      - GeneratorId
+      - AwsAccountId
+      - Types
+      - CreatedAt
+      - UpdatedAt
+      - Severity
+      - Resources
+    properties:
+      SchemaVersion:
+        $ref: '#/definitions/NonEmptyString'
+        description: The schema version for which a finding is formatted.
+      Id:
+        $ref: '#/definitions/NonEmptyString'
+        description: The security findings provider-specific identifier for a finding.
+      ProductArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The ARN generated by Security Hub that uniquely identifies a third-party company (security findings provider) once this provider''s product (solution that generates findings) is registered with Security Hub. '
+      GeneratorId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'This is the identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security findings provider''s solutions, this generator can be called a rule, a check, a detector, a plug-in, etc. '
+      AwsAccountId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The AWS account ID in which a finding is generated.
+      Types:
+        $ref: '#/definitions/TypeList'
+        description: '<p>One or more finding types in the format of ''namespace/category/classifier'' that classify a finding.</p> <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications</p>'
+      FirstObservedAt:
+        $ref: '#/definitions/NonEmptyString'
+        description: An ISO8601-formatted timestamp that indicates when the potential security issue captured by a finding was first observed by the security findings provider.
+      LastObservedAt:
+        $ref: '#/definitions/NonEmptyString'
+        description: An ISO8601-formatted timestamp that indicates when the potential security issue captured by a finding was most recently observed by the security findings provider.
+      CreatedAt:
+        $ref: '#/definitions/NonEmptyString'
+        description: An ISO8601-formatted timestamp that indicates when the potential security issue captured by a finding was created by the security findings provider.
+      UpdatedAt:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'An ISO8601-formatted timestamp that indicates when the finding record was last updated by the security findings provider. '
+      Severity:
+        $ref: '#/definitions/Severity'
+        description: A finding's severity.
+      Confidence:
+        $ref: '#/definitions/Integer'
+        description: A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale. 0 equates zero percent confidence and 100 equates to 100 percent confidence.
+      Criticality:
+        $ref: '#/definitions/Integer'
+        description: 'The level of importance assigned to the resources associated with the finding. A score of 0 means the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.'
+      Title:
+        $ref: '#/definitions/NonEmptyString'
+        description: A finding's title.
+      Description:
+        $ref: '#/definitions/NonEmptyString'
+        description: A finding's description.
+      Remediation:
+        $ref: '#/definitions/Remediation'
+        description: An data type that describes the remediation options for a finding.
+      SourceUrl:
+        $ref: '#/definitions/NonEmptyString'
+        description: A URL that links to a page about the current finding in the security findings provider's solution.
+      ProductFields:
+        $ref: '#/definitions/FieldMap'
+        description: A data type where security findings providers can include additional solution-specific details that are not part of the defined AwsSecurityFinding format.
+      UserDefinedFields:
+        $ref: '#/definitions/FieldMap'
+        description: 'A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding. '
+      Malware:
+        $ref: '#/definitions/MalwareList'
+        description: A list of malware related to a finding.
+      Network:
+        $ref: '#/definitions/Network'
+        description: The details of network-related information about a finding.
+      Process:
+        $ref: '#/definitions/ProcessDetails'
+        description: The details of process-related information about a finding.
+      ThreatIntelIndicators:
+        $ref: '#/definitions/ThreatIntelIndicatorList'
+        description: Threat intel details related to a finding.
+      Resources:
+        $ref: '#/definitions/ResourceList'
+        description: A set of resource data types that describe the resources to which the finding refers.
+      Compliance:
+        $ref: '#/definitions/Compliance'
+        description: 'This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, AWS CIS Foundations). Contains compliance-related finding details.'
+      VerificationState:
+        $ref: '#/definitions/VerificationState'
+        description: 'Indicates the veracity of a finding. '
+      WorkflowState:
+        $ref: '#/definitions/WorkflowState'
+        description: 'The workflow state of a finding. '
+      RecordState:
+        $ref: '#/definitions/RecordState'
+        description: The record state of a finding.
+      RelatedFindings:
+        $ref: '#/definitions/RelatedFindingList'
+        description: A list of related findings.
+      Note:
+        $ref: '#/definitions/Note'
+        description: A user-defined note added to a finding.
+    description: '<p>Provides consistent format for the contents of the Security Hub-aggregated findings. AwsSecurityFinding format enables you to share findings between AWS security services and third-party solutions, and compliance checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (GuardDuty, Inspector, Macie) or by the integrated third-party solutions and compliance checks.</p> </note>'
+  StringFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/StringFilter'
+  DateFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/DateFilter'
+  NumberFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/NumberFilter'
+  MapFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/MapFilter'
+  IpFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/IpFilter'
+  KeywordFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/KeywordFilter'
+  AwsSecurityFindingFilters:
+    type: object
+    properties:
+      ProductArn:
+        $ref: '#/definitions/StringFilterList'
+        description: The ARN generated by Security Hub that uniquely identifies a third-party company (security findings provider) once this provider's product (solution that generates findings) is registered with Security Hub.
+      AwsAccountId:
+        $ref: '#/definitions/StringFilterList'
+        description: The AWS account ID in which a finding is generated.
+      Id:
+        $ref: '#/definitions/StringFilterList'
+        description: The security findings provider-specific identifier for a finding.
+      GeneratorId:
+        $ref: '#/definitions/StringFilterList'
+        description: 'This is the identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security findings provider''s solutions, this generator can be called a rule, a check, a detector, a plug-in, etc.'
+      Type:
+        $ref: '#/definitions/StringFilterList'
+        description: A finding type in the format of 'namespace/category/classifier' that classifies a finding.
+      FirstObservedAt:
+        $ref: '#/definitions/DateFilterList'
+        description: An ISO8601-formatted timestamp that indicates when the potential security issue captured by a finding was first observed by the security findings provider.
+      LastObservedAt:
+        $ref: '#/definitions/DateFilterList'
+        description: An ISO8601-formatted timestamp that indicates when the potential security issue captured by a finding was most recently observed by the security findings provider.
+      CreatedAt:
+        $ref: '#/definitions/DateFilterList'
+        description: An ISO8601-formatted timestamp that indicates when the potential security issue captured by a finding was created by the security findings provider.
+      UpdatedAt:
+        $ref: '#/definitions/DateFilterList'
+        description: 'An ISO8601-formatted timestamp that indicates when the finding record was last updated by the security findings provider. '
+      SeverityProduct:
+        $ref: '#/definitions/NumberFilterList'
+        description: The native severity as defined by the security findings provider's solution that generated the finding.
+      SeverityNormalized:
+        $ref: '#/definitions/NumberFilterList'
+        description: The normalized severity of a finding.
+      SeverityLabel:
+        $ref: '#/definitions/StringFilterList'
+        description: The label of a finding's severity.
+      Confidence:
+        $ref: '#/definitions/NumberFilterList'
+        description: A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale. 0 equates zero percent confidence and 100 equates to 100 percent confidence.
+      Criticality:
+        $ref: '#/definitions/NumberFilterList'
+        description: 'The level of importance assigned to the resources associated with the finding. A score of 0 means the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.'
+      Title:
+        $ref: '#/definitions/StringFilterList'
+        description: A finding's title.
+      Description:
+        $ref: '#/definitions/StringFilterList'
+        description: A finding's description.
+      RecommendationText:
+        $ref: '#/definitions/StringFilterList'
+        description: The recommendation of what to do about the issue described in a finding.
+      SourceUrl:
+        $ref: '#/definitions/StringFilterList'
+        description: A URL that links to a page about the current finding in the security findings provider's solution.
+      ProductFields:
+        $ref: '#/definitions/MapFilterList'
+        description: A data type where security findings providers can include additional solution-specific details that are not part of the defined AwsSecurityFinding format.
+      ProductName:
+        $ref: '#/definitions/StringFilterList'
+        description: The name of the solution (product) that generates findings.
+      CompanyName:
+        $ref: '#/definitions/StringFilterList'
+        description: The name of the findings provider (company) that owns the solution (product) that generates findings.
+      UserDefinedFields:
+        $ref: '#/definitions/MapFilterList'
+        description: 'A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding. '
+      MalwareName:
+        $ref: '#/definitions/StringFilterList'
+        description: The name of the malware that was observed.
+      MalwareType:
+        $ref: '#/definitions/StringFilterList'
+        description: The type of the malware that was observed.
+      MalwarePath:
+        $ref: '#/definitions/StringFilterList'
+        description: The filesystem path of the malware that was observed.
+      MalwareState:
+        $ref: '#/definitions/StringFilterList'
+        description: The state of the malware that was observed.
+      NetworkDirection:
+        $ref: '#/definitions/StringFilterList'
+        description: Indicates the direction of network traffic associated with a finding.
+      NetworkProtocol:
+        $ref: '#/definitions/StringFilterList'
+        description: The protocol of network-related information about a finding.
+      NetworkSourceIpV4:
+        $ref: '#/definitions/IpFilterList'
+        description: The source IPv4 address of network-related information about a finding.
+      NetworkSourceIpV6:
+        $ref: '#/definitions/IpFilterList'
+        description: The source IPv6 address of network-related information about a finding.
+      NetworkSourcePort:
+        $ref: '#/definitions/NumberFilterList'
+        description: The source port of network-related information about a finding.
+      NetworkSourceDomain:
+        $ref: '#/definitions/StringFilterList'
+        description: The source domain of network-related information about a finding.
+      NetworkSourceMac:
+        $ref: '#/definitions/StringFilterList'
+        description: The source media access control (MAC) address of network-related information about a finding.
+      NetworkDestinationIpV4:
+        $ref: '#/definitions/IpFilterList'
+        description: The destination IPv4 address of network-related information about a finding.
+      NetworkDestinationIpV6:
+        $ref: '#/definitions/IpFilterList'
+        description: The destination IPv6 address of network-related information about a finding.
+      NetworkDestinationPort:
+        $ref: '#/definitions/NumberFilterList'
+        description: The destination port of network-related information about a finding.
+      NetworkDestinationDomain:
+        $ref: '#/definitions/StringFilterList'
+        description: The destination domain of network-related information about a finding.
+      ProcessName:
+        $ref: '#/definitions/StringFilterList'
+        description: The name of the process.
+      ProcessPath:
+        $ref: '#/definitions/StringFilterList'
+        description: The path to the process executable.
+      ProcessPid:
+        $ref: '#/definitions/NumberFilterList'
+        description: The process ID.
+      ProcessParentPid:
+        $ref: '#/definitions/NumberFilterList'
+        description: The parent process ID.
+      ProcessLaunchedAt:
+        $ref: '#/definitions/DateFilterList'
+        description: The date/time that the process was launched.
+      ProcessTerminatedAt:
+        $ref: '#/definitions/DateFilterList'
+        description: The date/time that the process was terminated.
+      ThreatIntelIndicatorType:
+        $ref: '#/definitions/StringFilterList'
+        description: The type of a threat intel indicator.
+      ThreatIntelIndicatorValue:
+        $ref: '#/definitions/StringFilterList'
+        description: The value of a threat intel indicator.
+      ThreatIntelIndicatorCategory:
+        $ref: '#/definitions/StringFilterList'
+        description: The category of a threat intel indicator.
+      ThreatIntelIndicatorLastObservedAt:
+        $ref: '#/definitions/DateFilterList'
+        description: The date/time of the last observation of a threat intel indicator.
+      ThreatIntelIndicatorSource:
+        $ref: '#/definitions/StringFilterList'
+        description: The source of the threat intel.
+      ThreatIntelIndicatorSourceUrl:
+        $ref: '#/definitions/StringFilterList'
+        description: The URL for more details from the source of the threat intel.
+      ResourceType:
+        $ref: '#/definitions/StringFilterList'
+        description: Specifies the type of the resource for which details are provided.
+      ResourceId:
+        $ref: '#/definitions/StringFilterList'
+        description: The canonical identifier for the given resource type.
+      ResourcePartition:
+        $ref: '#/definitions/StringFilterList'
+        description: The canonical AWS partition name to which the region is assigned.
+      ResourceRegion:
+        $ref: '#/definitions/StringFilterList'
+        description: The canonical AWS external region name where this resource is located.
+      ResourceTags:
+        $ref: '#/definitions/MapFilterList'
+        description: A list of AWS tags associated with a resource at the time the finding was processed.
+      ResourceAwsEc2InstanceType:
+        $ref: '#/definitions/StringFilterList'
+        description: The instance type of the instance.
+      ResourceAwsEc2InstanceImageId:
+        $ref: '#/definitions/StringFilterList'
+        description: The Amazon Machine Image (AMI) ID of the instance.
+      ResourceAwsEc2InstanceIpV4Addresses:
+        $ref: '#/definitions/IpFilterList'
+        description: The IPv4 addresses associated with the instance.
+      ResourceAwsEc2InstanceIpV6Addresses:
+        $ref: '#/definitions/IpFilterList'
+        description: The IPv6 addresses associated with the instance.
+      ResourceAwsEc2InstanceKeyName:
+        $ref: '#/definitions/StringFilterList'
+        description: The key name associated with the instance.
+      ResourceAwsEc2InstanceIamInstanceProfileArn:
+        $ref: '#/definitions/StringFilterList'
+        description: The IAM profile ARN of the instance.
+      ResourceAwsEc2InstanceVpcId:
+        $ref: '#/definitions/StringFilterList'
+        description: The identifier of the VPC in which the instance was launched.
+      ResourceAwsEc2InstanceSubnetId:
+        $ref: '#/definitions/StringFilterList'
+        description: The identifier of the subnet in which the instance was launched.
+      ResourceAwsEc2InstanceLaunchedAt:
+        $ref: '#/definitions/DateFilterList'
+        description: The date/time the instance was launched.
+      ResourceAwsS3BucketOwnerId:
+        $ref: '#/definitions/StringFilterList'
+        description: The canonical user ID of the owner of the S3 bucket.
+      ResourceAwsS3BucketOwnerName:
+        $ref: '#/definitions/StringFilterList'
+        description: The display name of the owner of the S3 bucket.
+      ResourceAwsIamAccessKeyUserName:
+        $ref: '#/definitions/StringFilterList'
+        description: The user associated with the IAM access key related to a finding.
+      ResourceAwsIamAccessKeyStatus:
+        $ref: '#/definitions/StringFilterList'
+        description: The status of the IAM access key related to a finding.
+      ResourceAwsIamAccessKeyCreatedAt:
+        $ref: '#/definitions/DateFilterList'
+        description: The creation date/time of the IAM access key related to a finding.
+      ResourceContainerName:
+        $ref: '#/definitions/StringFilterList'
+        description: The name of the container related to a finding.
+      ResourceContainerImageId:
+        $ref: '#/definitions/StringFilterList'
+        description: The identifier of the image related to a finding.
+      ResourceContainerImageName:
+        $ref: '#/definitions/StringFilterList'
+        description: The name of the image related to a finding.
+      ResourceContainerLaunchedAt:
+        $ref: '#/definitions/DateFilterList'
+        description: The date/time that the container was started.
+      ResourceDetailsOther:
+        $ref: '#/definitions/MapFilterList'
+        description: The details of a resource that does not have a specific sub-field for the resource type defined.
+      ComplianceStatus:
+        $ref: '#/definitions/StringFilterList'
+        description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, AWS CIS Foundations). Contains compliance-related finding details.'
+      VerificationState:
+        $ref: '#/definitions/StringFilterList'
+        description: 'Indicates the veracity of a finding. '
+      WorkflowState:
+        $ref: '#/definitions/StringFilterList'
+        description: The workflow state of a finding.
+      RecordState:
+        $ref: '#/definitions/StringFilterList'
+        description: The updated record state for the finding.
+      RelatedFindingsProductArn:
+        $ref: '#/definitions/StringFilterList'
+        description: The ARN of the solution that generated a related finding.
+      RelatedFindingsId:
+        $ref: '#/definitions/StringFilterList'
+        description: The solution-generated identifier for a related finding.
+      NoteText:
+        $ref: '#/definitions/StringFilterList'
+        description: The text of a note.
+      NoteUpdatedAt:
+        $ref: '#/definitions/DateFilterList'
+        description: The timestamp of when the note was updated.
+      NoteUpdatedBy:
+        $ref: '#/definitions/StringFilterList'
+        description: The principal that created a note.
+      Keyword:
+        $ref: '#/definitions/KeywordFilterList'
+        description: A keyword for a finding.
+    description: 'A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight. '
+  AwsSecurityFindingList:
+    type: array
+    items:
+      $ref: '#/definitions/AwsSecurityFinding'
+  StandardsSubscriptionArns:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+    minItems: 1
+    maxItems: 25
+  StandardsSubscriptions:
+    type: array
+    items:
+      $ref: '#/definitions/StandardsSubscription'
+  StandardsSubscriptionRequests:
+    type: array
+    items:
+      $ref: '#/definitions/StandardsSubscriptionRequest'
+    minItems: 1
+    maxItems: 25
+  ImportFindingsErrorList:
+    type: array
+    items:
+      $ref: '#/definitions/ImportFindingsError'
+  Boolean:
+    type: boolean
+  ComplianceStatus:
+    type: string
+    enum:
+      - PASSED
+      - WARNING
+      - FAILED
+      - NOT_AVAILABLE
+  ContainerDetails:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the container related to a finding.
+      ImageId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The identifier of the image related to a finding.
+      ImageName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the image related to a finding.
+      LaunchedAt:
+        $ref: '#/definitions/NonEmptyString'
+        description: The date/time that the container was started.
+    description: Container details related to a finding.
+  ResultList:
+    type: array
+    items:
+      $ref: '#/definitions/Result'
+  DateRange:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/Integer'
+        description: A date range value for the date filter.
+      Unit:
+        $ref: '#/definitions/DateRangeUnit'
+        description: A date range unit for the date filter.
+    description: A date range for the date filter.
+  DateFilter:
+    type: object
+    properties:
+      Start:
+        $ref: '#/definitions/NonEmptyString'
+        description: A start date for the date filter.
+      End:
+        $ref: '#/definitions/NonEmptyString'
+        description: An end date for the date filter.
+      DateRange:
+        $ref: '#/definitions/DateRange'
+        description: A date range for the date filter.
+    description: A date filter for querying findings.
+  DateRangeUnit:
+    type: string
+    enum:
+      - DAYS
+  Double:
+    type: number
+    format: double
+  NextToken:
+    type: string
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  SortCriteria:
+    type: array
+    items:
+      $ref: '#/definitions/SortCriterion'
+  InsightResults:
+    type: object
+    required:
+      - InsightArn
+      - GroupByAttribute
+      - ResultValues
+    properties:
+      InsightArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ARN of the insight whose results are returned by the GetInsightResults operation.
+      GroupByAttribute:
+        $ref: '#/definitions/NonEmptyString'
+        description: The attribute by which the findings are grouped for the insight's whose results are returned by the GetInsightResults operation.
+      ResultValues:
+        $ref: '#/definitions/InsightResultValueList'
+        description: The list of insight result values returned by the GetInsightResults operation.
+    description: The insight results returned by the GetInsightResults operation.
+  InsightList:
+    type: array
+    items:
+      $ref: '#/definitions/Insight'
+  Invitation:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: 'The account ID of the master Security Hub account who sent the invitation. '
+      InvitationId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the invitation sent by the master Security Hub account.
+      InvitedAt:
+        $ref: '#/definitions/Timestamp'
+        description: The timestamp of when the invitation was sent.
+      MemberStatus:
+        $ref: '#/definitions/NonEmptyString'
+        description: The current relationship status between the inviter and invitee accounts.
+    description: 'The details of an invitation sent to an AWS account by the Security Hub master account. '
+  MemberList:
+    type: array
+    items:
+      $ref: '#/definitions/Member'
+  ImportFindingsError:
+    type: object
+    required:
+      - Id
+      - ErrorCode
+      - ErrorMessage
+    properties:
+      Id:
+        $ref: '#/definitions/NonEmptyString'
+        description: The id of the error made during the BatchImportFindings operation.
+      ErrorCode:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The code of the error made during the BatchImportFindings operation. '
+      ErrorMessage:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The message of the error made during the BatchImportFindings operation. '
+    description: 'Includes details of the list of the findings that cannot be imported. '
+  Insight:
+    type: object
+    required:
+      - InsightArn
+      - Name
+      - Filters
+      - GroupByAttribute
+    properties:
+      InsightArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ARN of a Security Hub insight.
+      Name:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of a Security Hub insight.
+      Filters:
+        $ref: '#/definitions/AwsSecurityFindingFilters'
+        description: 'A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight. '
+      GroupByAttribute:
+        $ref: '#/definitions/NonEmptyString'
+        description: The attribute by which the insight's findings are grouped. This attribute is used as a findings aggregator for the purposes of viewing and managing multiple related findings under a single operand.
+    description: 'Contains information about a Security Hub insight. '
+  InsightResultValue:
+    type: object
+    required:
+      - GroupByAttributeValue
+      - Count
+    properties:
+      GroupByAttributeValue:
+        $ref: '#/definitions/NonEmptyString'
+        description: The value of the attribute by which the findings are grouped for the insight's whose results are returned by the GetInsightResults operation.
+      Count:
+        $ref: '#/definitions/Integer'
+        description: The number of findings returned for each GroupByAttributeValue.
+    description: The insight result values returned by the GetInsightResults operation.
+  InsightResultValueList:
+    type: array
+    items:
+      $ref: '#/definitions/InsightResultValue'
+  Timestamp:
+    type: string
+    format: date-time
+  InvitationList:
+    type: array
+    items:
+      $ref: '#/definitions/Invitation'
+  IpFilter:
+    type: object
+    properties:
+      Cidr:
+        $ref: '#/definitions/NonEmptyString'
+        description: Finding's CIDR value.
+    description: The IP filter for querying findings.&gt;
+  KeywordFilter:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/NonEmptyString'
+        description: A value for the keyword.
+    description: A keyword filter for querying findings.
+  ProductSubscriptionArnList:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+  MalwareType:
+    type: string
+    enum:
+      - ADWARE
+      - BLENDED_THREAT
+      - BOTNET_AGENT
+      - COIN_MINER
+      - EXPLOIT_KIT
+      - KEYLOGGER
+      - MACRO
+      - POTENTIALLY_UNWANTED
+      - SPYWARE
+      - RANSOMWARE
+      - REMOTE_ACCESS
+      - ROOTKIT
+      - TROJAN
+      - VIRUS
+      - WORM
+  MalwareState:
+    type: string
+    enum:
+      - OBSERVED
+      - REMOVAL_FAILED
+      - REMOVED
+  Malware:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the malware that was observed.
+      Type:
+        $ref: '#/definitions/MalwareType'
+        description: The type of the malware that was observed.
+      Path:
+        $ref: '#/definitions/NonEmptyString'
+        description: The filesystem path of the malware that was observed.
+      State:
+        $ref: '#/definitions/MalwareState'
+        description: The state of the malware that was observed.
+    description: A list of malware related to a finding.
+  MapFilterComparison:
+    type: string
+    enum:
+      - CONTAINS
+  MapFilter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/NonEmptyString'
+        description: The key of the map filter.
+      Value:
+        $ref: '#/definitions/NonEmptyString'
+        description: The value for the key in the map filter.
+      Comparison:
+        $ref: '#/definitions/MapFilterComparison'
+        description: Represents the condition to be applied to a key value when querying for findings with a map filter.
+    description: The map filter for querying findings.
+  Member:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: The AWS account ID of a Security Hub member account.
+      Email:
+        $ref: '#/definitions/NonEmptyString'
+        description: The email of a Security Hub member account.
+      MasterId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The AWS account ID of the master Security Hub account to this member account.
+      MemberStatus:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The status of the relationship between the member account and its master account. '
+      InvitedAt:
+        $ref: '#/definitions/Timestamp'
+        description: Time stamp at which the member account was invited to Security Hub.
+      UpdatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: Time stamp at which this member account was updated.
+    description: The details for a Security Hub member account.
+  NetworkDirection:
+    type: string
+    enum:
+      - IN
+      - OUT
+  NoteUpdate:
+    type: object
+    required:
+      - Text
+      - UpdatedBy
+    properties:
+      Text:
+        $ref: '#/definitions/NonEmptyString'
+        description: The updated note text.
+      UpdatedBy:
+        $ref: '#/definitions/NonEmptyString'
+        description: The principal that updated the note.
+    description: The updated note.
+  NumberFilter:
+    type: object
+    properties:
+      Gte:
+        $ref: '#/definitions/Double'
+        description: 'Represents the "greater than equal" condition to be applied to a single field when querying for findings. '
+      Lte:
+        $ref: '#/definitions/Double'
+        description: 'Represents the "less than equal" condition to be applied to a single field when querying for findings. '
+      Eq:
+        $ref: '#/definitions/Double'
+        description: Represents the "equal to" condition to be applied to a single field when querying for findings.
+    description: A number filter for querying findings.
+  Partition:
+    type: string
+    enum:
+      - aws
+      - aws-cn
+      - aws-us-gov
+  Recommendation:
+    type: object
+    properties:
+      Text:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The recommendation of what to do about the issue described in a finding. '
+      Url:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'A URL to link to general remediation information for the finding type of a finding. '
+    description: Provides a recommendation on how to remediate the issue identified within a finding.
+  RelatedFinding:
+    type: object
+    required:
+      - ProductArn
+      - Id
+    properties:
+      ProductArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ARN of the solution that generated a related finding.
+      Id:
+        $ref: '#/definitions/NonEmptyString'
+        description: The solution-generated identifier for a related finding.
+    description: Related finding's details.
+  ResourceDetails:
+    type: object
+    properties:
+      AwsEc2Instance:
+        $ref: '#/definitions/AwsEc2InstanceDetails'
+        description: The details of an AWS EC2 instance.
+      AwsS3Bucket:
+        $ref: '#/definitions/AwsS3BucketDetails'
+        description: The details of an AWS S3 Bucket.
+      AwsIamAccessKey:
+        $ref: '#/definitions/AwsIamAccessKeyDetails'
+        description: AWS IAM access key details related to a finding.
+      Container:
+        $ref: '#/definitions/ContainerDetails'
+        description: Container details related to a finding.
+      Other:
+        $ref: '#/definitions/FieldMap'
+        description: The details of a resource that does not have a specific sub-field for the resource type defined.
+    description: Provides additional details about the resource.
+  Resource:
+    type: object
+    required:
+      - Type
+      - Id
+    properties:
+      Type:
+        $ref: '#/definitions/NonEmptyString'
+        description: Specifies the type of the resource for which details are provided.
+      Id:
+        $ref: '#/definitions/NonEmptyString'
+        description: The canonical identifier for the given resource type.
+      Partition:
+        $ref: '#/definitions/Partition'
+        description: The canonical AWS partition name to which the region is assigned.
+      Region:
+        $ref: '#/definitions/NonEmptyString'
+        description: The canonical AWS external region name where this resource is located.
+      Tags:
+        $ref: '#/definitions/FieldMap'
+        description: A list of AWS tags associated with a resource at the time the finding was processed.
+      Details:
+        $ref: '#/definitions/ResourceDetails'
+        description: Provides additional details about the resource.
+    description: A resource data type that describes a resource to which the finding refers.
+  Result:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/AccountId'
+        description: 'An ID of the AWS account that could not be processed. '
+      ProcessingResult:
+        $ref: '#/definitions/NonEmptyString'
+        description: The reason for why an account could not be processed.
+    description: The account details that could not be processed.
+  SortCriterion:
+    type: object
+    properties:
+      Field:
+        $ref: '#/definitions/NonEmptyString'
+        description: The finding attribute used for sorting findings.
+      SortOrder:
+        $ref: '#/definitions/SortOrder'
+        description: The order used for sorting findings.
+    description: A collection of attributes used for sorting findings.
+  SortOrder:
+    type: string
+    enum:
+      - asc
+      - desc
+  StandardsInputParameterMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/NonEmptyString'
+        value:
+          $ref: '#/definitions/NonEmptyString'
+  StandardsStatus:
+    type: string
+    enum:
+      - PENDING
+      - READY
+      - FAILED
+      - DELETING
+  StandardsSubscription:
+    type: object
+    required:
+      - StandardsSubscriptionArn
+      - StandardsArn
+      - StandardsInput
+      - StandardsStatus
+    properties:
+      StandardsSubscriptionArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ARN of a resource that represents your subscription to a supported standard.
+      StandardsArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ARN of a standard.
+      StandardsInput:
+        $ref: '#/definitions/StandardsInputParameterMap'
+        description: <p/>
+      StandardsStatus:
+        $ref: '#/definitions/StandardsStatus'
+        description: The standard's status.
+    description: A resource that represents your subscription to a supported standard.
+  StandardsSubscriptionRequest:
+    type: object
+    required:
+      - StandardsArn
+    properties:
+      StandardsArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ARN of the standard that you want to enable.
+      StandardsInput:
+        $ref: '#/definitions/StandardsInputParameterMap'
+        description: <p/>
+    description: The standard that you want to enable.
+  StringFilterComparison:
+    type: string
+    enum:
+      - EQUALS
+      - CONTAINS
+      - PREFIX
+  StringFilter:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/NonEmptyString'
+        description: The string filter value.
+      Comparison:
+        $ref: '#/definitions/StringFilterComparison'
+        description: 'Represents the condition to be applied to a string value when querying for findings. '
+    description: A string filter for querying findings.
+  ThreatIntelIndicatorType:
+    type: string
+    enum:
+      - DOMAIN
+      - EMAIL_ADDRESS
+      - HASH_MD5
+      - HASH_SHA1
+      - HASH_SHA256
+      - HASH_SHA512
+      - IPV4_ADDRESS
+      - IPV6_ADDRESS
+      - MUTEX
+      - PROCESS
+      - URL
+  ThreatIntelIndicatorCategory:
+    type: string
+    enum:
+      - BACKDOOR
+      - CARD_STEALER
+      - COMMAND_AND_CONTROL
+      - DROP_SITE
+      - EXPLOIT_SITE
+      - KEYLOGGER
+  ThreatIntelIndicator:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/ThreatIntelIndicatorType'
+        description: The type of a threat intel indicator.
+      Value:
+        $ref: '#/definitions/NonEmptyString'
+        description: The value of a threat intel indicator.
+      Category:
+        $ref: '#/definitions/ThreatIntelIndicatorCategory'
+        description: The category of a threat intel indicator.
+      LastObservedAt:
+        $ref: '#/definitions/NonEmptyString'
+        description: The date/time of the last observation of a threat intel indicator.
+      Source:
+        $ref: '#/definitions/NonEmptyString'
+        description: The source of the threat intel.
+      SourceUrl:
+        $ref: '#/definitions/NonEmptyString'
+        description: The URL for more details from the source of the threat intel.
+    description: Threat intel details related to a finding.

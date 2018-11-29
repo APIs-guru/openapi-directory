@@ -589,6 +589,14 @@ paths:
           description: DBSubnetGroupDoesNotCoverEnoughAZs
           schema:
             $ref: '#/definitions/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '495':
+          description: GlobalClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/GlobalClusterNotFoundFault'
+        '496':
+          description: InvalidGlobalClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidGlobalClusterStateFault'
       parameters:
         - name: body
           in: body
@@ -1139,6 +1147,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateGlobalCluster':
+    post:
+      operationId: CreateGlobalCluster
+      description: '<p> </p> <p> Creates an Aurora global database spread across multiple regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. </p> <p> You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateGlobalClusterResult'
+        '480':
+          description: GlobalClusterAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/GlobalClusterAlreadyExistsFault'
+        '481':
+          description: GlobalClusterQuotaExceededFault
+          schema:
+            $ref: '#/definitions/GlobalClusterQuotaExceededFault'
+        '482':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '483':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateGlobalClusterMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateOptionGroup':
     post:
       operationId: CreateOptionGroup
@@ -1553,6 +1602,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteEventSubscriptionMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteGlobalCluster':
+    post:
+      operationId: DeleteGlobalCluster
+      description: ' Deletes a global database cluster. The primary and secondary clusters must already be detached or destroyed first. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteGlobalClusterResult'
+        '480':
+          description: GlobalClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/GlobalClusterNotFoundFault'
+        '481':
+          description: InvalidGlobalClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidGlobalClusterStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteGlobalClusterMessage'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2512,6 +2594,45 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeGlobalClusters':
+    post:
+      operationId: DescribeGlobalClusters
+      description: '<p> Returns information about Aurora global database clusters. This API supports pagination. </p> <p> For more information on Amazon Aurora, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GlobalClustersMessage'
+        '480':
+          description: GlobalClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/GlobalClusterNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeGlobalClustersMessage'
+        - name: MaxRecords
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeOptionGroupOptions':
     post:
       operationId: DescribeOptionGroupOptions
@@ -3410,6 +3531,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyGlobalCluster':
+    post:
+      operationId: ModifyGlobalCluster
+      description: ' Modify a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyGlobalClusterResult'
+        '480':
+          description: GlobalClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/GlobalClusterNotFoundFault'
+        '481':
+          description: InvalidGlobalClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidGlobalClusterStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyGlobalClusterMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ModifyOptionGroup':
     post:
       operationId: ModifyOptionGroup
@@ -3569,6 +3723,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RebootDBInstanceMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RemoveFromGlobalCluster':
+    post:
+      operationId: RemoveFromGlobalCluster
+      description: ' Detaches an Aurora secondary cluster from an Aurora global database cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary cluster in a different region. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RemoveFromGlobalClusterResult'
+        '480':
+          description: GlobalClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/GlobalClusterNotFoundFault'
+        '481':
+          description: InvalidGlobalClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidGlobalClusterStateFault'
+        '482':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RemoveFromGlobalClusterMessage'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4933,13 +5124,16 @@ definitions:
         description: 'The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.'
       EngineMode:
         $ref: '#/definitions/String'
-        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, or <code>parallelquery</code>.'
+        description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, or <code>global</code>.'
       ScalingConfiguration:
         $ref: '#/definitions/ScalingConfiguration'
         description: 'For DB clusters in <code>serverless</code> DB engine mode, the scaling properties of the DB cluster.'
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
         description: 'Indicates if the DB cluster should have deletion protection enabled. The database can''t be deleted when this value is set to true. The default is false. '
+      GlobalClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: ' The global cluster ID of an Aurora cluster that becomes the primary cluster in the new global database cluster. '
       SourceRegion:
         $ref: '#/definitions/String'
         description: The ID of the region that contains the source for the read replica.
@@ -4954,6 +5148,8 @@ definitions:
   InvalidSubnet: {}
   DBClusterParameterGroupNotFoundFault: {}
   DBSubnetGroupDoesNotCoverEnoughAZs: {}
+  GlobalClusterNotFoundFault: {}
+  InvalidGlobalClusterStateFault: {}
   DBClusterEndpoint:
     type: object
     properties:
@@ -5095,7 +5291,7 @@ definitions:
         description: '<p>A list of DB security groups to associate with this DB instance.</p> <p>Default: The default DB security group for the database engine.</p>'
       VpcSecurityGroupIds:
         $ref: '#/definitions/VpcSecurityGroupIdList'
-        description: '<p>A list of EC2 VPC security groups to associate with this DB instance.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. For more information, see <a>CreateDBCluster</a>.</p> <p>Default: The default EC2 VPC security group for the DB subnet group''s VPC.</p>'
+        description: '<p>A list of Amazon EC2 VPC security groups to associate with this DB instance.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. For more information, see <a>CreateDBCluster</a>.</p> <p>Default: The default EC2 VPC security group for the DB subnet group''s VPC.</p>'
       AvailabilityZone:
         $ref: '#/definitions/String'
         description: '<p> The EC2 Availability Zone that the DB instance is created in. For information on AWS Regions and Availability Zones, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html">Regions and Availability Zones</a>. </p> <p>Default: A random, system-chosen Availability Zone in the endpoint''s AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The AvailabilityZone parameter can''t be specified if the MultiAZ parameter is set to <code>true</code>. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p>'
@@ -5119,7 +5315,7 @@ definitions:
         description: '<p>The port number on which the database accepts connections.</p> <p> <b>MySQL</b> </p> <p> Default: <code>3306</code> </p> <p> Valid Values: <code>1150-65535</code> </p> <p>Type: Integer</p> <p> <b>MariaDB</b> </p> <p> Default: <code>3306</code> </p> <p> Valid Values: <code>1150-65535</code> </p> <p>Type: Integer</p> <p> <b>PostgreSQL</b> </p> <p> Default: <code>5432</code> </p> <p> Valid Values: <code>1150-65535</code> </p> <p>Type: Integer</p> <p> <b>Oracle</b> </p> <p> Default: <code>1521</code> </p> <p> Valid Values: <code>1150-65535</code> </p> <p> <b>SQL Server</b> </p> <p> Default: <code>1433</code> </p> <p> Valid Values: <code>1150-65535</code> except for <code>1434</code>, <code>3389</code>, <code>47001</code>, <code>49152</code>, and <code>49152</code> through <code>49156</code>. </p> <p> <b>Amazon Aurora</b> </p> <p> Default: <code>3306</code> </p> <p> Valid Values: <code>1150-65535</code> </p> <p>Type: Integer</p>'
       MultiAZ:
         $ref: '#/definitions/BooleanOptional'
-        description: Specifies if the DB instance is a Multi-AZ deployment. You can't set the AvailabilityZone parameter if the MultiAZ parameter is set to true.
+        description: A value that specifies whether the DB instance is a Multi-AZ deployment. You can't set the AvailabilityZone parameter if the MultiAZ parameter is set to true.
       EngineVersion:
         $ref: '#/definitions/String'
         description: '<p>The version number of the database engine to use.</p> <p>For a list of valid engine versions, call <a>DescribeDBEngineVersions</a>.</p> <p>The following are the database engines and links to information about the major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS Region.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The version number of the database engine to be used by the DB instance is managed by the DB cluster. For more information, see <a>CreateDBCluster</a>.</p> <p> <b>MariaDB</b> </p> <p>See <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt">MariaDB on Amazon RDS Versions</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>Microsoft SQL Server</b> </p> <p>See <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport">Version and Feature Support on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>MySQL</b> </p> <p>See <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt">MySQL on Amazon RDS Versions</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>Oracle</b> </p> <p>See <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html">Oracle Database Engine Release Notes</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>PostgreSQL</b> </p> <p>See <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions">Supported PostgreSQL Database Versions</a> in the <i>Amazon RDS User Guide.</i> </p>'
@@ -5440,6 +5636,37 @@ definitions:
   SNSNoAuthorizationFault: {}
   SNSTopicArnNotFoundFault: {}
   SubscriptionCategoryNotFoundFault: {}
+  CreateGlobalClusterResult:
+    type: object
+    properties:
+      GlobalCluster:
+        $ref: '#/definitions/GlobalCluster'
+  CreateGlobalClusterMessage:
+    type: object
+    properties:
+      GlobalClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The cluster identifier of the new global database cluster.
+      SourceDBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: ' The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. '
+      Engine:
+        $ref: '#/definitions/String'
+        description: Provides the name of the database engine to be used for this DB cluster.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: The engine version of the Aurora global database.
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: ' The deletion protection setting for the new global database. The global database can''t be deleted when this value is set to true. '
+      DatabaseName:
+        $ref: '#/definitions/String'
+        description: ' The name for your database of up to 64 alpha-numeric characters. If you do not provide a name, Amazon Aurora will not create a database in the global database cluster you are creating. '
+      StorageEncrypted:
+        $ref: '#/definitions/BooleanOptional'
+        description: ' The storage encryption setting for the new global database cluster. '
+  GlobalClusterAlreadyExistsFault: {}
+  GlobalClusterQuotaExceededFault: {}
   CreateOptionGroupResult:
     type: object
     properties:
@@ -5619,6 +5846,19 @@ definitions:
         description: The name of the RDS event notification subscription you want to delete.
     description: <p/>
   InvalidEventSubscriptionStateFault: {}
+  DeleteGlobalClusterResult:
+    type: object
+    properties:
+      GlobalCluster:
+        $ref: '#/definitions/GlobalCluster'
+  DeleteGlobalClusterMessage:
+    type: object
+    required:
+      - GlobalClusterIdentifier
+    properties:
+      GlobalClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: ' The cluster identifier of the global database cluster being deleted. '
   DeleteOptionGroupMessage:
     type: object
     required:
@@ -6286,6 +6526,30 @@ definitions:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous DescribeEvents request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
+  GlobalClustersMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: ' An optional pagination token provided by a previous <code>DescribeGlobalClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+      GlobalClusters:
+        $ref: '#/definitions/GlobalClusterList'
+        description: ' The list of global clusters returned by this request. '
+  DescribeGlobalClustersMessage:
+    type: object
+    properties:
+      GlobalClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p> The user-supplied DB cluster identifier. If this parameter is specified, information from only the specific DB cluster is returned. This parameter isn''t case-sensitive. </p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match an existing DBClusterIdentifier.</p> </li> </ul>'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>A filter that specifies one or more global DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> </ul>'
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: ' An optional pagination token provided by a previous <a>DescribeGlobalClusters</a> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
   OptionGroupOptionsMessage:
     type: object
     properties:
@@ -6581,6 +6845,8 @@ definitions:
         $ref: '#/definitions/DBCluster'
   FailoverDBClusterMessage:
     type: object
+    required:
+      - DBClusterIdentifier
     properties:
       DBClusterIdentifier:
         $ref: '#/definitions/String'
@@ -6705,6 +6971,9 @@ definitions:
       DeletionProtection:
         $ref: '#/definitions/BooleanOptional'
         description: 'Indicates if the DB cluster has deletion protection enabled. The database can''t be deleted when this value is set to true. '
+      EnableHttpEndpoint:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<note> <p>HTTP endpoint functionality is in beta for Aurora Serverless and is subject to change.</p> </note> <p>A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled.</p> <p>When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless DB cluster. You can also query your database from inside the RDS console with the query editor.</p> <p>For more information about Aurora Serverless, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>'
     description: <p/>
   ModifyDBClusterEndpointMessage:
     type: object
@@ -7011,6 +7280,23 @@ definitions:
         $ref: '#/definitions/BooleanOptional'
         description: ' A Boolean value; set to <b>true</b> to activate the subscription. '
     description: <p/>
+  ModifyGlobalClusterResult:
+    type: object
+    properties:
+      GlobalCluster:
+        $ref: '#/definitions/GlobalCluster'
+  ModifyGlobalClusterMessage:
+    type: object
+    properties:
+      GlobalClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p> The DB cluster identifier for the global cluster being modified. This parameter is not case-sensitive. </p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing global database cluster.</p> </li> </ul>'
+      NewGlobalClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p> The new cluster identifier for the global database cluster when modifying a global database cluster. This value is stored as a lowercase string. </p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens</p> </li> <li> <p>The first character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-cluster2</code> </p>'
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: ' Indicates if the global database cluster has deletion protection enabled. The global database cluster can''t be deleted when this value is set to true. '
   ModifyOptionGroupResult:
     type: object
     properties:
@@ -7109,6 +7395,20 @@ definitions:
         $ref: '#/definitions/BooleanOptional'
         description: '<p> When <code>true</code>, the reboot is conducted through a MultiAZ failover. </p> <p>Constraint: You can''t specify <code>true</code> if the instance is not configured for MultiAZ.</p>'
     description: <p/>
+  RemoveFromGlobalClusterResult:
+    type: object
+    properties:
+      GlobalCluster:
+        $ref: '#/definitions/GlobalCluster'
+  RemoveFromGlobalClusterMessage:
+    type: object
+    properties:
+      GlobalClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: ' The cluster identifier to detach from the Aurora global database cluster. '
+      DbClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: ' The Amazon Resource Name (ARN) identifying the cluster that was detached from the Aurora global database cluster. '
   RemoveRoleFromDBClusterMessage:
     type: object
     required:
@@ -8406,6 +8706,9 @@ definitions:
       DeletionProtection:
         $ref: '#/definitions/Boolean'
         description: 'Indicates if the DB cluster has deletion protection enabled. The database can''t be deleted when this value is set to true. '
+      HttpEndpointEnabled:
+        $ref: '#/definitions/Boolean'
+        description: '<note> <p>HTTP endpoint functionality is in beta for Aurora Serverless and is subject to change.</p> </note> <p>Value that is <code>true</code> if the HTTP endpoint for an Aurora Serverless DB cluster is enabled and <code>false</code> otherwise.</p> <p>When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless DB cluster. You can also query your database from inside the RDS console with the query editor.</p> <p>For more information about Aurora Serverless, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>'
     description: '<p>Contains the details of an Amazon Aurora DB cluster. </p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a>, <a>StopDBCluster</a>, and <a>StartDBCluster</a> actions. </p>'
   DBSecurityGroupNameList:
     type: array
@@ -8621,6 +8924,40 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  GlobalCluster:
+    type: object
+    properties:
+      GlobalClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: ' Contains a user-supplied global database cluster identifier. This identifier is the unique key that identifies a global database cluster. '
+      GlobalClusterResourceId:
+        $ref: '#/definitions/String'
+        description: ' The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed. '
+      GlobalClusterArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the global database cluster.
+      Status:
+        $ref: '#/definitions/String'
+        description: Specifies the current state of this global database cluster.
+      Engine:
+        $ref: '#/definitions/String'
+        description: ' The Aurora database engine used by the global database cluster. '
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: Indicates the database engine version.
+      DatabaseName:
+        $ref: '#/definitions/String'
+        description: ' The default database name within the new global database cluster. '
+      StorageEncrypted:
+        $ref: '#/definitions/BooleanOptional'
+        description: ' The storage encryption setting for the global database cluster. '
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: ' The deletion protection setting for the new global database cluster. '
+      GlobalClusterMembers:
+        $ref: '#/definitions/GlobalClusterMemberList'
+        description: ' The list of cluster IDs for secondary clusters within the global database cluster. Currently limited to 1 item. '
+    description: A data type representing an Aurora global database.
   DBClusterOptionGroupMemberships:
     type: array
     items:
@@ -9243,6 +9580,31 @@ definitions:
         $ref: '#/definitions/FilterValueList'
         description: One or more filter values. Filter values are case-sensitive.
     description: '<p>A filter name and value pair that is used to return a more specific list of results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as IDs. The filters supported by a describe operation are documented with the describe operation.</p> <note> <p>Currently, wildcards are not supported in filters.</p> </note> <p>The following actions can be filtered:</p> <ul> <li> <p> <a>DescribeDBClusterBacktracks</a> </p> </li> <li> <p> <a>DescribeDBClusterEndpoints</a> </p> </li> <li> <p> <a>DescribeDBClusters</a> </p> </li> <li> <p> <a>DescribeDBInstances</a> </p> </li> <li> <p> <a>DescribePendingMaintenanceActions</a> </p> </li> </ul>'
+  GlobalClusterMemberList:
+    type: array
+    items:
+      $ref: '#/definitions/GlobalClusterMember'
+  GlobalClusterList:
+    type: array
+    items:
+      $ref: '#/definitions/GlobalCluster'
+  ReadersArnList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  GlobalClusterMember:
+    type: object
+    properties:
+      DBClusterArn:
+        $ref: '#/definitions/String'
+        description: ' The Amazon Resource Name (ARN) for each Aurora cluster. '
+      Readers:
+        $ref: '#/definitions/ReadersArnList'
+        description: ' The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Aurora global database. '
+      IsWriter:
+        $ref: '#/definitions/Boolean'
+        description: ' Specifies whether the Aurora cluster is the primary cluster (that is, has read-write capability) for the Aurora global database with which it is associated. '
+    description: ' A data structure with information about any primary and secondary clusters associated with an Aurora global database. '
   IPRange:
     type: object
     properties:

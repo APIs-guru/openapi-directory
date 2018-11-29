@@ -155,7 +155,7 @@ paths:
   '/#AttachDisk':
     post:
       operationId: AttachDisk
-      description: Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.
+      description: '<p>Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.</p> <p>The <code>attach disk</code> operation supports tag-based access control via resource tags applied to the resource identified by diskName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -208,7 +208,7 @@ paths:
   '/#AttachInstancesToLoadBalancer':
     post:
       operationId: AttachInstancesToLoadBalancer
-      description: '<p>Attaches one or more Lightsail instances to a load balancer.</p> <p>After some time, the instances are attached to the load balancer and the health check status is available.</p>'
+      description: '<p>Attaches one or more Lightsail instances to a load balancer.</p> <p>After some time, the instances are attached to the load balancer and the health check status is available.</p> <p>The <code>attach instances to load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -261,7 +261,7 @@ paths:
   '/#AttachLoadBalancerTlsCertificate':
     post:
       operationId: AttachLoadBalancerTlsCertificate
-      description: '<p>Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the <code>AttachLoadBalancerTlsCertificate</code> operation with the non-attached certificate, and it will replace the existing one and become the attached certificate.</p>'
+      description: '<p>Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the <code>AttachLoadBalancerTlsCertificate</code> operation with the non-attached certificate, and it will replace the existing one and become the attached certificate.</p> <p>The <code>attach load balancer tls certificate</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -367,7 +367,7 @@ paths:
   '/#CloseInstancePublicPorts':
     post:
       operationId: CloseInstancePublicPorts
-      description: Closes the public ports on a specific Amazon Lightsail instance.
+      description: '<p>Closes the public ports on a specific Amazon Lightsail instance.</p> <p>The <code>close instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -417,10 +417,116 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CopySnapshot':
+    post:
+      operationId: CopySnapshot
+      description: Copies an instance or disk snapshot from one AWS Region to another in Amazon Lightsail.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CopySnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CopySnapshotRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateCloudFormationStack':
+    post:
+      operationId: CreateCloudFormationStack
+      description: '<p>Creates an AWS CloudFormation stack, which creates a new Amazon EC2 instance from an exported Amazon Lightsail snapshot. This operation results in a CloudFormation stack record that can be used to track the AWS CloudFormation stack created. Use the <code>get cloud formation stack records</code> operation to get a list of the CloudFormation stacks created.</p> <important> <p>Wait until after your new Amazon EC2 instance is created before running the <code>create cloud formation stack</code> operation again with the same export snapshot record.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateCloudFormationStackResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCloudFormationStackRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateDisk':
     post:
       operationId: CreateDisk
-      description: 'Creates a block storage disk that can be attached to a Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail">Regions and Availability Zones in Lightsail</a>.'
+      description: '<p>Creates a block storage disk that can be attached to a Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail">Regions and Availability Zones in Lightsail</a>.</p> <p>The <code>create disk</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -473,7 +579,7 @@ paths:
   '/#CreateDiskFromSnapshot':
     post:
       operationId: CreateDiskFromSnapshot
-      description: 'Creates a block storage disk from a disk snapshot that can be attached to a Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail">Regions and Availability Zones in Lightsail</a>.'
+      description: '<p>Creates a block storage disk from a disk snapshot that can be attached to a Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail">Regions and Availability Zones in Lightsail</a>.</p> <p>The <code>create disk from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by diskSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -526,7 +632,7 @@ paths:
   '/#CreateDiskSnapshot':
     post:
       operationId: CreateDiskSnapshot
-      description: '<p>Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance.</p> <p>You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending.</p>'
+      description: '<p>Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance.</p> <p>You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending.</p> <p>The <code>create disk snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -579,7 +685,7 @@ paths:
   '/#CreateDomain':
     post:
       operationId: CreateDomain
-      description: 'Creates a domain resource for the specified domain (e.g., example.com).'
+      description: '<p>Creates a domain resource for the specified domain (e.g., example.com).</p> <p>The <code>create domain</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -632,7 +738,7 @@ paths:
   '/#CreateDomainEntry':
     post:
       operationId: CreateDomainEntry
-      description: 'Creates one of the following entry records associated with the domain: A record, CNAME record, TXT record, or MX record.'
+      description: '<p>Creates one of the following entry records associated with the domain: A record, CNAME record, TXT record, or MX record.</p> <p>The <code>create domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -685,7 +791,7 @@ paths:
   '/#CreateInstanceSnapshot':
     post:
       operationId: CreateInstanceSnapshot
-      description: 'Creates a snapshot of a specific virtual private server, or <i>instance</i>. You can use a snapshot to create a new instance that is based on that snapshot.'
+      description: '<p>Creates a snapshot of a specific virtual private server, or <i>instance</i>. You can use a snapshot to create a new instance that is based on that snapshot.</p> <p>The <code>create instance snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -738,7 +844,7 @@ paths:
   '/#CreateInstances':
     post:
       operationId: CreateInstances
-      description: 'Creates one or more Amazon Lightsail virtual private servers, or <i>instances</i>. Create instances using active blueprints. Inactive blueprints are listed to support customers with existing instances but are not necessarily available for launch of new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. Use the get blueprints operation to return a list of available blueprints.'
+      description: '<p>Creates one or more Amazon Lightsail virtual private servers, or <i>instances</i>. Create instances using active blueprints. Inactive blueprints are listed to support customers with existing instances but are not necessarily available for launch of new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases. Use the get blueprints operation to return a list of available blueprints.</p> <p>The <code>create instances</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -791,7 +897,7 @@ paths:
   '/#CreateInstancesFromSnapshot':
     post:
       operationId: CreateInstancesFromSnapshot
-      description: Uses a specific snapshot as a blueprint for creating one or more new instances that are based on that identical configuration.
+      description: '<p>Uses a specific snapshot as a blueprint for creating one or more new instances that are based on that identical configuration.</p> <p>The <code>create instances from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by instanceSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -844,7 +950,7 @@ paths:
   '/#CreateKeyPair':
     post:
       operationId: CreateKeyPair
-      description: Creates an SSH key pair.
+      description: '<p>Creates an SSH key pair.</p> <p>The <code>create key pair</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -897,7 +1003,7 @@ paths:
   '/#CreateLoadBalancer':
     post:
       operationId: CreateLoadBalancer
-      description: '<p>Creates a Lightsail load balancer. To learn more about deciding whether to load balance your application, see <a href="https://lightsail.aws.amazon.com/ls/docs/how-to/article/configure-lightsail-instances-for-load-balancing">Configure your Lightsail instances for load balancing</a>. You can create up to 5 load balancers per AWS Region in your account.</p> <p>When you create a load balancer, you can specify a unique name and port settings. To change additional load balancer settings, use the <code>UpdateLoadBalancerAttribute</code> operation.</p>'
+      description: '<p>Creates a Lightsail load balancer. To learn more about deciding whether to load balance your application, see <a href="https://lightsail.aws.amazon.com/ls/docs/how-to/article/configure-lightsail-instances-for-load-balancing">Configure your Lightsail instances for load balancing</a>. You can create up to 5 load balancers per AWS Region in your account.</p> <p>When you create a load balancer, you can specify a unique name and port settings. To change additional load balancer settings, use the <code>UpdateLoadBalancerAttribute</code> operation.</p> <p>The <code>create load balancer</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -950,7 +1056,7 @@ paths:
   '/#CreateLoadBalancerTlsCertificate':
     post:
       operationId: CreateLoadBalancerTlsCertificate
-      description: '<p>Creates a Lightsail load balancer TLS certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>'
+      description: '<p>Creates a Lightsail load balancer TLS certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>The <code>create load balancer tls certificate</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1003,7 +1109,7 @@ paths:
   '/#CreateRelationalDatabase':
     post:
       operationId: CreateRelationalDatabase
-      description: Creates a new database in Amazon Lightsail.
+      description: '<p>Creates a new database in Amazon Lightsail.</p> <p>The <code>create relational database</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1056,7 +1162,7 @@ paths:
   '/#CreateRelationalDatabaseFromSnapshot':
     post:
       operationId: CreateRelationalDatabaseFromSnapshot
-      description: '<p>Creates a new database from an existing database snapshot in Amazon Lightsail.</p> <p>You can create a new database from a snapshot in if something goes wrong with your original database, or to change it to a different plan, such as a high availability or standard plan.</p>'
+      description: '<p>Creates a new database from an existing database snapshot in Amazon Lightsail.</p> <p>You can create a new database from a snapshot in if something goes wrong with your original database, or to change it to a different plan, such as a high availability or standard plan.</p> <p>The <code>create relational database from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by relationalDatabaseSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1109,7 +1215,7 @@ paths:
   '/#CreateRelationalDatabaseSnapshot':
     post:
       operationId: CreateRelationalDatabaseSnapshot
-      description: 'Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups, to make copies of a database, and to save data before deleting a database.'
+      description: '<p>Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups, to make copies of a database, and to save data before deleting a database.</p> <p>The <code>create relational database snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1162,7 +1268,7 @@ paths:
   '/#DeleteDisk':
     post:
       operationId: DeleteDisk
-      description: <p>Deletes the specified block storage disk. The disk must be in the <code>available</code> state (not attached to a Lightsail instance).</p> <note> <p>The disk may remain in the <code>deleting</code> state for several minutes.</p> </note>
+      description: '<p>Deletes the specified block storage disk. The disk must be in the <code>available</code> state (not attached to a Lightsail instance).</p> <note> <p>The disk may remain in the <code>deleting</code> state for several minutes.</p> </note> <p>The <code>delete disk</code> operation supports tag-based access control via resource tags applied to the resource identified by diskName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1215,7 +1321,7 @@ paths:
   '/#DeleteDiskSnapshot':
     post:
       operationId: DeleteDiskSnapshot
-      description: '<p>Deletes the specified disk snapshot.</p> <p>When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.</p>'
+      description: '<p>Deletes the specified disk snapshot.</p> <p>When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.</p> <p>The <code>delete disk snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by diskSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1268,7 +1374,7 @@ paths:
   '/#DeleteDomain':
     post:
       operationId: DeleteDomain
-      description: Deletes the specified domain recordset and all of its domain records.
+      description: '<p>Deletes the specified domain recordset and all of its domain records.</p> <p>The <code>delete domain</code> operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1321,7 +1427,7 @@ paths:
   '/#DeleteDomainEntry':
     post:
       operationId: DeleteDomainEntry
-      description: Deletes a specific domain entry.
+      description: '<p>Deletes a specific domain entry.</p> <p>The <code>delete domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1374,7 +1480,7 @@ paths:
   '/#DeleteInstance':
     post:
       operationId: DeleteInstance
-      description: 'Deletes a specific Amazon Lightsail virtual private server, or <i>instance</i>.'
+      description: '<p>Deletes a specific Amazon Lightsail virtual private server, or <i>instance</i>.</p> <p>The <code>delete instance</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1427,7 +1533,7 @@ paths:
   '/#DeleteInstanceSnapshot':
     post:
       operationId: DeleteInstanceSnapshot
-      description: Deletes a specific snapshot of a virtual private server (or <i>instance</i>).
+      description: '<p>Deletes a specific snapshot of a virtual private server (or <i>instance</i>).</p> <p>The <code>delete instance snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1480,7 +1586,7 @@ paths:
   '/#DeleteKeyPair':
     post:
       operationId: DeleteKeyPair
-      description: Deletes a specific SSH key pair.
+      description: '<p>Deletes a specific SSH key pair.</p> <p>The <code>delete key pair</code> operation supports tag-based access control via resource tags applied to the resource identified by keyPairName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1533,7 +1639,7 @@ paths:
   '/#DeleteLoadBalancer':
     post:
       operationId: DeleteLoadBalancer
-      description: 'Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again.'
+      description: '<p>Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again.</p> <p>The <code>delete load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1586,7 +1692,7 @@ paths:
   '/#DeleteLoadBalancerTlsCertificate':
     post:
       operationId: DeleteLoadBalancerTlsCertificate
-      description: Deletes an SSL/TLS certificate associated with a Lightsail load balancer.
+      description: '<p>Deletes an SSL/TLS certificate associated with a Lightsail load balancer.</p> <p>The <code>delete load balancer tls certificate</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1639,7 +1745,7 @@ paths:
   '/#DeleteRelationalDatabase':
     post:
       operationId: DeleteRelationalDatabase
-      description: Deletes a database in Amazon Lightsail.
+      description: '<p>Deletes a database in Amazon Lightsail.</p> <p>The <code>delete relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1692,7 +1798,7 @@ paths:
   '/#DeleteRelationalDatabaseSnapshot':
     post:
       operationId: DeleteRelationalDatabaseSnapshot
-      description: Deletes a database snapshot in Amazon Lightsail.
+      description: '<p>Deletes a database snapshot in Amazon Lightsail.</p> <p>The <code>delete relational database snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1745,7 +1851,7 @@ paths:
   '/#DetachDisk':
     post:
       operationId: DetachDisk
-      description: Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.
+      description: '<p>Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.</p> <p>The <code>detach disk</code> operation supports tag-based access control via resource tags applied to the resource identified by diskName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1798,7 +1904,7 @@ paths:
   '/#DetachInstancesFromLoadBalancer':
     post:
       operationId: DetachInstancesFromLoadBalancer
-      description: <p>Detaches the specified instances from a Lightsail load balancer.</p> <p>This operation waits until the instances are no longer needed before they are detached from the load balancer.</p>
+      description: '<p>Detaches the specified instances from a Lightsail load balancer.</p> <p>This operation waits until the instances are no longer needed before they are detached from the load balancer.</p> <p>The <code>detach instances from load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1944,6 +2050,59 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DownloadDefaultKeyPairRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ExportSnapshot':
+    post:
+      operationId: ExportSnapshot
+      description: '<p>Exports a Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the <code>create cloud formation stack</code> operation to create new Amazon EC2 instances.</p> <p>Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.</p> <p/> <p>The <code>export snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by sourceSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p> <note> <p>Use the <code>get instance snapshots</code> or <code>get disk snapshots</code> operations to get a list of snapshots that you can export to Amazon EC2.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExportSnapshotResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ExportSnapshotRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2103,6 +2262,59 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetBundlesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetCloudFormationStackRecords':
+    post:
+      operationId: GetCloudFormationStackRecords
+      description: <p>Returns the CloudFormation stack record created as a result of the <code>create cloud formation stack</code> operation.</p> <p>An AWS CloudFormation stack is used to create a new Amazon EC2 instance from an exported Lightsail snapshot.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCloudFormationStackRecordsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCloudFormationStackRecordsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2431,6 +2643,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetExportSnapshotRecords':
+    post:
+      operationId: GetExportSnapshotRecords
+      description: <p>Returns the export snapshot record created as a result of the <code>export snapshot</code> operation.</p> <p>An export snapshot record can be used to create a new Amazon EC2 instance and its related resources with the <code>create cloud formation stack</code> operation.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetExportSnapshotRecordsResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetExportSnapshotRecordsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetInstance':
     post:
       operationId: GetInstance
@@ -2487,7 +2752,7 @@ paths:
   '/#GetInstanceAccessDetails':
     post:
       operationId: GetInstanceAccessDetails
-      description: 'Returns temporary SSH keys you can use to connect to a specific virtual private server, or <i>instance</i>.'
+      description: '<p>Returns temporary SSH keys you can use to connect to a specific virtual private server, or <i>instance</i>.</p> <p>The <code>get instance access details</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -3706,7 +3971,7 @@ paths:
   '/#GetRelationalDatabaseMasterUserPassword':
     post:
       operationId: GetRelationalDatabaseMasterUserPassword
-      description: 'Returns the current, previous, or pending versions of the master user password for a Lightsail database.'
+      description: '<p>Returns the current, previous, or pending versions of the master user password for a Lightsail database.</p> <p>The <code>asdf</code> operation GetRelationalDatabaseMasterUserPassword supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName.</p>'
       responses:
         '200':
           description: Success
@@ -4236,7 +4501,7 @@ paths:
   '/#OpenInstancePublicPorts':
     post:
       operationId: OpenInstancePublicPorts
-      description: Adds public ports to an Amazon Lightsail instance.
+      description: '<p>Adds public ports to an Amazon Lightsail instance.</p> <p>The <code>open instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4342,7 +4607,7 @@ paths:
   '/#PutInstancePublicPorts':
     post:
       operationId: PutInstancePublicPorts
-      description: 'Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request.'
+      description: '<p>Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request.</p> <p>The <code>put instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4395,7 +4660,7 @@ paths:
   '/#RebootInstance':
     post:
       operationId: RebootInstance
-      description: 'Restarts a specific instance. When your Amazon Lightsail instance is finished rebooting, Lightsail assigns a new public IP address. To use the same IP address after restarting, create a static IP address and attach it to the instance.'
+      description: '<p>Restarts a specific instance. When your Amazon Lightsail instance is finished rebooting, Lightsail assigns a new public IP address. To use the same IP address after restarting, create a static IP address and attach it to the instance.</p> <p>The <code>reboot instance</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4448,7 +4713,7 @@ paths:
   '/#RebootRelationalDatabase':
     post:
       operationId: RebootRelationalDatabase
-      description: Restarts a specific database in Amazon Lightsail.
+      description: '<p>Restarts a specific database in Amazon Lightsail.</p> <p>The <code>reboot relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4554,7 +4819,7 @@ paths:
   '/#StartInstance':
     post:
       operationId: StartInstance
-      description: 'Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.'
+      description: '<p>Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.</p> <p>The <code>start instance</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4607,7 +4872,7 @@ paths:
   '/#StartRelationalDatabase':
     post:
       operationId: StartRelationalDatabase
-      description: 'Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the <code>reboot relational database</code> operation.'
+      description: '<p>Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the <code>reboot relational database</code> operation.</p> <p>The <code>start relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4660,7 +4925,7 @@ paths:
   '/#StopInstance':
     post:
       operationId: StopInstance
-      description: Stops a specific Amazon Lightsail instance that is currently running.
+      description: '<p>Stops a specific Amazon Lightsail instance that is currently running.</p> <p>The <code>stop instance</code> operation supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4713,7 +4978,7 @@ paths:
   '/#StopRelationalDatabase':
     post:
       operationId: StopRelationalDatabase
-      description: Stops a specific database that is currently running in Amazon Lightsail.
+      description: '<p>Stops a specific database that is currently running in Amazon Lightsail.</p> <p>The <code>stop relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4753,6 +5018,59 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopRelationalDatabaseRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#TagResource':
+    post:
+      operationId: TagResource
+      description: '<p>Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.</p> <p>The <code>tag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by resourceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4816,10 +5134,63 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UntagResource':
+    post:
+      operationId: UntagResource
+      description: '<p>Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource.</p> <p>The <code>untag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by resourceName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResult'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '482':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '483':
+          description: OperationFailureException
+          schema:
+            $ref: '#/definitions/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          schema:
+            $ref: '#/definitions/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          schema:
+            $ref: '#/definitions/UnauthenticatedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateDomainEntry':
     post:
       operationId: UpdateDomainEntry
-      description: Updates a domain recordset after it is created.
+      description: '<p>Updates a domain recordset after it is created.</p> <p>The <code>update domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4872,7 +5243,7 @@ paths:
   '/#UpdateLoadBalancerAttribute':
     post:
       operationId: UpdateLoadBalancerAttribute
-      description: Updates the specified attribute for a load balancer. You can only update one attribute at a time.
+      description: '<p>Updates the specified attribute for a load balancer. You can only update one attribute at a time.</p> <p>The <code>update load balancer attribute</code> operation supports tag-based access control via resource tags applied to the resource identified by loadBalancerName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4925,7 +5296,7 @@ paths:
   '/#UpdateRelationalDatabase':
     post:
       operationId: UpdateRelationalDatabase
-      description: '<p>Allows the update of one or more attributes of a database in Amazon Lightsail.</p> <p>Updates are applied immediately, or in cases where the updates could result in an outage, are applied during the database''s predefined maintenance window.</p>'
+      description: '<p>Allows the update of one or more attributes of a database in Amazon Lightsail.</p> <p>Updates are applied immediately, or in cases where the updates could result in an outage, are applied during the database''s predefined maintenance window.</p> <p>The <code>update relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4978,7 +5349,7 @@ paths:
   '/#UpdateRelationalDatabaseParameters':
     post:
       operationId: UpdateRelationalDatabaseParameters
-      description: '<p>Allows the update of one or more parameters of a database in Amazon Lightsail.</p> <p>Parameter updates don''t cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which paramater updates are applied: <code>dynamic</code> or <code>pending-reboot</code>. Parameters marked with a <code>dynamic</code> apply type are applied immediately. Parameters marked with a <code>pending-reboot</code> apply type are applied only after the database is rebooted using the <code>reboot relational database</code> operation.</p>'
+      description: '<p>Allows the update of one or more parameters of a database in Amazon Lightsail.</p> <p>Parameter updates don''t cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which paramater updates are applied: <code>dynamic</code> or <code>pending-reboot</code>. Parameters marked with a <code>dynamic</code> apply type are applied immediately. Parameters marked with a <code>pending-reboot</code> apply type are applied only after the database is rebooted using the <code>reboot relational database</code> operation.</p> <p>The <code>update relational database parameters</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -5144,6 +5515,42 @@ definitions:
       instanceName:
         $ref: '#/definitions/ResourceName'
         description: The name of the instance on which you're attempting to close the public ports.
+  CopySnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: A list of objects describing the API operation.
+  CopySnapshotRequest:
+    type: object
+    required:
+      - sourceSnapshotName
+      - targetSnapshotName
+      - sourceRegion
+    properties:
+      sourceSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the source instance or disk snapshot to be copied.
+      targetSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the new instance or disk snapshot to be created as a copy.
+      sourceRegion:
+        $ref: '#/definitions/RegionName'
+        description: The AWS Region where the source snapshot is located.
+  CreateCloudFormationStackResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: A list of objects describing the API operation.
+  CreateCloudFormationStackRequest:
+    type: object
+    required:
+      - instances
+    properties:
+      instances:
+        $ref: '#/definitions/InstanceEntryList'
+        description: An array of parameters that will be used to create the new Amazon EC2 instance. You can only pass one instance entry at a time in this array. You will get an invalid parameter error if you pass more than one instance entry in this array.
   CreateDiskResult:
     type: object
     properties:
@@ -5166,6 +5573,9 @@ definitions:
       sizeInGb:
         $ref: '#/definitions/integer'
         description: 'The size of the disk in GB (e.g., <code>32</code>).'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   CreateDiskFromSnapshotResult:
     type: object
     properties:
@@ -5192,6 +5602,9 @@ definitions:
       sizeInGb:
         $ref: '#/definitions/integer'
         description: 'The size of the disk in GB (e.g., <code>32</code>).'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   CreateDiskSnapshotResult:
     type: object
     properties:
@@ -5210,6 +5623,9 @@ definitions:
       diskSnapshotName:
         $ref: '#/definitions/ResourceName'
         description: 'The name of the destination disk snapshot (e.g., <code>my-disk-snapshot</code>) based on the source disk.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   CreateDomainResult:
     type: object
     properties:
@@ -5224,6 +5640,9 @@ definitions:
       domainName:
         $ref: '#/definitions/DomainName'
         description: '<p>The domain name to manage (e.g., <code>example.com</code>).</p> <note> <p>You cannot register a new domain name using Lightsail. You must register a domain name using Amazon Route 53 or another domain name registrar. If you have already registered your domain, you can enter its name in this parameter to manage the DNS records for that domain.</p> </note>'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   CreateDomainEntryResult:
     type: object
     properties:
@@ -5260,6 +5679,9 @@ definitions:
       instanceName:
         $ref: '#/definitions/ResourceName'
         description: The Lightsail instance on which to base your snapshot.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   CreateInstancesResult:
     type: object
     properties:
@@ -5295,6 +5717,9 @@ definitions:
       keyPairName:
         $ref: '#/definitions/ResourceName'
         description: The name of your key pair.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   CreateInstancesFromSnapshotResult:
     type: object
     properties:
@@ -5330,6 +5755,9 @@ definitions:
       keyPairName:
         $ref: '#/definitions/ResourceName'
         description: The name for your key pair.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   CreateKeyPairResult:
     type: object
     properties:
@@ -5353,6 +5781,9 @@ definitions:
       keyPairName:
         $ref: '#/definitions/ResourceName'
         description: The name for your new key pair.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   CreateLoadBalancerResult:
     type: object
     properties:
@@ -5383,6 +5814,9 @@ definitions:
       certificateAlternativeNames:
         $ref: '#/definitions/DomainNameList'
         description: 'The optional alternative domains and subdomains to use with your SSL/TLS certificate (e.g., <code>www.example.com</code>, <code>example.com</code>, <code>m.example.com</code>, <code>blog.example.com</code>).'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   CreateLoadBalancerTlsCertificateResult:
     type: object
     properties:
@@ -5408,6 +5842,9 @@ definitions:
       certificateAlternativeNames:
         $ref: '#/definitions/DomainNameList'
         description: 'An array of strings listing alternative domains and subdomains for your SSL/TLS certificate. Lightsail will de-dupe the names for you. You can have a maximum of 9 alternative names (in addition to the 1 primary domain). We do not support wildcards (e.g., <code>*.example.com</code>).'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   CreateRelationalDatabaseResult:
     type: object
     properties:
@@ -5453,6 +5890,9 @@ definitions:
       publiclyAccessible:
         $ref: '#/definitions/boolean'
         description: Specifies the accessibility options for your new database. A value of <code>true</code> specifies a database that is available to resources outside of your Lightsail account. A value of <code>false</code> specifies a database that is available only to your Lightsail resources in the same region as your database.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   CreateRelationalDatabaseFromSnapshotResult:
     type: object
     properties:
@@ -5488,6 +5928,9 @@ definitions:
       useLatestRestorableTime:
         $ref: '#/definitions/boolean'
         description: '<p>Specifies whether your database is restored from the latest backup time. A value of <code>true</code> restores from the latest backup time. </p> <p>Default: <code>false</code> </p> <p>Constraints: Cannot be specified if the <code>restore time</code> parameter is provided.</p>'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   CreateRelationalDatabaseSnapshotResult:
     type: object
     properties:
@@ -5506,6 +5949,9 @@ definitions:
       relationalDatabaseSnapshotName:
         $ref: '#/definitions/ResourceName'
         description: '<p>The name for your new database snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p> </li> <li> <p>The first and last character must be a letter or number.</p> </li> </ul>'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>'
   DeleteDiskResult:
     type: object
     properties:
@@ -5735,6 +6181,20 @@ definitions:
   DownloadDefaultKeyPairRequest:
     type: object
     properties: {}
+  ExportSnapshotResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: A list of objects describing the API operation.
+  ExportSnapshotRequest:
+    type: object
+    required:
+      - sourceSnapshotName
+    properties:
+      sourceSnapshotName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the instance or disk snapshot to be exported to Amazon EC2.
   GetActiveNamesResult:
     type: object
     properties:
@@ -5786,6 +6246,21 @@ definitions:
       pageToken:
         $ref: '#/definitions/string'
         description: A token used for advancing to the next page of results from your get bundles request.
+  GetCloudFormationStackRecordsResult:
+    type: object
+    properties:
+      cloudFormationStackRecords:
+        $ref: '#/definitions/CloudFormationStackRecordList'
+        description: A list of objects describing the CloudFormation stack records.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results of your get relational database bundles request.
+  GetCloudFormationStackRecordsRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to a specific page of results for your <code>get cloud formation stack records</code> request.
   GetDiskResult:
     type: object
     properties:
@@ -5873,6 +6348,21 @@ definitions:
       pageToken:
         $ref: '#/definitions/string'
         description: A token used for advancing to the next page of results from your get domains request.
+  GetExportSnapshotRecordsResult:
+    type: object
+    properties:
+      exportSnapshotRecords:
+        $ref: '#/definitions/ExportSnapshotRecordList'
+        description: A list of objects describing the export snapshot records.
+      nextPageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to the next page of results of your get relational database bundles request.
+  GetExportSnapshotRecordsRequest:
+    type: object
+    properties:
+      pageToken:
+        $ref: '#/definitions/string'
+        description: A token used for advancing to a specific page of results for your <code>get export snapshot records</code> request.
   GetInstanceResult:
     type: object
     properties:
@@ -6225,7 +6715,7 @@ definitions:
     properties:
       pageToken:
         $ref: '#/definitions/string'
-        description: A token used for advancing to a specific page of results for your get relational database blueprints request.
+        description: A token used for advancing to a specific page of results for your <code>get relational database blueprints</code> request.
   GetRelationalDatabaseBundlesResult:
     type: object
     properties:
@@ -6240,7 +6730,7 @@ definitions:
     properties:
       pageToken:
         $ref: '#/definitions/string'
-        description: A token used for advancing to a specific page of results for your get relational database bundles request.
+        description: A token used for advancing to a specific page of results for your <code>get relational database bundles</code> request.
   GetRelationalDatabaseEventsResult:
     type: object
     properties:
@@ -6299,7 +6789,7 @@ definitions:
         description: '<p>Parameter to specify if the log should start from head or tail. If <code>true</code> is specified, the log event starts from the head of the log. If <code>false</code> is specified, the log event starts from the tail of the log.</p> <p>Default: <code>false</code> </p>'
       pageToken:
         $ref: '#/definitions/string'
-        description: A token used for advancing to a specific page of results for your get relational database log events request.
+        description: A token used for advancing to a specific page of results for your <code>get relational database log events</code> request.
   GetRelationalDatabaseLogStreamsResult:
     type: object
     properties:
@@ -6394,7 +6884,7 @@ definitions:
         description: The name of your database for which to get parameters.
       pageToken:
         $ref: '#/definitions/string'
-        description: A token used for advancing to a specific page of results for your get relational database parameters request.
+        description: A token used for advancing to a specific page of results for your <code>get relational database parameters</code> request.
   GetRelationalDatabaseSnapshotResult:
     type: object
     properties:
@@ -6423,7 +6913,7 @@ definitions:
     properties:
       pageToken:
         $ref: '#/definitions/string'
-        description: A token used for advancing to a specific page of results for your get relational database snapshots request.
+        description: A token used for advancing to a specific page of results for your <code>get relational database snapshots</code> request.
   GetRelationalDatabasesResult:
     type: object
     properties:
@@ -6438,7 +6928,7 @@ definitions:
     properties:
       pageToken:
         $ref: '#/definitions/string'
-        description: A token used for advancing to a specific page of results for your get relational database request.
+        description: A token used for advancing to a specific page of results for your <code>get relational database</code> request.
   GetStaticIpResult:
     type: object
     properties:
@@ -6644,6 +7134,24 @@ definitions:
       relationalDatabaseSnapshotName:
         $ref: '#/definitions/ResourceName'
         description: The name of your new database snapshot to be created before stopping your database.
+  TagResourceResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: A list of objects describing the API operation.
+  TagResourceRequest:
+    type: object
+    required:
+      - resourceName
+      - tags
+    properties:
+      resourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the resource to which you are adding tags.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The tag key and optional value.
   UnpeerVpcResult:
     type: object
     properties:
@@ -6653,6 +7161,24 @@ definitions:
   UnpeerVpcRequest:
     type: object
     properties: {}
+  UntagResourceResult:
+    type: object
+    properties:
+      operations:
+        $ref: '#/definitions/OperationList'
+        description: A list of objects describing the API operation.
+  UntagResourceRequest:
+    type: object
+    required:
+      - resourceName
+      - tagKeys
+    properties:
+      resourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the resource from which you are removing a tag.
+      tagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: The tag keys to delete from the specified resource.
   UpdateDomainEntryResult:
     type: object
     properties:
@@ -6958,6 +7484,130 @@ definitions:
         $ref: '#/definitions/string'
         description: The error details.
     description: Describes the API operation.
+  IsoDate:
+    type: string
+    format: date-time
+  ResourceLocation:
+    type: object
+    properties:
+      availabilityZone:
+        $ref: '#/definitions/string'
+        description: The Availability Zone. Follows the format <code>us-east-2a</code> (case-sensitive).
+      regionName:
+        $ref: '#/definitions/RegionName'
+        description: The AWS Region name.
+    description: Describes the resource location.
+  ResourceType:
+    type: string
+    enum:
+      - Instance
+      - StaticIp
+      - KeyPair
+      - InstanceSnapshot
+      - Domain
+      - PeeredVpc
+      - LoadBalancer
+      - LoadBalancerTlsCertificate
+      - Disk
+      - DiskSnapshot
+      - RelationalDatabase
+      - RelationalDatabaseSnapshot
+      - ExportSnapshotRecord
+      - CloudFormationStackRecord
+  RecordState:
+    type: string
+    enum:
+      - Started
+      - Succeeded
+      - Failed
+  CloudFormationStackRecordSourceInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/CloudFormationStackRecordSourceInfo'
+  DestinationInfo:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the resource created at the destination.
+      service:
+        $ref: '#/definitions/NonEmptyString'
+        description: The destination service of the record.
+    description: Describes the destination of a record.
+  CloudFormationStackRecord:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the CloudFormation stack record. It starts with <code>CloudFormationStackRecord</code> followed by a GUID.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the CloudFormation stack record.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The date when the CloudFormation stack record was created.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: A list of objects describing the Availability Zone and AWS Region of the CloudFormation stack record.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The Lightsail resource type (e.g., <code>CloudFormationStackRecord</code>).'
+      state:
+        $ref: '#/definitions/RecordState'
+        description: The current state of the CloudFormation stack record.
+      sourceInfo:
+        $ref: '#/definitions/CloudFormationStackRecordSourceInfoList'
+        description: A list of objects describing the source of the CloudFormation stack record.
+      destinationInfo:
+        $ref: '#/definitions/DestinationInfo'
+        description: 'A list of objects describing the destination service, which is AWS CloudFormation, and the Amazon Resource Name (ARN) of the AWS CloudFormation stack.'
+    description: <p>Describes a CloudFormation stack record created as a result of the <code>create cloud formation stack</code> operation.</p> <p>A CloudFormation stack record provides information about the AWS CloudFormation stack used to create a new Amazon Elastic Compute Cloud instance from an exported Lightsail instance snapshot.</p>
+  CloudFormationStackRecordList:
+    type: array
+    items:
+      $ref: '#/definitions/CloudFormationStackRecord'
+  CloudFormationStackRecordSourceType:
+    type: string
+    enum:
+      - ExportSnapshotRecord
+  CloudFormationStackRecordSourceInfo:
+    type: object
+    properties:
+      resourceType:
+        $ref: '#/definitions/CloudFormationStackRecordSourceType'
+        description: 'The Lightsail resource type (e.g., <code>ExportSnapshotRecord</code>).'
+      name:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the record.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the export snapshot record.
+    description: 'Describes the source of a CloudFormation stack record (i.e., the export snapshot record).'
+  RegionName:
+    type: string
+    enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - ca-central-1
+      - ap-south-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+  InstanceEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceEntry'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   DomainName:
     type: string
   DomainEntry:
@@ -7007,6 +7657,9 @@ definitions:
       resourceType:
         $ref: '#/definitions/ResourceType'
         description: The resource type (usually <code>KeyPair</code>).
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
       fingerprint:
         $ref: '#/definitions/Base64'
         description: The RSA fingerprint of the key pair.
@@ -7019,37 +7672,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DomainName'
-  IsoDate:
-    type: string
-    format: date-time
   SensitiveString:
     type: string
     format: password
-  ResourceLocation:
-    type: object
-    properties:
-      availabilityZone:
-        $ref: '#/definitions/string'
-        description: The Availability Zone. Follows the format <code>us-east-2a</code> (case-sensitive).
-      regionName:
-        $ref: '#/definitions/RegionName'
-        description: The AWS Region name.
-    description: Describes the resource location.
-  ResourceType:
-    type: string
-    enum:
-      - Instance
-      - StaticIp
-      - KeyPair
-      - InstanceSnapshot
-      - Domain
-      - PeeredVpc
-      - LoadBalancer
-      - LoadBalancerTlsCertificate
-      - Disk
-      - DiskSnapshot
-      - RelationalDatabase
-      - RelationalDatabaseSnapshot
   DiskState:
     type: string
     enum:
@@ -7079,6 +7704,9 @@ definitions:
       resourceType:
         $ref: '#/definitions/ResourceType'
         description: 'The Lightsail resource type (e.g., <code>Disk</code>).'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
       sizeInGb:
         $ref: '#/definitions/integer'
         description: The size of the disk in GB.
@@ -7107,6 +7735,26 @@ definitions:
         $ref: '#/definitions/integer'
         description: '<p>(Deprecated) The number of GB in use by the disk.</p> <note> <p>In releases prior to November 14, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
     description: Describes a system disk or an block storage disk.
+  DiskInfo:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/string'
+        description: The disk name.
+      path:
+        $ref: '#/definitions/NonEmptyString'
+        description: The disk path.
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: 'The size of the disk in GB (e.g., <code>32</code>).'
+      isSystemDisk:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether this disk is a system disk (has an operating system loaded on it).
+    description: Describes a disk.
+  DiskInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/DiskInfo'
   DiskList:
     type: array
     items:
@@ -7149,6 +7797,9 @@ definitions:
       resourceType:
         $ref: '#/definitions/ResourceType'
         description: 'The Lightsail resource type (e.g., <code>DiskSnapshot</code>).'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
       sizeInGb:
         $ref: '#/definitions/integer'
         description: The size of the disk in GB.
@@ -7165,6 +7816,13 @@ definitions:
         $ref: '#/definitions/NonEmptyString'
         description: The Amazon Resource Name (ARN) of the source disk from which you are creating the disk snapshot.
     description: Describes a block storage disk snapshot.
+  DiskSnapshotInfo:
+    type: object
+    properties:
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: 'The size of the disk in GB (e.g., <code>32</code>).'
+    description: Describes a disk snapshot.
   DiskSnapshotList:
     type: array
     items:
@@ -7194,6 +7852,9 @@ definitions:
       resourceType:
         $ref: '#/definitions/ResourceType'
         description: 'The resource type. '
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
       domainEntries:
         $ref: '#/definitions/DomainEntryList'
         description: An array of key-value pairs containing information about the domain entries.
@@ -7215,6 +7876,84 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Domain'
+  ExportSnapshotRecordSourceInfo:
+    type: object
+    properties:
+      resourceType:
+        $ref: '#/definitions/ExportSnapshotRecordSourceType'
+        description: 'The Lightsail resource type (e.g., <code>InstanceSnapshot</code> or <code>DiskSnapshot</code>).'
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The date when the source instance or disk snapshot was created.
+      name:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the source instance or disk snapshot.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the source instance or disk snapshot.
+      fromResourceName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the snapshot's source instance or disk.
+      fromResourceArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the snapshot's source instance or disk.
+      instanceSnapshotInfo:
+        $ref: '#/definitions/InstanceSnapshotInfo'
+        description: A list of objects describing an instance snapshot.
+      diskSnapshotInfo:
+        $ref: '#/definitions/DiskSnapshotInfo'
+        description: A list of objects describing a disk snapshot.
+    description: Describes the source of an export snapshot record.
+  ExportSnapshotRecord:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The export snapshot record name.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the export snapshot record.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The date when the export snapshot record was created.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The AWS Region and Availability Zone where the export snapshot record is located.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The Lightsail resource type (e.g., <code>ExportSnapshotRecord</code>).'
+      state:
+        $ref: '#/definitions/RecordState'
+        description: The state of the export snapshot record.
+      sourceInfo:
+        $ref: '#/definitions/ExportSnapshotRecordSourceInfo'
+        description: A list of objects describing the source of the export snapshot record.
+      destinationInfo:
+        $ref: '#/definitions/DestinationInfo'
+        description: A list of objects describing the destination of the export snapshot record.
+    description: Describes an export snapshot record.
+  ExportSnapshotRecordList:
+    type: array
+    items:
+      $ref: '#/definitions/ExportSnapshotRecord'
+  ExportSnapshotRecordSourceType:
+    type: string
+    enum:
+      - InstanceSnapshot
+      - DiskSnapshot
+  InstanceSnapshotInfo:
+    type: object
+    properties:
+      fromBundleId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The bundle ID from which the source instance was created (e.g., <code>micro_1_0</code>).'
+      fromBlueprintId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The blueprint ID from which the source instance (e.g., <code>os_debian_8_3</code>).'
+      fromDiskInfo:
+        $ref: '#/definitions/DiskInfoList'
+        description: A list of objects describing the disks that were attached to the source instance.
+    description: Describes an instance snapshot.
   InstanceAccessProtocol:
     type: string
     enum:
@@ -7330,6 +8069,9 @@ definitions:
       resourceType:
         $ref: '#/definitions/ResourceType'
         description: The type of resource (usually <code>Instance</code>).
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
       blueprintId:
         $ref: '#/definitions/NonEmptyString'
         description: 'The blueprint ID (e.g., <code>os_amlinux_2016_03</code>).'
@@ -7388,6 +8130,9 @@ definitions:
       resourceType:
         $ref: '#/definitions/ResourceType'
         description: The type of resource (usually <code>InstanceSnapshot</code>).
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
       state:
         $ref: '#/definitions/InstanceSnapshotState'
         description: The state the snapshot is in.
@@ -7471,6 +8216,9 @@ definitions:
       resourceType:
         $ref: '#/definitions/ResourceType'
         description: 'The resource type (e.g., <code>LoadBalancer</code>.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
       dnsName:
         $ref: '#/definitions/NonEmptyString'
         description: The DNS name of your Lightsail load balancer.
@@ -7567,6 +8315,9 @@ definitions:
       resourceType:
         $ref: '#/definitions/ResourceType'
         description: 'The Lightsail resource type for the database (for example, <code>RelationalDatabase</code>).'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
       relationalDatabaseBlueprintId:
         $ref: '#/definitions/NonEmptyString'
         description: The blueprint ID for the database. A blueprint describes the major engine version of a database.
@@ -7643,6 +8394,9 @@ definitions:
       resourceType:
         $ref: '#/definitions/ResourceType'
         description: The Lightsail resource type.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
       engine:
         $ref: '#/definitions/NonEmptyString'
         description: 'The software of the database snapshot (for example, <code>MySQL</code>)'
@@ -7750,6 +8504,36 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: '<p>The name of the key pair that you used when creating your instance. If no key pair name was specified when creating the instance, Lightsail uses the default key pair (<code>LightsailDefaultKeyPair</code>).</p> <p>If you are using a custom key pair, you need to use your own means of decrypting your password using the <code>ciphertext</code>. Lightsail creates the ciphertext by encrypting your password with the public key part of this key pair.</p>'
     description: 'The password data for the Windows Server-based instance, including the ciphertext and the key pair name.'
+  PortInfoSourceType:
+    type: string
+    enum:
+      - DEFAULT
+      - INSTANCE
+      - NONE
+  InstanceEntry:
+    type: object
+    required:
+      - sourceName
+      - instanceType
+      - portInfoSource
+      - availabilityZone
+    properties:
+      sourceName:
+        $ref: '#/definitions/ResourceName'
+        description: '<p>The name of the export snapshot record, which contains the exported Lightsail instance snapshot that will be used as the source of the new Amazon EC2 instance.</p> <p>Use the <code>get export snapshot records</code> operation to get a list of export snapshot records that you can use to create a CloudFormation stack.</p>'
+      instanceType:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The instance type (e.g., <code>t2.micro</code>) to use for the new Amazon EC2 instance.'
+      portInfoSource:
+        $ref: '#/definitions/PortInfoSourceType'
+        description: '<p>The port configuration to use for the new Amazon EC2 instance.</p> <p>The following configuration options are available:</p> <ul> <li> <p>DEFAULT — Use the default firewall settings from the image.</p> </li> <li> <p>INSTANCE — Use the firewall settings from the source Lightsail instance.</p> </li> <li> <p>NONE — Default to Amazon EC2.</p> </li> </ul>'
+      userData:
+        $ref: '#/definitions/string'
+        description: '<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>.</p> </note>'
+      availabilityZone:
+        $ref: '#/definitions/string'
+        description: The Availability Zone for the new Amazon EC2 instance.
+    description: Describes the Amazon Elastic Compute Cloud instance and related resources to be created using the <code>create cloud formation stack</code> operation.
   InstanceHealthReason:
     type: string
     enum:
@@ -7967,6 +8751,9 @@ definitions:
       resourceType:
         $ref: '#/definitions/ResourceType'
         description: '<p>The resource type (e.g., <code>LoadBalancerTlsCertificate</code>).</p> <ul> <li> <p> <b> <code>Instance</code> </b> - A Lightsail instance (a virtual private server)</p> </li> <li> <p> <b> <code>StaticIp</code> </b> - A static IP address</p> </li> <li> <p> <b> <code>KeyPair</code> </b> - The key pair used to connect to a Lightsail instance</p> </li> <li> <p> <b> <code>InstanceSnapshot</code> </b> - A Lightsail instance snapshot</p> </li> <li> <p> <b> <code>Domain</code> </b> - A DNS zone</p> </li> <li> <p> <b> <code>PeeredVpc</code> </b> - A peered VPC</p> </li> <li> <p> <b> <code>LoadBalancer</code> </b> - A Lightsail load balancer</p> </li> <li> <p> <b> <code>LoadBalancerTlsCertificate</code> </b> - An SSL/TLS certificate associated with a Lightsail load balancer</p> </li> <li> <p> <b> <code>Disk</code> </b> - A Lightsail block storage disk</p> </li> <li> <p> <b> <code>DiskSnapshot</code> </b> - A block storage disk snapshot</p> </li> </ul>'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
       loadBalancerName:
         $ref: '#/definitions/ResourceName'
         description: The load balancer name where your SSL/TLS certificate is attached.
@@ -8213,23 +9000,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PortInfo'
-  RegionName:
-    type: string
-    enum:
-      - us-east-1
-      - us-east-2
-      - us-west-1
-      - us-west-2
-      - eu-west-1
-      - eu-west-2
-      - eu-west-3
-      - eu-central-1
-      - ca-central-1
-      - ap-south-1
-      - ap-southeast-1
-      - ap-southeast-2
-      - ap-northeast-1
-      - ap-northeast-2
   Region:
     type: object
     properties:
@@ -8380,3 +9150,21 @@ definitions:
     type: string
     minLength: 1
     maxLength: 256
+  TagKey:
+    type: string
+  TagValue:
+    type: string
+  Tag:
+    type: object
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: '<p>The key of the tag.</p> <p>Constraints: Tag keys accept a maximum of 128 letters, numbers, spaces in UTF-8, or the following characters: + - = . _ : / @</p>'
+      value:
+        $ref: '#/definitions/TagValue'
+        description: '<p>The value of the tag.</p> <p>Constraints: Tag values accept a maximum of 256 letters, numbers, spaces in UTF-8, or the following characters: + - = . _ : / @</p>'
+    description: '<p>Describes a tag key and optional value assigned to an Amazon Lightsail resource.</p> <p>For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.</p>'
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
