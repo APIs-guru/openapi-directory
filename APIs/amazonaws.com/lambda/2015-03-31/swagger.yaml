@@ -99,6 +99,105 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
+  '/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy':
+    post:
+      operationId: AddLayerVersionPermission
+      description: '<p>Adds permissions to the resource-based policy of a version of a function layer. Use this action to grant layer usage permission to other accounts. You can grant permission to a single account, all AWS accounts, or all accounts in an organization.</p> <p>To revoke permission, call <a>RemoveLayerVersionPermission</a> with the statement ID that you specified when you added it.</p>'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/AddLayerVersionPermissionResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '485':
+          description: PolicyLengthExceededException
+          schema:
+            $ref: '#/definitions/PolicyLengthExceededException'
+        '486':
+          description: PreconditionFailedException
+          schema:
+            $ref: '#/definitions/PreconditionFailedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddLayerVersionPermissionRequest'
+        - name: LayerName
+          in: path
+          type: string
+          required: true
+        - name: VersionNumber
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetLayerVersionPolicy
+      description: 'Returns the permission policy for a layer version. For more information, see <a>AddLayerVersionPermission</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLayerVersionPolicyResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLayerVersionPolicyRequest'
+        - name: LayerName
+          in: path
+          type: string
+          required: true
+        - name: VersionNumber
+          in: path
+          type: string
+          required: true
   '/2015-03-31/functions/{FunctionName}/policy':
     post:
       operationId: AddPermission
@@ -846,6 +945,83 @@ paths:
         - name: FunctionName
           in: query
           type: string
+  '/2018-10-31/layers/{LayerName}/versions/{VersionNumber}':
+    delete:
+      operationId: DeleteLayerVersion
+      description: 'Deletes a version of a function layer. Deleted versions can no longer be viewed or added to functions. However, a copy of the version remains in Lambda until no functions refer to it.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLayerVersionRequest'
+        - name: LayerName
+          in: path
+          type: string
+          required: true
+        - name: VersionNumber
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetLayerVersion
+      description: 'Returns information about a version of a function layer, with a link to download the layer archive that''s valid for 10 minutes.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLayerVersionResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLayerVersionRequest'
+        - name: LayerName
+          in: path
+          type: string
+          required: true
+        - name: VersionNumber
+          in: path
+          type: string
+          required: true
   /2016-08-19/account-settings/:
     get:
       operationId: GetAccountSettings
@@ -1179,6 +1355,126 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/2018-10-31/layers/{LayerName}/versions':
+    get:
+      operationId: ListLayerVersions
+      description: 'Lists the versions of a function layer. Versions that have been deleted aren''t listed. Specify a <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime identifier</a> to list only versions that indicate that they''re compatible with that runtime.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListLayerVersionsResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListLayerVersionsRequest'
+        - name: LayerName
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: PublishLayerVersion
+      description: '<p>Creates a function layer from a ZIP archive. Each time you call <code>PublishLayerVersion</code> with the same version name, a new version is created.</p> <p>Add layers to your function with <a>CreateFunction</a> or <a>UpdateFunctionConfiguration</a>.</p>'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/PublishLayerVersionResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '484':
+          description: CodeStorageExceededException
+          schema:
+            $ref: '#/definitions/CodeStorageExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PublishLayerVersionRequest'
+        - name: LayerName
+          in: path
+          type: string
+          required: true
+  /2018-10-31/layers:
+    get:
+      operationId: ListLayers
+      description: 'Lists function layers and shows information about the latest version of each. Specify a <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime identifier</a> to list only layers that indicate that they''re compatible with that runtime.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListLayersResponse'
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListLayersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2017-03-31/tags/{ARN}':
     get:
       operationId: ListTags
@@ -1381,6 +1677,61 @@ paths:
         - name: FunctionName
           in: query
           type: string
+  '/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy/{StatementId}':
+    delete:
+      operationId: RemoveLayerVersionPermission
+      description: 'Removes a statement from the permissions policy for a layer version. For more information, see <a>AddLayerVersionPermission</a>.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: PreconditionFailedException
+          schema:
+            $ref: '#/definitions/PreconditionFailedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RemoveLayerVersionPermissionRequest'
+        - name: LayerName
+          in: path
+          type: string
+          required: true
+        - name: VersionNumber
+          in: path
+          type: string
+          required: true
+        - name: StatementId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/2015-03-31/functions/{FunctionName}/policy/{StatementId}':
     delete:
       operationId: RemovePermission
@@ -1492,6 +1843,41 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  AddLayerVersionPermissionResponse:
+    type: object
+    properties:
+      Statement:
+        $ref: '#/definitions/String'
+        description: The permission statement.
+      RevisionId:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the current revision of the policy.
+  AddLayerVersionPermissionRequest:
+    type: object
+    required:
+      - StatementId
+      - Action
+      - Principal
+    properties:
+      StatementId:
+        $ref: '#/definitions/StatementId'
+        description: An identifier that distinguishes the policy from others on the same layer version.
+      Action:
+        $ref: '#/definitions/LayerPermissionAllowedAction'
+        description: 'The API action that grants access to the layer. For example, <code>lambda:GetLayerVersion</code>.'
+      Principal:
+        $ref: '#/definitions/LayerPermissionAllowedPrincipal'
+        description: 'An account ID, or <code>*</code> to grant permission to all AWS accounts.'
+      OrganizationId:
+        $ref: '#/definitions/OrganizationId'
+        description: 'With the principal set to <code>*</code>, grant permission to all accounts in the specified organization.'
+  ServiceException: {}
+  ResourceNotFoundException: {}
+  ResourceConflictException: {}
+  TooManyRequestsException: {}
+  InvalidParameterValueException: {}
+  PolicyLengthExceededException: {}
+  PreconditionFailedException: {}
   AddPermissionResponse:
     type: object
     example:
@@ -1535,13 +1921,6 @@ definitions:
       RevisionId:
         $ref: '#/definitions/String'
         description: 'An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn''t match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either <a>GetFunction</a> or <a>GetAlias</a> '
-  ServiceException: {}
-  ResourceNotFoundException: {}
-  ResourceConflictException: {}
-  InvalidParameterValueException: {}
-  PolicyLengthExceededException: {}
-  TooManyRequestsException: {}
-  PreconditionFailedException: {}
   AliasConfiguration:
     type: object
     example:
@@ -1694,7 +2073,7 @@ definitions:
         description: The memory allocated to the function
       LastModified:
         $ref: '#/definitions/Timestamp'
-        description: 'The date and time that the function was last updated, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ssTZD).'
+        description: 'The date and time that the function was last updated, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).'
       CodeSha256:
         $ref: '#/definitions/String'
         description: The SHA256 hash of the function's deployment package.
@@ -1722,6 +2101,9 @@ definitions:
       RevisionId:
         $ref: '#/definitions/String'
         description: Represents the latest updated revision of the function or alias.
+      Layers:
+        $ref: '#/definitions/LayersReferenceList'
+        description: 'A list of <a href="http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a>.'
     description: A Lambda function's configuration settings.
   CreateFunctionRequest:
     type: object
@@ -1745,7 +2127,7 @@ definitions:
     properties:
       FunctionName:
         $ref: '#/definitions/FunctionName'
-        description: '<p>The name of the lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+        description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
       Runtime:
         $ref: '#/definitions/Runtime'
         description: The runtime version for the function.
@@ -1788,6 +2170,9 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: 'The list of tags (key-value pairs) assigned to the new function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/tagging.html">Tagging Lambda Functions</a> in the <b>AWS Lambda Developer Guide</b>.'
+      Layers:
+        $ref: '#/definitions/LayerList'
+        description: 'A list of <a href="http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment.'
   CodeStorageExceededException: {}
   DeleteAliasRequest:
     type: object
@@ -1808,6 +2193,9 @@ definitions:
       Qualifier: '1'
     properties: {}
   DeleteFunctionConcurrencyRequest:
+    type: object
+    properties: {}
+  DeleteLayerVersionRequest:
     type: object
     properties: {}
   GetAccountSettingsResponse:
@@ -1887,6 +2275,48 @@ definitions:
     example:
       FunctionName: myFunction
       Qualifier: '1'
+    properties: {}
+  GetLayerVersionResponse:
+    type: object
+    properties:
+      Content:
+        $ref: '#/definitions/LayerVersionContentOutput'
+        description: Details about the layer version.
+      LayerArn:
+        $ref: '#/definitions/LayerArn'
+        description: The Amazon Resource Name (ARN) of the function layer.
+      LayerVersionArn:
+        $ref: '#/definitions/LayerVersionArn'
+        description: The ARN of the layer version.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the version.
+      CreatedDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date that the layer version was created, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).'
+      Version:
+        $ref: '#/definitions/LayerVersionNumber'
+        description: The version number.
+      CompatibleRuntimes:
+        $ref: '#/definitions/CompatibleRuntimes'
+        description: The layer's compatible runtimes.
+      LicenseInfo:
+        $ref: '#/definitions/LicenseInfo'
+        description: The layer's software license.
+  GetLayerVersionRequest:
+    type: object
+    properties: {}
+  GetLayerVersionPolicyResponse:
+    type: object
+    properties:
+      Policy:
+        $ref: '#/definitions/String'
+        description: The policy document.
+      RevisionId:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the current revision of the policy.
+  GetLayerVersionPolicyRequest:
+    type: object
     properties: {}
   GetPolicyResponse:
     type: object
@@ -2014,6 +2444,30 @@ definitions:
       Marker: ''
       MaxItems: 123
     properties: {}
+  ListLayerVersionsResponse:
+    type: object
+    properties:
+      NextMarker:
+        $ref: '#/definitions/String'
+        description: A pagination token returned when the response doesn't contain all versions.
+      LayerVersions:
+        $ref: '#/definitions/LayerVersionsList'
+        description: A list of versions.
+  ListLayerVersionsRequest:
+    type: object
+    properties: {}
+  ListLayersResponse:
+    type: object
+    properties:
+      NextMarker:
+        $ref: '#/definitions/String'
+        description: A pagination token returned when the response doesn't contain all layers.
+      Layers:
+        $ref: '#/definitions/LayersList'
+        description: A list of function layers.
+  ListLayersRequest:
+    type: object
+    properties: {}
   ListTagsResponse:
     type: object
     properties:
@@ -2042,6 +2496,50 @@ definitions:
       Marker: ''
       MaxItems: 123
     properties: {}
+  PublishLayerVersionResponse:
+    type: object
+    properties:
+      Content:
+        $ref: '#/definitions/LayerVersionContentOutput'
+        description: Details about the layer version.
+      LayerArn:
+        $ref: '#/definitions/LayerArn'
+        description: The Amazon Resource Name (ARN) of the function layer.
+      LayerVersionArn:
+        $ref: '#/definitions/LayerVersionArn'
+        description: The ARN of the layer version.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the version.
+      CreatedDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date that the layer version was created, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).'
+      Version:
+        $ref: '#/definitions/LayerVersionNumber'
+        description: The version number.
+      CompatibleRuntimes:
+        $ref: '#/definitions/CompatibleRuntimes'
+        description: The layer's compatible runtimes.
+      LicenseInfo:
+        $ref: '#/definitions/LicenseInfo'
+        description: The layer's software license.
+  PublishLayerVersionRequest:
+    type: object
+    required:
+      - Content
+    properties:
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the version.
+      Content:
+        $ref: '#/definitions/LayerVersionContentInput'
+        description: The function layer archive.
+      CompatibleRuntimes:
+        $ref: '#/definitions/CompatibleRuntimes'
+        description: 'A list of compatible <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">function runtimes</a>. Used for filtering with <a>ListLayers</a> and <a>ListLayerVersions</a>.'
+      LicenseInfo:
+        $ref: '#/definitions/LicenseInfo'
+        description: '<p>The layer''s software license. It can be any of the following:</p> <ul> <li> <p>An <a href="https://spdx.org/licenses/">SPDX license identifier</a>. For example, <code>MIT</code>.</p> </li> <li> <p>The URL of a license hosted on the internet. For example, <code>https://opensource.org/licenses/MIT</code>.</p> </li> <li> <p>The full text of the license.</p> </li> </ul>'
   PublishVersionRequest:
     type: object
     example:
@@ -2072,6 +2570,9 @@ definitions:
       ReservedConcurrentExecutions:
         $ref: '#/definitions/ReservedConcurrentExecutions'
         description: The concurrent execution limit reserved for this function.
+  RemoveLayerVersionPermissionRequest:
+    type: object
+    properties: {}
   RemovePermissionRequest:
     type: object
     example:
@@ -2206,6 +2707,9 @@ definitions:
       RevisionId:
         $ref: '#/definitions/String'
         description: 'An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn''t match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either <a>GetFunction</a> or <a>GetAlias</a>.'
+      Layers:
+        $ref: '#/definitions/LayerList'
+        description: 'A list of <a href="http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment.'
   Long:
     type: integer
   Integer:
@@ -2245,16 +2749,34 @@ definitions:
   Action:
     type: string
     pattern: '(lambda:[*]|lambda:[a-zA-Z]+|[*])'
-  FunctionName:
+  LayerName:
     type: string
-    pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+    pattern: '(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+'
     minLength: 1
     maxLength: 140
+  LayerVersionNumber:
+    type: integer
   StatementId:
     type: string
     pattern: '([a-zA-Z0-9-_]+)'
     minLength: 1
     maxLength: 100
+  LayerPermissionAllowedAction:
+    type: string
+    pattern: 'lambda:GetLayerVersion'
+  LayerPermissionAllowedPrincipal:
+    type: string
+    pattern: '\d{12}|\*|arn:(aws[a-zA-Z-]*):iam::\d{12}:root'
+  OrganizationId:
+    type: string
+    pattern: 'o-[a-z0-9]{10,32}'
+  String:
+    type: string
+  FunctionName:
+    type: string
+    pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+    minLength: 1
+    maxLength: 140
   Principal:
     type: string
     pattern: .*
@@ -2274,8 +2796,6 @@ definitions:
     pattern: '(|[a-zA-Z0-9$_-]+)'
     minLength: 1
     maxLength: 128
-  String:
-    type: string
   AdditionalVersion:
     type: string
     pattern: '[0-9]+'
@@ -2334,20 +2854,6 @@ definitions:
     type: string
   Boolean:
     type: boolean
-  ReservedConcurrentExecutions:
-    type: integer
-    minimum: 0
-  Enabled:
-    type: boolean
-  EventSourcePosition:
-    type: string
-    enum:
-      - TRIM_HORIZON
-      - LATEST
-      - AT_TIMESTAMP
-  Date:
-    type: string
-    format: date-time
   Runtime:
     type: string
     enum:
@@ -2364,6 +2870,27 @@ definitions:
       - dotnetcore2.1
       - nodejs4.3-edge
       - go1.x
+      - ruby2.5
+      - provided
+  CompatibleRuntimes:
+    type: array
+    items:
+      $ref: '#/definitions/Runtime'
+    maxItems: 5
+  ReservedConcurrentExecutions:
+    type: integer
+    minimum: 0
+  Enabled:
+    type: boolean
+  EventSourcePosition:
+    type: string
+    enum:
+      - TRIM_HORIZON
+      - LATEST
+      - AT_TIMESTAMP
+  Date:
+    type: string
+    format: date-time
   RoleArn:
     type: string
     pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
@@ -2437,6 +2964,10 @@ definitions:
           $ref: '#/definitions/TagKey'
         value:
           $ref: '#/definitions/TagValue'
+  LayerList:
+    type: array
+    items:
+      $ref: '#/definitions/LayerVersionArn'
   ResourceArn:
     type: string
     pattern: '(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()'
@@ -2485,7 +3016,7 @@ definitions:
       $ref: '#/definitions/EventSourceMappingConfiguration'
   S3Bucket:
     type: string
-    pattern: '^[0-9A-Za-z\.\-_]*(?<!\.)$'
+    pattern: '^[0-9A-Za-z\.\-_]*$'
     minLength: 3
     maxLength: 63
   S3Key:
@@ -2536,6 +3067,10 @@ definitions:
         $ref: '#/definitions/TracingMode'
         description: The tracing mode.
     description: The function's AWS X-Ray tracing configuration.
+  LayersReferenceList:
+    type: array
+    items:
+      $ref: '#/definitions/Layer'
   FunctionList:
     type: array
     items:
@@ -2544,6 +3079,32 @@ definitions:
     type: string
     enum:
       - ALL
+  LayerVersionContentOutput:
+    type: object
+    properties:
+      Location:
+        $ref: '#/definitions/String'
+        description: A link to the layer archive in Amazon S3 that is valid for 10 minutes.
+      CodeSha256:
+        $ref: '#/definitions/String'
+        description: The SHA-256 hash of the layer archive.
+      CodeSize:
+        $ref: '#/definitions/Long'
+        description: The size of the layer archive in bytes.
+    description: Details about a layer version.
+  LayerArn:
+    type: string
+    pattern: 'arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+'
+    minLength: 1
+    maxLength: 140
+  LayerVersionArn:
+    type: string
+    pattern: 'arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+'
+    minLength: 1
+    maxLength: 140
+  LicenseInfo:
+    type: string
+    maxLength: 512
   HttpStatus:
     type: integer
   InvocationType:
@@ -2557,6 +3118,75 @@ definitions:
     enum:
       - None
       - Tail
+  Layer:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/LayerVersionArn'
+        description: The Amazon Resource Name (ARN) of the function layer.
+      CodeSize:
+        $ref: '#/definitions/Long'
+        description: The size of the layer archive in bytes.
+    description: A function layer.
+  LayerVersionContentInput:
+    type: object
+    properties:
+      S3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The Amazon S3 bucket of the layer archive.
+      S3Key:
+        $ref: '#/definitions/S3Key'
+        description: The Amazon S3 key of the layer archive.
+      S3ObjectVersion:
+        $ref: '#/definitions/S3ObjectVersion'
+        description: 'For versioned objects, the version of the layer archive object to use.'
+      ZipFile:
+        $ref: '#/definitions/Blob'
+        description: The base64-encoded contents of the layer archive. AWS SDK and AWS CLI clients handle the encoding for you.
+    description: 'A ZIP archive that contains the contents of the function layer. You can specify either an Amazon S3 location, or upload a layer archive directly.'
+  LayerVersionsListItem:
+    type: object
+    properties:
+      LayerVersionArn:
+        $ref: '#/definitions/LayerVersionArn'
+        description: The ARN of the layer version.
+      Version:
+        $ref: '#/definitions/LayerVersionNumber'
+        description: The version number.
+      Description:
+        $ref: '#/definitions/Description'
+        description: The description of the version.
+      CreatedDate:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date that the version was created, in ISO 8601 format. For example, <code>2018-11-27T15:10:45.123+0000</code>.'
+      CompatibleRuntimes:
+        $ref: '#/definitions/CompatibleRuntimes'
+        description: The layer's compatible runtimes.
+      LicenseInfo:
+        $ref: '#/definitions/LicenseInfo'
+        description: The layer's open-source license.
+    description: Details about a layer version.
+  LayerVersionsList:
+    type: array
+    items:
+      $ref: '#/definitions/LayerVersionsListItem'
+  LayersListItem:
+    type: object
+    properties:
+      LayerName:
+        $ref: '#/definitions/LayerName'
+        description: The name of the layer.
+      LayerArn:
+        $ref: '#/definitions/LayerArn'
+        description: The Amazon Resource Name (ARN) of the function layer.
+      LatestMatchingVersion:
+        $ref: '#/definitions/LayerVersionsListItem'
+        description: The newest version of the layer.
+    description: Details about a function layer.
+  LayersList:
+    type: array
+    items:
+      $ref: '#/definitions/LayersListItem'
   MaxListItems:
     type: integer
     minimum: 1
@@ -2564,6 +3194,10 @@ definitions:
   MasterRegion:
     type: string
     pattern: 'ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}'
+  MaxLayerListItems:
+    type: integer
+    minimum: 1
+    maximum: 50
   NamespacedStatementId:
     type: string
     pattern: '([a-zA-Z0-9-_.]+)'

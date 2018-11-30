@@ -3,7 +3,7 @@ info:
   version: '2015-10-07'
   x-release: v4
   title: Amazon CloudWatch Events
-  description: '<p>Amazon CloudWatch Events helps you to respond to state changes in your AWS resources. When your resources change state, they automatically send events into an event stream. You can create rules that match selected events in the stream and route them to targets to take action. You can also use rules to take action on a pre-determined schedule. For example, you can configure rules to:</p> <ul> <li> <p>Automatically invoke an AWS Lambda function to update DNS entries when an event notifies you that Amazon EC2 instance enters the running state.</p> </li> <li> <p>Direct specific API records from AWS CloudTrail to an Amazon Kinesis data stream for detailed analysis of potential security or availability risks.</p> </li> <li> <p>Periodically invoke a built-in target to create a snapshot of an Amazon EBS volume.</p> </li> </ul> <p>For more information about the features of Amazon CloudWatch Events, see the <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/events">Amazon CloudWatch Events User Guide</a>.</p>'
+  description: '<p>Amazon CloudWatch Events helps you to respond to state changes in your AWS resources. When your resources change state, they automatically send events into an event stream. You can create rules that match selected events in the stream and route them to targets to take action. You can also use rules to take action on a predetermined schedule. For example, you can configure rules to:</p> <ul> <li> <p>Automatically invoke an AWS Lambda function to update DNS entries when an event notifies you that Amazon EC2 instance enters the running state.</p> </li> <li> <p>Direct specific API records from AWS CloudTrail to an Amazon Kinesis data stream for detailed analysis of potential security or availability risks.</p> </li> <li> <p>Periodically invoke a built-in target to create a snapshot of an Amazon EBS volume.</p> </li> </ul> <p>For more information about the features of Amazon CloudWatch Events, see the <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/events">Amazon CloudWatch Events User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -102,7 +102,7 @@ paths:
   /:
     post:
       operationId: DeleteRule
-      description: '<p>Deletes the specified rule.</p> <p>Before you can delete the rule, you must remove all targets, using <a>RemoveTargets</a>.</p> <p>When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect.</p>'
+      description: '<p>Deletes the specified rule.</p> <p>Before you can delete the rule, you must remove all targets, using <a>RemoveTargets</a>.</p> <p>When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect.</p> <p>Managed rules are rules created and managed by another AWS service on your behalf. These rules are created by those other AWS services to support functionality in those services. You can delete these rules using the <code>Force</code> option, but you should do so only if you are sure the other service is not still using that rule.</p>'
       responses:
         '200':
           description: Success
@@ -111,6 +111,10 @@ paths:
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
         '481':
+          description: ManagedRuleException
+          schema:
+            $ref: '#/definitions/ManagedRuleException'
+        '482':
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
@@ -212,6 +216,10 @@ paths:
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
         '482':
+          description: ManagedRuleException
+          schema:
+            $ref: '#/definitions/ManagedRuleException'
+        '483':
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
@@ -247,6 +255,10 @@ paths:
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
         '482':
+          description: ManagedRuleException
+          schema:
+            $ref: '#/definitions/ManagedRuleException'
+        '483':
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
@@ -447,6 +459,10 @@ paths:
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
         '483':
+          description: ManagedRuleException
+          schema:
+            $ref: '#/definitions/ManagedRuleException'
+        '484':
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
@@ -488,6 +504,10 @@ paths:
           schema:
             $ref: '#/definitions/LimitExceededException'
         '483':
+          description: ManagedRuleException
+          schema:
+            $ref: '#/definitions/ManagedRuleException'
+        '484':
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
@@ -560,6 +580,10 @@ paths:
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
         '482':
+          description: ManagedRuleException
+          schema:
+            $ref: '#/definitions/ManagedRuleException'
+        '483':
           description: InternalException
           schema:
             $ref: '#/definitions/InternalException'
@@ -621,7 +645,11 @@ definitions:
       Name:
         $ref: '#/definitions/RuleName'
         description: The name of the rule.
+      Force:
+        $ref: '#/definitions/Boolean'
+        description: 'If this is a managed rule, created by an AWS service on your behalf, you must specify <code>Force</code> as <code>True</code> to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code> field of the response.'
   ConcurrentModificationException: {}
+  ManagedRuleException: {}
   InternalException: {}
   DescribeEventBusResponse:
     type: object
@@ -663,6 +691,9 @@ definitions:
       RoleArn:
         $ref: '#/definitions/RoleArn'
         description: The Amazon Resource Name (ARN) of the IAM role associated with the rule.
+      ManagedBy:
+        $ref: '#/definitions/ManagedBy'
+        description: 'If this is a managed rule, created by an AWS service on your behalf, this field displays the principal name of the AWS service that created the rule.'
   DescribeRuleRequest:
     type: object
     required:
@@ -872,6 +903,9 @@ definitions:
       Ids:
         $ref: '#/definitions/TargetIdList'
         description: The IDs of the targets to remove from the rule.
+      Force:
+        $ref: '#/definitions/Boolean'
+        description: 'If this is a managed rule, created by an AWS service on your behalf, you must specify <code>Force</code> as <code>True</code> to remove targets. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code> field of the response.'
   TestEventPatternResponse:
     type: object
     properties:
@@ -1005,6 +1039,10 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1600
+  ManagedBy:
+    type: string
+    minLength: 1
+    maxLength: 128
   LimitMin1:
     type: integer
     minimum: 1
@@ -1251,6 +1289,9 @@ definitions:
       RoleArn:
         $ref: '#/definitions/RoleArn'
         description: The Amazon Resource Name (ARN) of the role that is used for target invocation.
+      ManagedBy:
+        $ref: '#/definitions/ManagedBy'
+        description: 'If the rule was created on behalf of your account by an AWS service, this field displays the principal name of the service that created the rule.'
     description: Contains information about a rule in Amazon CloudWatch Events.
   RunCommandTargets:
     type: array

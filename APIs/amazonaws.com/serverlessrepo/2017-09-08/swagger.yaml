@@ -629,6 +629,65 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/applications/{applicationId}/dependencies':
+    get:
+      operationId: ListApplicationDependencies
+      description: Retrieves the list of applications nested in the containing application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListApplicationDependenciesResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListApplicationDependenciesRequest'
+        - name: MaxItems
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+        - name: applicationId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/applications/{applicationId}/versions':
     get:
       operationId: ListApplicationVersions
@@ -816,17 +875,20 @@ definitions:
            CAPABILITY_NAMED_IAM:
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html">AWS::IAM::InstanceProfile</a>,
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>, and
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html">AWS::IAM::Policy</a>, and
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html">AWS::IAM::Role</a>.
            If the application contains IAM resources, you can specify either CAPABILITY_IAM
            or CAPABILITY_NAMED_IAM. If the application contains IAM resources
            with custom names, you must specify CAPABILITY_NAMED_IAM.</p><p>The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html">AWS::Lambda::Permission</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html">AWS::IAM:Policy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html">AWS::ApplicationAutoScaling::ScalingPolicy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html">AWS::S3::BucketPolicy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html">AWS::SQS::QueuePolicy</a>, and
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS:TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS::TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
            all permissions associated with the application before deploying. If you don't specify
-           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY</p>
+           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
+           </p>
       ResourcesSupported:
         $ref: '#/definitions/__boolean'
         description: |-
@@ -891,68 +953,41 @@ definitions:
            CAPABILITY_NAMED_IAM:
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html">AWS::IAM::InstanceProfile</a>,
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>, and
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html">AWS::IAM::Policy</a>, and
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html">AWS::IAM::Role</a>.
            If the application contains IAM resources, you can specify either CAPABILITY_IAM
            or CAPABILITY_NAMED_IAM. If the application contains IAM resources
            with custom names, you must specify CAPABILITY_NAMED_IAM.</p><p>The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html">AWS::Lambda::Permission</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html">AWS::IAM:Policy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html">AWS::ApplicationAutoScaling::ScalingPolicy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html">AWS::S3::BucketPolicy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html">AWS::SQS::QueuePolicy</a>, and
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS:TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
            all permissions associated with the application before deploying. If you don't specify
-           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY</p>
+           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
+           </p>
       ChangeSetName:
         $ref: '#/definitions/__string'
-        description: |-
-          This property corresponds to the parameter of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
-           CreateChangeSet</a></i>
-           API.
+        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
       ClientToken:
         $ref: '#/definitions/__string'
-        description: |-
-          This property corresponds to the parameter of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
-           CreateChangeSet</a></i>
-           API.
+        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
       Description:
         $ref: '#/definitions/__string'
-        description: |-
-          This property corresponds to the parameter of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
-           CreateChangeSet</a></i>
-           API.
+        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
       NotificationArns:
         $ref: '#/definitions/__listOf__string'
-        description: |-
-          This property corresponds to the parameter of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
-           CreateChangeSet</a></i>
-           API.
+        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
       ParameterOverrides:
         $ref: '#/definitions/__listOfParameterValue'
         description: A list of parameter values for the parameters of the application.
       ResourceTypes:
         $ref: '#/definitions/__listOf__string'
-        description: |-
-          This property corresponds to the parameter of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
-           CreateChangeSet</a></i>
-           API.
+        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
       RollbackConfiguration:
         $ref: '#/definitions/RollbackConfiguration'
-        description: |-
-          This property corresponds to the parameter of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
-           CreateChangeSet</a></i>
-           API.
+        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
       SemanticVersion:
         $ref: '#/definitions/__string'
         description: |-
@@ -961,20 +996,10 @@ definitions:
            </p>
       StackName:
         $ref: '#/definitions/__string'
-        description: |-
-          This property corresponds to the parameter of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
-           CreateChangeSet</a></i>
-           API.
+        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
       Tags:
         $ref: '#/definitions/__listOfTag'
-        description: |-
-          This property corresponds to the parameter of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">
-           CreateChangeSet</a></i>
-           API.
+        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
       TemplateId:
         $ref: '#/definitions/__string'
         description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
@@ -1106,6 +1131,18 @@ definitions:
   GetCloudFormationTemplateRequest:
     type: object
     properties: {}
+  ListApplicationDependenciesResponse:
+    type: object
+    properties:
+      Dependencies:
+        $ref: '#/definitions/__listOfApplicationDependencySummary'
+        description: An array of application summaries nested in the application.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: The token to request the next page of results.
+  ListApplicationDependenciesRequest:
+    type: object
+    properties: {}
   ListApplicationVersionsResponse:
     type: object
     properties:
@@ -1205,12 +1242,25 @@ definitions:
       ReadmeUrl:
         $ref: '#/definitions/__string'
         description: <p>A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
+  __string:
+    type: string
+  ApplicationDependencySummary:
+    type: object
+    required:
+      - ApplicationId
+      - SemanticVersion
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the nested application.
+      SemanticVersion:
+        $ref: '#/definitions/__string'
+        description: The semantic version of the nested application.
+    description: A nested application summary.
   __listOf__string:
     type: array
     items:
       $ref: '#/definitions/__string'
-  __string:
-    type: string
   ApplicationPolicyStatement:
     type: object
     required:
@@ -1271,6 +1321,7 @@ definitions:
       - CAPABILITY_NAMED_IAM
       - CAPABILITY_AUTO_EXPAND
       - CAPABILITY_RESOURCE_POLICY
+    description: Values that must be specified in order to deploy some applications.
   Version:
     type: object
     required:
@@ -1303,17 +1354,20 @@ definitions:
            CAPABILITY_NAMED_IAM:
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html">AWS::IAM::InstanceProfile</a>,
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>, and
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html">AWS::IAM::Policy</a>, and
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html">AWS::IAM::Role</a>.
            If the application contains IAM resources, you can specify either CAPABILITY_IAM
            or CAPABILITY_NAMED_IAM. If the application contains IAM resources
            with custom names, you must specify CAPABILITY_NAMED_IAM.</p><p>The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html">AWS::Lambda::Permission</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html">AWS::IAM:Policy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html">AWS::ApplicationAutoScaling::ScalingPolicy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html">AWS::S3::BucketPolicy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html">AWS::SQS::QueuePolicy</a>, and
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS:TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS::TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
            all permissions associated with the application before deploying. If you don't specify
-           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY</p>
+           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
+           </p>
       ResourcesSupported:
         $ref: '#/definitions/__boolean'
         description: |-
@@ -1351,26 +1405,11 @@ definitions:
     properties:
       MonitoringTimeInMinutes:
         $ref: '#/definitions/__integer'
-        description: |-
-          This property corresponds to the content of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">
-           RollbackConfiguration</a></i>
-           Data Type.
+        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a></i> Data Type.'
       RollbackTriggers:
         $ref: '#/definitions/__listOfRollbackTrigger'
-        description: |-
-          This property corresponds to the content of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">
-           RollbackConfiguration</a></i>
-           Data Type.
-    description: |-
-      This property corresponds to the
-       <i>AWS CloudFormation
-       <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">
-       RollbackConfiguration</a></i>
-       Data Type.
+        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a></i> Data Type.'
+    description: 'This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a></i> Data Type.'
   __listOfTag:
     type: array
     items:
@@ -1389,6 +1428,10 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100
+  __listOfApplicationDependencySummary:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationDependencySummary'
   __listOfVersionSummary:
     type: array
     items:
@@ -1493,26 +1536,11 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: |-
-          This property corresponds to the content of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">
-           RollbackTrigger</a></i>
-           Data Type.
+        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a></i> Data Type.'
       Type:
         $ref: '#/definitions/__string'
-        description: |-
-          This property corresponds to the content of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">
-           RollbackTrigger</a></i>
-           Data Type.
-    description: |-
-      This property corresponds to the
-       <i>AWS CloudFormation
-       <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">
-       RollbackTrigger</a></i>
-       Data Type.
+        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a></i> Data Type.'
+    description: 'This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a></i> Data Type.'
   Tag:
     type: object
     required:
@@ -1521,26 +1549,15 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/__string'
-        description: |-
-          This property corresponds to the content of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">
-           Tag</a></i>
-           Data Type.
+        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a></i> Data Type.'
       Value:
         $ref: '#/definitions/__string'
         description: |-
-          This property corresponds to the content of the same name for the
-           <i>AWS CloudFormation
-           <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">
-           Tag</a></i>
+          This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">
+           Tag</a>
+           </i>
            Data Type.
-    description: |-
-      This property corresponds to the
-       <i>AWS CloudFormation
-       <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">
-       Tag</a></i>
-       Data Type.
+    description: 'This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a></i> Data Type.'
   VersionSummary:
     type: object
     required:
