@@ -2516,12 +2516,14 @@ definitions:
   CreateBucketOutput:
     type: object
     example:
-      Location: /examplebucket
+      Location: 'http://examplebucket.s3.amazonaws.com/'
     properties: {}
   CreateBucketRequest:
     type: object
     example:
       Bucket: examplebucket
+      CreateBucketConfiguration:
+        LocationConstraint: eu-west-1
     properties:
       CreateBucketConfiguration:
         $ref: '#/definitions/CreateBucketConfiguration'
@@ -2605,8 +2607,8 @@ definitions:
   DeleteObjectRequest:
     type: object
     example:
-      Bucket: examplebucket
-      Key: objectkey.jpg
+      Bucket: ExampleBucket
+      Key: HappyFace.jpg
     properties: {}
   DeleteObjectTaggingOutput:
     type: object
@@ -2623,12 +2625,10 @@ definitions:
     type: object
     example:
       Deleted:
-        - DeleteMarker: 'true'
-          DeleteMarkerVersionId: A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F
-          Key: objectkey1
-        - DeleteMarker: 'true'
-          DeleteMarkerVersionId: iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt
-          Key: objectkey2
+        - Key: HappyFace.jpg
+          VersionId: yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd
+        - Key: HappyFace.jpg
+          VersionId: 2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b
     properties:
       Deleted:
         $ref: '#/definitions/DeletedObjects'
@@ -2642,8 +2642,10 @@ definitions:
       Bucket: examplebucket
       Delete:
         Objects:
-          - Key: objectkey1
-          - Key: objectkey2
+          - Key: HappyFace.jpg
+            VersionId: 2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b
+          - Key: HappyFace.jpg
+            VersionId: yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd
         Quiet: false
     properties:
       Delete:
@@ -3024,9 +3026,11 @@ definitions:
       - TagSet
     example:
       TagSet:
-        - Key: Key1
-          Value: Value1
-      VersionId: ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI
+        - Key: Key4
+          Value: Value4
+        - Key: Key3
+          Value: Value3
+      VersionId: 'null'
     properties:
       TagSet:
         $ref: '#/definitions/TagSet'
@@ -3034,8 +3038,7 @@ definitions:
     type: object
     example:
       Bucket: examplebucket
-      Key: exampleobject
-      VersionId: ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI
+      Key: HappyFace.jpg
     properties: {}
   GetObjectTorrentOutput:
     type: object
@@ -3719,17 +3722,15 @@ definitions:
     type: object
     example:
       ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
-      ServerSideEncryption: AES256
-      VersionId: CG612hodqujkf8FaaNfp8U..FIhLROcp
+      VersionId: Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr
     properties: {}
   PutObjectRequest:
     type: object
     example:
-      Body: HappyFace.jpg
+      ACL: authenticated-read
+      Body: filetoupload
       Bucket: examplebucket
-      Key: HappyFace.jpg
-      ServerSideEncryption: AES256
-      StorageClass: STANDARD_IA
+      Key: exampleobject
     properties:
       Body:
         $ref: '#/definitions/Body'
@@ -4922,7 +4923,7 @@ definitions:
     properties:
       ObjectLockEnabled:
         $ref: '#/definitions/ObjectLockEnabled'
-        description: Indicates whether this object has an Object Lock configuration enabled.
+        description: Indicates whether this bucket has an Object Lock configuration enabled.
       Rule:
         $ref: '#/definitions/ObjectLockRule'
         description: The Object Lock rule in place for the specified object.
@@ -4975,7 +4976,7 @@ definitions:
         description: Indicates the Retention mode for the specified object.
       RetainUntilDate:
         $ref: '#/definitions/Date'
-        description: <p/>
+        description: The date on which this Object Lock Retention will expire.
     description: A Retention configuration for an object.
   PublicAccessBlockConfiguration:
     type: object

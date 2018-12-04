@@ -4918,25 +4918,46 @@ definitions:
     description: Lists iSCSI information about a VTL device.
   DiskAllocationType:
     type: string
+    description: 'One of the <code>DiskAllocationType</code> enumeration values that identifies how a local disk is used. Valid values: "UPLOAD_BUFFER", "CACHE_STORAGE".'
     minLength: 3
     maxLength: 100
+  DiskAttributeList:
+    type: array
+    description: A list of values that represents attributes of a local disk.
+    items:
+      $ref: '#/definitions/DiskAttribute'
+    minItems: 0
+    maxItems: 10
   Disk:
     type: object
     properties:
       DiskId:
         $ref: '#/definitions/DiskId'
+        description: The unique device ID or other distinguishing data that identifies a local disk.
       DiskPath:
         $ref: '#/definitions/string'
+        description: The path of a local disk in the gateway virtual machine (VM).
       DiskNode:
         $ref: '#/definitions/string'
+        description: The device node of a local disk as assigned by the virtualization environment.
       DiskStatus:
         $ref: '#/definitions/string'
+        description: A value that represents the status of a local disk.
       DiskSizeInBytes:
         $ref: '#/definitions/long'
+        description: The local disk size in bytes.
       DiskAllocationType:
         $ref: '#/definitions/DiskAllocationType'
       DiskAllocationResource:
         $ref: '#/definitions/string'
+        description: 'The iSCSI Qualified Name (IQN) that is defined for a disk. This field is not included in the response if the local disk is not defined as an iSCSI target. The format of this field is <i>targetIqn::LUNNumber::region-volumeId</i>. '
+      DiskAttributeList:
+        $ref: '#/definitions/DiskAttributeList'
+    description: Represents a gateway's local disk.
+  DiskAttribute:
+    type: string
+    minLength: 1
+    maxLength: 64
   Disks:
     type: array
     items:

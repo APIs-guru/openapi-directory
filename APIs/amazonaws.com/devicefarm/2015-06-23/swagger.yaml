@@ -3693,6 +3693,9 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
+      filters:
+        $ref: '#/definitions/DeviceFilters'
+        description: '<p>Used to select a set of devices. A filter is made up of an attribute, an operator, and one or more values.</p> <ul> <li> <p>Attribute: The aspect of a device such as platform or model used as the selction criteria in a device filter.</p> <p>Allowed values include:</p> <ul> <li> <p>ARN: The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".</p> </li> <li> <p>PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".</p> </li> <li> <p>OS_VERSION: The operating system version. For example, "10.3.2".</p> </li> <li> <p>MODEL: The device model. For example, "iPad 5th Gen".</p> </li> <li> <p>AVAILABILITY: The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".</p> </li> <li> <p>FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".</p> </li> <li> <p>MANUFACTURER: The device manufacturer. For example, "Apple".</p> </li> <li> <p>REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.</p> </li> <li> <p>REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging.</p> </li> <li> <p>INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.</p> </li> <li> <p>INSTANCE_LABELS: The label of the device instance.</p> </li> <li> <p>FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".</p> </li> </ul> </li> <li> <p>Operator: The filter operator.</p> <ul> <li> <p>The EQUALS operator is available for every attribute except INSTANCE_LABELS.</p> </li> <li> <p>The CONTAINS operator is available for the INSTANCE_LABELS and MODEL attributes.</p> </li> <li> <p>The IN and NOT_IN operators are available for the ARN, OS_VERSION, MODEL, MANUFACTURER, and INSTANCE_ARN attributes.</p> </li> <li> <p>The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS operators are also available for the OS_VERSION attribute.</p> </li> </ul> </li> <li> <p>Values: An array of one or more filter values.</p> <ul> <li> <p>The IN and NOT operators can take a values array that has more than one element.</p> </li> <li> <p>The other operators require an array with a single element.</p> </li> <li> <p>In a request, the AVAILABILITY attribute takes "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE" as values.</p> </li> </ul> </li> </ul>'
     description: Represents the result of a list devices request.
   ListInstanceProfilesResult:
     type: object
@@ -4259,7 +4262,6 @@ definitions:
     type: object
     required:
       - projectArn
-      - devicePoolArn
       - test
     example:
       name: MyRun
@@ -4277,7 +4279,10 @@ definitions:
         description: The ARN of the app to schedule a run.
       devicePoolArn:
         $ref: '#/definitions/AmazonResourceName'
-        description: The ARN of the device pool for the run to be scheduled.
+        description: <p>The ARN of the device pool for the run to be scheduled.</p> <p>Either <b> <code>devicePoolArn</code> </b> or <b> <code>deviceSelectionConfiguration</code> </b> are required in a request.</p>
+      deviceSelectionConfiguration:
+        $ref: '#/definitions/DeviceSelectionConfiguration'
+        description: '<p>The filter criteria used to dynamically select a set of devices for a test run, as well as the maximum number of devices to be included in the run.</p> <p>Either <b> <code>devicePoolArn</code> </b> or <b> <code>deviceSelectionConfiguration</code> </b> are required in a request.</p>'
       name:
         $ref: '#/definitions/Name'
         description: The name for the run to be scheduled.
@@ -5116,6 +5121,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DeviceInstance'
+  DeviceAvailability:
+    type: string
+    enum:
+      - TEMPORARY_NOT_AVAILABLE
+      - BUSY
+      - AVAILABLE
+      - HIGHLY_AVAILABLE
   Device:
     type: object
     properties:
@@ -5179,6 +5191,9 @@ definitions:
       instances:
         $ref: '#/definitions/DeviceInstances'
         description: The instances belonging to this device.
+      availability:
+        $ref: '#/definitions/DeviceAvailability'
+        description: Reflects how likely a device will be available for a test run.
     description: Represents a device type that an app is tested against.
   DeviceAttribute:
     type: string
@@ -5193,6 +5208,53 @@ definitions:
       - INSTANCE_ARN
       - INSTANCE_LABELS
       - FLEET_TYPE
+  DeviceFilterAttribute:
+    type: string
+    enum:
+      - ARN
+      - PLATFORM
+      - OS_VERSION
+      - MODEL
+      - AVAILABILITY
+      - FORM_FACTOR
+      - MANUFACTURER
+      - REMOTE_ACCESS_ENABLED
+      - REMOTE_DEBUG_ENABLED
+      - INSTANCE_ARN
+      - INSTANCE_LABELS
+      - FLEET_TYPE
+  DeviceFilterOperator:
+    type: string
+    enum:
+      - EQUALS
+      - LESS_THAN
+      - LESS_THAN_OR_EQUALS
+      - GREATER_THAN
+      - GREATER_THAN_OR_EQUALS
+      - IN
+      - NOT_IN
+      - CONTAINS
+  DeviceFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  DeviceFilter:
+    type: object
+    properties:
+      attribute:
+        $ref: '#/definitions/DeviceFilterAttribute'
+        description: '<p>The aspect of a device such as platform or model used as the selection criteria in a device filter.</p> <p>Allowed values include:</p> <ul> <li> <p>ARN: The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".</p> </li> <li> <p>PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".</p> </li> <li> <p>OS_VERSION: The operating system version. For example, "10.3.2".</p> </li> <li> <p>MODEL: The device model. For example, "iPad 5th Gen".</p> </li> <li> <p>AVAILABILITY: The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".</p> </li> <li> <p>FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".</p> </li> <li> <p>MANUFACTURER: The device manufacturer. For example, "Apple".</p> </li> <li> <p>REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.</p> </li> <li> <p>REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging.</p> </li> <li> <p>INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.</p> </li> <li> <p>INSTANCE_LABELS: The label of the device instance.</p> </li> <li> <p>FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".</p> </li> </ul>'
+      operator:
+        $ref: '#/definitions/DeviceFilterOperator'
+        description: '<p>The filter operator.</p> <ul> <li> <p>The EQUALS operator is available for every attribute except INSTANCE_LABELS.</p> </li> <li> <p>The CONTAINS operator is available for the INSTANCE_LABELS and MODEL attributes.</p> </li> <li> <p>The IN and NOT_IN operators are available for the ARN, OS_VERSION, MODEL, MANUFACTURER, and INSTANCE_ARN attributes.</p> </li> <li> <p>The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS operators are also available for the OS_VERSION attribute.</p> </li> </ul>'
+      values:
+        $ref: '#/definitions/DeviceFilterValues'
+        description: '<p>An array of one or more filter values used in a device filter.</p> <p class="title"> <b>Operator Values</b> </p> <ul> <li> <p>The IN and NOT operators can take a values array that has more than one element.</p> </li> <li> <p>The other operators require an array with a single element.</p> </li> </ul> <p class="title"> <b>Attribute Values</b> </p> <ul> <li> <p>The PLATFORM attribute can be set to "ANDROID" or "IOS".</p> </li> <li> <p>The AVAILABILITY attribute can be set to "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".</p> </li> <li> <p>The FORM_FACTOR attribute can be set to "PHONE" or "TABLET".</p> </li> <li> <p>The FLEET_TYPE attribute can be set to "PUBLIC" or "PRIVATE".</p> </li> </ul>'
+    description: '<p>Represents a device filter used to select a set of devices to be included in a test run. This data structure is passed in as the "deviceSelectionConfiguration" parameter to ScheduleRun. For an example of the JSON request syntax, see <a>ScheduleRun</a>.</p> <p>It is also passed in as the "filters" parameter to ListDevices. For an example of the JSON request syntax, see <a>ListDevices</a>.</p>'
+  DeviceFilters:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceFilter'
   InstanceLabels:
     type: array
     items:
@@ -5269,6 +5331,32 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DevicePool'
+  DeviceSelectionConfiguration:
+    type: object
+    required:
+      - filters
+      - maxDevices
+    properties:
+      filters:
+        $ref: '#/definitions/DeviceFilters'
+        description: '<p>Used to dynamically select a set of devices for a test run. A filter is made up of an attribute, an operator, and one or more values.</p> <ul> <li> <p>Attribute: The aspect of a device such as platform or model used as the selection criteria in a device filter.</p> <p>Allowed values include:</p> <ul> <li> <p>ARN: The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".</p> </li> <li> <p>PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".</p> </li> <li> <p>OS_VERSION: The operating system version. For example, "10.3.2".</p> </li> <li> <p>MODEL: The device model. For example, "iPad 5th Gen".</p> </li> <li> <p>AVAILABILITY: The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".</p> </li> <li> <p>FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".</p> </li> <li> <p>MANUFACTURER: The device manufacturer. For example, "Apple".</p> </li> <li> <p>REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.</p> </li> <li> <p>REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging.</p> </li> <li> <p>INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.</p> </li> <li> <p>INSTANCE_LABELS: The label of the device instance.</p> </li> <li> <p>FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".</p> </li> </ul> </li> <li> <p>Operator: The filter operator.</p> <ul> <li> <p>The EQUALS operator is available for every attribute except INSTANCE_LABELS.</p> </li> <li> <p>The CONTAINS operator is available for the INSTANCE_LABELS and MODEL attributes.</p> </li> <li> <p>The IN and NOT_IN operators are available for the ARN, OS_VERSION, MODEL, MANUFACTURER, and INSTANCE_ARN attributes.</p> </li> <li> <p>The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS operators are also available for the OS_VERSION attribute.</p> </li> </ul> </li> <li> <p>Values: An array of one or more filter values.</p> <ul> <li> <p>The IN and NOT operators can take a values array that has more than one element.</p> </li> <li> <p>The other operators require an array with a single element.</p> </li> <li> <p>In a request, the AVAILABILITY attribute takes "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE" as values.</p> </li> </ul> </li> </ul>'
+      maxDevices:
+        $ref: '#/definitions/Integer'
+        description: The maximum number of devices to be included in a test run.
+    description: Represents the device filters used in a test run as well as the maximum number of devices to be included in the run. It is passed in as the deviceSelectionConfiguration request parameter in <a>ScheduleRun</a>.
+  DeviceSelectionResult:
+    type: object
+    properties:
+      filters:
+        $ref: '#/definitions/DeviceFilters'
+        description: The filters in a device selection result.
+      matchedDevicesCount:
+        $ref: '#/definitions/Integer'
+        description: The number of devices that matched the device filter selection criteria.
+      maxDevices:
+        $ref: '#/definitions/Integer'
+        description: The maximum number of devices to be selected by a device filter and included in a test run.
+    description: 'Contains the run results requested by the device selection configuration as well as how many devices were returned. For an example of the JSON response syntax, see <a>ScheduleRun</a>.'
   Devices:
     type: array
     items:
@@ -5552,6 +5640,9 @@ definitions:
       testSpecArn:
         $ref: '#/definitions/AmazonResourceName'
         description: The ARN of the YAML-formatted test specification for the run.
+      deviceSelectionResult:
+        $ref: '#/definitions/DeviceSelectionResult'
+        description: The results of a device filter used to select the devices for a test run.
     description: 'Represents a test run on a set of devices with a given app package, test parameters, etc.'
   Suite:
     type: object
@@ -5902,14 +5993,14 @@ definitions:
     properties:
       attribute:
         $ref: '#/definitions/DeviceAttribute'
-        description: '<p>The rule''s stringified attribute. For example, specify the value as <code>"\"abc\""</code>.</p> <p>Allowed values include:</p> <ul> <li> <p>ARN: The ARN.</p> </li> <li> <p>FORM_FACTOR: The form factor (for example, phone or tablet).</p> </li> <li> <p>MANUFACTURER: The manufacturer.</p> </li> <li> <p>PLATFORM: The platform (for example, Android or iOS).</p> </li> <li> <p>REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.</p> </li> <li> <p>APPIUM_VERSION: The Appium version for the test.</p> </li> <li> <p>INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.</p> </li> <li> <p>INSTANCE_LABELS: The label of the device instance.</p> </li> </ul>'
+        description: '<p>The rule''s attribute. It is the aspect of a device such as platform or model used as selection criteria to create or update a device pool.</p> <p>Allowed values include:</p> <ul> <li> <p>ARN: The Amazon Resource Name (ARN) of a device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".</p> </li> <li> <p>PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".</p> </li> <li> <p>FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".</p> </li> <li> <p>MANUFACTURER: The device manufacturer. For example, "Apple".</p> </li> <li> <p>REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.</p> </li> <li> <p>REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging.</p> </li> <li> <p>APPIUM_VERSION: The Appium version for the test.</p> </li> <li> <p>INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.</p> </li> <li> <p>INSTANCE_LABELS: The label of the device instance.</p> </li> <li> <p>FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".</p> </li> </ul>'
       operator:
         $ref: '#/definitions/RuleOperator'
         description: '<p>The rule''s operator.</p> <ul> <li> <p>EQUALS: The equals operator.</p> </li> <li> <p>GREATER_THAN: The greater-than operator.</p> </li> <li> <p>IN: The in operator.</p> </li> <li> <p>LESS_THAN: The less-than operator.</p> </li> <li> <p>NOT_IN: The not-in operator.</p> </li> <li> <p>CONTAINS: The contains operator.</p> </li> </ul>'
       value:
         $ref: '#/definitions/String'
-        description: The rule's value.
-    description: Represents a condition for a device pool.
+        description: '<p>The rule''s value.</p> <p>The value must be passed in as a string using escaped quotes.</p> <p>For example:</p> <p>"value": "\"ANDROID\""</p>'
+    description: Represents a condition for a device pool. It is passed in as the <code>rules</code> parameter to <a>CreateDevicePool</a> and <a>UpdateDevicePool</a>.
   SampleType:
     type: string
     enum:

@@ -937,7 +937,7 @@ definitions:
         description: The services that have processed a traced request during the specified time frame.
       ContainsOldGroupVersions:
         $ref: '#/definitions/Boolean'
-        description: 'A flag indicating whether or not the group''s filter expression has been consistent, or if the returned service graph may show traces from an older version of the group''s filter expression.'
+        description: 'A flag indicating whether the group''s filter expression has been consistent, or if the returned service graph may show traces from an older version of the group''s filter expression.'
       NextToken:
         $ref: '#/definitions/String'
         description: Pagination token. Not used.
@@ -952,7 +952,7 @@ definitions:
         description: The start of the time frame for which to generate a graph.
       EndTime:
         $ref: '#/definitions/Timestamp'
-        description: The end of the time frame for which to generate a graph.
+        description: The end of the timeframe for which to generate a graph.
       GroupName:
         $ref: '#/definitions/GroupName'
         description: The name of a group to generate a graph based on.
@@ -1083,7 +1083,7 @@ definitions:
         description: The case-sensitive name of the group.
       GroupARN:
         $ref: '#/definitions/GroupARN'
-        description: The ARN that was generated upon create.
+        description: The ARN that was generated upon creation.
       FilterExpression:
         $ref: '#/definitions/FilterExpression'
         description: The updated filter expression defining criteria by which to group traces.
@@ -1175,6 +1175,13 @@ definitions:
           $ref: '#/definitions/AttributeKey'
         value:
           $ref: '#/definitions/AttributeValue'
+  AvailabilityZoneDetail:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of a corresponding availability zone.
+    description: A list of availability zones corresponding to the segments in a trace.
   NullableInteger:
     type: integer
   BackendConnectionErrors:
@@ -1422,6 +1429,122 @@ definitions:
     type: string
     minLength: 1
     maxLength: 3000
+  ErrorRootCauseServices:
+    type: array
+    items:
+      $ref: '#/definitions/ErrorRootCauseService'
+  ErrorRootCause:
+    type: object
+    properties:
+      Services:
+        $ref: '#/definitions/ErrorRootCauseServices'
+        description: 'A list of services corresponding to an error. A service identifies a segment and it contains a name, account ID, type, and inferred flag.'
+    description: The root cause of a trace summary error.
+  RootCauseExceptions:
+    type: array
+    items:
+      $ref: '#/definitions/RootCauseException'
+  ErrorRootCauseEntity:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the entity.
+      Exceptions:
+        $ref: '#/definitions/RootCauseExceptions'
+        description: The types and messages of the exceptions.
+      Remote:
+        $ref: '#/definitions/NullableBoolean'
+        description: A flag that denotes a remote subsegment.
+    description: A collection of segments and corresponding subsegments associated to a trace summary error.
+  ErrorRootCauseEntityPath:
+    type: array
+    items:
+      $ref: '#/definitions/ErrorRootCauseEntity'
+  ServiceNames:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ErrorRootCauseService:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The service name.
+      Names:
+        $ref: '#/definitions/ServiceNames'
+        description: A collection of associated service names.
+      Type:
+        $ref: '#/definitions/String'
+        description: The type associated to the service.
+      AccountId:
+        $ref: '#/definitions/String'
+        description: The account ID associated to the service.
+      EntityPath:
+        $ref: '#/definitions/ErrorRootCauseEntityPath'
+        description: 'The path of root cause entities found on the service. '
+      Inferred:
+        $ref: '#/definitions/NullableBoolean'
+        description: A Boolean value indicating if the service is inferred from the trace.
+    description: A collection of fields identifying the services in a trace summary error.
+  ErrorRootCauses:
+    type: array
+    items:
+      $ref: '#/definitions/ErrorRootCause'
+  FaultRootCauseServices:
+    type: array
+    items:
+      $ref: '#/definitions/FaultRootCauseService'
+  FaultRootCause:
+    type: object
+    properties:
+      Services:
+        $ref: '#/definitions/FaultRootCauseServices'
+        description: 'A list of corresponding services. A service identifies a segment and it contains a name, account ID, type, and inferred flag.'
+    description: The root cause information for a trace summary fault.
+  FaultRootCauseEntity:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the entity.
+      Exceptions:
+        $ref: '#/definitions/RootCauseExceptions'
+        description: The types and messages of the exceptions.
+      Remote:
+        $ref: '#/definitions/NullableBoolean'
+        description: A flag that denotes a remote subsegment.
+    description: A collection of segments and corresponding subsegments associated to a trace summary fault error.
+  FaultRootCauseEntityPath:
+    type: array
+    items:
+      $ref: '#/definitions/FaultRootCauseEntity'
+  FaultRootCauseService:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The service name.
+      Names:
+        $ref: '#/definitions/ServiceNames'
+        description: A collection of associated service names.
+      Type:
+        $ref: '#/definitions/String'
+        description: The type associated to the service.
+      AccountId:
+        $ref: '#/definitions/String'
+        description: The account ID associated to the service.
+      EntityPath:
+        $ref: '#/definitions/FaultRootCauseEntityPath'
+        description: 'The path of root cause entities found on the service. '
+      Inferred:
+        $ref: '#/definitions/NullableBoolean'
+        description: A Boolean value indicating if the service is inferred from the trace.
+    description: A collection of fields identifying the services in a trace summary fault.
+  FaultRootCauses:
+    type: array
+    items:
+      $ref: '#/definitions/FaultRootCause'
   FixedRate:
     type: number
     format: double
@@ -1517,6 +1640,13 @@ definitions:
         $ref: '#/definitions/String'
         description: The IP address of the requestor.
     description: Information about an HTTP request.
+  InstanceIdDetail:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/String'
+        description: The ID of a corresponding EC2 instance.
+    description: 'A list of EC2 instance IDs corresponding to the segments in a trace. '
   Priority:
     type: integer
     minimum: 1
@@ -1542,6 +1672,77 @@ definitions:
   ReservoirSize:
     type: integer
     minimum: 0
+  ResourceARNDetail:
+    type: object
+    properties:
+      ARN:
+        $ref: '#/definitions/String'
+        description: The ARN of a corresponding resource.
+    description: A list of resources ARNs corresponding to the segments in a trace.
+  ResponseTimeRootCauseServices:
+    type: array
+    items:
+      $ref: '#/definitions/ResponseTimeRootCauseService'
+  ResponseTimeRootCause:
+    type: object
+    properties:
+      Services:
+        $ref: '#/definitions/ResponseTimeRootCauseServices'
+        description: 'A list of corresponding services. A service identifies a segment and contains a name, account ID, type, and inferred flag.'
+    description: The root cause information for a response time warning.
+  ResponseTimeRootCauseEntity:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the entity.
+      Coverage:
+        $ref: '#/definitions/NullableDouble'
+        description: The types and messages of the exceptions.
+      Remote:
+        $ref: '#/definitions/NullableBoolean'
+        description: A flag that denotes a remote subsegment.
+    description: A collection of segments and corresponding subsegments associated to a response time warning.
+  ResponseTimeRootCauseEntityPath:
+    type: array
+    items:
+      $ref: '#/definitions/ResponseTimeRootCauseEntity'
+  ResponseTimeRootCauseService:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The service name.
+      Names:
+        $ref: '#/definitions/ServiceNames'
+        description: A collection of associated service names.
+      Type:
+        $ref: '#/definitions/String'
+        description: The type associated to the service.
+      AccountId:
+        $ref: '#/definitions/String'
+        description: The account ID associated to the service.
+      EntityPath:
+        $ref: '#/definitions/ResponseTimeRootCauseEntityPath'
+        description: 'The path of root cause entities found on the service. '
+      Inferred:
+        $ref: '#/definitions/NullableBoolean'
+        description: A Boolean value indicating if the service is inferred from the trace.
+    description: A collection of fields identifying the service in a response time warning.
+  ResponseTimeRootCauses:
+    type: array
+    items:
+      $ref: '#/definitions/ResponseTimeRootCause'
+  RootCauseException:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the exception.
+      Message:
+        $ref: '#/definitions/String'
+        description: The message of the exception.
+    description: The exception associated with a root cause.
   RuleName:
     type: string
     minLength: 1
@@ -1686,10 +1887,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Segment'
-  ServiceNames:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   ServiceStatistics:
     type: object
     properties:
@@ -1813,6 +2010,18 @@ definitions:
         $ref: '#/definitions/SegmentList'
         description: Segment documents for the segments and subsegments that comprise the trace.
     description: A collection of segment documents with matching trace IDs.
+  TraceAvailabilityZones:
+    type: array
+    items:
+      $ref: '#/definitions/AvailabilityZoneDetail'
+  TraceInstanceIds:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceIdDetail'
+  TraceResourceARNs:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceARNDetail'
   TraceSegmentDocument:
     type: string
   TraceUsers:
@@ -1855,6 +2064,30 @@ definitions:
       ServiceIds:
         $ref: '#/definitions/ServiceIds'
         description: Service IDs from the trace's segment documents.
+      ResourceARNs:
+        $ref: '#/definitions/TraceResourceARNs'
+        description: A list of resource ARNs for any resource corresponding to the trace segments.
+      InstanceIds:
+        $ref: '#/definitions/TraceInstanceIds'
+        description: A list of EC2 instance IDs for any instance corresponding to the trace segments.
+      AvailabilityZones:
+        $ref: '#/definitions/TraceAvailabilityZones'
+        description: A list of availability zones for any zone corresponding to the trace segments.
+      EntryPoint:
+        $ref: '#/definitions/ServiceId'
+        description: The root of a trace.
+      FaultRootCauses:
+        $ref: '#/definitions/FaultRootCauses'
+        description: A collection of FaultRootCause structures corresponding to the the trace segments.
+      ErrorRootCauses:
+        $ref: '#/definitions/ErrorRootCauses'
+        description: A collection of ErrorRootCause structures corresponding to the trace segments.
+      ResponseTimeRootCauses:
+        $ref: '#/definitions/ResponseTimeRootCauses'
+        description: A collection of ResponseTimeRootCause structures corresponding to the trace segments.
+      Revision:
+        $ref: '#/definitions/Integer'
+        description: The revision number of a trace.
     description: Metadata generated from the segment documents in a trace.
   TraceUser:
     type: object
