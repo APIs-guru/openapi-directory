@@ -348,18 +348,8 @@ definitions:
       maxResults:
         $ref: '#/definitions/maxResults'
         description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
-  InvalidPaginationToken:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/string'
-    description: The specified pagination token (<code>nextToken</code>) is not valid.
-  UnsupportedLocale:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/string'
-    description: The specified locale is not supported.
+  InvalidPaginationToken: {}
+  UnsupportedLocale: {}
   DescribeEntityAggregatesResponse:
     type: object
     properties:
@@ -471,11 +461,14 @@ definitions:
     maxLength: 1600
   eventArn:
     type: string
-    pattern: 'arn:aws:health:[^:]*:[^:]*:event(?:/[\w-]+){1}((?:/[\w-]+){2})?'
+    pattern: 'arn:aws:health:[^:]*:[^:]*:event(?:/[\w-]+){3}'
     maxLength: 1600
   entityValue:
     type: string
     maxLength: 256
+  entityUrl:
+    type: string
+    pattern: 'https?://.+\.(amazon\.com|amazonaws\.com|amazonaws\.cn|c2s\.ic\.gov|sc2s\.sgov\.gov|amazonaws-us-gov.com)/.*'
   accountId:
     type: string
     pattern: '[0-9]{12}'
@@ -510,6 +503,8 @@ definitions:
       entityValue:
         $ref: '#/definitions/entityValue'
         description: The ID of the affected entity.
+      entityUrl:
+        $ref: '#/definitions/entityUrl'
       awsAccountId:
         $ref: '#/definitions/accountId'
         description: The 12-digit AWS account number that contains the affected entity.
