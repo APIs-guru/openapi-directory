@@ -1585,7 +1585,7 @@ paths:
   '/#EnableAWSOrganizationsAccess':
     post:
       operationId: EnableAWSOrganizationsAccess
-      description: '<p>Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization.</p> <p>By calling this API Service Catalog will use FAS credentials to call organizations:EnableAWSServiceAccess so that your shares can be in sync with any changes in your AWS Organizations.</p>'
+      description: '<p>Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization.</p> <p>By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.</p>'
       responses:
         '200':
           description: Success
@@ -5020,11 +5020,11 @@ definitions:
     properties:
       Type:
         $ref: '#/definitions/OrganizationNodeType'
-        description: <p/>
+        description: The organization node type.
       Value:
         $ref: '#/definitions/OrganizationNodeValue'
-        description: <p/>
-    description: <p/>
+        description: The identifier of the organization node.
+    description: Information about the organization node.
   PortfolioShareToken:
     type: string
   ProductViewOwner:

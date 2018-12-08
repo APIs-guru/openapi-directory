@@ -237,6 +237,115 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListConfigurationsRequest'
+  '/v1/tags/{resource-arn}':
+    post:
+      operationId: CreateTags
+      description: Add a tag to a resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTagsRequest'
+        - name: resource-arn
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteTags
+      description: Remove a tag from a resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTagsRequest'
+        - name: resource-arn
+          in: path
+          type: string
+          required: true
+    get:
+      operationId: ListTags
+      description: Lists tags for a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsRequest'
+        - name: resource-arn
+          in: path
+          type: string
+          required: true
   '/v1/brokers/{broker-id}/users/{username}':
     post:
       operationId: CreateUser
@@ -825,7 +934,7 @@ definitions:
         description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
       EngineVersion:
         $ref: '#/definitions/__string'
-        description: 'Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.6 and 5.15.0.'
+        description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
       HostInstanceType:
         $ref: '#/definitions/__string'
         description: Required. The broker's instance type.
@@ -844,6 +953,9 @@ definitions:
       SubnetIds:
         $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: Create tags when creating the broker.
       Users:
         $ref: '#/definitions/__listOfUser'
         description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
@@ -879,11 +991,22 @@ definitions:
         description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
       EngineVersion:
         $ref: '#/definitions/__string'
-        description: 'Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.6 and 5.15.0.'
+        description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
       Name:
         $ref: '#/definitions/__string'
         description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: Create tags when creating the configuration.
     description: Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
+  CreateTagsRequest:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The key-value pair for the resource tag.
+    description: A map of the key-value pairs for the resource tag.
+  NotFoundException: {}
   CreateUserResponse:
     type: object
     properties: {}
@@ -900,7 +1023,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
     description: Creates a new ActiveMQ user.
-  NotFoundException: {}
   DeleteBrokerResponse:
     type: object
     properties:
@@ -908,6 +1030,9 @@ definitions:
         $ref: '#/definitions/__string'
         description: The unique ID that Amazon MQ generates for the broker.
   DeleteBrokerRequest:
+    type: object
+    properties: {}
+  DeleteTagsRequest:
     type: object
     properties: {}
   DeleteUserResponse:
@@ -951,7 +1076,7 @@ definitions:
         description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
       EngineVersion:
         $ref: '#/definitions/__string'
-        description: 'The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.6 and 5.15.0.'
+        description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
       HostInstanceType:
         $ref: '#/definitions/__string'
         description: The broker's instance type.
@@ -963,7 +1088,7 @@ definitions:
         description: The parameters that determine the WeeklyStartTime.
       PendingEngineVersion:
         $ref: '#/definitions/__string'
-        description: The version of the broker engine to upgrade to.
+        description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
       PubliclyAccessible:
         $ref: '#/definitions/__boolean'
         description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
@@ -973,6 +1098,9 @@ definitions:
       SubnetIds:
         $ref: '#/definitions/__listOf__string'
         description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The list of all tags associated with this broker.
       Users:
         $ref: '#/definitions/__listOfUserSummary'
         description: The list of all ActiveMQ usernames for the specified broker.
@@ -996,7 +1124,7 @@ definitions:
         description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
       EngineVersion:
         $ref: '#/definitions/__string'
-        description: Required. The version of the broker engine.
+        description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
       Id:
         $ref: '#/definitions/__string'
         description: Required. The unique ID that Amazon MQ generates for the configuration.
@@ -1006,6 +1134,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The list of all tags associated with this configuration.
   DescribeConfigurationRequest:
     type: object
     properties: {}
@@ -1093,6 +1224,15 @@ definitions:
   ListConfigurationsRequest:
     type: object
     properties: {}
+  ListTagsResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The key-value pair for the resource tag.
+  ListTagsRequest:
+    type: object
+    properties: {}
   ListUsersResponse:
     type: object
     properties:
@@ -1131,7 +1271,7 @@ definitions:
         description: The ID of the updated configuration.
       EngineVersion:
         $ref: '#/definitions/__string'
-        description: The version of the broker engine to upgrade to.
+        description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
       Logs:
         $ref: '#/definitions/Logs'
         description: The list of information about logs to be enabled for the specified broker.
@@ -1146,7 +1286,7 @@ definitions:
         description: A list of information about the configuration.
       EngineVersion:
         $ref: '#/definitions/__string'
-        description: 'The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.6 and 5.15.0.'
+        description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
       Logs:
         $ref: '#/definitions/Logs'
         description: Enables Amazon CloudWatch logging for brokers.
@@ -1285,6 +1425,15 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Required. The revision number of the configuration.
     description: Returns information about the specified configuration revision.
+  __mapOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
   Configuration:
     type: object
     properties:
@@ -1302,7 +1451,7 @@ definitions:
         description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
       EngineVersion:
         $ref: '#/definitions/__string'
-        description: Required. The version of the broker engine.
+        description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
       Id:
         $ref: '#/definitions/__string'
         description: Required. The unique ID that Amazon MQ generates for the configuration.
@@ -1312,6 +1461,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The list of all tags associated with this configuration.
     description: Returns information about all configurations.
   __integer:
     type: integer

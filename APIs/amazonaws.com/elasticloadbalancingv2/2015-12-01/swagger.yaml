@@ -118,14 +118,6 @@ paths:
           description: CertificateNotFoundException
           schema:
             $ref: '#/definitions/CertificateNotFoundException'
-        '483':
-          description: UnsupportedCertificateException
-          schema:
-            $ref: '#/definitions/UnsupportedCertificateException'
-        '484':
-          description: UnsupportedProtocolException
-          schema:
-            $ref: '#/definitions/UnsupportedProtocolException'
       parameters:
         - name: body
           in: body
@@ -245,14 +237,10 @@ paths:
           schema:
             $ref: '#/definitions/TooManyTargetsException'
         '493':
-          description: UnsupportedCertificateException
-          schema:
-            $ref: '#/definitions/UnsupportedCertificateException'
-        '494':
           description: TooManyActionsException
           schema:
             $ref: '#/definitions/TooManyActionsException'
-        '495':
+        '494':
           description: InvalidLoadBalancerActionException
           schema:
             $ref: '#/definitions/InvalidLoadBalancerActionException'
@@ -820,35 +808,6 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#DescribeProvisionedCapacity':
-    post:
-      operationId: DescribeProvisionedCapacity
-      description: ''
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/DescribeProvisionedCapacityOutput'
-        '480':
-          description: LoadBalancerNotFoundException
-          schema:
-            $ref: '#/definitions/LoadBalancerNotFoundException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DescribeProvisionedCapacityInput'
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeRules':
     post:
       operationId: DescribeRules
@@ -1145,14 +1104,10 @@ paths:
           schema:
             $ref: '#/definitions/TooManyTargetsException'
         '493':
-          description: UnsupportedCertificateException
-          schema:
-            $ref: '#/definitions/UnsupportedCertificateException'
-        '494':
           description: TooManyActionsException
           schema:
             $ref: '#/definitions/TooManyActionsException'
-        '495':
+        '494':
           description: InvalidLoadBalancerActionException
           schema:
             $ref: '#/definitions/InvalidLoadBalancerActionException'
@@ -1195,51 +1150,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ModifyLoadBalancerAttributesInput'
-    parameters:
-      - $ref: '#/parameters/Action'
-      - $ref: '#/parameters/Version'
-      - $ref: '#/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/parameters/X-Amz-Date'
-      - $ref: '#/parameters/X-Amz-Algorithm'
-      - $ref: '#/parameters/X-Amz-Credential'
-      - $ref: '#/parameters/X-Amz-Security-Token'
-      - $ref: '#/parameters/X-Amz-Signature'
-      - $ref: '#/parameters/X-Amz-SignedHeaders'
-  '/#ModifyProvisionedCapacity':
-    post:
-      operationId: ModifyProvisionedCapacity
-      description: ''
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ModifyProvisionedCapacityOutput'
-        '480':
-          description: LoadBalancerNotFoundException
-          schema:
-            $ref: '#/definitions/LoadBalancerNotFoundException'
-        '481':
-          description: InvalidConfigurationRequestException
-          schema:
-            $ref: '#/definitions/InvalidConfigurationRequestException'
-        '482':
-          description: MinimumLBCapacityUnitsDecreaseThrottlingException
-          schema:
-            $ref: '#/definitions/MinimumLBCapacityUnitsDecreaseThrottlingException'
-        '483':
-          description: MinimumLBCapacityUnitsLimitExceededException
-          schema:
-            $ref: '#/definitions/MinimumLBCapacityUnitsLimitExceededException'
-        '484':
-          description: InsufficientCapacityException
-          schema:
-            $ref: '#/definitions/InsufficientCapacityException'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ModifyProvisionedCapacityInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1682,8 +1592,6 @@ definitions:
   ListenerNotFoundException: {}
   TooManyCertificatesException: {}
   CertificateNotFoundException: {}
-  UnsupportedCertificateException: {}
-  UnsupportedProtocolException: {}
   AddTagsOutput:
     type: object
     properties: {}
@@ -1771,6 +1679,7 @@ definitions:
   InvalidConfigurationRequestException: {}
   IncompatibleProtocolsException: {}
   SSLPolicyNotFoundException: {}
+  UnsupportedProtocolException: {}
   TooManyRegistrationsForTargetIdException: {}
   TooManyTargetsException: {}
   TooManyActionsException: {}
@@ -2196,18 +2105,6 @@ definitions:
       PageSize:
         $ref: '#/definitions/PageSize'
         description: The maximum number of results to return with this call.
-  DescribeProvisionedCapacityOutput:
-    type: object
-    properties:
-      ProvisionedCapacity:
-        $ref: '#/definitions/ProvisionedCapacity'
-  DescribeProvisionedCapacityInput:
-    type: object
-    required:
-      - LoadBalancerArn
-    properties:
-      LoadBalancerArn:
-        $ref: '#/definitions/LoadBalancerArn'
   DescribeRulesOutput:
     type: object
     example:
@@ -2531,24 +2428,6 @@ definitions:
       Attributes:
         $ref: '#/definitions/LoadBalancerAttributes'
         description: The load balancer attributes.
-  ModifyProvisionedCapacityOutput:
-    type: object
-    properties:
-      ProvisionedCapacity:
-        $ref: '#/definitions/ProvisionedCapacity'
-  ModifyProvisionedCapacityInput:
-    type: object
-    required:
-      - LoadBalancerArn
-      - MinimumLBCapacityUnits
-    properties:
-      LoadBalancerArn:
-        $ref: '#/definitions/LoadBalancerArn'
-      MinimumLBCapacityUnits:
-        $ref: '#/definitions/LBCapacityUnits'
-  MinimumLBCapacityUnitsDecreaseThrottlingException: {}
-  MinimumLBCapacityUnitsLimitExceededException: {}
-  InsufficientCapacityException: {}
   ModifyRuleOutput:
     type: object
     example:
@@ -2849,8 +2728,8 @@ definitions:
     enum:
       - forward
       - authenticate-oidc
-      - redirect
       - authenticate-cognito
+      - redirect
       - fixed-response
   TargetGroupArn:
     type: string
@@ -2862,6 +2741,7 @@ definitions:
       - TokenEndpoint
       - UserInfoEndpoint
       - ClientId
+      - ClientSecret
     properties:
       Issuer:
         $ref: '#/definitions/AuthenticateOidcActionIssuer'
@@ -2896,8 +2776,6 @@ definitions:
       OnUnauthenticatedRequest:
         $ref: '#/definitions/AuthenticateOidcActionConditionalBehaviorEnum'
         description: '<p>The behavior if the user is not authenticated. The following are possible values:</p> <ul> <li> <p>deny<code/> - Return an HTTP 401 Unauthorized error.</p> </li> <li> <p>allow<code/> - Allow the request to be forwarded to the target.</p> </li> <li> <p>authenticate<code/> - Redirect the request to the IdP authorization endpoint. This is the default value.</p> </li> </ul>'
-      UseExistingClientSecret:
-        $ref: '#/definitions/AuthenticateOidcActionUseExistingClientSecret'
     description: Request parameters when using an identity provider (IdP) that is compliant with OpenID Connect (OIDC) to authenticate users.
   AuthenticateCognitoActionConfig:
     type: object
@@ -3090,8 +2968,6 @@ definitions:
     type: string
   AuthenticateOidcActionSessionTimeout:
     type: integer
-  AuthenticateOidcActionUseExistingClientSecret:
-    type: boolean
   ZoneName:
     type: string
   SubnetId:
@@ -3100,8 +2976,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LoadBalancerAddress'
-  StaticIp:
-    type: boolean
   AvailabilityZone:
     type: object
     properties:
@@ -3114,8 +2988,6 @@ definitions:
       LoadBalancerAddresses:
         $ref: '#/definitions/LoadBalancerAddresses'
         description: '[Network Load Balancers] The static IP address.'
-      StaticIp:
-        $ref: '#/definitions/StaticIp'
     description: Information about an Availability Zone.
   AvailabilityZones:
     type: array
@@ -3166,8 +3038,6 @@ definitions:
       - HTTP
       - HTTPS
       - TCP
-      - TLS
-      - UDP
   Port:
     type: integer
     minimum: 1
@@ -3271,8 +3141,6 @@ definitions:
     format: date-time
   DNSName:
     type: string
-  DecreasesRemaining:
-    type: integer
   RuleArn:
     type: string
   TargetDescriptions:
@@ -3306,17 +3174,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LoadBalancerName'
-  ProvisionedCapacity:
-    type: object
-    properties:
-      MinimumLBCapacityUnits:
-        $ref: '#/definitions/LBCapacityUnits'
-      Status:
-        $ref: '#/definitions/ProvisionedCapacityStatus'
-      DecreasesRemaining:
-        $ref: '#/definitions/DecreasesRemaining'
-      LastModifiedTime:
-        $ref: '#/definitions/LastModifiedTime'
   RuleArns:
     type: array
     items:
@@ -3362,56 +3219,12 @@ definitions:
     type: string
     minLength: 0
     maxLength: 32
-  ListOfString:
-    type: array
-    items:
-      $ref: '#/definitions/StringValue'
-  HostHeaderConditionConfig:
-    type: object
-    properties:
-      Values:
-        $ref: '#/definitions/ListOfString'
   HttpCode:
     type: string
-  HttpHeaderConditionName:
-    type: string
-  HttpHeaderConditionConfig:
-    type: object
-    properties:
-      HttpHeaderName:
-        $ref: '#/definitions/HttpHeaderConditionName'
-      Values:
-        $ref: '#/definitions/ListOfString'
-  HttpRequestMethodList:
-    type: array
-    items:
-      $ref: '#/definitions/HttpRequestMethodEnum'
-  HttpRequestMethodConditionConfig:
-    type: object
-    properties:
-      Values:
-        $ref: '#/definitions/HttpRequestMethodList'
-  HttpRequestMethodEnum:
-    type: string
-    enum:
-      - GET
-      - HEAD
-      - POST
-      - PUT
-      - DELETE
-      - CONNECT
-      - OPTIONS
-      - TRACE
-      - PATCH
   IpAddress:
     type: string
   IsDefault:
     type: boolean
-  LBCapacityUnits:
-    type: integer
-  LastModifiedTime:
-    type: string
-    format: date-time
   Name:
     type: string
   Max:
@@ -3428,6 +3241,10 @@ definitions:
     description: Information about an Elastic Load Balancing resource limit for your AWS account.
   StringValue:
     type: string
+  ListOfString:
+    type: array
+    items:
+      $ref: '#/definitions/StringValue'
   Listener:
     type: object
     properties:
@@ -3539,23 +3356,6 @@ definitions:
       - failed
   StateReason:
     type: string
-  PathPatternConditionConfig:
-    type: object
-    properties:
-      Values:
-        $ref: '#/definitions/ListOfString'
-  ProvisionedCapacityStatus:
-    type: string
-    enum:
-      - disabled
-      - pending
-      - provisioned
-      - pre-warmed
-  QueryStringConditionConfig:
-    type: object
-    properties:
-      Values:
-        $ref: '#/definitions/ListOfString'
   RedirectActionProtocol:
     type: string
     pattern: '^(HTTPS?|#\{protocol\})$'
@@ -3614,16 +3414,6 @@ definitions:
       Values:
         $ref: '#/definitions/ListOfString'
         description: '<p>The condition value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
-      HostHeaderConfig:
-        $ref: '#/definitions/HostHeaderConditionConfig'
-      PathPatternConfig:
-        $ref: '#/definitions/PathPatternConditionConfig'
-      HttpHeaderConfig:
-        $ref: '#/definitions/HttpHeaderConditionConfig'
-      QueryStringConfig:
-        $ref: '#/definitions/QueryStringConditionConfig'
-      HttpRequestMethodConfig:
-        $ref: '#/definitions/HttpRequestMethodConditionConfig'
     description: Information about a condition for a rule.
   RulePriorityPair:
     type: object
@@ -3669,8 +3459,6 @@ definitions:
       AllocationId:
         $ref: '#/definitions/AllocationId'
         description: '[Network Load Balancers] The allocation ID of the Elastic IP address.'
-      StaticIp:
-        $ref: '#/definitions/StaticIp'
     description: Information about a subnet mapping.
   TagKey:
     type: string

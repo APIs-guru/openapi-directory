@@ -3,7 +3,7 @@ info:
   version: '2016-10-06'
   x-release: v4
   title: AWS CodeBuild
-  description: '<fullname>AWS CodeBuild</fullname> <p>AWS CodeBuild is a fully managed build service in the cloud. AWS CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. AWS CodeBuild eliminates the need to provision, manage, and scale your own build servers. It provides prepackaged build environments for the most popular programming languages and build tools, such as Apache Maven, Gradle, and more. You can also fully customize build environments in AWS CodeBuild to use your own build tools. AWS CodeBuild scales automatically to meet peak build requests. You pay only for the build time you consume. For more information about AWS CodeBuild, see the <i>AWS CodeBuild User Guide</i>.</p> <p>AWS CodeBuild supports these operations:</p> <ul> <li> <p> <code>BatchDeleteBuilds</code>: Deletes one or more builds.</p> </li> <li> <p> <code>BatchGetProjects</code>: Gets information about one or more build projects. A <i>build project</i> defines how AWS CodeBuild runs a build. This includes information such as where to get the source code to build, the build environment to use, the build commands to run, and where to store the build output. A <i>build environment</i> is a representation of operating system, programming language runtime, and tools that AWS CodeBuild uses to run a build. You can add tags to build projects to help manage your resources and costs.</p> </li> <li> <p> <code>CreateProject</code>: Creates a build project.</p> </li> <li> <p> <code>CreateWebhook</code>: For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.</p> </li> <li> <p> <code>UpdateWebhook</code>: Changes the settings of an existing webhook.</p> </li> <li> <p> <code>DeleteProject</code>: Deletes a build project.</p> </li> <li> <p> <code>DeleteWebhook</code>: For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.</p> </li> <li> <p> <code>ListProjects</code>: Gets a list of build project names, with each build project name representing a single build project.</p> </li> <li> <p> <code>UpdateProject</code>: Changes the settings of an existing build project.</p> </li> <li> <p> <code>BatchGetBuilds</code>: Gets information about one or more builds.</p> </li> <li> <p> <code>ListBuilds</code>: Gets a list of build IDs, with each build ID representing a single build.</p> </li> <li> <p> <code>ListBuildsForProject</code>: Gets a list of build IDs for the specified build project, with each build ID representing a single build.</p> </li> <li> <p> <code>StartBuild</code>: Starts running a build.</p> </li> <li> <p> <code>StopBuild</code>: Attempts to stop running a build.</p> </li> <li> <p> <code>ListCuratedEnvironmentImages</code>: Gets information about Docker images that are managed by AWS CodeBuild.</p> </li> </ul>'
+  description: '<fullname>AWS CodeBuild</fullname> <p>AWS CodeBuild is a fully managed build service in the cloud. AWS CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. AWS CodeBuild eliminates the need to provision, manage, and scale your own build servers. It provides prepackaged build environments for the most popular programming languages and build tools, such as Apache Maven, Gradle, and more. You can also fully customize build environments in AWS CodeBuild to use your own build tools. AWS CodeBuild scales automatically to meet peak build requests. You pay only for the build time you consume. For more information about AWS CodeBuild, see the <i>AWS CodeBuild User Guide</i>.</p> <p>AWS CodeBuild supports these operations:</p> <ul> <li> <p> <code>BatchDeleteBuilds</code>: Deletes one or more builds.</p> </li> <li> <p> <code>BatchGetProjects</code>: Gets information about one or more build projects. A <i>build project</i> defines how AWS CodeBuild runs a build. This includes information such as where to get the source code to build, the build environment to use, the build commands to run, and where to store the build output. A <i>build environment</i> is a representation of operating system, programming language runtime, and tools that AWS CodeBuild uses to run a build. You can add tags to build projects to help manage your resources and costs.</p> </li> <li> <p> <code>CreateProject</code>: Creates a build project.</p> </li> <li> <p> <code>CreateWebhook</code>: For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.</p> </li> <li> <p> <code>UpdateWebhook</code>: Changes the settings of an existing webhook.</p> </li> <li> <p> <code>DeleteProject</code>: Deletes a build project.</p> </li> <li> <p> <code>DeleteWebhook</code>: For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.</p> </li> <li> <p> <code>ListProjects</code>: Gets a list of build project names, with each build project name representing a single build project.</p> </li> <li> <p> <code>UpdateProject</code>: Changes the settings of an existing build project.</p> </li> <li> <p> <code>BatchGetBuilds</code>: Gets information about one or more builds.</p> </li> <li> <p> <code>ListBuilds</code>: Gets a list of build IDs, with each build ID representing a single build.</p> </li> <li> <p> <code>ListBuildsForProject</code>: Gets a list of build IDs for the specified build project, with each build ID representing a single build.</p> </li> <li> <p> <code>StartBuild</code>: Starts running a build.</p> </li> <li> <p> <code>StopBuild</code>: Attempts to stop running a build.</p> </li> <li> <p> <code>ListCuratedEnvironmentImages</code>: Gets information about Docker images that are managed by AWS CodeBuild.</p> </li> <li> <p> <code>DeleteSourceCredentials</code>: Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials.</p> </li> <li> <p> <code>ImportSourceCredentials</code>: Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository.</p> </li> <li> <p> <code>ListSourceCredentials</code>: Returns a list of <code>SourceCredentialsInfo</code> objects. Each <code>SourceCredentialsInfo</code> object includes the authentication type, token ARN, and type of source provider for one set of credentials.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -293,6 +293,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSourceCredentials':
+    post:
+      operationId: DeleteSourceCredentials
+      description: ' Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSourceCredentialsOutput'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSourceCredentialsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteWebhook':
     post:
       operationId: DeleteWebhook
@@ -320,6 +353,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteWebhookInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ImportSourceCredentials':
+    post:
+      operationId: ImportSourceCredentials
+      description: ' Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ImportSourceCredentialsOutput'
+        '480':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '481':
+          description: AccountLimitExceededException
+          schema:
+            $ref: '#/definitions/AccountLimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ImportSourceCredentialsInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -469,6 +535,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListProjectsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListSourceCredentials':
+    post:
+      operationId: ListSourceCredentials
+      description: ' Returns a list of <code>SourceCredentialsInfo</code> objects. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListSourceCredentialsOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListSourceCredentialsInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -936,6 +1027,20 @@ definitions:
       name:
         $ref: '#/definitions/NonEmptyString'
         description: The name of the build project.
+  DeleteSourceCredentialsOutput:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: ' The Amazon Resource Name (ARN) of the token. '
+  DeleteSourceCredentialsInput:
+    type: object
+    required:
+      - arn
+    properties:
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: ' The Amazon Resource Name (ARN) of the token.'
   DeleteWebhookOutput:
     type: object
     properties: {}
@@ -947,6 +1052,31 @@ definitions:
       projectName:
         $ref: '#/definitions/ProjectName'
         description: The name of the AWS CodeBuild project.
+  ImportSourceCredentialsOutput:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: ' The Amazon Resource Name (ARN) of the token. '
+  ImportSourceCredentialsInput:
+    type: object
+    required:
+      - token
+      - serverType
+      - authType
+    properties:
+      username:
+        $ref: '#/definitions/NonEmptyString'
+        description: ' The Bitbucket username when the <code>authType</code> is BASIC_AUTH. This parameter is not valid for other types of source providers or connections. '
+      token:
+        $ref: '#/definitions/SensitiveNonEmptyString'
+        description: ' For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is the app password. '
+      serverType:
+        $ref: '#/definitions/ServerType'
+        description: ' The source provider used for this project. '
+      authType:
+        $ref: '#/definitions/AuthType'
+        description: ' The type of authentication used to connect to a GitHub, GitHub Enterprise, or Bitbucket repository. An OAUTH connection is not supported by the API and must be created using the AWS CodeBuild console. '
   InvalidateProjectCacheOutput:
     type: object
     properties: {}
@@ -1029,6 +1159,15 @@ definitions:
       nextToken:
         $ref: '#/definitions/NonEmptyString'
         description: 'During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.'
+  ListSourceCredentialsOutput:
+    type: object
+    properties:
+      sourceCredentialsInfos:
+        $ref: '#/definitions/SourceCredentialsInfos'
+        description: ' A list of <code>SourceCredentialsInfo</code> objects. Each <code>SourceCredentialsInfo</code> object includes the authentication type, token ARN, and type of source provider for one set of credentials. '
+  ListSourceCredentialsInput:
+    type: object
+    properties: {}
   StartBuildOutput:
     type: object
     properties:
@@ -1221,6 +1360,12 @@ definitions:
       - CODEPIPELINE
       - S3
       - NO_ARTIFACTS
+  AuthType:
+    type: string
+    enum:
+      - OAUTH
+      - BASIC_AUTH
+      - PERSONAL_ACCESS_TOKEN
   BuildIds:
     type: array
     items:
@@ -1287,7 +1432,7 @@ definitions:
         description: '<p>The build spec declaration to use for the builds in this build project.</p> <p>If this value is not specified, a build spec must be included along with the source code to be built.</p>'
       auth:
         $ref: '#/definitions/SourceAuth'
-        description: <p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly (unless the build project's source <code>type</code> value is <code>BITBUCKET</code> or <code>GITHUB</code>).</p>
+        description: <p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly.</p>
       reportBuildStatus:
         $ref: '#/definitions/WrapperBoolean'
         description: ' Set to true to report the status of a build''s start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an invalidInputException is thrown. '
@@ -1843,6 +1988,16 @@ definitions:
   GitCloneDepth:
     type: integer
     minimum: 0
+  SensitiveNonEmptyString:
+    type: string
+    minLength: 1
+    format: password
+  ServerType:
+    type: string
+    enum:
+      - GITHUB
+      - BITBUCKET
+      - GITHUB_ENTERPRISE
   KeyInput:
     type: string
     pattern: '^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$'
@@ -1859,6 +2014,10 @@ definitions:
       - NAME
       - CREATED_TIME
       - LAST_MODIFIED_TIME
+  SourceCredentialsInfos:
+    type: array
+    items:
+      $ref: '#/definitions/SourceCredentialsInfo'
   S3LogsConfig:
     type: object
     required:
@@ -1921,11 +2080,11 @@ definitions:
     properties:
       type:
         $ref: '#/definitions/SourceAuthType'
-        description: 'The authorization type to use. The only valid value is <code>OAUTH</code>, which represents the OAuth authorization type.'
+        description: '<note> <p> This data type is deprecated and is no longer accurate or used. </p> </note> <p>The authorization type to use. The only valid value is <code>OAUTH</code>, which represents the OAuth authorization type.</p>'
       resource:
         $ref: '#/definitions/String'
         description: The resource value that applies to the specified authorization type.
-    description: <p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly (unless the build project's source <code>type</code> value is <code>BITBUCKET</code> or <code>GITHUB</code>).</p>
+    description: <p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly.</p>
   SecurityGroupIds:
     type: array
     items:
@@ -1935,6 +2094,19 @@ definitions:
     type: string
     enum:
       - OAUTH
+  SourceCredentialsInfo:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: ' The Amazon Resource Name (ARN) of the token. '
+      serverType:
+        $ref: '#/definitions/ServerType'
+        description: ' The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, or BITBUCKET. '
+      authType:
+        $ref: '#/definitions/AuthType'
+        description: ' The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, or PERSONAL_ACCESS_TOKEN. '
+    description: ' Information about the credentials for a GitHub, GitHub Enterprise, or Bitbucket repository. '
   Subnets:
     type: array
     items:

@@ -297,6 +297,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateBusinessReportSchedule':
+    post:
+      operationId: CreateBusinessReportSchedule
+      description: Creates a recurring schedule for usage reports to deliver to the specified S3 location with a specified daily or weekly interval.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateBusinessReportScheduleResponse'
+        '480':
+          description: AlreadyExistsException
+          schema:
+            $ref: '#/definitions/AlreadyExistsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateBusinessReportScheduleRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateConferenceProvider':
     post:
       operationId: CreateConferenceProvider
@@ -526,6 +555,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteAddressBookRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteBusinessReportSchedule':
+    post:
+      operationId: DeleteBusinessReportSchedule
+      description: Deletes the recurring report delivery schedule with the specified schedule ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteBusinessReportScheduleResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBusinessReportScheduleRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1229,6 +1291,41 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetSkillGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListBusinessReportSchedules':
+    post:
+      operationId: ListBusinessReportSchedules
+      description: Lists the details of the schedules that a user configured.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBusinessReportSchedulesResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBusinessReportSchedulesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2154,6 +2251,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateBusinessReportSchedule':
+    post:
+      operationId: UpdateBusinessReportSchedule
+      description: Updates the configuration of the report delivery schedule with the specified schedule ARN.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateBusinessReportScheduleResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateBusinessReportScheduleRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateConferenceProvider':
     post:
       operationId: UpdateConferenceProvider
@@ -2450,6 +2580,39 @@ definitions:
         $ref: '#/definitions/ClientRequestToken'
         description: 'A unique, user-specified identifier for the request that ensures idempotency.'
   AlreadyExistsException: {}
+  CreateBusinessReportScheduleResponse:
+    type: object
+    properties:
+      ScheduleArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the business report schedule.
+  CreateBusinessReportScheduleRequest:
+    type: object
+    required:
+      - Format
+      - ContentRange
+    properties:
+      ScheduleName:
+        $ref: '#/definitions/BusinessReportScheduleName'
+        description: The name identifier of the schedule.
+      S3BucketName:
+        $ref: '#/definitions/CustomerS3BucketName'
+        description: The S3 bucket name of the output reports.
+      S3KeyPrefix:
+        $ref: '#/definitions/S3KeyPrefix'
+        description: The S3 key where the report is delivered.
+      Format:
+        $ref: '#/definitions/BusinessReportFormat'
+        description: The format of the generated report (individual CSV files or zipped files of individual files).
+      ContentRange:
+        $ref: '#/definitions/BusinessReportContentRange'
+        description: The content range of the reports.
+      Recurrence:
+        $ref: '#/definitions/BusinessReportRecurrence'
+        description: The recurrence of the reports.
+      ClientRequestToken:
+        $ref: '#/definitions/ClientRequestToken'
+        description: The client request token.
   CreateConferenceProviderResponse:
     type: object
     properties:
@@ -2491,7 +2654,6 @@ definitions:
     type: object
     required:
       - FirstName
-      - PhoneNumber
     properties:
       DisplayName:
         $ref: '#/definitions/ContactName'
@@ -2644,6 +2806,17 @@ definitions:
       AddressBookArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the address book to delete.
+  DeleteBusinessReportScheduleResponse:
+    type: object
+    properties: {}
+  DeleteBusinessReportScheduleRequest:
+    type: object
+    required:
+      - ScheduleArn
+    properties:
+      ScheduleArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the business report schedule.
   DeleteConferenceProviderResponse:
     type: object
     properties: {}
@@ -2932,6 +3105,24 @@ definitions:
       SkillGroupArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the skill group for which to get details. Required.
+  ListBusinessReportSchedulesResponse:
+    type: object
+    properties:
+      BusinessReportSchedules:
+        $ref: '#/definitions/BusinessReportScheduleList'
+        description: The schedule of the reports.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token used to list the remaining schedules from the previous API call.
+  ListBusinessReportSchedulesRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token used to list the remaining schedules from the previous API call.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of schedules listed in the call.
   ListConferenceProvidersResponse:
     type: object
     properties:
@@ -3491,6 +3682,32 @@ definitions:
         $ref: '#/definitions/AddressBookDescription'
         description: The updated description of the room.
   NameInUseException: {}
+  UpdateBusinessReportScheduleResponse:
+    type: object
+    properties: {}
+  UpdateBusinessReportScheduleRequest:
+    type: object
+    required:
+      - ScheduleArn
+    properties:
+      ScheduleArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the business report schedule.
+      S3BucketName:
+        $ref: '#/definitions/CustomerS3BucketName'
+        description: The S3 location of the output reports.
+      S3KeyPrefix:
+        $ref: '#/definitions/S3KeyPrefix'
+        description: The S3 key where the report is delivered.
+      Format:
+        $ref: '#/definitions/BusinessReportFormat'
+        description: The format of the generated report (individual CSV files or zipped files of individual files).
+      ScheduleName:
+        $ref: '#/definitions/BusinessReportScheduleName'
+        description: The name identifier of the schedule.
+      Recurrence:
+        $ref: '#/definitions/BusinessReportRecurrence'
+        description: The recurrence of the reports.
   UpdateConferenceProviderResponse:
     type: object
     properties: {}
@@ -3708,6 +3925,126 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BulletPoint'
+  BusinessReportStatus:
+    type: string
+    enum:
+      - RUNNING
+      - SUCCEEDED
+      - FAILED
+  BusinessReportFailureCode:
+    type: string
+    enum:
+      - ACCESS_DENIED
+      - NO_SUCH_BUCKET
+      - INTERNAL_FAILURE
+  BusinessReportS3Location:
+    type: object
+    properties:
+      Path:
+        $ref: '#/definitions/BusinessReportS3Path'
+        description: The path of the business report.
+      BucketName:
+        $ref: '#/definitions/CustomerS3BucketName'
+        description: The S3 bucket name of the output reports.
+    description: The S3 location of the output reports.
+  Timestamp:
+    type: string
+    format: date-time
+  BusinessReportDownloadUrl:
+    type: string
+  BusinessReport:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/BusinessReportStatus'
+        description: 'The status of the report generation execution (RUNNING, SUCCEEDED, or FAILED).'
+      FailureCode:
+        $ref: '#/definitions/BusinessReportFailureCode'
+        description: The failure code.
+      S3Location:
+        $ref: '#/definitions/BusinessReportS3Location'
+        description: The S3 location of the output reports.
+      DeliveryTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time of report delivery.
+      DownloadUrl:
+        $ref: '#/definitions/BusinessReportDownloadUrl'
+        description: The download link where a user can download the report.
+    description: Usage report with specified parameters.
+  BusinessReportInterval:
+    type: string
+    enum:
+      - ONE_DAY
+      - ONE_WEEK
+  BusinessReportContentRange:
+    type: object
+    properties:
+      Interval:
+        $ref: '#/definitions/BusinessReportInterval'
+        description: The interval of the content range.
+    description: The content range of the report.
+  BusinessReportFormat:
+    type: string
+    enum:
+      - CSV
+      - CSV_ZIP
+  Date:
+    type: string
+    pattern: '^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$'
+  BusinessReportRecurrence:
+    type: object
+    properties:
+      StartDate:
+        $ref: '#/definitions/Date'
+        description: The start date.
+    description: The recurrence of the reports.
+  BusinessReportS3Path:
+    type: string
+  CustomerS3BucketName:
+    type: string
+    pattern: '[a-z0-9-\.]{3,63}'
+  BusinessReportScheduleName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 0
+    maxLength: 64
+  S3KeyPrefix:
+    type: string
+    pattern: '[A-Za-z0-9!_\-\.\*''()/]*'
+    minLength: 0
+    maxLength: 100
+  BusinessReportSchedule:
+    type: object
+    properties:
+      ScheduleArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the business report schedule.
+      ScheduleName:
+        $ref: '#/definitions/BusinessReportScheduleName'
+        description: The name identifier of the schedule.
+      S3BucketName:
+        $ref: '#/definitions/CustomerS3BucketName'
+        description: The S3 bucket name of the output reports.
+      S3KeyPrefix:
+        $ref: '#/definitions/S3KeyPrefix'
+        description: The S3 key where the report is delivered.
+      Format:
+        $ref: '#/definitions/BusinessReportFormat'
+        description: The format of the generated report (individual CSV files or zipped files of individual files).
+      ContentRange:
+        $ref: '#/definitions/BusinessReportContentRange'
+        description: The content range of the reports.
+      Recurrence:
+        $ref: '#/definitions/BusinessReportRecurrence'
+        description: The recurrence of the reports.
+      LastBusinessReport:
+        $ref: '#/definitions/BusinessReport'
+        description: The details of the last business report delivery for a specified time interval.
+    description: The schedule of the usage report.
+  BusinessReportScheduleList:
+    type: array
+    items:
+      $ref: '#/definitions/BusinessReportSchedule'
   CategoryId:
     type: integer
     minimum: 1
@@ -3792,7 +4129,7 @@ definitions:
         $ref: '#/definitions/CountryCode'
         description: The zip code.
       PhoneNumber:
-        $ref: '#/definitions/PhoneNumber'
+        $ref: '#/definitions/OutboundPhoneNumber'
         description: The phone number to call to join the conference.
       OneClickIdDelay:
         $ref: '#/definitions/OneClickIdDelay'
@@ -3849,6 +4186,7 @@ definitions:
   E164PhoneNumber:
     type: string
     pattern: '^\+\d{8,}$'
+    format: password
   Contact:
     type: object
     properties:
@@ -4108,9 +4446,6 @@ definitions:
       - DEVICE_STATUS
   DeviceEventValue:
     type: string
-  Timestamp:
-    type: string
-    format: date-time
   DeviceEvent:
     type: object
     properties:
@@ -4358,7 +4693,7 @@ definitions:
     type: string
     minLength: 1
     maxLength: 2
-  PhoneNumber:
+  OutboundPhoneNumber:
     type: string
     pattern: '\d{10}'
   ProductDescription:
