@@ -255,6 +255,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLifecyclePolicy':
+    post:
+      operationId: DeleteLifecyclePolicy
+      description: Removes an object lifecycle policy from a container.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteLifecyclePolicyOutput'
+        '480':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
+          description: PolicyNotFoundException
+          schema:
+            $ref: '#/definitions/PolicyNotFoundException'
+        '483':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteLifecyclePolicyInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeContainer':
     post:
       operationId: DescribeContainer
@@ -370,6 +411,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetLifecyclePolicy':
+    post:
+      operationId: GetLifecyclePolicy
+      description: Retrieves the object lifecycle policy that is assigned to a container.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetLifecyclePolicyOutput'
+        '480':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
+          description: PolicyNotFoundException
+          schema:
+            $ref: '#/definitions/PolicyNotFoundException'
+        '483':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetLifecyclePolicyInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListContainers':
     post:
       operationId: ListContainers
@@ -473,6 +555,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutLifecyclePolicy':
+    post:
+      operationId: PutLifecyclePolicy
+      description: 'Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutLifecyclePolicyOutput'
+        '480':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutLifecyclePolicyInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   CreateContainerOutput:
     type: object
@@ -490,24 +609,9 @@ definitions:
       ContainerName:
         $ref: '#/definitions/ContainerName'
         description: 'The name for the container. The name must be from 1 to 255 characters. Container names must be unique to your AWS account within a specific region. As an example, you could create a container named <code>movies</code> in every region, as long as you don’t have an existing container with that name.'
-  ContainerInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Resource already exists or is being updated.
-  LimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: A service limit has been exceeded.
-  InternalServerError:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The service is temporarily unavailable.
+  ContainerInUseException: {}
+  LimitExceededException: {}
+  InternalServerError: {}
   DeleteContainerOutput:
     type: object
     properties: {}
@@ -519,12 +623,7 @@ definitions:
       ContainerName:
         $ref: '#/definitions/ContainerName'
         description: 'The name of the container to delete. '
-  ContainerNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Could not perform an operation on a container that does not exist.
+  ContainerNotFoundException: {}
   DeleteContainerPolicyOutput:
     type: object
     properties: {}
@@ -536,12 +635,7 @@ definitions:
       ContainerName:
         $ref: '#/definitions/ContainerName'
         description: The name of the container that holds the policy.
-  PolicyNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Could not perform an operation on a policy that does not exist.
+  PolicyNotFoundException: {}
   DeleteCorsPolicyOutput:
     type: object
     properties: {}
@@ -553,12 +647,18 @@ definitions:
       ContainerName:
         $ref: '#/definitions/ContainerName'
         description: The name of the container to remove the policy from.
-  CorsPolicyNotFoundException:
+  CorsPolicyNotFoundException: {}
+  DeleteLifecyclePolicyOutput:
     type: object
+    properties: {}
+  DeleteLifecyclePolicyInput:
+    type: object
+    required:
+      - ContainerName
     properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Could not perform an operation on a policy that does not exist.
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container that holds the object lifecycle policy.
   DescribeContainerOutput:
     type: object
     properties:
@@ -594,6 +694,7 @@ definitions:
     properties:
       CorsPolicy:
         $ref: '#/definitions/CorsPolicy'
+        description: The CORS policy assigned to the container.
   GetCorsPolicyInput:
     type: object
     required:
@@ -602,6 +703,22 @@ definitions:
       ContainerName:
         $ref: '#/definitions/ContainerName'
         description: The name of the container that the policy is assigned to.
+  GetLifecyclePolicyOutput:
+    type: object
+    required:
+      - LifecyclePolicy
+    properties:
+      LifecyclePolicy:
+        $ref: '#/definitions/LifecyclePolicy'
+        description: The object lifecycle policy that is assigned to the container.
+  GetLifecyclePolicyInput:
+    type: object
+    required:
+      - ContainerName
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container that the object lifecycle policy is assigned to.
   ListContainersOutput:
     type: object
     required:
@@ -652,6 +769,21 @@ definitions:
       CorsPolicy:
         $ref: '#/definitions/CorsPolicy'
         description: 'The CORS policy to apply to the container. '
+  PutLifecyclePolicyOutput:
+    type: object
+    properties: {}
+  PutLifecyclePolicyInput:
+    type: object
+    required:
+      - ContainerName
+      - LifecyclePolicy
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container that you want to assign the object lifecycle policy to.
+      LifecyclePolicy:
+        $ref: '#/definitions/LifecyclePolicy'
+        description: The object lifecycle policy to apply to the container.
   Header:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
@@ -674,13 +806,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/MethodName'
+    minItems: 1
+    maxItems: 4
   Origin:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 2048
   AllowedOrigins:
     type: array
     items:
       $ref: '#/definitions/Origin'
+    minItems: 1
+    maxItems: 100
   Endpoint:
     type: string
     minLength: 1
@@ -695,7 +833,7 @@ definitions:
     maxLength: 1024
   ContainerName:
     type: string
-    pattern: \w+
+    pattern: '[\w-]+'
     minLength: 1
     maxLength: 255
   ContainerStatus:
@@ -725,11 +863,6 @@ definitions:
         $ref: '#/definitions/ContainerStatus'
         description: 'The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When the endpoint is available, the status changes to <code>ACTIVE</code>.'
     description: This section describes operations that you can perform on an AWS Elemental MediaStore container.
-  ErrorMessage:
-    type: string
-    pattern: '[ \w:\.\?-]+'
-    minLength: 1
-    maxLength: 255
   ContainerList:
     type: array
     items:
@@ -745,13 +878,16 @@ definitions:
     maxLength: 8192
   CorsRule:
     type: object
+    required:
+      - AllowedOrigins
+      - AllowedHeaders
     properties:
       AllowedOrigins:
         $ref: '#/definitions/AllowedOrigins'
-        description: '<p>One or more response headers that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>Each CORS rule must have at least one <code>AllowedOrigin</code> element. The string value can include only one wildcard character (*), for example, http://*.example.com. Additionally, you can specify only one wildcard character to allow cross-origin access for all origins.</p>'
+        description: '<p>One or more response headers that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>Each CORS rule must have at least one <code>AllowedOrigins</code> element. The string value can include only one wildcard character (*), for example, http://*.example.com. Additionally, you can specify only one wildcard character to allow cross-origin access for all origins.</p>'
       AllowedMethods:
         $ref: '#/definitions/AllowedMethods'
-        description: <p>Identifies an HTTP method that the origin that is specified in the rule is allowed to execute.</p> <p>Each CORS rule must contain at least one <code>AllowedMethod</code> and one <code>AllowedOrigin</code> element.</p>
+        description: <p>Identifies an HTTP method that the origin that is specified in the rule is allowed to execute.</p> <p>Each CORS rule must contain at least one <code>AllowedMethods</code> and one <code>AllowedOrigins</code> element.</p>
       AllowedHeaders:
         $ref: '#/definitions/AllowedHeaders'
         description: <p>Specifies which headers are allowed in a preflight <code>OPTIONS</code> request through the <code>Access-Control-Request-Headers</code> header. Each header name that is specified in <code>Access-Control-Request-Headers</code> must have a corresponding entry in the rule. Only the headers that were requested are sent back. </p> <p>This element can contain only one wildcard character (*).</p>
@@ -779,6 +915,11 @@ definitions:
       $ref: '#/definitions/Header'
     minItems: 0
     maxItems: 100
+  LifecyclePolicy:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 0
+    maxLength: 8192
   PaginationToken:
     type: string
     pattern: '[0-9A-Za-z=/+]+'

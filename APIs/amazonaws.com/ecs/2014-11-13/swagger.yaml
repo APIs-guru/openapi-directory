@@ -2601,7 +2601,7 @@ definitions:
         description: 'The resource name for which to enable the new format. If <code>serviceLongArnFormat</code> is specified, the ARN for your Amazon ECS services is affected. If <code>taskLongArnFormat</code> is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If <code>containerInstanceLongArnFormat</code> is specified, the ARN and resource ID for your Amazon ECS container instances is affected.'
       value:
         $ref: '#/definitions/String'
-        description: The account setting value for the specified principal ARN. Accepted values are <code>ENABLED</code> and <code>DISABLED</code>.
+        description: The account setting value for the specified principal ARN. Accepted values are <code>enabled</code> and <code>disabled</code>.
       principalArn:
         $ref: '#/definitions/String'
         description: 'The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you specify the root user, it modifies the ARN and resource ID format for all IAM users, IAM roles, and the root user of the account unless an IAM user or role explicitly overrides these settings for themselves. If this field is omitted, the setting are changed only for the authenticated user.'
@@ -3819,7 +3819,7 @@ definitions:
         description: The account resource name.
       value:
         $ref: '#/definitions/String'
-        description: 'The current account setting for the resource name. If <code>ENABLED</code>, then the resource will receive the new Amazon Resource Name (ARN) and resource identifier (ID) format. If <code>DISABLED</code>, then the resource will receive the old Amazon Resource Name (ARN) and resource identifier (ID) format.'
+        description: 'The current account setting for the resource name. If <code>enabled</code>, then the resource will receive the new Amazon Resource Name (ARN) and resource identifier (ID) format. If <code>disabled</code>, then the resource will receive the old Amazon Resource Name (ARN) and resource identifier (ID) format.'
       principalArn:
         $ref: '#/definitions/String'
         description: 'The ARN of the principal, which can be an IAM user, IAM role, or the root user. If this field is omitted, the authenticated user is assumed.'

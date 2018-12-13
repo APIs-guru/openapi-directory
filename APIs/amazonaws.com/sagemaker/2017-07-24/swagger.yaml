@@ -5492,6 +5492,9 @@ definitions:
       ParameterRanges:
         $ref: '#/definitions/ParameterRanges'
         description: The <a>ParameterRanges</a> object that specifies the ranges of hyperparameters that this tuning job searches.
+      TrainingJobEarlyStoppingType:
+        $ref: '#/definitions/TrainingJobEarlyStoppingType'
+        description: '<p>Specifies whether to use early stopping for training jobs launched by the hyperparameter tuning job. One of the following values:</p> <dl> <dt>OFF</dt> <dd> <p>Training jobs launched by the hyperparameter tuning job do not use early stopping.</p> </dd> <dt>AUTO</dt> <dd> <p>Amazon SageMaker stops training jobs launched by the hyperparameter tuning job when they are no longer improving as measured by the objective metric of the tuning job.</p> </dd> </dl>'
     description: Configures a hyperparameter tuning job.
   HyperParameterTrainingJobDefinition:
     type: object
@@ -6702,6 +6705,11 @@ definitions:
         $ref: '#/definitions/CategoricalParameterRanges'
         description: The array of <a>CategoricalParameterRange</a> objects that specify ranges of categorical hyperparameters that a hyperparameter tuning job searches.
     description: '<p>Specifies ranges of integer, continuous, and categorical hyperparameters that a hyperparameter tuning job searches. The hyperparameter tuning job launches training jobs with hyperparameter values within these ranges to find the combination of values that result in the training job with the best performance as measured by the objective metric of the hyperparameter tuning job.</p> <note> <p>You can specify a maximum of 20 hyperparameters that a hyperparameter tuning job can search over. Every possible value of a categorical parameter range counts against this limit.</p> </note>'
+  TrainingJobEarlyStoppingType:
+    type: string
+    enum:
+      - 'Off'
+      - Auto
   HyperParameterTuningJobObjectives:
     type: array
     items:

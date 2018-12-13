@@ -296,6 +296,142 @@ paths:
             - expected: ResourceNotFoundException
               matcher: error
               state: success
+  '/clusters/{name}/updates/{updateId}':
+    get:
+      operationId: DescribeUpdate
+      description: '<p>Returns descriptive information about an update against your Amazon EKS cluster.</p> <p>When the status of the update is <code>Succeeded</code>, the update is complete. If an update fails, the status is <code>Failed</code>, and an error detail explains the reason for the failure.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeUpdateResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '482':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeUpdateRequest'
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: updateId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/clusters/{name}/updates':
+    get:
+      operationId: ListUpdates
+      description: 'Lists the updates associated with an Amazon EKS cluster in your AWS account, in the specified Region.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListUpdatesResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '482':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListUpdatesRequest'
+        - name: name
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: UpdateClusterVersion
+      description: '<p>Updates an Amazon EKS cluster to the specified Kubernetes version. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the <a>DescribeUpdate</a> API operation.</p> <p>Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to <code>UPDATING</code> (this status transition is eventually consistent). When the update is complete (either <code>Failed</code> or <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateClusterVersionResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '482':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+        '483':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '485':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateClusterVersionRequest'
+        - name: name
+          in: path
+          type: string
+          required: true
 definitions:
   CreateClusterResponse:
     type: object
@@ -333,10 +469,10 @@ definitions:
         description: 'The Amazon Resource Name (ARN) of the IAM role that provides permissions for Amazon EKS to make calls to other AWS API operations on your behalf. For more information, see <a href="http://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
       resourcesVpcConfig:
         $ref: '#/definitions/VpcConfigRequest'
-        description: 'The VPC subnets and security groups used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You may specify up to 5 security groups, but we recommend that you use a dedicated security group for your cluster control plane.'
+        description: 'The VPC subnets and security groups used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You may specify up to five security groups, but we recommend that you use a dedicated security group for your cluster control plane.'
       clientRequestToken:
         $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request.'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   ResourceInUseException: {}
   ResourceLimitExceededException: {}
   InvalidParameterException: {}
@@ -386,6 +522,15 @@ definitions:
     example:
       name: devel
     properties: {}
+  DescribeUpdateResponse:
+    type: object
+    properties:
+      update:
+        $ref: '#/definitions/Update'
+        description: The full description of the specified update.
+  DescribeUpdateRequest:
+    type: object
+    properties: {}
   ListClustersResponse:
     type: object
     example:
@@ -403,6 +548,36 @@ definitions:
     type: object
     example: {}
     properties: {}
+  ListUpdatesResponse:
+    type: object
+    properties:
+      updateIds:
+        $ref: '#/definitions/StringList'
+        description: A list of all the updates for the specified cluster and Region.
+      nextToken:
+        $ref: '#/definitions/String'
+        description: 'The <code>nextToken</code> value to include in a future <code>ListUpdates</code> request. When the results of a <code>ListUpdates</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+  ListUpdatesRequest:
+    type: object
+    properties: {}
+  UpdateClusterVersionResponse:
+    type: object
+    properties:
+      update:
+        $ref: '#/definitions/Update'
+        description: The full description of the specified update
+  UpdateClusterVersionRequest:
+    type: object
+    required:
+      - version
+    properties:
+      version:
+        $ref: '#/definitions/String'
+        description: The desired Kubernetes version following a successful update.
+      clientRequestToken:
+        $ref: '#/definitions/String'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+  InvalidRequestException: {}
   String:
     type: string
   Certificate:
@@ -446,7 +621,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the cluster.
       createdAt:
         $ref: '#/definitions/Timestamp'
-        description: The Unix epoch time stamp in seconds for when the cluster was created.
+        description: The Unix epoch timestamp in seconds for when the cluster was created.
       version:
         $ref: '#/definitions/String'
         description: The Kubernetes server version for the cluster.
@@ -467,16 +642,16 @@ definitions:
         description: The <code>certificate-authority-data</code> for your cluster.
       clientRequestToken:
         $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request.'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
       platformVersion:
         $ref: '#/definitions/String'
-        description: 'The platform version of your Amazon EKS cluster. For more information, see <a href="eks/latest/userguide/platform-versions.html">Platform Versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+        description: 'The platform version of your Amazon EKS cluster. For more information, see <a href="http://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html">Platform Versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
     description: An object representing an Amazon EKS cluster.
   ClusterName:
     type: string
-    pattern: '[A-Za-z0-9\-_]*'
+    pattern: '^[0-9A-Za-z][A-Za-z0-9\-_]*'
     minLength: 1
-    maxLength: 255
+    maxLength: 100
   VpcConfigRequest:
     type: object
     required:
@@ -487,13 +662,97 @@ definitions:
         description: Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
       securityGroupIds:
         $ref: '#/definitions/StringList'
-        description: Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
+        description: 'Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you do not specify a security group, the default security group for your VPC is used.'
     description: An object representing an Amazon EKS cluster VPC configuration request.
-  ListClustersRequestMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
+  Update:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/String'
+        description: A UUID that is used to track the update.
+      status:
+        $ref: '#/definitions/UpdateStatus'
+        description: The current status of the update.
+      type:
+        $ref: '#/definitions/UpdateType'
+        description: The type of the update.
+      params:
+        $ref: '#/definitions/UpdateParams'
+        description: A key-value map that contains the parameters associated with the update.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The Unix epoch timestamp in seconds for when the update was created.
+      errors:
+        $ref: '#/definitions/ErrorDetails'
+        description: Any errors associated with a <code>Failed</code> update.
+    description: An object representing an asynchronous update.
+  ErrorCode:
+    type: string
+    enum:
+      - SubnetNotFound
+      - SecurityGroupNotFound
+      - EniLimitReached
+      - IpNotAvailable
+      - AccessDenied
+      - OperationNotPermitted
+      - VpcIdNotFound
+      - Unknown
   StringList:
     type: array
     items:
       $ref: '#/definitions/String'
+  ErrorDetail:
+    type: object
+    properties:
+      errorCode:
+        $ref: '#/definitions/ErrorCode'
+        description: '<p>A brief description of the error. </p> <ul> <li> <p> <b>SubnetNotFound</b>: One of the subnets associated with the cluster could not be found.</p> </li> <li> <p> <b>SecurityGroupNotFound</b>: One of the security groups associated with the cluster could not be found.</p> </li> <li> <p> <b>EniLimitReached</b>: You have reached the elastic network interface limit for your account.</p> </li> <li> <p> <b>IpNotAvailable</b>: A subnet associated with the cluster does not have any free IP addresses.</p> </li> <li> <p> <b>AccessDenied</b>: You do not have permissions to perform the specified operation.</p> </li> <li> <p> <b>OperationNotPermitted</b>: The service role associated with the cluster does not have the required access permissions for Amazon EKS.</p> </li> <li> <p> <b>VpcIdNotFound</b>: The VPC associated with the cluster could not be found.</p> </li> </ul>'
+      errorMessage:
+        $ref: '#/definitions/String'
+        description: A more complete description of the error.
+      resourceIds:
+        $ref: '#/definitions/StringList'
+        description: An optional field that contains the resource IDs associated with the error.
+    description: An object representing an error when an asynchronous operation fails.
+  ErrorDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ErrorDetail'
+  ListClustersRequestMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  ListUpdatesRequestMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  UpdateStatus:
+    type: string
+    enum:
+      - InProgress
+      - Failed
+      - Cancelled
+      - Successful
+  UpdateType:
+    type: string
+    enum:
+      - VersionUpdate
+  UpdateParams:
+    type: array
+    items:
+      $ref: '#/definitions/UpdateParam'
+  UpdateParamType:
+    type: string
+    enum:
+      - Version
+      - PlatformVersion
+  UpdateParam:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/UpdateParamType'
+        description: The keys associated with an update request.
+      value:
+        $ref: '#/definitions/String'
+        description: The value of the keys submitted as part of an update request.
+    description: An object representing the details of an update request.
