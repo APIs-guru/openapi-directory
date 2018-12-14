@@ -151,12 +151,12 @@ paths:
           schema:
             $ref: '#/definitions/CreateGroupRequest'
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -215,12 +215,12 @@ paths:
           schema:
             $ref: '#/definitions/ListGroupsRequest'
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
           required: true
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}/members/{MemberName}':
     put:
@@ -265,21 +265,21 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateGroupMembershipRequest'
-        - name: MemberName
-          in: path
-          type: string
-          required: true
-        - name: GroupName
-          in: path
-          type: string
-          required: true
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
+          required: true
+        - name: GroupName
+          type: string
+          in: path
+          required: true
+        - name: MemberName
+          type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -333,21 +333,21 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteGroupMembershipRequest'
-        - name: MemberName
-          in: path
-          type: string
-          required: true
-        - name: GroupName
-          in: path
-          type: string
-          required: true
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
+          required: true
+        - name: GroupName
+          type: string
+          in: path
+          required: true
+        - name: MemberName
+          type: string
+          in: path
           required: true
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}':
     delete:
@@ -392,17 +392,17 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteGroupRequest'
-        - name: GroupName
-          in: path
-          type: string
-          required: true
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
+          required: true
+        - name: GroupName
+          type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -456,17 +456,17 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeGroupRequest'
-        - name: GroupName
-          in: path
-          type: string
-          required: true
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
+          required: true
+        - name: GroupName
+          type: string
+          in: path
           required: true
     put:
       operationId: UpdateGroup
@@ -510,17 +510,17 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateGroupRequest'
-        - name: GroupName
-          in: path
-          type: string
-          required: true
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
+          required: true
+        - name: GroupName
+          type: string
+          in: path
           required: true
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}':
     delete:
@@ -562,16 +562,16 @@ paths:
           schema:
             $ref: '#/definitions/DeleteUserRequest'
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
           required: true
         - name: UserName
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -622,16 +622,16 @@ paths:
           schema:
             $ref: '#/definitions/DescribeUserRequest'
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
           required: true
         - name: UserName
-          in: path
           type: string
+          in: path
           required: true
     put:
       operationId: UpdateUser
@@ -672,16 +672,16 @@ paths:
           schema:
             $ref: '#/definitions/UpdateUserRequest'
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
           required: true
         - name: UserName
-          in: path
           type: string
+          in: path
           required: true
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/embed-url':
     get:
@@ -751,12 +751,12 @@ paths:
           schema:
             $ref: '#/definitions/GetDashboardEmbedUrlRequest'
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: DashboardId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -815,17 +815,17 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListGroupMembershipsRequest'
-        - name: GroupName
-          in: path
-          type: string
-          required: true
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
+          required: true
+        - name: GroupName
+          type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -877,16 +877,16 @@ paths:
           schema:
             $ref: '#/definitions/ListUserGroupsRequest'
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
           required: true
         - name: UserName
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -942,12 +942,12 @@ paths:
           schema:
             $ref: '#/definitions/ListUsersRequest'
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -1010,23 +1010,26 @@ paths:
           schema:
             $ref: '#/definitions/RegisterUserRequest'
         - name: AwsAccountId
-          in: path
           type: string
+          in: path
           required: true
         - name: Namespace
-          in: path
           type: string
+          in: path
           required: true
 definitions:
   CreateGroupResponse:
     type: object
     properties:
       Group:
-        $ref: '#/definitions/Group'
+        $ref: '#/definitions/[object Object]'
         description: The name of the group.
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
     description: The response object for this operation.
   CreateGroupRequest:
     type: object
@@ -1034,10 +1037,10 @@ definitions:
       - GroupName
     properties:
       GroupName:
-        $ref: '#/definitions/GroupName'
+        $ref: '#/definitions/[object Object]'
         description: A name for the group that you want to create.
       Description:
-        $ref: '#/definitions/GroupDescription'
+        $ref: '#/definitions/[object Object]'
         description: A description for the group that you want to create.
     description: 'The request object for this operation. '
   AccessDeniedException: {}
@@ -1053,11 +1056,14 @@ definitions:
     type: object
     properties:
       GroupMember:
-        $ref: '#/definitions/GroupMember'
+        $ref: '#/definitions/[object Object]'
         description: The group member.
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   CreateGroupMembershipRequest:
     type: object
     properties: {}
@@ -1065,8 +1071,11 @@ definitions:
     type: object
     properties:
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   DeleteGroupRequest:
     type: object
     properties: {}
@@ -1074,8 +1083,11 @@ definitions:
     type: object
     properties:
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   DeleteGroupMembershipRequest:
     type: object
     properties: {}
@@ -1083,8 +1095,11 @@ definitions:
     type: object
     properties:
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   DeleteUserRequest:
     type: object
     properties: {}
@@ -1092,11 +1107,14 @@ definitions:
     type: object
     properties:
       Group:
-        $ref: '#/definitions/Group'
+        $ref: '#/definitions/[object Object]'
         description: The name of the group.
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   DescribeGroupRequest:
     type: object
     properties: {}
@@ -1104,11 +1122,14 @@ definitions:
     type: object
     properties:
       User:
-        $ref: '#/definitions/User'
+        $ref: '#/definitions/[object Object]'
         description: The user name.
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   DescribeUserRequest:
     type: object
     properties: {}
@@ -1116,10 +1137,13 @@ definitions:
     type: object
     properties:
       EmbedUrl:
-        $ref: '#/definitions/EmbeddingUrl'
+        $ref: '#/definitions/[object Object]'
         description: 'Call the GetDashboardEmbedUrl API to get the URL that you can embed in your dashboard. This URL is valid for 5 minutes, and the resulting session is valid for 10 hours. The API provides the URL with an auth_code that enables a single-signon session. '
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
   GetDashboardEmbedUrlRequest:
     type: object
@@ -1133,14 +1157,17 @@ definitions:
     type: object
     properties:
       GroupMemberList:
-        $ref: '#/definitions/GroupMemberList'
+        $ref: '#/definitions/[object Object]'
         description: The list of the members of the group.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A pagination token that can be used in a subsequent request.
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   ListGroupMembershipsRequest:
     type: object
     properties: {}
@@ -1149,14 +1176,17 @@ definitions:
     type: object
     properties:
       GroupList:
-        $ref: '#/definitions/GroupList'
+        $ref: '#/definitions/[object Object]'
         description: The list of the groups.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A pagination token that can be used in a subsequent request.
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   ListGroupsRequest:
     type: object
     properties: {}
@@ -1164,14 +1194,17 @@ definitions:
     type: object
     properties:
       GroupList:
-        $ref: '#/definitions/GroupList'
+        $ref: '#/definitions/[object Object]'
         description: The list of groups the user is a member of.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A pagination token that can be used in a subsequent request.
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   ListUserGroupsRequest:
     type: object
     properties: {}
@@ -1179,14 +1212,17 @@ definitions:
     type: object
     properties:
       UserList:
-        $ref: '#/definitions/UserList'
+        $ref: '#/definitions/[object Object]'
         description: The list of users.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A pagination token that can be used in a subsequent request.
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   ListUsersRequest:
     type: object
     properties: {}
@@ -1194,11 +1230,14 @@ definitions:
     type: object
     properties:
       User:
-        $ref: '#/definitions/User'
+        $ref: '#/definitions/[object Object]'
         description: The user name.
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   RegisterUserRequest:
     type: object
     required:
@@ -1207,47 +1246,53 @@ definitions:
       - UserRole
     properties:
       IdentityType:
-        $ref: '#/definitions/IdentityType'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Amazon QuickSight supports several ways of managing the identity of users. This parameter accepts two values:</p> <ul> <li> <p> <code>IAM</code>: A user whose identity maps to an existing IAM user or role. </p> </li> <li> <p> <code>QUICKSIGHT</code>: A user whose identity is owned and managed internally by Amazon QuickSight. </p> </li> </ul>'
       Email:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The email address of the user that you want to register.
       UserRole:
-        $ref: '#/definitions/UserRole'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, data sets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>'
       IamArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The ARN of the IAM user or role that you are registering with Amazon QuickSight. '
       SessionName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the session with the assumed IAM role. By using this parameter, you can register multiple users with the same IAM role, provided that each has a different session name. For more information on assuming IAM roles, see <a href="https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon QuickSight user name that you want to create for the user you are registering.
   UpdateGroupResponse:
     type: object
     properties:
       Group:
-        $ref: '#/definitions/Group'
+        $ref: '#/definitions/[object Object]'
         description: The name of the group.
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   UpdateGroupRequest:
     type: object
     properties:
       Description:
-        $ref: '#/definitions/GroupDescription'
+        $ref: '#/definitions/[object Object]'
         description: The description for the group that you want to update.
   UpdateUserResponse:
     type: object
     properties:
       User:
-        $ref: '#/definitions/User'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon QuickSight user.
       RequestId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The http status of the request.
   UpdateUserRequest:
     type: object
     required:
@@ -1255,10 +1300,10 @@ definitions:
       - Role
     properties:
       Email:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The email address of the user that you want to update.
       Role:
-        $ref: '#/definitions/UserRole'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, data sets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>'
   Arn:
     type: string
@@ -1269,6 +1314,45 @@ definitions:
     maxLength: 12
   Boolean:
     type: boolean
+  '[object Object]': {}
+  EmbeddingUrl:
+    type: string
+    format: password
+  Group:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) for the group.
+      GroupName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the group.
+      Description:
+        $ref: '#/definitions/[object Object]'
+        description: The group description.
+    description: 'A <i>group</i> in Amazon QuickSight consists of a set of users. You can use groups to make it easier to manage access and security. Currently, an Amazon QuickSight subscription can''t contain more than 500 Amazon QuickSight groups.'
+  GroupDescription:
+    type: string
+    minLength: 1
+    maxLength: 512
+  GroupList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  GroupMember:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) for the group member (user).
+      MemberName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the group member (user).
+    description: 'A member of an Amazon QuickSight group. Currently, group members must be users. Groups can''t be members of another group. '
+  GroupMemberList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   GroupMemberName:
     type: string
     pattern: '[\u0020-\u00FF]+'
@@ -1278,96 +1362,56 @@ definitions:
     type: string
     pattern: '[\u0020-\u00FF]+'
     minLength: 1
-  Namespace:
-    type: string
-    pattern: default
-  GroupMember:
-    type: object
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) for the group member (user).
-      MemberName:
-        $ref: '#/definitions/GroupMemberName'
-        description: The name of the group member (user).
-    description: 'A member of an Amazon QuickSight group. Currently, group members must be users. Groups can''t be members of another group. '
-  String:
-    type: string
-  StatusCode:
-    type: integer
-  GroupDescription:
-    type: string
-    minLength: 1
-    maxLength: 512
-  Group:
-    type: object
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) for the group.
-      GroupName:
-        $ref: '#/definitions/GroupName'
-        description: The name of the group.
-      Description:
-        $ref: '#/definitions/GroupDescription'
-        description: The group description.
-    description: 'A <i>group</i> in Amazon QuickSight consists of a set of users. You can use groups to make it easier to manage access and security. Currently, an Amazon QuickSight subscription can''t contain more than 500 Amazon QuickSight groups.'
-  UserName:
-    type: string
-    pattern: '[\u0020-\u00FF]+'
-    minLength: 1
-  User:
-    type: object
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) for the user.
-      UserName:
-        $ref: '#/definitions/UserName'
-        description: The user's user name.
-      Email:
-        $ref: '#/definitions/String'
-        description: The user's email address.
-      Role:
-        $ref: '#/definitions/UserRole'
-        description: The Amazon QuickSight role for the user.
-      IdentityType:
-        $ref: '#/definitions/IdentityType'
-        description: The type of identity authentication used by the user.
-      Active:
-        $ref: '#/definitions/Boolean'
-        description: 'Active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an AD user, that user is inactive until they sign in and provide a password'
-    description: 'A registered user of Amazon QuickSight. Currently, an Amazon QuickSight subscription can''t contain more than 20 million users.'
-  EmbeddingUrl:
-    type: string
-    format: password
   IdentityType:
     type: string
     enum:
       - IAM
       - QUICKSIGHT
-  SessionLifetimeInMinutes:
-    type: integer
-    minimum: 15
-    maximum: 600
-  boolean:
-    type: boolean
-  GroupList:
-    type: array
-    items:
-      $ref: '#/definitions/Group'
-  GroupMemberList:
-    type: array
-    items:
-      $ref: '#/definitions/GroupMember'
   MaxResults:
     type: integer
     minimum: 1
     maximum: 100000
+  Namespace:
+    type: string
+    pattern: default
+  SessionLifetimeInMinutes:
+    type: integer
+    minimum: 15
+    maximum: 600
+  StatusCode:
+    type: integer
+  String:
+    type: string
+  User:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) for the user.
+      UserName:
+        $ref: '#/definitions/[object Object]'
+        description: The user's user name.
+      Email:
+        $ref: '#/definitions/[object Object]'
+        description: The user's email address.
+      Role:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon QuickSight role for the user.
+      IdentityType:
+        $ref: '#/definitions/[object Object]'
+        description: The type of identity authentication used by the user.
+      Active:
+        $ref: '#/definitions/[object Object]'
+        description: 'Active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an AD user, that user is inactive until they sign in and provide a password'
+    description: 'A registered user of Amazon QuickSight. Currently, an Amazon QuickSight subscription can''t contain more than 20 million users.'
   UserList:
     type: array
     items:
-      $ref: '#/definitions/User'
+      $ref: '#/definitions/[object Object]'
+  UserName:
+    type: string
+    pattern: '[\u0020-\u00FF]+'
+    minLength: 1
   UserRole:
     type: string
     enum:
@@ -1376,3 +1420,5 @@ definitions:
       - READER
       - RESTRICTED_AUTHOR
       - RESTRICTED_READER
+  boolean:
+    type: boolean

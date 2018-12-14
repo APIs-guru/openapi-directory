@@ -1036,10 +1036,10 @@ definitions:
     type: object
     properties:
       layers:
-        $ref: '#/definitions/LayerList'
+        $ref: '#/definitions/[object Object]'
         description: A list of image layer objects corresponding to the image layer references in the request.
       failures:
-        $ref: '#/definitions/LayerFailureList'
+        $ref: '#/definitions/[object Object]'
         description: Any failures associated with the call.
   BatchCheckLayerAvailabilityRequest:
     type: object
@@ -1048,33 +1048,33 @@ definitions:
       - layerDigests
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the image layers to check. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository that is associated with the image layers to check.
       layerDigests:
-        $ref: '#/definitions/BatchedOperationLayerDigestList'
+        $ref: '#/definitions/[object Object]'
         description: The digests of the image layers to check.
   RepositoryNotFoundException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: The specified repository could not be found. Check the spelling of the specified repository and ensure that you are performing operations on the correct registry.
   InvalidParameterException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: The specified parameter is invalid. Review the available parameters for the API request.
   ServerException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: These errors are usually caused by a server-side issue.
   BatchDeleteImageResponse:
@@ -1086,10 +1086,10 @@ definitions:
           imageTag: precise
     properties:
       imageIds:
-        $ref: '#/definitions/ImageIdentifierList'
+        $ref: '#/definitions/[object Object]'
         description: The image IDs of the deleted images.
       failures:
-        $ref: '#/definitions/ImageFailureList'
+        $ref: '#/definitions/[object Object]'
         description: Any failures associated with the call.
   BatchDeleteImageRequest:
     type: object
@@ -1102,13 +1102,13 @@ definitions:
       repositoryName: ubuntu
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the image to delete. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository that contains the image to delete.
       imageIds:
-        $ref: '#/definitions/ImageIdentifierList'
+        $ref: '#/definitions/[object Object]'
         description: A list of image ID references that correspond to images to delete. The format of the <code>imageIds</code> reference is <code>imageTag=tag</code> or <code>imageDigest=digest</code>.
     description: Deletes specified images within a specified repository. Images are specified with either the <code>imageTag</code> or <code>imageDigest</code>.
   BatchGetImageResponse:
@@ -1129,10 +1129,10 @@ definitions:
           repositoryName: ubuntu
     properties:
       images:
-        $ref: '#/definitions/ImageList'
+        $ref: '#/definitions/[object Object]'
         description: A list of image objects corresponding to the image references in the request.
       failures:
-        $ref: '#/definitions/ImageFailureList'
+        $ref: '#/definitions/[object Object]'
         description: Any failures associated with the call.
   BatchGetImageRequest:
     type: object
@@ -1145,31 +1145,31 @@ definitions:
       repositoryName: ubuntu
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the images to describe. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository that contains the images to describe.
       imageIds:
-        $ref: '#/definitions/ImageIdentifierList'
+        $ref: '#/definitions/[object Object]'
         description: A list of image ID references that correspond to images to describe. The format of the <code>imageIds</code> reference is <code>imageTag=tag</code> or <code>imageDigest=digest</code>.
       acceptedMediaTypes:
-        $ref: '#/definitions/MediaTypeList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The accepted media types for the request.</p> <p>Valid values: <code>application/vnd.docker.distribution.manifest.v1+json</code> | <code>application/vnd.docker.distribution.manifest.v2+json</code> | <code>application/vnd.oci.image.manifest.v1+json</code> </p>'
   CompleteLayerUploadResponse:
     type: object
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository name associated with the request.
       uploadId:
-        $ref: '#/definitions/UploadId'
+        $ref: '#/definitions/[object Object]'
         description: The upload ID associated with the layer.
       layerDigest:
-        $ref: '#/definitions/LayerDigest'
+        $ref: '#/definitions/[object Object]'
         description: The <code>sha256</code> digest of the image layer.
   CompleteLayerUploadRequest:
     type: object
@@ -1179,50 +1179,50 @@ definitions:
       - layerDigests
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry to which to upload layers. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to associate with the image layer.
       uploadId:
-        $ref: '#/definitions/UploadId'
+        $ref: '#/definitions/[object Object]'
         description: The upload ID from a previous <a>InitiateLayerUpload</a> operation to associate with the image layer.
       layerDigests:
-        $ref: '#/definitions/LayerDigestList'
+        $ref: '#/definitions/[object Object]'
         description: The <code>sha256</code> digest of the image layer.
   UploadNotFoundException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: 'The upload could not be found, or the specified upload id is not valid for this repository.'
   InvalidLayerException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: The layer digest calculation performed by Amazon ECR upon receipt of the image layer does not match the digest specified.
   LayerPartTooSmallException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: Layer parts must be at least 5 MiB in size.
   LayerAlreadyExistsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: The image layer already exists in the associated repository.
   EmptyUploadException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: The specified layer upload does not contain any layer parts.
   CreateRepositoryResponse:
@@ -1234,7 +1234,7 @@ definitions:
         repositoryName: project-a/nginx-web-app
     properties:
       repository:
-        $ref: '#/definitions/Repository'
+        $ref: '#/definitions/[object Object]'
         description: The repository that was created.
   CreateRepositoryRequest:
     type: object
@@ -1244,36 +1244,36 @@ definitions:
       repositoryName: project-a/nginx-web-app
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name to use for the repository. The repository name may be specified on its own (such as <code>nginx-web-app</code>) or it can be prepended with a namespace to group the repository into a category (such as <code>project-a/nginx-web-app</code>).
   RepositoryAlreadyExistsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: The specified repository already exists in the specified registry.
   LimitExceededException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: 'The operation did not succeed because it would have exceeded a service limit for your account. For more information, see <a href="http://docs.aws.amazon.com/AmazonECR/latest/userguide/service_limits.html">Amazon ECR Default Service Limits</a> in the Amazon Elastic Container Registry User Guide.'
   DeleteLifecyclePolicyResponse:
     type: object
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository name associated with the request.
       lifecyclePolicyText:
-        $ref: '#/definitions/LifecyclePolicyText'
+        $ref: '#/definitions/[object Object]'
         description: The JSON lifecycle policy text.
       lastEvaluatedAt:
-        $ref: '#/definitions/EvaluationTimestamp'
+        $ref: '#/definitions/[object Object]'
         description: The time stamp of the last time that the lifecycle policy was run.
   DeleteLifecyclePolicyRequest:
     type: object
@@ -1281,16 +1281,16 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository.
   LifecyclePolicyNotFoundException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
     description: 'The lifecycle policy could not be found, and no policy is set to the repository.'
   DeleteRepositoryResponse:
     type: object
@@ -1301,7 +1301,7 @@ definitions:
         repositoryName: ubuntu
     properties:
       repository:
-        $ref: '#/definitions/Repository'
+        $ref: '#/definitions/[object Object]'
         description: The repository that was deleted.
   DeleteRepositoryRequest:
     type: object
@@ -1312,19 +1312,19 @@ definitions:
       repositoryName: ubuntu
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repository to delete. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to delete.
       force:
-        $ref: '#/definitions/ForceFlag'
+        $ref: '#/definitions/[object Object]'
         description: ' If a repository contains images, forces the deletion.'
   RepositoryNotEmptyException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: 'The specified repository contains images. To delete a repository that contains images, you must force the deletion with the <code>force</code> parameter.'
   DeleteRepositoryPolicyResponse:
@@ -1335,13 +1335,13 @@ definitions:
       repositoryName: ubuntu
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository name associated with the request.
       policyText:
-        $ref: '#/definitions/RepositoryPolicyText'
+        $ref: '#/definitions/[object Object]'
         description: The JSON repository policy that was deleted from the repository.
   DeleteRepositoryPolicyRequest:
     type: object
@@ -1351,26 +1351,26 @@ definitions:
       repositoryName: ubuntu
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repository policy to delete. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository that is associated with the repository policy to delete.
   RepositoryPolicyNotFoundException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: The specified repository and registry combination does not have an associated repository policy.
   DescribeImagesResponse:
     type: object
     properties:
       imageDetails:
-        $ref: '#/definitions/ImageDetailList'
+        $ref: '#/definitions/[object Object]'
         description: A list of <a>ImageDetail</a> objects that contain data about the image.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The <code>nextToken</code> value to include in a future <code>DescribeImages</code> request. When the results of a <code>DescribeImages</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
   DescribeImagesRequest:
     type: object
@@ -1378,28 +1378,28 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repository in which to describe images. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.'
       imageIds:
-        $ref: '#/definitions/ImageIdentifierList'
+        $ref: '#/definitions/[object Object]'
         description: The list of image IDs for the requested repository.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> value returned from a previous paginated <code>DescribeImages</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify images with <code>imageIds</code>.
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of repository results returned by <code>DescribeImages</code> in paginated output. When this parameter is used, <code>DescribeImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify images with <code>imageIds</code>.'
       filter:
-        $ref: '#/definitions/DescribeImagesFilter'
+        $ref: '#/definitions/[object Object]'
         description: The filter key and value with which to filter your <code>DescribeImages</code> results.
   ImageNotFoundException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
     description: The image requested does not exist in the specified repository.
   DescribeRepositoriesResponse:
     type: object
@@ -1413,26 +1413,26 @@ definitions:
           repositoryName: test
     properties:
       repositories:
-        $ref: '#/definitions/RepositoryList'
+        $ref: '#/definitions/[object Object]'
         description: A list of repository objects corresponding to valid repositories.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The <code>nextToken</code> value to include in a future <code>DescribeRepositories</code> request. When the results of a <code>DescribeRepositories</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
   DescribeRepositoriesRequest:
     type: object
     example: {}
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default registry is assumed.'
       repositoryNames:
-        $ref: '#/definitions/RepositoryNameList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeRepositories</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify repositories with <code>repositoryNames</code>.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of repository results returned by <code>DescribeRepositories</code> in paginated output. When this parameter is used, <code>DescribeRepositories</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeRepositories</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeRepositories</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify repositories with <code>repositoryNames</code>.'
   GetAuthorizationTokenResponse:
     type: object
@@ -1443,23 +1443,23 @@ definitions:
           proxyEndpoint: 'https://012345678901.dkr.ecr.us-west-2.amazonaws.com'
     properties:
       authorizationData:
-        $ref: '#/definitions/AuthorizationDataList'
+        $ref: '#/definitions/[object Object]'
         description: A list of authorization token data objects that correspond to the <code>registryIds</code> values in the request.
   GetAuthorizationTokenRequest:
     type: object
     example: {}
     properties:
       registryIds:
-        $ref: '#/definitions/GetAuthorizationTokenRegistryIdList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of AWS account IDs that are associated with the registries for which to get authorization tokens. If you do not specify a registry, the default registry is assumed.'
   GetDownloadUrlForLayerResponse:
     type: object
     properties:
       downloadUrl:
-        $ref: '#/definitions/Url'
+        $ref: '#/definitions/[object Object]'
         description: The pre-signed Amazon S3 download URL for the requested layer.
       layerDigest:
-        $ref: '#/definitions/LayerDigest'
+        $ref: '#/definitions/[object Object]'
         description: The digest of the image layer to download.
   GetDownloadUrlForLayerRequest:
     type: object
@@ -1468,42 +1468,42 @@ definitions:
       - layerDigest
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the image layer to download. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository that is associated with the image layer to download.
       layerDigest:
-        $ref: '#/definitions/LayerDigest'
+        $ref: '#/definitions/[object Object]'
         description: The digest of the image layer to download.
   LayersNotFoundException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: 'The specified layers could not be found, or the specified layer is not valid for this repository.'
   LayerInaccessibleException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: The specified layer is not available because it is not associated with an image. Unassociated image layers may be cleaned up at any time.
   GetLifecyclePolicyResponse:
     type: object
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository name associated with the request.
       lifecyclePolicyText:
-        $ref: '#/definitions/LifecyclePolicyText'
+        $ref: '#/definitions/[object Object]'
         description: The JSON lifecycle policy text.
       lastEvaluatedAt:
-        $ref: '#/definitions/EvaluationTimestamp'
+        $ref: '#/definitions/[object Object]'
         description: The time stamp of the last time that the lifecycle policy was run.
   GetLifecyclePolicyRequest:
     type: object
@@ -1511,34 +1511,34 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository.
   GetLifecyclePolicyPreviewResponse:
     type: object
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository name associated with the request.
       lifecyclePolicyText:
-        $ref: '#/definitions/LifecyclePolicyText'
+        $ref: '#/definitions/[object Object]'
         description: The JSON lifecycle policy text.
       status:
-        $ref: '#/definitions/LifecyclePolicyPreviewStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status of the lifecycle policy preview request.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The <code>nextToken</code> value to include in a future <code>GetLifecyclePolicyPreview</code> request. When the results of a <code>GetLifecyclePolicyPreview</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
       previewResults:
-        $ref: '#/definitions/LifecyclePolicyPreviewResultList'
+        $ref: '#/definitions/[object Object]'
         description: The results of the lifecycle policy preview request.
       summary:
-        $ref: '#/definitions/LifecyclePolicyPreviewSummary'
+        $ref: '#/definitions/[object Object]'
         description: The list of images that is returned as a result of the action.
   GetLifecyclePolicyPreviewRequest:
     type: object
@@ -1546,28 +1546,28 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository.
       imageIds:
-        $ref: '#/definitions/ImageIdentifierList'
+        $ref: '#/definitions/[object Object]'
         description: The list of imageIDs to be included.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The <code>nextToken</code> value returned from a previous paginated&#x2028; <code>GetLifecyclePolicyPreviewRequest</code> request where <code>maxResults</code> was used and the&#x2028; results exceeded the value of that parameter. Pagination continues from the end of the&#x2028; previous results that returned the <code>nextToken</code> value. This value is&#x2028; <code>null</code> when there are no more results to return. This option cannot be used when you specify images with <code>imageIds</code>.'
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of repository results returned by <code>GetLifecyclePolicyPreviewRequest</code> in&#x2028; paginated output. When this parameter is used, <code>GetLifecyclePolicyPreviewRequest</code> only returns&#x2028; <code>maxResults</code> results in a single page along with a <code>nextToken</code>&#x2028; response element. The remaining results of the initial request can be seen by sending&#x2028; another <code>GetLifecyclePolicyPreviewRequest</code> request with the returned <code>nextToken</code>&#x2028; value. This value can be between 1 and 100. If this&#x2028; parameter is not used, then <code>GetLifecyclePolicyPreviewRequest</code> returns up to&#x2028; 100 results and a <code>nextToken</code> value, if&#x2028; applicable. This option cannot be used when you specify images with <code>imageIds</code>.'
       filter:
-        $ref: '#/definitions/LifecyclePolicyPreviewFilter'
+        $ref: '#/definitions/[object Object]'
         description: 'An optional parameter that filters results based on image tag status and all tags, if tagged.'
   LifecyclePolicyPreviewNotFoundException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
     description: There is no dry run for this repository.
   GetRepositoryPolicyResponse:
     type: object
@@ -1588,13 +1588,13 @@ definitions:
       repositoryName: ubuntu
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository name associated with the request.
       policyText:
-        $ref: '#/definitions/RepositoryPolicyText'
+        $ref: '#/definitions/[object Object]'
         description: The JSON repository policy text associated with the repository.
   GetRepositoryPolicyRequest:
     type: object
@@ -1604,19 +1604,19 @@ definitions:
       repositoryName: ubuntu
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository with the policy to retrieve.
   InitiateLayerUploadResponse:
     type: object
     properties:
       uploadId:
-        $ref: '#/definitions/UploadId'
+        $ref: '#/definitions/[object Object]'
         description: The upload ID for the layer upload. This parameter is passed to further <a>UploadLayerPart</a> and <a>CompleteLayerUpload</a> operations.
       partSize:
-        $ref: '#/definitions/PartSize'
+        $ref: '#/definitions/[object Object]'
         description: 'The size, in bytes, that Amazon ECR expects future layer part uploads to be.'
   InitiateLayerUploadRequest:
     type: object
@@ -1624,10 +1624,10 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to which you intend to upload layers.
   ListImagesResponse:
     type: object
@@ -1637,10 +1637,10 @@ definitions:
           imageTag: precise
     properties:
       imageIds:
-        $ref: '#/definitions/ImageIdentifierList'
+        $ref: '#/definitions/[object Object]'
         description: The list of image IDs for the requested repository.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The <code>nextToken</code> value to include in a future <code>ListImages</code> request. When the results of a <code>ListImages</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
   ListImagesRequest:
     type: object
@@ -1650,25 +1650,25 @@ definitions:
       repositoryName: ubuntu
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repository in which to list images. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository with image IDs to be listed.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListImages</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of image results returned by <code>ListImages</code> in paginated output. When this parameter is used, <code>ListImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.'
       filter:
-        $ref: '#/definitions/ListImagesFilter'
+        $ref: '#/definitions/[object Object]'
         description: The filter key and value with which to filter your <code>ListImages</code> results.
   PutImageResponse:
     type: object
     properties:
       image:
-        $ref: '#/definitions/Image'
+        $ref: '#/definitions/[object Object]'
         description: Details of the image uploaded.
   PutImageRequest:
     type: object
@@ -1677,35 +1677,35 @@ definitions:
       - imageManifest
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repository in which to put the image. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository in which to put the image.
       imageManifest:
-        $ref: '#/definitions/ImageManifest'
+        $ref: '#/definitions/[object Object]'
         description: The image manifest corresponding to the image to be uploaded.
       imageTag:
-        $ref: '#/definitions/ImageTag'
+        $ref: '#/definitions/[object Object]'
         description: The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
   ImageAlreadyExistsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: 'The specified image has already been pushed, and there were no changes to the manifest or image tag after the last push.'
   PutLifecyclePolicyResponse:
     type: object
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository name associated with the request.
       lifecyclePolicyText:
-        $ref: '#/definitions/LifecyclePolicyText'
+        $ref: '#/definitions/[object Object]'
         description: The JSON repository policy text.
   PutLifecyclePolicyRequest:
     type: object
@@ -1714,25 +1714,25 @@ definitions:
       - lifecyclePolicyText
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repository. If you do&#x2028; not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to receive the policy.
       lifecyclePolicyText:
-        $ref: '#/definitions/LifecyclePolicyText'
+        $ref: '#/definitions/[object Object]'
         description: The JSON repository policy text to apply to the repository.
   SetRepositoryPolicyResponse:
     type: object
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository name associated with the request.
       policyText:
-        $ref: '#/definitions/RepositoryPolicyText'
+        $ref: '#/definitions/[object Object]'
         description: The JSON repository policy text applied to the repository.
   SetRepositoryPolicyRequest:
     type: object
@@ -1741,31 +1741,31 @@ definitions:
       - policyText
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to receive the policy.
       policyText:
-        $ref: '#/definitions/RepositoryPolicyText'
+        $ref: '#/definitions/[object Object]'
         description: The JSON repository policy text to apply to the repository.
       force:
-        $ref: '#/definitions/ForceFlag'
+        $ref: '#/definitions/[object Object]'
         description: 'If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the <a>SetRepositoryPolicy</a> operation. This is intended to prevent accidental repository lock outs.'
   StartLifecyclePolicyPreviewResponse:
     type: object
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository name associated with the request.
       lifecyclePolicyText:
-        $ref: '#/definitions/LifecyclePolicyText'
+        $ref: '#/definitions/[object Object]'
         description: The JSON repository policy text.
       status:
-        $ref: '#/definitions/LifecyclePolicyPreviewStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status of the lifecycle policy preview request.
   StartLifecyclePolicyPreviewRequest:
     type: object
@@ -1773,34 +1773,34 @@ definitions:
       - repositoryName
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to be evaluated.
       lifecyclePolicyText:
-        $ref: '#/definitions/LifecyclePolicyText'
+        $ref: '#/definitions/[object Object]'
         description: 'The policy to be evaluated against. If you do not specify a policy, the current policy for the repository is used.'
   LifecyclePolicyPreviewInProgressException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
     description: The previous lifecycle policy preview request has not completed. Please try again later.
   UploadLayerPartResponse:
     type: object
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The registry ID associated with the request.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository name associated with the request.
       uploadId:
-        $ref: '#/definitions/UploadId'
+        $ref: '#/definitions/[object Object]'
         description: The upload ID associated with the request.
       lastByteReceived:
-        $ref: '#/definitions/PartSize'
+        $ref: '#/definitions/[object Object]'
         description: The integer value of the last byte received in the request.
   UploadLayerPartRequest:
     type: object
@@ -1812,255 +1812,115 @@ definitions:
       - layerPartBlob
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account ID associated with the registry to which you are uploading layer parts. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to which you are uploading layer parts.
       uploadId:
-        $ref: '#/definitions/UploadId'
+        $ref: '#/definitions/[object Object]'
         description: The upload ID from a previous <a>InitiateLayerUpload</a> operation to associate with the layer part upload.
       partFirstByte:
-        $ref: '#/definitions/PartSize'
+        $ref: '#/definitions/[object Object]'
         description: The integer value of the first byte of the layer part.
       partLastByte:
-        $ref: '#/definitions/PartSize'
+        $ref: '#/definitions/[object Object]'
         description: The integer value of the last byte of the layer part.
       layerPartBlob:
-        $ref: '#/definitions/LayerPartBlob'
+        $ref: '#/definitions/[object Object]'
         description: The base64-encoded layer part payload.
   InvalidLayerPartException:
     type: object
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The registry ID associated with the exception.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The repository name associated with the exception.
       uploadId:
-        $ref: '#/definitions/UploadId'
+        $ref: '#/definitions/[object Object]'
         description: The upload ID associated with the exception.
       lastValidByteReceived:
-        $ref: '#/definitions/PartSize'
+        $ref: '#/definitions/[object Object]'
         description: The last valid byte received from the layer part upload that is associated with the exception.
       message:
-        $ref: '#/definitions/ExceptionMessage'
+        $ref: '#/definitions/[object Object]'
         description: The error message associated with the exception.
     description: 'The layer part size is not valid, or the first byte specified is not consecutive to the last byte of a previous layer part upload.'
   Arn:
     type: string
-  Base64:
-    type: string
-    pattern: ^\S+$
-  ExpirationTimestamp:
-    type: string
-    format: date-time
-  ProxyEndpoint:
-    type: string
+  '[object Object]': {}
   AuthorizationData:
     type: object
     properties:
       authorizationToken:
-        $ref: '#/definitions/Base64'
+        $ref: '#/definitions/[object Object]'
         description: 'A base64-encoded string that contains authorization data for the specified Amazon ECR registry. When the string is decoded, it is presented in the format <code>user:password</code> for private registry authentication using <code>docker login</code>.'
       expiresAt:
-        $ref: '#/definitions/ExpirationTimestamp'
+        $ref: '#/definitions/[object Object]'
         description: The Unix time in seconds and milliseconds when the authorization token expires. Authorization tokens are valid for 12 hours.
       proxyEndpoint:
-        $ref: '#/definitions/ProxyEndpoint'
+        $ref: '#/definitions/[object Object]'
         description: 'The registry URL to use for this authorization token in a <code>docker login</code> command. The Amazon ECR registry URL format is <code>https://aws_account_id.dkr.ecr.region.amazonaws.com</code>. For example, <code>https://012345678910.dkr.ecr.us-east-1.amazonaws.com</code>.. '
     description: An object representing authorization data for an Amazon ECR registry.
   AuthorizationDataList:
     type: array
     items:
-      $ref: '#/definitions/AuthorizationData'
-  RegistryId:
+      $ref: '#/definitions/[object Object]'
+  Base64:
     type: string
-    pattern: '[0-9]{12}'
-  RepositoryName:
-    type: string
-    pattern: '(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*'
-    minLength: 2
-    maxLength: 256
-  BatchedOperationLayerDigestList:
-    type: array
-    items:
-      $ref: '#/definitions/BatchedOperationLayerDigest'
-    minItems: 1
-    maxItems: 100
-  LayerList:
-    type: array
-    items:
-      $ref: '#/definitions/Layer'
-  LayerFailureList:
-    type: array
-    items:
-      $ref: '#/definitions/LayerFailure'
-  ImageIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/ImageIdentifier'
-    minItems: 1
-    maxItems: 100
-  ImageFailureList:
-    type: array
-    items:
-      $ref: '#/definitions/ImageFailure'
-  MediaTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/MediaType'
-    minItems: 1
-    maxItems: 100
-  ImageList:
-    type: array
-    items:
-      $ref: '#/definitions/Image'
+    pattern: ^\S+$
   BatchedOperationLayerDigest:
     type: string
     minLength: 0
     maxLength: 1000
-  UploadId:
-    type: string
-    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
-  LayerDigestList:
+  BatchedOperationLayerDigestList:
     type: array
     items:
-      $ref: '#/definitions/LayerDigest'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 100
-  LayerDigest:
-    type: string
-    pattern: '[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+'
-  Repository:
-    type: object
-    properties:
-      repositoryArn:
-        $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.'
-      registryId:
-        $ref: '#/definitions/RegistryId'
-        description: The AWS account ID associated with the registry that contains the repository.
-      repositoryName:
-        $ref: '#/definitions/RepositoryName'
-        description: The name of the repository.
-      repositoryUri:
-        $ref: '#/definitions/Url'
-        description: The URI for the repository. You can use this URI for Docker <code>push</code> or <code>pull</code> operations.
-      createdAt:
-        $ref: '#/definitions/CreationTimestamp'
-        description: 'The date and time, in JavaScript date format, when the repository was created.'
-    description: An object representing a repository.
   CreationTimestamp:
     type: string
     format: date-time
-  LifecyclePolicyText:
-    type: string
-    minLength: 100
-    maxLength: 10240
-  EvaluationTimestamp:
-    type: string
-    format: date-time
-  RepositoryPolicyText:
-    type: string
-    minLength: 0
-    maxLength: 10240
-  ForceFlag:
-    type: boolean
-  TagStatus:
-    type: string
-    enum:
-      - TAGGED
-      - UNTAGGED
   DescribeImagesFilter:
     type: object
     properties:
       tagStatus:
-        $ref: '#/definitions/TagStatus'
+        $ref: '#/definitions/[object Object]'
         description: The tag status with which to filter your <a>DescribeImages</a> results. You can filter results based on whether they are <code>TAGGED</code> or <code>UNTAGGED</code>.
     description: An object representing a filter on a <a>DescribeImages</a> operation.
-  NextToken:
+  EvaluationTimestamp:
     type: string
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  ImageDetailList:
-    type: array
-    items:
-      $ref: '#/definitions/ImageDetail'
-  RepositoryNameList:
-    type: array
-    items:
-      $ref: '#/definitions/RepositoryName'
-    minItems: 1
-    maxItems: 100
-  RepositoryList:
-    type: array
-    items:
-      $ref: '#/definitions/Repository'
+    format: date-time
   ExceptionMessage:
     type: string
+  ExpirationTimestamp:
+    type: string
+    format: date-time
+  ForceFlag:
+    type: boolean
   GetAuthorizationTokenRegistryIdList:
     type: array
     items:
-      $ref: '#/definitions/RegistryId'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 10
-  Url:
-    type: string
-  LifecyclePolicyPreviewFilter:
-    type: object
-    properties:
-      tagStatus:
-        $ref: '#/definitions/TagStatus'
-        description: The tag status of the image.
-    description: The filter for the lifecycle policy preview.
-  LifecyclePolicyPreviewStatus:
-    type: string
-    enum:
-      - IN_PROGRESS
-      - COMPLETE
-      - EXPIRED
-      - FAILED
-  LifecyclePolicyPreviewResultList:
-    type: array
-    items:
-      $ref: '#/definitions/LifecyclePolicyPreviewResult'
-  LifecyclePolicyPreviewSummary:
-    type: object
-    properties:
-      expiringImageTotalCount:
-        $ref: '#/definitions/ImageCount'
-        description: The number of expiring images.
-    description: The summary of the lifecycle policy preview request.
-  ImageIdentifier:
-    type: object
-    properties:
-      imageDigest:
-        $ref: '#/definitions/ImageDigest'
-        description: The <code>sha256</code> digest of the image manifest.
-      imageTag:
-        $ref: '#/definitions/ImageTag'
-        description: The tag used for the image.
-    description: An object with identifying information for an Amazon ECR image.
-  ImageManifest:
-    type: string
   Image:
     type: object
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The AWS account ID associated with the registry containing the image.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository associated with the image.
       imageId:
-        $ref: '#/definitions/ImageIdentifier'
+        $ref: '#/definitions/[object Object]'
         description: An object containing the image tag and image digest associated with an image.
       imageManifest:
-        $ref: '#/definitions/ImageManifest'
+        $ref: '#/definitions/[object Object]'
         description: The image manifest associated with the image.
     description: An object representing an Amazon ECR image.
   ImageActionType:
@@ -2070,39 +1930,47 @@ definitions:
   ImageCount:
     type: integer
     minimum: 0
-  ImageDigest:
-    type: string
-  ImageTagList:
-    type: array
-    items:
-      $ref: '#/definitions/ImageTag'
-  ImageSizeInBytes:
-    type: integer
-  PushTimestamp:
-    type: string
-    format: date-time
   ImageDetail:
     type: object
     properties:
       registryId:
-        $ref: '#/definitions/RegistryId'
+        $ref: '#/definitions/[object Object]'
         description: The AWS account ID associated with the registry to which this image belongs.
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to which this image belongs.
       imageDigest:
-        $ref: '#/definitions/ImageDigest'
+        $ref: '#/definitions/[object Object]'
         description: The <code>sha256</code> digest of the image manifest.
       imageTags:
-        $ref: '#/definitions/ImageTagList'
+        $ref: '#/definitions/[object Object]'
         description: The list of tags associated with this image.
       imageSizeInBytes:
-        $ref: '#/definitions/ImageSizeInBytes'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The size, in bytes, of the image in the repository.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>'
       imagePushedAt:
-        $ref: '#/definitions/PushTimestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository. '
     description: An object that describes an image returned by a <a>DescribeImages</a> operation.
+  ImageDetailList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ImageDigest:
+    type: string
+  ImageFailure:
+    type: object
+    properties:
+      imageId:
+        $ref: '#/definitions/[object Object]'
+        description: The image ID associated with the failure.
+      failureCode:
+        $ref: '#/definitions/[object Object]'
+        description: The code associated with the failure.
+      failureReason:
+        $ref: '#/definitions/[object Object]'
+        description: The reason for the failure.
+    description: An object representing an Amazon ECR image failure.
   ImageFailureCode:
     type: string
     enum:
@@ -2111,106 +1979,239 @@ definitions:
       - ImageTagDoesNotMatchDigest
       - ImageNotFound
       - MissingDigestAndTag
+  ImageFailureList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ImageFailureReason:
     type: string
-  ImageFailure:
+  ImageIdentifier:
     type: object
     properties:
-      imageId:
-        $ref: '#/definitions/ImageIdentifier'
-        description: The image ID associated with the failure.
-      failureCode:
-        $ref: '#/definitions/ImageFailureCode'
-        description: The code associated with the failure.
-      failureReason:
-        $ref: '#/definitions/ImageFailureReason'
-        description: The reason for the failure.
-    description: An object representing an Amazon ECR image failure.
+      imageDigest:
+        $ref: '#/definitions/[object Object]'
+        description: The <code>sha256</code> digest of the image manifest.
+      imageTag:
+        $ref: '#/definitions/[object Object]'
+        description: The tag used for the image.
+    description: An object with identifying information for an Amazon ECR image.
+  ImageIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
+  ImageList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ImageManifest:
+    type: string
+  ImageSizeInBytes:
+    type: integer
   ImageTag:
     type: string
-  PartSize:
-    type: integer
-    minimum: 0
+  ImageTagList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Layer:
+    type: object
+    properties:
+      layerDigest:
+        $ref: '#/definitions/[object Object]'
+        description: The <code>sha256</code> digest of the image layer.
+      layerAvailability:
+        $ref: '#/definitions/[object Object]'
+        description: The availability status of the image layer.
+      layerSize:
+        $ref: '#/definitions/[object Object]'
+        description: 'The size, in bytes, of the image layer.'
+      mediaType:
+        $ref: '#/definitions/[object Object]'
+        description: 'The media type of the layer, such as <code>application/vnd.docker.image.rootfs.diff.tar.gzip</code> or <code>application/vnd.oci.image.layer.v1.tar+gzip</code>.'
+    description: An object representing an Amazon ECR image layer.
   LayerAvailability:
     type: string
     enum:
       - AVAILABLE
       - UNAVAILABLE
-  LayerSizeInBytes:
-    type: integer
-  MediaType:
+  LayerDigest:
     type: string
-  Layer:
+    pattern: '[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+'
+  LayerDigestList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
+  LayerFailure:
     type: object
     properties:
       layerDigest:
-        $ref: '#/definitions/LayerDigest'
-        description: The <code>sha256</code> digest of the image layer.
-      layerAvailability:
-        $ref: '#/definitions/LayerAvailability'
-        description: The availability status of the image layer.
-      layerSize:
-        $ref: '#/definitions/LayerSizeInBytes'
-        description: 'The size, in bytes, of the image layer.'
-      mediaType:
-        $ref: '#/definitions/MediaType'
-        description: 'The media type of the layer, such as <code>application/vnd.docker.image.rootfs.diff.tar.gzip</code> or <code>application/vnd.oci.image.layer.v1.tar+gzip</code>.'
-    description: An object representing an Amazon ECR image layer.
+        $ref: '#/definitions/[object Object]'
+        description: The layer digest associated with the failure.
+      failureCode:
+        $ref: '#/definitions/[object Object]'
+        description: The failure code associated with the failure.
+      failureReason:
+        $ref: '#/definitions/[object Object]'
+        description: The reason for the failure.
+    description: An object representing an Amazon ECR image layer failure.
   LayerFailureCode:
     type: string
     enum:
       - InvalidLayerDigest
       - MissingLayerDigest
+  LayerFailureList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   LayerFailureReason:
     type: string
-  LayerFailure:
-    type: object
-    properties:
-      layerDigest:
-        $ref: '#/definitions/BatchedOperationLayerDigest'
-        description: The layer digest associated with the failure.
-      failureCode:
-        $ref: '#/definitions/LayerFailureCode'
-        description: The failure code associated with the failure.
-      failureReason:
-        $ref: '#/definitions/LayerFailureReason'
-        description: The reason for the failure.
-    description: An object representing an Amazon ECR image layer failure.
+  LayerList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   LayerPartBlob:
     type: string
+  LayerSizeInBytes:
+    type: integer
+  LifecyclePolicyPreviewFilter:
+    type: object
+    properties:
+      tagStatus:
+        $ref: '#/definitions/[object Object]'
+        description: The tag status of the image.
+    description: The filter for the lifecycle policy preview.
+  LifecyclePolicyPreviewResult:
+    type: object
+    properties:
+      imageTags:
+        $ref: '#/definitions/[object Object]'
+        description: The list of tags associated with this image.
+      imageDigest:
+        $ref: '#/definitions/[object Object]'
+        description: The <code>sha256</code> digest of the image manifest.
+      imagePushedAt:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository.'
+      action:
+        $ref: '#/definitions/[object Object]'
+        description: The type of action to be taken.
+      appliedRulePriority:
+        $ref: '#/definitions/[object Object]'
+        description: The priority of the applied rule.
+    description: The result of the lifecycle policy preview.
+  LifecyclePolicyPreviewResultList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  LifecyclePolicyPreviewStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - COMPLETE
+      - EXPIRED
+      - FAILED
+  LifecyclePolicyPreviewSummary:
+    type: object
+    properties:
+      expiringImageTotalCount:
+        $ref: '#/definitions/[object Object]'
+        description: The number of expiring images.
+    description: The summary of the lifecycle policy preview request.
   LifecyclePolicyRuleAction:
     type: object
     properties:
       type:
-        $ref: '#/definitions/ImageActionType'
+        $ref: '#/definitions/[object Object]'
         description: The type of action to be taken.
     description: The type of action to be taken.
   LifecyclePolicyRulePriority:
     type: integer
     minimum: 1
-  LifecyclePolicyPreviewResult:
-    type: object
-    properties:
-      imageTags:
-        $ref: '#/definitions/ImageTagList'
-        description: The list of tags associated with this image.
-      imageDigest:
-        $ref: '#/definitions/ImageDigest'
-        description: The <code>sha256</code> digest of the image manifest.
-      imagePushedAt:
-        $ref: '#/definitions/PushTimestamp'
-        description: 'The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository.'
-      action:
-        $ref: '#/definitions/LifecyclePolicyRuleAction'
-        description: The type of action to be taken.
-      appliedRulePriority:
-        $ref: '#/definitions/LifecyclePolicyRulePriority'
-        description: The priority of the applied rule.
-    description: The result of the lifecycle policy preview.
+  LifecyclePolicyText:
+    type: string
+    minLength: 100
+    maxLength: 10240
   ListImagesFilter:
     type: object
     properties:
       tagStatus:
-        $ref: '#/definitions/TagStatus'
+        $ref: '#/definitions/[object Object]'
         description: The tag status with which to filter your <a>ListImages</a> results. You can filter results based on whether they are <code>TAGGED</code> or <code>UNTAGGED</code>.
     description: An object representing a filter on a <a>ListImages</a> operation.
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  MediaType:
+    type: string
+  MediaTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
+  NextToken:
+    type: string
+  PartSize:
+    type: integer
+    minimum: 0
+  ProxyEndpoint:
+    type: string
+  PushTimestamp:
+    type: string
+    format: date-time
+  RegistryId:
+    type: string
+    pattern: '[0-9]{12}'
+  Repository:
+    type: object
+    properties:
+      repositoryArn:
+        $ref: '#/definitions/[object Object]'
+        description: 'The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.'
+      registryId:
+        $ref: '#/definitions/[object Object]'
+        description: The AWS account ID associated with the registry that contains the repository.
+      repositoryName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the repository.
+      repositoryUri:
+        $ref: '#/definitions/[object Object]'
+        description: The URI for the repository. You can use this URI for Docker <code>push</code> or <code>pull</code> operations.
+      createdAt:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date and time, in JavaScript date format, when the repository was created.'
+    description: An object representing a repository.
+  RepositoryList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  RepositoryName:
+    type: string
+    pattern: '(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*'
+    minLength: 2
+    maxLength: 256
+  RepositoryNameList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
+  RepositoryPolicyText:
+    type: string
+    minLength: 0
+    maxLength: 10240
+  TagStatus:
+    type: string
+    enum:
+      - TAGGED
+      - UNTAGGED
+  UploadId:
+    type: string
+    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+  Url:
+    type: string

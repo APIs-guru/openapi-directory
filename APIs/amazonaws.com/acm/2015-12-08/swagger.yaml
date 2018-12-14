@@ -196,26 +196,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeCertificateRequest'
-      x-waiters:
-        - delay: 60
-          maxAttempts: 40
-          operation: DescribeCertificate
-          acceptors:
-            - matcher: pathAll
-              expected: SUCCESS
-              argument: 'Certificate.DomainValidationOptions[].ValidationStatus'
-              state: success
-            - matcher: pathAny
-              expected: PENDING_VALIDATION
-              argument: 'Certificate.DomainValidationOptions[].ValidationStatus'
-              state: retry
-            - matcher: path
-              expected: FAILED
-              argument: Certificate.Status
-              state: failure
-            - matcher: error
-              expected: ResourceNotFoundException
-              state: failure
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -559,34 +539,34 @@ definitions:
       - Tags
     properties:
       CertificateArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>String that contains the ARN of the ACM certificate to which the tag is to be applied. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>'
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: The key-value pair that defines the tag. The tag value is optional.
   ResourceNotFoundException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
     description: The specified certificate cannot be found in the caller's account or the caller's account cannot be found.
   InvalidArnException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
     description: The requested Amazon Resource Name (ARN) does not refer to an existing resource.
   InvalidTagException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
     description: 'One or both of the values that make up the key-value pair is not valid. For example, you cannot specify a tag value that begins with <code>aws:</code>.'
   TooManyTagsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
     description: The request contains too many tags. Try the request again with fewer tags.
   DeleteCertificateRequest:
     type: object
@@ -594,19 +574,19 @@ definitions:
       - CertificateArn
     properties:
       CertificateArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>String that contains the ARN of the ACM certificate to be deleted. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>'
   ResourceInUseException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
     description: The certificate is in use by another AWS service in the caller's account. Remove the association and try again.
   DescribeCertificateResponse:
     type: object
     properties:
       Certificate:
-        $ref: '#/definitions/CertificateDetail'
+        $ref: '#/definitions/[object Object]'
         description: Metadata about an ACM certificate.
   DescribeCertificateRequest:
     type: object
@@ -614,19 +594,19 @@ definitions:
       - CertificateArn
     properties:
       CertificateArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have the following form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>'
   ExportCertificateResponse:
     type: object
     properties:
       Certificate:
-        $ref: '#/definitions/CertificateBody'
+        $ref: '#/definitions/[object Object]'
         description: The base64 PEM-encoded certificate.
       CertificateChain:
-        $ref: '#/definitions/CertificateChain'
+        $ref: '#/definitions/[object Object]'
         description: The base64 PEM-encoded certificate chain. This does not include the certificate that you are exporting.
       PrivateKey:
-        $ref: '#/definitions/PrivateKey'
+        $ref: '#/definitions/[object Object]'
         description: The PEM-encoded private key associated with the public key in the certificate.
   ExportCertificateRequest:
     type: object
@@ -635,25 +615,25 @@ definitions:
       - Passphrase
     properties:
       CertificateArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>An Amazon Resource Name (ARN) of the issued certificate. This must be of the form:</p> <p> <code>arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012</code> </p>'
       Passphrase:
-        $ref: '#/definitions/PassphraseBlob'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Passphrase to associate with the encrypted exported private key. If you want to later decrypt the private key, you must have the passphrase. You can use the following OpenSSL command to decrypt a private key: </p> <p> <code>openssl rsa -in encrypted_key.pem -out decrypted_key.pem</code> </p>'
   RequestInProgressException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
     description: The certificate request is in process and the certificate in your account has not yet been issued.
   GetCertificateResponse:
     type: object
     properties:
       Certificate:
-        $ref: '#/definitions/CertificateBody'
+        $ref: '#/definitions/[object Object]'
         description: String that contains the ACM certificate represented by the ARN specified at input.
       CertificateChain:
-        $ref: '#/definitions/CertificateChain'
+        $ref: '#/definitions/[object Object]'
         description: The certificate chain that contains the root certificate issued by the certificate authority (CA).
   GetCertificateRequest:
     type: object
@@ -661,13 +641,13 @@ definitions:
       - CertificateArn
     properties:
       CertificateArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>String that contains a certificate ARN in the following format:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>'
   ImportCertificateResponse:
     type: object
     properties:
       CertificateArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: 'The <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the imported certificate.'
   ImportCertificateRequest:
     type: object
@@ -676,52 +656,52 @@ definitions:
       - PrivateKey
     properties:
       CertificateArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: 'The <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of an imported certificate to replace. To import a new certificate, omit this field. '
       Certificate:
-        $ref: '#/definitions/CertificateBodyBlob'
+        $ref: '#/definitions/[object Object]'
         description: The certificate to import.
       PrivateKey:
-        $ref: '#/definitions/PrivateKeyBlob'
+        $ref: '#/definitions/[object Object]'
         description: The private key that matches the public key in the certificate.
       CertificateChain:
-        $ref: '#/definitions/CertificateChainBlob'
+        $ref: '#/definitions/[object Object]'
         description: The PEM encoded certificate chain.
   LimitExceededException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
     description: An ACM limit has been exceeded.
   ListCertificatesResponse:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'When the list is truncated, this value is present and contains the value to use for the <code>NextToken</code> parameter in a subsequent pagination request.'
       CertificateSummaryList:
-        $ref: '#/definitions/CertificateSummaryList'
+        $ref: '#/definitions/[object Object]'
         description: A list of ACM certificates.
   ListCertificatesRequest:
     type: object
     properties:
       CertificateStatuses:
-        $ref: '#/definitions/CertificateStatuses'
+        $ref: '#/definitions/[object Object]'
         description: Filter the certificate list by status value.
       Includes:
-        $ref: '#/definitions/Filters'
+        $ref: '#/definitions/[object Object]'
         description: 'Filter the certificate list. For more information, see the <a>Filters</a> structure.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter only when paginating results and only in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextToken</code> from the response you just received.
       MaxItems:
-        $ref: '#/definitions/MaxItems'
+        $ref: '#/definitions/[object Object]'
         description: 'Use this parameter when paginating results to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <code>NextToken</code> element is sent in the response. Use this <code>NextToken</code> value in a subsequent request to retrieve additional items.'
   ListTagsForCertificateResponse:
     type: object
     properties:
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: The key-value pairs that define the applied tags.
   ListTagsForCertificateRequest:
     type: object
@@ -729,7 +709,7 @@ definitions:
       - CertificateArn
     properties:
       CertificateArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>String that contains the ARN of the ACM certificate for which you want to list the tags. This must have the following form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>'
   RemoveTagsFromCertificateRequest:
     type: object
@@ -738,16 +718,16 @@ definitions:
       - Tags
     properties:
       CertificateArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>String that contains the ARN of the ACM Certificate with one or more tags that you want to remove. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>'
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: The key-value pair that defines the tag to remove.
   RequestCertificateResponse:
     type: object
     properties:
       CertificateArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>String that contains the ARN of the issued certificate. This must be of the form:</p> <p> <code>arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p>'
   RequestCertificateRequest:
     type: object
@@ -755,31 +735,31 @@ definitions:
       - DomainName
     properties:
       DomainName:
-        $ref: '#/definitions/DomainNameString'
+        $ref: '#/definitions/[object Object]'
         description: '<p> Fully qualified domain name (FQDN), such as www.example.com, that you want to secure with an ACM certificate. Use an asterisk (*) to create a wildcard certificate that protects several sites in the same domain. For example, *.example.com protects www.example.com, site.example.com, and images.example.com. </p> <p> The first domain name you enter cannot exceed 63 octets, including periods. Each subsequent Subject Alternative Name (SAN), however, can be up to 253 octets in length. </p>'
       ValidationMethod:
-        $ref: '#/definitions/ValidationMethod'
+        $ref: '#/definitions/[object Object]'
         description: 'The method you want to use if you are requesting a public certificate to validate that you own or control domain. You can <a href="http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html">validate with DNS</a> or <a href="http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html">validate with email</a>. We recommend that you use DNS validation. '
       SubjectAlternativeNames:
-        $ref: '#/definitions/DomainList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate. For example, add the name www.example.net to a certificate for which the <code>DomainName</code> field is www.example.com if users can reach your site by using either name. The maximum number of domain names that you can add to an ACM certificate is 100. However, the initial limit is 10 domain names. If you need more than 10 names, you must request a limit increase. For more information, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html">Limits</a>.</p> <p> The maximum length of a SAN DNS name is 253 octets. The name is made up of multiple labels separated by periods. No label can be longer than 63 octets. Consider the following examples: </p> <ul> <li> <p> <code>(63 octets).(63 octets).(63 octets).(61 octets)</code> is legal because the total length is 253 octets (63+1+63+1+63+1+61) and no label exceeds 63 octets.</p> </li> <li> <p> <code>(64 octets).(63 octets).(63 octets).(61 octets)</code> is not legal because the total length exceeds 253 octets (64+1+63+1+63+1+61) and the first label exceeds 63 octets.</p> </li> <li> <p> <code>(63 octets).(63 octets).(63 octets).(62 octets)</code> is not legal because the total length of the DNS name (63+1+63+1+63+1+62) exceeds 253 octets.</p> </li> </ul>'
       IdempotencyToken:
-        $ref: '#/definitions/IdempotencyToken'
+        $ref: '#/definitions/[object Object]'
         description: 'Customer chosen string that can be used to distinguish between calls to <code>RequestCertificate</code>. Idempotency tokens time out after one hour. Therefore, if you call <code>RequestCertificate</code> multiple times with the same idempotency token within one hour, ACM recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, ACM recognizes that you are requesting multiple certificates.'
       DomainValidationOptions:
-        $ref: '#/definitions/DomainValidationOptionList'
+        $ref: '#/definitions/[object Object]'
         description: The domain name that you want ACM to use to send you emails so that you can validate domain ownership.
       Options:
-        $ref: '#/definitions/CertificateOptions'
+        $ref: '#/definitions/[object Object]'
         description: 'Currently, you can use this parameter to specify whether to add the certificate to a certificate transparency log. Certificate transparency makes it possible to detect SSL/TLS certificates that have been mistakenly or maliciously issued. Certificates that have not been logged typically produce an error message in a browser. For more information, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency">Opting Out of Certificate Transparency Logging</a>.'
       CertificateAuthorityArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate. If you do not provide an ARN and you are trying to request a private certificate, ACM will attempt to issue a public certificate. For more information about private CAs, see the <a href="http://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html">AWS Certificate Manager Private Certificate Authority (PCA)</a> user guide. The ARN must have the following form: </p> <p> <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> </p>'
   InvalidDomainValidationOptionsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
     description: One or more values in the <a>DomainValidationOption</a> structure is incorrect.
   ResendValidationEmailRequest:
     type: object
@@ -789,19 +769,19 @@ definitions:
       - ValidationDomain
     properties:
       CertificateArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>String that contains the ARN of the requested certificate. The certificate ARN is generated and returned by the <a>RequestCertificate</a> action as soon as the request is made. By default, using this parameter causes email to be sent to all top-level domains you specified in the certificate request. The ARN must be of the form: </p> <p> <code>arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p>'
       Domain:
-        $ref: '#/definitions/DomainNameString'
+        $ref: '#/definitions/[object Object]'
         description: The fully qualified domain name (FQDN) of the certificate that needs to be validated.
       ValidationDomain:
-        $ref: '#/definitions/DomainNameString'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The base validation domain that will act as the suffix of the email addresses that are used to send the emails. This must be the same as the <code>Domain</code> value or a superdomain of the <code>Domain</code> value. For example, if you requested a certificate for <code>site.subdomain.example.com</code> and specify a <b>ValidationDomain</b> of <code>subdomain.example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS and the following five addresses:</p> <ul> <li> <p>admin@subdomain.example.com</p> </li> <li> <p>administrator@subdomain.example.com</p> </li> <li> <p>hostmaster@subdomain.example.com</p> </li> <li> <p>postmaster@subdomain.example.com</p> </li> <li> <p>webmaster@subdomain.example.com</p> </li> </ul>'
   InvalidStateException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
     description: Processing has reached an invalid state.
   UpdateCertificateOptionsRequest:
     type: object
@@ -810,22 +790,17 @@ definitions:
       - Options
     properties:
       CertificateArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>ARN of the requested certificate to update. This must be of the form:</p> <p> <code>arn:aws:acm:us-east-1:<i>account</i>:certificate/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
       Options:
-        $ref: '#/definitions/CertificateOptions'
+        $ref: '#/definitions/[object Object]'
         description: 'Use to update the options for your certificate. Currently, you can specify whether to add your certificate to a transparency log. Certificate transparency makes it possible to detect SSL/TLS certificates that have been mistakenly or maliciously issued. Certificates that have not been logged typically produce an error message in a browser. '
+  '[object Object]': {}
   Arn:
     type: string
     pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*'
     minLength: 20
     maxLength: 2048
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-    maxItems: 50
   CertificateBody:
     type: string
     pattern: '-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
@@ -844,28 +819,95 @@ definitions:
     type: string
     minLength: 1
     maxLength: 2097152
-  DomainNameString:
-    type: string
-    pattern: '^(\*\.)?(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])$'
-    minLength: 1
-    maxLength: 253
-  DomainList:
-    type: array
-    items:
-      $ref: '#/definitions/DomainNameString'
-    minItems: 1
-    maxItems: 100
-  DomainValidationList:
-    type: array
-    items:
-      $ref: '#/definitions/DomainValidation'
-    minItems: 1
-    maxItems: 1000
-  String:
-    type: string
-  TStamp:
-    type: string
-    format: date-time
+  CertificateDetail:
+    type: object
+    properties:
+      CertificateArn:
+        $ref: '#/definitions/[object Object]'
+        description: 'The Amazon Resource Name (ARN) of the certificate. For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+      DomainName:
+        $ref: '#/definitions/[object Object]'
+        description: 'The fully qualified domain name for the certificate, such as www.example.com or example.com.'
+      SubjectAlternativeNames:
+        $ref: '#/definitions/[object Object]'
+        description: 'One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website. '
+      DomainValidationOptions:
+        $ref: '#/definitions/[object Object]'
+        description: 'Contains information about the initial validation of each domain name that occurs as a result of the <a>RequestCertificate</a> request. This field exists only when the certificate type is <code>AMAZON_ISSUED</code>. '
+      Serial:
+        $ref: '#/definitions/[object Object]'
+        description: The serial number of the certificate.
+      Subject:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the entity that is associated with the public key contained in the certificate.
+      Issuer:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the certificate authority that issued and signed the certificate.
+      CreatedAt:
+        $ref: '#/definitions/[object Object]'
+        description: 'The time at which the certificate was requested. This value exists only when the certificate type is <code>AMAZON_ISSUED</code>. '
+      IssuedAt:
+        $ref: '#/definitions/[object Object]'
+        description: 'The time at which the certificate was issued. This value exists only when the certificate type is <code>AMAZON_ISSUED</code>. '
+      ImportedAt:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date and time at which the certificate was imported. This value exists only when the certificate type is <code>IMPORTED</code>. '
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the certificate.
+      RevokedAt:
+        $ref: '#/definitions/[object Object]'
+        description: 'The time at which the certificate was revoked. This value exists only when the certificate status is <code>REVOKED</code>. '
+      RevocationReason:
+        $ref: '#/definitions/[object Object]'
+        description: 'The reason the certificate was revoked. This value exists only when the certificate status is <code>REVOKED</code>. '
+      NotBefore:
+        $ref: '#/definitions/[object Object]'
+        description: The time before which the certificate is not valid.
+      NotAfter:
+        $ref: '#/definitions/[object Object]'
+        description: The time after which the certificate is not valid.
+      KeyAlgorithm:
+        $ref: '#/definitions/[object Object]'
+        description: The algorithm that was used to generate the public-private key pair.
+      SignatureAlgorithm:
+        $ref: '#/definitions/[object Object]'
+        description: The algorithm that was used to sign the certificate.
+      InUseBy:
+        $ref: '#/definitions/[object Object]'
+        description: 'A list of ARNs for the AWS resources that are using the certificate. A certificate can be used by multiple AWS resources. '
+      FailureReason:
+        $ref: '#/definitions/[object Object]'
+        description: 'The reason the certificate request failed. This value exists only when the certificate status is <code>FAILED</code>. For more information, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed">Certificate Request Failed</a> in the <i>AWS Certificate Manager User Guide</i>. '
+      Type:
+        $ref: '#/definitions/[object Object]'
+        description: 'The source of the certificate. For certificates provided by ACM, this value is <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html">managed renewal</a> for imported certificates. For more information about the differences between certificates that you import and those that ACM provides, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html">Importing Certificates</a> in the <i>AWS Certificate Manager User Guide</i>. '
+      RenewalSummary:
+        $ref: '#/definitions/[object Object]'
+        description: 'Contains information about the status of ACM''s <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html">managed renewal</a> for the certificate. This field exists only when the certificate type is <code>AMAZON_ISSUED</code>.'
+      KeyUsages:
+        $ref: '#/definitions/[object Object]'
+        description: 'A list of Key Usage X.509 v3 extension objects. Each object is a string value that identifies the purpose of the public key contained in the certificate. Possible extension values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT, NON_REPUDIATION, and more.'
+      ExtendedKeyUsages:
+        $ref: '#/definitions/[object Object]'
+        description: 'Contains a list of Extended Key Usage X.509 v3 extension objects. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier (OID). '
+      CertificateAuthorityArn:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The Amazon Resource Name (ARN) of the ACM PCA private certificate authority (CA) that issued the certificate. This has the following format: </p> <p> <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> </p>'
+      RenewalEligibility:
+        $ref: '#/definitions/[object Object]'
+        description: Specifies whether the certificate is eligible for renewal.
+      Options:
+        $ref: '#/definitions/[object Object]'
+        description: 'Value that specifies whether to add the certificate to a transparency log. Certificate transparency makes it possible to detect SSL certificates that have been mistakenly or maliciously issued. A browser might respond to certificate that has not been logged by showing an error message. The logs are cryptographically secure. '
+    description: 'Contains metadata about an ACM certificate. This structure is returned in the response to a <a>DescribeCertificate</a> request. '
+  CertificateOptions:
+    type: object
+    properties:
+      CertificateTransparencyLoggingPreference:
+        $ref: '#/definitions/[object Object]'
+        description: 'You can opt out of certificate transparency logging by specifying the <code>DISABLED</code> option. Opt in by specifying <code>ENABLED</code>. '
+    description: 'Structure that contains options for your certificate. Currently, you can use this only to specify whether to opt in to or out of certificate transparency logging. Some browsers require that public certificates issued for your domain be recorded in a log. Certificates that are not logged typically generate a browser error. Transparency makes it possible for you to detect SSL/TLS certificates that have been mistakenly or maliciously issued for your domain. For general information, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency">Certificate Transparency Logging</a>. '
   CertificateStatus:
     type: string
     enum:
@@ -876,247 +918,82 @@ definitions:
       - VALIDATION_TIMED_OUT
       - REVOKED
       - FAILED
-  RevocationReason:
-    type: string
-    enum:
-      - UNSPECIFIED
-      - KEY_COMPROMISE
-      - CA_COMPROMISE
-      - AFFILIATION_CHANGED
-      - SUPERCEDED
-      - CESSATION_OF_OPERATION
-      - CERTIFICATE_HOLD
-      - REMOVE_FROM_CRL
-      - PRIVILEGE_WITHDRAWN
-      - A_A_COMPROMISE
-  KeyAlgorithm:
-    type: string
-    enum:
-      - RSA_2048
-      - RSA_1024
-      - RSA_4096
-      - EC_prime256v1
-      - EC_secp384r1
-      - EC_secp521r1
-  InUseList:
+  CertificateStatuses:
     type: array
     items:
-      $ref: '#/definitions/String'
-  FailureReason:
+      $ref: '#/definitions/[object Object]'
+  CertificateSummary:
+    type: object
+    properties:
+      CertificateArn:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Amazon Resource Name (ARN) of the certificate. This is of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>'
+      DomainName:
+        $ref: '#/definitions/[object Object]'
+        description: 'Fully qualified domain name (FQDN), such as www.example.com or example.com, for the certificate.'
+    description: 'This structure is returned in the response object of <a>ListCertificates</a> action. '
+  CertificateSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  CertificateTransparencyLoggingPreference:
     type: string
     enum:
-      - NO_AVAILABLE_CONTACTS
-      - ADDITIONAL_VERIFICATION_REQUIRED
-      - DOMAIN_NOT_ALLOWED
-      - INVALID_PUBLIC_DOMAIN
-      - CAA_ERROR
-      - PCA_LIMIT_EXCEEDED
-      - PCA_INVALID_ARN
-      - PCA_INVALID_STATE
-      - PCA_REQUEST_FAILED
-      - PCA_RESOURCE_NOT_FOUND
-      - PCA_INVALID_ARGS
-      - OTHER
+      - ENABLED
+      - DISABLED
   CertificateType:
     type: string
     enum:
       - IMPORTED
       - AMAZON_ISSUED
       - PRIVATE
-  RenewalSummary:
-    type: object
-    required:
-      - RenewalStatus
-      - DomainValidationOptions
-    properties:
-      RenewalStatus:
-        $ref: '#/definitions/RenewalStatus'
-        description: 'The status of ACM''s <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html">managed renewal</a> of the certificate.'
-      DomainValidationOptions:
-        $ref: '#/definitions/DomainValidationList'
-        description: 'Contains information about the validation of each domain name in the certificate, as it pertains to ACM''s <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html">managed renewal</a>. This is different from the initial validation that occurs as a result of the <a>RequestCertificate</a> request. This field exists only when the certificate type is <code>AMAZON_ISSUED</code>.'
-    description: 'Contains information about the status of ACM''s <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html">managed renewal</a> for the certificate. This structure exists only when the certificate type is <code>AMAZON_ISSUED</code>.'
-  KeyUsageList:
+  DomainList:
     type: array
     items:
-      $ref: '#/definitions/KeyUsage'
-  ExtendedKeyUsageList:
-    type: array
-    items:
-      $ref: '#/definitions/ExtendedKeyUsage'
-  RenewalEligibility:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
+  DomainNameString:
     type: string
-    enum:
-      - ELIGIBLE
-      - INELIGIBLE
-  CertificateOptions:
-    type: object
-    properties:
-      CertificateTransparencyLoggingPreference:
-        $ref: '#/definitions/CertificateTransparencyLoggingPreference'
-        description: 'You can opt out of certificate transparency logging by specifying the <code>DISABLED</code> option. Opt in by specifying <code>ENABLED</code>. '
-    description: 'Structure that contains options for your certificate. Currently, you can use this only to specify whether to opt in to or out of certificate transparency logging. Some browsers require that public certificates issued for your domain be recorded in a log. Certificates that are not logged typically generate a browser error. Transparency makes it possible for you to detect SSL/TLS certificates that have been mistakenly or maliciously issued for your domain. For general information, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency">Certificate Transparency Logging</a>. '
-  CertificateDetail:
-    type: object
-    properties:
-      CertificateArn:
-        $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) of the certificate. For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
-      DomainName:
-        $ref: '#/definitions/DomainNameString'
-        description: 'The fully qualified domain name for the certificate, such as www.example.com or example.com.'
-      SubjectAlternativeNames:
-        $ref: '#/definitions/DomainList'
-        description: 'One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website. '
-      DomainValidationOptions:
-        $ref: '#/definitions/DomainValidationList'
-        description: 'Contains information about the initial validation of each domain name that occurs as a result of the <a>RequestCertificate</a> request. This field exists only when the certificate type is <code>AMAZON_ISSUED</code>. '
-      Serial:
-        $ref: '#/definitions/String'
-        description: The serial number of the certificate.
-      Subject:
-        $ref: '#/definitions/String'
-        description: The name of the entity that is associated with the public key contained in the certificate.
-      Issuer:
-        $ref: '#/definitions/String'
-        description: The name of the certificate authority that issued and signed the certificate.
-      CreatedAt:
-        $ref: '#/definitions/TStamp'
-        description: 'The time at which the certificate was requested. This value exists only when the certificate type is <code>AMAZON_ISSUED</code>. '
-      IssuedAt:
-        $ref: '#/definitions/TStamp'
-        description: 'The time at which the certificate was issued. This value exists only when the certificate type is <code>AMAZON_ISSUED</code>. '
-      ImportedAt:
-        $ref: '#/definitions/TStamp'
-        description: 'The date and time at which the certificate was imported. This value exists only when the certificate type is <code>IMPORTED</code>. '
-      Status:
-        $ref: '#/definitions/CertificateStatus'
-        description: The status of the certificate.
-      RevokedAt:
-        $ref: '#/definitions/TStamp'
-        description: 'The time at which the certificate was revoked. This value exists only when the certificate status is <code>REVOKED</code>. '
-      RevocationReason:
-        $ref: '#/definitions/RevocationReason'
-        description: 'The reason the certificate was revoked. This value exists only when the certificate status is <code>REVOKED</code>. '
-      NotBefore:
-        $ref: '#/definitions/TStamp'
-        description: The time before which the certificate is not valid.
-      NotAfter:
-        $ref: '#/definitions/TStamp'
-        description: The time after which the certificate is not valid.
-      KeyAlgorithm:
-        $ref: '#/definitions/KeyAlgorithm'
-        description: The algorithm that was used to generate the public-private key pair.
-      SignatureAlgorithm:
-        $ref: '#/definitions/String'
-        description: The algorithm that was used to sign the certificate.
-      InUseBy:
-        $ref: '#/definitions/InUseList'
-        description: 'A list of ARNs for the AWS resources that are using the certificate. A certificate can be used by multiple AWS resources. '
-      FailureReason:
-        $ref: '#/definitions/FailureReason'
-        description: 'The reason the certificate request failed. This value exists only when the certificate status is <code>FAILED</code>. For more information, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed">Certificate Request Failed</a> in the <i>AWS Certificate Manager User Guide</i>. '
-      Type:
-        $ref: '#/definitions/CertificateType'
-        description: 'The source of the certificate. For certificates provided by ACM, this value is <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html">managed renewal</a> for imported certificates. For more information about the differences between certificates that you import and those that ACM provides, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html">Importing Certificates</a> in the <i>AWS Certificate Manager User Guide</i>. '
-      RenewalSummary:
-        $ref: '#/definitions/RenewalSummary'
-        description: 'Contains information about the status of ACM''s <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html">managed renewal</a> for the certificate. This field exists only when the certificate type is <code>AMAZON_ISSUED</code>.'
-      KeyUsages:
-        $ref: '#/definitions/KeyUsageList'
-        description: 'A list of Key Usage X.509 v3 extension objects. Each object is a string value that identifies the purpose of the public key contained in the certificate. Possible extension values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT, NON_REPUDIATION, and more.'
-      ExtendedKeyUsages:
-        $ref: '#/definitions/ExtendedKeyUsageList'
-        description: 'Contains a list of Extended Key Usage X.509 v3 extension objects. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier (OID). '
-      CertificateAuthorityArn:
-        $ref: '#/definitions/Arn'
-        description: '<p>The Amazon Resource Name (ARN) of the ACM PCA private certificate authority (CA) that issued the certificate. This has the following format: </p> <p> <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> </p>'
-      RenewalEligibility:
-        $ref: '#/definitions/RenewalEligibility'
-        description: Specifies whether the certificate is eligible for renewal.
-      Options:
-        $ref: '#/definitions/CertificateOptions'
-        description: 'Value that specifies whether to add the certificate to a transparency log. Certificate transparency makes it possible to detect SSL certificates that have been mistakenly or maliciously issued. A browser might respond to certificate that has not been logged by showing an error message. The logs are cryptographically secure. '
-    description: 'Contains metadata about an ACM certificate. This structure is returned in the response to a <a>DescribeCertificate</a> request. '
-  CertificateTransparencyLoggingPreference:
-    type: string
-    enum:
-      - ENABLED
-      - DISABLED
-  CertificateStatuses:
-    type: array
-    items:
-      $ref: '#/definitions/CertificateStatus'
-  CertificateSummary:
-    type: object
-    properties:
-      CertificateArn:
-        $ref: '#/definitions/Arn'
-        description: '<p>Amazon Resource Name (ARN) of the certificate. This is of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>. </p>'
-      DomainName:
-        $ref: '#/definitions/DomainNameString'
-        description: 'Fully qualified domain name (FQDN), such as www.example.com or example.com, for the certificate.'
-    description: 'This structure is returned in the response object of <a>ListCertificates</a> action. '
-  CertificateSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/CertificateSummary'
+    pattern: '^(\*\.)?(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])$'
+    minLength: 1
+    maxLength: 253
   DomainStatus:
     type: string
     enum:
       - PENDING_VALIDATION
       - SUCCESS
       - FAILED
-  ValidationEmailList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ResourceRecord:
-    type: object
-    required:
-      - Name
-      - Type
-      - Value
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the DNS record to create in your domain. This is supplied by ACM.
-      Type:
-        $ref: '#/definitions/RecordType'
-        description: The type of DNS record. Currently this can be <code>CNAME</code>.
-      Value:
-        $ref: '#/definitions/String'
-        description: The value of the CNAME record to add to your DNS database. This is supplied by ACM.
-    description: 'Contains a DNS record value that you can use to can use to validate ownership or control of a domain. This is used by the <a>DescribeCertificate</a> action. '
-  ValidationMethod:
-    type: string
-    enum:
-      - EMAIL
-      - DNS
   DomainValidation:
     type: object
     required:
       - DomainName
     properties:
       DomainName:
-        $ref: '#/definitions/DomainNameString'
+        $ref: '#/definitions/[object Object]'
         description: 'A fully qualified domain name (FQDN) in the certificate. For example, <code>www.example.com</code> or <code>example.com</code>. '
       ValidationEmails:
-        $ref: '#/definitions/ValidationEmailList'
+        $ref: '#/definitions/[object Object]'
         description: A list of email addresses that ACM used to send domain validation emails.
       ValidationDomain:
-        $ref: '#/definitions/DomainNameString'
+        $ref: '#/definitions/[object Object]'
         description: The domain name that ACM used to send domain validation emails.
       ValidationStatus:
-        $ref: '#/definitions/DomainStatus'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The validation status of the domain name. This can be one of the following values:</p> <ul> <li> <p> <code>PENDING_VALIDATION</code> </p> </li> <li> <p> <code/>SUCCESS</p> </li> <li> <p> <code/>FAILED</p> </li> </ul>'
       ResourceRecord:
-        $ref: '#/definitions/ResourceRecord'
+        $ref: '#/definitions/[object Object]'
         description: 'Contains the CNAME record that you add to your DNS database for domain validation. For more information, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html">Use DNS to Validate Domain Ownership</a>.'
       ValidationMethod:
-        $ref: '#/definitions/ValidationMethod'
+        $ref: '#/definitions/[object Object]'
         description: Specifies the domain validation method.
     description: Contains information about the validation of each domain name in the certificate.
+  DomainValidationList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 1000
   DomainValidationOption:
     type: object
     required:
@@ -1124,29 +1001,36 @@ definitions:
       - ValidationDomain
     properties:
       DomainName:
-        $ref: '#/definitions/DomainNameString'
+        $ref: '#/definitions/[object Object]'
         description: A fully qualified domain name (FQDN) in the certificate request.
       ValidationDomain:
-        $ref: '#/definitions/DomainNameString'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The domain name that you want ACM to use to send you validation emails. This domain name is the suffix of the email addresses that you want ACM to use. This must be the same as the <code>DomainName</code> value or a superdomain of the <code>DomainName</code> value. For example, if you request a certificate for <code>testing.example.com</code>, you can specify <code>example.com</code> for this value. In that case, ACM sends domain validation emails to the following five addresses:</p> <ul> <li> <p>admin@example.com</p> </li> <li> <p>administrator@example.com</p> </li> <li> <p>hostmaster@example.com</p> </li> <li> <p>postmaster@example.com</p> </li> <li> <p>webmaster@example.com</p> </li> </ul>'
     description: Contains information about the domain names that you want ACM to use to send you emails that enable you to validate domain ownership.
   DomainValidationOptionList:
     type: array
     items:
-      $ref: '#/definitions/DomainValidationOption'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 100
-  PassphraseBlob:
-    type: string
-    minLength: 4
-    maxLength: 128
-    format: password
-  PrivateKey:
-    type: string
-    pattern: '-{5}BEGIN PRIVATE KEY-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END PRIVATE KEY-{5}(\u000D?\u000A)?'
-    minLength: 1
-    maxLength: 524288
-    format: password
+  ExtendedKeyUsage:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of an Extended Key Usage value.
+      OID:
+        $ref: '#/definitions/[object Object]'
+        description: <p>An object identifier (OID) for the extension value. OIDs are strings of numbers separated by periods. The following OIDs are defined in RFC 3280 and RFC 5280. </p> <ul> <li> <p> <code>1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.2 (TLS_WEB_CLIENT_AUTHENTICATION)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.3 (CODE_SIGNING)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.4 (EMAIL_PROTECTION)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.8 (TIME_STAMPING)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.7 (IPSEC_USER)</code> </p> </li> </ul>
+    description: 'The Extended Key Usage X.509 v3 extension defines one or more purposes for which the public key can be used. This is in addition to or in place of the basic purposes specified by the Key Usage extension. '
+  ExtendedKeyUsageFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ExtendedKeyUsageList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ExtendedKeyUsageName:
     type: string
     enum:
@@ -1162,39 +1046,32 @@ definitions:
       - ANY
       - NONE
       - CUSTOM
-  ExtendedKeyUsage:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/ExtendedKeyUsageName'
-        description: The name of an Extended Key Usage value.
-      OID:
-        $ref: '#/definitions/String'
-        description: <p>An object identifier (OID) for the extension value. OIDs are strings of numbers separated by periods. The following OIDs are defined in RFC 3280 and RFC 5280. </p> <ul> <li> <p> <code>1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.2 (TLS_WEB_CLIENT_AUTHENTICATION)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.3 (CODE_SIGNING)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.4 (EMAIL_PROTECTION)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.8 (TIME_STAMPING)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)</code> </p> </li> <li> <p> <code>1.3.6.1.5.5.7.3.7 (IPSEC_USER)</code> </p> </li> </ul>
-    description: 'The Extended Key Usage X.509 v3 extension defines one or more purposes for which the public key can be used. This is in addition to or in place of the basic purposes specified by the Key Usage extension. '
-  ExtendedKeyUsageFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/ExtendedKeyUsageName'
-  KeyUsageFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/KeyUsageName'
-  KeyAlgorithmList:
-    type: array
-    items:
-      $ref: '#/definitions/KeyAlgorithm'
+  FailureReason:
+    type: string
+    enum:
+      - NO_AVAILABLE_CONTACTS
+      - ADDITIONAL_VERIFICATION_REQUIRED
+      - DOMAIN_NOT_ALLOWED
+      - INVALID_PUBLIC_DOMAIN
+      - CAA_ERROR
+      - PCA_LIMIT_EXCEEDED
+      - PCA_INVALID_ARN
+      - PCA_INVALID_STATE
+      - PCA_REQUEST_FAILED
+      - PCA_RESOURCE_NOT_FOUND
+      - PCA_INVALID_ARGS
+      - OTHER
   Filters:
     type: object
     properties:
       extendedKeyUsage:
-        $ref: '#/definitions/ExtendedKeyUsageFilterList'
+        $ref: '#/definitions/[object Object]'
         description: Specify one or more <a>ExtendedKeyUsage</a> extension values.
       keyUsage:
-        $ref: '#/definitions/KeyUsageFilterList'
+        $ref: '#/definitions/[object Object]'
         description: Specify one or more <a>KeyUsage</a> extension values.
       keyTypes:
-        $ref: '#/definitions/KeyAlgorithmList'
+        $ref: '#/definitions/[object Object]'
         description: Specify one or more algorithms that can be used to generate key pairs.
     description: 'This structure can be used in the <a>ListCertificates</a> action to filter the output of the certificate list. '
   IdempotencyToken:
@@ -1202,11 +1079,38 @@ definitions:
     pattern: \w+
     minLength: 1
     maxLength: 32
-  PrivateKeyBlob:
+  InUseList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  KeyAlgorithm:
     type: string
-    minLength: 1
-    maxLength: 524288
-    format: password
+    enum:
+      - RSA_2048
+      - RSA_1024
+      - RSA_4096
+      - EC_prime256v1
+      - EC_secp384r1
+      - EC_secp521r1
+  KeyAlgorithmList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  KeyUsage:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: A string value that contains a Key Usage extension name.
+    description: The Key Usage X.509 v3 extension defines the purpose of the public key contained in the certificate.
+  KeyUsageFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  KeyUsageList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   KeyUsageName:
     type: string
     enum:
@@ -1221,26 +1125,40 @@ definitions:
       - DECIPHER_ONLY
       - ANY
       - CUSTOM
-  KeyUsage:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/KeyUsageName'
-        description: A string value that contains a Key Usage extension name.
-    description: The Key Usage X.509 v3 extension defines the purpose of the public key contained in the certificate.
+  MaxItems:
+    type: integer
+    minimum: 1
+    maximum: 1000
   NextToken:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u00FF]*'
     minLength: 1
     maxLength: 320
-  MaxItems:
-    type: integer
-    minimum: 1
-    maximum: 1000
+  PassphraseBlob:
+    type: string
+    minLength: 4
+    maxLength: 128
+    format: password
+  PrivateKey:
+    type: string
+    pattern: '-{5}BEGIN PRIVATE KEY-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END PRIVATE KEY-{5}(\u000D?\u000A)?'
+    minLength: 1
+    maxLength: 524288
+    format: password
+  PrivateKeyBlob:
+    type: string
+    minLength: 1
+    maxLength: 524288
+    format: password
   RecordType:
     type: string
     enum:
       - CNAME
+  RenewalEligibility:
+    type: string
+    enum:
+      - ELIGIBLE
+      - INELIGIBLE
   RenewalStatus:
     type: string
     enum:
@@ -1248,25 +1166,88 @@ definitions:
       - PENDING_VALIDATION
       - SUCCESS
       - FAILED
-  TagKey:
+  RenewalSummary:
+    type: object
+    required:
+      - RenewalStatus
+      - DomainValidationOptions
+    properties:
+      RenewalStatus:
+        $ref: '#/definitions/[object Object]'
+        description: 'The status of ACM''s <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html">managed renewal</a> of the certificate.'
+      DomainValidationOptions:
+        $ref: '#/definitions/[object Object]'
+        description: 'Contains information about the validation of each domain name in the certificate, as it pertains to ACM''s <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html">managed renewal</a>. This is different from the initial validation that occurs as a result of the <a>RequestCertificate</a> request. This field exists only when the certificate type is <code>AMAZON_ISSUED</code>.'
+    description: 'Contains information about the status of ACM''s <a href="http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html">managed renewal</a> for the certificate. This structure exists only when the certificate type is <code>AMAZON_ISSUED</code>.'
+  ResourceRecord:
+    type: object
+    required:
+      - Name
+      - Type
+      - Value
+    properties:
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the DNS record to create in your domain. This is supplied by ACM.
+      Type:
+        $ref: '#/definitions/[object Object]'
+        description: The type of DNS record. Currently this can be <code>CNAME</code>.
+      Value:
+        $ref: '#/definitions/[object Object]'
+        description: The value of the CNAME record to add to your DNS database. This is supplied by ACM.
+    description: 'Contains a DNS record value that you can use to can use to validate ownership or control of a domain. This is used by the <a>DescribeCertificate</a> action. '
+  RevocationReason:
     type: string
-    pattern: '[\p{L}\p{Z}\p{N}_.:\/=+\-@]*'
-    minLength: 1
-    maxLength: 128
-  TagValue:
+    enum:
+      - UNSPECIFIED
+      - KEY_COMPROMISE
+      - CA_COMPROMISE
+      - AFFILIATION_CHANGED
+      - SUPERCEDED
+      - CESSATION_OF_OPERATION
+      - CERTIFICATE_HOLD
+      - REMOVE_FROM_CRL
+      - PRIVILEGE_WITHDRAWN
+      - A_A_COMPROMISE
+  String:
     type: string
-    pattern: '[\p{L}\p{Z}\p{N}_.:\/=+\-@]*'
-    minLength: 0
-    maxLength: 256
+  TStamp:
+    type: string
+    format: date-time
   Tag:
     type: object
     required:
       - Key
     properties:
       Key:
-        $ref: '#/definitions/TagKey'
+        $ref: '#/definitions/[object Object]'
         description: The key of the tag.
       Value:
-        $ref: '#/definitions/TagValue'
+        $ref: '#/definitions/[object Object]'
         description: The value of the tag.
     description: A key-value pair that identifies or specifies metadata about an ACM resource.
+  TagKey:
+    type: string
+    pattern: '[\p{L}\p{Z}\p{N}_.:\/=+\-@]*'
+    minLength: 1
+    maxLength: 128
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 50
+  TagValue:
+    type: string
+    pattern: '[\p{L}\p{Z}\p{N}_.:\/=+\-@]*'
+    minLength: 0
+    maxLength: 256
+  ValidationEmailList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ValidationMethod:
+    type: string
+    enum:
+      - EMAIL
+      - DNS

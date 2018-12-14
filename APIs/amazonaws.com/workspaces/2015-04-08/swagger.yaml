@@ -1258,10 +1258,10 @@ definitions:
       - GroupIds
     properties:
       DirectoryId:
-        $ref: '#/definitions/DirectoryId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the directory.
       GroupIds:
-        $ref: '#/definitions/IpGroupIdList'
+        $ref: '#/definitions/[object Object]'
         description: The identifiers of one or more IP access control groups.
   InvalidParameterValuesException: {}
   ResourceNotFoundException: {}
@@ -1279,16 +1279,16 @@ definitions:
       - UserRules
     properties:
       GroupId:
-        $ref: '#/definitions/IpGroupId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the group.
       UserRules:
-        $ref: '#/definitions/IpRuleList'
+        $ref: '#/definitions/[object Object]'
         description: The rules to add to the group.
   CreateIpGroupResult:
     type: object
     properties:
       GroupId:
-        $ref: '#/definitions/IpGroupId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the group.
   CreateIpGroupRequest:
     type: object
@@ -1296,13 +1296,13 @@ definitions:
       - GroupName
     properties:
       GroupName:
-        $ref: '#/definitions/IpGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the group.
       GroupDesc:
-        $ref: '#/definitions/IpGroupDesc'
+        $ref: '#/definitions/[object Object]'
         description: The description of the group.
       UserRules:
-        $ref: '#/definitions/IpRuleList'
+        $ref: '#/definitions/[object Object]'
         description: The rules to add to the group.
   ResourceAlreadyExistsException: {}
   ResourceCreationFailedException: {}
@@ -1316,19 +1316,19 @@ definitions:
       - Tags
     properties:
       ResourceId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: The tags. Each WorkSpace can have a maximum of 50 tags.
   CreateWorkspacesResult:
     type: object
     properties:
       FailedRequests:
-        $ref: '#/definitions/FailedCreateWorkspaceRequests'
+        $ref: '#/definitions/[object Object]'
         description: Information about the WorkSpaces that could not be created.
       PendingRequests:
-        $ref: '#/definitions/WorkspaceList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Information about the WorkSpaces that were created.</p> <p>Because this operation is asynchronous, the identifier returned is not immediately available for use with other operations. For example, if you call <a>DescribeWorkspaces</a> before the WorkSpace is created, the information returned can be incomplete.</p>'
   CreateWorkspacesRequest:
     type: object
@@ -1336,7 +1336,7 @@ definitions:
       - Workspaces
     properties:
       Workspaces:
-        $ref: '#/definitions/WorkspaceRequestList'
+        $ref: '#/definitions/[object Object]'
         description: The WorkSpaces to create. You can specify up to 25 WorkSpaces.
   DeleteIpGroupResult:
     type: object
@@ -1347,7 +1347,7 @@ definitions:
       - GroupId
     properties:
       GroupId:
-        $ref: '#/definitions/IpGroupId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the IP access control group.
   ResourceAssociatedException: {}
   DeleteTagsResult:
@@ -1360,10 +1360,10 @@ definitions:
       - TagKeys
     properties:
       ResourceId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
       TagKeys:
-        $ref: '#/definitions/TagKeyList'
+        $ref: '#/definitions/[object Object]'
         description: The tag keys.
   DeleteWorkspaceImageResult:
     type: object
@@ -1374,16 +1374,16 @@ definitions:
       - ImageId
     properties:
       ImageId:
-        $ref: '#/definitions/WorkspaceImageId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the image.
   DescribeAccountResult:
     type: object
     properties:
       DedicatedTenancySupport:
-        $ref: '#/definitions/DedicatedTenancySupportResultEnum'
+        $ref: '#/definitions/[object Object]'
         description: The status of BYOL (whether BYOL is enabled or disabled).
       DedicatedTenancyManagementCidrRange:
-        $ref: '#/definitions/DedicatedTenancyManagementCidrRange'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The IP address range, specified as an IPv4 CIDR block, used for the management network interface.</p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>'
   DescribeAccountRequest:
     type: object
@@ -1392,22 +1392,22 @@ definitions:
     type: object
     properties:
       AccountModifications:
-        $ref: '#/definitions/AccountModificationList'
+        $ref: '#/definitions/[object Object]'
         description: The list of modifications to the configuration of BYOL.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   DescribeAccountModificationsRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
   DescribeClientPropertiesResult:
     type: object
     properties:
       ClientPropertiesList:
-        $ref: '#/definitions/ClientPropertiesList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the specified Amazon WorkSpaces clients.
   DescribeClientPropertiesRequest:
     type: object
@@ -1415,34 +1415,34 @@ definitions:
       - ResourceIds
     properties:
       ResourceIds:
-        $ref: '#/definitions/ResourceIdList'
+        $ref: '#/definitions/[object Object]'
         description: 'The resource identifiers, in the form of directory IDs.'
   DescribeIpGroupsResult:
     type: object
     properties:
       Result:
-        $ref: '#/definitions/WorkspacesIpGroupsList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the IP access control groups.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   DescribeIpGroupsRequest:
     type: object
     properties:
       GroupIds:
-        $ref: '#/definitions/IpGroupIdList'
+        $ref: '#/definitions/[object Object]'
         description: The identifiers of one or more IP access control groups.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
       MaxResults:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of items to return.
   DescribeTagsResult:
     type: object
     properties:
       TagList:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: The tags.
   DescribeTagsRequest:
     type: object
@@ -1450,116 +1450,116 @@ definitions:
       - ResourceId
     properties:
       ResourceId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.'
   DescribeWorkspaceBundlesResult:
     type: object
     properties:
       Bundles:
-        $ref: '#/definitions/BundleList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the bundles.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
   DescribeWorkspaceBundlesRequest:
     type: object
     properties:
       BundleIds:
-        $ref: '#/definitions/BundleIdList'
+        $ref: '#/definitions/[object Object]'
         description: The identifiers of the bundles. You cannot combine this parameter with any other filter.
       Owner:
-        $ref: '#/definitions/BundleOwner'
+        $ref: '#/definitions/[object Object]'
         description: <p>The owner of the bundles. You cannot combine this parameter with any other filter.</p> <p>Specify <code>AMAZON</code> to describe the bundles provided by AWS or null to describe the bundles that belong to your account.</p>
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of results. (You received this token from a previous call.)
   DescribeWorkspaceDirectoriesResult:
     type: object
     properties:
       Directories:
-        $ref: '#/definitions/DirectoryList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the directories.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   DescribeWorkspaceDirectoriesRequest:
     type: object
     properties:
       DirectoryIds:
-        $ref: '#/definitions/DirectoryIdList'
+        $ref: '#/definitions/[object Object]'
         description: 'The identifiers of the directories. If the value is null, all directories are retrieved.'
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
   DescribeWorkspaceImagesResult:
     type: object
     properties:
       Images:
-        $ref: '#/definitions/WorkspaceImageList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the images.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   DescribeWorkspaceImagesRequest:
     type: object
     properties:
       ImageIds:
-        $ref: '#/definitions/WorkspaceImageIdList'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the image.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
       MaxResults:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of items to return.
   DescribeWorkspacesResult:
     type: object
     properties:
       Workspaces:
-        $ref: '#/definitions/WorkspaceList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Information about the WorkSpaces.</p> <p>Because <a>CreateWorkspaces</a> is an asynchronous operation, some of the returned information could be incomplete.</p>'
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   DescribeWorkspacesRequest:
     type: object
     properties:
       WorkspaceIds:
-        $ref: '#/definitions/WorkspaceIdList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The identifiers of the WorkSpaces. You cannot combine this parameter with any other filter.</p> <p>Because the <a>CreateWorkspaces</a> operation is asynchronous, the identifier it returns is not immediately available. If you immediately call <a>DescribeWorkspaces</a> with this identifier, no information is returned.</p>'
       DirectoryId:
-        $ref: '#/definitions/DirectoryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The identifier of the directory. In addition, you can optionally specify a specific directory user (see <code>UserName</code>). You cannot combine this parameter with any other filter.'
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the directory user. You must specify this parameter with <code>DirectoryId</code>.
       BundleId:
-        $ref: '#/definitions/BundleId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the bundle. All WorkSpaces that are created from this bundle are retrieved. You cannot combine this parameter with any other filter.
       Limit:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of items to return.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
   ResourceUnavailableException: {}
   DescribeWorkspacesConnectionStatusResult:
     type: object
     properties:
       WorkspacesConnectionStatus:
-        $ref: '#/definitions/WorkspaceConnectionStatusList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the connection status of the WorkSpace.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   DescribeWorkspacesConnectionStatusRequest:
     type: object
     properties:
       WorkspaceIds:
-        $ref: '#/definitions/WorkspaceIdList'
+        $ref: '#/definitions/[object Object]'
         description: The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
   DisassociateIpGroupsResult:
     type: object
@@ -1571,16 +1571,16 @@ definitions:
       - GroupIds
     properties:
       DirectoryId:
-        $ref: '#/definitions/DirectoryId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the directory.
       GroupIds:
-        $ref: '#/definitions/IpGroupIdList'
+        $ref: '#/definitions/[object Object]'
         description: The identifiers of one or more IP access control groups.
   ImportWorkspaceImageResult:
     type: object
     properties:
       ImageId:
-        $ref: '#/definitions/WorkspaceImageId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the WorkSpace image.
   ImportWorkspaceImageRequest:
     type: object
@@ -1591,25 +1591,25 @@ definitions:
       - ImageDescription
     properties:
       Ec2ImageId:
-        $ref: '#/definitions/Ec2ImageId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the EC2 image.
       IngestionProcess:
-        $ref: '#/definitions/WorkspaceImageIngestionProcess'
+        $ref: '#/definitions/[object Object]'
         description: The ingestion process to be used when importing the image.
       ImageName:
-        $ref: '#/definitions/WorkspaceImageName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the WorkSpace image.
       ImageDescription:
-        $ref: '#/definitions/WorkspaceImageDescription'
+        $ref: '#/definitions/[object Object]'
         description: The description of the WorkSpace image.
   ListAvailableManagementCidrRangesResult:
     type: object
     properties:
       ManagementCidrRanges:
-        $ref: '#/definitions/DedicatedTenancyCidrRangeList'
+        $ref: '#/definitions/[object Object]'
         description: 'The list of available IP address ranges, specified as IPv4 CIDR blocks.'
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
   ListAvailableManagementCidrRangesRequest:
     type: object
@@ -1617,13 +1617,13 @@ definitions:
       - ManagementCidrRangeConstraint
     properties:
       ManagementCidrRangeConstraint:
-        $ref: '#/definitions/ManagementCidrRangeConstraint'
+        $ref: '#/definitions/[object Object]'
         description: 'The IP address range to search. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block).'
       MaxResults:
-        $ref: '#/definitions/ManagementCidrRangeMaxResults'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of items to return.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
   ModifyAccountResult:
     type: object
@@ -1632,10 +1632,10 @@ definitions:
     type: object
     properties:
       DedicatedTenancySupport:
-        $ref: '#/definitions/DedicatedTenancySupportEnum'
+        $ref: '#/definitions/[object Object]'
         description: The status of BYOL.
       DedicatedTenancyManagementCidrRange:
-        $ref: '#/definitions/DedicatedTenancyManagementCidrRange'
+        $ref: '#/definitions/[object Object]'
         description: 'The IP address range, specified as an IPv4 CIDR block, for the management network interface. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block). The CIDR block size must be /16 (for example, 203.0.113.25/16). It must also be specified as available by the <code>ListAvailableManagementCidrRanges</code> operation.'
   ModifyClientPropertiesResult:
     type: object
@@ -1646,10 +1646,10 @@ definitions:
       - ResourceId
     properties:
       ResourceId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The resource identifiers, in the form of directory IDs.'
       ClientProperties:
-        $ref: '#/definitions/ClientProperties'
+        $ref: '#/definitions/[object Object]'
         description: Information about the Amazon WorkSpaces client.
   ModifyWorkspacePropertiesResult:
     type: object
@@ -1661,10 +1661,10 @@ definitions:
       - WorkspaceProperties
     properties:
       WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the WorkSpace.
       WorkspaceProperties:
-        $ref: '#/definitions/WorkspaceProperties'
+        $ref: '#/definitions/[object Object]'
         description: The properties of the WorkSpace.
   OperationInProgressException: {}
   UnsupportedWorkspaceConfigurationException: {}
@@ -1678,16 +1678,16 @@ definitions:
       - WorkspaceState
     properties:
       WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the WorkSpace.
       WorkspaceState:
-        $ref: '#/definitions/TargetWorkspaceState'
+        $ref: '#/definitions/[object Object]'
         description: The WorkSpace state.
   RebootWorkspacesResult:
     type: object
     properties:
       FailedRequests:
-        $ref: '#/definitions/FailedRebootWorkspaceRequests'
+        $ref: '#/definitions/[object Object]'
         description: Information about the WorkSpaces that could not be rebooted.
   RebootWorkspacesRequest:
     type: object
@@ -1695,13 +1695,13 @@ definitions:
       - RebootWorkspaceRequests
     properties:
       RebootWorkspaceRequests:
-        $ref: '#/definitions/RebootWorkspaceRequests'
+        $ref: '#/definitions/[object Object]'
         description: The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
   RebuildWorkspacesResult:
     type: object
     properties:
       FailedRequests:
-        $ref: '#/definitions/FailedRebuildWorkspaceRequests'
+        $ref: '#/definitions/[object Object]'
         description: Information about the WorkSpace that could not be rebuilt.
   RebuildWorkspacesRequest:
     type: object
@@ -1709,7 +1709,7 @@ definitions:
       - RebuildWorkspaceRequests
     properties:
       RebuildWorkspaceRequests:
-        $ref: '#/definitions/RebuildWorkspaceRequests'
+        $ref: '#/definitions/[object Object]'
         description: The WorkSpace to rebuild. You can specify a single WorkSpace.
   RevokeIpRulesResult:
     type: object
@@ -1721,16 +1721,16 @@ definitions:
       - UserRules
     properties:
       GroupId:
-        $ref: '#/definitions/IpGroupId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the group.
       UserRules:
-        $ref: '#/definitions/IpRevokedRuleList'
+        $ref: '#/definitions/[object Object]'
         description: The rules to remove from the group.
   StartWorkspacesResult:
     type: object
     properties:
       FailedRequests:
-        $ref: '#/definitions/FailedStartWorkspaceRequests'
+        $ref: '#/definitions/[object Object]'
         description: Information about the WorkSpaces that could not be started.
   StartWorkspacesRequest:
     type: object
@@ -1738,13 +1738,13 @@ definitions:
       - StartWorkspaceRequests
     properties:
       StartWorkspaceRequests:
-        $ref: '#/definitions/StartWorkspaceRequests'
+        $ref: '#/definitions/[object Object]'
         description: The WorkSpaces to start. You can specify up to 25 WorkSpaces.
   StopWorkspacesResult:
     type: object
     properties:
       FailedRequests:
-        $ref: '#/definitions/FailedStopWorkspaceRequests'
+        $ref: '#/definitions/[object Object]'
         description: Information about the WorkSpaces that could not be stopped.
   StopWorkspacesRequest:
     type: object
@@ -1752,13 +1752,13 @@ definitions:
       - StopWorkspaceRequests
     properties:
       StopWorkspaceRequests:
-        $ref: '#/definitions/StopWorkspaceRequests'
+        $ref: '#/definitions/[object Object]'
         description: The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
   TerminateWorkspacesResult:
     type: object
     properties:
       FailedRequests:
-        $ref: '#/definitions/FailedTerminateWorkspaceRequests'
+        $ref: '#/definitions/[object Object]'
         description: Information about the WorkSpaces that could not be terminated.
   TerminateWorkspacesRequest:
     type: object
@@ -1766,7 +1766,7 @@ definitions:
       - TerminateWorkspaceRequests
     properties:
       TerminateWorkspaceRequests:
-        $ref: '#/definitions/TerminateWorkspaceRequests'
+        $ref: '#/definitions/[object Object]'
         description: The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
   UpdateRulesOfIpGroupResult:
     type: object
@@ -1778,77 +1778,43 @@ definitions:
       - UserRules
     properties:
       GroupId:
-        $ref: '#/definitions/IpGroupId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the group.
       UserRules:
-        $ref: '#/definitions/IpRuleList'
+        $ref: '#/definitions/[object Object]'
         description: One or more rules.
   ARN:
     type: string
     pattern: '^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$'
-  DedicatedTenancyModificationStateEnum:
-    type: string
-    enum:
-      - PENDING
-      - COMPLETED
-      - FAILED
-  DedicatedTenancySupportResultEnum:
-    type: string
-    enum:
-      - ENABLED
-      - DISABLED
-  DedicatedTenancyManagementCidrRange:
-    type: string
-    pattern: '(^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.0\.0)(\/(16$))$'
-  Timestamp:
-    type: string
-    format: date-time
-  WorkspaceErrorCode:
-    type: string
-  Description:
-    type: string
+  '[object Object]': {}
   AccountModification:
     type: object
     properties:
       ModificationState:
-        $ref: '#/definitions/DedicatedTenancyModificationStateEnum'
+        $ref: '#/definitions/[object Object]'
         description: The state of the modification to the configuration of BYOL.
       DedicatedTenancySupport:
-        $ref: '#/definitions/DedicatedTenancySupportResultEnum'
+        $ref: '#/definitions/[object Object]'
         description: The status of BYOL (whether BYOL is being enabled or disabled).
       DedicatedTenancyManagementCidrRange:
-        $ref: '#/definitions/DedicatedTenancyManagementCidrRange'
+        $ref: '#/definitions/[object Object]'
         description: 'The IP address range, specified as an IPv4 CIDR block, for the management network interface used for the account.'
       StartTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: The timestamp when the modification of the BYOL configuration was started.
       ErrorCode:
-        $ref: '#/definitions/WorkspaceErrorCode'
+        $ref: '#/definitions/[object Object]'
         description: The error code that is returned if the configuration of BYOL cannot be modified.
       ErrorMessage:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: The text of the error message that is returned if the configuration of BYOL cannot be modified.
     description: 'Describes a modification to the configuration of bring your own license (BYOL) for the specified account. '
   AccountModificationList:
     type: array
     items:
-      $ref: '#/definitions/AccountModification'
+      $ref: '#/definitions/[object Object]'
   Alias:
     type: string
-  DirectoryId:
-    type: string
-    pattern: '^d-[0-9a-f]{8,63}$'
-  IpGroupIdList:
-    type: array
-    items:
-      $ref: '#/definitions/IpGroupId'
-  IpGroupId:
-    type: string
-    pattern: 'wsipg-[0-9a-z]{8,63}$'
-  IpRuleList:
-    type: array
-    items:
-      $ref: '#/definitions/IpRuleItem'
   BooleanObject:
     type: boolean
   BundleId:
@@ -1857,69 +1823,36 @@ definitions:
   BundleIdList:
     type: array
     items:
-      $ref: '#/definitions/BundleId'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 25
-  WorkspaceBundle:
-    type: object
-    properties:
-      BundleId:
-        $ref: '#/definitions/BundleId'
-        description: The bundle identifier.
-      Name:
-        $ref: '#/definitions/NonEmptyString'
-        description: The name of the bundle.
-      Owner:
-        $ref: '#/definitions/BundleOwner'
-        description: 'The owner of the bundle. This is the account identifier of the owner, or <code>AMAZON</code> if the bundle is provided by AWS.'
-      Description:
-        $ref: '#/definitions/Description'
-        description: A description.
-      RootStorage:
-        $ref: '#/definitions/RootStorage'
-        description: The size of the root volume.
-      UserStorage:
-        $ref: '#/definitions/UserStorage'
-        description: The size of the user storage.
-      ComputeType:
-        $ref: '#/definitions/ComputeType'
-        description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
-    description: Describes a WorkSpace bundle.
   BundleList:
     type: array
     items:
-      $ref: '#/definitions/WorkspaceBundle'
+      $ref: '#/definitions/[object Object]'
   BundleOwner:
     type: string
-  ReconnectEnum:
-    type: string
-    enum:
-      - ENABLED
-      - DISABLED
   ClientProperties:
     type: object
     properties:
       ReconnectEnabled:
-        $ref: '#/definitions/ReconnectEnum'
+        $ref: '#/definitions/[object Object]'
         description: 'Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. '
     description: Describes an Amazon WorkSpaces client.
+  ClientPropertiesList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ClientPropertiesResult:
     type: object
     properties:
       ResourceId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The resource identifier, in the form of a directory ID.'
       ClientProperties:
-        $ref: '#/definitions/ClientProperties'
+        $ref: '#/definitions/[object Object]'
         description: Information about the Amazon WorkSpaces client.
     description: Information about the Amazon WorkSpaces client.
-  ClientPropertiesList:
-    type: array
-    items:
-      $ref: '#/definitions/ClientPropertiesResult'
-  NonEmptyString:
-    type: string
-    minLength: 1
   Compute:
     type: string
     enum:
@@ -1934,7 +1867,7 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/Compute'
+        $ref: '#/definitions/[object Object]'
         description: The compute type.
     description: Describes the compute type.
   ComputerName:
@@ -1945,290 +1878,164 @@ definitions:
       - CONNECTED
       - DISCONNECTED
       - UNKNOWN
-  IpGroupName:
-    type: string
-  IpGroupDesc:
-    type: string
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  WorkspaceRequestList:
-    type: array
-    items:
-      $ref: '#/definitions/WorkspaceRequest'
-    minItems: 1
-    maxItems: 25
-  FailedCreateWorkspaceRequests:
-    type: array
-    items:
-      $ref: '#/definitions/FailedCreateWorkspaceRequest'
-  WorkspaceList:
-    type: array
-    items:
-      $ref: '#/definitions/Workspace'
   DedicatedTenancyCidrRangeList:
     type: array
     items:
-      $ref: '#/definitions/DedicatedTenancyManagementCidrRange'
+      $ref: '#/definitions/[object Object]'
+  DedicatedTenancyManagementCidrRange:
+    type: string
+    pattern: '(^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.0\.0)(\/(16$))$'
+  DedicatedTenancyModificationStateEnum:
+    type: string
+    enum:
+      - PENDING
+      - COMPLETED
+      - FAILED
   DedicatedTenancySupportEnum:
     type: string
     enum:
       - ENABLED
+  DedicatedTenancySupportResultEnum:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
   DefaultOu:
     type: string
-  SecurityGroupId:
-    type: string
-    pattern: '^(sg-[0-9a-f]{8})$'
   DefaultWorkspaceCreationProperties:
     type: object
     properties:
       EnableWorkDocs:
-        $ref: '#/definitions/BooleanObject'
+        $ref: '#/definitions/[object Object]'
         description: Specifies whether the directory is enabled for Amazon WorkDocs.
       EnableInternetAccess:
-        $ref: '#/definitions/BooleanObject'
+        $ref: '#/definitions/[object Object]'
         description: The public IP address to attach to all WorkSpaces that are created or rebuilt.
       DefaultOu:
-        $ref: '#/definitions/DefaultOu'
+        $ref: '#/definitions/[object Object]'
         description: The organizational unit (OU) in the directory for the WorkSpace machine accounts.
       CustomSecurityGroupId:
-        $ref: '#/definitions/SecurityGroupId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of any security groups to apply to WorkSpaces when they are created.
       UserEnabledAsLocalAdministrator:
-        $ref: '#/definitions/BooleanObject'
+        $ref: '#/definitions/[object Object]'
         description: Specifies whether the WorkSpace user is an administrator on the WorkSpace.
     description: Describes the default values used to create a WorkSpace.
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/NonEmptyString'
-  WorkspaceImageId:
+  Description:
     type: string
-    pattern: 'wsi-[0-9a-z]{9,63}$'
-  PaginationToken:
+  DirectoryId:
     type: string
-    minLength: 1
-    maxLength: 63
-  ResourceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/NonEmptyString'
-    minItems: 1
-    maxItems: 25
-  Limit:
-    type: integer
-    minimum: 1
-    maximum: 25
-  WorkspacesIpGroupsList:
-    type: array
-    items:
-      $ref: '#/definitions/WorkspacesIpGroup'
+    pattern: '^d-[0-9a-f]{8,63}$'
   DirectoryIdList:
     type: array
     items:
-      $ref: '#/definitions/DirectoryId'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 25
   DirectoryList:
     type: array
     items:
-      $ref: '#/definitions/WorkspaceDirectory'
-  WorkspaceImageIdList:
-    type: array
-    items:
-      $ref: '#/definitions/WorkspaceImageId'
-    minItems: 1
-    maxItems: 25
-  WorkspaceImageList:
-    type: array
-    items:
-      $ref: '#/definitions/WorkspaceImage'
-  WorkspaceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/WorkspaceId'
-    minItems: 1
-    maxItems: 25
-  WorkspaceConnectionStatusList:
-    type: array
-    items:
-      $ref: '#/definitions/WorkspaceConnectionStatus'
-  UserName:
-    type: string
-    minLength: 1
-    maxLength: 63
-  WorkspaceDirectory:
-    type: object
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The directory identifier.
-      Alias:
-        $ref: '#/definitions/Alias'
-        description: The directory alias.
-      DirectoryName:
-        $ref: '#/definitions/DirectoryName'
-        description: The name of the directory.
-      RegistrationCode:
-        $ref: '#/definitions/RegistrationCode'
-        description: The registration code for the directory. This is the code that users enter in their Amazon WorkSpaces client application to connect to the directory.
-      SubnetIds:
-        $ref: '#/definitions/SubnetIds'
-        description: The identifiers of the subnets used with the directory.
-      DnsIpAddresses:
-        $ref: '#/definitions/DnsIpAddresses'
-        description: The IP addresses of the DNS servers for the directory.
-      CustomerUserName:
-        $ref: '#/definitions/UserName'
-        description: The user name for the service account.
-      IamRoleId:
-        $ref: '#/definitions/ARN'
-        description: 'The identifier of the IAM role. This is the role that allows Amazon WorkSpaces to make calls to other services, such as Amazon EC2, on your behalf.'
-      DirectoryType:
-        $ref: '#/definitions/WorkspaceDirectoryType'
-        description: The directory type.
-      WorkspaceSecurityGroupId:
-        $ref: '#/definitions/SecurityGroupId'
-        description: The identifier of the security group that is assigned to new WorkSpaces.
-      State:
-        $ref: '#/definitions/WorkspaceDirectoryState'
-        description: The state of the directory's registration with Amazon WorkSpaces
-      WorkspaceCreationProperties:
-        $ref: '#/definitions/DefaultWorkspaceCreationProperties'
-        description: The default creation properties for all WorkSpaces in the directory.
-      ipGroupIds:
-        $ref: '#/definitions/IpGroupIdList'
-        description: The identifiers of the IP access control groups associated with the directory.
-    description: Describes an AWS Directory Service directory that is used with Amazon WorkSpaces.
+      $ref: '#/definitions/[object Object]'
   DirectoryName:
-    type: string
-  IpAddress:
     type: string
   DnsIpAddresses:
     type: array
     items:
-      $ref: '#/definitions/IpAddress'
+      $ref: '#/definitions/[object Object]'
   Ec2ImageId:
     type: string
     pattern: '^ami\-([a-f0-9]{8}|[a-f0-9]{17})$'
   ErrorType:
     type: string
-  WorkspaceRequest:
-    type: object
-    required:
-      - DirectoryId
-      - UserName
-      - BundleId
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The identifier of the AWS Directory Service directory for the WorkSpace. You can use <a>DescribeWorkspaceDirectories</a> to list the available directories.
-      UserName:
-        $ref: '#/definitions/UserName'
-        description: The username of the user for the WorkSpace. This username must exist in the AWS Directory Service directory for the WorkSpace.
-      BundleId:
-        $ref: '#/definitions/BundleId'
-        description: The identifier of the bundle for the WorkSpace. You can use <a>DescribeWorkspaceBundles</a> to list the available bundles.
-      VolumeEncryptionKey:
-        $ref: '#/definitions/VolumeEncryptionKey'
-        description: The KMS key used to encrypt data stored on your WorkSpace.
-      UserVolumeEncryptionEnabled:
-        $ref: '#/definitions/BooleanObject'
-        description: Indicates whether the data stored on the user volume is encrypted.
-      RootVolumeEncryptionEnabled:
-        $ref: '#/definitions/BooleanObject'
-        description: Indicates whether the data stored on the root volume is encrypted.
-      WorkspaceProperties:
-        $ref: '#/definitions/WorkspaceProperties'
-        description: The WorkSpace properties.
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The tags for the WorkSpace.
-    description: Describes the information used to create a WorkSpace.
   FailedCreateWorkspaceRequest:
     type: object
     properties:
       WorkspaceRequest:
-        $ref: '#/definitions/WorkspaceRequest'
+        $ref: '#/definitions/[object Object]'
         description: Information about the WorkSpace.
       ErrorCode:
-        $ref: '#/definitions/ErrorType'
+        $ref: '#/definitions/[object Object]'
         description: The error code that is returned if the WorkSpace cannot be created.
       ErrorMessage:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: The text of the error message that is returned if the WorkSpace cannot be created.
     description: Describes a WorkSpace that cannot be created.
+  FailedCreateWorkspaceRequests:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  FailedRebootWorkspaceRequests:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  FailedRebuildWorkspaceRequests:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  FailedStartWorkspaceRequests:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  FailedStopWorkspaceRequests:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  FailedTerminateWorkspaceRequests:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   FailedWorkspaceChangeRequest:
     type: object
     properties:
       WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the WorkSpace.
       ErrorCode:
-        $ref: '#/definitions/ErrorType'
+        $ref: '#/definitions/[object Object]'
         description: The error code that is returned if the WorkSpace cannot be rebooted.
       ErrorMessage:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: The text of the error message that is returned if the WorkSpace cannot be rebooted.
     description: 'Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).'
-  FailedRebootWorkspaceRequests:
-    type: array
-    items:
-      $ref: '#/definitions/FailedWorkspaceChangeRequest'
-  FailedRebuildWorkspaceRequests:
-    type: array
-    items:
-      $ref: '#/definitions/FailedWorkspaceChangeRequest'
-  FailedStartWorkspaceRequests:
-    type: array
-    items:
-      $ref: '#/definitions/FailedWorkspaceChangeRequest'
-  FailedStopWorkspaceRequests:
-    type: array
-    items:
-      $ref: '#/definitions/FailedWorkspaceChangeRequest'
-  FailedTerminateWorkspaceRequests:
-    type: array
-    items:
-      $ref: '#/definitions/FailedWorkspaceChangeRequest'
-  WorkspaceId:
+  IpAddress:
     type: string
-    pattern: '^ws-[0-9a-z]{8,63}$'
-  WorkspaceImageIngestionProcess:
+  IpGroupDesc:
     type: string
-    enum:
-      - BYOL_REGULAR
-      - BYOL_GRAPHICS
-      - BYOL_GRAPHICSPRO
-  WorkspaceImageName:
+  IpGroupId:
     type: string
-    pattern: '^[a-zA-Z0-9_./()\\-]+$'
-    minLength: 1
-    maxLength: 64
-  WorkspaceImageDescription:
-    type: string
-    pattern: '^[a-zA-Z0-9_./() -]+$'
-    minLength: 1
-    maxLength: 256
-  IpRule:
+    pattern: 'wsipg-[0-9a-z]{8,63}$'
+  IpGroupIdList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  IpGroupName:
     type: string
   IpRevokedRuleList:
     type: array
     items:
-      $ref: '#/definitions/IpRule'
+      $ref: '#/definitions/[object Object]'
+  IpRule:
+    type: string
   IpRuleDesc:
     type: string
   IpRuleItem:
     type: object
     properties:
       ipRule:
-        $ref: '#/definitions/IpRule'
+        $ref: '#/definitions/[object Object]'
         description: 'The IP address range, in CIDR notation.'
       ruleDesc:
-        $ref: '#/definitions/IpRuleDesc'
+        $ref: '#/definitions/[object Object]'
         description: The description.
     description: Describes a rule for an IP access control group.
+  IpRuleList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Limit:
+    type: integer
+    minimum: 1
+    maximum: 25
   ManagementCidrRangeConstraint:
     type: string
     pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(3[0-2]|[1-2][0-9]|[0-9]))$'
@@ -2242,74 +2049,57 @@ definitions:
       - ROOT_VOLUME
       - USER_VOLUME
       - COMPUTE_TYPE
+  ModificationState:
+    type: object
+    properties:
+      Resource:
+        $ref: '#/definitions/[object Object]'
+        description: The resource.
+      State:
+        $ref: '#/definitions/[object Object]'
+        description: The modification state.
+    description: Describes a WorkSpace modification.
   ModificationStateEnum:
     type: string
     enum:
       - UPDATE_INITIATED
       - UPDATE_IN_PROGRESS
-  ModificationState:
-    type: object
-    properties:
-      Resource:
-        $ref: '#/definitions/ModificationResourceEnum'
-        description: The resource.
-      State:
-        $ref: '#/definitions/ModificationStateEnum'
-        description: The modification state.
-    description: Describes a WorkSpace modification.
   ModificationStateList:
     type: array
     items:
-      $ref: '#/definitions/ModificationState'
-  WorkspaceProperties:
+      $ref: '#/definitions/[object Object]'
+  NonEmptyString:
+    type: string
+    minLength: 1
+  OperatingSystem:
     type: object
     properties:
-      RunningMode:
-        $ref: '#/definitions/RunningMode'
-        description: 'The running mode. For more information, see <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html">Manage the WorkSpace Running Mode</a>.'
-      RunningModeAutoStopTimeoutInMinutes:
-        $ref: '#/definitions/RunningModeAutoStopTimeoutInMinutes'
-        description: The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.
-      RootVolumeSizeGib:
-        $ref: '#/definitions/RootVolumeSizeGib'
-        description: The size of the root volume.
-      UserVolumeSizeGib:
-        $ref: '#/definitions/UserVolumeSizeGib'
-        description: The size of the user storage.
-      ComputeTypeName:
-        $ref: '#/definitions/Compute'
-        description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
-    description: Describes a WorkSpace.
-  TargetWorkspaceState:
-    type: string
-    enum:
-      - AVAILABLE
-      - ADMIN_MAINTENANCE
+      Type:
+        $ref: '#/definitions/[object Object]'
+        description: The operating system.
+    description: The operating system that the image is running.
   OperatingSystemType:
     type: string
     enum:
       - WINDOWS
       - LINUX
-  OperatingSystem:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/OperatingSystemType'
-        description: The operating system.
-    description: The operating system that the image is running.
+  PaginationToken:
+    type: string
+    minLength: 1
+    maxLength: 63
   RebootRequest:
     type: object
     required:
       - WorkspaceId
     properties:
       WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the WorkSpace.
     description: Describes the information used to reboot a WorkSpace.
   RebootWorkspaceRequests:
     type: array
     items:
-      $ref: '#/definitions/RebootRequest'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 25
   RebuildRequest:
@@ -2318,24 +2108,35 @@ definitions:
       - WorkspaceId
     properties:
       WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the WorkSpace.
     description: Describes the information used to rebuild a WorkSpace.
   RebuildWorkspaceRequests:
     type: array
     items:
-      $ref: '#/definitions/RebuildRequest'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 1
+  ReconnectEnum:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
   RegistrationCode:
     type: string
     minLength: 1
     maxLength: 20
+  ResourceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 25
   RootStorage:
     type: object
     properties:
       Capacity:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The size of the root volume.
     description: Describes the root volume for a WorkSpace bundle.
   RootVolumeSizeGib:
@@ -2347,30 +2148,33 @@ definitions:
       - ALWAYS_ON
   RunningModeAutoStopTimeoutInMinutes:
     type: integer
+  SecurityGroupId:
+    type: string
+    pattern: '^(sg-[0-9a-f]{8})$'
   StartRequest:
     type: object
     properties:
       WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the WorkSpace.
     description: Information used to start a WorkSpace.
   StartWorkspaceRequests:
     type: array
     items:
-      $ref: '#/definitions/StartRequest'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 25
   StopRequest:
     type: object
     properties:
       WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the WorkSpace.
     description: Describes the information used to stop a WorkSpace.
   StopWorkspaceRequests:
     type: array
     items:
-      $ref: '#/definitions/StopRequest'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 25
   SubnetId:
@@ -2379,52 +2183,364 @@ definitions:
   SubnetIds:
     type: array
     items:
-      $ref: '#/definitions/SubnetId'
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 127
-  TagValue:
-    type: string
-    maxLength: 255
+      $ref: '#/definitions/[object Object]'
   Tag:
     type: object
     required:
       - Key
     properties:
       Key:
-        $ref: '#/definitions/TagKey'
+        $ref: '#/definitions/[object Object]'
         description: The key of the tag.
       Value:
-        $ref: '#/definitions/TagValue'
+        $ref: '#/definitions/[object Object]'
         description: The value of the tag.
     description: Describes a tag.
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 127
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  TagValue:
+    type: string
+    maxLength: 255
+  TargetWorkspaceState:
+    type: string
+    enum:
+      - AVAILABLE
+      - ADMIN_MAINTENANCE
   TerminateRequest:
     type: object
     required:
       - WorkspaceId
     properties:
       WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the WorkSpace.
     description: Describes the information used to terminate a WorkSpace.
   TerminateWorkspaceRequests:
     type: array
     items:
-      $ref: '#/definitions/TerminateRequest'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 25
+  Timestamp:
+    type: string
+    format: date-time
+  UserName:
+    type: string
+    minLength: 1
+    maxLength: 63
   UserStorage:
     type: object
     properties:
       Capacity:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The size of the user storage.
     description: Describes the user storage for a WorkSpace bundle.
   UserVolumeSizeGib:
     type: integer
   VolumeEncryptionKey:
     type: string
+  Workspace:
+    type: object
+    properties:
+      WorkspaceId:
+        $ref: '#/definitions/[object Object]'
+        description: The identifier of the WorkSpace.
+      DirectoryId:
+        $ref: '#/definitions/[object Object]'
+        description: The identifier of the AWS Directory Service directory for the WorkSpace.
+      UserName:
+        $ref: '#/definitions/[object Object]'
+        description: The user for the WorkSpace.
+      IpAddress:
+        $ref: '#/definitions/[object Object]'
+        description: The IP address of the WorkSpace.
+      State:
+        $ref: '#/definitions/[object Object]'
+        description: The operational state of the WorkSpace.
+      BundleId:
+        $ref: '#/definitions/[object Object]'
+        description: The identifier of the bundle used to create the WorkSpace.
+      SubnetId:
+        $ref: '#/definitions/[object Object]'
+        description: The identifier of the subnet for the WorkSpace.
+      ErrorMessage:
+        $ref: '#/definitions/[object Object]'
+        description: The text of the error message that is returned if the WorkSpace cannot be created.
+      ErrorCode:
+        $ref: '#/definitions/[object Object]'
+        description: The error code that is returned if the WorkSpace cannot be created.
+      ComputerName:
+        $ref: '#/definitions/[object Object]'
+        description: 'The name of the WorkSpace, as seen by the operating system.'
+      VolumeEncryptionKey:
+        $ref: '#/definitions/[object Object]'
+        description: The KMS key used to encrypt data stored on your WorkSpace.
+      UserVolumeEncryptionEnabled:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates whether the data stored on the user volume is encrypted.
+      RootVolumeEncryptionEnabled:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates whether the data stored on the root volume is encrypted.
+      WorkspaceProperties:
+        $ref: '#/definitions/[object Object]'
+        description: The properties of the WorkSpace.
+      ModificationStates:
+        $ref: '#/definitions/[object Object]'
+        description: The modification states of the WorkSpace.
+    description: Describes a WorkSpace.
+  WorkspaceBundle:
+    type: object
+    properties:
+      BundleId:
+        $ref: '#/definitions/[object Object]'
+        description: The bundle identifier.
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the bundle.
+      Owner:
+        $ref: '#/definitions/[object Object]'
+        description: 'The owner of the bundle. This is the account identifier of the owner, or <code>AMAZON</code> if the bundle is provided by AWS.'
+      Description:
+        $ref: '#/definitions/[object Object]'
+        description: A description.
+      RootStorage:
+        $ref: '#/definitions/[object Object]'
+        description: The size of the root volume.
+      UserStorage:
+        $ref: '#/definitions/[object Object]'
+        description: The size of the user storage.
+      ComputeType:
+        $ref: '#/definitions/[object Object]'
+        description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
+    description: Describes a WorkSpace bundle.
+  WorkspaceConnectionStatus:
+    type: object
+    properties:
+      WorkspaceId:
+        $ref: '#/definitions/[object Object]'
+        description: The identifier of the WorkSpace.
+      ConnectionState:
+        $ref: '#/definitions/[object Object]'
+        description: The connection state of the WorkSpace. The connection state is unknown if the WorkSpace is stopped.
+      ConnectionStateCheckTimestamp:
+        $ref: '#/definitions/[object Object]'
+        description: The timestamp of the connection status check.
+      LastKnownUserConnectionTimestamp:
+        $ref: '#/definitions/[object Object]'
+        description: The timestamp of the last known user connection.
+    description: Describes the connection status of a WorkSpace.
+  WorkspaceConnectionStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  WorkspaceDirectory:
+    type: object
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/[object Object]'
+        description: The directory identifier.
+      Alias:
+        $ref: '#/definitions/[object Object]'
+        description: The directory alias.
+      DirectoryName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the directory.
+      RegistrationCode:
+        $ref: '#/definitions/[object Object]'
+        description: The registration code for the directory. This is the code that users enter in their Amazon WorkSpaces client application to connect to the directory.
+      SubnetIds:
+        $ref: '#/definitions/[object Object]'
+        description: The identifiers of the subnets used with the directory.
+      DnsIpAddresses:
+        $ref: '#/definitions/[object Object]'
+        description: The IP addresses of the DNS servers for the directory.
+      CustomerUserName:
+        $ref: '#/definitions/[object Object]'
+        description: The user name for the service account.
+      IamRoleId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The identifier of the IAM role. This is the role that allows Amazon WorkSpaces to make calls to other services, such as Amazon EC2, on your behalf.'
+      DirectoryType:
+        $ref: '#/definitions/[object Object]'
+        description: The directory type.
+      WorkspaceSecurityGroupId:
+        $ref: '#/definitions/[object Object]'
+        description: The identifier of the security group that is assigned to new WorkSpaces.
+      State:
+        $ref: '#/definitions/[object Object]'
+        description: The state of the directory's registration with Amazon WorkSpaces
+      WorkspaceCreationProperties:
+        $ref: '#/definitions/[object Object]'
+        description: The default creation properties for all WorkSpaces in the directory.
+      ipGroupIds:
+        $ref: '#/definitions/[object Object]'
+        description: The identifiers of the IP access control groups associated with the directory.
+    description: Describes an AWS Directory Service directory that is used with Amazon WorkSpaces.
+  WorkspaceDirectoryState:
+    type: string
+    enum:
+      - REGISTERING
+      - REGISTERED
+      - DEREGISTERING
+      - DEREGISTERED
+      - ERROR
+  WorkspaceDirectoryType:
+    type: string
+    enum:
+      - SIMPLE_AD
+      - AD_CONNECTOR
+  WorkspaceErrorCode:
+    type: string
+  WorkspaceId:
+    type: string
+    pattern: '^ws-[0-9a-z]{8,63}$'
+  WorkspaceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 25
+  WorkspaceImage:
+    type: object
+    properties:
+      ImageId:
+        $ref: '#/definitions/[object Object]'
+        description: The identifier of the image.
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the image.
+      Description:
+        $ref: '#/definitions/[object Object]'
+        description: The description of the image.
+      OperatingSystem:
+        $ref: '#/definitions/[object Object]'
+        description: 'The operating system that the image is running. '
+      State:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the image.
+      RequiredTenancy:
+        $ref: '#/definitions/[object Object]'
+        description: 'Specifies whether the image is running on dedicated hardware. When bring your own license (BYOL) is enabled, this value is set to DEDICATED. '
+      ErrorCode:
+        $ref: '#/definitions/[object Object]'
+        description: The error code that is returned for the image.
+      ErrorMessage:
+        $ref: '#/definitions/[object Object]'
+        description: The text of the error message that is returned for the image.
+    description: Describes a WorkSpace image.
+  WorkspaceImageDescription:
+    type: string
+    pattern: '^[a-zA-Z0-9_./() -]+$'
+    minLength: 1
+    maxLength: 256
+  WorkspaceImageErrorCode:
+    type: string
+  WorkspaceImageId:
+    type: string
+    pattern: 'wsi-[0-9a-z]{9,63}$'
+  WorkspaceImageIdList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 25
+  WorkspaceImageIngestionProcess:
+    type: string
+    enum:
+      - BYOL_REGULAR
+      - BYOL_GRAPHICS
+      - BYOL_GRAPHICSPRO
+  WorkspaceImageList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  WorkspaceImageName:
+    type: string
+    pattern: '^[a-zA-Z0-9_./()\\-]+$'
+    minLength: 1
+    maxLength: 64
+  WorkspaceImageRequiredTenancy:
+    type: string
+    enum:
+      - DEFAULT
+      - DEDICATED
+  WorkspaceImageState:
+    type: string
+    enum:
+      - AVAILABLE
+      - PENDING
+      - ERROR
+  WorkspaceList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  WorkspaceProperties:
+    type: object
+    properties:
+      RunningMode:
+        $ref: '#/definitions/[object Object]'
+        description: 'The running mode. For more information, see <a href="http://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html">Manage the WorkSpace Running Mode</a>.'
+      RunningModeAutoStopTimeoutInMinutes:
+        $ref: '#/definitions/[object Object]'
+        description: The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.
+      RootVolumeSizeGib:
+        $ref: '#/definitions/[object Object]'
+        description: The size of the root volume.
+      UserVolumeSizeGib:
+        $ref: '#/definitions/[object Object]'
+        description: The size of the user storage.
+      ComputeTypeName:
+        $ref: '#/definitions/[object Object]'
+        description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
+    description: Describes a WorkSpace.
+  WorkspaceRequest:
+    type: object
+    required:
+      - DirectoryId
+      - UserName
+      - BundleId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/[object Object]'
+        description: The identifier of the AWS Directory Service directory for the WorkSpace. You can use <a>DescribeWorkspaceDirectories</a> to list the available directories.
+      UserName:
+        $ref: '#/definitions/[object Object]'
+        description: The username of the user for the WorkSpace. This username must exist in the AWS Directory Service directory for the WorkSpace.
+      BundleId:
+        $ref: '#/definitions/[object Object]'
+        description: The identifier of the bundle for the WorkSpace. You can use <a>DescribeWorkspaceBundles</a> to list the available bundles.
+      VolumeEncryptionKey:
+        $ref: '#/definitions/[object Object]'
+        description: The KMS key used to encrypt data stored on your WorkSpace.
+      UserVolumeEncryptionEnabled:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates whether the data stored on the user volume is encrypted.
+      RootVolumeEncryptionEnabled:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates whether the data stored on the root volume is encrypted.
+      WorkspaceProperties:
+        $ref: '#/definitions/[object Object]'
+        description: The WorkSpace properties.
+      Tags:
+        $ref: '#/definitions/[object Object]'
+        description: The tags for the WorkSpace.
+    description: Describes the information used to create a WorkSpace.
+  WorkspaceRequestList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 25
   WorkspaceState:
     type: string
     enum:
@@ -2444,138 +2560,23 @@ definitions:
       - STOPPING
       - STOPPED
       - ERROR
-  Workspace:
-    type: object
-    properties:
-      WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
-        description: The identifier of the WorkSpace.
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: The identifier of the AWS Directory Service directory for the WorkSpace.
-      UserName:
-        $ref: '#/definitions/UserName'
-        description: The user for the WorkSpace.
-      IpAddress:
-        $ref: '#/definitions/IpAddress'
-        description: The IP address of the WorkSpace.
-      State:
-        $ref: '#/definitions/WorkspaceState'
-        description: The operational state of the WorkSpace.
-      BundleId:
-        $ref: '#/definitions/BundleId'
-        description: The identifier of the bundle used to create the WorkSpace.
-      SubnetId:
-        $ref: '#/definitions/SubnetId'
-        description: The identifier of the subnet for the WorkSpace.
-      ErrorMessage:
-        $ref: '#/definitions/Description'
-        description: The text of the error message that is returned if the WorkSpace cannot be created.
-      ErrorCode:
-        $ref: '#/definitions/WorkspaceErrorCode'
-        description: The error code that is returned if the WorkSpace cannot be created.
-      ComputerName:
-        $ref: '#/definitions/ComputerName'
-        description: 'The name of the WorkSpace, as seen by the operating system.'
-      VolumeEncryptionKey:
-        $ref: '#/definitions/VolumeEncryptionKey'
-        description: The KMS key used to encrypt data stored on your WorkSpace.
-      UserVolumeEncryptionEnabled:
-        $ref: '#/definitions/BooleanObject'
-        description: Indicates whether the data stored on the user volume is encrypted.
-      RootVolumeEncryptionEnabled:
-        $ref: '#/definitions/BooleanObject'
-        description: Indicates whether the data stored on the root volume is encrypted.
-      WorkspaceProperties:
-        $ref: '#/definitions/WorkspaceProperties'
-        description: The properties of the WorkSpace.
-      ModificationStates:
-        $ref: '#/definitions/ModificationStateList'
-        description: The modification states of the WorkSpace.
-    description: Describes a WorkSpace.
-  WorkspaceConnectionStatus:
-    type: object
-    properties:
-      WorkspaceId:
-        $ref: '#/definitions/WorkspaceId'
-        description: The identifier of the WorkSpace.
-      ConnectionState:
-        $ref: '#/definitions/ConnectionState'
-        description: The connection state of the WorkSpace. The connection state is unknown if the WorkSpace is stopped.
-      ConnectionStateCheckTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The timestamp of the connection status check.
-      LastKnownUserConnectionTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The timestamp of the last known user connection.
-    description: Describes the connection status of a WorkSpace.
-  WorkspaceDirectoryType:
-    type: string
-    enum:
-      - SIMPLE_AD
-      - AD_CONNECTOR
-  WorkspaceDirectoryState:
-    type: string
-    enum:
-      - REGISTERING
-      - REGISTERED
-      - DEREGISTERING
-      - DEREGISTERED
-      - ERROR
-  WorkspaceImageState:
-    type: string
-    enum:
-      - AVAILABLE
-      - PENDING
-      - ERROR
-  WorkspaceImageRequiredTenancy:
-    type: string
-    enum:
-      - DEFAULT
-      - DEDICATED
-  WorkspaceImageErrorCode:
-    type: string
-  WorkspaceImage:
-    type: object
-    properties:
-      ImageId:
-        $ref: '#/definitions/WorkspaceImageId'
-        description: The identifier of the image.
-      Name:
-        $ref: '#/definitions/WorkspaceImageName'
-        description: The name of the image.
-      Description:
-        $ref: '#/definitions/WorkspaceImageDescription'
-        description: The description of the image.
-      OperatingSystem:
-        $ref: '#/definitions/OperatingSystem'
-        description: 'The operating system that the image is running. '
-      State:
-        $ref: '#/definitions/WorkspaceImageState'
-        description: The status of the image.
-      RequiredTenancy:
-        $ref: '#/definitions/WorkspaceImageRequiredTenancy'
-        description: 'Specifies whether the image is running on dedicated hardware. When bring your own license (BYOL) is enabled, this value is set to DEDICATED. '
-      ErrorCode:
-        $ref: '#/definitions/WorkspaceImageErrorCode'
-        description: The error code that is returned for the image.
-      ErrorMessage:
-        $ref: '#/definitions/Description'
-        description: The text of the error message that is returned for the image.
-    description: Describes a WorkSpace image.
   WorkspacesIpGroup:
     type: object
     properties:
       groupId:
-        $ref: '#/definitions/IpGroupId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the group.
       groupName:
-        $ref: '#/definitions/IpGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the group.
       groupDesc:
-        $ref: '#/definitions/IpGroupDesc'
+        $ref: '#/definitions/[object Object]'
         description: The description of the group.
       userRules:
-        $ref: '#/definitions/IpRuleList'
+        $ref: '#/definitions/[object Object]'
         description: The rules.
     description: Describes an IP access control group.
+  WorkspacesIpGroupsList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'

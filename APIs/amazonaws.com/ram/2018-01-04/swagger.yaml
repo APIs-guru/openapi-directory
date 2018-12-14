@@ -1027,10 +1027,10 @@ definitions:
     type: object
     properties:
       resourceShareInvitation:
-        $ref: '#/definitions/ResourceShareInvitation'
+        $ref: '#/definitions/[object Object]'
         description: Information about the invitation.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   AcceptResourceShareInvitationRequest:
     type: object
@@ -1038,10 +1038,10 @@ definitions:
       - resourceShareInvitationArn
     properties:
       resourceShareInvitationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the invitation.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   MalformedArnException: {}
   OperationNotPermittedException: {}
@@ -1055,10 +1055,10 @@ definitions:
     type: object
     properties:
       resourceShareAssociations:
-        $ref: '#/definitions/ResourceShareAssociationList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the associations.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   AssociateResourceShareRequest:
     type: object
@@ -1066,16 +1066,16 @@ definitions:
       - resourceShareArn
     properties:
       resourceShareArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the resource share.
       resourceArns:
-        $ref: '#/definitions/ResourceArnList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Names (ARN) of the resources.
       principals:
-        $ref: '#/definitions/PrincipalArnOrIdList'
+        $ref: '#/definitions/[object Object]'
         description: The principals.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   IdempotentParameterMismatchException: {}
   UnknownResourceException: {}
@@ -1087,10 +1087,10 @@ definitions:
     type: object
     properties:
       resourceShare:
-        $ref: '#/definitions/ResourceShare'
+        $ref: '#/definitions/[object Object]'
         description: Information about the resource share.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   CreateResourceShareRequest:
     type: object
@@ -1098,31 +1098,31 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the resource share.
       resourceArns:
-        $ref: '#/definitions/ResourceArnList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Names (ARN) of the resources to associate with the resource share.
       principals:
-        $ref: '#/definitions/PrincipalArnOrIdList'
+        $ref: '#/definitions/[object Object]'
         description: 'The principals to associate with the resource share. The possible values are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.'
       tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: One or more tags.
       allowExternalPrincipals:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether principals outside your organization can be associated with a resource share.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   DeleteResourceShareResponse:
     type: object
     properties:
       returnValue:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether the request succeeded.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   DeleteResourceShareRequest:
     type: object
@@ -1131,10 +1131,10 @@ definitions:
     type: object
     properties:
       resourceShareAssociations:
-        $ref: '#/definitions/ResourceShareAssociationList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the associations.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   DisassociateResourceShareRequest:
     type: object
@@ -1142,22 +1142,22 @@ definitions:
       - resourceShareArn
     properties:
       resourceShareArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the resource share.
       resourceArns:
-        $ref: '#/definitions/ResourceArnList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Names (ARN) of the resources.
       principals:
-        $ref: '#/definitions/PrincipalArnOrIdList'
+        $ref: '#/definitions/[object Object]'
         description: The principals.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   EnableSharingWithAwsOrganizationResponse:
     type: object
     properties:
       returnValue:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether the request succeeded.
   EnableSharingWithAwsOrganizationRequest:
     type: object
@@ -1166,10 +1166,10 @@ definitions:
     type: object
     properties:
       policies:
-        $ref: '#/definitions/PolicyList'
+        $ref: '#/definitions/[object Object]'
         description: 'A key policy document, in JSON format.'
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   GetResourcePoliciesRequest:
     type: object
@@ -1177,26 +1177,26 @@ definitions:
       - resourceArns
     properties:
       resourceArns:
-        $ref: '#/definitions/ResourceArnList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Names (ARN) of the resources.
       principal:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The principal.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next page of results.
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   InvalidNextTokenException: {}
   GetResourceShareAssociationsResponse:
     type: object
     properties:
       resourceShareAssociations:
-        $ref: '#/definitions/ResourceShareAssociationList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the association.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   GetResourceShareAssociationsRequest:
     type: object
@@ -1204,59 +1204,59 @@ definitions:
       - associationType
     properties:
       associationType:
-        $ref: '#/definitions/ResourceShareAssociationType'
+        $ref: '#/definitions/[object Object]'
         description: The association type.
       resourceShareArns:
-        $ref: '#/definitions/ResourceShareArnList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Names (ARN) of the resource shares.
       resourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the resource.
       principal:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The principal.
       associationStatus:
-        $ref: '#/definitions/ResourceShareAssociationStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status of the association.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next page of results.
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   GetResourceShareInvitationsResponse:
     type: object
     properties:
       resourceShareInvitations:
-        $ref: '#/definitions/ResourceShareInvitationList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the invitations.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   GetResourceShareInvitationsRequest:
     type: object
     properties:
       resourceShareInvitationArns:
-        $ref: '#/definitions/ResourceShareInvitationArnList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Names (ARN) of the invitations.
       resourceShareArns:
-        $ref: '#/definitions/ResourceShareArnList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Names (ARN) of the resource shares.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next page of results.
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   InvalidMaxResultsException: {}
   GetResourceSharesResponse:
     type: object
     properties:
       resourceShares:
-        $ref: '#/definitions/ResourceShareList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the resource shares.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   GetResourceSharesRequest:
     type: object
@@ -1264,34 +1264,34 @@ definitions:
       - resourceOwner
     properties:
       resourceShareArns:
-        $ref: '#/definitions/ResourceShareArnList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Names (ARN) of the resource shares.
       resourceShareStatus:
-        $ref: '#/definitions/ResourceShareStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status of the resource share.
       resourceOwner:
-        $ref: '#/definitions/ResourceOwner'
+        $ref: '#/definitions/[object Object]'
         description: The type of owner.
       name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the resource share.
       tagFilters:
-        $ref: '#/definitions/TagFilters'
+        $ref: '#/definitions/[object Object]'
         description: One or more tag filters.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next page of results.
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   ListPrincipalsResponse:
     type: object
     properties:
       principals:
-        $ref: '#/definitions/PrincipalList'
+        $ref: '#/definitions/[object Object]'
         description: The principals.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   ListPrincipalsRequest:
     type: object
@@ -1299,34 +1299,34 @@ definitions:
       - resourceOwner
     properties:
       resourceOwner:
-        $ref: '#/definitions/ResourceOwner'
+        $ref: '#/definitions/[object Object]'
         description: The type of owner.
       resourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the resource.
       principals:
-        $ref: '#/definitions/PrincipalArnOrIdList'
+        $ref: '#/definitions/[object Object]'
         description: The principals.
       resourceType:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The resource type.
       resourceShareArns:
-        $ref: '#/definitions/ResourceShareArnList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Names (ARN) of the resource shares.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next page of results.
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   ListResourcesResponse:
     type: object
     properties:
       resources:
-        $ref: '#/definitions/ResourceList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the resources.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   ListResourcesRequest:
     type: object
@@ -1334,35 +1334,35 @@ definitions:
       - resourceOwner
     properties:
       resourceOwner:
-        $ref: '#/definitions/ResourceOwner'
+        $ref: '#/definitions/[object Object]'
         description: The type of owner.
       principal:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The principal.
       resourceType:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The resource type.
       resourceArns:
-        $ref: '#/definitions/ResourceArnList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Names (ARN) of the resources.
       resourceShareArns:
-        $ref: '#/definitions/ResourceShareArnList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Names (ARN) of the resource shares.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next page of results.
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   InvalidResourceTypeException: {}
   RejectResourceShareInvitationResponse:
     type: object
     properties:
       resourceShareInvitation:
-        $ref: '#/definitions/ResourceShareInvitation'
+        $ref: '#/definitions/[object Object]'
         description: Information about the invitation.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   RejectResourceShareInvitationRequest:
     type: object
@@ -1370,10 +1370,10 @@ definitions:
       - resourceShareInvitationArn
     properties:
       resourceShareInvitationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the invitation.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   TagResourceResponse:
     type: object
@@ -1385,10 +1385,10 @@ definitions:
       - tags
     properties:
       resourceShareArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the resource share.
       tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: One or more tags.
   TagLimitExceededException: {}
   ResourceArnNotFoundException: {}
@@ -1402,19 +1402,19 @@ definitions:
       - tagKeys
     properties:
       resourceShareArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the resource share.
       tagKeys:
-        $ref: '#/definitions/TagKeyList'
+        $ref: '#/definitions/[object Object]'
         description: The tag keys of the tags to remove.
   UpdateResourceShareResponse:
     type: object
     properties:
       resourceShare:
-        $ref: '#/definitions/ResourceShare'
+        $ref: '#/definitions/[object Object]'
         description: Information about the resource share.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   UpdateResourceShareRequest:
     type: object
@@ -1422,97 +1422,21 @@ definitions:
       - resourceShareArn
     properties:
       resourceShareArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the resource share.
       name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the resource share.
       allowExternalPrincipals:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether principals outside your organization can be associated with a resource share.
       clientToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   MissingRequiredParameterException: {}
-  String:
-    type: string
-  ResourceShareInvitation:
-    type: object
-    properties:
-      resourceShareInvitationArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the invitation.
-      resourceShareName:
-        $ref: '#/definitions/String'
-        description: The name of the resource share.
-      resourceShareArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource share.
-      senderAccountId:
-        $ref: '#/definitions/String'
-        description: The ID of the AWS account that sent the invitation.
-      receiverAccountId:
-        $ref: '#/definitions/String'
-        description: The ID of the AWS account that received the invitation.
-      invitationTimestamp:
-        $ref: '#/definitions/DateTime'
-        description: The date and time when the invitation was sent.
-      status:
-        $ref: '#/definitions/ResourceShareInvitationStatus'
-        description: The status of the invitation.
-      resourceShareAssociations:
-        $ref: '#/definitions/ResourceShareAssociationList'
-        description: The resources associated with the resource share.
-    description: Describes an invitation to join a resource share.
-  ResourceArnList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  PrincipalArnOrIdList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ResourceShareAssociationList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceShareAssociation'
+  '[object Object]': {}
   Boolean:
     type: boolean
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  ResourceShare:
-    type: object
-    properties:
-      resourceShareArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource share.
-      name:
-        $ref: '#/definitions/String'
-        description: The name of the resource share.
-      owningAccountId:
-        $ref: '#/definitions/String'
-        description: The ID of the AWS account that owns the resource share.
-      allowExternalPrincipals:
-        $ref: '#/definitions/Boolean'
-        description: Indicates whether principals outside your organization can be associated with a resource share.
-      status:
-        $ref: '#/definitions/ResourceShareStatus'
-        description: The status of the resource share.
-      statusMessage:
-        $ref: '#/definitions/String'
-        description: A message about the status of the resource share.
-      tags:
-        $ref: '#/definitions/TagList'
-        description: The tags for the resource share.
-      creationTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the resource share was created.
-      lastUpdatedTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the resource share was last updated.
-    description: Describes a resource share.
   DateTime:
     type: string
     format: date-time
@@ -1520,19 +1444,144 @@ definitions:
     type: integer
     minimum: 1
     maximum: 500
+  Policy:
+    type: string
   PolicyList:
     type: array
     items:
-      $ref: '#/definitions/Policy'
-  ResourceShareAssociationType:
+      $ref: '#/definitions/[object Object]'
+  Principal:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the principal.
+      resourceShareArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      creationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when the principal was associated with the resource share.
+      lastUpdatedTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when the association was last updated.
+      external:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
+    description: Describes a principal for use with AWS Resource Access Manager.
+  PrincipalArnOrIdList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PrincipalList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Resource:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the resource.
+      type:
+        $ref: '#/definitions/[object Object]'
+        description: The resource type.
+      resourceShareArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      status:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the resource.
+      statusMessage:
+        $ref: '#/definitions/[object Object]'
+        description: A message about the status of the resource.
+      creationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when the resource was associated with the resource share.
+      lastUpdatedTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when the association was last updated.
+    description: Describes a resource associated with a resource share.
+  ResourceArnList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ResourceOwner:
     type: string
     enum:
-      - PRINCIPAL
-      - RESOURCE
+      - SELF
+      - OTHER-ACCOUNTS
+  ResourceShare:
+    type: object
+    properties:
+      resourceShareArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the resource share.
+      owningAccountId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the AWS account that owns the resource share.
+      allowExternalPrincipals:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates whether principals outside your organization can be associated with a resource share.
+      status:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the resource share.
+      statusMessage:
+        $ref: '#/definitions/[object Object]'
+        description: A message about the status of the resource share.
+      tags:
+        $ref: '#/definitions/[object Object]'
+        description: The tags for the resource share.
+      creationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when the resource share was created.
+      lastUpdatedTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when the resource share was last updated.
+    description: Describes a resource share.
   ResourceShareArnList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/[object Object]'
+  ResourceShareAssociation:
+    type: object
+    properties:
+      resourceShareArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      associatedEntity:
+        $ref: '#/definitions/[object Object]'
+        description: 'The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.'
+      associationType:
+        $ref: '#/definitions/[object Object]'
+        description: The association type.
+      status:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the association.
+      statusMessage:
+        $ref: '#/definitions/[object Object]'
+        description: A message about the status of the association.
+      creationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when the association was created.
+      lastUpdatedTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when the association was last updated.
+      external:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
+    description: Describes an association with a resource share.
+  ResourceShareAssociationList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ResourceShareAssociationStatus:
     type: string
     enum:
@@ -1541,14 +1590,58 @@ definitions:
       - FAILED
       - DISASSOCIATING
       - DISASSOCIATED
+  ResourceShareAssociationType:
+    type: string
+    enum:
+      - PRINCIPAL
+      - RESOURCE
+  ResourceShareInvitation:
+    type: object
+    properties:
+      resourceShareInvitationArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the invitation.
+      resourceShareName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the resource share.
+      resourceShareArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      senderAccountId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the AWS account that sent the invitation.
+      receiverAccountId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the AWS account that received the invitation.
+      invitationTimestamp:
+        $ref: '#/definitions/[object Object]'
+        description: The date and time when the invitation was sent.
+      status:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the invitation.
+      resourceShareAssociations:
+        $ref: '#/definitions/[object Object]'
+        description: The resources associated with the resource share.
+    description: Describes an invitation to join a resource share.
   ResourceShareInvitationArnList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/[object Object]'
   ResourceShareInvitationList:
     type: array
     items:
-      $ref: '#/definitions/ResourceShareInvitation'
+      $ref: '#/definitions/[object Object]'
+  ResourceShareInvitationStatus:
+    type: string
+    enum:
+      - PENDING
+      - ACCEPTED
+      - REJECTED
+      - EXPIRED
+  ResourceShareList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ResourceShareStatus:
     type: string
     enum:
@@ -1557,48 +1650,6 @@ definitions:
       - FAILED
       - DELETING
       - DELETED
-  ResourceOwner:
-    type: string
-    enum:
-      - SELF
-      - OTHER-ACCOUNTS
-  TagFilters:
-    type: array
-    items:
-      $ref: '#/definitions/TagFilter'
-  ResourceShareList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceShare'
-  PrincipalList:
-    type: array
-    items:
-      $ref: '#/definitions/Principal'
-  ResourceList:
-    type: array
-    items:
-      $ref: '#/definitions/Resource'
-  Policy:
-    type: string
-  Principal:
-    type: object
-    properties:
-      id:
-        $ref: '#/definitions/String'
-        description: The ID of the principal.
-      resourceShareArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource share.
-      creationTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the principal was associated with the resource share.
-      lastUpdatedTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the association was last updated.
-      external:
-        $ref: '#/definitions/Boolean'
-        description: Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
-    description: Describes a principal for use with AWS Resource Access Manager.
   ResourceStatus:
     type: string
     enum:
@@ -1606,95 +1657,45 @@ definitions:
       - ZONAL_RESOURCE_INACCESSIBLE
       - LIMIT_EXCEEDED
       - UNAVAILABLE
-  Resource:
-    type: object
-    properties:
-      arn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource.
-      type:
-        $ref: '#/definitions/String'
-        description: The resource type.
-      resourceShareArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource share.
-      status:
-        $ref: '#/definitions/ResourceStatus'
-        description: The status of the resource.
-      statusMessage:
-        $ref: '#/definitions/String'
-        description: A message about the status of the resource.
-      creationTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the resource was associated with the resource share.
-      lastUpdatedTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the association was last updated.
-    description: Describes a resource associated with a resource share.
-  ResourceShareAssociation:
-    type: object
-    properties:
-      resourceShareArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource share.
-      associatedEntity:
-        $ref: '#/definitions/String'
-        description: 'The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.'
-      associationType:
-        $ref: '#/definitions/ResourceShareAssociationType'
-        description: The association type.
-      status:
-        $ref: '#/definitions/ResourceShareAssociationStatus'
-        description: The status of the association.
-      statusMessage:
-        $ref: '#/definitions/String'
-        description: A message about the status of the association.
-      creationTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the association was created.
-      lastUpdatedTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the association was last updated.
-      external:
-        $ref: '#/definitions/Boolean'
-        description: Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
-    description: Describes an association with a resource share.
-  ResourceShareInvitationStatus:
-    type: string
-    enum:
-      - PENDING
-      - ACCEPTED
-      - REJECTED
-      - EXPIRED
-  TagKey:
-    type: string
-  TagValue:
+  String:
     type: string
   Tag:
     type: object
     properties:
       key:
-        $ref: '#/definitions/TagKey'
+        $ref: '#/definitions/[object Object]'
         description: The key of the tag.
       value:
-        $ref: '#/definitions/TagValue'
+        $ref: '#/definitions/[object Object]'
         description: The value of the tag.
     description: Information about a tag.
-  TagValueList:
-    type: array
-    items:
-      $ref: '#/definitions/TagValue'
   TagFilter:
     type: object
     properties:
       tagKey:
-        $ref: '#/definitions/TagKey'
+        $ref: '#/definitions/[object Object]'
         description: The tag key.
       tagValues:
-        $ref: '#/definitions/TagValueList'
+        $ref: '#/definitions/[object Object]'
         description: The tag values.
     description: Used to filter information based on tags.
+  TagFilters:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  TagKey:
+    type: string
   TagKeyList:
     type: array
     items:
-      $ref: '#/definitions/TagKey'
+      $ref: '#/definitions/[object Object]'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  TagValue:
+    type: string
+  TagValueList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'

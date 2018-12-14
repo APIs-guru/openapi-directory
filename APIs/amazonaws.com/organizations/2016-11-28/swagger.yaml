@@ -295,7 +295,7 @@ paths:
   '/#CreateAccount':
     post:
       operationId: CreateAccount
-      description: '<p>Creates an AWS account that is automatically a member of the organization whose credentials made the request. This is an asynchronous request that AWS performs in the background. Because <code>CreateAccount</code> operates asynchronously, it can return a successful completion message even though account initialization might still be in progress. You might need to wait a few minutes before you can successfully access the account. To check the status of the request, do one of the following:</p> <ul> <li> <p>Use the <code>OperationId</code> response element from this operation to provide as a parameter to the <a>DescribeCreateAccountStatus</a> operation.</p> </li> <li> <p>Check the AWS CloudTrail log for the <code>CreateAccountResult</code> event. For information on using AWS CloudTrail with Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html">Monitoring the Activity in Your Organization</a> in the <i>AWS Organizations User Guide</i>.</p> </li> </ul> <p/> <p>The user who calls the API to create an account must have the <code>organizations:CreateAccount</code> permission. If you enabled all features in the organization, AWS Organizations will create the required service-linked role named <code>AWSServiceRoleForOrganizations</code>. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs">AWS Organizations and Service-Linked Roles</a> in the <i>AWS Organizations User Guide</i>.</p> <p>AWS Organizations preconfigures the new member account with a role (named <code>OrganizationAccountAccessRole</code> by default) that grants users in the master account administrator permissions in the new member account. Principals in the master account can assume the role. AWS Organizations clones the company name and address information for the new account from the organization''s master account.</p> <p>This operation can be called only from the organization''s master account.</p> <p>For more information about creating accounts, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html">Creating an AWS Account in Your Organization</a> in the <i>AWS Organizations User Guide</i>.</p> <important> <ul> <li> <p>When you create an account in an organization using the AWS Organizations console, API, or CLI commands, the information required for the account to operate as a standalone account, such as a payment method and signing the end user license agreement (EULA) is <i>not</i> automatically collected. If you must remove an account from your organization later, you can do so only after you provide the missing information. Follow the steps at <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info"> To leave an organization as a member account</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p>If you get an exception that indicates that you exceeded your account limits for the organization, contact <a href="https://console.aws.amazon.com/support/home#/">AWS Support</a>.</p> </li> <li> <p>If you get an exception that indicates that the operation failed because your organization is still initializing, wait one hour and then try again. If the error persists, contact <a href="https://console.aws.amazon.com/support/home#/">AWS Support</a>.</p> </li> </ul> </important> <note> <p>When you create a member account with this operation, you can choose whether to create the account with the <b>IAM User and Role Access to Billing Information</b> switch enabled. If you enable it, IAM users and roles that have appropriate permissions can view billing information for the account. If you disable it, only the account root user can access billing information. For information about how to disable this switch for an account, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html">Granting Access to Your Billing Information and Tools</a>.</p> </note>'
+      description: '<p>Creates an AWS account that is automatically a member of the organization whose credentials made the request. This is an asynchronous request that AWS performs in the background. Because <code>CreateAccount</code> operates asynchronously, it can return a successful completion message even though account initialization might still be in progress. You might need to wait a few minutes before you can successfully access the account. To check the status of the request, do one of the following:</p> <ul> <li> <p>Use the <code>OperationId</code> response element from this operation to provide as a parameter to the <a>DescribeCreateAccountStatus</a> operation.</p> </li> <li> <p>Check the AWS CloudTrail log for the <code>CreateAccountResult</code> event. For information on using AWS CloudTrail with Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html">Monitoring the Activity in Your Organization</a> in the <i>AWS Organizations User Guide</i>.</p> </li> </ul> <p/> <p>The user who calls the API to create an account must have the <code>organizations:CreateAccount</code> permission. If you enabled all features in the organization, AWS Organizations will create the required service-linked role named <code>AWSServiceRoleForOrganizations</code>. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs">AWS Organizations and Service-Linked Roles</a> in the <i>AWS Organizations User Guide</i>.</p> <p>AWS Organizations preconfigures the new member account with a role (named <code>OrganizationAccountAccessRole</code> by default) that grants users in the master account administrator permissions in the new member account. Principals in the master account can assume the role. AWS Organizations clones the company name and address information for the new account from the organization''s master account.</p> <p>This operation can be called only from the organization''s master account.</p> <p>For more information about creating accounts, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html">Creating an AWS Account in Your Organization</a> in the <i>AWS Organizations User Guide</i>.</p> <important> <ul> <li> <p>When you create an account in an organization using the AWS Organizations console, API, or CLI commands, the information required for the account to operate as a standalone account, such as a payment method and signing the end user license agreement (EULA) is <i>not</i> automatically collected. If you must remove an account from your organization later, you can do so only after you provide the missing information. Follow the steps at <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info"> To leave an organization as a member account</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p>If you get an exception that indicates that you exceeded your account limits for the organization, contact <a href="https://console.aws.amazon.com/support/home#/">AWS Support</a>.</p> </li> <li> <p>If you get an exception that indicates that the operation failed because your organization is still initializing, wait one hour and then try again. If the error persists, contact <a href="https://console.aws.amazon.com/support/home#/">AWS Support</a>.</p> </li> <li> <p>Using CreateAccount to create multiple temporary accounts is not recommended. You can only close an account from the Billing and Cost Management Console, and you must be signed in as the root user. For information on the requirements and process for closing an account, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html">Closing an AWS Account</a> in the <i>AWS Organizations User Guide</i>.</p> </li> </ul> </important> <note> <p>When you create a member account with this operation, you can choose whether to create the account with the <b>IAM User and Role Access to Billing Information</b> switch enabled. If you enable it, IAM users and roles that have appropriate permissions can view billing information for the account. If you disable it, only the account root user can access billing information. For information about how to disable this switch for an account, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html">Granting Access to Your Billing Information and Tools</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2511,7 +2511,7 @@ definitions:
         State: ACCEPTED
     properties:
       Handshake:
-        $ref: '#/definitions/Handshake'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains details about the accepted handshake.
   AcceptHandshakeRequest:
     type: object
@@ -2521,7 +2521,7 @@ definitions:
       HandshakeId: h-examplehandshakeid111
     properties:
       HandshakeId:
-        $ref: '#/definitions/HandshakeId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the handshake that you want to accept.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
   AccessDeniedException: {}
   AWSOrganizationsNotInUseException: {}
@@ -2544,10 +2544,10 @@ definitions:
       TargetId: '333333333333'
     properties:
       PolicyId:
-        $ref: '#/definitions/PolicyId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the policy that you want to attach to the target. You can get the ID for the policy by calling the <a>ListPolicies</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
       TargetId:
-        $ref: '#/definitions/PolicyTargetId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the root, OU, or account that you want to attach the policy to. You can get the ID by calling the <a>ListRoots</a>, <a>ListOrganizationalUnitsForParent</a>, or <a>ListAccounts</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
   ConstraintViolationException: {}
   DuplicatePolicyAttachmentException: {}
@@ -2585,7 +2585,7 @@ definitions:
         State: CANCELED
     properties:
       Handshake:
-        $ref: '#/definitions/Handshake'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains details about the handshake that you canceled.
   CancelHandshakeRequest:
     type: object
@@ -2595,7 +2595,7 @@ definitions:
       HandshakeId: h-examplehandshakeid111
     properties:
       HandshakeId:
-        $ref: '#/definitions/HandshakeId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the handshake that you want to cancel. You can get the ID from the <a>ListHandshakesForOrganization</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
   CreateAccountResponse:
     type: object
@@ -2605,7 +2605,7 @@ definitions:
         State: IN_PROGRESS
     properties:
       CreateAccountStatus:
-        $ref: '#/definitions/CreateAccountStatus'
+        $ref: '#/definitions/[object Object]'
         description: 'A structure that contains details about the request to create an account. This response structure might not be fully populated when you first receive it because account creation is an asynchronous process. You can pass the returned <code>CreateAccountStatus</code> ID as a parameter to <a>DescribeCreateAccountStatus</a> to get status about the progress of the request at later times. You can also check the AWS CloudTrail log for the <code>CreateAccountResult</code> event. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html">Monitoring the Activity in Your Organization</a> in the <i>AWS Organizations User Guide</i>.'
   CreateAccountRequest:
     type: object
@@ -2617,16 +2617,16 @@ definitions:
       Email: susan@example.com
     properties:
       Email:
-        $ref: '#/definitions/Email'
+        $ref: '#/definitions/[object Object]'
         description: The email address of the owner to assign to the new member account. This email address must not already be associated with another AWS account. You must use a valid email address to complete account creation. You can't access the root user of the account or remove an account that was created with an invalid email address.
       AccountName:
-        $ref: '#/definitions/AccountName'
+        $ref: '#/definitions/[object Object]'
         description: The friendly name of the member account.
       RoleName:
-        $ref: '#/definitions/RoleName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>(Optional)</p> <p>The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. This role trusts the master account, allowing users in the master account to assume the role, as permitted by the master account administrator. The role has administrator permissions in the new member account.</p> <p>If you don''t specify this parameter, the role name defaults to <code>OrganizationAccountAccessRole</code>.</p> <p>For more information about how to use this role to access the member account, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role">Accessing and Administering the Member Accounts in Your Organization</a> in the <i>AWS Organizations User Guide</i>, and steps 2 and 3 in <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html">Tutorial: Delegate Access Across AWS Accounts Using IAM Roles</a> in the <i>IAM User Guide</i>.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of characters that can consist of uppercase letters, lowercase letters, digits with no spaces, and any of the following characters: =,.@-</p>'
       IamUserAccessToBilling:
-        $ref: '#/definitions/IAMUserAccessToBilling'
+        $ref: '#/definitions/[object Object]'
         description: '<p>If set to <code>ALLOW</code>, the new account enables IAM users to access account billing information <i>if</i> they have the required permissions. If set to <code>DENY</code>, only the root user of the new account can access account billing information. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate">Activating Access to the Billing and Cost Management Console</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> <p>If you don''t specify this parameter, the value defaults to <code>ALLOW</code>, and IAM users and roles with the required permissions can access billing information for the new account.</p>'
   FinalizingOrganizationException: {}
   CreateOrganizationResponse:
@@ -2642,7 +2642,7 @@ definitions:
         MasterAccountId: '111111111111'
     properties:
       Organization:
-        $ref: '#/definitions/Organization'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains details about the newly created organization.
   CreateOrganizationRequest:
     type: object
@@ -2650,8 +2650,8 @@ definitions:
       FeatureSet: CONSOLIDATED_BILLING
     properties:
       FeatureSet:
-        $ref: '#/definitions/OrganizationFeatureSet'
-        description: '<p>Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.</p> <ul> <li> <p> <i>CONSOLIDATED_BILLING</i>: All member accounts have their bills consolidated to and paid by the master account. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only">Consolidated Billing</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p> <i>ALL</i>: In addition to all the features supported by the consolidated billing feature set, the master account can also apply any type of policy to any member account in the organization. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all">All features</a> in the <i>AWS Organizations User Guide</i>.</p> </li> </ul>'
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.</p> <ul> <li> <p> <i>CONSOLIDATED_BILLING</i>: All member accounts have their bills consolidated to and paid by the master account. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only">Consolidated billing</a> in the <i>AWS Organizations User Guide</i>.</p> </li> <li> <p> <i>ALL</i>: In addition to all the features supported by the consolidated billing feature set, the master account can also apply any type of policy to any member account in the organization. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all">All features</a> in the <i>AWS Organizations User Guide</i>.</p> </li> </ul>'
   AlreadyInOrganizationException: {}
   CreateOrganizationalUnitResponse:
     type: object
@@ -2662,7 +2662,7 @@ definitions:
         Name: AccountingOU
     properties:
       OrganizationalUnit:
-        $ref: '#/definitions/OrganizationalUnit'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains details about the newly created OU.
   CreateOrganizationalUnitRequest:
     type: object
@@ -2674,10 +2674,10 @@ definitions:
       ParentId: r-examplerootid111
     properties:
       ParentId:
-        $ref: '#/definitions/ParentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the parent root or OU in which you want to create the new OU.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
       Name:
-        $ref: '#/definitions/OrganizationalUnitName'
+        $ref: '#/definitions/[object Object]'
         description: The friendly name to assign to the new OU.
   DuplicateOrganizationalUnitException: {}
   ParentNotFoundException: {}
@@ -2693,7 +2693,7 @@ definitions:
           Type: SERVICE_CONTROL_POLICY
     properties:
       Policy:
-        $ref: '#/definitions/Policy'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains details about the newly created policy.
   CreatePolicyRequest:
     type: object
@@ -2709,16 +2709,16 @@ definitions:
       Type: SERVICE_CONTROL_POLICY
     properties:
       Content:
-        $ref: '#/definitions/PolicyContent'
+        $ref: '#/definitions/[object Object]'
         description: 'The policy content to add to the new policy. For example, if you create a <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html">service control policy</a> (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles. For more information about the SCP syntax, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html">Service Control Policy Syntax</a> in the <i>AWS Organizations User Guide</i>.'
       Description:
-        $ref: '#/definitions/PolicyDescription'
+        $ref: '#/definitions/[object Object]'
         description: An optional description to assign to the policy.
       Name:
-        $ref: '#/definitions/PolicyName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The friendly name to assign to the policy.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
       Type:
-        $ref: '#/definitions/PolicyType'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The type of policy to create.</p> <note> <p>In the current release, the only type of policy that you can create is a service control policy (SCP).</p> </note>'
   DuplicatePolicyException: {}
   MalformedPolicyDocumentException: {}
@@ -2752,7 +2752,7 @@ definitions:
         State: DECLINED
     properties:
       Handshake:
-        $ref: '#/definitions/Handshake'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains details about the declined handshake. The state is updated to show the value <code>DECLINED</code>.
   DeclineHandshakeRequest:
     type: object
@@ -2762,7 +2762,7 @@ definitions:
       HandshakeId: h-examplehandshakeid111
     properties:
       HandshakeId:
-        $ref: '#/definitions/HandshakeId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the handshake that you want to decline. You can get the ID from the <a>ListHandshakesForAccount</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
   OrganizationNotEmptyException: {}
   DeleteOrganizationalUnitRequest:
@@ -2773,7 +2773,7 @@ definitions:
       OrganizationalUnitId: ou-examplerootid111-exampleouid111
     properties:
       OrganizationalUnitId:
-        $ref: '#/definitions/OrganizationalUnitId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the organizational unit that you want to delete. You can get the ID from the <a>ListOrganizationalUnitsForParent</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p>'
   OrganizationalUnitNotEmptyException: {}
   OrganizationalUnitNotFoundException: {}
@@ -2785,7 +2785,7 @@ definitions:
       PolicyId: p-examplepolicyid111
     properties:
       PolicyId:
-        $ref: '#/definitions/PolicyId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the policy that you want to delete. You can get the ID from the <a>ListPolicies</a> or <a>ListPoliciesForTarget</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
   PolicyInUseException: {}
   DescribeAccountResponse:
@@ -2798,7 +2798,7 @@ definitions:
         Name: Beta Account
     properties:
       Account:
-        $ref: '#/definitions/Account'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains information about the requested account.
   DescribeAccountRequest:
     type: object
@@ -2808,7 +2808,7 @@ definitions:
       AccountId: '555555555555'
     properties:
       AccountId:
-        $ref: '#/definitions/AccountId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the AWS account that you want information about. You can get the ID from the <a>ListAccounts</a> or <a>ListAccountsForParent</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
   AccountNotFoundException: {}
   DescribeCreateAccountStatusResponse:
@@ -2820,7 +2820,7 @@ definitions:
         State: SUCCEEDED
     properties:
       CreateAccountStatus:
-        $ref: '#/definitions/CreateAccountStatus'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains the current status of an account creation request.
   DescribeCreateAccountStatusRequest:
     type: object
@@ -2830,7 +2830,7 @@ definitions:
       CreateAccountRequestId: car-exampleaccountcreationrequestid
     properties:
       CreateAccountRequestId:
-        $ref: '#/definitions/CreateAccountRequestId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Specifies the <code>operationId</code> that uniquely identifies the request. You can get the ID from the response to an earlier <a>CreateAccount</a> request, or from the <a>ListCreateAccountStatus</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an create account request ID string requires "car-" followed by from 8 to 32 lower-case letters or digits.</p>'
   CreateAccountStatusNotFoundException: {}
   DescribeHandshakeResponse:
@@ -2860,7 +2860,7 @@ definitions:
         State: OPEN
     properties:
       Handshake:
-        $ref: '#/definitions/Handshake'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains information about the specified handshake.
   DescribeHandshakeRequest:
     type: object
@@ -2870,7 +2870,7 @@ definitions:
       HandshakeId: h-examplehandshakeid111
     properties:
       HandshakeId:
-        $ref: '#/definitions/HandshakeId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the handshake that you want information about. You can get the ID from the original call to <a>InviteAccountToOrganization</a>, or from a call to <a>ListHandshakesForAccount</a> or <a>ListHandshakesForOrganization</a>.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
   DescribeOrganizationResponse:
     type: object
@@ -2886,7 +2886,7 @@ definitions:
         MasterAccountEmail: bill@example.com
     properties:
       Organization:
-        $ref: '#/definitions/Organization'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains information about the organization.
   DescribeOrganizationalUnitResponse:
     type: object
@@ -2897,7 +2897,7 @@ definitions:
         Name: Accounting Group
     properties:
       OrganizationalUnit:
-        $ref: '#/definitions/OrganizationalUnit'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains details about the specified OU.
   DescribeOrganizationalUnitRequest:
     type: object
@@ -2907,7 +2907,7 @@ definitions:
       OrganizationalUnitId: ou-examplerootid111-exampleouid111
     properties:
       OrganizationalUnitId:
-        $ref: '#/definitions/OrganizationalUnitId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the organizational unit that you want details about. You can get the ID from the <a>ListOrganizationalUnitsForParent</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p>'
   DescribePolicyResponse:
     type: object
@@ -2923,7 +2923,7 @@ definitions:
           Type: SERVICE_CONTROL_POLICY
     properties:
       Policy:
-        $ref: '#/definitions/Policy'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains details about the specified policy.
   DescribePolicyRequest:
     type: object
@@ -2933,7 +2933,7 @@ definitions:
       PolicyId: p-examplepolicyid111
     properties:
       PolicyId:
-        $ref: '#/definitions/PolicyId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the policy that you want details about. You can get the ID from the <a>ListPolicies</a> or <a>ListPoliciesForTarget</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
   DetachPolicyRequest:
     type: object
@@ -2945,10 +2945,10 @@ definitions:
       TargetId: ou-examplerootid111-exampleouid111
     properties:
       PolicyId:
-        $ref: '#/definitions/PolicyId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the policy you want to detach. You can get the ID from the <a>ListPolicies</a> or <a>ListPoliciesForTarget</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
       TargetId:
-        $ref: '#/definitions/PolicyTargetId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the root, OU, or account from which you want to detach the policy. You can get the ID from the <a>ListRoots</a>, <a>ListOrganizationalUnitsForParent</a>, or <a>ListAccounts</a> operations.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
   PolicyNotAttachedException: {}
   DisableAWSServiceAccessRequest:
@@ -2957,7 +2957,7 @@ definitions:
       - ServicePrincipal
     properties:
       ServicePrincipal:
-        $ref: '#/definitions/ServicePrincipal'
+        $ref: '#/definitions/[object Object]'
         description: 'The service principal name of the AWS service for which you want to disable integration with your organization. This is typically in the form of a URL, such as <code> <i>service-abbreviation</i>.amazonaws.com</code>.'
   DisablePolicyTypeResponse:
     type: object
@@ -2969,7 +2969,7 @@ definitions:
         PolicyTypes: []
     properties:
       Root:
-        $ref: '#/definitions/Root'
+        $ref: '#/definitions/[object Object]'
         description: A structure that shows the root with the updated list of enabled policy types.
   DisablePolicyTypeRequest:
     type: object
@@ -2981,10 +2981,10 @@ definitions:
       RootId: r-examplerootid111
     properties:
       RootId:
-        $ref: '#/definitions/RootId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the root in which you want to disable a policy type. You can get the ID from the <a>ListRoots</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by from 4 to 32 lower-case letters or digits.</p>'
       PolicyType:
-        $ref: '#/definitions/PolicyType'
+        $ref: '#/definitions/[object Object]'
         description: The policy type that you want to disable in this root.
   RootNotFoundException: {}
   EnableAWSServiceAccessRequest:
@@ -2993,7 +2993,7 @@ definitions:
       - ServicePrincipal
     properties:
       ServicePrincipal:
-        $ref: '#/definitions/ServicePrincipal'
+        $ref: '#/definitions/[object Object]'
         description: 'The service principal name of the AWS service for which you want to enable integration with your organization. This is typically in the form of a URL, such as <code> <i>service-abbreviation</i>.amazonaws.com</code>.'
   EnableAllFeaturesResponse:
     type: object
@@ -3013,7 +3013,7 @@ definitions:
         State: REQUESTED
     properties:
       Handshake:
-        $ref: '#/definitions/Handshake'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains details about the handshake created to support this request to enable all features in the organization.
   EnableAllFeaturesRequest:
     type: object
@@ -3031,7 +3031,7 @@ definitions:
             Type: SERVICE_CONTROL_POLICY
     properties:
       Root:
-        $ref: '#/definitions/Root'
+        $ref: '#/definitions/[object Object]'
         description: A structure that shows the root with the updated list of enabled policy types.
   EnablePolicyTypeRequest:
     type: object
@@ -3043,10 +3043,10 @@ definitions:
       RootId: r-examplerootid111
     properties:
       RootId:
-        $ref: '#/definitions/RootId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the root in which you want to enable a policy type. You can get the ID from the <a>ListRoots</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by from 4 to 32 lower-case letters or digits.</p>'
       PolicyType:
-        $ref: '#/definitions/PolicyType'
+        $ref: '#/definitions/[object Object]'
         description: The policy type that you want to enable.
   PolicyTypeAlreadyEnabledException: {}
   InviteAccountToOrganizationResponse:
@@ -3078,7 +3078,7 @@ definitions:
         State: OPEN
     properties:
       Handshake:
-        $ref: '#/definitions/Handshake'
+        $ref: '#/definitions/[object Object]'
         description: A structure that contains details about the handshake that is created to support this invitation request.
   InviteAccountToOrganizationRequest:
     type: object
@@ -3091,10 +3091,10 @@ definitions:
         Type: EMAIL
     properties:
       Target:
-        $ref: '#/definitions/HandshakeParty'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The identifier (ID) of the AWS account that you want to invite to join your organization. This is a JSON object that contains the following elements: </p> <p> <code>{ "Type": "ACCOUNT", "Id": "&lt;<i> <b>account id number</b> </i>&gt;" }</code> </p> <p>If you use the AWS CLI, you can submit this as a single string, similar to the following example:</p> <p> <code>--target Id=123456789012,Type=ACCOUNT</code> </p> <p>If you specify <code>"Type": "ACCOUNT"</code>, then you must provide the AWS account ID number as the <code>Id</code>. If you specify <code>"Type": "EMAIL"</code>, then you must specify the email address that is associated with the account.</p> <p> <code>--target Id=diego@example.com,Type=EMAIL</code> </p>'
       Notes:
-        $ref: '#/definitions/HandshakeNotes'
+        $ref: '#/definitions/[object Object]'
         description: Additional information that you want to include in the generated email to the recipient account owner.
   AccountOwnerNotVerifiedException: {}
   DuplicateHandshakeException: {}
@@ -3103,19 +3103,19 @@ definitions:
     type: object
     properties:
       EnabledServicePrincipals:
-        $ref: '#/definitions/EnabledServicePrincipals'
+        $ref: '#/definitions/[object Object]'
         description: A list of the service principals for the services that are enabled to integrate with your organization. Each principal is a structure that includes the name and the date that it was enabled for integration with AWS Organizations.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListAWSServiceAccessForOrganizationRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListAccountsResponse:
     type: object
@@ -3151,20 +3151,20 @@ definitions:
           Status: ACTIVE
     properties:
       Accounts:
-        $ref: '#/definitions/Accounts'
+        $ref: '#/definitions/[object Object]'
         description: A list of objects in the organization.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListAccountsRequest:
     type: object
     example: {}
     properties:
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListAccountsForParentResponse:
     type: object
@@ -3186,10 +3186,10 @@ definitions:
           Status: ACTIVE
     properties:
       Accounts:
-        $ref: '#/definitions/Accounts'
+        $ref: '#/definitions/[object Object]'
         description: A list of the accounts in the specified root or OU.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListAccountsForParentRequest:
     type: object
@@ -3199,13 +3199,13 @@ definitions:
       ParentId: ou-examplerootid111-exampleouid111
     properties:
       ParentId:
-        $ref: '#/definitions/ParentId'
+        $ref: '#/definitions/[object Object]'
         description: The unique identifier (ID) for the parent root or organization unit (OU) whose accounts you want to list.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListChildrenResponse:
     type: object
@@ -3217,10 +3217,10 @@ definitions:
           Type: ORGANIZATIONAL_UNIT
     properties:
       Children:
-        $ref: '#/definitions/Children'
+        $ref: '#/definitions/[object Object]'
         description: The list of children of the specified parent container.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListChildrenRequest:
     type: object
@@ -3232,16 +3232,16 @@ definitions:
       ParentId: ou-examplerootid111-exampleouid111
     properties:
       ParentId:
-        $ref: '#/definitions/ParentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) for the parent root or OU whose children you want to list.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
       ChildType:
-        $ref: '#/definitions/ChildType'
+        $ref: '#/definitions/[object Object]'
         description: Filters the output to include only the specified child type.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListCreateAccountStatusResponse:
     type: object
@@ -3253,10 +3253,10 @@ definitions:
           State: IN_PROGRESS
     properties:
       CreateAccountStatuses:
-        $ref: '#/definitions/CreateAccountStatuses'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of objects with details about the requests. Certain elements, such as the accountId number, are present in the output only after the account has been successfully created.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListCreateAccountStatusRequest:
     type: object
@@ -3265,13 +3265,13 @@ definitions:
         - IN_PROGRESS
     properties:
       States:
-        $ref: '#/definitions/CreateAccountStates'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of one or more states that you want included in the response. If this parameter is not present, then all requests are included in the response.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListHandshakesForAccountResponse:
     type: object
@@ -3302,22 +3302,22 @@ definitions:
           State: OPEN
     properties:
       Handshakes:
-        $ref: '#/definitions/Handshakes'
+        $ref: '#/definitions/[object Object]'
         description: A list of <a>Handshake</a> objects with details about each of the handshakes that is associated with the specified account.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListHandshakesForAccountRequest:
     type: object
     properties:
       Filter:
-        $ref: '#/definitions/HandshakeFilter'
+        $ref: '#/definitions/[object Object]'
         description: 'Filters the handshakes that you want included in the response. The default is all types. Use the <code>ActionType</code> element to limit the output to only a specified type, such as <code>INVITE</code>, <code>ENABLE-FULL-CONTROL</code>, or <code>APPROVE-FULL-CONTROL</code>. Alternatively, for the <code>ENABLE-FULL-CONTROL</code> handshake that generates a separate child handshake for each member account, you can specify <code>ParentHandshakeId</code> to see only the handshakes that were generated by that parent request.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListHandshakesForOrganizationResponse:
     type: object
@@ -3371,22 +3371,22 @@ definitions:
           State: ACCEPTED
     properties:
       Handshakes:
-        $ref: '#/definitions/Handshakes'
+        $ref: '#/definitions/[object Object]'
         description: A list of <a>Handshake</a> objects with details about each of the handshakes that are associated with an organization.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListHandshakesForOrganizationRequest:
     type: object
     properties:
       Filter:
-        $ref: '#/definitions/HandshakeFilter'
+        $ref: '#/definitions/[object Object]'
         description: 'A filter of the handshakes that you want included in the response. The default is all types. Use the <code>ActionType</code> element to limit the output to only a specified type, such as <code>INVITE</code>, <code>ENABLE-ALL-FEATURES</code>, or <code>APPROVE-ALL-FEATURES</code>. Alternatively, for the <code>ENABLE-ALL-FEATURES</code> handshake that generates a separate child handshake for each member account, you can specify the <code>ParentHandshakeId</code> to see only the handshakes that were generated by that parent request.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListOrganizationalUnitsForParentResponse:
     type: object
@@ -3400,10 +3400,10 @@ definitions:
           Name: Production
     properties:
       OrganizationalUnits:
-        $ref: '#/definitions/OrganizationalUnits'
+        $ref: '#/definitions/[object Object]'
         description: A list of the OUs in the specified root or parent OU.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListOrganizationalUnitsForParentRequest:
     type: object
@@ -3413,13 +3413,13 @@ definitions:
       ParentId: r-examplerootid111
     properties:
       ParentId:
-        $ref: '#/definitions/ParentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the root or OU whose child OUs you want to list.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListParentsResponse:
     type: object
@@ -3429,10 +3429,10 @@ definitions:
           Type: ORGANIZATIONAL_UNIT
     properties:
       Parents:
-        $ref: '#/definitions/Parents'
+        $ref: '#/definitions/[object Object]'
         description: A list of parents for the specified child account or OU.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListParentsRequest:
     type: object
@@ -3442,13 +3442,13 @@ definitions:
       ChildId: '444444444444'
     properties:
       ChildId:
-        $ref: '#/definitions/ChildId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the OU or account whose parent containers you want to list. Do not specify a root.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the following:</p> <ul> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ChildNotFoundException: {}
   ListPoliciesResponse:
@@ -3475,10 +3475,10 @@ definitions:
           Type: SERVICE_CONTROL_POLICY
     properties:
       Policies:
-        $ref: '#/definitions/Policies'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of policies that match the filter criteria in the request. The output list does not include the policy contents. To see the content for a policy, see <a>DescribePolicy</a>.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListPoliciesRequest:
     type: object
@@ -3488,13 +3488,13 @@ definitions:
       Filter: SERVICE_CONTROL_POLICY
     properties:
       Filter:
-        $ref: '#/definitions/PolicyType'
+        $ref: '#/definitions/[object Object]'
         description: Specifies the type of policy that you want to include in the response.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListPoliciesForTargetResponse:
     type: object
@@ -3508,10 +3508,10 @@ definitions:
           Type: SERVICE_CONTROL_POLICY
     properties:
       Policies:
-        $ref: '#/definitions/Policies'
+        $ref: '#/definitions/[object Object]'
         description: The list of policies that match the criteria in the request.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListPoliciesForTargetRequest:
     type: object
@@ -3523,16 +3523,16 @@ definitions:
       TargetId: '444444444444'
     properties:
       TargetId:
-        $ref: '#/definitions/PolicyTargetId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the root, organizational unit, or account whose policies you want to list.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
       Filter:
-        $ref: '#/definitions/PolicyType'
+        $ref: '#/definitions/[object Object]'
         description: The type of policy that you want to include in the returned list.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListRootsResponse:
     type: object
@@ -3546,20 +3546,20 @@ definitions:
               Type: SERVICE_CONTROL_POLICY
     properties:
       Roots:
-        $ref: '#/definitions/Roots'
+        $ref: '#/definitions/[object Object]'
         description: A list of roots that are defined in an organization.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListRootsRequest:
     type: object
     example: {}
     properties:
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   ListTargetsForPolicyResponse:
     type: object
@@ -3579,10 +3579,10 @@ definitions:
           Type: ORGANIZATIONAL_UNIT
     properties:
       Targets:
-        $ref: '#/definitions/PolicyTargets'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of structures, each of which contains details about one of the entities to which the specified policy is attached.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If present, this value indicates that there is more output available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.'
   ListTargetsForPolicyRequest:
     type: object
@@ -3592,13 +3592,13 @@ definitions:
       PolicyId: p-FullAWSAccess
     properties:
       PolicyId:
-        $ref: '#/definitions/PolicyId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the policy for which you want to know its attachments.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: '(Optional) Use this to limit the number of results you want included per page in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
   MoveAccountRequest:
     type: object
@@ -3612,13 +3612,13 @@ definitions:
       SourceParentId: r-examplerootid111
     properties:
       AccountId:
-        $ref: '#/definitions/AccountId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the account that you want to move.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
       SourceParentId:
-        $ref: '#/definitions/ParentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the root or organizational unit that you want to move the account from.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
       DestinationParentId:
-        $ref: '#/definitions/ParentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the root or organizational unit that you want to move the account to.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
   SourceParentNotFoundException: {}
   DestinationParentNotFoundException: {}
@@ -3631,7 +3631,7 @@ definitions:
       AccountId: '333333333333'
     properties:
       AccountId:
-        $ref: '#/definitions/AccountId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the member account that you want to remove from the organization.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
   UpdateOrganizationalUnitResponse:
     type: object
@@ -3642,7 +3642,7 @@ definitions:
         Name: AccountingOU
     properties:
       OrganizationalUnit:
-        $ref: '#/definitions/OrganizationalUnit'
+        $ref: '#/definitions/[object Object]'
         description: 'A structure that contains the details about the specified OU, including its new name.'
   UpdateOrganizationalUnitRequest:
     type: object
@@ -3653,10 +3653,10 @@ definitions:
       OrganizationalUnitId: ou-examplerootid111-exampleouid111
     properties:
       OrganizationalUnitId:
-        $ref: '#/definitions/OrganizationalUnitId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the OU that you want to rename. You can get the ID from the <a>ListOrganizationalUnitsForParent</a> operation.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p>'
       Name:
-        $ref: '#/definitions/OrganizationalUnitName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The new name that you want to assign to the OU.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
   UpdatePolicyResponse:
     type: object
@@ -3672,7 +3672,7 @@ definitions:
           Type: SERVICE_CONTROL_POLICY
     properties:
       Policy:
-        $ref: '#/definitions/Policy'
+        $ref: '#/definitions/[object Object]'
         description: 'A structure that contains details about the updated policy, showing the requested changes.'
   UpdatePolicyRequest:
     type: object
@@ -3683,60 +3683,54 @@ definitions:
       PolicyId: p-examplepolicyid111
     properties:
       PolicyId:
-        $ref: '#/definitions/PolicyId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the policy that you want to update.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
       Name:
-        $ref: '#/definitions/PolicyName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>If provided, the new name for the policy.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
       Description:
-        $ref: '#/definitions/PolicyDescription'
+        $ref: '#/definitions/[object Object]'
         description: 'If provided, the new description for the policy.'
       Content:
-        $ref: '#/definitions/PolicyContent'
+        $ref: '#/definitions/[object Object]'
         description: 'If provided, the new content for the policy. The text must be correctly formatted JSON that complies with the syntax for the policy''s type. For more information, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html">Service Control Policy Syntax</a> in the <i>AWS Organizations User Guide</i>.'
-  HandshakeId:
-    type: string
-    pattern: '^h-[0-9a-z]{8,32}$'
-  Handshake:
+  '[object Object]': {}
+  Account:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/HandshakeId'
-        description: '<p>The unique identifier (ID) of a handshake. The originating account creates the ID when it initiates the handshake.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The unique identifier (ID) of the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
       Arn:
-        $ref: '#/definitions/HandshakeArn'
-        description: '<p>The Amazon Resource Name (ARN) of a handshake.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
-      Parties:
-        $ref: '#/definitions/HandshakeParties'
-        description: Information about the two accounts that are participating in the handshake.
-      State:
-        $ref: '#/definitions/HandshakeState'
-        description: '<p>The current state of the handshake. Use the state to trace the flow of the handshake through the process from its creation to its acceptance. The meaning of each of the valid values is as follows:</p> <ul> <li> <p> <b>REQUESTED</b>: This handshake was sent to multiple recipients (applicable to only some handshake types) and not all recipients have responded yet. The request stays in this state until all recipients respond.</p> </li> <li> <p> <b>OPEN</b>: This handshake was sent to multiple recipients (applicable to only some policy types) and all recipients have responded, allowing the originator to complete the handshake action.</p> </li> <li> <p> <b>CANCELED</b>: This handshake is no longer active because it was canceled by the originating account.</p> </li> <li> <p> <b>ACCEPTED</b>: This handshake is complete because it has been accepted by the recipient.</p> </li> <li> <p> <b>DECLINED</b>: This handshake is no longer active because it was declined by the recipient account.</p> </li> <li> <p> <b>EXPIRED</b>: This handshake is no longer active because the originator did not receive a response of any kind from the recipient before the expiration time (15 days).</p> </li> </ul>'
-      RequestedTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time that the handshake request was made.
-      ExpirationTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time that the handshake expires. If the recipient of the handshake request fails to respond before the specified date and time, the handshake becomes inactive and is no longer valid.'
-      Action:
-        $ref: '#/definitions/ActionType'
-        description: '<p>The type of handshake, indicating what action occurs when the recipient accepts the handshake. The following handshake types are supported:</p> <ul> <li> <p> <b>INVITE</b>: This type of handshake represents a request to join an organization. It is always sent from the master account to only non-member accounts.</p> </li> <li> <p> <b>ENABLE_ALL_FEATURES</b>: This type of handshake represents a request to enable all features in an organization. It is always sent from the master account to only <i>invited</i> member accounts. Created accounts do not receive this because those accounts were created by the organization''s master account and approval is inferred.</p> </li> <li> <p> <b>APPROVE_ALL_FEATURES</b>: This type of handshake is sent from the Organizations service when all member accounts have approved the <code>ENABLE_ALL_FEATURES</code> invitation. It is sent only to the master account and signals the master that it can finalize the process to enable all features.</p> </li> </ul>'
-      Resources:
-        $ref: '#/definitions/HandshakeResources'
-        description: Additional information that is needed to process the handshake.
-    description: '<p>Contains information that must be exchanged to securely establish a relationship between two accounts (an <i>originator</i> and a <i>recipient</i>). For example, when a master account (the originator) invites another account (the recipient) to join its organization, the two accounts exchange information as a series of handshake requests and responses.</p> <p> <b>Note:</b> Handshakes that are CANCELED, ACCEPTED, or DECLINED show up in lists for only 30 days after entering that state After that they are deleted.</p>'
-  AccountId:
-    type: string
-    pattern: '^\d{12}$'
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The Amazon Resource Name (ARN) of the account.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
+      Email:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The email address associated with the AWS account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for this parameter is a string of characters that represents a standard Internet email address.</p>'
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The friendly name of the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the account in the organization.
+      JoinedMethod:
+        $ref: '#/definitions/[object Object]'
+        description: The method by which the account joined the organization.
+      JoinedTimestamp:
+        $ref: '#/definitions/[object Object]'
+        description: The date the account became a part of the organization.
+    description: Contains information about an AWS account that is a member of an organization.
   AccountArn:
     type: string
     pattern: '^arn:aws:organizations::\d{12}:account\/o-[a-z0-9]{10,32}\/\d{12}'
-  Email:
+  AccountId:
     type: string
-    pattern: '[^\s@]+@[^\s@]+\.[^\s@]+'
-    minLength: 6
-    maxLength: 64
-    format: password
+    pattern: '^\d{12}$'
+  AccountJoinedMethod:
+    type: string
+    enum:
+      - INVITED
+      - CREATED
   AccountName:
     type: string
     pattern: '[\u0020-\u007E]+'
@@ -3748,43 +3742,10 @@ definitions:
     enum:
       - ACTIVE
       - SUSPENDED
-  AccountJoinedMethod:
-    type: string
-    enum:
-      - INVITED
-      - CREATED
-  Timestamp:
-    type: string
-    format: date-time
-  Account:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/AccountId'
-        description: '<p>The unique identifier (ID) of the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
-      Arn:
-        $ref: '#/definitions/AccountArn'
-        description: '<p>The Amazon Resource Name (ARN) of the account.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
-      Email:
-        $ref: '#/definitions/Email'
-        description: '<p>The email address associated with the AWS account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for this parameter is a string of characters that represents a standard Internet email address.</p>'
-      Name:
-        $ref: '#/definitions/AccountName'
-        description: '<p>The friendly name of the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
-      Status:
-        $ref: '#/definitions/AccountStatus'
-        description: The status of the account in the organization.
-      JoinedMethod:
-        $ref: '#/definitions/AccountJoinedMethod'
-        description: The method by which the account joined the organization.
-      JoinedTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The date the account became a part of the organization.
-    description: Contains information about an AWS account that is a member of an organization.
   Accounts:
     type: array
     items:
-      $ref: '#/definitions/Account'
+      $ref: '#/definitions/[object Object]'
   ActionType:
     type: string
     enum:
@@ -3792,14 +3753,18 @@ definitions:
       - ENABLE_ALL_FEATURES
       - APPROVE_ALL_FEATURES
       - ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
-  PolicyId:
-    type: string
-    pattern: '^p-[0-9a-zA-Z_]{8,128}$'
-  PolicyTargetId:
-    type: string
-    pattern: '^(r-[0-9a-z]{4,32})|(\d{12})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$'
   AwsManagedPolicy:
     type: boolean
+  Child:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The unique identifier (ID) of this child entity.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the following:</p> <ul> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
+      Type:
+        $ref: '#/definitions/[object Object]'
+        description: The type of this child entity.
+    description: 'Contains a list of child entities, either OUs or accounts.'
   ChildId:
     type: string
     pattern: '^(\d{12})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$'
@@ -3808,20 +3773,10 @@ definitions:
     enum:
       - ACCOUNT
       - ORGANIZATIONAL_UNIT
-  Child:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/ChildId'
-        description: '<p>The unique identifier (ID) of this child entity.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the following:</p> <ul> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
-      Type:
-        $ref: '#/definitions/ChildType'
-        description: The type of this child entity.
-    description: 'Contains a list of child entities, either OUs or accounts.'
   Children:
     type: array
     items:
-      $ref: '#/definitions/Child'
+      $ref: '#/definitions/[object Object]'
   CreateAccountFailureReason:
     type: string
     enum:
@@ -3831,42 +3786,9 @@ definitions:
       - INVALID_EMAIL
       - CONCURRENT_ACCOUNT_MODIFICATION
       - INTERNAL_FAILURE
-  RoleName:
-    type: string
-    pattern: '[\w+=,.@-]{1,64}'
-  IAMUserAccessToBilling:
-    type: string
-    enum:
-      - ALLOW
-      - DENY
   CreateAccountRequestId:
     type: string
     pattern: '^car-[a-z0-9]{8,32}$'
-  CreateAccountStatus:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/CreateAccountRequestId'
-        description: '<p>The unique identifier (ID) that references this request. You get this value from the response of the initial <a>CreateAccount</a> request to create the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an create account request ID string requires "car-" followed by from 8 to 32 lower-case letters or digits.</p>'
-      AccountName:
-        $ref: '#/definitions/AccountName'
-        description: The account name given to the account when it was created.
-      State:
-        $ref: '#/definitions/CreateAccountState'
-        description: The status of the request.
-      RequestedTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time that the request was made for the account creation.
-      CompletedTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time that the account was created and the request completed.
-      AccountId:
-        $ref: '#/definitions/AccountId'
-        description: '<p>If the account was created successfully, the unique identifier (ID) of the new account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
-      FailureReason:
-        $ref: '#/definitions/CreateAccountFailureReason'
-        description: '<p>If the request failed, a description of the reason for the failure.</p> <ul> <li> <p>ACCOUNT_LIMIT_EXCEEDED: The account could not be created because you have reached the limit on the number of accounts in your organization.</p> </li> <li> <p>EMAIL_ALREADY_EXISTS: The account could not be created because another AWS account with that email address already exists.</p> </li> <li> <p>INVALID_ADDRESS: The account could not be created because the address you provided is not valid.</p> </li> <li> <p>INVALID_EMAIL: The account could not be created because the email address you provided is not valid.</p> </li> <li> <p>INTERNAL_FAILURE: The account could not be created because of an internal failure. Try again later. If the problem persists, contact Customer Support.</p> </li> </ul>'
-    description: Contains the status about a <a>CreateAccount</a> request to create an AWS account in an organization.
   CreateAccountState:
     type: string
     enum:
@@ -3876,164 +3798,111 @@ definitions:
   CreateAccountStates:
     type: array
     items:
-      $ref: '#/definitions/CreateAccountState'
+      $ref: '#/definitions/[object Object]'
+  CreateAccountStatus:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The unique identifier (ID) that references this request. You get this value from the response of the initial <a>CreateAccount</a> request to create the account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an create account request ID string requires "car-" followed by from 8 to 32 lower-case letters or digits.</p>'
+      AccountName:
+        $ref: '#/definitions/[object Object]'
+        description: The account name given to the account when it was created.
+      State:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the request.
+      RequestedTimestamp:
+        $ref: '#/definitions/[object Object]'
+        description: The date and time that the request was made for the account creation.
+      CompletedTimestamp:
+        $ref: '#/definitions/[object Object]'
+        description: The date and time that the account was created and the request completed.
+      AccountId:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>If the account was created successfully, the unique identifier (ID) of the new account.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
+      FailureReason:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>If the request failed, a description of the reason for the failure.</p> <ul> <li> <p>ACCOUNT_LIMIT_EXCEEDED: The account could not be created because you have reached the limit on the number of accounts in your organization.</p> </li> <li> <p>EMAIL_ALREADY_EXISTS: The account could not be created because another AWS account with that email address already exists.</p> </li> <li> <p>INVALID_ADDRESS: The account could not be created because the address you provided is not valid.</p> </li> <li> <p>INVALID_EMAIL: The account could not be created because the email address you provided is not valid.</p> </li> <li> <p>INTERNAL_FAILURE: The account could not be created because of an internal failure. Try again later. If the problem persists, contact Customer Support.</p> </li> </ul>'
+    description: Contains the status about a <a>CreateAccount</a> request to create an AWS account in an organization.
   CreateAccountStatuses:
     type: array
     items:
-      $ref: '#/definitions/CreateAccountStatus'
-  OrganizationFeatureSet:
+      $ref: '#/definitions/[object Object]'
+  Email:
     type: string
-    enum:
-      - ALL
-      - CONSOLIDATED_BILLING
-  Organization:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/OrganizationId'
-        description: '<p>The unique identifier (ID) of an organization.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organization ID string requires "o-" followed by from 10 to 32 lower-case letters or digits.</p>'
-      Arn:
-        $ref: '#/definitions/OrganizationArn'
-        description: '<p>The Amazon Resource Name (ARN) of an organization.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
-      FeatureSet:
-        $ref: '#/definitions/OrganizationFeatureSet'
-        description: 'Specifies the functionality that currently is available to the organization. If set to "ALL", then all features are enabled and policies can be applied to accounts in the organization. If set to "CONSOLIDATED_BILLING", then only consolidated billing functionality is available. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_manage_org_support-all-features.html">Enabling All Features in Your Organization</a> in the <i>AWS Organizations User Guide</i>.'
-      MasterAccountArn:
-        $ref: '#/definitions/AccountArn'
-        description: '<p>The Amazon Resource Name (ARN) of the account that is designated as the master account for the organization.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
-      MasterAccountId:
-        $ref: '#/definitions/AccountId'
-        description: '<p>The unique identifier (ID) of the master account of an organization.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
-      MasterAccountEmail:
-        $ref: '#/definitions/Email'
-        description: The email address that is associated with the AWS account that is designated as the master account for the organization.
-      AvailablePolicyTypes:
-        $ref: '#/definitions/PolicyTypes'
-        description: '<p>A list of policy types that are enabled for this organization. For example, if your organization has all features enabled, then service control policies (SCPs) are included in the list.</p> <note> <p>Even if a policy type is shown as available in the organization, you can separately enable and disable them at the root level by using <a>EnablePolicyType</a> and <a>DisablePolicyType</a>. Use <a>ListRoots</a> to see the status of a policy type in that root.</p> </note>'
-    description: 'Contains details about an organization. An organization is a collection of accounts that are centrally managed together using consolidated billing, organized hierarchically with organizational units (OUs), and controlled with policies .'
-  ParentId:
-    type: string
-    pattern: '^(r-[0-9a-z]{4,32})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$'
-  OrganizationalUnitName:
-    type: string
-    minLength: 1
-    maxLength: 128
-  OrganizationalUnit:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/OrganizationalUnitId'
-        description: '<p>The unique identifier (ID) associated with this OU.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p>'
-      Arn:
-        $ref: '#/definitions/OrganizationalUnitArn'
-        description: '<p>The Amazon Resource Name (ARN) of this OU.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
-      Name:
-        $ref: '#/definitions/OrganizationalUnitName'
-        description: '<p>The friendly name of this OU.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
-    description: Contains details about an organizational unit (OU). An OU is a container of AWS accounts within a root of an organization. Policies that are attached to an OU apply to all accounts contained in that OU and in any child OUs.
-  PolicyContent:
-    type: string
-    minLength: 1
-    maxLength: 1000000
-  PolicyDescription:
-    type: string
-    maxLength: 512
-  PolicyName:
-    type: string
-    minLength: 1
-    maxLength: 128
-  PolicyType:
-    type: string
-    enum:
-      - SERVICE_CONTROL_POLICY
-  Policy:
-    type: object
-    properties:
-      PolicySummary:
-        $ref: '#/definitions/PolicySummary'
-        description: A structure that contains additional details about the policy.
-      Content:
-        $ref: '#/definitions/PolicyContent'
-        description: The text content of the policy.
-    description: 'Contains rules to be applied to the affected accounts. Policies can be attached directly to accounts, or to roots and OUs to affect all accounts in those hierarchies.'
-  OrganizationalUnitId:
-    type: string
-    pattern: '^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$'
-  ServicePrincipal:
-    type: string
-    pattern: '[\w+=,.@-]*'
-    minLength: 1
-    maxLength: 128
-  RootId:
-    type: string
-    pattern: '^r-[0-9a-z]{4,32}$'
-  Root:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/RootId'
-        description: '<p>The unique identifier (ID) for the root.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by from 4 to 32 lower-case letters or digits.</p>'
-      Arn:
-        $ref: '#/definitions/RootArn'
-        description: '<p>The Amazon Resource Name (ARN) of the root.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
-      Name:
-        $ref: '#/definitions/RootName'
-        description: '<p>The friendly name of the root.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
-      PolicyTypes:
-        $ref: '#/definitions/PolicyTypes'
-        description: '<p>The types of policies that are currently enabled for the root and therefore can be attached to the root or to its OUs or accounts.</p> <note> <p>Even if a policy type is shown as available in the organization, you can separately enable and disable them at the root level by using <a>EnablePolicyType</a> and <a>DisablePolicyType</a>. Use <a>DescribeOrganization</a> to see the availability of the policy types in that organization.</p> </note>'
-    description: Contains details about a root. A root is a top-level parent node in the hierarchy of an organization that can contain organizational units (OUs) and accounts. Every root contains every AWS account in the organization. Each root enables the accounts to be organized in a different way and to have different policy types enabled for use in that root.
+    pattern: '[^\s@]+@[^\s@]+\.[^\s@]+'
+    minLength: 6
+    maxLength: 64
+    format: password
   EnabledServicePrincipal:
     type: object
     properties:
       ServicePrincipal:
-        $ref: '#/definitions/ServicePrincipal'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the service principal. This is typically in the form of a URL, such as: <code> <i>servicename</i>.amazonaws.com</code>.'
       DateEnabled:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: The date that the service principal was enabled for integration with AWS Organizations.
     description: A structure that contains details of a service principal that is enabled to integrate with AWS Organizations.
   EnabledServicePrincipals:
     type: array
     items:
-      $ref: '#/definitions/EnabledServicePrincipal'
+      $ref: '#/definitions/[object Object]'
   GenericArn:
     type: string
     pattern: '^arn:aws:organizations::.+:.+'
+  Handshake:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The unique identifier (ID) of a handshake. The originating account creates the ID when it initiates the handshake.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
+      Arn:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The Amazon Resource Name (ARN) of a handshake.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
+      Parties:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the two accounts that are participating in the handshake.
+      State:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The current state of the handshake. Use the state to trace the flow of the handshake through the process from its creation to its acceptance. The meaning of each of the valid values is as follows:</p> <ul> <li> <p> <b>REQUESTED</b>: This handshake was sent to multiple recipients (applicable to only some handshake types) and not all recipients have responded yet. The request stays in this state until all recipients respond.</p> </li> <li> <p> <b>OPEN</b>: This handshake was sent to multiple recipients (applicable to only some policy types) and all recipients have responded, allowing the originator to complete the handshake action.</p> </li> <li> <p> <b>CANCELED</b>: This handshake is no longer active because it was canceled by the originating account.</p> </li> <li> <p> <b>ACCEPTED</b>: This handshake is complete because it has been accepted by the recipient.</p> </li> <li> <p> <b>DECLINED</b>: This handshake is no longer active because it was declined by the recipient account.</p> </li> <li> <p> <b>EXPIRED</b>: This handshake is no longer active because the originator did not receive a response of any kind from the recipient before the expiration time (15 days).</p> </li> </ul>'
+      RequestedTimestamp:
+        $ref: '#/definitions/[object Object]'
+        description: The date and time that the handshake request was made.
+      ExpirationTimestamp:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date and time that the handshake expires. If the recipient of the handshake request fails to respond before the specified date and time, the handshake becomes inactive and is no longer valid.'
+      Action:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The type of handshake, indicating what action occurs when the recipient accepts the handshake. The following handshake types are supported:</p> <ul> <li> <p> <b>INVITE</b>: This type of handshake represents a request to join an organization. It is always sent from the master account to only non-member accounts.</p> </li> <li> <p> <b>ENABLE_ALL_FEATURES</b>: This type of handshake represents a request to enable all features in an organization. It is always sent from the master account to only <i>invited</i> member accounts. Created accounts do not receive this because those accounts were created by the organization''s master account and approval is inferred.</p> </li> <li> <p> <b>APPROVE_ALL_FEATURES</b>: This type of handshake is sent from the Organizations service when all member accounts have approved the <code>ENABLE_ALL_FEATURES</code> invitation. It is sent only to the master account and signals the master that it can finalize the process to enable all features.</p> </li> </ul>'
+      Resources:
+        $ref: '#/definitions/[object Object]'
+        description: Additional information that is needed to process the handshake.
+    description: '<p>Contains information that must be exchanged to securely establish a relationship between two accounts (an <i>originator</i> and a <i>recipient</i>). For example, when a master account (the originator) invites another account (the recipient) to join its organization, the two accounts exchange information as a series of handshake requests and responses.</p> <p> <b>Note:</b> Handshakes that are CANCELED, ACCEPTED, or DECLINED show up in lists for only 30 days after entering that state After that they are deleted.</p>'
   HandshakeArn:
     type: string
     pattern: '^arn:aws:organizations::\d{12}:handshake\/o-[a-z0-9]{10,32}\/[a-z_]{1,32}\/h-[0-9a-z]{8,32}'
-  HandshakeParties:
-    type: array
-    items:
-      $ref: '#/definitions/HandshakeParty'
-  HandshakeState:
-    type: string
-    enum:
-      - REQUESTED
-      - OPEN
-      - CANCELED
-      - ACCEPTED
-      - DECLINED
-      - EXPIRED
-  HandshakeResources:
-    type: array
-    items:
-      $ref: '#/definitions/HandshakeResource'
   HandshakeFilter:
     type: object
     properties:
       ActionType:
-        $ref: '#/definitions/ActionType'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Specifies the type of handshake action.</p> <p>If you specify <code>ActionType</code>, you cannot also specify <code>ParentHandshakeId</code>.</p>'
       ParentHandshakeId:
-        $ref: '#/definitions/HandshakeId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Specifies the parent handshake. Only used for handshake types that are a child of another type.</p> <p>If you specify <code>ParentHandshakeId</code>, you cannot also specify <code>ActionType</code>.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
     description: Specifies the criteria that are used to select the handshakes for the operation.
+  HandshakeId:
+    type: string
+    pattern: '^h-[0-9a-z]{8,32}$'
   HandshakeNotes:
     type: string
     maxLength: 1024
     format: password
+  HandshakeParties:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   HandshakeParty:
     type: object
     required:
@@ -4041,10 +3910,10 @@ definitions:
       - Type
     properties:
       Id:
-        $ref: '#/definitions/HandshakePartyId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) for the party.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.</p>'
       Type:
-        $ref: '#/definitions/HandshakePartyType'
+        $ref: '#/definitions/[object Object]'
         description: The type of party.
     description: Identifies a participant in a handshake.
   HandshakePartyId:
@@ -4058,9 +3927,19 @@ definitions:
       - ACCOUNT
       - ORGANIZATION
       - EMAIL
-  HandshakeResourceValue:
-    type: string
-    format: password
+  HandshakeResource:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/[object Object]'
+        description: The information that is passed to the other party in the handshake. The format of the value string must match the requirements of the specified type.
+      Type:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The type of information being passed, specifying how the value is to be interpreted by the other party:</p> <ul> <li> <p> <code>ACCOUNT</code> - Specifies an AWS account ID number.</p> </li> <li> <p> <code>ORGANIZATION</code> - Specifies an organization ID number.</p> </li> <li> <p> <code>EMAIL</code> - Specifies the email address that is associated with the account that receives the handshake. </p> </li> <li> <p> <code>OWNER_EMAIL</code> - Specifies the email address associated with the master account. Included as information about an organization. </p> </li> <li> <p> <code>OWNER_NAME</code> - Specifies the name associated with the master account. Included as information about an organization. </p> </li> <li> <p> <code>NOTES</code> - Additional text provided by the handshake initiator and intended for the recipient to read.</p> </li> </ul>'
+      Resources:
+        $ref: '#/definitions/[object Object]'
+        description: 'When needed, contains an additional array of <code>HandshakeResource</code> objects.'
+    description: Contains additional data that is needed to process a handshake.
   HandshakeResourceType:
     type: string
     enum:
@@ -4072,128 +3951,202 @@ definitions:
       - MASTER_NAME
       - NOTES
       - PARENT_HANDSHAKE
-  HandshakeResource:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/HandshakeResourceValue'
-        description: The information that is passed to the other party in the handshake. The format of the value string must match the requirements of the specified type.
-      Type:
-        $ref: '#/definitions/HandshakeResourceType'
-        description: '<p>The type of information being passed, specifying how the value is to be interpreted by the other party:</p> <ul> <li> <p> <code>ACCOUNT</code> - Specifies an AWS account ID number.</p> </li> <li> <p> <code>ORGANIZATION</code> - Specifies an organization ID number.</p> </li> <li> <p> <code>EMAIL</code> - Specifies the email address that is associated with the account that receives the handshake. </p> </li> <li> <p> <code>OWNER_EMAIL</code> - Specifies the email address associated with the master account. Included as information about an organization. </p> </li> <li> <p> <code>OWNER_NAME</code> - Specifies the name associated with the master account. Included as information about an organization. </p> </li> <li> <p> <code>NOTES</code> - Additional text provided by the handshake initiator and intended for the recipient to read.</p> </li> </ul>'
-      Resources:
-        $ref: '#/definitions/HandshakeResources'
-        description: 'When needed, contains an additional array of <code>HandshakeResource</code> objects.'
-    description: Contains additional data that is needed to process a handshake.
+  HandshakeResourceValue:
+    type: string
+    format: password
+  HandshakeResources:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  HandshakeState:
+    type: string
+    enum:
+      - REQUESTED
+      - OPEN
+      - CANCELED
+      - ACCEPTED
+      - DECLINED
+      - EXPIRED
   Handshakes:
     type: array
     items:
-      $ref: '#/definitions/Handshake'
-  NextToken:
+      $ref: '#/definitions/[object Object]'
+  IAMUserAccessToBilling:
     type: string
+    enum:
+      - ALLOW
+      - DENY
   MaxResults:
     type: integer
     minimum: 1
     maximum: 20
-  OrganizationalUnits:
-    type: array
-    items:
-      $ref: '#/definitions/OrganizationalUnit'
-  Parents:
-    type: array
-    items:
-      $ref: '#/definitions/Parent'
-  Policies:
-    type: array
-    items:
-      $ref: '#/definitions/PolicySummary'
-  Roots:
-    type: array
-    items:
-      $ref: '#/definitions/Root'
-  PolicyTargets:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyTargetSummary'
-  OrganizationId:
+  NextToken:
     type: string
-    pattern: '^o-[a-z0-9]{10,32}$'
+  Organization:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The unique identifier (ID) of an organization.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organization ID string requires "o-" followed by from 10 to 32 lower-case letters or digits.</p>'
+      Arn:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The Amazon Resource Name (ARN) of an organization.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
+      FeatureSet:
+        $ref: '#/definitions/[object Object]'
+        description: 'Specifies the functionality that currently is available to the organization. If set to "ALL", then all features are enabled and policies can be applied to accounts in the organization. If set to "CONSOLIDATED_BILLING", then only consolidated billing functionality is available. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_manage_org_support-all-features.html">Enabling All Features in Your Organization</a> in the <i>AWS Organizations User Guide</i>.'
+      MasterAccountArn:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The Amazon Resource Name (ARN) of the account that is designated as the master account for the organization.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
+      MasterAccountId:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The unique identifier (ID) of the master account of an organization.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an account ID string requires exactly 12 digits.</p>'
+      MasterAccountEmail:
+        $ref: '#/definitions/[object Object]'
+        description: The email address that is associated with the AWS account that is designated as the master account for the organization.
+      AvailablePolicyTypes:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>A list of policy types that are enabled for this organization. For example, if your organization has all features enabled, then service control policies (SCPs) are included in the list.</p> <note> <p>Even if a policy type is shown as available in the organization, you can separately enable and disable them at the root level by using <a>EnablePolicyType</a> and <a>DisablePolicyType</a>. Use <a>ListRoots</a> to see the status of a policy type in that root.</p> </note>'
+    description: 'Contains details about an organization. An organization is a collection of accounts that are centrally managed together using consolidated billing, organized hierarchically with organizational units (OUs), and controlled with policies .'
   OrganizationArn:
     type: string
     pattern: '^arn:aws:organizations::\d{12}:organization\/o-[a-z0-9]{10,32}'
-  PolicyTypes:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyTypeSummary'
+  OrganizationFeatureSet:
+    type: string
+    enum:
+      - ALL
+      - CONSOLIDATED_BILLING
+  OrganizationId:
+    type: string
+    pattern: '^o-[a-z0-9]{10,32}$'
+  OrganizationalUnit:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The unique identifier (ID) associated with this OU.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p>'
+      Arn:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The Amazon Resource Name (ARN) of this OU.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The friendly name of this OU.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
+    description: Contains details about an organizational unit (OU). An OU is a container of AWS accounts within a root of an organization. Policies that are attached to an OU apply to all accounts contained in that OU and in any child OUs.
   OrganizationalUnitArn:
     type: string
     pattern: '^arn:aws:organizations::\d{12}:ou\/o-[a-z0-9]{10,32}\/ou-[0-9a-z]{4,32}-[0-9a-z]{8,32}'
+  OrganizationalUnitId:
+    type: string
+    pattern: '^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$'
+  OrganizationalUnitName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  OrganizationalUnits:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Parent:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The unique identifier (ID) of the parent entity.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
+      Type:
+        $ref: '#/definitions/[object Object]'
+        description: The type of the parent entity.
+    description: Contains information about either a root or an organizational unit (OU) that can contain OUs or accounts in an organization.
+  ParentId:
+    type: string
+    pattern: '^(r-[0-9a-z]{4,32})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$'
   ParentType:
     type: string
     enum:
       - ROOT
       - ORGANIZATIONAL_UNIT
-  Parent:
+  Parents:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Policies:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Policy:
     type: object
     properties:
-      Id:
-        $ref: '#/definitions/ParentId'
-        description: '<p>The unique identifier (ID) of the parent entity.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
-      Type:
-        $ref: '#/definitions/ParentType'
-        description: The type of the parent entity.
-    description: Contains information about either a root or an organizational unit (OU) that can contain OUs or accounts in an organization.
+      PolicySummary:
+        $ref: '#/definitions/[object Object]'
+        description: A structure that contains additional details about the policy.
+      Content:
+        $ref: '#/definitions/[object Object]'
+        description: The text content of the policy.
+    description: 'Contains rules to be applied to the affected accounts. Policies can be attached directly to accounts, or to roots and OUs to affect all accounts in those hierarchies.'
+  PolicyArn:
+    type: string
+    pattern: '^(arn:aws:organizations::\d{12}:policy\/o-[a-z0-9]{10,32}\/[0-9a-z_]+\/p-[0-9a-z]{10,32})|(arn:aws:organizations::aws:policy\/[0-9a-z_]+\/p-[0-9a-zA-Z_]{10,128})'
+  PolicyContent:
+    type: string
+    minLength: 1
+    maxLength: 1000000
+  PolicyDescription:
+    type: string
+    maxLength: 512
+  PolicyId:
+    type: string
+    pattern: '^p-[0-9a-zA-Z_]{8,128}$'
+  PolicyName:
+    type: string
+    minLength: 1
+    maxLength: 128
   PolicySummary:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/PolicyId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the policy.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.</p>'
       Arn:
-        $ref: '#/definitions/PolicyArn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The Amazon Resource Name (ARN) of the policy.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
       Name:
-        $ref: '#/definitions/PolicyName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The friendly name of the policy.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
       Description:
-        $ref: '#/definitions/PolicyDescription'
+        $ref: '#/definitions/[object Object]'
         description: The description of the policy.
       Type:
-        $ref: '#/definitions/PolicyType'
+        $ref: '#/definitions/[object Object]'
         description: The type of policy.
       AwsManaged:
-        $ref: '#/definitions/AwsManagedPolicy'
+        $ref: '#/definitions/[object Object]'
         description: 'A boolean value that indicates whether the specified policy is an AWS managed policy. If true, then you can attach the policy to roots, OUs, or accounts, but you cannot edit it.'
     description: 'Contains information about a policy, but does not include the content. To see the content of a policy, see <a>DescribePolicy</a>.'
-  PolicyArn:
+  PolicyTargetId:
     type: string
-    pattern: '^(arn:aws:organizations::\d{12}:policy\/o-[a-z0-9]{10,32}\/[0-9a-z_]+\/p-[0-9a-z]{10,32})|(arn:aws:organizations::aws:policy\/[0-9a-z_]+\/p-[0-9a-zA-Z_]{10,128})'
-  TargetName:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TargetType:
-    type: string
-    enum:
-      - ACCOUNT
-      - ORGANIZATIONAL_UNIT
-      - ROOT
+    pattern: '^(r-[0-9a-z]{4,32})|(\d{12})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$'
   PolicyTargetSummary:
     type: object
     properties:
       TargetId:
-        $ref: '#/definitions/PolicyTargetId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The unique identifier (ID) of the policy target.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the following:</p> <ul> <li> <p>Root: a string that begins with "r-" followed by from 4 to 32 lower-case letters or digits.</p> </li> <li> <p>Account: a string that consists of exactly 12 digits.</p> </li> <li> <p>Organizational unit (OU): a string that begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that the OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.</p> </li> </ul>'
       Arn:
-        $ref: '#/definitions/GenericArn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The Amazon Resource Name (ARN) of the policy target.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
       Name:
-        $ref: '#/definitions/TargetName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The friendly name of the policy target.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
       Type:
-        $ref: '#/definitions/TargetType'
+        $ref: '#/definitions/[object Object]'
         description: The type of the policy target.
     description: 'Contains information about a root, OU, or account that a policy is attached to.'
+  PolicyTargets:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PolicyType:
+    type: string
+    enum:
+      - SERVICE_CONTROL_POLICY
   PolicyTypeStatus:
     type: string
     enum:
@@ -4204,16 +4157,64 @@ definitions:
     type: object
     properties:
       Type:
-        $ref: '#/definitions/PolicyType'
+        $ref: '#/definitions/[object Object]'
         description: The name of the policy type.
       Status:
-        $ref: '#/definitions/PolicyTypeStatus'
+        $ref: '#/definitions/[object Object]'
         description: 'The status of the policy type as it relates to the associated root. To attach a policy of the specified type to a root or to an OU or account in that root, it must be available in the organization and enabled for that root.'
     description: Contains information about a policy type and its status in the associated root.
+  PolicyTypes:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  RoleName:
+    type: string
+    pattern: '[\w+=,.@-]{1,64}'
+  Root:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The unique identifier (ID) for the root.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by from 4 to 32 lower-case letters or digits.</p>'
+      Arn:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The Amazon Resource Name (ARN) of the root.</p> <p>For more information about ARNs in Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns">ARN Formats Supported by Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>'
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The friendly name of the root.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that is used to validate this parameter is a string of any of the characters in the ASCII character range.</p>'
+      PolicyTypes:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The types of policies that are currently enabled for the root and therefore can be attached to the root or to its OUs or accounts.</p> <note> <p>Even if a policy type is shown as available in the organization, you can separately enable and disable them at the root level by using <a>EnablePolicyType</a> and <a>DisablePolicyType</a>. Use <a>DescribeOrganization</a> to see the availability of the policy types in that organization.</p> </note>'
+    description: Contains details about a root. A root is a top-level parent node in the hierarchy of an organization that can contain organizational units (OUs) and accounts. Every root contains every AWS account in the organization. Each root enables the accounts to be organized in a different way and to have different policy types enabled for use in that root.
   RootArn:
     type: string
     pattern: '^arn:aws:organizations::\d{12}:root\/o-[a-z0-9]{10,32}\/r-[0-9a-z]{4,32}'
+  RootId:
+    type: string
+    pattern: '^r-[0-9a-z]{4,32}$'
   RootName:
     type: string
     minLength: 1
     maxLength: 128
+  Roots:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ServicePrincipal:
+    type: string
+    pattern: '[\w+=,.@-]*'
+    minLength: 1
+    maxLength: 128
+  TargetName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TargetType:
+    type: string
+    enum:
+      - ACCOUNT
+      - ORGANIZATIONAL_UNIT
+      - ROOT
+  Timestamp:
+    type: string
+    format: date-time

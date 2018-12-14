@@ -140,10 +140,10 @@ definitions:
     type: object
     properties:
       Entitlements:
-        $ref: '#/definitions/EntitlementList'
+        $ref: '#/definitions/[object Object]'
         description: 'The set of entitlements found through the GetEntitlements operation. If the result contains an empty set of entitlements, NextToken might still be present and should be used.'
       NextToken:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'For paginated results, use NextToken in subsequent calls to GetEntitlements. If the result contains an empty set of entitlements, NextToken might still be present and should be used.'
     description: The GetEntitlementsRequest contains results from the GetEntitlements operation.
   GetEntitlementsRequest:
@@ -152,95 +152,82 @@ definitions:
       - ProductCode
     properties:
       ProductCode:
-        $ref: '#/definitions/ProductCode'
+        $ref: '#/definitions/[object Object]'
         description: Product code is used to uniquely identify a product in AWS Marketplace. The product code will be provided by AWS Marketplace when the product listing is created.
       Filter:
-        $ref: '#/definitions/GetEntitlementFilters'
+        $ref: '#/definitions/[object Object]'
         description: 'Filter is used to return entitlements for a specific customer or for a specific dimension. Filters are described as keys mapped to a lists of values. Filtered requests are <i>unioned</i> for each value in the value list, and then <i>intersected</i> for each filter key.'
       NextToken:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'For paginated calls to GetEntitlements, pass the NextToken from the previous GetEntitlementsResult.'
       MaxResults:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of items to retrieve from the GetEntitlements operation. For pagination, use the NextToken field in subsequent calls to GetEntitlements.'
     description: The GetEntitlementsRequest contains parameters for the GetEntitlements operation.
   InvalidParameterException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: '#/definitions/[object Object]'
     description: One or more parameters in your request was invalid.
   ThrottlingException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: '#/definitions/[object Object]'
     description: The calls to the GetEntitlements API are throttled.
   InternalServiceErrorException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/ErrorMessage'
+        $ref: '#/definitions/[object Object]'
     description: 'An internal error has occurred. Retry your request. If the problem persists, post a message with details on the AWS forums.'
   Boolean:
     type: boolean
   Double:
     type: number
     format: double
-  ProductCode:
-    type: string
-    minLength: 1
-    maxLength: 255
-  NonEmptyString:
-    type: string
-    pattern: \S+
-  EntitlementValue:
-    type: object
-    properties:
-      IntegerValue:
-        $ref: '#/definitions/Integer'
-        description: 'The IntegerValue field will be populated with an integer value when the entitlement is an integer type. Otherwise, the field will not be set.'
-      DoubleValue:
-        $ref: '#/definitions/Double'
-        description: 'The DoubleValue field will be populated with a double value when the entitlement is a double type. Otherwise, the field will not be set.'
-      BooleanValue:
-        $ref: '#/definitions/Boolean'
-        description: 'The BooleanValue field will be populated with a boolean value when the entitlement is a boolean type. Otherwise, the field will not be set.'
-      StringValue:
-        $ref: '#/definitions/String'
-        description: 'The StringValue field will be populated with a string value when the entitlement is a string type. Otherwise, the field will not be set.'
-    description: The EntitlementValue represents the amount of capacity that the customer is entitled to for the product.
-  Timestamp:
-    type: string
-    format: date-time
+  '[object Object]': {}
   Entitlement:
     type: object
     properties:
       ProductCode:
-        $ref: '#/definitions/ProductCode'
+        $ref: '#/definitions/[object Object]'
         description: The product code for which the given entitlement applies. Product codes are provided by AWS Marketplace when the product listing is created.
       Dimension:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The dimension for which the given entitlement applies. Dimensions represent categories of capacity in a product and are specified when the product is listed in AWS Marketplace.
       CustomerIdentifier:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The customer identifier is a handle to each unique customer in an application. Customer identifiers are obtained through the ResolveCustomer operation in AWS Marketplace Metering Service.
       Value:
-        $ref: '#/definitions/EntitlementValue'
+        $ref: '#/definitions/[object Object]'
         description: The EntitlementValue represents the amount of capacity that the customer is entitled to for the product.
       ExpirationDate:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The expiration date represents the minimum date through which this entitlement is expected to remain valid. For contractual products listed on AWS Marketplace, the expiration date is the date at which the customer will renew or cancel their contract. Customers who are opting to renew their contract will still have entitlements with an expiration date.'
     description: 'An entitlement represents capacity in a product owned by the customer. For example, a customer might own some number of users or seats in an SaaS application or some amount of data capacity in a multi-tenant database.'
   EntitlementList:
     type: array
     items:
-      $ref: '#/definitions/Entitlement'
+      $ref: '#/definitions/[object Object]'
     minItems: 0
-  Integer:
-    type: integer
-  String:
-    type: string
+  EntitlementValue:
+    type: object
+    properties:
+      IntegerValue:
+        $ref: '#/definitions/[object Object]'
+        description: 'The IntegerValue field will be populated with an integer value when the entitlement is an integer type. Otherwise, the field will not be set.'
+      DoubleValue:
+        $ref: '#/definitions/[object Object]'
+        description: 'The DoubleValue field will be populated with a double value when the entitlement is a double type. Otherwise, the field will not be set.'
+      BooleanValue:
+        $ref: '#/definitions/[object Object]'
+        description: 'The BooleanValue field will be populated with a boolean value when the entitlement is a boolean type. Otherwise, the field will not be set.'
+      StringValue:
+        $ref: '#/definitions/[object Object]'
+        description: 'The StringValue field will be populated with a string value when the entitlement is a string type. Otherwise, the field will not be set.'
+    description: The EntitlementValue represents the amount of capacity that the customer is entitled to for the product.
   ErrorMessage:
     type: string
   FilterValue:
@@ -248,7 +235,7 @@ definitions:
   FilterValueList:
     type: array
     items:
-      $ref: '#/definitions/FilterValue'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
   GetEntitlementFilterName:
     type: string
@@ -264,3 +251,17 @@ definitions:
           $ref: '#/definitions/GetEntitlementFilterName'
         value:
           $ref: '#/definitions/FilterValueList'
+  Integer:
+    type: integer
+  NonEmptyString:
+    type: string
+    pattern: \S+
+  ProductCode:
+    type: string
+    minLength: 1
+    maxLength: 255
+  String:
+    type: string
+  Timestamp:
+    type: string
+    format: date-time

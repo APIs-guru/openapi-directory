@@ -807,7 +807,7 @@ definitions:
     type: object
     properties:
       LicenseConfigurationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the license configuration object after its creation.
   CreateLicenseConfigurationRequest:
     type: object
@@ -816,25 +816,25 @@ definitions:
       - LicenseCountingType
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Name of the license configuration.
       Description:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Human-friendly description of the license configuration.
       LicenseCountingType:
-        $ref: '#/definitions/LicenseCountingType'
+        $ref: '#/definitions/[object Object]'
         description: Dimension to use to track the license inventory.
       LicenseCount:
-        $ref: '#/definitions/BoxLong'
+        $ref: '#/definitions/[object Object]'
         description: Number of licenses managed by the license configuration.
       LicenseCountHardLimit:
-        $ref: '#/definitions/BoxBoolean'
+        $ref: '#/definitions/[object Object]'
         description: Flag indicating whether hard or soft license enforcement is used. Exceeding a hard limit results in the blocked deployment of new instances.
       LicenseRules:
-        $ref: '#/definitions/StringList'
+        $ref: '#/definitions/[object Object]'
         description: Array of configured License Manager rules.
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The tags to apply to the resources during launch. You can only tag instances and volumes on launch. The specified tags are applied to all instances or volumes that are created during launch. To tag a resource after it has been created, see CreateTags .</p> <p/>'
   InvalidParameterValueException: {}
   ServerInternalException: {}
@@ -851,52 +851,52 @@ definitions:
       - LicenseConfigurationArn
     properties:
       LicenseConfigurationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Unique ID of the configuration object to delete.
   GetLicenseConfigurationResponse:
     type: object
     properties:
       LicenseConfigurationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Unique ID for the license configuration.
       LicenseConfigurationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the license configuration requested.
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Name of the license configuration.
       Description:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Description of the license configuration.
       LicenseCountingType:
-        $ref: '#/definitions/LicenseCountingType'
+        $ref: '#/definitions/[object Object]'
         description: 'Dimension on which the licenses are counted (for example, instances, cores, sockets, or VCPUs).'
       LicenseRules:
-        $ref: '#/definitions/StringList'
+        $ref: '#/definitions/[object Object]'
         description: List of flexible text strings designating license rules.
       LicenseCount:
-        $ref: '#/definitions/BoxLong'
+        $ref: '#/definitions/[object Object]'
         description: Number of available licenses.
       LicenseCountHardLimit:
-        $ref: '#/definitions/BoxBoolean'
+        $ref: '#/definitions/[object Object]'
         description: Sets the number of available licenses as a hard limit.
       ConsumedLicenses:
-        $ref: '#/definitions/BoxLong'
+        $ref: '#/definitions/[object Object]'
         description: Number of licenses assigned to resources.
       Status:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'License configuration status (active, etc.).'
       OwnerAccountId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Owner account ID for the license configuration.
       ConsumedLicenseSummaryList:
-        $ref: '#/definitions/ConsumedLicenseSummaryList'
+        $ref: '#/definitions/[object Object]'
         description: List of summaries for consumed licenses used by various resources.
       ManagedResourceSummaryList:
-        $ref: '#/definitions/ManagedResourceSummaryList'
+        $ref: '#/definitions/[object Object]'
         description: List of summaries of managed resources.
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: List of tags attached to the license configuration.
   GetLicenseConfigurationRequest:
     type: object
@@ -904,22 +904,22 @@ definitions:
       - LicenseConfigurationArn
     properties:
       LicenseConfigurationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the license configuration being requested.
   GetServiceSettingsResponse:
     type: object
     properties:
       S3BucketArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'Regional S3 bucket path for storing reports, license trail event data, discovery data, etc.'
       SnsTopicArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: SNS topic configured to receive notifications from License Manager.
       OrganizationConfiguration:
-        $ref: '#/definitions/OrganizationConfiguration'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether AWS Organizations has been integrated with License Manager for cross-account discovery.
       EnableCrossAccountsDiscovery:
-        $ref: '#/definitions/BoxBoolean'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether cross-account discovery has been enabled.
   GetServiceSettingsRequest:
     type: object
@@ -928,10 +928,10 @@ definitions:
     type: object
     properties:
       LicenseConfigurationAssociations:
-        $ref: '#/definitions/LicenseConfigurationAssociations'
+        $ref: '#/definitions/[object Object]'
         description: 'Lists association objects for the license configuration, each containing the association time, number of consumed licenses, resource ARN, resource ID, account ID that owns the resource, resource size, and resource type.'
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Token for the next set of results.
   ListAssociationsForLicenseConfigurationRequest:
     type: object
@@ -939,47 +939,47 @@ definitions:
       - LicenseConfigurationArn
     properties:
       LicenseConfigurationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of a <code>LicenseConfiguration</code> object.
       MaxResults:
-        $ref: '#/definitions/BoxInteger'
+        $ref: '#/definitions/[object Object]'
         description: 'Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Token for the next set of results.
   FilterLimitExceededException: {}
   ListLicenseConfigurationsResponse:
     type: object
     properties:
       LicenseConfigurations:
-        $ref: '#/definitions/LicenseConfigurations'
+        $ref: '#/definitions/[object Object]'
         description: Array of license configuration objects.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Token for the next set of results.
   ListLicenseConfigurationsRequest:
     type: object
     properties:
       LicenseConfigurationArns:
-        $ref: '#/definitions/StringList'
+        $ref: '#/definitions/[object Object]'
         description: An array of ARNs for the calling account’s license configurations.
       MaxResults:
-        $ref: '#/definitions/BoxInteger'
+        $ref: '#/definitions/[object Object]'
         description: 'Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Token for the next set of results.
       Filters:
-        $ref: '#/definitions/Filters'
+        $ref: '#/definitions/[object Object]'
         description: One or more filters.
   ListLicenseSpecificationsForResourceResponse:
     type: object
     properties:
       LicenseSpecifications:
-        $ref: '#/definitions/LicenseSpecifications'
+        $ref: '#/definitions/[object Object]'
         description: License configurations associated with a resource.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Token for the next set of results.
   ListLicenseSpecificationsForResourceRequest:
     type: object
@@ -987,41 +987,41 @@ definitions:
       - ResourceArn
     properties:
       ResourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of an AMI or Amazon EC2 instance that has an associated license configuration.
       MaxResults:
-        $ref: '#/definitions/BoxInteger'
+        $ref: '#/definitions/[object Object]'
         description: 'Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Token for the next set of results.
   ListResourceInventoryResponse:
     type: object
     properties:
       ResourceInventoryList:
-        $ref: '#/definitions/ResourceInventoryList'
+        $ref: '#/definitions/[object Object]'
         description: The detailed list of resources.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Token for the next set of results.
   ListResourceInventoryRequest:
     type: object
     properties:
       MaxResults:
-        $ref: '#/definitions/BoxInteger'
+        $ref: '#/definitions/[object Object]'
         description: 'Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Token for the next set of results.
       Filters:
-        $ref: '#/definitions/InventoryFilterList'
+        $ref: '#/definitions/[object Object]'
         description: One or more filters.
   FailedDependencyException: {}
   ListTagsForResourceResponse:
     type: object
     properties:
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: List of tags attached to the resource.
   ListTagsForResourceRequest:
     type: object
@@ -1029,16 +1029,16 @@ definitions:
       - ResourceArn
     properties:
       ResourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN for the resource.
   ListUsageForLicenseConfigurationResponse:
     type: object
     properties:
       LicenseConfigurationUsageList:
-        $ref: '#/definitions/LicenseConfigurationUsageList'
+        $ref: '#/definitions/[object Object]'
         description: An array of <code>LicenseConfigurationUsage</code> objects.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Token for the next set of results.
   ListUsageForLicenseConfigurationRequest:
     type: object
@@ -1046,16 +1046,16 @@ definitions:
       - LicenseConfigurationArn
     properties:
       LicenseConfigurationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the targeted <code>LicenseConfiguration</code> object.
       MaxResults:
-        $ref: '#/definitions/BoxInteger'
+        $ref: '#/definitions/[object Object]'
         description: 'Maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Token for the next set of results.
       Filters:
-        $ref: '#/definitions/Filters'
+        $ref: '#/definitions/[object Object]'
         description: List of filters to apply.
   TagResourceResponse:
     type: object
@@ -1067,10 +1067,10 @@ definitions:
       - Tags
     properties:
       ResourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Resource of the ARN to be tagged.
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: Names of the tags to attach to the resource.
   UntagResourceResponse:
     type: object
@@ -1082,10 +1082,10 @@ definitions:
       - TagKeys
     properties:
       ResourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the resource.
       TagKeys:
-        $ref: '#/definitions/TagKeyList'
+        $ref: '#/definitions/[object Object]'
         description: List keys identifying tags to remove.
   UpdateLicenseConfigurationResponse:
     type: object
@@ -1096,25 +1096,25 @@ definitions:
       - LicenseConfigurationArn
     properties:
       LicenseConfigurationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN for a license configuration.
       LicenseConfigurationStatus:
-        $ref: '#/definitions/LicenseConfigurationStatus'
+        $ref: '#/definitions/[object Object]'
         description: New status of the license configuration (<code>ACTIVE</code> or <code>INACTIVE</code>).
       LicenseRules:
-        $ref: '#/definitions/StringList'
+        $ref: '#/definitions/[object Object]'
         description: List of flexible text strings designating license rules.
       LicenseCount:
-        $ref: '#/definitions/BoxLong'
+        $ref: '#/definitions/[object Object]'
         description: New number of licenses managed by the license configuration.
       LicenseCountHardLimit:
-        $ref: '#/definitions/BoxBoolean'
+        $ref: '#/definitions/[object Object]'
         description: Sets the number of available licenses as a hard limit.
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: New name of the license configuration.
       Description:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: New human-friendly description of the license configuration.
   UpdateLicenseSpecificationsForResourceResponse:
     type: object
@@ -1125,13 +1125,13 @@ definitions:
       - ResourceArn
     properties:
       ResourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN for an AWS server resource.
       AddLicenseSpecifications:
-        $ref: '#/definitions/LicenseSpecifications'
+        $ref: '#/definitions/[object Object]'
         description: License configuration ARNs to be added to a resource.
       RemoveLicenseSpecifications:
-        $ref: '#/definitions/LicenseSpecifications'
+        $ref: '#/definitions/[object Object]'
         description: License configuration ARNs to be removed from a resource.
   InvalidResourceStateException: {}
   LicenseUsageException: {}
@@ -1142,16 +1142,16 @@ definitions:
     type: object
     properties:
       S3BucketArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the Amazon S3 bucket where License Manager information is stored.
       SnsTopicArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the Amazon SNS topic used for License Manager alerts.
       OrganizationConfiguration:
-        $ref: '#/definitions/OrganizationConfiguration'
+        $ref: '#/definitions/[object Object]'
         description: Integrates AWS Organizations with License Manager for cross-account discovery.
       EnableCrossAccountsDiscovery:
-        $ref: '#/definitions/BoxBoolean'
+        $ref: '#/definitions/[object Object]'
         description: Activates cross-account discovery.
   Boolean:
     type: boolean
@@ -1161,88 +1161,46 @@ definitions:
     type: integer
   BoxLong:
     type: integer
-  ResourceType:
-    type: string
-    enum:
-      - EC2_INSTANCE
-      - EC2_HOST
-      - EC2_AMI
+  '[object Object]': {}
   ConsumedLicenseSummary:
     type: object
     properties:
       ResourceType:
-        $ref: '#/definitions/ResourceType'
+        $ref: '#/definitions/[object Object]'
         description: 'Resource type of the resource consuming a license (instance, host, or AMI).'
       ConsumedLicenses:
-        $ref: '#/definitions/BoxLong'
+        $ref: '#/definitions/[object Object]'
         description: Number of licenses consumed by a resource.
     description: Details about license consumption.
   ConsumedLicenseSummaryList:
     type: array
     items:
-      $ref: '#/definitions/ConsumedLicenseSummary'
-  String:
-    type: string
-  LicenseCountingType:
-    type: string
-    enum:
-      - vCPU
-      - Instance
-      - Core
-      - Socket
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
+      $ref: '#/definitions/[object Object]'
   DateTime:
     type: string
     format: date-time
-  FilterName:
-    type: string
-  FilterValues:
-    type: array
-    items:
-      $ref: '#/definitions/FilterValue'
   Filter:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/FilterName'
+        $ref: '#/definitions/[object Object]'
         description: Name of the filter. Filter names are case-sensitive.
       Values:
-        $ref: '#/definitions/FilterValues'
+        $ref: '#/definitions/[object Object]'
         description: One or more filter values. Filter values are case-sensitive.
     description: 'A filter name and value pair that is used to return a more specific list of results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs. The filters supported by a <code>Describe</code> operation are documented with the <code>Describe</code> operation.'
+  FilterName:
+    type: string
   FilterValue:
     type: string
+  FilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Filters:
     type: array
     items:
-      $ref: '#/definitions/Filter'
-  ManagedResourceSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/ManagedResourceSummary'
-  OrganizationConfiguration:
-    type: object
-    required:
-      - EnableIntegration
-    properties:
-      EnableIntegration:
-        $ref: '#/definitions/Boolean'
-        description: Flag to activate AWS Organization integration.
-    description: Object containing configuration information for AWS Organizations.
-  InventoryFilterCondition:
-    type: string
-    enum:
-      - EQUALS
-      - NOT_EQUALS
-      - BEGINS_WITH
-      - CONTAINS
+      $ref: '#/definitions/[object Object]'
   InventoryFilter:
     type: object
     required:
@@ -1250,82 +1208,89 @@ definitions:
       - Condition
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the filter.
       Condition:
-        $ref: '#/definitions/InventoryFilterCondition'
+        $ref: '#/definitions/[object Object]'
         description: The condition of the filter.
       Value:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Value of the filter.
     description: An inventory filter object.
+  InventoryFilterCondition:
+    type: string
+    enum:
+      - EQUALS
+      - NOT_EQUALS
+      - BEGINS_WITH
+      - CONTAINS
   InventoryFilterList:
     type: array
     items:
-      $ref: '#/definitions/InventoryFilter'
+      $ref: '#/definitions/[object Object]'
   LicenseConfiguration:
     type: object
     properties:
       LicenseConfigurationId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Unique ID of the <code>LicenseConfiguration</code> object.
       LicenseConfigurationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the <code>LicenseConfiguration</code> object.
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Name of the license configuration.
       Description:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Description of the license configuration.
       LicenseCountingType:
-        $ref: '#/definitions/LicenseCountingType'
+        $ref: '#/definitions/[object Object]'
         description: Dimension to use to track license inventory.
       LicenseRules:
-        $ref: '#/definitions/StringList'
+        $ref: '#/definitions/[object Object]'
         description: Array of configured License Manager rules.
       LicenseCount:
-        $ref: '#/definitions/BoxLong'
+        $ref: '#/definitions/[object Object]'
         description: Number of licenses managed by the license configuration.
       LicenseCountHardLimit:
-        $ref: '#/definitions/BoxBoolean'
+        $ref: '#/definitions/[object Object]'
         description: Sets the number of available licenses as a hard limit.
       ConsumedLicenses:
-        $ref: '#/definitions/BoxLong'
+        $ref: '#/definitions/[object Object]'
         description: 'Number of licenses consumed. '
       Status:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Status of the license configuration.
       OwnerAccountId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Account ID of the license configuration's owner.
       ConsumedLicenseSummaryList:
-        $ref: '#/definitions/ConsumedLicenseSummaryList'
+        $ref: '#/definitions/[object Object]'
         description: List of summaries for licenses consumed by various resources.
       ManagedResourceSummaryList:
-        $ref: '#/definitions/ManagedResourceSummaryList'
+        $ref: '#/definitions/[object Object]'
         description: List of summaries for managed resources.
     description: 'A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host affinity (how long a VM must be associated with a host), the number of licenses purchased and used.'
   LicenseConfigurationAssociation:
     type: object
     properties:
       ResourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the resource associated with the license configuration.
       ResourceType:
-        $ref: '#/definitions/ResourceType'
+        $ref: '#/definitions/[object Object]'
         description: Type of server resource.
       ResourceOwnerId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ID of the AWS account that owns the resource consuming licenses.
       AssociationTime:
-        $ref: '#/definitions/DateTime'
+        $ref: '#/definitions/[object Object]'
         description: Time when the license configuration was associated with the resource.
     description: Describes a server resource that is associated with a license configuration.
   LicenseConfigurationAssociations:
     type: array
     items:
-      $ref: '#/definitions/LicenseConfigurationAssociation'
+      $ref: '#/definitions/[object Object]'
   LicenseConfigurationStatus:
     type: string
     enum:
@@ -1335,92 +1300,128 @@ definitions:
     type: object
     properties:
       ResourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the resource associated with a license configuration.
       ResourceType:
-        $ref: '#/definitions/ResourceType'
+        $ref: '#/definitions/[object Object]'
         description: Type of resource associated with athe license configuration.
       ResourceStatus:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Status of a resource associated with the license configuration.
       ResourceOwnerId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ID of the account that owns a resource that is associated with the license configuration.
       AssociationTime:
-        $ref: '#/definitions/DateTime'
+        $ref: '#/definitions/[object Object]'
         description: Time when the license configuration was initially associated with a resource.
       ConsumedLicenses:
-        $ref: '#/definitions/BoxLong'
+        $ref: '#/definitions/[object Object]'
         description: Number of licenses consumed out of the total provisioned in the license configuration.
     description: Contains details of the usage of each resource from the license pool.
   LicenseConfigurationUsageList:
     type: array
     items:
-      $ref: '#/definitions/LicenseConfigurationUsage'
+      $ref: '#/definitions/[object Object]'
   LicenseConfigurations:
     type: array
     items:
-      $ref: '#/definitions/LicenseConfiguration'
+      $ref: '#/definitions/[object Object]'
+  LicenseCountingType:
+    type: string
+    enum:
+      - vCPU
+      - Instance
+      - Core
+      - Socket
   LicenseSpecification:
     type: object
     required:
       - LicenseConfigurationArn
     properties:
       LicenseConfigurationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the <code>LicenseConfiguration</code> object.
     description: Object used for associating a license configuration with a resource.
   LicenseSpecifications:
     type: array
     items:
-      $ref: '#/definitions/LicenseSpecification'
-  ResourceInventoryList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceInventory'
+      $ref: '#/definitions/[object Object]'
   ManagedResourceSummary:
     type: object
     properties:
       ResourceType:
-        $ref: '#/definitions/ResourceType'
+        $ref: '#/definitions/[object Object]'
         description: 'Type of resource associated with a license (instance, host, or AMI).'
       AssociationCount:
-        $ref: '#/definitions/BoxLong'
+        $ref: '#/definitions/[object Object]'
         description: Number of resources associated with licenses.
     description: Summary for a resource.
+  ManagedResourceSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  OrganizationConfiguration:
+    type: object
+    required:
+      - EnableIntegration
+    properties:
+      EnableIntegration:
+        $ref: '#/definitions/[object Object]'
+        description: Flag to activate AWS Organization integration.
+    description: Object containing configuration information for AWS Organizations.
   ResourceInventory:
     type: object
     properties:
       ResourceId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Unique ID of the resource.
       ResourceType:
-        $ref: '#/definitions/ResourceType'
+        $ref: '#/definitions/[object Object]'
         description: The type of resource.
       ResourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the resource.
       Platform:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The platform of the resource.
       PlatformVersion:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Platform version of the resource in the inventory.
       ResourceOwningAccountId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Unique ID of the account that owns the resource.
     description: A set of attributes that describe a resource.
+  ResourceInventoryList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ResourceType:
+    type: string
+    enum:
+      - EC2_INSTANCE
+      - EC2_HOST
+      - EC2_AMI
+  String:
+    type: string
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Tag:
     type: object
     properties:
       Key:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Key for the resource tag.
       Value:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Value for the resource tag.
     description: Tag for a resource in a key-value format.
   TagKeyList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/[object Object]'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'

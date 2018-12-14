@@ -656,7 +656,7 @@ definitions:
       environmentId: 8d9967e2f0624182b74e7690ad69ebEX
     properties:
       environmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the environment that was created.
   CreateEnvironmentEC2Request:
     type: object
@@ -672,25 +672,25 @@ definitions:
       subnetId: subnet-1fab8aEX
     properties:
       name:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: <p>The name of the environment to create.</p> <p>This name is visible to other AWS IAM users in the same AWS account.</p>
       description:
-        $ref: '#/definitions/EnvironmentDescription'
+        $ref: '#/definitions/[object Object]'
         description: The description of the environment to create.
       clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A unique, case-sensitive string that helps AWS Cloud9 to ensure this operation completes no more than one time.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Client Tokens</a> in the <i>Amazon EC2 API Reference</i>.</p>'
       instanceType:
-        $ref: '#/definitions/InstanceType'
+        $ref: '#/definitions/[object Object]'
         description: 'The type of instance to connect to the environment (for example, <code>t2.micro</code>).'
       subnetId:
-        $ref: '#/definitions/SubnetId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate with the Amazon EC2 instance.
       automaticStopTimeMinutes:
-        $ref: '#/definitions/AutomaticStopTimeMinutes'
+        $ref: '#/definitions/[object Object]'
         description: The number of minutes until the running instance is shut down after the environment has last been used.
       ownerArn:
-        $ref: '#/definitions/UserArn'
+        $ref: '#/definitions/[object Object]'
         description: 'The Amazon Resource Name (ARN) of the environment owner. This ARN can be the ARN of any AWS IAM principal. If this value is not specified, the ARN defaults to this environment''s creator.'
   BadRequestException:
     type: object
@@ -730,7 +730,7 @@ definitions:
         userId: AIDAJ3BA6O2FMJWCWXHEX
     properties:
       membership:
-        $ref: '#/definitions/EnvironmentMember'
+        $ref: '#/definitions/[object Object]'
         description: Information about the environment member that was added.
   CreateEnvironmentMembershipRequest:
     type: object
@@ -744,13 +744,13 @@ definitions:
       userArn: 'arn:aws:iam::123456789012:user/AnotherDemoUser'
     properties:
       environmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the environment that contains the environment member you want to add.
       userArn:
-        $ref: '#/definitions/UserArn'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the environment member you want to add.
       permissions:
-        $ref: '#/definitions/MemberPermissions'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The type of environment member permissions you want to associate with this environment member. Available values include:</p> <ul> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
   DeleteEnvironmentResult:
     type: object
@@ -764,7 +764,7 @@ definitions:
       environmentId: 8d9967e2f0624182b74e7690ad69ebEX
     properties:
       environmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the environment to delete.
   DeleteEnvironmentMembershipResult:
     type: object
@@ -780,10 +780,10 @@ definitions:
       userArn: 'arn:aws:iam::123456789012:user/AnotherDemoUser'
     properties:
       environmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the environment to delete the environment member from.
       userArn:
-        $ref: '#/definitions/UserArn'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the environment member to delete from the environment.
   DescribeEnvironmentMembershipsResult:
     type: object
@@ -801,10 +801,10 @@ definitions:
           userId: AIDAJNUEDQAQWFELJDLEX
     properties:
       memberships:
-        $ref: '#/definitions/EnvironmentMembersList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the environment members for the environment.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'If there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call.'
   DescribeEnvironmentMembershipsRequest:
     type: object
@@ -812,19 +812,19 @@ definitions:
       userArn: 'arn:aws:iam::123456789012:user/MyDemoUser'
     properties:
       userArn:
-        $ref: '#/definitions/UserArn'
+        $ref: '#/definitions/[object Object]'
         description: 'The Amazon Resource Name (ARN) of an individual environment member to get information about. If no value is specified, information about all environment members are returned.'
       environmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the environment to get environment member information about.
       permissions:
-        $ref: '#/definitions/PermissionsList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The type of environment member permissions to get information about. Available values include:</p> <ul> <li> <p> <code>owner</code>: Owns the environment.</p> </li> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul> <p>If no value is specified, information about all environment members are returned.</p>'
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'During a previous call, if there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.'
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of environment members to get information about.
   DescribeEnvironmentStatusResult:
     type: object
@@ -833,10 +833,10 @@ definitions:
       status: ready
     properties:
       status:
-        $ref: '#/definitions/EnvironmentStatus'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The status of the environment. Available values include:</p> <ul> <li> <p> <code>connecting</code>: The environment is connecting.</p> </li> <li> <p> <code>creating</code>: The environment is being created.</p> </li> <li> <p> <code>deleting</code>: The environment is being deleted.</p> </li> <li> <p> <code>error</code>: The environment is in an error state.</p> </li> <li> <p> <code>ready</code>: The environment is ready.</p> </li> <li> <p> <code>stopped</code>: The environment is stopped.</p> </li> <li> <p> <code>stopping</code>: The environment is stopping.</p> </li> </ul>'
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Any informational message about the status of the environment.
   DescribeEnvironmentStatusRequest:
     type: object
@@ -846,7 +846,7 @@ definitions:
       environmentId: 8d9967e2f0624182b74e7690ad69ebEX
     properties:
       environmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the environment to get status information about.
   DescribeEnvironmentsResult:
     type: object
@@ -865,7 +865,7 @@ definitions:
           ownerArn: 'arn:aws:sts::123456789012:assumed-role/AnotherDemoUser/AnotherDemoUser'
     properties:
       environments:
-        $ref: '#/definitions/EnvironmentList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the environments that are returned.
   DescribeEnvironmentsRequest:
     type: object
@@ -877,7 +877,7 @@ definitions:
         - 349c86d4579e4e7298d500ff57a6b2EX
     properties:
       environmentIds:
-        $ref: '#/definitions/BoundedEnvironmentIdList'
+        $ref: '#/definitions/[object Object]'
         description: The IDs of individual environments to get information about.
   ListEnvironmentsResult:
     type: object
@@ -887,20 +887,20 @@ definitions:
         - 45a3da47af0840f2b0c0824f5ee232EX
     properties:
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'If there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call.'
       environmentIds:
-        $ref: '#/definitions/EnvironmentIdList'
+        $ref: '#/definitions/[object Object]'
         description: The list of environment identifiers.
   ListEnvironmentsRequest:
     type: object
     example: {}
     properties:
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'During a previous call, if there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.'
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of environments to get identifiers for.
   UpdateEnvironmentResult:
     type: object
@@ -916,13 +916,13 @@ definitions:
       environmentId: 8d9967e2f0624182b74e7690ad69ebEX
     properties:
       environmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the environment to change settings.
       name:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: A replacement name for the environment.
       description:
-        $ref: '#/definitions/EnvironmentDescription'
+        $ref: '#/definitions/[object Object]'
         description: Any new or replacement description for the environment.
   UpdateEnvironmentMembershipResult:
     type: object
@@ -934,7 +934,7 @@ definitions:
         userId: AIDAJ3BA6O2FMJWCWXHEX
     properties:
       membership:
-        $ref: '#/definitions/EnvironmentMember'
+        $ref: '#/definitions/[object Object]'
         description: Information about the environment member whose settings were changed.
   UpdateEnvironmentMembershipRequest:
     type: object
@@ -948,86 +948,90 @@ definitions:
       userArn: 'arn:aws:iam::123456789012:user/AnotherDemoUser'
     properties:
       environmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the environment for the environment member whose settings you want to change.
       userArn:
-        $ref: '#/definitions/UserArn'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the environment member whose settings you want to change.
       permissions:
-        $ref: '#/definitions/MemberPermissions'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The replacement type of environment member permissions you want to associate with this environment member. Available values include:</p> <ul> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
   AutomaticStopTimeMinutes:
     type: integer
     maximum: 20160
-  EnvironmentId:
-    type: string
-    pattern: '^[a-zA-Z0-9]{8,32}$'
+  '[object Object]': {}
   BoundedEnvironmentIdList:
     type: array
     items:
-      $ref: '#/definitions/EnvironmentId'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 25
   ClientRequestToken:
     type: string
     pattern: '[\x20-\x7E]{10,128}'
-  EnvironmentName:
-    type: string
-    minLength: 1
-    maxLength: 60
+  Environment:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the environment.
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the environment.
+      description:
+        $ref: '#/definitions/[object Object]'
+        description: The description for the environment.
+      type:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The type of environment. Valid values include the following:</p> <ul> <li> <p> <code>ec2</code>: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.</p> </li> <li> <p> <code>ssh</code>: Your own server connects to the environment.</p> </li> </ul>'
+      arn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the environment.
+      ownerArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the environment owner.
+    description: Information about an AWS Cloud9 development environment.
   EnvironmentDescription:
     type: string
     maxLength: 200
-  InstanceType:
+  EnvironmentId:
     type: string
-    pattern: '^[a-z][1-9][.][a-z0-9]+$'
-    minLength: 5
-    maxLength: 20
-  SubnetId:
-    type: string
-    minLength: 5
-    maxLength: 30
-  UserArn:
-    type: string
-    pattern: 'arn:aws:(iam|sts)::\d+:\S+'
-  MemberPermissions:
-    type: string
-    enum:
-      - read-write
-      - read-only
+    pattern: '^[a-zA-Z0-9]{8,32}$'
+  EnvironmentIdList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  EnvironmentList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   EnvironmentMember:
     type: object
     properties:
       permissions:
-        $ref: '#/definitions/Permissions'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The type of environment member permissions associated with this environment member. Available values include:</p> <ul> <li> <p> <code>owner</code>: Owns the environment.</p> </li> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
       userId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The user ID in AWS Identity and Access Management (AWS IAM) of the environment member.
       userArn:
-        $ref: '#/definitions/UserArn'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the environment member.
       environmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the environment for the environment member.
       lastAccess:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The time, expressed in epoch time format, when the environment member last opened the environment.'
     description: Information about an environment member for an AWS Cloud9 development environment.
-  PermissionsList:
-    type: array
-    items:
-      $ref: '#/definitions/Permissions'
-  String:
-    type: string
-  MaxResults:
-    type: integer
-    minimum: 0
-    maximum: 25
   EnvironmentMembersList:
     type: array
     items:
-      $ref: '#/definitions/EnvironmentMember'
+      $ref: '#/definitions/[object Object]'
+  EnvironmentName:
+    type: string
+    minLength: 1
+    maxLength: 60
   EnvironmentStatus:
     type: string
     enum:
@@ -1038,47 +1042,44 @@ definitions:
       - stopping
       - stopped
       - deleting
-  EnvironmentList:
-    type: array
-    items:
-      $ref: '#/definitions/Environment'
   EnvironmentType:
     type: string
     enum:
       - ssh
       - ec2
-  Environment:
-    type: object
-    properties:
-      id:
-        $ref: '#/definitions/EnvironmentId'
-        description: The ID of the environment.
-      name:
-        $ref: '#/definitions/EnvironmentName'
-        description: The name of the environment.
-      description:
-        $ref: '#/definitions/EnvironmentDescription'
-        description: The description for the environment.
-      type:
-        $ref: '#/definitions/EnvironmentType'
-        description: '<p>The type of environment. Valid values include the following:</p> <ul> <li> <p> <code>ec2</code>: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.</p> </li> <li> <p> <code>ssh</code>: Your own server connects to the environment.</p> </li> </ul>'
-      arn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the environment.
-      ownerArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the environment owner.
-    description: Information about an AWS Cloud9 development environment.
-  EnvironmentIdList:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentId'
+  InstanceType:
+    type: string
+    pattern: '^[a-z][1-9][.][a-z0-9]+$'
+    minLength: 5
+    maxLength: 20
+  MaxResults:
+    type: integer
+    minimum: 0
+    maximum: 25
+  MemberPermissions:
+    type: string
+    enum:
+      - read-write
+      - read-only
   Permissions:
     type: string
     enum:
       - owner
       - read-write
       - read-only
+  PermissionsList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  String:
+    type: string
+  SubnetId:
+    type: string
+    minLength: 5
+    maxLength: 30
   Timestamp:
     type: string
     format: date-time
+  UserArn:
+    type: string
+    pattern: 'arn:aws:(iam|sts)::\d+:\S+'

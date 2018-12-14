@@ -599,7 +599,7 @@ definitions:
       - Container
     properties:
       Container:
-        $ref: '#/definitions/Container'
+        $ref: '#/definitions/[object Object]'
         description: '<p>ContainerARN: The Amazon Resource Name (ARN) of the newly created container. The ARN has the following format: arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt;. For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p> <p>ContainerName: The container name as specified in the request.</p> <p>CreationTime: Unix time stamp.</p> <p>Status: The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When an endpoint is available, the status changes to <code>ACTIVE</code>.</p> <p>The return value does not include the container''s endpoint. To make downstream requests, you must obtain this value by using <a>DescribeContainer</a> or <a>ListContainers</a>.</p>'
   CreateContainerInput:
     type: object
@@ -607,7 +607,7 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: '#/definitions/ContainerName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name for the container. The name must be from 1 to 255 characters. Container names must be unique to your AWS account within a specific region. As an example, you could create a container named <code>movies</code> in every region, as long as you don’t have an existing container with that name.'
   ContainerInUseException: {}
   LimitExceededException: {}
@@ -621,7 +621,7 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: '#/definitions/ContainerName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the container to delete. '
   ContainerNotFoundException: {}
   DeleteContainerPolicyOutput:
@@ -633,7 +633,7 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: '#/definitions/ContainerName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the container that holds the policy.
   PolicyNotFoundException: {}
   DeleteCorsPolicyOutput:
@@ -645,7 +645,7 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: '#/definitions/ContainerName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the container to remove the policy from.
   CorsPolicyNotFoundException: {}
   DeleteLifecyclePolicyOutput:
@@ -657,19 +657,19 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: '#/definitions/ContainerName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the container that holds the object lifecycle policy.
   DescribeContainerOutput:
     type: object
     properties:
       Container:
-        $ref: '#/definitions/Container'
+        $ref: '#/definitions/[object Object]'
         description: The name of the queried container.
   DescribeContainerInput:
     type: object
     properties:
       ContainerName:
-        $ref: '#/definitions/ContainerName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the container to query.
   GetContainerPolicyOutput:
     type: object
@@ -677,7 +677,7 @@ definitions:
       - Policy
     properties:
       Policy:
-        $ref: '#/definitions/ContainerPolicy'
+        $ref: '#/definitions/[object Object]'
         description: The contents of the access policy.
   GetContainerPolicyInput:
     type: object
@@ -685,7 +685,7 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: '#/definitions/ContainerName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the container. '
   GetCorsPolicyOutput:
     type: object
@@ -693,7 +693,7 @@ definitions:
       - CorsPolicy
     properties:
       CorsPolicy:
-        $ref: '#/definitions/CorsPolicy'
+        $ref: '#/definitions/[object Object]'
         description: The CORS policy assigned to the container.
   GetCorsPolicyInput:
     type: object
@@ -701,7 +701,7 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: '#/definitions/ContainerName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the container that the policy is assigned to.
   GetLifecyclePolicyOutput:
     type: object
@@ -709,7 +709,7 @@ definitions:
       - LifecyclePolicy
     properties:
       LifecyclePolicy:
-        $ref: '#/definitions/LifecyclePolicy'
+        $ref: '#/definitions/[object Object]'
         description: The object lifecycle policy that is assigned to the container.
   GetLifecyclePolicyInput:
     type: object
@@ -717,7 +717,7 @@ definitions:
       - ContainerName
     properties:
       ContainerName:
-        $ref: '#/definitions/ContainerName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the container that the object lifecycle policy is assigned to.
   ListContainersOutput:
     type: object
@@ -725,19 +725,19 @@ definitions:
       - Containers
     properties:
       Containers:
-        $ref: '#/definitions/ContainerList'
+        $ref: '#/definitions/[object Object]'
         description: The names of the containers.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: ' <code>NextToken</code> is the token to use in the next call to <code>ListContainers</code>. This token is returned only if you included the <code>MaxResults</code> tag in the original command, and only if there are still containers to return. '
   ListContainersInput:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'Only if you used <code>MaxResults</code> in the first command, enter the token (which was included in the previous response) to obtain the next set of containers. This token is included in a response only if there actually are more containers to list.'
       MaxResults:
-        $ref: '#/definitions/ContainerListLimit'
+        $ref: '#/definitions/[object Object]'
         description: 'Enter the maximum number of containers in the response. Use from 1 to 255 characters. '
   PutContainerPolicyOutput:
     type: object
@@ -749,10 +749,10 @@ definitions:
       - Policy
     properties:
       ContainerName:
-        $ref: '#/definitions/ContainerName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the container.
       Policy:
-        $ref: '#/definitions/ContainerPolicy'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The contents of the policy, which includes the following: </p> <ul> <li> <p>One <code>Version</code> tag</p> </li> <li> <p>One <code>Statement</code> tag that contains the standard tags for the policy.</p> </li> </ul>'
   PutCorsPolicyOutput:
     type: object
@@ -764,10 +764,10 @@ definitions:
       - CorsPolicy
     properties:
       ContainerName:
-        $ref: '#/definitions/ContainerName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the container that you want to assign the CORS policy to.
       CorsPolicy:
-        $ref: '#/definitions/CorsPolicy'
+        $ref: '#/definitions/[object Object]'
         description: 'The CORS policy to apply to the container. '
   PutLifecyclePolicyOutput:
     type: object
@@ -779,63 +779,72 @@ definitions:
       - LifecyclePolicy
     properties:
       ContainerName:
-        $ref: '#/definitions/ContainerName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the container that you want to assign the object lifecycle policy to.
       LifecyclePolicy:
-        $ref: '#/definitions/LifecyclePolicy'
+        $ref: '#/definitions/[object Object]'
         description: The object lifecycle policy to apply to the container.
-  Header:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 8192
+  '[object Object]': {}
   AllowedHeaders:
     type: array
     items:
-      $ref: '#/definitions/Header'
+      $ref: '#/definitions/[object Object]'
     minItems: 0
     maxItems: 100
-  MethodName:
-    type: string
-    enum:
-      - PUT
-      - GET
-      - DELETE
-      - HEAD
   AllowedMethods:
     type: array
     items:
-      $ref: '#/definitions/MethodName'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 4
-  Origin:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 2048
   AllowedOrigins:
     type: array
     items:
-      $ref: '#/definitions/Origin'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 100
-  Endpoint:
-    type: string
-    minLength: 1
-    maxLength: 255
-  TimeStamp:
-    type: string
-    format: date-time
+  Container:
+    type: object
+    properties:
+      Endpoint:
+        $ref: '#/definitions/[object Object]'
+        description: 'The DNS endpoint of the container. Use the endpoint to identify the specific container when sending requests to the data plane. The service assigns this value when the container is created. Once the value has been assigned, it does not change.'
+      CreationTime:
+        $ref: '#/definitions/[object Object]'
+        description: Unix timestamp.
+      ARN:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The Amazon Resource Name (ARN) of the container. The ARN has the following format:</p> <p>arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt; </p> <p>For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p>'
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the container.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: 'The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When the endpoint is available, the status changes to <code>ACTIVE</code>.'
+    description: This section describes operations that you can perform on an AWS Elemental MediaStore container.
   ContainerARN:
     type: string
     pattern: 'arn:aws:mediastore:[a-z]+-[a-z]+-\d:\d{12}:container/\w{1,255}'
     minLength: 1
     maxLength: 1024
+  ContainerList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ContainerListLimit:
+    type: integer
+    minimum: 1
+    maximum: 100
   ContainerName:
     type: string
     pattern: '[\w-]+'
     minLength: 1
     maxLength: 255
+  ContainerPolicy:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 8192
   ContainerStatus:
     type: string
     enum:
@@ -844,38 +853,13 @@ definitions:
       - DELETING
     minLength: 1
     maxLength: 16
-  Container:
-    type: object
-    properties:
-      Endpoint:
-        $ref: '#/definitions/Endpoint'
-        description: 'The DNS endpoint of the container. Use the endpoint to identify the specific container when sending requests to the data plane. The service assigns this value when the container is created. Once the value has been assigned, it does not change.'
-      CreationTime:
-        $ref: '#/definitions/TimeStamp'
-        description: Unix timestamp.
-      ARN:
-        $ref: '#/definitions/ContainerARN'
-        description: '<p>The Amazon Resource Name (ARN) of the container. The ARN has the following format:</p> <p>arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt; </p> <p>For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p>'
-      Name:
-        $ref: '#/definitions/ContainerName'
-        description: The name of the container.
-      Status:
-        $ref: '#/definitions/ContainerStatus'
-        description: 'The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When the endpoint is available, the status changes to <code>ACTIVE</code>.'
-    description: This section describes operations that you can perform on an AWS Elemental MediaStore container.
-  ContainerList:
+  CorsPolicy:
     type: array
+    description: 'The CORS policy of the container. '
     items:
-      $ref: '#/definitions/Container'
-  ContainerListLimit:
-    type: integer
-    minimum: 1
-    maximum: 100
-  ContainerPolicy:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 8192
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
   CorsRule:
     type: object
     required:
@@ -883,45 +867,62 @@ definitions:
       - AllowedHeaders
     properties:
       AllowedOrigins:
-        $ref: '#/definitions/AllowedOrigins'
+        $ref: '#/definitions/[object Object]'
         description: '<p>One or more response headers that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>Each CORS rule must have at least one <code>AllowedOrigins</code> element. The string value can include only one wildcard character (*), for example, http://*.example.com. Additionally, you can specify only one wildcard character to allow cross-origin access for all origins.</p>'
       AllowedMethods:
-        $ref: '#/definitions/AllowedMethods'
+        $ref: '#/definitions/[object Object]'
         description: <p>Identifies an HTTP method that the origin that is specified in the rule is allowed to execute.</p> <p>Each CORS rule must contain at least one <code>AllowedMethods</code> and one <code>AllowedOrigins</code> element.</p>
       AllowedHeaders:
-        $ref: '#/definitions/AllowedHeaders'
+        $ref: '#/definitions/[object Object]'
         description: <p>Specifies which headers are allowed in a preflight <code>OPTIONS</code> request through the <code>Access-Control-Request-Headers</code> header. Each header name that is specified in <code>Access-Control-Request-Headers</code> must have a corresponding entry in the rule. Only the headers that were requested are sent back. </p> <p>This element can contain only one wildcard character (*).</p>
       MaxAgeSeconds:
-        $ref: '#/definitions/MaxAgeSeconds'
+        $ref: '#/definitions/[object Object]'
         description: <p>The time in seconds that your browser caches the preflight response for the specified resource.</p> <p>A CORS rule can have only one <code>MaxAgeSeconds</code> element.</p>
       ExposeHeaders:
-        $ref: '#/definitions/ExposeHeaders'
+        $ref: '#/definitions/[object Object]'
         description: '<p>One or more headers in the response that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>This element is optional for each rule.</p>'
     description: 'A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.'
-  CorsPolicy:
-    type: array
-    description: 'The CORS policy of the container. '
-    items:
-      $ref: '#/definitions/CorsRule'
-    minItems: 1
-    maxItems: 100
-  MaxAgeSeconds:
-    type: integer
-    minimum: 0
-    maximum: 2147483647
+  Endpoint:
+    type: string
+    minLength: 1
+    maxLength: 255
   ExposeHeaders:
     type: array
     items:
-      $ref: '#/definitions/Header'
+      $ref: '#/definitions/[object Object]'
     minItems: 0
     maxItems: 100
+  Header:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 8192
   LifecyclePolicy:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
     minLength: 0
     maxLength: 8192
+  MaxAgeSeconds:
+    type: integer
+    minimum: 0
+    maximum: 2147483647
+  MethodName:
+    type: string
+    enum:
+      - PUT
+      - GET
+      - DELETE
+      - HEAD
+  Origin:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 2048
   PaginationToken:
     type: string
     pattern: '[0-9A-Za-z=/+]+'
     minLength: 1
     maxLength: 255
+  TimeStamp:
+    type: string
+    format: date-time

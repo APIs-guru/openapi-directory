@@ -403,10 +403,10 @@ definitions:
       - Items
     properties:
       DomainName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the domain in which the attributes are being deleted.
       Items:
-        $ref: '#/definitions/DeletableItemList'
+        $ref: '#/definitions/[object Object]'
         description: A list of items on which to perform the operation.
   BatchPutAttributesRequest:
     type: object
@@ -415,64 +415,64 @@ definitions:
       - Items
     properties:
       DomainName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the domain in which the attributes are being stored.
       Items:
-        $ref: '#/definitions/ReplaceableItemList'
+        $ref: '#/definitions/[object Object]'
         description: A list of items on which to perform the operation.
   DuplicateItemName:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: 'The item name was specified more than once. '
   InvalidParameterValue:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: The value for a parameter is invalid.
   MissingParameter:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: The request must contain the specified missing parameter.
   NoSuchDomain:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: The specified domain does not exist.
   NumberItemAttributesExceeded:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: Too many attributes in this item.
   NumberDomainAttributesExceeded:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: Too many attributes in this domain.
   NumberDomainBytesExceeded:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: Too many bytes in this domain.
   NumberSubmittedItemsExceeded:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: Too many items exist in a single call.
   NumberSubmittedAttributesExceeded:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: Too many attributes exist in a single call.
   CreateDomainRequest:
     type: object
@@ -480,13 +480,13 @@ definitions:
       - DomainName
     properties:
       DomainName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the domain to create. The name can range between 3 and 255 characters and can contain the following characters: a-z, A-Z, 0-9, ''_'', ''-'', and ''.''.'
   NumberDomainsExceeded:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: Too many domains exist per this account.
   DeleteAttributesRequest:
     type: object
@@ -495,22 +495,22 @@ definitions:
       - ItemName
     properties:
       DomainName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the domain in which to perform the operation.
       ItemName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the item. Similar to rows on a spreadsheet, items represent individual objects that contain one or more value-attribute pairs.'
       Attributes:
-        $ref: '#/definitions/DeletableAttributeList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of Attributes. Similar to columns on a spreadsheet, attributes represent categories of data that can be assigned to items.'
       Expected:
-        $ref: '#/definitions/UpdateCondition'
+        $ref: '#/definitions/[object Object]'
         description: 'The update condition which, if specified, determines whether the specified attributes will be deleted or not. The update condition must be satisfied in order for this request to be processed and the attributes to be deleted.'
   AttributeDoesNotExist:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: The specified attribute does not exist.
   DeleteDomainRequest:
     type: object
@@ -518,31 +518,31 @@ definitions:
       - DomainName
     properties:
       DomainName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the domain to delete.
   DomainMetadataResult:
     type: object
     properties:
       ItemCount:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The number of all items in the domain.
       ItemNamesSizeBytes:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: 'The total size of all item names in the domain, in bytes.'
       AttributeNameCount:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The number of unique attribute names in the domain.
       AttributeNamesSizeBytes:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: 'The total size of all unique attribute names in the domain, in bytes.'
       AttributeValueCount:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The number of all attribute name/value pairs in the domain.
       AttributeValuesSizeBytes:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: 'The total size of all attribute values in the domain, in bytes.'
       Timestamp:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: 'The data and time when metadata was calculated, in Epoch (UNIX) seconds.'
   DomainMetadataRequest:
     type: object
@@ -550,13 +550,13 @@ definitions:
       - DomainName
     properties:
       DomainName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the domain for which to display the metadata of.
   GetAttributesResult:
     type: object
     properties:
       Attributes:
-        $ref: '#/definitions/AttributeList'
+        $ref: '#/definitions/[object Object]'
         description: The list of attributes returned by the operation.
   GetAttributesRequest:
     type: object
@@ -565,40 +565,40 @@ definitions:
       - ItemName
     properties:
       DomainName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the domain in which to perform the operation.
       ItemName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the item.
       AttributeNames:
-        $ref: '#/definitions/AttributeNameList'
+        $ref: '#/definitions/[object Object]'
         description: The names of the attributes.
       ConsistentRead:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: 'Determines whether or not strong consistency should be enforced when data is read from SimpleDB. If <code>true</code>, any data previously written to SimpleDB will be returned. Otherwise, results will be consistent eventually, and the client may not see data that was written immediately before your read.'
   ListDomainsResult:
     type: object
     properties:
       DomainNames:
-        $ref: '#/definitions/DomainNameList'
+        $ref: '#/definitions/[object Object]'
         description: A list of domain names that match the expression.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: An opaque token indicating that there are more domains than the specified <code>MaxNumberOfDomains</code> still available.
   ListDomainsRequest:
     type: object
     properties:
       MaxNumberOfDomains:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of domain names you want returned. The range is 1 to 100. The default setting is 100.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A string informing Amazon SimpleDB where to start the next list of domain names.
   InvalidNextToken:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: 'The specified NextToken is not valid. '
   PutAttributesRequest:
     type: object
@@ -608,25 +608,25 @@ definitions:
       - Attributes
     properties:
       DomainName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the domain in which to perform the operation.
       ItemName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the item.
       Attributes:
-        $ref: '#/definitions/ReplaceableAttributeList'
+        $ref: '#/definitions/[object Object]'
         description: The list of attributes.
       Expected:
-        $ref: '#/definitions/UpdateCondition'
+        $ref: '#/definitions/[object Object]'
         description: 'The update condition which, if specified, determines whether the specified attributes will be updated or not. The update condition must be satisfied in order for this request to be processed and the attributes to be updated.'
   SelectResult:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/ItemList'
+        $ref: '#/definitions/[object Object]'
         description: A list of items that match the select expression.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'An opaque token indicating that more items than <code>MaxNumberOfItems</code> were matched, the response size exceeded 1 megabyte, or the execution time exceeded 5 seconds.'
   SelectRequest:
     type: object
@@ -634,46 +634,45 @@ definitions:
       - SelectExpression
     properties:
       SelectExpression:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The expression used to query the domain.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A string informing Amazon SimpleDB where to start the next list of <code>ItemNames</code>.
       ConsistentRead:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: 'Determines whether or not strong consistency should be enforced when data is read from SimpleDB. If <code>true</code>, any data previously written to SimpleDB will be returned. Otherwise, results will be consistent eventually, and the client may not see data that was written immediately before your read.'
   InvalidNumberPredicates:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: Too many predicates exist in the query expression.
   InvalidNumberValueTests:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: Too many predicates exist in the query expression.
   InvalidQueryExpression:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: The specified query expression syntax is not valid.
   RequestTimeout:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: A timeout occurred when attempting to query the specified domain with specified query expression.
   TooManyRequestedAttributes:
     type: object
     properties:
       BoxUsage:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
     description: Too many attributes requested.
-  String:
-    type: string
+  '[object Object]': {}
   Attribute:
     type: object
     required:
@@ -681,43 +680,28 @@ definitions:
       - Value
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the attribute.
       AlternateNameEncoding:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ''
       Value:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The value of the attribute.
       AlternateValueEncoding:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ''
     description: ''
-  Float:
-    type: number
-    format: float
   AttributeList:
     type: array
     items:
-      $ref: '#/definitions/Attribute'
+      $ref: '#/definitions/[object Object]'
     xml:
       wrapped: false
   AttributeNameList:
     type: array
     items:
-      $ref: '#/definitions/String'
-    xml:
-      wrapped: false
-  DeletableItemList:
-    type: array
-    items:
-      $ref: '#/definitions/DeletableItem'
-    xml:
-      wrapped: false
-  ReplaceableItemList:
-    type: array
-    items:
-      $ref: '#/definitions/ReplaceableItem'
+      $ref: '#/definitions/[object Object]'
     xml:
       wrapped: false
   Boolean:
@@ -728,16 +712,16 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the attribute.
       Value:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The value of the attribute.
     description: ''
   DeletableAttributeList:
     type: array
     items:
-      $ref: '#/definitions/DeletableAttribute'
+      $ref: '#/definitions/[object Object]'
     xml:
       wrapped: false
   DeletableItem:
@@ -746,32 +730,26 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
       Attributes:
-        $ref: '#/definitions/DeletableAttributeList'
-  UpdateCondition:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the attribute involved in the condition.
-      Value:
-        $ref: '#/definitions/String'
-        description: The value of an attribute. This value can only be specified when the <code>Exists</code> parameter is equal to <code>true</code>.
-      Exists:
-        $ref: '#/definitions/Boolean'
-        description: A value specifying whether or not the specified attribute must exist with the specified value in order for the update condition to be satisfied. Specify <code>true</code> if the attribute must exist for the update condition to be satisfied. Specify <code>false</code> if the attribute should not exist in order for the update condition to be satisfied.
-    description: ' Specifies the conditions under which data should be updated. If an update condition is specified for a request, the data will only be updated if the condition is satisfied. For example, if an attribute with a specific name and value exists, or if a specific attribute doesn''t exist. '
-  Integer:
-    type: integer
-  Long:
-    type: integer
+        $ref: '#/definitions/[object Object]'
+  DeletableItemList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    xml:
+      wrapped: false
   DomainNameList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/[object Object]'
     xml:
       wrapped: false
+  Float:
+    type: number
+    format: float
+  Integer:
+    type: integer
   Item:
     type: object
     required:
@@ -779,27 +757,23 @@ definitions:
       - Attributes
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the item.
       AlternateNameEncoding:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ''
       Attributes:
-        $ref: '#/definitions/AttributeList'
+        $ref: '#/definitions/[object Object]'
         description: A list of attributes.
     description: ''
   ItemList:
     type: array
     items:
-      $ref: '#/definitions/Item'
+      $ref: '#/definitions/[object Object]'
     xml:
       wrapped: false
-  ReplaceableAttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/ReplaceableAttribute'
-    xml:
-      wrapped: false
+  Long:
+    type: integer
   ReplaceableAttribute:
     type: object
     required:
@@ -807,15 +781,21 @@ definitions:
       - Value
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the replaceable attribute.
       Value:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The value of the replaceable attribute.
       Replace:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: A flag specifying whether or not to replace the attribute/value pair or to add a new attribute/value pair. The default setting is <code>false</code>.
     description: ''
+  ReplaceableAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    xml:
+      wrapped: false
   ReplaceableItem:
     type: object
     required:
@@ -823,9 +803,30 @@ definitions:
       - Attributes
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the replaceable item.
       Attributes:
-        $ref: '#/definitions/ReplaceableAttributeList'
+        $ref: '#/definitions/[object Object]'
         description: The list of attributes for a replaceable item.
     description: ''
+  ReplaceableItemList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    xml:
+      wrapped: false
+  String:
+    type: string
+  UpdateCondition:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the attribute involved in the condition.
+      Value:
+        $ref: '#/definitions/[object Object]'
+        description: The value of an attribute. This value can only be specified when the <code>Exists</code> parameter is equal to <code>true</code>.
+      Exists:
+        $ref: '#/definitions/[object Object]'
+        description: A value specifying whether or not the specified attribute must exist with the specified value in order for the update condition to be satisfied. Specify <code>true</code> if the attribute must exist for the update condition to be satisfied. Specify <code>false</code> if the attribute should not exist in order for the update condition to be satisfied.
+    description: ' Specifies the conditions under which data should be updated. If an update condition is specified for a request, the data will only be updated if the condition is satisfied. For example, if an attribute with a specific name and value exists, or if a specific attribute doesn''t exist. '

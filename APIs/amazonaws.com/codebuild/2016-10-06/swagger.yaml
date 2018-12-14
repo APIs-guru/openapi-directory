@@ -715,10 +715,10 @@ definitions:
     type: object
     properties:
       buildsDeleted:
-        $ref: '#/definitions/BuildIds'
+        $ref: '#/definitions/[object Object]'
         description: The IDs of the builds that were successfully deleted.
       buildsNotDeleted:
-        $ref: '#/definitions/BuildsNotDeleted'
+        $ref: '#/definitions/[object Object]'
         description: Information about any builds that could not be successfully deleted.
   BatchDeleteBuildsInput:
     type: object
@@ -726,7 +726,7 @@ definitions:
       - ids
     properties:
       ids:
-        $ref: '#/definitions/BuildIds'
+        $ref: '#/definitions/[object Object]'
         description: The IDs of the builds to delete.
   InvalidInputException: {}
   BatchGetBuildsOutput:
@@ -898,10 +898,10 @@ definitions:
           timeoutInMinutes: 60
     properties:
       builds:
-        $ref: '#/definitions/Builds'
+        $ref: '#/definitions/[object Object]'
         description: Information about the requested builds.
       buildsNotFound:
-        $ref: '#/definitions/BuildIds'
+        $ref: '#/definitions/[object Object]'
         description: The IDs of builds for which information could not be found.
   BatchGetBuildsInput:
     type: object
@@ -913,16 +913,16 @@ definitions:
         - 'codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX'
     properties:
       ids:
-        $ref: '#/definitions/BuildIds'
+        $ref: '#/definitions/[object Object]'
         description: The IDs of the builds.
   BatchGetProjectsOutput:
     type: object
     properties:
       projects:
-        $ref: '#/definitions/Projects'
+        $ref: '#/definitions/[object Object]'
         description: Information about the requested build projects.
       projectsNotFound:
-        $ref: '#/definitions/ProjectNames'
+        $ref: '#/definitions/[object Object]'
         description: The names of build projects for which information could not be found.
   BatchGetProjectsInput:
     type: object
@@ -930,13 +930,13 @@ definitions:
       - names
     properties:
       names:
-        $ref: '#/definitions/ProjectNames'
+        $ref: '#/definitions/[object Object]'
         description: The names of the build projects.
   CreateProjectOutput:
     type: object
     properties:
       project:
-        $ref: '#/definitions/Project'
+        $ref: '#/definitions/[object Object]'
         description: Information about the build project that was created.
   CreateProjectInput:
     type: object
@@ -948,52 +948,52 @@ definitions:
       - serviceRole
     properties:
       name:
-        $ref: '#/definitions/ProjectName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the build project.
       description:
-        $ref: '#/definitions/ProjectDescription'
+        $ref: '#/definitions/[object Object]'
         description: A description that makes the build project easy to identify.
       source:
-        $ref: '#/definitions/ProjectSource'
+        $ref: '#/definitions/[object Object]'
         description: Information about the build input source code for the build project.
       secondarySources:
-        $ref: '#/definitions/ProjectSources'
+        $ref: '#/definitions/[object Object]'
         description: ' An array of <code>ProjectSource</code> objects. '
       artifacts:
-        $ref: '#/definitions/ProjectArtifacts'
+        $ref: '#/definitions/[object Object]'
         description: Information about the build output artifacts for the build project.
       secondaryArtifacts:
-        $ref: '#/definitions/ProjectArtifactsList'
+        $ref: '#/definitions/[object Object]'
         description: ' An array of <code>ProjectArtifacts</code> objects. '
       cache:
-        $ref: '#/definitions/ProjectCache'
+        $ref: '#/definitions/[object Object]'
         description: Stores recently used information so that it can be quickly accessed at a later time.
       environment:
-        $ref: '#/definitions/ProjectEnvironment'
+        $ref: '#/definitions/[object Object]'
         description: Information about the build environment for the build project.
       serviceRole:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
       timeoutInMinutes:
-        $ref: '#/definitions/TimeOut'
+        $ref: '#/definitions/[object Object]'
         description: 'How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before it times out any build that has not been marked as completed. The default is 60 minutes.'
       queuedTimeoutInMinutes:
-        $ref: '#/definitions/TimeOut'
+        $ref: '#/definitions/[object Object]'
         description: ' The number of minutes a build is allowed to be queued before it times out. '
       encryptionKey:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
       tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: <p>A set of tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
       vpcConfig:
-        $ref: '#/definitions/VpcConfig'
+        $ref: '#/definitions/[object Object]'
         description: VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
       badgeEnabled:
-        $ref: '#/definitions/WrapperBoolean'
+        $ref: '#/definitions/[object Object]'
         description: Set this to true to generate a publicly accessible URL for your project's build badge.
       logsConfig:
-        $ref: '#/definitions/LogsConfig'
+        $ref: '#/definitions/[object Object]'
         description: ' Information about logs for the build project. These can be logs in Amazon CloudWatch Logs, logs uploaded to a specified S3 bucket, or both. '
   ResourceAlreadyExistsException: {}
   AccountLimitExceededException: {}
@@ -1001,7 +1001,7 @@ definitions:
     type: object
     properties:
       webhook:
-        $ref: '#/definitions/Webhook'
+        $ref: '#/definitions/[object Object]'
         description: Information about a webhook that connects repository events to a build project in AWS CodeBuild.
   CreateWebhookInput:
     type: object
@@ -1009,10 +1009,10 @@ definitions:
       - projectName
     properties:
       projectName:
-        $ref: '#/definitions/ProjectName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS CodeBuild project.
       branchFilter:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.'
   OAuthProviderException: {}
   ResourceNotFoundException: {}
@@ -1025,13 +1025,13 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The name of the build project.
   DeleteSourceCredentialsOutput:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: ' The Amazon Resource Name (ARN) of the token. '
   DeleteSourceCredentialsInput:
     type: object
@@ -1039,7 +1039,7 @@ definitions:
       - arn
     properties:
       arn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: ' The Amazon Resource Name (ARN) of the token.'
   DeleteWebhookOutput:
     type: object
@@ -1050,13 +1050,13 @@ definitions:
       - projectName
     properties:
       projectName:
-        $ref: '#/definitions/ProjectName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS CodeBuild project.
   ImportSourceCredentialsOutput:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: ' The Amazon Resource Name (ARN) of the token. '
   ImportSourceCredentialsInput:
     type: object
@@ -1066,16 +1066,16 @@ definitions:
       - authType
     properties:
       username:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: ' The Bitbucket username when the <code>authType</code> is BASIC_AUTH. This parameter is not valid for other types of source providers or connections. '
       token:
-        $ref: '#/definitions/SensitiveNonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: ' For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is the app password. '
       serverType:
-        $ref: '#/definitions/ServerType'
+        $ref: '#/definitions/[object Object]'
         description: ' The source provider used for this project. '
       authType:
-        $ref: '#/definitions/AuthType'
+        $ref: '#/definitions/[object Object]'
         description: ' The type of authentication used to connect to a GitHub, GitHub Enterprise, or Bitbucket repository. An OAUTH connection is not supported by the API and must be created using the AWS CodeBuild console. '
   InvalidateProjectCacheOutput:
     type: object
@@ -1086,34 +1086,34 @@ definitions:
       - projectName
     properties:
       projectName:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS CodeBuild build project that the cache is reset for.
   ListBuildsOutput:
     type: object
     properties:
       ids:
-        $ref: '#/definitions/BuildIds'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of build IDs, with each build ID representing a single build.'
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call.'
   ListBuildsInput:
     type: object
     properties:
       sortOrder:
-        $ref: '#/definitions/SortOrderType'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The order to list build IDs. Valid values include:</p> <ul> <li> <p> <code>ASCENDING</code>: List the build IDs in ascending order by build ID.</p> </li> <li> <p> <code>DESCENDING</code>: List the build IDs in descending order by build ID.</p> </li> </ul>'
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.'
   ListBuildsForProjectOutput:
     type: object
     properties:
       ids:
-        $ref: '#/definitions/BuildIds'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of build IDs for the specified build project, with each build ID representing a single build.'
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call.'
   ListBuildsForProjectInput:
     type: object
@@ -1121,19 +1121,19 @@ definitions:
       - projectName
     properties:
       projectName:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS CodeBuild project.
       sortOrder:
-        $ref: '#/definitions/SortOrderType'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The order to list build IDs. Valid values include:</p> <ul> <li> <p> <code>ASCENDING</code>: List the build IDs in ascending order by build ID.</p> </li> <li> <p> <code>DESCENDING</code>: List the build IDs in descending order by build ID.</p> </li> </ul>'
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.'
   ListCuratedEnvironmentImagesOutput:
     type: object
     properties:
       platforms:
-        $ref: '#/definitions/EnvironmentPlatforms'
+        $ref: '#/definitions/[object Object]'
         description: Information about supported platforms for Docker images that are managed by AWS CodeBuild.
   ListCuratedEnvironmentImagesInput:
     type: object
@@ -1142,28 +1142,28 @@ definitions:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call.'
       projects:
-        $ref: '#/definitions/ProjectNames'
+        $ref: '#/definitions/[object Object]'
         description: 'The list of build project names, with each build project name representing a single build project.'
   ListProjectsInput:
     type: object
     properties:
       sortBy:
-        $ref: '#/definitions/ProjectSortByType'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The criterion to be used to list build project names. Valid values include:</p> <ul> <li> <p> <code>CREATED_TIME</code>: List based on when each build project was created.</p> </li> <li> <p> <code>LAST_MODIFIED_TIME</code>: List based on when information about each build project was last changed.</p> </li> <li> <p> <code>NAME</code>: List based on each build project''s name.</p> </li> </ul> <p>Use <code>sortOrder</code> to specify in what order to list the build project names based on the preceding criteria.</p>'
       sortOrder:
-        $ref: '#/definitions/SortOrderType'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The order in which to list build projects. Valid values include:</p> <ul> <li> <p> <code>ASCENDING</code>: List in ascending order.</p> </li> <li> <p> <code>DESCENDING</code>: List in descending order.</p> </li> </ul> <p>Use <code>sortBy</code> to specify the criterion to be used to list build project names.</p>'
       nextToken:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a <i>next token</i>. To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.'
   ListSourceCredentialsOutput:
     type: object
     properties:
       sourceCredentialsInfos:
-        $ref: '#/definitions/SourceCredentialsInfos'
+        $ref: '#/definitions/[object Object]'
         description: ' A list of <code>SourceCredentialsInfo</code> objects. Each <code>SourceCredentialsInfo</code> object includes the authentication type, token ARN, and type of source provider for one set of credentials. '
   ListSourceCredentialsInput:
     type: object
@@ -1172,7 +1172,7 @@ definitions:
     type: object
     properties:
       build:
-        $ref: '#/definitions/Build'
+        $ref: '#/definitions/[object Object]'
         description: Information about the build to be run.
   StartBuildInput:
     type: object
@@ -1180,82 +1180,82 @@ definitions:
       - projectName
     properties:
       projectName:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS CodeBuild build project to start running a build.
       secondarySourcesOverride:
-        $ref: '#/definitions/ProjectSources'
+        $ref: '#/definitions/[object Object]'
         description: ' An array of <code>ProjectSource</code> objects. '
       secondarySourcesVersionOverride:
-        $ref: '#/definitions/ProjectSecondarySourceVersions'
+        $ref: '#/definitions/[object Object]'
         description: ' An array of <code>ProjectSourceVersion</code> objects that specify one or more versions of the project''s secondary sources to be used for this build only. '
       sourceVersion:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul>'
       artifactsOverride:
-        $ref: '#/definitions/ProjectArtifacts'
+        $ref: '#/definitions/[object Object]'
         description: 'Build output artifact settings that override, for this build only, the latest ones already defined in the build project.'
       secondaryArtifactsOverride:
-        $ref: '#/definitions/ProjectArtifactsList'
+        $ref: '#/definitions/[object Object]'
         description: ' An array of <code>ProjectArtifacts</code> objects. '
       environmentVariablesOverride:
-        $ref: '#/definitions/EnvironmentVariables'
+        $ref: '#/definitions/[object Object]'
         description: 'A set of environment variables that overrides, for this build only, the latest ones already defined in the build project.'
       sourceTypeOverride:
-        $ref: '#/definitions/SourceType'
+        $ref: '#/definitions/[object Object]'
         description: 'A source input type, for this build, that overrides the source input defined in the build project.'
       sourceLocationOverride:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A location that overrides, for this build, the source location for the one defined in the build project.'
       sourceAuthOverride:
-        $ref: '#/definitions/SourceAuth'
+        $ref: '#/definitions/[object Object]'
         description: An authorization type for this build that overrides the one defined in the build project. This override applies only if the build project's source is BitBucket or GitHub.
       gitCloneDepthOverride:
-        $ref: '#/definitions/GitCloneDepth'
+        $ref: '#/definitions/[object Object]'
         description: 'The user-defined depth of history, with a minimum value of 0, that overrides, for this build only, any previous depth of history defined in the build project.'
       buildspecOverride:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A build spec declaration that overrides, for this build only, the latest one already defined in the build project.'
       insecureSslOverride:
-        $ref: '#/definitions/WrapperBoolean'
+        $ref: '#/definitions/[object Object]'
         description: Enable this flag to override the insecure SSL setting that is specified in the build project. The insecure SSL setting determines whether to ignore SSL warnings while connecting to the project source code. This override applies only if the build's source is GitHub Enterprise.
       reportBuildStatusOverride:
-        $ref: '#/definitions/WrapperBoolean'
+        $ref: '#/definitions/[object Object]'
         description: ' Set to true to report to your source provider the status of a build''s start and completion. If you use this option with a source provider other than GitHub, GitHub Enterprise, or Bitbucket, an invalidInputException is thrown. '
       environmentTypeOverride:
-        $ref: '#/definitions/EnvironmentType'
+        $ref: '#/definitions/[object Object]'
         description: A container type for this build that overrides the one specified in the build project.
       imageOverride:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The name of an image for this build that overrides the one specified in the build project.
       computeTypeOverride:
-        $ref: '#/definitions/ComputeType'
+        $ref: '#/definitions/[object Object]'
         description: The name of a compute type for this build that overrides the one specified in the build project.
       certificateOverride:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of a certificate for this build that overrides the one specified in the build project.
       cacheOverride:
-        $ref: '#/definitions/ProjectCache'
+        $ref: '#/definitions/[object Object]'
         description: A ProjectCache object specified for this build that overrides the one defined in the build project.
       serviceRoleOverride:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The name of a service role for this build that overrides the one specified in the build project.
       privilegedModeOverride:
-        $ref: '#/definitions/WrapperBoolean'
+        $ref: '#/definitions/[object Object]'
         description: Enable this flag to override privileged mode in the build project.
       timeoutInMinutesOverride:
-        $ref: '#/definitions/TimeOut'
+        $ref: '#/definitions/[object Object]'
         description: 'The number of build timeout minutes, from 5 to 480 (8 hours), that overrides, for this build only, the latest setting already defined in the build project.'
       queuedTimeoutInMinutesOverride:
-        $ref: '#/definitions/TimeOut'
+        $ref: '#/definitions/[object Object]'
         description: ' The number of minutes a build is allowed to be queued before it times out. '
       logsConfigOverride:
-        $ref: '#/definitions/LogsConfig'
+        $ref: '#/definitions/[object Object]'
         description: ' Log settings for this build that override the log settings defined in the build project. '
   StopBuildOutput:
     type: object
     properties:
       build:
-        $ref: '#/definitions/Build'
+        $ref: '#/definitions/[object Object]'
         description: Information about the build.
   StopBuildInput:
     type: object
@@ -1263,13 +1263,13 @@ definitions:
       - id
     properties:
       id:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the build.
   UpdateProjectOutput:
     type: object
     properties:
       project:
-        $ref: '#/definitions/Project'
+        $ref: '#/definitions/[object Object]'
         description: Information about the build project that was changed.
   UpdateProjectInput:
     type: object
@@ -1277,58 +1277,58 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: <p>The name of the build project.</p> <note> <p>You cannot change a build project's name.</p> </note>
       description:
-        $ref: '#/definitions/ProjectDescription'
+        $ref: '#/definitions/[object Object]'
         description: A new or replacement description of the build project.
       source:
-        $ref: '#/definitions/ProjectSource'
+        $ref: '#/definitions/[object Object]'
         description: Information to be changed about the build input source code for the build project.
       secondarySources:
-        $ref: '#/definitions/ProjectSources'
+        $ref: '#/definitions/[object Object]'
         description: ' An array of <code>ProjectSource</code> objects. '
       artifacts:
-        $ref: '#/definitions/ProjectArtifacts'
+        $ref: '#/definitions/[object Object]'
         description: Information to be changed about the build output artifacts for the build project.
       secondaryArtifacts:
-        $ref: '#/definitions/ProjectArtifactsList'
+        $ref: '#/definitions/[object Object]'
         description: ' An array of <code>ProjectSource</code> objects. '
       cache:
-        $ref: '#/definitions/ProjectCache'
+        $ref: '#/definitions/[object Object]'
         description: Stores recently used information so that it can be quickly accessed at a later time.
       environment:
-        $ref: '#/definitions/ProjectEnvironment'
+        $ref: '#/definitions/[object Object]'
         description: Information to be changed about the build environment for the build project.
       serviceRole:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The replacement ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
       timeoutInMinutes:
-        $ref: '#/definitions/TimeOut'
+        $ref: '#/definitions/[object Object]'
         description: 'The replacement value in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before timing out any related build that did not get marked as completed.'
       queuedTimeoutInMinutes:
-        $ref: '#/definitions/TimeOut'
+        $ref: '#/definitions/[object Object]'
         description: ' The number of minutes a build is allowed to be queued before it times out. '
       encryptionKey:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The replacement AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>You can specify either the Amazon Resource Name (ARN)of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
       tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: <p>The replacement set of tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
       vpcConfig:
-        $ref: '#/definitions/VpcConfig'
+        $ref: '#/definitions/[object Object]'
         description: VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
       badgeEnabled:
-        $ref: '#/definitions/WrapperBoolean'
+        $ref: '#/definitions/[object Object]'
         description: Set this to true to generate a publicly accessible URL for your project's build badge.
       logsConfig:
-        $ref: '#/definitions/LogsConfig'
+        $ref: '#/definitions/[object Object]'
         description: ' Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, logs in an S3 bucket, or both. '
   UpdateWebhookOutput:
     type: object
     properties:
       webhook:
-        $ref: '#/definitions/Webhook'
+        $ref: '#/definitions/[object Object]'
         description: ' Information about a repository''s webhook that is associated with a project in AWS CodeBuild. '
   UpdateWebhookInput:
     type: object
@@ -1336,13 +1336,13 @@ definitions:
       - projectName
     properties:
       projectName:
-        $ref: '#/definitions/ProjectName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS CodeBuild project.
       branchFilter:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.'
       rotateSecret:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: ' A boolean value that specifies whether the associated GitHub repository''s secret token should be updated. If you use Bitbucket for your repository, <code>rotateSecret</code> is ignored. '
   ArtifactNamespace:
     type: string
@@ -1366,302 +1366,157 @@ definitions:
       - OAUTH
       - BASIC_AUTH
       - PERSONAL_ACCESS_TOKEN
-  BuildIds:
-    type: array
-    items:
-      $ref: '#/definitions/NonEmptyString'
-    minItems: 1
-    maxItems: 100
-  BuildsNotDeleted:
-    type: array
-    items:
-      $ref: '#/definitions/BuildNotDeleted'
-  Builds:
-    type: array
-    items:
-      $ref: '#/definitions/Build'
-  ProjectNames:
-    type: array
-    items:
-      $ref: '#/definitions/NonEmptyString'
-    minItems: 1
-    maxItems: 100
-  Projects:
-    type: array
-    items:
-      $ref: '#/definitions/Project'
+  '[object Object]': {}
   Boolean:
     type: boolean
-  NonEmptyString:
-    type: string
-    minLength: 1
-  Timestamp:
-    type: string
-    format: date-time
-  String:
-    type: string
-  StatusType:
-    type: string
-    enum:
-      - SUCCEEDED
-      - FAILED
-      - FAULT
-      - TIMED_OUT
-      - IN_PROGRESS
-      - STOPPED
-  BuildPhases:
-    type: array
-    items:
-      $ref: '#/definitions/BuildPhase'
-  ProjectSource:
+  Build:
     type: object
-    required:
-      - type
     properties:
-      type:
-        $ref: '#/definitions/SourceType'
-        description: '<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub repository.</p> </li> <li> <p> <code>NO_SOURCE</code>: The project does not have input source code.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon Simple Storage Service (Amazon S3) input bucket.</p> </li> </ul>'
-      location:
-        $ref: '#/definitions/String'
-        description: '<p>Information about the location of the source code to be built. Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, <code>location</code> should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline''s source action instead of this value.</p> </li> <li> <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec (for example, <code>https://git-codecommit.<i>region-ID</i>.amazonaws.com/v1/repos/<i>repo-name</i> </code>).</p> </li> <li> <p>For source code in an Amazon Simple Storage Service (Amazon S3) input bucket, one of the following. </p> <ul> <li> <p> The path to the ZIP file that contains the source code (for example, <code> <i>bucket-name</i>/<i>path</i>/<i>to</i>/<i>object-name</i>.zip</code>). </p> </li> <li> <p> The path to the folder that contains the source code (for example, <code> <i>bucket-name</i>/<i>path</i>/<i>to</i>/<i>source-code</i>/<i>folder</i>/</code>). </p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec. You must connect your AWS account to your GitHub account. Use the AWS CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub <b>Authorize application</b> page, for <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to allow AWS CodeBuild to have access to, and then choose <b>Authorize application</b>. (After you have connected to your GitHub account, you do not need to finish creating the build project. You can leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object''s <code>type</code> value to <code>OAUTH</code>.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec. You must connect your AWS account to your Bitbucket account. Use the AWS CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket <b>Confirm access to your account</b> page, choose <b>Grant access</b>. (After you have connected to your Bitbucket account, you do not need to finish creating the build project. You can leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object''s <code>type</code> value to <code>OAUTH</code>.</p> </li> </ul>'
-      gitCloneDepth:
-        $ref: '#/definitions/GitCloneDepth'
-        description: Information about the git clone depth for the build project.
-      buildspec:
-        $ref: '#/definitions/String'
-        description: '<p>The build spec declaration to use for the builds in this build project.</p> <p>If this value is not specified, a build spec must be included along with the source code to be built.</p>'
-      auth:
-        $ref: '#/definitions/SourceAuth'
-        description: <p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly.</p>
-      reportBuildStatus:
-        $ref: '#/definitions/WrapperBoolean'
-        description: ' Set to true to report the status of a build''s start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an invalidInputException is thrown. '
-      insecureSsl:
-        $ref: '#/definitions/WrapperBoolean'
-        description: Enable this flag to ignore SSL warnings while connecting to the project source code.
-      sourceIdentifier:
-        $ref: '#/definitions/String'
-        description: ' An identifier for this project source. '
-    description: Information about the build input source code for the build project.
-  ProjectSources:
-    type: array
-    items:
-      $ref: '#/definitions/ProjectSource'
-    minItems: 0
-    maxItems: 12
-  ProjectSecondarySourceVersions:
-    type: array
-    items:
-      $ref: '#/definitions/ProjectSourceVersion'
-    minItems: 0
-    maxItems: 12
+      id:
+        $ref: '#/definitions/[object Object]'
+        description: The unique ID for the build.
+      arn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the build.
+      startTime:
+        $ref: '#/definitions/[object Object]'
+        description: 'When the build process started, expressed in Unix time format.'
+      endTime:
+        $ref: '#/definitions/[object Object]'
+        description: 'When the build process ended, expressed in Unix time format.'
+      currentPhase:
+        $ref: '#/definitions/[object Object]'
+        description: The current build phase.
+      buildStatus:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The current status of the build. Valid values include:</p> <ul> <li> <p> <code>FAILED</code>: The build failed.</p> </li> <li> <p> <code>FAULT</code>: The build faulted.</p> </li> <li> <p> <code>IN_PROGRESS</code>: The build is still in progress.</p> </li> <li> <p> <code>STOPPED</code>: The build stopped.</p> </li> <li> <p> <code>SUCCEEDED</code>: The build succeeded.</p> </li> <li> <p> <code>TIMED_OUT</code>: The build timed out.</p> </li> </ul>'
+      sourceVersion:
+        $ref: '#/definitions/[object Object]'
+        description: Any version identifier for the version of the source code to be built.
+      resolvedSourceVersion:
+        $ref: '#/definitions/[object Object]'
+        description: '<p> An identifier for the version of this build''s source code. </p> <ul> <li> <p> For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID. </p> </li> <li> <p> For AWS CodePipeline, the source revision provided by AWS CodePipeline. </p> </li> <li> <p> For Amazon Simple Storage Service (Amazon S3), this does not apply. </p> </li> </ul>'
+      projectName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the AWS CodeBuild project.
+      phases:
+        $ref: '#/definitions/[object Object]'
+        description: Information about all previous build phases that are complete and information about any current build phase that is not yet complete.
+      source:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the source code to be built.
+      secondarySources:
+        $ref: '#/definitions/[object Object]'
+        description: ' An array of <code>ProjectSource</code> objects. '
+      secondarySourceVersions:
+        $ref: '#/definitions/[object Object]'
+        description: '<p> An array of <code>ProjectSourceVersion</code> objects. Each <code>ProjectSourceVersion</code> must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul>'
+      artifacts:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the output artifacts for the build.
+      secondaryArtifacts:
+        $ref: '#/definitions/[object Object]'
+        description: ' An array of <code>ProjectArtifacts</code> objects. '
+      cache:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the cache for the build.
+      environment:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the build environment for this build.
+      serviceRole:
+        $ref: '#/definitions/[object Object]'
+        description: The name of a service role used for this build.
+      logs:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the build's logs in Amazon CloudWatch Logs.
+      timeoutInMinutes:
+        $ref: '#/definitions/[object Object]'
+        description: 'How long, in minutes, for AWS CodeBuild to wait before timing out this build if it does not get marked as completed.'
+      queuedTimeoutInMinutes:
+        $ref: '#/definitions/[object Object]'
+        description: ' The number of minutes a build is allowed to be queued before it times out. '
+      buildComplete:
+        $ref: '#/definitions/[object Object]'
+        description: 'Whether the build is complete. True if complete; otherwise, false.'
+      initiator:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The entity that started the build. Valid values include:</p> <ul> <li> <p>If AWS CodePipeline started the build, the pipeline''s name (for example, <code>codepipeline/my-demo-pipeline</code>).</p> </li> <li> <p>If an AWS Identity and Access Management (IAM) user started the build, the user''s name (for example, <code>MyUserName</code>).</p> </li> <li> <p>If the Jenkins plugin for AWS CodeBuild started the build, the string <code>CodeBuild-Jenkins-Plugin</code>.</p> </li> </ul>'
+      vpcConfig:
+        $ref: '#/definitions/[object Object]'
+        description: 'If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.'
+      networkInterface:
+        $ref: '#/definitions/[object Object]'
+        description: Describes a network interface.
+      encryptionKey:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>This is expressed either as the Amazon Resource Name (ARN) of the CMK or, if specified, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+    description: Information about a build.
   BuildArtifacts:
     type: object
     properties:
       location:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Information about the location of the build artifacts.
       sha256sum:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: <p>The SHA-256 hash of the build artifact.</p> <p>You can use this hash along with a checksum tool to confirm file integrity and authenticity.</p> <note> <p>This value is available only if the build project's <code>packaging</code> value is set to <code>ZIP</code>.</p> </note>
       md5sum:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: <p>The MD5 hash of the build artifact.</p> <p>You can use this hash along with a checksum tool to confirm file integrity and authenticity.</p> <note> <p>This value is available only if the build project's <code>packaging</code> value is set to <code>ZIP</code>.</p> </note>
       overrideArtifactName:
-        $ref: '#/definitions/WrapperBoolean'
+        $ref: '#/definitions/[object Object]'
         description: ' If this flag is set, a name specified in the build spec file overrides the artifact name. The name specified in a build spec file is calculated at build time and uses the Shell Command Language. For example, you can append a date and time to your artifact name so that it is always unique. '
       encryptionDisabled:
-        $ref: '#/definitions/WrapperBoolean'
+        $ref: '#/definitions/[object Object]'
         description: ' Information that tells you if encryption for build artifacts is disabled. '
       artifactIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An identifier for this artifact definition. '
     description: Information about build output artifacts.
   BuildArtifactsList:
     type: array
     items:
-      $ref: '#/definitions/BuildArtifacts'
+      $ref: '#/definitions/[object Object]'
     minItems: 0
     maxItems: 12
-  ProjectCache:
-    type: object
-    required:
-      - type
-    properties:
-      type:
-        $ref: '#/definitions/CacheType'
-        description: '<p>The type of cache used by the build project. Valid values include:</p> <ul> <li> <p> <code>NO_CACHE</code>: The build project does not use any cache.</p> </li> <li> <p> <code>S3</code>: The build project reads and writes from and to S3.</p> </li> </ul>'
-      location:
-        $ref: '#/definitions/String'
-        description: '<p>Information about the cache location: </p> <ul> <li> <p> <code>NO_CACHE</code>: This value is ignored.</p> </li> <li> <p> <code>S3</code>: This is the S3 bucket name/prefix.</p> </li> </ul>'
-    description: Information about the cache for the build project.
-  ProjectEnvironment:
-    type: object
-    required:
-      - type
-      - image
-      - computeType
-    properties:
-      type:
-        $ref: '#/definitions/EnvironmentType'
-        description: The type of build environment to use for related builds.
-      image:
-        $ref: '#/definitions/NonEmptyString'
-        description: The ID of the Docker image to use for this build project.
-      computeType:
-        $ref: '#/definitions/ComputeType'
-        description: '<p>Information about the compute resources the build project uses. Available values include:</p> <ul> <li> <p> <code>BUILD_GENERAL1_SMALL</code>: Use up to 3 GB memory and 2 vCPUs for builds.</p> </li> <li> <p> <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 7 GB memory and 4 vCPUs for builds.</p> </li> <li> <p> <code>BUILD_GENERAL1_LARGE</code>: Use up to 15 GB memory and 8 vCPUs for builds.</p> </li> </ul>'
-      environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
-        description: A set of environment variables to make available to builds for this build project.
-      privilegedMode:
-        $ref: '#/definitions/WrapperBoolean'
-        description: '<p>Enables running the Docker daemon inside a Docker container. Set to true only if the build project is be used to build Docker images, and the specified build environment image is not provided by AWS CodeBuild with Docker support. Otherwise, all associated builds that attempt to interact with the Docker daemon fail. You must also start the Docker daemon so that builds can interact with it. One way to do this is to initialize the Docker daemon during the install phase of your build spec by running the following build commands. (Do not run these commands if the specified build environment image is provided by AWS CodeBuild with Docker support.)</p> <p>If the operating system''s base image is Ubuntu Linux:</p> <p> <code>- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&amp; - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"</code> </p> <p>If the operating system''s base image is Alpine Linux, add the <code>-t</code> argument to <code>timeout</code>:</p> <p> <code>- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&amp; - timeout 15 -t sh -c "until docker info; do echo .; sleep 1; done"</code> </p>'
-      certificate:
-        $ref: '#/definitions/String'
-        description: The certificate to use with this build project.
-    description: Information about the build environment of the build project.
-  LogsLocation:
-    type: object
-    properties:
-      groupName:
-        $ref: '#/definitions/String'
-        description: The name of the Amazon CloudWatch Logs group for the build logs.
-      streamName:
-        $ref: '#/definitions/String'
-        description: The name of the Amazon CloudWatch Logs stream for the build logs.
-      deepLink:
-        $ref: '#/definitions/String'
-        description: The URL to an individual build log in Amazon CloudWatch Logs.
-      s3DeepLink:
-        $ref: '#/definitions/String'
-        description: ' The URL to a build log in an S3 bucket. '
-      cloudWatchLogs:
-        $ref: '#/definitions/CloudWatchLogsConfig'
-        description: ' Information about Amazon CloudWatch Logs for a build project. '
-      s3Logs:
-        $ref: '#/definitions/S3LogsConfig'
-        description: ' Information about S3 logs for a build project. '
-    description: Information about build logs in Amazon CloudWatch Logs.
-  WrapperInt:
-    type: integer
-  VpcConfig:
-    type: object
-    properties:
-      vpcId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The ID of the Amazon VPC.
-      subnets:
-        $ref: '#/definitions/Subnets'
-        description: A list of one or more subnet IDs in your Amazon VPC.
-      securityGroupIds:
-        $ref: '#/definitions/SecurityGroupIds'
-        description: A list of one or more security groups IDs in your Amazon VPC.
-    description: Information about the VPC configuration that AWS CodeBuild accesses.
-  NetworkInterface:
-    type: object
-    properties:
-      subnetId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The ID of the subnet.
-      networkInterfaceId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The ID of the network interface.
-    description: Describes a network interface.
-  Build:
-    type: object
-    properties:
-      id:
-        $ref: '#/definitions/NonEmptyString'
-        description: The unique ID for the build.
-      arn:
-        $ref: '#/definitions/NonEmptyString'
-        description: The Amazon Resource Name (ARN) of the build.
-      startTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'When the build process started, expressed in Unix time format.'
-      endTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'When the build process ended, expressed in Unix time format.'
-      currentPhase:
-        $ref: '#/definitions/String'
-        description: The current build phase.
-      buildStatus:
-        $ref: '#/definitions/StatusType'
-        description: '<p>The current status of the build. Valid values include:</p> <ul> <li> <p> <code>FAILED</code>: The build failed.</p> </li> <li> <p> <code>FAULT</code>: The build faulted.</p> </li> <li> <p> <code>IN_PROGRESS</code>: The build is still in progress.</p> </li> <li> <p> <code>STOPPED</code>: The build stopped.</p> </li> <li> <p> <code>SUCCEEDED</code>: The build succeeded.</p> </li> <li> <p> <code>TIMED_OUT</code>: The build timed out.</p> </li> </ul>'
-      sourceVersion:
-        $ref: '#/definitions/NonEmptyString'
-        description: Any version identifier for the version of the source code to be built.
-      resolvedSourceVersion:
-        $ref: '#/definitions/NonEmptyString'
-        description: '<p> An identifier for the version of this build''s source code. </p> <ul> <li> <p> For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID. </p> </li> <li> <p> For AWS CodePipeline, the source revision provided by AWS CodePipeline. </p> </li> <li> <p> For Amazon Simple Storage Service (Amazon S3), this does not apply. </p> </li> </ul>'
-      projectName:
-        $ref: '#/definitions/NonEmptyString'
-        description: The name of the AWS CodeBuild project.
-      phases:
-        $ref: '#/definitions/BuildPhases'
-        description: Information about all previous build phases that are complete and information about any current build phase that is not yet complete.
-      source:
-        $ref: '#/definitions/ProjectSource'
-        description: Information about the source code to be built.
-      secondarySources:
-        $ref: '#/definitions/ProjectSources'
-        description: ' An array of <code>ProjectSource</code> objects. '
-      secondarySourceVersions:
-        $ref: '#/definitions/ProjectSecondarySourceVersions'
-        description: '<p> An array of <code>ProjectSourceVersion</code> objects. Each <code>ProjectSourceVersion</code> must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul>'
-      artifacts:
-        $ref: '#/definitions/BuildArtifacts'
-        description: Information about the output artifacts for the build.
-      secondaryArtifacts:
-        $ref: '#/definitions/BuildArtifactsList'
-        description: ' An array of <code>ProjectArtifacts</code> objects. '
-      cache:
-        $ref: '#/definitions/ProjectCache'
-        description: Information about the cache for the build.
-      environment:
-        $ref: '#/definitions/ProjectEnvironment'
-        description: Information about the build environment for this build.
-      serviceRole:
-        $ref: '#/definitions/NonEmptyString'
-        description: The name of a service role used for this build.
-      logs:
-        $ref: '#/definitions/LogsLocation'
-        description: Information about the build's logs in Amazon CloudWatch Logs.
-      timeoutInMinutes:
-        $ref: '#/definitions/WrapperInt'
-        description: 'How long, in minutes, for AWS CodeBuild to wait before timing out this build if it does not get marked as completed.'
-      queuedTimeoutInMinutes:
-        $ref: '#/definitions/WrapperInt'
-        description: ' The number of minutes a build is allowed to be queued before it times out. '
-      buildComplete:
-        $ref: '#/definitions/Boolean'
-        description: 'Whether the build is complete. True if complete; otherwise, false.'
-      initiator:
-        $ref: '#/definitions/String'
-        description: '<p>The entity that started the build. Valid values include:</p> <ul> <li> <p>If AWS CodePipeline started the build, the pipeline''s name (for example, <code>codepipeline/my-demo-pipeline</code>).</p> </li> <li> <p>If an AWS Identity and Access Management (IAM) user started the build, the user''s name (for example, <code>MyUserName</code>).</p> </li> <li> <p>If the Jenkins plugin for AWS CodeBuild started the build, the string <code>CodeBuild-Jenkins-Plugin</code>.</p> </li> </ul>'
-      vpcConfig:
-        $ref: '#/definitions/VpcConfig'
-        description: 'If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.'
-      networkInterface:
-        $ref: '#/definitions/NetworkInterface'
-        description: Describes a network interface.
-      encryptionKey:
-        $ref: '#/definitions/NonEmptyString'
-        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>This is expressed either as the Amazon Resource Name (ARN) of the CMK or, if specified, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
-    description: Information about a build.
-  WrapperBoolean:
-    type: boolean
+  BuildIds:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
   BuildNotDeleted:
     type: object
     properties:
       id:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the build that could not be successfully deleted.
       statusCode:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Additional information about the build that could not be successfully deleted.
     description: Information about a build that could not be successfully deleted.
+  BuildPhase:
+    type: object
+    properties:
+      phaseType:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The name of the build phase. Valid values include:</p> <ul> <li> <p> <code>BUILD</code>: Core build activities typically occur in this build phase.</p> </li> <li> <p> <code>COMPLETED</code>: The build has been completed.</p> </li> <li> <p> <code>DOWNLOAD_SOURCE</code>: Source code is being downloaded in this build phase.</p> </li> <li> <p> <code>FINALIZING</code>: The build process is completing in this build phase.</p> </li> <li> <p> <code>INSTALL</code>: Installation activities typically occur in this build phase.</p> </li> <li> <p> <code>POST_BUILD</code>: Post-build activities typically occur in this build phase.</p> </li> <li> <p> <code>PRE_BUILD</code>: Pre-build activities typically occur in this build phase.</p> </li> <li> <p> <code>PROVISIONING</code>: The build environment is being set up.</p> </li> <li> <p> <code>QUEUED</code>: The build has been submitted and is queued behind other submitted builds.</p> </li> <li> <p> <code>SUBMITTED</code>: The build has been submitted.</p> </li> <li> <p> <code>UPLOAD_ARTIFACTS</code>: Build output artifacts are being uploaded to the output location.</p> </li> </ul>'
+      phaseStatus:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The current status of the build phase. Valid values include:</p> <ul> <li> <p> <code>FAILED</code>: The build phase failed.</p> </li> <li> <p> <code>FAULT</code>: The build phase faulted.</p> </li> <li> <p> <code>IN_PROGRESS</code>: The build phase is still in progress.</p> </li> <li> <p> <code>QUEUED</code>: The build has been submitted and is queued behind other submitted builds.</p> </li> <li> <p> <code>STOPPED</code>: The build phase stopped.</p> </li> <li> <p> <code>SUCCEEDED</code>: The build phase succeeded.</p> </li> <li> <p> <code>TIMED_OUT</code>: The build phase timed out.</p> </li> </ul>'
+      startTime:
+        $ref: '#/definitions/[object Object]'
+        description: 'When the build phase started, expressed in Unix time format.'
+      endTime:
+        $ref: '#/definitions/[object Object]'
+        description: 'When the build phase ended, expressed in Unix time format.'
+      durationInSeconds:
+        $ref: '#/definitions/[object Object]'
+        description: 'How long, in seconds, between the starting and ending times of the build''s phase.'
+      contexts:
+        $ref: '#/definitions/[object Object]'
+        description: 'Additional information about a build phase, especially to help troubleshoot a failed build.'
+    description: Information about a stage for a build.
   BuildPhaseType:
     type: string
     enum:
@@ -1676,57 +1531,36 @@ definitions:
       - UPLOAD_ARTIFACTS
       - FINALIZING
       - COMPLETED
-  WrapperLong:
-    type: integer
-  PhaseContexts:
+  BuildPhases:
     type: array
     items:
-      $ref: '#/definitions/PhaseContext'
-  BuildPhase:
-    type: object
-    properties:
-      phaseType:
-        $ref: '#/definitions/BuildPhaseType'
-        description: '<p>The name of the build phase. Valid values include:</p> <ul> <li> <p> <code>BUILD</code>: Core build activities typically occur in this build phase.</p> </li> <li> <p> <code>COMPLETED</code>: The build has been completed.</p> </li> <li> <p> <code>DOWNLOAD_SOURCE</code>: Source code is being downloaded in this build phase.</p> </li> <li> <p> <code>FINALIZING</code>: The build process is completing in this build phase.</p> </li> <li> <p> <code>INSTALL</code>: Installation activities typically occur in this build phase.</p> </li> <li> <p> <code>POST_BUILD</code>: Post-build activities typically occur in this build phase.</p> </li> <li> <p> <code>PRE_BUILD</code>: Pre-build activities typically occur in this build phase.</p> </li> <li> <p> <code>PROVISIONING</code>: The build environment is being set up.</p> </li> <li> <p> <code>QUEUED</code>: The build has been submitted and is queued behind other submitted builds.</p> </li> <li> <p> <code>SUBMITTED</code>: The build has been submitted.</p> </li> <li> <p> <code>UPLOAD_ARTIFACTS</code>: Build output artifacts are being uploaded to the output location.</p> </li> </ul>'
-      phaseStatus:
-        $ref: '#/definitions/StatusType'
-        description: '<p>The current status of the build phase. Valid values include:</p> <ul> <li> <p> <code>FAILED</code>: The build phase failed.</p> </li> <li> <p> <code>FAULT</code>: The build phase faulted.</p> </li> <li> <p> <code>IN_PROGRESS</code>: The build phase is still in progress.</p> </li> <li> <p> <code>QUEUED</code>: The build has been submitted and is queued behind other submitted builds.</p> </li> <li> <p> <code>STOPPED</code>: The build phase stopped.</p> </li> <li> <p> <code>SUCCEEDED</code>: The build phase succeeded.</p> </li> <li> <p> <code>TIMED_OUT</code>: The build phase timed out.</p> </li> </ul>'
-      startTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'When the build phase started, expressed in Unix time format.'
-      endTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'When the build phase ended, expressed in Unix time format.'
-      durationInSeconds:
-        $ref: '#/definitions/WrapperLong'
-        description: 'How long, in seconds, between the starting and ending times of the build''s phase.'
-      contexts:
-        $ref: '#/definitions/PhaseContexts'
-        description: 'Additional information about a build phase, especially to help troubleshoot a failed build.'
-    description: Information about a stage for a build.
+      $ref: '#/definitions/[object Object]'
+  Builds:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  BuildsNotDeleted:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   CacheType:
     type: string
     enum:
       - NO_CACHE
       - S3
-  LogsConfigStatusType:
-    type: string
-    enum:
-      - ENABLED
-      - DISABLED
   CloudWatchLogsConfig:
     type: object
     required:
       - status
     properties:
       status:
-        $ref: '#/definitions/LogsConfigStatusType'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The current status of the logs in Amazon CloudWatch Logs for a build project. Valid values are:</p> <ul> <li> <p> <code>ENABLED</code>: Amazon CloudWatch Logs are enabled for this build project.</p> </li> <li> <p> <code>DISABLED</code>: Amazon CloudWatch Logs are not enabled for this build project.</p> </li> </ul>'
       groupName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The group name of the logs in Amazon CloudWatch Logs. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html">Working with Log Groups and Log Streams</a>. '
       streamName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The prefix of the stream name of the Amazon CloudWatch Logs. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html">Working with Log Groups and Log Streams</a>. '
     description: ' Information about Amazon CloudWatch Logs for a build project. '
   ComputeType:
@@ -1735,178 +1569,93 @@ definitions:
       - BUILD_GENERAL1_SMALL
       - BUILD_GENERAL1_MEDIUM
       - BUILD_GENERAL1_LARGE
-  ProjectName:
-    type: string
-    pattern: '[A-Za-z0-9][A-Za-z0-9\-_]{1,254}'
-    minLength: 2
-    maxLength: 255
-  ProjectDescription:
-    type: string
-    minLength: 0
-    maxLength: 255
-  ProjectArtifacts:
-    type: object
-    required:
-      - type
-    properties:
-      type:
-        $ref: '#/definitions/ArtifactsType'
-        description: '<p>The type of build output artifact. Valid values include:</p> <ul> <li> <p> <code>CODEPIPELINE</code>: The build project has build output generated through AWS CodePipeline.</p> </li> <li> <p> <code>NO_ARTIFACTS</code>: The build project does not produce any build output.</p> </li> <li> <p> <code>S3</code>: The build project stores build output in Amazon Simple Storage Service (Amazon S3).</p> </li> </ul>'
-      location:
-        $ref: '#/definitions/String'
-        description: '<p>Information about the build output artifact location:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output locations instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the name of the output bucket.</p> </li> </ul>'
-      path:
-        $ref: '#/definitions/String'
-        description: '<p>Along with <code>namespaceType</code> and <code>name</code>, the pattern that AWS CodeBuild uses to name and store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the path to the output artifact. If <code>path</code> is not specified, <code>path</code> is not used.</p> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>NONE</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, the output artifact is stored in the output bucket at <code>MyArtifacts/MyArtifact.zip</code>.</p>'
-      namespaceType:
-        $ref: '#/definitions/ArtifactNamespace'
-        description: '<p>Along with <code>path</code> and <code>name</code>, the pattern that AWS CodeBuild uses to determine the name and location to store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>BUILD_ID</code>: Include the build ID in the location of the build output artifact.</p> </li> <li> <p> <code>NONE</code>: Do not include the build ID. This is the default if <code>namespaceType</code> is not specified.</p> </li> </ul> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, the output artifact is stored in <code>MyArtifacts/<i>build-ID</i>/MyArtifact.zip</code>.</p>'
-      name:
-        $ref: '#/definitions/String'
-        description: '<p>Along with <code>path</code> and <code>namespaceType</code>, the pattern that AWS CodeBuild uses to name and store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the name of the output artifact object. If you set the name to be a forward slash ("/"), the artifact is stored in the root of the output bucket.</p> </li> </ul> <p>For example:</p> <ul> <li> <p> If <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, then the output artifact is stored in <code>MyArtifacts/<i>build-ID</i>/MyArtifact.zip</code>. </p> </li> <li> <p> If <code>path</code> is empty, <code>namespaceType</code> is set to <code>NONE</code>, and <code>name</code> is set to "<code>/</code>", the output artifact is stored in the root of the output bucket. </p> </li> <li> <p> If <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to "<code>/</code>", the output artifact is stored in <code>MyArtifacts/<i>build-ID</i> </code>. </p> </li> </ul>'
-      packaging:
-        $ref: '#/definitions/ArtifactPackaging'
-        description: '<p>The type of build output artifact to create:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output artifacts instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>NONE</code>: AWS CodeBuild creates in the output bucket a folder that contains the build output. This is the default if <code>packaging</code> is not specified.</p> </li> <li> <p> <code>ZIP</code>: AWS CodeBuild creates in the output bucket a ZIP file that contains the build output.</p> </li> </ul> </li> </ul>'
-      overrideArtifactName:
-        $ref: '#/definitions/WrapperBoolean'
-        description: ' If this flag is set, a name specified in the build spec file overrides the artifact name. The name specified in a build spec file is calculated at build time and uses the Shell Command Language. For example, you can append a date and time to your artifact name so that it is always unique. '
-      encryptionDisabled:
-        $ref: '#/definitions/WrapperBoolean'
-        description: ' Set to true if you do not want your output artifacts encrypted. This option is valid only if your artifacts type is Amazon Simple Storage Service (Amazon S3). If this is set with another artifacts type, an invalidInputException is thrown. '
-      artifactIdentifier:
-        $ref: '#/definitions/String'
-        description: ' An identifier for this artifact definition. '
-    description: Information about the build output artifacts for the build project.
-  ProjectArtifactsList:
-    type: array
-    items:
-      $ref: '#/definitions/ProjectArtifacts'
-    minItems: 0
-    maxItems: 12
-  TimeOut:
-    type: integer
-    minimum: 5
-    maximum: 480
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 0
-    maxItems: 50
-  LogsConfig:
-    type: object
-    properties:
-      cloudWatchLogs:
-        $ref: '#/definitions/CloudWatchLogsConfig'
-        description: ' Information about Amazon CloudWatch Logs for a build project. Amazon CloudWatch Logs are enabled by default. '
-      s3Logs:
-        $ref: '#/definitions/S3LogsConfig'
-        description: ' Information about logs built to an S3 bucket for a build project. S3 logs are not enabled by default. '
-    description: ' Information about logs for a build project. These can be logs in Amazon CloudWatch Logs, built in a specified S3 bucket, or both. '
-  Project:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/ProjectName'
-        description: The name of the build project.
-      arn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the build project.
-      description:
-        $ref: '#/definitions/ProjectDescription'
-        description: A description that makes the build project easy to identify.
-      source:
-        $ref: '#/definitions/ProjectSource'
-        description: Information about the build input source code for this build project.
-      secondarySources:
-        $ref: '#/definitions/ProjectSources'
-        description: ' An array of <code>ProjectSource</code> objects. '
-      artifacts:
-        $ref: '#/definitions/ProjectArtifacts'
-        description: Information about the build output artifacts for the build project.
-      secondaryArtifacts:
-        $ref: '#/definitions/ProjectArtifactsList'
-        description: ' An array of <code>ProjectArtifacts</code> objects. '
-      cache:
-        $ref: '#/definitions/ProjectCache'
-        description: Information about the cache for the build project.
-      environment:
-        $ref: '#/definitions/ProjectEnvironment'
-        description: Information about the build environment for this build project.
-      serviceRole:
-        $ref: '#/definitions/NonEmptyString'
-        description: The ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
-      timeoutInMinutes:
-        $ref: '#/definitions/TimeOut'
-        description: 'How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.'
-      queuedTimeoutInMinutes:
-        $ref: '#/definitions/TimeOut'
-        description: ' The number of minutes a build is allowed to be queued before it times out. '
-      encryptionKey:
-        $ref: '#/definitions/NonEmptyString'
-        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>This is expressed either as the Amazon Resource Name (ARN) of the CMK or, if specified, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
-      tags:
-        $ref: '#/definitions/TagList'
-        description: <p>The tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
-      created:
-        $ref: '#/definitions/Timestamp'
-        description: 'When the build project was created, expressed in Unix time format.'
-      lastModified:
-        $ref: '#/definitions/Timestamp'
-        description: 'When the build project''s settings were last modified, expressed in Unix time format.'
-      webhook:
-        $ref: '#/definitions/Webhook'
-        description: Information about a webhook that connects repository events to a build project in AWS CodeBuild.
-      vpcConfig:
-        $ref: '#/definitions/VpcConfig'
-        description: Information about the VPC configuration that AWS CodeBuild accesses.
-      badge:
-        $ref: '#/definitions/ProjectBadge'
-        description: Information about the build badge for the build project.
-      logsConfig:
-        $ref: '#/definitions/LogsConfig'
-        description: ' Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, an S3 bucket, or both. '
-    description: Information about a build project.
-  Webhook:
-    type: object
-    properties:
-      url:
-        $ref: '#/definitions/NonEmptyString'
-        description: The URL to the webhook.
-      payloadUrl:
-        $ref: '#/definitions/NonEmptyString'
-        description: ' The AWS CodeBuild endpoint where webhook events are sent.'
-      secret:
-        $ref: '#/definitions/NonEmptyString'
-        description: <p> The secret token of the associated repository. </p> <note> <p> A Bitbucket webhook does not support <code>secret</code>. </p> </note>
-      branchFilter:
-        $ref: '#/definitions/String'
-        description: 'A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.'
-      lastModifiedSecret:
-        $ref: '#/definitions/Timestamp'
-        description: ' A timestamp that indicates the last time a repository''s secret token was modified. '
-    description: Information about a webhook that connects repository events to a build project in AWS CodeBuild.
-  ImageVersions:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   EnvironmentImage:
     type: object
     properties:
       name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the Docker image.
       description:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The description of the Docker image.
       versions:
-        $ref: '#/definitions/ImageVersions'
+        $ref: '#/definitions/[object Object]'
         description: A list of environment image versions.
     description: Information about a Docker image that is managed by AWS CodeBuild.
   EnvironmentImages:
     type: array
     items:
-      $ref: '#/definitions/EnvironmentImage'
+      $ref: '#/definitions/[object Object]'
+  EnvironmentLanguage:
+    type: object
+    properties:
+      language:
+        $ref: '#/definitions/[object Object]'
+        description: The programming language for the Docker images.
+      images:
+        $ref: '#/definitions/[object Object]'
+        description: The list of Docker images that are related by the specified programming language.
+    description: A set of Docker images that are related by programming language and are managed by AWS CodeBuild.
+  EnvironmentLanguages:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  EnvironmentPlatform:
+    type: object
+    properties:
+      platform:
+        $ref: '#/definitions/[object Object]'
+        description: The platform's name.
+      languages:
+        $ref: '#/definitions/[object Object]'
+        description: The list of programming languages that are available for the specified platform.
+    description: A set of Docker images that are related by platform and are managed by AWS CodeBuild.
+  EnvironmentPlatforms:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  EnvironmentType:
+    type: string
+    enum:
+      - WINDOWS_CONTAINER
+      - LINUX_CONTAINER
+  EnvironmentVariable:
+    type: object
+    required:
+      - name
+      - value
+    properties:
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: The name or key of the environment variable.
+      value:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The value of the environment variable.</p> <important> <p>We strongly discourage the use of environment variables to store sensitive values, especially AWS secret key IDs and secret access keys. Environment variables can be displayed in plain text using the AWS CodeBuild console and the AWS Command Line Interface (AWS CLI).</p> </important>'
+      type:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The type of environment variable. Valid values include:</p> <ul> <li> <p> <code>PARAMETER_STORE</code>: An environment variable stored in Amazon EC2 Systems Manager Parameter Store.</p> </li> <li> <p> <code>PLAINTEXT</code>: An environment variable in plaintext format.</p> </li> </ul>'
+    description: Information about an environment variable for a build project or a build.
+  EnvironmentVariableType:
+    type: string
+    enum:
+      - PLAINTEXT
+      - PARAMETER_STORE
+  EnvironmentVariables:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  GitCloneDepth:
+    type: integer
+    minimum: 0
+  ImageVersions:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  KeyInput:
+    type: string
+    pattern: '^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$'
+    minLength: 1
+    maxLength: 127
   LanguageType:
     type: string
     enum:
@@ -1920,20 +1669,70 @@ definitions:
       - DOTNET
       - BASE
       - PHP
-  EnvironmentLanguage:
+  LogsConfig:
     type: object
     properties:
-      language:
-        $ref: '#/definitions/LanguageType'
-        description: The programming language for the Docker images.
-      images:
-        $ref: '#/definitions/EnvironmentImages'
-        description: The list of Docker images that are related by the specified programming language.
-    description: A set of Docker images that are related by programming language and are managed by AWS CodeBuild.
-  EnvironmentLanguages:
+      cloudWatchLogs:
+        $ref: '#/definitions/[object Object]'
+        description: ' Information about Amazon CloudWatch Logs for a build project. Amazon CloudWatch Logs are enabled by default. '
+      s3Logs:
+        $ref: '#/definitions/[object Object]'
+        description: ' Information about logs built to an S3 bucket for a build project. S3 logs are not enabled by default. '
+    description: ' Information about logs for a build project. These can be logs in Amazon CloudWatch Logs, built in a specified S3 bucket, or both. '
+  LogsConfigStatusType:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+  LogsLocation:
+    type: object
+    properties:
+      groupName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the Amazon CloudWatch Logs group for the build logs.
+      streamName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the Amazon CloudWatch Logs stream for the build logs.
+      deepLink:
+        $ref: '#/definitions/[object Object]'
+        description: The URL to an individual build log in Amazon CloudWatch Logs.
+      s3DeepLink:
+        $ref: '#/definitions/[object Object]'
+        description: ' The URL to a build log in an S3 bucket. '
+      cloudWatchLogs:
+        $ref: '#/definitions/[object Object]'
+        description: ' Information about Amazon CloudWatch Logs for a build project. '
+      s3Logs:
+        $ref: '#/definitions/[object Object]'
+        description: ' Information about S3 logs for a build project. '
+    description: Information about build logs in Amazon CloudWatch Logs.
+  NetworkInterface:
+    type: object
+    properties:
+      subnetId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the subnet.
+      networkInterfaceId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the network interface.
+    description: Describes a network interface.
+  NonEmptyString:
+    type: string
+    minLength: 1
+  PhaseContext:
+    type: object
+    properties:
+      statusCode:
+        $ref: '#/definitions/[object Object]'
+        description: The status code for the context of the build phase.
+      message:
+        $ref: '#/definitions/[object Object]'
+        description: An explanation of the build phase's context. This might include a command ID and an exit code.
+    description: Additional information about a build phase that has an error. You can use this information for troubleshooting.
+  PhaseContexts:
     type: array
     items:
-      $ref: '#/definitions/EnvironmentLanguage'
+      $ref: '#/definitions/[object Object]'
   PlatformType:
     type: string
     enum:
@@ -1941,53 +1740,254 @@ definitions:
       - AMAZON_LINUX
       - UBUNTU
       - WINDOWS_SERVER
-  EnvironmentPlatform:
+  Project:
     type: object
-    properties:
-      platform:
-        $ref: '#/definitions/PlatformType'
-        description: The platform's name.
-      languages:
-        $ref: '#/definitions/EnvironmentLanguages'
-        description: The list of programming languages that are available for the specified platform.
-    description: A set of Docker images that are related by platform and are managed by AWS CodeBuild.
-  EnvironmentPlatforms:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentPlatform'
-  EnvironmentType:
-    type: string
-    enum:
-      - WINDOWS_CONTAINER
-      - LINUX_CONTAINER
-  EnvironmentVariableType:
-    type: string
-    enum:
-      - PLAINTEXT
-      - PARAMETER_STORE
-  EnvironmentVariable:
-    type: object
-    required:
-      - name
-      - value
     properties:
       name:
-        $ref: '#/definitions/NonEmptyString'
-        description: The name or key of the environment variable.
-      value:
-        $ref: '#/definitions/String'
-        description: '<p>The value of the environment variable.</p> <important> <p>We strongly discourage the use of environment variables to store sensitive values, especially AWS secret key IDs and secret access keys. Environment variables can be displayed in plain text using the AWS CodeBuild console and the AWS Command Line Interface (AWS CLI).</p> </important>'
+        $ref: '#/definitions/[object Object]'
+        description: The name of the build project.
+      arn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the build project.
+      description:
+        $ref: '#/definitions/[object Object]'
+        description: A description that makes the build project easy to identify.
+      source:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the build input source code for this build project.
+      secondarySources:
+        $ref: '#/definitions/[object Object]'
+        description: ' An array of <code>ProjectSource</code> objects. '
+      artifacts:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the build output artifacts for the build project.
+      secondaryArtifacts:
+        $ref: '#/definitions/[object Object]'
+        description: ' An array of <code>ProjectArtifacts</code> objects. '
+      cache:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the cache for the build project.
+      environment:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the build environment for this build project.
+      serviceRole:
+        $ref: '#/definitions/[object Object]'
+        description: The ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
+      timeoutInMinutes:
+        $ref: '#/definitions/[object Object]'
+        description: 'How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.'
+      queuedTimeoutInMinutes:
+        $ref: '#/definitions/[object Object]'
+        description: ' The number of minutes a build is allowed to be queued before it times out. '
+      encryptionKey:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>This is expressed either as the Amazon Resource Name (ARN) of the CMK or, if specified, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+      tags:
+        $ref: '#/definitions/[object Object]'
+        description: <p>The tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
+      created:
+        $ref: '#/definitions/[object Object]'
+        description: 'When the build project was created, expressed in Unix time format.'
+      lastModified:
+        $ref: '#/definitions/[object Object]'
+        description: 'When the build project''s settings were last modified, expressed in Unix time format.'
+      webhook:
+        $ref: '#/definitions/[object Object]'
+        description: Information about a webhook that connects repository events to a build project in AWS CodeBuild.
+      vpcConfig:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the VPC configuration that AWS CodeBuild accesses.
+      badge:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the build badge for the build project.
+      logsConfig:
+        $ref: '#/definitions/[object Object]'
+        description: ' Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, an S3 bucket, or both. '
+    description: Information about a build project.
+  ProjectArtifacts:
+    type: object
+    required:
+      - type
+    properties:
       type:
-        $ref: '#/definitions/EnvironmentVariableType'
-        description: '<p>The type of environment variable. Valid values include:</p> <ul> <li> <p> <code>PARAMETER_STORE</code>: An environment variable stored in Amazon EC2 Systems Manager Parameter Store.</p> </li> <li> <p> <code>PLAINTEXT</code>: An environment variable in plaintext format.</p> </li> </ul>'
-    description: Information about an environment variable for a build project or a build.
-  EnvironmentVariables:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The type of build output artifact. Valid values include:</p> <ul> <li> <p> <code>CODEPIPELINE</code>: The build project has build output generated through AWS CodePipeline.</p> </li> <li> <p> <code>NO_ARTIFACTS</code>: The build project does not produce any build output.</p> </li> <li> <p> <code>S3</code>: The build project stores build output in Amazon Simple Storage Service (Amazon S3).</p> </li> </ul>'
+      location:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Information about the build output artifact location:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output locations instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the name of the output bucket.</p> </li> </ul>'
+      path:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Along with <code>namespaceType</code> and <code>name</code>, the pattern that AWS CodeBuild uses to name and store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the path to the output artifact. If <code>path</code> is not specified, <code>path</code> is not used.</p> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>NONE</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, the output artifact is stored in the output bucket at <code>MyArtifacts/MyArtifact.zip</code>.</p>'
+      namespaceType:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Along with <code>path</code> and <code>name</code>, the pattern that AWS CodeBuild uses to determine the name and location to store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>BUILD_ID</code>: Include the build ID in the location of the build output artifact.</p> </li> <li> <p> <code>NONE</code>: Do not include the build ID. This is the default if <code>namespaceType</code> is not specified.</p> </li> </ul> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, the output artifact is stored in <code>MyArtifacts/<i>build-ID</i>/MyArtifact.zip</code>.</p>'
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Along with <code>path</code> and <code>namespaceType</code>, the pattern that AWS CodeBuild uses to name and store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the name of the output artifact object. If you set the name to be a forward slash ("/"), the artifact is stored in the root of the output bucket.</p> </li> </ul> <p>For example:</p> <ul> <li> <p> If <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, then the output artifact is stored in <code>MyArtifacts/<i>build-ID</i>/MyArtifact.zip</code>. </p> </li> <li> <p> If <code>path</code> is empty, <code>namespaceType</code> is set to <code>NONE</code>, and <code>name</code> is set to "<code>/</code>", the output artifact is stored in the root of the output bucket. </p> </li> <li> <p> If <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to "<code>/</code>", the output artifact is stored in <code>MyArtifacts/<i>build-ID</i> </code>. </p> </li> </ul>'
+      packaging:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The type of build output artifact to create:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output artifacts instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>NONE</code>: AWS CodeBuild creates in the output bucket a folder that contains the build output. This is the default if <code>packaging</code> is not specified.</p> </li> <li> <p> <code>ZIP</code>: AWS CodeBuild creates in the output bucket a ZIP file that contains the build output.</p> </li> </ul> </li> </ul>'
+      overrideArtifactName:
+        $ref: '#/definitions/[object Object]'
+        description: ' If this flag is set, a name specified in the build spec file overrides the artifact name. The name specified in a build spec file is calculated at build time and uses the Shell Command Language. For example, you can append a date and time to your artifact name so that it is always unique. '
+      encryptionDisabled:
+        $ref: '#/definitions/[object Object]'
+        description: ' Set to true if you do not want your output artifacts encrypted. This option is valid only if your artifacts type is Amazon Simple Storage Service (Amazon S3). If this is set with another artifacts type, an invalidInputException is thrown. '
+      artifactIdentifier:
+        $ref: '#/definitions/[object Object]'
+        description: ' An identifier for this artifact definition. '
+    description: Information about the build output artifacts for the build project.
+  ProjectArtifactsList:
     type: array
     items:
-      $ref: '#/definitions/EnvironmentVariable'
-  GitCloneDepth:
-    type: integer
-    minimum: 0
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 12
+  ProjectBadge:
+    type: object
+    properties:
+      badgeEnabled:
+        $ref: '#/definitions/[object Object]'
+        description: Set this to true to generate a publicly accessible URL for your project's build badge.
+      badgeRequestUrl:
+        $ref: '#/definitions/[object Object]'
+        description: <p>The publicly-accessible URL through which you can access the build badge for your project. </p> <p>The publicly accessible URL through which you can access the build badge for your project. </p>
+    description: Information about the build badge for the build project.
+  ProjectCache:
+    type: object
+    required:
+      - type
+    properties:
+      type:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The type of cache used by the build project. Valid values include:</p> <ul> <li> <p> <code>NO_CACHE</code>: The build project does not use any cache.</p> </li> <li> <p> <code>S3</code>: The build project reads and writes from and to S3.</p> </li> </ul>'
+      location:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Information about the cache location: </p> <ul> <li> <p> <code>NO_CACHE</code>: This value is ignored.</p> </li> <li> <p> <code>S3</code>: This is the S3 bucket name/prefix.</p> </li> </ul>'
+    description: Information about the cache for the build project.
+  ProjectDescription:
+    type: string
+    minLength: 0
+    maxLength: 255
+  ProjectEnvironment:
+    type: object
+    required:
+      - type
+      - image
+      - computeType
+    properties:
+      type:
+        $ref: '#/definitions/[object Object]'
+        description: The type of build environment to use for related builds.
+      image:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the Docker image to use for this build project.
+      computeType:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Information about the compute resources the build project uses. Available values include:</p> <ul> <li> <p> <code>BUILD_GENERAL1_SMALL</code>: Use up to 3 GB memory and 2 vCPUs for builds.</p> </li> <li> <p> <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 7 GB memory and 4 vCPUs for builds.</p> </li> <li> <p> <code>BUILD_GENERAL1_LARGE</code>: Use up to 15 GB memory and 8 vCPUs for builds.</p> </li> </ul>'
+      environmentVariables:
+        $ref: '#/definitions/[object Object]'
+        description: A set of environment variables to make available to builds for this build project.
+      privilegedMode:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Enables running the Docker daemon inside a Docker container. Set to true only if the build project is be used to build Docker images, and the specified build environment image is not provided by AWS CodeBuild with Docker support. Otherwise, all associated builds that attempt to interact with the Docker daemon fail. You must also start the Docker daemon so that builds can interact with it. One way to do this is to initialize the Docker daemon during the install phase of your build spec by running the following build commands. (Do not run these commands if the specified build environment image is provided by AWS CodeBuild with Docker support.)</p> <p>If the operating system''s base image is Ubuntu Linux:</p> <p> <code>- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&amp; - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"</code> </p> <p>If the operating system''s base image is Alpine Linux, add the <code>-t</code> argument to <code>timeout</code>:</p> <p> <code>- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&amp; - timeout 15 -t sh -c "until docker info; do echo .; sleep 1; done"</code> </p>'
+      certificate:
+        $ref: '#/definitions/[object Object]'
+        description: The certificate to use with this build project.
+    description: Information about the build environment of the build project.
+  ProjectName:
+    type: string
+    pattern: '[A-Za-z0-9][A-Za-z0-9\-_]{1,254}'
+    minLength: 2
+    maxLength: 255
+  ProjectNames:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
+  ProjectSecondarySourceVersions:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 12
+  ProjectSortByType:
+    type: string
+    enum:
+      - NAME
+      - CREATED_TIME
+      - LAST_MODIFIED_TIME
+  ProjectSource:
+    type: object
+    required:
+      - type
+    properties:
+      type:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub repository.</p> </li> <li> <p> <code>NO_SOURCE</code>: The project does not have input source code.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon Simple Storage Service (Amazon S3) input bucket.</p> </li> </ul>'
+      location:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Information about the location of the source code to be built. Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, <code>location</code> should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline''s source action instead of this value.</p> </li> <li> <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec (for example, <code>https://git-codecommit.<i>region-ID</i>.amazonaws.com/v1/repos/<i>repo-name</i> </code>).</p> </li> <li> <p>For source code in an Amazon Simple Storage Service (Amazon S3) input bucket, one of the following. </p> <ul> <li> <p> The path to the ZIP file that contains the source code (for example, <code> <i>bucket-name</i>/<i>path</i>/<i>to</i>/<i>object-name</i>.zip</code>). </p> </li> <li> <p> The path to the folder that contains the source code (for example, <code> <i>bucket-name</i>/<i>path</i>/<i>to</i>/<i>source-code</i>/<i>folder</i>/</code>). </p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec. You must connect your AWS account to your GitHub account. Use the AWS CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub <b>Authorize application</b> page, for <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to allow AWS CodeBuild to have access to, and then choose <b>Authorize application</b>. (After you have connected to your GitHub account, you do not need to finish creating the build project. You can leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object''s <code>type</code> value to <code>OAUTH</code>.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec. You must connect your AWS account to your Bitbucket account. Use the AWS CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket <b>Confirm access to your account</b> page, choose <b>Grant access</b>. (After you have connected to your Bitbucket account, you do not need to finish creating the build project. You can leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object''s <code>type</code> value to <code>OAUTH</code>.</p> </li> </ul>'
+      gitCloneDepth:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the git clone depth for the build project.
+      buildspec:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The build spec declaration to use for the builds in this build project.</p> <p>If this value is not specified, a build spec must be included along with the source code to be built.</p>'
+      auth:
+        $ref: '#/definitions/[object Object]'
+        description: <p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly.</p>
+      reportBuildStatus:
+        $ref: '#/definitions/[object Object]'
+        description: ' Set to true to report the status of a build''s start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an invalidInputException is thrown. '
+      insecureSsl:
+        $ref: '#/definitions/[object Object]'
+        description: Enable this flag to ignore SSL warnings while connecting to the project source code.
+      sourceIdentifier:
+        $ref: '#/definitions/[object Object]'
+        description: ' An identifier for this project source. '
+    description: Information about the build input source code for the build project.
+  ProjectSourceVersion:
+    type: object
+    required:
+      - sourceIdentifier
+      - sourceVersion
+    properties:
+      sourceIdentifier:
+        $ref: '#/definitions/[object Object]'
+        description: An identifier for a source in the build project.
+      sourceVersion:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The source version for the corresponding source identifier. If specified, must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul>'
+    description: A source identifier and its corresponding version.
+  ProjectSources:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 12
+  Projects:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  S3LogsConfig:
+    type: object
+    required:
+      - status
+    properties:
+      status:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The current status of the S3 build logs. Valid values are:</p> <ul> <li> <p> <code>ENABLED</code>: S3 build logs are enabled for this build project.</p> </li> <li> <p> <code>DISABLED</code>: S3 build logs are not enabled for this build project.</p> </li> </ul>'
+      location:
+        $ref: '#/definitions/[object Object]'
+        description: ' The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is <code>my-bucket</code>, and your path prefix is <code>build-log</code>, then acceptable formats are <code>my-bucket/build-log</code> or <code>arn:aws:s3:::my-bucket/build-log</code>. '
+    description: ' Information about S3 logs for a build project. '
+  SecurityGroupIds:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    maxItems: 5
   SensitiveNonEmptyString:
     type: string
     minLength: 1
@@ -1998,71 +1998,44 @@ definitions:
       - GITHUB
       - BITBUCKET
       - GITHUB_ENTERPRISE
-  KeyInput:
-    type: string
-    pattern: '^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$'
-    minLength: 1
-    maxLength: 127
   SortOrderType:
     type: string
     enum:
       - ASCENDING
       - DESCENDING
-  ProjectSortByType:
+  SourceAuth:
+    type: object
+    required:
+      - type
+    properties:
+      type:
+        $ref: '#/definitions/[object Object]'
+        description: '<note> <p> This data type is deprecated and is no longer accurate or used. </p> </note> <p>The authorization type to use. The only valid value is <code>OAUTH</code>, which represents the OAuth authorization type.</p>'
+      resource:
+        $ref: '#/definitions/[object Object]'
+        description: The resource value that applies to the specified authorization type.
+    description: <p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly.</p>
+  SourceAuthType:
     type: string
     enum:
-      - NAME
-      - CREATED_TIME
-      - LAST_MODIFIED_TIME
+      - OAUTH
+  SourceCredentialsInfo:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/[object Object]'
+        description: ' The Amazon Resource Name (ARN) of the token. '
+      serverType:
+        $ref: '#/definitions/[object Object]'
+        description: ' The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, or BITBUCKET. '
+      authType:
+        $ref: '#/definitions/[object Object]'
+        description: ' The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, or PERSONAL_ACCESS_TOKEN. '
+    description: ' Information about the credentials for a GitHub, GitHub Enterprise, or Bitbucket repository. '
   SourceCredentialsInfos:
     type: array
     items:
-      $ref: '#/definitions/SourceCredentialsInfo'
-  S3LogsConfig:
-    type: object
-    required:
-      - status
-    properties:
-      status:
-        $ref: '#/definitions/LogsConfigStatusType'
-        description: '<p>The current status of the S3 build logs. Valid values are:</p> <ul> <li> <p> <code>ENABLED</code>: S3 build logs are enabled for this build project.</p> </li> <li> <p> <code>DISABLED</code>: S3 build logs are not enabled for this build project.</p> </li> </ul>'
-      location:
-        $ref: '#/definitions/String'
-        description: ' The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is <code>my-bucket</code>, and your path prefix is <code>build-log</code>, then acceptable formats are <code>my-bucket/build-log</code> or <code>arn:aws:s3:::my-bucket/build-log</code>. '
-    description: ' Information about S3 logs for a build project. '
-  PhaseContext:
-    type: object
-    properties:
-      statusCode:
-        $ref: '#/definitions/String'
-        description: The status code for the context of the build phase.
-      message:
-        $ref: '#/definitions/String'
-        description: An explanation of the build phase's context. This might include a command ID and an exit code.
-    description: Additional information about a build phase that has an error. You can use this information for troubleshooting.
-  ProjectBadge:
-    type: object
-    properties:
-      badgeEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Set this to true to generate a publicly accessible URL for your project's build badge.
-      badgeRequestUrl:
-        $ref: '#/definitions/String'
-        description: <p>The publicly-accessible URL through which you can access the build badge for your project. </p> <p>The publicly accessible URL through which you can access the build badge for your project. </p>
-    description: Information about the build badge for the build project.
-  ProjectSourceVersion:
-    type: object
-    required:
-      - sourceIdentifier
-      - sourceVersion
-    properties:
-      sourceIdentifier:
-        $ref: '#/definitions/String'
-        description: An identifier for a source in the build project.
-      sourceVersion:
-        $ref: '#/definitions/String'
-        description: '<p>The source version for the corresponding source identifier. If specified, must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch''s HEAD commit ID is used. If not specified, the default branch''s HEAD commit ID is used.</p> </li> <li> <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul>'
-    description: A source identifier and its corresponding version.
+      $ref: '#/definitions/[object Object]'
   SourceType:
     type: string
     enum:
@@ -2073,57 +2046,85 @@ definitions:
       - BITBUCKET
       - GITHUB_ENTERPRISE
       - NO_SOURCE
-  SourceAuth:
-    type: object
-    required:
-      - type
-    properties:
-      type:
-        $ref: '#/definitions/SourceAuthType'
-        description: '<note> <p> This data type is deprecated and is no longer accurate or used. </p> </note> <p>The authorization type to use. The only valid value is <code>OAUTH</code>, which represents the OAuth authorization type.</p>'
-      resource:
-        $ref: '#/definitions/String'
-        description: The resource value that applies to the specified authorization type.
-    description: <p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly.</p>
-  SecurityGroupIds:
-    type: array
-    items:
-      $ref: '#/definitions/NonEmptyString'
-    maxItems: 5
-  SourceAuthType:
+  StatusType:
     type: string
     enum:
-      - OAUTH
-  SourceCredentialsInfo:
-    type: object
-    properties:
-      arn:
-        $ref: '#/definitions/NonEmptyString'
-        description: ' The Amazon Resource Name (ARN) of the token. '
-      serverType:
-        $ref: '#/definitions/ServerType'
-        description: ' The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, or BITBUCKET. '
-      authType:
-        $ref: '#/definitions/AuthType'
-        description: ' The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, or PERSONAL_ACCESS_TOKEN. '
-    description: ' Information about the credentials for a GitHub, GitHub Enterprise, or Bitbucket repository. '
+      - SUCCEEDED
+      - FAILED
+      - FAULT
+      - TIMED_OUT
+      - IN_PROGRESS
+      - STOPPED
+  String:
+    type: string
   Subnets:
     type: array
     items:
-      $ref: '#/definitions/NonEmptyString'
+      $ref: '#/definitions/[object Object]'
     maxItems: 16
+  Tag:
+    type: object
+    properties:
+      key:
+        $ref: '#/definitions/[object Object]'
+        description: The tag's key.
+      value:
+        $ref: '#/definitions/[object Object]'
+        description: The tag's value.
+    description: '<p>A tag, consisting of a key and a value.</p> <p>This tag is available for use by AWS services that support tags in AWS CodeBuild.</p>'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 50
+  TimeOut:
+    type: integer
+    minimum: 5
+    maximum: 480
+  Timestamp:
+    type: string
+    format: date-time
   ValueInput:
     type: string
     pattern: '^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$'
     minLength: 1
     maxLength: 255
-  Tag:
+  VpcConfig:
     type: object
     properties:
-      key:
-        $ref: '#/definitions/KeyInput'
-        description: The tag's key.
-      value:
-        $ref: '#/definitions/ValueInput'
-        description: The tag's value.
-    description: '<p>A tag, consisting of a key and a value.</p> <p>This tag is available for use by AWS services that support tags in AWS CodeBuild.</p>'
+      vpcId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the Amazon VPC.
+      subnets:
+        $ref: '#/definitions/[object Object]'
+        description: A list of one or more subnet IDs in your Amazon VPC.
+      securityGroupIds:
+        $ref: '#/definitions/[object Object]'
+        description: A list of one or more security groups IDs in your Amazon VPC.
+    description: Information about the VPC configuration that AWS CodeBuild accesses.
+  Webhook:
+    type: object
+    properties:
+      url:
+        $ref: '#/definitions/[object Object]'
+        description: The URL to the webhook.
+      payloadUrl:
+        $ref: '#/definitions/[object Object]'
+        description: ' The AWS CodeBuild endpoint where webhook events are sent.'
+      secret:
+        $ref: '#/definitions/[object Object]'
+        description: <p> The secret token of the associated repository. </p> <note> <p> A Bitbucket webhook does not support <code>secret</code>. </p> </note>
+      branchFilter:
+        $ref: '#/definitions/[object Object]'
+        description: 'A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.'
+      lastModifiedSecret:
+        $ref: '#/definitions/[object Object]'
+        description: ' A timestamp that indicates the last time a repository''s secret token was modified. '
+    description: Information about a webhook that connects repository events to a build project in AWS CodeBuild.
+  WrapperBoolean:
+    type: boolean
+  WrapperInt:
+    type: integer
+  WrapperLong:
+    type: integer

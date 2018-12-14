@@ -3083,10 +3083,10 @@ definitions:
     type: object
     properties:
       repositories:
-        $ref: '#/definitions/RepositoryMetadataList'
+        $ref: '#/definitions/[object Object]'
         description: A list of repositories returned by the batch get repositories operation.
       repositoriesNotFound:
-        $ref: '#/definitions/RepositoryNotFoundList'
+        $ref: '#/definitions/[object Object]'
         description: Returns a list of repository names for which information could not be found.
     description: Represents the output of a batch get repositories operation.
   BatchGetRepositoriesInput:
@@ -3095,7 +3095,7 @@ definitions:
       - repositoryNames
     properties:
       repositoryNames:
-        $ref: '#/definitions/RepositoryNameList'
+        $ref: '#/definitions/[object Object]'
         description: The names of the repositories to get information about.
     description: Represents the input of a batch get repositories operation.
   RepositoryNamesRequiredException: {}
@@ -3114,13 +3114,13 @@ definitions:
       - commitId
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository in which you want to create the new branch.
       branchName:
-        $ref: '#/definitions/BranchName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the new branch to create.
       commitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the commit to point the new branch to.
     description: Represents the input of a create branch operation.
   RepositoryNameRequiredException: {}
@@ -3137,7 +3137,7 @@ definitions:
       - pullRequest
     properties:
       pullRequest:
-        $ref: '#/definitions/PullRequest'
+        $ref: '#/definitions/[object Object]'
         description: Information about the newly created pull request.
   CreatePullRequestInput:
     type: object
@@ -3146,16 +3146,16 @@ definitions:
       - targets
     properties:
       title:
-        $ref: '#/definitions/Title'
+        $ref: '#/definitions/[object Object]'
         description: The title of the pull request. This title will be used to identify the pull request to other users in the repository.
       description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: A description of the pull request.
       targets:
-        $ref: '#/definitions/TargetList'
+        $ref: '#/definitions/[object Object]'
         description: 'The targets for the pull request, including the source of the code to be reviewed (the source branch), and the destination where the creator of the pull request intends the code to be merged after the pull request is closed (the destination branch).'
       clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.</p> <note> <p>The AWS SDKs prepopulate client request tokens. If using an AWS SDK, you do not have to generate an idempotency token, as this will be done for you.</p> </note>'
   ClientRequestTokenRequiredException: {}
   InvalidClientRequestTokenException: {}
@@ -3178,7 +3178,7 @@ definitions:
     type: object
     properties:
       repositoryMetadata:
-        $ref: '#/definitions/RepositoryMetadata'
+        $ref: '#/definitions/[object Object]'
         description: Information about the newly created repository.
     description: Represents the output of a create repository operation.
   CreateRepositoryInput:
@@ -3187,10 +3187,10 @@ definitions:
       - repositoryName
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the new repository to be created.</p> <note> <p>The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. For a full description of the limits on repository names, see <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Limits</a> in the AWS CodeCommit User Guide. The suffix ".git" is prohibited.</p> </note>'
       repositoryDescription:
-        $ref: '#/definitions/RepositoryDescription'
+        $ref: '#/definitions/[object Object]'
         description: <p>A comment or description about the new repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p> </note>
     description: Represents the input of a create repository operation.
   RepositoryNameExistsException: {}
@@ -3200,7 +3200,7 @@ definitions:
     type: object
     properties:
       deletedBranch:
-        $ref: '#/definitions/BranchInfo'
+        $ref: '#/definitions/[object Object]'
         description: 'Information about the branch deleted by the operation, including the branch name and the commit ID that was the tip of the branch.'
     description: Represents the output of a delete branch operation.
   DeleteBranchInput:
@@ -3210,10 +3210,10 @@ definitions:
       - branchName
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository that contains the branch to be deleted.
       branchName:
-        $ref: '#/definitions/BranchName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the branch to delete.
     description: Represents the input of a delete branch operation.
   DefaultBranchCannotBeDeletedException: {}
@@ -3221,7 +3221,7 @@ definitions:
     type: object
     properties:
       comment:
-        $ref: '#/definitions/Comment'
+        $ref: '#/definitions/[object Object]'
         description: Information about the comment you just deleted.
   DeleteCommentContentInput:
     type: object
@@ -3229,7 +3229,7 @@ definitions:
       - commentId
     properties:
       commentId:
-        $ref: '#/definitions/CommentId'
+        $ref: '#/definitions/[object Object]'
         description: 'The unique, system-generated ID of the comment. To get this ID, use <a>GetCommentsForComparedCommit</a> or <a>GetCommentsForPullRequest</a>.'
   CommentDoesNotExistException: {}
   CommentIdRequiredException: {}
@@ -3244,16 +3244,16 @@ definitions:
       - filePath
     properties:
       commitId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The full commit ID of the commit that contains the change that deletes the file.
       blobId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The blob ID removed from the tree as part of deleting the file.
       treeId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The full SHA-1 pointer of the tree information for the commit that contains the delete file change.
       filePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: 'The fully-qualified path to the file that will be deleted, including the full name and extension of that file.'
   DeleteFileInput:
     type: object
@@ -3264,28 +3264,28 @@ definitions:
       - parentCommitId
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository that contains the file to delete.
       branchName:
-        $ref: '#/definitions/BranchName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the branch where the commit will be made deleting the file.
       filePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: 'The fully-qualified path to the file that will be deleted, including the full name and extension of that file. For example, /examples/file.md is a fully qualified path to a file named file.md in a folder named examples.'
       parentCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the commit that is the tip of the branch where you want to create the commit that will delete the file. This must be the HEAD commit for the branch. The commit that deletes the file will be created from this commit ID.
       keepEmptyFolders:
-        $ref: '#/definitions/KeepEmptyFolders'
+        $ref: '#/definitions/[object Object]'
         description: 'Specifies whether to delete the folder or directory that contains the file you want to delete if that file is the only object in the folder or directory. By default, empty folders will be deleted. This includes empty folders that are part of the directory structure. For example, if the path to a file is dir1/dir2/dir3/dir4, and dir2 and dir3 are empty, deleting the last file in dir4 will also delete the empty folders dir4, dir3, and dir2.'
       commitMessage:
-        $ref: '#/definitions/Message'
+        $ref: '#/definitions/[object Object]'
         description: 'The commit message you want to include as part of deleting the file. Commit messages are limited to 256 KB. If no message is specified, a default message will be used.'
       name:
-        $ref: '#/definitions/Name'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the author of the commit that deletes the file. If no name is specified, the user''s ARN will be used as the author name and committer name.'
       email:
-        $ref: '#/definitions/Email'
+        $ref: '#/definitions/[object Object]'
         description: 'The email address for the commit that deletes the file. If no email address is specified, the email address will be left blank.'
   ParentCommitIdRequiredException: {}
   InvalidParentCommitIdException: {}
@@ -3303,7 +3303,7 @@ definitions:
     type: object
     properties:
       repositoryId:
-        $ref: '#/definitions/RepositoryId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the repository that was deleted.
     description: Represents the output of a delete repository operation.
   DeleteRepositoryInput:
@@ -3312,7 +3312,7 @@ definitions:
       - repositoryName
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to delete.
     description: Represents the input of a delete repository operation.
   DescribePullRequestEventsOutput:
@@ -3321,10 +3321,10 @@ definitions:
       - pullRequestEvents
     properties:
       pullRequestEvents:
-        $ref: '#/definitions/PullRequestEventList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the pull request events.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: An enumeration token that can be used in a request to return the next batch of the results.
   DescribePullRequestEventsInput:
     type: object
@@ -3332,19 +3332,19 @@ definitions:
       - pullRequestId
     properties:
       pullRequestId:
-        $ref: '#/definitions/PullRequestId'
+        $ref: '#/definitions/[object Object]'
         description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
       pullRequestEventType:
-        $ref: '#/definitions/PullRequestEventType'
+        $ref: '#/definitions/[object Object]'
         description: Optional. The pull request event type about which you want to return information.
       actorArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with additional commits or changing the status of a pull request.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'A non-negative integer used to limit the number of returned results. The default is 100 events, which is also the maximum number of events that can be returned in a result.'
   PullRequestDoesNotExistException: {}
   InvalidPullRequestIdException: {}
@@ -3360,7 +3360,7 @@ definitions:
       - content
     properties:
       content:
-        $ref: '#/definitions/blob'
+        $ref: '#/definitions/[object Object]'
         description: 'The content of the blob, usually a file.'
     description: Represents the output of a get blob operation.
   GetBlobInput:
@@ -3370,10 +3370,10 @@ definitions:
       - blobId
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository that contains the blob.
       blobId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: 'The ID of the blob, which is its SHA-1 pointer.'
     description: Represents the input of a get blob operation.
   BlobIdRequiredException: {}
@@ -3384,24 +3384,24 @@ definitions:
     type: object
     properties:
       branch:
-        $ref: '#/definitions/BranchInfo'
+        $ref: '#/definitions/[object Object]'
         description: The name of the branch.
     description: Represents the output of a get branch operation.
   GetBranchInput:
     type: object
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository that contains the branch for which you want to retrieve information.
       branchName:
-        $ref: '#/definitions/BranchName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the branch for which you want to retrieve information.
     description: Represents the input of a get branch operation.
   GetCommentOutput:
     type: object
     properties:
       comment:
-        $ref: '#/definitions/Comment'
+        $ref: '#/definitions/[object Object]'
         description: The contents of the comment.
   GetCommentInput:
     type: object
@@ -3409,16 +3409,16 @@ definitions:
       - commentId
     properties:
       commentId:
-        $ref: '#/definitions/CommentId'
+        $ref: '#/definitions/[object Object]'
         description: 'The unique, system-generated ID of the comment. To get this ID, use <a>GetCommentsForComparedCommit</a> or <a>GetCommentsForPullRequest</a>.'
   GetCommentsForComparedCommitOutput:
     type: object
     properties:
       commentsForComparedCommitData:
-        $ref: '#/definitions/CommentsForComparedCommitData'
+        $ref: '#/definitions/[object Object]'
         description: A list of comment objects on the compared commit.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: An enumeration token that can be used in a request to return the next batch of the results.
   GetCommentsForComparedCommitInput:
     type: object
@@ -3427,28 +3427,28 @@ definitions:
       - afterCommitId
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository where you want to compare commits.
       beforeCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: 'To establish the directionality of the comparison, the full commit ID of the ''before'' commit.'
       afterCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: 'To establish the directionality of the comparison, the full commit ID of the ''after'' commit.'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'An enumeration token that when provided in a request, returns the next batch of the results. '
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'A non-negative integer used to limit the number of returned results. The default is 100 comments, and is configurable up to 500.'
   GetCommentsForPullRequestOutput:
     type: object
     properties:
       commentsForPullRequestData:
-        $ref: '#/definitions/CommentsForPullRequestData'
+        $ref: '#/definitions/[object Object]'
         description: An array of comment objects on the pull request.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: An enumeration token that can be used in a request to return the next batch of the results.
   GetCommentsForPullRequestInput:
     type: object
@@ -3456,22 +3456,22 @@ definitions:
       - pullRequestId
     properties:
       pullRequestId:
-        $ref: '#/definitions/PullRequestId'
+        $ref: '#/definitions/[object Object]'
         description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository that contains the pull request.
       beforeCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created.
       afterCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: The full commit ID of the commit in the source branch that was the tip of the branch at the time the comment was made.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: A non-negative integer used to limit the number of returned results. The default is 100 comments. You can return up to 500 comments with a single request.
   RepositoryNotAssociatedWithPullRequestException: {}
   GetCommitOutput:
@@ -3480,7 +3480,7 @@ definitions:
       - commit
     properties:
       commit:
-        $ref: '#/definitions/Commit'
+        $ref: '#/definitions/[object Object]'
         description: A commit data type object that contains information about the specified commit.
     description: Represents the output of a get commit operation.
   GetCommitInput:
@@ -3490,10 +3490,10 @@ definitions:
       - commitId
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to which the commit was made.
       commitId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The commit ID. Commit IDs are the full SHA of the commit.
     description: Represents the input of a get commit operation.
   CommitIdDoesNotExistException: {}
@@ -3501,10 +3501,10 @@ definitions:
     type: object
     properties:
       differences:
-        $ref: '#/definitions/DifferenceList'
+        $ref: '#/definitions/[object Object]'
         description: 'A differences data type object that contains information about the differences, including whether the difference is added, modified, or deleted (A, D, M).'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: An enumeration token that can be used in a request to return the next batch of the results.
   GetDifferencesInput:
     type: object
@@ -3513,25 +3513,25 @@ definitions:
       - afterCommitSpecifier
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository where you want to get differences.
       beforeCommitSpecifier:
-        $ref: '#/definitions/CommitName'
+        $ref: '#/definitions/[object Object]'
         description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, the full commit ID. Optional. If not specified, all changes prior to the <code>afterCommitSpecifier</code> value will be shown. If you do not use <code>beforeCommitSpecifier</code> in your request, consider limiting the results with <code>maxResults</code>.'
       afterCommitSpecifier:
-        $ref: '#/definitions/CommitName'
+        $ref: '#/definitions/[object Object]'
         description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit.'
       beforePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: 'The file path in which to check for differences. Limits the results to this path. Can also be used to specify the previous name of a directory or folder. If <code>beforePath</code> and <code>afterPath</code> are not specified, differences will be shown for all paths.'
       afterPath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: 'The file path in which to check differences. Limits the results to this path. Can also be used to specify the changed name of a directory or folder, if it has changed. If not specified, differences will be shown for all paths.'
       MaxResults:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: A non-negative integer used to limit the number of returned results.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
   CommitRequiredException: {}
   InvalidCommitException: {}
@@ -3547,22 +3547,22 @@ definitions:
       - fileContent
     properties:
       commitId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The full commit ID of the commit that contains the content returned by GetFile.
       blobId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The blob ID of the object that represents the file content.
       filePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: The fully qualified path to the specified file. This returns the name and extension of the file.
       fileMode:
-        $ref: '#/definitions/FileModeTypeEnum'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The extrapolated file mode permissions of the blob. Valid values include strings such as EXECUTABLE and not numeric values.</p> <note> <p>The file mode permissions returned by this API are not the standard file mode permission values, such as 100644, but rather extrapolated values. See below for a full list of supported return values.</p> </note>'
       fileSize:
-        $ref: '#/definitions/ObjectSize'
+        $ref: '#/definitions/[object Object]'
         description: 'The size of the contents of the file, in bytes.'
       fileContent:
-        $ref: '#/definitions/FileContent'
+        $ref: '#/definitions/[object Object]'
         description: The base-64 encoded binary data object that represents the content of the file.
   GetFileInput:
     type: object
@@ -3571,13 +3571,13 @@ definitions:
       - filePath
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository that contains the file.
       commitSpecifier:
-        $ref: '#/definitions/CommitName'
+        $ref: '#/definitions/[object Object]'
         description: 'The fully-quaified reference that identifies the commit that contains the file. For example, you could specify a full commit ID, a tag, a branch name, or a reference such as refs/heads/master. If none is provided, then the head commit will be used.'
       filePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: 'The fully-qualified path to the file, including the full name and extension of the file. For example, /examples/file.md is the fully-qualified path to a file named file.md in a folder named examples.'
   GetFolderOutput:
     type: object
@@ -3586,25 +3586,25 @@ definitions:
       - folderPath
     properties:
       commitId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The full commit ID used as a reference for which version of the folder content is returned.
       folderPath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: The fully-qualified path of the folder whose contents are returned.
       treeId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The full SHA-1 pointer of the tree information for the commit that contains the folder.
       subFolders:
-        $ref: '#/definitions/FolderList'
+        $ref: '#/definitions/[object Object]'
         description: 'The list of folders that exist beneath the specified folder, if any.'
       files:
-        $ref: '#/definitions/FileList'
+        $ref: '#/definitions/[object Object]'
         description: 'The list of files that exist in the specified folder, if any.'
       symbolicLinks:
-        $ref: '#/definitions/SymbolicLinkList'
+        $ref: '#/definitions/[object Object]'
         description: 'The list of symbolic links to other files and folders that exist in the specified folder, if any.'
       subModules:
-        $ref: '#/definitions/SubModuleList'
+        $ref: '#/definitions/[object Object]'
         description: 'The list of submodules that exist in the specified folder, if any.'
   GetFolderInput:
     type: object
@@ -3613,13 +3613,13 @@ definitions:
       - folderPath
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository.
       commitSpecifier:
-        $ref: '#/definitions/CommitName'
+        $ref: '#/definitions/[object Object]'
         description: 'A fully-qualified reference used to identify a commit that contains the version of the folder''s content to return. A fully-qualified reference can be a commit ID, branch name, tag, or reference such as HEAD. If no specifier is provided, the folder content will be returned as it exists in the HEAD commit.'
       folderPath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: 'The fully-qualified path to the folder whose contents will be returned, including the folder name. For example, /examples is a fully-qualified path to a folder named examples that was created off of the root directory (/) of a repository. '
   FolderDoesNotExistException: {}
   GetMergeConflictsOutput:
@@ -3630,13 +3630,13 @@ definitions:
       - sourceCommitId
     properties:
       mergeable:
-        $ref: '#/definitions/IsMergeable'
+        $ref: '#/definitions/[object Object]'
         description: A Boolean value that indicates whether the code is mergable by the specified merge option.
       destinationCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: The commit ID of the destination commit specifier that was used in the merge evaluation.
       sourceCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: The commit ID of the source commit specifier that was used in the merge evaluation.
   GetMergeConflictsInput:
     type: object
@@ -3647,16 +3647,16 @@ definitions:
       - mergeOption
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository where the pull request was created.
       destinationCommitSpecifier:
-        $ref: '#/definitions/CommitName'
+        $ref: '#/definitions/[object Object]'
         description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
       sourceCommitSpecifier:
-        $ref: '#/definitions/CommitName'
+        $ref: '#/definitions/[object Object]'
         description: 'The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.'
       mergeOption:
-        $ref: '#/definitions/MergeOptionTypeEnum'
+        $ref: '#/definitions/[object Object]'
         description: The merge option or strategy you want to use to merge the code. The only valid value is FAST_FORWARD_MERGE.
   MergeOptionRequiredException: {}
   InvalidMergeOptionException: {}
@@ -3669,7 +3669,7 @@ definitions:
       - pullRequest
     properties:
       pullRequest:
-        $ref: '#/definitions/PullRequest'
+        $ref: '#/definitions/[object Object]'
         description: Information about the specified pull request.
   GetPullRequestInput:
     type: object
@@ -3677,13 +3677,13 @@ definitions:
       - pullRequestId
     properties:
       pullRequestId:
-        $ref: '#/definitions/PullRequestId'
+        $ref: '#/definitions/[object Object]'
         description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
   GetRepositoryOutput:
     type: object
     properties:
       repositoryMetadata:
-        $ref: '#/definitions/RepositoryMetadata'
+        $ref: '#/definitions/[object Object]'
         description: Information about the repository.
     description: Represents the output of a get repository operation.
   GetRepositoryInput:
@@ -3692,17 +3692,17 @@ definitions:
       - repositoryName
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to get information about.
     description: Represents the input of a get repository operation.
   GetRepositoryTriggersOutput:
     type: object
     properties:
       configurationId:
-        $ref: '#/definitions/RepositoryTriggersConfigurationId'
+        $ref: '#/definitions/[object Object]'
         description: The system-generated unique ID for the trigger.
       triggers:
-        $ref: '#/definitions/RepositoryTriggersList'
+        $ref: '#/definitions/[object Object]'
         description: The JSON block of configuration information for each trigger.
     description: Represents the output of a get repository triggers operation.
   GetRepositoryTriggersInput:
@@ -3711,17 +3711,17 @@ definitions:
       - repositoryName
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository for which the trigger is configured.
     description: Represents the input of a get repository triggers operation.
   ListBranchesOutput:
     type: object
     properties:
       branches:
-        $ref: '#/definitions/BranchNameList'
+        $ref: '#/definitions/[object Object]'
         description: The list of branch names.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: An enumeration token that returns the batch of the results.
     description: Represents the output of a list branches operation.
   ListBranchesInput:
@@ -3730,10 +3730,10 @@ definitions:
       - repositoryName
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository that contains the branches.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: An enumeration token that allows the operation to batch the results.
     description: Represents the input of a list branches operation.
   ListPullRequestsOutput:
@@ -3742,10 +3742,10 @@ definitions:
       - pullRequestIds
     properties:
       pullRequestIds:
-        $ref: '#/definitions/PullRequestIdList'
+        $ref: '#/definitions/[object Object]'
         description: The system-generated IDs of the pull requests.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
   ListPullRequestsInput:
     type: object
@@ -3753,19 +3753,19 @@ definitions:
       - repositoryName
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository for which you want to list pull requests.
       authorArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: 'Optional. The Amazon Resource Name (ARN) of the user who created the pull request. If used, this filters the results to pull requests created by that user.'
       pullRequestStatus:
-        $ref: '#/definitions/PullRequestStatusEnum'
+        $ref: '#/definitions/[object Object]'
         description: 'Optional. The status of the pull request. If used, this refines the results to the pull requests that match the specified status.'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'An enumeration token that when provided in a request, returns the next batch of the results.'
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: A non-negative integer used to limit the number of returned results.
   InvalidPullRequestStatusException: {}
   InvalidAuthorArnException: {}
@@ -3774,23 +3774,23 @@ definitions:
     type: object
     properties:
       repositories:
-        $ref: '#/definitions/RepositoryNameIdPairList'
+        $ref: '#/definitions/[object Object]'
         description: Lists the repositories called by the list repositories operation.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'An enumeration token that allows the operation to batch the results of the operation. Batch sizes are 1,000 for list repository operations. When the client sends the token back to AWS CodeCommit, another page of 1,000 records is retrieved.'
     description: Represents the output of a list repositories operation.
   ListRepositoriesInput:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'An enumeration token that allows the operation to batch the results of the operation. Batch sizes are 1,000 for list repository operations. When the client sends the token back to AWS CodeCommit, another page of 1,000 records is retrieved.'
       sortBy:
-        $ref: '#/definitions/SortByEnum'
+        $ref: '#/definitions/[object Object]'
         description: The criteria used to sort the results of a list repositories operation.
       order:
-        $ref: '#/definitions/OrderEnum'
+        $ref: '#/definitions/[object Object]'
         description: The order in which to sort the results of a list repositories operation.
     description: Represents the input of a list repositories operation.
   InvalidSortByException: {}
@@ -3799,7 +3799,7 @@ definitions:
     type: object
     properties:
       pullRequest:
-        $ref: '#/definitions/PullRequest'
+        $ref: '#/definitions/[object Object]'
         description: 'Information about the specified pull request, including information about the merge.'
   MergePullRequestByFastForwardInput:
     type: object
@@ -3808,13 +3808,13 @@ definitions:
       - repositoryName
     properties:
       pullRequestId:
-        $ref: '#/definitions/PullRequestId'
+        $ref: '#/definitions/[object Object]'
         description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository where the pull request was created.
       sourceCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.
   ManualMergeRequiredException: {}
   PullRequestAlreadyClosedException: {}
@@ -3823,25 +3823,25 @@ definitions:
     type: object
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository where you posted a comment on the comparison between commits.
       beforeCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: 'In the directionality you established, the full commit ID of the ''before'' commit.'
       afterCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: 'In the directionality you established, the full commit ID of the ''after'' commit.'
       beforeBlobId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: 'In the directionality you established, the blob ID of the ''before'' blob.'
       afterBlobId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: 'In the directionality you established, the blob ID of the ''after'' blob.'
       location:
-        $ref: '#/definitions/Location'
+        $ref: '#/definitions/[object Object]'
         description: The location of the comment in the comparison between the two commits.
       comment:
-        $ref: '#/definitions/Comment'
+        $ref: '#/definitions/[object Object]'
         description: The content of the comment you posted.
   PostCommentForComparedCommitInput:
     type: object
@@ -3851,22 +3851,22 @@ definitions:
       - content
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository where you want to post a comment on the comparison between commits.
       beforeCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: 'To establish the directionality of the comparison, the full commit ID of the ''before'' commit.'
       afterCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: 'To establish the directionality of the comparison, the full commit ID of the ''after'' commit.'
       location:
-        $ref: '#/definitions/Location'
+        $ref: '#/definitions/[object Object]'
         description: The location of the comparison where you want to comment.
       content:
-        $ref: '#/definitions/Content'
+        $ref: '#/definitions/[object Object]'
         description: The content of the comment you want to make.
       clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
   CommentContentRequiredException: {}
   CommentContentSizeLimitExceededException: {}
@@ -3878,28 +3878,28 @@ definitions:
     type: object
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository where you posted a comment on a pull request.
       pullRequestId:
-        $ref: '#/definitions/PullRequestId'
+        $ref: '#/definitions/[object Object]'
         description: 'The system-generated ID of the pull request. '
       beforeCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: 'The full commit ID of the commit in the source branch used to create the pull request, or in the case of an updated pull request, the full commit ID of the commit used to update the pull request.'
       afterCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: The full commit ID of the commit in the destination branch where the pull request will be merged.
       beforeBlobId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: 'In the directionality of the pull request, the blob ID of the ''before'' blob.'
       afterBlobId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: 'In the directionality of the pull request, the blob ID of the ''after'' blob.'
       location:
-        $ref: '#/definitions/Location'
+        $ref: '#/definitions/[object Object]'
         description: The location of the change where you posted your comment.
       comment:
-        $ref: '#/definitions/Comment'
+        $ref: '#/definitions/[object Object]'
         description: The content of the comment you posted.
   PostCommentForPullRequestInput:
     type: object
@@ -3911,31 +3911,31 @@ definitions:
       - content
     properties:
       pullRequestId:
-        $ref: '#/definitions/PullRequestId'
+        $ref: '#/definitions/[object Object]'
         description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository where you want to post a comment on a pull request.
       beforeCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created.
       afterCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: The full commit ID of the commit in the source branch that is the current tip of the branch for the pull request when you post the comment.
       location:
-        $ref: '#/definitions/Location'
+        $ref: '#/definitions/[object Object]'
         description: 'The location of the change where you want to post your comment. If no location is provided, the comment will be posted as a general comment on the pull request difference between the before commit ID and the after commit ID.'
       content:
-        $ref: '#/definitions/Content'
+        $ref: '#/definitions/[object Object]'
         description: The content of your comment on the change.
       clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
   PostCommentReplyOutput:
     type: object
     properties:
       comment:
-        $ref: '#/definitions/Comment'
+        $ref: '#/definitions/[object Object]'
         description: Information about the reply to a comment.
   PostCommentReplyInput:
     type: object
@@ -3944,13 +3944,13 @@ definitions:
       - content
     properties:
       inReplyTo:
-        $ref: '#/definitions/CommentId'
+        $ref: '#/definitions/[object Object]'
         description: 'The system-generated ID of the comment to which you want to reply. To get this ID, use <a>GetCommentsForComparedCommit</a> or <a>GetCommentsForPullRequest</a>.'
       clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
       content:
-        $ref: '#/definitions/Content'
+        $ref: '#/definitions/[object Object]'
         description: The contents of your reply to a comment.
   PutFileOutput:
     type: object
@@ -3960,13 +3960,13 @@ definitions:
       - treeId
     properties:
       commitId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The full SHA of the commit that contains this file change.
       blobId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: 'The ID of the blob, which is its SHA-1 pointer.'
       treeId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The full SHA-1 pointer of the tree information for the commit that contains this file change.
   PutFileInput:
     type: object
@@ -3977,31 +3977,31 @@ definitions:
       - filePath
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository where you want to add or update the file.
       branchName:
-        $ref: '#/definitions/BranchName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the branch where you want to add or update the file. If this is an empty repository, this branch will be created.'
       fileContent:
-        $ref: '#/definitions/FileContent'
+        $ref: '#/definitions/[object Object]'
         description: 'The content of the file, in binary object format. '
       filePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the file you want to add or update, including the relative path to the file in the repository.</p> <note> <p>If the path does not currently exist in the repository, the path will be created as part of adding the file.</p> </note>'
       fileMode:
-        $ref: '#/definitions/FileModeTypeEnum'
+        $ref: '#/definitions/[object Object]'
         description: The file mode permissions of the blob. Valid file mode permissions are listed below.
       parentCommitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The full commit ID of the head commit in the branch where you want to add or update the file. If this is an empty repository, no commit ID is required. If this is not an empty repository, a commit ID is required. </p> <p>The commit ID must match the ID of the head commit at the time of the operation, or an error will occur, and the file will not be added or updated.</p>'
       commitMessage:
-        $ref: '#/definitions/Message'
+        $ref: '#/definitions/[object Object]'
         description: 'A message about why this file was added or updated. While optional, adding a message is strongly encouraged in order to provide a more useful commit history for your repository.'
       name:
-        $ref: '#/definitions/Name'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the person adding or updating the file. While optional, adding a name is strongly encouraged in order to provide a more useful commit history for your repository.'
       email:
-        $ref: '#/definitions/Email'
+        $ref: '#/definitions/[object Object]'
         description: An email address for the person adding or updating the file.
   FileContentRequiredException: {}
   FileContentSizeLimitExceededException: {}
@@ -4014,7 +4014,7 @@ definitions:
     type: object
     properties:
       configurationId:
-        $ref: '#/definitions/RepositoryTriggersConfigurationId'
+        $ref: '#/definitions/[object Object]'
         description: The system-generated unique ID for the create or update operation.
     description: Represents the output of a put repository triggers operation.
   PutRepositoryTriggersInput:
@@ -4024,10 +4024,10 @@ definitions:
       - triggers
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository where you want to create or update the trigger.
       triggers:
-        $ref: '#/definitions/RepositoryTriggersList'
+        $ref: '#/definitions/[object Object]'
         description: The JSON block of configuration information for each trigger.
     description: Represents the input ofa put repository triggers operation.
   RepositoryTriggersListRequiredException: {}
@@ -4047,10 +4047,10 @@ definitions:
     type: object
     properties:
       successfulExecutions:
-        $ref: '#/definitions/RepositoryTriggerNameList'
+        $ref: '#/definitions/[object Object]'
         description: 'The list of triggers that were successfully tested. This list provides the names of the triggers that were successfully tested, separated by commas.'
       failedExecutions:
-        $ref: '#/definitions/RepositoryTriggerExecutionFailureList'
+        $ref: '#/definitions/[object Object]'
         description: 'The list of triggers that were not able to be tested. This list provides the names of the triggers that could not be tested, separated by commas.'
     description: Represents the output of a test repository triggers operation.
   TestRepositoryTriggersInput:
@@ -4060,17 +4060,17 @@ definitions:
       - triggers
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository in which to test the triggers.
       triggers:
-        $ref: '#/definitions/RepositoryTriggersList'
+        $ref: '#/definitions/[object Object]'
         description: The list of triggers to test.
     description: Represents the input of a test repository triggers operation.
   UpdateCommentOutput:
     type: object
     properties:
       comment:
-        $ref: '#/definitions/Comment'
+        $ref: '#/definitions/[object Object]'
         description: Information about the updated comment.
   UpdateCommentInput:
     type: object
@@ -4079,10 +4079,10 @@ definitions:
       - content
     properties:
       commentId:
-        $ref: '#/definitions/CommentId'
+        $ref: '#/definitions/[object Object]'
         description: 'The system-generated ID of the comment you want to update. To get this ID, use <a>GetCommentsForComparedCommit</a> or <a>GetCommentsForPullRequest</a>.'
       content:
-        $ref: '#/definitions/Content'
+        $ref: '#/definitions/[object Object]'
         description: The updated content with which you want to replace the existing content of the comment.
   CommentNotCreatedByCallerException: {}
   UpdateDefaultBranchInput:
@@ -4092,10 +4092,10 @@ definitions:
       - defaultBranchName
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to set or change the default branch for.
       defaultBranchName:
-        $ref: '#/definitions/BranchName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the branch to set as the default.
     description: Represents the input of an update default branch operation.
   UpdatePullRequestDescriptionOutput:
@@ -4104,7 +4104,7 @@ definitions:
       - pullRequest
     properties:
       pullRequest:
-        $ref: '#/definitions/PullRequest'
+        $ref: '#/definitions/[object Object]'
         description: Information about the updated pull request.
   UpdatePullRequestDescriptionInput:
     type: object
@@ -4113,10 +4113,10 @@ definitions:
       - description
     properties:
       pullRequestId:
-        $ref: '#/definitions/PullRequestId'
+        $ref: '#/definitions/[object Object]'
         description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
       description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: The updated content of the description for the pull request. This content will replace the existing description.
   UpdatePullRequestStatusOutput:
     type: object
@@ -4124,7 +4124,7 @@ definitions:
       - pullRequest
     properties:
       pullRequest:
-        $ref: '#/definitions/PullRequest'
+        $ref: '#/definitions/[object Object]'
         description: Information about the pull request.
   UpdatePullRequestStatusInput:
     type: object
@@ -4133,10 +4133,10 @@ definitions:
       - pullRequestStatus
     properties:
       pullRequestId:
-        $ref: '#/definitions/PullRequestId'
+        $ref: '#/definitions/[object Object]'
         description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
       pullRequestStatus:
-        $ref: '#/definitions/PullRequestStatusEnum'
+        $ref: '#/definitions/[object Object]'
         description: 'The status of the pull request. The only valid operations are to update the status from <code>OPEN</code> to <code>OPEN</code>, <code>OPEN</code> to <code>CLOSED</code> or from from <code>CLOSED</code> to <code>CLOSED</code>.'
   InvalidPullRequestStatusUpdateException: {}
   PullRequestStatusRequiredException: {}
@@ -4146,7 +4146,7 @@ definitions:
       - pullRequest
     properties:
       pullRequest:
-        $ref: '#/definitions/PullRequest'
+        $ref: '#/definitions/[object Object]'
         description: Information about the updated pull request.
   UpdatePullRequestTitleInput:
     type: object
@@ -4155,10 +4155,10 @@ definitions:
       - title
     properties:
       pullRequestId:
-        $ref: '#/definitions/PullRequestId'
+        $ref: '#/definitions/[object Object]'
         description: 'The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.'
       title:
-        $ref: '#/definitions/Title'
+        $ref: '#/definitions/[object Object]'
         description: The updated title of the pull request. This will replace the existing title.
   UpdateRepositoryDescriptionInput:
     type: object
@@ -4166,10 +4166,10 @@ definitions:
       - repositoryName
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository to set or change the comment or description for.
       repositoryDescription:
-        $ref: '#/definitions/RepositoryDescription'
+        $ref: '#/definitions/[object Object]'
         description: 'The new comment or description for the specified repository. Repository descriptions are limited to 1,000 characters.'
     description: Represents the input of an update repository description operation.
   UpdateRepositoryNameInput:
@@ -4179,10 +4179,10 @@ definitions:
       - newName
     properties:
       oldName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The existing name of the repository.
       newName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The new name for the repository.
     description: Represents the input of an update repository description operation.
   AccountId:
@@ -4191,57 +4191,38 @@ definitions:
     type: string
   Arn:
     type: string
-  RepositoryNameList:
-    type: array
-    items:
-      $ref: '#/definitions/RepositoryName'
-  RepositoryMetadataList:
-    type: array
-    items:
-      $ref: '#/definitions/RepositoryMetadata'
-  RepositoryNotFoundList:
-    type: array
-    items:
-      $ref: '#/definitions/RepositoryName'
-  ObjectId:
-    type: string
-  Path:
-    type: string
-  Mode:
-    type: string
+  '[object Object]': {}
   BlobMetadata:
     type: object
     properties:
       blobId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The full ID of the blob.
       path:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: 'The path to the blob and any associated file name, if any.'
       mode:
-        $ref: '#/definitions/Mode'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The file mode permissions of the blob. File mode permission codes include:</p> <ul> <li> <p> <code>100644</code> indicates read/write</p> </li> <li> <p> <code>100755</code> indicates read/write/execute</p> </li> <li> <p> <code>160000</code> indicates a submodule</p> </li> <li> <p> <code>120000</code> indicates a symlink</p> </li> </ul>'
     description: Returns information about a specific Git blob object.
-  BranchName:
-    type: string
-    minLength: 1
-    maxLength: 256
-  CommitId:
-    type: string
   BranchInfo:
     type: object
     properties:
       branchName:
-        $ref: '#/definitions/BranchName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the branch.
       commitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the last commit made to the branch.
     description: Returns information about a branch.
+  BranchName:
+    type: string
+    minLength: 1
+    maxLength: 256
   BranchNameList:
     type: array
     items:
-      $ref: '#/definitions/BranchName'
+      $ref: '#/definitions/[object Object]'
   ChangeTypeEnum:
     type: string
     enum:
@@ -4254,320 +4235,176 @@ definitions:
     type: string
   CloneUrlSsh:
     type: string
+  Comment:
+    type: object
+    properties:
+      commentId:
+        $ref: '#/definitions/[object Object]'
+        description: The system-generated comment ID.
+      content:
+        $ref: '#/definitions/[object Object]'
+        description: The content of the comment.
+      inReplyTo:
+        $ref: '#/definitions/[object Object]'
+        description: 'The ID of the comment for which this comment is a reply, if any.'
+      creationDate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date and time the comment was created, in timestamp format.'
+      lastModifiedDate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date and time the comment was most recently modified, in timestamp format.'
+      authorArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the person who posted the comment.
+      deleted:
+        $ref: '#/definitions/[object Object]'
+        description: A Boolean value indicating whether the comment has been deleted.
+      clientRequestToken:
+        $ref: '#/definitions/[object Object]'
+        description: 'A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
+    description: Returns information about a specific comment.
   CommentId:
+    type: string
+  Comments:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  CommentsForComparedCommit:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the repository that contains the compared commits.
+      beforeCommitId:
+        $ref: '#/definitions/[object Object]'
+        description: The full commit ID of the commit used to establish the 'before' of the comparison.
+      afterCommitId:
+        $ref: '#/definitions/[object Object]'
+        description: The full commit ID of the commit used to establish the 'after' of the comparison.
+      beforeBlobId:
+        $ref: '#/definitions/[object Object]'
+        description: The full blob ID of the commit used to establish the 'before' of the comparison.
+      afterBlobId:
+        $ref: '#/definitions/[object Object]'
+        description: The full blob ID of the commit used to establish the 'after' of the comparison.
+      location:
+        $ref: '#/definitions/[object Object]'
+        description: 'Location information about the comment on the comparison, including the file name, line number, and whether the version of the file where the comment was made is ''BEFORE'' or ''AFTER''.'
+      comments:
+        $ref: '#/definitions/[object Object]'
+        description: An array of comment objects. Each comment object contains information about a comment on the comparison between commits.
+    description: Returns information about comments on the comparison between two commits.
+  CommentsForComparedCommitData:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  CommentsForPullRequest:
+    type: object
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/[object Object]'
+        description: The system-generated ID of the pull request.
+      repositoryName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the repository that contains the pull request.
+      beforeCommitId:
+        $ref: '#/definitions/[object Object]'
+        description: The full commit ID of the commit that was the tip of the destination branch when the pull request was created. This commit will be superceded by the after commit in the source branch when and if you merge the source branch into the destination branch.
+      afterCommitId:
+        $ref: '#/definitions/[object Object]'
+        description: 'he full commit ID of the commit that was the tip of the source branch at the time the comment was made. '
+      beforeBlobId:
+        $ref: '#/definitions/[object Object]'
+        description: The full blob ID of the file on which you want to comment on the destination commit.
+      afterBlobId:
+        $ref: '#/definitions/[object Object]'
+        description: The full blob ID of the file on which you want to comment on the source commit.
+      location:
+        $ref: '#/definitions/[object Object]'
+        description: 'Location information about the comment on the pull request, including the file name, line number, and whether the version of the file where the comment was made is ''BEFORE'' (destination branch) or ''AFTER'' (source branch).'
+      comments:
+        $ref: '#/definitions/[object Object]'
+        description: An array of comment objects. Each comment object contains information about a comment on the pull request.
+    description: Returns information about comments on a pull request.
+  CommentsForPullRequestData:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Commit:
+    type: object
+    properties:
+      commitId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The full SHA of the specified commit. '
+      treeId:
+        $ref: '#/definitions/[object Object]'
+        description: Tree information for the specified commit.
+      parents:
+        $ref: '#/definitions/[object Object]'
+        description: A list of parent commits for the specified commit. Each parent commit ID is the full commit ID.
+      message:
+        $ref: '#/definitions/[object Object]'
+        description: The commit message associated with the specified commit.
+      author:
+        $ref: '#/definitions/[object Object]'
+        description: 'Information about the author of the specified commit. Information includes the date in timestamp format with GMT offset, the name of the author, and the email address for the author, as configured in Git.'
+      committer:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Information about the person who committed the specified commit, also known as the committer. Information includes the date in timestamp format with GMT offset, the name of the committer, and the email address for the committer, as configured in Git.</p> <p>For more information about the difference between an author and a committer in Git, see <a href="http://git-scm.com/book/ch2-3.html">Viewing the Commit History</a> in Pro Git by Scott Chacon and Ben Straub.</p>'
+      additionalData:
+        $ref: '#/definitions/[object Object]'
+        description: Any additional data associated with the specified commit.
+    description: Returns information about a specific commit.
+  CommitId:
+    type: string
+  CommitName:
     type: string
   Content:
     type: string
   CreationDate:
     type: string
     format: date-time
-  LastModifiedDate:
+  Date:
     type: string
-    format: date-time
-  IsCommentDeleted:
-    type: boolean
-  Comment:
-    type: object
-    properties:
-      commentId:
-        $ref: '#/definitions/CommentId'
-        description: The system-generated comment ID.
-      content:
-        $ref: '#/definitions/Content'
-        description: The content of the comment.
-      inReplyTo:
-        $ref: '#/definitions/CommentId'
-        description: 'The ID of the comment for which this comment is a reply, if any.'
-      creationDate:
-        $ref: '#/definitions/CreationDate'
-        description: 'The date and time the comment was created, in timestamp format.'
-      lastModifiedDate:
-        $ref: '#/definitions/LastModifiedDate'
-        description: 'The date and time the comment was most recently modified, in timestamp format.'
-      authorArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the person who posted the comment.
-      deleted:
-        $ref: '#/definitions/IsCommentDeleted'
-        description: A Boolean value indicating whether the comment has been deleted.
-      clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: 'A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
-    description: Returns information about a specific comment.
-  Comments:
-    type: array
-    items:
-      $ref: '#/definitions/Comment'
-  RepositoryName:
-    type: string
-    pattern: '[\w\.-]+'
-    minLength: 1
-    maxLength: 100
-  Location:
-    type: object
-    properties:
-      filePath:
-        $ref: '#/definitions/Path'
-        description: 'The name of the file being compared, including its extension and subdirectory, if any.'
-      filePosition:
-        $ref: '#/definitions/Position'
-        description: 'The position of a change within a compared file, in line number format.'
-      relativeFileVersion:
-        $ref: '#/definitions/RelativeFileVersionEnum'
-        description: 'In a comparison of commits or a pull request, whether the change is in the ''before'' or ''after'' of that comparison.'
-    description: Returns information about the location of a change or comment in the comparison between two commits or a pull request.
-  CommentsForComparedCommit:
-    type: object
-    properties:
-      repositoryName:
-        $ref: '#/definitions/RepositoryName'
-        description: The name of the repository that contains the compared commits.
-      beforeCommitId:
-        $ref: '#/definitions/CommitId'
-        description: The full commit ID of the commit used to establish the 'before' of the comparison.
-      afterCommitId:
-        $ref: '#/definitions/CommitId'
-        description: The full commit ID of the commit used to establish the 'after' of the comparison.
-      beforeBlobId:
-        $ref: '#/definitions/ObjectId'
-        description: The full blob ID of the commit used to establish the 'before' of the comparison.
-      afterBlobId:
-        $ref: '#/definitions/ObjectId'
-        description: The full blob ID of the commit used to establish the 'after' of the comparison.
-      location:
-        $ref: '#/definitions/Location'
-        description: 'Location information about the comment on the comparison, including the file name, line number, and whether the version of the file where the comment was made is ''BEFORE'' or ''AFTER''.'
-      comments:
-        $ref: '#/definitions/Comments'
-        description: An array of comment objects. Each comment object contains information about a comment on the comparison between commits.
-    description: Returns information about comments on the comparison between two commits.
-  CommentsForComparedCommitData:
-    type: array
-    items:
-      $ref: '#/definitions/CommentsForComparedCommit'
-  PullRequestId:
-    type: string
-  CommentsForPullRequest:
-    type: object
-    properties:
-      pullRequestId:
-        $ref: '#/definitions/PullRequestId'
-        description: The system-generated ID of the pull request.
-      repositoryName:
-        $ref: '#/definitions/RepositoryName'
-        description: The name of the repository that contains the pull request.
-      beforeCommitId:
-        $ref: '#/definitions/CommitId'
-        description: The full commit ID of the commit that was the tip of the destination branch when the pull request was created. This commit will be superceded by the after commit in the source branch when and if you merge the source branch into the destination branch.
-      afterCommitId:
-        $ref: '#/definitions/CommitId'
-        description: 'he full commit ID of the commit that was the tip of the source branch at the time the comment was made. '
-      beforeBlobId:
-        $ref: '#/definitions/ObjectId'
-        description: The full blob ID of the file on which you want to comment on the destination commit.
-      afterBlobId:
-        $ref: '#/definitions/ObjectId'
-        description: The full blob ID of the file on which you want to comment on the source commit.
-      location:
-        $ref: '#/definitions/Location'
-        description: 'Location information about the comment on the pull request, including the file name, line number, and whether the version of the file where the comment was made is ''BEFORE'' (destination branch) or ''AFTER'' (source branch).'
-      comments:
-        $ref: '#/definitions/Comments'
-        description: An array of comment objects. Each comment object contains information about a comment on the pull request.
-    description: Returns information about comments on a pull request.
-  CommentsForPullRequestData:
-    type: array
-    items:
-      $ref: '#/definitions/CommentsForPullRequest'
-  ParentList:
-    type: array
-    items:
-      $ref: '#/definitions/ObjectId'
-  Message:
-    type: string
-  UserInfo:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/Name'
-        description: The name of the user who made the specified commit.
-      email:
-        $ref: '#/definitions/Email'
-        description: 'The email address associated with the user who made the commit, if any.'
-      date:
-        $ref: '#/definitions/Date'
-        description: 'The date when the specified commit was commited, in timestamp format with GMT offset.'
-    description: Information about the user who made a specified commit.
-  Commit:
-    type: object
-    properties:
-      commitId:
-        $ref: '#/definitions/ObjectId'
-        description: 'The full SHA of the specified commit. '
-      treeId:
-        $ref: '#/definitions/ObjectId'
-        description: Tree information for the specified commit.
-      parents:
-        $ref: '#/definitions/ParentList'
-        description: A list of parent commits for the specified commit. Each parent commit ID is the full commit ID.
-      message:
-        $ref: '#/definitions/Message'
-        description: The commit message associated with the specified commit.
-      author:
-        $ref: '#/definitions/UserInfo'
-        description: 'Information about the author of the specified commit. Information includes the date in timestamp format with GMT offset, the name of the author, and the email address for the author, as configured in Git.'
-      committer:
-        $ref: '#/definitions/UserInfo'
-        description: '<p>Information about the person who committed the specified commit, also known as the committer. Information includes the date in timestamp format with GMT offset, the name of the committer, and the email address for the committer, as configured in Git.</p> <p>For more information about the difference between an author and a committer in Git, see <a href="http://git-scm.com/book/ch2-3.html">Viewing the Commit History</a> in Pro Git by Scott Chacon and Ben Straub.</p>'
-      additionalData:
-        $ref: '#/definitions/AdditionalData'
-        description: Any additional data associated with the specified commit.
-    description: Returns information about a specific commit.
-  CommitName:
-    type: string
-  Title:
-    type: string
-    maxLength: 150
   Description:
     type: string
     maxLength: 10240
-  TargetList:
-    type: array
-    items:
-      $ref: '#/definitions/Target'
-  PullRequest:
-    type: object
-    properties:
-      pullRequestId:
-        $ref: '#/definitions/PullRequestId'
-        description: 'The system-generated ID of the pull request. '
-      title:
-        $ref: '#/definitions/Title'
-        description: The user-defined title of the pull request. This title is displayed in the list of pull requests to other users of the repository.
-      description:
-        $ref: '#/definitions/Description'
-        description: The user-defined description of the pull request. This description can be used to clarify what should be reviewed and other details of the request.
-      lastActivityDate:
-        $ref: '#/definitions/LastModifiedDate'
-        description: 'The day and time of the last user or system activity on the pull request, in timestamp format.'
-      creationDate:
-        $ref: '#/definitions/CreationDate'
-        description: 'The date and time the pull request was originally created, in timestamp format.'
-      pullRequestStatus:
-        $ref: '#/definitions/PullRequestStatusEnum'
-        description: The status of the pull request. Pull request status can only change from <code>OPEN</code> to <code>CLOSED</code>.
-      authorArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the user who created the pull request.
-      pullRequestTargets:
-        $ref: '#/definitions/PullRequestTargetList'
-        description: 'The targets of the pull request, including the source branch and destination branch for the pull request.'
-      clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
-        description: 'A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
-    description: Returns information about a pull request.
-  RepositoryDescription:
-    type: string
-    maxLength: 1000
-  RepositoryMetadata:
-    type: object
-    properties:
-      accountId:
-        $ref: '#/definitions/AccountId'
-        description: The ID of the AWS account associated with the repository.
-      repositoryId:
-        $ref: '#/definitions/RepositoryId'
-        description: The ID of the repository.
-      repositoryName:
-        $ref: '#/definitions/RepositoryName'
-        description: The repository's name.
-      repositoryDescription:
-        $ref: '#/definitions/RepositoryDescription'
-        description: A comment or description about the repository.
-      defaultBranch:
-        $ref: '#/definitions/BranchName'
-        description: The repository's default branch name.
-      lastModifiedDate:
-        $ref: '#/definitions/LastModifiedDate'
-        description: 'The date and time the repository was last modified, in timestamp format.'
-      creationDate:
-        $ref: '#/definitions/CreationDate'
-        description: 'The date and time the repository was created, in timestamp format.'
-      cloneUrlHttp:
-        $ref: '#/definitions/CloneUrlHttp'
-        description: The URL to use for cloning the repository over HTTPS.
-      cloneUrlSsh:
-        $ref: '#/definitions/CloneUrlSsh'
-        description: The URL to use for cloning the repository over SSH.
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the repository.
-    description: Information about a repository.
-  Date:
-    type: string
-  KeepEmptyFolders:
-    type: boolean
-  Name:
-    type: string
-  Email:
-    type: string
-  RepositoryId:
-    type: string
-  PullRequestEventType:
-    type: string
-    enum:
-      - PULL_REQUEST_CREATED
-      - PULL_REQUEST_STATUS_CHANGED
-      - PULL_REQUEST_SOURCE_REFERENCE_UPDATED
-      - PULL_REQUEST_MERGE_STATE_CHANGED
-  NextToken:
-    type: string
-  MaxResults:
-    type: integer
-  PullRequestEventList:
-    type: array
-    items:
-      $ref: '#/definitions/PullRequestEvent'
   Difference:
     type: object
     properties:
       beforeBlob:
-        $ref: '#/definitions/BlobMetadata'
+        $ref: '#/definitions/[object Object]'
         description: 'Information about a <code>beforeBlob</code> data type object, including the ID, the file mode permission code, and the path.'
       afterBlob:
-        $ref: '#/definitions/BlobMetadata'
+        $ref: '#/definitions/[object Object]'
         description: 'Information about an <code>afterBlob</code> data type object, including the ID, the file mode permission code, and the path.'
       changeType:
-        $ref: '#/definitions/ChangeTypeEnum'
+        $ref: '#/definitions/[object Object]'
         description: 'Whether the change type of the difference is an addition (A), deletion (D), or modification (M).'
     description: Returns information about a set of differences for a commit specifier.
   DifferenceList:
     type: array
     items:
-      $ref: '#/definitions/Difference'
+      $ref: '#/definitions/[object Object]'
+  Email:
+    type: string
   EventDate:
     type: string
     format: date-time
-  FileModeTypeEnum:
-    type: string
-    enum:
-      - EXECUTABLE
-      - NORMAL
-      - SYMLINK
   File:
     type: object
     properties:
       blobId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The blob ID that contains the file information.
       absolutePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: The fully-qualified path to the file in the repository.
       relativePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: The relative path of the file from the folder where the query originated.
       fileMode:
-        $ref: '#/definitions/FileModeTypeEnum'
+        $ref: '#/definitions/[object Object]'
         description: The extrapolated file mode permissions for the file. Valid values include EXECUTABLE and NORMAL.
     description: Returns information about a file in a repository.
   FileContent:
@@ -4576,221 +4413,336 @@ definitions:
   FileList:
     type: array
     items:
-      $ref: '#/definitions/File'
+      $ref: '#/definitions/[object Object]'
+  FileModeTypeEnum:
+    type: string
+    enum:
+      - EXECUTABLE
+      - NORMAL
+      - SYMLINK
   Folder:
     type: object
     properties:
       treeId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The full SHA-1 pointer of the tree information for the commit that contains the folder.
       absolutePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: The fully-qualified path of the folder in the repository.
       relativePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: The relative path of the specified folder from the folder where the query originated.
     description: Returns information about a folder in a repository.
   FolderList:
     type: array
     items:
-      $ref: '#/definitions/Folder'
-  blob:
+      $ref: '#/definitions/[object Object]'
+  IsCommentDeleted:
+    type: boolean
+  IsMergeable:
+    type: boolean
+  IsMerged:
+    type: boolean
+  KeepEmptyFolders:
+    type: boolean
+  LastModifiedDate:
     type: string
+    format: date-time
   Limit:
     type: integer
-  ObjectSize:
+  Location:
+    type: object
+    properties:
+      filePath:
+        $ref: '#/definitions/[object Object]'
+        description: 'The name of the file being compared, including its extension and subdirectory, if any.'
+      filePosition:
+        $ref: '#/definitions/[object Object]'
+        description: 'The position of a change within a compared file, in line number format.'
+      relativeFileVersion:
+        $ref: '#/definitions/[object Object]'
+        description: 'In a comparison of commits or a pull request, whether the change is in the ''before'' or ''after'' of that comparison.'
+    description: Returns information about the location of a change or comment in the comparison between two commits or a pull request.
+  MaxResults:
     type: integer
-  SymbolicLinkList:
-    type: array
-    items:
-      $ref: '#/definitions/SymbolicLink'
-  SubModuleList:
-    type: array
-    items:
-      $ref: '#/definitions/SubModule'
+  MergeMetadata:
+    type: object
+    properties:
+      isMerged:
+        $ref: '#/definitions/[object Object]'
+        description: A Boolean value indicating whether the merge has been made.
+      mergedBy:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the user who merged the branches.
+    description: Returns information about a merge or potential merge between a source reference and a destination reference in a pull request.
   MergeOptionTypeEnum:
     type: string
     enum:
       - FAST_FORWARD_MERGE
-  IsMergeable:
-    type: boolean
-  RepositoryTriggersConfigurationId:
+  Message:
     type: string
-  RepositoryTriggersList:
-    type: array
-    items:
-      $ref: '#/definitions/RepositoryTrigger'
-  IsMerged:
-    type: boolean
-  PullRequestStatusEnum:
+  Mode:
     type: string
-    enum:
-      - OPEN
-      - CLOSED
-  PullRequestIdList:
-    type: array
-    items:
-      $ref: '#/definitions/PullRequestId'
-  SortByEnum:
+  Name:
     type: string
-    enum:
-      - repositoryName
-      - lastModifiedDate
+  NextToken:
+    type: string
+  ObjectId:
+    type: string
+  ObjectSize:
+    type: integer
   OrderEnum:
     type: string
     enum:
       - ascending
       - descending
-  RepositoryNameIdPairList:
+  ParentList:
     type: array
     items:
-      $ref: '#/definitions/RepositoryNameIdPair'
+      $ref: '#/definitions/[object Object]'
+  Path:
+    type: string
   Position:
     type: integer
+  PullRequest:
+    type: object
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The system-generated ID of the pull request. '
+      title:
+        $ref: '#/definitions/[object Object]'
+        description: The user-defined title of the pull request. This title is displayed in the list of pull requests to other users of the repository.
+      description:
+        $ref: '#/definitions/[object Object]'
+        description: The user-defined description of the pull request. This description can be used to clarify what should be reviewed and other details of the request.
+      lastActivityDate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The day and time of the last user or system activity on the pull request, in timestamp format.'
+      creationDate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date and time the pull request was originally created, in timestamp format.'
+      pullRequestStatus:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the pull request. Pull request status can only change from <code>OPEN</code> to <code>CLOSED</code>.
+      authorArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the user who created the pull request.
+      pullRequestTargets:
+        $ref: '#/definitions/[object Object]'
+        description: 'The targets of the pull request, including the source branch and destination branch for the pull request.'
+      clientRequestToken:
+        $ref: '#/definitions/[object Object]'
+        description: 'A unique, client-generated idempotency token that when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request will return information about the initial request that used that token.'
+    description: Returns information about a pull request.
+  PullRequestCreatedEventMetadata:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the repository where the pull request was created.
+      sourceCommitId:
+        $ref: '#/definitions/[object Object]'
+        description: The commit ID on the source branch used when the pull request was created.
+      destinationCommitId:
+        $ref: '#/definitions/[object Object]'
+        description: The commit ID of the tip of the branch specified as the destination branch when the pull request was created.
+      mergeBase:
+        $ref: '#/definitions/[object Object]'
+        description: The commit ID of the most recent commit that the source branch and the destination branch have in common.
+    description: Metadata about the pull request that is used when comparing the pull request source with its destination.
+  PullRequestEvent:
+    type: object
+    properties:
+      pullRequestId:
+        $ref: '#/definitions/[object Object]'
+        description: The system-generated ID of the pull request.
+      eventDate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The day and time of the pull request event, in timestamp format.'
+      pullRequestEventType:
+        $ref: '#/definitions/[object Object]'
+        description: 'The type of the pull request event, for example a status change event (PULL_REQUEST_STATUS_CHANGED) or update event (PULL_REQUEST_SOURCE_REFERENCE_UPDATED).'
+      actorArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with additional commits or changing the status of a pull request.
+      pullRequestCreatedEventMetadata:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the source and destination branches for the pull request.
+      pullRequestStatusChangedEventMetadata:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the change in status for the pull request event.
+      pullRequestSourceReferenceUpdatedEventMetadata:
+        $ref: '#/definitions/[object Object]'
+        description: 'Information about the updated source branch for the pull request event. '
+      pullRequestMergedStateChangedEventMetadata:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the change in mergability state for the pull request event.
+    description: Returns information about a pull request event.
+  PullRequestEventList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PullRequestEventType:
+    type: string
+    enum:
+      - PULL_REQUEST_CREATED
+      - PULL_REQUEST_STATUS_CHANGED
+      - PULL_REQUEST_SOURCE_REFERENCE_UPDATED
+      - PULL_REQUEST_MERGE_STATE_CHANGED
+  PullRequestId:
+    type: string
+  PullRequestIdList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PullRequestMergedStateChangedEventMetadata:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the repository where the pull request was created.
+      destinationReference:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the branch that the pull request will be merged into.
+      mergeMetadata:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the merge state change event.
+    description: 'Returns information about the change in the merge state for a pull request event. '
+  PullRequestSourceReferenceUpdatedEventMetadata:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the repository where the pull request was updated.
+      beforeCommitId:
+        $ref: '#/definitions/[object Object]'
+        description: The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was updated.
+      afterCommitId:
+        $ref: '#/definitions/[object Object]'
+        description: The full commit ID of the commit in the source branch that was the tip of the branch at the time the pull request was updated.
+      mergeBase:
+        $ref: '#/definitions/[object Object]'
+        description: The commit ID of the most recent commit that the source branch and the destination branch have in common.
+    description: Information about an update to the source branch of a pull request.
+  PullRequestStatusChangedEventMetadata:
+    type: object
+    properties:
+      pullRequestStatus:
+        $ref: '#/definitions/[object Object]'
+        description: The changed status of the pull request.
+    description: Information about a change to the status of a pull request.
+  PullRequestStatusEnum:
+    type: string
+    enum:
+      - OPEN
+      - CLOSED
+  PullRequestTarget:
+    type: object
+    properties:
+      repositoryName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the repository that contains the pull request source and destination branches.
+      sourceReference:
+        $ref: '#/definitions/[object Object]'
+        description: The branch of the repository that contains the changes for the pull request. Also known as the source branch.
+      destinationReference:
+        $ref: '#/definitions/[object Object]'
+        description: 'The branch of the repository where the pull request changes will be merged into. Also known as the destination branch. '
+      destinationCommit:
+        $ref: '#/definitions/[object Object]'
+        description: The full commit ID that is the tip of the destination branch. This is the commit where the pull request was or will be merged.
+      sourceCommit:
+        $ref: '#/definitions/[object Object]'
+        description: 'The full commit ID of the tip of the source branch used to create the pull request. If the pull request branch is updated by a push while the pull request is open, the commit ID will change to reflect the new tip of the branch.'
+      mergeBase:
+        $ref: '#/definitions/[object Object]'
+        description: The commit ID of the most recent commit that the source branch and the destination branch have in common.
+      mergeMetadata:
+        $ref: '#/definitions/[object Object]'
+        description: 'Returns metadata about the state of the merge, including whether the merge has been made.'
+    description: Returns information about a pull request target.
+  PullRequestTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ReferenceName:
+    type: string
   RelativeFileVersionEnum:
     type: string
     enum:
       - BEFORE
       - AFTER
-  MergeMetadata:
+  RepositoryDescription:
+    type: string
+    maxLength: 1000
+  RepositoryId:
+    type: string
+  RepositoryMetadata:
     type: object
     properties:
-      isMerged:
-        $ref: '#/definitions/IsMerged'
-        description: A Boolean value indicating whether the merge has been made.
-      mergedBy:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the user who merged the branches.
-    description: Returns information about a merge or potential merge between a source reference and a destination reference in a pull request.
-  PullRequestTargetList:
+      accountId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the AWS account associated with the repository.
+      repositoryId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the repository.
+      repositoryName:
+        $ref: '#/definitions/[object Object]'
+        description: The repository's name.
+      repositoryDescription:
+        $ref: '#/definitions/[object Object]'
+        description: A comment or description about the repository.
+      defaultBranch:
+        $ref: '#/definitions/[object Object]'
+        description: The repository's default branch name.
+      lastModifiedDate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date and time the repository was last modified, in timestamp format.'
+      creationDate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date and time the repository was created, in timestamp format.'
+      cloneUrlHttp:
+        $ref: '#/definitions/[object Object]'
+        description: The URL to use for cloning the repository over HTTPS.
+      cloneUrlSsh:
+        $ref: '#/definitions/[object Object]'
+        description: The URL to use for cloning the repository over SSH.
+      Arn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the repository.
+    description: Information about a repository.
+  RepositoryMetadataList:
     type: array
     items:
-      $ref: '#/definitions/PullRequestTarget'
-  PullRequestCreatedEventMetadata:
-    type: object
-    properties:
-      repositoryName:
-        $ref: '#/definitions/RepositoryName'
-        description: The name of the repository where the pull request was created.
-      sourceCommitId:
-        $ref: '#/definitions/CommitId'
-        description: The commit ID on the source branch used when the pull request was created.
-      destinationCommitId:
-        $ref: '#/definitions/CommitId'
-        description: The commit ID of the tip of the branch specified as the destination branch when the pull request was created.
-      mergeBase:
-        $ref: '#/definitions/CommitId'
-        description: The commit ID of the most recent commit that the source branch and the destination branch have in common.
-    description: Metadata about the pull request that is used when comparing the pull request source with its destination.
-  PullRequestStatusChangedEventMetadata:
-    type: object
-    properties:
-      pullRequestStatus:
-        $ref: '#/definitions/PullRequestStatusEnum'
-        description: The changed status of the pull request.
-    description: Information about a change to the status of a pull request.
-  PullRequestSourceReferenceUpdatedEventMetadata:
-    type: object
-    properties:
-      repositoryName:
-        $ref: '#/definitions/RepositoryName'
-        description: The name of the repository where the pull request was updated.
-      beforeCommitId:
-        $ref: '#/definitions/CommitId'
-        description: The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was updated.
-      afterCommitId:
-        $ref: '#/definitions/CommitId'
-        description: The full commit ID of the commit in the source branch that was the tip of the branch at the time the pull request was updated.
-      mergeBase:
-        $ref: '#/definitions/CommitId'
-        description: The commit ID of the most recent commit that the source branch and the destination branch have in common.
-    description: Information about an update to the source branch of a pull request.
-  PullRequestMergedStateChangedEventMetadata:
-    type: object
-    properties:
-      repositoryName:
-        $ref: '#/definitions/RepositoryName'
-        description: The name of the repository where the pull request was created.
-      destinationReference:
-        $ref: '#/definitions/ReferenceName'
-        description: The name of the branch that the pull request will be merged into.
-      mergeMetadata:
-        $ref: '#/definitions/MergeMetadata'
-        description: Information about the merge state change event.
-    description: 'Returns information about the change in the merge state for a pull request event. '
-  PullRequestEvent:
-    type: object
-    properties:
-      pullRequestId:
-        $ref: '#/definitions/PullRequestId'
-        description: The system-generated ID of the pull request.
-      eventDate:
-        $ref: '#/definitions/EventDate'
-        description: 'The day and time of the pull request event, in timestamp format.'
-      pullRequestEventType:
-        $ref: '#/definitions/PullRequestEventType'
-        description: 'The type of the pull request event, for example a status change event (PULL_REQUEST_STATUS_CHANGED) or update event (PULL_REQUEST_SOURCE_REFERENCE_UPDATED).'
-      actorArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with additional commits or changing the status of a pull request.
-      pullRequestCreatedEventMetadata:
-        $ref: '#/definitions/PullRequestCreatedEventMetadata'
-        description: Information about the source and destination branches for the pull request.
-      pullRequestStatusChangedEventMetadata:
-        $ref: '#/definitions/PullRequestStatusChangedEventMetadata'
-        description: Information about the change in status for the pull request event.
-      pullRequestSourceReferenceUpdatedEventMetadata:
-        $ref: '#/definitions/PullRequestSourceReferenceUpdatedEventMetadata'
-        description: 'Information about the updated source branch for the pull request event. '
-      pullRequestMergedStateChangedEventMetadata:
-        $ref: '#/definitions/PullRequestMergedStateChangedEventMetadata'
-        description: Information about the change in mergability state for the pull request event.
-    description: Returns information about a pull request event.
-  ReferenceName:
+      $ref: '#/definitions/[object Object]'
+  RepositoryName:
     type: string
-  PullRequestTarget:
-    type: object
-    properties:
-      repositoryName:
-        $ref: '#/definitions/RepositoryName'
-        description: The name of the repository that contains the pull request source and destination branches.
-      sourceReference:
-        $ref: '#/definitions/ReferenceName'
-        description: The branch of the repository that contains the changes for the pull request. Also known as the source branch.
-      destinationReference:
-        $ref: '#/definitions/ReferenceName'
-        description: 'The branch of the repository where the pull request changes will be merged into. Also known as the destination branch. '
-      destinationCommit:
-        $ref: '#/definitions/CommitId'
-        description: The full commit ID that is the tip of the destination branch. This is the commit where the pull request was or will be merged.
-      sourceCommit:
-        $ref: '#/definitions/CommitId'
-        description: 'The full commit ID of the tip of the source branch used to create the pull request. If the pull request branch is updated by a push while the pull request is open, the commit ID will change to reflect the new tip of the branch.'
-      mergeBase:
-        $ref: '#/definitions/CommitId'
-        description: The commit ID of the most recent commit that the source branch and the destination branch have in common.
-      mergeMetadata:
-        $ref: '#/definitions/MergeMetadata'
-        description: 'Returns metadata about the state of the merge, including whether the merge has been made.'
-    description: Returns information about a pull request target.
+    pattern: '[\w\.-]+'
+    minLength: 1
+    maxLength: 100
   RepositoryNameIdPair:
     type: object
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name associated with the repository.
       repositoryId:
-        $ref: '#/definitions/RepositoryId'
+        $ref: '#/definitions/[object Object]'
         description: The ID associated with the repository.
     description: Information about a repository name and ID.
-  RepositoryTriggerName:
-    type: string
-  RepositoryTriggerCustomData:
-    type: string
-  RepositoryTriggerEventList:
+  RepositoryNameIdPairList:
     type: array
     items:
-      $ref: '#/definitions/RepositoryTriggerEventEnum'
+      $ref: '#/definitions/[object Object]'
+  RepositoryNameList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  RepositoryNotFoundList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   RepositoryTrigger:
     type: object
     required:
@@ -4799,21 +4751,23 @@ definitions:
       - events
     properties:
       name:
-        $ref: '#/definitions/RepositoryTriggerName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the trigger.
       destinationArn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: 'The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS).'
       customData:
-        $ref: '#/definitions/RepositoryTriggerCustomData'
+        $ref: '#/definitions/[object Object]'
         description: Any custom data associated with the trigger that will be included in the information sent to the target of the trigger.
       branches:
-        $ref: '#/definitions/BranchNameList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The branches that will be included in the trigger configuration. If you specify an empty array, the trigger will apply to all branches.</p> <note> <p>While no content is required in the array, you must include the array itself.</p> </note>'
       events:
-        $ref: '#/definitions/RepositoryTriggerEventList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). </p> <note> <p>The valid value "all" cannot be used with any other values.</p> </note>'
     description: Information about a trigger for a repository.
+  RepositoryTriggerCustomData:
+    type: string
   RepositoryTriggerEventEnum:
     type: string
     enum:
@@ -4821,55 +4775,80 @@ definitions:
       - updateReference
       - createReference
       - deleteReference
-  RepositoryTriggerExecutionFailureMessage:
-    type: string
+  RepositoryTriggerEventList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   RepositoryTriggerExecutionFailure:
     type: object
     properties:
       trigger:
-        $ref: '#/definitions/RepositoryTriggerName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the trigger that did not run.
       failureMessage:
-        $ref: '#/definitions/RepositoryTriggerExecutionFailureMessage'
+        $ref: '#/definitions/[object Object]'
         description: Additional message information about the trigger that did not run.
     description: A trigger failed to run.
   RepositoryTriggerExecutionFailureList:
     type: array
     items:
-      $ref: '#/definitions/RepositoryTriggerExecutionFailure'
+      $ref: '#/definitions/[object Object]'
+  RepositoryTriggerExecutionFailureMessage:
+    type: string
+  RepositoryTriggerName:
+    type: string
   RepositoryTriggerNameList:
     type: array
     items:
-      $ref: '#/definitions/RepositoryTriggerName'
+      $ref: '#/definitions/[object Object]'
+  RepositoryTriggersConfigurationId:
+    type: string
+  RepositoryTriggersList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  SortByEnum:
+    type: string
+    enum:
+      - repositoryName
+      - lastModifiedDate
   SubModule:
     type: object
     properties:
       commitId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The commit ID that contains the reference to the submodule.
       absolutePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: The fully qualified path to the folder that contains the reference to the submodule.
       relativePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: The relative path of the submodule from the folder where the query originated.
     description: Returns information about a submodule reference in a repository folder.
+  SubModuleList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   SymbolicLink:
     type: object
     properties:
       blobId:
-        $ref: '#/definitions/ObjectId'
+        $ref: '#/definitions/[object Object]'
         description: The blob ID that contains the information about the symbolic link.
       absolutePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: The fully-qualified path to the folder that contains the symbolic link.
       relativePath:
-        $ref: '#/definitions/Path'
+        $ref: '#/definitions/[object Object]'
         description: The relative path of the symbolic link from the folder where the query originated.
       fileMode:
-        $ref: '#/definitions/FileModeTypeEnum'
+        $ref: '#/definitions/[object Object]'
         description: The file mode permissions of the blob that cotains information about the symbolic link.
     description: Returns information about a symbolic link in a repository folder.
+  SymbolicLinkList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Target:
     type: object
     required:
@@ -4877,12 +4856,34 @@ definitions:
       - sourceReference
     properties:
       repositoryName:
-        $ref: '#/definitions/RepositoryName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the repository that contains the pull request.
       sourceReference:
-        $ref: '#/definitions/ReferenceName'
+        $ref: '#/definitions/[object Object]'
         description: The branch of the repository that contains the changes for the pull request. Also known as the source branch.
       destinationReference:
-        $ref: '#/definitions/ReferenceName'
+        $ref: '#/definitions/[object Object]'
         description: The branch of the repository where the pull request changes will be merged into. Also known as the destination branch.
     description: Returns information about a target for a pull request.
+  TargetList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Title:
+    type: string
+    maxLength: 150
+  UserInfo:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the user who made the specified commit.
+      email:
+        $ref: '#/definitions/[object Object]'
+        description: 'The email address associated with the user who made the commit, if any.'
+      date:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date when the specified commit was commited, in timestamp format with GMT offset.'
+    description: Information about the user who made a specified commit.
+  blob:
+    type: string

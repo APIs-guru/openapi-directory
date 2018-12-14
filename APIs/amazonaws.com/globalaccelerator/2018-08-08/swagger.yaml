@@ -759,7 +759,7 @@ definitions:
     type: object
     properties:
       Accelerator:
-        $ref: '#/definitions/Accelerator'
+        $ref: '#/definitions/[object Object]'
         description: The accelerator that is created by specifying a listener and the supported IP address types.
   CreateAcceleratorRequest:
     type: object
@@ -768,16 +768,16 @@ definitions:
       - IdempotencyToken
     properties:
       Name:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of an accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.'
       IpAddressType:
-        $ref: '#/definitions/IpAddressType'
+        $ref: '#/definitions/[object Object]'
         description: 'The value for the address type must be IPv4. '
       Enabled:
-        $ref: '#/definitions/GenericBoolean'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates whether an accelerator is enabled. The value is true or false. The default value is true. </p> <p>If the value is set to true, an accelerator cannot be deleted. If set to false, the accelerator can be deleted.</p>'
       IdempotencyToken:
-        $ref: '#/definitions/IdempotencyToken'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of an accelerator.'
   InternalServiceErrorException: {}
   InvalidArgumentException: {}
@@ -786,7 +786,7 @@ definitions:
     type: object
     properties:
       EndpointGroup:
-        $ref: '#/definitions/EndpointGroup'
+        $ref: '#/definitions/[object Object]'
         description: The information about the endpoint group that was created.
   CreateEndpointGroupRequest:
     type: object
@@ -796,34 +796,34 @@ definitions:
       - IdempotencyToken
     properties:
       ListenerArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the listener.
       EndpointGroupRegion:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS Region where the endpoint group is located. A listener can have only one endpoint group in a specific Region.
       EndpointConfigurations:
-        $ref: '#/definitions/EndpointConfigurations'
+        $ref: '#/definitions/[object Object]'
         description: The list of endpoint objects.
       TrafficDialPercentage:
-        $ref: '#/definitions/TrafficDialPercentage'
+        $ref: '#/definitions/[object Object]'
         description: <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener. </p> <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p> <p>The default value is 100.</p>
       HealthCheckPort:
-        $ref: '#/definitions/HealthCheckPort'
+        $ref: '#/definitions/[object Object]'
         description: 'The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port is the listener port that this endpoint group is associated with. If listener port is a list of ports, Global Accelerator uses the first port in the list.'
       HealthCheckProtocol:
-        $ref: '#/definitions/HealthCheckProtocol'
+        $ref: '#/definitions/[object Object]'
         description: The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
       HealthCheckPath:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: 'If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The default value is slash (/).'
       HealthCheckIntervalSeconds:
-        $ref: '#/definitions/HealthCheckIntervalSeconds'
+        $ref: '#/definitions/[object Object]'
         description: 'The time, in seconds, between each health check for an endpoint. The default value is 30.'
       ThresholdCount:
-        $ref: '#/definitions/ThresholdCount'
+        $ref: '#/definitions/[object Object]'
         description: 'The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.'
       IdempotencyToken:
-        $ref: '#/definitions/IdempotencyToken'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.'
   AcceleratorNotFoundException: {}
   EndpointGroupAlreadyExistsException: {}
@@ -832,7 +832,7 @@ definitions:
     type: object
     properties:
       Listener:
-        $ref: '#/definitions/Listener'
+        $ref: '#/definitions/[object Object]'
         description: The listener that you've created.
   CreateListenerRequest:
     type: object
@@ -843,19 +843,19 @@ definitions:
       - IdempotencyToken
     properties:
       AcceleratorArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of your accelerator.
       PortRanges:
-        $ref: '#/definitions/PortRanges'
+        $ref: '#/definitions/[object Object]'
         description: The list of port ranges to support for connections from clients to your accelerator.
       Protocol:
-        $ref: '#/definitions/Protocol'
+        $ref: '#/definitions/[object Object]'
         description: The protocol for connections from clients to your accelerator.
       ClientAffinity:
-        $ref: '#/definitions/ClientAffinity'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Clienty affinity gives you control over whether to always route each client to the same specific endpoint.</p> <p>AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is <code>NONE</code>, Global Accelerator uses the "five-tuple" (5-tuple) properties—client IP address, client port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes. </p> <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>CLIENT_IP</code> instead. When you use the <code>CLIENT_IP</code> setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— client IP address and destination IP address—to select the hash value. For UDP, Global Accelerator always uses two-tuple properties to select the hash value.</p> <p>The default value is <code>NONE</code>.</p>'
       IdempotencyToken:
-        $ref: '#/definitions/IdempotencyToken'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.'
   InvalidPortRangeException: {}
   DeleteAcceleratorRequest:
@@ -864,7 +864,7 @@ definitions:
       - AcceleratorArn
     properties:
       AcceleratorArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of an accelerator.
   AcceleratorNotDisabledException: {}
   AssociatedListenerFoundException: {}
@@ -874,7 +874,7 @@ definitions:
       - EndpointGroupArn
     properties:
       EndpointGroupArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the endpoint group to delete.
   EndpointGroupNotFoundException: {}
   DeleteListenerRequest:
@@ -883,14 +883,14 @@ definitions:
       - ListenerArn
     properties:
       ListenerArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the listener.
   AssociatedEndpointGroupFoundException: {}
   DescribeAcceleratorResponse:
     type: object
     properties:
       Accelerator:
-        $ref: '#/definitions/Accelerator'
+        $ref: '#/definitions/[object Object]'
         description: The description of the accelerator.
   DescribeAcceleratorRequest:
     type: object
@@ -898,25 +898,25 @@ definitions:
       - AcceleratorArn
     properties:
       AcceleratorArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the accelerator to describe.
   DescribeAcceleratorAttributesResponse:
     type: object
     properties:
       AcceleratorAttributes:
-        $ref: '#/definitions/AcceleratorAttributes'
+        $ref: '#/definitions/[object Object]'
         description: The attributes of the accelerator.
   DescribeAcceleratorAttributesRequest:
     type: object
     properties:
       AcceleratorArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the accelerator with the attributes that you want to describe.
   DescribeEndpointGroupResponse:
     type: object
     properties:
       EndpointGroup:
-        $ref: '#/definitions/EndpointGroup'
+        $ref: '#/definitions/[object Object]'
         description: The description of an endpoint group.
   DescribeEndpointGroupRequest:
     type: object
@@ -924,13 +924,13 @@ definitions:
       - EndpointGroupArn
     properties:
       EndpointGroupArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the endpoint group to describe.
   DescribeListenerResponse:
     type: object
     properties:
       Listener:
-        $ref: '#/definitions/Listener'
+        $ref: '#/definitions/[object Object]'
         description: The description of a listener.
   DescribeListenerRequest:
     type: object
@@ -938,35 +938,35 @@ definitions:
       - ListenerArn
     properties:
       ListenerArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the listener to describe.
   ListAcceleratorsResponse:
     type: object
     properties:
       Accelerators:
-        $ref: '#/definitions/Accelerators'
+        $ref: '#/definitions/[object Object]'
         description: The list of accelerators for a customer account.
       NextToken:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of results. You receive this token from a previous call.
   ListAcceleratorsRequest:
     type: object
     properties:
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: The number of Global Accelerator objects that you want to return with this call. The default value is 10.
       NextToken:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of results. You receive this token from a previous call.
   InvalidNextTokenException: {}
   ListEndpointGroupsResponse:
     type: object
     properties:
       EndpointGroups:
-        $ref: '#/definitions/EndpointGroups'
+        $ref: '#/definitions/[object Object]'
         description: The list of the endpoint groups associated with a listener.
       NextToken:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of results. You receive this token from a previous call.
   ListEndpointGroupsRequest:
     type: object
@@ -974,22 +974,22 @@ definitions:
       - ListenerArn
     properties:
       ListenerArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the listener.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: The number of endpoint group objects that you want to return with this call. The default value is 10.
       NextToken:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of results. You receive this token from a previous call.
   ListListenersResponse:
     type: object
     properties:
       Listeners:
-        $ref: '#/definitions/Listeners'
+        $ref: '#/definitions/[object Object]'
         description: The list of listeners for an accelerator.
       NextToken:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of results. You receive this token from a previous call.
   ListListenersRequest:
     type: object
@@ -997,19 +997,19 @@ definitions:
       - AcceleratorArn
     properties:
       AcceleratorArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the accelerator for which you want to list listener objects.
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: The number of listener objects that you want to return with this call. The default value is 10.
       NextToken:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of results. You receive this token from a previous call.
   UpdateAcceleratorResponse:
     type: object
     properties:
       Accelerator:
-        $ref: '#/definitions/Accelerator'
+        $ref: '#/definitions/[object Object]'
         description: Information about the updated accelerator.
   UpdateAcceleratorRequest:
     type: object
@@ -1017,43 +1017,43 @@ definitions:
       - AcceleratorArn
     properties:
       AcceleratorArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the accelerator to update.
       Name:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.'
       IpAddressType:
-        $ref: '#/definitions/IpAddressType'
+        $ref: '#/definitions/[object Object]'
         description: 'The value for the address type must be IPv4. '
       Enabled:
-        $ref: '#/definitions/GenericBoolean'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates whether an accelerator is enabled. The value is true or false. The default value is true. </p> <p>If the value is set to true, the accelerator cannot be deleted. If set to false, the accelerator can be deleted.</p>'
   UpdateAcceleratorAttributesResponse:
     type: object
     properties:
       AcceleratorAttributes:
-        $ref: '#/definitions/AcceleratorAttributes'
+        $ref: '#/definitions/[object Object]'
         description: Updated attributes for the accelerator.
   UpdateAcceleratorAttributesRequest:
     type: object
     properties:
       AcceleratorArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the accelerator that you want to update.
       FlowLogsEnabled:
-        $ref: '#/definitions/GenericBoolean'
+        $ref: '#/definitions/[object Object]'
         description: Update whether flow logs are enabled.
       FlowLogsS3Bucket:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: Update the name of the Amazon S3 bucket for the flow logs.
       FlowLogsS3Prefix:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: Update the prefix for the location in the Amazon S3 bucket for the flow logs.
   UpdateEndpointGroupResponse:
     type: object
     properties:
       EndpointGroup:
-        $ref: '#/definitions/EndpointGroup'
+        $ref: '#/definitions/[object Object]'
         description: The information about the endpoint group that was updated.
   UpdateEndpointGroupRequest:
     type: object
@@ -1061,34 +1061,34 @@ definitions:
       - EndpointGroupArn
     properties:
       EndpointGroupArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the endpoint group.
       EndpointConfigurations:
-        $ref: '#/definitions/EndpointConfigurations'
+        $ref: '#/definitions/[object Object]'
         description: The list of endpoint objects.
       TrafficDialPercentage:
-        $ref: '#/definitions/TrafficDialPercentage'
+        $ref: '#/definitions/[object Object]'
         description: <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener. </p> <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p> <p>The default value is 100.</p>
       HealthCheckPort:
-        $ref: '#/definitions/HealthCheckPort'
+        $ref: '#/definitions/[object Object]'
         description: 'The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port is the listener port that this endpoint group is associated with. If the listener port is a list of ports, Global Accelerator uses the first port in the list.'
       HealthCheckProtocol:
-        $ref: '#/definitions/HealthCheckProtocol'
+        $ref: '#/definitions/[object Object]'
         description: The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
       HealthCheckPath:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: 'If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The default value is slash (/).'
       HealthCheckIntervalSeconds:
-        $ref: '#/definitions/HealthCheckIntervalSeconds'
+        $ref: '#/definitions/[object Object]'
         description: 'The time, in seconds, between each health check for an endpoint. The default value is 30.'
       ThresholdCount:
-        $ref: '#/definitions/ThresholdCount'
+        $ref: '#/definitions/[object Object]'
         description: 'The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.'
   UpdateListenerResponse:
     type: object
     properties:
       Listener:
-        $ref: '#/definitions/Listener'
+        $ref: '#/definitions/[object Object]'
         description: Information for the updated listener.
   UpdateListenerRequest:
     type: object
@@ -1096,102 +1096,157 @@ definitions:
       - ListenerArn
     properties:
       ListenerArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the listener to update.
       PortRanges:
-        $ref: '#/definitions/PortRanges'
+        $ref: '#/definitions/[object Object]'
         description: The updated list of port ranges for the connections from clients to the accelerator.
       Protocol:
-        $ref: '#/definitions/Protocol'
+        $ref: '#/definitions/[object Object]'
         description: The updated protocol for the connections from clients to the accelerator.
       ClientAffinity:
-        $ref: '#/definitions/ClientAffinity'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the source port and protocol of the user request. This gives you control over whether and how to maintain client affinity to a given endpoint.</p> <p>The default value is <code>NONE</code>.</p>'
-  GenericString:
-    type: string
-    maxLength: 255
-  IpAddressType:
-    type: string
-    enum:
-      - IPV4
-  GenericBoolean:
-    type: boolean
-  IpSets:
-    type: array
-    items:
-      $ref: '#/definitions/IpSet'
-  AcceleratorStatus:
-    type: string
-    enum:
-      - DEPLOYED
-      - IN_PROGRESS
-  Timestamp:
-    type: string
-    format: date-time
+  '[object Object]': {}
   Accelerator:
     type: object
     properties:
       AcceleratorArn:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the accelerator.
       Name:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.'
       IpAddressType:
-        $ref: '#/definitions/IpAddressType'
+        $ref: '#/definitions/[object Object]'
         description: 'The value for the address type must be IPv4. '
       Enabled:
-        $ref: '#/definitions/GenericBoolean'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates whether theaccelerator is enabled. The value is true or false. The default value is true. </p> <p>If the value is set to true, the accelerator cannot be deleted. If set to false, accelerator can be deleted.</p>'
       IpSets:
-        $ref: '#/definitions/IpSets'
+        $ref: '#/definitions/[object Object]'
         description: IP address set associated with the accelerator.
       Status:
-        $ref: '#/definitions/AcceleratorStatus'
+        $ref: '#/definitions/[object Object]'
         description: Describes the deployment status of the accelerator.
       CreatedTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: The date and time that the accelerator was created.
       LastModifiedTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: The date and time that the accelerator was last modified.
     description: 'An accelerator is a complex type that includes one or more listeners that process inbound connections and then direct traffic to one or more endpoint groups, each of which includes endpoints, such as load balancers.'
   AcceleratorAttributes:
     type: object
     properties:
       FlowLogsEnabled:
-        $ref: '#/definitions/GenericBoolean'
+        $ref: '#/definitions/[object Object]'
         description: 'Indicates whether flow logs are enabled. The value is true or false. The default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified.'
       FlowLogsS3Bucket:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The name of the Amazon S3 bucket for the flow logs. This attribute is required if flow logs are enabled. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the bucket.
       FlowLogsS3Prefix:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: 'The prefix for the location in the Amazon S3 bucket for the flow logs. If you don’t specify a prefix, the flow logs are stored in the root of the bucket.'
     description: Attributes of an accelerator.
+  AcceleratorStatus:
+    type: string
+    enum:
+      - DEPLOYED
+      - IN_PROGRESS
   Accelerators:
     type: array
     items:
-      $ref: '#/definitions/Accelerator'
+      $ref: '#/definitions/[object Object]'
   ClientAffinity:
     type: string
     enum:
       - NONE
       - SOURCE_IP
-  IdempotencyToken:
-    type: string
-    maxLength: 255
+  EndpointConfiguration:
+    type: object
+    properties:
+      EndpointId:
+        $ref: '#/definitions/[object Object]'
+        description: 'An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.'
+      Weight:
+        $ref: '#/definitions/[object Object]'
+        description: 'The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>.'
+    description: A complex type for endpoints.
   EndpointConfigurations:
     type: array
     items:
-      $ref: '#/definitions/EndpointConfiguration'
+      $ref: '#/definitions/[object Object]'
     minItems: 0
     maxItems: 10
-  TrafficDialPercentage:
-    type: number
-    format: float
+  EndpointDescription:
+    type: object
+    properties:
+      EndpointId:
+        $ref: '#/definitions/[object Object]'
+        description: 'An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.'
+      Weight:
+        $ref: '#/definitions/[object Object]'
+        description: 'The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>. '
+      HealthState:
+        $ref: '#/definitions/[object Object]'
+        description: The health status of the endpoint.
+      HealthReason:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The reason code associated with why the endpoint is not healthy. If the endpoint state is healthy, a reason code is not provided.</p> <p>If the endpoint state is <b>unhealthy</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>Timeout</b>: The health check requests to the endpoint are timing out before returning a status.</p> </li> <li> <p> <b>Failed</b>: The health check failed, for example because the endpoint response was invalid (malformed).</p> </li> </ul> <p>If the endpoint state is <b>initial</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>ProvisioningInProgress</b>: The endpoint is in the process of being provisioned.</p> </li> <li> <p> <b>InitialHealthChecking</b>: Global Accelerator is still setting up the minimum number of health checks for the endpoint that are required to determine its health status.</p> </li> </ul>'
+    description: 'A complex type for an endpoint. Each endpoint group can include one or more endpoints, such as load balancers.'
+  EndpointDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  EndpointGroup:
+    type: object
+    properties:
+      EndpointGroupArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the endpoint group.
+      EndpointGroupRegion:
+        $ref: '#/definitions/[object Object]'
+        description: The AWS Region that this endpoint group belongs.
+      EndpointDescriptions:
+        $ref: '#/definitions/[object Object]'
+        description: The list of endpoint objects.
+      TrafficDialPercentage:
+        $ref: '#/definitions/[object Object]'
+        description: <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener. </p> <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p> <p>The default value is 100.</p>
+      HealthCheckPort:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The port that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. </p> <p>The default port is the port for the listener that this endpoint group is associated with. If the listener port is a list, Global Accelerator uses the first specified port in the list of ports.</p>'
+      HealthCheckProtocol:
+        $ref: '#/definitions/[object Object]'
+        description: The protocol that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. The default value is TCP.
+      HealthCheckPath:
+        $ref: '#/definitions/[object Object]'
+        description: 'If the protocol is HTTP/S, then this value provides the ping path that Global Accelerator uses for the destination on the endpoints for health checks. The default is slash (/).'
+      HealthCheckIntervalSeconds:
+        $ref: '#/definitions/[object Object]'
+        description: 'The elapsed time, in seconds, between health checks for each endpoint. The default value is 30.'
+      ThresholdCount:
+        $ref: '#/definitions/[object Object]'
+        description: 'The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.'
+    description: 'A complex type for the endpoint group. An AWS Region can have only one endpoint group for a specific listener. '
+  EndpointGroups:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  EndpointWeight:
+    type: integer
     minimum: 0
-    maximum: 100
+    maximum: 255
+  GenericBoolean:
+    type: boolean
+  GenericString:
+    type: string
+    maxLength: 255
+  HealthCheckIntervalSeconds:
+    type: integer
+    minimum: 10
+    maximum: 30
   HealthCheckPort:
     type: integer
     minimum: 1
@@ -1202,142 +1257,65 @@ definitions:
       - TCP
       - HTTP
       - HTTPS
-  HealthCheckIntervalSeconds:
-    type: integer
-    minimum: 10
-    maximum: 30
-  ThresholdCount:
-    type: integer
-    minimum: 1
-    maximum: 10
-  EndpointGroup:
-    type: object
-    properties:
-      EndpointGroupArn:
-        $ref: '#/definitions/GenericString'
-        description: The Amazon Resource Name (ARN) of the endpoint group.
-      EndpointGroupRegion:
-        $ref: '#/definitions/GenericString'
-        description: The AWS Region that this endpoint group belongs.
-      EndpointDescriptions:
-        $ref: '#/definitions/EndpointDescriptions'
-        description: The list of endpoint objects.
-      TrafficDialPercentage:
-        $ref: '#/definitions/TrafficDialPercentage'
-        description: <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener. </p> <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p> <p>The default value is 100.</p>
-      HealthCheckPort:
-        $ref: '#/definitions/HealthCheckPort'
-        description: '<p>The port that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. </p> <p>The default port is the port for the listener that this endpoint group is associated with. If the listener port is a list, Global Accelerator uses the first specified port in the list of ports.</p>'
-      HealthCheckProtocol:
-        $ref: '#/definitions/HealthCheckProtocol'
-        description: The protocol that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. The default value is TCP.
-      HealthCheckPath:
-        $ref: '#/definitions/GenericString'
-        description: 'If the protocol is HTTP/S, then this value provides the ping path that Global Accelerator uses for the destination on the endpoints for health checks. The default is slash (/).'
-      HealthCheckIntervalSeconds:
-        $ref: '#/definitions/HealthCheckIntervalSeconds'
-        description: 'The elapsed time, in seconds, between health checks for each endpoint. The default value is 30.'
-      ThresholdCount:
-        $ref: '#/definitions/ThresholdCount'
-        description: 'The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.'
-    description: 'A complex type for the endpoint group. An AWS Region can have only one endpoint group for a specific listener. '
-  PortRanges:
-    type: array
-    items:
-      $ref: '#/definitions/PortRange'
-    minItems: 1
-    maxItems: 10
-  Protocol:
-    type: string
-    enum:
-      - TCP
-      - UDP
-  Listener:
-    type: object
-    properties:
-      ListenerArn:
-        $ref: '#/definitions/GenericString'
-        description: The Amazon Resource Name (ARN) of the listener.
-      PortRanges:
-        $ref: '#/definitions/PortRanges'
-        description: The list of port ranges for the connections from clients to the accelerator.
-      Protocol:
-        $ref: '#/definitions/Protocol'
-        description: The protocol for the connections from clients to the accelerator.
-      ClientAffinity:
-        $ref: '#/definitions/ClientAffinity'
-        description: The client properties that Global Accelerator uses to select an endpoint so that you can choose to route traffic from users to their original endpoint. The default value is <code>NONE</code>.
-    description: A complex type for a listener.
-  EndpointWeight:
-    type: integer
-    minimum: 0
-    maximum: 255
-  EndpointConfiguration:
-    type: object
-    properties:
-      EndpointId:
-        $ref: '#/definitions/GenericString'
-        description: 'An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.'
-      Weight:
-        $ref: '#/definitions/EndpointWeight'
-        description: 'The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>.'
-    description: A complex type for endpoints.
   HealthState:
     type: string
     enum:
       - INITIAL
       - HEALTHY
       - UNHEALTHY
-  EndpointDescription:
-    type: object
-    properties:
-      EndpointId:
-        $ref: '#/definitions/GenericString'
-        description: 'An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.'
-      Weight:
-        $ref: '#/definitions/EndpointWeight'
-        description: 'The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>. '
-      HealthState:
-        $ref: '#/definitions/HealthState'
-        description: The health status of the endpoint.
-      HealthReason:
-        $ref: '#/definitions/GenericString'
-        description: '<p>The reason code associated with why the endpoint is not healthy. If the endpoint state is healthy, a reason code is not provided.</p> <p>If the endpoint state is <b>unhealthy</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>Timeout</b>: The health check requests to the endpoint are timing out before returning a status.</p> </li> <li> <p> <b>Failed</b>: The health check failed, for example because the endpoint response was invalid (malformed).</p> </li> </ul> <p>If the endpoint state is <b>initial</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>ProvisioningInProgress</b>: The endpoint is in the process of being provisioned.</p> </li> <li> <p> <b>InitialHealthChecking</b>: Global Accelerator is still setting up the minimum number of health checks for the endpoint that are required to determine its health status.</p> </li> </ul>'
-    description: 'A complex type for an endpoint. Each endpoint group can include one or more endpoints, such as load balancers.'
-  EndpointDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/EndpointDescription'
-  EndpointGroups:
-    type: array
-    items:
-      $ref: '#/definitions/EndpointGroup'
+  IdempotencyToken:
+    type: string
+    maxLength: 255
   IpAddress:
     type: string
+  IpAddressType:
+    type: string
+    enum:
+      - IPV4
   IpAddresses:
     type: array
     items:
-      $ref: '#/definitions/IpAddress'
+      $ref: '#/definitions/[object Object]'
     minItems: 0
     maxItems: 2
   IpSet:
     type: object
     properties:
       IpFamily:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/[object Object]'
         description: The types of IP addresses included in this IP set.
       IpAddresses:
-        $ref: '#/definitions/IpAddresses'
+        $ref: '#/definitions/[object Object]'
         description: The array of IP addresses in the IP address set. An IP address set can have a maximum of two IP addresses.
     description: A complex type for the set of IP addresses for an accelerator.
+  IpSets:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Listener:
+    type: object
+    properties:
+      ListenerArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the listener.
+      PortRanges:
+        $ref: '#/definitions/[object Object]'
+        description: The list of port ranges for the connections from clients to the accelerator.
+      Protocol:
+        $ref: '#/definitions/[object Object]'
+        description: The protocol for the connections from clients to the accelerator.
+      ClientAffinity:
+        $ref: '#/definitions/[object Object]'
+        description: The client properties that Global Accelerator uses to select an endpoint so that you can choose to route traffic from users to their original endpoint. The default value is <code>NONE</code>.
+    description: A complex type for a listener.
+  Listeners:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   MaxResults:
     type: integer
     minimum: 1
     maximum: 100
-  Listeners:
-    type: array
-    items:
-      $ref: '#/definitions/Listener'
   PortNumber:
     type: integer
     minimum: 1
@@ -1346,9 +1324,32 @@ definitions:
     type: object
     properties:
       FromPort:
-        $ref: '#/definitions/PortNumber'
+        $ref: '#/definitions/[object Object]'
         description: 'The first port in the range of ports, inclusive.'
       ToPort:
-        $ref: '#/definitions/PortNumber'
+        $ref: '#/definitions/[object Object]'
         description: 'The last port in the range of ports, inclusive.'
     description: A complex type for a range of ports for a listener.
+  PortRanges:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 10
+  Protocol:
+    type: string
+    enum:
+      - TCP
+      - UDP
+  ThresholdCount:
+    type: integer
+    minimum: 1
+    maximum: 10
+  Timestamp:
+    type: string
+    format: date-time
+  TrafficDialPercentage:
+    type: number
+    format: float
+    minimum: 0
+    maximum: 100

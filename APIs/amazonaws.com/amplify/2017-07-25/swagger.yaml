@@ -210,8 +210,8 @@ paths:
           schema:
             $ref: '#/definitions/CreateBranchRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -250,8 +250,8 @@ paths:
           schema:
             $ref: '#/definitions/ListBranchesRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
   '/apps/{appId}/domains':
     post:
@@ -293,8 +293,8 @@ paths:
           schema:
             $ref: '#/definitions/CreateDomainAssociationRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -333,8 +333,8 @@ paths:
           schema:
             $ref: '#/definitions/ListDomainAssociationsRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
   '/apps/{appId}':
     delete:
@@ -372,8 +372,8 @@ paths:
           schema:
             $ref: '#/definitions/DeleteAppRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -416,8 +416,8 @@ paths:
           schema:
             $ref: '#/definitions/GetAppRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
     post:
       operationId: UpdateApp
@@ -450,8 +450,8 @@ paths:
           schema:
             $ref: '#/definitions/UpdateAppRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
   '/apps/{appId}/branches/{branchName}':
     delete:
@@ -489,12 +489,12 @@ paths:
           schema:
             $ref: '#/definitions/DeleteBranchRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
         - name: branchName
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -537,12 +537,12 @@ paths:
           schema:
             $ref: '#/definitions/GetBranchRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
         - name: branchName
-          in: path
           type: string
+          in: path
           required: true
     post:
       operationId: UpdateBranch
@@ -579,12 +579,12 @@ paths:
           schema:
             $ref: '#/definitions/UpdateBranchRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
         - name: branchName
-          in: path
           type: string
+          in: path
           required: true
   '/apps/{appId}/domains/{domainName}':
     delete:
@@ -622,12 +622,12 @@ paths:
           schema:
             $ref: '#/definitions/DeleteDomainAssociationRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
         - name: domainName
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -670,12 +670,12 @@ paths:
           schema:
             $ref: '#/definitions/GetDomainAssociationRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
         - name: domainName
-          in: path
           type: string
+          in: path
           required: true
     post:
       operationId: UpdateDomainAssociation
@@ -712,12 +712,12 @@ paths:
           schema:
             $ref: '#/definitions/UpdateDomainAssociationRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
         - name: domainName
-          in: path
           type: string
+          in: path
           required: true
   '/apps/{appId}/branches/{branchName}/jobs/{jobId}':
     delete:
@@ -755,16 +755,16 @@ paths:
           schema:
             $ref: '#/definitions/DeleteJobRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
         - name: branchName
-          in: path
           type: string
+          in: path
           required: true
         - name: jobId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -811,16 +811,16 @@ paths:
           schema:
             $ref: '#/definitions/GetJobRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
         - name: branchName
-          in: path
           type: string
+          in: path
           required: true
         - name: jobId
-          in: path
           type: string
+          in: path
           required: true
   '/apps/{appId}/branches/{branchName}/jobs':
     get:
@@ -854,12 +854,12 @@ paths:
           schema:
             $ref: '#/definitions/ListJobsRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
         - name: branchName
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -906,12 +906,12 @@ paths:
           schema:
             $ref: '#/definitions/StartJobRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
         - name: branchName
-          in: path
           type: string
+          in: path
           required: true
   '/apps/{appId}/branches/{branchName}/jobs/{jobId}/stop':
     delete:
@@ -949,16 +949,16 @@ paths:
           schema:
             $ref: '#/definitions/StopJobRequest'
         - name: appId
-          in: path
           type: string
+          in: path
           required: true
         - name: branchName
-          in: path
           type: string
+          in: path
           required: true
         - name: jobId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -977,7 +977,7 @@ definitions:
       - app
     properties:
       app:
-        $ref: '#/definitions/App'
+        $ref: '#/definitions/[object Object]'
   CreateAppRequest:
     type: object
     required:
@@ -987,43 +987,43 @@ definitions:
       - oauthToken
     properties:
       name:
-        $ref: '#/definitions/Name'
+        $ref: '#/definitions/[object Object]'
         description: ' Name for the Amplify App '
       description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: ' Description for an Amplify App '
       repository:
-        $ref: '#/definitions/Repository'
+        $ref: '#/definitions/[object Object]'
         description: ' Repository for an Amplify App '
       platform:
-        $ref: '#/definitions/Platform'
+        $ref: '#/definitions/[object Object]'
         description: ' Platform / framework for an Amplify App '
       iamServiceRoleArn:
-        $ref: '#/definitions/ServiceRoleArn'
+        $ref: '#/definitions/[object Object]'
         description: ' AWS IAM service role for an Amplify App '
       oauthToken:
-        $ref: '#/definitions/OauthToken'
+        $ref: '#/definitions/[object Object]'
         description: ' OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. '
       environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
+        $ref: '#/definitions/[object Object]'
         description: ' Environment variables map for an Amplify App. '
       enableBranchAutoBuild:
-        $ref: '#/definitions/EnableBranchAutoBuild'
+        $ref: '#/definitions/[object Object]'
         description: ' Enable the auto building of branches for an Amplify App. '
       enableBasicAuth:
-        $ref: '#/definitions/EnableBasicAuth'
+        $ref: '#/definitions/[object Object]'
         description: ' Enable Basic Authorization for an Amplify App, this will apply to all branches part of this App. '
       basicAuthCredentials:
-        $ref: '#/definitions/BasicAuthCredentials'
+        $ref: '#/definitions/[object Object]'
         description: ' Credentials for Basic Authorization for an Amplify App. '
       customRules:
-        $ref: '#/definitions/CustomRules'
+        $ref: '#/definitions/[object Object]'
         description: ' Custom rewrite / redirect rules for an Amplify App. '
       tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: ' Tag for an Amplify App '
       buildSpec:
-        $ref: '#/definitions/BuildSpec'
+        $ref: '#/definitions/[object Object]'
         description: ' BuildSpec for an Amplify App '
     description: ' Request structure used to create Apps in Amplify. '
   BadRequestException: {}
@@ -1037,7 +1037,7 @@ definitions:
       - branch
     properties:
       branch:
-        $ref: '#/definitions/Branch'
+        $ref: '#/definitions/[object Object]'
         description: ' Branch structure for an Amplify App. '
     description: ' Result structure for create branch request. '
   CreateBranchRequest:
@@ -1046,40 +1046,40 @@ definitions:
       - branchName
     properties:
       branchName:
-        $ref: '#/definitions/BranchName'
+        $ref: '#/definitions/[object Object]'
         description: ' Name for the branch. '
       description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: ' Description for the branch. '
       stage:
-        $ref: '#/definitions/Stage'
+        $ref: '#/definitions/[object Object]'
         description: ' Stage for the branch. '
       framework:
-        $ref: '#/definitions/Framework'
+        $ref: '#/definitions/[object Object]'
         description: ' Framework for the branch. '
       enableNotification:
-        $ref: '#/definitions/EnableNotification'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables notifications for the branch. '
       enableAutoBuild:
-        $ref: '#/definitions/EnableAutoBuild'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables auto building for the branch. '
       environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
+        $ref: '#/definitions/[object Object]'
         description: ' Environment Variables for the branch. '
       basicAuthCredentials:
-        $ref: '#/definitions/BasicAuthCredentials'
+        $ref: '#/definitions/[object Object]'
         description: ' Basic Authorization credentials for the branch. '
       enableBasicAuth:
-        $ref: '#/definitions/EnableBasicAuth'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables Basic Auth for the branch. '
       tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: ' Tag for the branch. '
       buildSpec:
-        $ref: '#/definitions/BuildSpec'
+        $ref: '#/definitions/[object Object]'
         description: ' BuildSpec for the branch. '
       ttl:
-        $ref: '#/definitions/TTL'
+        $ref: '#/definitions/[object Object]'
         description: ' The content TTL for the website in seconds. '
     description: ' Request structure for a branch create request. '
   NotFoundException: {}
@@ -1089,7 +1089,7 @@ definitions:
       - domainAssociation
     properties:
       domainAssociation:
-        $ref: '#/definitions/DomainAssociation'
+        $ref: '#/definitions/[object Object]'
         description: ' Domain Association structure. '
     description: ' Result structure for the create Domain Association request. '
   CreateDomainAssociationRequest:
@@ -1099,13 +1099,13 @@ definitions:
       - subDomainSettings
     properties:
       domainName:
-        $ref: '#/definitions/DomainName'
+        $ref: '#/definitions/[object Object]'
         description: ' Domain name for the Domain Association. '
       enableAutoSubDomain:
-        $ref: '#/definitions/EnableAutoSubDomain'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables automated creation of Subdomains for branches. '
       subDomainSettings:
-        $ref: '#/definitions/SubDomainSettings'
+        $ref: '#/definitions/[object Object]'
         description: ' Setting structure for the Subdomain. '
     description: ' Request structure for create Domain Association request. '
   DeleteAppResult:
@@ -1114,7 +1114,7 @@ definitions:
       - app
     properties:
       app:
-        $ref: '#/definitions/App'
+        $ref: '#/definitions/[object Object]'
     description: ' Result structure for an Amplify App delete request. '
   DeleteAppRequest:
     type: object
@@ -1126,7 +1126,7 @@ definitions:
       - branch
     properties:
       branch:
-        $ref: '#/definitions/Branch'
+        $ref: '#/definitions/[object Object]'
         description: ' Branch structure for an Amplify App. '
     description: ' Result structure for delete branch request. '
   DeleteBranchRequest:
@@ -1139,7 +1139,7 @@ definitions:
       - domainAssociation
     properties:
       domainAssociation:
-        $ref: '#/definitions/DomainAssociation'
+        $ref: '#/definitions/[object Object]'
   DeleteDomainAssociationRequest:
     type: object
     properties: {}
@@ -1150,7 +1150,7 @@ definitions:
       - jobSummary
     properties:
       jobSummary:
-        $ref: '#/definitions/JobSummary'
+        $ref: '#/definitions/[object Object]'
     description: ' Result structure for the delete job request. '
   DeleteJobRequest:
     type: object
@@ -1162,7 +1162,7 @@ definitions:
       - app
     properties:
       app:
-        $ref: '#/definitions/App'
+        $ref: '#/definitions/[object Object]'
   GetAppRequest:
     type: object
     properties: {}
@@ -1173,7 +1173,7 @@ definitions:
       - branch
     properties:
       branch:
-        $ref: '#/definitions/Branch'
+        $ref: '#/definitions/[object Object]'
   GetBranchRequest:
     type: object
     properties: {}
@@ -1184,7 +1184,7 @@ definitions:
       - domainAssociation
     properties:
       domainAssociation:
-        $ref: '#/definitions/DomainAssociation'
+        $ref: '#/definitions/[object Object]'
         description: ' Domain Association structure. '
     description: ' Result structure for the get Domain Association request. '
   GetDomainAssociationRequest:
@@ -1197,7 +1197,7 @@ definitions:
       - job
     properties:
       job:
-        $ref: '#/definitions/Job'
+        $ref: '#/definitions/[object Object]'
   GetJobRequest:
     type: object
     properties: {}
@@ -1208,10 +1208,10 @@ definitions:
       - apps
     properties:
       apps:
-        $ref: '#/definitions/Apps'
+        $ref: '#/definitions/[object Object]'
         description: ' List of Amplify Apps. '
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: ' Pagination token. Set to null to start listing Apps from start. If non-null pagination token is returned in a result, then pass its value in here to list more projects. '
     description: ' Result structure for an Amplify App list request. '
   ListAppsRequest:
@@ -1224,10 +1224,10 @@ definitions:
       - branches
     properties:
       branches:
-        $ref: '#/definitions/Branches'
+        $ref: '#/definitions/[object Object]'
         description: ' List of branches for an Amplify App. '
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
     description: ' Result structure for list branches request. '
   ListBranchesRequest:
@@ -1240,10 +1240,10 @@ definitions:
       - domainAssociations
     properties:
       domainAssociations:
-        $ref: '#/definitions/DomainAssociations'
+        $ref: '#/definitions/[object Object]'
         description: ' List of Domain Associations. '
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
     description: ' Result structure for the list Domain Association request. '
   ListDomainAssociationsRequest:
@@ -1256,10 +1256,10 @@ definitions:
       - jobSummaries
     properties:
       jobSummaries:
-        $ref: '#/definitions/JobSummaries'
+        $ref: '#/definitions/[object Object]'
         description: ' Result structure for list job result request. '
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
     description: ' Maximum number of records to list in a single response. '
   ListJobsRequest:
@@ -1272,7 +1272,7 @@ definitions:
       - jobSummary
     properties:
       jobSummary:
-        $ref: '#/definitions/JobSummary'
+        $ref: '#/definitions/[object Object]'
         description: ' Summary for the Job. '
     description: ' Result structure for run job request. '
   StartJobRequest:
@@ -1281,22 +1281,22 @@ definitions:
       - jobType
     properties:
       jobId:
-        $ref: '#/definitions/JobId'
+        $ref: '#/definitions/[object Object]'
         description: ' Unique Id for the Job. '
       jobType:
-        $ref: '#/definitions/JobType'
+        $ref: '#/definitions/[object Object]'
         description: ' Type for the Job. '
       jobReason:
-        $ref: '#/definitions/JobReason'
+        $ref: '#/definitions/[object Object]'
         description: ' Reason for the Job. '
       commitId:
-        $ref: '#/definitions/CommitId'
+        $ref: '#/definitions/[object Object]'
         description: ' Commit Id from 3rd party repository provider for the Job. '
       commitMessage:
-        $ref: '#/definitions/CommitMessage'
+        $ref: '#/definitions/[object Object]'
         description: ' Commit message from 3rd party repository provider for the Job. '
       commitTime:
-        $ref: '#/definitions/CommitTime'
+        $ref: '#/definitions/[object Object]'
         description: ' Commit date / time for the Job. '
     description: ' Request structure for Start job request. '
   StopJobResult:
@@ -1305,7 +1305,7 @@ definitions:
       - jobSummary
     properties:
       jobSummary:
-        $ref: '#/definitions/JobSummary'
+        $ref: '#/definitions/[object Object]'
         description: ' Summary for the Job. '
     description: ' Result structure for the stop job request. '
   StopJobRequest:
@@ -1318,41 +1318,41 @@ definitions:
       - app
     properties:
       app:
-        $ref: '#/definitions/App'
+        $ref: '#/definitions/[object Object]'
         description: ' App structure for the updated App. '
     description: ' Result structure for an Amplify App update request. '
   UpdateAppRequest:
     type: object
     properties:
       name:
-        $ref: '#/definitions/Name'
+        $ref: '#/definitions/[object Object]'
         description: ' Name for an Amplify App. '
       description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: ' Description for an Amplify App. '
       platform:
-        $ref: '#/definitions/Platform'
+        $ref: '#/definitions/[object Object]'
         description: ' Platform for an Amplify App. '
       iamServiceRoleArn:
-        $ref: '#/definitions/ServiceRoleArn'
+        $ref: '#/definitions/[object Object]'
         description: ' IAM service role for an Amplify App. '
       environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
+        $ref: '#/definitions/[object Object]'
         description: ' Environment Variables for an Amplify App. '
       enableBranchAutoBuild:
-        $ref: '#/definitions/EnableAutoBuild'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables branch auto-building for an Amplify App. '
       enableBasicAuth:
-        $ref: '#/definitions/EnableBasicAuth'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables Basic Authorization for an Amplify App. '
       basicAuthCredentials:
-        $ref: '#/definitions/BasicAuthCredentials'
+        $ref: '#/definitions/[object Object]'
         description: ' Basic Authorization credentials for an Amplify App. '
       customRules:
-        $ref: '#/definitions/CustomRules'
+        $ref: '#/definitions/[object Object]'
         description: ' Custom redirect / rewrite rules for an Amplify App. '
       buildSpec:
-        $ref: '#/definitions/BuildSpec'
+        $ref: '#/definitions/[object Object]'
         description: ' BuildSpec for an Amplify App. '
     description: ' Request structure for update App request. '
   UpdateBranchResult:
@@ -1361,41 +1361,41 @@ definitions:
       - branch
     properties:
       branch:
-        $ref: '#/definitions/Branch'
+        $ref: '#/definitions/[object Object]'
         description: ' Branch structure for an Amplify App. '
     description: ' Result structure for update branch request. '
   UpdateBranchRequest:
     type: object
     properties:
       description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: ' Description for the branch. '
       framework:
-        $ref: '#/definitions/Framework'
+        $ref: '#/definitions/[object Object]'
         description: ' Framework for the branch. '
       stage:
-        $ref: '#/definitions/Stage'
+        $ref: '#/definitions/[object Object]'
         description: ' Stage for the branch. '
       enableNotification:
-        $ref: '#/definitions/EnableNotification'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables notifications for the branch. '
       enableAutoBuild:
-        $ref: '#/definitions/EnableAutoBuild'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables auto building for the branch. '
       environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
+        $ref: '#/definitions/[object Object]'
         description: ' Environment Variables for the branch. '
       basicAuthCredentials:
-        $ref: '#/definitions/BasicAuthCredentials'
+        $ref: '#/definitions/[object Object]'
         description: ' Basic Authorization credentials for the branch. '
       enableBasicAuth:
-        $ref: '#/definitions/EnableBasicAuth'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables Basic Auth for the branch. '
       buildSpec:
-        $ref: '#/definitions/BuildSpec'
+        $ref: '#/definitions/[object Object]'
         description: ' BuildSpec for the branch. '
       ttl:
-        $ref: '#/definitions/TTL'
+        $ref: '#/definitions/[object Object]'
         description: ' The content TTL for the website in seconds. '
     description: ' Request structure for update branch request. '
   UpdateDomainAssociationResult:
@@ -1404,7 +1404,7 @@ definitions:
       - domainAssociation
     properties:
       domainAssociation:
-        $ref: '#/definitions/DomainAssociation'
+        $ref: '#/definitions/[object Object]'
         description: ' Domain Association structure. '
     description: ' Result structure for the update Domain Association request. '
   UpdateDomainAssociationRequest:
@@ -1413,103 +1413,16 @@ definitions:
       - subDomainSettings
     properties:
       enableAutoSubDomain:
-        $ref: '#/definitions/EnableAutoSubDomain'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables automated creation of Subdomains for branches. '
       subDomainSettings:
-        $ref: '#/definitions/SubDomainSettings'
+        $ref: '#/definitions/[object Object]'
         description: ' Setting structure for the Subdomain. '
     description: ' Request structure for update Domain Association request. '
   ActiveJobId:
     type: string
     maxLength: 1000
-  AppId:
-    type: string
-    minLength: 1
-    maxLength: 255
-  AppArn:
-    type: string
-    maxLength: 1000
-  Name:
-    type: string
-    minLength: 1
-    maxLength: 255
-  Tags:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-  Description:
-    type: string
-    maxLength: 1000
-  Repository:
-    type: string
-    maxLength: 1000
-  Platform:
-    type: string
-    enum:
-      - IOS
-      - ANDROID
-      - WEB
-      - REACT_NATIVE
-  CreateTime:
-    type: string
-    format: date-time
-  UpdateTime:
-    type: string
-    format: date-time
-  ServiceRoleArn:
-    type: string
-    minLength: 1
-    maxLength: 1000
-  EnvironmentVariables:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/EnvKey'
-        value:
-          $ref: '#/definitions/EnvValue'
-  DefaultDomain:
-    type: string
-    minLength: 1
-    maxLength: 1000
-  EnableBranchAutoBuild:
-    type: boolean
-  EnableBasicAuth:
-    type: boolean
-  BasicAuthCredentials:
-    type: string
-    maxLength: 2000
-  CustomRules:
-    type: array
-    items:
-      $ref: '#/definitions/CustomRule'
-  ProductionBranch:
-    type: object
-    properties:
-      lastDeployTime:
-        $ref: '#/definitions/LastDeployTime'
-        description: ' Last Deploy Time of Production Branch. '
-      status:
-        $ref: '#/definitions/Status'
-        description: ' Status of Production Branch. '
-      thumbnailUrl:
-        $ref: '#/definitions/ThumbnailUrl'
-        description: ' Thumbnail Url for Production Branch. '
-      branchName:
-        $ref: '#/definitions/BranchName'
-        description: ' Branch Name for Production Branch. '
-    description: ' Structure with Production Branch information. '
-  BuildSpec:
-    type: string
-    description: ' BuildSpec file for Amplify app build. '
-    minLength: 1
-    maxLength: 25000
+  '[object Object]': {}
   App:
     type: object
     required:
@@ -1527,106 +1440,77 @@ definitions:
       - enableBasicAuth
     properties:
       appId:
-        $ref: '#/definitions/AppId'
+        $ref: '#/definitions/[object Object]'
         description: ' Unique Id for the Amplify App. '
       appArn:
-        $ref: '#/definitions/AppArn'
+        $ref: '#/definitions/[object Object]'
         description: ' ARN for the Amplify App. '
       name:
-        $ref: '#/definitions/Name'
+        $ref: '#/definitions/[object Object]'
         description: ' Name for the Amplify App. '
       tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: ' Tag for Amplify App. '
       description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: ' Description for the Amplify App. '
       repository:
-        $ref: '#/definitions/Repository'
+        $ref: '#/definitions/[object Object]'
         description: ' Repository for the Amplify App. '
       platform:
-        $ref: '#/definitions/Platform'
+        $ref: '#/definitions/[object Object]'
         description: ' Platform for the Amplify App. '
       createTime:
-        $ref: '#/definitions/CreateTime'
+        $ref: '#/definitions/[object Object]'
         description: ' Create date / time for the Amplify App. '
       updateTime:
-        $ref: '#/definitions/UpdateTime'
+        $ref: '#/definitions/[object Object]'
         description: ' Update date / time for the Amplify App. '
       iamServiceRoleArn:
-        $ref: '#/definitions/ServiceRoleArn'
+        $ref: '#/definitions/[object Object]'
         description: ' IAM service role ARN for the Amplify App. '
       environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
+        $ref: '#/definitions/[object Object]'
         description: ' Environment Variables for the Amplify App. '
       defaultDomain:
-        $ref: '#/definitions/DefaultDomain'
+        $ref: '#/definitions/[object Object]'
         description: ' Default domain for the Amplify App. '
       enableBranchAutoBuild:
-        $ref: '#/definitions/EnableBranchAutoBuild'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables auto-building of branches for the Amplify App. '
       enableBasicAuth:
-        $ref: '#/definitions/EnableBasicAuth'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables Basic Authorization for branches for the Amplify App. '
       basicAuthCredentials:
-        $ref: '#/definitions/BasicAuthCredentials'
+        $ref: '#/definitions/[object Object]'
         description: ' Basic Authorization credentials for branches for the Amplify App. '
       customRules:
-        $ref: '#/definitions/CustomRules'
+        $ref: '#/definitions/[object Object]'
         description: ' Custom redirect / rewrite rules for the Amplify App. '
       productionBranch:
-        $ref: '#/definitions/ProductionBranch'
+        $ref: '#/definitions/[object Object]'
         description: ' Structure with Production Branch information. '
       buildSpec:
-        $ref: '#/definitions/BuildSpec'
+        $ref: '#/definitions/[object Object]'
         description: ' BuildSpec content for Amplify App. '
     description: ' Amplify App represents different branches of a repository for building, deploying, and hosting. '
+  AppArn:
+    type: string
+    maxLength: 1000
+  AppId:
+    type: string
+    minLength: 1
+    maxLength: 255
   Apps:
     type: array
     items:
-      $ref: '#/definitions/App'
+      $ref: '#/definitions/[object Object]'
   ArtifactsUrl:
     type: string
     maxLength: 1000
-  BranchArn:
+  BasicAuthCredentials:
     type: string
-    maxLength: 1000
-  BranchName:
-    type: string
-    minLength: 1
-    maxLength: 255
-  Stage:
-    type: string
-    enum:
-      - PRODUCTION
-      - BETA
-      - DEVELOPMENT
-      - EXPERIMENTAL
-  DisplayName:
-    type: string
-    maxLength: 255
-  EnableNotification:
-    type: boolean
-  EnableAutoBuild:
-    type: boolean
-  CustomDomains:
-    type: array
-    items:
-      $ref: '#/definitions/CustomDomain'
-    maxItems: 255
-  Framework:
-    type: string
-    maxLength: 255
-  TotalNumberOfJobs:
-    type: string
-    maxLength: 1000
-  ThumbnailUrl:
-    type: string
-    minLength: 1
     maxLength: 2000
-  TTL:
-    type: string
-    description: ' The content TTL for the website in seconds. '
   Branch:
     type: object
     required:
@@ -1647,71 +1531,83 @@ definitions:
       - ttl
     properties:
       branchArn:
-        $ref: '#/definitions/BranchArn'
+        $ref: '#/definitions/[object Object]'
         description: ' ARN for a branch, part of an Amplify App. '
       branchName:
-        $ref: '#/definitions/BranchName'
+        $ref: '#/definitions/[object Object]'
         description: ' Name for a branch, part of an Amplify App. '
       description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: ' Description for a branch, part of an Amplify App. '
       tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: ' Tag for branch for Amplify App. '
       stage:
-        $ref: '#/definitions/Stage'
+        $ref: '#/definitions/[object Object]'
         description: ' Stage for a branch, part of an Amplify App. '
       displayName:
-        $ref: '#/definitions/DisplayName'
+        $ref: '#/definitions/[object Object]'
         description: ' Display name for a branch, part of an Amplify App. '
       enableNotification:
-        $ref: '#/definitions/EnableNotification'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables notifications for a branch, part of an Amplify App. '
       createTime:
-        $ref: '#/definitions/CreateTime'
+        $ref: '#/definitions/[object Object]'
         description: ' Creation date and time for a branch, part of an Amplify App. '
       updateTime:
-        $ref: '#/definitions/UpdateTime'
+        $ref: '#/definitions/[object Object]'
         description: ' Last updated date and time for a branch, part of an Amplify App. '
       environmentVariables:
-        $ref: '#/definitions/EnvironmentVariables'
+        $ref: '#/definitions/[object Object]'
         description: ' Environment Variables specific to a branch, part of an Amplify App. '
       enableAutoBuild:
-        $ref: '#/definitions/EnableAutoBuild'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables auto-building on push for a branch, part of an Amplify App. '
       customDomains:
-        $ref: '#/definitions/CustomDomains'
+        $ref: '#/definitions/[object Object]'
         description: ' Custom domains for a branch, part of an Amplify App. '
       framework:
-        $ref: '#/definitions/Framework'
+        $ref: '#/definitions/[object Object]'
         description: ' Framework for a branch, part of an Amplify App. '
       activeJobId:
-        $ref: '#/definitions/ActiveJobId'
+        $ref: '#/definitions/[object Object]'
         description: ' Id of the active job for a branch, part of an Amplify App. '
       totalNumberOfJobs:
-        $ref: '#/definitions/TotalNumberOfJobs'
+        $ref: '#/definitions/[object Object]'
         description: ' Total number of Jobs part of an Amplify App. '
       enableBasicAuth:
-        $ref: '#/definitions/EnableBasicAuth'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables Basic Authorization for a branch, part of an Amplify App. '
       thumbnailUrl:
-        $ref: '#/definitions/ThumbnailUrl'
+        $ref: '#/definitions/[object Object]'
         description: ' Thumbnail Url for the branch. '
       basicAuthCredentials:
-        $ref: '#/definitions/BasicAuthCredentials'
+        $ref: '#/definitions/[object Object]'
         description: ' Basic Authorization credentials for a branch, part of an Amplify App. '
       buildSpec:
-        $ref: '#/definitions/BuildSpec'
+        $ref: '#/definitions/[object Object]'
         description: ' BuildSpec content for branch for Amplify App. '
       ttl:
-        $ref: '#/definitions/TTL'
+        $ref: '#/definitions/[object Object]'
         description: ' The content TTL for the website in seconds. '
     description: ' Branch for an Amplify App, which maps to a 3rd party repository branch. '
+  BranchArn:
+    type: string
+    maxLength: 1000
+  BranchName:
+    type: string
+    minLength: 1
+    maxLength: 255
   Branches:
     type: array
     items:
-      $ref: '#/definitions/Branch'
+      $ref: '#/definitions/[object Object]'
     maxItems: 255
+  BuildSpec:
+    type: string
+    description: ' BuildSpec file for Amplify app build. '
+    minLength: 1
+    maxLength: 25000
   CertificateVerificationDNSRecord:
     type: string
     maxLength: 1000
@@ -1728,19 +1624,53 @@ definitions:
     type: string
     minLength: 1
     maxLength: 2048
-  OauthToken:
+  CreateTime:
     type: string
-    maxLength: 100
-  DomainName:
+    format: date-time
+  CustomDomain:
     type: string
     maxLength: 255
-  EnableAutoSubDomain:
-    type: boolean
-  SubDomainSettings:
+  CustomDomains:
     type: array
     items:
-      $ref: '#/definitions/SubDomainSetting'
+      $ref: '#/definitions/[object Object]'
     maxItems: 255
+  CustomRule:
+    type: object
+    required:
+      - source
+      - target
+    properties:
+      source:
+        $ref: '#/definitions/[object Object]'
+        description: ' The source pattern for a URL rewrite or redirect rule. '
+      target:
+        $ref: '#/definitions/[object Object]'
+        description: ' The target pattern for a URL rewrite or redirect rule. '
+      status:
+        $ref: '#/definitions/[object Object]'
+        description: ' The status code for a URL rewrite or redirect rule. '
+      condition:
+        $ref: '#/definitions/[object Object]'
+        description: ' The condition for a URL rewrite or redirect rule, e.g. country code. '
+    description: ' Custom rewrite / redirect rule. '
+  CustomRules:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  DNSRecord:
+    type: string
+    maxLength: 1000
+  DefaultDomain:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  Description:
+    type: string
+    maxLength: 1000
+  DisplayName:
+    type: string
+    maxLength: 255
   DomainAssociation:
     type: object
     required:
@@ -1753,110 +1683,41 @@ definitions:
       - subDomains
     properties:
       domainAssociationArn:
-        $ref: '#/definitions/DomainAssociationArn'
+        $ref: '#/definitions/[object Object]'
         description: ' ARN for the Domain Association. '
       domainName:
-        $ref: '#/definitions/DomainName'
+        $ref: '#/definitions/[object Object]'
         description: ' Name of the domain. '
       enableAutoSubDomain:
-        $ref: '#/definitions/EnableAutoSubDomain'
+        $ref: '#/definitions/[object Object]'
         description: ' Enables automated creation of Subdomains for branches. '
       domainStatus:
-        $ref: '#/definitions/DomainStatus'
+        $ref: '#/definitions/[object Object]'
         description: ' Status fo the Domain Association. '
       statusReason:
-        $ref: '#/definitions/StatusReason'
+        $ref: '#/definitions/[object Object]'
         description: ' Reason for the current status of the Domain Association. '
       certificateVerificationDNSRecord:
-        $ref: '#/definitions/CertificateVerificationDNSRecord'
+        $ref: '#/definitions/[object Object]'
         description: ' DNS Record for certificate verification. '
       subDomains:
-        $ref: '#/definitions/SubDomains'
+        $ref: '#/definitions/[object Object]'
         description: ' Subdomains for the Domain Association. '
     description: ' Structure for Domain Association, which associates a custom domain with an Amplify App. '
-  CustomDomain:
-    type: string
-    maxLength: 255
-  Source:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  Target:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  Status:
-    type: string
-    minLength: 3
-    maxLength: 3
-  CustomRule:
-    type: object
-    required:
-      - source
-      - target
-    properties:
-      source:
-        $ref: '#/definitions/Source'
-        description: ' The source pattern for a URL rewrite or redirect rule. '
-      target:
-        $ref: '#/definitions/Target'
-        description: ' The target pattern for a URL rewrite or redirect rule. '
-      status:
-        $ref: '#/definitions/Status'
-        description: ' The status code for a URL rewrite or redirect rule. '
-      condition:
-        $ref: '#/definitions/Condition'
-        description: ' The condition for a URL rewrite or redirect rule, e.g. country code. '
-    description: ' Custom rewrite / redirect rule. '
-  DNSRecord:
-    type: string
-    maxLength: 1000
-  JobId:
-    type: string
-    maxLength: 255
-  JobSummary:
-    type: object
-    required:
-      - jobArn
-      - jobId
-      - commitId
-      - commitMessage
-      - commitTime
-      - startTime
-      - status
-      - jobType
-    properties:
-      jobArn:
-        $ref: '#/definitions/JobArn'
-        description: ' Arn for the Job. '
-      jobId:
-        $ref: '#/definitions/JobId'
-        description: ' Unique Id for the Job. '
-      commitId:
-        $ref: '#/definitions/CommitId'
-        description: ' Commit Id from 3rd party repository provider for the Job. '
-      commitMessage:
-        $ref: '#/definitions/CommitMessage'
-        description: ' Commit message from 3rd party repository provider for the Job. '
-      commitTime:
-        $ref: '#/definitions/CommitTime'
-        description: ' Commit date / time for the Job. '
-      startTime:
-        $ref: '#/definitions/StartTime'
-        description: ' Start date / time for the Job. '
-      status:
-        $ref: '#/definitions/JobStatus'
-        description: ' Status for the Job. '
-      endTime:
-        $ref: '#/definitions/EndTime'
-        description: ' End date / time for the Job. '
-      jobType:
-        $ref: '#/definitions/JobType'
-        description: ' Type for the Job. '
-    description: ' Structure for the summary of a Job. '
   DomainAssociationArn:
     type: string
     maxLength: 1000
+  DomainAssociations:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    maxItems: 255
+  DomainName:
+    type: string
+    maxLength: 255
+  DomainPrefix:
+    type: string
+    maxLength: 255
   DomainStatus:
     type: string
     enum:
@@ -1865,22 +1726,16 @@ definitions:
       - AVAILABLE
       - PENDING_DEPLOYMENT
       - FAILED
-  StatusReason:
-    type: string
-    maxLength: 1000
-  SubDomains:
-    type: array
-    items:
-      $ref: '#/definitions/SubDomain'
-    maxItems: 255
-  DomainAssociations:
-    type: array
-    items:
-      $ref: '#/definitions/DomainAssociation'
-    maxItems: 255
-  DomainPrefix:
-    type: string
-    maxLength: 255
+  EnableAutoBuild:
+    type: boolean
+  EnableAutoSubDomain:
+    type: boolean
+  EnableBasicAuth:
+    type: boolean
+  EnableBranchAutoBuild:
+    type: boolean
+  EnableNotification:
+    type: boolean
   EndTime:
     type: string
     format: date-time
@@ -1890,6 +1745,18 @@ definitions:
   EnvValue:
     type: string
     maxLength: 1000
+  EnvironmentVariables:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/EnvKey'
+        value:
+          $ref: '#/definitions/EnvValue'
+  Framework:
+    type: string
+    maxLength: 255
   Job:
     type: object
     required:
@@ -1897,19 +1764,18 @@ definitions:
       - steps
     properties:
       summary:
-        $ref: '#/definitions/JobSummary'
+        $ref: '#/definitions/[object Object]'
         description: ' Summary for an execution job for an Amplify App. '
       steps:
-        $ref: '#/definitions/Steps'
+        $ref: '#/definitions/[object Object]'
         description: ' Execution steps for an execution job, for an Amplify App. '
     description: ' Structure for an execution job for an Amplify App. '
-  Steps:
-    type: array
-    items:
-      $ref: '#/definitions/Step'
   JobArn:
     type: string
     maxLength: 1000
+  JobId:
+    type: string
+    maxLength: 255
   JobReason:
     type: string
     maxLength: 255
@@ -1926,10 +1792,47 @@ definitions:
   JobSummaries:
     type: array
     items:
-      $ref: '#/definitions/JobSummary'
-  StartTime:
-    type: string
-    format: date-time
+      $ref: '#/definitions/[object Object]'
+  JobSummary:
+    type: object
+    required:
+      - jobArn
+      - jobId
+      - commitId
+      - commitMessage
+      - commitTime
+      - startTime
+      - status
+      - jobType
+    properties:
+      jobArn:
+        $ref: '#/definitions/[object Object]'
+        description: ' Arn for the Job. '
+      jobId:
+        $ref: '#/definitions/[object Object]'
+        description: ' Unique Id for the Job. '
+      commitId:
+        $ref: '#/definitions/[object Object]'
+        description: ' Commit Id from 3rd party repository provider for the Job. '
+      commitMessage:
+        $ref: '#/definitions/[object Object]'
+        description: ' Commit message from 3rd party repository provider for the Job. '
+      commitTime:
+        $ref: '#/definitions/[object Object]'
+        description: ' Commit date / time for the Job. '
+      startTime:
+        $ref: '#/definitions/[object Object]'
+        description: ' Start date / time for the Job. '
+      status:
+        $ref: '#/definitions/[object Object]'
+        description: ' Status for the Job. '
+      endTime:
+        $ref: '#/definitions/[object Object]'
+        description: ' End date / time for the Job. '
+      jobType:
+        $ref: '#/definitions/[object Object]'
+        description: ' Type for the Job. '
+    description: ' Structure for the summary of a Job. '
   JobType:
     type: string
     enum:
@@ -1940,19 +1843,56 @@ definitions:
   LastDeployTime:
     type: string
     format: date-time
-  NextToken:
+  LogUrl:
     type: string
-    maxLength: 2000
+    maxLength: 1000
   MaxResults:
     type: integer
     minimum: 1
     maximum: 100
-  LogUrl:
+  Name:
+    type: string
+    minLength: 1
+    maxLength: 255
+  NextToken:
+    type: string
+    maxLength: 2000
+  OauthToken:
+    type: string
+    maxLength: 100
+  Platform:
+    type: string
+    enum:
+      - IOS
+      - ANDROID
+      - WEB
+      - REACT_NATIVE
+  ProductionBranch:
+    type: object
+    properties:
+      lastDeployTime:
+        $ref: '#/definitions/[object Object]'
+        description: ' Last Deploy Time of Production Branch. '
+      status:
+        $ref: '#/definitions/[object Object]'
+        description: ' Status of Production Branch. '
+      thumbnailUrl:
+        $ref: '#/definitions/[object Object]'
+        description: ' Thumbnail Url for Production Branch. '
+      branchName:
+        $ref: '#/definitions/[object Object]'
+        description: ' Branch Name for Production Branch. '
+    description: ' Structure with Production Branch information. '
+  Repository:
     type: string
     maxLength: 1000
   ThumbnailName:
     type: string
     maxLength: 256
+  ThumbnailUrl:
+    type: string
+    minLength: 1
+    maxLength: 2000
   Screenshots:
     type: array
     items:
@@ -1962,9 +1902,31 @@ definitions:
           $ref: '#/definitions/ThumbnailName'
         value:
           $ref: '#/definitions/ThumbnailUrl'
-  StepName:
+  ServiceRoleArn:
     type: string
-    maxLength: 255
+    minLength: 1
+    maxLength: 1000
+  Source:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  Stage:
+    type: string
+    enum:
+      - PRODUCTION
+      - BETA
+      - DEVELOPMENT
+      - EXPERIMENTAL
+  StartTime:
+    type: string
+    format: date-time
+  Status:
+    type: string
+    minLength: 3
+    maxLength: 3
+  StatusReason:
+    type: string
+    maxLength: 1000
   Step:
     type: object
     required:
@@ -1974,42 +1936,34 @@ definitions:
       - endTime
     properties:
       stepName:
-        $ref: '#/definitions/StepName'
+        $ref: '#/definitions/[object Object]'
         description: ' Name of the execution step. '
       startTime:
-        $ref: '#/definitions/StartTime'
+        $ref: '#/definitions/[object Object]'
         description: ' Start date/ time of the execution step. '
       status:
-        $ref: '#/definitions/JobStatus'
+        $ref: '#/definitions/[object Object]'
         description: ' Status of the execution step. '
       endTime:
-        $ref: '#/definitions/EndTime'
+        $ref: '#/definitions/[object Object]'
         description: ' End date/ time of the execution step. '
       logUrl:
-        $ref: '#/definitions/LogUrl'
+        $ref: '#/definitions/[object Object]'
         description: ' Url to the logs for the execution step. '
       artifactsUrl:
-        $ref: '#/definitions/ArtifactsUrl'
+        $ref: '#/definitions/[object Object]'
         description: ' Url to teh artifact for the execution step. '
       screenshots:
-        $ref: '#/definitions/Screenshots'
+        $ref: '#/definitions/[object Object]'
         description: ' List of screenshot Urls for the execution step, if relevant. '
     description: ' Structure for an execution step for an execution job, for an Amplify App. '
-  SubDomainSetting:
-    type: object
-    required:
-      - prefix
-      - branchName
-    properties:
-      prefix:
-        $ref: '#/definitions/DomainPrefix'
-        description: ' Prefix setting for the Subdomain. '
-      branchName:
-        $ref: '#/definitions/BranchName'
-        description: ' Branch name setting for the Subdomain. '
-    description: ' Setting for the Subdomain. '
-  Verified:
-    type: boolean
+  StepName:
+    type: string
+    maxLength: 255
+  Steps:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   SubDomain:
     type: object
     required:
@@ -2018,18 +1972,65 @@ definitions:
       - dnsRecord
     properties:
       subDomainSetting:
-        $ref: '#/definitions/SubDomainSetting'
+        $ref: '#/definitions/[object Object]'
         description: ' Setting structure for the Subdomain. '
       verified:
-        $ref: '#/definitions/Verified'
+        $ref: '#/definitions/[object Object]'
         description: ' Verified status of the Subdomain '
       dnsRecord:
-        $ref: '#/definitions/DNSRecord'
+        $ref: '#/definitions/[object Object]'
         description: ' DNS record for the Subdomain. '
     description: ' Subdomain for the Domain Association. '
+  SubDomainSetting:
+    type: object
+    required:
+      - prefix
+      - branchName
+    properties:
+      prefix:
+        $ref: '#/definitions/[object Object]'
+        description: ' Prefix setting for the Subdomain. '
+      branchName:
+        $ref: '#/definitions/[object Object]'
+        description: ' Branch name setting for the Subdomain. '
+    description: ' Setting for the Subdomain. '
+  SubDomainSettings:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    maxItems: 255
+  SubDomains:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    maxItems: 255
+  TTL:
+    type: string
+    description: ' The content TTL for the website in seconds. '
   TagKey:
     type: string
     maxLength: 1000
   TagValue:
     type: string
     maxLength: 1000
+  Tags:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
+  Target:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  TotalNumberOfJobs:
+    type: string
+    maxLength: 1000
+  UpdateTime:
+    type: string
+    format: date-time
+  Verified:
+    type: boolean

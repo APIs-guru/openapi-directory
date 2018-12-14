@@ -220,16 +220,16 @@ definitions:
     type: object
     properties:
       status:
-        $ref: '#/definitions/SearchStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status information returned for the search request.
       hits:
-        $ref: '#/definitions/Hits'
+        $ref: '#/definitions/[object Object]'
         description: The documents that match the search criteria.
       facets:
-        $ref: '#/definitions/Facets'
+        $ref: '#/definitions/[object Object]'
         description: The requested facet information.
       stats:
-        $ref: '#/definitions/Stats'
+        $ref: '#/definitions/[object Object]'
         description: The requested field statistics information.
     description: 'The result of a <code>Search</code> request. Contains the documents that match the specified search criteria and any requested fields, highlights, and facet information.'
   SearchRequest:
@@ -240,17 +240,17 @@ definitions:
     type: object
     properties:
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A description of the error returned by the search service.
     description: Information about any problems encountered while processing a search request.
   SuggestResponse:
     type: object
     properties:
       status:
-        $ref: '#/definitions/SuggestStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status of a <code>SuggestRequest</code>. Contains the resource ID (<code>rid</code>) and how long it took to process the request (<code>timems</code>).
       suggest:
-        $ref: '#/definitions/SuggestModel'
+        $ref: '#/definitions/[object Object]'
         description: Container for the matching search suggestion information.
     description: Contains the response to a <code>Suggest</code> request.
   SuggestRequest:
@@ -261,16 +261,16 @@ definitions:
     type: object
     properties:
       status:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The status of an <code>UploadDocumentsRequest</code>.
       adds:
-        $ref: '#/definitions/Adds'
+        $ref: '#/definitions/[object Object]'
         description: The number of documents that were added to the search domain.
       deletes:
-        $ref: '#/definitions/Deletes'
+        $ref: '#/definitions/[object Object]'
         description: The number of documents that were deleted from the search domain.
       warnings:
-        $ref: '#/definitions/DocumentServiceWarnings'
+        $ref: '#/definitions/[object Object]'
         description: Any warnings returned by the document service about the documents being uploaded.
     description: Contains the response to an <code>UploadDocuments</code> request.
   UploadDocumentsRequest:
@@ -279,48 +279,45 @@ definitions:
       - documents
     properties:
       documents:
-        $ref: '#/definitions/Blob'
+        $ref: '#/definitions/[object Object]'
         description: A batch of documents formatted in JSON or HTML.
     description: Container for the parameters to the <code>UploadDocuments</code> request.
   DocumentServiceException:
     type: object
     properties:
       status:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The return status of a document upload request, <code>error</code> or <code>success</code>.'
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The description of the errors returned by the document service.
     description: Information about any problems encountered while processing an upload request.
   Adds:
     type: integer
   Blob:
     type: string
-  String:
-    type: string
-  Long:
-    type: integer
+  '[object Object]': {}
   Bucket:
     type: object
     properties:
       value:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The facet value being counted.
       count:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of hits that contain the facet value in the specified facet field.
     description: 'A container for facet information. '
-  BucketList:
-    type: array
-    items:
-      $ref: '#/definitions/Bucket'
   BucketInfo:
     type: object
     properties:
       buckets:
-        $ref: '#/definitions/BucketList'
+        $ref: '#/definitions/[object Object]'
         description: A list of the calculated facet values and counts.
     description: A container for the calculated facet values and counts.
+  BucketList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ContentType:
     type: string
     enum:
@@ -334,17 +331,19 @@ definitions:
     type: object
     properties:
       message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The description for a warning returned by the document service.
     description: A warning returned by the document service when an issue is discovered while processing an upload request.
   DocumentServiceWarnings:
     type: array
     items:
-      $ref: '#/definitions/DocumentServiceWarning'
+      $ref: '#/definitions/[object Object]'
   Double:
     type: number
     format: double
   Expr:
+    type: string
+  String:
     type: string
   Exprs:
     type: array
@@ -370,34 +369,34 @@ definitions:
     type: object
     properties:
       min:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The minimum value found in the specified field in the result set.</p> <p>If the field is numeric (<code>int</code>, <code>int-array</code>, <code>double</code>, or <code>double-array</code>), <code>min</code> is the string representation of a double-precision 64-bit floating point value. If the field is <code>date</code> or <code>date-array</code>, <code>min</code> is the string representation of a date with the format specified in <a href="http://tools.ietf.org/html/rfc3339">IETF RFC3339</a>: yyyy-mm-ddTHH:mm:ss.SSSZ.</p>'
       max:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The maximum value found in the specified field in the result set.</p> <p>If the field is numeric (<code>int</code>, <code>int-array</code>, <code>double</code>, or <code>double-array</code>), <code>max</code> is the string representation of a double-precision 64-bit floating point value. If the field is <code>date</code> or <code>date-array</code>, <code>max</code> is the string representation of a date with the format specified in <a href="http://tools.ietf.org/html/rfc3339">IETF RFC3339</a>: yyyy-mm-ddTHH:mm:ss.SSSZ.</p>'
       count:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of documents that contain a value in the specified field in the result set.
       missing:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of documents that do not contain a value in the specified field in the result set.
       sum:
-        $ref: '#/definitions/Double'
+        $ref: '#/definitions/[object Object]'
         description: The sum of the field values across the documents in the result set. <code>null</code> for date fields.
       sumOfSquares:
-        $ref: '#/definitions/Double'
+        $ref: '#/definitions/[object Object]'
         description: The sum of all field values in the result set squared.
       mean:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The average of the values found in the specified field in the result set.</p> <p>If the field is numeric (<code>int</code>, <code>int-array</code>, <code>double</code>, or <code>double-array</code>), <code>mean</code> is the string representation of a double-precision 64-bit floating point value. If the field is <code>date</code> or <code>date-array</code>, <code>mean</code> is the string representation of a date with the format specified in <a href="http://tools.ietf.org/html/rfc3339">IETF RFC3339</a>: yyyy-mm-ddTHH:mm:ss.SSSZ.</p>'
       stddev:
-        $ref: '#/definitions/Double'
+        $ref: '#/definitions/[object Object]'
         description: The standard deviation of the values in the specified field in the result set.
     description: The statistics for a field calculated in the request.
   FieldValue:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/[object Object]'
   Fields:
     type: array
     items:
@@ -424,38 +423,40 @@ definitions:
     type: object
     properties:
       id:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The document ID of a document that matches the search request.
       fields:
-        $ref: '#/definitions/Fields'
+        $ref: '#/definitions/[object Object]'
         description: The fields returned from a document that matches the search request.
       exprs:
-        $ref: '#/definitions/Exprs'
+        $ref: '#/definitions/[object Object]'
         description: The expressions returned from a document that matches the search request.
       highlights:
-        $ref: '#/definitions/Highlights'
+        $ref: '#/definitions/[object Object]'
         description: The highlights returned from a document that matches the search request.
     description: Information about a document that matches the search request.
   HitList:
     type: array
     items:
-      $ref: '#/definitions/Hit'
+      $ref: '#/definitions/[object Object]'
   Hits:
     type: object
     properties:
       found:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The total number of documents that match the search request.
       start:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The index of the first matching document.
       cursor:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A cursor that can be used to retrieve the next set of matching documents when you want to page through a large result set.
       hit:
-        $ref: '#/definitions/HitList'
+        $ref: '#/definitions/[object Object]'
         description: A document that matches the search request.
     description: The collection of documents that match the search request.
+  Long:
+    type: integer
   Partial:
     type: boolean
   Query:
@@ -471,6 +472,16 @@ definitions:
       - dismax
   Return:
     type: string
+  SearchStatus:
+    type: object
+    properties:
+      timems:
+        $ref: '#/definitions/[object Object]'
+        description: 'How long it took to process the request, in milliseconds.'
+      rid:
+        $ref: '#/definitions/[object Object]'
+        description: The encrypted resource ID for the request.
+    description: Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).
   Size:
     type: integer
   Sort:
@@ -479,16 +490,6 @@ definitions:
     type: integer
   Stat:
     type: string
-  SearchStatus:
-    type: object
-    properties:
-      timems:
-        $ref: '#/definitions/Long'
-        description: 'How long it took to process the request, in milliseconds.'
-      rid:
-        $ref: '#/definitions/String'
-        description: The encrypted resource ID for the request.
-    description: Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).
   Stats:
     type: array
     description: The statistics calculated in the request.
@@ -499,47 +500,47 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/FieldStats'
-  Suggestions:
-    type: array
-    items:
-      $ref: '#/definitions/SuggestionMatch'
   SuggestModel:
     type: object
     properties:
       query:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The query string specified in the suggest request.
       found:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of documents that were found to match the query string.
       suggestions:
-        $ref: '#/definitions/Suggestions'
+        $ref: '#/definitions/[object Object]'
         description: The documents that match the query string.
     description: Container for the suggestion information returned in a <code>SuggestResponse</code>.
-  Suggester:
-    type: string
-  SuggestionsSize:
-    type: integer
   SuggestStatus:
     type: object
     properties:
       timems:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: 'How long it took to process the request, in milliseconds.'
       rid:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The encrypted resource ID for the request.
     description: Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).
+  Suggester:
+    type: string
   SuggestionMatch:
     type: object
     properties:
       suggestion:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The string that matches the query string specified in the <code>SuggestRequest</code>. '
       score:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The relevance score of a suggested match.
       id:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The document ID of the suggested document.
     description: 'An autocomplete suggestion that matches the query string specified in a <code>SuggestRequest</code>. '
+  Suggestions:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  SuggestionsSize:
+    type: integer

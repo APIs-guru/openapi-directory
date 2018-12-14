@@ -146,7 +146,7 @@ definitions:
       - sqlStatementResults
     properties:
       sqlStatementResults:
-        $ref: '#/definitions/SqlStatementResults'
+        $ref: '#/definitions/[object Object]'
         description: Results returned by executing the sql statement(s)
     description: Execute SQL response
   ExecuteSqlRequest:
@@ -157,19 +157,19 @@ definitions:
       - sqlStatements
     properties:
       awsSecretStoreArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the db credentials in AWS Secret Store or the friendly secret name
       database:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Target DB name
       dbClusterOrInstanceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ARN of the target db cluster or instance
       schema:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Target Schema name
       sqlStatements:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: SQL statement(s) to be executed. Statements can be chained by using semicolons
     description: Execute SQL Request
   BadRequestException: {}
@@ -178,166 +178,167 @@ definitions:
   ServiceUnavailableError: {}
   Boolean:
     type: boolean
-  Long:
-    type: integer
-  ResultFrame:
-    type: object
-    properties:
-      records:
-        $ref: '#/definitions/Records'
-        description: ResultSet Metadata.
-      resultSetMetadata:
-        $ref: '#/definitions/ResultSetMetadata'
-        description: ResultSet Metadata.
-    description: Result Frame
+  '[object Object]': {}
   SqlStatementResult:
     type: object
     properties:
       numberOfRecordsUpdated:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: Number of rows updated.
       resultFrame:
-        $ref: '#/definitions/ResultFrame'
+        $ref: '#/definitions/[object Object]'
         description: ResultFrame returned by executing the sql statement
     description: SQL statement execution result
-  ArrayValues:
-    type: array
-    description: Array value
-    items:
-      $ref: '#/definitions/Value'
-  Blob:
-    type: string
-  Double:
-    type: number
-    format: double
-  Integer:
-    type: integer
-  Float:
-    type: number
-    format: float
-  String:
-    type: string
-  StructValue:
-    type: object
-    properties:
-      attributes:
-        $ref: '#/definitions/ArrayValues'
-        description: Struct or UDT
-    description: User Defined Type
   Value:
     type: object
     properties:
       arrayValues:
-        $ref: '#/definitions/ArrayValues'
+        $ref: '#/definitions/[object Object]'
         description: Arbitrarily nested arrays
       bigIntValue:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: Long value
       bitValue:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: Bit value
       blobValue:
-        $ref: '#/definitions/Blob'
+        $ref: '#/definitions/[object Object]'
         description: Blob value
       doubleValue:
-        $ref: '#/definitions/Double'
+        $ref: '#/definitions/[object Object]'
         description: Double value
       intValue:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: Integer value
       isNull:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: Is column null
       realValue:
-        $ref: '#/definitions/Float'
+        $ref: '#/definitions/[object Object]'
         description: Float value
       stringValue:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: String value
       structValue:
-        $ref: '#/definitions/StructValue'
+        $ref: '#/definitions/[object Object]'
         description: Struct or UDT
     description: Column value
   SqlStatementResults:
     type: array
     description: SQL statement execution results
     items:
-      $ref: '#/definitions/SqlStatementResult'
-  ColumnMetadata:
-    type: object
-    properties:
-      arrayBaseColumnType:
-        $ref: '#/definitions/Integer'
-        description: Homogenous array base SQL type from java.sql.Types.
-      isAutoIncrement:
-        $ref: '#/definitions/Boolean'
-        description: Whether the designated column is automatically numbered
-      isCaseSensitive:
-        $ref: '#/definitions/Boolean'
-        description: Whether values in the designated column's case matters
-      isCurrency:
-        $ref: '#/definitions/Boolean'
-        description: Whether values in the designated column is a cash value
-      isSigned:
-        $ref: '#/definitions/Boolean'
-        description: Whether values in the designated column are signed numbers
-      label:
-        $ref: '#/definitions/String'
-        description: 'Usually specified by the SQL AS. If not specified, return column name.'
-      name:
-        $ref: '#/definitions/String'
-        description: Name of the column.
-      nullable:
-        $ref: '#/definitions/Integer'
-        description: 'Indicates the nullability of values in the designated column. One of columnNoNulls (0), columnNullable (1), columnNullableUnknown (2)'
-      precision:
-        $ref: '#/definitions/Integer'
-        description: 'Get the designated column''s specified column size.For numeric data, this is the maximum precision.  For character data, this is the length in characters. For datetime datatypes, this is the length in characters of the String representation (assuming the maximum allowed precision of the fractional seconds component). For binary data, this is the length in bytes.  For the ROWID datatype, this is the length in bytes. 0 is returned for data types where the column size is not applicable.'
-      scale:
-        $ref: '#/definitions/Integer'
-        description: Designated column's number of digits to right of the decimal point. 0 is returned for data types where the scale is not applicable.
-      schemaName:
-        $ref: '#/definitions/String'
-        description: Designated column's table's schema
-      tableName:
-        $ref: '#/definitions/String'
-        description: Designated column's table name
-      type:
-        $ref: '#/definitions/Integer'
-        description: SQL type from java.sql.Types.
-      typeName:
-        $ref: '#/definitions/String'
-        description: Database-specific type name.
-    description: Column Metadata
+      $ref: '#/definitions/[object Object]'
   ColumnMetadataList:
     type: array
     description: List of Column metadata
     items:
-      $ref: '#/definitions/ColumnMetadata'
+      $ref: '#/definitions/[object Object]'
   ResultSetMetadata:
     type: object
     properties:
       columnCount:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: Number of columns
       columnMetadata:
-        $ref: '#/definitions/ColumnMetadataList'
+        $ref: '#/definitions/[object Object]'
         description: List of columns and their types
     description: List of columns and their types.
-  Record:
-    type: object
-    properties:
-      values:
-        $ref: '#/definitions/Row'
-        description: Record
-    description: Row or Record
   Records:
     type: array
     description: List of records
     items:
-      $ref: '#/definitions/Record'
+      $ref: '#/definitions/[object Object]'
+  ResultFrame:
+    type: object
+    properties:
+      records:
+        $ref: '#/definitions/[object Object]'
+        description: ResultSet Metadata.
+      resultSetMetadata:
+        $ref: '#/definitions/[object Object]'
+        description: ResultSet Metadata.
+    description: Result Frame
+  Long:
+    type: integer
+  StructValue:
+    type: object
+    properties:
+      attributes:
+        $ref: '#/definitions/[object Object]'
+        description: Struct or UDT
+    description: User Defined Type
+  Blob:
+    type: string
   Row:
     type: array
     description: List of column values
     items:
-      $ref: '#/definitions/Value'
+      $ref: '#/definitions/[object Object]'
+  String:
+    type: string
+  ArrayValues:
+    type: array
+    description: Array value
+    items:
+      $ref: '#/definitions/[object Object]'
+  Double:
+    type: number
+    format: double
+  ColumnMetadata:
+    type: object
+    properties:
+      arrayBaseColumnType:
+        $ref: '#/definitions/[object Object]'
+        description: Homogenous array base SQL type from java.sql.Types.
+      isAutoIncrement:
+        $ref: '#/definitions/[object Object]'
+        description: Whether the designated column is automatically numbered
+      isCaseSensitive:
+        $ref: '#/definitions/[object Object]'
+        description: Whether values in the designated column's case matters
+      isCurrency:
+        $ref: '#/definitions/[object Object]'
+        description: Whether values in the designated column is a cash value
+      isSigned:
+        $ref: '#/definitions/[object Object]'
+        description: Whether values in the designated column are signed numbers
+      label:
+        $ref: '#/definitions/[object Object]'
+        description: 'Usually specified by the SQL AS. If not specified, return column name.'
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: Name of the column.
+      nullable:
+        $ref: '#/definitions/[object Object]'
+        description: 'Indicates the nullability of values in the designated column. One of columnNoNulls (0), columnNullable (1), columnNullableUnknown (2)'
+      precision:
+        $ref: '#/definitions/[object Object]'
+        description: 'Get the designated column''s specified column size.For numeric data, this is the maximum precision.  For character data, this is the length in characters. For datetime datatypes, this is the length in characters of the String representation (assuming the maximum allowed precision of the fractional seconds component). For binary data, this is the length in bytes.  For the ROWID datatype, this is the length in bytes. 0 is returned for data types where the column size is not applicable.'
+      scale:
+        $ref: '#/definitions/[object Object]'
+        description: Designated column's number of digits to right of the decimal point. 0 is returned for data types where the scale is not applicable.
+      schemaName:
+        $ref: '#/definitions/[object Object]'
+        description: Designated column's table's schema
+      tableName:
+        $ref: '#/definitions/[object Object]'
+        description: Designated column's table name
+      type:
+        $ref: '#/definitions/[object Object]'
+        description: SQL type from java.sql.Types.
+      typeName:
+        $ref: '#/definitions/[object Object]'
+        description: Database-specific type name.
+    description: Column Metadata
+  Integer:
+    type: integer
+  Float:
+    type: number
+    format: float
+  Record:
+    type: object
+    properties:
+      values:
+        $ref: '#/definitions/[object Object]'
+        description: Record
+    description: Row or Record

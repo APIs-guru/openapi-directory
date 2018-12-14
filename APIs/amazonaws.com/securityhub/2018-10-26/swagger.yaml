@@ -453,12 +453,9 @@ paths:
           schema:
             $ref: '#/definitions/DeleteInsightRequest'
         - name: InsightArn
+          type: string
           in: path
-          type: array
           required: true
-          items:
-            type: string
-          collectionFormat: csv
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -500,12 +497,9 @@ paths:
           schema:
             $ref: '#/definitions/UpdateInsightRequest'
         - name: InsightArn
+          type: string
           in: path
-          type: array
           required: true
-          items:
-            type: string
-          collectionFormat: csv
   /invitations/delete:
     post:
       operationId: DeleteInvitations
@@ -616,12 +610,9 @@ paths:
           schema:
             $ref: '#/definitions/DisableImportFindingsForProductRequest'
         - name: ProductSubscriptionArn
+          type: string
           in: path
-          type: array
           required: true
-          items:
-            type: string
-          collectionFormat: csv
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -980,12 +971,9 @@ paths:
           schema:
             $ref: '#/definitions/GetInsightResultsRequest'
         - name: InsightArn
+          type: string
           in: path
-          type: array
           required: true
-          items:
-            type: string
-          collectionFormat: csv
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1215,10 +1203,10 @@ definitions:
     type: object
     properties:
       MasterId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The account ID of the master Security Hub account whose invitation you''re accepting. '
       InvitationId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The ID of the invitation that is sent to the AWS account by the Security Hub master account. '
   InternalException: {}
   InvalidInputException: {}
@@ -1228,7 +1216,7 @@ definitions:
     type: object
     properties:
       StandardsSubscriptions:
-        $ref: '#/definitions/StandardsSubscriptions'
+        $ref: '#/definitions/[object Object]'
         description: The details of the standards subscriptions that were disabled.
   BatchDisableStandardsRequest:
     type: object
@@ -1236,13 +1224,13 @@ definitions:
       - StandardsSubscriptionArns
     properties:
       StandardsSubscriptionArns:
-        $ref: '#/definitions/StandardsSubscriptionArns'
+        $ref: '#/definitions/[object Object]'
         description: The ARNS of the standards subscriptions that you want to disable.
   BatchEnableStandardsResponse:
     type: object
     properties:
       StandardsSubscriptions:
-        $ref: '#/definitions/StandardsSubscriptions'
+        $ref: '#/definitions/[object Object]'
         description: The details of the standards subscriptions that were enabled.
   BatchEnableStandardsRequest:
     type: object
@@ -1250,7 +1238,7 @@ definitions:
       - StandardsSubscriptionRequests
     properties:
       StandardsSubscriptionRequests:
-        $ref: '#/definitions/StandardsSubscriptionRequests'
+        $ref: '#/definitions/[object Object]'
         description: The list of standards that you want to enable.
   BatchImportFindingsResponse:
     type: object
@@ -1259,13 +1247,13 @@ definitions:
       - SuccessCount
     properties:
       FailedCount:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The number of findings that cannot be imported.
       SuccessCount:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The number of findings that were successfully imported
       FailedFindings:
-        $ref: '#/definitions/ImportFindingsErrorList'
+        $ref: '#/definitions/[object Object]'
         description: The list of the findings that cannot be imported.
   BatchImportFindingsRequest:
     type: object
@@ -1273,7 +1261,7 @@ definitions:
       - Findings
     properties:
       Findings:
-        $ref: '#/definitions/AwsSecurityFindingList'
+        $ref: '#/definitions/[object Object]'
         description: A list of findings that you want to import. Must be submitted in the AWSSecurityFinding format.
   CreateInsightResponse:
     type: object
@@ -1281,7 +1269,7 @@ definitions:
       - InsightArn
     properties:
       InsightArn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ARN Of the created insight.
   CreateInsightRequest:
     type: object
@@ -1291,37 +1279,37 @@ definitions:
       - GroupByAttribute
     properties:
       Name:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The user-defined name that identifies the insight that you want to create.
       Filters:
-        $ref: '#/definitions/AwsSecurityFindingFilters'
+        $ref: '#/definitions/[object Object]'
         description: A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.
       GroupByAttribute:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The attribute by which the insight''s findings are grouped. This attribute is used as a findings aggregator for the purposes of viewing and managing multiple related findings under a single operand. '
   CreateMembersResponse:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/ResultList'
+        $ref: '#/definitions/[object Object]'
         description: A list of account ID and email address pairs of the AWS accounts that could not be processed.
   CreateMembersRequest:
     type: object
     properties:
       AccountDetails:
-        $ref: '#/definitions/AccountDetailsList'
+        $ref: '#/definitions/[object Object]'
         description: A list of account ID and email address pairs of the accounts that you want to associate with the master Security Hub account.
   DeclineInvitationsResponse:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/ResultList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of account ID and email address pairs of the AWS accounts that could not be processed. '
   DeclineInvitationsRequest:
     type: object
     properties:
       AccountIds:
-        $ref: '#/definitions/AccountIdList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of account IDs specifying accounts whose invitations to Security Hub you want to decline. '
   DeleteInsightResponse:
     type: object
@@ -1329,7 +1317,7 @@ definitions:
       - InsightArn
     properties:
       InsightArn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the insight that was deleted.
   DeleteInsightRequest:
     type: object
@@ -1338,25 +1326,25 @@ definitions:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/ResultList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of account ID and email address pairs of the AWS accounts that could not be processed. '
   DeleteInvitationsRequest:
     type: object
     properties:
       AccountIds:
-        $ref: '#/definitions/AccountIdList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of account IDs specifying accounts whose invitations to Security Hub you want to delete. '
   DeleteMembersResponse:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/ResultList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of account ID and email address pairs of the AWS accounts that could not be processed. '
   DeleteMembersRequest:
     type: object
     properties:
       AccountIds:
-        $ref: '#/definitions/AccountIdList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of account IDs of the Security Hub member accounts that you want to delete. '
   DisableImportFindingsForProductResponse:
     type: object
@@ -1383,13 +1371,13 @@ definitions:
     type: object
     properties:
       AccountIds:
-        $ref: '#/definitions/AccountIdList'
+        $ref: '#/definitions/[object Object]'
         description: The account IDs of the member accounts that you want to disassociate from the master account.
   EnableImportFindingsForProductResponse:
     type: object
     properties:
       ProductSubscriptionArn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of a resource that represents your subscription to the product that generates the findings that you want to import into Security Hub.
   EnableImportFindingsForProductRequest:
     type: object
@@ -1397,7 +1385,7 @@ definitions:
       - ProductArn
     properties:
       ProductArn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the product that generates findings that you want to import into Security Hub.
   EnableSecurityHubResponse:
     type: object
@@ -1409,22 +1397,22 @@ definitions:
     type: object
     properties:
       StandardsSubscriptions:
-        $ref: '#/definitions/StandardsSubscriptions'
+        $ref: '#/definitions/[object Object]'
         description: The standards subscription details returned by the operation.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token that is required for pagination.
   GetEnabledStandardsRequest:
     type: object
     properties:
       StandardsSubscriptionArns:
-        $ref: '#/definitions/StandardsSubscriptionArns'
+        $ref: '#/definitions/[object Object]'
         description: The list of standards subscription ARNS that you want to list and describe.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'Paginates results. Set the value of this parameter to NULL on your first call to the GetEnabledStandards operation. For subsequent calls to the operation, fill nextToken in the request with the value of nextToken from the previous response to continue listing data.'
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: Indicates the maximum number of items that you want in the response.
   GetFindingsResponse:
     type: object
@@ -1432,25 +1420,25 @@ definitions:
       - Findings
     properties:
       Findings:
-        $ref: '#/definitions/AwsSecurityFindingList'
+        $ref: '#/definitions/[object Object]'
         description: Findings details returned by the operation.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token that is required for pagination.
   GetFindingsRequest:
     type: object
     properties:
       Filters:
-        $ref: '#/definitions/AwsSecurityFindingFilters'
+        $ref: '#/definitions/[object Object]'
         description: A collection of attributes that is use for querying findings.
       SortCriteria:
-        $ref: '#/definitions/SortCriteria'
+        $ref: '#/definitions/[object Object]'
         description: A collection of attributes used for sorting findings.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'Paginates results. Set the value of this parameter to NULL on your first call to the GetFindings operation. For subsequent calls to the operation, fill nextToken in the request with the value of nextToken from the previous response to continue listing data.'
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: Indicates the maximum number of items that you want in the response.
   GetInsightResultsResponse:
     type: object
@@ -1458,7 +1446,7 @@ definitions:
       - InsightResults
     properties:
       InsightResults:
-        $ref: '#/definitions/InsightResults'
+        $ref: '#/definitions/[object Object]'
         description: The insight results returned by the operation.
   GetInsightResultsRequest:
     type: object
@@ -1469,28 +1457,28 @@ definitions:
       - Insights
     properties:
       Insights:
-        $ref: '#/definitions/InsightList'
+        $ref: '#/definitions/[object Object]'
         description: The insights returned by the operation.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token that is required for pagination.
   GetInsightsRequest:
     type: object
     properties:
       InsightArns:
-        $ref: '#/definitions/ArnList'
+        $ref: '#/definitions/[object Object]'
         description: The ARNS of the insights that you want to describe.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'Paginates results. Set the value of this parameter to NULL on your first call to the GetInsights operation. For subsequent calls to the operation, fill nextToken in the request with the value of nextToken from the previous response to continue listing data.'
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: Indicates the maximum number of items that you want in the response.
   GetInvitationsCountResponse:
     type: object
     properties:
       InvitationsCount:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: 'The number of all membership invitations sent to this Security Hub member account, not including the currently accepted invitation. '
   GetInvitationsCountRequest:
     type: object
@@ -1499,7 +1487,7 @@ definitions:
     type: object
     properties:
       Master:
-        $ref: '#/definitions/Invitation'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of details about the Security Hub master account for the current member account. '
   GetMasterAccountRequest:
     type: object
@@ -1508,10 +1496,10 @@ definitions:
     type: object
     properties:
       Members:
-        $ref: '#/definitions/MemberList'
+        $ref: '#/definitions/[object Object]'
         description: A list of details about the Security Hub member accounts.
       UnprocessedAccounts:
-        $ref: '#/definitions/ResultList'
+        $ref: '#/definitions/[object Object]'
         description: A list of account ID and email address pairs of the AWS accounts that could not be processed.
   GetMembersRequest:
     type: object
@@ -1519,28 +1507,28 @@ definitions:
       - AccountIds
     properties:
       AccountIds:
-        $ref: '#/definitions/AccountIdList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of account IDs for the Security Hub member accounts on which you want to return the details. '
   InviteMembersResponse:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/ResultList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of account ID and email address pairs of the AWS accounts that could not be processed. '
   InviteMembersRequest:
     type: object
     properties:
       AccountIds:
-        $ref: '#/definitions/AccountIdList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of IDs of the AWS accounts that you want to invite to Security Hub as members. '
   ListEnabledProductsForImportResponse:
     type: object
     properties:
       ProductSubscriptions:
-        $ref: '#/definitions/ProductSubscriptionArnList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of ARNs for the resources that represent your subscriptions to products. '
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token that is required for pagination.
   ListEnabledProductsForImportRequest:
     type: object
@@ -1549,10 +1537,10 @@ definitions:
     type: object
     properties:
       Invitations:
-        $ref: '#/definitions/InvitationList'
+        $ref: '#/definitions/[object Object]'
         description: The details of the invitations returned by the operation.
       NextToken:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The token that is required for pagination.
   ListInvitationsRequest:
     type: object
@@ -1561,10 +1549,10 @@ definitions:
     type: object
     properties:
       Members:
-        $ref: '#/definitions/MemberList'
+        $ref: '#/definitions/[object Object]'
         description: Member details returned by the operation.
       NextToken:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The token that is required for pagination.
   ListMembersRequest:
     type: object
@@ -1578,13 +1566,13 @@ definitions:
       - Filters
     properties:
       Filters:
-        $ref: '#/definitions/AwsSecurityFindingFilters'
+        $ref: '#/definitions/[object Object]'
         description: A collection of attributes that specify what findings you want to update.
       Note:
-        $ref: '#/definitions/NoteUpdate'
+        $ref: '#/definitions/[object Object]'
         description: The updated note for the finding.
       RecordState:
-        $ref: '#/definitions/RecordState'
+        $ref: '#/definitions/[object Object]'
         description: The updated record state for the finding.
   UpdateInsightResponse:
     type: object
@@ -1593,257 +1581,98 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The updated name for the insight.
       Filters:
-        $ref: '#/definitions/AwsSecurityFindingFilters'
+        $ref: '#/definitions/[object Object]'
         description: The updated filters that define this insight.
       GroupByAttribute:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The updated GroupBy attribute that defines this insight.
-  NonEmptyString:
-    type: string
-    pattern: .*\S.*
-  AccountId:
-    type: string
+  '[object Object]': {}
   AccountDetails:
     type: object
     properties:
       AccountId:
-        $ref: '#/definitions/AccountId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of an AWS account.
       Email:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The email of an AWS account.
     description: The details of an AWS account.
   AccountDetailsList:
     type: array
     items:
-      $ref: '#/definitions/AccountDetails'
+      $ref: '#/definitions/[object Object]'
+  AccountId:
+    type: string
   AccountIdList:
     type: array
     items:
-      $ref: '#/definitions/NonEmptyString'
+      $ref: '#/definitions/[object Object]'
   ArnList:
     type: array
     items:
-      $ref: '#/definitions/NonEmptyString'
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/NonEmptyString'
+      $ref: '#/definitions/[object Object]'
   AwsEc2InstanceDetails:
     type: object
     properties:
       Type:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The instance type of the instance. '
       ImageId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Machine Image (AMI) ID of the instance.
       IpV4Addresses:
-        $ref: '#/definitions/StringList'
+        $ref: '#/definitions/[object Object]'
         description: The IPv4 addresses associated with the instance.
       IpV6Addresses:
-        $ref: '#/definitions/StringList'
+        $ref: '#/definitions/[object Object]'
         description: The IPv6 addresses associated with the instance.
       KeyName:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The key name associated with the instance.
       IamInstanceProfileArn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The IAM profile ARN of the instance.
       VpcId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the VPC in which the instance was launched.
       SubnetId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the subnet in which the instance was launched.
       LaunchedAt:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The date/time the instance was launched.
     description: The details of an AWS EC2 instance.
+  AwsIamAccessKeyDetails:
+    type: object
+    properties:
+      UserName:
+        $ref: '#/definitions/[object Object]'
+        description: The user associated with the IAM access key related to a finding.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the IAM access key related to a finding.
+      CreatedAt:
+        $ref: '#/definitions/[object Object]'
+        description: The creation date/time of the IAM access key related to a finding.
+    description: AWS IAM access key details related to a finding.
   AwsIamAccessKeyStatus:
     type: string
     enum:
       - Active
       - Inactive
-  AwsIamAccessKeyDetails:
-    type: object
-    properties:
-      UserName:
-        $ref: '#/definitions/NonEmptyString'
-        description: The user associated with the IAM access key related to a finding.
-      Status:
-        $ref: '#/definitions/AwsIamAccessKeyStatus'
-        description: The status of the IAM access key related to a finding.
-      CreatedAt:
-        $ref: '#/definitions/NonEmptyString'
-        description: The creation date/time of the IAM access key related to a finding.
-    description: AWS IAM access key details related to a finding.
   AwsS3BucketDetails:
     type: object
     properties:
       OwnerId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The canonical user ID of the owner of the S3 bucket.
       OwnerName:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The display name of the owner of the S3 bucket.
     description: The details of an AWS S3 Bucket.
-  TypeList:
-    type: array
-    items:
-      $ref: '#/definitions/NonEmptyString'
-  Severity:
-    type: object
-    required:
-      - Normalized
-    properties:
-      Product:
-        $ref: '#/definitions/Double'
-        description: The native severity as defined by the security findings provider's solution that generated the finding.
-      Normalized:
-        $ref: '#/definitions/Integer'
-        description: The normalized severity of a finding.
-    description: A finding's severity.
-  Integer:
-    type: integer
-  Remediation:
-    type: object
-    properties:
-      Recommendation:
-        $ref: '#/definitions/Recommendation'
-        description: Provides a recommendation on how to remediate the issue identified within a finding.
-    description: 'The remediation options for a finding. '
-  FieldMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/NonEmptyString'
-        value:
-          $ref: '#/definitions/NonEmptyString'
-  MalwareList:
-    type: array
-    items:
-      $ref: '#/definitions/Malware'
-  Network:
-    type: object
-    properties:
-      Direction:
-        $ref: '#/definitions/NetworkDirection'
-        description: Indicates the direction of network traffic associated with a finding.
-      Protocol:
-        $ref: '#/definitions/NonEmptyString'
-        description: The protocol of network-related information about a finding.
-      SourceIpV4:
-        $ref: '#/definitions/NonEmptyString'
-        description: The source IPv4 address of network-related information about a finding.
-      SourceIpV6:
-        $ref: '#/definitions/NonEmptyString'
-        description: The source IPv6 address of network-related information about a finding.
-      SourcePort:
-        $ref: '#/definitions/Integer'
-        description: The source port of network-related information about a finding.
-      SourceDomain:
-        $ref: '#/definitions/NonEmptyString'
-        description: The source domain of network-related information about a finding.
-      SourceMac:
-        $ref: '#/definitions/NonEmptyString'
-        description: The source media access control (MAC) address of network-related information about a finding.
-      DestinationIpV4:
-        $ref: '#/definitions/NonEmptyString'
-        description: The destination IPv4 address of network-related information about a finding.
-      DestinationIpV6:
-        $ref: '#/definitions/NonEmptyString'
-        description: The destination IPv6 address of network-related information about a finding.
-      DestinationPort:
-        $ref: '#/definitions/Integer'
-        description: The destination port of network-related information about a finding.
-      DestinationDomain:
-        $ref: '#/definitions/NonEmptyString'
-        description: The destination domain of network-related information about a finding.
-    description: The details of network-related information about a finding.
-  ProcessDetails:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/NonEmptyString'
-        description: The name of the process.
-      Path:
-        $ref: '#/definitions/NonEmptyString'
-        description: The path to the process executable.
-      Pid:
-        $ref: '#/definitions/Integer'
-        description: The process ID.
-      ParentPid:
-        $ref: '#/definitions/Integer'
-        description: The parent process ID.
-      LaunchedAt:
-        $ref: '#/definitions/NonEmptyString'
-        description: The date/time that the process was launched.
-      TerminatedAt:
-        $ref: '#/definitions/NonEmptyString'
-        description: The date/time that the process was terminated.
-    description: The details of process-related information about a finding.
-  ThreatIntelIndicatorList:
-    type: array
-    items:
-      $ref: '#/definitions/ThreatIntelIndicator'
-  ResourceList:
-    type: array
-    items:
-      $ref: '#/definitions/Resource'
-  Compliance:
-    type: object
-    properties:
-      Status:
-        $ref: '#/definitions/ComplianceStatus'
-        description: Indicates the result of a compliance check.
-    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, AWS CIS Foundations). Contains compliance-related finding details.'
-  VerificationState:
-    type: string
-    enum:
-      - UNKNOWN
-      - TRUE_POSITIVE
-      - FALSE_POSITIVE
-      - BENIGN_POSITIVE
-  WorkflowState:
-    type: string
-    enum:
-      - NEW
-      - ASSIGNED
-      - IN_PROGRESS
-      - DEFERRED
-      - RESOLVED
-  RecordState:
-    type: string
-    enum:
-      - ACTIVE
-      - ARCHIVED
-  RelatedFindingList:
-    type: array
-    items:
-      $ref: '#/definitions/RelatedFinding'
-  Note:
-    type: object
-    required:
-      - Text
-      - UpdatedBy
-      - UpdatedAt
-    properties:
-      Text:
-        $ref: '#/definitions/NonEmptyString'
-        description: The text of a note.
-      UpdatedBy:
-        $ref: '#/definitions/NonEmptyString'
-        description: The principal that created a note.
-      UpdatedAt:
-        $ref: '#/definitions/NonEmptyString'
-        description: The timestamp of when the note was updated.
-    description: A user-defined note added to a finding.
   AwsSecurityFinding:
     type: object
     required:
@@ -1859,399 +1688,362 @@ definitions:
       - Resources
     properties:
       SchemaVersion:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The schema version for which a finding is formatted.
       Id:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The security findings provider-specific identifier for a finding.
       ProductArn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The ARN generated by Security Hub that uniquely identifies a third-party company (security findings provider) once this provider''s product (solution that generates findings) is registered with Security Hub. '
       GeneratorId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'This is the identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security findings provider''s solutions, this generator can be called a rule, a check, a detector, a plug-in, etc. '
       AwsAccountId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The AWS account ID in which a finding is generated.
       Types:
-        $ref: '#/definitions/TypeList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>One or more finding types in the format of ''namespace/category/classifier'' that classify a finding.</p> <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications</p>'
       FirstObservedAt:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: An ISO8601-formatted timestamp that indicates when the potential security issue captured by a finding was first observed by the security findings provider.
       LastObservedAt:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: An ISO8601-formatted timestamp that indicates when the potential security issue captured by a finding was most recently observed by the security findings provider.
       CreatedAt:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: An ISO8601-formatted timestamp that indicates when the potential security issue captured by a finding was created by the security findings provider.
       UpdatedAt:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'An ISO8601-formatted timestamp that indicates when the finding record was last updated by the security findings provider. '
       Severity:
-        $ref: '#/definitions/Severity'
+        $ref: '#/definitions/[object Object]'
         description: A finding's severity.
       Confidence:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale. 0 equates zero percent confidence and 100 equates to 100 percent confidence.
       Criticality:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: 'The level of importance assigned to the resources associated with the finding. A score of 0 means the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.'
       Title:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: A finding's title.
       Description:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: A finding's description.
       Remediation:
-        $ref: '#/definitions/Remediation'
+        $ref: '#/definitions/[object Object]'
         description: An data type that describes the remediation options for a finding.
       SourceUrl:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: A URL that links to a page about the current finding in the security findings provider's solution.
       ProductFields:
-        $ref: '#/definitions/FieldMap'
+        $ref: '#/definitions/[object Object]'
         description: A data type where security findings providers can include additional solution-specific details that are not part of the defined AwsSecurityFinding format.
       UserDefinedFields:
-        $ref: '#/definitions/FieldMap'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding. '
       Malware:
-        $ref: '#/definitions/MalwareList'
+        $ref: '#/definitions/[object Object]'
         description: A list of malware related to a finding.
       Network:
-        $ref: '#/definitions/Network'
+        $ref: '#/definitions/[object Object]'
         description: The details of network-related information about a finding.
       Process:
-        $ref: '#/definitions/ProcessDetails'
+        $ref: '#/definitions/[object Object]'
         description: The details of process-related information about a finding.
       ThreatIntelIndicators:
-        $ref: '#/definitions/ThreatIntelIndicatorList'
+        $ref: '#/definitions/[object Object]'
         description: Threat intel details related to a finding.
       Resources:
-        $ref: '#/definitions/ResourceList'
+        $ref: '#/definitions/[object Object]'
         description: A set of resource data types that describe the resources to which the finding refers.
       Compliance:
-        $ref: '#/definitions/Compliance'
+        $ref: '#/definitions/[object Object]'
         description: 'This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, AWS CIS Foundations). Contains compliance-related finding details.'
       VerificationState:
-        $ref: '#/definitions/VerificationState'
+        $ref: '#/definitions/[object Object]'
         description: 'Indicates the veracity of a finding. '
       WorkflowState:
-        $ref: '#/definitions/WorkflowState'
+        $ref: '#/definitions/[object Object]'
         description: 'The workflow state of a finding. '
       RecordState:
-        $ref: '#/definitions/RecordState'
+        $ref: '#/definitions/[object Object]'
         description: The record state of a finding.
       RelatedFindings:
-        $ref: '#/definitions/RelatedFindingList'
+        $ref: '#/definitions/[object Object]'
         description: A list of related findings.
       Note:
-        $ref: '#/definitions/Note'
+        $ref: '#/definitions/[object Object]'
         description: A user-defined note added to a finding.
     description: '<p>Provides consistent format for the contents of the Security Hub-aggregated findings. AwsSecurityFinding format enables you to share findings between AWS security services and third-party solutions, and compliance checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (GuardDuty, Inspector, Macie) or by the integrated third-party solutions and compliance checks.</p> </note>'
-  StringFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/StringFilter'
-  DateFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/DateFilter'
-  NumberFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/NumberFilter'
-  MapFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/MapFilter'
-  IpFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/IpFilter'
-  KeywordFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/KeywordFilter'
   AwsSecurityFindingFilters:
     type: object
     properties:
       ProductArn:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The ARN generated by Security Hub that uniquely identifies a third-party company (security findings provider) once this provider's product (solution that generates findings) is registered with Security Hub.
       AwsAccountId:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The AWS account ID in which a finding is generated.
       Id:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The security findings provider-specific identifier for a finding.
       GeneratorId:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: 'This is the identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security findings provider''s solutions, this generator can be called a rule, a check, a detector, a plug-in, etc.'
       Type:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: A finding type in the format of 'namespace/category/classifier' that classifies a finding.
       FirstObservedAt:
-        $ref: '#/definitions/DateFilterList'
+        $ref: '#/definitions/[object Object]'
         description: An ISO8601-formatted timestamp that indicates when the potential security issue captured by a finding was first observed by the security findings provider.
       LastObservedAt:
-        $ref: '#/definitions/DateFilterList'
+        $ref: '#/definitions/[object Object]'
         description: An ISO8601-formatted timestamp that indicates when the potential security issue captured by a finding was most recently observed by the security findings provider.
       CreatedAt:
-        $ref: '#/definitions/DateFilterList'
+        $ref: '#/definitions/[object Object]'
         description: An ISO8601-formatted timestamp that indicates when the potential security issue captured by a finding was created by the security findings provider.
       UpdatedAt:
-        $ref: '#/definitions/DateFilterList'
+        $ref: '#/definitions/[object Object]'
         description: 'An ISO8601-formatted timestamp that indicates when the finding record was last updated by the security findings provider. '
       SeverityProduct:
-        $ref: '#/definitions/NumberFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The native severity as defined by the security findings provider's solution that generated the finding.
       SeverityNormalized:
-        $ref: '#/definitions/NumberFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The normalized severity of a finding.
       SeverityLabel:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The label of a finding's severity.
       Confidence:
-        $ref: '#/definitions/NumberFilterList'
+        $ref: '#/definitions/[object Object]'
         description: A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale. 0 equates zero percent confidence and 100 equates to 100 percent confidence.
       Criticality:
-        $ref: '#/definitions/NumberFilterList'
+        $ref: '#/definitions/[object Object]'
         description: 'The level of importance assigned to the resources associated with the finding. A score of 0 means the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.'
       Title:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: A finding's title.
       Description:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: A finding's description.
       RecommendationText:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The recommendation of what to do about the issue described in a finding.
       SourceUrl:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: A URL that links to a page about the current finding in the security findings provider's solution.
       ProductFields:
-        $ref: '#/definitions/MapFilterList'
+        $ref: '#/definitions/[object Object]'
         description: A data type where security findings providers can include additional solution-specific details that are not part of the defined AwsSecurityFinding format.
       ProductName:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The name of the solution (product) that generates findings.
       CompanyName:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The name of the findings provider (company) that owns the solution (product) that generates findings.
       UserDefinedFields:
-        $ref: '#/definitions/MapFilterList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding. '
       MalwareName:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The name of the malware that was observed.
       MalwareType:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The type of the malware that was observed.
       MalwarePath:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The filesystem path of the malware that was observed.
       MalwareState:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The state of the malware that was observed.
       NetworkDirection:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: Indicates the direction of network traffic associated with a finding.
       NetworkProtocol:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The protocol of network-related information about a finding.
       NetworkSourceIpV4:
-        $ref: '#/definitions/IpFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The source IPv4 address of network-related information about a finding.
       NetworkSourceIpV6:
-        $ref: '#/definitions/IpFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The source IPv6 address of network-related information about a finding.
       NetworkSourcePort:
-        $ref: '#/definitions/NumberFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The source port of network-related information about a finding.
       NetworkSourceDomain:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The source domain of network-related information about a finding.
       NetworkSourceMac:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The source media access control (MAC) address of network-related information about a finding.
       NetworkDestinationIpV4:
-        $ref: '#/definitions/IpFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The destination IPv4 address of network-related information about a finding.
       NetworkDestinationIpV6:
-        $ref: '#/definitions/IpFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The destination IPv6 address of network-related information about a finding.
       NetworkDestinationPort:
-        $ref: '#/definitions/NumberFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The destination port of network-related information about a finding.
       NetworkDestinationDomain:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The destination domain of network-related information about a finding.
       ProcessName:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The name of the process.
       ProcessPath:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The path to the process executable.
       ProcessPid:
-        $ref: '#/definitions/NumberFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The process ID.
       ProcessParentPid:
-        $ref: '#/definitions/NumberFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The parent process ID.
       ProcessLaunchedAt:
-        $ref: '#/definitions/DateFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The date/time that the process was launched.
       ProcessTerminatedAt:
-        $ref: '#/definitions/DateFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The date/time that the process was terminated.
       ThreatIntelIndicatorType:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The type of a threat intel indicator.
       ThreatIntelIndicatorValue:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The value of a threat intel indicator.
       ThreatIntelIndicatorCategory:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The category of a threat intel indicator.
       ThreatIntelIndicatorLastObservedAt:
-        $ref: '#/definitions/DateFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The date/time of the last observation of a threat intel indicator.
       ThreatIntelIndicatorSource:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The source of the threat intel.
       ThreatIntelIndicatorSourceUrl:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The URL for more details from the source of the threat intel.
       ResourceType:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: Specifies the type of the resource for which details are provided.
       ResourceId:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The canonical identifier for the given resource type.
       ResourcePartition:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The canonical AWS partition name to which the region is assigned.
       ResourceRegion:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The canonical AWS external region name where this resource is located.
       ResourceTags:
-        $ref: '#/definitions/MapFilterList'
+        $ref: '#/definitions/[object Object]'
         description: A list of AWS tags associated with a resource at the time the finding was processed.
       ResourceAwsEc2InstanceType:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The instance type of the instance.
       ResourceAwsEc2InstanceImageId:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Machine Image (AMI) ID of the instance.
       ResourceAwsEc2InstanceIpV4Addresses:
-        $ref: '#/definitions/IpFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The IPv4 addresses associated with the instance.
       ResourceAwsEc2InstanceIpV6Addresses:
-        $ref: '#/definitions/IpFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The IPv6 addresses associated with the instance.
       ResourceAwsEc2InstanceKeyName:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The key name associated with the instance.
       ResourceAwsEc2InstanceIamInstanceProfileArn:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The IAM profile ARN of the instance.
       ResourceAwsEc2InstanceVpcId:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the VPC in which the instance was launched.
       ResourceAwsEc2InstanceSubnetId:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the subnet in which the instance was launched.
       ResourceAwsEc2InstanceLaunchedAt:
-        $ref: '#/definitions/DateFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The date/time the instance was launched.
       ResourceAwsS3BucketOwnerId:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The canonical user ID of the owner of the S3 bucket.
       ResourceAwsS3BucketOwnerName:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The display name of the owner of the S3 bucket.
       ResourceAwsIamAccessKeyUserName:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The user associated with the IAM access key related to a finding.
       ResourceAwsIamAccessKeyStatus:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The status of the IAM access key related to a finding.
       ResourceAwsIamAccessKeyCreatedAt:
-        $ref: '#/definitions/DateFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The creation date/time of the IAM access key related to a finding.
       ResourceContainerName:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The name of the container related to a finding.
       ResourceContainerImageId:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the image related to a finding.
       ResourceContainerImageName:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The name of the image related to a finding.
       ResourceContainerLaunchedAt:
-        $ref: '#/definitions/DateFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The date/time that the container was started.
       ResourceDetailsOther:
-        $ref: '#/definitions/MapFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The details of a resource that does not have a specific sub-field for the resource type defined.
       ComplianceStatus:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, AWS CIS Foundations). Contains compliance-related finding details.'
       VerificationState:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: 'Indicates the veracity of a finding. '
       WorkflowState:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The workflow state of a finding.
       RecordState:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The updated record state for the finding.
       RelatedFindingsProductArn:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the solution that generated a related finding.
       RelatedFindingsId:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The solution-generated identifier for a related finding.
       NoteText:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The text of a note.
       NoteUpdatedAt:
-        $ref: '#/definitions/DateFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The timestamp of when the note was updated.
       NoteUpdatedBy:
-        $ref: '#/definitions/StringFilterList'
+        $ref: '#/definitions/[object Object]'
         description: The principal that created a note.
       Keyword:
-        $ref: '#/definitions/KeywordFilterList'
+        $ref: '#/definitions/[object Object]'
         description: A keyword for a finding.
     description: 'A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight. '
   AwsSecurityFindingList:
     type: array
     items:
-      $ref: '#/definitions/AwsSecurityFinding'
-  StandardsSubscriptionArns:
-    type: array
-    items:
-      $ref: '#/definitions/NonEmptyString'
-    minItems: 1
-    maxItems: 25
-  StandardsSubscriptions:
-    type: array
-    items:
-      $ref: '#/definitions/StandardsSubscription'
-  StandardsSubscriptionRequests:
-    type: array
-    items:
-      $ref: '#/definitions/StandardsSubscriptionRequest'
-    minItems: 1
-    maxItems: 25
-  ImportFindingsErrorList:
-    type: array
-    items:
-      $ref: '#/definitions/ImportFindingsError'
+      $ref: '#/definitions/[object Object]'
   Boolean:
     type: boolean
+  Compliance:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates the result of a compliance check.
+    description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard (for example, AWS CIS Foundations). Contains compliance-related finding details.'
   ComplianceStatus:
     type: string
     enum:
@@ -2263,45 +2055,45 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The name of the container related to a finding.
       ImageId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The identifier of the image related to a finding.
       ImageName:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The name of the image related to a finding.
       LaunchedAt:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The date/time that the container was started.
     description: Container details related to a finding.
-  ResultList:
-    type: array
-    items:
-      $ref: '#/definitions/Result'
-  DateRange:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/Integer'
-        description: A date range value for the date filter.
-      Unit:
-        $ref: '#/definitions/DateRangeUnit'
-        description: A date range unit for the date filter.
-    description: A date range for the date filter.
   DateFilter:
     type: object
     properties:
       Start:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: A start date for the date filter.
       End:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: An end date for the date filter.
       DateRange:
-        $ref: '#/definitions/DateRange'
+        $ref: '#/definitions/[object Object]'
         description: A date range for the date filter.
     description: A date filter for querying findings.
+  DateFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  DateRange:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/[object Object]'
+        description: A date range value for the date filter.
+      Unit:
+        $ref: '#/definitions/[object Object]'
+        description: A date range unit for the date filter.
+    description: A date range for the date filter.
   DateRangeUnit:
     type: string
     enum:
@@ -2309,57 +2101,18 @@ definitions:
   Double:
     type: number
     format: double
-  NextToken:
+  NonEmptyString:
     type: string
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  SortCriteria:
+    pattern: .*\S.*
+  FieldMap:
     type: array
     items:
-      $ref: '#/definitions/SortCriterion'
-  InsightResults:
-    type: object
-    required:
-      - InsightArn
-      - GroupByAttribute
-      - ResultValues
-    properties:
-      InsightArn:
-        $ref: '#/definitions/NonEmptyString'
-        description: The ARN of the insight whose results are returned by the GetInsightResults operation.
-      GroupByAttribute:
-        $ref: '#/definitions/NonEmptyString'
-        description: The attribute by which the findings are grouped for the insight's whose results are returned by the GetInsightResults operation.
-      ResultValues:
-        $ref: '#/definitions/InsightResultValueList'
-        description: The list of insight result values returned by the GetInsightResults operation.
-    description: The insight results returned by the GetInsightResults operation.
-  InsightList:
-    type: array
-    items:
-      $ref: '#/definitions/Insight'
-  Invitation:
-    type: object
-    properties:
-      AccountId:
-        $ref: '#/definitions/AccountId'
-        description: 'The account ID of the master Security Hub account who sent the invitation. '
-      InvitationId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The ID of the invitation sent by the master Security Hub account.
-      InvitedAt:
-        $ref: '#/definitions/Timestamp'
-        description: The timestamp of when the invitation was sent.
-      MemberStatus:
-        $ref: '#/definitions/NonEmptyString'
-        description: The current relationship status between the inviter and invitee accounts.
-    description: 'The details of an invitation sent to an AWS account by the Security Hub master account. '
-  MemberList:
-    type: array
-    items:
-      $ref: '#/definitions/Member'
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/NonEmptyString'
+        value:
+          $ref: '#/definitions/NonEmptyString'
   ImportFindingsError:
     type: object
     required:
@@ -2368,15 +2121,19 @@ definitions:
       - ErrorMessage
     properties:
       Id:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The id of the error made during the BatchImportFindings operation.
       ErrorCode:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The code of the error made during the BatchImportFindings operation. '
       ErrorMessage:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The message of the error made during the BatchImportFindings operation. '
     description: 'Includes details of the list of the findings that cannot be imported. '
+  ImportFindingsErrorList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Insight:
     type: object
     required:
@@ -2386,18 +2143,22 @@ definitions:
       - GroupByAttribute
     properties:
       InsightArn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of a Security Hub insight.
       Name:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The name of a Security Hub insight.
       Filters:
-        $ref: '#/definitions/AwsSecurityFindingFilters'
+        $ref: '#/definitions/[object Object]'
         description: 'A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight. '
       GroupByAttribute:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The attribute by which the insight's findings are grouped. This attribute is used as a findings aggregator for the purposes of viewing and managing multiple related findings under a single operand.
     description: 'Contains information about a Security Hub insight. '
+  InsightList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   InsightResultValue:
     type: object
     required:
@@ -2405,41 +2166,105 @@ definitions:
       - Count
     properties:
       GroupByAttributeValue:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The value of the attribute by which the findings are grouped for the insight's whose results are returned by the GetInsightResults operation.
       Count:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The number of findings returned for each GroupByAttributeValue.
     description: The insight result values returned by the GetInsightResults operation.
   InsightResultValueList:
     type: array
     items:
-      $ref: '#/definitions/InsightResultValue'
-  Timestamp:
-    type: string
-    format: date-time
+      $ref: '#/definitions/[object Object]'
+  InsightResults:
+    type: object
+    required:
+      - InsightArn
+      - GroupByAttribute
+      - ResultValues
+    properties:
+      InsightArn:
+        $ref: '#/definitions/[object Object]'
+        description: The ARN of the insight whose results are returned by the GetInsightResults operation.
+      GroupByAttribute:
+        $ref: '#/definitions/[object Object]'
+        description: The attribute by which the findings are grouped for the insight's whose results are returned by the GetInsightResults operation.
+      ResultValues:
+        $ref: '#/definitions/[object Object]'
+        description: The list of insight result values returned by the GetInsightResults operation.
+    description: The insight results returned by the GetInsightResults operation.
+  Integer:
+    type: integer
+  Invitation:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The account ID of the master Security Hub account who sent the invitation. '
+      InvitationId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the invitation sent by the master Security Hub account.
+      InvitedAt:
+        $ref: '#/definitions/[object Object]'
+        description: The timestamp of when the invitation was sent.
+      MemberStatus:
+        $ref: '#/definitions/[object Object]'
+        description: The current relationship status between the inviter and invitee accounts.
+    description: 'The details of an invitation sent to an AWS account by the Security Hub master account. '
   InvitationList:
     type: array
     items:
-      $ref: '#/definitions/Invitation'
+      $ref: '#/definitions/[object Object]'
   IpFilter:
     type: object
     properties:
       Cidr:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: Finding's CIDR value.
     description: The IP filter for querying findings.&gt;
+  IpFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   KeywordFilter:
     type: object
     properties:
       Value:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: A value for the keyword.
     description: A keyword filter for querying findings.
-  ProductSubscriptionArnList:
+  KeywordFilterList:
     type: array
     items:
-      $ref: '#/definitions/NonEmptyString'
+      $ref: '#/definitions/[object Object]'
+  Malware:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the malware that was observed.
+      Type:
+        $ref: '#/definitions/[object Object]'
+        description: The type of the malware that was observed.
+      Path:
+        $ref: '#/definitions/[object Object]'
+        description: The filesystem path of the malware that was observed.
+      State:
+        $ref: '#/definitions/[object Object]'
+        description: The state of the malware that was observed.
+    description: A list of malware related to a finding.
+  MalwareList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  MalwareState:
+    type: string
+    enum:
+      - OBSERVED
+      - REMOVAL_FAILED
+      - REMOVED
   MalwareType:
     type: string
     enum:
@@ -2458,74 +2283,118 @@ definitions:
       - TROJAN
       - VIRUS
       - WORM
-  MalwareState:
-    type: string
-    enum:
-      - OBSERVED
-      - REMOVAL_FAILED
-      - REMOVED
-  Malware:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/NonEmptyString'
-        description: The name of the malware that was observed.
-      Type:
-        $ref: '#/definitions/MalwareType'
-        description: The type of the malware that was observed.
-      Path:
-        $ref: '#/definitions/NonEmptyString'
-        description: The filesystem path of the malware that was observed.
-      State:
-        $ref: '#/definitions/MalwareState'
-        description: The state of the malware that was observed.
-    description: A list of malware related to a finding.
-  MapFilterComparison:
-    type: string
-    enum:
-      - CONTAINS
   MapFilter:
     type: object
     properties:
       Key:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The key of the map filter.
       Value:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The value for the key in the map filter.
       Comparison:
-        $ref: '#/definitions/MapFilterComparison'
+        $ref: '#/definitions/[object Object]'
         description: Represents the condition to be applied to a key value when querying for findings with a map filter.
     description: The map filter for querying findings.
+  MapFilterComparison:
+    type: string
+    enum:
+      - CONTAINS
+  MapFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
   Member:
     type: object
     properties:
       AccountId:
-        $ref: '#/definitions/AccountId'
+        $ref: '#/definitions/[object Object]'
         description: The AWS account ID of a Security Hub member account.
       Email:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The email of a Security Hub member account.
       MasterId:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The AWS account ID of the master Security Hub account to this member account.
       MemberStatus:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The status of the relationship between the member account and its master account. '
       InvitedAt:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: Time stamp at which the member account was invited to Security Hub.
       UpdatedAt:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: Time stamp at which this member account was updated.
     description: The details for a Security Hub member account.
+  MemberList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Network:
+    type: object
+    properties:
+      Direction:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates the direction of network traffic associated with a finding.
+      Protocol:
+        $ref: '#/definitions/[object Object]'
+        description: The protocol of network-related information about a finding.
+      SourceIpV4:
+        $ref: '#/definitions/[object Object]'
+        description: The source IPv4 address of network-related information about a finding.
+      SourceIpV6:
+        $ref: '#/definitions/[object Object]'
+        description: The source IPv6 address of network-related information about a finding.
+      SourcePort:
+        $ref: '#/definitions/[object Object]'
+        description: The source port of network-related information about a finding.
+      SourceDomain:
+        $ref: '#/definitions/[object Object]'
+        description: The source domain of network-related information about a finding.
+      SourceMac:
+        $ref: '#/definitions/[object Object]'
+        description: The source media access control (MAC) address of network-related information about a finding.
+      DestinationIpV4:
+        $ref: '#/definitions/[object Object]'
+        description: The destination IPv4 address of network-related information about a finding.
+      DestinationIpV6:
+        $ref: '#/definitions/[object Object]'
+        description: The destination IPv6 address of network-related information about a finding.
+      DestinationPort:
+        $ref: '#/definitions/[object Object]'
+        description: The destination port of network-related information about a finding.
+      DestinationDomain:
+        $ref: '#/definitions/[object Object]'
+        description: The destination domain of network-related information about a finding.
+    description: The details of network-related information about a finding.
   NetworkDirection:
     type: string
     enum:
       - IN
       - OUT
+  NextToken:
+    type: string
+  Note:
+    type: object
+    required:
+      - Text
+      - UpdatedBy
+      - UpdatedAt
+    properties:
+      Text:
+        $ref: '#/definitions/[object Object]'
+        description: The text of a note.
+      UpdatedBy:
+        $ref: '#/definitions/[object Object]'
+        description: The principal that created a note.
+      UpdatedAt:
+        $ref: '#/definitions/[object Object]'
+        description: The timestamp of when the note was updated.
+    description: A user-defined note added to a finding.
   NoteUpdate:
     type: object
     required:
@@ -2533,41 +2402,76 @@ definitions:
       - UpdatedBy
     properties:
       Text:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The updated note text.
       UpdatedBy:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The principal that updated the note.
     description: The updated note.
   NumberFilter:
     type: object
     properties:
       Gte:
-        $ref: '#/definitions/Double'
+        $ref: '#/definitions/[object Object]'
         description: 'Represents the "greater than equal" condition to be applied to a single field when querying for findings. '
       Lte:
-        $ref: '#/definitions/Double'
+        $ref: '#/definitions/[object Object]'
         description: 'Represents the "less than equal" condition to be applied to a single field when querying for findings. '
       Eq:
-        $ref: '#/definitions/Double'
+        $ref: '#/definitions/[object Object]'
         description: Represents the "equal to" condition to be applied to a single field when querying for findings.
     description: A number filter for querying findings.
+  NumberFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Partition:
     type: string
     enum:
       - aws
       - aws-cn
       - aws-us-gov
+  ProcessDetails:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the process.
+      Path:
+        $ref: '#/definitions/[object Object]'
+        description: The path to the process executable.
+      Pid:
+        $ref: '#/definitions/[object Object]'
+        description: The process ID.
+      ParentPid:
+        $ref: '#/definitions/[object Object]'
+        description: The parent process ID.
+      LaunchedAt:
+        $ref: '#/definitions/[object Object]'
+        description: The date/time that the process was launched.
+      TerminatedAt:
+        $ref: '#/definitions/[object Object]'
+        description: The date/time that the process was terminated.
+    description: The details of process-related information about a finding.
+  ProductSubscriptionArnList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Recommendation:
     type: object
     properties:
       Text:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'The recommendation of what to do about the issue described in a finding. '
       Url:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'A URL to link to general remediation information for the finding type of a finding. '
     description: Provides a recommendation on how to remediate the issue identified within a finding.
+  RecordState:
+    type: string
+    enum:
+      - ACTIVE
+      - ARCHIVED
   RelatedFinding:
     type: object
     required:
@@ -2575,31 +2479,23 @@ definitions:
       - Id
     properties:
       ProductArn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the solution that generated a related finding.
       Id:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The solution-generated identifier for a related finding.
     description: Related finding's details.
-  ResourceDetails:
+  RelatedFindingList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Remediation:
     type: object
     properties:
-      AwsEc2Instance:
-        $ref: '#/definitions/AwsEc2InstanceDetails'
-        description: The details of an AWS EC2 instance.
-      AwsS3Bucket:
-        $ref: '#/definitions/AwsS3BucketDetails'
-        description: The details of an AWS S3 Bucket.
-      AwsIamAccessKey:
-        $ref: '#/definitions/AwsIamAccessKeyDetails'
-        description: AWS IAM access key details related to a finding.
-      Container:
-        $ref: '#/definitions/ContainerDetails'
-        description: Container details related to a finding.
-      Other:
-        $ref: '#/definitions/FieldMap'
-        description: The details of a resource that does not have a specific sub-field for the resource type defined.
-    description: Provides additional details about the resource.
+      Recommendation:
+        $ref: '#/definitions/[object Object]'
+        description: Provides a recommendation on how to remediate the issue identified within a finding.
+    description: 'The remediation options for a finding. '
   Resource:
     type: object
     required:
@@ -2607,42 +2503,85 @@ definitions:
       - Id
     properties:
       Type:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: Specifies the type of the resource for which details are provided.
       Id:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The canonical identifier for the given resource type.
       Partition:
-        $ref: '#/definitions/Partition'
+        $ref: '#/definitions/[object Object]'
         description: The canonical AWS partition name to which the region is assigned.
       Region:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The canonical AWS external region name where this resource is located.
       Tags:
-        $ref: '#/definitions/FieldMap'
+        $ref: '#/definitions/[object Object]'
         description: A list of AWS tags associated with a resource at the time the finding was processed.
       Details:
-        $ref: '#/definitions/ResourceDetails'
+        $ref: '#/definitions/[object Object]'
         description: Provides additional details about the resource.
     description: A resource data type that describes a resource to which the finding refers.
+  ResourceDetails:
+    type: object
+    properties:
+      AwsEc2Instance:
+        $ref: '#/definitions/[object Object]'
+        description: The details of an AWS EC2 instance.
+      AwsS3Bucket:
+        $ref: '#/definitions/[object Object]'
+        description: The details of an AWS S3 Bucket.
+      AwsIamAccessKey:
+        $ref: '#/definitions/[object Object]'
+        description: AWS IAM access key details related to a finding.
+      Container:
+        $ref: '#/definitions/[object Object]'
+        description: Container details related to a finding.
+      Other:
+        $ref: '#/definitions/[object Object]'
+        description: The details of a resource that does not have a specific sub-field for the resource type defined.
+    description: Provides additional details about the resource.
+  ResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Result:
     type: object
     properties:
       AccountId:
-        $ref: '#/definitions/AccountId'
+        $ref: '#/definitions/[object Object]'
         description: 'An ID of the AWS account that could not be processed. '
       ProcessingResult:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The reason for why an account could not be processed.
     description: The account details that could not be processed.
+  ResultList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Severity:
+    type: object
+    required:
+      - Normalized
+    properties:
+      Product:
+        $ref: '#/definitions/[object Object]'
+        description: The native severity as defined by the security findings provider's solution that generated the finding.
+      Normalized:
+        $ref: '#/definitions/[object Object]'
+        description: The normalized severity of a finding.
+    description: A finding's severity.
+  SortCriteria:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   SortCriterion:
     type: object
     properties:
       Field:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The finding attribute used for sorting findings.
       SortOrder:
-        $ref: '#/definitions/SortOrder'
+        $ref: '#/definitions/[object Object]'
         description: The order used for sorting findings.
     description: A collection of attributes used for sorting findings.
   SortOrder:
@@ -2675,46 +2614,105 @@ definitions:
       - StandardsStatus
     properties:
       StandardsSubscriptionArn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of a resource that represents your subscription to a supported standard.
       StandardsArn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of a standard.
       StandardsInput:
-        $ref: '#/definitions/StandardsInputParameterMap'
+        $ref: '#/definitions/[object Object]'
         description: <p/>
       StandardsStatus:
-        $ref: '#/definitions/StandardsStatus'
+        $ref: '#/definitions/[object Object]'
         description: The standard's status.
     description: A resource that represents your subscription to a supported standard.
+  StandardsSubscriptionArns:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 25
   StandardsSubscriptionRequest:
     type: object
     required:
       - StandardsArn
     properties:
       StandardsArn:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the standard that you want to enable.
       StandardsInput:
-        $ref: '#/definitions/StandardsInputParameterMap'
+        $ref: '#/definitions/[object Object]'
         description: <p/>
     description: The standard that you want to enable.
+  StandardsSubscriptionRequests:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 25
+  StandardsSubscriptions:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  StringFilter:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/[object Object]'
+        description: The string filter value.
+      Comparison:
+        $ref: '#/definitions/[object Object]'
+        description: 'Represents the condition to be applied to a string value when querying for findings. '
+    description: A string filter for querying findings.
   StringFilterComparison:
     type: string
     enum:
       - EQUALS
       - CONTAINS
       - PREFIX
-  StringFilter:
+  StringFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ThreatIntelIndicator:
     type: object
     properties:
+      Type:
+        $ref: '#/definitions/[object Object]'
+        description: The type of a threat intel indicator.
       Value:
-        $ref: '#/definitions/NonEmptyString'
-        description: The string filter value.
-      Comparison:
-        $ref: '#/definitions/StringFilterComparison'
-        description: 'Represents the condition to be applied to a string value when querying for findings. '
-    description: A string filter for querying findings.
+        $ref: '#/definitions/[object Object]'
+        description: The value of a threat intel indicator.
+      Category:
+        $ref: '#/definitions/[object Object]'
+        description: The category of a threat intel indicator.
+      LastObservedAt:
+        $ref: '#/definitions/[object Object]'
+        description: The date/time of the last observation of a threat intel indicator.
+      Source:
+        $ref: '#/definitions/[object Object]'
+        description: The source of the threat intel.
+      SourceUrl:
+        $ref: '#/definitions/[object Object]'
+        description: The URL for more details from the source of the threat intel.
+    description: Threat intel details related to a finding.
+  ThreatIntelIndicatorCategory:
+    type: string
+    enum:
+      - BACKDOOR
+      - CARD_STEALER
+      - COMMAND_AND_CONTROL
+      - DROP_SITE
+      - EXPLOIT_SITE
+      - KEYLOGGER
+  ThreatIntelIndicatorList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ThreatIntelIndicatorType:
     type: string
     enum:
@@ -2729,34 +2727,25 @@ definitions:
       - MUTEX
       - PROCESS
       - URL
-  ThreatIntelIndicatorCategory:
+  Timestamp:
+    type: string
+    format: date-time
+  TypeList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  VerificationState:
     type: string
     enum:
-      - BACKDOOR
-      - CARD_STEALER
-      - COMMAND_AND_CONTROL
-      - DROP_SITE
-      - EXPLOIT_SITE
-      - KEYLOGGER
-  ThreatIntelIndicator:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/ThreatIntelIndicatorType'
-        description: The type of a threat intel indicator.
-      Value:
-        $ref: '#/definitions/NonEmptyString'
-        description: The value of a threat intel indicator.
-      Category:
-        $ref: '#/definitions/ThreatIntelIndicatorCategory'
-        description: The category of a threat intel indicator.
-      LastObservedAt:
-        $ref: '#/definitions/NonEmptyString'
-        description: The date/time of the last observation of a threat intel indicator.
-      Source:
-        $ref: '#/definitions/NonEmptyString'
-        description: The source of the threat intel.
-      SourceUrl:
-        $ref: '#/definitions/NonEmptyString'
-        description: The URL for more details from the source of the threat intel.
-    description: Threat intel details related to a finding.
+      - UNKNOWN
+      - TRUE_POSITIVE
+      - FALSE_POSITIVE
+      - BENIGN_POSITIVE
+  WorkflowState:
+    type: string
+    enum:
+      - NEW
+      - ASSIGNED
+      - IN_PROGRESS
+      - DEFERRED
+      - RESOLVED

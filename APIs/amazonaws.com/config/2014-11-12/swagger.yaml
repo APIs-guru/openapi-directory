@@ -1767,10 +1767,10 @@ definitions:
     type: object
     properties:
       BaseConfigurationItems:
-        $ref: '#/definitions/BaseConfigurationItems'
+        $ref: '#/definitions/[object Object]'
         description: A list that contains the current configuration of one or more resources.
       UnprocessedResourceIdentifiers:
-        $ref: '#/definitions/UnprocessedResourceIdentifierList'
+        $ref: '#/definitions/[object Object]'
         description: A list of resource identifiers that were not processed with current scope. The list is empty if all the resources are processed.
   BatchGetAggregateResourceConfigRequest:
     type: object
@@ -1779,10 +1779,10 @@ definitions:
       - ResourceIdentifiers
     properties:
       ConfigurationAggregatorName:
-        $ref: '#/definitions/ConfigurationAggregatorName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration aggregator.
       ResourceIdentifiers:
-        $ref: '#/definitions/ResourceIdentifiersList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of aggregate ResourceIdentifiers objects. '
   ValidationException: {}
   NoSuchConfigurationAggregatorException: {}
@@ -1790,10 +1790,10 @@ definitions:
     type: object
     properties:
       baseConfigurationItems:
-        $ref: '#/definitions/BaseConfigurationItems'
+        $ref: '#/definitions/[object Object]'
         description: A list that contains the current configuration of one or more resources.
       unprocessedResourceKeys:
-        $ref: '#/definitions/ResourceKeys'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of resource keys that were not processed with the current response. The unprocessesResourceKeys value is in the same form as ResourceKeys, so the value can be directly provided to a subsequent BatchGetResourceConfig operation. If there are no unprocessed resource keys, the response contains an empty unprocessedResourceKeys list. '
   BatchGetResourceConfigRequest:
     type: object
@@ -1801,7 +1801,7 @@ definitions:
       - resourceKeys
     properties:
       resourceKeys:
-        $ref: '#/definitions/ResourceKeys'
+        $ref: '#/definitions/[object Object]'
         description: A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID.
   NoAvailableConfigurationRecorderException: {}
   DeleteAggregationAuthorizationRequest:
@@ -1811,10 +1811,10 @@ definitions:
       - AuthorizedAwsRegion
     properties:
       AuthorizedAccountId:
-        $ref: '#/definitions/AccountId'
+        $ref: '#/definitions/[object Object]'
         description: The 12-digit account ID of the account authorized to aggregate data.
       AuthorizedAwsRegion:
-        $ref: '#/definitions/AwsRegion'
+        $ref: '#/definitions/[object Object]'
         description: The region authorized to collect aggregated data.
   InvalidParameterValueException: {}
   DeleteConfigRuleRequest:
@@ -1823,7 +1823,7 @@ definitions:
       - ConfigRuleName
     properties:
       ConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS Config rule that you want to delete.
     description: <p/>
   NoSuchConfigRuleException: {}
@@ -1834,7 +1834,7 @@ definitions:
       - ConfigurationAggregatorName
     properties:
       ConfigurationAggregatorName:
-        $ref: '#/definitions/ConfigurationAggregatorName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration aggregator.
   DeleteConfigurationRecorderRequest:
     type: object
@@ -1842,7 +1842,7 @@ definitions:
       - ConfigurationRecorderName
     properties:
       ConfigurationRecorderName:
-        $ref: '#/definitions/RecorderName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration recorder to be deleted. You can retrieve the name of your configuration recorder by using the <code>DescribeConfigurationRecorders</code> action.
     description: The request object for the <code>DeleteConfigurationRecorder</code> action.
   NoSuchConfigurationRecorderException: {}
@@ -1852,7 +1852,7 @@ definitions:
       - DeliveryChannelName
     properties:
       DeliveryChannelName:
-        $ref: '#/definitions/ChannelName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the delivery channel to delete.
     description: 'The input for the <a>DeleteDeliveryChannel</a> action. The action accepts the following data, in JSON format. '
   NoSuchDeliveryChannelException: {}
@@ -1867,7 +1867,7 @@ definitions:
       - ConfigRuleName
     properties:
       ConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS Config rule for which you want to delete the evaluation results.
     description: <p/>
   DeletePendingAggregationRequestRequest:
@@ -1877,10 +1877,10 @@ definitions:
       - RequesterAwsRegion
     properties:
       RequesterAccountId:
-        $ref: '#/definitions/AccountId'
+        $ref: '#/definitions/[object Object]'
         description: The 12-digit account ID of the account requesting to aggregate data.
       RequesterAwsRegion:
-        $ref: '#/definitions/AwsRegion'
+        $ref: '#/definitions/[object Object]'
         description: The region requesting to aggregate data.
   DeleteRetentionConfigurationRequest:
     type: object
@@ -1888,14 +1888,14 @@ definitions:
       - RetentionConfigurationName
     properties:
       RetentionConfigurationName:
-        $ref: '#/definitions/RetentionConfigurationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the retention configuration to delete.
   NoSuchRetentionConfigurationException: {}
   DeliverConfigSnapshotResponse:
     type: object
     properties:
       configSnapshotId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the snapshot that is being created.
     description: 'The output for the <a>DeliverConfigSnapshot</a> action, in JSON format.'
   DeliverConfigSnapshotRequest:
@@ -1904,7 +1904,7 @@ definitions:
       - deliveryChannelName
     properties:
       deliveryChannelName:
-        $ref: '#/definitions/ChannelName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the delivery channel through which the snapshot is delivered.
     description: The input for the <a>DeliverConfigSnapshot</a> action.
   NoRunningConfigurationRecorderException: {}
@@ -1912,10 +1912,10 @@ definitions:
     type: object
     properties:
       AggregateComplianceByConfigRules:
-        $ref: '#/definitions/AggregateComplianceByConfigRuleList'
+        $ref: '#/definitions/[object Object]'
         description: Returns a list of AggregateComplianceByConfigRule object.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeAggregateComplianceByConfigRulesRequest:
     type: object
@@ -1923,16 +1923,16 @@ definitions:
       - ConfigurationAggregatorName
     properties:
       ConfigurationAggregatorName:
-        $ref: '#/definitions/ConfigurationAggregatorName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration aggregator.
       Filters:
-        $ref: '#/definitions/ConfigRuleComplianceFilters'
+        $ref: '#/definitions/[object Object]'
         description: 'Filters the results by ConfigRuleComplianceFilters object. '
       Limit:
-        $ref: '#/definitions/GroupByAPILimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of evaluation results returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
   InvalidLimitException: {}
   InvalidNextTokenException: {}
@@ -1940,123 +1940,123 @@ definitions:
     type: object
     properties:
       AggregationAuthorizations:
-        $ref: '#/definitions/AggregationAuthorizationList'
+        $ref: '#/definitions/[object Object]'
         description: Returns a list of authorizations granted to various aggregator accounts and regions.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeAggregationAuthorizationsRequest:
     type: object
     properties:
       Limit:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of AggregationAuthorizations returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.'
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeComplianceByConfigRuleResponse:
     type: object
     properties:
       ComplianceByConfigRules:
-        $ref: '#/definitions/ComplianceByConfigRules'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether each of the specified AWS Config rules is compliant.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: <p/>
   DescribeComplianceByConfigRuleRequest:
     type: object
     properties:
       ConfigRuleNames:
-        $ref: '#/definitions/ConfigRuleNames'
+        $ref: '#/definitions/[object Object]'
         description: Specify one or more AWS Config rule names to filter the results by rule.
       ComplianceTypes:
-        $ref: '#/definitions/ComplianceTypes'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>INSUFFICIENT_DATA</code>.</p>'
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
     description: <p/>
   DescribeComplianceByResourceResponse:
     type: object
     properties:
       ComplianceByResources:
-        $ref: '#/definitions/ComplianceByResources'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether the specified AWS resource complies with all of the AWS Config rules that evaluate it.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: <p/>
   DescribeComplianceByResourceRequest:
     type: object
     properties:
       ResourceType:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/[object Object]'
         description: 'The types of AWS resources for which you want compliance information (for example, <code>AWS::EC2::Instance</code>). For this action, you can specify that the resource type is an AWS account by specifying <code>AWS::::Account</code>.'
       ResourceId:
-        $ref: '#/definitions/BaseResourceId'
+        $ref: '#/definitions/[object Object]'
         description: 'The ID of the AWS resource for which you want compliance information. You can specify only one resource ID. If you specify a resource ID, you must also specify a type for <code>ResourceType</code>.'
       ComplianceTypes:
-        $ref: '#/definitions/ComplianceTypes'
+        $ref: '#/definitions/[object Object]'
         description: <p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>
       Limit:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of evaluation results returned on each page. The default is 10. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
     description: <p/>
   DescribeConfigRuleEvaluationStatusResponse:
     type: object
     properties:
       ConfigRulesEvaluationStatus:
-        $ref: '#/definitions/ConfigRuleEvaluationStatusList'
+        $ref: '#/definitions/[object Object]'
         description: Status information about your AWS managed Config rules.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: <p/>
   DescribeConfigRuleEvaluationStatusRequest:
     type: object
     properties:
       ConfigRuleNames:
-        $ref: '#/definitions/ConfigRuleNames'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the AWS managed Config rules for which you want status information. If you do not specify any names, AWS Config returns status information for all AWS managed Config rules that you use.'
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
       Limit:
-        $ref: '#/definitions/RuleLimit'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The number of rule evaluation results that you want returned.</p> <p>This parameter is required if the rule limit for your account is more than the default of 50 rules.</p> <p>For information about requesting a rule limit increase, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config">AWS Config Limits</a> in the <i>AWS General Reference Guide</i>.</p>'
     description: <p/>
   DescribeConfigRulesResponse:
     type: object
     properties:
       ConfigRules:
-        $ref: '#/definitions/ConfigRules'
+        $ref: '#/definitions/[object Object]'
         description: The details about your AWS Config rules.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: <p/>
   DescribeConfigRulesRequest:
     type: object
     properties:
       ConfigRuleNames:
-        $ref: '#/definitions/ConfigRuleNames'
+        $ref: '#/definitions/[object Object]'
         description: 'The names of the AWS Config rules for which you want details. If you do not specify any names, AWS Config returns details for all your rules.'
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
     description: <p/>
   DescribeConfigurationAggregatorSourcesStatusResponse:
     type: object
     properties:
       AggregatedSourceStatusList:
-        $ref: '#/definitions/AggregatedSourceStatusList'
+        $ref: '#/definitions/[object Object]'
         description: 'Returns an AggregatedSourceStatus object. '
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeConfigurationAggregatorSourcesStatusRequest:
     type: object
@@ -2064,138 +2064,138 @@ definitions:
       - ConfigurationAggregatorName
     properties:
       ConfigurationAggregatorName:
-        $ref: '#/definitions/ConfigurationAggregatorName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration aggregator.
       UpdateStatus:
-        $ref: '#/definitions/AggregatedSourceStatusTypeList'
+        $ref: '#/definitions/[object Object]'
         description: <p>Filters the status type.</p> <ul> <li> <p>Valid value FAILED indicates errors while moving data.</p> </li> <li> <p>Valid value SUCCEEDED indicates the data was successfully moved.</p> </li> <li> <p>Valid value OUTDATED indicates the data is not the most recent.</p> </li> </ul>
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
       Limit:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of AggregatorSourceStatus returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.'
   DescribeConfigurationAggregatorsResponse:
     type: object
     properties:
       ConfigurationAggregators:
-        $ref: '#/definitions/ConfigurationAggregatorList'
+        $ref: '#/definitions/[object Object]'
         description: Returns a ConfigurationAggregators object.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeConfigurationAggregatorsRequest:
     type: object
     properties:
       ConfigurationAggregatorNames:
-        $ref: '#/definitions/ConfigurationAggregatorNameList'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration aggregators.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
       Limit:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of configuration aggregators returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.'
   DescribeConfigurationRecorderStatusResponse:
     type: object
     properties:
       ConfigurationRecordersStatus:
-        $ref: '#/definitions/ConfigurationRecorderStatusList'
+        $ref: '#/definitions/[object Object]'
         description: A list that contains status of the specified recorders.
     description: 'The output for the <a>DescribeConfigurationRecorderStatus</a> action, in JSON format.'
   DescribeConfigurationRecorderStatusRequest:
     type: object
     properties:
       ConfigurationRecorderNames:
-        $ref: '#/definitions/ConfigurationRecorderNameList'
+        $ref: '#/definitions/[object Object]'
         description: 'The name(s) of the configuration recorder. If the name is not specified, the action returns the current status of all the configuration recorders associated with the account.'
     description: The input for the <a>DescribeConfigurationRecorderStatus</a> action.
   DescribeConfigurationRecordersResponse:
     type: object
     properties:
       ConfigurationRecorders:
-        $ref: '#/definitions/ConfigurationRecorderList'
+        $ref: '#/definitions/[object Object]'
         description: A list that contains the descriptions of the specified configuration recorders.
     description: The output for the <a>DescribeConfigurationRecorders</a> action.
   DescribeConfigurationRecordersRequest:
     type: object
     properties:
       ConfigurationRecorderNames:
-        $ref: '#/definitions/ConfigurationRecorderNameList'
+        $ref: '#/definitions/[object Object]'
         description: A list of configuration recorder names.
     description: The input for the <a>DescribeConfigurationRecorders</a> action.
   DescribeDeliveryChannelStatusResponse:
     type: object
     properties:
       DeliveryChannelsStatus:
-        $ref: '#/definitions/DeliveryChannelStatusList'
+        $ref: '#/definitions/[object Object]'
         description: A list that contains the status of a specified delivery channel.
     description: The output for the <a>DescribeDeliveryChannelStatus</a> action.
   DescribeDeliveryChannelStatusRequest:
     type: object
     properties:
       DeliveryChannelNames:
-        $ref: '#/definitions/DeliveryChannelNameList'
+        $ref: '#/definitions/[object Object]'
         description: A list of delivery channel names.
     description: The input for the <a>DeliveryChannelStatus</a> action.
   DescribeDeliveryChannelsResponse:
     type: object
     properties:
       DeliveryChannels:
-        $ref: '#/definitions/DeliveryChannelList'
+        $ref: '#/definitions/[object Object]'
         description: A list that contains the descriptions of the specified delivery channel.
     description: The output for the <a>DescribeDeliveryChannels</a> action.
   DescribeDeliveryChannelsRequest:
     type: object
     properties:
       DeliveryChannelNames:
-        $ref: '#/definitions/DeliveryChannelNameList'
+        $ref: '#/definitions/[object Object]'
         description: A list of delivery channel names.
     description: The input for the <a>DescribeDeliveryChannels</a> action.
   DescribePendingAggregationRequestsResponse:
     type: object
     properties:
       PendingAggregationRequests:
-        $ref: '#/definitions/PendingAggregationRequestList'
+        $ref: '#/definitions/[object Object]'
         description: Returns a PendingAggregationRequests object.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribePendingAggregationRequestsRequest:
     type: object
     properties:
       Limit:
-        $ref: '#/definitions/DescribePendingAggregationRequestsLimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of evaluation results returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.'
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeRetentionConfigurationsResponse:
     type: object
     properties:
       RetentionConfigurations:
-        $ref: '#/definitions/RetentionConfigurationList'
+        $ref: '#/definitions/[object Object]'
         description: Returns a retention configuration object.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
   DescribeRetentionConfigurationsRequest:
     type: object
     properties:
       RetentionConfigurationNames:
-        $ref: '#/definitions/RetentionConfigurationNameList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A list of names of retention configurations for which you want details. If you do not specify a name, AWS Config returns details for all the retention configurations for that account.</p> <note> <p>Currently, AWS Config supports only one retention configuration per region in your account.</p> </note>'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
   GetAggregateComplianceDetailsByConfigRuleResponse:
     type: object
     properties:
       AggregateEvaluationResults:
-        $ref: '#/definitions/AggregateEvaluationResultList'
+        $ref: '#/definitions/[object Object]'
         description: Returns an AggregateEvaluationResults object.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
   GetAggregateComplianceDetailsByConfigRuleRequest:
     type: object
@@ -2206,37 +2206,37 @@ definitions:
       - AwsRegion
     properties:
       ConfigurationAggregatorName:
-        $ref: '#/definitions/ConfigurationAggregatorName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration aggregator.
       ConfigRuleName:
-        $ref: '#/definitions/ConfigRuleName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS Config rule for which you want compliance information.
       AccountId:
-        $ref: '#/definitions/AccountId'
+        $ref: '#/definitions/[object Object]'
         description: The 12-digit account ID of the source account.
       AwsRegion:
-        $ref: '#/definitions/AwsRegion'
+        $ref: '#/definitions/[object Object]'
         description: The source region from where the data is aggregated.
       ComplianceType:
-        $ref: '#/definitions/ComplianceType'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The resource compliance status.</p> <note> <p>For the <code>GetAggregateComplianceDetailsByConfigRuleRequest</code> data type, AWS Config supports only the <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. AWS Config does not support the <code>NOT_APPLICABLE</code> and <code>INSUFFICIENT_DATA</code> values.</p> </note>'
       Limit:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of evaluation results returned on each page. The default is 50. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
   GetAggregateConfigRuleComplianceSummaryResponse:
     type: object
     properties:
       GroupByKey:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/[object Object]'
         description: Groups the result based on ACCOUNT_ID or AWS_REGION.
       AggregateComplianceCounts:
-        $ref: '#/definitions/AggregateComplianceCountList'
+        $ref: '#/definitions/[object Object]'
         description: Returns a list of AggregateComplianceCounts object.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
   GetAggregateConfigRuleComplianceSummaryRequest:
     type: object
@@ -2244,19 +2244,19 @@ definitions:
       - ConfigurationAggregatorName
     properties:
       ConfigurationAggregatorName:
-        $ref: '#/definitions/ConfigurationAggregatorName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration aggregator.
       Filters:
-        $ref: '#/definitions/ConfigRuleComplianceSummaryFilters'
+        $ref: '#/definitions/[object Object]'
         description: Filters the results based on the ConfigRuleComplianceSummaryFilters object.
       GroupByKey:
-        $ref: '#/definitions/ConfigRuleComplianceSummaryGroupKey'
+        $ref: '#/definitions/[object Object]'
         description: Groups the result based on ACCOUNT_ID or AWS_REGION.
       Limit:
-        $ref: '#/definitions/GroupByAPILimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of evaluation results returned on each page. The default is 1000. You cannot specify a number greater than 1000. If you specify 0, AWS Config uses the default.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
   GetAggregateDiscoveredResourceCountsResponse:
     type: object
@@ -2264,16 +2264,16 @@ definitions:
       - TotalDiscoveredResources
     properties:
       TotalDiscoveredResources:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The total number of resources that are present in an aggregator with the filters that you provide.
       GroupByKey:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/[object Object]'
         description: 'The key passed into the request object. If <code>GroupByKey</code> is not provided, the result will be empty.'
       GroupedResourceCounts:
-        $ref: '#/definitions/GroupedResourceCountList'
+        $ref: '#/definitions/[object Object]'
         description: Returns a list of GroupedResourceCount objects.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   GetAggregateDiscoveredResourceCountsRequest:
     type: object
@@ -2281,25 +2281,25 @@ definitions:
       - ConfigurationAggregatorName
     properties:
       ConfigurationAggregatorName:
-        $ref: '#/definitions/ConfigurationAggregatorName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration aggregator.
       Filters:
-        $ref: '#/definitions/ResourceCountFilters'
+        $ref: '#/definitions/[object Object]'
         description: Filters the results based on the <code>ResourceCountFilters</code> object.
       GroupByKey:
-        $ref: '#/definitions/ResourceCountGroupKey'
+        $ref: '#/definitions/[object Object]'
         description: The key to group the resource counts.
       Limit:
-        $ref: '#/definitions/GroupByAPILimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of <a>GroupedResourceCount</a> objects returned on each page. The default is 1000. You cannot specify a number greater than 1000. If you specify 0, AWS Config uses the default.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
   GetAggregateResourceConfigResponse:
     type: object
     properties:
       ConfigurationItem:
-        $ref: '#/definitions/ConfigurationItem'
+        $ref: '#/definitions/[object Object]'
         description: Returns a <code>ConfigurationItem</code> object.
   GetAggregateResourceConfigRequest:
     type: object
@@ -2308,10 +2308,10 @@ definitions:
       - ResourceIdentifier
     properties:
       ConfigurationAggregatorName:
-        $ref: '#/definitions/ConfigurationAggregatorName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration aggregator.
       ResourceIdentifier:
-        $ref: '#/definitions/AggregateResourceIdentifier'
+        $ref: '#/definitions/[object Object]'
         description: An object that identifies aggregate resource.
   OversizedConfigurationItemException: {}
   ResourceNotDiscoveredException: {}
@@ -2319,10 +2319,10 @@ definitions:
     type: object
     properties:
       EvaluationResults:
-        $ref: '#/definitions/EvaluationResults'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether the AWS resource complies with the specified AWS Config rule.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: <p/>
   GetComplianceDetailsByConfigRuleRequest:
@@ -2331,26 +2331,26 @@ definitions:
       - ConfigRuleName
     properties:
       ConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS Config rule for which you want compliance information.
       ComplianceTypes:
-        $ref: '#/definitions/ComplianceTypes'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>NOT_APPLICABLE</code>.</p>'
       Limit:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of evaluation results returned on each page. The default is 10. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
     description: <p/>
   GetComplianceDetailsByResourceResponse:
     type: object
     properties:
       EvaluationResults:
-        $ref: '#/definitions/EvaluationResults'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether the specified AWS resource complies each AWS Config rule.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: <p/>
   GetComplianceDetailsByResourceRequest:
@@ -2360,71 +2360,71 @@ definitions:
       - ResourceId
     properties:
       ResourceType:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/[object Object]'
         description: The type of the AWS resource for which you want compliance information.
       ResourceId:
-        $ref: '#/definitions/BaseResourceId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the AWS resource for which you want compliance information.
       ComplianceTypes:
-        $ref: '#/definitions/ComplianceTypes'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>NOT_APPLICABLE</code>.</p>'
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
     description: <p/>
   GetComplianceSummaryByConfigRuleResponse:
     type: object
     properties:
       ComplianceSummary:
-        $ref: '#/definitions/ComplianceSummary'
+        $ref: '#/definitions/[object Object]'
         description: 'The number of AWS Config rules that are compliant and the number that are noncompliant, up to a maximum of 25 for each.'
     description: <p/>
   GetComplianceSummaryByResourceTypeResponse:
     type: object
     properties:
       ComplianceSummariesByResourceType:
-        $ref: '#/definitions/ComplianceSummariesByResourceType'
+        $ref: '#/definitions/[object Object]'
         description: 'The number of resources that are compliant and the number that are noncompliant. If one or more resource types were provided with the request, the numbers are returned for each resource type. The maximum number returned is 100.'
     description: <p/>
   GetComplianceSummaryByResourceTypeRequest:
     type: object
     properties:
       ResourceTypes:
-        $ref: '#/definitions/ResourceTypes'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Specify one or more resource types to get the number of resources that are compliant and the number that are noncompliant for each resource type.</p> <p>For this request, you can specify an AWS resource type such as <code>AWS::EC2::Instance</code>. You can specify that the resource type is an AWS account by specifying <code>AWS::::Account</code>.</p>'
     description: <p/>
   GetDiscoveredResourceCountsResponse:
     type: object
     properties:
       totalDiscoveredResources:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The total number of resources that AWS Config is recording in the region for your account. If you specify resource types in the request, AWS Config returns only the total number of resources for those resource types.</p> <p class="title"> <b>Example</b> </p> <ol> <li> <p>AWS Config is recording three resource types in the US East (Ohio) Region for your account: 25 EC2 instances, 20 IAM users, and 15 S3 buckets, for a total of 60 resources.</p> </li> <li> <p>You make a call to the <code>GetDiscoveredResourceCounts</code> action and specify the resource type, <code>"AWS::EC2::Instances"</code>, in the request.</p> </li> <li> <p>AWS Config returns 25 for <code>totalDiscoveredResources</code>.</p> </li> </ol>'
       resourceCounts:
-        $ref: '#/definitions/ResourceCounts'
+        $ref: '#/definitions/[object Object]'
         description: The list of <code>ResourceCount</code> objects. Each object is listed in descending order by the number of resources.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
   GetDiscoveredResourceCountsRequest:
     type: object
     properties:
       resourceTypes:
-        $ref: '#/definitions/ResourceTypes'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The comma-separated list that specifies the resource types that you want AWS Config to return (for example, <code>"AWS::EC2::Instance"</code>, <code>"AWS::IAM::User"</code>).</p> <p>If a value for <code>resourceTypes</code> is not specified, AWS Config returns all resource types that AWS Config is recording in the region for your account.</p> <note> <p>If the configuration recorder is turned off, AWS Config returns an empty list of <a>ResourceCount</a> objects. If the configuration recorder is not recording a specific resource type (for example, S3 buckets), that resource type is not returned in the list of <a>ResourceCount</a> objects.</p> </note>'
       limit:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of <a>ResourceCount</a> objects returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   GetResourceConfigHistoryResponse:
     type: object
     properties:
       configurationItems:
-        $ref: '#/definitions/ConfigurationItemList'
+        $ref: '#/definitions/[object Object]'
         description: A list that contains the configuration history of one or more resources.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: The output for the <a>GetResourceConfigHistory</a> action.
   GetResourceConfigHistoryRequest:
@@ -2434,25 +2434,25 @@ definitions:
       - resourceId
     properties:
       resourceType:
-        $ref: '#/definitions/ResourceType'
+        $ref: '#/definitions/[object Object]'
         description: The resource type.
       resourceId:
-        $ref: '#/definitions/ResourceId'
+        $ref: '#/definitions/[object Object]'
         description: 'The ID of the resource (for example., <code>sg-xxxxxx</code>).'
       laterTime:
-        $ref: '#/definitions/LaterTime'
+        $ref: '#/definitions/[object Object]'
         description: 'The time stamp that indicates a later time. If not specified, current time is taken.'
       earlierTime:
-        $ref: '#/definitions/EarlierTime'
+        $ref: '#/definitions/[object Object]'
         description: 'The time stamp that indicates an earlier time. If not specified, the action returns paginated results that contain configuration items that start when the first configuration item was recorded.'
       chronologicalOrder:
-        $ref: '#/definitions/ChronologicalOrder'
+        $ref: '#/definitions/[object Object]'
         description: 'The chronological order for configuration items listed. By default, the results are listed in reverse chronological order.'
       limit:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of configuration items returned on each page. The default is 10. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
     description: The input for the <a>GetResourceConfigHistory</a> action.
   InvalidTimeRangeException: {}
@@ -2460,10 +2460,10 @@ definitions:
     type: object
     properties:
       ResourceIdentifiers:
-        $ref: '#/definitions/DiscoveredResourceIdentifierList'
+        $ref: '#/definitions/[object Object]'
         description: Returns a list of <code>ResourceIdentifiers</code> objects.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   ListAggregateDiscoveredResourcesRequest:
     type: object
@@ -2472,28 +2472,28 @@ definitions:
       - ResourceType
     properties:
       ConfigurationAggregatorName:
-        $ref: '#/definitions/ConfigurationAggregatorName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the configuration aggregator. '
       ResourceType:
-        $ref: '#/definitions/ResourceType'
+        $ref: '#/definitions/[object Object]'
         description: The type of resources that you want AWS Config to list in the response.
       Filters:
-        $ref: '#/definitions/ResourceFilters'
+        $ref: '#/definitions/[object Object]'
         description: Filters the results based on the <code>ResourceFilters</code> object.
       Limit:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of resource identifiers returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   ListDiscoveredResourcesResponse:
     type: object
     properties:
       resourceIdentifiers:
-        $ref: '#/definitions/ResourceIdentifierList'
+        $ref: '#/definitions/[object Object]'
         description: 'The details that identify a resource that is discovered by AWS Config, including the resource type, ID, and (if available) the custom resource name.'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The string that you use in a subsequent request to get the next page of results in a paginated response.
     description: <p/>
   ListDiscoveredResourcesRequest:
@@ -2502,29 +2502,29 @@ definitions:
       - resourceType
     properties:
       resourceType:
-        $ref: '#/definitions/ResourceType'
+        $ref: '#/definitions/[object Object]'
         description: The type of resources that you want AWS Config to list in the response.
       resourceIds:
-        $ref: '#/definitions/ResourceIdList'
+        $ref: '#/definitions/[object Object]'
         description: 'The IDs of only those resources that you want AWS Config to list in the response. If you do not specify this parameter, AWS Config lists all resources of the specified type that it has discovered.'
       resourceName:
-        $ref: '#/definitions/ResourceName'
+        $ref: '#/definitions/[object Object]'
         description: 'The custom name of only those resources that you want AWS Config to list in the response. If you do not specify this parameter, AWS Config lists all resources of the specified type that it has discovered.'
       limit:
-        $ref: '#/definitions/Limit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of resource identifiers returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.'
       includeDeletedResources:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: 'Specifies whether AWS Config includes deleted resources in the results. By default, deleted resources are not included.'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
     description: <p/>
   PutAggregationAuthorizationResponse:
     type: object
     properties:
       AggregationAuthorization:
-        $ref: '#/definitions/AggregationAuthorization'
+        $ref: '#/definitions/[object Object]'
         description: 'Returns an AggregationAuthorization object. '
   PutAggregationAuthorizationRequest:
     type: object
@@ -2533,10 +2533,10 @@ definitions:
       - AuthorizedAwsRegion
     properties:
       AuthorizedAccountId:
-        $ref: '#/definitions/AccountId'
+        $ref: '#/definitions/[object Object]'
         description: The 12-digit account ID of the account authorized to aggregate data.
       AuthorizedAwsRegion:
-        $ref: '#/definitions/AwsRegion'
+        $ref: '#/definitions/[object Object]'
         description: The region authorized to collect aggregated data.
   PutConfigRuleRequest:
     type: object
@@ -2544,7 +2544,7 @@ definitions:
       - ConfigRule
     properties:
       ConfigRule:
-        $ref: '#/definitions/ConfigRule'
+        $ref: '#/definitions/[object Object]'
         description: The rule that you want to add to your account.
   MaxNumberOfConfigRulesExceededException: {}
   InsufficientPermissionsException: {}
@@ -2552,7 +2552,7 @@ definitions:
     type: object
     properties:
       ConfigurationAggregator:
-        $ref: '#/definitions/ConfigurationAggregator'
+        $ref: '#/definitions/[object Object]'
         description: Returns a ConfigurationAggregator object.
   PutConfigurationAggregatorRequest:
     type: object
@@ -2560,13 +2560,13 @@ definitions:
       - ConfigurationAggregatorName
     properties:
       ConfigurationAggregatorName:
-        $ref: '#/definitions/ConfigurationAggregatorName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration aggregator.
       AccountAggregationSources:
-        $ref: '#/definitions/AccountAggregationSourceList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of AccountAggregationSource object. '
       OrganizationAggregationSource:
-        $ref: '#/definitions/OrganizationAggregationSource'
+        $ref: '#/definitions/[object Object]'
         description: An OrganizationAggregationSource object.
   LimitExceededException: {}
   InvalidRoleException: {}
@@ -2579,7 +2579,7 @@ definitions:
       - ConfigurationRecorder
     properties:
       ConfigurationRecorder:
-        $ref: '#/definitions/ConfigurationRecorder'
+        $ref: '#/definitions/[object Object]'
         description: The configuration recorder object that records each configuration change made to the resources.
     description: The input for the <a>PutConfigurationRecorder</a> action.
   MaxNumberOfConfigurationRecordersExceededException: {}
@@ -2591,7 +2591,7 @@ definitions:
       - DeliveryChannel
     properties:
       DeliveryChannel:
-        $ref: '#/definitions/DeliveryChannel'
+        $ref: '#/definitions/[object Object]'
         description: The configuration delivery channel object that delivers the configuration information to an Amazon S3 bucket and to an Amazon SNS topic.
     description: The input for the <a>PutDeliveryChannel</a> action.
   MaxNumberOfDeliveryChannelsExceededException: {}
@@ -2604,7 +2604,7 @@ definitions:
     type: object
     properties:
       FailedEvaluations:
-        $ref: '#/definitions/Evaluations'
+        $ref: '#/definitions/[object Object]'
         description: Requests that failed because of a client or server error.
     description: <p/>
   PutEvaluationsRequest:
@@ -2613,13 +2613,13 @@ definitions:
       - ResultToken
     properties:
       Evaluations:
-        $ref: '#/definitions/Evaluations'
+        $ref: '#/definitions/[object Object]'
         description: The assessments that the AWS Lambda function performs. Each evaluation identifies an AWS resource and indicates whether it complies with the AWS Config rule that invokes the AWS Lambda function.
       ResultToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: An encrypted token that associates an evaluation with an AWS Config rule. Identifies the rule and the event that triggered the evaluation.
       TestMode:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Use this parameter to specify a test run for <code>PutEvaluations</code>. You can verify whether your AWS Lambda function will deliver evaluation results to AWS Config. No updates occur to your existing evaluations, and evaluation results are not sent to AWS Config.</p> <note> <p>When <code>TestMode</code> is <code>true</code>, <code>PutEvaluations</code> doesn''t require a valid value for the <code>ResultToken</code> parameter, but the value cannot be null.</p> </note>'
     description: <p/>
   InvalidResultTokenException: {}
@@ -2627,7 +2627,7 @@ definitions:
     type: object
     properties:
       RetentionConfiguration:
-        $ref: '#/definitions/RetentionConfiguration'
+        $ref: '#/definitions/[object Object]'
         description: Returns a retention configuration object.
   PutRetentionConfigurationRequest:
     type: object
@@ -2635,7 +2635,7 @@ definitions:
       - RetentionPeriodInDays
     properties:
       RetentionPeriodInDays:
-        $ref: '#/definitions/RetentionPeriodInDays'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
   MaxNumberOfRetentionConfigurationsExceededException: {}
   StartConfigRulesEvaluationResponse:
@@ -2646,7 +2646,7 @@ definitions:
     type: object
     properties:
       ConfigRuleNames:
-        $ref: '#/definitions/ReevaluateConfigRuleNames'
+        $ref: '#/definitions/[object Object]'
         description: The list of names of AWS Config rules that you want to run evaluations for.
     description: <p/>
   StartConfigurationRecorderRequest:
@@ -2655,7 +2655,7 @@ definitions:
       - ConfigurationRecorderName
     properties:
       ConfigurationRecorderName:
-        $ref: '#/definitions/RecorderName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the recorder object that records each configuration change made to the resources.
     description: The input for the <a>StartConfigurationRecorder</a> action.
   NoAvailableDeliveryChannelException: {}
@@ -2665,126 +2665,355 @@ definitions:
       - ConfigurationRecorderName
     properties:
       ConfigurationRecorderName:
-        $ref: '#/definitions/RecorderName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the recorder object that records each configuration change made to the resources.
     description: The input for the <a>StopConfigurationRecorder</a> action.
   ARN:
     type: string
-  AccountAggregationSourceAccountList:
-    type: array
-    items:
-      $ref: '#/definitions/AccountId'
-    minItems: 1
-  Boolean:
-    type: boolean
-  AggregatorRegionList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-    minItems: 1
+  '[object Object]': {}
   AccountAggregationSource:
     type: object
     required:
       - AccountIds
     properties:
       AccountIds:
-        $ref: '#/definitions/AccountAggregationSourceAccountList'
+        $ref: '#/definitions/[object Object]'
         description: 'The 12-digit account ID of the account being aggregated. '
       AllAwsRegions:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: 'If true, aggregate existing AWS Config regions and future regions.'
       AwsRegions:
-        $ref: '#/definitions/AggregatorRegionList'
+        $ref: '#/definitions/[object Object]'
         description: The source regions being aggregated.
     description: A collection of accounts and regions.
-  AccountId:
-    type: string
-    pattern: '\d{12}'
+  AccountAggregationSourceAccountList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
   AccountAggregationSourceList:
     type: array
     items:
-      $ref: '#/definitions/AccountAggregationSource'
+      $ref: '#/definitions/[object Object]'
     minItems: 0
     maxItems: 1
-  ConfigRuleName:
+  AccountId:
     type: string
-    minLength: 1
-    maxLength: 64
-  Compliance:
-    type: object
-    properties:
-      ComplianceType:
-        $ref: '#/definitions/ComplianceType'
-        description: '<p>Indicates whether an AWS resource or AWS Config rule is compliant.</p> <p>A resource is compliant if it complies with all of the AWS Config rules that evaluate it. A resource is noncompliant if it does not comply with one or more of these rules.</p> <p>A rule is compliant if all of the resources that the rule evaluates comply with it. A rule is noncompliant if any of these resources do not comply.</p> <p>AWS Config returns the <code>INSUFFICIENT_DATA</code> value when no evaluation results are available for the AWS resource or AWS Config rule.</p> <p>For the <code>Compliance</code> data type, AWS Config supports only <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>INSUFFICIENT_DATA</code> values. AWS Config does not support the <code>NOT_APPLICABLE</code> value for the <code>Compliance</code> data type.</p>'
-      ComplianceContributorCount:
-        $ref: '#/definitions/ComplianceContributorCount'
-        description: 'The number of AWS resources or AWS Config rules that cause a result of <code>NON_COMPLIANT</code>, up to a maximum number.'
-    description: Indicates whether an AWS resource or AWS Config rule is compliant and provides the number of contributors that affect the compliance.
-  AwsRegion:
-    type: string
-    minLength: 1
-    maxLength: 64
+    pattern: '\d{12}'
   AggregateComplianceByConfigRule:
     type: object
     properties:
       ConfigRuleName:
-        $ref: '#/definitions/ConfigRuleName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS Config rule.
       Compliance:
-        $ref: '#/definitions/Compliance'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether an AWS resource or AWS Config rule is compliant and provides the number of contributors that affect the compliance.
       AccountId:
-        $ref: '#/definitions/AccountId'
+        $ref: '#/definitions/[object Object]'
         description: The 12-digit account ID of the source account.
       AwsRegion:
-        $ref: '#/definitions/AwsRegion'
+        $ref: '#/definitions/[object Object]'
         description: The source region from where the data is aggregated.
     description: '<p>Indicates whether an AWS Config rule is compliant based on account ID, region, compliance, and rule name.</p> <p>A rule is compliant if all of the resources that the rule evaluated comply with it. It is noncompliant if any of these resources do not comply.</p>'
   AggregateComplianceByConfigRuleList:
     type: array
     items:
-      $ref: '#/definitions/AggregateComplianceByConfigRule'
-  StringWithCharLimit256:
-    type: string
-    minLength: 1
-    maxLength: 256
-  ComplianceSummary:
-    type: object
-    properties:
-      CompliantResourceCount:
-        $ref: '#/definitions/ComplianceContributorCount'
-        description: 'The number of AWS Config rules or AWS resources that are compliant, up to a maximum of 25 for rules and 100 for resources.'
-      NonCompliantResourceCount:
-        $ref: '#/definitions/ComplianceContributorCount'
-        description: 'The number of AWS Config rules or AWS resources that are noncompliant, up to a maximum of 25 for rules and 100 for resources.'
-      ComplianceSummaryTimestamp:
-        $ref: '#/definitions/Date'
-        description: The time that AWS Config created the compliance summary.
-    description: The number of AWS Config rules or AWS resources that are compliant and noncompliant.
+      $ref: '#/definitions/[object Object]'
   AggregateComplianceCount:
     type: object
     properties:
       GroupName:
-        $ref: '#/definitions/StringWithCharLimit256'
+        $ref: '#/definitions/[object Object]'
         description: The 12-digit account ID or region based on the GroupByKey value.
       ComplianceSummary:
-        $ref: '#/definitions/ComplianceSummary'
+        $ref: '#/definitions/[object Object]'
         description: The number of compliant and noncompliant AWS Config rules.
     description: Returns the number of compliant and noncompliant rules for one or more accounts and regions in an aggregator.
   AggregateComplianceCountList:
     type: array
     items:
-      $ref: '#/definitions/AggregateComplianceCount'
-  EvaluationResultIdentifier:
+      $ref: '#/definitions/[object Object]'
+  AggregateEvaluationResult:
     type: object
     properties:
-      EvaluationResultQualifier:
-        $ref: '#/definitions/EvaluationResultQualifier'
-        description: 'Identifies an AWS Config rule used to evaluate an AWS resource, and provides the type and ID of the evaluated resource.'
-      OrderingTimestamp:
-        $ref: '#/definitions/Date'
-        description: 'The time of the event that triggered the evaluation of your AWS resources. The time can indicate when AWS Config delivered a configuration item change notification, or it can indicate when AWS Config delivered the configuration snapshot, depending on which event triggered the evaluation.'
-    description: Uniquely identifies an evaluation result.
+      EvaluationResultIdentifier:
+        $ref: '#/definitions/[object Object]'
+        description: Uniquely identifies the evaluation result.
+      ComplianceType:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The resource compliance status.</p> <p>For the <code>AggregationEvaluationResult</code> data type, AWS Config supports only the <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. AWS Config does not support the <code>NOT_APPLICABLE</code> and <code>INSUFFICIENT_DATA</code> value.</p>'
+      ResultRecordedTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when AWS Config recorded the aggregate evaluation result.
+      ConfigRuleInvokedTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when the AWS Config rule evaluated the AWS resource.
+      Annotation:
+        $ref: '#/definitions/[object Object]'
+        description: Supplementary information about how the agrregate evaluation determined the compliance.
+      AccountId:
+        $ref: '#/definitions/[object Object]'
+        description: The 12-digit account ID of the source account.
+      AwsRegion:
+        $ref: '#/definitions/[object Object]'
+        description: The source region from where the data is aggregated.
+    description: 'The details of an AWS Config evaluation for an account ID and region in an aggregator. Provides the AWS resource that was evaluated, the compliance of the resource, related time stamps, and supplementary information. '
+  AggregateEvaluationResultList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  AggregateResourceIdentifier:
+    type: object
+    required:
+      - SourceAccountId
+      - SourceRegion
+      - ResourceId
+      - ResourceType
+    properties:
+      SourceAccountId:
+        $ref: '#/definitions/[object Object]'
+        description: The 12-digit account ID of the source account.
+      SourceRegion:
+        $ref: '#/definitions/[object Object]'
+        description: The source region where data is aggregated.
+      ResourceId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the AWS resource.
+      ResourceType:
+        $ref: '#/definitions/[object Object]'
+        description: The type of the AWS resource.
+      ResourceName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the AWS resource.
+    description: 'The details that identify a resource that is collected by AWS Config aggregator, including the resource type, ID, (if available) the custom resource name, the source account, and source region.'
+  AggregatedSourceStatus:
+    type: object
+    properties:
+      SourceId:
+        $ref: '#/definitions/[object Object]'
+        description: The source account ID or an organization.
+      SourceType:
+        $ref: '#/definitions/[object Object]'
+        description: The source account or an organization.
+      AwsRegion:
+        $ref: '#/definitions/[object Object]'
+        description: The region authorized to collect aggregated data.
+      LastUpdateStatus:
+        $ref: '#/definitions/[object Object]'
+        description: <p>Filters the last updated status type.</p> <ul> <li> <p>Valid value FAILED indicates errors while moving data.</p> </li> <li> <p>Valid value SUCCEEDED indicates the data was successfully moved.</p> </li> <li> <p>Valid value OUTDATED indicates the data is not the most recent.</p> </li> </ul>
+      LastUpdateTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time of the last update.
+      LastErrorCode:
+        $ref: '#/definitions/[object Object]'
+        description: The error code that AWS Config returned when the source account aggregation last failed.
+      LastErrorMessage:
+        $ref: '#/definitions/[object Object]'
+        description: The message indicating that the source account aggregation failed due to an error.
+    description: The current sync status between the source and the aggregator account.
+  AggregatedSourceStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  AggregatedSourceStatusType:
+    type: string
+    enum:
+      - FAILED
+      - SUCCEEDED
+      - OUTDATED
+  AggregatedSourceStatusTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+  AggregatedSourceType:
+    type: string
+    enum:
+      - ACCOUNT
+      - ORGANIZATION
+  AggregationAuthorization:
+    type: object
+    properties:
+      AggregationAuthorizationArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the aggregation object.
+      AuthorizedAccountId:
+        $ref: '#/definitions/[object Object]'
+        description: The 12-digit account ID of the account authorized to aggregate data.
+      AuthorizedAwsRegion:
+        $ref: '#/definitions/[object Object]'
+        description: The region authorized to collect aggregated data.
+      CreationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time stamp when the aggregation authorization was created.
+    description: An object that represents the authorizations granted to aggregator accounts and regions.
+  AggregationAuthorizationList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  AggregatorRegionList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+  AllSupported:
+    type: boolean
+  AvailabilityZone:
+    type: string
+  AwsRegion:
+    type: string
+    minLength: 1
+    maxLength: 64
+  BaseConfigurationItem:
+    type: object
+    properties:
+      version:
+        $ref: '#/definitions/[object Object]'
+        description: The version number of the resource configuration.
+      accountId:
+        $ref: '#/definitions/[object Object]'
+        description: The 12-digit AWS account ID associated with the resource.
+      configurationItemCaptureTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when the configuration recording was initiated.
+      configurationItemStatus:
+        $ref: '#/definitions/[object Object]'
+        description: The configuration item status.
+      configurationStateId:
+        $ref: '#/definitions/[object Object]'
+        description: An identifier that indicates the ordering of the configuration items of a resource.
+      arn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the resource.
+      resourceType:
+        $ref: '#/definitions/[object Object]'
+        description: The type of AWS resource.
+      resourceId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The ID of the resource (for example., sg-xxxxxx).'
+      resourceName:
+        $ref: '#/definitions/[object Object]'
+        description: 'The custom name of the resource, if available.'
+      awsRegion:
+        $ref: '#/definitions/[object Object]'
+        description: The region where the resource resides.
+      availabilityZone:
+        $ref: '#/definitions/[object Object]'
+        description: The Availability Zone associated with the resource.
+      resourceCreationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time stamp when the resource was created.
+      configuration:
+        $ref: '#/definitions/[object Object]'
+        description: The description of the resource configuration.
+      supplementaryConfiguration:
+        $ref: '#/definitions/[object Object]'
+        description: Configuration attributes that AWS Config returns for certain resource types to supplement the information returned for the configuration parameter.
+    description: The detailed configuration of a specified resource.
+  BaseConfigurationItems:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  BaseResourceId:
+    type: string
+    minLength: 1
+    maxLength: 768
+  Boolean:
+    type: boolean
+  ChannelName:
+    type: string
+    minLength: 1
+    maxLength: 256
+  ChronologicalOrder:
+    type: string
+    enum:
+      - Reverse
+      - Forward
+  Compliance:
+    type: object
+    properties:
+      ComplianceType:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Indicates whether an AWS resource or AWS Config rule is compliant.</p> <p>A resource is compliant if it complies with all of the AWS Config rules that evaluate it. A resource is noncompliant if it does not comply with one or more of these rules.</p> <p>A rule is compliant if all of the resources that the rule evaluates comply with it. A rule is noncompliant if any of these resources do not comply.</p> <p>AWS Config returns the <code>INSUFFICIENT_DATA</code> value when no evaluation results are available for the AWS resource or AWS Config rule.</p> <p>For the <code>Compliance</code> data type, AWS Config supports only <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>INSUFFICIENT_DATA</code> values. AWS Config does not support the <code>NOT_APPLICABLE</code> value for the <code>Compliance</code> data type.</p>'
+      ComplianceContributorCount:
+        $ref: '#/definitions/[object Object]'
+        description: 'The number of AWS resources or AWS Config rules that cause a result of <code>NON_COMPLIANT</code>, up to a maximum number.'
+    description: Indicates whether an AWS resource or AWS Config rule is compliant and provides the number of contributors that affect the compliance.
+  ComplianceByConfigRule:
+    type: object
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the AWS Config rule.
+      Compliance:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates whether the AWS Config rule is compliant.
+    description: Indicates whether an AWS Config rule is compliant. A rule is compliant if all of the resources that the rule evaluated comply with it. A rule is noncompliant if any of these resources do not comply.
+  ComplianceByConfigRules:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ComplianceByResource:
+    type: object
+    properties:
+      ResourceType:
+        $ref: '#/definitions/[object Object]'
+        description: The type of the AWS resource that was evaluated.
+      ResourceId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the AWS resource that was evaluated.
+      Compliance:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates whether the AWS resource complies with all of the AWS Config rules that evaluated it.
+    description: Indicates whether an AWS resource that is evaluated according to one or more AWS Config rules is compliant. A resource is compliant if it complies with all of the rules that evaluate it. A resource is noncompliant if it does not comply with one or more of these rules.
+  ComplianceByResources:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ComplianceContributorCount:
+    type: object
+    properties:
+      CappedCount:
+        $ref: '#/definitions/[object Object]'
+        description: The number of AWS resources or AWS Config rules responsible for the current compliance of the item.
+      CapExceeded:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates whether the maximum count is reached.
+    description: 'The number of AWS resources or AWS Config rules responsible for the current compliance of the item, up to a maximum number.'
+  ComplianceResourceTypes:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 100
+  ComplianceSummariesByResourceType:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ComplianceSummary:
+    type: object
+    properties:
+      CompliantResourceCount:
+        $ref: '#/definitions/[object Object]'
+        description: 'The number of AWS Config rules or AWS resources that are compliant, up to a maximum of 25 for rules and 100 for resources.'
+      NonCompliantResourceCount:
+        $ref: '#/definitions/[object Object]'
+        description: 'The number of AWS Config rules or AWS resources that are noncompliant, up to a maximum of 25 for rules and 100 for resources.'
+      ComplianceSummaryTimestamp:
+        $ref: '#/definitions/[object Object]'
+        description: The time that AWS Config created the compliance summary.
+    description: The number of AWS Config rules or AWS resources that are compliant and noncompliant.
+  ComplianceSummaryByResourceType:
+    type: object
+    properties:
+      ResourceType:
+        $ref: '#/definitions/[object Object]'
+        description: The type of AWS resource.
+      ComplianceSummary:
+        $ref: '#/definitions/[object Object]'
+        description: 'The number of AWS resources that are compliant or noncompliant, up to a maximum of 100 for each.'
+    description: 'The number of AWS resources of a specific type that are compliant or noncompliant, up to a maximum of 100 for each.'
   ComplianceType:
     type: string
     enum:
@@ -2792,42 +3021,769 @@ definitions:
       - NON_COMPLIANT
       - NOT_APPLICABLE
       - INSUFFICIENT_DATA
+  ComplianceTypes:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 3
+  ConfigExportDeliveryInfo:
+    type: object
+    properties:
+      lastStatus:
+        $ref: '#/definitions/[object Object]'
+        description: Status of the last attempted delivery.
+      lastErrorCode:
+        $ref: '#/definitions/[object Object]'
+        description: The error code from the last attempted delivery.
+      lastErrorMessage:
+        $ref: '#/definitions/[object Object]'
+        description: The error message from the last attempted delivery.
+      lastAttemptTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time of the last attempted delivery.
+      lastSuccessfulTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time of the last successful delivery.
+      nextDeliveryTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time that the next delivery occurs.
+    description: Provides status of the delivery of the snapshot or the configuration history to the specified Amazon S3 bucket. Also provides the status of notifications about the Amazon S3 delivery to the specified Amazon SNS topic.
+  ConfigRule:
+    type: object
+    required:
+      - Source
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/[object Object]'
+        description: The name that you assign to the AWS Config rule. The name is required if you are adding a new rule.
+      ConfigRuleArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the AWS Config rule.
+      ConfigRuleId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the AWS Config rule.
+      Description:
+        $ref: '#/definitions/[object Object]'
+        description: The description that you provide for the AWS Config rule.
+      Scope:
+        $ref: '#/definitions/[object Object]'
+        description: 'Defines which resources can trigger an evaluation for the rule. The scope can include one or more resource types, a combination of one resource type and one resource ID, or a combination of a tag key and value. Specify a scope to constrain the resources that can trigger an evaluation for the rule. If you do not specify a scope, evaluations are triggered when any resource in the recording group changes.'
+      Source:
+        $ref: '#/definitions/[object Object]'
+        description: 'Provides the rule owner (AWS or customer), the rule identifier, and the notifications that cause the function to evaluate your AWS resources.'
+      InputParameters:
+        $ref: '#/definitions/[object Object]'
+        description: 'A string, in JSON format, that is passed to the AWS Config rule Lambda function.'
+      MaximumExecutionFrequency:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The maximum frequency with which AWS Config runs evaluations for a rule. You can specify a value for <code>MaximumExecutionFrequency</code> when:</p> <ul> <li> <p>You are using an AWS managed rule that is triggered at a periodic frequency.</p> </li> <li> <p>Your custom rule is triggered when AWS Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p> </li> </ul> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> </note>'
+      ConfigRuleState:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Indicates whether the AWS Config rule is active or is currently being deleted by AWS Config. It can also indicate the evaluation status for the AWS Config rule.</p> <p>AWS Config sets the state of the rule to <code>EVALUATING</code> temporarily after you use the <code>StartConfigRulesEvaluation</code> request to evaluate your resources against the AWS Config rule.</p> <p>AWS Config sets the state of the rule to <code>DELETING_RESULTS</code> temporarily after you use the <code>DeleteEvaluationResults</code> request to delete the current evaluation results for the AWS Config rule.</p> <p>AWS Config temporarily sets the state of a rule to <code>DELETING</code> after you use the <code>DeleteConfigRule</code> request to delete the rule. After AWS Config deletes the rule, the rule and all of its evaluations are erased and are no longer available.</p>'
+      CreatedBy:
+        $ref: '#/definitions/[object Object]'
+        description: <p>Service principal name of the service that created the rule.</p> <note> <p>The field is populated only if the service linked rule is created by a service. The field is empty if you create your own rule.</p> </note>
+    description: '<p>An AWS Config rule represents an AWS Lambda function that you create for a custom rule or a predefined function for an AWS managed rule. The function evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change to an AWS resource and at a periodic frequency that you choose (for example, every 24 hours).</p> <note> <p>You can use the AWS CLI and AWS SDKs if you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p> </note> <p>For more information about developing and using AWS Config rules, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>'
+  ConfigRuleComplianceFilters:
+    type: object
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the AWS Config rule.
+      ComplianceType:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The rule compliance status.</p> <p>For the <code>ConfigRuleComplianceFilters</code> data type, AWS Config supports only <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. AWS Config does not support the <code>NOT_APPLICABLE</code> and the <code>INSUFFICIENT_DATA</code> values.</p>'
+      AccountId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The 12-digit account ID of the source account. '
+      AwsRegion:
+        $ref: '#/definitions/[object Object]'
+        description: 'The source region where the data is aggregated. '
+    description: 'Filters the compliance results based on account ID, region, compliance type, and rule name.'
+  ConfigRuleComplianceSummaryFilters:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/[object Object]'
+        description: The 12-digit account ID of the source account.
+      AwsRegion:
+        $ref: '#/definitions/[object Object]'
+        description: The source region where the data is aggregated.
+    description: Filters the results based on the account IDs and regions.
+  ConfigRuleComplianceSummaryGroupKey:
+    type: string
+    enum:
+      - ACCOUNT_ID
+      - AWS_REGION
+  ConfigRuleEvaluationStatus:
+    type: object
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the AWS Config rule.
+      ConfigRuleArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the AWS Config rule.
+      ConfigRuleId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the AWS Config rule.
+      LastSuccessfulInvocationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time that AWS Config last successfully invoked the AWS Config rule to evaluate your AWS resources.
+      LastFailedInvocationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time that AWS Config last failed to invoke the AWS Config rule to evaluate your AWS resources.
+      LastSuccessfulEvaluationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time that AWS Config last successfully evaluated your AWS resources against the rule.
+      LastFailedEvaluationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time that AWS Config last failed to evaluate your AWS resources against the rule.
+      FirstActivatedTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time that you first activated the AWS Config rule.
+      LastErrorCode:
+        $ref: '#/definitions/[object Object]'
+        description: The error code that AWS Config returned when the rule last failed.
+      LastErrorMessage:
+        $ref: '#/definitions/[object Object]'
+        description: The error message that AWS Config returned when the rule last failed.
+      FirstEvaluationStarted:
+        $ref: '#/definitions/[object Object]'
+        description: <p>Indicates whether AWS Config has evaluated your resources against the rule at least once.</p> <ul> <li> <p> <code>true</code> - AWS Config has evaluated your AWS resources against the rule at least once.</p> </li> <li> <p> <code>false</code> - AWS Config has not once finished evaluating your AWS resources against the rule.</p> </li> </ul>
+    description: '<p>Status information for your AWS managed Config rules. The status includes information such as the last time the rule ran, the last time it failed, and the related error for the last failure.</p> <p>This action does not return status information about custom AWS Config rules.</p>'
+  ConfigRuleEvaluationStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ConfigRuleName:
+    type: string
+    minLength: 1
+    maxLength: 64
+  ConfigRuleNames:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 25
+  ConfigRuleState:
+    type: string
+    enum:
+      - ACTIVE
+      - DELETING
+      - DELETING_RESULTS
+      - EVALUATING
+  ConfigRules:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ConfigSnapshotDeliveryProperties:
+    type: object
+    properties:
+      deliveryFrequency:
+        $ref: '#/definitions/[object Object]'
+        description: The frequency with which AWS Config delivers configuration snapshots.
+    description: '<p>Provides options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket in your delivery channel.</p> <note> <p>If you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot, see the following:</p> </note> <p>The frequency for a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot is set by one of two values, depending on which is less frequent:</p> <ul> <li> <p>The value for the <code>deliveryFrequency</code> parameter within the delivery channel configuration, which sets how often AWS Config delivers configuration snapshots. This value also sets how often AWS Config invokes evaluations for AWS Config rules.</p> </li> <li> <p>The value for the <code>MaximumExecutionFrequency</code> parameter, which sets the maximum frequency with which AWS Config invokes evaluations for the rule. For more information, see <a>ConfigRule</a>.</p> </li> </ul> <p>If the <code>deliveryFrequency</code> value is less frequent than the <code>MaximumExecutionFrequency</code> value for a rule, AWS Config invokes the rule only as often as the <code>deliveryFrequency</code> value.</p> <ol> <li> <p>For example, you want your rule to run evaluations when AWS Config delivers the configuration snapshot.</p> </li> <li> <p>You specify the <code>MaximumExecutionFrequency</code> value for <code>Six_Hours</code>. </p> </li> <li> <p>You then specify the delivery channel <code>deliveryFrequency</code> value for <code>TwentyFour_Hours</code>.</p> </li> <li> <p>Because the value for <code>deliveryFrequency</code> is less frequent than <code>MaximumExecutionFrequency</code>, AWS Config invokes evaluations for the rule every 24 hours. </p> </li> </ol> <p>You should set the <code>MaximumExecutionFrequency</code> value to be at least as frequent as the <code>deliveryFrequency</code> value. You can view the <code>deliveryFrequency</code> value by using the <code>DescribeDeliveryChannnels</code> action.</p> <p>To update the <code>deliveryFrequency</code> with which AWS Config delivers your configuration snapshots, use the <code>PutDeliveryChannel</code> action.</p>'
+  ConfigStreamDeliveryInfo:
+    type: object
+    properties:
+      lastStatus:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Status of the last attempted delivery.</p> <p> <b>Note</b> Providing an SNS topic on a <a href="http://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html">DeliveryChannel</a> for AWS Config is optional. If the SNS delivery is turned off, the last status will be <b>Not_Applicable</b>.</p>'
+      lastErrorCode:
+        $ref: '#/definitions/[object Object]'
+        description: The error code from the last attempted delivery.
+      lastErrorMessage:
+        $ref: '#/definitions/[object Object]'
+        description: The error message from the last attempted delivery.
+      lastStatusChangeTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time from the last status change.
+    description: A list that contains the status of the delivery of the configuration stream notification to the Amazon SNS topic.
+  Configuration:
+    type: string
+  ConfigurationAggregator:
+    type: object
+    properties:
+      ConfigurationAggregatorName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the aggregator.
+      ConfigurationAggregatorArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the aggregator.
+      AccountAggregationSources:
+        $ref: '#/definitions/[object Object]'
+        description: Provides a list of source accounts and regions to be aggregated.
+      OrganizationAggregationSource:
+        $ref: '#/definitions/[object Object]'
+        description: Provides an organization and list of regions to be aggregated.
+      CreationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time stamp when the configuration aggregator was created.
+      LastUpdatedTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time of the last update.
+    description: 'The details about the configuration aggregator, including information about source accounts, regions, and metadata of the aggregator. '
+  ConfigurationAggregatorArn:
+    type: string
+    pattern: 'arn:aws[a-z\-]*:config:[a-z\-\d]+:\d+:config-aggregator/config-aggregator-[a-z\d]+'
+  ConfigurationAggregatorList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ConfigurationAggregatorName:
+    type: string
+    pattern: '[\w\-]+'
+    minLength: 1
+    maxLength: 256
+  ConfigurationAggregatorNameList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 10
+  ConfigurationItem:
+    type: object
+    properties:
+      version:
+        $ref: '#/definitions/[object Object]'
+        description: The version number of the resource configuration.
+      accountId:
+        $ref: '#/definitions/[object Object]'
+        description: The 12-digit AWS account ID associated with the resource.
+      configurationItemCaptureTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when the configuration recording was initiated.
+      configurationItemStatus:
+        $ref: '#/definitions/[object Object]'
+        description: The configuration item status.
+      configurationStateId:
+        $ref: '#/definitions/[object Object]'
+        description: An identifier that indicates the ordering of the configuration items of a resource.
+      configurationItemMD5Hash:
+        $ref: '#/definitions/[object Object]'
+        description: <p>Unique MD5 hash that represents the configuration item's state.</p> <p>You can use MD5 hash to compare the states of two or more configuration items that are associated with the same resource.</p>
+      arn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the resource.
+      resourceType:
+        $ref: '#/definitions/[object Object]'
+        description: The type of AWS resource.
+      resourceId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The ID of the resource (for example, <code>sg-xxxxxx</code>).'
+      resourceName:
+        $ref: '#/definitions/[object Object]'
+        description: 'The custom name of the resource, if available.'
+      awsRegion:
+        $ref: '#/definitions/[object Object]'
+        description: The region where the resource resides.
+      availabilityZone:
+        $ref: '#/definitions/[object Object]'
+        description: The Availability Zone associated with the resource.
+      resourceCreationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time stamp when the resource was created.
+      tags:
+        $ref: '#/definitions/[object Object]'
+        description: A mapping of key value tags associated with the resource.
+      relatedEvents:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>A list of CloudTrail event IDs.</p> <p>A populated field indicates that the current configuration was initiated by the events recorded in the CloudTrail log. For more information about CloudTrail, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html">What Is AWS CloudTrail</a>.</p> <p>An empty field indicates that the current configuration was not initiated by any event.</p>'
+      relationships:
+        $ref: '#/definitions/[object Object]'
+        description: A list of related AWS resources.
+      configuration:
+        $ref: '#/definitions/[object Object]'
+        description: The description of the resource configuration.
+      supplementaryConfiguration:
+        $ref: '#/definitions/[object Object]'
+        description: Configuration attributes that AWS Config returns for certain resource types to supplement the information returned for the <code>configuration</code> parameter.
+    description: A list that contains detailed configurations of a specified resource.
+  ConfigurationItemCaptureTime:
+    type: string
+    format: date-time
+  ConfigurationItemList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ConfigurationItemMD5Hash:
+    type: string
+  ConfigurationItemStatus:
+    type: string
+    enum:
+      - OK
+      - ResourceDiscovered
+      - ResourceNotRecorded
+      - ResourceDeleted
+      - ResourceDeletedNotRecorded
+  ConfigurationRecorder:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: 'The name of the recorder. By default, AWS Config automatically assigns the name "default" when creating the configuration recorder. You cannot change the assigned name.'
+      roleARN:
+        $ref: '#/definitions/[object Object]'
+        description: Amazon Resource Name (ARN) of the IAM role used to describe the AWS resources associated with the account.
+      recordingGroup:
+        $ref: '#/definitions/[object Object]'
+        description: Specifies the types of AWS resources for which AWS Config records configuration changes.
+    description: An object that represents the recording of configuration changes of an AWS resource.
+  ConfigurationRecorderList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ConfigurationRecorderNameList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ConfigurationRecorderStatus:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the configuration recorder.
+      lastStartTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time the recorder was last started.
+      lastStopTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time the recorder was last stopped.
+      recording:
+        $ref: '#/definitions/[object Object]'
+        description: Specifies whether or not the recorder is currently recording.
+      lastStatus:
+        $ref: '#/definitions/[object Object]'
+        description: The last (previous) status of the recorder.
+      lastErrorCode:
+        $ref: '#/definitions/[object Object]'
+        description: The error code indicating that the recording failed.
+      lastErrorMessage:
+        $ref: '#/definitions/[object Object]'
+        description: The message indicating that the recording failed due to an error.
+      lastStatusChangeTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time when the status was last changed.
+    description: The current status of the configuration recorder.
+  ConfigurationRecorderStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ConfigurationStateId:
+    type: string
   Date:
     type: string
     format: date-time
-  AggregateEvaluationResult:
+  DeliveryChannel:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: 'The name of the delivery channel. By default, AWS Config assigns the name "default" when creating the delivery channel. To change the delivery channel name, you must use the DeleteDeliveryChannel action to delete your current delivery channel, and then you must use the PutDeliveryChannel command to create a delivery channel that has the desired name.'
+      s3BucketName:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The name of the Amazon S3 bucket to which AWS Config delivers configuration snapshots and configuration history files.</p> <p>If you specify a bucket that belongs to another AWS account, that bucket must have policies that grant access permissions to AWS Config. For more information, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html">Permissions for the Amazon S3 Bucket</a> in the AWS Config Developer Guide.</p>'
+      s3KeyPrefix:
+        $ref: '#/definitions/[object Object]'
+        description: The prefix for the specified Amazon S3 bucket.
+      snsTopicARN:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS Config sends notifications about configuration changes.</p> <p>If you choose a topic from another account, the topic must have policies that grant access permissions to AWS Config. For more information, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html">Permissions for the Amazon SNS Topic</a> in the AWS Config Developer Guide.</p>'
+      configSnapshotDeliveryProperties:
+        $ref: '#/definitions/[object Object]'
+        description: The options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket.
+    description: The channel through which AWS Config delivers notifications and updated configuration states.
+  DeliveryChannelList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  DeliveryChannelNameList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  DeliveryChannelStatus:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the delivery channel.
+      configSnapshotDeliveryInfo:
+        $ref: '#/definitions/[object Object]'
+        description: A list containing the status of the delivery of the snapshot to the specified Amazon S3 bucket.
+      configHistoryDeliveryInfo:
+        $ref: '#/definitions/[object Object]'
+        description: A list that contains the status of the delivery of the configuration history to the specified Amazon S3 bucket.
+      configStreamDeliveryInfo:
+        $ref: '#/definitions/[object Object]'
+        description: A list containing the status of the delivery of the configuration stream notification to the specified Amazon SNS topic.
+    description: '<p>The status of a specified delivery channel.</p> <p>Valid values: <code>Success</code> | <code>Failure</code> </p>'
+  DeliveryChannelStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  DeliveryStatus:
+    type: string
+    enum:
+      - Success
+      - Failure
+      - Not_Applicable
+  DescribePendingAggregationRequestsLimit:
+    type: integer
+    minimum: 0
+    maximum: 20
+  DiscoveredResourceIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  EarlierTime:
+    type: string
+    format: date-time
+  EmptiableStringWithCharLimit256:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Evaluation:
+    type: object
+    required:
+      - ComplianceResourceType
+      - ComplianceResourceId
+      - ComplianceType
+      - OrderingTimestamp
+    properties:
+      ComplianceResourceType:
+        $ref: '#/definitions/[object Object]'
+        description: The type of AWS resource that was evaluated.
+      ComplianceResourceId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the AWS resource that was evaluated.
+      ComplianceType:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Indicates whether the AWS resource complies with the AWS Config rule that it was evaluated against.</p> <p>For the <code>Evaluation</code> data type, AWS Config supports only the <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>NOT_APPLICABLE</code> values. AWS Config does not support the <code>INSUFFICIENT_DATA</code> value for this data type.</p> <p>Similarly, AWS Config does not accept <code>INSUFFICIENT_DATA</code> as the value for <code>ComplianceType</code> from a <code>PutEvaluations</code> request. For example, an AWS Lambda function for a custom AWS Config rule cannot pass an <code>INSUFFICIENT_DATA</code> value to AWS Config.</p>'
+      Annotation:
+        $ref: '#/definitions/[object Object]'
+        description: Supplementary information about how the evaluation determined the compliance.
+      OrderingTimestamp:
+        $ref: '#/definitions/[object Object]'
+        description: 'The time of the event in AWS Config that triggered the evaluation. For event-based evaluations, the time indicates when AWS Config created the configuration item that triggered the evaluation. For periodic evaluations, the time indicates when AWS Config triggered the evaluation at the frequency that you specified (for example, every 24 hours).'
+    description: Identifies an AWS resource and indicates whether it complies with the AWS Config rule that it was evaluated against.
+  EvaluationResult:
     type: object
     properties:
       EvaluationResultIdentifier:
-        $ref: '#/definitions/EvaluationResultIdentifier'
+        $ref: '#/definitions/[object Object]'
         description: Uniquely identifies the evaluation result.
       ComplianceType:
-        $ref: '#/definitions/ComplianceType'
-        description: '<p>The resource compliance status.</p> <p>For the <code>AggregationEvaluationResult</code> data type, AWS Config supports only the <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. AWS Config does not support the <code>NOT_APPLICABLE</code> and <code>INSUFFICIENT_DATA</code> value.</p>'
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Indicates whether the AWS resource complies with the AWS Config rule that evaluated it.</p> <p>For the <code>EvaluationResult</code> data type, AWS Config supports only the <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>NOT_APPLICABLE</code> values. AWS Config does not support the <code>INSUFFICIENT_DATA</code> value for the <code>EvaluationResult</code> data type.</p>'
       ResultRecordedTime:
-        $ref: '#/definitions/Date'
-        description: The time when AWS Config recorded the aggregate evaluation result.
+        $ref: '#/definitions/[object Object]'
+        description: The time when AWS Config recorded the evaluation result.
       ConfigRuleInvokedTime:
-        $ref: '#/definitions/Date'
+        $ref: '#/definitions/[object Object]'
         description: The time when the AWS Config rule evaluated the AWS resource.
       Annotation:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: Supplementary information about how the agrregate evaluation determined the compliance.
-      AccountId:
-        $ref: '#/definitions/AccountId'
-        description: The 12-digit account ID of the source account.
-      AwsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: The source region from where the data is aggregated.
-    description: 'The details of an AWS Config evaluation for an account ID and region in an aggregator. Provides the AWS resource that was evaluated, the compliance of the resource, related time stamps, and supplementary information. '
-  AggregateEvaluationResultList:
+        $ref: '#/definitions/[object Object]'
+        description: Supplementary information about how the evaluation determined the compliance.
+      ResultToken:
+        $ref: '#/definitions/[object Object]'
+        description: 'An encrypted token that associates an evaluation with an AWS Config rule. The token identifies the rule, the AWS resource being evaluated, and the event that triggered the evaluation.'
+    description: 'The details of an AWS Config evaluation. Provides the AWS resource that was evaluated, the compliance of the resource, related time stamps, and supplementary information.'
+  EvaluationResultIdentifier:
+    type: object
+    properties:
+      EvaluationResultQualifier:
+        $ref: '#/definitions/[object Object]'
+        description: 'Identifies an AWS Config rule used to evaluate an AWS resource, and provides the type and ID of the evaluated resource.'
+      OrderingTimestamp:
+        $ref: '#/definitions/[object Object]'
+        description: 'The time of the event that triggered the evaluation of your AWS resources. The time can indicate when AWS Config delivered a configuration item change notification, or it can indicate when AWS Config delivered the configuration snapshot, depending on which event triggered the evaluation.'
+    description: Uniquely identifies an evaluation result.
+  EvaluationResultQualifier:
+    type: object
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the AWS Config rule that was used in the evaluation.
+      ResourceType:
+        $ref: '#/definitions/[object Object]'
+        description: The type of AWS resource that was evaluated.
+      ResourceId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the evaluated AWS resource.
+    description: 'Identifies an AWS Config rule that evaluated an AWS resource, and provides the type and ID of the resource that the rule evaluated.'
+  EvaluationResults:
     type: array
     items:
-      $ref: '#/definitions/AggregateEvaluationResult'
+      $ref: '#/definitions/[object Object]'
+  Evaluations:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 100
+  EventSource:
+    type: string
+    enum:
+      - aws.config
+  GroupByAPILimit:
+    type: integer
+    minimum: 0
+    maximum: 1000
+  GroupedResourceCount:
+    type: object
+    required:
+      - GroupName
+      - ResourceCount
+    properties:
+      GroupName:
+        $ref: '#/definitions/[object Object]'
+        description: 'The name of the group that can be region, account ID, or resource type. For example, region1, region2 if the region was chosen as <code>GroupByKey</code>.'
+      ResourceCount:
+        $ref: '#/definitions/[object Object]'
+        description: The number of resources in the group.
+    description: The count of resources that are grouped by the group name.
+  GroupedResourceCountList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  IncludeGlobalResourceTypes:
+    type: boolean
+  Integer:
+    type: integer
+  LaterTime:
+    type: string
+    format: date-time
+  Limit:
+    type: integer
+    minimum: 0
+    maximum: 100
+  Long:
+    type: integer
+  MaximumExecutionFrequency:
+    type: string
+    enum:
+      - One_Hour
+      - Three_Hours
+      - Six_Hours
+      - Twelve_Hours
+      - TwentyFour_Hours
+  MessageType:
+    type: string
+    enum:
+      - ConfigurationItemChangeNotification
+      - ConfigurationSnapshotDeliveryCompleted
+      - ScheduledNotification
+      - OversizedConfigurationItemChangeNotification
+  Name:
+    type: string
+  NextToken:
+    type: string
+  OrderingTimestamp:
+    type: string
+    format: date-time
+  OrganizationAggregationSource:
+    type: object
+    required:
+      - RoleArn
+    properties:
+      RoleArn:
+        $ref: '#/definitions/[object Object]'
+        description: ARN of the IAM role used to retreive AWS Organization details associated with the aggregator account.
+      AwsRegions:
+        $ref: '#/definitions/[object Object]'
+        description: The source regions being aggregated.
+      AllAwsRegions:
+        $ref: '#/definitions/[object Object]'
+        description: 'If true, aggregate existing AWS Config regions and future regions.'
+    description: This object contains regions to setup the aggregator and an IAM role to retrieve organization details.
+  Owner:
+    type: string
+    enum:
+      - CUSTOM_LAMBDA
+      - AWS
+  PendingAggregationRequest:
+    type: object
+    properties:
+      RequesterAccountId:
+        $ref: '#/definitions/[object Object]'
+        description: The 12-digit account ID of the account requesting to aggregate data.
+      RequesterAwsRegion:
+        $ref: '#/definitions/[object Object]'
+        description: 'The region requesting to aggregate data. '
+    description: An object that represents the account ID and region of an aggregator account that is requesting authorization but is not yet authorized.
+  PendingAggregationRequestList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  RecorderName:
+    type: string
+    minLength: 1
+    maxLength: 256
+  RecorderStatus:
+    type: string
+    enum:
+      - Pending
+      - Success
+      - Failure
+  RecordingGroup:
+    type: object
+    properties:
+      allSupported:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Specifies whether AWS Config records configuration changes for every supported type of regional resource.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of regional resource, it starts recording resources of that type automatically.</p> <p>If you set this option to <code>true</code>, you cannot enumerate a list of <code>resourceTypes</code>.</p>'
+      includeGlobalResourceTypes:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Specifies whether AWS Config includes all supported types of global resources (for example, IAM resources) with the resources that it records.</p> <p>Before you can set this option to <code>true</code>, you must set the <code>allSupported</code> option to <code>true</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of global resource, it starts recording resources of that type automatically.</p> <p>The configuration details for any global resource are the same in all regions. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources.</p>'
+      resourceTypes:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, <code>AWS::EC2::Instance</code> or <code>AWS::CloudTrail::Trail</code>).</p> <p>Before you can set this option to <code>true</code>, you must set the <code>allSupported</code> option to <code>false</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>resourceType Value</b> column in <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported AWS Resource Types</a>.</p>'
+    description: '<p>Specifies the types of AWS resource for which AWS Config records configuration changes.</p> <p>In the recording group, you specify whether all supported types or specific types of resources are recorded.</p> <p>By default, AWS Config records configuration changes for all supported types of regional resources that AWS Config discovers in the region in which it is running. Regional resources are tied to a region and can be used only in that region. Examples of regional resources are EC2 instances and EBS volumes.</p> <p>You can also have AWS Config record configuration changes for supported types of global resources (for example, IAM resources). Global resources are not tied to an individual region and can be used in all regions.</p> <important> <p>The configuration details for any global resource are the same in all regions. If you customize AWS Config in multiple regions to record global resources, it will create multiple configuration items each time a global resource changes: one configuration item for each region. These configuration items will contain identical data. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources, unless you want the configuration items to be available in multiple regions.</p> </important> <p>If you don''t want AWS Config to record all resources, you can specify which types of resources it will record with the <code>resourceTypes</code> parameter.</p> <p>For a list of supported resource types, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported Resource Types</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/select-resources.html">Selecting Which Resources AWS Config Records</a>.</p>'
+  ReevaluateConfigRuleNames:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 25
+  RelatedEvent:
+    type: string
+  RelatedEventList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Relationship:
+    type: object
+    properties:
+      resourceType:
+        $ref: '#/definitions/[object Object]'
+        description: The resource type of the related resource.
+      resourceId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The ID of the related resource (for example, <code>sg-xxxxxx</code>).'
+      resourceName:
+        $ref: '#/definitions/[object Object]'
+        description: 'The custom name of the related resource, if available.'
+      relationshipName:
+        $ref: '#/definitions/[object Object]'
+        description: The type of relationship with the related resource.
+    description: The relationship of the related resource to the main resource.
+  RelationshipList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  RelationshipName:
+    type: string
+  ResourceCount:
+    type: object
+    properties:
+      resourceType:
+        $ref: '#/definitions/[object Object]'
+        description: 'The resource type (for example, <code>"AWS::EC2::Instance"</code>).'
+      count:
+        $ref: '#/definitions/[object Object]'
+        description: The number of resources.
+    description: An object that contains the resource type and the number of resources.
+  ResourceCountFilters:
+    type: object
+    properties:
+      ResourceType:
+        $ref: '#/definitions/[object Object]'
+        description: The type of the AWS resource.
+      AccountId:
+        $ref: '#/definitions/[object Object]'
+        description: The 12-digit ID of the account.
+      Region:
+        $ref: '#/definitions/[object Object]'
+        description: The region where the account is located.
+    description: 'Filters the resource count based on account ID, region, and resource type.'
+  ResourceCountGroupKey:
+    type: string
+    enum:
+      - RESOURCE_TYPE
+      - ACCOUNT_ID
+      - AWS_REGION
+  ResourceCounts:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ResourceCreationTime:
+    type: string
+    format: date-time
+  ResourceDeletionTime:
+    type: string
+    format: date-time
+  ResourceFilters:
+    type: object
+    properties:
+      AccountId:
+        $ref: '#/definitions/[object Object]'
+        description: The 12-digit source account ID.
+      ResourceId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the resource.
+      ResourceName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the resource.
+      Region:
+        $ref: '#/definitions/[object Object]'
+        description: The source region.
+    description: 'Filters the results by resource account ID, region, resource ID, and resource name.'
   ResourceId:
     type: string
     minLength: 1
     maxLength: 768
+  ResourceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ResourceIdentifier:
+    type: object
+    properties:
+      resourceType:
+        $ref: '#/definitions/[object Object]'
+        description: The type of resource.
+      resourceId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The ID of the resource (for example, <code>sg-xxxxxx</code>).'
+      resourceName:
+        $ref: '#/definitions/[object Object]'
+        description: The custom name of the resource (if available).
+      resourceDeletionTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time that the resource was deleted.
+    description: 'The details that identify a resource that is discovered by AWS Config, including the resource type, ID, and (if available) the custom resource name.'
+  ResourceIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ResourceIdentifiersList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
+  ResourceKey:
+    type: object
+    required:
+      - resourceType
+      - resourceId
+    properties:
+      resourceType:
+        $ref: '#/definitions/[object Object]'
+        description: The resource type.
+      resourceId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The ID of the resource (for example., sg-xxxxxx). '
+    description: 'The details that identify a resource within AWS Config, including the resource type and resource ID.'
+  ResourceKeys:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
+  ResourceName:
+    type: string
   ResourceType:
     type: string
     enum:
@@ -2895,122 +3851,124 @@ definitions:
       - 'AWS::ShieldRegional::Protection'
       - 'AWS::Config::ResourceCompliance'
       - 'AWS::CodePipeline::Pipeline'
-  ResourceName:
-    type: string
-  AggregateResourceIdentifier:
+  ResourceTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ResourceTypes:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 20
+  RetentionConfiguration:
     type: object
     required:
-      - SourceAccountId
-      - SourceRegion
-      - ResourceId
-      - ResourceType
+      - Name
+      - RetentionPeriodInDays
     properties:
-      SourceAccountId:
-        $ref: '#/definitions/AccountId'
-        description: The 12-digit account ID of the source account.
-      SourceRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: The source region where data is aggregated.
-      ResourceId:
-        $ref: '#/definitions/ResourceId'
-        description: The ID of the AWS resource.
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The type of the AWS resource.
-      ResourceName:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the AWS resource.
-    description: 'The details that identify a resource that is collected by AWS Config aggregator, including the resource type, ID, (if available) the custom resource name, the source account, and source region.'
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the retention configuration object.
+      RetentionPeriodInDays:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
+    description: An object with the name of the retention configuration and the retention period in days. The object stores the configuration for data retention in AWS Config.
+  RetentionConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  RetentionConfigurationName:
+    type: string
+    pattern: '[\w\-]+'
+    minLength: 1
+    maxLength: 256
+  RetentionConfigurationNameList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 1
+  RetentionPeriodInDays:
+    type: integer
+    minimum: 30
+    maximum: 2557
+  RuleLimit:
+    type: integer
+    minimum: 0
+    maximum: 50
+  Scope:
+    type: object
+    properties:
+      ComplianceResourceTypes:
+        $ref: '#/definitions/[object Object]'
+        description: The resource types of only those AWS resources that you want to trigger an evaluation for the rule. You can only specify one type if you also specify a resource ID for <code>ComplianceResourceId</code>.
+      TagKey:
+        $ref: '#/definitions/[object Object]'
+        description: The tag key that is applied to only those AWS resources that you want to trigger an evaluation for the rule.
+      TagValue:
+        $ref: '#/definitions/[object Object]'
+        description: 'The tag value applied to only those AWS resources that you want to trigger an evaluation for the rule. If you specify a value for <code>TagValue</code>, you must also specify a value for <code>TagKey</code>.'
+      ComplianceResourceId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The ID of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for <code>ComplianceResourceTypes</code>.'
+    description: 'Defines which resources trigger an evaluation for an AWS Config rule. The scope can include one or more resource types, a combination of a tag key and value, or a combination of one resource type and one resource ID. Specify a scope to constrain which resources trigger an evaluation for a rule. Otherwise, evaluations for the rule are triggered when any resource in your recording group changes in configuration.'
+  Source:
+    type: object
+    required:
+      - Owner
+      - SourceIdentifier
+    properties:
+      Owner:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates whether AWS or the customer owns and manages the AWS Config rule.
+      SourceIdentifier:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>For AWS Config managed rules, a predefined identifier from a list. For example, <code>IAM_PASSWORD_POLICY</code> is a managed rule. To reference a managed rule, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html">Using AWS Managed Config Rules</a>.</p> <p>For custom rules, the identifier is the Amazon Resource Name (ARN) of the rule''s AWS Lambda function, such as <code>arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name</code>.</p>'
+      SourceDetails:
+        $ref: '#/definitions/[object Object]'
+        description: Provides the source and type of the event that causes AWS Config to evaluate your AWS resources.
+    description: 'Provides the AWS Config rule owner (AWS or customer), the rule identifier, and the events that trigger the evaluation of your AWS resources.'
+  SourceDetail:
+    type: object
+    properties:
+      EventSource:
+        $ref: '#/definitions/[object Object]'
+        description: 'The source of the event, such as an AWS service, that triggers AWS Config to evaluate your AWS resources.'
+      MessageType:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:</p> <ul> <li> <p> <code>ConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.</p> </li> <li> <p> <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.</p> </li> <li> <p> <code>ScheduledNotification</code> - Triggers a periodic evaluation at the frequency specified for <code>MaximumExecutionFrequency</code>.</p> </li> <li> <p> <code>ConfigurationSnapshotDeliveryCompleted</code> - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot.</p> </li> </ul> <p>If you want your custom rule to be triggered by configuration changes, specify two SourceDetail objects, one for <code>ConfigurationItemChangeNotification</code> and one for <code>OversizedConfigurationItemChangeNotification</code>.</p>'
+      MaximumExecutionFrequency:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The frequency at which you want AWS Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for <code>MaximumExecutionFrequency</code>, then <code>MessageType</code> must use the <code>ScheduledNotification</code> value.</p> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> <p>Based on the valid value you choose, AWS Config runs evaluations once for each valid value. For example, if you choose <code>Three_Hours</code>, AWS Config runs evaluations once every three hours. In this case, <code>Three_Hours</code> is the frequency of this rule. </p> </note>'
+    description: 'Provides the source and the message types that trigger AWS Config to evaluate your AWS resources against a rule. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic. You can specify the parameter values for <code>SourceDetail</code> only for custom rules. '
+  SourceDetails:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 25
   String:
     type: string
-  AggregatedSourceType:
+  StringWithCharLimit1024:
     type: string
-    enum:
-      - ACCOUNT
-      - ORGANIZATION
-  AggregatedSourceStatusType:
+    minLength: 1
+    maxLength: 1024
+  StringWithCharLimit128:
     type: string
-    enum:
-      - FAILED
-      - SUCCEEDED
-      - OUTDATED
-  AggregatedSourceStatus:
-    type: object
-    properties:
-      SourceId:
-        $ref: '#/definitions/String'
-        description: The source account ID or an organization.
-      SourceType:
-        $ref: '#/definitions/AggregatedSourceType'
-        description: The source account or an organization.
-      AwsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: The region authorized to collect aggregated data.
-      LastUpdateStatus:
-        $ref: '#/definitions/AggregatedSourceStatusType'
-        description: <p>Filters the last updated status type.</p> <ul> <li> <p>Valid value FAILED indicates errors while moving data.</p> </li> <li> <p>Valid value SUCCEEDED indicates the data was successfully moved.</p> </li> <li> <p>Valid value OUTDATED indicates the data is not the most recent.</p> </li> </ul>
-      LastUpdateTime:
-        $ref: '#/definitions/Date'
-        description: The time of the last update.
-      LastErrorCode:
-        $ref: '#/definitions/String'
-        description: The error code that AWS Config returned when the source account aggregation last failed.
-      LastErrorMessage:
-        $ref: '#/definitions/String'
-        description: The message indicating that the source account aggregation failed due to an error.
-    description: The current sync status between the source and the aggregator account.
-  AggregatedSourceStatusList:
-    type: array
-    items:
-      $ref: '#/definitions/AggregatedSourceStatus'
-  AggregatedSourceStatusTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/AggregatedSourceStatusType'
-    minItems: 1
-  AggregationAuthorization:
-    type: object
-    properties:
-      AggregationAuthorizationArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the aggregation object.
-      AuthorizedAccountId:
-        $ref: '#/definitions/AccountId'
-        description: The 12-digit account ID of the account authorized to aggregate data.
-      AuthorizedAwsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: The region authorized to collect aggregated data.
-      CreationTime:
-        $ref: '#/definitions/Date'
-        description: The time stamp when the aggregation authorization was created.
-    description: An object that represents the authorizations granted to aggregator accounts and regions.
-  AggregationAuthorizationList:
-    type: array
-    items:
-      $ref: '#/definitions/AggregationAuthorization'
-  AllSupported:
-    type: boolean
-  AvailabilityZone:
+    minLength: 1
+    maxLength: 128
+  StringWithCharLimit256:
     type: string
-  Version:
+    minLength: 1
+    maxLength: 256
+  StringWithCharLimit64:
     type: string
-  ConfigurationItemCaptureTime:
+    minLength: 1
+    maxLength: 64
+  SupplementaryConfigurationName:
     type: string
-    format: date-time
-  ConfigurationItemStatus:
-    type: string
-    enum:
-      - OK
-      - ResourceDiscovered
-      - ResourceNotRecorded
-      - ResourceDeleted
-      - ResourceDeletedNotRecorded
-  ConfigurationStateId:
-    type: string
-  ResourceCreationTime:
-    type: string
-    format: date-time
-  Configuration:
+  SupplementaryConfigurationValue:
     type: string
   SupplementaryConfiguration:
     type: array
@@ -3021,438 +3979,7 @@ definitions:
           $ref: '#/definitions/SupplementaryConfigurationName'
         value:
           $ref: '#/definitions/SupplementaryConfigurationValue'
-  BaseConfigurationItem:
-    type: object
-    properties:
-      version:
-        $ref: '#/definitions/Version'
-        description: The version number of the resource configuration.
-      accountId:
-        $ref: '#/definitions/AccountId'
-        description: The 12-digit AWS account ID associated with the resource.
-      configurationItemCaptureTime:
-        $ref: '#/definitions/ConfigurationItemCaptureTime'
-        description: The time when the configuration recording was initiated.
-      configurationItemStatus:
-        $ref: '#/definitions/ConfigurationItemStatus'
-        description: The configuration item status.
-      configurationStateId:
-        $ref: '#/definitions/ConfigurationStateId'
-        description: An identifier that indicates the ordering of the configuration items of a resource.
-      arn:
-        $ref: '#/definitions/ARN'
-        description: The Amazon Resource Name (ARN) of the resource.
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The type of AWS resource.
-      resourceId:
-        $ref: '#/definitions/ResourceId'
-        description: 'The ID of the resource (for example., sg-xxxxxx).'
-      resourceName:
-        $ref: '#/definitions/ResourceName'
-        description: 'The custom name of the resource, if available.'
-      awsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: The region where the resource resides.
-      availabilityZone:
-        $ref: '#/definitions/AvailabilityZone'
-        description: The Availability Zone associated with the resource.
-      resourceCreationTime:
-        $ref: '#/definitions/ResourceCreationTime'
-        description: The time stamp when the resource was created.
-      configuration:
-        $ref: '#/definitions/Configuration'
-        description: The description of the resource configuration.
-      supplementaryConfiguration:
-        $ref: '#/definitions/SupplementaryConfiguration'
-        description: Configuration attributes that AWS Config returns for certain resource types to supplement the information returned for the configuration parameter.
-    description: The detailed configuration of a specified resource.
-  BaseConfigurationItems:
-    type: array
-    items:
-      $ref: '#/definitions/BaseConfigurationItem'
-  BaseResourceId:
-    type: string
-    minLength: 1
-    maxLength: 768
-  ConfigurationAggregatorName:
-    type: string
-    pattern: '[\w\-]+'
-    minLength: 1
-    maxLength: 256
-  ResourceIdentifiersList:
-    type: array
-    items:
-      $ref: '#/definitions/AggregateResourceIdentifier'
-    minItems: 1
-    maxItems: 100
-  UnprocessedResourceIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/AggregateResourceIdentifier'
-  ResourceKeys:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceKey'
-    minItems: 1
-    maxItems: 100
-  ChannelName:
-    type: string
-    minLength: 1
-    maxLength: 256
-  ChronologicalOrder:
-    type: string
-    enum:
-      - Reverse
-      - Forward
-  ComplianceContributorCount:
-    type: object
-    properties:
-      CappedCount:
-        $ref: '#/definitions/Integer'
-        description: The number of AWS resources or AWS Config rules responsible for the current compliance of the item.
-      CapExceeded:
-        $ref: '#/definitions/Boolean'
-        description: Indicates whether the maximum count is reached.
-    description: 'The number of AWS resources or AWS Config rules responsible for the current compliance of the item, up to a maximum number.'
-  StringWithCharLimit64:
-    type: string
-    minLength: 1
-    maxLength: 64
-  ComplianceByConfigRule:
-    type: object
-    properties:
-      ConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
-        description: The name of the AWS Config rule.
-      Compliance:
-        $ref: '#/definitions/Compliance'
-        description: Indicates whether the AWS Config rule is compliant.
-    description: Indicates whether an AWS Config rule is compliant. A rule is compliant if all of the resources that the rule evaluated comply with it. A rule is noncompliant if any of these resources do not comply.
-  ComplianceByConfigRules:
-    type: array
-    items:
-      $ref: '#/definitions/ComplianceByConfigRule'
-  ComplianceByResource:
-    type: object
-    properties:
-      ResourceType:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: The type of the AWS resource that was evaluated.
-      ResourceId:
-        $ref: '#/definitions/BaseResourceId'
-        description: The ID of the AWS resource that was evaluated.
-      Compliance:
-        $ref: '#/definitions/Compliance'
-        description: Indicates whether the AWS resource complies with all of the AWS Config rules that evaluated it.
-    description: Indicates whether an AWS resource that is evaluated according to one or more AWS Config rules is compliant. A resource is compliant if it complies with all of the rules that evaluate it. A resource is noncompliant if it does not comply with one or more of these rules.
-  ComplianceByResources:
-    type: array
-    items:
-      $ref: '#/definitions/ComplianceByResource'
-  Integer:
-    type: integer
-  ComplianceResourceTypes:
-    type: array
-    items:
-      $ref: '#/definitions/StringWithCharLimit256'
-    minItems: 0
-    maxItems: 100
-  ComplianceSummaryByResourceType:
-    type: object
-    properties:
-      ResourceType:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: The type of AWS resource.
-      ComplianceSummary:
-        $ref: '#/definitions/ComplianceSummary'
-        description: 'The number of AWS resources that are compliant or noncompliant, up to a maximum of 100 for each.'
-    description: 'The number of AWS resources of a specific type that are compliant or noncompliant, up to a maximum of 100 for each.'
-  ComplianceSummariesByResourceType:
-    type: array
-    items:
-      $ref: '#/definitions/ComplianceSummaryByResourceType'
-  ComplianceTypes:
-    type: array
-    items:
-      $ref: '#/definitions/ComplianceType'
-    minItems: 0
-    maxItems: 3
-  DeliveryStatus:
-    type: string
-    enum:
-      - Success
-      - Failure
-      - Not_Applicable
-  ConfigExportDeliveryInfo:
-    type: object
-    properties:
-      lastStatus:
-        $ref: '#/definitions/DeliveryStatus'
-        description: Status of the last attempted delivery.
-      lastErrorCode:
-        $ref: '#/definitions/String'
-        description: The error code from the last attempted delivery.
-      lastErrorMessage:
-        $ref: '#/definitions/String'
-        description: The error message from the last attempted delivery.
-      lastAttemptTime:
-        $ref: '#/definitions/Date'
-        description: The time of the last attempted delivery.
-      lastSuccessfulTime:
-        $ref: '#/definitions/Date'
-        description: The time of the last successful delivery.
-      nextDeliveryTime:
-        $ref: '#/definitions/Date'
-        description: The time that the next delivery occurs.
-    description: Provides status of the delivery of the snapshot or the configuration history to the specified Amazon S3 bucket. Also provides the status of notifications about the Amazon S3 delivery to the specified Amazon SNS topic.
-  EmptiableStringWithCharLimit256:
-    type: string
-    minLength: 0
-    maxLength: 256
-  Scope:
-    type: object
-    properties:
-      ComplianceResourceTypes:
-        $ref: '#/definitions/ComplianceResourceTypes'
-        description: The resource types of only those AWS resources that you want to trigger an evaluation for the rule. You can only specify one type if you also specify a resource ID for <code>ComplianceResourceId</code>.
-      TagKey:
-        $ref: '#/definitions/StringWithCharLimit128'
-        description: The tag key that is applied to only those AWS resources that you want to trigger an evaluation for the rule.
-      TagValue:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: 'The tag value applied to only those AWS resources that you want to trigger an evaluation for the rule. If you specify a value for <code>TagValue</code>, you must also specify a value for <code>TagKey</code>.'
-      ComplianceResourceId:
-        $ref: '#/definitions/BaseResourceId'
-        description: 'The ID of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for <code>ComplianceResourceTypes</code>.'
-    description: 'Defines which resources trigger an evaluation for an AWS Config rule. The scope can include one or more resource types, a combination of a tag key and value, or a combination of one resource type and one resource ID. Specify a scope to constrain which resources trigger an evaluation for a rule. Otherwise, evaluations for the rule are triggered when any resource in your recording group changes in configuration.'
-  Source:
-    type: object
-    required:
-      - Owner
-      - SourceIdentifier
-    properties:
-      Owner:
-        $ref: '#/definitions/Owner'
-        description: Indicates whether AWS or the customer owns and manages the AWS Config rule.
-      SourceIdentifier:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: '<p>For AWS Config managed rules, a predefined identifier from a list. For example, <code>IAM_PASSWORD_POLICY</code> is a managed rule. To reference a managed rule, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html">Using AWS Managed Config Rules</a>.</p> <p>For custom rules, the identifier is the Amazon Resource Name (ARN) of the rule''s AWS Lambda function, such as <code>arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name</code>.</p>'
-      SourceDetails:
-        $ref: '#/definitions/SourceDetails'
-        description: Provides the source and type of the event that causes AWS Config to evaluate your AWS resources.
-    description: 'Provides the AWS Config rule owner (AWS or customer), the rule identifier, and the events that trigger the evaluation of your AWS resources.'
-  StringWithCharLimit1024:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  MaximumExecutionFrequency:
-    type: string
-    enum:
-      - One_Hour
-      - Three_Hours
-      - Six_Hours
-      - Twelve_Hours
-      - TwentyFour_Hours
-  ConfigRuleState:
-    type: string
-    enum:
-      - ACTIVE
-      - DELETING
-      - DELETING_RESULTS
-      - EVALUATING
-  ConfigRule:
-    type: object
-    required:
-      - Source
-    properties:
-      ConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
-        description: The name that you assign to the AWS Config rule. The name is required if you are adding a new rule.
-      ConfigRuleArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the AWS Config rule.
-      ConfigRuleId:
-        $ref: '#/definitions/String'
-        description: The ID of the AWS Config rule.
-      Description:
-        $ref: '#/definitions/EmptiableStringWithCharLimit256'
-        description: The description that you provide for the AWS Config rule.
-      Scope:
-        $ref: '#/definitions/Scope'
-        description: 'Defines which resources can trigger an evaluation for the rule. The scope can include one or more resource types, a combination of one resource type and one resource ID, or a combination of a tag key and value. Specify a scope to constrain the resources that can trigger an evaluation for the rule. If you do not specify a scope, evaluations are triggered when any resource in the recording group changes.'
-      Source:
-        $ref: '#/definitions/Source'
-        description: 'Provides the rule owner (AWS or customer), the rule identifier, and the notifications that cause the function to evaluate your AWS resources.'
-      InputParameters:
-        $ref: '#/definitions/StringWithCharLimit1024'
-        description: 'A string, in JSON format, that is passed to the AWS Config rule Lambda function.'
-      MaximumExecutionFrequency:
-        $ref: '#/definitions/MaximumExecutionFrequency'
-        description: '<p>The maximum frequency with which AWS Config runs evaluations for a rule. You can specify a value for <code>MaximumExecutionFrequency</code> when:</p> <ul> <li> <p>You are using an AWS managed rule that is triggered at a periodic frequency.</p> </li> <li> <p>Your custom rule is triggered when AWS Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p> </li> </ul> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> </note>'
-      ConfigRuleState:
-        $ref: '#/definitions/ConfigRuleState'
-        description: '<p>Indicates whether the AWS Config rule is active or is currently being deleted by AWS Config. It can also indicate the evaluation status for the AWS Config rule.</p> <p>AWS Config sets the state of the rule to <code>EVALUATING</code> temporarily after you use the <code>StartConfigRulesEvaluation</code> request to evaluate your resources against the AWS Config rule.</p> <p>AWS Config sets the state of the rule to <code>DELETING_RESULTS</code> temporarily after you use the <code>DeleteEvaluationResults</code> request to delete the current evaluation results for the AWS Config rule.</p> <p>AWS Config temporarily sets the state of a rule to <code>DELETING</code> after you use the <code>DeleteConfigRule</code> request to delete the rule. After AWS Config deletes the rule, the rule and all of its evaluations are erased and are no longer available.</p>'
-      CreatedBy:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: <p>Service principal name of the service that created the rule.</p> <note> <p>The field is populated only if the service linked rule is created by a service. The field is empty if you create your own rule.</p> </note>
-    description: '<p>An AWS Config rule represents an AWS Lambda function that you create for a custom rule or a predefined function for an AWS managed rule. The function evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change to an AWS resource and at a periodic frequency that you choose (for example, every 24 hours).</p> <note> <p>You can use the AWS CLI and AWS SDKs if you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p> </note> <p>For more information about developing and using AWS Config rules, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>'
-  ConfigRuleComplianceFilters:
-    type: object
-    properties:
-      ConfigRuleName:
-        $ref: '#/definitions/ConfigRuleName'
-        description: The name of the AWS Config rule.
-      ComplianceType:
-        $ref: '#/definitions/ComplianceType'
-        description: '<p>The rule compliance status.</p> <p>For the <code>ConfigRuleComplianceFilters</code> data type, AWS Config supports only <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. AWS Config does not support the <code>NOT_APPLICABLE</code> and the <code>INSUFFICIENT_DATA</code> values.</p>'
-      AccountId:
-        $ref: '#/definitions/AccountId'
-        description: 'The 12-digit account ID of the source account. '
-      AwsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: 'The source region where the data is aggregated. '
-    description: 'Filters the compliance results based on account ID, region, compliance type, and rule name.'
-  ConfigRuleComplianceSummaryFilters:
-    type: object
-    properties:
-      AccountId:
-        $ref: '#/definitions/AccountId'
-        description: The 12-digit account ID of the source account.
-      AwsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: The source region where the data is aggregated.
-    description: Filters the results based on the account IDs and regions.
-  ConfigRuleComplianceSummaryGroupKey:
-    type: string
-    enum:
-      - ACCOUNT_ID
-      - AWS_REGION
-  ConfigRuleEvaluationStatus:
-    type: object
-    properties:
-      ConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
-        description: The name of the AWS Config rule.
-      ConfigRuleArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the AWS Config rule.
-      ConfigRuleId:
-        $ref: '#/definitions/String'
-        description: The ID of the AWS Config rule.
-      LastSuccessfulInvocationTime:
-        $ref: '#/definitions/Date'
-        description: The time that AWS Config last successfully invoked the AWS Config rule to evaluate your AWS resources.
-      LastFailedInvocationTime:
-        $ref: '#/definitions/Date'
-        description: The time that AWS Config last failed to invoke the AWS Config rule to evaluate your AWS resources.
-      LastSuccessfulEvaluationTime:
-        $ref: '#/definitions/Date'
-        description: The time that AWS Config last successfully evaluated your AWS resources against the rule.
-      LastFailedEvaluationTime:
-        $ref: '#/definitions/Date'
-        description: The time that AWS Config last failed to evaluate your AWS resources against the rule.
-      FirstActivatedTime:
-        $ref: '#/definitions/Date'
-        description: The time that you first activated the AWS Config rule.
-      LastErrorCode:
-        $ref: '#/definitions/String'
-        description: The error code that AWS Config returned when the rule last failed.
-      LastErrorMessage:
-        $ref: '#/definitions/String'
-        description: The error message that AWS Config returned when the rule last failed.
-      FirstEvaluationStarted:
-        $ref: '#/definitions/Boolean'
-        description: <p>Indicates whether AWS Config has evaluated your resources against the rule at least once.</p> <ul> <li> <p> <code>true</code> - AWS Config has evaluated your AWS resources against the rule at least once.</p> </li> <li> <p> <code>false</code> - AWS Config has not once finished evaluating your AWS resources against the rule.</p> </li> </ul>
-    description: '<p>Status information for your AWS managed Config rules. The status includes information such as the last time the rule ran, the last time it failed, and the related error for the last failure.</p> <p>This action does not return status information about custom AWS Config rules.</p>'
-  ConfigRuleEvaluationStatusList:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigRuleEvaluationStatus'
-  ConfigRuleNames:
-    type: array
-    items:
-      $ref: '#/definitions/StringWithCharLimit64'
-    minItems: 0
-    maxItems: 25
-  ConfigRules:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigRule'
-  ConfigSnapshotDeliveryProperties:
-    type: object
-    properties:
-      deliveryFrequency:
-        $ref: '#/definitions/MaximumExecutionFrequency'
-        description: The frequency with which AWS Config delivers configuration snapshots.
-    description: '<p>Provides options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket in your delivery channel.</p> <note> <p>If you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot, see the following:</p> </note> <p>The frequency for a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot is set by one of two values, depending on which is less frequent:</p> <ul> <li> <p>The value for the <code>deliveryFrequency</code> parameter within the delivery channel configuration, which sets how often AWS Config delivers configuration snapshots. This value also sets how often AWS Config invokes evaluations for AWS Config rules.</p> </li> <li> <p>The value for the <code>MaximumExecutionFrequency</code> parameter, which sets the maximum frequency with which AWS Config invokes evaluations for the rule. For more information, see <a>ConfigRule</a>.</p> </li> </ul> <p>If the <code>deliveryFrequency</code> value is less frequent than the <code>MaximumExecutionFrequency</code> value for a rule, AWS Config invokes the rule only as often as the <code>deliveryFrequency</code> value.</p> <ol> <li> <p>For example, you want your rule to run evaluations when AWS Config delivers the configuration snapshot.</p> </li> <li> <p>You specify the <code>MaximumExecutionFrequency</code> value for <code>Six_Hours</code>. </p> </li> <li> <p>You then specify the delivery channel <code>deliveryFrequency</code> value for <code>TwentyFour_Hours</code>.</p> </li> <li> <p>Because the value for <code>deliveryFrequency</code> is less frequent than <code>MaximumExecutionFrequency</code>, AWS Config invokes evaluations for the rule every 24 hours. </p> </li> </ol> <p>You should set the <code>MaximumExecutionFrequency</code> value to be at least as frequent as the <code>deliveryFrequency</code> value. You can view the <code>deliveryFrequency</code> value by using the <code>DescribeDeliveryChannnels</code> action.</p> <p>To update the <code>deliveryFrequency</code> with which AWS Config delivers your configuration snapshots, use the <code>PutDeliveryChannel</code> action.</p>'
-  ConfigStreamDeliveryInfo:
-    type: object
-    properties:
-      lastStatus:
-        $ref: '#/definitions/DeliveryStatus'
-        description: '<p>Status of the last attempted delivery.</p> <p> <b>Note</b> Providing an SNS topic on a <a href="http://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html">DeliveryChannel</a> for AWS Config is optional. If the SNS delivery is turned off, the last status will be <b>Not_Applicable</b>.</p>'
-      lastErrorCode:
-        $ref: '#/definitions/String'
-        description: The error code from the last attempted delivery.
-      lastErrorMessage:
-        $ref: '#/definitions/String'
-        description: The error message from the last attempted delivery.
-      lastStatusChangeTime:
-        $ref: '#/definitions/Date'
-        description: The time from the last status change.
-    description: A list that contains the status of the delivery of the configuration stream notification to the Amazon SNS topic.
-  ConfigurationAggregatorArn:
-    type: string
-    pattern: 'arn:aws[a-z\-]*:config:[a-z\-\d]+:\d+:config-aggregator/config-aggregator-[a-z\d]+'
-  OrganizationAggregationSource:
-    type: object
-    required:
-      - RoleArn
-    properties:
-      RoleArn:
-        $ref: '#/definitions/String'
-        description: ARN of the IAM role used to retreive AWS Organization details associated with the aggregator account.
-      AwsRegions:
-        $ref: '#/definitions/AggregatorRegionList'
-        description: The source regions being aggregated.
-      AllAwsRegions:
-        $ref: '#/definitions/Boolean'
-        description: 'If true, aggregate existing AWS Config regions and future regions.'
-    description: This object contains regions to setup the aggregator and an IAM role to retrieve organization details.
-  ConfigurationAggregator:
-    type: object
-    properties:
-      ConfigurationAggregatorName:
-        $ref: '#/definitions/ConfigurationAggregatorName'
-        description: The name of the aggregator.
-      ConfigurationAggregatorArn:
-        $ref: '#/definitions/ConfigurationAggregatorArn'
-        description: The Amazon Resource Name (ARN) of the aggregator.
-      AccountAggregationSources:
-        $ref: '#/definitions/AccountAggregationSourceList'
-        description: Provides a list of source accounts and regions to be aggregated.
-      OrganizationAggregationSource:
-        $ref: '#/definitions/OrganizationAggregationSource'
-        description: Provides an organization and list of regions to be aggregated.
-      CreationTime:
-        $ref: '#/definitions/Date'
-        description: The time stamp when the configuration aggregator was created.
-      LastUpdatedTime:
-        $ref: '#/definitions/Date'
-        description: The time of the last update.
-    description: 'The details about the configuration aggregator, including information about source accounts, regions, and metadata of the aggregator. '
-  ConfigurationAggregatorList:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationAggregator'
-  ConfigurationAggregatorNameList:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationAggregatorName'
-    minItems: 0
-    maxItems: 10
-  ConfigurationItemMD5Hash:
+  Value:
     type: string
   Tags:
     type: array
@@ -3463,535 +3990,9 @@ definitions:
           $ref: '#/definitions/Name'
         value:
           $ref: '#/definitions/Value'
-  RelatedEventList:
+  UnprocessedResourceIdentifierList:
     type: array
     items:
-      $ref: '#/definitions/RelatedEvent'
-  RelationshipList:
-    type: array
-    items:
-      $ref: '#/definitions/Relationship'
-  ConfigurationItem:
-    type: object
-    properties:
-      version:
-        $ref: '#/definitions/Version'
-        description: The version number of the resource configuration.
-      accountId:
-        $ref: '#/definitions/AccountId'
-        description: The 12-digit AWS account ID associated with the resource.
-      configurationItemCaptureTime:
-        $ref: '#/definitions/ConfigurationItemCaptureTime'
-        description: The time when the configuration recording was initiated.
-      configurationItemStatus:
-        $ref: '#/definitions/ConfigurationItemStatus'
-        description: The configuration item status.
-      configurationStateId:
-        $ref: '#/definitions/ConfigurationStateId'
-        description: An identifier that indicates the ordering of the configuration items of a resource.
-      configurationItemMD5Hash:
-        $ref: '#/definitions/ConfigurationItemMD5Hash'
-        description: <p>Unique MD5 hash that represents the configuration item's state.</p> <p>You can use MD5 hash to compare the states of two or more configuration items that are associated with the same resource.</p>
-      arn:
-        $ref: '#/definitions/ARN'
-        description: The Amazon Resource Name (ARN) of the resource.
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The type of AWS resource.
-      resourceId:
-        $ref: '#/definitions/ResourceId'
-        description: 'The ID of the resource (for example, <code>sg-xxxxxx</code>).'
-      resourceName:
-        $ref: '#/definitions/ResourceName'
-        description: 'The custom name of the resource, if available.'
-      awsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: The region where the resource resides.
-      availabilityZone:
-        $ref: '#/definitions/AvailabilityZone'
-        description: The Availability Zone associated with the resource.
-      resourceCreationTime:
-        $ref: '#/definitions/ResourceCreationTime'
-        description: The time stamp when the resource was created.
-      tags:
-        $ref: '#/definitions/Tags'
-        description: A mapping of key value tags associated with the resource.
-      relatedEvents:
-        $ref: '#/definitions/RelatedEventList'
-        description: '<p>A list of CloudTrail event IDs.</p> <p>A populated field indicates that the current configuration was initiated by the events recorded in the CloudTrail log. For more information about CloudTrail, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html">What Is AWS CloudTrail</a>.</p> <p>An empty field indicates that the current configuration was not initiated by any event.</p>'
-      relationships:
-        $ref: '#/definitions/RelationshipList'
-        description: A list of related AWS resources.
-      configuration:
-        $ref: '#/definitions/Configuration'
-        description: The description of the resource configuration.
-      supplementaryConfiguration:
-        $ref: '#/definitions/SupplementaryConfiguration'
-        description: Configuration attributes that AWS Config returns for certain resource types to supplement the information returned for the <code>configuration</code> parameter.
-    description: A list that contains detailed configurations of a specified resource.
-  ConfigurationItemList:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationItem'
-  RecorderName:
-    type: string
-    minLength: 1
-    maxLength: 256
-  RecordingGroup:
-    type: object
-    properties:
-      allSupported:
-        $ref: '#/definitions/AllSupported'
-        description: '<p>Specifies whether AWS Config records configuration changes for every supported type of regional resource.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of regional resource, it starts recording resources of that type automatically.</p> <p>If you set this option to <code>true</code>, you cannot enumerate a list of <code>resourceTypes</code>.</p>'
-      includeGlobalResourceTypes:
-        $ref: '#/definitions/IncludeGlobalResourceTypes'
-        description: '<p>Specifies whether AWS Config includes all supported types of global resources (for example, IAM resources) with the resources that it records.</p> <p>Before you can set this option to <code>true</code>, you must set the <code>allSupported</code> option to <code>true</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of global resource, it starts recording resources of that type automatically.</p> <p>The configuration details for any global resource are the same in all regions. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources.</p>'
-      resourceTypes:
-        $ref: '#/definitions/ResourceTypeList'
-        description: '<p>A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, <code>AWS::EC2::Instance</code> or <code>AWS::CloudTrail::Trail</code>).</p> <p>Before you can set this option to <code>true</code>, you must set the <code>allSupported</code> option to <code>false</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>resourceType Value</b> column in <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported AWS Resource Types</a>.</p>'
-    description: '<p>Specifies the types of AWS resource for which AWS Config records configuration changes.</p> <p>In the recording group, you specify whether all supported types or specific types of resources are recorded.</p> <p>By default, AWS Config records configuration changes for all supported types of regional resources that AWS Config discovers in the region in which it is running. Regional resources are tied to a region and can be used only in that region. Examples of regional resources are EC2 instances and EBS volumes.</p> <p>You can also have AWS Config record configuration changes for supported types of global resources (for example, IAM resources). Global resources are not tied to an individual region and can be used in all regions.</p> <important> <p>The configuration details for any global resource are the same in all regions. If you customize AWS Config in multiple regions to record global resources, it will create multiple configuration items each time a global resource changes: one configuration item for each region. These configuration items will contain identical data. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources, unless you want the configuration items to be available in multiple regions.</p> </important> <p>If you don''t want AWS Config to record all resources, you can specify which types of resources it will record with the <code>resourceTypes</code> parameter.</p> <p>For a list of supported resource types, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported Resource Types</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/select-resources.html">Selecting Which Resources AWS Config Records</a>.</p>'
-  ConfigurationRecorder:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/RecorderName'
-        description: 'The name of the recorder. By default, AWS Config automatically assigns the name "default" when creating the configuration recorder. You cannot change the assigned name.'
-      roleARN:
-        $ref: '#/definitions/String'
-        description: Amazon Resource Name (ARN) of the IAM role used to describe the AWS resources associated with the account.
-      recordingGroup:
-        $ref: '#/definitions/RecordingGroup'
-        description: Specifies the types of AWS resources for which AWS Config records configuration changes.
-    description: An object that represents the recording of configuration changes of an AWS resource.
-  ConfigurationRecorderList:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationRecorder'
-  ConfigurationRecorderNameList:
-    type: array
-    items:
-      $ref: '#/definitions/RecorderName'
-  RecorderStatus:
-    type: string
-    enum:
-      - Pending
-      - Success
-      - Failure
-  ConfigurationRecorderStatus:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/String'
-        description: The name of the configuration recorder.
-      lastStartTime:
-        $ref: '#/definitions/Date'
-        description: The time the recorder was last started.
-      lastStopTime:
-        $ref: '#/definitions/Date'
-        description: The time the recorder was last stopped.
-      recording:
-        $ref: '#/definitions/Boolean'
-        description: Specifies whether or not the recorder is currently recording.
-      lastStatus:
-        $ref: '#/definitions/RecorderStatus'
-        description: The last (previous) status of the recorder.
-      lastErrorCode:
-        $ref: '#/definitions/String'
-        description: The error code indicating that the recording failed.
-      lastErrorMessage:
-        $ref: '#/definitions/String'
-        description: The message indicating that the recording failed due to an error.
-      lastStatusChangeTime:
-        $ref: '#/definitions/Date'
-        description: The time when the status was last changed.
-    description: The current status of the configuration recorder.
-  ConfigurationRecorderStatusList:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationRecorderStatus'
-  RetentionConfigurationName:
-    type: string
-    pattern: '[\w\-]+'
-    minLength: 1
-    maxLength: 256
-  DeliveryChannel:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/ChannelName'
-        description: 'The name of the delivery channel. By default, AWS Config assigns the name "default" when creating the delivery channel. To change the delivery channel name, you must use the DeleteDeliveryChannel action to delete your current delivery channel, and then you must use the PutDeliveryChannel command to create a delivery channel that has the desired name.'
-      s3BucketName:
-        $ref: '#/definitions/String'
-        description: '<p>The name of the Amazon S3 bucket to which AWS Config delivers configuration snapshots and configuration history files.</p> <p>If you specify a bucket that belongs to another AWS account, that bucket must have policies that grant access permissions to AWS Config. For more information, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html">Permissions for the Amazon S3 Bucket</a> in the AWS Config Developer Guide.</p>'
-      s3KeyPrefix:
-        $ref: '#/definitions/String'
-        description: The prefix for the specified Amazon S3 bucket.
-      snsTopicARN:
-        $ref: '#/definitions/String'
-        description: '<p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS Config sends notifications about configuration changes.</p> <p>If you choose a topic from another account, the topic must have policies that grant access permissions to AWS Config. For more information, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html">Permissions for the Amazon SNS Topic</a> in the AWS Config Developer Guide.</p>'
-      configSnapshotDeliveryProperties:
-        $ref: '#/definitions/ConfigSnapshotDeliveryProperties'
-        description: The options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket.
-    description: The channel through which AWS Config delivers notifications and updated configuration states.
-  DeliveryChannelList:
-    type: array
-    items:
-      $ref: '#/definitions/DeliveryChannel'
-  DeliveryChannelNameList:
-    type: array
-    items:
-      $ref: '#/definitions/ChannelName'
-  DeliveryChannelStatus:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/String'
-        description: The name of the delivery channel.
-      configSnapshotDeliveryInfo:
-        $ref: '#/definitions/ConfigExportDeliveryInfo'
-        description: A list containing the status of the delivery of the snapshot to the specified Amazon S3 bucket.
-      configHistoryDeliveryInfo:
-        $ref: '#/definitions/ConfigExportDeliveryInfo'
-        description: A list that contains the status of the delivery of the configuration history to the specified Amazon S3 bucket.
-      configStreamDeliveryInfo:
-        $ref: '#/definitions/ConfigStreamDeliveryInfo'
-        description: A list containing the status of the delivery of the configuration stream notification to the specified Amazon SNS topic.
-    description: '<p>The status of a specified delivery channel.</p> <p>Valid values: <code>Success</code> | <code>Failure</code> </p>'
-  DeliveryChannelStatusList:
-    type: array
-    items:
-      $ref: '#/definitions/DeliveryChannelStatus'
-  GroupByAPILimit:
-    type: integer
-    minimum: 0
-    maximum: 1000
-  NextToken:
-    type: string
-  Limit:
-    type: integer
-    minimum: 0
-    maximum: 100
-  RuleLimit:
-    type: integer
-    minimum: 0
-    maximum: 50
-  DescribePendingAggregationRequestsLimit:
-    type: integer
-    minimum: 0
-    maximum: 20
-  PendingAggregationRequestList:
-    type: array
-    items:
-      $ref: '#/definitions/PendingAggregationRequest'
-  RetentionConfigurationNameList:
-    type: array
-    items:
-      $ref: '#/definitions/RetentionConfigurationName'
-    minItems: 0
-    maxItems: 1
-  RetentionConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/RetentionConfiguration'
-  DiscoveredResourceIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/AggregateResourceIdentifier'
-  EarlierTime:
-    type: string
-    format: date-time
-  OrderingTimestamp:
-    type: string
-    format: date-time
-  Evaluation:
-    type: object
-    required:
-      - ComplianceResourceType
-      - ComplianceResourceId
-      - ComplianceType
-      - OrderingTimestamp
-    properties:
-      ComplianceResourceType:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: The type of AWS resource that was evaluated.
-      ComplianceResourceId:
-        $ref: '#/definitions/BaseResourceId'
-        description: The ID of the AWS resource that was evaluated.
-      ComplianceType:
-        $ref: '#/definitions/ComplianceType'
-        description: '<p>Indicates whether the AWS resource complies with the AWS Config rule that it was evaluated against.</p> <p>For the <code>Evaluation</code> data type, AWS Config supports only the <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>NOT_APPLICABLE</code> values. AWS Config does not support the <code>INSUFFICIENT_DATA</code> value for this data type.</p> <p>Similarly, AWS Config does not accept <code>INSUFFICIENT_DATA</code> as the value for <code>ComplianceType</code> from a <code>PutEvaluations</code> request. For example, an AWS Lambda function for a custom AWS Config rule cannot pass an <code>INSUFFICIENT_DATA</code> value to AWS Config.</p>'
-      Annotation:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: Supplementary information about how the evaluation determined the compliance.
-      OrderingTimestamp:
-        $ref: '#/definitions/OrderingTimestamp'
-        description: 'The time of the event in AWS Config that triggered the evaluation. For event-based evaluations, the time indicates when AWS Config created the configuration item that triggered the evaluation. For periodic evaluations, the time indicates when AWS Config triggered the evaluation at the frequency that you specified (for example, every 24 hours).'
-    description: Identifies an AWS resource and indicates whether it complies with the AWS Config rule that it was evaluated against.
-  EvaluationResult:
-    type: object
-    properties:
-      EvaluationResultIdentifier:
-        $ref: '#/definitions/EvaluationResultIdentifier'
-        description: Uniquely identifies the evaluation result.
-      ComplianceType:
-        $ref: '#/definitions/ComplianceType'
-        description: '<p>Indicates whether the AWS resource complies with the AWS Config rule that evaluated it.</p> <p>For the <code>EvaluationResult</code> data type, AWS Config supports only the <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>NOT_APPLICABLE</code> values. AWS Config does not support the <code>INSUFFICIENT_DATA</code> value for the <code>EvaluationResult</code> data type.</p>'
-      ResultRecordedTime:
-        $ref: '#/definitions/Date'
-        description: The time when AWS Config recorded the evaluation result.
-      ConfigRuleInvokedTime:
-        $ref: '#/definitions/Date'
-        description: The time when the AWS Config rule evaluated the AWS resource.
-      Annotation:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: Supplementary information about how the evaluation determined the compliance.
-      ResultToken:
-        $ref: '#/definitions/String'
-        description: 'An encrypted token that associates an evaluation with an AWS Config rule. The token identifies the rule, the AWS resource being evaluated, and the event that triggered the evaluation.'
-    description: 'The details of an AWS Config evaluation. Provides the AWS resource that was evaluated, the compliance of the resource, related time stamps, and supplementary information.'
-  EvaluationResultQualifier:
-    type: object
-    properties:
-      ConfigRuleName:
-        $ref: '#/definitions/StringWithCharLimit64'
-        description: The name of the AWS Config rule that was used in the evaluation.
-      ResourceType:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: The type of AWS resource that was evaluated.
-      ResourceId:
-        $ref: '#/definitions/BaseResourceId'
-        description: The ID of the evaluated AWS resource.
-    description: 'Identifies an AWS Config rule that evaluated an AWS resource, and provides the type and ID of the resource that the rule evaluated.'
-  EvaluationResults:
-    type: array
-    items:
-      $ref: '#/definitions/EvaluationResult'
-  Evaluations:
-    type: array
-    items:
-      $ref: '#/definitions/Evaluation'
-    minItems: 0
-    maxItems: 100
-  EventSource:
-    type: string
-    enum:
-      - aws.config
-  ResourceCountFilters:
-    type: object
-    properties:
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The type of the AWS resource.
-      AccountId:
-        $ref: '#/definitions/AccountId'
-        description: The 12-digit ID of the account.
-      Region:
-        $ref: '#/definitions/AwsRegion'
-        description: The region where the account is located.
-    description: 'Filters the resource count based on account ID, region, and resource type.'
-  ResourceCountGroupKey:
-    type: string
-    enum:
-      - RESOURCE_TYPE
-      - ACCOUNT_ID
-      - AWS_REGION
-  Long:
-    type: integer
-  GroupedResourceCountList:
-    type: array
-    items:
-      $ref: '#/definitions/GroupedResourceCount'
-  ResourceTypes:
-    type: array
-    items:
-      $ref: '#/definitions/StringWithCharLimit256'
-    minItems: 0
-    maxItems: 20
-  ResourceCounts:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceCount'
-  LaterTime:
-    type: string
-    format: date-time
-  GroupedResourceCount:
-    type: object
-    required:
-      - GroupName
-      - ResourceCount
-    properties:
-      GroupName:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: 'The name of the group that can be region, account ID, or resource type. For example, region1, region2 if the region was chosen as <code>GroupByKey</code>.'
-      ResourceCount:
-        $ref: '#/definitions/Long'
-        description: The number of resources in the group.
-    description: The count of resources that are grouped by the group name.
-  IncludeGlobalResourceTypes:
-    type: boolean
-  ResourceFilters:
-    type: object
-    properties:
-      AccountId:
-        $ref: '#/definitions/AccountId'
-        description: The 12-digit source account ID.
-      ResourceId:
-        $ref: '#/definitions/ResourceId'
-        description: The ID of the resource.
-      ResourceName:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the resource.
-      Region:
-        $ref: '#/definitions/AwsRegion'
-        description: The source region.
-    description: 'Filters the results by resource account ID, region, resource ID, and resource name.'
-  ResourceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceId'
-  ResourceIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceIdentifier'
-  MessageType:
-    type: string
-    enum:
-      - ConfigurationItemChangeNotification
-      - ConfigurationSnapshotDeliveryCompleted
-      - ScheduledNotification
-      - OversizedConfigurationItemChangeNotification
-  Name:
-    type: string
-  Owner:
-    type: string
-    enum:
-      - CUSTOM_LAMBDA
-      - AWS
-  PendingAggregationRequest:
-    type: object
-    properties:
-      RequesterAccountId:
-        $ref: '#/definitions/AccountId'
-        description: The 12-digit account ID of the account requesting to aggregate data.
-      RequesterAwsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: 'The region requesting to aggregate data. '
-    description: An object that represents the account ID and region of an aggregator account that is requesting authorization but is not yet authorized.
-  RetentionPeriodInDays:
-    type: integer
-    minimum: 30
-    maximum: 2557
-  RetentionConfiguration:
-    type: object
-    required:
-      - Name
-      - RetentionPeriodInDays
-    properties:
-      Name:
-        $ref: '#/definitions/RetentionConfigurationName'
-        description: The name of the retention configuration object.
-      RetentionPeriodInDays:
-        $ref: '#/definitions/RetentionPeriodInDays'
-        description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
-    description: An object with the name of the retention configuration and the retention period in days. The object stores the configuration for data retention in AWS Config.
-  ResourceTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceType'
-  ReevaluateConfigRuleNames:
-    type: array
-    items:
-      $ref: '#/definitions/StringWithCharLimit64'
-    minItems: 1
-    maxItems: 25
-  RelatedEvent:
-    type: string
-  RelationshipName:
-    type: string
-  Relationship:
-    type: object
-    properties:
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The resource type of the related resource.
-      resourceId:
-        $ref: '#/definitions/ResourceId'
-        description: 'The ID of the related resource (for example, <code>sg-xxxxxx</code>).'
-      resourceName:
-        $ref: '#/definitions/ResourceName'
-        description: 'The custom name of the related resource, if available.'
-      relationshipName:
-        $ref: '#/definitions/RelationshipName'
-        description: The type of relationship with the related resource.
-    description: The relationship of the related resource to the main resource.
-  ResourceCount:
-    type: object
-    properties:
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: 'The resource type (for example, <code>"AWS::EC2::Instance"</code>).'
-      count:
-        $ref: '#/definitions/Long'
-        description: The number of resources.
-    description: An object that contains the resource type and the number of resources.
-  ResourceDeletionTime:
-    type: string
-    format: date-time
-  ResourceIdentifier:
-    type: object
-    properties:
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The type of resource.
-      resourceId:
-        $ref: '#/definitions/ResourceId'
-        description: 'The ID of the resource (for example, <code>sg-xxxxxx</code>).'
-      resourceName:
-        $ref: '#/definitions/ResourceName'
-        description: The custom name of the resource (if available).
-      resourceDeletionTime:
-        $ref: '#/definitions/ResourceDeletionTime'
-        description: The time that the resource was deleted.
-    description: 'The details that identify a resource that is discovered by AWS Config, including the resource type, ID, and (if available) the custom resource name.'
-  ResourceKey:
-    type: object
-    required:
-      - resourceType
-      - resourceId
-    properties:
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The resource type.
-      resourceId:
-        $ref: '#/definitions/ResourceId'
-        description: 'The ID of the resource (for example., sg-xxxxxx). '
-    description: 'The details that identify a resource within AWS Config, including the resource type and resource ID.'
-  StringWithCharLimit128:
-    type: string
-    minLength: 1
-    maxLength: 128
-  SourceDetails:
-    type: array
-    items:
-      $ref: '#/definitions/SourceDetail'
-    minItems: 0
-    maxItems: 25
-  SourceDetail:
-    type: object
-    properties:
-      EventSource:
-        $ref: '#/definitions/EventSource'
-        description: 'The source of the event, such as an AWS service, that triggers AWS Config to evaluate your AWS resources.'
-      MessageType:
-        $ref: '#/definitions/MessageType'
-        description: '<p>The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:</p> <ul> <li> <p> <code>ConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.</p> </li> <li> <p> <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.</p> </li> <li> <p> <code>ScheduledNotification</code> - Triggers a periodic evaluation at the frequency specified for <code>MaximumExecutionFrequency</code>.</p> </li> <li> <p> <code>ConfigurationSnapshotDeliveryCompleted</code> - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot.</p> </li> </ul> <p>If you want your custom rule to be triggered by configuration changes, specify two SourceDetail objects, one for <code>ConfigurationItemChangeNotification</code> and one for <code>OversizedConfigurationItemChangeNotification</code>.</p>'
-      MaximumExecutionFrequency:
-        $ref: '#/definitions/MaximumExecutionFrequency'
-        description: '<p>The frequency at which you want AWS Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for <code>MaximumExecutionFrequency</code>, then <code>MessageType</code> must use the <code>ScheduledNotification</code> value.</p> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> <p>Based on the valid value you choose, AWS Config runs evaluations once for each valid value. For example, if you choose <code>Three_Hours</code>, AWS Config runs evaluations once every three hours. In this case, <code>Three_Hours</code> is the frequency of this rule. </p> </note>'
-    description: 'Provides the source and the message types that trigger AWS Config to evaluate your AWS resources against a rule. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic. You can specify the parameter values for <code>SourceDetail</code> only for custom rules. '
-  SupplementaryConfigurationName:
-    type: string
-  SupplementaryConfigurationValue:
-    type: string
-  Value:
+      $ref: '#/definitions/[object Object]'
+  Version:
     type: string

@@ -128,8 +128,8 @@ paths:
           schema:
             $ref: '#/definitions/ClaimDevicesByClaimCodeRequest'
         - name: claimCode
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -171,8 +171,8 @@ paths:
           schema:
             $ref: '#/definitions/DescribeDeviceRequest'
         - name: deviceId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -225,8 +225,8 @@ paths:
           schema:
             $ref: '#/definitions/FinalizeDeviceClaimRequest'
         - name: deviceId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -268,8 +268,8 @@ paths:
           schema:
             $ref: '#/definitions/GetDeviceMethodsRequest'
         - name: deviceId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -322,8 +322,8 @@ paths:
           schema:
             $ref: '#/definitions/InvokeDeviceMethodRequest'
         - name: deviceId
-          in: path
           type: string
+          in: path
           required: true
   '/devices/{deviceId}/initiate-claim':
     put:
@@ -362,8 +362,8 @@ paths:
           schema:
             $ref: '#/definitions/InitiateDeviceClaimRequest'
         - name: deviceId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -409,8 +409,8 @@ paths:
           schema:
             $ref: '#/definitions/ListDeviceEventsRequest'
         - name: deviceId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -487,8 +487,8 @@ paths:
           schema:
             $ref: '#/definitions/UnclaimDeviceRequest'
         - name: deviceId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -530,8 +530,8 @@ paths:
           schema:
             $ref: '#/definitions/UpdateDeviceStateRequest'
         - name: deviceId
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -548,10 +548,10 @@ definitions:
     type: object
     properties:
       ClaimCode:
-        $ref: '#/definitions/__stringMin12Max40'
+        $ref: '#/definitions/[object Object]'
         description: The claim code provided by the device manufacturer.
       Total:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/[object Object]'
         description: |-
           The total number of devices associated with the claim code that has been processed
            in the claim request.
@@ -562,34 +562,34 @@ definitions:
     type: object
     properties:
       Code:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: '400'
       Message:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The 400 error message returned by the web server.
   InternalFailureException:
     type: object
     properties:
       Code:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: '500'
       Message:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The 500 error message returned by the web server.
   ForbiddenException:
     type: object
     properties:
       Code:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: '403'
       Message:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The 403 error message returned by the web server.
   DescribeDeviceResponse:
     type: object
     properties:
       DeviceDescription:
-        $ref: '#/definitions/DeviceDescription'
+        $ref: '#/definitions/[object Object]'
         description: Device details.
   DescribeDeviceRequest:
     type: object
@@ -598,16 +598,16 @@ definitions:
     type: object
     properties:
       Code:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: '404'
       Message:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The requested device could not be found.
   FinalizeDeviceClaimResponse:
     type: object
     properties:
       State:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The device's final claim state.
   FinalizeDeviceClaimRequest:
     type: object
@@ -616,25 +616,25 @@ definitions:
     type: object
     properties:
       Code:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: '412'
       Message:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: An error message explaining the error or its remedy.
   ResourceConflictException:
     type: object
     properties:
       Code:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: '409'
       Message:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: An error message explaining the error or its remedy.
   GetDeviceMethodsResponse:
     type: object
     properties:
       DeviceMethods:
-        $ref: '#/definitions/__listOfDeviceMethod'
+        $ref: '#/definitions/[object Object]'
         description: List of available device APIs.
   GetDeviceMethodsRequest:
     type: object
@@ -643,7 +643,7 @@ definitions:
     type: object
     properties:
       State:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The device's final claim state.
   InitiateDeviceClaimRequest:
     type: object
@@ -652,25 +652,25 @@ definitions:
     type: object
     properties:
       DeviceMethodResponse:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: A JSON encoded string containing the device method response.
   InvokeDeviceMethodRequest:
     type: object
     properties:
       DeviceMethod:
-        $ref: '#/definitions/DeviceMethod'
+        $ref: '#/definitions/[object Object]'
         description: The device method to invoke.
       DeviceMethodParameters:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: A JSON encoded string containing the device method request parameters.
   RangeNotSatisfiableException:
     type: object
     properties:
       Code:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: '416'
       Message:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: |-
           The requested number of results specified by nextToken cannot be
            satisfied.
@@ -678,12 +678,12 @@ definitions:
     type: object
     properties:
       Events:
-        $ref: '#/definitions/__listOfDeviceEvent'
+        $ref: '#/definitions/[object Object]'
         description: |-
           An array of zero or more elements describing the event(s) associated with the
            device.
       NextToken:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The token to retrieve the next set of results.
   ListDeviceEventsRequest:
     type: object
@@ -692,10 +692,10 @@ definitions:
     type: object
     properties:
       Devices:
-        $ref: '#/definitions/__listOfDeviceDescription'
+        $ref: '#/definitions/[object Object]'
         description: A list of devices.
       NextToken:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The token to retrieve the next set of results.
   ListDevicesRequest:
     type: object
@@ -704,7 +704,7 @@ definitions:
     type: object
     properties:
       State:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The device's final claim state.
   UnclaimDeviceRequest:
     type: object
@@ -716,55 +716,28 @@ definitions:
     type: object
     properties:
       Enabled:
-        $ref: '#/definitions/__boolean'
+        $ref: '#/definitions/[object Object]'
         description: |-
           If true, the device is enabled. If false, the device is
            disabled.
   Attributes:
     type: object
     properties: {}
-  __string:
-    type: string
-  __stringMin12Max40:
-    type: string
-    minLength: 12
-    maxLength: 40
-  __integer:
-    type: integer
-  DeviceDescription:
-    type: object
-    properties:
-      Attributes:
-        $ref: '#/definitions/DeviceAttributes'
-        description: |-
-          An array of zero or more elements of DeviceAttribute objects
-           providing user specified device attributes.
-      DeviceId:
-        $ref: '#/definitions/__string'
-        description: The unique identifier of the device.
-      Enabled:
-        $ref: '#/definitions/__boolean'
-        description: A Boolean value indicating whether or not the device is enabled.
-      RemainingLife:
-        $ref: '#/definitions/__doubleMin0Max100'
-        description: |-
-          A value between 0 and 1 inclusive, representing the fraction of life remaining for
-           the device.
-      Type:
-        $ref: '#/definitions/__string'
-        description: 'The type of the device, such as "button".'
+  '[object Object]': {}
   Device:
     type: object
     properties:
       Attributes:
-        $ref: '#/definitions/Attributes'
+        $ref: '#/definitions/[object Object]'
         description: The user specified attributes associated with the device for an event.
       DeviceId:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The unique identifier of the device.
       Type:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: 'The device type, such as "button".'
+  __string:
+    type: string
   DeviceAttributes:
     type: array
     description: |-
@@ -781,70 +754,98 @@ definitions:
     type: object
     properties:
       State:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The device's final claim state.
-  __boolean:
-    type: boolean
-  __doubleMin0Max100:
-    type: number
-    format: double
+  DeviceDescription:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/[object Object]'
+        description: |-
+          An array of zero or more elements of DeviceAttribute objects
+           providing user specified device attributes.
+      DeviceId:
+        $ref: '#/definitions/[object Object]'
+        description: The unique identifier of the device.
+      Enabled:
+        $ref: '#/definitions/[object Object]'
+        description: A Boolean value indicating whether or not the device is enabled.
+      RemainingLife:
+        $ref: '#/definitions/[object Object]'
+        description: |-
+          A value between 0 and 1 inclusive, representing the fraction of life remaining for
+           the device.
+      Type:
+        $ref: '#/definitions/[object Object]'
+        description: 'The type of the device, such as "button".'
   DeviceEvent:
     type: object
     properties:
       Device:
-        $ref: '#/definitions/Device'
+        $ref: '#/definitions/[object Object]'
         description: An object representing the device associated with the event.
       StdEvent:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: A serialized JSON object representing the device-type specific event.
-  __listOfDeviceEvent:
-    type: array
-    items:
-      $ref: '#/definitions/DeviceEvent'
   DeviceEventsResponse:
     type: object
     properties:
       Events:
-        $ref: '#/definitions/__listOfDeviceEvent'
+        $ref: '#/definitions/[object Object]'
         description: |-
           An array of zero or more elements describing the event(s) associated with the
            device.
       NextToken:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The token to retrieve the next set of results.
   DeviceMethod:
     type: object
     properties:
       DeviceType:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: 'The type of the device, such as "button".'
       MethodName:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The name of the method applicable to the deviceType.
   Empty:
     type: object
     properties: {}
     description: 'On success, an empty object is returned.'
-  __listOfDeviceMethod:
-    type: array
-    items:
-      $ref: '#/definitions/DeviceMethod'
-  __timestampIso8601:
-    type: string
-    format: date-time
   MaxResults:
     type: integer
     minimum: 1
     maximum: 250
-  __listOfDeviceDescription:
-    type: array
-    items:
-      $ref: '#/definitions/DeviceDescription'
+  __boolean:
+    type: boolean
   __double:
     type: number
     format: double
+  __doubleMin0Max100:
+    type: number
+    format: double
+  __integer:
+    type: integer
+  __listOfDeviceDescription:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  __listOfDeviceEvent:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  __listOfDeviceMethod:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   __long:
     type: integer
+  __stringMin12Max40:
+    type: string
+    minLength: 12
+    maxLength: 40
+  __timestampIso8601:
+    type: string
+    format: date-time
   __timestampUnix:
     type: string
     format: date-time

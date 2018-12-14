@@ -1656,10 +1656,10 @@ definitions:
       - kmsKeyId
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       kmsKeyId:
-        $ref: '#/definitions/KmsKeyId'
+        $ref: '#/definitions/[object Object]'
         description: 'The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a>.'
   InvalidParameterException: {}
   ResourceNotFoundException: {}
@@ -1671,14 +1671,14 @@ definitions:
       - taskId
     properties:
       taskId:
-        $ref: '#/definitions/ExportTaskId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the export task.
   InvalidOperationException: {}
   CreateExportTaskResponse:
     type: object
     properties:
       taskId:
-        $ref: '#/definitions/ExportTaskId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the export task.
   CreateExportTaskRequest:
     type: object
@@ -1689,25 +1689,25 @@ definitions:
       - destination
     properties:
       taskName:
-        $ref: '#/definitions/ExportTaskName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the export task.
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       logStreamNamePrefix:
-        $ref: '#/definitions/LogStreamName'
+        $ref: '#/definitions/[object Object]'
         description: 'Export only log streams that match the provided prefix. If you don''t specify a value, no prefix filter is applied.'
       from:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The start time of the range for the request, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than this time are not exported.'
       to:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The end time of the range for the request, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.'
       destination:
-        $ref: '#/definitions/ExportDestinationBucket'
+        $ref: '#/definitions/[object Object]'
         description: The name of S3 bucket for the exported log data. The bucket must be in the same AWS region.
       destinationPrefix:
-        $ref: '#/definitions/ExportDestinationPrefix'
+        $ref: '#/definitions/[object Object]'
         description: 'The prefix used as the start of the key for every object exported. If you don''t specify a value, the default is <code>exportedlogs</code>.'
   LimitExceededException: {}
   ResourceAlreadyExistsException: {}
@@ -1717,13 +1717,13 @@ definitions:
       - logGroupName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       kmsKeyId:
-        $ref: '#/definitions/KmsKeyId'
+        $ref: '#/definitions/[object Object]'
         description: 'The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a>.'
       tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: The key-value pairs to use for the tags.
   CreateLogStreamRequest:
     type: object
@@ -1732,10 +1732,10 @@ definitions:
       - logStreamName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       logStreamName:
-        $ref: '#/definitions/LogStreamName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log stream.
   DeleteDestinationRequest:
     type: object
@@ -1743,7 +1743,7 @@ definitions:
       - destinationName
     properties:
       destinationName:
-        $ref: '#/definitions/DestinationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the destination.
   DeleteLogGroupRequest:
     type: object
@@ -1751,7 +1751,7 @@ definitions:
       - logGroupName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
   DeleteLogStreamRequest:
     type: object
@@ -1760,10 +1760,10 @@ definitions:
       - logStreamName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       logStreamName:
-        $ref: '#/definitions/LogStreamName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log stream.
   DeleteMetricFilterRequest:
     type: object
@@ -1772,16 +1772,16 @@ definitions:
       - filterName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       filterName:
-        $ref: '#/definitions/FilterName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the metric filter.
   DeleteResourcePolicyRequest:
     type: object
     properties:
       policyName:
-        $ref: '#/definitions/PolicyName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the policy to be revoked. This parameter is required.
   DeleteRetentionPolicyRequest:
     type: object
@@ -1789,7 +1789,7 @@ definitions:
       - logGroupName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
   DeleteSubscriptionFilterRequest:
     type: object
@@ -1798,196 +1798,196 @@ definitions:
       - filterName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       filterName:
-        $ref: '#/definitions/FilterName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the subscription filter.
   DescribeDestinationsResponse:
     type: object
     properties:
       destinations:
-        $ref: '#/definitions/Destinations'
+        $ref: '#/definitions/[object Object]'
         description: The destinations.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
   DescribeDestinationsRequest:
     type: object
     properties:
       DestinationNamePrefix:
-        $ref: '#/definitions/DestinationName'
+        $ref: '#/definitions/[object Object]'
         description: 'The prefix to match. If you don''t specify a value, no prefix filter is applied.'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of items to return. (You received this token from a previous call.)
       limit:
-        $ref: '#/definitions/DescribeLimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
   DescribeExportTasksResponse:
     type: object
     properties:
       exportTasks:
-        $ref: '#/definitions/ExportTasks'
+        $ref: '#/definitions/[object Object]'
         description: The export tasks.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
   DescribeExportTasksRequest:
     type: object
     properties:
       taskId:
-        $ref: '#/definitions/ExportTaskId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the export task. Specifying a task ID filters the results to zero or one export tasks.
       statusCode:
-        $ref: '#/definitions/ExportTaskStatusCode'
+        $ref: '#/definitions/[object Object]'
         description: The status code of the export task. Specifying a status code filters the results to zero or more export tasks.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of items to return. (You received this token from a previous call.)
       limit:
-        $ref: '#/definitions/DescribeLimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
   DescribeLogGroupsResponse:
     type: object
     properties:
       logGroups:
-        $ref: '#/definitions/LogGroups'
+        $ref: '#/definitions/[object Object]'
         description: The log groups.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
   DescribeLogGroupsRequest:
     type: object
     properties:
       logGroupNamePrefix:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The prefix to match.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of items to return. (You received this token from a previous call.)
       limit:
-        $ref: '#/definitions/DescribeLimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
   DescribeLogStreamsResponse:
     type: object
     properties:
       logStreams:
-        $ref: '#/definitions/LogStreams'
+        $ref: '#/definitions/[object Object]'
         description: The log streams.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
   DescribeLogStreamsRequest:
     type: object
     required:
       - logGroupName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       logStreamNamePrefix:
-        $ref: '#/definitions/LogStreamName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The prefix to match.</p> <p>If <code>orderBy</code> is <code>LastEventTime</code>,you cannot specify this parameter.</p>'
       orderBy:
-        $ref: '#/definitions/OrderBy'
+        $ref: '#/definitions/[object Object]'
         description: '<p>If the value is <code>LogStreamName</code>, the results are ordered by log stream name. If the value is <code>LastEventTime</code>, the results are ordered by the event time. The default value is <code>LogStreamName</code>.</p> <p>If you order the results by event time, you cannot specify the <code>logStreamNamePrefix</code> parameter.</p> <p>lastEventTimestamp represents the time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. lastEventTimeStamp updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but may take longer in some rare situations.</p>'
       descending:
-        $ref: '#/definitions/Descending'
+        $ref: '#/definitions/[object Object]'
         description: 'If the value is true, results are returned in descending order. If the value is to false, results are returned in ascending order. The default value is false.'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of items to return. (You received this token from a previous call.)
       limit:
-        $ref: '#/definitions/DescribeLimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
   DescribeMetricFiltersResponse:
     type: object
     properties:
       metricFilters:
-        $ref: '#/definitions/MetricFilters'
+        $ref: '#/definitions/[object Object]'
         description: The metric filters.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
   DescribeMetricFiltersRequest:
     type: object
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       filterNamePrefix:
-        $ref: '#/definitions/FilterName'
+        $ref: '#/definitions/[object Object]'
         description: The prefix to match.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of items to return. (You received this token from a previous call.)
       limit:
-        $ref: '#/definitions/DescribeLimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
       metricName:
-        $ref: '#/definitions/MetricName'
+        $ref: '#/definitions/[object Object]'
         description: 'Filters results to include only those with the specified metric name. If you include this parameter in your request, you must also include the <code>metricNamespace</code> parameter.'
       metricNamespace:
-        $ref: '#/definitions/MetricNamespace'
+        $ref: '#/definitions/[object Object]'
         description: 'Filters results to include only those in the specified namespace. If you include this parameter in your request, you must also include the <code>metricName</code> parameter.'
   DescribeQueriesResponse:
     type: object
     properties:
       queries:
-        $ref: '#/definitions/QueryInfoList'
+        $ref: '#/definitions/[object Object]'
         description: The list of queries that match the request.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
   DescribeQueriesRequest:
     type: object
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: Limits the returned queries to only those for the specified log group.
       status:
-        $ref: '#/definitions/QueryStatus'
+        $ref: '#/definitions/[object Object]'
         description: 'Limits the returned queries to only those that have the specified status. Valid values are <code>Cancelled</code>, <code>Complete</code>, <code>Failed</code>, <code>Running</code>, and <code>Scheduled</code>.'
       maxResults:
-        $ref: '#/definitions/DescribeQueriesMaxResults'
+        $ref: '#/definitions/[object Object]'
         description: Limits the number of returned queries to the specified number.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
   DescribeResourcePoliciesResponse:
     type: object
     properties:
       resourcePolicies:
-        $ref: '#/definitions/ResourcePolicies'
+        $ref: '#/definitions/[object Object]'
         description: The resource policies that exist in this account.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
   DescribeResourcePoliciesRequest:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
       limit:
-        $ref: '#/definitions/DescribeLimit'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of resource policies to be displayed with one call of this API.
   DescribeSubscriptionFiltersResponse:
     type: object
     properties:
       subscriptionFilters:
-        $ref: '#/definitions/SubscriptionFilters'
+        $ref: '#/definitions/[object Object]'
         description: The subscription filters.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
   DescribeSubscriptionFiltersRequest:
     type: object
     required:
       - logGroupName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       filterNamePrefix:
-        $ref: '#/definitions/FilterName'
+        $ref: '#/definitions/[object Object]'
         description: 'The prefix to match. If you don''t specify a value, no prefix filter is applied.'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of items to return. (You received this token from a previous call.)
       limit:
-        $ref: '#/definitions/DescribeLimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
   DisassociateKmsKeyRequest:
     type: object
@@ -1995,19 +1995,19 @@ definitions:
       - logGroupName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
   FilterLogEventsResponse:
     type: object
     properties:
       events:
-        $ref: '#/definitions/FilteredLogEvents'
+        $ref: '#/definitions/[object Object]'
         description: The matched events.
       searchedLogStreams:
-        $ref: '#/definitions/SearchedLogStreams'
+        $ref: '#/definitions/[object Object]'
         description: Indicates which log streams have been searched and whether each has been searched completely.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token to use when requesting the next set of items. The token expires after 24 hours.
   FilterLogEventsRequest:
     type: object
@@ -2015,43 +2015,43 @@ definitions:
       - logGroupName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group to search.
       logStreamNames:
-        $ref: '#/definitions/InputLogStreamNames'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Filters the results to only logs from the log streams in this list.</p> <p>If you specify a value for both <code>logStreamNamePrefix</code> and <code>logStreamNames</code>, the action returns an <code>InvalidParameterException</code> error.</p>'
       logStreamNamePrefix:
-        $ref: '#/definitions/LogStreamName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Filters the results to include only events from log streams that have names starting with this prefix.</p> <p>If you specify a value for both <code>logStreamNamePrefix</code> and <code>logStreamNames</code>, but the value for <code>logStreamNamePrefix</code> does not match any log stream names specified in <code>logStreamNames</code>, the action returns an <code>InvalidParameterException</code> error.</p>'
       startTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not returned.'
       endTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The end of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not returned.'
       filterPattern:
-        $ref: '#/definitions/FilterPattern'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The filter pattern to use. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html">Filter and Pattern Syntax</a>.</p> <p>If not provided, all the events are matched.</p>'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of events to return. (You received this token from a previous call.)
       limit:
-        $ref: '#/definitions/EventsLimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of events to return. The default is 10,000 events.'
       interleaved:
-        $ref: '#/definitions/Interleaved'
+        $ref: '#/definitions/[object Object]'
         description: 'If the value is true, the operation makes a best effort to provide responses that contain events from multiple log streams within the log group, interleaved in a single response. If the value is false, all the matched log events in the first log stream are searched first, then those in the next log stream, and so on. The default is false.'
   GetLogEventsResponse:
     type: object
     properties:
       events:
-        $ref: '#/definitions/OutputLogEvents'
+        $ref: '#/definitions/[object Object]'
         description: The events.
       nextForwardToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token for the next set of items in the forward direction. The token expires after 24 hours. If you have reached the end of the stream, it will return the same token you passed in.'
       nextBackwardToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token for the next set of items in the backward direction. The token expires after 24 hours. This token will never be null. If you have reached the end of the stream, it will return the same token you passed in.'
   GetLogEventsRequest:
     type: object
@@ -2060,31 +2060,31 @@ definitions:
       - logStreamName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       logStreamName:
-        $ref: '#/definitions/LogStreamName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log stream.
       startTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to this time or later than this time are included. Events with a timestamp earlier than this time are not included.'
       endTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The end of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to or later than this time are not included.'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token for the next set of items to return. (You received this token from a previous call.)
       limit:
-        $ref: '#/definitions/EventsLimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of log events returned. If you don''t specify a value, the maximum is as many log events as can fit in a response size of 1 MB, up to 10,000 log events.'
       startFromHead:
-        $ref: '#/definitions/StartFromHead'
+        $ref: '#/definitions/[object Object]'
         description: 'If the value is true, the earliest log events are returned first. If the value is false, the latest log events are returned first. The default value is false.'
   GetLogGroupFieldsResponse:
     type: object
     properties:
       logGroupFields:
-        $ref: '#/definitions/LogGroupFieldList'
+        $ref: '#/definitions/[object Object]'
         description: 'The array of fields found in the query. Each object in the array contains the name of the field, along with the percentage of time it appeared in the log events that were queried.'
   GetLogGroupFieldsRequest:
     type: object
@@ -2092,16 +2092,16 @@ definitions:
       - logGroupName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group to search.
       time:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The time to set as the center of the query. If you specify <code>time</code>, the 8 minutes before and 8 minutes after this time are searched. If you omit <code>time</code>, the past 15 minutes are queried.</p> <p>The <code>time</code> value is specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.</p>'
   GetLogRecordResponse:
     type: object
     properties:
       logRecord:
-        $ref: '#/definitions/LogRecord'
+        $ref: '#/definitions/[object Object]'
         description: 'The requested log event, as a JSON string.'
   GetLogRecordRequest:
     type: object
@@ -2109,19 +2109,19 @@ definitions:
       - logRecordPointer
     properties:
       logRecordPointer:
-        $ref: '#/definitions/LogRecordPointer'
+        $ref: '#/definitions/[object Object]'
         description: 'The pointer corresponding to the log event record you want to retrieve. You get this from the response of a <code>GetQueryResults</code> operation. In that response, the value of the <code>@ptr</code> field for a log event is the value to use as <code>logRecordPointer</code> to retrieve that complete log event record.'
   GetQueryResultsResponse:
     type: object
     properties:
       results:
-        $ref: '#/definitions/QueryResults'
+        $ref: '#/definitions/[object Object]'
         description: <p>The log events that matched the query criteria during the most recent time it ran.</p> <p>The <code>results</code> value is an array of arrays. Each log event is one object in the top-level array. Each of these log event objects is an array of <code>field</code>/<code>value</code> pairs.</p>
       statistics:
-        $ref: '#/definitions/QueryStatistics'
+        $ref: '#/definitions/[object Object]'
         description: 'Includes the number of log events scanned by the query, the number of log events that matched the query criteria, and the total number of bytes in the log events that were scanned.'
       status:
-        $ref: '#/definitions/QueryStatus'
+        $ref: '#/definitions/[object Object]'
         description: 'The status of the most recent running of the query. Possible values are <code>Cancelled</code>, <code>Complete</code>, <code>Failed</code>, <code>Running</code>, <code>Scheduled</code>, and <code>Unknown</code>.'
   GetQueryResultsRequest:
     type: object
@@ -2129,13 +2129,13 @@ definitions:
       - queryId
     properties:
       queryId:
-        $ref: '#/definitions/QueryId'
+        $ref: '#/definitions/[object Object]'
         description: The ID number of the query.
   ListTagsLogGroupResponse:
     type: object
     properties:
       tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: The tags for the log group.
   ListTagsLogGroupRequest:
     type: object
@@ -2143,13 +2143,13 @@ definitions:
       - logGroupName
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
   PutDestinationResponse:
     type: object
     properties:
       destination:
-        $ref: '#/definitions/Destination'
+        $ref: '#/definitions/[object Object]'
         description: The destination.
   PutDestinationRequest:
     type: object
@@ -2159,13 +2159,13 @@ definitions:
       - roleArn
     properties:
       destinationName:
-        $ref: '#/definitions/DestinationName'
+        $ref: '#/definitions/[object Object]'
         description: A name for the destination.
       targetArn:
-        $ref: '#/definitions/TargetArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of an Amazon Kinesis stream to which to deliver matching log events.
       roleArn:
-        $ref: '#/definitions/RoleArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of an IAM role that grants CloudWatch Logs permissions to call the Amazon Kinesis PutRecord operation on the destination stream.
   PutDestinationPolicyRequest:
     type: object
@@ -2174,19 +2174,19 @@ definitions:
       - accessPolicy
     properties:
       destinationName:
-        $ref: '#/definitions/DestinationName'
+        $ref: '#/definitions/[object Object]'
         description: A name for an existing destination.
       accessPolicy:
-        $ref: '#/definitions/AccessPolicy'
+        $ref: '#/definitions/[object Object]'
         description: An IAM policy document that authorizes cross-account users to deliver their log events to the associated destination.
   PutLogEventsResponse:
     type: object
     properties:
       nextSequenceToken:
-        $ref: '#/definitions/SequenceToken'
+        $ref: '#/definitions/[object Object]'
         description: The next sequence token.
       rejectedLogEventsInfo:
-        $ref: '#/definitions/RejectedLogEventsInfo'
+        $ref: '#/definitions/[object Object]'
         description: The rejected events.
   PutLogEventsRequest:
     type: object
@@ -2196,16 +2196,16 @@ definitions:
       - logEvents
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       logStreamName:
-        $ref: '#/definitions/LogStreamName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log stream.
       logEvents:
-        $ref: '#/definitions/InputLogEvents'
+        $ref: '#/definitions/[object Object]'
         description: The log events.
       sequenceToken:
-        $ref: '#/definitions/SequenceToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The sequence token obtained from the response of the previous <code>PutLogEvents</code> call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using <a>DescribeLogStreams</a>. If you call <code>PutLogEvents</code> twice within a narrow time period using the same value for <code>sequenceToken</code>, both calls may be successful, or one may be rejected.'
   InvalidSequenceTokenException: {}
   DataAlreadyAcceptedException: {}
@@ -2219,31 +2219,31 @@ definitions:
       - metricTransformations
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       filterName:
-        $ref: '#/definitions/FilterName'
+        $ref: '#/definitions/[object Object]'
         description: A name for the metric filter.
       filterPattern:
-        $ref: '#/definitions/FilterPattern'
+        $ref: '#/definitions/[object Object]'
         description: A filter pattern for extracting metric data out of ingested log events.
       metricTransformations:
-        $ref: '#/definitions/MetricTransformations'
+        $ref: '#/definitions/[object Object]'
         description: A collection of information that defines how metric data gets emitted.
   PutResourcePolicyResponse:
     type: object
     properties:
       resourcePolicy:
-        $ref: '#/definitions/ResourcePolicy'
+        $ref: '#/definitions/[object Object]'
         description: The new policy.
   PutResourcePolicyRequest:
     type: object
     properties:
       policyName:
-        $ref: '#/definitions/PolicyName'
+        $ref: '#/definitions/[object Object]'
         description: Name of the new policy. This parameter is required.
       policyDocument:
-        $ref: '#/definitions/PolicyDocument'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string.</p> <p>The following example creates a resource policy enabling the Route 53 service to put DNS query logs in to the specified log group. Replace "logArn" with the ARN of your CloudWatch Logs resource, such as a log group or log stream.</p> <p> <code>{ "Version": "2012-10-17", "Statement": [ { "Sid": "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": { "Service": [ "route53.amazonaws.com" ] }, "Action":"logs:PutLogEvents", "Resource": "logArn" } ] } </code> </p>'
   PutRetentionPolicyRequest:
     type: object
@@ -2252,10 +2252,10 @@ definitions:
       - retentionInDays
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       retentionInDays:
-        $ref: '#/definitions/Days'
+        $ref: '#/definitions/[object Object]'
   PutSubscriptionFilterRequest:
     type: object
     required:
@@ -2265,28 +2265,28 @@ definitions:
       - destinationArn
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       filterName:
-        $ref: '#/definitions/FilterName'
+        $ref: '#/definitions/[object Object]'
         description: 'A name for the subscription filter. If you are updating an existing filter, you must specify the correct name in <code>filterName</code>. Otherwise, the call fails because you cannot associate a second filter with a log group. To find the name of the filter currently associated with a log group, use <a>DescribeSubscriptionFilters</a>.'
       filterPattern:
-        $ref: '#/definitions/FilterPattern'
+        $ref: '#/definitions/[object Object]'
         description: A filter pattern for subscribing to a filtered stream of log events.
       destinationArn:
-        $ref: '#/definitions/DestinationArn'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The ARN of the destination to deliver matching log events to. Currently, the supported destinations are:</p> <ul> <li> <p>An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>A logical destination (specified using an ARN) belonging to a different account, for cross-account delivery.</p> </li> <li> <p>An Amazon Kinesis Firehose delivery stream belonging to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>An AWS Lambda function belonging to the same account as the subscription filter, for same-account delivery.</p> </li> </ul>'
       roleArn:
-        $ref: '#/definitions/RoleArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.
       distribution:
-        $ref: '#/definitions/Distribution'
+        $ref: '#/definitions/[object Object]'
         description: 'The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. '
   StartQueryResponse:
     type: object
     properties:
       queryId:
-        $ref: '#/definitions/QueryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The unique ID of the query. '
   StartQueryRequest:
     type: object
@@ -2297,26 +2297,26 @@ definitions:
       - queryString
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The log group on which to perform the query.
       startTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The time to start the query. Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.'
       endTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The time to end this query, if it is still running. Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.'
       queryString:
-        $ref: '#/definitions/QueryString'
+        $ref: '#/definitions/[object Object]'
         description: 'The query string to use. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html">CloudWatch Logs Insights Query Syntax</a>.'
       limit:
-        $ref: '#/definitions/EventsLimit'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of log events to return in the query. If the query string uses the <code>fields</code> command, only the specified fields and their values are returned.'
   MalformedQueryException: {}
   StopQueryResponse:
     type: object
     properties:
       success:
-        $ref: '#/definitions/Success'
+        $ref: '#/definitions/[object Object]'
         description: This is true if the query was stopped by the <code>StopQuery</code> operation.
   StopQueryRequest:
     type: object
@@ -2324,7 +2324,7 @@ definitions:
       - queryId
     properties:
       queryId:
-        $ref: '#/definitions/QueryId'
+        $ref: '#/definitions/[object Object]'
         description: 'The ID number of the query to stop. If necessary, you can use <code>DescribeQueries</code> to find this ID number.'
   TagLogGroupRequest:
     type: object
@@ -2333,16 +2333,16 @@ definitions:
       - tags
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: The key-value pairs to use for the tags.
   TestMetricFilterResponse:
     type: object
     properties:
       matches:
-        $ref: '#/definitions/MetricFilterMatches'
+        $ref: '#/definitions/[object Object]'
         description: The matched events.
   TestMetricFilterRequest:
     type: object
@@ -2351,9 +2351,9 @@ definitions:
       - logEventMessages
     properties:
       filterPattern:
-        $ref: '#/definitions/FilterPattern'
+        $ref: '#/definitions/[object Object]'
       logEventMessages:
-        $ref: '#/definitions/TestEventMessages'
+        $ref: '#/definitions/[object Object]'
         description: The log event messages to test.
   UntagLogGroupRequest:
     type: object
@@ -2362,183 +2362,67 @@ definitions:
       - tags
     properties:
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: The tag keys. The corresponding tags are removed from the log group.
   AccessPolicy:
     type: string
     minLength: 1
   Arn:
     type: string
-  LogGroupName:
-    type: string
-    pattern: '[\.\-_/#A-Za-z0-9]+'
-    minLength: 1
-    maxLength: 512
-  KmsKeyId:
-    type: string
-    maxLength: 256
-  ExportTaskId:
-    type: string
-    minLength: 1
-    maxLength: 512
-  ExportTaskName:
-    type: string
-    minLength: 1
-    maxLength: 512
-  LogStreamName:
-    type: string
-    pattern: '[^:*]*'
-    minLength: 1
-    maxLength: 512
-  Timestamp:
-    type: integer
-    minimum: 0
-  ExportDestinationBucket:
-    type: string
-    minLength: 1
-    maxLength: 512
-  ExportDestinationPrefix:
-    type: string
-  Tags:
-    type: array
-    minItems: 1
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
+  '[object Object]': {}
   Days:
     type: integer
     description: 'The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.'
   DefaultValue:
     type: number
     format: double
-  DestinationName:
-    type: string
-    pattern: '[^:*]*'
-    minLength: 1
-    maxLength: 512
-  FilterName:
-    type: string
-    pattern: '[^:*]*'
-    minLength: 1
-    maxLength: 512
-  PolicyName:
-    type: string
   Descending:
     type: boolean
-  NextToken:
-    type: string
-    description: The token for the next set of items to return. The token expires after 24 hours.
-    minLength: 1
   DescribeLimit:
     type: integer
     minimum: 1
     maximum: 50
-  Destinations:
-    type: array
-    items:
-      $ref: '#/definitions/Destination'
-  ExportTaskStatusCode:
-    type: string
-    enum:
-      - CANCELLED
-      - COMPLETED
-      - FAILED
-      - PENDING
-      - PENDING_CANCEL
-      - RUNNING
-  ExportTasks:
-    type: array
-    items:
-      $ref: '#/definitions/ExportTask'
-  LogGroups:
-    type: array
-    items:
-      $ref: '#/definitions/LogGroup'
-  OrderBy:
-    type: string
-    enum:
-      - LogStreamName
-      - LastEventTime
-  LogStreams:
-    type: array
-    items:
-      $ref: '#/definitions/LogStream'
-  MetricName:
-    type: string
-    pattern: '[^:*$]*'
-    description: 'The name of the CloudWatch metric to which the monitored log information should be published. For example, you may publish to a metric called ErrorCount.'
-    maxLength: 255
-  MetricNamespace:
-    type: string
-    pattern: '[^:*$]*'
-    maxLength: 255
-  MetricFilters:
-    type: array
-    items:
-      $ref: '#/definitions/MetricFilter'
   DescribeQueriesMaxResults:
     type: integer
     minimum: 1
     maximum: 1000
-  QueryStatus:
-    type: string
-    enum:
-      - Scheduled
-      - Running
-      - Complete
-      - Failed
-      - Cancelled
-  QueryInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/QueryInfo'
-  ResourcePolicies:
-    type: array
-    items:
-      $ref: '#/definitions/ResourcePolicy'
-  SubscriptionFilters:
-    type: array
-    items:
-      $ref: '#/definitions/SubscriptionFilter'
-  TargetArn:
-    type: string
-    minLength: 1
-  RoleArn:
-    type: string
-    minLength: 1
   Destination:
     type: object
     properties:
       destinationName:
-        $ref: '#/definitions/DestinationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the destination.
       targetArn:
-        $ref: '#/definitions/TargetArn'
+        $ref: '#/definitions/[object Object]'
         description: 'The Amazon Resource Name (ARN) of the physical target to where the log events are delivered (for example, a Kinesis stream).'
       roleArn:
-        $ref: '#/definitions/RoleArn'
+        $ref: '#/definitions/[object Object]'
         description: 'A role for impersonation, used when delivering log events to the target.'
       accessPolicy:
-        $ref: '#/definitions/AccessPolicy'
+        $ref: '#/definitions/[object Object]'
         description: An IAM policy document that governs which AWS accounts can create subscription filters against this destination.
       arn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of this destination.
       creationTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The creation time of the destination, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
     description: Represents a cross-account destination that receives subscription log events.
   DestinationArn:
     type: string
     minLength: 1
+  DestinationName:
+    type: string
+    pattern: '[^:*]*'
+    minLength: 1
+    maxLength: 512
+  Destinations:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Distribution:
     type: string
     enum:
@@ -2556,59 +2440,86 @@ definitions:
     type: integer
     minimum: 1
     maximum: 10000
-  ExportTaskStatus:
-    type: object
-    properties:
-      code:
-        $ref: '#/definitions/ExportTaskStatusCode'
-        description: The status code of the export task.
-      message:
-        $ref: '#/definitions/ExportTaskStatusMessage'
-        description: The status message related to the status code.
-    description: Represents the status of an export task.
-  ExportTaskExecutionInfo:
-    type: object
-    properties:
-      creationTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The creation time of the export task, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
-      completionTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The completion time of the export task, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
-    description: Represents the status of an export task.
+  ExportDestinationBucket:
+    type: string
+    minLength: 1
+    maxLength: 512
+  ExportDestinationPrefix:
+    type: string
   ExportTask:
     type: object
     properties:
       taskId:
-        $ref: '#/definitions/ExportTaskId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the export task.
       taskName:
-        $ref: '#/definitions/ExportTaskName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the export task.
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group from which logs data was exported.
       from:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The start time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not exported.'
       to:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The end time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.'
       destination:
-        $ref: '#/definitions/ExportDestinationBucket'
+        $ref: '#/definitions/[object Object]'
         description: The name of Amazon S3 bucket to which the log data was exported.
       destinationPrefix:
-        $ref: '#/definitions/ExportDestinationPrefix'
+        $ref: '#/definitions/[object Object]'
         description: The prefix that was used as the start of Amazon S3 key for every object exported.
       status:
-        $ref: '#/definitions/ExportTaskStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status of the export task.
       executionInfo:
-        $ref: '#/definitions/ExportTaskExecutionInfo'
+        $ref: '#/definitions/[object Object]'
         description: Execution info about the export task.
     description: Represents an export task.
+  ExportTaskExecutionInfo:
+    type: object
+    properties:
+      creationTime:
+        $ref: '#/definitions/[object Object]'
+        description: 'The creation time of the export task, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+      completionTime:
+        $ref: '#/definitions/[object Object]'
+        description: 'The completion time of the export task, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+    description: Represents the status of an export task.
+  ExportTaskId:
+    type: string
+    minLength: 1
+    maxLength: 512
+  ExportTaskName:
+    type: string
+    minLength: 1
+    maxLength: 512
+  ExportTaskStatus:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/[object Object]'
+        description: The status code of the export task.
+      message:
+        $ref: '#/definitions/[object Object]'
+        description: The status message related to the status code.
+    description: Represents the status of an export task.
+  ExportTaskStatusCode:
+    type: string
+    enum:
+      - CANCELLED
+      - COMPLETED
+      - FAILED
+      - PENDING
+      - PENDING_CANCEL
+      - RUNNING
   ExportTaskStatusMessage:
     type: string
+  ExportTasks:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Token:
     type: string
   Value:
@@ -2626,58 +2537,118 @@ definitions:
     type: string
   FilterCount:
     type: integer
-  InputLogStreamNames:
-    type: array
-    items:
-      $ref: '#/definitions/LogStreamName'
-    minItems: 1
-    maxItems: 100
+  FilterName:
+    type: string
+    pattern: '[^:*]*'
+    minLength: 1
+    maxLength: 512
   FilterPattern:
     type: string
     description: 'A symbolic description of how CloudWatch Logs should interpret the data in each log event. For example, a log event may contain timestamps, IP addresses, strings, and so on. You use the filter pattern to specify what to look for in the log event message.'
     minLength: 0
     maxLength: 1024
-  Interleaved:
-    type: boolean
-  FilteredLogEvents:
-    type: array
-    items:
-      $ref: '#/definitions/FilteredLogEvent'
-  SearchedLogStreams:
-    type: array
-    items:
-      $ref: '#/definitions/SearchedLogStream'
   FilteredLogEvent:
     type: object
     properties:
       logStreamName:
-        $ref: '#/definitions/LogStreamName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log stream to which this event belongs.
       timestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       message:
-        $ref: '#/definitions/EventMessage'
+        $ref: '#/definitions/[object Object]'
         description: The data contained in the log event.
       ingestionTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The time the event was ingested, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       eventId:
-        $ref: '#/definitions/EventId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the event.
     description: Represents a matched event.
-  StartFromHead:
-    type: boolean
-  OutputLogEvents:
+  FilteredLogEvents:
     type: array
     items:
-      $ref: '#/definitions/OutputLogEvent'
+      $ref: '#/definitions/[object Object]'
+  InputLogEvent:
+    type: object
+    required:
+      - timestamp
+      - message
+    properties:
+      timestamp:
+        $ref: '#/definitions/[object Object]'
+        description: 'The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+      message:
+        $ref: '#/definitions/[object Object]'
+        description: The raw event message.
+    description: 'Represents a log event, which is a record of activity that was recorded by the application or resource being monitored.'
+  InputLogEvents:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 10000
+  InputLogStreamNames:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
+  Interleaved:
+    type: boolean
+  KmsKeyId:
+    type: string
+    maxLength: 256
+  LogEventIndex:
+    type: integer
+  LogGroup:
+    type: object
+    properties:
+      logGroupName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the log group.
+      creationTime:
+        $ref: '#/definitions/[object Object]'
+        description: 'The creation time of the log group, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+      retentionInDays:
+        $ref: '#/definitions/[object Object]'
+      metricFilterCount:
+        $ref: '#/definitions/[object Object]'
+        description: The number of metric filters.
+      arn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the log group.
+      storedBytes:
+        $ref: '#/definitions/[object Object]'
+        description: The number of bytes stored.
+      kmsKeyId:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.
+    description: Represents a log group.
+  LogGroupField:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of a log field.
+      percent:
+        $ref: '#/definitions/[object Object]'
+        description: The percentage of log events queried that contained the field.
+    description: 'The fields contained in log events found by a <code>GetLogGroupFields</code> operation, along with the percentage of queried log events in which each field appears.'
   LogGroupFieldList:
     type: array
     items:
-      $ref: '#/definitions/LogGroupField'
-  LogRecordPointer:
+      $ref: '#/definitions/[object Object]'
+  LogGroupName:
     type: string
+    pattern: '[\.\-_/#A-Za-z0-9]+'
+    minLength: 1
+    maxLength: 512
+  LogGroups:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   LogRecord:
     type: array
     items:
@@ -2687,167 +2658,95 @@ definitions:
           $ref: '#/definitions/Field'
         value:
           $ref: '#/definitions/Value'
-  QueryId:
+  LogRecordPointer:
     type: string
-    minLength: 0
-    maxLength: 256
-  QueryResults:
-    type: array
-    items:
-      $ref: '#/definitions/ResultRows'
-  QueryStatistics:
-    type: object
-    properties:
-      recordsMatched:
-        $ref: '#/definitions/StatsValue'
-        description: The number of log events that matched the query string.
-      recordsScanned:
-        $ref: '#/definitions/StatsValue'
-        description: The total number of log events scanned during the query.
-      bytesScanned:
-        $ref: '#/definitions/StatsValue'
-        description: The total number of bytes in the log events scanned during the query.
-    description: 'Contains the number of log events scanned by the query, the number of log events that matched the query criteria, and the total number of bytes in the log events that were scanned.'
-  InputLogEvent:
-    type: object
-    required:
-      - timestamp
-      - message
-    properties:
-      timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: 'The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
-      message:
-        $ref: '#/definitions/EventMessage'
-        description: The raw event message.
-    description: 'Represents a log event, which is a record of activity that was recorded by the application or resource being monitored.'
-  InputLogEvents:
-    type: array
-    items:
-      $ref: '#/definitions/InputLogEvent'
-    minItems: 1
-    maxItems: 10000
-  LogEventIndex:
-    type: integer
-  StoredBytes:
-    type: integer
-    minimum: 0
-  LogGroup:
-    type: object
-    properties:
-      logGroupName:
-        $ref: '#/definitions/LogGroupName'
-        description: The name of the log group.
-      creationTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The creation time of the log group, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
-      retentionInDays:
-        $ref: '#/definitions/Days'
-      metricFilterCount:
-        $ref: '#/definitions/FilterCount'
-        description: The number of metric filters.
-      arn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the log group.
-      storedBytes:
-        $ref: '#/definitions/StoredBytes'
-        description: The number of bytes stored.
-      kmsKeyId:
-        $ref: '#/definitions/KmsKeyId'
-        description: The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.
-    description: Represents a log group.
-  Percentage:
-    type: integer
-    minimum: 0
-    maximum: 100
-  LogGroupField:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/Field'
-        description: The name of a log field.
-      percent:
-        $ref: '#/definitions/Percentage'
-        description: The percentage of log events queried that contained the field.
-    description: 'The fields contained in log events found by a <code>GetLogGroupFields</code> operation, along with the percentage of queried log events in which each field appears.'
-  SequenceToken:
-    type: string
-    minLength: 1
   LogStream:
     type: object
     properties:
       logStreamName:
-        $ref: '#/definitions/LogStreamName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log stream.
       creationTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The creation time of the stream, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       firstEventTimestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The time of the first event, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       lastEventTimestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. The <code>lastEventTime</code> value updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but may take longer in some rare situations.'
       lastIngestionTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The ingestion time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       uploadSequenceToken:
-        $ref: '#/definitions/SequenceToken'
+        $ref: '#/definitions/[object Object]'
         description: The sequence token.
       arn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the log stream.
       storedBytes:
-        $ref: '#/definitions/StoredBytes'
+        $ref: '#/definitions/[object Object]'
         description: The number of bytes stored.
     description: 'Represents a log stream, which is a sequence of log events from a single emitter of logs.'
+  LogStreamName:
+    type: string
+    pattern: '[^:*]*'
+    minLength: 1
+    maxLength: 512
   LogStreamSearchedCompletely:
     type: boolean
-  MetricTransformations:
+  LogStreams:
     type: array
     items:
-      $ref: '#/definitions/MetricTransformation'
-    minItems: 1
-    maxItems: 1
+      $ref: '#/definitions/[object Object]'
   MetricFilter:
     type: object
     properties:
       filterName:
-        $ref: '#/definitions/FilterName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the metric filter.
       filterPattern:
-        $ref: '#/definitions/FilterPattern'
+        $ref: '#/definitions/[object Object]'
       metricTransformations:
-        $ref: '#/definitions/MetricTransformations'
+        $ref: '#/definitions/[object Object]'
         description: The metric transformations.
       creationTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The creation time of the metric filter, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
     description: Metric filters express how CloudWatch Logs would extract metric observations from ingested log events and transform them into metric data in a CloudWatch metric.
   MetricFilterMatchRecord:
     type: object
     properties:
       eventNumber:
-        $ref: '#/definitions/EventNumber'
+        $ref: '#/definitions/[object Object]'
         description: The event number.
       eventMessage:
-        $ref: '#/definitions/EventMessage'
+        $ref: '#/definitions/[object Object]'
         description: The raw event data.
       extractedValues:
-        $ref: '#/definitions/ExtractedValues'
+        $ref: '#/definitions/[object Object]'
         description: The values extracted from the event data by the filter.
     description: Represents a matched event.
   MetricFilterMatches:
     type: array
     items:
-      $ref: '#/definitions/MetricFilterMatchRecord'
-  MetricValue:
+      $ref: '#/definitions/[object Object]'
+  MetricFilters:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  MetricName:
     type: string
-    description: 'The value to publish to the CloudWatch metric. For example, if you''re counting the occurrences of a term like "Error", the value is "1" for each occurrence. If you''re counting the bytes transferred, the value is the value in the log event.'
-    maxLength: 100
+    pattern: '[^:*$]*'
+    description: 'The name of the CloudWatch metric to which the monitored log information should be published. For example, you may publish to a metric called ErrorCount.'
+    maxLength: 255
+  MetricNamespace:
+    type: string
+    pattern: '[^:*$]*'
+    maxLength: 255
   MetricTransformation:
     type: object
     required:
@@ -2856,136 +2755,221 @@ definitions:
       - metricValue
     properties:
       metricName:
-        $ref: '#/definitions/MetricName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the CloudWatch metric.
       metricNamespace:
-        $ref: '#/definitions/MetricNamespace'
+        $ref: '#/definitions/[object Object]'
         description: The namespace of the CloudWatch metric.
       metricValue:
-        $ref: '#/definitions/MetricValue'
+        $ref: '#/definitions/[object Object]'
         description: The value to publish to the CloudWatch metric when a filter pattern matches a log event.
       defaultValue:
-        $ref: '#/definitions/DefaultValue'
+        $ref: '#/definitions/[object Object]'
         description: (Optional) The value to emit when a filter pattern does not match a log event. This value can be null.
     description: Indicates how to transform ingested log eventsto metric data in a CloudWatch metric.
+  MetricTransformations:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 1
+  MetricValue:
+    type: string
+    description: 'The value to publish to the CloudWatch metric. For example, if you''re counting the occurrences of a term like "Error", the value is "1" for each occurrence. If you''re counting the bytes transferred, the value is the value in the log event.'
+    maxLength: 100
+  NextToken:
+    type: string
+    description: The token for the next set of items to return. The token expires after 24 hours.
+    minLength: 1
+  OrderBy:
+    type: string
+    enum:
+      - LogStreamName
+      - LastEventTime
   OutputLogEvent:
     type: object
     properties:
       timestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       message:
-        $ref: '#/definitions/EventMessage'
+        $ref: '#/definitions/[object Object]'
         description: The data contained in the log event.
       ingestionTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The time the event was ingested, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
     description: Represents a log event.
+  OutputLogEvents:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Percentage:
+    type: integer
+    minimum: 0
+    maximum: 100
   PolicyDocument:
     type: string
     minLength: 1
     maxLength: 5120
-  RejectedLogEventsInfo:
-    type: object
-    properties:
-      tooNewLogEventStartIndex:
-        $ref: '#/definitions/LogEventIndex'
-        description: The log events that are too new.
-      tooOldLogEventEndIndex:
-        $ref: '#/definitions/LogEventIndex'
-        description: The log events that are too old.
-      expiredLogEventEndIndex:
-        $ref: '#/definitions/LogEventIndex'
-        description: The expired log events.
-    description: Represents the rejected events.
-  ResourcePolicy:
-    type: object
-    properties:
-      policyName:
-        $ref: '#/definitions/PolicyName'
-        description: The name of the resource policy.
-      policyDocument:
-        $ref: '#/definitions/PolicyDocument'
-        description: The details of the policy.
-      lastUpdatedTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'Timestamp showing when this policy was last updated, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
-    description: A policy enabling one or more entities to put logs to a log group in this account.
-  QueryString:
+  PolicyName:
+    type: string
+  QueryId:
     type: string
     minLength: 0
-    maxLength: 2048
+    maxLength: 256
   QueryInfo:
     type: object
     properties:
       queryId:
-        $ref: '#/definitions/QueryId'
+        $ref: '#/definitions/[object Object]'
         description: The unique ID number of this query.
       queryString:
-        $ref: '#/definitions/QueryString'
+        $ref: '#/definitions/[object Object]'
         description: The query string used in this query.
       status:
-        $ref: '#/definitions/QueryStatus'
+        $ref: '#/definitions/[object Object]'
         description: 'The status of this query. Possible values are <code>Cancelled</code>, <code>Complete</code>, <code>Failed</code>, <code>Running</code>, <code>Scheduled</code>, and <code>Unknown</code>.'
       createTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: The date and time that this query was created.
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group scanned by this query.
     description: 'Information about one CloudWatch Logs Insights query that matches the request in a <code>DescribeQueries</code> operation. '
-  ResultRows:
+  QueryInfoList:
     type: array
     items:
-      $ref: '#/definitions/ResultField'
-  StatsValue:
-    type: number
-    format: double
+      $ref: '#/definitions/[object Object]'
+  QueryResults:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  QueryStatistics:
+    type: object
+    properties:
+      recordsMatched:
+        $ref: '#/definitions/[object Object]'
+        description: The number of log events that matched the query string.
+      recordsScanned:
+        $ref: '#/definitions/[object Object]'
+        description: The total number of log events scanned during the query.
+      bytesScanned:
+        $ref: '#/definitions/[object Object]'
+        description: The total number of bytes in the log events scanned during the query.
+    description: 'Contains the number of log events scanned by the query, the number of log events that matched the query criteria, and the total number of bytes in the log events that were scanned.'
+  QueryStatus:
+    type: string
+    enum:
+      - Scheduled
+      - Running
+      - Complete
+      - Failed
+      - Cancelled
+  QueryString:
+    type: string
+    minLength: 0
+    maxLength: 2048
+  RejectedLogEventsInfo:
+    type: object
+    properties:
+      tooNewLogEventStartIndex:
+        $ref: '#/definitions/[object Object]'
+        description: The log events that are too new.
+      tooOldLogEventEndIndex:
+        $ref: '#/definitions/[object Object]'
+        description: The log events that are too old.
+      expiredLogEventEndIndex:
+        $ref: '#/definitions/[object Object]'
+        description: The expired log events.
+    description: Represents the rejected events.
+  ResourcePolicies:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ResourcePolicy:
+    type: object
+    properties:
+      policyName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the resource policy.
+      policyDocument:
+        $ref: '#/definitions/[object Object]'
+        description: The details of the policy.
+      lastUpdatedTime:
+        $ref: '#/definitions/[object Object]'
+        description: 'Timestamp showing when this policy was last updated, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+    description: A policy enabling one or more entities to put logs to a log group in this account.
   ResultField:
     type: object
     properties:
       field:
-        $ref: '#/definitions/Field'
+        $ref: '#/definitions/[object Object]'
         description: The log event field.
       value:
-        $ref: '#/definitions/Value'
+        $ref: '#/definitions/[object Object]'
         description: The value of this field.
     description: 'Contains one field from one log event returned by a CloudWatch Logs Insights query, along with the value of that field.'
+  ResultRows:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  RoleArn:
+    type: string
+    minLength: 1
   SearchedLogStream:
     type: object
     properties:
       logStreamName:
-        $ref: '#/definitions/LogStreamName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log stream.
       searchedCompletely:
-        $ref: '#/definitions/LogStreamSearchedCompletely'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether all the events in this log stream were searched.
     description: Represents the search status of a log stream.
-  Success:
+  SearchedLogStreams:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  SequenceToken:
+    type: string
+    minLength: 1
+  StartFromHead:
     type: boolean
+  StatsValue:
+    type: number
+    format: double
+  StoredBytes:
+    type: integer
+    minimum: 0
   SubscriptionFilter:
     type: object
     properties:
       filterName:
-        $ref: '#/definitions/FilterName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the subscription filter.
       logGroupName:
-        $ref: '#/definitions/LogGroupName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the log group.
       filterPattern:
-        $ref: '#/definitions/FilterPattern'
+        $ref: '#/definitions/[object Object]'
       destinationArn:
-        $ref: '#/definitions/DestinationArn'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the destination.
       roleArn:
-        $ref: '#/definitions/RoleArn'
+        $ref: '#/definitions/[object Object]'
         description: <p/>
       distribution:
-        $ref: '#/definitions/Distribution'
+        $ref: '#/definitions/[object Object]'
       creationTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The creation time of the subscription filter, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
     description: Represents a subscription filter.
+  SubscriptionFilters:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Success:
+    type: boolean
   TagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]+)$'
@@ -2994,15 +2978,32 @@ definitions:
   TagList:
     type: array
     items:
-      $ref: '#/definitions/TagKey'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
   TagValue:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     maxLength: 256
+  Tags:
+    type: array
+    minItems: 1
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
+  TargetArn:
+    type: string
+    minLength: 1
   TestEventMessages:
     type: array
     items:
-      $ref: '#/definitions/EventMessage'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 50
+  Timestamp:
+    type: integer
+    minimum: 0

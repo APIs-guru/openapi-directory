@@ -1280,7 +1280,7 @@ definitions:
     type: object
     properties:
       status:
-        $ref: '#/definitions/JobStatus'
+        $ref: '#/definitions/[object Object]'
         description: Whether the job worker has received the specified job.
     description: Represents the output of an AcknowledgeJob action.
   AcknowledgeJobInput:
@@ -1290,10 +1290,10 @@ definitions:
       - nonce
     properties:
       jobId:
-        $ref: '#/definitions/JobId'
+        $ref: '#/definitions/[object Object]'
         description: The unique system-generated ID of the job for which you want to confirm receipt.
       nonce:
-        $ref: '#/definitions/Nonce'
+        $ref: '#/definitions/[object Object]'
         description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response of the <a>PollForJobs</a> request that returned this job.
     description: Represents the input of an AcknowledgeJob action.
   ValidationException: {}
@@ -1303,7 +1303,7 @@ definitions:
     type: object
     properties:
       status:
-        $ref: '#/definitions/JobStatus'
+        $ref: '#/definitions/[object Object]'
         description: 'The status information for the third party job, if any.'
     description: Represents the output of an AcknowledgeThirdPartyJob action.
   AcknowledgeThirdPartyJobInput:
@@ -1314,13 +1314,13 @@ definitions:
       - clientToken
     properties:
       jobId:
-        $ref: '#/definitions/ThirdPartyJobId'
+        $ref: '#/definitions/[object Object]'
         description: The unique system-generated ID of the job.
       nonce:
-        $ref: '#/definitions/Nonce'
+        $ref: '#/definitions/[object Object]'
         description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response to a <a>GetThirdPartyJobDetails</a> request.
       clientToken:
-        $ref: '#/definitions/ClientToken'
+        $ref: '#/definitions/[object Object]'
         description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
     description: Represents the input of an AcknowledgeThirdPartyJob action.
   InvalidClientTokenException: {}
@@ -1330,7 +1330,7 @@ definitions:
       - actionType
     properties:
       actionType:
-        $ref: '#/definitions/ActionType'
+        $ref: '#/definitions/[object Object]'
         description: Returns information about the details of an action type.
     description: Represents the output of a CreateCustomActionType operation.
   CreateCustomActionTypeInput:
@@ -1343,25 +1343,25 @@ definitions:
       - outputArtifactDetails
     properties:
       category:
-        $ref: '#/definitions/ActionCategory'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The category of the custom action, such as a build action or a test action.</p> <note> <p>Although Source and Approval are listed as valid values, they are not currently functional. These values are reserved for future use.</p> </note>'
       provider:
-        $ref: '#/definitions/ActionProvider'
+        $ref: '#/definitions/[object Object]'
         description: 'The provider of the service used in the custom action, such as AWS CodeDeploy.'
       version:
-        $ref: '#/definitions/Version'
+        $ref: '#/definitions/[object Object]'
         description: The version identifier of the custom action.
       settings:
-        $ref: '#/definitions/ActionTypeSettings'
+        $ref: '#/definitions/[object Object]'
         description: Returns information about the settings for an action type.
       configurationProperties:
-        $ref: '#/definitions/ActionConfigurationPropertyList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The configuration properties for the custom action.</p> <note> <p>You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of {Config:name}, as long as the configuration property is both required and not secret. For more information, see <a href="http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html">Create a Custom Action for a Pipeline</a>.</p> </note>'
       inputArtifactDetails:
-        $ref: '#/definitions/ArtifactDetails'
+        $ref: '#/definitions/[object Object]'
         description: 'The details of the input artifact for the action, such as its commit ID.'
       outputArtifactDetails:
-        $ref: '#/definitions/ArtifactDetails'
+        $ref: '#/definitions/[object Object]'
         description: 'The details of the output artifact of the action, such as its commit ID.'
     description: Represents the input of a CreateCustomActionType operation.
   LimitExceededException: {}
@@ -1369,7 +1369,7 @@ definitions:
     type: object
     properties:
       pipeline:
-        $ref: '#/definitions/PipelineDeclaration'
+        $ref: '#/definitions/[object Object]'
         description: 'Represents the structure of actions and stages to be performed in the pipeline. '
     description: Represents the output of a CreatePipeline action.
   CreatePipelineInput:
@@ -1378,7 +1378,7 @@ definitions:
       - pipeline
     properties:
       pipeline:
-        $ref: '#/definitions/PipelineDeclaration'
+        $ref: '#/definitions/[object Object]'
         description: 'Represents the structure of actions and stages to be performed in the pipeline. '
     description: Represents the input of a CreatePipeline action.
   PipelineNameInUseException: {}
@@ -1394,13 +1394,13 @@ definitions:
       - version
     properties:
       category:
-        $ref: '#/definitions/ActionCategory'
+        $ref: '#/definitions/[object Object]'
         description: 'The category of the custom action that you want to delete, such as source or deploy.'
       provider:
-        $ref: '#/definitions/ActionProvider'
+        $ref: '#/definitions/[object Object]'
         description: 'The provider of the service used in the custom action, such as AWS CodeDeploy.'
       version:
-        $ref: '#/definitions/Version'
+        $ref: '#/definitions/[object Object]'
         description: The version of the custom action to delete.
     description: Represents the input of a DeleteCustomActionType operation. The custom action will be marked as deleted.
   DeletePipelineInput:
@@ -1409,7 +1409,7 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline to be deleted.
     description: Represents the input of a DeletePipeline action.
   DeleteWebhookOutput:
@@ -1421,7 +1421,7 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/WebhookName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the webhook you want to delete.
   DeregisterWebhookWithThirdPartyOutput:
     type: object
@@ -1430,7 +1430,7 @@ definitions:
     type: object
     properties:
       webhookName:
-        $ref: '#/definitions/WebhookName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the webhook you want to deregister.
   WebhookNotFoundException: {}
   DisableStageTransitionInput:
@@ -1442,16 +1442,16 @@ definitions:
       - reason
     properties:
       pipelineName:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline in which you want to disable the flow of artifacts from one stage to another.
       stageName:
-        $ref: '#/definitions/StageName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the stage where you want to disable the inbound or outbound transition of artifacts.
       transitionType:
-        $ref: '#/definitions/StageTransitionType'
+        $ref: '#/definitions/[object Object]'
         description: 'Specifies whether artifacts will be prevented from transitioning into the stage and being processed by the actions in that stage (inbound), or prevented from transitioning from the stage after they have been processed by the actions in that stage (outbound).'
       reason:
-        $ref: '#/definitions/DisabledReason'
+        $ref: '#/definitions/[object Object]'
         description: 'The reason given to the user why a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.'
     description: Represents the input of a DisableStageTransition action.
   PipelineNotFoundException: {}
@@ -1464,20 +1464,20 @@ definitions:
       - transitionType
     properties:
       pipelineName:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline in which you want to enable the flow of artifacts from one stage to another.
       stageName:
-        $ref: '#/definitions/StageName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the stage where you want to enable the transition of artifacts, either into the stage (inbound) or from that stage to the next stage (outbound).'
       transitionType:
-        $ref: '#/definitions/StageTransitionType'
+        $ref: '#/definitions/[object Object]'
         description: Specifies whether artifacts will be allowed to enter the stage and be processed by the actions in that stage (inbound) or whether already-processed artifacts will be allowed to transition to the next stage (outbound).
     description: Represents the input of an EnableStageTransition action.
   GetJobDetailsOutput:
     type: object
     properties:
       jobDetails:
-        $ref: '#/definitions/JobDetails'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The details of the job.</p> <note> <p>If AWSSessionCredentials is used, a long-running job can call GetJobDetails again to obtain new credentials.</p> </note>'
     description: Represents the output of a GetJobDetails action.
   GetJobDetailsInput:
@@ -1486,17 +1486,17 @@ definitions:
       - jobId
     properties:
       jobId:
-        $ref: '#/definitions/JobId'
+        $ref: '#/definitions/[object Object]'
         description: The unique system-generated ID for the job.
     description: Represents the input of a GetJobDetails action.
   GetPipelineOutput:
     type: object
     properties:
       pipeline:
-        $ref: '#/definitions/PipelineDeclaration'
+        $ref: '#/definitions/[object Object]'
         description: 'Represents the structure of actions and stages to be performed in the pipeline. '
       metadata:
-        $ref: '#/definitions/PipelineMetadata'
+        $ref: '#/definitions/[object Object]'
         description: Represents the pipeline metadata information returned as part of the output of a GetPipeline action.
     description: Represents the output of a GetPipeline action.
   GetPipelineInput:
@@ -1505,10 +1505,10 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline for which you want to get information. Pipeline names must be unique under an Amazon Web Services (AWS) user account.
       version:
-        $ref: '#/definitions/PipelineVersion'
+        $ref: '#/definitions/[object Object]'
         description: 'The version number of the pipeline. If you do not specify a version, defaults to the most current version.'
     description: Represents the input of a GetPipeline action.
   PipelineVersionNotFoundException: {}
@@ -1516,7 +1516,7 @@ definitions:
     type: object
     properties:
       pipelineExecution:
-        $ref: '#/definitions/PipelineExecution'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about the execution of a pipeline.
     description: Represents the output of a GetPipelineExecution action.
   GetPipelineExecutionInput:
@@ -1526,10 +1526,10 @@ definitions:
       - pipelineExecutionId
     properties:
       pipelineName:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline about which you want to get execution details.
       pipelineExecutionId:
-        $ref: '#/definitions/PipelineExecutionId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the pipeline execution about which you want to get execution details.
     description: Represents the input of a GetPipelineExecution action.
   PipelineExecutionNotFoundException: {}
@@ -1537,19 +1537,19 @@ definitions:
     type: object
     properties:
       pipelineName:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline for which you want to get the state.
       pipelineVersion:
-        $ref: '#/definitions/PipelineVersion'
+        $ref: '#/definitions/[object Object]'
         description: <p>The version number of the pipeline.</p> <note> <p>A newly-created pipeline is always assigned a version number of <code>1</code>.</p> </note>
       stageStates:
-        $ref: '#/definitions/StageStateList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of the pipeline stage output information, including stage name, state, most recent run details, whether the stage is disabled, and other data.'
       created:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The date and time the pipeline was created, in timestamp format.'
       updated:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The date and time the pipeline was last updated, in timestamp format.'
     description: Represents the output of a GetPipelineState action.
   GetPipelineStateInput:
@@ -1558,14 +1558,14 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline about which you want to get information.
     description: Represents the input of a GetPipelineState action.
   GetThirdPartyJobDetailsOutput:
     type: object
     properties:
       jobDetails:
-        $ref: '#/definitions/ThirdPartyJobDetails'
+        $ref: '#/definitions/[object Object]'
         description: 'The details of the job, including any protected values defined for the job.'
     description: Represents the output of a GetThirdPartyJobDetails action.
   GetThirdPartyJobDetailsInput:
@@ -1575,10 +1575,10 @@ definitions:
       - clientToken
     properties:
       jobId:
-        $ref: '#/definitions/ThirdPartyJobId'
+        $ref: '#/definitions/[object Object]'
         description: The unique system-generated ID used for identifying the job.
       clientToken:
-        $ref: '#/definitions/ClientToken'
+        $ref: '#/definitions/[object Object]'
         description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
     description: Represents the input of a GetThirdPartyJobDetails action.
   InvalidJobException: {}
@@ -1588,20 +1588,20 @@ definitions:
       - actionTypes
     properties:
       actionTypes:
-        $ref: '#/definitions/ActionTypeList'
+        $ref: '#/definitions/[object Object]'
         description: Provides details of the action types.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If the amount of returned information is significantly large, an identifier is also returned which can be used in a subsequent list action types call to return the next set of action types in the list.'
     description: Represents the output of a ListActionTypes action.
   ListActionTypesInput:
     type: object
     properties:
       actionOwnerFilter:
-        $ref: '#/definitions/ActionOwner'
+        $ref: '#/definitions/[object Object]'
         description: Filters the list of action types to those created by a specified entity.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'An identifier that was returned from the previous list action types call, which can be used to return the next set of action types in the list.'
     description: Represents the input of a ListActionTypes action.
   InvalidNextTokenException: {}
@@ -1609,10 +1609,10 @@ definitions:
     type: object
     properties:
       pipelineExecutionSummaries:
-        $ref: '#/definitions/PipelineExecutionSummaryList'
+        $ref: '#/definitions/[object Object]'
         description: A list of executions in the history of a pipeline.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'A token that can be used in the next ListPipelineExecutions call. To view all items in the list, continue to call this operation with each subsequent token until no more nextToken values are returned.'
     description: Represents the output of a ListPipelineExecutions action.
   ListPipelineExecutionsInput:
@@ -1621,55 +1621,55 @@ definitions:
       - pipelineName
     properties:
       pipelineName:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline for which you want to get execution summary information.
       maxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. The available pipeline execution history is limited to the most recent 12 months, based on pipeline execution start times. Default value is 100.'
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token that was returned from the previous ListPipelineExecutions call, which can be used to return the next set of pipeline executions in the list.'
     description: Represents the input of a ListPipelineExecutions action.
   ListPipelinesOutput:
     type: object
     properties:
       pipelines:
-        $ref: '#/definitions/PipelineList'
+        $ref: '#/definitions/[object Object]'
         description: The list of pipelines.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If the amount of returned information is significantly large, an identifier is also returned which can be used in a subsequent list pipelines call to return the next set of pipelines in the list.'
     description: Represents the output of a ListPipelines action.
   ListPipelinesInput:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'An identifier that was returned from the previous list pipelines call, which can be used to return the next set of pipelines in the list.'
     description: Represents the input of a ListPipelines action.
   ListWebhooksOutput:
     type: object
     properties:
       webhooks:
-        $ref: '#/definitions/WebhookList'
+        $ref: '#/definitions/[object Object]'
         description: The JSON detail returned for each webhook in the list output for the ListWebhooks call.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent ListWebhooks call to return the next set of webhooks in the list. '
   ListWebhooksInput:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token that was returned from the previous ListWebhooks call, which can be used to return the next set of webhooks in the list.'
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value.'
   PollForJobsOutput:
     type: object
     properties:
       jobs:
-        $ref: '#/definitions/JobList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the jobs to take action on.
     description: Represents the output of a PollForJobs action.
   PollForJobsInput:
@@ -1678,13 +1678,13 @@ definitions:
       - actionTypeId
     properties:
       actionTypeId:
-        $ref: '#/definitions/ActionTypeId'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about an action type.
       maxBatchSize:
-        $ref: '#/definitions/MaxBatchSize'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of jobs to return in a poll for jobs call.
       queryParam:
-        $ref: '#/definitions/QueryParamMap'
+        $ref: '#/definitions/[object Object]'
         description: 'A map of property names and values. For an action type with no queryable properties, this value must be null or an empty map. For an action type with a queryable property, you must supply that property as a key in the map. Only jobs whose action configuration matches the mapped value will be returned.'
     description: Represents the input of a PollForJobs action.
   ActionTypeNotFoundException: {}
@@ -1692,7 +1692,7 @@ definitions:
     type: object
     properties:
       jobs:
-        $ref: '#/definitions/ThirdPartyJobList'
+        $ref: '#/definitions/[object Object]'
         description: Information about the jobs to take action on.
     description: Represents the output of a PollForThirdPartyJobs action.
   PollForThirdPartyJobsInput:
@@ -1701,20 +1701,20 @@ definitions:
       - actionTypeId
     properties:
       actionTypeId:
-        $ref: '#/definitions/ActionTypeId'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about an action type.
       maxBatchSize:
-        $ref: '#/definitions/MaxBatchSize'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of jobs to return in a poll for jobs call.
     description: Represents the input of a PollForThirdPartyJobs action.
   PutActionRevisionOutput:
     type: object
     properties:
       newRevision:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether the artifact revision was previously used in an execution of the specified pipeline.
       pipelineExecutionId:
-        $ref: '#/definitions/PipelineExecutionId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the current workflow state of the pipeline.
     description: Represents the output of a PutActionRevision action.
   PutActionRevisionInput:
@@ -1726,16 +1726,16 @@ definitions:
       - actionRevision
     properties:
       pipelineName:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline that will start processing the revision to the source.
       stageName:
-        $ref: '#/definitions/StageName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the stage that contains the action that will act upon the revision.
       actionName:
-        $ref: '#/definitions/ActionName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the action that will process the revision.
       actionRevision:
-        $ref: '#/definitions/ActionRevision'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about the version (or revision) of an action.
     description: Represents the input of a PutActionRevision action.
   ActionNotFoundException: {}
@@ -1743,7 +1743,7 @@ definitions:
     type: object
     properties:
       approvedAt:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: The timestamp showing when the approval or rejection was submitted.
     description: Represents the output of a PutApprovalResult action.
   PutApprovalResultInput:
@@ -1756,19 +1756,19 @@ definitions:
       - token
     properties:
       pipelineName:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the pipeline that contains the action. '
       stageName:
-        $ref: '#/definitions/StageName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the stage that contains the action.
       actionName:
-        $ref: '#/definitions/ActionName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the action for which approval is requested.
       result:
-        $ref: '#/definitions/ApprovalResult'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about the result of the approval request.
       token:
-        $ref: '#/definitions/ApprovalToken'
+        $ref: '#/definitions/[object Object]'
         description: The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the <a>GetPipelineState</a> action and is used to validate that the approval request corresponding to this token is still valid.
     description: Represents the input of a PutApprovalResult action.
   InvalidApprovalTokenException: {}
@@ -1780,10 +1780,10 @@ definitions:
       - failureDetails
     properties:
       jobId:
-        $ref: '#/definitions/JobId'
+        $ref: '#/definitions/[object Object]'
         description: The unique system-generated ID of the job that failed. This is the same ID returned from PollForJobs.
       failureDetails:
-        $ref: '#/definitions/FailureDetails'
+        $ref: '#/definitions/[object Object]'
         description: The details about the failure of a job.
     description: Represents the input of a PutJobFailureResult action.
   InvalidJobStateException: {}
@@ -1793,16 +1793,16 @@ definitions:
       - jobId
     properties:
       jobId:
-        $ref: '#/definitions/JobId'
+        $ref: '#/definitions/[object Object]'
         description: The unique system-generated ID of the job that succeeded. This is the same ID returned from PollForJobs.
       currentRevision:
-        $ref: '#/definitions/CurrentRevision'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the current revision of the artifact successfully worked upon by the job.
       continuationToken:
-        $ref: '#/definitions/ContinuationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a custom action in progress. Future jobs will use this token in order to identify the running instance of the action. It can be reused to return additional information about the progress of the custom action. When the action is complete, no continuation token should be supplied.'
       executionDetails:
-        $ref: '#/definitions/ExecutionDetails'
+        $ref: '#/definitions/[object Object]'
         description: 'The execution details of the successful job, such as the actions taken by the job worker.'
     description: Represents the input of a PutJobSuccessResult action.
   PutThirdPartyJobFailureResultInput:
@@ -1813,13 +1813,13 @@ definitions:
       - failureDetails
     properties:
       jobId:
-        $ref: '#/definitions/ThirdPartyJobId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the job that failed. This is the same ID returned from PollForThirdPartyJobs.
       clientToken:
-        $ref: '#/definitions/ClientToken'
+        $ref: '#/definitions/[object Object]'
         description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
       failureDetails:
-        $ref: '#/definitions/FailureDetails'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about failure details.
     description: Represents the input of a PutThirdPartyJobFailureResult action.
   PutThirdPartyJobSuccessResultInput:
@@ -1829,26 +1829,26 @@ definitions:
       - clientToken
     properties:
       jobId:
-        $ref: '#/definitions/ThirdPartyJobId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the job that successfully completed. This is the same ID returned from PollForThirdPartyJobs.
       clientToken:
-        $ref: '#/definitions/ClientToken'
+        $ref: '#/definitions/[object Object]'
         description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
       currentRevision:
-        $ref: '#/definitions/CurrentRevision'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about a current revision.
       continuationToken:
-        $ref: '#/definitions/ContinuationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a partner action in progress. Future jobs will use this token in order to identify the running instance of the action. It can be reused to return additional information about the progress of the partner action. When the action is complete, no continuation token should be supplied.'
       executionDetails:
-        $ref: '#/definitions/ExecutionDetails'
+        $ref: '#/definitions/[object Object]'
         description: 'The details of the actions taken and results produced on an artifact as it passes through stages in the pipeline. '
     description: Represents the input of a PutThirdPartyJobSuccessResult action.
   PutWebhookOutput:
     type: object
     properties:
       webhook:
-        $ref: '#/definitions/ListWebhookItem'
+        $ref: '#/definitions/[object Object]'
         description: 'The detail returned from creating the webhook, such as the webhook name, webhook URL, and webhook ARN.'
   PutWebhookInput:
     type: object
@@ -1856,7 +1856,7 @@ definitions:
       - webhook
     properties:
       webhook:
-        $ref: '#/definitions/WebhookDefinition'
+        $ref: '#/definitions/[object Object]'
         description: 'The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name. Give the webhook a unique name which identifies the webhook being defined. You may choose to name the webhook after the pipeline and action it targets so that you can easily recognize what it''s used for later.'
   InvalidWebhookFilterPatternException: {}
   InvalidWebhookAuthenticationParametersException: {}
@@ -1867,13 +1867,13 @@ definitions:
     type: object
     properties:
       webhookName:
-        $ref: '#/definitions/WebhookName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of an existing webhook created with PutWebhook to register with a supported third party. '
   RetryStageExecutionOutput:
     type: object
     properties:
       pipelineExecutionId:
-        $ref: '#/definitions/PipelineExecutionId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the current workflow execution in the failed stage.
     description: Represents the output of a RetryStageExecution action.
   RetryStageExecutionInput:
@@ -1885,16 +1885,16 @@ definitions:
       - retryMode
     properties:
       pipelineName:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline that contains the failed stage.
       stageName:
-        $ref: '#/definitions/StageName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the failed stage to be retried.
       pipelineExecutionId:
-        $ref: '#/definitions/PipelineExecutionId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the pipeline execution in the failed stage to be retried. Use the <a>GetPipelineState</a> action to retrieve the current pipelineExecutionId of the failed stage
       retryMode:
-        $ref: '#/definitions/StageRetryMode'
+        $ref: '#/definitions/[object Object]'
         description: 'The scope of the retry attempt. Currently, the only supported value is FAILED_ACTIONS.'
     description: Represents the input of a RetryStageExecution action.
   StageNotRetryableException: {}
@@ -1903,7 +1903,7 @@ definitions:
     type: object
     properties:
       pipelineExecutionId:
-        $ref: '#/definitions/PipelineExecutionId'
+        $ref: '#/definitions/[object Object]'
         description: The unique system-generated ID of the pipeline execution that was started.
     description: Represents the output of a StartPipelineExecution action.
   StartPipelineExecutionInput:
@@ -1912,17 +1912,17 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline to start.
       clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
+        $ref: '#/definitions/[object Object]'
         description: The system-generated unique ID used to identify a unique execution request.
     description: Represents the input of a StartPipelineExecution action.
   UpdatePipelineOutput:
     type: object
     properties:
       pipeline:
-        $ref: '#/definitions/PipelineDeclaration'
+        $ref: '#/definitions/[object Object]'
         description: The structure of the updated pipeline.
     description: Represents the output of an UpdatePipeline action.
   UpdatePipelineInput:
@@ -1931,19 +1931,14 @@ definitions:
       - pipeline
     properties:
       pipeline:
-        $ref: '#/definitions/PipelineDeclaration'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline to be updated.
     description: Represents the input of an UpdatePipeline action.
   AWSRegionName:
     type: string
     minLength: 4
     maxLength: 30
-  AccessKeyId:
-    type: string
-  SecretAccessKey:
-    type: string
-  SessionToken:
-    type: string
+  '[object Object]': {}
   AWSSessionCredentials:
     type: object
     required:
@@ -1952,43 +1947,20 @@ definitions:
       - sessionToken
     properties:
       accessKeyId:
-        $ref: '#/definitions/AccessKeyId'
+        $ref: '#/definitions/[object Object]'
         description: The access key for the session.
       secretAccessKey:
-        $ref: '#/definitions/SecretAccessKey'
+        $ref: '#/definitions/[object Object]'
         description: The secret access key for the session.
       sessionToken:
-        $ref: '#/definitions/SessionToken'
+        $ref: '#/definitions/[object Object]'
         description: The token for the session.
     description: Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline.
+  AccessKeyId:
+    type: string
   AccountId:
     type: string
     pattern: '[0-9]{12}'
-  JobId:
-    type: string
-    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
-  Nonce:
-    type: string
-    minLength: 1
-    maxLength: 50
-  JobStatus:
-    type: string
-    enum:
-      - Created
-      - Queued
-      - Dispatched
-      - InProgress
-      - TimedOut
-      - Succeeded
-      - Failed
-  ThirdPartyJobId:
-    type: string
-    minLength: 1
-    maxLength: 512
-  ClientToken:
-    type: string
-    minLength: 1
-    maxLength: 256
   ActionCategory:
     type: string
     enum:
@@ -1998,20 +1970,11 @@ definitions:
       - Test
       - Invoke
       - Approval
-  ActionConfigurationMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ActionConfigurationKey'
-        value:
-          $ref: '#/definitions/ActionConfigurationValue'
   ActionConfiguration:
     type: object
     properties:
       configuration:
-        $ref: '#/definitions/ActionConfigurationMap'
+        $ref: '#/definitions/[object Object]'
         description: The configuration data for the action.
     description: Represents information about an action configuration.
   ActionConfigurationKey:
@@ -2022,18 +1985,15 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1000
-  Boolean:
-    type: boolean
-  Description:
-    type: string
-    minLength: 1
-    maxLength: 160
-  ActionConfigurationPropertyType:
-    type: string
-    enum:
-      - String
-      - Number
-      - Boolean
+  ActionConfigurationMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ActionConfigurationKey'
+        value:
+          $ref: '#/definitions/ActionConfigurationValue'
   ActionConfigurationProperty:
     type: object
     required:
@@ -2043,86 +2003,50 @@ definitions:
       - secret
     properties:
       name:
-        $ref: '#/definitions/ActionConfigurationKey'
+        $ref: '#/definitions/[object Object]'
         description: The name of the action configuration property.
       required:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: Whether the configuration property is a required value.
       key:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: Whether the configuration property is a key.
       secret:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Whether the configuration property is secret. Secrets are hidden from all calls except for GetJobDetails, GetThirdPartyJobDetails, PollForJobs, and PollForThirdPartyJobs.</p> <p>When updating a pipeline, passing * * * * * without changing any other values of the action will preserve the prior value of the secret.</p>'
       queryable:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates that the property will be used in conjunction with PollForJobs. When creating a custom action, an action can have up to one queryable property. If it has one, that property must be both required and not secret.</p> <p>If you create a pipeline with a custom action type, and that custom action contains a queryable property, the value for that configuration property is subject to additional restrictions. The value must be less than or equal to twenty (20) characters. The value can contain only alphanumeric characters, underscores, and hyphens.</p>'
       description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: The description of the action configuration property that will be displayed to users.
       type:
-        $ref: '#/definitions/ActionConfigurationPropertyType'
+        $ref: '#/definitions/[object Object]'
         description: The type of the configuration property.
     description: Represents information about an action configuration property.
   ActionConfigurationPropertyList:
     type: array
     items:
-      $ref: '#/definitions/ActionConfigurationProperty'
+      $ref: '#/definitions/[object Object]'
     maxItems: 10
+  ActionConfigurationPropertyType:
+    type: string
+    enum:
+      - String
+      - Number
+      - Boolean
   ActionConfigurationQueryableValue:
     type: string
     pattern: '[a-zA-Z0-9_-]+'
     minLength: 1
     maxLength: 50
-  ActionName:
-    type: string
-    pattern: '[A-Za-z0-9.@\-_]+'
-    minLength: 1
-    maxLength: 100
   ActionContext:
     type: object
     properties:
       name:
-        $ref: '#/definitions/ActionName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the action within the context of a job.
     description: Represents the context of an action within the stage of a pipeline to a job worker.
-  ActionTypeId:
-    type: object
-    required:
-      - category
-      - owner
-      - provider
-      - version
-    properties:
-      category:
-        $ref: '#/definitions/ActionCategory'
-        description: 'A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below.'
-      owner:
-        $ref: '#/definitions/ActionOwner'
-        description: The creator of the action being called.
-      provider:
-        $ref: '#/definitions/ActionProvider'
-        description: 'The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of AWS CodeDeploy, which would be specified as CodeDeploy.'
-      version:
-        $ref: '#/definitions/Version'
-        description: A string that describes the action version.
-    description: Represents information about an action type.
-  ActionRunOrder:
-    type: integer
-    minimum: 1
-    maximum: 999
-  OutputArtifactList:
-    type: array
-    items:
-      $ref: '#/definitions/OutputArtifact'
-  InputArtifactList:
-    type: array
-    items:
-      $ref: '#/definitions/InputArtifact'
-  RoleArn:
-    type: string
-    pattern: 'arn:aws(-[\w]+)*:iam::[0-9]{12}:role/.*'
-    maxLength: 1024
   ActionDeclaration:
     type: object
     required:
@@ -2130,100 +2054,74 @@ definitions:
       - actionTypeId
     properties:
       name:
-        $ref: '#/definitions/ActionName'
+        $ref: '#/definitions/[object Object]'
         description: The action declaration's name.
       actionTypeId:
-        $ref: '#/definitions/ActionTypeId'
+        $ref: '#/definitions/[object Object]'
         description: The configuration information for the action type.
       runOrder:
-        $ref: '#/definitions/ActionRunOrder'
+        $ref: '#/definitions/[object Object]'
         description: The order in which actions are run.
       configuration:
-        $ref: '#/definitions/ActionConfigurationMap'
+        $ref: '#/definitions/[object Object]'
         description: The action declaration's configuration.
       outputArtifacts:
-        $ref: '#/definitions/OutputArtifactList'
+        $ref: '#/definitions/[object Object]'
         description: 'The name or ID of the result of the action declaration, such as a test or build artifact.'
       inputArtifacts:
-        $ref: '#/definitions/InputArtifactList'
+        $ref: '#/definitions/[object Object]'
         description: 'The name or ID of the artifact consumed by the action, such as a test or build artifact.'
       roleArn:
-        $ref: '#/definitions/RoleArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the IAM service role that will perform the declared action. This is assumed through the roleArn for the pipeline.
       region:
-        $ref: '#/definitions/AWSRegionName'
+        $ref: '#/definitions/[object Object]'
         description: 'The action declaration''s AWS Region, such as us-east-1.'
     description: Represents information about an action declaration.
+  ActionExecution:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/[object Object]'
+        description: 'The status of the action, or for a completed action, the last status of the action.'
+      summary:
+        $ref: '#/definitions/[object Object]'
+        description: A summary of the run of the action.
+      lastStatusChange:
+        $ref: '#/definitions/[object Object]'
+        description: The last status change of the action.
+      token:
+        $ref: '#/definitions/[object Object]'
+        description: The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the GetPipelineState command and is used to validate that the approval request corresponding to this token is still valid.
+      lastUpdatedBy:
+        $ref: '#/definitions/[object Object]'
+        description: The ARN of the user who last changed the pipeline.
+      externalExecutionId:
+        $ref: '#/definitions/[object Object]'
+        description: The external ID of the run of the action.
+      externalExecutionUrl:
+        $ref: '#/definitions/[object Object]'
+        description: 'The URL of a resource external to AWS that will be used when running the action, for example an external repository URL.'
+      percentComplete:
+        $ref: '#/definitions/[object Object]'
+        description: A percentage of completeness of the action as it runs.
+      errorDetails:
+        $ref: '#/definitions/[object Object]'
+        description: The details of an error returned by a URL external to AWS.
+    description: Represents information about the run of an action.
   ActionExecutionStatus:
     type: string
     enum:
       - InProgress
       - Succeeded
       - Failed
-  ExecutionSummary:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  Timestamp:
-    type: string
-    format: date-time
   ActionExecutionToken:
     type: string
-  LastUpdatedBy:
+  ActionName:
     type: string
-  ExecutionId:
-    type: string
+    pattern: '[A-Za-z0-9.@\-_]+'
     minLength: 1
-    maxLength: 1500
-  Url:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  Percentage:
-    type: integer
-    minimum: 0
-    maximum: 100
-  ErrorDetails:
-    type: object
-    properties:
-      code:
-        $ref: '#/definitions/Code'
-        description: The system ID or error number code of the error.
-      message:
-        $ref: '#/definitions/Message'
-        description: The text of the error message.
-    description: Represents information about an error in AWS CodePipeline.
-  ActionExecution:
-    type: object
-    properties:
-      status:
-        $ref: '#/definitions/ActionExecutionStatus'
-        description: 'The status of the action, or for a completed action, the last status of the action.'
-      summary:
-        $ref: '#/definitions/ExecutionSummary'
-        description: A summary of the run of the action.
-      lastStatusChange:
-        $ref: '#/definitions/Timestamp'
-        description: The last status change of the action.
-      token:
-        $ref: '#/definitions/ActionExecutionToken'
-        description: The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the GetPipelineState command and is used to validate that the approval request corresponding to this token is still valid.
-      lastUpdatedBy:
-        $ref: '#/definitions/LastUpdatedBy'
-        description: The ARN of the user who last changed the pipeline.
-      externalExecutionId:
-        $ref: '#/definitions/ExecutionId'
-        description: The external ID of the run of the action.
-      externalExecutionUrl:
-        $ref: '#/definitions/Url'
-        description: 'The URL of a resource external to AWS that will be used when running the action, for example an external repository URL.'
-      percentComplete:
-        $ref: '#/definitions/Percentage'
-        description: A percentage of completeness of the action as it runs.
-      errorDetails:
-        $ref: '#/definitions/ErrorDetails'
-        description: The details of an error returned by a URL external to AWS.
-    description: Represents information about the run of an action.
+    maxLength: 100
   ActionOwner:
     type: string
     enum:
@@ -2235,14 +2133,6 @@ definitions:
     pattern: '[0-9A-Za-z_-]+'
     minLength: 1
     maxLength: 25
-  Revision:
-    type: string
-    minLength: 1
-    maxLength: 1500
-  RevisionChangeIdentifier:
-    type: string
-    minLength: 1
-    maxLength: 100
   ActionRevision:
     type: object
     required:
@@ -2251,67 +2141,42 @@ definitions:
       - created
     properties:
       revisionId:
-        $ref: '#/definitions/Revision'
+        $ref: '#/definitions/[object Object]'
         description: The system-generated unique ID that identifies the revision number of the action.
       revisionChangeId:
-        $ref: '#/definitions/RevisionChangeIdentifier'
+        $ref: '#/definitions/[object Object]'
         description: 'The unique identifier of the change that set the state to this revision, for example a deployment ID or timestamp.'
       created:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The date and time when the most recent version of the action was created, in timestamp format.'
     description: Represents information about the version (or revision) of an action.
+  ActionRunOrder:
+    type: integer
+    minimum: 1
+    maximum: 999
   ActionState:
     type: object
     properties:
       actionName:
-        $ref: '#/definitions/ActionName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the action.
       currentRevision:
-        $ref: '#/definitions/ActionRevision'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about the version (or revision) of an action.
       latestExecution:
-        $ref: '#/definitions/ActionExecution'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about the run of an action.
       entityUrl:
-        $ref: '#/definitions/Url'
+        $ref: '#/definitions/[object Object]'
         description: 'A URL link for more information about the state of the action, such as a deployment group details page.'
       revisionUrl:
-        $ref: '#/definitions/Url'
+        $ref: '#/definitions/[object Object]'
         description: 'A URL link for more information about the revision, such as a commit details page.'
     description: Represents information about the state of an action.
   ActionStateList:
     type: array
     items:
-      $ref: '#/definitions/ActionState'
-  ActionTypeSettings:
-    type: object
-    properties:
-      thirdPartyConfigurationUrl:
-        $ref: '#/definitions/Url'
-        description: The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.
-      entityUrlTemplate:
-        $ref: '#/definitions/UrlTemplate'
-        description: 'The URL returned to the AWS CodePipeline console that provides a deep link to the resources of the external system, such as the configuration page for an AWS CodeDeploy deployment group. This link is provided as part of the action display within the pipeline.'
-      executionUrlTemplate:
-        $ref: '#/definitions/UrlTemplate'
-        description: 'The URL returned to the AWS CodePipeline console that contains a link to the top-level landing page for the external system, such as console page for AWS CodeDeploy. This link is shown on the pipeline view page in the AWS CodePipeline console and provides a link to the execution entity of the external action.'
-      revisionUrlTemplate:
-        $ref: '#/definitions/UrlTemplate'
-        description: The URL returned to the AWS CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.
-    description: Returns information about the settings for an action type.
-  ArtifactDetails:
-    type: object
-    required:
-      - minimumCount
-      - maximumCount
-    properties:
-      minimumCount:
-        $ref: '#/definitions/MinimumArtifactCount'
-        description: The minimum number of artifacts allowed for the action type.
-      maximumCount:
-        $ref: '#/definitions/MaximumArtifactCount'
-        description: The maximum number of artifacts allowed for the action type.
-    description: Returns information about the details of an artifact.
+      $ref: '#/definitions/[object Object]'
   ActionType:
     type: object
     required:
@@ -2320,43 +2185,62 @@ definitions:
       - outputArtifactDetails
     properties:
       id:
-        $ref: '#/definitions/ActionTypeId'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about an action type.
       settings:
-        $ref: '#/definitions/ActionTypeSettings'
+        $ref: '#/definitions/[object Object]'
         description: The settings for the action type.
       actionConfigurationProperties:
-        $ref: '#/definitions/ActionConfigurationPropertyList'
+        $ref: '#/definitions/[object Object]'
         description: The configuration properties for the action type.
       inputArtifactDetails:
-        $ref: '#/definitions/ArtifactDetails'
+        $ref: '#/definitions/[object Object]'
         description: 'The details of the input artifact for the action, such as its commit ID.'
       outputArtifactDetails:
-        $ref: '#/definitions/ArtifactDetails'
+        $ref: '#/definitions/[object Object]'
         description: 'The details of the output artifact of the action, such as its commit ID.'
     description: Returns information about the details of an action type.
-  Version:
-    type: string
-    pattern: '[0-9A-Za-z_-]+'
-    minLength: 1
-    maxLength: 9
+  ActionTypeId:
+    type: object
+    required:
+      - category
+      - owner
+      - provider
+      - version
+    properties:
+      category:
+        $ref: '#/definitions/[object Object]'
+        description: 'A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below.'
+      owner:
+        $ref: '#/definitions/[object Object]'
+        description: The creator of the action being called.
+      provider:
+        $ref: '#/definitions/[object Object]'
+        description: 'The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of AWS CodeDeploy, which would be specified as CodeDeploy.'
+      version:
+        $ref: '#/definitions/[object Object]'
+        description: A string that describes the action version.
+    description: Represents information about an action type.
   ActionTypeList:
     type: array
     items:
-      $ref: '#/definitions/ActionType'
-  UrlTemplate:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  ApprovalSummary:
-    type: string
-    minLength: 0
-    maxLength: 512
-  ApprovalStatus:
-    type: string
-    enum:
-      - Approved
-      - Rejected
+      $ref: '#/definitions/[object Object]'
+  ActionTypeSettings:
+    type: object
+    properties:
+      thirdPartyConfigurationUrl:
+        $ref: '#/definitions/[object Object]'
+        description: The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.
+      entityUrlTemplate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The URL returned to the AWS CodePipeline console that provides a deep link to the resources of the external system, such as the configuration page for an AWS CodeDeploy deployment group. This link is provided as part of the action display within the pipeline.'
+      executionUrlTemplate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The URL returned to the AWS CodePipeline console that contains a link to the top-level landing page for the external system, such as console page for AWS CodeDeploy. This link is shown on the pipeline view page in the AWS CodePipeline console and provides a link to the execution entity of the external action.'
+      revisionUrlTemplate:
+        $ref: '#/definitions/[object Object]'
+        description: The URL returned to the AWS CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.
+    description: Returns information about the settings for an action type.
   ApprovalResult:
     type: object
     required:
@@ -2364,124 +2248,99 @@ definitions:
       - status
     properties:
       summary:
-        $ref: '#/definitions/ApprovalSummary'
+        $ref: '#/definitions/[object Object]'
         description: The summary of the current status of the approval request.
       status:
-        $ref: '#/definitions/ApprovalStatus'
+        $ref: '#/definitions/[object Object]'
         description: The response submitted by a reviewer assigned to an approval action request.
     description: Represents information about the result of an approval request.
+  ApprovalStatus:
+    type: string
+    enum:
+      - Approved
+      - Rejected
+  ApprovalSummary:
+    type: string
+    minLength: 0
+    maxLength: 512
   ApprovalToken:
     type: string
     pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+  Artifact:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: The artifact's name.
+      revision:
+        $ref: '#/definitions/[object Object]'
+        description: 'The artifact''s revision ID. Depending on the type of object, this could be a commit ID (GitHub) or a revision ID (Amazon S3).'
+      location:
+        $ref: '#/definitions/[object Object]'
+        description: The location of an artifact.
+    description: Represents information about an artifact that will be worked upon by actions in the pipeline.
+  ArtifactDetails:
+    type: object
+    required:
+      - minimumCount
+      - maximumCount
+    properties:
+      minimumCount:
+        $ref: '#/definitions/[object Object]'
+        description: The minimum number of artifacts allowed for the action type.
+      maximumCount:
+        $ref: '#/definitions/[object Object]'
+        description: The maximum number of artifacts allowed for the action type.
+    description: Returns information about the details of an artifact.
+  ArtifactList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ArtifactLocation:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/[object Object]'
+        description: The type of artifact in the location.
+      s3Location:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon S3 bucket that contains the artifact.
+    description: Represents information about the location of an artifact.
+  ArtifactLocationType:
+    type: string
+    enum:
+      - S3
   ArtifactName:
     type: string
     pattern: '[a-zA-Z0-9_\-]+'
     minLength: 1
     maxLength: 100
-  ArtifactLocation:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/ArtifactLocationType'
-        description: The type of artifact in the location.
-      s3Location:
-        $ref: '#/definitions/S3ArtifactLocation'
-        description: The Amazon S3 bucket that contains the artifact.
-    description: Represents information about the location of an artifact.
-  Artifact:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/ArtifactName'
-        description: The artifact's name.
-      revision:
-        $ref: '#/definitions/Revision'
-        description: 'The artifact''s revision ID. Depending on the type of object, this could be a commit ID (GitHub) or a revision ID (Amazon S3).'
-      location:
-        $ref: '#/definitions/ArtifactLocation'
-        description: The location of an artifact.
-    description: Represents information about an artifact that will be worked upon by actions in the pipeline.
-  MinimumArtifactCount:
-    type: integer
-    minimum: 0
-    maximum: 5
-  MaximumArtifactCount:
-    type: integer
-    minimum: 0
-    maximum: 5
-  ArtifactList:
-    type: array
-    items:
-      $ref: '#/definitions/Artifact'
-  ArtifactLocationType:
-    type: string
-    enum:
-      - S3
-  S3ArtifactLocation:
-    type: object
-    required:
-      - bucketName
-      - objectKey
-    properties:
-      bucketName:
-        $ref: '#/definitions/S3BucketName'
-        description: The name of the Amazon S3 bucket.
-      objectKey:
-        $ref: '#/definitions/S3ObjectKey'
-        description: 'The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket.'
-    description: The location of the Amazon S3 bucket that contains a revision.
-  RevisionSummary:
-    type: string
-    minLength: 1
-    maxLength: 2048
   ArtifactRevision:
     type: object
     properties:
       name:
-        $ref: '#/definitions/ArtifactName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of an artifact. This name might be system-generated, such as "MyApp", or might be defined by the user when an action is created.'
       revisionId:
-        $ref: '#/definitions/Revision'
+        $ref: '#/definitions/[object Object]'
         description: The revision ID of the artifact.
       revisionChangeIdentifier:
-        $ref: '#/definitions/RevisionChangeIdentifier'
+        $ref: '#/definitions/[object Object]'
         description: 'An additional identifier for a revision, such as a commit date or, for artifacts stored in Amazon S3 buckets, the ETag value.'
       revisionSummary:
-        $ref: '#/definitions/RevisionSummary'
+        $ref: '#/definitions/[object Object]'
         description: 'Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a <code>codepipeline-artifact-revision-summary</code> key specified in the object metadata.'
       created:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The date and time when the most recent revision of the artifact was created, in timestamp format.'
       revisionUrl:
-        $ref: '#/definitions/Url'
+        $ref: '#/definitions/[object Object]'
         description: 'The commit ID for the artifact revision. For artifacts stored in GitHub or AWS CodeCommit repositories, the commit ID is linked to a commit details page.'
     description: 'Represents revision details of an artifact. '
   ArtifactRevisionList:
     type: array
     items:
-      $ref: '#/definitions/ArtifactRevision'
-  ArtifactStoreType:
-    type: string
-    enum:
-      - S3
-  ArtifactStoreLocation:
-    type: string
-    pattern: '[a-zA-Z0-9\-\.]+'
-    minLength: 3
-    maxLength: 63
-  EncryptionKey:
-    type: object
-    required:
-      - id
-      - type
-    properties:
-      id:
-        $ref: '#/definitions/EncryptionKeyId'
-        description: 'The ID used to identify the key. For an AWS KMS key, this is the key ID or key ARN.'
-      type:
-        $ref: '#/definitions/EncryptionKeyType'
-        description: 'The type of encryption key, such as an AWS Key Management Service (AWS KMS) key. When creating or updating a pipeline, the value must be set to ''KMS''.'
-    description: 'Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key.'
+      $ref: '#/definitions/[object Object]'
   ArtifactStore:
     type: object
     required:
@@ -2489,15 +2348,20 @@ definitions:
       - location
     properties:
       type:
-        $ref: '#/definitions/ArtifactStoreType'
+        $ref: '#/definitions/[object Object]'
         description: 'The type of the artifact store, such as S3.'
       location:
-        $ref: '#/definitions/ArtifactStoreLocation'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder within the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any Amazon S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
       encryptionKey:
-        $ref: '#/definitions/EncryptionKey'
+        $ref: '#/definitions/[object Object]'
         description: 'The encryption key used to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If this is undefined, the default key for Amazon S3 is used.'
     description: The Amazon S3 bucket where artifacts are stored for the pipeline.
+  ArtifactStoreLocation:
+    type: string
+    pattern: '[a-zA-Z0-9\-\.]+'
+    minLength: 3
+    maxLength: 63
   ArtifactStoreMap:
     type: array
     items:
@@ -2507,6 +2371,23 @@ definitions:
           $ref: '#/definitions/AWSRegionName'
         value:
           $ref: '#/definitions/ArtifactStore'
+  ArtifactStoreType:
+    type: string
+    enum:
+      - S3
+  BlockerDeclaration:
+    type: object
+    required:
+      - name
+      - type
+    properties:
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: Reserved for future use.
+      type:
+        $ref: '#/definitions/[object Object]'
+        description: Reserved for future use.
+    description: Reserved for future use.
   BlockerName:
     type: string
     minLength: 1
@@ -2515,19 +2396,8 @@ definitions:
     type: string
     enum:
       - Schedule
-  BlockerDeclaration:
-    type: object
-    required:
-      - name
-      - type
-    properties:
-      name:
-        $ref: '#/definitions/BlockerName'
-        description: Reserved for future use.
-      type:
-        $ref: '#/definitions/BlockerType'
-        description: Reserved for future use.
-    description: Reserved for future use.
+  Boolean:
+    type: boolean
   ClientId:
     type: string
     pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
@@ -2536,41 +2406,16 @@ definitions:
     pattern: '^[a-zA-Z0-9-]+$'
     minLength: 1
     maxLength: 128
+  ClientToken:
+    type: string
+    minLength: 1
+    maxLength: 256
   Code:
     type: string
   ContinuationToken:
     type: string
     minLength: 1
     maxLength: 2048
-  PipelineDeclaration:
-    type: object
-    required:
-      - name
-      - roleArn
-      - stages
-    properties:
-      name:
-        $ref: '#/definitions/PipelineName'
-        description: The name of the action to be performed.
-      roleArn:
-        $ref: '#/definitions/RoleArn'
-        description: 'The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform actions with no actionRoleArn, or to use to assume roles for actions with an actionRoleArn.'
-      artifactStore:
-        $ref: '#/definitions/ArtifactStore'
-        description: 'Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline. '
-      artifactStores:
-        $ref: '#/definitions/ArtifactStoreMap'
-        description: '<p>A mapping of artifactStore objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline. You can only use either artifactStore or artifactStores, not both.</p> <p>If you create a cross-region action in your pipeline, you must use artifactStores.</p>'
-      stages:
-        $ref: '#/definitions/PipelineStageDeclarationList'
-        description: The stage in which to perform the action.
-      version:
-        $ref: '#/definitions/PipelineVersion'
-        description: The version number of the pipeline. A new pipeline always has a version number of 1. This number is automatically incremented when a pipeline is updated.
-    description: Represents the structure of actions and stages to be performed in the pipeline.
-  Time:
-    type: string
-    format: date-time
   CurrentRevision:
     type: object
     required:
@@ -2578,38 +2423,22 @@ definitions:
       - changeIdentifier
     properties:
       revision:
-        $ref: '#/definitions/Revision'
+        $ref: '#/definitions/[object Object]'
         description: The revision ID of the current version of an artifact.
       changeIdentifier:
-        $ref: '#/definitions/RevisionChangeIdentifier'
+        $ref: '#/definitions/[object Object]'
         description: The change identifier for the current revision.
       created:
-        $ref: '#/definitions/Time'
+        $ref: '#/definitions/[object Object]'
         description: 'The date and time when the most recent revision of the artifact was created, in timestamp format.'
       revisionSummary:
-        $ref: '#/definitions/RevisionSummary'
+        $ref: '#/definitions/[object Object]'
         description: The summary of the most recent revision of the artifact.
     description: Represents information about a current revision.
-  PipelineName:
+  Description:
     type: string
-    pattern: '[A-Za-z0-9.@\-_]+'
     minLength: 1
-    maxLength: 100
-  WebhookName:
-    type: string
-    pattern: '[A-Za-z0-9.@\-_]+'
-    minLength: 1
-    maxLength: 100
-  StageName:
-    type: string
-    pattern: '[A-Za-z0-9.@\-_]+'
-    minLength: 1
-    maxLength: 100
-  StageTransitionType:
-    type: string
-    enum:
-      - Inbound
-      - Outbound
+    maxLength: 160
   DisabledReason:
     type: string
     pattern: '[a-zA-Z0-9!@ \(\)\.\*\?\-]+'
@@ -2617,6 +2446,19 @@ definitions:
     maxLength: 300
   Enabled:
     type: boolean
+  EncryptionKey:
+    type: object
+    required:
+      - id
+      - type
+    properties:
+      id:
+        $ref: '#/definitions/[object Object]'
+        description: 'The ID used to identify the key. For an AWS KMS key, this is the key ID or key ARN.'
+      type:
+        $ref: '#/definitions/[object Object]'
+        description: 'The type of encryption key, such as an AWS Key Management Service (AWS KMS) key. When creating or updating a pipeline, the value must be set to ''KMS''.'
+    description: 'Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key.'
   EncryptionKeyId:
     type: string
     minLength: 1
@@ -2625,23 +2467,53 @@ definitions:
     type: string
     enum:
       - KMS
-  Message:
-    type: string
-    minLength: 1
-    maxLength: 5000
+  ErrorDetails:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/[object Object]'
+        description: The system ID or error number code of the error.
+      message:
+        $ref: '#/definitions/[object Object]'
+        description: The text of the error message.
+    description: Represents information about an error in AWS CodePipeline.
   ExecutionDetails:
     type: object
     properties:
       summary:
-        $ref: '#/definitions/ExecutionSummary'
+        $ref: '#/definitions/[object Object]'
         description: The summary of the current status of the actions.
       externalExecutionId:
-        $ref: '#/definitions/ExecutionId'
+        $ref: '#/definitions/[object Object]'
         description: 'The system-generated unique ID of this action used to identify this job worker in any external systems, such as AWS CodeDeploy.'
       percentComplete:
-        $ref: '#/definitions/Percentage'
+        $ref: '#/definitions/[object Object]'
         description: 'The percentage of work completed on the action, represented on a scale of zero to one hundred percent.'
     description: The details of the actions taken and results produced on an artifact as it passes through stages in the pipeline.
+  ExecutionId:
+    type: string
+    minLength: 1
+    maxLength: 1500
+  ExecutionSummary:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  FailureDetails:
+    type: object
+    required:
+      - type
+      - message
+    properties:
+      type:
+        $ref: '#/definitions/[object Object]'
+        description: The type of the failure.
+      message:
+        $ref: '#/definitions/[object Object]'
+        description: The message about the failure.
+      externalExecutionId:
+        $ref: '#/definitions/[object Object]'
+        description: The external ID of the run of the action that failed.
+    description: Represents information about failure details.
   FailureType:
     type: string
     enum:
@@ -2651,160 +2523,93 @@ definitions:
       - RevisionOutOfSync
       - RevisionUnavailable
       - SystemUnavailable
-  FailureDetails:
-    type: object
-    required:
-      - type
-      - message
-    properties:
-      type:
-        $ref: '#/definitions/FailureType'
-        description: The type of the failure.
-      message:
-        $ref: '#/definitions/Message'
-        description: The message about the failure.
-      externalExecutionId:
-        $ref: '#/definitions/ExecutionId'
-        description: The external ID of the run of the action that failed.
-    description: Represents information about failure details.
-  JobDetails:
-    type: object
-    properties:
-      id:
-        $ref: '#/definitions/JobId'
-        description: The unique system-generated ID of the job.
-      data:
-        $ref: '#/definitions/JobData'
-        description: 'Represents additional information about a job required for a job worker to complete the job. '
-      accountId:
-        $ref: '#/definitions/AccountId'
-        description: The AWS account ID associated with the job.
-    description: Represents information about the details of a job.
-  PipelineExecutionId:
-    type: string
-    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
-  PipelineExecution:
-    type: object
-    properties:
-      pipelineName:
-        $ref: '#/definitions/PipelineName'
-        description: The name of the pipeline that was executed.
-      pipelineVersion:
-        $ref: '#/definitions/PipelineVersion'
-        description: The version number of the pipeline that was executed.
-      pipelineExecutionId:
-        $ref: '#/definitions/PipelineExecutionId'
-        description: The ID of the pipeline execution.
-      status:
-        $ref: '#/definitions/PipelineExecutionStatus'
-        description: '<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Succeeded: The pipeline execution was completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. </p> </li> <li> <p>Failed: The pipeline execution was not completed successfully.</p> </li> </ul>'
-      artifactRevisions:
-        $ref: '#/definitions/ArtifactRevisionList'
-        description: A list of ArtifactRevision objects included in a pipeline execution.
-    description: Represents information about an execution of a pipeline.
-  PipelineVersion:
-    type: integer
-    minimum: 1
-  PipelineMetadata:
-    type: object
-    properties:
-      pipelineArn:
-        $ref: '#/definitions/PipelineArn'
-        description: The Amazon Resource Name (ARN) of the pipeline.
-      created:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time the pipeline was created, in timestamp format.'
-      updated:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time the pipeline was last updated, in timestamp format.'
-    description: Information about a pipeline.
-  StageStateList:
-    type: array
-    items:
-      $ref: '#/definitions/StageState'
-  ThirdPartyJobDetails:
-    type: object
-    properties:
-      id:
-        $ref: '#/definitions/ThirdPartyJobId'
-        description: The identifier used to identify the job details in AWS CodePipeline.
-      data:
-        $ref: '#/definitions/ThirdPartyJobData'
-        description: The data to be returned by the third party job worker.
-      nonce:
-        $ref: '#/definitions/Nonce'
-        description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an <a>AcknowledgeThirdPartyJob</a> request.
-    description: The details of a job sent in response to a GetThirdPartyJobDetails request.
   InputArtifact:
     type: object
     required:
       - name
     properties:
       name:
-        $ref: '#/definitions/ArtifactName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the artifact to be worked on, for example, "My App".</p> <p>The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.</p>'
     description: 'Represents information about an artifact to be worked on, such as a test or build artifact.'
-  JobData:
-    type: object
-    properties:
-      actionTypeId:
-        $ref: '#/definitions/ActionTypeId'
-        description: Represents information about an action type.
-      actionConfiguration:
-        $ref: '#/definitions/ActionConfiguration'
-        description: Represents information about an action configuration.
-      pipelineContext:
-        $ref: '#/definitions/PipelineContext'
-        description: Represents information about a pipeline to a job worker.
-      inputArtifacts:
-        $ref: '#/definitions/ArtifactList'
-        description: The artifact supplied to the job.
-      outputArtifacts:
-        $ref: '#/definitions/ArtifactList'
-        description: The output of the job.
-      artifactCredentials:
-        $ref: '#/definitions/AWSSessionCredentials'
-        description: Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline.
-      continuationToken:
-        $ref: '#/definitions/ContinuationToken'
-        description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.'
-      encryptionKey:
-        $ref: '#/definitions/EncryptionKey'
-        description: 'Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. '
-    description: Represents additional information about a job required for a job worker to complete the job.
+  InputArtifactList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Job:
     type: object
     properties:
       id:
-        $ref: '#/definitions/JobId'
+        $ref: '#/definitions/[object Object]'
         description: The unique system-generated ID of the job.
       data:
-        $ref: '#/definitions/JobData'
+        $ref: '#/definitions/[object Object]'
         description: Additional data about a job.
       nonce:
-        $ref: '#/definitions/Nonce'
+        $ref: '#/definitions/[object Object]'
         description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an <a>AcknowledgeJob</a> request.
       accountId:
-        $ref: '#/definitions/AccountId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the AWS account to use when performing the job.
     description: Represents information about a job.
-  PipelineContext:
+  JobData:
     type: object
     properties:
-      pipelineName:
-        $ref: '#/definitions/PipelineName'
-        description: The name of the pipeline. This is a user-specified value. Pipeline names must be unique across all pipeline names under an Amazon Web Services account.
-      stage:
-        $ref: '#/definitions/StageContext'
-        description: The stage of the pipeline.
-      action:
-        $ref: '#/definitions/ActionContext'
-        description: The context of an action to a job worker within the stage of a pipeline.
-    description: Represents information about a pipeline to a job worker.
+      actionTypeId:
+        $ref: '#/definitions/[object Object]'
+        description: Represents information about an action type.
+      actionConfiguration:
+        $ref: '#/definitions/[object Object]'
+        description: Represents information about an action configuration.
+      pipelineContext:
+        $ref: '#/definitions/[object Object]'
+        description: Represents information about a pipeline to a job worker.
+      inputArtifacts:
+        $ref: '#/definitions/[object Object]'
+        description: The artifact supplied to the job.
+      outputArtifacts:
+        $ref: '#/definitions/[object Object]'
+        description: The output of the job.
+      artifactCredentials:
+        $ref: '#/definitions/[object Object]'
+        description: Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline.
+      continuationToken:
+        $ref: '#/definitions/[object Object]'
+        description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.'
+      encryptionKey:
+        $ref: '#/definitions/[object Object]'
+        description: 'Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. '
+    description: Represents additional information about a job required for a job worker to complete the job.
+  JobDetails:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/[object Object]'
+        description: The unique system-generated ID of the job.
+      data:
+        $ref: '#/definitions/[object Object]'
+        description: 'Represents additional information about a job required for a job worker to complete the job. '
+      accountId:
+        $ref: '#/definitions/[object Object]'
+        description: The AWS account ID associated with the job.
+    description: Represents information about the details of a job.
+  JobId:
+    type: string
+    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
   JobList:
     type: array
     items:
-      $ref: '#/definitions/Job'
+      $ref: '#/definitions/[object Object]'
+  JobStatus:
+    type: string
+    enum:
+      - Created
+      - Queued
+      - Dispatched
+      - InProgress
+      - TimedOut
+      - Succeeded
+      - Failed
   JsonPath:
     type: string
     minLength: 1
@@ -2814,63 +2619,7 @@ definitions:
     format: date-time
   LastChangedBy:
     type: string
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  PipelineExecutionSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/PipelineExecutionSummary'
-  PipelineList:
-    type: array
-    items:
-      $ref: '#/definitions/PipelineSummary'
-  WebhookDefinition:
-    type: object
-    required:
-      - name
-      - targetPipeline
-      - targetAction
-      - filters
-      - authentication
-      - authenticationConfiguration
-    properties:
-      name:
-        $ref: '#/definitions/WebhookName'
-        description: The name of the webhook.
-      targetPipeline:
-        $ref: '#/definitions/PipelineName'
-        description: The name of the pipeline you want to connect to the webhook.
-      targetAction:
-        $ref: '#/definitions/ActionName'
-        description: The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
-      filters:
-        $ref: '#/definitions/WebhookFilters'
-        description: A list of rules applied to the body/payload sent in the POST request to a webhook URL. All defined rules must pass for the request to be accepted and the pipeline started.
-      authentication:
-        $ref: '#/definitions/WebhookAuthenticationType'
-        description: '<p>Supported options are GITHUB_HMAC, IP and UNAUTHENTICATED.</p> <ul> <li> <p> GITHUB_HMAC implements the authentication scheme described here: https://developer.github.com/webhooks/securing/</p> </li> <li> <p> IP will reject webhooks trigger requests unless they originate from an IP within the IP range whitelisted in the authentication configuration.</p> </li> <li> <p> UNAUTHENTICATED will accept all webhook trigger requests regardless of origin.</p> </li> </ul>'
-      authenticationConfiguration:
-        $ref: '#/definitions/WebhookAuthConfiguration'
-        description: 'Properties that configure the authentication applied to incoming webhook trigger requests. The required properties depend on the authentication type. For GITHUB_HMAC, only the SecretToken property must be set. For IP, only the AllowedIPRange property must be set to a valid CIDR range. For UNAUTHENTICATED, no properties can be set.'
-    description: Represents information about a webhook and its definition.
-  WebhookUrl:
-    type: string
-    minLength: 1
-    maxLength: 1000
-  WebhookErrorMessage:
-    type: string
-  WebhookErrorCode:
-    type: string
-  WebhookLastTriggered:
-    type: string
-    format: date-time
-  WebhookArn:
+  LastUpdatedBy:
     type: string
   ListWebhookItem:
     type: object
@@ -2879,28 +2628,24 @@ definitions:
       - url
     properties:
       definition:
-        $ref: '#/definitions/WebhookDefinition'
+        $ref: '#/definitions/[object Object]'
         description: 'The detail returned for each webhook, such as the webhook authentication type and filter rules.'
       url:
-        $ref: '#/definitions/WebhookUrl'
+        $ref: '#/definitions/[object Object]'
         description: 'A unique URL generated by CodePipeline. When a POST request is made to this URL, the defined pipeline is started as long as the body of the post request satisfies the defined authentication and filtering conditions. Deleting and re-creating a webhook will make the old URL invalid and generate a new URL.'
       errorMessage:
-        $ref: '#/definitions/WebhookErrorMessage'
+        $ref: '#/definitions/[object Object]'
         description: The text of the error message about the webhook.
       errorCode:
-        $ref: '#/definitions/WebhookErrorCode'
+        $ref: '#/definitions/[object Object]'
         description: The number code of the error.
       lastTriggered:
-        $ref: '#/definitions/WebhookLastTriggered'
+        $ref: '#/definitions/[object Object]'
         description: 'The date and time a webhook was last successfully triggered, in timestamp format.'
       arn:
-        $ref: '#/definitions/WebhookArn'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the webhook.
     description: 'The detail returned for each webhook after listing webhooks, such as the webhook URL, the webhook name, and the webhook ARN.'
-  WebhookList:
-    type: array
-    items:
-      $ref: '#/definitions/ListWebhookItem'
   MatchEquals:
     type: string
     minLength: 1
@@ -2908,29 +2653,111 @@ definitions:
   MaxBatchSize:
     type: integer
     minimum: 1
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  MaximumArtifactCount:
+    type: integer
+    minimum: 0
+    maximum: 5
+  Message:
+    type: string
+    minLength: 1
+    maxLength: 5000
+  MinimumArtifactCount:
+    type: integer
+    minimum: 0
+    maximum: 5
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  Nonce:
+    type: string
+    minLength: 1
+    maxLength: 50
   OutputArtifact:
     type: object
     required:
       - name
     properties:
       name:
-        $ref: '#/definitions/ArtifactName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the output of an artifact, such as "My App".</p> <p>The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.</p> <p>Output artifact names must be unique within a pipeline.</p>'
     description: Represents information about the output of an action.
+  OutputArtifactList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Percentage:
+    type: integer
+    minimum: 0
+    maximum: 100
   PipelineArn:
     type: string
     pattern: 'arn:aws(-[\w]+)*:codepipeline:.+:[0-9]{12}:.+'
-  StageContext:
+  PipelineContext:
     type: object
     properties:
+      pipelineName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the pipeline. This is a user-specified value. Pipeline names must be unique across all pipeline names under an Amazon Web Services account.
+      stage:
+        $ref: '#/definitions/[object Object]'
+        description: The stage of the pipeline.
+      action:
+        $ref: '#/definitions/[object Object]'
+        description: The context of an action to a job worker within the stage of a pipeline.
+    description: Represents information about a pipeline to a job worker.
+  PipelineDeclaration:
+    type: object
+    required:
+      - name
+      - roleArn
+      - stages
+    properties:
       name:
-        $ref: '#/definitions/StageName'
-        description: The name of the stage.
-    description: Represents information about a stage to a job worker.
-  PipelineStageDeclarationList:
-    type: array
-    items:
-      $ref: '#/definitions/StageDeclaration'
+        $ref: '#/definitions/[object Object]'
+        description: The name of the action to be performed.
+      roleArn:
+        $ref: '#/definitions/[object Object]'
+        description: 'The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform actions with no actionRoleArn, or to use to assume roles for actions with an actionRoleArn.'
+      artifactStore:
+        $ref: '#/definitions/[object Object]'
+        description: 'Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline. '
+      artifactStores:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>A mapping of artifactStore objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline. You can only use either artifactStore or artifactStores, not both.</p> <p>If you create a cross-region action in your pipeline, you must use artifactStores.</p>'
+      stages:
+        $ref: '#/definitions/[object Object]'
+        description: The stage in which to perform the action.
+      version:
+        $ref: '#/definitions/[object Object]'
+        description: The version number of the pipeline. A new pipeline always has a version number of 1. This number is automatically incremented when a pipeline is updated.
+    description: Represents the structure of actions and stages to be performed in the pipeline.
+  PipelineExecution:
+    type: object
+    properties:
+      pipelineName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the pipeline that was executed.
+      pipelineVersion:
+        $ref: '#/definitions/[object Object]'
+        description: The version number of the pipeline that was executed.
+      pipelineExecutionId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the pipeline execution.
+      status:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Succeeded: The pipeline execution was completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. </p> </li> <li> <p>Failed: The pipeline execution was not completed successfully.</p> </li> </ul>'
+      artifactRevisions:
+        $ref: '#/definitions/[object Object]'
+        description: A list of ArtifactRevision objects included in a pipeline execution.
+    description: Represents information about an execution of a pipeline.
+  PipelineExecutionId:
+    type: string
+    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
   PipelineExecutionStatus:
     type: string
     enum:
@@ -2938,61 +2765,74 @@ definitions:
       - Succeeded
       - Superseded
       - Failed
-  SourceRevisionList:
-    type: array
-    items:
-      $ref: '#/definitions/SourceRevision'
   PipelineExecutionSummary:
     type: object
     properties:
       pipelineExecutionId:
-        $ref: '#/definitions/PipelineExecutionId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the pipeline execution.
       status:
-        $ref: '#/definitions/PipelineExecutionStatus'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Succeeded: The pipeline execution was completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. </p> </li> <li> <p>Failed: The pipeline execution was not completed successfully.</p> </li> </ul>'
       startTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The date and time when the pipeline execution began, in timestamp format.'
       lastUpdateTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The date and time of the last change to the pipeline execution, in timestamp format.'
       sourceRevisions:
-        $ref: '#/definitions/SourceRevisionList'
+        $ref: '#/definitions/[object Object]'
         description: A list of the source artifact revisions that initiated a pipeline execution.
     description: Summary information about a pipeline execution.
+  PipelineExecutionSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PipelineList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PipelineMetadata:
+    type: object
+    properties:
+      pipelineArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the pipeline.
+      created:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date and time the pipeline was created, in timestamp format.'
+      updated:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date and time the pipeline was last updated, in timestamp format.'
+    description: Information about a pipeline.
+  PipelineName:
+    type: string
+    pattern: '[A-Za-z0-9.@\-_]+'
+    minLength: 1
+    maxLength: 100
+  PipelineStageDeclarationList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   PipelineSummary:
     type: object
     properties:
       name:
-        $ref: '#/definitions/PipelineName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the pipeline.
       version:
-        $ref: '#/definitions/PipelineVersion'
+        $ref: '#/definitions/[object Object]'
         description: The version number of the pipeline.
       created:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The date and time the pipeline was created, in timestamp format.'
       updated:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The date and time of the last update to the pipeline, in timestamp format.'
     description: Returns a summary of a pipeline.
-  StageDeclaration:
-    type: object
-    required:
-      - name
-      - actions
-    properties:
-      name:
-        $ref: '#/definitions/StageName'
-        description: The name of the stage.
-      blockers:
-        $ref: '#/definitions/StageBlockerDeclarationList'
-        description: Reserved for future use.
-      actions:
-        $ref: '#/definitions/StageActionDeclarationList'
-        description: The actions included in a stage.
-    description: Represents information about a stage and its definition.
+  PipelineVersion:
+    type: integer
+    minimum: 1
   QueryParamMap:
     type: array
     minItems: 0
@@ -3004,17 +2844,42 @@ definitions:
           $ref: '#/definitions/ActionConfigurationKey'
         value:
           $ref: '#/definitions/ActionConfigurationQueryableValue'
-  ThirdPartyJobList:
-    type: array
-    items:
-      $ref: '#/definitions/ThirdPartyJob'
-  StageRetryMode:
+  Revision:
     type: string
-    enum:
-      - FAILED_ACTIONS
+    minLength: 1
+    maxLength: 1500
+  RevisionChangeIdentifier:
+    type: string
+    minLength: 1
+    maxLength: 100
+  RevisionSummary:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  RoleArn:
+    type: string
+    pattern: 'arn:aws(-[\w]+)*:iam::[0-9]{12}:role/.*'
+    maxLength: 1024
+  S3ArtifactLocation:
+    type: object
+    required:
+      - bucketName
+      - objectKey
+    properties:
+      bucketName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the Amazon S3 bucket.
+      objectKey:
+        $ref: '#/definitions/[object Object]'
+        description: 'The key of the object in the Amazon S3 bucket, which uniquely identifies the object in the bucket.'
+    description: The location of the Amazon S3 bucket that contains a revision.
   S3BucketName:
     type: string
   S3ObjectKey:
+    type: string
+  SecretAccessKey:
+    type: string
+  SessionToken:
     type: string
   SourceRevision:
     type: object
@@ -3022,32 +2887,53 @@ definitions:
       - actionName
     properties:
       actionName:
-        $ref: '#/definitions/ActionName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the action that processed the revision to the source artifact.
       revisionId:
-        $ref: '#/definitions/Revision'
+        $ref: '#/definitions/[object Object]'
         description: The system-generated unique ID that identifies the revision number of the artifact.
       revisionSummary:
-        $ref: '#/definitions/RevisionSummary'
+        $ref: '#/definitions/[object Object]'
         description: 'Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a <code>codepipeline-artifact-revision-summary</code> key specified in the object metadata.'
       revisionUrl:
-        $ref: '#/definitions/Url'
+        $ref: '#/definitions/[object Object]'
         description: 'The commit ID for the artifact revision. For artifacts stored in GitHub or AWS CodeCommit repositories, the commit ID is linked to a commit details page.'
     description: Information about the version (or revision) of a source artifact that initiated a pipeline execution.
+  SourceRevisionList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   StageActionDeclarationList:
     type: array
     items:
-      $ref: '#/definitions/ActionDeclaration'
+      $ref: '#/definitions/[object Object]'
   StageBlockerDeclarationList:
     type: array
     items:
-      $ref: '#/definitions/BlockerDeclaration'
-  StageExecutionStatus:
-    type: string
-    enum:
-      - InProgress
-      - Failed
-      - Succeeded
+      $ref: '#/definitions/[object Object]'
+  StageContext:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the stage.
+    description: Represents information about a stage to a job worker.
+  StageDeclaration:
+    type: object
+    required:
+      - name
+      - actions
+    properties:
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the stage.
+      blockers:
+        $ref: '#/definitions/[object Object]'
+        description: Reserved for future use.
+      actions:
+        $ref: '#/definitions/[object Object]'
+        description: The actions included in a stage.
+    description: Represents information about a stage and its definition.
   StageExecution:
     type: object
     required:
@@ -3055,82 +2941,158 @@ definitions:
       - status
     properties:
       pipelineExecutionId:
-        $ref: '#/definitions/PipelineExecutionId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the pipeline execution associated with the stage.
       status:
-        $ref: '#/definitions/StageExecutionStatus'
+        $ref: '#/definitions/[object Object]'
         description: 'The status of the stage, or for a completed stage, the last status of the stage.'
     description: Represents information about the run of a stage.
-  TransitionState:
-    type: object
-    properties:
-      enabled:
-        $ref: '#/definitions/Enabled'
-        description: Whether the transition between stages is enabled (true) or disabled (false).
-      lastChangedBy:
-        $ref: '#/definitions/LastChangedBy'
-        description: The ID of the user who last changed the transition state.
-      lastChangedAt:
-        $ref: '#/definitions/LastChangedAt'
-        description: The timestamp when the transition state was last changed.
-      disabledReason:
-        $ref: '#/definitions/DisabledReason'
-        description: The user-specified reason why the transition between two stages of a pipeline was disabled.
-    description: Represents information about the state of transitions between one stage and another stage.
+  StageExecutionStatus:
+    type: string
+    enum:
+      - InProgress
+      - Failed
+      - Succeeded
+  StageName:
+    type: string
+    pattern: '[A-Za-z0-9.@\-_]+'
+    minLength: 1
+    maxLength: 100
+  StageRetryMode:
+    type: string
+    enum:
+      - FAILED_ACTIONS
   StageState:
     type: object
     properties:
       stageName:
-        $ref: '#/definitions/StageName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the stage.
       inboundTransitionState:
-        $ref: '#/definitions/TransitionState'
+        $ref: '#/definitions/[object Object]'
         description: 'The state of the inbound transition, which is either enabled or disabled.'
       actionStates:
-        $ref: '#/definitions/ActionStateList'
+        $ref: '#/definitions/[object Object]'
         description: The state of the stage.
       latestExecution:
-        $ref: '#/definitions/StageExecution'
+        $ref: '#/definitions/[object Object]'
         description: 'Information about the latest execution in the stage, including its ID and status.'
     description: Represents information about the state of the stage.
+  StageStateList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  StageTransitionType:
+    type: string
+    enum:
+      - Inbound
+      - Outbound
   ThirdPartyJob:
     type: object
     properties:
       clientId:
-        $ref: '#/definitions/ClientId'
+        $ref: '#/definitions/[object Object]'
         description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
       jobId:
-        $ref: '#/definitions/JobId'
+        $ref: '#/definitions/[object Object]'
         description: The identifier used to identify the job in AWS CodePipeline.
     description: A response to a PollForThirdPartyJobs request returned by AWS CodePipeline when there is a job to be worked upon by a partner action.
   ThirdPartyJobData:
     type: object
     properties:
       actionTypeId:
-        $ref: '#/definitions/ActionTypeId'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about an action type.
       actionConfiguration:
-        $ref: '#/definitions/ActionConfiguration'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about an action configuration.
       pipelineContext:
-        $ref: '#/definitions/PipelineContext'
+        $ref: '#/definitions/[object Object]'
         description: Represents information about a pipeline to a job worker.
       inputArtifacts:
-        $ref: '#/definitions/ArtifactList'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the artifact that will be worked upon by the action, if any. This name might be system-generated, such as "MyApp", or might be defined by the user when the action is created. The input artifact name must match the name of an output artifact generated by an action in an earlier action or stage of the pipeline.'
       outputArtifacts:
-        $ref: '#/definitions/ArtifactList'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the artifact that will be the result of the action, if any. This name might be system-generated, such as "MyBuiltApp", or might be defined by the user when the action is created.'
       artifactCredentials:
-        $ref: '#/definitions/AWSSessionCredentials'
+        $ref: '#/definitions/[object Object]'
         description: 'Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline. '
       continuationToken:
-        $ref: '#/definitions/ContinuationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.'
       encryptionKey:
-        $ref: '#/definitions/EncryptionKey'
+        $ref: '#/definitions/[object Object]'
         description: 'The encryption key used to encrypt and decrypt data in the artifact store for the pipeline, such as an AWS Key Management Service (AWS KMS) key. This is optional and might not be present.'
     description: Represents information about the job data for a partner action.
+  ThirdPartyJobDetails:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/[object Object]'
+        description: The identifier used to identify the job details in AWS CodePipeline.
+      data:
+        $ref: '#/definitions/[object Object]'
+        description: The data to be returned by the third party job worker.
+      nonce:
+        $ref: '#/definitions/[object Object]'
+        description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an <a>AcknowledgeThirdPartyJob</a> request.
+    description: The details of a job sent in response to a GetThirdPartyJobDetails request.
+  ThirdPartyJobId:
+    type: string
+    minLength: 1
+    maxLength: 512
+  ThirdPartyJobList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Time:
+    type: string
+    format: date-time
+  Timestamp:
+    type: string
+    format: date-time
+  TransitionState:
+    type: object
+    properties:
+      enabled:
+        $ref: '#/definitions/[object Object]'
+        description: Whether the transition between stages is enabled (true) or disabled (false).
+      lastChangedBy:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the user who last changed the transition state.
+      lastChangedAt:
+        $ref: '#/definitions/[object Object]'
+        description: The timestamp when the transition state was last changed.
+      disabledReason:
+        $ref: '#/definitions/[object Object]'
+        description: The user-specified reason why the transition between two stages of a pipeline was disabled.
+    description: Represents information about the state of transitions between one stage and another stage.
+  Url:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  UrlTemplate:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  Version:
+    type: string
+    pattern: '[0-9A-Za-z_-]+'
+    minLength: 1
+    maxLength: 9
+  WebhookArn:
+    type: string
+  WebhookAuthConfiguration:
+    type: object
+    properties:
+      AllowedIPRange:
+        $ref: '#/definitions/[object Object]'
+        description: 'The property used to configure acceptance of webhooks within a specific IP range. For IP, only the AllowedIPRange property must be set, and this property must be set to a valid CIDR range.'
+      SecretToken:
+        $ref: '#/definitions/[object Object]'
+        description: 'The property used to configure GitHub authentication. For GITHUB_HMAC, only the SecretToken property must be set.'
+    description: The authentication applied to incoming webhook trigger requests.
   WebhookAuthConfigurationAllowedIPRange:
     type: string
     minLength: 1
@@ -3139,36 +3101,75 @@ definitions:
     type: string
     minLength: 1
     maxLength: 100
-  WebhookAuthConfiguration:
-    type: object
-    properties:
-      AllowedIPRange:
-        $ref: '#/definitions/WebhookAuthConfigurationAllowedIPRange'
-        description: 'The property used to configure acceptance of webhooks within a specific IP range. For IP, only the AllowedIPRange property must be set, and this property must be set to a valid CIDR range.'
-      SecretToken:
-        $ref: '#/definitions/WebhookAuthConfigurationSecretToken'
-        description: 'The property used to configure GitHub authentication. For GITHUB_HMAC, only the SecretToken property must be set.'
-    description: The authentication applied to incoming webhook trigger requests.
   WebhookAuthenticationType:
     type: string
     enum:
       - GITHUB_HMAC
       - IP
       - UNAUTHENTICATED
-  WebhookFilters:
-    type: array
-    items:
-      $ref: '#/definitions/WebhookFilterRule'
-    maxItems: 5
+  WebhookDefinition:
+    type: object
+    required:
+      - name
+      - targetPipeline
+      - targetAction
+      - filters
+      - authentication
+      - authenticationConfiguration
+    properties:
+      name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the webhook.
+      targetPipeline:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the pipeline you want to connect to the webhook.
+      targetAction:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
+      filters:
+        $ref: '#/definitions/[object Object]'
+        description: A list of rules applied to the body/payload sent in the POST request to a webhook URL. All defined rules must pass for the request to be accepted and the pipeline started.
+      authentication:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Supported options are GITHUB_HMAC, IP and UNAUTHENTICATED.</p> <ul> <li> <p> GITHUB_HMAC implements the authentication scheme described here: https://developer.github.com/webhooks/securing/</p> </li> <li> <p> IP will reject webhooks trigger requests unless they originate from an IP within the IP range whitelisted in the authentication configuration.</p> </li> <li> <p> UNAUTHENTICATED will accept all webhook trigger requests regardless of origin.</p> </li> </ul>'
+      authenticationConfiguration:
+        $ref: '#/definitions/[object Object]'
+        description: 'Properties that configure the authentication applied to incoming webhook trigger requests. The required properties depend on the authentication type. For GITHUB_HMAC, only the SecretToken property must be set. For IP, only the AllowedIPRange property must be set to a valid CIDR range. For UNAUTHENTICATED, no properties can be set.'
+    description: Represents information about a webhook and its definition.
+  WebhookErrorCode:
+    type: string
+  WebhookErrorMessage:
+    type: string
   WebhookFilterRule:
     type: object
     required:
       - jsonPath
     properties:
       jsonPath:
-        $ref: '#/definitions/JsonPath'
+        $ref: '#/definitions/[object Object]'
         description: 'A JsonPath expression that will be applied to the body/payload of the webhook. The value selected by JsonPath expression must match the value specified in the matchEquals field, otherwise the request will be ignored. More information on JsonPath expressions can be found here: https://github.com/json-path/JsonPath.'
       matchEquals:
-        $ref: '#/definitions/MatchEquals'
+        $ref: '#/definitions/[object Object]'
         description: 'The value selected by the JsonPath expression must match what is supplied in the MatchEquals field, otherwise the request will be ignored. Properties from the target action configuration can be included as placeholders in this value by surrounding the action configuration key with curly braces. For example, if the value supplied here is "refs/heads/{Branch}" and the target action has an action configuration property called "Branch" with a value of "master", the MatchEquals value will be evaluated as "refs/heads/master". A list of action configuration properties for built-in action types can be found here: <a href="http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements">Pipeline Structure Reference Action Requirements</a>.'
     description: The event criteria that specify when a webhook notification is sent to your URL.
+  WebhookFilters:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    maxItems: 5
+  WebhookLastTriggered:
+    type: string
+    format: date-time
+  WebhookList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  WebhookName:
+    type: string
+    pattern: '[A-Za-z0-9.@\-_]+'
+    minLength: 1
+    maxLength: 100
+  WebhookUrl:
+    type: string
+    minLength: 1
+    maxLength: 1000

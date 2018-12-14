@@ -1428,10 +1428,10 @@ definitions:
       EnvironmentName: my-env
     properties:
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: This specifies the ID of the environment with the in-progress update that you want to cancel.
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: This specifies the name of the environment with the in-progress update that you want to cancel.
     description: <p/>
   InsufficientPrivilegesException: {}
@@ -1439,16 +1439,16 @@ definitions:
     type: object
     properties:
       ActionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The action ID of the managed action.
       ActionDescription:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A description of the managed action.
       ActionType:
-        $ref: '#/definitions/ActionType'
+        $ref: '#/definitions/[object Object]'
         description: The type of managed action.
       Status:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The status of the managed action.
     description: The result message containing information about the managed action.
   ApplyEnvironmentManagedActionRequest:
@@ -1457,13 +1457,13 @@ definitions:
       - ActionId
     properties:
       EnvironmentName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the target environment.
       EnvironmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The environment ID of the target environment.
       ActionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The action ID of the scheduled managed action to execute.
     description: Request to execute a scheduled managed action immediately.
   ElasticBeanstalkServiceException: {}
@@ -1475,10 +1475,10 @@ definitions:
       FullyQualifiedCNAME: my-cname.us-west-2.elasticbeanstalk.com
     properties:
       Available:
-        $ref: '#/definitions/CnameAvailability'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates if the specified CNAME is available:</p> <ul> <li> <p> <code>true</code> : The CNAME is available.</p> </li> <li> <p> <code>false</code> : The CNAME is not available.</p> </li> </ul>'
       FullyQualifiedCNAME:
-        $ref: '#/definitions/DNSCname'
+        $ref: '#/definitions/[object Object]'
         description: The fully qualified CNAME to reserve when <a>CreateEnvironment</a> is called with the provided prefix.
     description: Indicates if the specified CNAME is available.
   CheckDNSAvailabilityMessage:
@@ -1489,7 +1489,7 @@ definitions:
       CNAMEPrefix: my-cname
     properties:
       CNAMEPrefix:
-        $ref: '#/definitions/DNSCnamePrefix'
+        $ref: '#/definitions/[object Object]'
         description: The prefix used when this CNAME is reserved.
     description: Results message indicating whether a CNAME is available.
   EnvironmentDescriptionsMessage:
@@ -1514,23 +1514,23 @@ definitions:
           VersionLabel: 7f58-stage-150812_025409
     properties:
       Environments:
-        $ref: '#/definitions/EnvironmentDescriptionsList'
+        $ref: '#/definitions/[object Object]'
         description: ' Returns an <a>EnvironmentDescription</a> list. '
       NextToken:
-        $ref: '#/definitions/Token'
+        $ref: '#/definitions/[object Object]'
         description: 'In a paginated request, the token that you can pass in a subsequent request to get the next response page.'
     description: Result message containing a list of environment descriptions.
   ComposeEnvironmentsMessage:
     type: object
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application to which the specified source bundles belong.
       GroupName:
-        $ref: '#/definitions/GroupName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the group to which the target environments belong. Specify a group name only if the environment name defined in each target environment''s manifest ends with a + (plus) character. See <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest (env.yaml)</a> for details.'
       VersionLabels:
-        $ref: '#/definitions/VersionLabels'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of version labels, specifying one or more application source bundles that belong to the target application. Each source bundle must include an environment manifest that specifies the name of the environment and the name of the solution stack to use, and optionally can specify environment links to create.'
     description: Request to create or update a group of environments.
   TooManyEnvironmentsException: {}
@@ -1551,7 +1551,7 @@ definitions:
           - 22a0-stage-150819_185942
     properties:
       Application:
-        $ref: '#/definitions/ApplicationDescription'
+        $ref: '#/definitions/[object Object]'
         description: ' The <a>ApplicationDescription</a> of the application. '
     description: Result message containing a single description of an application.
   CreateApplicationMessage:
@@ -1563,13 +1563,13 @@ definitions:
       Description: my application
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the application.</p> <p>Constraint: This name must be unique within your account. If the specified name already exists, the action returns an <code>InvalidParameterValue</code> error.</p>'
       Description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: Describes the application.
       ResourceLifecycleConfig:
-        $ref: '#/definitions/ApplicationResourceLifecycleConfig'
+        $ref: '#/definitions/[object Object]'
         description: Specify an application resource lifecycle configuration to prevent your application from accumulating too many versions.
     description: Request to create an application.
   TooManyApplicationsException: {}
@@ -1587,7 +1587,7 @@ definitions:
         VersionLabel: 22a0-stage-150819_185942
     properties:
       ApplicationVersion:
-        $ref: '#/definitions/ApplicationVersionDescription'
+        $ref: '#/definitions/[object Object]'
         description: ' The <a>ApplicationVersionDescription</a> of the application version. '
     description: Result message wrapping a single description of an application version.
   CreateApplicationVersionMessage:
@@ -1606,28 +1606,28 @@ definitions:
       VersionLabel: v1
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: ' The name of the application. If no application is found with this name, and <code>AutoCreateApplication</code> is <code>false</code>, returns an <code>InvalidParameterValue</code> error. '
       VersionLabel:
-        $ref: '#/definitions/VersionLabel'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A label identifying this version.</p> <p>Constraint: Must be unique per application. If an application version already exists with this label for the specified application, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>'
       Description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: Describes this version.
       SourceBuildInformation:
-        $ref: '#/definitions/SourceBuildInformation'
+        $ref: '#/definitions/[object Object]'
         description: Specify a commit in an AWS CodeCommit Git repository to use as the source code for the application version.
       SourceBundle:
-        $ref: '#/definitions/S3Location'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The Amazon S3 bucket and key that identify the location of the source bundle for this version.</p> <note> <p>The Amazon S3 bucket must be in the same region as the environment.</p> </note> <p>Specify a source bundle in S3 or a commit in an AWS CodeCommit repository (with <code>SourceBuildInformation</code>), but not both. If neither <code>SourceBundle</code> nor <code>SourceBuildInformation</code> are provided, Elastic Beanstalk uses a sample application.</p>'
       BuildConfiguration:
-        $ref: '#/definitions/BuildConfiguration'
+        $ref: '#/definitions/[object Object]'
         description: Settings for an AWS CodeBuild build.
       AutoCreateApplication:
-        $ref: '#/definitions/AutoCreateApplication'
+        $ref: '#/definitions/[object Object]'
         description: Set to <code>true</code> to create an application with the specified name if it doesn't already exist.
       Process:
-        $ref: '#/definitions/ApplicationVersionProccess'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Pre-processes and validates the environment manifest (<code>env.yaml</code>) and configuration files (<code>*.config</code> files in the <code>.ebextensions</code> folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment.</p> <p>You must turn processing on for application versions that you create using AWS CodeBuild or AWS CodeCommit. For application versions built from a source bundle in Amazon S3, processing is optional.</p> <note> <p>The <code>Process</code> option validates Elastic Beanstalk configuration files. It doesn''t validate your application''s configuration files, like proxy server or Docker configuration.</p> </note>'
     description: <p/>
   TooManyApplicationVersionsException: {}
@@ -1643,34 +1643,34 @@ definitions:
       TemplateName: my-template
     properties:
       SolutionStackName:
-        $ref: '#/definitions/SolutionStackName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the solution stack this configuration set uses.
       PlatformArn:
-        $ref: '#/definitions/PlatformArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the platform.
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application associated with this configuration set.
       TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
+        $ref: '#/definitions/[object Object]'
         description: ' If not <code>null</code>, the name of the configuration template for this configuration set. '
       Description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: Describes this configuration set.
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: ' If not <code>null</code>, the name of the environment for this configuration set. '
       DeploymentStatus:
-        $ref: '#/definitions/ConfigurationDeploymentStatus'
+        $ref: '#/definitions/[object Object]'
         description: '<p> If this configuration set is associated with an environment, the <code>DeploymentStatus</code> parameter indicates the deployment status of this configuration set: </p> <ul> <li> <p> <code>null</code>: This configuration is not associated with a running environment.</p> </li> <li> <p> <code>pending</code>: This is a draft configuration that is not deployed to the associated environment but is in the process of deploying.</p> </li> <li> <p> <code>deployed</code>: This is the configuration that is currently deployed to the associated running environment.</p> </li> <li> <p> <code>failed</code>: This is a draft configuration that failed to successfully deploy.</p> </li> </ul>'
       DateCreated:
-        $ref: '#/definitions/CreationDate'
+        $ref: '#/definitions/[object Object]'
         description: The date (in UTC time) when this configuration set was created.
       DateUpdated:
-        $ref: '#/definitions/UpdateDate'
+        $ref: '#/definitions/[object Object]'
         description: The date (in UTC time) when this configuration set was last modified.
       OptionSettings:
-        $ref: '#/definitions/ConfigurationOptionSettingsList'
+        $ref: '#/definitions/[object Object]'
         description: A list of the configuration options and their values in this configuration set.
     description: Describes the settings for a configuration set.
   CreateConfigurationTemplateMessage:
@@ -1684,28 +1684,28 @@ definitions:
       TemplateName: my-app-v1
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the application to associate with this configuration template. If no application is found with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. '
       TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the configuration template.</p> <p>Constraint: This name must be unique per application.</p> <p>Default: If a configuration template already exists with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p>'
       SolutionStackName:
-        $ref: '#/definitions/SolutionStackName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the solution stack used by this configuration. The solution stack specifies the operating system, architecture, and application server for a configuration template. It determines the set of configuration options as well as the possible and default values.</p> <p> Use <a>ListAvailableSolutionStacks</a> to obtain a list of available solution stacks. </p> <p> A solution stack name or a source configuration parameter must be specified, otherwise AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>If a solution stack name is not specified and the source configuration parameter is specified, AWS Elastic Beanstalk uses the same solution stack as the source configuration template.</p>'
       PlatformArn:
-        $ref: '#/definitions/PlatformArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the custom platform.
       SourceConfiguration:
-        $ref: '#/definitions/SourceConfiguration'
+        $ref: '#/definitions/[object Object]'
         description: '<p>If specified, AWS Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration.</p> <p> Values specified in the <code>OptionSettings</code> parameter of this call overrides any values obtained from the <code>SourceConfiguration</code>. </p> <p> If no configuration template is found, returns an <code>InvalidParameterValue</code> error. </p> <p> Constraint: If both the solution stack name parameter and the source configuration parameters are specified, the solution stack of the source configuration template must match the specified solution stack name or else AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p>'
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the environment used with this configuration template.
       Description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: Describes this configuration.
       OptionSettings:
-        $ref: '#/definitions/ConfigurationOptionSettingsList'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk sets the specified configuration option to the requested value. The new value overrides the value obtained from the solution stack or the source configuration template.'
     description: Request to create a configuration template.
   TooManyBucketsException: {}
@@ -1731,64 +1731,64 @@ definitions:
       VersionLabel: 7f58-stage-150812_025409
     properties:
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: The name of this environment.
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of this environment.
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application associated with this environment.
       VersionLabel:
-        $ref: '#/definitions/VersionLabel'
+        $ref: '#/definitions/[object Object]'
         description: The application version deployed in this environment.
       SolutionStackName:
-        $ref: '#/definitions/SolutionStackName'
+        $ref: '#/definitions/[object Object]'
         description: ' The name of the <code>SolutionStack</code> deployed with this environment. '
       PlatformArn:
-        $ref: '#/definitions/PlatformArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the platform.
       TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration template used to originally launch this environment.
       Description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: Describes this environment.
       EndpointURL:
-        $ref: '#/definitions/EndpointURL'
+        $ref: '#/definitions/[object Object]'
         description: 'For load-balanced, autoscaling environments, the URL to the LoadBalancer. For single-instance environments, the IP address of the instance.'
       CNAME:
-        $ref: '#/definitions/DNSCname'
+        $ref: '#/definitions/[object Object]'
         description: The URL to the CNAME for this environment.
       DateCreated:
-        $ref: '#/definitions/CreationDate'
+        $ref: '#/definitions/[object Object]'
         description: The creation date for this environment.
       DateUpdated:
-        $ref: '#/definitions/UpdateDate'
+        $ref: '#/definitions/[object Object]'
         description: The last modified date for this environment.
       Status:
-        $ref: '#/definitions/EnvironmentStatus'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The current operational status of the environment:</p> <ul> <li> <p> <code>Launching</code>: Environment is in the process of initial deployment.</p> </li> <li> <p> <code>Updating</code>: Environment is in the process of updating its configuration settings or application version.</p> </li> <li> <p> <code>Ready</code>: Environment is available to have an action performed on it, such as update or terminate.</p> </li> <li> <p> <code>Terminating</code>: Environment is in the shut-down process.</p> </li> <li> <p> <code>Terminated</code>: Environment is not running.</p> </li> </ul>'
       AbortableOperationInProgress:
-        $ref: '#/definitions/AbortableOperationInProgress'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates if there is an in-progress environment configuration update or application version deployment that you can cancel.</p> <p> <code>true:</code> There is an update in progress. </p> <p> <code>false:</code> There are no updates currently in progress. </p>'
       Health:
-        $ref: '#/definitions/EnvironmentHealth'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:</p> <ul> <li> <p> <code>Red</code>: Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.</p> </li> <li> <p> <code>Yellow</code>: Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.</p> </li> <li> <p> <code>Green</code>: Indicates the environment is healthy and fully functional.</p> </li> <li> <p> <code>Grey</code>: Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an <code>UpdateEnvironment</code> or <code>RestartEnvironement</code> request.</p> </li> </ul> <p> Default: <code>Grey</code> </p>'
       HealthStatus:
-        $ref: '#/definitions/EnvironmentHealthStatus'
+        $ref: '#/definitions/[object Object]'
         description: 'Returns the health status of the application running in your environment. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and Statuses</a>.'
       Resources:
-        $ref: '#/definitions/EnvironmentResourcesDescription'
+        $ref: '#/definitions/[object Object]'
         description: The description of the AWS resources used by this environment.
       Tier:
-        $ref: '#/definitions/EnvironmentTier'
+        $ref: '#/definitions/[object Object]'
         description: Describes the current tier of this environment.
       EnvironmentLinks:
-        $ref: '#/definitions/EnvironmentLinks'
+        $ref: '#/definitions/[object Object]'
         description: A list of links to other environments in the same group.
       EnvironmentArn:
-        $ref: '#/definitions/EnvironmentArn'
+        $ref: '#/definitions/[object Object]'
         description: 'The environment''s Amazon Resource Name (ARN), which can be used in other API requests that require an ARN.'
     description: Describes the properties of an environment.
   CreateEnvironmentMessage:
@@ -1803,53 +1803,53 @@ definitions:
       VersionLabel: v1
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the application that contains the version to be deployed.</p> <p> If no application is found with this name, <code>CreateEnvironment</code> returns an <code>InvalidParameterValue</code> error. </p>'
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A unique name for the deployment environment. Used in the application URL.</p> <p>Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique within a region in your account. If the specified name already exists in the region, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.</p>'
       GroupName:
-        $ref: '#/definitions/GroupName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the group to which the target environment belongs. Specify a group name only if the environment''s name is specified in an environment manifest and not with the environment name parameter. See <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest (env.yaml)</a> for details.'
       Description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: Describes this environment.
       CNAMEPrefix:
-        $ref: '#/definitions/DNSCnamePrefix'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, the environment attempts to use this value as the prefix for the CNAME. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.'
       Tier:
-        $ref: '#/definitions/EnvironmentTier'
+        $ref: '#/definitions/[object Object]'
         description: This specifies the tier to use for creating this environment.
       Tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: This specifies the tags applied to resources in the environment.
       VersionLabel:
-        $ref: '#/definitions/VersionLabel'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the application version to deploy.</p> <p> If the specified application has no associated application versions, AWS Elastic Beanstalk <code>UpdateEnvironment</code> returns an <code>InvalidParameterValue</code> error. </p> <p>Default: If not specified, AWS Elastic Beanstalk attempts to launch the sample application in the container.</p>'
       TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
+        $ref: '#/definitions/[object Object]'
         description: ' The name of the configuration template to use in deployment. If no configuration template is found with this name, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. '
       SolutionStackName:
-        $ref: '#/definitions/SolutionStackName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack.</p> <p>For a list of current solution stacks, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html">Elastic Beanstalk Supported Platforms</a>.</p>'
       PlatformArn:
-        $ref: '#/definitions/PlatformArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the platform.
       OptionSettings:
-        $ref: '#/definitions/ConfigurationOptionSettingsList'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These override the values obtained from the solution stack or the configuration template.'
       OptionsToRemove:
-        $ref: '#/definitions/OptionsSpecifierList'
+        $ref: '#/definitions/[object Object]'
         description: A list of custom user-defined configuration options to remove from the configuration set for this new environment.
     description: <p/>
   CreatePlatformVersionResult:
     type: object
     properties:
       PlatformSummary:
-        $ref: '#/definitions/PlatformSummary'
+        $ref: '#/definitions/[object Object]'
         description: Detailed information about the new version of the custom platform.
       Builder:
-        $ref: '#/definitions/Builder'
+        $ref: '#/definitions/[object Object]'
         description: The builder used to create the custom platform.
   CreatePlatformVersionRequest:
     type: object
@@ -1859,19 +1859,19 @@ definitions:
       - PlatformDefinitionBundle
     properties:
       PlatformName:
-        $ref: '#/definitions/PlatformName'
+        $ref: '#/definitions/[object Object]'
         description: The name of your custom platform.
       PlatformVersion:
-        $ref: '#/definitions/PlatformVersion'
+        $ref: '#/definitions/[object Object]'
         description: 'The number, such as 1.0.2, for the new platform version.'
       PlatformDefinitionBundle:
-        $ref: '#/definitions/S3Location'
+        $ref: '#/definitions/[object Object]'
         description: The location of the platform definition archive in Amazon S3.
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the builder environment.
       OptionSettings:
-        $ref: '#/definitions/ConfigurationOptionSettingsList'
+        $ref: '#/definitions/[object Object]'
         description: The configuration option settings to apply to the builder environment.
     description: Request to create a new platform version.
   TooManyPlatformsException: {}
@@ -1881,7 +1881,7 @@ definitions:
       S3Bucket: elasticbeanstalk-us-west-2-0123456789012
     properties:
       S3Bucket:
-        $ref: '#/definitions/S3Bucket'
+        $ref: '#/definitions/[object Object]'
         description: The name of the Amazon S3 bucket created.
     description: Results of a <a>CreateStorageLocationResult</a> call.
   S3SubscriptionRequiredException: {}
@@ -1893,10 +1893,10 @@ definitions:
       ApplicationName: my-app
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application to delete.
       TerminateEnvByForce:
-        $ref: '#/definitions/TerminateEnvForce'
+        $ref: '#/definitions/[object Object]'
         description: 'When set to true, running environments will be terminated before deleting the application.'
     description: Request to delete an application.
   OperationInProgressException: {}
@@ -1911,13 +1911,13 @@ definitions:
       VersionLabel: 22a0-stage-150819_182129
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application to which the version belongs.
       VersionLabel:
-        $ref: '#/definitions/VersionLabel'
+        $ref: '#/definitions/[object Object]'
         description: The label of the version to delete.
       DeleteSourceBundle:
-        $ref: '#/definitions/DeleteSourceBundle'
+        $ref: '#/definitions/[object Object]'
         description: 'Set to <code>true</code> to delete the source bundle from your storage bucket. Otherwise, the application version is deleted only from Elastic Beanstalk and the source bundle remains in Amazon S3.'
     description: Request to delete an application version.
   SourceBundleDeletionException: {}
@@ -1931,10 +1931,10 @@ definitions:
       TemplateName: my-template
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application to delete the configuration template from.
       TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration template to delete.
     description: Request to delete a configuration template.
   DeleteEnvironmentConfigurationMessage:
@@ -1947,30 +1947,30 @@ definitions:
       EnvironmentName: my-env
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application the environment is associated with.
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the environment to delete the draft configuration from.
     description: Request to delete a draft environment configuration.
   DeletePlatformVersionResult:
     type: object
     properties:
       PlatformSummary:
-        $ref: '#/definitions/PlatformSummary'
+        $ref: '#/definitions/[object Object]'
         description: Detailed information about the version of the custom platform.
   DeletePlatformVersionRequest:
     type: object
     properties:
       PlatformArn:
-        $ref: '#/definitions/PlatformArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the version of the custom platform.
   PlatformVersionStillReferencedException: {}
   DescribeAccountAttributesResult:
     type: object
     properties:
       ResourceQuotas:
-        $ref: '#/definitions/ResourceQuotas'
+        $ref: '#/definitions/[object Object]'
         description: The Elastic Beanstalk resource quotas associated with the calling AWS account.
   ApplicationVersionDescriptionsMessage:
     type: object
@@ -1994,10 +1994,10 @@ definitions:
           VersionLabel: v1
     properties:
       ApplicationVersions:
-        $ref: '#/definitions/ApplicationVersionDescriptionList'
+        $ref: '#/definitions/[object Object]'
         description: List of <code>ApplicationVersionDescription</code> objects sorted in order of creation.
       NextToken:
-        $ref: '#/definitions/Token'
+        $ref: '#/definitions/[object Object]'
         description: 'In a paginated request, the token that you can pass in a subsequent request to get the next response page.'
     description: Result message wrapping a list of application version descriptions.
   DescribeApplicationVersionsMessage:
@@ -2008,16 +2008,16 @@ definitions:
         - v2
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: Specify an application name to show only application versions for that application.
       VersionLabels:
-        $ref: '#/definitions/VersionLabelsList'
+        $ref: '#/definitions/[object Object]'
         description: Specify a version label to show a specific application version.
       MaxRecords:
-        $ref: '#/definitions/MaxRecords'
+        $ref: '#/definitions/[object Object]'
         description: '<p>For a paginated request. Specify a maximum number of application versions to include in each response.</p> <p>If no <code>MaxRecords</code> is specified, all available application versions are retrieved in a single response.</p>'
       NextToken:
-        $ref: '#/definitions/Token'
+        $ref: '#/definitions/[object Object]'
         description: '<p>For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.</p> <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>'
     description: Request to describe application versions.
   ApplicationDescriptionsMessage:
@@ -2046,7 +2046,7 @@ definitions:
             - First Release
     properties:
       Applications:
-        $ref: '#/definitions/ApplicationDescriptionList'
+        $ref: '#/definitions/[object Object]'
         description: This parameter contains a list of <a>ApplicationDescription</a>.
     description: Result message containing a list of application descriptions.
   DescribeApplicationsMessage:
@@ -2054,7 +2054,7 @@ definitions:
     example: {}
     properties:
       ApplicationNames:
-        $ref: '#/definitions/ApplicationNamesList'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.'
     description: Request to describe one or more applications.
   ConfigurationOptionsDescription:
@@ -2078,13 +2078,13 @@ definitions:
           ValueType: Scalar
     properties:
       SolutionStackName:
-        $ref: '#/definitions/SolutionStackName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the solution stack these configuration options belong to.
       PlatformArn:
-        $ref: '#/definitions/PlatformArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the platform.
       Options:
-        $ref: '#/definitions/ConfigurationOptionDescriptionsList'
+        $ref: '#/definitions/[object Object]'
         description: ' A list of <a>ConfigurationOptionDescription</a>. '
     description: Describes the settings for a specified configuration set.
   DescribeConfigurationOptionsMessage:
@@ -2094,22 +2094,22 @@ definitions:
       EnvironmentName: my-env
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application associated with the configuration template or environment. Only needed if you want to describe the configuration options associated with either the configuration template or environment.
       TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration template whose configuration options you want to describe.
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the environment whose configuration options you want to describe.
       SolutionStackName:
-        $ref: '#/definitions/SolutionStackName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the solution stack whose configuration options you want to describe.
       PlatformArn:
-        $ref: '#/definitions/PlatformArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the custom platform.
       Options:
-        $ref: '#/definitions/OptionsSpecifierList'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, restricts the descriptions to only the specified options.'
     description: Result message containing a list of application version descriptions.
   ConfigurationSettingsDescriptions:
@@ -2142,7 +2142,7 @@ definitions:
           SolutionStackName: 64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8
     properties:
       ConfigurationSettings:
-        $ref: '#/definitions/ConfigurationSettingsDescriptionList'
+        $ref: '#/definitions/[object Object]'
         description: ' A list of <a>ConfigurationSettingsDescription</a>. '
     description: The results from a request to change the configuration settings of an environment.
   DescribeConfigurationSettingsMessage:
@@ -2154,13 +2154,13 @@ definitions:
       EnvironmentName: my-env
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The application for the environment or configuration template.
       TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the configuration template to describe.</p> <p> Conditional: You must specify either this parameter or an EnvironmentName, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns a <code>MissingRequiredParameter</code> error. </p>'
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the environment to describe.</p> <p> Condition: You must specify either this or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
     description: Result message containing all of the configuration settings for a specified solution stack or configuration template.
   DescribeEnvironmentHealthResult:
@@ -2199,28 +2199,28 @@ definitions:
       RefreshedAt: '2015-08-20T21:09:18Z'
     properties:
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: The environment's name.
       HealthStatus:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">health status</a> of the environment. For example, <code>Ok</code>.'
       Status:
-        $ref: '#/definitions/EnvironmentHealth'
+        $ref: '#/definitions/[object Object]'
         description: 'The environment''s operational status. <code>Ready</code>, <code>Launching</code>, <code>Updating</code>, <code>Terminating</code>, or <code>Terminated</code>.'
       Color:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">health color</a> of the environment.'
       Causes:
-        $ref: '#/definitions/Causes'
+        $ref: '#/definitions/[object Object]'
         description: Descriptions of the data that contributed to the environment's current health status.
       ApplicationMetrics:
-        $ref: '#/definitions/ApplicationMetrics'
+        $ref: '#/definitions/[object Object]'
         description: Application request metrics for the environment.
       InstancesHealth:
-        $ref: '#/definitions/InstanceHealthSummary'
+        $ref: '#/definitions/[object Object]'
         description: Summary health information for the instances in the environment.
       RefreshedAt:
-        $ref: '#/definitions/RefreshedAt'
+        $ref: '#/definitions/[object Object]'
         description: The date and time that the health information was retrieved.
     description: Health details for an AWS Elastic Beanstalk environment.
   DescribeEnvironmentHealthRequest:
@@ -2231,13 +2231,13 @@ definitions:
       EnvironmentName: my-env
     properties:
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Specify the environment by name.</p> <p>You must specify either this or an EnvironmentName, or both.</p>'
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Specify the environment by ID.</p> <p>You must specify either this or an EnvironmentName, or both.</p>'
       AttributeNames:
-        $ref: '#/definitions/EnvironmentHealthAttributes'
+        $ref: '#/definitions/[object Object]'
         description: 'Specify the response elements to return. To retrieve all attributes, set to <code>All</code>. If no attribute names are specified, returns the name of the environment.'
     description: See the example below to learn how to create a request body.
   InvalidRequestException: {}
@@ -2245,46 +2245,46 @@ definitions:
     type: object
     properties:
       ManagedActionHistoryItems:
-        $ref: '#/definitions/ManagedActionHistoryItems'
+        $ref: '#/definitions/[object Object]'
         description: A list of completed and failed managed actions.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A pagination token that you pass to <a>DescribeEnvironmentManagedActionHistory</a> to get the next page of results.
     description: A result message containing a list of completed and failed managed actions.
   DescribeEnvironmentManagedActionHistoryRequest:
     type: object
     properties:
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: The environment ID of the target environment.
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the target environment.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The pagination token returned by a previous request.
       MaxItems:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of items to return for a single request.
     description: Request to list completed and failed managed actions.
   DescribeEnvironmentManagedActionsResult:
     type: object
     properties:
       ManagedActions:
-        $ref: '#/definitions/ManagedActions'
+        $ref: '#/definitions/[object Object]'
         description: A list of upcoming and in-progress managed actions.
     description: The result message containing a list of managed actions.
   DescribeEnvironmentManagedActionsRequest:
     type: object
     properties:
       EnvironmentName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the target environment.
       EnvironmentId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The environment ID of the target environment.
       Status:
-        $ref: '#/definitions/ActionStatus'
+        $ref: '#/definitions/[object Object]'
         description: 'To show only actions with a particular status, specify a status.'
     description: Request to list an environment's upcoming and in-progress managed actions.
   EnvironmentResourceDescriptionsMessage:
@@ -2304,7 +2304,7 @@ definitions:
         Triggers: []
     properties:
       EnvironmentResources:
-        $ref: '#/definitions/EnvironmentResourceDescription'
+        $ref: '#/definitions/[object Object]'
         description: ' A list of <a>EnvironmentResourceDescription</a>. '
     description: Result message containing a list of environment resource descriptions.
   DescribeEnvironmentResourcesMessage:
@@ -2313,10 +2313,10 @@ definitions:
       EnvironmentName: my-env
     properties:
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The ID of the environment to retrieve AWS resource usage data.</p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the environment to retrieve AWS resource usage data.</p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
     description: Request to describe the resources in an environment.
   DescribeEnvironmentsMessage:
@@ -2326,28 +2326,28 @@ definitions:
         - my-env
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.'
       VersionLabel:
-        $ref: '#/definitions/VersionLabel'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.'
       EnvironmentIds:
-        $ref: '#/definitions/EnvironmentIdList'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.'
       EnvironmentNames:
-        $ref: '#/definitions/EnvironmentNamesList'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.'
       IncludeDeleted:
-        $ref: '#/definitions/IncludeDeleted'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates whether to include deleted environments:</p> <p> <code>true</code>: Environments that have been deleted after <code>IncludedDeletedBackTo</code> are displayed.</p> <p> <code>false</code>: Do not include deleted environments.</p>'
       IncludedDeletedBackTo:
-        $ref: '#/definitions/IncludeDeletedBackTo'
+        $ref: '#/definitions/[object Object]'
         description: ' If specified when <code>IncludeDeleted</code> is set to <code>true</code>, then environments deleted after this date are displayed. '
       MaxRecords:
-        $ref: '#/definitions/MaxRecords'
+        $ref: '#/definitions/[object Object]'
         description: '<p>For a paginated request. Specify a maximum number of environments to include in each response.</p> <p>If no <code>MaxRecords</code> is specified, all available environments are retrieved in a single response.</p>'
       NextToken:
-        $ref: '#/definitions/Token'
+        $ref: '#/definitions/[object Object]'
         description: '<p>For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.</p> <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>'
     description: Request to describe one or more environments.
   EventDescriptionsMessage:
@@ -2379,10 +2379,10 @@ definitions:
           Severity: INFO
     properties:
       Events:
-        $ref: '#/definitions/EventDescriptionList'
+        $ref: '#/definitions/[object Object]'
         description: ' A list of <a>EventDescription</a>. '
       NextToken:
-        $ref: '#/definitions/Token'
+        $ref: '#/definitions/[object Object]'
         description: ' If returned, this indicates that there are more results to obtain. Use this token in the next <a>DescribeEvents</a> call to get the next batch of events. '
     description: Result message wrapping a list of event descriptions.
   DescribeEventsMessage:
@@ -2391,40 +2391,40 @@ definitions:
       EnvironmentName: my-env
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those associated with this application.'
       VersionLabel:
-        $ref: '#/definitions/VersionLabel'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this application version.'
       TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that are associated with this environment configuration.'
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this environment.'
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this environment.'
       PlatformArn:
-        $ref: '#/definitions/PlatformArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the version of the custom platform.
       RequestId:
-        $ref: '#/definitions/RequestId'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk restricts the described events to include only those associated with this request ID.'
       Severity:
-        $ref: '#/definitions/EventSeverity'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, limits the events returned from this call to include only those with the specified severity or higher.'
       StartTime:
-        $ref: '#/definitions/TimeFilterStart'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur on or after this time.'
       EndTime:
-        $ref: '#/definitions/TimeFilterEnd'
+        $ref: '#/definitions/[object Object]'
         description: ' If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur up to, but not including, the <code>EndTime</code>. '
       MaxRecords:
-        $ref: '#/definitions/MaxRecords'
+        $ref: '#/definitions/[object Object]'
         description: 'Specifies the maximum number of events that can be returned, beginning with the most recent event.'
       NextToken:
-        $ref: '#/definitions/Token'
+        $ref: '#/definitions/[object Object]'
         description: 'Pagination token. If specified, the events return the next batch of results.'
     description: Request to retrieve a list of events for an environment.
   DescribeInstancesHealthResult:
@@ -2469,13 +2469,13 @@ definitions:
       RefreshedAt: '2015-08-20T21:09:08Z'
     properties:
       InstanceHealthList:
-        $ref: '#/definitions/InstanceHealthList'
+        $ref: '#/definitions/[object Object]'
         description: <p>Detailed health information about each instance.</p> <p>The output differs slightly between Linux and Windows environments. There is a difference in the members that are supported under the <code>&lt;CPUUtilization&gt;</code> type.</p>
       RefreshedAt:
-        $ref: '#/definitions/RefreshedAt'
+        $ref: '#/definitions/[object Object]'
         description: The date and time that the health information was retrieved.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'Pagination token for the next page of results, if available.'
     description: Detailed health information about the Amazon EC2 instances in an AWS Elastic Beanstalk environment.
   DescribeInstancesHealthRequest:
@@ -2486,29 +2486,29 @@ definitions:
       EnvironmentName: my-env
     properties:
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: Specify the AWS Elastic Beanstalk environment by name.
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: Specify the AWS Elastic Beanstalk environment by ID.
       AttributeNames:
-        $ref: '#/definitions/InstancesHealthAttributes'
+        $ref: '#/definitions/[object Object]'
         description: 'Specifies the response elements you wish to receive. To retrieve all attributes, set to <code>All</code>. If no attribute names are specified, returns a list of instances.'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Specify the pagination token returned by a previous call.
     description: Parameters for a call to <code>DescribeInstancesHealth</code>.
   DescribePlatformVersionResult:
     type: object
     properties:
       PlatformDescription:
-        $ref: '#/definitions/PlatformDescription'
+        $ref: '#/definitions/[object Object]'
         description: Detailed information about the version of the platform.
   DescribePlatformVersionRequest:
     type: object
     properties:
       PlatformArn:
-        $ref: '#/definitions/PlatformArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the version of the platform.
   ListAvailableSolutionStacksResultMessage:
     type: object
@@ -2548,41 +2548,41 @@ definitions:
         - 64bit Debian jessie v2.0.0 running Python 3.4 (Preconfigured - Docker)
     properties:
       SolutionStacks:
-        $ref: '#/definitions/AvailableSolutionStackNamesList'
+        $ref: '#/definitions/[object Object]'
         description: A list of available solution stacks.
       SolutionStackDetails:
-        $ref: '#/definitions/AvailableSolutionStackDetailsList'
+        $ref: '#/definitions/[object Object]'
         description: ' A list of available solution stacks and their <a>SolutionStackDescription</a>. '
     description: A list of available AWS Elastic Beanstalk solution stacks.
   ListPlatformVersionsResult:
     type: object
     properties:
       PlatformSummaryList:
-        $ref: '#/definitions/PlatformSummaryList'
+        $ref: '#/definitions/[object Object]'
         description: Detailed information about the platforms.
       NextToken:
-        $ref: '#/definitions/Token'
+        $ref: '#/definitions/[object Object]'
         description: 'The starting index into the remaining list of platforms. if this value is not <code>null</code>, you can use it in a subsequent <code>ListPlatformVersion</code> call. '
   ListPlatformVersionsRequest:
     type: object
     properties:
       Filters:
-        $ref: '#/definitions/PlatformFilters'
+        $ref: '#/definitions/[object Object]'
         description: List only the platforms where the platform member value relates to one of the supplied values.
       MaxRecords:
-        $ref: '#/definitions/PlatformMaxRecords'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of platform values returned in one call.
       NextToken:
-        $ref: '#/definitions/Token'
+        $ref: '#/definitions/[object Object]'
         description: The starting index into the remaining list of platforms. Use the <code>NextToken</code> value from a previous <code>ListPlatformVersion</code> call.
   ResourceTagsDescriptionMessage:
     type: object
     properties:
       ResourceArn:
-        $ref: '#/definitions/ResourceArn'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the resouce for which a tag list was requested.
       ResourceTags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: A list of tag key-value pairs.
   ListTagsForResourceMessage:
     type: object
@@ -2590,7 +2590,7 @@ definitions:
       - ResourceArn
     properties:
       ResourceArn:
-        $ref: '#/definitions/ResourceArn'
+        $ref: '#/definitions/[object Object]'
         description: <p>The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.</p> <p>Must be the ARN of an Elastic Beanstalk environment.</p>
   ResourceNotFoundException: {}
   ResourceTypeNotSupportedException: {}
@@ -2600,10 +2600,10 @@ definitions:
       EnvironmentName: my-env
     properties:
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The ID of the environment to rebuild.</p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the environment to rebuild.</p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
     description: <p/>
   RequestEnvironmentInfoMessage:
@@ -2615,13 +2615,13 @@ definitions:
       InfoType: tail
     properties:
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The ID of the environment of the requested data.</p> <p>If no such environment is found, <code>RequestEnvironmentInfo</code> returns an <code>InvalidParameterValue</code> error. </p> <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the environment of the requested data.</p> <p>If no such environment is found, <code>RequestEnvironmentInfo</code> returns an <code>InvalidParameterValue</code> error. </p> <p>Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
       InfoType:
-        $ref: '#/definitions/EnvironmentInfoType'
+        $ref: '#/definitions/[object Object]'
         description: The type of information to request.
     description: Request to retrieve logs from an environment and store them in your Elastic Beanstalk storage bucket.
   RestartAppServerMessage:
@@ -2630,10 +2630,10 @@ definitions:
       EnvironmentName: my-env
     properties:
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The ID of the environment to restart the server for.</p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the environment to restart the server for.</p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
     description: <p/>
   RetrieveEnvironmentInfoResultMessage:
@@ -2646,7 +2646,7 @@ definitions:
           SampleTimestamp: '2015-08-20T22:23:17.703Z'
     properties:
       EnvironmentInfo:
-        $ref: '#/definitions/EnvironmentInfoDescriptionList'
+        $ref: '#/definitions/[object Object]'
         description: ' The <a>EnvironmentInfoDescription</a> of the environment. '
     description: Result message containing a description of the requested environment info.
   RetrieveEnvironmentInfoMessage:
@@ -2658,13 +2658,13 @@ definitions:
       InfoType: tail
     properties:
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The ID of the data''s environment.</p> <p>If no such environment is found, returns an <code>InvalidParameterValue</code> error.</p> <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error.</p>'
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the data''s environment.</p> <p> If no such environment is found, returns an <code>InvalidParameterValue</code> error. </p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
       InfoType:
-        $ref: '#/definitions/EnvironmentInfoType'
+        $ref: '#/definitions/[object Object]'
         description: The type of information to retrieve.
     description: Request to download logs retrieved with <a>RequestEnvironmentInfo</a>.
   SwapEnvironmentCNAMEsMessage:
@@ -2674,16 +2674,16 @@ definitions:
       SourceEnvironmentName: my-env-blue
     properties:
       SourceEnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The ID of the source environment.</p> <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the <code>SourceEnvironmentName</code>. You may also specify both. If you specify the <code>SourceEnvironmentId</code>, you must specify the <code>DestinationEnvironmentId</code>. </p>'
       SourceEnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the source environment.</p> <p> Condition: You must specify at least the <code>SourceEnvironmentID</code> or the <code>SourceEnvironmentName</code>. You may also specify both. If you specify the <code>SourceEnvironmentName</code>, you must specify the <code>DestinationEnvironmentName</code>. </p>'
       DestinationEnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The ID of the destination environment.</p> <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the <code>DestinationEnvironmentName</code>. You may also specify both. You must specify the <code>SourceEnvironmentId</code> with the <code>DestinationEnvironmentId</code>. </p>'
       DestinationEnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the destination environment.</p> <p> Condition: You must specify at least the <code>DestinationEnvironmentID</code> or the <code>DestinationEnvironmentName</code>. You may also specify both. You must specify the <code>SourceEnvironmentName</code> with the <code>DestinationEnvironmentName</code>. </p>'
     description: Swaps the CNAMEs of two environments.
   TerminateEnvironmentMessage:
@@ -2692,16 +2692,16 @@ definitions:
       EnvironmentName: my-env
     properties:
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The ID of the environment to terminate.</p> <p> Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the environment to terminate.</p> <p> Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
       TerminateResources:
-        $ref: '#/definitions/TerminateEnvironmentResources'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates whether the associated AWS resources should shut down when the environment is terminated:</p> <ul> <li> <p> <code>true</code>: The specified environment as well as the associated AWS resources, such as Auto Scaling group and LoadBalancer, are terminated.</p> </li> <li> <p> <code>false</code>: AWS Elastic Beanstalk resource management is removed from the environment, but the AWS resources continue to operate.</p> </li> </ul> <p> For more information, see the <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/ug/"> AWS Elastic Beanstalk User Guide. </a> </p> <p> Default: <code>true</code> </p> <p> Valid Values: <code>true</code> | <code>false</code> </p>'
       ForceTerminate:
-        $ref: '#/definitions/ForceTerminate'
+        $ref: '#/definitions/[object Object]'
         description: Terminates the target environment even if another environment in the same group is dependent on it.
     description: Request to terminate an environment.
   UpdateApplicationMessage:
@@ -2713,20 +2713,20 @@ definitions:
       Description: my Elastic Beanstalk application
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the application to update. If no such application is found, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. '
       Description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A new description for the application.</p> <p>Default: If not specified, AWS Elastic Beanstalk does not update the description.</p>'
     description: Request to update an application.
   ApplicationResourceLifecycleDescriptionMessage:
     type: object
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application.
       ResourceLifecycleConfig:
-        $ref: '#/definitions/ApplicationResourceLifecycleConfig'
+        $ref: '#/definitions/[object Object]'
         description: The lifecycle configuration.
   UpdateApplicationResourceLifecycleMessage:
     type: object
@@ -2735,10 +2735,10 @@ definitions:
       - ResourceLifecycleConfig
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application.
       ResourceLifecycleConfig:
-        $ref: '#/definitions/ApplicationResourceLifecycleConfig'
+        $ref: '#/definitions/[object Object]'
         description: The lifecycle configuration.
   UpdateApplicationVersionMessage:
     type: object
@@ -2751,13 +2751,13 @@ definitions:
       VersionLabel: 22a0-stage-150819_185942
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the application associated with this version.</p> <p> If no application is found with this name, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error.</p>'
       VersionLabel:
-        $ref: '#/definitions/VersionLabel'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the version to update.</p> <p>If no application version is found with this label, <code>UpdateApplication</code> returns an <code>InvalidParameterValue</code> error. </p>'
       Description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: A new description for this version.
     description: <p/>
   UpdateConfigurationTemplateMessage:
@@ -2773,19 +2773,19 @@ definitions:
       TemplateName: my-template
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the application associated with the configuration template to update.</p> <p> If no application is found with this name, <code>UpdateConfigurationTemplate</code> returns an <code>InvalidParameterValue</code> error. </p>'
       TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the configuration template to update.</p> <p> If no configuration template is found with this name, <code>UpdateConfigurationTemplate</code> returns an <code>InvalidParameterValue</code> error. </p>'
       Description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: A new description for the configuration.
       OptionSettings:
-        $ref: '#/definitions/ConfigurationOptionSettingsList'
+        $ref: '#/definitions/[object Object]'
         description: A list of configuration option settings to update with the new specified option value.
       OptionsToRemove:
-        $ref: '#/definitions/OptionsSpecifierList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A list of configuration options to remove from the configuration set.</p> <p> Constraint: You can remove only <code>UserDefined</code> configuration options. </p>'
     description: The result message containing the options for the specified solution stack.
   UpdateEnvironmentMessage:
@@ -2807,40 +2807,40 @@ definitions:
           Value: '3'
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application with which the environment is associated.
       EnvironmentId:
-        $ref: '#/definitions/EnvironmentId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The ID of the environment to update.</p> <p>If no environment with this ID exists, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error.</p> <p>Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the environment to update. If no environment with this name exists, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns <code>MissingRequiredParameter</code> error. </p>'
       GroupName:
-        $ref: '#/definitions/GroupName'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the group to which the target environment belongs. Specify a group name only if the environment''s name is specified in an environment manifest and not with the environment name or environment ID parameters. See <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest (env.yaml)</a> for details.'
       Description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: 'If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment.'
       Tier:
-        $ref: '#/definitions/EnvironmentTier'
+        $ref: '#/definitions/[object Object]'
         description: '<p>This specifies the tier to use to update the environment.</p> <p>Condition: At this time, if you change the tier version, name, or type, AWS Elastic Beanstalk returns <code>InvalidParameterValue</code> error. </p>'
       VersionLabel:
-        $ref: '#/definitions/VersionLabel'
+        $ref: '#/definitions/[object Object]'
         description: 'If this parameter is specified, AWS Elastic Beanstalk deploys the named application version to the environment. If no such application version is found, returns an <code>InvalidParameterValue</code> error. '
       TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
+        $ref: '#/definitions/[object Object]'
         description: 'If this parameter is specified, AWS Elastic Beanstalk deploys this configuration template to the environment. If no such configuration template is found, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. '
       SolutionStackName:
-        $ref: '#/definitions/SolutionStackName'
+        $ref: '#/definitions/[object Object]'
         description: This specifies the platform version that the environment will run after the environment is updated.
       PlatformArn:
-        $ref: '#/definitions/PlatformArn'
+        $ref: '#/definitions/[object Object]'
         description: 'The ARN of the platform, if used.'
       OptionSettings:
-        $ref: '#/definitions/ConfigurationOptionSettingsList'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.'
       OptionsToRemove:
-        $ref: '#/definitions/OptionsSpecifierList'
+        $ref: '#/definitions/[object Object]'
         description: A list of custom user-defined configuration options to remove from the configuration set for this environment.
     description: Request to update an environment.
   UpdateTagsForResourceMessage:
@@ -2849,13 +2849,13 @@ definitions:
       - ResourceArn
     properties:
       ResourceArn:
-        $ref: '#/definitions/ResourceArn'
+        $ref: '#/definitions/[object Object]'
         description: <p>The Amazon Resource Name (ARN) of the resouce to be updated.</p> <p>Must be the ARN of an Elastic Beanstalk environment.</p>
       TagsToAdd:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A list of tags to add or update.</p> <p>If a key of an existing tag is added, the tag''s value is updated.</p>'
       TagsToRemove:
-        $ref: '#/definitions/TagKeyList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A list of tag keys to remove.</p> <p>If a tag key doesn''t exist, it is silently ignored.</p>'
   TooManyTagsException: {}
   ConfigurationSettingsValidationMessages:
@@ -2864,7 +2864,7 @@ definitions:
       Messages: []
     properties:
       Messages:
-        $ref: '#/definitions/ValidationMessagesList'
+        $ref: '#/definitions/[object Object]'
         description: ' A list of <a>ValidationMessage</a>. '
     description: Provides a list of validation messages.
   ValidateConfigurationSettingsMessage:
@@ -2881,26 +2881,21 @@ definitions:
           Value: '{"CloudWatchMetrics": {"Environment": {"ApplicationLatencyP99.9": null,"InstancesSevere": 60,"ApplicationLatencyP90": 60,"ApplicationLatencyP99": null,"ApplicationLatencyP95": 60,"InstancesUnknown": 60,"ApplicationLatencyP85": 60,"InstancesInfo": null,"ApplicationRequests2xx": null,"InstancesDegraded": null,"InstancesWarning": 60,"ApplicationLatencyP50": 60,"ApplicationRequestsTotal": null,"InstancesNoData": null,"InstancesPending": 60,"ApplicationLatencyP10": null,"ApplicationRequests5xx": null,"ApplicationLatencyP75": null,"InstancesOk": 60,"ApplicationRequests3xx": null,"ApplicationRequests4xx": null},"Instance": {"ApplicationLatencyP99.9": null,"ApplicationLatencyP90": 60,"ApplicationLatencyP99": null,"ApplicationLatencyP95": null,"ApplicationLatencyP85": null,"CPUUser": 60,"ApplicationRequests2xx": null,"CPUIdle": null,"ApplicationLatencyP50": null,"ApplicationRequestsTotal": 60,"RootFilesystemUtil": null,"LoadAverage1min": null,"CPUIrq": null,"CPUNice": 60,"CPUIowait": 60,"ApplicationLatencyP10": null,"LoadAverage5min": null,"ApplicationRequests5xx": null,"ApplicationLatencyP75": 60,"CPUSystem": 60,"ApplicationRequests3xx": 60,"ApplicationRequests4xx": null,"InstanceHealth": null,"CPUSoftirq": 60}},"Version": 1}'
     properties:
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application that the configuration template or environment belongs to.
       TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the configuration template to validate the settings against.</p> <p>Condition: You cannot specify both this and an environment name.</p>'
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the environment to validate the settings against.</p> <p>Condition: You cannot specify both this and a configuration template name.</p>'
       OptionSettings:
-        $ref: '#/definitions/ConfigurationOptionSettingsList'
+        $ref: '#/definitions/[object Object]'
         description: A list of the options and desired values to evaluate.
     description: A list of validation messages for a specified configuration template.
   ARN:
     type: string
-  EnvironmentId:
-    type: string
-  EnvironmentName:
-    type: string
-    minLength: 4
-    maxLength: 40
+  '[object Object]': {}
   AbortableOperationInProgress:
     type: boolean
   ActionHistoryStatus:
@@ -2924,182 +2919,124 @@ definitions:
       - Unknown
   ApplicationArn:
     type: string
-  ApplicationName:
-    type: string
-    minLength: 1
-    maxLength: 100
-  Description:
-    type: string
-    maxLength: 200
-  CreationDate:
-    type: string
-    format: date-time
-  UpdateDate:
-    type: string
-    format: date-time
-  VersionLabelsList:
-    type: array
-    items:
-      $ref: '#/definitions/VersionLabel'
-  ConfigurationTemplateNamesList:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationTemplateName'
-  ApplicationResourceLifecycleConfig:
-    type: object
-    properties:
-      ServiceRole:
-        $ref: '#/definitions/String'
-        description: '<p>The ARN of an IAM service role that Elastic Beanstalk has permission to assume.</p> <p>The <code>ServiceRole</code> property is required the first time that you provide a <code>VersionLifecycleConfig</code> for the application in one of the supporting calls (<code>CreateApplication</code> or <code>UpdateApplicationResourceLifecycle</code>). After you provide it once, in either one of the calls, Elastic Beanstalk persists the Service Role with the application, and you don''t need to specify it again in subsequent <code>UpdateApplicationResourceLifecycle</code> calls. You can, however, specify it in subsequent calls to change the Service Role to another value.</p>'
-      VersionLifecycleConfig:
-        $ref: '#/definitions/ApplicationVersionLifecycleConfig'
-        description: The application version lifecycle configuration.
-    description: 'The resource lifecycle configuration for an application. Defines lifecycle settings for resources that belong to the application, and the service role that Elastic Beanstalk assumes in order to apply lifecycle settings. The version lifecycle configuration defines lifecycle settings for application versions.'
   ApplicationDescription:
     type: object
     properties:
       ApplicationArn:
-        $ref: '#/definitions/ApplicationArn'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the application.
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the application.
       Description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: User-defined description of the application.
       DateCreated:
-        $ref: '#/definitions/CreationDate'
+        $ref: '#/definitions/[object Object]'
         description: The date when the application was created.
       DateUpdated:
-        $ref: '#/definitions/UpdateDate'
+        $ref: '#/definitions/[object Object]'
         description: The date when the application was last modified.
       Versions:
-        $ref: '#/definitions/VersionLabelsList'
+        $ref: '#/definitions/[object Object]'
         description: The names of the versions for this application.
       ConfigurationTemplates:
-        $ref: '#/definitions/ConfigurationTemplateNamesList'
+        $ref: '#/definitions/[object Object]'
         description: The names of the configuration templates associated with this application.
       ResourceLifecycleConfig:
-        $ref: '#/definitions/ApplicationResourceLifecycleConfig'
+        $ref: '#/definitions/[object Object]'
         description: The lifecycle settings for the application.
     description: Describes the properties of an application.
   ApplicationDescriptionList:
     type: array
     items:
-      $ref: '#/definitions/ApplicationDescription'
-  NullableInteger:
-    type: integer
-  RequestCount:
-    type: integer
-  StatusCodes:
-    type: object
-    properties:
-      Status2xx:
-        $ref: '#/definitions/NullableInteger'
-        description: 'The percentage of requests over the last 10 seconds that resulted in a 2xx (200, 201, etc.) status code.'
-      Status3xx:
-        $ref: '#/definitions/NullableInteger'
-        description: 'The percentage of requests over the last 10 seconds that resulted in a 3xx (300, 301, etc.) status code.'
-      Status4xx:
-        $ref: '#/definitions/NullableInteger'
-        description: 'The percentage of requests over the last 10 seconds that resulted in a 4xx (400, 401, etc.) status code.'
-      Status5xx:
-        $ref: '#/definitions/NullableInteger'
-        description: 'The percentage of requests over the last 10 seconds that resulted in a 5xx (500, 501, etc.) status code.'
-    description: 'Represents the percentage of requests over the last 10 seconds that resulted in each type of status code response. For more information, see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">Status Code Definitions</a>.'
-  Latency:
-    type: object
-    properties:
-      P999:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 0.1 percent of requests over the last 10 seconds.
-      P99:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 1 percent of requests over the last 10 seconds.
-      P95:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 5 percent of requests over the last 10 seconds.
-      P90:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 10 percent of requests over the last 10 seconds.
-      P85:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 15 percent of requests over the last 10 seconds.
-      P75:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 25 percent of requests over the last 10 seconds.
-      P50:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 50 percent of requests over the last 10 seconds.
-      P10:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 90 percent of requests over the last 10 seconds.
-    description: Represents the average latency for the slowest X percent of requests over the last 10 seconds.
+      $ref: '#/definitions/[object Object]'
   ApplicationMetrics:
     type: object
     properties:
       Duration:
-        $ref: '#/definitions/NullableInteger'
+        $ref: '#/definitions/[object Object]'
         description: 'The amount of time that the metrics cover (usually 10 seconds). For example, you might have 5 requests (<code>request_count</code>) within the most recent time slice of 10 seconds (<code>duration</code>).'
       RequestCount:
-        $ref: '#/definitions/RequestCount'
+        $ref: '#/definitions/[object Object]'
         description: Average number of requests handled by the web server per second over the last 10 seconds.
       StatusCodes:
-        $ref: '#/definitions/StatusCodes'
+        $ref: '#/definitions/[object Object]'
         description: Represents the percentage of requests over the last 10 seconds that resulted in each type of status code response.
       Latency:
-        $ref: '#/definitions/Latency'
+        $ref: '#/definitions/[object Object]'
         description: Represents the average latency for the slowest X percent of requests over the last 10 seconds. Latencies are in seconds with one millisecond resolution.
     description: Application request metrics for an AWS Elastic Beanstalk environment.
+  ApplicationName:
+    type: string
+    minLength: 1
+    maxLength: 100
   ApplicationNamesList:
     type: array
     items:
-      $ref: '#/definitions/ApplicationName'
-  String:
+      $ref: '#/definitions/[object Object]'
+  ApplicationResourceLifecycleConfig:
+    type: object
+    properties:
+      ServiceRole:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The ARN of an IAM service role that Elastic Beanstalk has permission to assume.</p> <p>The <code>ServiceRole</code> property is required the first time that you provide a <code>VersionLifecycleConfig</code> for the application in one of the supporting calls (<code>CreateApplication</code> or <code>UpdateApplicationResourceLifecycle</code>). After you provide it once, in either one of the calls, Elastic Beanstalk persists the Service Role with the application, and you don''t need to specify it again in subsequent <code>UpdateApplicationResourceLifecycle</code> calls. You can, however, specify it in subsequent calls to change the Service Role to another value.</p>'
+      VersionLifecycleConfig:
+        $ref: '#/definitions/[object Object]'
+        description: The application version lifecycle configuration.
+    description: 'The resource lifecycle configuration for an application. Defines lifecycle settings for resources that belong to the application, and the service role that Elastic Beanstalk assumes in order to apply lifecycle settings. The version lifecycle configuration defines lifecycle settings for application versions.'
+  ApplicationVersionArn:
     type: string
+  ApplicationVersionDescription:
+    type: object
+    properties:
+      ApplicationVersionArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the application version.
+      ApplicationName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the application to which the application version belongs.
+      Description:
+        $ref: '#/definitions/[object Object]'
+        description: The description of the application version.
+      VersionLabel:
+        $ref: '#/definitions/[object Object]'
+        description: A unique identifier for the application version.
+      SourceBuildInformation:
+        $ref: '#/definitions/[object Object]'
+        description: 'If the version''s source code was retrieved from AWS CodeCommit, the location of the source code for the application version.'
+      BuildArn:
+        $ref: '#/definitions/[object Object]'
+        description: Reference to the artifact from the AWS CodeBuild build.
+      SourceBundle:
+        $ref: '#/definitions/[object Object]'
+        description: The storage location of the application version's source bundle in Amazon S3.
+      DateCreated:
+        $ref: '#/definitions/[object Object]'
+        description: The creation date of the application version.
+      DateUpdated:
+        $ref: '#/definitions/[object Object]'
+        description: The last modified date of the application version.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: <p>The processing status of the application version. Reflects the state of the application version during its creation. Many of the values are only applicable if you specified <code>True</code> for the <code>Process</code> parameter of the <code>CreateApplicationVersion</code> action. The following list describes the possible values.</p> <ul> <li> <p> <code>Unprocessed</code> – Application version wasn't pre-processed or validated. Elastic Beanstalk will validate configuration files during deployment of the application version to an environment.</p> </li> <li> <p> <code>Processing</code> – Elastic Beanstalk is currently processing the application version.</p> </li> <li> <p> <code>Building</code> – Application version is currently undergoing an AWS CodeBuild build.</p> </li> <li> <p> <code>Processed</code> – Elastic Beanstalk was successfully pre-processed and validated.</p> </li> <li> <p> <code>Failed</code> – Either the AWS CodeBuild build failed or configuration files didn't pass validation. This application version isn't usable.</p> </li> </ul>
+    description: Describes the properties of an application version.
+  ApplicationVersionDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ApplicationVersionLifecycleConfig:
     type: object
     properties:
       MaxCountRule:
-        $ref: '#/definitions/MaxCountRule'
+        $ref: '#/definitions/[object Object]'
         description: Specify a max count rule to restrict the number of application versions that are retained for an application.
       MaxAgeRule:
-        $ref: '#/definitions/MaxAgeRule'
+        $ref: '#/definitions/[object Object]'
         description: Specify a max age rule to restrict the length of time that application versions are retained for an application.
     description: '<p>The application version lifecycle settings for an application. Defines the rules that Elastic Beanstalk applies to an application''s versions in order to avoid hitting the per-region limit for application versions.</p> <p>When Elastic Beanstalk deletes an application version from its database, you can no longer deploy that version to an environment. The source bundle remains in S3 unless you configure the rule to delete it.</p>'
-  ApplicationVersionArn:
-    type: string
-  VersionLabel:
-    type: string
-    minLength: 1
-    maxLength: 100
-  SourceBuildInformation:
-    type: object
-    required:
-      - SourceType
-      - SourceRepository
-      - SourceLocation
-    properties:
-      SourceType:
-        $ref: '#/definitions/SourceType'
-        description: <p>The type of repository.</p> <ul> <li> <p> <code>Git</code> </p> </li> <li> <p> <code>Zip</code> </p> </li> </ul>
-      SourceRepository:
-        $ref: '#/definitions/SourceRepository'
-        description: <p>Location where the repository is stored.</p> <ul> <li> <p> <code>CodeCommit</code> </p> </li> <li> <p> <code>S3</code> </p> </li> </ul>
-      SourceLocation:
-        $ref: '#/definitions/SourceLocation'
-        description: '<p>The location of the source code, as a formatted string, depending on the value of <code>SourceRepository</code> </p> <ul> <li> <p>For <code>CodeCommit</code>, the format is the repository name and commit ID, separated by a forward slash. For example, <code>my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a</code>.</p> </li> <li> <p>For <code>S3</code>, the format is the S3 bucket name and object key, separated by a forward slash. For example, <code>my-s3-bucket/Folders/my-source-file</code>.</p> </li> </ul>'
-    description: Location of the source code for an application version.
-  S3Location:
-    type: object
-    properties:
-      S3Bucket:
-        $ref: '#/definitions/S3Bucket'
-        description: The Amazon S3 bucket where the data is located.
-      S3Key:
-        $ref: '#/definitions/S3Key'
-        description: The Amazon S3 key where the data is located.
-    description: The bucket and key of an item stored in Amazon S3.
+  ApplicationVersionProccess:
+    type: boolean
   ApplicationVersionStatus:
     type: string
     enum:
@@ -3108,126 +3045,31 @@ definitions:
       - Failed
       - Processing
       - Building
-  ApplicationVersionDescription:
-    type: object
-    properties:
-      ApplicationVersionArn:
-        $ref: '#/definitions/ApplicationVersionArn'
-        description: The Amazon Resource Name (ARN) of the application version.
-      ApplicationName:
-        $ref: '#/definitions/ApplicationName'
-        description: The name of the application to which the application version belongs.
-      Description:
-        $ref: '#/definitions/Description'
-        description: The description of the application version.
-      VersionLabel:
-        $ref: '#/definitions/VersionLabel'
-        description: A unique identifier for the application version.
-      SourceBuildInformation:
-        $ref: '#/definitions/SourceBuildInformation'
-        description: 'If the version''s source code was retrieved from AWS CodeCommit, the location of the source code for the application version.'
-      BuildArn:
-        $ref: '#/definitions/String'
-        description: Reference to the artifact from the AWS CodeBuild build.
-      SourceBundle:
-        $ref: '#/definitions/S3Location'
-        description: The storage location of the application version's source bundle in Amazon S3.
-      DateCreated:
-        $ref: '#/definitions/CreationDate'
-        description: The creation date of the application version.
-      DateUpdated:
-        $ref: '#/definitions/UpdateDate'
-        description: The last modified date of the application version.
-      Status:
-        $ref: '#/definitions/ApplicationVersionStatus'
-        description: <p>The processing status of the application version. Reflects the state of the application version during its creation. Many of the values are only applicable if you specified <code>True</code> for the <code>Process</code> parameter of the <code>CreateApplicationVersion</code> action. The following list describes the possible values.</p> <ul> <li> <p> <code>Unprocessed</code> – Application version wasn't pre-processed or validated. Elastic Beanstalk will validate configuration files during deployment of the application version to an environment.</p> </li> <li> <p> <code>Processing</code> – Elastic Beanstalk is currently processing the application version.</p> </li> <li> <p> <code>Building</code> – Application version is currently undergoing an AWS CodeBuild build.</p> </li> <li> <p> <code>Processed</code> – Elastic Beanstalk was successfully pre-processed and validated.</p> </li> <li> <p> <code>Failed</code> – Either the AWS CodeBuild build failed or configuration files didn't pass validation. This application version isn't usable.</p> </li> </ul>
-    description: Describes the properties of an application version.
-  ApplicationVersionDescriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/ApplicationVersionDescription'
-  Token:
-    type: string
-  MaxCountRule:
-    type: object
-    required:
-      - Enabled
-    properties:
-      Enabled:
-        $ref: '#/definitions/BoxedBoolean'
-        description: 'Specify <code>true</code> to apply the rule, or <code>false</code> to disable it.'
-      MaxCount:
-        $ref: '#/definitions/BoxedInt'
-        description: Specify the maximum number of application versions to retain.
-      DeleteSourceFromS3:
-        $ref: '#/definitions/BoxedBoolean'
-        description: Set to <code>true</code> to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.
-    description: A lifecycle rule that deletes the oldest application version when the maximum count is exceeded.
-  MaxAgeRule:
-    type: object
-    required:
-      - Enabled
-    properties:
-      Enabled:
-        $ref: '#/definitions/BoxedBoolean'
-        description: 'Specify <code>true</code> to apply the rule, or <code>false</code> to disable it.'
-      MaxAgeInDays:
-        $ref: '#/definitions/BoxedInt'
-        description: Specify the number of days to retain an application versions.
-      DeleteSourceFromS3:
-        $ref: '#/definitions/BoxedBoolean'
-        description: Set to <code>true</code> to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.
-    description: A lifecycle rule that deletes application versions after the specified number of days.
-  ApplicationVersionProccess:
-    type: boolean
   AutoCreateApplication:
     type: boolean
-  ResourceId:
-    type: string
   AutoScalingGroup:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/ResourceId'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the <code>AutoScalingGroup</code> . '
     description: Describes an Auto Scaling launch configuration.
   AutoScalingGroupList:
     type: array
     items:
-      $ref: '#/definitions/AutoScalingGroup'
-  SolutionStackDescription:
-    type: object
-    properties:
-      SolutionStackName:
-        $ref: '#/definitions/SolutionStackName'
-        description: The name of the solution stack.
-      PermittedFileTypes:
-        $ref: '#/definitions/SolutionStackFileTypeList'
-        description: The permitted file types allowed for a solution stack.
-    description: Describes the solution stack.
+      $ref: '#/definitions/[object Object]'
   AvailableSolutionStackDetailsList:
     type: array
     items:
-      $ref: '#/definitions/SolutionStackDescription'
-  SolutionStackName:
-    type: string
+      $ref: '#/definitions/[object Object]'
   AvailableSolutionStackNamesList:
     type: array
     items:
-      $ref: '#/definitions/SolutionStackName'
+      $ref: '#/definitions/[object Object]'
   BoxedBoolean:
     type: boolean
   BoxedInt:
     type: integer
-  NonEmptyString:
-    type: string
-    pattern: .*\S.*
-  ComputeType:
-    type: string
-    enum:
-      - BUILD_GENERAL1_SMALL
-      - BUILD_GENERAL1_MEDIUM
-      - BUILD_GENERAL1_LARGE
   BuildConfiguration:
     type: object
     required:
@@ -3235,57 +3077,54 @@ definitions:
       - Image
     properties:
       ArtifactName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The name of the artifact of the CodeBuild build. If provided, Elastic Beanstalk stores the build artifact in the S3 location <i>S3-bucket</i>/resources/<i>application-name</i>/codebuild/codebuild-<i>version-label</i>-<i>artifact-name</i>.zip. If not provided, Elastic Beanstalk stores the build artifact in the S3 location <i>S3-bucket</i>/resources/<i>application-name</i>/codebuild/codebuild-<i>version-label</i>.zip. '
       CodeBuildServiceRole:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
       ComputeType:
-        $ref: '#/definitions/ComputeType'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Information about the compute resources the build project will use.</p> <ul> <li> <p> <code>BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds</code> </p> </li> <li> <p> <code>BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds</code> </p> </li> <li> <p> <code>BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds</code> </p> </li> </ul>'
       Image:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the Docker image to use for this build project.
       TimeoutInMinutes:
-        $ref: '#/definitions/BoxedInt'
+        $ref: '#/definitions/[object Object]'
         description: 'How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed. The default is 60 minutes.'
     description: Settings for an AWS CodeBuild build.
   Builder:
     type: object
     properties:
       ARN:
-        $ref: '#/definitions/ARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the builder.
     description: The builder used to build the custom platform.
-  NullableDouble:
-    type: number
-    format: double
   CPUUtilization:
     type: object
     properties:
       User:
-        $ref: '#/definitions/NullableDouble'
+        $ref: '#/definitions/[object Object]'
         description: Percentage of time that the CPU has spent in the <code>User</code> state over the last 10 seconds.
       Nice:
-        $ref: '#/definitions/NullableDouble'
+        $ref: '#/definitions/[object Object]'
         description: <p>Available on Linux environments only.</p> <p>Percentage of time that the CPU has spent in the <code>Nice</code> state over the last 10 seconds.</p>
       System:
-        $ref: '#/definitions/NullableDouble'
+        $ref: '#/definitions/[object Object]'
         description: <p>Available on Linux environments only.</p> <p>Percentage of time that the CPU has spent in the <code>System</code> state over the last 10 seconds.</p>
       Idle:
-        $ref: '#/definitions/NullableDouble'
+        $ref: '#/definitions/[object Object]'
         description: Percentage of time that the CPU has spent in the <code>Idle</code> state over the last 10 seconds.
       IOWait:
-        $ref: '#/definitions/NullableDouble'
+        $ref: '#/definitions/[object Object]'
         description: <p>Available on Linux environments only.</p> <p>Percentage of time that the CPU has spent in the <code>I/O Wait</code> state over the last 10 seconds.</p>
       IRQ:
-        $ref: '#/definitions/NullableDouble'
+        $ref: '#/definitions/[object Object]'
         description: <p>Available on Linux environments only.</p> <p>Percentage of time that the CPU has spent in the <code>IRQ</code> state over the last 10 seconds.</p>
       SoftIRQ:
-        $ref: '#/definitions/NullableDouble'
+        $ref: '#/definitions/[object Object]'
         description: <p>Available on Linux environments only.</p> <p>Percentage of time that the CPU has spent in the <code>SoftIRQ</code> state over the last 10 seconds.</p>
       Privileged:
-        $ref: '#/definitions/NullableDouble'
+        $ref: '#/definitions/[object Object]'
         description: <p>Available on Windows environments only.</p> <p>Percentage of time that the CPU has spent in the <code>Privileged</code> state over the last 10 seconds.</p>
     description: CPU utilization metrics for an instance.
   Cause:
@@ -3295,25 +3134,15 @@ definitions:
   Causes:
     type: array
     items:
-      $ref: '#/definitions/Cause'
-  DNSCnamePrefix:
-    type: string
-    minLength: 4
-    maxLength: 63
+      $ref: '#/definitions/[object Object]'
   CnameAvailability:
     type: boolean
-  DNSCname:
+  ComputeType:
     type: string
-    minLength: 1
-    maxLength: 255
-  GroupName:
-    type: string
-    minLength: 1
-    maxLength: 19
-  VersionLabels:
-    type: array
-    items:
-      $ref: '#/definitions/VersionLabel'
+    enum:
+      - BUILD_GENERAL1_SMALL
+      - BUILD_GENERAL1_MEDIUM
+      - BUILD_GENERAL1_LARGE
   ConfigurationDeploymentStatus:
     type: string
     enum:
@@ -3322,258 +3151,155 @@ definitions:
       - failed
   ConfigurationOptionDefaultValue:
     type: string
-  OptionNamespace:
-    type: string
-  ConfigurationOptionName:
-    type: string
-  ConfigurationOptionSeverity:
-    type: string
-  UserDefinedOption:
-    type: boolean
-  ConfigurationOptionValueType:
-    type: string
-    enum:
-      - Scalar
-      - List
-  ConfigurationOptionPossibleValues:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationOptionPossibleValue'
-  OptionRestrictionMinValue:
-    type: integer
-  OptionRestrictionMaxValue:
-    type: integer
-  OptionRestrictionMaxLength:
-    type: integer
-  OptionRestrictionRegex:
-    type: object
-    properties:
-      Pattern:
-        $ref: '#/definitions/RegexPattern'
-        description: The regular expression pattern that a string configuration option value with this restriction must match.
-      Label:
-        $ref: '#/definitions/RegexLabel'
-        description: A unique name representing this regular expression.
-    description: A regular expression representing a restriction on a string configuration option value.
   ConfigurationOptionDescription:
     type: object
     properties:
       Namespace:
-        $ref: '#/definitions/OptionNamespace'
+        $ref: '#/definitions/[object Object]'
         description: A unique namespace identifying the option's associated AWS resource.
       Name:
-        $ref: '#/definitions/ConfigurationOptionName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration option.
       DefaultValue:
-        $ref: '#/definitions/ConfigurationOptionDefaultValue'
+        $ref: '#/definitions/[object Object]'
         description: The default value for this configuration option.
       ChangeSeverity:
-        $ref: '#/definitions/ConfigurationOptionSeverity'
+        $ref: '#/definitions/[object Object]'
         description: '<p>An indication of which action is required if the value for this configuration option changes:</p> <ul> <li> <p> <code>NoInterruption</code> : There is no interruption to the environment or application availability.</p> </li> <li> <p> <code>RestartEnvironment</code> : The environment is entirely restarted, all AWS resources are deleted and recreated, and the environment is unavailable during the process.</p> </li> <li> <p> <code>RestartApplicationServer</code> : The environment is available the entire time. However, a short application outage occurs when the application servers on the running Amazon EC2 instances are restarted.</p> </li> </ul>'
       UserDefined:
-        $ref: '#/definitions/UserDefinedOption'
+        $ref: '#/definitions/[object Object]'
         description: '<p>An indication of whether the user defined this configuration option:</p> <ul> <li> <p> <code>true</code> : This configuration option was defined by the user. It is a valid choice for specifying if this as an <code>Option to Remove</code> when updating configuration settings. </p> </li> <li> <p> <code>false</code> : This configuration was not defined by the user.</p> </li> </ul> <p> Constraint: You can remove only <code>UserDefined</code> options from a configuration. </p> <p> Valid Values: <code>true</code> | <code>false</code> </p>'
       ValueType:
-        $ref: '#/definitions/ConfigurationOptionValueType'
+        $ref: '#/definitions/[object Object]'
         description: '<p>An indication of which type of values this option has and whether it is allowable to select one or more than one of the possible values:</p> <ul> <li> <p> <code>Scalar</code> : Values for this option are a single selection from the possible values, or an unformatted string, or numeric value governed by the <code>MIN/MAX/Regex</code> constraints.</p> </li> <li> <p> <code>List</code> : Values for this option are multiple selections from the possible values.</p> </li> <li> <p> <code>Boolean</code> : Values for this option are either <code>true</code> or <code>false</code> .</p> </li> <li> <p> <code>Json</code> : Values for this option are a JSON representation of a <code>ConfigDocument</code>.</p> </li> </ul>'
       ValueOptions:
-        $ref: '#/definitions/ConfigurationOptionPossibleValues'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, values for the configuration option are selected from this list.'
       MinValue:
-        $ref: '#/definitions/OptionRestrictionMinValue'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, the configuration option must be a numeric value greater than this value.'
       MaxValue:
-        $ref: '#/definitions/OptionRestrictionMaxValue'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, the configuration option must be a numeric value less than this value.'
       MaxLength:
-        $ref: '#/definitions/OptionRestrictionMaxLength'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, the configuration option must be a string value no longer than this value.'
       Regex:
-        $ref: '#/definitions/OptionRestrictionRegex'
+        $ref: '#/definitions/[object Object]'
         description: 'If specified, the configuration option must be a string value that satisfies this regular expression.'
     description: Describes the possible values for a configuration option.
   ConfigurationOptionDescriptionsList:
     type: array
     items:
-      $ref: '#/definitions/ConfigurationOptionDescription'
+      $ref: '#/definitions/[object Object]'
+  ConfigurationOptionName:
+    type: string
   ConfigurationOptionPossibleValue:
     type: string
-  ResourceName:
-    type: string
-    minLength: 1
-    maxLength: 256
-  ConfigurationOptionValue:
-    type: string
+  ConfigurationOptionPossibleValues:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ConfigurationOptionSetting:
     type: object
     properties:
       ResourceName:
-        $ref: '#/definitions/ResourceName'
+        $ref: '#/definitions/[object Object]'
         description: A unique resource name for a time-based scaling configuration option.
       Namespace:
-        $ref: '#/definitions/OptionNamespace'
+        $ref: '#/definitions/[object Object]'
         description: A unique namespace identifying the option's associated AWS resource.
       OptionName:
-        $ref: '#/definitions/ConfigurationOptionName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration option.
       Value:
-        $ref: '#/definitions/ConfigurationOptionValue'
+        $ref: '#/definitions/[object Object]'
         description: The current value for the configuration option.
     description: ' A specification identifying an individual configuration option along with its current value. For a list of possible option values, go to <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html">Option Values</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>. '
   ConfigurationOptionSettingsList:
     type: array
     items:
-      $ref: '#/definitions/ConfigurationOptionSetting'
-  PlatformArn:
+      $ref: '#/definitions/[object Object]'
+  ConfigurationOptionSeverity:
     type: string
+  ConfigurationOptionValue:
+    type: string
+  ConfigurationOptionValueType:
+    type: string
+    enum:
+      - Scalar
+      - List
+  ConfigurationSettingsDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ConfigurationTemplateName:
     type: string
     minLength: 1
     maxLength: 100
-  ConfigurationSettingsDescriptionList:
+  ConfigurationTemplateNamesList:
     type: array
     items:
-      $ref: '#/definitions/ConfigurationSettingsDescription'
-  ValidationMessagesList:
-    type: array
-    items:
-      $ref: '#/definitions/ValidationMessage'
-  SourceConfiguration:
-    type: object
-    properties:
-      ApplicationName:
-        $ref: '#/definitions/ApplicationName'
-        description: The name of the application associated with the configuration.
-      TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
-        description: The name of the configuration template.
-    description: A specification for an environment configuration
-  EnvironmentTier:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of this environment tier.
-      Type:
-        $ref: '#/definitions/String'
-        description: The type of this environment tier.
-      Version:
-        $ref: '#/definitions/String'
-        description: '<p>The version of this environment tier. When you don''t set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.</p> <note> <p>This member is deprecated. Any specific version that you set may become out of date. We recommend leaving it unspecified.</p> </note>'
-    description: Describes the properties of an environment tier
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  OptionsSpecifierList:
-    type: array
-    items:
-      $ref: '#/definitions/OptionSpecification'
-  PlatformName:
+      $ref: '#/definitions/[object Object]'
+  CreationDate:
     type: string
-  PlatformVersion:
-    type: string
-  PlatformSummary:
-    type: object
-    properties:
-      PlatformArn:
-        $ref: '#/definitions/PlatformArn'
-        description: The ARN of the platform.
-      PlatformOwner:
-        $ref: '#/definitions/PlatformOwner'
-        description: The AWS account ID of the person who created the platform.
-      PlatformStatus:
-        $ref: '#/definitions/PlatformStatus'
-        description: The status of the platform. You can create an environment from the platform once it is ready.
-      PlatformCategory:
-        $ref: '#/definitions/PlatformCategory'
-        description: The category of platform.
-      OperatingSystemName:
-        $ref: '#/definitions/OperatingSystemName'
-        description: The operating system used by the platform.
-      OperatingSystemVersion:
-        $ref: '#/definitions/OperatingSystemVersion'
-        description: The version of the operating system used by the platform.
-      SupportedTierList:
-        $ref: '#/definitions/SupportedTierList'
-        description: The tiers in which the platform runs.
-      SupportedAddonList:
-        $ref: '#/definitions/SupportedAddonList'
-        description: The additions associated with the platform.
-    description: Detailed information about a platform.
-  S3Bucket:
-    type: string
-    maxLength: 255
-  VirtualizationType:
-    type: string
-  ImageId:
-    type: string
+    format: date-time
   CustomAmi:
     type: object
     properties:
       VirtualizationType:
-        $ref: '#/definitions/VirtualizationType'
+        $ref: '#/definitions/[object Object]'
         description: The type of virtualization used to create the custom AMI.
       ImageId:
-        $ref: '#/definitions/ImageId'
+        $ref: '#/definitions/[object Object]'
         description: THe ID of the image used to create the custom AMI.
     description: A custom AMI available to platforms.
   CustomAmiList:
     type: array
     items:
-      $ref: '#/definitions/CustomAmi'
-  TerminateEnvForce:
-    type: boolean
+      $ref: '#/definitions/[object Object]'
+  DNSCname:
+    type: string
+    minLength: 1
+    maxLength: 255
+  DNSCnamePrefix:
+    type: string
+    minLength: 4
+    maxLength: 63
   DeleteSourceBundle:
     type: boolean
-  NullableLong:
-    type: integer
-  DeploymentTimestamp:
-    type: string
-    format: date-time
   Deployment:
     type: object
     properties:
       VersionLabel:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The version label of the application version in the deployment.
       DeploymentId:
-        $ref: '#/definitions/NullableLong'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the deployment. This number increases by one each time that you deploy source code or change instance configuration settings.
       Status:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The status of the deployment:</p> <ul> <li> <p> <code>In Progress</code> : The deployment is in progress.</p> </li> <li> <p> <code>Deployed</code> : The deployment succeeded.</p> </li> <li> <p> <code>Failed</code> : The deployment failed.</p> </li> </ul>'
       DeploymentTime:
-        $ref: '#/definitions/DeploymentTimestamp'
+        $ref: '#/definitions/[object Object]'
         description: '<p>For in-progress deployments, the time that the deployment started.</p> <p>For completed deployments, the time that the deployment ended.</p>'
     description: Information about an application version deployment.
-  ResourceQuotas:
-    type: object
-    properties:
-      ApplicationQuota:
-        $ref: '#/definitions/ResourceQuota'
-        description: The quota for applications in the AWS account.
-      ApplicationVersionQuota:
-        $ref: '#/definitions/ResourceQuota'
-        description: The quota for application versions in the AWS account.
-      EnvironmentQuota:
-        $ref: '#/definitions/ResourceQuota'
-        description: The quota for environments in the AWS account.
-      ConfigurationTemplateQuota:
-        $ref: '#/definitions/ResourceQuota'
-        description: The quota for configuration templates in the AWS account.
-      CustomPlatformQuota:
-        $ref: '#/definitions/ResourceQuota'
-        description: The quota for custom platforms in the AWS account.
-    description: A set of per-resource AWS Elastic Beanstalk quotas associated with an AWS account. They reflect Elastic Beanstalk resource limits for this account.
-  MaxRecords:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  EnvironmentHealthAttributes:
+  DeploymentTimestamp:
+    type: string
+    format: date-time
+  Description:
+    type: string
+    maxLength: 200
+  Ec2InstanceId:
+    type: string
+  EndpointURL:
+    type: string
+  EnvironmentArn:
+    type: string
+  EnvironmentDescriptionsList:
     type: array
     items:
-      $ref: '#/definitions/EnvironmentHealthAttribute'
+      $ref: '#/definitions/[object Object]'
   EnvironmentHealth:
     type: string
     enum:
@@ -3581,165 +3307,21 @@ definitions:
       - Yellow
       - Red
       - Grey
-  InstanceHealthSummary:
-    type: object
-    properties:
-      NoData:
-        $ref: '#/definitions/NullableInteger'
-        description: ' <b>Grey.</b> AWS Elastic Beanstalk and the health agent are reporting no data on an instance.'
-      Unknown:
-        $ref: '#/definitions/NullableInteger'
-        description: ' <b>Grey.</b> AWS Elastic Beanstalk and the health agent are reporting an insufficient amount of data on an instance.'
-      Pending:
-        $ref: '#/definitions/NullableInteger'
-        description: ' <b>Grey.</b> An operation is in progress on an instance within the command timeout.'
-      Ok:
-        $ref: '#/definitions/NullableInteger'
-        description: ' <b>Green.</b> An instance is passing health checks and the health agent is not reporting any problems.'
-      Info:
-        $ref: '#/definitions/NullableInteger'
-        description: ' <b>Green.</b> An operation is in progress on an instance.'
-      Warning:
-        $ref: '#/definitions/NullableInteger'
-        description: ' <b>Yellow.</b> The health agent is reporting a moderate number of request failures or other issues for an instance or environment.'
-      Degraded:
-        $ref: '#/definitions/NullableInteger'
-        description: ' <b>Red.</b> The health agent is reporting a high number of request failures or other issues for an instance or environment.'
-      Severe:
-        $ref: '#/definitions/NullableInteger'
-        description: ' <b>Red.</b> The health agent is reporting a very high number of request failures or other issues for an instance or environment.'
-    description: 'Represents summary information about the health of an instance. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and Statuses</a>.'
-  RefreshedAt:
-    type: string
-    format: date-time
-  Integer:
-    type: integer
-  ManagedActionHistoryItems:
-    type: array
-    items:
-      $ref: '#/definitions/ManagedActionHistoryItem'
-    minItems: 1
-    maxItems: 100
-  ManagedActions:
-    type: array
-    items:
-      $ref: '#/definitions/ManagedAction'
-    minItems: 1
-    maxItems: 100
-  EnvironmentIdList:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentId'
-  EnvironmentNamesList:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentName'
-  IncludeDeleted:
-    type: boolean
-  IncludeDeletedBackTo:
-    type: string
-    format: date-time
-  RequestId:
-    type: string
-  EventSeverity:
+  EnvironmentHealthAttribute:
     type: string
     enum:
-      - TRACE
-      - DEBUG
-      - INFO
-      - WARN
-      - ERROR
-      - FATAL
-  TimeFilterStart:
-    type: string
-    format: date-time
-  TimeFilterEnd:
-    type: string
-    format: date-time
-  InstancesHealthAttributes:
+      - Status
+      - Color
+      - Causes
+      - ApplicationMetrics
+      - InstancesHealth
+      - All
+      - HealthStatus
+      - RefreshedAt
+  EnvironmentHealthAttributes:
     type: array
     items:
-      $ref: '#/definitions/InstancesHealthAttribute'
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 100
-  InstanceHealthList:
-    type: array
-    items:
-      $ref: '#/definitions/SingleInstanceHealth'
-  PlatformDescription:
-    type: object
-    properties:
-      PlatformArn:
-        $ref: '#/definitions/PlatformArn'
-        description: The ARN of the platform.
-      PlatformOwner:
-        $ref: '#/definitions/PlatformOwner'
-        description: The AWS account ID of the person who created the platform.
-      PlatformName:
-        $ref: '#/definitions/PlatformName'
-        description: The name of the platform.
-      PlatformVersion:
-        $ref: '#/definitions/PlatformVersion'
-        description: The version of the platform.
-      SolutionStackName:
-        $ref: '#/definitions/SolutionStackName'
-        description: The name of the solution stack used by the platform.
-      PlatformStatus:
-        $ref: '#/definitions/PlatformStatus'
-        description: The status of the platform.
-      DateCreated:
-        $ref: '#/definitions/CreationDate'
-        description: The date when the platform was created.
-      DateUpdated:
-        $ref: '#/definitions/UpdateDate'
-        description: The date when the platform was last updated.
-      PlatformCategory:
-        $ref: '#/definitions/PlatformCategory'
-        description: The category of the platform.
-      Description:
-        $ref: '#/definitions/Description'
-        description: The description of the platform.
-      Maintainer:
-        $ref: '#/definitions/Maintainer'
-        description: Information about the maintainer of the platform.
-      OperatingSystemName:
-        $ref: '#/definitions/OperatingSystemName'
-        description: The operating system used by the platform.
-      OperatingSystemVersion:
-        $ref: '#/definitions/OperatingSystemVersion'
-        description: The version of the operating system used by the platform.
-      ProgrammingLanguages:
-        $ref: '#/definitions/PlatformProgrammingLanguages'
-        description: The programming languages supported by the platform.
-      Frameworks:
-        $ref: '#/definitions/PlatformFrameworks'
-        description: The frameworks supported by the platform.
-      CustomAmiList:
-        $ref: '#/definitions/CustomAmiList'
-        description: The custom AMIs supported by the platform.
-      SupportedTierList:
-        $ref: '#/definitions/SupportedTierList'
-        description: The tiers supported by the platform.
-      SupportedAddonList:
-        $ref: '#/definitions/SupportedAddonList'
-        description: The additions supported by the platform.
-    description: Detailed information about a platform.
-  Ec2InstanceId:
-    type: string
-  EndpointURL:
-    type: string
-  EnvironmentArn:
-    type: string
-  EnvironmentStatus:
-    type: string
-    enum:
-      - Launching
-      - Updating
-      - Ready
-      - Terminating
-      - Terminated
+      $ref: '#/definitions/[object Object]'
   EnvironmentHealthStatus:
     type: string
     enum:
@@ -3752,170 +3334,161 @@ definitions:
       - Degraded
       - Severe
       - Suspended
-  EnvironmentResourcesDescription:
-    type: object
-    properties:
-      LoadBalancer:
-        $ref: '#/definitions/LoadBalancerDescription'
-        description: Describes the LoadBalancer.
-    description: Describes the AWS resources in use by this environment. This data is not live data.
-  EnvironmentLinks:
+  EnvironmentId:
+    type: string
+  EnvironmentIdList:
     type: array
     items:
-      $ref: '#/definitions/EnvironmentLink'
-  EnvironmentDescriptionsList:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentDescription'
-  EnvironmentHealthAttribute:
-    type: string
-    enum:
-      - Status
-      - Color
-      - Causes
-      - ApplicationMetrics
-      - InstancesHealth
-      - All
-      - HealthStatus
-      - RefreshedAt
-  EnvironmentInfoType:
-    type: string
-    enum:
-      - tail
-      - bundle
-  SampleTimestamp:
-    type: string
-    format: date-time
-  Message:
-    type: string
+      $ref: '#/definitions/[object Object]'
   EnvironmentInfoDescription:
     type: object
     properties:
       InfoType:
-        $ref: '#/definitions/EnvironmentInfoType'
+        $ref: '#/definitions/[object Object]'
         description: The type of information retrieved.
       Ec2InstanceId:
-        $ref: '#/definitions/Ec2InstanceId'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon EC2 Instance ID for this information.
       SampleTimestamp:
-        $ref: '#/definitions/SampleTimestamp'
+        $ref: '#/definitions/[object Object]'
         description: The time stamp when this information was retrieved.
       Message:
-        $ref: '#/definitions/Message'
+        $ref: '#/definitions/[object Object]'
         description: The retrieved information.
     description: The information retrieved from the Amazon EC2 instances.
   EnvironmentInfoDescriptionList:
     type: array
     items:
-      $ref: '#/definitions/EnvironmentInfoDescription'
+      $ref: '#/definitions/[object Object]'
+  EnvironmentInfoType:
+    type: string
+    enum:
+      - tail
+      - bundle
   EnvironmentLink:
     type: object
     properties:
       LinkName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the link.
       EnvironmentName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the linked environment (the dependency).
     description: 'A link to another environment, defined in the environment''s manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest (env.yaml)</a> for details.'
-  InstanceList:
+  EnvironmentLinks:
     type: array
     items:
-      $ref: '#/definitions/Instance'
-  LaunchConfigurationList:
+      $ref: '#/definitions/[object Object]'
+  EnvironmentName:
+    type: string
+    minLength: 4
+    maxLength: 40
+  EnvironmentNamesList:
     type: array
     items:
-      $ref: '#/definitions/LaunchConfiguration'
-  LoadBalancerList:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancer'
-  TriggerList:
-    type: array
-    items:
-      $ref: '#/definitions/Trigger'
-  QueueList:
-    type: array
-    items:
-      $ref: '#/definitions/Queue'
+      $ref: '#/definitions/[object Object]'
   EnvironmentResourceDescription:
     type: object
     properties:
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the environment.
       AutoScalingGroups:
-        $ref: '#/definitions/AutoScalingGroupList'
+        $ref: '#/definitions/[object Object]'
         description: ' The <code>AutoScalingGroups</code> used by this environment. '
       Instances:
-        $ref: '#/definitions/InstanceList'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon EC2 instances used by this environment.
       LaunchConfigurations:
-        $ref: '#/definitions/LaunchConfigurationList'
+        $ref: '#/definitions/[object Object]'
         description: The Auto Scaling launch configurations in use by this environment.
       LoadBalancers:
-        $ref: '#/definitions/LoadBalancerList'
+        $ref: '#/definitions/[object Object]'
         description: The LoadBalancers in use by this environment.
       Triggers:
-        $ref: '#/definitions/TriggerList'
+        $ref: '#/definitions/[object Object]'
         description: 'The <code>AutoScaling</code> triggers in use by this environment. '
       Queues:
-        $ref: '#/definitions/QueueList'
+        $ref: '#/definitions/[object Object]'
         description: The queues used by this environment.
     description: Describes the AWS resources in use by this environment. This data is live.
-  LoadBalancerDescription:
+  EnvironmentResourcesDescription:
     type: object
     properties:
-      LoadBalancerName:
-        $ref: '#/definitions/String'
-        description: The name of the LoadBalancer.
-      Domain:
-        $ref: '#/definitions/String'
-        description: The domain name of the LoadBalancer.
-      Listeners:
-        $ref: '#/definitions/LoadBalancerListenersDescription'
-        description: A list of Listeners used by the LoadBalancer.
-    description: Describes the details of a LoadBalancer.
+      LoadBalancer:
+        $ref: '#/definitions/[object Object]'
+        description: Describes the LoadBalancer.
+    description: Describes the AWS resources in use by this environment. This data is not live data.
+  EnvironmentStatus:
+    type: string
+    enum:
+      - Launching
+      - Updating
+      - Ready
+      - Terminating
+      - Terminated
+  EnvironmentTier:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of this environment tier.
+      Type:
+        $ref: '#/definitions/[object Object]'
+        description: The type of this environment tier.
+      Version:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The version of this environment tier. When you don''t set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.</p> <note> <p>This member is deprecated. Any specific version that you set may become out of date. We recommend leaving it unspecified.</p> </note>'
+    description: Describes the properties of an environment tier
   EventDate:
     type: string
     format: date-time
-  EventMessage:
-    type: string
   EventDescription:
     type: object
     properties:
       EventDate:
-        $ref: '#/definitions/EventDate'
+        $ref: '#/definitions/[object Object]'
         description: The date when the event occurred.
       Message:
-        $ref: '#/definitions/EventMessage'
+        $ref: '#/definitions/[object Object]'
         description: The event message.
       ApplicationName:
-        $ref: '#/definitions/ApplicationName'
+        $ref: '#/definitions/[object Object]'
         description: The application associated with the event.
       VersionLabel:
-        $ref: '#/definitions/VersionLabel'
+        $ref: '#/definitions/[object Object]'
         description: The release label for the application version associated with this event.
       TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration associated with this event.
       EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the environment associated with this event.
       PlatformArn:
-        $ref: '#/definitions/PlatformArn'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the platform.
       RequestId:
-        $ref: '#/definitions/RequestId'
+        $ref: '#/definitions/[object Object]'
         description: The web service request ID for the activity of this event.
       Severity:
-        $ref: '#/definitions/EventSeverity'
+        $ref: '#/definitions/[object Object]'
         description: The severity level of this event.
     description: Describes an event.
   EventDescriptionList:
     type: array
     items:
-      $ref: '#/definitions/EventDescription'
+      $ref: '#/definitions/[object Object]'
+  EventMessage:
+    type: string
+  EventSeverity:
+    type: string
+    enum:
+      - TRACE
+      - DEBUG
+      - INFO
+      - WARN
+      - ERROR
+      - FATAL
   FailureType:
     type: string
     enum:
@@ -3932,51 +3505,64 @@ definitions:
     maxLength: 100
   ForceTerminate:
     type: boolean
+  GroupName:
+    type: string
+    minLength: 1
+    maxLength: 19
+  ImageId:
+    type: string
+  IncludeDeleted:
+    type: boolean
+  IncludeDeletedBackTo:
+    type: string
+    format: date-time
   Instance:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/ResourceId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the Amazon EC2 instance.
     description: The description of an Amazon EC2 instance.
-  SingleInstanceHealth:
+  InstanceHealthList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  InstanceHealthSummary:
     type: object
     properties:
-      InstanceId:
-        $ref: '#/definitions/InstanceId'
-        description: The ID of the Amazon EC2 instance.
-      HealthStatus:
-        $ref: '#/definitions/String'
-        description: 'Returns the health status of the specified instance. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and Statuses</a>.'
-      Color:
-        $ref: '#/definitions/String'
-        description: 'Represents the color indicator that gives you information about the health of the EC2 instance. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and Statuses</a>.'
-      Causes:
-        $ref: '#/definitions/Causes'
-        description: 'Represents the causes, which provide more information about the current health status.'
-      LaunchedAt:
-        $ref: '#/definitions/LaunchedAt'
-        description: The time at which the EC2 instance was launched.
-      ApplicationMetrics:
-        $ref: '#/definitions/ApplicationMetrics'
-        description: Request metrics from your application.
-      System:
-        $ref: '#/definitions/SystemStatus'
-        description: Operating system metrics from the instance.
-      Deployment:
-        $ref: '#/definitions/Deployment'
-        description: Information about the most recent deployment to an instance.
-      AvailabilityZone:
-        $ref: '#/definitions/String'
-        description: The availability zone in which the instance runs.
-      InstanceType:
-        $ref: '#/definitions/String'
-        description: The instance's type.
-    description: Detailed health information about an Amazon EC2 instance in your Elastic Beanstalk environment.
+      NoData:
+        $ref: '#/definitions/[object Object]'
+        description: ' <b>Grey.</b> AWS Elastic Beanstalk and the health agent are reporting no data on an instance.'
+      Unknown:
+        $ref: '#/definitions/[object Object]'
+        description: ' <b>Grey.</b> AWS Elastic Beanstalk and the health agent are reporting an insufficient amount of data on an instance.'
+      Pending:
+        $ref: '#/definitions/[object Object]'
+        description: ' <b>Grey.</b> An operation is in progress on an instance within the command timeout.'
+      Ok:
+        $ref: '#/definitions/[object Object]'
+        description: ' <b>Green.</b> An instance is passing health checks and the health agent is not reporting any problems.'
+      Info:
+        $ref: '#/definitions/[object Object]'
+        description: ' <b>Green.</b> An operation is in progress on an instance.'
+      Warning:
+        $ref: '#/definitions/[object Object]'
+        description: ' <b>Yellow.</b> The health agent is reporting a moderate number of request failures or other issues for an instance or environment.'
+      Degraded:
+        $ref: '#/definitions/[object Object]'
+        description: ' <b>Red.</b> The health agent is reporting a high number of request failures or other issues for an instance or environment.'
+      Severe:
+        $ref: '#/definitions/[object Object]'
+        description: ' <b>Red.</b> The health agent is reporting a very high number of request failures or other issues for an instance or environment.'
+    description: 'Represents summary information about the health of an instance. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and Statuses</a>.'
   InstanceId:
     type: string
     minLength: 1
     maxLength: 255
+  InstanceList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   InstancesHealthAttribute:
     type: string
     enum:
@@ -3991,134 +3577,373 @@ definitions:
       - AvailabilityZone
       - InstanceType
       - All
+  InstancesHealthAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Integer:
+    type: integer
+  Latency:
+    type: object
+    properties:
+      P999:
+        $ref: '#/definitions/[object Object]'
+        description: The average latency for the slowest 0.1 percent of requests over the last 10 seconds.
+      P99:
+        $ref: '#/definitions/[object Object]'
+        description: The average latency for the slowest 1 percent of requests over the last 10 seconds.
+      P95:
+        $ref: '#/definitions/[object Object]'
+        description: The average latency for the slowest 5 percent of requests over the last 10 seconds.
+      P90:
+        $ref: '#/definitions/[object Object]'
+        description: The average latency for the slowest 10 percent of requests over the last 10 seconds.
+      P85:
+        $ref: '#/definitions/[object Object]'
+        description: The average latency for the slowest 15 percent of requests over the last 10 seconds.
+      P75:
+        $ref: '#/definitions/[object Object]'
+        description: The average latency for the slowest 25 percent of requests over the last 10 seconds.
+      P50:
+        $ref: '#/definitions/[object Object]'
+        description: The average latency for the slowest 50 percent of requests over the last 10 seconds.
+      P10:
+        $ref: '#/definitions/[object Object]'
+        description: The average latency for the slowest 90 percent of requests over the last 10 seconds.
+    description: Represents the average latency for the slowest X percent of requests over the last 10 seconds.
   LaunchConfiguration:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/ResourceId'
+        $ref: '#/definitions/[object Object]'
         description: The name of the launch configuration.
     description: Describes an Auto Scaling launch configuration.
+  LaunchConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   LaunchedAt:
     type: string
     format: date-time
-  PlatformFilters:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformFilter'
-  PlatformMaxRecords:
-    type: integer
-    minimum: 1
-  PlatformSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformSummary'
-  ResourceArn:
-    type: string
   Listener:
     type: object
     properties:
       Protocol:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The protocol that is used by the Listener.
       Port:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The port that is used by the Listener.
     description: Describes the properties of a Listener for the LoadBalancer.
-  LoadAverageValue:
-    type: number
-    format: double
   LoadAverage:
     type: array
     items:
-      $ref: '#/definitions/LoadAverageValue'
+      $ref: '#/definitions/[object Object]'
+  LoadAverageValue:
+    type: number
+    format: double
   LoadBalancer:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/ResourceId'
+        $ref: '#/definitions/[object Object]'
         description: The name of the LoadBalancer.
     description: Describes a LoadBalancer.
+  LoadBalancerDescription:
+    type: object
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the LoadBalancer.
+      Domain:
+        $ref: '#/definitions/[object Object]'
+        description: The domain name of the LoadBalancer.
+      Listeners:
+        $ref: '#/definitions/[object Object]'
+        description: A list of Listeners used by the LoadBalancer.
+    description: Describes the details of a LoadBalancer.
+  LoadBalancerList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   LoadBalancerListenersDescription:
     type: array
     items:
-      $ref: '#/definitions/Listener'
+      $ref: '#/definitions/[object Object]'
   Maintainer:
     type: string
-  Timestamp:
-    type: string
-    format: date-time
   ManagedAction:
     type: object
     properties:
       ActionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A unique identifier for the managed action.
       ActionDescription:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A description of the managed action.
       ActionType:
-        $ref: '#/definitions/ActionType'
+        $ref: '#/definitions/[object Object]'
         description: The type of managed action.
       Status:
-        $ref: '#/definitions/ActionStatus'
+        $ref: '#/definitions/[object Object]'
         description: 'The status of the managed action. If the action is <code>Scheduled</code>, you can apply it immediately with <a>ApplyEnvironmentManagedAction</a>.'
       WindowStartTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: The start time of the maintenance window in which the managed action will execute.
     description: The record of an upcoming or in-progress managed action.
   ManagedActionHistoryItem:
     type: object
     properties:
       ActionId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A unique identifier for the managed action.
       ActionType:
-        $ref: '#/definitions/ActionType'
+        $ref: '#/definitions/[object Object]'
         description: The type of the managed action.
       ActionDescription:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A description of the managed action.
       FailureType:
-        $ref: '#/definitions/FailureType'
+        $ref: '#/definitions/[object Object]'
         description: 'If the action failed, the type of failure.'
       Status:
-        $ref: '#/definitions/ActionHistoryStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status of the action.
       FailureDescription:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'If the action failed, a description of the failure.'
       ExecutedTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: The date and time that the action started executing.
       FinishedTime:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: The date and time that the action finished executing.
     description: The record of a completed or failed managed action.
+  ManagedActionHistoryItems:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
+  ManagedActions:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 100
+  MaxAgeRule:
+    type: object
+    required:
+      - Enabled
+    properties:
+      Enabled:
+        $ref: '#/definitions/[object Object]'
+        description: 'Specify <code>true</code> to apply the rule, or <code>false</code> to disable it.'
+      MaxAgeInDays:
+        $ref: '#/definitions/[object Object]'
+        description: Specify the number of days to retain an application versions.
+      DeleteSourceFromS3:
+        $ref: '#/definitions/[object Object]'
+        description: Set to <code>true</code> to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.
+    description: A lifecycle rule that deletes application versions after the specified number of days.
+  MaxCountRule:
+    type: object
+    required:
+      - Enabled
+    properties:
+      Enabled:
+        $ref: '#/definitions/[object Object]'
+        description: 'Specify <code>true</code> to apply the rule, or <code>false</code> to disable it.'
+      MaxCount:
+        $ref: '#/definitions/[object Object]'
+        description: Specify the maximum number of application versions to retain.
+      DeleteSourceFromS3:
+        $ref: '#/definitions/[object Object]'
+        description: Set to <code>true</code> to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.
+    description: A lifecycle rule that deletes the oldest application version when the maximum count is exceeded.
+  MaxRecords:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  Message:
+    type: string
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 100
+  NonEmptyString:
+    type: string
+    pattern: .*\S.*
+  NullableDouble:
+    type: number
+    format: double
+  NullableInteger:
+    type: integer
+  NullableLong:
+    type: integer
   OperatingSystemName:
     type: string
   OperatingSystemVersion:
     type: string
-  RegexPattern:
+  OptionNamespace:
     type: string
-  RegexLabel:
-    type: string
+  OptionRestrictionMaxLength:
+    type: integer
+  OptionRestrictionMaxValue:
+    type: integer
+  OptionRestrictionMinValue:
+    type: integer
+  OptionRestrictionRegex:
+    type: object
+    properties:
+      Pattern:
+        $ref: '#/definitions/[object Object]'
+        description: The regular expression pattern that a string configuration option value with this restriction must match.
+      Label:
+        $ref: '#/definitions/[object Object]'
+        description: A unique name representing this regular expression.
+    description: A regular expression representing a restriction on a string configuration option value.
   OptionSpecification:
     type: object
     properties:
       ResourceName:
-        $ref: '#/definitions/ResourceName'
+        $ref: '#/definitions/[object Object]'
         description: A unique resource name for a time-based scaling configuration option.
       Namespace:
-        $ref: '#/definitions/OptionNamespace'
+        $ref: '#/definitions/[object Object]'
         description: A unique namespace identifying the option's associated AWS resource.
       OptionName:
-        $ref: '#/definitions/ConfigurationOptionName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the configuration option.
     description: A specification identifying an individual configuration option.
+  OptionsSpecifierList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PlatformArn:
+    type: string
   PlatformCategory:
+    type: string
+  PlatformDescription:
+    type: object
+    properties:
+      PlatformArn:
+        $ref: '#/definitions/[object Object]'
+        description: The ARN of the platform.
+      PlatformOwner:
+        $ref: '#/definitions/[object Object]'
+        description: The AWS account ID of the person who created the platform.
+      PlatformName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the platform.
+      PlatformVersion:
+        $ref: '#/definitions/[object Object]'
+        description: The version of the platform.
+      SolutionStackName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the solution stack used by the platform.
+      PlatformStatus:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the platform.
+      DateCreated:
+        $ref: '#/definitions/[object Object]'
+        description: The date when the platform was created.
+      DateUpdated:
+        $ref: '#/definitions/[object Object]'
+        description: The date when the platform was last updated.
+      PlatformCategory:
+        $ref: '#/definitions/[object Object]'
+        description: The category of the platform.
+      Description:
+        $ref: '#/definitions/[object Object]'
+        description: The description of the platform.
+      Maintainer:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the maintainer of the platform.
+      OperatingSystemName:
+        $ref: '#/definitions/[object Object]'
+        description: The operating system used by the platform.
+      OperatingSystemVersion:
+        $ref: '#/definitions/[object Object]'
+        description: The version of the operating system used by the platform.
+      ProgrammingLanguages:
+        $ref: '#/definitions/[object Object]'
+        description: The programming languages supported by the platform.
+      Frameworks:
+        $ref: '#/definitions/[object Object]'
+        description: The frameworks supported by the platform.
+      CustomAmiList:
+        $ref: '#/definitions/[object Object]'
+        description: The custom AMIs supported by the platform.
+      SupportedTierList:
+        $ref: '#/definitions/[object Object]'
+        description: The tiers supported by the platform.
+      SupportedAddonList:
+        $ref: '#/definitions/[object Object]'
+        description: The additions supported by the platform.
+    description: Detailed information about a platform.
+  PlatformFilter:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The custom platform attribute to which the filter values are applied.</p> <p>Valid Values: <code>PlatformName</code> | <code>PlatformVersion</code> | <code>PlatformStatus</code> | <code>PlatformOwner</code> </p>'
+      Operator:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The operator to apply to the <code>Type</code> with each of the <code>Values</code>.</p> <p> Valid Values: <code>=</code> (equal to) | <code>!=</code> (not equal to) | <code>&lt;</code> (less than) | <code>&lt;=</code> (less than or equal to) | <code>&gt;</code> (greater than) | <code>&gt;=</code> (greater than or equal to) | <code>contains</code> | <code>begins_with</code> | <code>ends_with</code> </p>'
+      Values:
+        $ref: '#/definitions/[object Object]'
+        description: The list of values applied to the custom platform attribute.
+    description: '<p>Specify criteria to restrict the results when listing custom platforms.</p> <p>The filter is evaluated as the expression:</p> <p> <code>Type</code> <code>Operator</code> <code>Values[i]</code> </p>'
+  PlatformFilterOperator:
+    type: string
+  PlatformFilterType:
+    type: string
+  PlatformFilterValue:
+    type: string
+  PlatformFilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PlatformFilters:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PlatformFramework:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the framework.
+      Version:
+        $ref: '#/definitions/[object Object]'
+        description: The version of the framework.
+    description: A framework supported by the custom platform.
+  PlatformFrameworks:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PlatformMaxRecords:
+    type: integer
+    minimum: 1
+  PlatformName:
     type: string
   PlatformOwner:
     type: string
+  PlatformProgrammingLanguage:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the programming language.
+      Version:
+        $ref: '#/definitions/[object Object]'
+        description: The version of the programming language.
+    description: A programming language supported by the platform.
+  PlatformProgrammingLanguages:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   PlatformStatus:
     type: string
     enum:
@@ -4127,173 +3952,349 @@ definitions:
       - Ready
       - Deleting
       - Deleted
-  PlatformProgrammingLanguages:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformProgrammingLanguage'
-  PlatformFrameworks:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformFramework'
-  SupportedTierList:
-    type: array
-    items:
-      $ref: '#/definitions/SupportedTier'
-  SupportedAddonList:
-    type: array
-    items:
-      $ref: '#/definitions/SupportedAddon'
-  PlatformFilterType:
-    type: string
-  PlatformFilterOperator:
-    type: string
-  PlatformFilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformFilterValue'
-  PlatformFilter:
+  PlatformSummary:
     type: object
     properties:
-      Type:
-        $ref: '#/definitions/PlatformFilterType'
-        description: '<p>The custom platform attribute to which the filter values are applied.</p> <p>Valid Values: <code>PlatformName</code> | <code>PlatformVersion</code> | <code>PlatformStatus</code> | <code>PlatformOwner</code> </p>'
-      Operator:
-        $ref: '#/definitions/PlatformFilterOperator'
-        description: '<p>The operator to apply to the <code>Type</code> with each of the <code>Values</code>.</p> <p> Valid Values: <code>=</code> (equal to) | <code>!=</code> (not equal to) | <code>&lt;</code> (less than) | <code>&lt;=</code> (less than or equal to) | <code>&gt;</code> (greater than) | <code>&gt;=</code> (greater than or equal to) | <code>contains</code> | <code>begins_with</code> | <code>ends_with</code> </p>'
-      Values:
-        $ref: '#/definitions/PlatformFilterValueList'
-        description: The list of values applied to the custom platform attribute.
-    description: '<p>Specify criteria to restrict the results when listing custom platforms.</p> <p>The filter is evaluated as the expression:</p> <p> <code>Type</code> <code>Operator</code> <code>Values[i]</code> </p>'
-  PlatformFilterValue:
+      PlatformArn:
+        $ref: '#/definitions/[object Object]'
+        description: The ARN of the platform.
+      PlatformOwner:
+        $ref: '#/definitions/[object Object]'
+        description: The AWS account ID of the person who created the platform.
+      PlatformStatus:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the platform. You can create an environment from the platform once it is ready.
+      PlatformCategory:
+        $ref: '#/definitions/[object Object]'
+        description: The category of platform.
+      OperatingSystemName:
+        $ref: '#/definitions/[object Object]'
+        description: The operating system used by the platform.
+      OperatingSystemVersion:
+        $ref: '#/definitions/[object Object]'
+        description: The version of the operating system used by the platform.
+      SupportedTierList:
+        $ref: '#/definitions/[object Object]'
+        description: The tiers in which the platform runs.
+      SupportedAddonList:
+        $ref: '#/definitions/[object Object]'
+        description: The additions associated with the platform.
+    description: Detailed information about a platform.
+  PlatformSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PlatformVersion:
     type: string
-  PlatformFramework:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the framework.
-      Version:
-        $ref: '#/definitions/String'
-        description: The version of the framework.
-    description: A framework supported by the custom platform.
-  PlatformProgrammingLanguage:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the programming language.
-      Version:
-        $ref: '#/definitions/String'
-        description: The version of the programming language.
-    description: A programming language supported by the platform.
   Queue:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the queue.
       URL:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The URL of the queue.
     description: Describes a queue.
+  QueueList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  RefreshedAt:
+    type: string
+    format: date-time
+  RegexLabel:
+    type: string
+  RegexPattern:
+    type: string
+  RequestCount:
+    type: integer
+  RequestId:
+    type: string
+  ResourceArn:
+    type: string
+  ResourceId:
+    type: string
+  ResourceName:
+    type: string
+    minLength: 1
+    maxLength: 256
   ResourceQuota:
     type: object
     properties:
       Maximum:
-        $ref: '#/definitions/BoxedInt'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of instances of this Elastic Beanstalk resource type that an AWS account can use.
     description: The AWS Elastic Beanstalk quota information for a single resource type in an AWS account. It reflects the resource's limits for this account.
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
+  ResourceQuotas:
+    type: object
+    properties:
+      ApplicationQuota:
+        $ref: '#/definitions/[object Object]'
+        description: The quota for applications in the AWS account.
+      ApplicationVersionQuota:
+        $ref: '#/definitions/[object Object]'
+        description: The quota for application versions in the AWS account.
+      EnvironmentQuota:
+        $ref: '#/definitions/[object Object]'
+        description: The quota for environments in the AWS account.
+      ConfigurationTemplateQuota:
+        $ref: '#/definitions/[object Object]'
+        description: The quota for configuration templates in the AWS account.
+      CustomPlatformQuota:
+        $ref: '#/definitions/[object Object]'
+        description: The quota for custom platforms in the AWS account.
+    description: A set of per-resource AWS Elastic Beanstalk quotas associated with an AWS account. They reflect Elastic Beanstalk resource limits for this account.
+  S3Bucket:
+    type: string
+    maxLength: 255
   S3Key:
     type: string
     maxLength: 1024
-  SystemStatus:
+  S3Location:
     type: object
     properties:
-      CPUUtilization:
-        $ref: '#/definitions/CPUUtilization'
-        description: CPU utilization metrics for the instance.
-      LoadAverage:
-        $ref: '#/definitions/LoadAverage'
-        description: 'Load average in the last 1-minute, 5-minute, and 15-minute periods. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os">Operating System Metrics</a>.'
-    description: CPU utilization and load average metrics for an Amazon EC2 instance.
+      S3Bucket:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon S3 bucket where the data is located.
+      S3Key:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon S3 key where the data is located.
+    description: The bucket and key of an item stored in Amazon S3.
+  SampleTimestamp:
+    type: string
+    format: date-time
+  SingleInstanceHealth:
+    type: object
+    properties:
+      InstanceId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the Amazon EC2 instance.
+      HealthStatus:
+        $ref: '#/definitions/[object Object]'
+        description: 'Returns the health status of the specified instance. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and Statuses</a>.'
+      Color:
+        $ref: '#/definitions/[object Object]'
+        description: 'Represents the color indicator that gives you information about the health of the EC2 instance. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and Statuses</a>.'
+      Causes:
+        $ref: '#/definitions/[object Object]'
+        description: 'Represents the causes, which provide more information about the current health status.'
+      LaunchedAt:
+        $ref: '#/definitions/[object Object]'
+        description: The time at which the EC2 instance was launched.
+      ApplicationMetrics:
+        $ref: '#/definitions/[object Object]'
+        description: Request metrics from your application.
+      System:
+        $ref: '#/definitions/[object Object]'
+        description: Operating system metrics from the instance.
+      Deployment:
+        $ref: '#/definitions/[object Object]'
+        description: Information about the most recent deployment to an instance.
+      AvailabilityZone:
+        $ref: '#/definitions/[object Object]'
+        description: The availability zone in which the instance runs.
+      InstanceType:
+        $ref: '#/definitions/[object Object]'
+        description: The instance's type.
+    description: Detailed health information about an Amazon EC2 instance in your Elastic Beanstalk environment.
+  SolutionStackDescription:
+    type: object
+    properties:
+      SolutionStackName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the solution stack.
+      PermittedFileTypes:
+        $ref: '#/definitions/[object Object]'
+        description: The permitted file types allowed for a solution stack.
+    description: Describes the solution stack.
   SolutionStackFileTypeList:
     type: array
     items:
-      $ref: '#/definitions/FileTypeExtension'
-  SourceType:
+      $ref: '#/definitions/[object Object]'
+  SolutionStackName:
     type: string
-    enum:
-      - Git
-      - Zip
-  SourceRepository:
-    type: string
-    enum:
-      - CodeCommit
-      - S3
+  SourceBuildInformation:
+    type: object
+    required:
+      - SourceType
+      - SourceRepository
+      - SourceLocation
+    properties:
+      SourceType:
+        $ref: '#/definitions/[object Object]'
+        description: <p>The type of repository.</p> <ul> <li> <p> <code>Git</code> </p> </li> <li> <p> <code>Zip</code> </p> </li> </ul>
+      SourceRepository:
+        $ref: '#/definitions/[object Object]'
+        description: <p>Location where the repository is stored.</p> <ul> <li> <p> <code>CodeCommit</code> </p> </li> <li> <p> <code>S3</code> </p> </li> </ul>
+      SourceLocation:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The location of the source code, as a formatted string, depending on the value of <code>SourceRepository</code> </p> <ul> <li> <p>For <code>CodeCommit</code>, the format is the repository name and commit ID, separated by a forward slash. For example, <code>my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a</code>.</p> </li> <li> <p>For <code>S3</code>, the format is the S3 bucket name and object key, separated by a forward slash. For example, <code>my-s3-bucket/Folders/my-source-file</code>.</p> </li> </ul>'
+    description: Location of the source code for an application version.
+  SourceConfiguration:
+    type: object
+    properties:
+      ApplicationName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the application associated with the configuration.
+      TemplateName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the configuration template.
+    description: A specification for an environment configuration
   SourceLocation:
     type: string
     pattern: .+/.+
     minLength: 3
     maxLength: 255
+  SourceRepository:
+    type: string
+    enum:
+      - CodeCommit
+      - S3
+  SourceType:
+    type: string
+    enum:
+      - Git
+      - Zip
+  StatusCodes:
+    type: object
+    properties:
+      Status2xx:
+        $ref: '#/definitions/[object Object]'
+        description: 'The percentage of requests over the last 10 seconds that resulted in a 2xx (200, 201, etc.) status code.'
+      Status3xx:
+        $ref: '#/definitions/[object Object]'
+        description: 'The percentage of requests over the last 10 seconds that resulted in a 3xx (300, 301, etc.) status code.'
+      Status4xx:
+        $ref: '#/definitions/[object Object]'
+        description: 'The percentage of requests over the last 10 seconds that resulted in a 4xx (400, 401, etc.) status code.'
+      Status5xx:
+        $ref: '#/definitions/[object Object]'
+        description: 'The percentage of requests over the last 10 seconds that resulted in a 5xx (500, 501, etc.) status code.'
+    description: 'Represents the percentage of requests over the last 10 seconds that resulted in each type of status code response. For more information, see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">Status Code Definitions</a>.'
+  String:
+    type: string
   SupportedAddon:
     type: string
+  SupportedAddonList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   SupportedTier:
     type: string
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagValue:
-    type: string
-    minLength: 1
-    maxLength: 256
+  SupportedTierList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  SystemStatus:
+    type: object
+    properties:
+      CPUUtilization:
+        $ref: '#/definitions/[object Object]'
+        description: CPU utilization metrics for the instance.
+      LoadAverage:
+        $ref: '#/definitions/[object Object]'
+        description: 'Load average in the last 1-minute, 5-minute, and 15-minute periods. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os">Operating System Metrics</a>.'
+    description: CPU utilization and load average metrics for an Amazon EC2 instance.
   Tag:
     type: object
     properties:
       Key:
-        $ref: '#/definitions/TagKey'
+        $ref: '#/definitions/[object Object]'
         description: The key of the tag.
       Value:
-        $ref: '#/definitions/TagValue'
+        $ref: '#/definitions/[object Object]'
         description: The value of the tag.
     description: Describes a tag applied to a resource in an environment.
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
   TagKeyList:
     type: array
     items:
-      $ref: '#/definitions/TagKey'
+      $ref: '#/definitions/[object Object]'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  TagValue:
+    type: string
+    minLength: 1
+    maxLength: 256
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  TerminateEnvForce:
+    type: boolean
   TerminateEnvironmentResources:
     type: boolean
+  TimeFilterEnd:
+    type: string
+    format: date-time
+  TimeFilterStart:
+    type: string
+    format: date-time
+  Timestamp:
+    type: string
+    format: date-time
+  Token:
+    type: string
   Trigger:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/ResourceId'
+        $ref: '#/definitions/[object Object]'
         description: The name of the trigger.
     description: Describes a trigger.
+  TriggerList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  UpdateDate:
+    type: string
+    format: date-time
+  UserDefinedOption:
+    type: boolean
+  ValidationMessage:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/[object Object]'
+        description: A message describing the error or warning.
+      Severity:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>An indication of the severity of this message:</p> <ul> <li> <p> <code>error</code>: This message indicates that this is not a valid setting for an option.</p> </li> <li> <p> <code>warning</code>: This message is providing information you should take into account.</p> </li> </ul>'
+      Namespace:
+        $ref: '#/definitions/[object Object]'
+        description: The namespace to which the option belongs.
+      OptionName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the option.
+    description: An error or warning for a desired configuration option value.
   ValidationMessageString:
     type: string
+  ValidationMessagesList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ValidationSeverity:
     type: string
     enum:
       - error
       - warning
-  ValidationMessage:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ValidationMessageString'
-        description: A message describing the error or warning.
-      Severity:
-        $ref: '#/definitions/ValidationSeverity'
-        description: '<p>An indication of the severity of this message:</p> <ul> <li> <p> <code>error</code>: This message indicates that this is not a valid setting for an option.</p> </li> <li> <p> <code>warning</code>: This message is providing information you should take into account.</p> </li> </ul>'
-      Namespace:
-        $ref: '#/definitions/OptionNamespace'
-        description: The namespace to which the option belongs.
-      OptionName:
-        $ref: '#/definitions/ConfigurationOptionName'
-        description: The name of the option.
-    description: An error or warning for a desired configuration option value.
+  VersionLabel:
+    type: string
+    minLength: 1
+    maxLength: 100
+  VersionLabels:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  VersionLabelsList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  VirtualizationType:
+    type: string

@@ -127,15 +127,9 @@ paths:
           schema:
             $ref: '#/definitions/DeleteObjectRequest'
         - name: Path
-          in: path
-          type: array
-          required: true
-          items:
-            type: string
-          collectionFormat: csv
-        - name: Path
-          in: query
           type: string
+          in: path
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -173,15 +167,9 @@ paths:
           schema:
             $ref: '#/definitions/DescribeObjectRequest'
         - name: Path
-          in: path
-          type: array
-          required: true
-          items:
-            type: string
-          collectionFormat: csv
-        - name: Path
-          in: query
           type: string
+          in: path
+          required: true
     get:
       operationId: GetObject
       description: Downloads the object at the specified path.
@@ -213,15 +201,9 @@ paths:
           schema:
             $ref: '#/definitions/GetObjectRequest'
         - name: Path
-          in: path
-          type: array
-          required: true
-          items:
-            type: string
-          collectionFormat: csv
-        - name: Path
-          in: query
           type: string
+          in: path
+          required: true
     put:
       operationId: PutObject
       description: Uploads an object to the specified path. Object sizes are limited to 25 MB.
@@ -245,15 +227,9 @@ paths:
           schema:
             $ref: '#/definitions/PutObjectRequest'
         - name: Path
-          in: path
-          type: array
-          required: true
-          items:
-            type: string
-          collectionFormat: csv
-        - name: Path
-          in: query
           type: string
+          in: path
+          required: true
   /:
     get:
       operationId: ListItems
@@ -307,8 +283,11 @@ definitions:
     type: object
     properties:
       Body:
-        $ref: '#/definitions/PayloadBlob'
+        $ref: '#/definitions/[object Object]'
         description: 'The bytes of the object. '
+      StatusCode:
+        $ref: '#/definitions/[object Object]'
+        description: The HTML status code of the request. Status codes ranging from 200 to 299 indicate success. All other status codes indicate the type of error that occurred.
   GetObjectRequest:
     type: object
     properties: {}
@@ -317,10 +296,10 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/ItemList'
+        $ref: '#/definitions/[object Object]'
         description: The metadata entries for the folders and objects at the requested path.
       NextToken:
-        $ref: '#/definitions/PaginationToken'
+        $ref: '#/definitions/[object Object]'
         description: 'The token that can be used in a request to view the next set of results. For example, you submit a <code>ListItems</code> request that matches 2,000 items with <code>MaxResults</code> set at 500. The service returns the first batch of results (up to 500) and a <code>NextToken</code> value that can be used to fetch the next batch of results.'
   ListItemsRequest:
     type: object
@@ -329,13 +308,13 @@ definitions:
     type: object
     properties:
       ContentSHA256:
-        $ref: '#/definitions/SHA256Hash'
+        $ref: '#/definitions/[object Object]'
         description: The SHA256 digest of the object that is persisted.
       ETag:
-        $ref: '#/definitions/ETag'
+        $ref: '#/definitions/[object Object]'
         description: Unique identifier of the object in the container.
       StorageClass:
-        $ref: '#/definitions/StorageClass'
+        $ref: '#/definitions/[object Object]'
         description: The storage class where the object was persisted. The class should be “Temporal”.
   PutObjectRequest:
     type: object
@@ -343,7 +322,7 @@ definitions:
       - Body
     properties:
       Body:
-        $ref: '#/definitions/PayloadBlob'
+        $ref: '#/definitions/[object Object]'
         description: 'The bytes to be stored. '
   ContentRangePattern:
     type: string
@@ -351,31 +330,38 @@ definitions:
   ContentType:
     type: string
     pattern: '^[\w\-\/\.\+]{1,255}$'
-  PathNaming:
-    type: string
-    pattern: '(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+'
-    minLength: 1
-    maxLength: 900
+  '[object Object]': {}
   ETag:
     type: string
     pattern: '[0-9A-Fa-f]+'
     minLength: 1
     maxLength: 64
-  NonNegativeLong:
-    type: integer
-    minimum: 0
-  StringPrimitive:
-    type: string
-  TimeStamp:
-    type: string
-    format: date-time
-  RangePattern:
-    type: string
-    pattern: '^bytes=(?:\d+\-\d*|\d*\-\d+)$'
-  PayloadBlob:
-    type: string
-  statusCode:
-    type: integer
+  Item:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the item.
+      Type:
+        $ref: '#/definitions/[object Object]'
+        description: The item type (folder or object).
+      ETag:
+        $ref: '#/definitions/[object Object]'
+        description: The ETag that represents a unique instance of the item.
+      LastModified:
+        $ref: '#/definitions/[object Object]'
+        description: The date and time that the item was last modified.
+      ContentType:
+        $ref: '#/definitions/[object Object]'
+        description: The content type of the item.
+      ContentLength:
+        $ref: '#/definitions/[object Object]'
+        description: The length of the item in bytes.
+    description: A metadata entry for a folder or object.
+  ItemList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ItemName:
     type: string
     pattern: '[A-Za-z0-9_\.\-\~]+'
@@ -384,51 +370,45 @@ definitions:
     enum:
       - OBJECT
       - FOLDER
-  Item:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/ItemName'
-        description: The name of the item.
-      Type:
-        $ref: '#/definitions/ItemType'
-        description: The item type (folder or object).
-      ETag:
-        $ref: '#/definitions/ETag'
-        description: The ETag that represents a unique instance of the item.
-      LastModified:
-        $ref: '#/definitions/TimeStamp'
-        description: The date and time that the item was last modified.
-      ContentType:
-        $ref: '#/definitions/ContentType'
-        description: The content type of the item.
-      ContentLength:
-        $ref: '#/definitions/NonNegativeLong'
-        description: The length of the item in bytes.
-    description: A metadata entry for a folder or object.
-  ItemList:
-    type: array
-    items:
-      $ref: '#/definitions/Item'
+  ListLimit:
+    type: integer
+    minimum: 1
+    maximum: 1000
   ListPathNaming:
     type: string
     pattern: '/?(?:[A-Za-z0-9_\.\-\~]+/){0,10}(?:[A-Za-z0-9_\.\-\~]+)?/?'
     minLength: 0
     maxLength: 900
-  ListLimit:
+  NonNegativeLong:
     type: integer
-    minimum: 1
-    maximum: 1000
+    minimum: 0
   PaginationToken:
     type: string
+  PathNaming:
+    type: string
+    pattern: '(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+'
+    minLength: 1
+    maxLength: 900
+  PayloadBlob:
+    type: string
+  RangePattern:
+    type: string
+    pattern: '^bytes=(?:\d+\-\d*|\d*\-\d+)$'
+  SHA256Hash:
+    type: string
+    pattern: '[0-9A-Fa-f]{64}'
+    minLength: 64
+    maxLength: 64
   StorageClass:
     type: string
     enum:
       - TEMPORAL
     minLength: 1
     maxLength: 16
-  SHA256Hash:
+  StringPrimitive:
     type: string
-    pattern: '[0-9A-Fa-f]{64}'
-    minLength: 64
-    maxLength: 64
+  TimeStamp:
+    type: string
+    format: date-time
+  statusCode:
+    type: integer

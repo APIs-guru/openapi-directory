@@ -312,10 +312,10 @@ definitions:
     type: object
     properties:
       Results:
-        $ref: '#/definitions/UsageRecordResultList'
+        $ref: '#/definitions/[object Object]'
         description: Contains all UsageRecords processed by BatchMeterUsage. These records were either honored by AWS Marketplace Metering Service or were invalid.
       UnprocessedRecords:
-        $ref: '#/definitions/UsageRecordList'
+        $ref: '#/definitions/[object Object]'
         description: Contains all UsageRecords that were not processed by BatchMeterUsage. This is a list of UsageRecords. You can retry the failed request by making another BatchMeterUsage call with this list as input in the BatchMeterUsageRequest.
     description: Contains the UsageRecords processed by BatchMeterUsage and any records that have failed due to transient error.
   BatchMeterUsageRequest:
@@ -325,10 +325,10 @@ definitions:
       - ProductCode
     properties:
       UsageRecords:
-        $ref: '#/definitions/UsageRecordList'
+        $ref: '#/definitions/[object Object]'
         description: The set of UsageRecords to submit. BatchMeterUsage accepts up to 25 UsageRecords at a time.
       ProductCode:
-        $ref: '#/definitions/ProductCode'
+        $ref: '#/definitions/[object Object]'
         description: Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.
     description: 'A BatchMeterUsageRequest contains UsageRecords, which indicate quantities of usage within your application.'
   InternalServiceErrorException: {}
@@ -342,7 +342,7 @@ definitions:
     type: object
     properties:
       MeteringRecordId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Metering record id.
   MeterUsageRequest:
     type: object
@@ -354,19 +354,19 @@ definitions:
       - DryRun
     properties:
       ProductCode:
-        $ref: '#/definitions/ProductCode'
+        $ref: '#/definitions/[object Object]'
         description: Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.
       Timestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: 'Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions of the timestamp will be ignored.'
       UsageDimension:
-        $ref: '#/definitions/UsageDimension'
+        $ref: '#/definitions/[object Object]'
         description: It will be one of the fcp dimension name provided during the publishing of the product.
       UsageQuantity:
-        $ref: '#/definitions/UsageQuantity'
+        $ref: '#/definitions/[object Object]'
         description: Consumption value for the hour.
       DryRun:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: 'Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException.'
   InvalidEndpointRegionException: {}
   DuplicateRequestException: {}
@@ -374,10 +374,10 @@ definitions:
     type: object
     properties:
       PublicKeyRotationTimestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: (Optional) Only included when public key version has expired
       Signature:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: JWT Token
   RegisterUsageRequest:
     type: object
@@ -386,13 +386,13 @@ definitions:
       - PublicKeyVersion
     properties:
       ProductCode:
-        $ref: '#/definitions/ProductCode'
+        $ref: '#/definitions/[object Object]'
         description: Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.
       PublicKeyVersion:
-        $ref: '#/definitions/VersionInteger'
+        $ref: '#/definitions/[object Object]'
         description: Public Key Version provided by AWS Marketplace
       Nonce:
-        $ref: '#/definitions/Nonce'
+        $ref: '#/definitions/[object Object]'
         description: (Optional) To scope down the registration to a specific running software instance and guard against replay attacks.
   InvalidRegionException: {}
   InvalidPublicKeyVersionException: {}
@@ -402,10 +402,10 @@ definitions:
     type: object
     properties:
       CustomerIdentifier:
-        $ref: '#/definitions/CustomerIdentifier'
+        $ref: '#/definitions/[object Object]'
         description: The CustomerIdentifier is used to identify an individual customer in your application. Calls to BatchMeterUsage require CustomerIdentifiers for each UsageRecord.
       ProductCode:
-        $ref: '#/definitions/ProductCode'
+        $ref: '#/definitions/[object Object]'
         description: The product code is returned to confirm that the buyer is registering for your product. Subsequent BatchMeterUsage calls should be made using this product code.
     description: The result of the ResolveCustomer operation. Contains the CustomerIdentifier and product code.
   ResolveCustomerRequest:
@@ -414,31 +414,30 @@ definitions:
       - RegistrationToken
     properties:
       RegistrationToken:
-        $ref: '#/definitions/NonEmptyString'
+        $ref: '#/definitions/[object Object]'
         description: 'When a buyer visits your website during the registration process, the buyer submits a registration token through the browser. The registration token is resolved to obtain a CustomerIdentifier and product code.'
     description: Contains input to the ResolveCustomer operation.
   InvalidTokenException: {}
   ExpiredTokenException: {}
-  UsageRecordList:
-    type: array
-    items:
-      $ref: '#/definitions/UsageRecord'
-    minItems: 0
-    maxItems: 25
-  ProductCode:
-    type: string
-    minLength: 1
-    maxLength: 255
-  UsageRecordResultList:
-    type: array
-    items:
-      $ref: '#/definitions/UsageRecordResult'
+  '[object Object]': {}
   Boolean:
     type: boolean
   CustomerIdentifier:
     type: string
     minLength: 1
     maxLength: 255
+  NonEmptyString:
+    type: string
+    pattern: \S+
+  Nonce:
+    type: string
+    maxLength: 255
+  ProductCode:
+    type: string
+    minLength: 1
+    maxLength: 255
+  String:
+    type: string
   Timestamp:
     type: string
     format: date-time
@@ -450,17 +449,6 @@ definitions:
     type: integer
     minimum: 0
     maximum: 1000000
-  String:
-    type: string
-  NonEmptyString:
-    type: string
-    pattern: \S+
-  Nonce:
-    type: string
-    maxLength: 255
-  VersionInteger:
-    type: integer
-    minimum: 1
   UsageRecord:
     type: object
     required:
@@ -470,34 +458,47 @@ definitions:
       - Quantity
     properties:
       Timestamp:
-        $ref: '#/definitions/Timestamp'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions of the timestamp will be ignored.</p> <p>Your application can meter usage for up to one hour in the past.</p>'
       CustomerIdentifier:
-        $ref: '#/definitions/CustomerIdentifier'
+        $ref: '#/definitions/[object Object]'
         description: The CustomerIdentifier is obtained through the ResolveCustomer operation and represents an individual buyer in your application.
       Dimension:
-        $ref: '#/definitions/UsageDimension'
+        $ref: '#/definitions/[object Object]'
         description: 'During the process of registering a product on AWS Marketplace, up to eight dimensions are specified. These represent different units of value in your application.'
       Quantity:
-        $ref: '#/definitions/UsageQuantity'
+        $ref: '#/definitions/[object Object]'
         description: The quantity of usage consumed by the customer for the given dimension and time.
     description: '<p>A UsageRecord indicates a quantity of usage for a given product, customer, dimension and time.</p> <p>Multiple requests with the same UsageRecords as input will be deduplicated to prevent double charges.</p>'
+  UsageRecordList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 0
+    maxItems: 25
+  UsageRecordResult:
+    type: object
+    properties:
+      UsageRecord:
+        $ref: '#/definitions/[object Object]'
+        description: The UsageRecord that was part of the BatchMeterUsage request.
+      MeteringRecordId:
+        $ref: '#/definitions/[object Object]'
+        description: The MeteringRecordId is a unique identifier for this metering event.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The UsageRecordResult Status indicates the status of an individual UsageRecord processed by BatchMeterUsage.</p> <ul> <li> <p> <i>Success</i>- The UsageRecord was accepted and honored by BatchMeterUsage.</p> </li> <li> <p> <i>CustomerNotSubscribed</i>- The CustomerIdentifier specified is not subscribed to your product. The UsageRecord was not honored. Future UsageRecords for this customer will fail until the customer subscribes to your product.</p> </li> <li> <p> <i>DuplicateRecord</i>- Indicates that the UsageRecord was invalid and not honored. A previously metered UsageRecord had the same customer, dimension, and time, but a different quantity.</p> </li> </ul>'
+    description: A UsageRecordResult indicates the status of a given UsageRecord processed by BatchMeterUsage.
+  UsageRecordResultList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   UsageRecordResultStatus:
     type: string
     enum:
       - Success
       - CustomerNotSubscribed
       - DuplicateRecord
-  UsageRecordResult:
-    type: object
-    properties:
-      UsageRecord:
-        $ref: '#/definitions/UsageRecord'
-        description: The UsageRecord that was part of the BatchMeterUsage request.
-      MeteringRecordId:
-        $ref: '#/definitions/String'
-        description: The MeteringRecordId is a unique identifier for this metering event.
-      Status:
-        $ref: '#/definitions/UsageRecordResultStatus'
-        description: '<p>The UsageRecordResult Status indicates the status of an individual UsageRecord processed by BatchMeterUsage.</p> <ul> <li> <p> <i>Success</i>- The UsageRecord was accepted and honored by BatchMeterUsage.</p> </li> <li> <p> <i>CustomerNotSubscribed</i>- The CustomerIdentifier specified is not subscribed to your product. The UsageRecord was not honored. Future UsageRecords for this customer will fail until the customer subscribes to your product.</p> </li> <li> <p> <i>DuplicateRecord</i>- Indicates that the UsageRecord was invalid and not honored. A previously metered UsageRecord had the same customer, dimension, and time, but a different quantity.</p> </li> </ul>'
-    description: A UsageRecordResult indicates the status of a given UsageRecord processed by BatchMeterUsage.
+  VersionInteger:
+    type: integer
+    minimum: 1

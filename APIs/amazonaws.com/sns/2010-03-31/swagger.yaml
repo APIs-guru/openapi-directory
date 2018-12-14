@@ -1394,16 +1394,16 @@ definitions:
       - ActionName
     properties:
       TopicArn:
-        $ref: '#/definitions/topicARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the topic whose access control policy you wish to modify.
       Label:
-        $ref: '#/definitions/label'
+        $ref: '#/definitions/[object Object]'
         description: A unique identifier for the new policy statement.
       AWSAccountId:
-        $ref: '#/definitions/DelegatesList'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS account IDs of the users (principals) who will be given access to the specified actions. The users must have AWS accounts, but do not need to be signed up for this service.'
       ActionName:
-        $ref: '#/definitions/ActionsList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The action you want to allow for the specified principal(s).</p> <p>Valid values: any Amazon SNS action name.</p>'
   InvalidParameterException: {}
   InternalErrorException: {}
@@ -1413,7 +1413,7 @@ definitions:
     type: object
     properties:
       isOptedOut:
-        $ref: '#/definitions/boolean'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates whether the phone number is opted out:</p> <ul> <li> <p> <code>true</code> – The phone number is opted out, meaning you cannot publish SMS messages to it.</p> </li> <li> <p> <code>false</code> – The phone number is opted in, meaning you can publish SMS messages to it.</p> </li> </ul>'
     description: The response from the <code>CheckIfPhoneNumberIsOptedOut</code> action.
   CheckIfPhoneNumberIsOptedOutInput:
@@ -1422,7 +1422,7 @@ definitions:
       - phoneNumber
     properties:
       phoneNumber:
-        $ref: '#/definitions/PhoneNumber'
+        $ref: '#/definitions/[object Object]'
         description: The phone number for which you want to check the opt out status.
     description: The input for the <code>CheckIfPhoneNumberIsOptedOut</code> action.
   ThrottledException: {}
@@ -1430,7 +1430,7 @@ definitions:
     type: object
     properties:
       SubscriptionArn:
-        $ref: '#/definitions/subscriptionARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the created subscription.
     description: Response for ConfirmSubscriptions action.
   ConfirmSubscriptionInput:
@@ -1440,13 +1440,13 @@ definitions:
       - Token
     properties:
       TopicArn:
-        $ref: '#/definitions/topicARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the topic for which you wish to confirm a subscription.
       Token:
-        $ref: '#/definitions/token'
+        $ref: '#/definitions/[object Object]'
         description: Short-lived token sent to an endpoint during the <code>Subscribe</code> action.
       AuthenticateOnUnsubscribe:
-        $ref: '#/definitions/authenticateOnUnsubscribe'
+        $ref: '#/definitions/[object Object]'
         description: 'Disallows unauthenticated unsubscribes of the subscription. If the value of this parameter is <code>true</code> and the request has an AWS signature, then only the topic owner and the subscription owner can unsubscribe the endpoint. The unsubscribe action requires AWS authentication. '
     description: Input for ConfirmSubscription action.
   SubscriptionLimitExceededException: {}
@@ -1454,7 +1454,7 @@ definitions:
     type: object
     properties:
       PlatformApplicationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: PlatformApplicationArn is returned.
     description: Response from CreatePlatformApplication action.
   CreatePlatformApplicationInput:
@@ -1465,20 +1465,20 @@ definitions:
       - Attributes
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'Application names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, hyphens, and periods, and must be between 1 and 256 characters long.'
       Platform:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The following platforms are supported: ADM (Amazon Device Messaging), APNS (Apple Push Notification Service), APNS_SANDBOX, and GCM (Google Cloud Messaging).'
       Attributes:
-        $ref: '#/definitions/MapStringToString'
+        $ref: '#/definitions/[object Object]'
         description: 'For a list of attributes, see <a href="http://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html">SetPlatformApplicationAttributes</a> '
     description: Input for CreatePlatformApplication action.
   CreateEndpointResponse:
     type: object
     properties:
       EndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: EndpointArn returned from CreateEndpoint action.
     description: Response from CreateEndpoint action.
   CreatePlatformEndpointInput:
@@ -1488,23 +1488,23 @@ definitions:
       - Token
     properties:
       PlatformApplicationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: PlatformApplicationArn returned from CreatePlatformApplication is used to create a an endpoint.
       Token:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'Unique identifier created by the notification service for an app on a device. The specific name for Token will vary, depending on which notification service is being used. For example, when using APNS as the notification service, you need the device token. Alternatively, when using GCM or ADM, the device token equivalent is called the registration ID.'
       CustomUserData:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Arbitrary user data to associate with the endpoint. Amazon SNS does not use this data. The data must be in UTF-8 format and less than 2KB.
       Attributes:
-        $ref: '#/definitions/MapStringToString'
+        $ref: '#/definitions/[object Object]'
         description: 'For a list of attributes, see <a href="http://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html">SetEndpointAttributes</a>.'
     description: Input for CreatePlatformEndpoint action.
   CreateTopicResponse:
     type: object
     properties:
       TopicArn:
-        $ref: '#/definitions/topicARN'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) assigned to the created topic.
     description: Response from CreateTopic action.
   CreateTopicInput:
@@ -1513,10 +1513,10 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/topicName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the topic you want to create.</p> <p>Constraints: Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long.</p>'
       Attributes:
-        $ref: '#/definitions/TopicAttributesMap'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>CreateTopic</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions.</p> </li> <li> <p> <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.</p> </li> </ul>'
     description: Input for CreateTopic action.
   TopicLimitExceededException: {}
@@ -1527,7 +1527,7 @@ definitions:
       - EndpointArn
     properties:
       EndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: EndpointArn of endpoint to delete.
     description: Input for DeleteEndpoint action.
   DeletePlatformApplicationInput:
@@ -1536,7 +1536,7 @@ definitions:
       - PlatformApplicationArn
     properties:
       PlatformApplicationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: PlatformApplicationArn of platform application object to delete.
     description: Input for DeletePlatformApplication action.
   DeleteTopicInput:
@@ -1545,13 +1545,13 @@ definitions:
       - TopicArn
     properties:
       TopicArn:
-        $ref: '#/definitions/topicARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the topic you want to delete.
   GetEndpointAttributesResponse:
     type: object
     properties:
       Attributes:
-        $ref: '#/definitions/MapStringToString'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Attributes include the following:</p> <ul> <li> <p> <code>CustomUserData</code> – arbitrary user data to associate with the endpoint. Amazon SNS does not use this data. The data must be in UTF-8 format and less than 2KB.</p> </li> <li> <p> <code>Enabled</code> – flag that enables/disables delivery to the endpoint. Amazon SNS will set this to false when a notification service indicates to Amazon SNS that the endpoint is invalid. Users can set it back to true, typically after updating Token.</p> </li> <li> <p> <code>Token</code> – device token, also referred to as a registration id, for an app and mobile device. This is returned from the notification service when an app and mobile device are registered with the notification service.</p> </li> </ul>'
     description: Response from GetEndpointAttributes of the EndpointArn.
   GetEndpointAttributesInput:
@@ -1560,14 +1560,14 @@ definitions:
       - EndpointArn
     properties:
       EndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: EndpointArn for GetEndpointAttributes input.
     description: Input for GetEndpointAttributes action.
   GetPlatformApplicationAttributesResponse:
     type: object
     properties:
       Attributes:
-        $ref: '#/definitions/MapStringToString'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Attributes include the following:</p> <ul> <li> <p> <code>EventEndpointCreated</code> – Topic ARN to which EndpointCreated event notifications should be sent.</p> </li> <li> <p> <code>EventEndpointDeleted</code> – Topic ARN to which EndpointDeleted event notifications should be sent.</p> </li> <li> <p> <code>EventEndpointUpdated</code> – Topic ARN to which EndpointUpdate event notifications should be sent.</p> </li> <li> <p> <code>EventDeliveryFailure</code> – Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application''s endpoints.</p> </li> </ul>'
     description: Response for GetPlatformApplicationAttributes action.
   GetPlatformApplicationAttributesInput:
@@ -1576,28 +1576,28 @@ definitions:
       - PlatformApplicationArn
     properties:
       PlatformApplicationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: PlatformApplicationArn for GetPlatformApplicationAttributesInput.
     description: Input for GetPlatformApplicationAttributes action.
   GetSMSAttributesResponse:
     type: object
     properties:
       attributes:
-        $ref: '#/definitions/MapStringToString'
+        $ref: '#/definitions/[object Object]'
         description: The SMS attribute names and their values.
     description: The response from the <code>GetSMSAttributes</code> request.
   GetSMSAttributesInput:
     type: object
     properties:
       attributes:
-        $ref: '#/definitions/ListString'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A list of the individual attribute names, such as <code>MonthlySpendLimit</code>, for which you want values.</p> <p>For all attribute names, see <a href="http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html">SetSMSAttributes</a>.</p> <p>If you don''t use this parameter, Amazon SNS returns all SMS attributes.</p>'
     description: The input for the <code>GetSMSAttributes</code> request.
   GetSubscriptionAttributesResponse:
     type: object
     properties:
       Attributes:
-        $ref: '#/definitions/SubscriptionAttributesMap'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A map of the subscription''s attributes. Attributes in this map include the following:</p> <ul> <li> <p> <code>ConfirmationWasAuthenticated</code> – <code>true</code> if the subscription confirmation request was authenticated.</p> </li> <li> <p> <code>DeliveryPolicy</code> – The JSON serialization of the subscription''s delivery policy.</p> </li> <li> <p> <code>EffectiveDeliveryPolicy</code> – The JSON serialization of the effective delivery policy that takes into account the topic delivery policy and account system defaults.</p> </li> <li> <p> <code>FilterPolicy</code> – The filter policy JSON that is assigned to the subscription.</p> </li> <li> <p> <code>Owner</code> – The AWS account ID of the subscription''s owner.</p> </li> <li> <p> <code>PendingConfirmation</code> – <code>true</code> if the subscription hasn''t been confirmed. To confirm a pending subscription, call the <code>ConfirmSubscription</code> action with a confirmation token.</p> </li> <li> <p> <code>RawMessageDelivery</code> – <code>true</code> if raw message delivery is enabled for the subscription. Raw messages are free of JSON formatting and can be sent to HTTP/S and Amazon SQS endpoints.</p> </li> <li> <p> <code>SubscriptionArn</code> – The subscription''s ARN.</p> </li> <li> <p> <code>TopicArn</code> – The topic ARN that the subscription is associated with.</p> </li> </ul>'
     description: Response for GetSubscriptionAttributes action.
   GetSubscriptionAttributesInput:
@@ -1606,14 +1606,14 @@ definitions:
       - SubscriptionArn
     properties:
       SubscriptionArn:
-        $ref: '#/definitions/subscriptionARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the subscription whose properties you want to get.
     description: Input for GetSubscriptionAttributes.
   GetTopicAttributesResponse:
     type: object
     properties:
       Attributes:
-        $ref: '#/definitions/TopicAttributesMap'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A map of the topic''s attributes. Attributes in this map include the following:</p> <ul> <li> <p> <code>TopicArn</code> – the topic''s ARN</p> </li> <li> <p> <code>Owner</code> – the AWS account ID of the topic''s owner</p> </li> <li> <p> <code>Policy</code> – the JSON serialization of the topic''s access control policy</p> </li> <li> <p> <code>DisplayName</code> – the human-readable name used in the "From" field for notifications to email and email-json endpoints</p> </li> <li> <p> <code>SubscriptionsPending</code> – the number of subscriptions pending confirmation on this topic</p> </li> <li> <p> <code>SubscriptionsConfirmed</code> – the number of confirmed subscriptions on this topic</p> </li> <li> <p> <code>SubscriptionsDeleted</code> – the number of deleted subscriptions on this topic</p> </li> <li> <p> <code>DeliveryPolicy</code> – the JSON serialization of the topic''s delivery policy</p> </li> <li> <p> <code>EffectiveDeliveryPolicy</code> – the JSON serialization of the effective delivery policy that takes into account system defaults</p> </li> </ul>'
     description: Response for GetTopicAttributes action.
   GetTopicAttributesInput:
@@ -1622,17 +1622,17 @@ definitions:
       - TopicArn
     properties:
       TopicArn:
-        $ref: '#/definitions/topicARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the topic whose properties you want to get.
     description: Input for GetTopicAttributes action.
   ListEndpointsByPlatformApplicationResponse:
     type: object
     properties:
       Endpoints:
-        $ref: '#/definitions/ListOfEndpoints'
+        $ref: '#/definitions/[object Object]'
         description: Endpoints returned for ListEndpointsByPlatformApplication action.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: NextToken string is returned when calling ListEndpointsByPlatformApplication action if additional records are available after the first page results.
     description: Response for ListEndpointsByPlatformApplication action.
   ListEndpointsByPlatformApplicationInput:
@@ -1641,71 +1641,71 @@ definitions:
       - PlatformApplicationArn
     properties:
       PlatformApplicationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: PlatformApplicationArn for ListEndpointsByPlatformApplicationInput action.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: NextToken string is used when calling ListEndpointsByPlatformApplication action to retrieve additional records that are available after the first page results.
     description: Input for ListEndpointsByPlatformApplication action.
   ListPhoneNumbersOptedOutResponse:
     type: object
     properties:
       phoneNumbers:
-        $ref: '#/definitions/PhoneNumberList'
+        $ref: '#/definitions/[object Object]'
         description: 'A list of phone numbers that are opted out of receiving SMS messages. The list is paginated, and each page can contain up to 100 phone numbers.'
       nextToken:
-        $ref: '#/definitions/string'
+        $ref: '#/definitions/[object Object]'
         description: A <code>NextToken</code> string is returned when you call the <code>ListPhoneNumbersOptedOut</code> action if additional records are available after the first page of results.
     description: The response from the <code>ListPhoneNumbersOptedOut</code> action.
   ListPhoneNumbersOptedOutInput:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/string'
+        $ref: '#/definitions/[object Object]'
         description: A <code>NextToken</code> string is used when you call the <code>ListPhoneNumbersOptedOut</code> action to retrieve additional records that are available after the first page of results.
     description: The input for the <code>ListPhoneNumbersOptedOut</code> action.
   ListPlatformApplicationsResponse:
     type: object
     properties:
       PlatformApplications:
-        $ref: '#/definitions/ListOfPlatformApplications'
+        $ref: '#/definitions/[object Object]'
         description: Platform applications returned when calling ListPlatformApplications action.
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: NextToken string is returned when calling ListPlatformApplications action if additional records are available after the first page results.
     description: Response for ListPlatformApplications action.
   ListPlatformApplicationsInput:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: NextToken string is used when calling ListPlatformApplications action to retrieve additional records that are available after the first page results.
     description: Input for ListPlatformApplications action.
   ListSubscriptionsResponse:
     type: object
     properties:
       Subscriptions:
-        $ref: '#/definitions/SubscriptionsList'
+        $ref: '#/definitions/[object Object]'
         description: A list of subscriptions.
       NextToken:
-        $ref: '#/definitions/nextToken'
+        $ref: '#/definitions/[object Object]'
         description: Token to pass along to the next <code>ListSubscriptions</code> request. This element is returned if there are more subscriptions to retrieve.
     description: Response for ListSubscriptions action
   ListSubscriptionsInput:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/nextToken'
+        $ref: '#/definitions/[object Object]'
         description: Token returned by the previous <code>ListSubscriptions</code> request.
     description: Input for ListSubscriptions action.
   ListSubscriptionsByTopicResponse:
     type: object
     properties:
       Subscriptions:
-        $ref: '#/definitions/SubscriptionsList'
+        $ref: '#/definitions/[object Object]'
         description: A list of subscriptions.
       NextToken:
-        $ref: '#/definitions/nextToken'
+        $ref: '#/definitions/[object Object]'
         description: Token to pass along to the next <code>ListSubscriptionsByTopic</code> request. This element is returned if there are more subscriptions to retrieve.
     description: Response for ListSubscriptionsByTopic action.
   ListSubscriptionsByTopicInput:
@@ -1714,27 +1714,27 @@ definitions:
       - TopicArn
     properties:
       TopicArn:
-        $ref: '#/definitions/topicARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the topic for which you wish to find subscriptions.
       NextToken:
-        $ref: '#/definitions/nextToken'
+        $ref: '#/definitions/[object Object]'
         description: Token returned by the previous <code>ListSubscriptionsByTopic</code> request.
     description: Input for ListSubscriptionsByTopic action.
   ListTopicsResponse:
     type: object
     properties:
       Topics:
-        $ref: '#/definitions/TopicsList'
+        $ref: '#/definitions/[object Object]'
         description: A list of topic ARNs.
       NextToken:
-        $ref: '#/definitions/nextToken'
+        $ref: '#/definitions/[object Object]'
         description: Token to pass along to the next <code>ListTopics</code> request. This element is returned if there are additional topics to retrieve.
     description: Response for ListTopics action.
   ListTopicsInput:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/nextToken'
+        $ref: '#/definitions/[object Object]'
         description: Token returned by the previous <code>ListTopics</code> request.
   OptInPhoneNumberResponse:
     type: object
@@ -1746,14 +1746,14 @@ definitions:
       - phoneNumber
     properties:
       phoneNumber:
-        $ref: '#/definitions/PhoneNumber'
+        $ref: '#/definitions/[object Object]'
         description: The phone number to opt in.
     description: Input for the OptInPhoneNumber action.
   PublishResponse:
     type: object
     properties:
       MessageId:
-        $ref: '#/definitions/messageId'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Unique identifier assigned to the published message.</p> <p>Length Constraint: Maximum 100 characters</p>'
     description: Response for Publish action.
   PublishInput:
@@ -1762,25 +1762,25 @@ definitions:
       - Message
     properties:
       TopicArn:
-        $ref: '#/definitions/topicARN'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The topic you want to publish to.</p> <p>If you don''t specify a value for the <code>TopicArn</code> parameter, you must specify a value for the <code>PhoneNumber</code> or <code>TargetArn</code> parameters.</p>'
       TargetArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Either TopicArn or EndpointArn, but not both.</p> <p>If you don''t specify a value for the <code>TargetArn</code> parameter, you must specify a value for the <code>PhoneNumber</code> or <code>TopicArn</code> parameters.</p>'
       PhoneNumber:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The phone number to which you want to deliver an SMS message. Use E.164 format.</p> <p>If you don''t specify a value for the <code>PhoneNumber</code> parameter, you must specify a value for the <code>TargetArn</code> or <code>TopicArn</code> parameters.</p>'
       Message:
-        $ref: '#/definitions/message'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The message you want to send.</p> <important> <p>The <code>Message</code> parameter is always a string. If you set <code>MessageStructure</code> to <code>json</code>, you must string-encode the <code>Message</code> parameter.</p> </important> <p>If you are publishing to a topic and you want to send the same message to all transport protocols, include the text of the message as a String value. If you want to send different messages for each transport protocol, set the value of the <code>MessageStructure</code> parameter to <code>json</code> and use a JSON object for the <code>Message</code> parameter. </p> <p/> <p>Constraints:</p> <ul> <li> <p>With the exception of SMS, messages must be UTF-8 encoded strings and at most 256 KB in size (262,144 bytes, not 262,144 characters).</p> </li> <li> <p>For SMS, each message can contain up to 140 characters. This character limit depends on the encoding schema. For example, an SMS message can contain 160 GSM characters, 140 ASCII characters, or 70 UCS-2 characters.</p> <p>If you publish a message that exceeds this size limit, Amazon SNS sends the message as multiple messages, each fitting within the size limit. Messages aren''t truncated mid-word but are cut off at whole-word boundaries.</p> <p>The total size limit for a single SMS <code>Publish</code> action is 1,600 characters.</p> </li> </ul> <p>JSON-specific constraints:</p> <ul> <li> <p>Keys in the JSON object that correspond to supported transport protocols must have simple JSON string values.</p> </li> <li> <p>The values will be parsed (unescaped) before they are used in outgoing messages.</p> </li> <li> <p>Outbound notifications are JSON encoded (meaning that the characters will be reescaped for sending).</p> </li> <li> <p>Values have a minimum length of 0 (the empty string, "", is allowed).</p> </li> <li> <p>Values have a maximum length bounded by the overall message size (so, including multiple protocols may limit message sizes).</p> </li> <li> <p>Non-string values will cause the key to be ignored.</p> </li> <li> <p>Keys that do not correspond to supported transport protocols are ignored.</p> </li> <li> <p>Duplicate keys are not allowed.</p> </li> <li> <p>Failure to parse or validate any key or value in the message will cause the <code>Publish</code> call to return an error (no partial delivery).</p> </li> </ul>'
       Subject:
-        $ref: '#/definitions/subject'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Optional parameter to be used as the "Subject" line when the message is delivered to email endpoints. This field will also be included, if present, in the standard JSON messages delivered to other endpoints.</p> <p>Constraints: Subjects must be ASCII text that begins with a letter, number, or punctuation mark; must not include line breaks or control characters; and must be less than 100 characters long.</p>'
       MessageStructure:
-        $ref: '#/definitions/messageStructure'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Set <code>MessageStructure</code> to <code>json</code> if you want to send a different message for each protocol. For example, using one publish action, you can send a short message to your SMS subscribers and a longer message to your email subscribers. If you set <code>MessageStructure</code> to <code>json</code>, the value of the <code>Message</code> parameter must: </p> <ul> <li> <p>be a syntactically valid JSON object; and</p> </li> <li> <p>contain at least a top-level JSON key of "default" with a value that is a string.</p> </li> </ul> <p>You can define other top-level keys that define the message you want to send to a specific transport protocol (e.g., "http").</p> <p>For information about sending different messages for each protocol using the AWS Management Console, go to <a href="http://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol">Create Different Messages for Each Protocol</a> in the <i>Amazon Simple Notification Service Getting Started Guide</i>. </p> <p>Valid value: <code>json</code> </p>'
       MessageAttributes:
-        $ref: '#/definitions/MessageAttributeMap'
+        $ref: '#/definitions/[object Object]'
         description: Message attributes for Publish action.
     description: Input for Publish action.
   InvalidParameterValueException: {}
@@ -1799,10 +1799,10 @@ definitions:
       - Label
     properties:
       TopicArn:
-        $ref: '#/definitions/topicARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the topic whose access control policy you wish to modify.
       Label:
-        $ref: '#/definitions/label'
+        $ref: '#/definitions/[object Object]'
         description: The unique label of the statement you want to remove.
     description: Input for RemovePermission action.
   SetEndpointAttributesInput:
@@ -1812,10 +1812,10 @@ definitions:
       - Attributes
     properties:
       EndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: EndpointArn used for SetEndpointAttributes action.
       Attributes:
-        $ref: '#/definitions/MapStringToString'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A map of the endpoint attributes. Attributes in this map include the following:</p> <ul> <li> <p> <code>CustomUserData</code> – arbitrary user data to associate with the endpoint. Amazon SNS does not use this data. The data must be in UTF-8 format and less than 2KB.</p> </li> <li> <p> <code>Enabled</code> – flag that enables/disables delivery to the endpoint. Amazon SNS will set this to false when a notification service indicates to Amazon SNS that the endpoint is invalid. Users can set it back to true, typically after updating Token.</p> </li> <li> <p> <code>Token</code> – device token, also referred to as a registration id, for an app and mobile device. This is returned from the notification service when an app and mobile device are registered with the notification service.</p> </li> </ul>'
     description: Input for SetEndpointAttributes action.
   SetPlatformApplicationAttributesInput:
@@ -1825,10 +1825,10 @@ definitions:
       - Attributes
     properties:
       PlatformApplicationArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: PlatformApplicationArn for SetPlatformApplicationAttributes action.
       Attributes:
-        $ref: '#/definitions/MapStringToString'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A map of the platform application attributes. Attributes in this map include the following:</p> <ul> <li> <p> <code>PlatformCredential</code> – The credential received from the notification service. For APNS/APNS_SANDBOX, PlatformCredential is private key. For GCM, PlatformCredential is "API key". For ADM, PlatformCredential is "client secret".</p> </li> <li> <p> <code>PlatformPrincipal</code> – The principal received from the notification service. For APNS/APNS_SANDBOX, PlatformPrincipal is SSL certificate. For GCM, PlatformPrincipal is not applicable. For ADM, PlatformPrincipal is "client id".</p> </li> <li> <p> <code>EventEndpointCreated</code> – Topic ARN to which EndpointCreated event notifications should be sent.</p> </li> <li> <p> <code>EventEndpointDeleted</code> – Topic ARN to which EndpointDeleted event notifications should be sent.</p> </li> <li> <p> <code>EventEndpointUpdated</code> – Topic ARN to which EndpointUpdate event notifications should be sent.</p> </li> <li> <p> <code>EventDeliveryFailure</code> – Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application''s endpoints.</p> </li> <li> <p> <code>SuccessFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf.</p> </li> <li> <p> <code>FailureFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf.</p> </li> <li> <p> <code>SuccessFeedbackSampleRate</code> – Sample rate percentage (0-100) of successfully delivered messages.</p> </li> </ul>'
     description: Input for SetPlatformApplicationAttributes action.
   SetSMSAttributesResponse:
@@ -1841,7 +1841,7 @@ definitions:
       - attributes
     properties:
       attributes:
-        $ref: '#/definitions/MapStringToString'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The default settings for sending SMS messages from your account. You can set values for the following attribute names:</p> <p> <code>MonthlySpendLimit</code> – The maximum amount in USD that you are willing to spend each month to send SMS messages. When Amazon SNS determines that sending an SMS message would incur a cost that exceeds this limit, it stops sending SMS messages within minutes.</p> <important> <p>Amazon SNS stops sending SMS messages within minutes of the limit being crossed. During that interval, if you continue to send SMS messages, you will incur costs that exceed your limit.</p> </important> <p>By default, the spend limit is set to the maximum allowed by Amazon SNS. If you want to raise the limit, submit an <a href="https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-sns">SNS Limit Increase case</a>. For <b>New limit value</b>, enter your desired monthly spend limit. In the <b>Use Case Description</b> field, explain that you are requesting an SMS monthly spend limit increase.</p> <p> <code>DeliveryStatusIAMRole</code> – The ARN of the IAM role that allows Amazon SNS to write logs about SMS deliveries in CloudWatch Logs. For each SMS message that you send, Amazon SNS writes a log that includes the message price, the success or failure status, the reason for failure (if the message failed), the message dwell time, and other information.</p> <p> <code>DeliveryStatusSuccessSamplingRate</code> – The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value can be an integer from 0 - 100. For example, to write logs only for failed deliveries, set this value to <code>0</code>. To write logs for 10% of your successful deliveries, set it to <code>10</code>.</p> <p> <code>DefaultSenderID</code> – A string, such as your business brand, that is displayed as the sender on the receiving device. Support for sender IDs varies by country. The sender ID can be 1 - 11 alphanumeric characters, and it must contain at least one letter.</p> <p> <code>DefaultSMSType</code> – The type of SMS message that you will send by default. You can assign the following values:</p> <ul> <li> <p> <code>Promotional</code> – (Default) Noncritical messages, such as marketing messages. Amazon SNS optimizes the message delivery to incur the lowest cost.</p> </li> <li> <p> <code>Transactional</code> – Critical messages that support customer transactions, such as one-time passcodes for multi-factor authentication. Amazon SNS optimizes the message delivery to achieve the highest reliability.</p> </li> </ul> <p> <code>UsageReportS3Bucket</code> – The name of the Amazon S3 bucket to receive daily SMS usage reports from Amazon SNS. Each day, Amazon SNS will deliver a usage report as a CSV file to the bucket. The report includes the following information for each SMS message that was successfully delivered by your account:</p> <ul> <li> <p>Time that the message was published (in UTC)</p> </li> <li> <p>Message ID</p> </li> <li> <p>Destination phone number</p> </li> <li> <p>Message type</p> </li> <li> <p>Delivery status</p> </li> <li> <p>Message price (in USD)</p> </li> <li> <p>Part number (a message is split into multiple parts if it is too long for a single message)</p> </li> <li> <p>Total number of parts</p> </li> </ul> <p>To receive the report, the bucket must have a policy that allows the Amazon SNS service principle to perform the <code>s3:PutObject</code> and <code>s3:GetBucketLocation</code> actions.</p> <p>For an example bucket policy and usage report, see <a href="http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html">Monitoring SMS Activity</a> in the <i>Amazon SNS Developer Guide</i>.</p>'
     description: The input for the SetSMSAttributes action.
   SetSubscriptionAttributesInput:
@@ -1851,13 +1851,13 @@ definitions:
       - AttributeName
     properties:
       SubscriptionArn:
-        $ref: '#/definitions/subscriptionARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the subscription to modify.
       AttributeName:
-        $ref: '#/definitions/attributeName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>FilterPolicy</code> – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic.</p> </li> <li> <p> <code>RawMessageDelivery</code> – When set to <code>true</code>, enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata.</p> </li> </ul>'
       AttributeValue:
-        $ref: '#/definitions/attributeValue'
+        $ref: '#/definitions/[object Object]'
         description: The new value for the attribute in JSON format.
     description: Input for SetSubscriptionAttributes action.
   FilterPolicyLimitExceededException: {}
@@ -1868,20 +1868,20 @@ definitions:
       - AttributeName
     properties:
       TopicArn:
-        $ref: '#/definitions/topicARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the topic to modify.
       AttributeName:
-        $ref: '#/definitions/attributeName'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions.</p> </li> <li> <p> <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.</p> </li> </ul>'
       AttributeValue:
-        $ref: '#/definitions/attributeValue'
+        $ref: '#/definitions/[object Object]'
         description: The new value for the attribute.
     description: Input for SetTopicAttributes action.
   SubscribeResponse:
     type: object
     properties:
       SubscriptionArn:
-        $ref: '#/definitions/subscriptionARN'
+        $ref: '#/definitions/[object Object]'
         description: 'The ARN of the subscription if it is confirmed, or the string "pending confirmation" if the subscription requires confirmation. However, if the API request parameter <code>ReturnSubscriptionArn</code> is true, then the value is always the subscription ARN, even if the subscription requires confirmation.'
     description: Response for Subscribe action.
   SubscribeInput:
@@ -1891,19 +1891,19 @@ definitions:
       - Protocol
     properties:
       TopicArn:
-        $ref: '#/definitions/topicARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the topic you want to subscribe to.
       Protocol:
-        $ref: '#/definitions/protocol'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The protocol you want to use. Supported protocols include:</p> <ul> <li> <p> <code>http</code> – delivery of JSON-encoded message via HTTP POST</p> </li> <li> <p> <code>https</code> – delivery of JSON-encoded message via HTTPS POST</p> </li> <li> <p> <code>email</code> – delivery of message via SMTP</p> </li> <li> <p> <code>email-json</code> – delivery of JSON-encoded message via SMTP</p> </li> <li> <p> <code>sms</code> – delivery of message via SMS</p> </li> <li> <p> <code>sqs</code> – delivery of JSON-encoded message to an Amazon SQS queue</p> </li> <li> <p> <code>application</code> – delivery of JSON-encoded message to an EndpointArn for a mobile app and device.</p> </li> <li> <p> <code>lambda</code> – delivery of JSON-encoded message to an AWS Lambda function.</p> </li> </ul>'
       Endpoint:
-        $ref: '#/definitions/endpoint'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The endpoint that you want to receive notifications. Endpoints vary by protocol:</p> <ul> <li> <p>For the <code>http</code> protocol, the endpoint is an URL beginning with "http://"</p> </li> <li> <p>For the <code>https</code> protocol, the endpoint is a URL beginning with "https://"</p> </li> <li> <p>For the <code>email</code> protocol, the endpoint is an email address</p> </li> <li> <p>For the <code>email-json</code> protocol, the endpoint is an email address</p> </li> <li> <p>For the <code>sms</code> protocol, the endpoint is a phone number of an SMS-enabled device</p> </li> <li> <p>For the <code>sqs</code> protocol, the endpoint is the ARN of an Amazon SQS queue</p> </li> <li> <p>For the <code>application</code> protocol, the endpoint is the EndpointArn of a mobile app and device.</p> </li> <li> <p>For the <code>lambda</code> protocol, the endpoint is the ARN of an AWS Lambda function.</p> </li> </ul>'
       Attributes:
-        $ref: '#/definitions/SubscriptionAttributesMap'
+        $ref: '#/definitions/[object Object]'
         description: '<p>A map of attributes with their corresponding values.</p> <p>The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses:</p> <ul> <li> <p> <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.</p> </li> <li> <p> <code>FilterPolicy</code> – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic.</p> </li> <li> <p> <code>RawMessageDelivery</code> – When set to <code>true</code>, enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata.</p> </li> </ul>'
       ReturnSubscriptionArn:
-        $ref: '#/definitions/boolean'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Sets whether the response from the <code>Subscribe</code> request includes the subscription ARN, even if the subscription is not yet confirmed.</p> <p>If you set this parameter to <code>false</code>, the response includes the ARN for confirmed subscriptions, but it includes an ARN value of "pending subscription" for subscriptions that are not yet confirmed. A subscription becomes confirmed when the subscriber calls the <code>ConfirmSubscription</code> action with a confirmation token.</p> <p>If you set this parameter to <code>true</code>, the response includes the ARN in all cases, even if the subscription is not yet confirmed.</p> <p>The default value is <code>false</code>.</p>'
     description: Input for Subscribe action.
   UnsubscribeInput:
@@ -1912,35 +1912,42 @@ definitions:
       - SubscriptionArn
     properties:
       SubscriptionArn:
-        $ref: '#/definitions/subscriptionARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the subscription to be deleted.
     description: Input for Unsubscribe action.
-  action:
-    type: string
+  '[object Object]': {}
   ActionsList:
     type: array
     items:
-      $ref: '#/definitions/action'
-  topicARN:
-    type: string
-  label:
+      $ref: '#/definitions/[object Object]'
+  Binary:
     type: string
   DelegatesList:
     type: array
     items:
-      $ref: '#/definitions/delegate'
-  Binary:
-    type: string
-  PhoneNumber:
-    type: string
-  boolean:
-    type: boolean
-  token:
-    type: string
-  authenticateOnUnsubscribe:
-    type: string
-  subscriptionARN:
-    type: string
+      $ref: '#/definitions/[object Object]'
+  Endpoint:
+    type: object
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/[object Object]'
+        description: EndpointArn for mobile app and device.
+      Attributes:
+        $ref: '#/definitions/[object Object]'
+        description: Attributes for endpoint.
+    description: Endpoint for mobile app and device.
+  ListOfEndpoints:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ListOfPlatformApplications:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ListString:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   String:
     type: string
   MapStringToString:
@@ -1952,89 +1959,19 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/String'
-  topicName:
-    type: string
-  TopicAttributesMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/attributeName'
-        value:
-          $ref: '#/definitions/attributeValue'
-  delegate:
-    type: string
-  Endpoint:
-    type: object
-    properties:
-      EndpointArn:
-        $ref: '#/definitions/String'
-        description: EndpointArn for mobile app and device.
-      Attributes:
-        $ref: '#/definitions/MapStringToString'
-        description: Attributes for endpoint.
-    description: Endpoint for mobile app and device.
-  ListString:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SubscriptionAttributesMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/attributeName'
-        value:
-          $ref: '#/definitions/attributeValue'
-  ListOfEndpoints:
-    type: array
-    items:
-      $ref: '#/definitions/Endpoint'
-  PlatformApplication:
-    type: object
-    properties:
-      PlatformApplicationArn:
-        $ref: '#/definitions/String'
-        description: PlatformApplicationArn for platform application object.
-      Attributes:
-        $ref: '#/definitions/MapStringToString'
-        description: Attributes for platform application object.
-    description: Platform application object.
-  ListOfPlatformApplications:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformApplication'
-  string:
-    type: string
-  PhoneNumberList:
-    type: array
-    items:
-      $ref: '#/definitions/PhoneNumber'
-  nextToken:
-    type: string
-  SubscriptionsList:
-    type: array
-    items:
-      $ref: '#/definitions/Subscription'
-  TopicsList:
-    type: array
-    items:
-      $ref: '#/definitions/Topic'
   MessageAttributeValue:
     type: object
     required:
       - DataType
     properties:
       DataType:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'Amazon SNS supports the following logical data types: String, String.Array, Number, and Binary. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html#SNSMessageAttributes.DataTypes">Message Attribute Data Types</a>.'
       StringValue:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'Strings are Unicode with UTF8 binary encoding. For a list of code values, see <a href="http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters">http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters</a>.'
       BinaryValue:
-        $ref: '#/definitions/Binary'
+        $ref: '#/definitions/[object Object]'
         description: 'Binary type attributes can store any binary data, for example, compressed data, encrypted data, or images.'
     description: '<p>The user-specified message attribute value. For string data types, the value attribute has the same restrictions on the content as the message body. For more information, see <a href="http://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a>.</p> <p>Name, type, and value must not be empty or null. In addition, the message body should not be empty or null. All parts of the message attribute, including name, type, and value, are included in the message size restriction, which is currently 256 KB (262,144 bytes). For more information, see <a href="http://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html">Using Amazon SNS Message Attributes</a>.</p>'
   MessageAttributeMap:
@@ -2046,47 +1983,111 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/MessageAttributeValue'
-  message:
+  PhoneNumber:
     type: string
-  subject:
-    type: string
-  messageStructure:
-    type: string
-  messageId:
-    type: string
-  attributeName:
-    type: string
-  attributeValue:
-    type: string
-  protocol:
-    type: string
-  endpoint:
-    type: string
-  account:
-    type: string
+  PhoneNumberList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PlatformApplication:
+    type: object
+    properties:
+      PlatformApplicationArn:
+        $ref: '#/definitions/[object Object]'
+        description: PlatformApplicationArn for platform application object.
+      Attributes:
+        $ref: '#/definitions/[object Object]'
+        description: Attributes for platform application object.
+    description: Platform application object.
   Subscription:
     type: object
     properties:
       SubscriptionArn:
-        $ref: '#/definitions/subscriptionARN'
+        $ref: '#/definitions/[object Object]'
         description: The subscription's ARN.
       Owner:
-        $ref: '#/definitions/account'
+        $ref: '#/definitions/[object Object]'
         description: The subscription's owner.
       Protocol:
-        $ref: '#/definitions/protocol'
+        $ref: '#/definitions/[object Object]'
         description: The subscription's protocol.
       Endpoint:
-        $ref: '#/definitions/endpoint'
+        $ref: '#/definitions/[object Object]'
         description: The subscription's endpoint (format depends on the protocol).
       TopicArn:
-        $ref: '#/definitions/topicARN'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the subscription's topic.
     description: A wrapper type for the attributes of an Amazon SNS subscription.
+  attributeName:
+    type: string
+  attributeValue:
+    type: string
+  SubscriptionAttributesMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/attributeName'
+        value:
+          $ref: '#/definitions/attributeValue'
+  SubscriptionsList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Topic:
     type: object
     properties:
       TopicArn:
-        $ref: '#/definitions/topicARN'
+        $ref: '#/definitions/[object Object]'
         description: The topic's ARN.
     description: 'A wrapper type for the topic''s Amazon Resource Name (ARN). To retrieve a topic''s attributes, use <code>GetTopicAttributes</code>.'
+  TopicAttributesMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/attributeName'
+        value:
+          $ref: '#/definitions/attributeValue'
+  TopicsList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  account:
+    type: string
+  action:
+    type: string
+  authenticateOnUnsubscribe:
+    type: string
+  boolean:
+    type: boolean
+  delegate:
+    type: string
+  endpoint:
+    type: string
+  label:
+    type: string
+  message:
+    type: string
+  messageId:
+    type: string
+  messageStructure:
+    type: string
+  nextToken:
+    type: string
+  protocol:
+    type: string
+  string:
+    type: string
+  subject:
+    type: string
+  subscriptionARN:
+    type: string
+  token:
+    type: string
+  topicARN:
+    type: string
+  topicName:
+    type: string

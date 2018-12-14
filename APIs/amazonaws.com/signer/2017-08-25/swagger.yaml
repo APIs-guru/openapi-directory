@@ -129,8 +129,8 @@ paths:
           schema:
             $ref: '#/definitions/CancelSigningProfileRequest'
         - name: profileName
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -173,8 +173,8 @@ paths:
           schema:
             $ref: '#/definitions/GetSigningProfileRequest'
         - name: profileName
-          in: path
           type: string
+          in: path
           required: true
     put:
       operationId: PutSigningProfile
@@ -211,8 +211,8 @@ paths:
           schema:
             $ref: '#/definitions/PutSigningProfileRequest'
         - name: profileName
-          in: path
           type: string
+          in: path
           required: true
   '/signing-jobs/{jobId}':
     get:
@@ -242,25 +242,9 @@ paths:
           schema:
             $ref: '#/definitions/DescribeSigningJobRequest'
         - name: jobId
-          in: path
           type: string
+          in: path
           required: true
-      x-waiters:
-        - delay: 20
-          operation: DescribeSigningJob
-          maxAttempts: 25
-          acceptors:
-            - expected: Succeeded
-              matcher: path
-              state: success
-              argument: status
-            - expected: Failed
-              matcher: path
-              state: failure
-              argument: status
-            - expected: ResourceNotFoundException
-              matcher: error
-              state: failure
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -299,12 +283,9 @@ paths:
           schema:
             $ref: '#/definitions/GetSigningPlatformRequest'
         - name: platformId
+          type: string
           in: path
-          type: string
           required: true
-        - name: platformId
-          in: query
-          type: string
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -510,43 +491,43 @@ definitions:
     type: object
     properties:
       jobId:
-        $ref: '#/definitions/JobId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the signing job on output.
       source:
-        $ref: '#/definitions/Source'
+        $ref: '#/definitions/[object Object]'
         description: The object that contains the name of your S3 bucket or your raw code.
       signingMaterial:
-        $ref: '#/definitions/SigningMaterial'
+        $ref: '#/definitions/[object Object]'
         description: Amazon Resource Name (ARN) of your code signing certificate.
       platformId:
-        $ref: '#/definitions/PlatformId'
+        $ref: '#/definitions/[object Object]'
         description: The microcontroller platform to which your signed code image will be distributed.
       profileName:
-        $ref: '#/definitions/ProfileName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the profile that initiated the signing operation.
       overrides:
-        $ref: '#/definitions/SigningPlatformOverrides'
+        $ref: '#/definitions/[object Object]'
         description: A list of any overrides that were applied to the signing operation.
       signingParameters:
-        $ref: '#/definitions/SigningParameters'
+        $ref: '#/definitions/[object Object]'
         description: 'Map of user-assigned key-value pairs used during signing. These values contain any information that you specified for use in your signing job. '
       createdAt:
-        $ref: '#/definitions/CreatedAt'
+        $ref: '#/definitions/[object Object]'
         description: Date and time that the signing job was created.
       completedAt:
-        $ref: '#/definitions/CompletedAt'
+        $ref: '#/definitions/[object Object]'
         description: Date and time that the signing job was completed.
       requestedBy:
-        $ref: '#/definitions/RequestedBy'
+        $ref: '#/definitions/[object Object]'
         description: The IAM principal that requested the signing job.
       status:
-        $ref: '#/definitions/SigningStatus'
+        $ref: '#/definitions/[object Object]'
         description: Status of the signing job.
       statusReason:
-        $ref: '#/definitions/StatusReason'
+        $ref: '#/definitions/[object Object]'
         description: String value that contains the status reason.
       signedObject:
-        $ref: '#/definitions/SignedObject'
+        $ref: '#/definitions/[object Object]'
         description: Name of the S3 bucket where the signed code image is saved by AWS Signer.
   DescribeSigningJobRequest:
     type: object
@@ -555,28 +536,28 @@ definitions:
     type: object
     properties:
       platformId:
-        $ref: '#/definitions/PlatformId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the target signing platform.
       displayName:
-        $ref: '#/definitions/DisplayName'
+        $ref: '#/definitions/[object Object]'
         description: The display name of the target signing platform.
       partner:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A list of partner entities that use the target signing platform.
       target:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The validation template that is used by the target signing platform.
       category:
-        $ref: '#/definitions/Category'
+        $ref: '#/definitions/[object Object]'
         description: The category type of the target signing platform.
       signingConfiguration:
-        $ref: '#/definitions/SigningConfiguration'
+        $ref: '#/definitions/[object Object]'
         description: A list of configurations applied to the target platform at signing.
       signingImageFormat:
-        $ref: '#/definitions/SigningImageFormat'
+        $ref: '#/definitions/[object Object]'
         description: The format of the target platform's signing image.
       maxSizeInMB:
-        $ref: '#/definitions/MaxSizeInMB'
+        $ref: '#/definitions/[object Object]'
         description: The maximum size (in MB) of the payload that can be signed by the target platform.
   GetSigningPlatformRequest:
     type: object
@@ -585,22 +566,22 @@ definitions:
     type: object
     properties:
       profileName:
-        $ref: '#/definitions/ProfileName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the target signing profile.
       signingMaterial:
-        $ref: '#/definitions/SigningMaterial'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the certificate that the target profile uses for signing operations.
       platformId:
-        $ref: '#/definitions/PlatformId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the platform that is used by the target signing profile.
       overrides:
-        $ref: '#/definitions/SigningPlatformOverrides'
+        $ref: '#/definitions/[object Object]'
         description: A list of overrides applied by the target signing profile for signing operations.
       signingParameters:
-        $ref: '#/definitions/SigningParameters'
+        $ref: '#/definitions/[object Object]'
         description: A map of key-value pairs for signing operations that is attached to the target signing profile.
       status:
-        $ref: '#/definitions/SigningProfileStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status of the target signing profile.
   GetSigningProfileRequest:
     type: object
@@ -609,10 +590,10 @@ definitions:
     type: object
     properties:
       jobs:
-        $ref: '#/definitions/SigningJobs'
+        $ref: '#/definitions/[object Object]'
         description: A list of your signing jobs.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: String for specifying the next set of paginated results.
   ListSigningJobsRequest:
     type: object
@@ -622,10 +603,10 @@ definitions:
     type: object
     properties:
       platforms:
-        $ref: '#/definitions/SigningPlatforms'
+        $ref: '#/definitions/[object Object]'
         description: A list of all platforms that match the request parameters.
       nextToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Value for specifying the next set of paginated results to return.
   ListSigningPlatformsRequest:
     type: object
@@ -634,10 +615,10 @@ definitions:
     type: object
     properties:
       profiles:
-        $ref: '#/definitions/SigningProfiles'
+        $ref: '#/definitions/[object Object]'
         description: A list of profiles that are available in the AWS account. This includes profiles with the status of <code>CANCELED</code> if the <code>includeCanceled</code> parameter is set to <code>true</code>.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: Value for specifying the next set of paginated results to return.
   ListSigningProfilesRequest:
     type: object
@@ -646,7 +627,7 @@ definitions:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/string'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the signing profile created.
   PutSigningProfileRequest:
     type: object
@@ -655,22 +636,22 @@ definitions:
       - platformId
     properties:
       signingMaterial:
-        $ref: '#/definitions/SigningMaterial'
+        $ref: '#/definitions/[object Object]'
         description: The AWS Certificate Manager certificate that will be used to sign code with the new signing profile.
       platformId:
-        $ref: '#/definitions/PlatformId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the signing profile to be created.
       overrides:
-        $ref: '#/definitions/SigningPlatformOverrides'
+        $ref: '#/definitions/[object Object]'
         description: A subfield of <code>platform</code>. This specifies any different configuration options that you want to apply to the chosen platform (such as a different <code>hash-algorithm</code> or <code>signing-algorithm</code>).
       signingParameters:
-        $ref: '#/definitions/SigningParameters'
+        $ref: '#/definitions/[object Object]'
         description: Map of key-value pairs for signing. These can include any information that you want to use during signing.
   StartSigningJobResponse:
     type: object
     properties:
       jobId:
-        $ref: '#/definitions/JobId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of your signing job.
   StartSigningJobRequest:
     type: object
@@ -680,26 +661,22 @@ definitions:
       - clientRequestToken
     properties:
       source:
-        $ref: '#/definitions/Source'
+        $ref: '#/definitions/[object Object]'
         description: The S3 bucket that contains the object to sign or a BLOB that contains your raw code.
       destination:
-        $ref: '#/definitions/Destination'
+        $ref: '#/definitions/[object Object]'
         description: The S3 bucket in which to save your signed object. The destination contains the name of your bucket and an optional prefix.
       profileName:
-        $ref: '#/definitions/ProfileName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the signing profile.
       clientRequestToken:
-        $ref: '#/definitions/ClientRequestToken'
+        $ref: '#/definitions/[object Object]'
         description: String that identifies the signing request. All calls after the first that use this token return the same response as the first call.
   key:
     type: string
   BucketName:
     type: string
-  ProfileName:
-    type: string
-    pattern: '^[a-zA-Z0-9_]{2,}'
-    minLength: 2
-    maxLength: 20
+  '[object Object]': {}
   Category:
     type: string
     enum:
@@ -714,73 +691,11 @@ definitions:
   CreatedAt:
     type: string
     format: date-time
-  JobId:
-    type: string
-  Source:
-    type: object
-    properties:
-      s3:
-        $ref: '#/definitions/S3Source'
-        description: The <code>S3Source</code> object.
-    description: An <code>S3Source</code> object that contains information about the S3 bucket where you saved your unsigned code.
-  SigningMaterial:
-    type: object
-    required:
-      - certificateArn
-    properties:
-      certificateArn:
-        $ref: '#/definitions/CertificateArn'
-        description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
-    description: The ACM certificate that is used to sign your code.
-  PlatformId:
-    type: string
-  SigningPlatformOverrides:
-    type: object
-    properties:
-      signingConfiguration:
-        $ref: '#/definitions/SigningConfigurationOverrides'
-    description: Any overrides that are applied to the signing configuration of an AWS Signer platform.
-  SigningParameters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/SigningParameterKey'
-        value:
-          $ref: '#/definitions/SigningParameterValue'
-  RequestedBy:
-    type: string
-  SigningStatus:
-    type: string
-    enum:
-      - InProgress
-      - Failed
-      - Succeeded
-  StatusReason:
-    type: string
-  SignedObject:
-    type: object
-    properties:
-      s3:
-        $ref: '#/definitions/S3SignedObject'
-        description: The <code>S3SignedObject</code>.
-    description: Points to an <code>S3SignedObject</code> object that contains information about your signed code image.
-  S3Destination:
-    type: object
-    properties:
-      bucketName:
-        $ref: '#/definitions/BucketName'
-        description: Name of the S3 bucket.
-      prefix:
-        $ref: '#/definitions/Prefix'
-        description: An Amazon S3 prefix that you can use to limit responses to those that begin with the specified prefix.
-    description: The name and prefix of the S3 bucket where AWS Signer saves your signed objects.
   Destination:
     type: object
     properties:
       s3:
-        $ref: '#/definitions/S3Destination'
+        $ref: '#/definitions/[object Object]'
         description: The <code>S3Destination</code> object.
     description: Points to an <code>S3Destination</code> object that contains information about your S3 bucket.
   DisplayName:
@@ -790,10 +705,6 @@ definitions:
     enum:
       - RSA
       - ECDSA
-  EncryptionAlgorithms:
-    type: array
-    items:
-      $ref: '#/definitions/EncryptionAlgorithm'
   EncryptionAlgorithmOptions:
     type: object
     required:
@@ -801,56 +712,21 @@ definitions:
       - defaultValue
     properties:
       allowedValues:
-        $ref: '#/definitions/EncryptionAlgorithms'
+        $ref: '#/definitions/[object Object]'
         description: The set of accepted encryption algorithms that are allowed in an AWS Signer job.
       defaultValue:
-        $ref: '#/definitions/EncryptionAlgorithm'
+        $ref: '#/definitions/[object Object]'
         description: The default encryption algorithm that is used by an AWS Signer job.
     description: The encryption algorithm options that are available to an AWS Signer job.
-  String:
-    type: string
-  SigningConfiguration:
-    type: object
-    required:
-      - encryptionAlgorithmOptions
-      - hashAlgorithmOptions
-    properties:
-      encryptionAlgorithmOptions:
-        $ref: '#/definitions/EncryptionAlgorithmOptions'
-        description: The encryption algorithm options that are available for an AWS Signer job.
-      hashAlgorithmOptions:
-        $ref: '#/definitions/HashAlgorithmOptions'
-        description: The hash algorithm options that are available for an AWS Signer job.
-    description: The configuration of an AWS Signer operation.
-  SigningImageFormat:
-    type: object
-    required:
-      - supportedFormats
-      - defaultFormat
-    properties:
-      supportedFormats:
-        $ref: '#/definitions/ImageFormats'
-        description: The supported formats of an AWS Signer signing image.
-      defaultFormat:
-        $ref: '#/definitions/ImageFormat'
-        description: The default format of an AWS Signer signing image.
-    description: The image format of an AWS Signer platform or profile.
-  MaxSizeInMB:
-    type: integer
-  SigningProfileStatus:
-    type: string
-    enum:
-      - Active
-      - Canceled
+  EncryptionAlgorithms:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   HashAlgorithm:
     type: string
     enum:
       - SHA1
       - SHA256
-  HashAlgorithms:
-    type: array
-    items:
-      $ref: '#/definitions/HashAlgorithm'
   HashAlgorithmOptions:
     type: object
     required:
@@ -858,12 +734,16 @@ definitions:
       - defaultValue
     properties:
       allowedValues:
-        $ref: '#/definitions/HashAlgorithms'
+        $ref: '#/definitions/[object Object]'
         description: The set of accepted hash algorithms allowed in an AWS Signer job.
       defaultValue:
-        $ref: '#/definitions/HashAlgorithm'
+        $ref: '#/definitions/[object Object]'
         description: The default hash algorithm that is used in an AWS Signer job.
     description: The hash algorithms that are available to an AWS Signer job.
+  HashAlgorithms:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ImageFormat:
     type: string
     enum:
@@ -871,45 +751,50 @@ definitions:
   ImageFormats:
     type: array
     items:
-      $ref: '#/definitions/ImageFormat'
+      $ref: '#/definitions/[object Object]'
+  JobId:
+    type: string
   Key:
     type: string
   MaxResults:
     type: integer
     minimum: 1
     maximum: 25
+  MaxSizeInMB:
+    type: integer
   NextToken:
     type: string
-  SigningJobs:
-    type: array
-    items:
-      $ref: '#/definitions/SigningJob'
-  SigningPlatforms:
-    type: array
-    items:
-      $ref: '#/definitions/SigningPlatform'
-  bool:
-    type: boolean
-  SigningProfiles:
-    type: array
-    items:
-      $ref: '#/definitions/SigningProfile'
+  PlatformId:
+    type: string
   Prefix:
     type: string
-  string:
+  ProfileName:
     type: string
+    pattern: '^[a-zA-Z0-9_]{2,}'
+    minLength: 2
+    maxLength: 20
+  RequestedBy:
+    type: string
+  S3Destination:
+    type: object
+    properties:
+      bucketName:
+        $ref: '#/definitions/[object Object]'
+        description: Name of the S3 bucket.
+      prefix:
+        $ref: '#/definitions/[object Object]'
+        description: An Amazon S3 prefix that you can use to limit responses to those that begin with the specified prefix.
+    description: The name and prefix of the S3 bucket where AWS Signer saves your signed objects.
   S3SignedObject:
     type: object
     properties:
       bucketName:
-        $ref: '#/definitions/BucketName'
+        $ref: '#/definitions/[object Object]'
         description: Name of the S3 bucket.
       key:
-        $ref: '#/definitions/key'
+        $ref: '#/definitions/[object Object]'
         description: Key name that uniquely identifies a signed code image in your bucket.
     description: The S3 bucket name and key where AWS Signer saved your signed code image.
-  Version:
-    type: string
   S3Source:
     type: object
     required:
@@ -918,95 +803,192 @@ definitions:
       - version
     properties:
       bucketName:
-        $ref: '#/definitions/BucketName'
+        $ref: '#/definitions/[object Object]'
         description: Name of the S3 bucket.
       key:
-        $ref: '#/definitions/Key'
+        $ref: '#/definitions/[object Object]'
         description: Key name of the bucket object that contains your unsigned code.
       version:
-        $ref: '#/definitions/Version'
+        $ref: '#/definitions/[object Object]'
         description: Version of your source image in your version enabled S3 bucket.
     description: Information about the S3 bucket where you saved your unsigned code.
+  SignedObject:
+    type: object
+    properties:
+      s3:
+        $ref: '#/definitions/[object Object]'
+        description: The <code>S3SignedObject</code>.
+    description: Points to an <code>S3SignedObject</code> object that contains information about your signed code image.
+  SigningConfiguration:
+    type: object
+    required:
+      - encryptionAlgorithmOptions
+      - hashAlgorithmOptions
+    properties:
+      encryptionAlgorithmOptions:
+        $ref: '#/definitions/[object Object]'
+        description: The encryption algorithm options that are available for an AWS Signer job.
+      hashAlgorithmOptions:
+        $ref: '#/definitions/[object Object]'
+        description: The hash algorithm options that are available for an AWS Signer job.
+    description: The configuration of an AWS Signer operation.
   SigningConfigurationOverrides:
     type: object
     properties:
       encryptionAlgorithm:
-        $ref: '#/definitions/EncryptionAlgorithm'
+        $ref: '#/definitions/[object Object]'
         description: A specified override of the default encryption algorithm that is used in an AWS Signer job.
       hashAlgorithm:
-        $ref: '#/definitions/HashAlgorithm'
+        $ref: '#/definitions/[object Object]'
         description: A specified override of the default hash algorithm that is used in an AWS Signer job.
     description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+  SigningImageFormat:
+    type: object
+    required:
+      - supportedFormats
+      - defaultFormat
+    properties:
+      supportedFormats:
+        $ref: '#/definitions/[object Object]'
+        description: The supported formats of an AWS Signer signing image.
+      defaultFormat:
+        $ref: '#/definitions/[object Object]'
+        description: The default format of an AWS Signer signing image.
+    description: The image format of an AWS Signer platform or profile.
   SigningJob:
     type: object
     properties:
       jobId:
-        $ref: '#/definitions/JobId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the signing job.
       source:
-        $ref: '#/definitions/Source'
+        $ref: '#/definitions/[object Object]'
         description: A <code>Source</code> that contains information about a signing job's code image source.
       signedObject:
-        $ref: '#/definitions/SignedObject'
+        $ref: '#/definitions/[object Object]'
         description: A <code>SignedObject</code> structure that contains information about a signing job's signed code image.
       signingMaterial:
-        $ref: '#/definitions/SigningMaterial'
+        $ref: '#/definitions/[object Object]'
         description: A <code>SigningMaterial</code> object that contains the Amazon Resource Name (ARN) of the certificate used for the signing job.
       createdAt:
-        $ref: '#/definitions/CreatedAt'
+        $ref: '#/definitions/[object Object]'
         description: The date and time that the signing job was created.
       status:
-        $ref: '#/definitions/SigningStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status of the signing job.
     description: Contains information about a signing job.
+  SigningJobs:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  SigningMaterial:
+    type: object
+    required:
+      - certificateArn
+    properties:
+      certificateArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+    description: The ACM certificate that is used to sign your code.
   SigningParameterKey:
     type: string
   SigningParameterValue:
     type: string
+  SigningParameters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/SigningParameterKey'
+        value:
+          $ref: '#/definitions/SigningParameterValue'
   SigningPlatform:
     type: object
     properties:
       platformId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The ID of an AWS Signer platform.
       displayName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The display name of an AWS Signer platform.
       partner:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Any partner entities linked to an AWS Signer platform.
       target:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The types of targets that can be signed by an AWS Signer platform.
       category:
-        $ref: '#/definitions/Category'
+        $ref: '#/definitions/[object Object]'
         description: The category of an AWS Signer platform.
       signingConfiguration:
-        $ref: '#/definitions/SigningConfiguration'
+        $ref: '#/definitions/[object Object]'
         description: The configuration of an AWS Signer platform. This includes the designated hash algorithm and encryption algorithm of a signing platform.
       signingImageFormat:
-        $ref: '#/definitions/SigningImageFormat'
+        $ref: '#/definitions/[object Object]'
         description: The signing image format that is used by an AWS Signer platform.
       maxSizeInMB:
-        $ref: '#/definitions/MaxSizeInMB'
+        $ref: '#/definitions/[object Object]'
         description: The maximum size (in MB) of code that can be signed by a AWS Signer platform.
     description: Contains information about the signing configurations and parameters that is used to perform an AWS Signer job.
+  SigningPlatformOverrides:
+    type: object
+    properties:
+      signingConfiguration:
+        $ref: '#/definitions/[object Object]'
+    description: Any overrides that are applied to the signing configuration of an AWS Signer platform.
+  SigningPlatforms:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   SigningProfile:
     type: object
     properties:
       profileName:
-        $ref: '#/definitions/ProfileName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS Signer profile.
       signingMaterial:
-        $ref: '#/definitions/SigningMaterial'
+        $ref: '#/definitions/[object Object]'
         description: The ACM certificate that is available for use by a signing profile.
       platformId:
-        $ref: '#/definitions/PlatformId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of a platform that is available for use by a signing profile.
       signingParameters:
-        $ref: '#/definitions/SigningParameters'
+        $ref: '#/definitions/[object Object]'
         description: The parameters that are available for use by an AWS Signer user.
       status:
-        $ref: '#/definitions/SigningProfileStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status of an AWS Signer profile.
     description: Contains information about the ACM certificates and AWS Signer configuration parameters that can be used by a given AWS Signer user.
+  SigningProfileStatus:
+    type: string
+    enum:
+      - Active
+      - Canceled
+  SigningProfiles:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  SigningStatus:
+    type: string
+    enum:
+      - InProgress
+      - Failed
+      - Succeeded
+  Source:
+    type: object
+    properties:
+      s3:
+        $ref: '#/definitions/[object Object]'
+        description: The <code>S3Source</code> object.
+    description: An <code>S3Source</code> object that contains information about the S3 bucket where you saved your unsigned code.
+  StatusReason:
+    type: string
+  String:
+    type: string
+  Version:
+    type: string
+  bool:
+    type: boolean
+  string:
+    type: string

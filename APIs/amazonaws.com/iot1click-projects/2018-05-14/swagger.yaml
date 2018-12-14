@@ -131,16 +131,16 @@ paths:
           schema:
             $ref: '#/definitions/AssociateDeviceWithPlacementRequest'
         - name: projectName
-          in: path
           type: string
+          in: path
           required: true
         - name: placementName
-          in: path
           type: string
+          in: path
           required: true
         - name: deviceTemplateName
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -183,16 +183,16 @@ paths:
           schema:
             $ref: '#/definitions/DisassociateDeviceFromPlacementRequest'
         - name: projectName
-          in: path
           type: string
+          in: path
           required: true
         - name: placementName
-          in: path
           type: string
+          in: path
           required: true
         - name: deviceTemplateName
-          in: path
           type: string
+          in: path
           required: true
   '/projects/{projectName}/placements':
     post:
@@ -226,8 +226,8 @@ paths:
           schema:
             $ref: '#/definitions/CreatePlacementRequest'
         - name: projectName
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -266,8 +266,8 @@ paths:
           schema:
             $ref: '#/definitions/ListPlacementsRequest'
         - name: projectName
-          in: path
           type: string
+          in: path
           required: true
   /projects:
     post:
@@ -360,12 +360,12 @@ paths:
           schema:
             $ref: '#/definitions/DeletePlacementRequest'
         - name: projectName
-          in: path
           type: string
+          in: path
           required: true
         - name: placementName
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -404,12 +404,12 @@ paths:
           schema:
             $ref: '#/definitions/DescribePlacementRequest'
         - name: projectName
-          in: path
           type: string
+          in: path
           required: true
         - name: placementName
-          in: path
           type: string
+          in: path
           required: true
     put:
       operationId: UpdatePlacement
@@ -442,12 +442,12 @@ paths:
           schema:
             $ref: '#/definitions/UpdatePlacementRequest'
         - name: projectName
-          in: path
           type: string
+          in: path
           required: true
         - name: placementName
-          in: path
           type: string
+          in: path
           required: true
   '/projects/{projectName}':
     delete:
@@ -481,8 +481,8 @@ paths:
           schema:
             $ref: '#/definitions/DeleteProjectRequest'
         - name: projectName
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -521,8 +521,8 @@ paths:
           schema:
             $ref: '#/definitions/DescribeProjectRequest'
         - name: projectName
-          in: path
           type: string
+          in: path
           required: true
     put:
       operationId: UpdateProject
@@ -555,8 +555,8 @@ paths:
           schema:
             $ref: '#/definitions/UpdateProjectRequest'
         - name: projectName
-          in: path
           type: string
+          in: path
           required: true
   '/projects/{projectName}/placements/{placementName}/devices':
     get:
@@ -586,12 +586,12 @@ paths:
           schema:
             $ref: '#/definitions/GetDevicesInPlacementRequest'
         - name: projectName
-          in: path
           type: string
+          in: path
           required: true
         - name: placementName
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -613,7 +613,7 @@ definitions:
       - deviceId
     properties:
       deviceId:
-        $ref: '#/definitions/DeviceId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the physical device to be associated with the given placement in the project. Note that a mandatory 4 character prefix is required for all <code>deviceId</code> values.
   InternalFailureException:
     type: object
@@ -622,9 +622,9 @@ definitions:
       - message
     properties:
       code:
-        $ref: '#/definitions/Code'
+        $ref: '#/definitions/[object Object]'
       message:
-        $ref: '#/definitions/Message'
+        $ref: '#/definitions/[object Object]'
     description: <p/>
   InvalidRequestException:
     type: object
@@ -633,9 +633,9 @@ definitions:
       - message
     properties:
       code:
-        $ref: '#/definitions/Code'
+        $ref: '#/definitions/[object Object]'
       message:
-        $ref: '#/definitions/Message'
+        $ref: '#/definitions/[object Object]'
     description: <p/>
   ResourceConflictException:
     type: object
@@ -644,9 +644,9 @@ definitions:
       - message
     properties:
       code:
-        $ref: '#/definitions/Code'
+        $ref: '#/definitions/[object Object]'
       message:
-        $ref: '#/definitions/Message'
+        $ref: '#/definitions/[object Object]'
     description: <p/>
   ResourceNotFoundException:
     type: object
@@ -655,9 +655,9 @@ definitions:
       - message
     properties:
       code:
-        $ref: '#/definitions/Code'
+        $ref: '#/definitions/[object Object]'
       message:
-        $ref: '#/definitions/Message'
+        $ref: '#/definitions/[object Object]'
     description: <p/>
   CreatePlacementResponse:
     type: object
@@ -668,10 +668,10 @@ definitions:
       - placementName
     properties:
       placementName:
-        $ref: '#/definitions/PlacementName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the placement to be created.
       attributes:
-        $ref: '#/definitions/PlacementAttributeMap'
+        $ref: '#/definitions/[object Object]'
         description: Optional user-defined key/value pairs providing contextual data (such as location or function) for the placement.
   CreateProjectResponse:
     type: object
@@ -682,13 +682,13 @@ definitions:
       - projectName
     properties:
       projectName:
-        $ref: '#/definitions/ProjectName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the project to create.
       description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: An optional description for the project.
       placementTemplate:
-        $ref: '#/definitions/PlacementTemplate'
+        $ref: '#/definitions/[object Object]'
         description: 'The schema defining the placement to be created. A placement template defines placement default attributes and device templates. You cannot add or remove device templates after the project has been created. However, you can update <code>callbackOverrides</code> for the device templates using the <code>UpdateProject</code> API.'
   DeletePlacementResponse:
     type: object
@@ -703,9 +703,9 @@ definitions:
       - message
     properties:
       code:
-        $ref: '#/definitions/Code'
+        $ref: '#/definitions/[object Object]'
       message:
-        $ref: '#/definitions/Message'
+        $ref: '#/definitions/[object Object]'
     description: <p/>
   DeleteProjectResponse:
     type: object
@@ -719,7 +719,7 @@ definitions:
       - placement
     properties:
       placement:
-        $ref: '#/definitions/PlacementDescription'
+        $ref: '#/definitions/[object Object]'
         description: An object describing the placement.
   DescribePlacementRequest:
     type: object
@@ -730,7 +730,7 @@ definitions:
       - project
     properties:
       project:
-        $ref: '#/definitions/ProjectDescription'
+        $ref: '#/definitions/[object Object]'
         description: An object describing the project.
   DescribeProjectRequest:
     type: object
@@ -747,7 +747,7 @@ definitions:
       - devices
     properties:
       devices:
-        $ref: '#/definitions/DeviceMap'
+        $ref: '#/definitions/[object Object]'
         description: An object containing the devices (zero or more) within the placement.
   GetDevicesInPlacementRequest:
     type: object
@@ -758,10 +758,10 @@ definitions:
       - placements
     properties:
       placements:
-        $ref: '#/definitions/PlacementSummaryList'
+        $ref: '#/definitions/[object Object]'
         description: An object listing the requested placements.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token used to retrieve the next set of results - will be effectively empty if there are no further results.
   ListPlacementsRequest:
     type: object
@@ -772,10 +772,10 @@ definitions:
       - projects
     properties:
       projects:
-        $ref: '#/definitions/ProjectSummaryList'
+        $ref: '#/definitions/[object Object]'
         description: An object containing the list of projects.
       nextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: The token used to retrieve the next set of results - will be effectively empty if there are no further results.
   ListProjectsRequest:
     type: object
@@ -787,7 +787,7 @@ definitions:
     type: object
     properties:
       attributes:
-        $ref: '#/definitions/PlacementAttributeMap'
+        $ref: '#/definitions/[object Object]'
         description: The user-defined object of attributes used to update the placement. The maximum number of key/value pairs is 50.
   UpdateProjectResponse:
     type: object
@@ -796,30 +796,12 @@ definitions:
     type: object
     properties:
       description:
-        $ref: '#/definitions/Description'
+        $ref: '#/definitions/[object Object]'
         description: An optional user-defined description for the project.
       placementTemplate:
-        $ref: '#/definitions/PlacementTemplate'
+        $ref: '#/definitions/[object Object]'
         description: 'An object defining the project update. Once a project has been created, you cannot add device template names to the project. However, for a given <code>placementTemplate</code>, you can update the associated <code>callbackOverrides</code> for the device definition using this API.'
-  ProjectName:
-    type: string
-    pattern: '^[0-9A-Za-z_-]+$'
-    minLength: 1
-    maxLength: 128
-  PlacementName:
-    type: string
-    pattern: '^[a-zA-Z0-9_-]+$'
-    minLength: 1
-    maxLength: 128
-  DeviceId:
-    type: string
-    minLength: 1
-    maxLength: 32
-  DeviceTemplateName:
-    type: string
-    pattern: '^[a-zA-Z0-9_-]+$'
-    minLength: 1
-    maxLength: 128
+  '[object Object]': {}
   AttributeDefaultValue:
     type: string
     maxLength: 800
@@ -832,29 +814,6 @@ definitions:
     maxLength: 800
   Code:
     type: string
-  PlacementAttributeMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeValue'
-  Description:
-    type: string
-    minLength: 0
-    maxLength: 500
-  PlacementTemplate:
-    type: object
-    properties:
-      defaultAttributes:
-        $ref: '#/definitions/DefaultPlacementAttributeMap'
-        description: The default attributes (key/value pairs) to be applied to all placements using this template.
-      deviceTemplates:
-        $ref: '#/definitions/DeviceTemplateMap'
-        description: An object specifying the <a>DeviceTemplate</a> for all placements using this (<a>PlacementTemplate</a>) template.
-    description: An object defining the template for a placement.
   DefaultPlacementAttributeMap:
     type: array
     items:
@@ -864,54 +823,10 @@ definitions:
           $ref: '#/definitions/AttributeName'
         value:
           $ref: '#/definitions/AttributeDefaultValue'
-  PlacementDescription:
-    type: object
-    required:
-      - projectName
-      - placementName
-      - attributes
-      - createdDate
-      - updatedDate
-    properties:
-      projectName:
-        $ref: '#/definitions/ProjectName'
-        description: The name of the project containing the placement.
-      placementName:
-        $ref: '#/definitions/PlacementName'
-        description: The name of the placement.
-      attributes:
-        $ref: '#/definitions/PlacementAttributeMap'
-        description: The user-defined attributes associated with the placement.
-      createdDate:
-        $ref: '#/definitions/Time'
-        description: 'The date when the placement was initially created, in UNIX epoch time format.'
-      updatedDate:
-        $ref: '#/definitions/Time'
-        description: 'The date when the placement was last updated, in UNIX epoch time format. If the placement was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
-    description: An object describing a project's placement.
-  ProjectDescription:
-    type: object
-    required:
-      - projectName
-      - createdDate
-      - updatedDate
-    properties:
-      projectName:
-        $ref: '#/definitions/ProjectName'
-        description: The name of the project for which to obtain information from.
-      description:
-        $ref: '#/definitions/Description'
-        description: The description of the project.
-      createdDate:
-        $ref: '#/definitions/Time'
-        description: 'The date when the project was originally created, in UNIX epoch time format.'
-      updatedDate:
-        $ref: '#/definitions/Time'
-        description: 'The date when the project was last updated, in UNIX epoch time format. If the project was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
-      placementTemplate:
-        $ref: '#/definitions/PlacementTemplate'
-        description: An object describing the project's placement specifications.
-    description: An object providing detailed information for a particular project associated with an AWS account and region.
+  Description:
+    type: string
+    minLength: 0
+    maxLength: 500
   DeviceCallbackKey:
     type: string
     minLength: 1
@@ -928,6 +843,15 @@ definitions:
           $ref: '#/definitions/DeviceCallbackKey'
         value:
           $ref: '#/definitions/DeviceCallbackValue'
+  DeviceId:
+    type: string
+    minLength: 1
+    maxLength: 32
+  DeviceTemplateName:
+    type: string
+    pattern: '^[a-zA-Z0-9_-]+$'
+    minLength: 1
+    maxLength: 128
   DeviceMap:
     type: array
     items:
@@ -937,17 +861,14 @@ definitions:
           $ref: '#/definitions/DeviceTemplateName'
         value:
           $ref: '#/definitions/DeviceId'
-  DeviceType:
-    type: string
-    maxLength: 128
   DeviceTemplate:
     type: object
     properties:
       deviceType:
-        $ref: '#/definitions/DeviceType'
+        $ref: '#/definitions/[object Object]'
         description: 'The device type, which currently must be <code>"button"</code>.'
       callbackOverrides:
-        $ref: '#/definitions/DeviceCallbackOverrideMap'
+        $ref: '#/definitions/[object Object]'
         description: An optional Lambda function to invoke instead of the default Lambda function provided by the placement template.
     description: An object representing a device for a placement template (see <a>PlacementTemplate</a>).
   DeviceTemplateMap:
@@ -959,27 +880,58 @@ definitions:
           $ref: '#/definitions/DeviceTemplateName'
         value:
           $ref: '#/definitions/DeviceTemplate'
+  DeviceType:
+    type: string
+    maxLength: 128
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 250
   Message:
     type: string
   NextToken:
     type: string
     minLength: 1
     maxLength: 1024
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 250
-  PlacementSummaryList:
+  PlacementAttributeMap:
     type: array
     items:
-      $ref: '#/definitions/PlacementSummary'
-  ProjectSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/ProjectSummary'
-  Time:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeName'
+        value:
+          $ref: '#/definitions/AttributeValue'
+  PlacementDescription:
+    type: object
+    required:
+      - projectName
+      - placementName
+      - attributes
+      - createdDate
+      - updatedDate
+    properties:
+      projectName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the project containing the placement.
+      placementName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the placement.
+      attributes:
+        $ref: '#/definitions/[object Object]'
+        description: The user-defined attributes associated with the placement.
+      createdDate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date when the placement was initially created, in UNIX epoch time format.'
+      updatedDate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date when the placement was last updated, in UNIX epoch time format. If the placement was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
+    description: An object describing a project's placement.
+  PlacementName:
     type: string
-    format: date-time
+    pattern: '^[a-zA-Z0-9_-]+$'
+    minLength: 1
+    maxLength: 128
   PlacementSummary:
     type: object
     required:
@@ -989,18 +941,60 @@ definitions:
       - updatedDate
     properties:
       projectName:
-        $ref: '#/definitions/ProjectName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the project containing the placement.
       placementName:
-        $ref: '#/definitions/PlacementName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the placement being summarized.
       createdDate:
-        $ref: '#/definitions/Time'
+        $ref: '#/definitions/[object Object]'
         description: 'The date when the placement was originally created, in UNIX epoch time format.'
       updatedDate:
-        $ref: '#/definitions/Time'
+        $ref: '#/definitions/[object Object]'
         description: 'The date when the placement was last updated, in UNIX epoch time format. If the placement was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
     description: An object providing summary information for a particular placement.
+  PlacementSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  PlacementTemplate:
+    type: object
+    properties:
+      defaultAttributes:
+        $ref: '#/definitions/[object Object]'
+        description: The default attributes (key/value pairs) to be applied to all placements using this template.
+      deviceTemplates:
+        $ref: '#/definitions/[object Object]'
+        description: An object specifying the <a>DeviceTemplate</a> for all placements using this (<a>PlacementTemplate</a>) template.
+    description: An object defining the template for a placement.
+  ProjectDescription:
+    type: object
+    required:
+      - projectName
+      - createdDate
+      - updatedDate
+    properties:
+      projectName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the project for which to obtain information from.
+      description:
+        $ref: '#/definitions/[object Object]'
+        description: The description of the project.
+      createdDate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date when the project was originally created, in UNIX epoch time format.'
+      updatedDate:
+        $ref: '#/definitions/[object Object]'
+        description: 'The date when the project was last updated, in UNIX epoch time format. If the project was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
+      placementTemplate:
+        $ref: '#/definitions/[object Object]'
+        description: An object describing the project's placement specifications.
+    description: An object providing detailed information for a particular project associated with an AWS account and region.
+  ProjectName:
+    type: string
+    pattern: '^[0-9A-Za-z_-]+$'
+    minLength: 1
+    maxLength: 128
   ProjectSummary:
     type: object
     required:
@@ -1009,12 +1003,19 @@ definitions:
       - updatedDate
     properties:
       projectName:
-        $ref: '#/definitions/ProjectName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the project being summarized.
       createdDate:
-        $ref: '#/definitions/Time'
+        $ref: '#/definitions/[object Object]'
         description: 'The date when the project was originally created, in UNIX epoch time format.'
       updatedDate:
-        $ref: '#/definitions/Time'
+        $ref: '#/definitions/[object Object]'
         description: 'The date when the project was last updated, in UNIX epoch time format. If the project was not updated, then <code>createdDate</code> and <code>updatedDate</code> are the same.'
     description: An object providing summary information for a particular project for an associated AWS account and region.
+  ProjectSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  Time:
+    type: string
+    format: date-time

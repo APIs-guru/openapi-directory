@@ -142,8 +142,8 @@ paths:
           schema:
             $ref: '#/definitions/AddFlowOutputsRequest'
         - name: flowArn
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -284,8 +284,8 @@ paths:
           schema:
             $ref: '#/definitions/DeleteFlowRequest'
         - name: flowArn
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -336,8 +336,8 @@ paths:
           schema:
             $ref: '#/definitions/DescribeFlowRequest'
         - name: flowArn
-          in: path
           type: string
+          in: path
           required: true
   '/v1/flows/{flowArn}/entitlements':
     post:
@@ -383,8 +383,8 @@ paths:
           schema:
             $ref: '#/definitions/GrantFlowEntitlementsRequest'
         - name: flowArn
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -477,12 +477,12 @@ paths:
           schema:
             $ref: '#/definitions/RemoveFlowOutputRequest'
         - name: flowArn
-          in: path
           type: string
+          in: path
           required: true
         - name: outputArn
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -533,12 +533,12 @@ paths:
           schema:
             $ref: '#/definitions/UpdateFlowOutputRequest'
         - name: flowArn
-          in: path
           type: string
+          in: path
           required: true
         - name: outputArn
-          in: path
           type: string
+          in: path
           required: true
   '/v1/flows/{flowArn}/entitlements/{entitlementArn}':
     delete:
@@ -580,12 +580,12 @@ paths:
           schema:
             $ref: '#/definitions/RevokeFlowEntitlementRequest'
         - name: flowArn
-          in: path
           type: string
+          in: path
           required: true
         - name: entitlementArn
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -636,12 +636,12 @@ paths:
           schema:
             $ref: '#/definitions/UpdateFlowEntitlementRequest'
         - name: flowArn
-          in: path
           type: string
+          in: path
           required: true
         - name: entitlementArn
-          in: path
           type: string
+          in: path
           required: true
   '/v1/flows/start/{flowArn}':
     post:
@@ -683,8 +683,8 @@ paths:
           schema:
             $ref: '#/definitions/StartFlowRequest'
         - name: flowArn
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -736,8 +736,8 @@ paths:
           schema:
             $ref: '#/definitions/StopFlowRequest'
         - name: flowArn
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -789,12 +789,12 @@ paths:
           schema:
             $ref: '#/definitions/UpdateFlowSourceRequest'
         - name: flowArn
-          in: path
           type: string
+          in: path
           required: true
         - name: sourceArn
-          in: path
           type: string
+          in: path
           required: true
     parameters:
       - $ref: '#/parameters/Action'
@@ -811,10 +811,10 @@ definitions:
     type: object
     properties:
       FlowArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the flow that these outputs were added to.
       Outputs:
-        $ref: '#/definitions/__listOfOutput'
+        $ref: '#/definitions/[object Object]'
         description: The details of the newly added outputs.
   AddFlowOutputsRequest:
     type: object
@@ -822,7 +822,7 @@ definitions:
       - Outputs
     properties:
       Outputs:
-        $ref: '#/definitions/__listOfAddOutputRequest'
+        $ref: '#/definitions/[object Object]'
         description: A list of outputs that you want to add.
     description: A request to add outputs to the specified flow.
   AddFlowOutputs420Exception: {}
@@ -836,7 +836,7 @@ definitions:
     type: object
     properties:
       Flow:
-        $ref: '#/definitions/Flow'
+        $ref: '#/definitions/[object Object]'
   CreateFlowRequest:
     type: object
     required:
@@ -844,29 +844,29 @@ definitions:
       - Name
     properties:
       AvailabilityZone:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS Region.
       Entitlements:
-        $ref: '#/definitions/__listOfGrantEntitlementRequest'
+        $ref: '#/definitions/[object Object]'
         description: The entitlements that you want to grant on a flow.
       Name:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The name of the flow.
       Outputs:
-        $ref: '#/definitions/__listOfAddOutputRequest'
+        $ref: '#/definitions/[object Object]'
         description: The outputs that you want to add to this flow.
       Source:
-        $ref: '#/definitions/SetSourceRequest'
+        $ref: '#/definitions/[object Object]'
     description: Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
   CreateFlow420Exception: {}
   DeleteFlowResponse:
     type: object
     properties:
       FlowArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the flow that was deleted.
       Status:
-        $ref: '#/definitions/Status'
+        $ref: '#/definitions/[object Object]'
         description: The status of the flow when the DeleteFlow process begins.
   DeleteFlowRequest:
     type: object
@@ -875,9 +875,9 @@ definitions:
     type: object
     properties:
       Flow:
-        $ref: '#/definitions/Flow'
+        $ref: '#/definitions/[object Object]'
       Messages:
-        $ref: '#/definitions/Messages'
+        $ref: '#/definitions/[object Object]'
   DescribeFlowRequest:
     type: object
     properties: {}
@@ -885,10 +885,10 @@ definitions:
     type: object
     properties:
       Entitlements:
-        $ref: '#/definitions/__listOfEntitlement'
+        $ref: '#/definitions/[object Object]'
         description: The entitlements that were just granted.
       FlowArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the flow that these entitlements were granted to.
   GrantFlowEntitlementsRequest:
     type: object
@@ -896,7 +896,7 @@ definitions:
       - Entitlements
     properties:
       Entitlements:
-        $ref: '#/definitions/__listOfGrantEntitlementRequest'
+        $ref: '#/definitions/[object Object]'
         description: The list of entitlements that you want to grant.
     description: A request to grant entitlements on a flow.
   GrantFlowEntitlements420Exception: {}
@@ -904,10 +904,10 @@ definitions:
     type: object
     properties:
       Entitlements:
-        $ref: '#/definitions/__listOfListedEntitlement'
+        $ref: '#/definitions/[object Object]'
         description: A list of entitlements that have been granted to you from other AWS accounts.
       NextToken:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListEntitlements request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListEntitlements request a second time and specify the NextToken value.'
   ListEntitlementsRequest:
     type: object
@@ -916,10 +916,10 @@ definitions:
     type: object
     properties:
       Flows:
-        $ref: '#/definitions/__listOfListedFlow'
+        $ref: '#/definitions/[object Object]'
         description: A list of flow summaries.
       NextToken:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value.'
   ListFlowsRequest:
     type: object
@@ -928,10 +928,10 @@ definitions:
     type: object
     properties:
       FlowArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the flow that is associated with the output you removed.
       OutputArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the output that was removed.
   RemoveFlowOutputRequest:
     type: object
@@ -940,10 +940,10 @@ definitions:
     type: object
     properties:
       EntitlementArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the entitlement that was revoked.
       FlowArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the flow that the entitlement was revoked from.
   RevokeFlowEntitlementRequest:
     type: object
@@ -952,10 +952,10 @@ definitions:
     type: object
     properties:
       FlowArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the flow that you started.
       Status:
-        $ref: '#/definitions/Status'
+        $ref: '#/definitions/[object Object]'
         description: The status of the flow when the StartFlow process begins.
   StartFlowRequest:
     type: object
@@ -964,10 +964,10 @@ definitions:
     type: object
     properties:
       FlowArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the flow that you stopped.
       Status:
-        $ref: '#/definitions/Status'
+        $ref: '#/definitions/[object Object]'
         description: The status of the flow when the StopFlow process begins.
   StopFlowRequest:
     type: object
@@ -976,137 +976,100 @@ definitions:
     type: object
     properties:
       Entitlement:
-        $ref: '#/definitions/Entitlement'
+        $ref: '#/definitions/[object Object]'
       FlowArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the flow that this entitlement was granted on.
   UpdateFlowEntitlementRequest:
     type: object
     properties:
       Description:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: A description of the entitlement. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the subscriber or end user.
       Encryption:
-        $ref: '#/definitions/UpdateEncryption'
+        $ref: '#/definitions/[object Object]'
         description: The type of encryption that will be used on the output associated with this entitlement.
       Subscribers:
-        $ref: '#/definitions/__listOf__string'
+        $ref: '#/definitions/[object Object]'
         description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
     description: The entitlement fields that you want to update.
   UpdateFlowOutputResponse:
     type: object
     properties:
       FlowArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the flow that is associated with the updated output.
       Output:
-        $ref: '#/definitions/Output'
+        $ref: '#/definitions/[object Object]'
   UpdateFlowOutputRequest:
     type: object
     properties:
       Description:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.
       Destination:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The IP address where you want to send the output.
       Encryption:
-        $ref: '#/definitions/UpdateEncryption'
+        $ref: '#/definitions/[object Object]'
         description: 'The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
       MaxLatency:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/[object Object]'
         description: The maximum latency in milliseconds for Zixi-based streams.
       Port:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/[object Object]'
         description: The port to use when content is distributed to this output.
       Protocol:
-        $ref: '#/definitions/Protocol'
+        $ref: '#/definitions/[object Object]'
         description: The protocol to use for the output.
       SmoothingLatency:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/[object Object]'
         description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
       StreamId:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
     description: The fields that you want to update in the output.
   UpdateFlowSourceResponse:
     type: object
     properties:
       FlowArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the flow that you want to update.
       Source:
-        $ref: '#/definitions/Source'
+        $ref: '#/definitions/[object Object]'
         description: The settings for the source of the flow.
   UpdateFlowSourceRequest:
     type: object
     properties:
       Decryption:
-        $ref: '#/definitions/UpdateEncryption'
+        $ref: '#/definitions/[object Object]'
         description: The type of encryption used on the content ingested from this source.
       Description:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
       EntitlementArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
       IngestPort:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/[object Object]'
         description: The port that the flow will be listening on for incoming content.
       MaxBitrate:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/[object Object]'
         description: The smoothing max bitrate for RTP and RTP-FEC streams.
       MaxLatency:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/[object Object]'
         description: The maximum latency in milliseconds for Zixi-based streams.
       Protocol:
-        $ref: '#/definitions/Protocol'
+        $ref: '#/definitions/[object Object]'
         description: The protocol that is used by the source.
       StreamId:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
       WhitelistCidr:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
     description: A request to update the source of a flow.
-  __string:
-    type: string
-  __listOfAddOutputRequest:
-    type: array
-    items:
-      $ref: '#/definitions/AddOutputRequest'
-  __listOfOutput:
-    type: array
-    items:
-      $ref: '#/definitions/Output'
-  Encryption:
-    type: object
-    required:
-      - SecretArn
-      - Algorithm
-      - RoleArn
-    properties:
-      Algorithm:
-        $ref: '#/definitions/Algorithm'
-        description: 'The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).'
-      KeyType:
-        $ref: '#/definitions/KeyType'
-        description: 'The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
-      RoleArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
-      SecretArn:
-        $ref: '#/definitions/__string'
-        description: The ARN that was assigned to the secret that you created in AWS Secrets Manager to store the encryption key.
-    description: Information about the encryption of the flow.
-  __integer:
-    type: integer
-  Protocol:
-    type: string
-    enum:
-      - zixi-push
-      - rtp-fec
-      - rtp
+  '[object Object]': {}
   AddOutputRequest:
     type: object
     required:
@@ -1115,31 +1078,31 @@ definitions:
       - Protocol
     properties:
       Description:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: A description of the output. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the end user.
       Destination:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The IP address from which video will be sent to output destinations.
       Encryption:
-        $ref: '#/definitions/Encryption'
+        $ref: '#/definitions/[object Object]'
         description: 'The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
       MaxLatency:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/[object Object]'
         description: The maximum latency in milliseconds for Zixi-based streams.
       Name:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The name of the output. This value must be unique within the current flow.
       Port:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/[object Object]'
         description: The port to use when content is distributed to this output.
       Protocol:
-        $ref: '#/definitions/Protocol'
+        $ref: '#/definitions/[object Object]'
         description: The protocol to use for the output.
       SmoothingLatency:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/[object Object]'
         description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
       StreamId:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
     description: The output that you want to add to this flow.
   Algorithm:
@@ -1148,44 +1111,49 @@ definitions:
       - aes128
       - aes192
       - aes256
-  __listOfGrantEntitlementRequest:
-    type: array
-    items:
-      $ref: '#/definitions/GrantEntitlementRequest'
-  SetSourceRequest:
+  Encryption:
     type: object
+    required:
+      - SecretArn
+      - Algorithm
+      - RoleArn
     properties:
-      Decryption:
-        $ref: '#/definitions/Encryption'
-        description: The type of encryption that is used on the content ingested from this source.
+      Algorithm:
+        $ref: '#/definitions/[object Object]'
+        description: 'The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).'
+      KeyType:
+        $ref: '#/definitions/[object Object]'
+        description: 'The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
+      RoleArn:
+        $ref: '#/definitions/[object Object]'
+        description: The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
+      SecretArn:
+        $ref: '#/definitions/[object Object]'
+        description: The ARN that was assigned to the secret that you created in AWS Secrets Manager to store the encryption key.
+    description: Information about the encryption of the flow.
+  Entitlement:
+    type: object
+    required:
+      - EntitlementArn
+      - Subscribers
+      - Name
+    properties:
       Description:
-        $ref: '#/definitions/__string'
-        description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
+        $ref: '#/definitions/[object Object]'
+        description: A description of the entitlement.
+      Encryption:
+        $ref: '#/definitions/[object Object]'
+        description: The type of encryption that will be used on the output that is associated with this entitlement.
       EntitlementArn:
-        $ref: '#/definitions/__string'
-        description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
-      IngestPort:
-        $ref: '#/definitions/__integer'
-        description: The port that the flow will be listening on for incoming content.
-      MaxBitrate:
-        $ref: '#/definitions/__integer'
-        description: The smoothing max bitrate for RTP and RTP-FEC streams.
-      MaxLatency:
-        $ref: '#/definitions/__integer'
-        description: The maximum latency in milliseconds for Zixi-based streams.
+        $ref: '#/definitions/[object Object]'
+        description: The ARN of the entitlement.
       Name:
-        $ref: '#/definitions/__string'
-        description: The name of the source.
-      Protocol:
-        $ref: '#/definitions/Protocol'
-        description: The protocol that is used by the source.
-      StreamId:
-        $ref: '#/definitions/__string'
-        description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
-      WhitelistCidr:
-        $ref: '#/definitions/__string'
-        description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
-    description: The settings for the source of the flow.
+        $ref: '#/definitions/[object Object]'
+        description: The name of the entitlement.
+      Subscribers:
+        $ref: '#/definitions/[object Object]'
+        description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
+    description: The settings for a flow entitlement.
   Flow:
     type: object
     required:
@@ -1198,150 +1166,54 @@ definitions:
       - Name
     properties:
       AvailabilityZone:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
       Description:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: A description of the flow. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
       EgressIp:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The IP address from which video will be sent to output destinations.
       Entitlements:
-        $ref: '#/definitions/__listOfEntitlement'
+        $ref: '#/definitions/[object Object]'
         description: The entitlements in this flow.
       FlowArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: 'The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.'
       Name:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The name of the flow.
       Outputs:
-        $ref: '#/definitions/__listOfOutput'
+        $ref: '#/definitions/[object Object]'
         description: The outputs in this flow.
       Source:
-        $ref: '#/definitions/Source'
+        $ref: '#/definitions/[object Object]'
       Status:
-        $ref: '#/definitions/Status'
+        $ref: '#/definitions/[object Object]'
         description: The current status of the flow.
     description: 'The settings for a flow, including its source, outputs, and entitlements.'
-  Status:
-    type: string
-    enum:
-      - STANDBY
-      - ACTIVE
-      - UPDATING
-      - DELETING
-      - STARTING
-      - STOPPING
-      - ERROR
-  Messages:
-    type: object
-    required:
-      - Errors
-    properties:
-      Errors:
-        $ref: '#/definitions/__listOf__string'
-        description: A list of errors that might have been generated from processes on this flow.
-    description: Messages that provide the state of the flow.
-  KeyType:
-    type: string
-    enum:
-      - static-key
-  __listOf__string:
-    type: array
-    items:
-      $ref: '#/definitions/__string'
-  Entitlement:
-    type: object
-    required:
-      - EntitlementArn
-      - Subscribers
-      - Name
-    properties:
-      Description:
-        $ref: '#/definitions/__string'
-        description: A description of the entitlement.
-      Encryption:
-        $ref: '#/definitions/Encryption'
-        description: The type of encryption that will be used on the output that is associated with this entitlement.
-      EntitlementArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the entitlement.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the entitlement.
-      Subscribers:
-        $ref: '#/definitions/__listOf__string'
-        description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
-    description: The settings for a flow entitlement.
-  __listOfEntitlement:
-    type: array
-    items:
-      $ref: '#/definitions/Entitlement'
-  Source:
-    type: object
-    required:
-      - SourceArn
-      - Name
-    properties:
-      Decryption:
-        $ref: '#/definitions/Encryption'
-        description: The type of encryption that is used on the content ingested from this source.
-      Description:
-        $ref: '#/definitions/__string'
-        description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
-      EntitlementArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.
-      IngestIp:
-        $ref: '#/definitions/__string'
-        description: The IP address that the flow will be listening on for incoming content.
-      IngestPort:
-        $ref: '#/definitions/__integer'
-        description: The port that the flow will be listening on for incoming content.
-      Name:
-        $ref: '#/definitions/__string'
-        description: The name of the source.
-      SourceArn:
-        $ref: '#/definitions/__string'
-        description: The ARN of the source.
-      Transport:
-        $ref: '#/definitions/Transport'
-        description: Attributes related to the transport stream that are used in the source.
-      WhitelistCidr:
-        $ref: '#/definitions/__string'
-        description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
-    description: The settings for the source of the flow.
   GrantEntitlementRequest:
     type: object
     required:
       - Subscribers
     properties:
       Description:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: A description of the entitlement. This description appears only on the AWS Elemental MediaConnect console and will not be seen by the subscriber or end user.
       Encryption:
-        $ref: '#/definitions/Encryption'
+        $ref: '#/definitions/[object Object]'
         description: The type of encryption that will be used on the output that is associated with this entitlement.
       Name:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The name of the entitlement. This value must be unique within the current flow.
       Subscribers:
-        $ref: '#/definitions/__listOf__string'
+        $ref: '#/definitions/[object Object]'
         description: The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flows using your content as the source.
     description: The entitlements that you want to grant on a flow.
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  __listOfListedEntitlement:
-    type: array
-    items:
-      $ref: '#/definitions/ListedEntitlement'
-  __listOfListedFlow:
-    type: array
-    items:
-      $ref: '#/definitions/ListedFlow'
+  KeyType:
+    type: string
+    enum:
+      - static-key
   ListedEntitlement:
     type: object
     required:
@@ -1349,17 +1221,12 @@ definitions:
       - EntitlementName
     properties:
       EntitlementArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the entitlement.
       EntitlementName:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The name of the entitlement.
     description: An entitlement that has been granted to you from other AWS accounts.
-  SourceType:
-    type: string
-    enum:
-      - OWNED
-      - ENTITLED
   ListedFlow:
     type: object
     required:
@@ -1371,45 +1238,37 @@ definitions:
       - Name
     properties:
       AvailabilityZone:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The Availability Zone that the flow was created in.
       Description:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: A description of the flow.
       FlowArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the flow.
       Name:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The name of the flow.
       SourceType:
-        $ref: '#/definitions/SourceType'
+        $ref: '#/definitions/[object Object]'
         description: The type of source. This value is either owned (originated somewhere other than an AWS Elemental MediaConnect flow owned by another AWS account) or entitled (originated at an AWS Elemental MediaConnect flow owned by another AWS account).
       Status:
-        $ref: '#/definitions/Status'
+        $ref: '#/definitions/[object Object]'
         description: The current status of the flow.
     description: 'Provides a summary of a flow, including its ARN, Availability Zone, and source type.'
-  Transport:
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  Messages:
     type: object
     required:
-      - Protocol
+      - Errors
     properties:
-      MaxBitrate:
-        $ref: '#/definitions/__integer'
-        description: The smoothing max bitrate for RTP and RTP-FEC streams.
-      MaxLatency:
-        $ref: '#/definitions/__integer'
-        description: The maximum latency in milliseconds for Zixi-based streams.
-      Protocol:
-        $ref: '#/definitions/Protocol'
-        description: The protocol that is used by the source or output.
-      SmoothingLatency:
-        $ref: '#/definitions/__integer'
-        description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
-      StreamId:
-        $ref: '#/definitions/__string'
-        description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
-    description: Attributes related to the transport stream that are used in a source or output.
+      Errors:
+        $ref: '#/definitions/[object Object]'
+        description: A list of errors that might have been generated from processes on this flow.
+    description: Messages that provide the state of the flow.
   Output:
     type: object
     required:
@@ -1417,46 +1276,188 @@ definitions:
       - Name
     properties:
       Description:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: A description of the output.
       Destination:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The address where you want to send the output.
       Encryption:
-        $ref: '#/definitions/Encryption'
+        $ref: '#/definitions/[object Object]'
         description: 'The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
       EntitlementArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the entitlement on the originator''s flow. This value is relevant only on entitled flows.
       MediaLiveInputArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant only for outputs that were added by creating a MediaLive input.
       Name:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The name of the output. This value must be unique within the current flow.
       OutputArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the output.
       Port:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/[object Object]'
         description: The port to use when content is distributed to this output.
       Transport:
-        $ref: '#/definitions/Transport'
+        $ref: '#/definitions/[object Object]'
         description: Attributes related to the transport stream that are used in the output.
     description: The settings for an output.
+  Protocol:
+    type: string
+    enum:
+      - zixi-push
+      - rtp-fec
+      - rtp
+  SetSourceRequest:
+    type: object
+    properties:
+      Decryption:
+        $ref: '#/definitions/[object Object]'
+        description: The type of encryption that is used on the content ingested from this source.
+      Description:
+        $ref: '#/definitions/[object Object]'
+        description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
+      EntitlementArn:
+        $ref: '#/definitions/[object Object]'
+        description: 'The ARN of the entitlement that allows you to subscribe to this flow. The entitlement is set by the flow originator, and the ARN is generated as part of the originator''s flow.'
+      IngestPort:
+        $ref: '#/definitions/[object Object]'
+        description: The port that the flow will be listening on for incoming content.
+      MaxBitrate:
+        $ref: '#/definitions/[object Object]'
+        description: The smoothing max bitrate for RTP and RTP-FEC streams.
+      MaxLatency:
+        $ref: '#/definitions/[object Object]'
+        description: The maximum latency in milliseconds for Zixi-based streams.
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the source.
+      Protocol:
+        $ref: '#/definitions/[object Object]'
+        description: The protocol that is used by the source.
+      StreamId:
+        $ref: '#/definitions/[object Object]'
+        description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+      WhitelistCidr:
+        $ref: '#/definitions/[object Object]'
+        description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+    description: The settings for the source of the flow.
+  Source:
+    type: object
+    required:
+      - SourceArn
+      - Name
+    properties:
+      Decryption:
+        $ref: '#/definitions/[object Object]'
+        description: The type of encryption that is used on the content ingested from this source.
+      Description:
+        $ref: '#/definitions/[object Object]'
+        description: A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
+      EntitlementArn:
+        $ref: '#/definitions/[object Object]'
+        description: The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.
+      IngestIp:
+        $ref: '#/definitions/[object Object]'
+        description: The IP address that the flow will be listening on for incoming content.
+      IngestPort:
+        $ref: '#/definitions/[object Object]'
+        description: The port that the flow will be listening on for incoming content.
+      Name:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the source.
+      SourceArn:
+        $ref: '#/definitions/[object Object]'
+        description: The ARN of the source.
+      Transport:
+        $ref: '#/definitions/[object Object]'
+        description: Attributes related to the transport stream that are used in the source.
+      WhitelistCidr:
+        $ref: '#/definitions/[object Object]'
+        description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
+    description: The settings for the source of the flow.
+  SourceType:
+    type: string
+    enum:
+      - OWNED
+      - ENTITLED
+  Status:
+    type: string
+    enum:
+      - STANDBY
+      - ACTIVE
+      - UPDATING
+      - DELETING
+      - STARTING
+      - STOPPING
+      - ERROR
+  Transport:
+    type: object
+    required:
+      - Protocol
+    properties:
+      MaxBitrate:
+        $ref: '#/definitions/[object Object]'
+        description: The smoothing max bitrate for RTP and RTP-FEC streams.
+      MaxLatency:
+        $ref: '#/definitions/[object Object]'
+        description: The maximum latency in milliseconds for Zixi-based streams.
+      Protocol:
+        $ref: '#/definitions/[object Object]'
+        description: The protocol that is used by the source or output.
+      SmoothingLatency:
+        $ref: '#/definitions/[object Object]'
+        description: The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+      StreamId:
+        $ref: '#/definitions/[object Object]'
+        description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+    description: Attributes related to the transport stream that are used in a source or output.
   UpdateEncryption:
     type: object
     properties:
       Algorithm:
-        $ref: '#/definitions/Algorithm'
+        $ref: '#/definitions/[object Object]'
         description: 'The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).'
       KeyType:
-        $ref: '#/definitions/KeyType'
+        $ref: '#/definitions/[object Object]'
         description: 'The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).'
       RoleArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
       SecretArn:
-        $ref: '#/definitions/__string'
+        $ref: '#/definitions/[object Object]'
         description: The ARN that was assigned to the secret that you created in AWS Secrets Manager to store the encryption key.
     description: Information about the encryption of the flow.
+  __integer:
+    type: integer
+  __listOfAddOutputRequest:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  __listOfEntitlement:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  __listOfGrantEntitlementRequest:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  __listOfListedEntitlement:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  __listOfListedFlow:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  __listOfOutput:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  __string:
+    type: string

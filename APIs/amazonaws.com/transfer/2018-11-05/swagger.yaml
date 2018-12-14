@@ -829,22 +829,22 @@ definitions:
       - ServerId
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: The service-assigned ID of the SFTP server that is created.
   CreateServerRequest:
     type: object
     properties:
       IdentityProviderDetails:
-        $ref: '#/definitions/IdentityProviderDetails'
+        $ref: '#/definitions/[object Object]'
         description: ' An array containing all of the information required to call a customer-supplied authentication API. This parameter is not required when the <code>IdentityProviderType</code> value of server that is created uses the <code>SERVICE_MANAGED</code> authentication method.'
       IdentityProviderType:
-        $ref: '#/definitions/IdentityProviderType'
+        $ref: '#/definitions/[object Object]'
         description: 'The mode of authentication enabled for this service. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access SFTP user credentials within the service. An <code>IdentityProviderType</code> value of <code>API_GATEWAY</code> indicates that user authentication requires a call to an API Gateway endpoint URL provided by you to integrate an identity provider of your choice.'
       LoggingRole:
-        $ref: '#/definitions/Role'
+        $ref: '#/definitions/[object Object]'
         description: A value that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
       Tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: Key-value pairs that can be used to group and search for servers.
   ServiceUnavailableException: {}
   InternalServiceError: {}
@@ -856,10 +856,10 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: The ID of the SFTP server that the user is attached to.
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: A unique string that identifies a user account associated with an SFTP server.
   CreateUserRequest:
     type: object
@@ -869,25 +869,25 @@ definitions:
       - UserName
     properties:
       HomeDirectory:
-        $ref: '#/definitions/HomeDirectory'
+        $ref: '#/definitions/[object Object]'
         description: The landing directory (folder) for a user when they log in to the server using their SFTP client. An example is <code>/home/<i>username</i> </code>.
       Policy:
-        $ref: '#/definitions/Policy'
+        $ref: '#/definitions/[object Object]'
         description: 'A scope-down policy for your user so you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.'
       Role:
-        $ref: '#/definitions/Role'
+        $ref: '#/definitions/[object Object]'
         description: The IAM role that controls your user’s access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the SFTP server to access your resources when servicing your SFTP user’s transfer requests.
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server instance. This is the specific SFTP server that you added your user to.
       SshPublicKeyBody:
-        $ref: '#/definitions/SshPublicKeyBody'
+        $ref: '#/definitions/[object Object]'
         description: The public portion of the Secure Shall (SSH) key used to authenticate the user to the SFTP server.
       Tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: Key-value pairs that can be used to group and search for users. Tags are metadata attached to users for any purpose.
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: A unique string that identifies a user and is associated with a server as specified by the <code>ServerId</code>.
   ResourceExistsException: {}
   ResourceNotFoundException: {}
@@ -897,7 +897,7 @@ definitions:
       - ServerId
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A unique system-assigned identifier for an SFTP server instance.
   DeleteSshPublicKeyRequest:
     type: object
@@ -907,13 +907,13 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for a Secure File Transfer Protocol (SFTP) server instance that has the user assigned to it.
       SshPublicKeyId:
-        $ref: '#/definitions/SshPublicKeyId'
+        $ref: '#/definitions/[object Object]'
         description: A unique identifier used to reference your user’s specific SSH key.
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: A unique string that identifies a user whose public key is being deleted.
   DeleteUserRequest:
     type: object
@@ -922,10 +922,10 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server instance that has the user assigned to it.
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: A unique string that identifies a user that is being deleted from the server.
   DescribeServerResponse:
     type: object
@@ -933,7 +933,7 @@ definitions:
       - Server
     properties:
       Server:
-        $ref: '#/definitions/DescribedServer'
+        $ref: '#/definitions/[object Object]'
         description: An array containing the properties of the server with the <code>ServerID</code> you specified.
   DescribeServerRequest:
     type: object
@@ -941,7 +941,7 @@ definitions:
       - ServerId
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server.
   DescribeUserResponse:
     type: object
@@ -950,10 +950,10 @@ definitions:
       - User
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server that has this user assigned.
       User:
-        $ref: '#/definitions/DescribedUser'
+        $ref: '#/definitions/[object Object]'
         description: An array containing the properties of the user account for the <code>ServerID</code> value that you specified.
   DescribeUserRequest:
     type: object
@@ -962,10 +962,10 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server that has this user assigned.
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the user assigned to one or more servers. User names are part of the sign-in credentials to use the AWS Transfer service and perform file transfer tasks.
   ImportSshPublicKeyResponse:
     type: object
@@ -975,13 +975,13 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server.
       SshPublicKeyId:
-        $ref: '#/definitions/SshPublicKeyId'
+        $ref: '#/definitions/[object Object]'
         description: This identifier is the name given to a public key by the system that was imported.
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: A user name assigned to the <code>ServerID</code> value that you specified.
     description: 'This response identifies the user, server they belong to, and the identifier of the SSH public key associated with that user. A user can have more than one key on each server that they are associate with.'
   ImportSshPublicKeyRequest:
@@ -992,13 +992,13 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server.
       SshPublicKeyBody:
-        $ref: '#/definitions/SshPublicKeyBody'
+        $ref: '#/definitions/[object Object]'
         description: The public key portion of an SSH key pair.
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: The name of the user account that is assigned to one or more servers.
   ListServersResponse:
     type: object
@@ -1006,31 +1006,31 @@ definitions:
       - Servers
     properties:
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'When you can get additional results from the <code>ListServers</code> operation, a <code>NextToken</code> parameter is returned in the output. In a following command, you can pass in the <code>NextToken</code> parameter to continue listing additional servers.'
       Servers:
-        $ref: '#/definitions/ListedServers'
+        $ref: '#/definitions/[object Object]'
         description: An array of servers that were listed.
   ListServersRequest:
     type: object
     properties:
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: Specifies the number of servers to return as a response to the <code>ListServers</code> query.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'When additional results are obtained from the ListServers command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional servers.'
   InvalidNextTokenException: {}
   ListTagsForResourceResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: This value is the ARN you specified to list the tags of.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
       Tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: 'Key-value pairs that are assigned to a resource, usually for the purpose of grouping and searching for items. Tags are metadata that you define that you can use for any purpose.'
   ListTagsForResourceRequest:
     type: object
@@ -1038,12 +1038,12 @@ definitions:
       - Arn
     properties:
       Arn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: 'Requests the tags associated with a particular Amazon Resource Name (ARN). An ARN is an identifier for a specific AWS resource, such as a server, user, or role.'
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
   ListUsersResponse:
     type: object
     required:
@@ -1051,13 +1051,13 @@ definitions:
       - Users
     properties:
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'When you can get additional results from the <code>ListUsers</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional users.'
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server that the users are assigned to.
       Users:
-        $ref: '#/definitions/ListedUsers'
+        $ref: '#/definitions/[object Object]'
         description: Returns the user accounts and their properties for the <code>ServerId</code> value that you specify.
   ListUsersRequest:
     type: object
@@ -1065,13 +1065,13 @@ definitions:
       - ServerId
     properties:
       MaxResults:
-        $ref: '#/definitions/MaxResults'
+        $ref: '#/definitions/[object Object]'
         description: Specifies the number of users to return as a response to the <code>ListUsers</code> request.
       NextToken:
-        $ref: '#/definitions/NextToken'
+        $ref: '#/definitions/[object Object]'
         description: 'When you can get additional results from the <code>ListUsers</code>ListUsers call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional users.'
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for a Secure File Transfer Protocol (SFTP) server that has users are assigned to it.
   StartServerRequest:
     type: object
@@ -1079,7 +1079,7 @@ definitions:
       - ServerId
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server that you start.
   StopServerRequest:
     type: object
@@ -1087,7 +1087,7 @@ definitions:
       - ServerId
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server that you stopped.
   TagResourceRequest:
     type: object
@@ -1096,10 +1096,10 @@ definitions:
       - Tags
     properties:
       Arn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: 'An Amazon Resource Name (ARN) for a specific AWS resource, such as a server, user, or role.'
       Tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: Key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to user accounts for any purpose.
   TestIdentityProviderResponse:
     type: object
@@ -1108,13 +1108,13 @@ definitions:
       - Url
     properties:
       Message:
-        $ref: '#/definitions/Message'
+        $ref: '#/definitions/[object Object]'
         description: 'The result of the authorization test as a message. '
       StatusCode:
-        $ref: '#/definitions/StatusCode'
+        $ref: '#/definitions/[object Object]'
         description: The HTTP status code that is the response from your API Gateway.
       Url:
-        $ref: '#/definitions/Url'
+        $ref: '#/definitions/[object Object]'
         description: The endpoint of the service used to authenticate a user.
   TestIdentityProviderRequest:
     type: object
@@ -1123,13 +1123,13 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system assigned identifier for a specific server. That server's user authentication method is tested with a user name and password.
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: This request parameter is name of the user account to be tested.
       UserPassword:
-        $ref: '#/definitions/UserPassword'
+        $ref: '#/definitions/[object Object]'
         description: The password of the user account to be tested.
   UntagResourceRequest:
     type: object
@@ -1138,10 +1138,10 @@ definitions:
       - TagKeys
     properties:
       Arn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: 'This is the value of the resource that will have the tag removed. An Amazon Resource Name (ARN) is an identifier for a specific AWS resource, such as a server, user, or role.'
       TagKeys:
-        $ref: '#/definitions/TagKeys'
+        $ref: '#/definitions/[object Object]'
         description: TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type. This metadata can be attached to resources for any purpose.
   UpdateServerResponse:
     type: object
@@ -1149,7 +1149,7 @@ definitions:
       - ServerId
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server that the user account is assigned to.
   UpdateServerRequest:
     type: object
@@ -1157,13 +1157,13 @@ definitions:
       - ServerId
     properties:
       IdentityProviderDetails:
-        $ref: '#/definitions/IdentityProviderDetails'
+        $ref: '#/definitions/[object Object]'
         description: This response parameter is an array containing all of the information required to call a customer's authentication API method.
       LoggingRole:
-        $ref: '#/definitions/NullableRole'
+        $ref: '#/definitions/[object Object]'
         description: 'Changes the AWS Identity and Access Management (IAM) role that allows Amazon S3 events to be logged in Amazon CloudWatch, turning logging on or off.'
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server instance that the user account is assigned to.
   UpdateUserResponse:
     type: object
@@ -1172,10 +1172,10 @@ definitions:
       - UserName
     properties:
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server instance that the user account is assigned to.
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: The unique identifier for a user that is assigned to the SFTP server instance that was specified in the request.
     description: ' <code>UpdateUserResponse</code> returns the user name and server identifier for the request to update a user''s properties.'
   UpdateUserRequest:
@@ -1185,99 +1185,56 @@ definitions:
       - UserName
     properties:
       HomeDirectory:
-        $ref: '#/definitions/HomeDirectory'
+        $ref: '#/definitions/[object Object]'
         description: 'The HomeDirectory parameter specifies the landing directory (folder) for a user when they log in to the server using their client. An example would be: <code>/home/<i>username</i> </code>.'
       Policy:
-        $ref: '#/definitions/Policy'
+        $ref: '#/definitions/[object Object]'
         description: 'Allows you to supply a scope-down policy for your user so you can use the same AWS Identity and Access Management (IAM) role across multiple users. The policy scopes down users access to portions of your Amazon S3 bucket. Variables you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.'
       Role:
-        $ref: '#/definitions/Role'
+        $ref: '#/definitions/[object Object]'
         description: The IAM role that controls your user’s access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the Secure File Transfer Protocol (SFTP) server to access your resources when servicing your SFTP user’s transfer requests.
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: A system-assigned unique identifier for an SFTP server instance that the user account is assigned to.
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: A unique string that identifies a user and is associated with a server as specified by the ServerId. This is the string that will be used by your user when they log in to your SFTP server.
   Arn:
     type: string
     minLength: 20
     maxLength: 1600
-  IdentityProviderDetails:
-    type: object
-    properties:
-      Url:
-        $ref: '#/definitions/Url'
-        description: The <code>IdentityProviderDetail</code> parameter contains the location of the service endpoint used to authenticate users.
-      InvocationRole:
-        $ref: '#/definitions/Role'
-        description: The <code>Role</code> parameter provides the type of <code>InvocationRole</code> used to authenticate the user account.
-    description: Returns information related to the type of user authentication that is in use for a server's users. A server can only have one method of authentication.
-  IdentityProviderType:
-    type: string
-    enum:
-      - SERVICE_MANAGED
-      - API_GATEWAY
-    description: 'Returns information related to the type of user authentication that is in use for a server''s users. For <code>SERVICE_MANAGED</code> authentication, the Secure Shell (SSH) public keys are stored with a user on an SFTP server instance. For <code>API_GATEWAY</code> authentication, your custom authentication method is implemented by using an API call. A server can only have one method of authentication.'
-  Role:
-    type: string
-    pattern: 'arn:.*role/.*'
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-    maxItems: 50
-  ServerId:
-    type: string
-    pattern: '^s-([0-9a-f]{17})$'
-  HomeDirectory:
-    type: string
-    pattern: ^$|/.*
-    maxLength: 1024
-  Policy:
-    type: string
-  SshPublicKeyBody:
-    type: string
-    pattern: '^ssh-rsa\s+[A-Za-z0-9+/]+[=]{0,3}(\s+.+)?\s*$'
-    maxLength: 2048
-  UserName:
-    type: string
-    pattern: '^[a-z0-9]{3,32}$'
+  '[object Object]': {}
   DateImported:
     type: string
     format: date-time
-  SshPublicKeyId:
-    type: string
-    pattern: '^key-[0-9a-f]{17}$'
   DescribedServer:
     type: object
     required:
       - Arn
     properties:
       Arn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: Specifies the unique Amazon Resource Name (ARN) for the server to be described.
       IdentityProviderDetails:
-        $ref: '#/definitions/IdentityProviderDetails'
+        $ref: '#/definitions/[object Object]'
         description: Specifies information to call a customer-supplied authentication API. This field is not populated when the <code>IdentityProviderType</code> of the server is <code>SERVICE_MANAGED</code>&gt;.
       IdentityProviderType:
-        $ref: '#/definitions/IdentityProviderType'
+        $ref: '#/definitions/[object Object]'
         description: 'This property defines the mode of authentication method enabled for this service. A value of <code>SERVICE_MANAGED</code>, means that you are using this Server to store and access SFTP user credentials within the service. A value of <code>API_GATEWAY</code> indicates that you have integrated an API Gateway endpoint that will be invoked for authenticating your user into the service.'
       LoggingRole:
-        $ref: '#/definitions/Role'
+        $ref: '#/definitions/[object Object]'
         description: 'This property is an AWS Identity and Access Management (IAM) entity that allows the server to turn on Amazon CloudWatch logging for Amazon S3 events. When set, user activity can be view in your CloudWatch logs.'
       ServerId:
-        $ref: '#/definitions/ServerId'
+        $ref: '#/definitions/[object Object]'
         description: This property is a unique system assigned identifier for the SFTP server that you instantiate.
       State:
-        $ref: '#/definitions/State'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The condition of the SFTP server for the server that was described. A value of <code>ONLINE</code> indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicated that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>'
       Tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: This property contains the key-value pairs that you can use to search for and group servers that were assigned to the server that was described.
       UserCount:
-        $ref: '#/definitions/UserCount'
+        $ref: '#/definitions/[object Object]'
         description: The number of users that are assigned to the SFTP server you specified with the <code>ServerId</code>.
     description: 'Describe the properties of the server that was specified. Information returned includes: the server Amazon Resource Name (ARN), the authentication configuration and type, the logging role, server Id and state, and assigned tags or metadata. '
   DescribedUser:
@@ -1286,27 +1243,152 @@ definitions:
       - Arn
     properties:
       Arn:
-        $ref: '#/definitions/Arn'
+        $ref: '#/definitions/[object Object]'
         description: This property contains the unique Amazon Resource Name (ARN) for the user that was requested to be described.
       HomeDirectory:
-        $ref: '#/definitions/HomeDirectory'
+        $ref: '#/definitions/[object Object]'
         description: 'This property specifies the landing directory (or folder) which is the location that files are written to or read from in an Amazon S3 bucket for the described user. An example would be: <code>/<i>bucket_name</i>/home/<i>username</i> </code>.'
       Policy:
-        $ref: '#/definitions/Policy'
+        $ref: '#/definitions/[object Object]'
         description: Specifies the name of the policy in use for the described user.
       Role:
-        $ref: '#/definitions/Role'
+        $ref: '#/definitions/[object Object]'
         description: This property specifies the IAM role that controls your user’s access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the SFTP server to access your resources when servicing your SFTP user’s transfer requests.
       SshPublicKeys:
-        $ref: '#/definitions/SshPublicKeys'
+        $ref: '#/definitions/[object Object]'
         description: This property contains the public key portion of the Secure Shell (SSH) keys stored for the described user.
       Tags:
-        $ref: '#/definitions/Tags'
+        $ref: '#/definitions/[object Object]'
         description: This property contains the key-value pairs for the user requested. Tag can be used to search for and group users for a variety of purposes.
       UserName:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/[object Object]'
         description: This property is the name of the user that was requested to be described. User names are used for authentication purposes. This is the string that will be used by your user when they log in to your SFTP server.
     description: Returns properties of the user that you wish to describe.
+  HomeDirectory:
+    type: string
+    pattern: ^$|/.*
+    maxLength: 1024
+  IdentityProviderDetails:
+    type: object
+    properties:
+      Url:
+        $ref: '#/definitions/[object Object]'
+        description: The <code>IdentityProviderDetail</code> parameter contains the location of the service endpoint used to authenticate users.
+      InvocationRole:
+        $ref: '#/definitions/[object Object]'
+        description: The <code>Role</code> parameter provides the type of <code>InvocationRole</code> used to authenticate the user account.
+    description: Returns information related to the type of user authentication that is in use for a server's users. A server can only have one method of authentication.
+  IdentityProviderType:
+    type: string
+    enum:
+      - SERVICE_MANAGED
+      - API_GATEWAY
+    description: 'Returns information related to the type of user authentication that is in use for a server''s users. For <code>SERVICE_MANAGED</code> authentication, the Secure Shell (SSH) public keys are stored with a user on an SFTP server instance. For <code>API_GATEWAY</code> authentication, your custom authentication method is implemented by using an API call. A server can only have one method of authentication.'
+  ListedServer:
+    type: object
+    required:
+      - Arn
+    properties:
+      Arn:
+        $ref: '#/definitions/[object Object]'
+        description: The unique Amazon Resource Name (ARN) for the server to be listed.
+      IdentityProviderType:
+        $ref: '#/definitions/[object Object]'
+        description: 'The authentication method used to validate a user for the server that was specified. listed. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include <code>SERVICE_MANAGED</code> or <code>API_GATEWAY</code>.'
+      LoggingRole:
+        $ref: '#/definitions/[object Object]'
+        description: The AWS Identity and Access Management entity that allows the server to turn on Amazon CloudWatch logging.
+      ServerId:
+        $ref: '#/definitions/[object Object]'
+        description: This value is the unique system assigned identifier for the SFTP servers that were listed.
+      State:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>This property describes the condition of the SFTP server for the server that was described. A value of <code>ONLINE</code>&gt; indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicated that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>'
+      UserCount:
+        $ref: '#/definitions/[object Object]'
+        description: This property is a numeric value that indicates the number of users that are assigned to the SFTP server you specified with the <code>ServerId</code>.
+    description: Returns properties of the server that was specified.
+  ListedServers:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ListedUser:
+    type: object
+    required:
+      - Arn
+    properties:
+      Arn:
+        $ref: '#/definitions/[object Object]'
+        description: This property is the unique Amazon Resource Name (ARN) for the user that you wish to learn about.
+      HomeDirectory:
+        $ref: '#/definitions/[object Object]'
+        description: This value specifies the location that files are written to or read from an Amazon S3 bucket for the user you specify by their ARN.
+      Role:
+        $ref: '#/definitions/[object Object]'
+        description: The role in use by this user. A <i>role</i> is an AWS Identity and Access Management (IAM) entity that in this case allows the SFTP server to act on a user's behalf. It allows the server to inherit the trust relationship that enables that user to perform file operations to their Amazon S3 bucket.
+      SshPublicKeyCount:
+        $ref: '#/definitions/[object Object]'
+        description: This value is the number of SSH public keys stored for the user you specified.
+      UserName:
+        $ref: '#/definitions/[object Object]'
+        description: The name of the user whose ARN was specified. User names are used for authentication purposes.
+    description: Returns properties of the user that you specify.
+  ListedUsers:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  Message:
+    type: string
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 256
+  NullableRole:
+    type: string
+    pattern: '^$|arn:.*role/.*'
+  Policy:
+    type: string
+  Role:
+    type: string
+    pattern: 'arn:.*role/.*'
+  ServerId:
+    type: string
+    pattern: '^s-([0-9a-f]{17})$'
+  SshPublicKey:
+    type: object
+    required:
+      - DateImported
+      - SshPublicKeyBody
+      - SshPublicKeyId
+    properties:
+      DateImported:
+        $ref: '#/definitions/[object Object]'
+        description: The date that the public key was added to the user account.
+      SshPublicKeyBody:
+        $ref: '#/definitions/[object Object]'
+        description: The content of the SSH public key as specified by the <code>PublicKeyId</code>.
+      SshPublicKeyId:
+        $ref: '#/definitions/[object Object]'
+        description: The <code>SshPublicKeyId</code> parameter contains the identifier of the public key.
+    description: 'Provides information about the public Secure Shell (SSH) key that is associated with a user account for a specific server (as identified by <code>ServerId</code>). The information returned includes the date the key was imported, the public key contents, and the public key ID. A user can store more than one SSH public key associated with their user name on a specific SFTP server.'
+  SshPublicKeyBody:
+    type: string
+    pattern: '^ssh-rsa\s+[A-Za-z0-9+/]+[=]{0,3}(\s+.+)?\s*$'
+    maxLength: 2048
+  SshPublicKeyCount:
+    type: integer
+  SshPublicKeyId:
+    type: string
+    pattern: '^key-[0-9a-f]{17}$'
+  SshPublicKeys:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    maxItems: 5
   State:
     type: string
     enum:
@@ -1317,106 +1399,8 @@ definitions:
       - START_FAILED
       - STOP_FAILED
     description: '<p>Describes the condition of the SFTP server with respect to its ability to perform file operations. There are six possible states: <code>OFFLINE</code>, <code>ONLINE</code>, <code>STARTING</code>, <code>STOPPING</code>, <code>START_FAILED</code>, and <code>STOP_FAILED</code>.</p> <p> <code>OFFLINE</code> indicates that the SFTP server exists, but that it is not available for file operations. <code>ONLINE</code> indicates that the SFTP server is available to perform file operations. <code>STARTING</code> indicates that the SFTP server''s was instantiated, but the server is not yet available to perform file operations. Under normal conditions, it can take a couple of minutes for an SFTP server to be completely operational. Both <code>START_FAILED</code> and <code>STOP_FAILED</code> are error conditions.</p>'
-  UserCount:
-    type: integer
-  SshPublicKeys:
-    type: array
-    items:
-      $ref: '#/definitions/SshPublicKey'
-    maxItems: 5
-  Url:
-    type: string
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 256
-  ListedServers:
-    type: array
-    items:
-      $ref: '#/definitions/ListedServer'
-  ListedUsers:
-    type: array
-    items:
-      $ref: '#/definitions/ListedUser'
-  ListedServer:
-    type: object
-    required:
-      - Arn
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: The unique Amazon Resource Name (ARN) for the server to be listed.
-      IdentityProviderType:
-        $ref: '#/definitions/IdentityProviderType'
-        description: 'The authentication method used to validate a user for the server that was specified. listed. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include <code>SERVICE_MANAGED</code> or <code>API_GATEWAY</code>.'
-      LoggingRole:
-        $ref: '#/definitions/Role'
-        description: The AWS Identity and Access Management entity that allows the server to turn on Amazon CloudWatch logging.
-      ServerId:
-        $ref: '#/definitions/ServerId'
-        description: This value is the unique system assigned identifier for the SFTP servers that were listed.
-      State:
-        $ref: '#/definitions/State'
-        description: '<p>This property describes the condition of the SFTP server for the server that was described. A value of <code>ONLINE</code>&gt; indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicated that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>'
-      UserCount:
-        $ref: '#/definitions/UserCount'
-        description: This property is a numeric value that indicates the number of users that are assigned to the SFTP server you specified with the <code>ServerId</code>.
-    description: Returns properties of the server that was specified.
-  SshPublicKeyCount:
-    type: integer
-  ListedUser:
-    type: object
-    required:
-      - Arn
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: This property is the unique Amazon Resource Name (ARN) for the user that you wish to learn about.
-      HomeDirectory:
-        $ref: '#/definitions/HomeDirectory'
-        description: This value specifies the location that files are written to or read from an Amazon S3 bucket for the user you specify by their ARN.
-      Role:
-        $ref: '#/definitions/Role'
-        description: The role in use by this user. A <i>role</i> is an AWS Identity and Access Management (IAM) entity that in this case allows the SFTP server to act on a user's behalf. It allows the server to inherit the trust relationship that enables that user to perform file operations to their Amazon S3 bucket.
-      SshPublicKeyCount:
-        $ref: '#/definitions/SshPublicKeyCount'
-        description: This value is the number of SSH public keys stored for the user you specified.
-      UserName:
-        $ref: '#/definitions/UserName'
-        description: The name of the user whose ARN was specified. User names are used for authentication purposes.
-    description: Returns properties of the user that you specify.
-  Message:
-    type: string
-  NullableRole:
-    type: string
-    pattern: '^$|arn:.*role/.*'
-  SshPublicKey:
-    type: object
-    required:
-      - DateImported
-      - SshPublicKeyBody
-      - SshPublicKeyId
-    properties:
-      DateImported:
-        $ref: '#/definitions/DateImported'
-        description: The date that the public key was added to the user account.
-      SshPublicKeyBody:
-        $ref: '#/definitions/SshPublicKeyBody'
-        description: The content of the SSH public key as specified by the <code>PublicKeyId</code>.
-      SshPublicKeyId:
-        $ref: '#/definitions/SshPublicKeyId'
-        description: The <code>SshPublicKeyId</code> parameter contains the identifier of the public key.
-    description: 'Provides information about the public Secure Shell (SSH) key that is associated with a user account for a specific server (as identified by <code>ServerId</code>). The information returned includes the date the key was imported, the public key contents, and the public key ID. A user can store more than one SSH public key associated with their user name on a specific SFTP server.'
   StatusCode:
     type: integer
-  TagKey:
-    type: string
-  TagValue:
-    type: string
   Tag:
     type: object
     required:
@@ -1424,17 +1408,34 @@ definitions:
       - Value
     properties:
       Key:
-        $ref: '#/definitions/TagKey'
+        $ref: '#/definitions/[object Object]'
         description: The name assigned to the tag that you create.
       Value:
-        $ref: '#/definitions/TagValue'
+        $ref: '#/definitions/[object Object]'
         description: This property contains one or more values that you assigned to the key name you create.
     description: 'Creates a key-value pair for a specific resource. Tags are metadata that you can use to search for and group a resource for various purposes. You can apply tags to servers, users, and roles. A tag key can take more than one value. For example, to group servers for accounting purposes, you might create a tag called <code>Group</code> and assign the values <code>Research</code> and <code>Accounting</code> to that group.'
+  TagKey:
+    type: string
   TagKeys:
     type: array
     items:
-      $ref: '#/definitions/TagKey'
+      $ref: '#/definitions/[object Object]'
     minItems: 1
     maxItems: 50
+  TagValue:
+    type: string
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+    minItems: 1
+    maxItems: 50
+  Url:
+    type: string
+  UserCount:
+    type: integer
+  UserName:
+    type: string
+    pattern: '^[a-z0-9]{3,32}$'
   UserPassword:
     type: string

@@ -750,23 +750,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-      x-waiters:
-        - acceptors:
-            - expected: ResourceNotFoundFault
-              matcher: error
-              state: success
-            - argument: 'Endpoints[].Status'
-              expected: active
-              matcher: pathAny
-              state: failure
-            - argument: 'Endpoints[].Status'
-              expected: creating
-              matcher: pathAny
-              state: failure
-          delay: 5
-          description: Wait until testing endpoint is deleted.
-          maxAttempts: 60
-          operation: DescribeEndpoints
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1016,44 +999,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-      x-waiters:
-        - acceptors:
-            - argument: 'ReplicationInstances[].ReplicationInstanceStatus'
-              expected: available
-              matcher: pathAll
-              state: success
-            - argument: 'ReplicationInstances[].ReplicationInstanceStatus'
-              expected: deleting
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationInstances[].ReplicationInstanceStatus'
-              expected: incompatible-credentials
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationInstances[].ReplicationInstanceStatus'
-              expected: incompatible-network
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationInstances[].ReplicationInstanceStatus'
-              expected: inaccessible-encryption-credentials
-              matcher: pathAny
-              state: failure
-          delay: 60
-          description: Wait until DMS replication instance is available.
-          maxAttempts: 60
-          operation: DescribeReplicationInstances
-        - acceptors:
-            - argument: 'ReplicationInstances[].ReplicationInstanceStatus'
-              expected: available
-              matcher: pathAny
-              state: failure
-            - expected: ResourceNotFoundFault
-              matcher: error
-              state: success
-          delay: 15
-          description: Wait until DMS replication instance is deleted.
-          maxAttempts: 60
-          operation: DescribeReplicationInstances
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1171,158 +1116,6 @@ paths:
           in: query
           description: Pagination token
           required: false
-      x-waiters:
-        - acceptors:
-            - argument: 'ReplicationTasks[].Status'
-              expected: ready
-              matcher: pathAll
-              state: success
-            - argument: 'ReplicationTasks[].Status'
-              expected: starting
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: running
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: stopping
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: stopped
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: failed
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: modifying
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: testing
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: deleting
-              matcher: pathAny
-              state: failure
-          delay: 15
-          description: Wait until DMS replication task is ready.
-          maxAttempts: 60
-          operation: DescribeReplicationTasks
-        - acceptors:
-            - argument: 'ReplicationTasks[].Status'
-              expected: stopped
-              matcher: pathAll
-              state: success
-            - argument: 'ReplicationTasks[].Status'
-              expected: ready
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: creating
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: starting
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: running
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: failed
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: modifying
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: testing
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: deleting
-              matcher: pathAny
-              state: failure
-          delay: 15
-          description: Wait until DMS replication task is stopped.
-          maxAttempts: 60
-          operation: DescribeReplicationTasks
-        - acceptors:
-            - argument: 'ReplicationTasks[].Status'
-              expected: running
-              matcher: pathAll
-              state: success
-            - argument: 'ReplicationTasks[].Status'
-              expected: ready
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: creating
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: stopping
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: stopped
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: failed
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: modifying
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: testing
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: deleting
-              matcher: pathAny
-              state: failure
-          delay: 15
-          description: Wait until DMS replication task is running.
-          maxAttempts: 60
-          operation: DescribeReplicationTasks
-        - acceptors:
-            - argument: 'ReplicationTasks[].Status'
-              expected: ready
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: creating
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: stopped
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: running
-              matcher: pathAny
-              state: failure
-            - argument: 'ReplicationTasks[].Status'
-              expected: failed
-              matcher: pathAny
-              state: failure
-            - expected: ResourceNotFoundFault
-              matcher: error
-              state: success
-          delay: 15
-          description: Wait until DMS replication task is deleted.
-          maxAttempts: 60
-          operation: DescribeReplicationTasks
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1980,20 +1773,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TestConnectionMessage'
-      x-waiters:
-        - acceptors:
-            - argument: Connection.Status
-              expected: successful
-              matcher: path
-              state: success
-            - argument: Connection.Status
-              expected: failed
-              matcher: path
-              state: failure
-          delay: 5
-          description: Wait until testing connection succeeds.
-          maxAttempts: 60
-          operation: TestConnection
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2022,10 +1801,10 @@ definitions:
           Value: '1633456'
     properties:
       ResourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to be added to. AWS DMS resources include a replication instance, endpoint, and a replication task.'
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: The tag to be assigned to the DMS resource.
     description: <p/>
   ResourceNotFoundFault: {}
@@ -2044,7 +1823,7 @@ definitions:
         Username: username
     properties:
       Endpoint:
-        $ref: '#/definitions/Endpoint'
+        $ref: '#/definitions/[object Object]'
         description: The endpoint that was created.
     description: <p/>
   CreateEndpointMessage:
@@ -2071,67 +1850,67 @@ definitions:
       Username: username
     properties:
       EndpointIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.'
       EndpointType:
-        $ref: '#/definitions/ReplicationEndpointTypeValue'
+        $ref: '#/definitions/[object Object]'
         description: The type of endpoint.
       EngineName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The type of engine for the endpoint. Valid values, depending on the <code>EndPointType</code> value, include <code>mysql</code>, <code>oracle</code>, <code>postgres</code>, <code>mariadb</code>, <code>aurora</code>, <code>aurora-postgresql</code>, <code>redshift</code>, <code>s3</code>, <code>db2</code>, <code>azuredb</code>, <code>sybase</code>, <code>dynamodb</code>, <code>mongodb</code>, and <code>sqlserver</code>.'
       Username:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The user name to be used to log in to the endpoint database.
       Password:
-        $ref: '#/definitions/SecretString'
+        $ref: '#/definitions/[object Object]'
         description: The password to be used to log in to the endpoint database.
       ServerName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the server where the endpoint database resides.
       Port:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: The port used by the endpoint database.
       DatabaseName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the endpoint database.
       ExtraConnectionAttributes:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Additional attributes associated with the connection.
       KmsKeyId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS KMS key identifier to use to encrypt the connection parameters. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: Tags to be added to the endpoint.
       CertificateArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) for the certificate.
       SslMode:
-        $ref: '#/definitions/DmsSslModeValue'
+        $ref: '#/definitions/[object Object]'
         description: 'The Secure Sockets Layer (SSL) mode to use for the SSL connection. The SSL mode can be one of four values: <code>none</code>, <code>require</code>, <code>verify-ca</code>, <code>verify-full</code>. The default value is <code>none</code>.'
       ServiceAccessRoleArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The Amazon Resource Name (ARN) for the service access role that you want to use to create the endpoint. '
       ExternalTableDefinition:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The external table definition. '
       DynamoDbSettings:
-        $ref: '#/definitions/DynamoDbSettings'
+        $ref: '#/definitions/[object Object]'
         description: 'Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html">Using Object Mapping to Migrate Data to DynamoDB</a> in the <i>AWS Database Migration Service User Guide.</i> '
       S3Settings:
-        $ref: '#/definitions/S3Settings'
+        $ref: '#/definitions/[object Object]'
         description: 'Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring">Extra Connection Attributes When Using Amazon S3 as a Target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
       DmsTransferSettings:
-        $ref: '#/definitions/DmsTransferSettings'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Possible attributes include the following:</p> <ul> <li> <p> <code>serviceAccessRoleArn</code> - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p> <code>bucketName</code> - The name of the S3 bucket to use.</p> </li> <li> <p> <code>compressionType</code> - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to <code>NONE</code> (the default). To keep the files uncompressed, don''t use this value. </p> </li> </ul> <p>Shorthand syntax for these attributes is as follows: <code>ServiceAccessRoleArn=string,BucketName=string,CompressionType=string</code> </p> <p>JSON syntax for these attributes is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </code> </p>'
       MongoDbSettings:
-        $ref: '#/definitions/MongoDbSettings'
+        $ref: '#/definitions/[object Object]'
         description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
       KinesisSettings:
-        $ref: '#/definitions/KinesisSettings'
+        $ref: '#/definitions/[object Object]'
         description: 'Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping ">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> '
       ElasticsearchSettings:
-        $ref: '#/definitions/ElasticsearchSettings'
+        $ref: '#/definitions/[object Object]'
         description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration User Guide.</i> '
     description: <p/>
   KMSKeyNotAccessibleFault: {}
@@ -2143,7 +1922,7 @@ definitions:
     type: object
     properties:
       EventSubscription:
-        $ref: '#/definitions/EventSubscription'
+        $ref: '#/definitions/[object Object]'
         description: The event subscription that was created.
     description: <p/>
   CreateEventSubscriptionMessage:
@@ -2153,25 +1932,25 @@ definitions:
       - SnsTopicArn
     properties:
       SubscriptionName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name of the AWS DMS event notification subscription. </p> <p>Constraints: The name must be less than 255 characters. </p>'
       SnsTopicArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The Amazon Resource Name (ARN) of the Amazon SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it. '
       SourceType:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The type of AWS DMS resource that generates the events. For example, if you want to be notified of events generated by a replication instance, you set this parameter to <code>replication-instance</code>. If this value is not specified, all events are returned. </p> <p>Valid values: replication-instance | migration-task</p>'
       EventCategories:
-        $ref: '#/definitions/EventCategoriesList'
+        $ref: '#/definitions/[object Object]'
         description: ' A list of event categories for a source type that you want to subscribe to. You can see a list of the categories for a given source type by calling the <code>DescribeEventCategories</code> action or in the topic <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration Service User Guide.</i> '
       SourceIds:
-        $ref: '#/definitions/SourceIdsList'
+        $ref: '#/definitions/[object Object]'
         description: ' The list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens. '
       Enabled:
-        $ref: '#/definitions/BooleanOptional'
+        $ref: '#/definitions/[object Object]'
         description: ' A Boolean value; set to <code>true</code> to activate the subscription, or set to <code>false</code> to create the subscription but not activate it. '
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: A tag to be attached to the event subscription.
     description: <p/>
   SNSInvalidTopicFault: {}
@@ -2215,7 +1994,7 @@ definitions:
           VpcId: vpc-6741a603
     properties:
       ReplicationInstance:
-        $ref: '#/definitions/ReplicationInstance'
+        $ref: '#/definitions/[object Object]'
         description: The replication instance that was created.
     description: <p/>
   CreateReplicationInstanceMessage:
@@ -2241,46 +2020,46 @@ definitions:
       VpcSecurityGroupIds: []
     properties:
       ReplicationInstanceIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The replication instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>'
       AllocatedStorage:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: The amount of storage (in gigabytes) to be initially allocated for the replication instance.
       ReplicationInstanceClass:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The compute and memory capacity of the replication instance as specified by the replication instance class.</p> <p> Valid Values: <code>dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge </code> </p>'
       VpcSecurityGroupIds:
-        $ref: '#/definitions/VpcSecurityGroupIdList'
+        $ref: '#/definitions/[object Object]'
         description: ' Specifies the VPC security group to be used with the replication instance. The VPC security group must work with the VPC containing the replication instance. '
       AvailabilityZone:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The EC2 Availability Zone that the replication instance will be created in.</p> <p>Default: A random, system-chosen Availability Zone in the endpoint''s region.</p> <p> Example: <code>us-east-1d</code> </p>'
       ReplicationSubnetGroupIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A subnet group to associate with the replication instance.
       PreferredMaintenanceWindow:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>Default: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week.</p> <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>'
       MultiAZ:
-        $ref: '#/definitions/BooleanOptional'
+        $ref: '#/definitions/[object Object]'
         description: ' Specifies if the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. '
       EngineVersion:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The engine version number of the replication instance.
       AutoMinorVersionUpgrade:
-        $ref: '#/definitions/BooleanOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates that minor engine upgrades will be applied automatically to the replication instance during the maintenance window.</p> <p>Default: <code>true</code> </p>'
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: Tags to be associated with the replication instance.
       KmsKeyId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
       PubliclyAccessible:
-        $ref: '#/definitions/BooleanOptional'
+        $ref: '#/definitions/[object Object]'
         description: ' Specifies the accessibility options for the replication instance. A value of <code>true</code> represents an instance with a public IP address. A value of <code>false</code> represents an instance with a private IP address. The default value is <code>true</code>. '
       DnsNameServers:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: A list of DNS name servers supported for the replication instance.
     description: <p/>
   InsufficientResourceCapacityFault: {}
@@ -2293,7 +2072,7 @@ definitions:
       ReplicationSubnetGroup: {}
     properties:
       ReplicationSubnetGroup:
-        $ref: '#/definitions/ReplicationSubnetGroup'
+        $ref: '#/definitions/[object Object]'
         description: The replication subnet group that was created.
     description: <p/>
   CreateReplicationSubnetGroupMessage:
@@ -2313,16 +2092,16 @@ definitions:
           Value: '145235'
     properties:
       ReplicationSubnetGroupIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The name for the replication subnet group. This value is stored as a lowercase string.</p> <p>Constraints: Must contain no more than 255 alphanumeric characters, periods, spaces, underscores, or hyphens. Must not be "default".</p> <p>Example: <code>mySubnetgroup</code> </p>'
       ReplicationSubnetGroupDescription:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The description for the subnet group.
       SubnetIds:
-        $ref: '#/definitions/SubnetIdentifierList'
+        $ref: '#/definitions/[object Object]'
         description: The EC2 subnet IDs for the subnet group.
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: The tag to be assigned to the subnet group.
     description: <p/>
   CreateReplicationTaskResponse:
@@ -2341,7 +2120,7 @@ definitions:
         TargetEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
     properties:
       ReplicationTask:
-        $ref: '#/definitions/ReplicationTask'
+        $ref: '#/definitions/[object Object]'
         description: The replication task that was created.
     description: <p/>
   CreateReplicationTaskMessage:
@@ -2367,37 +2146,37 @@ definitions:
       TargetEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
     properties:
       ReplicationTaskIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The replication task identifier.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
       SourceEndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
       TargetEndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
       ReplicationInstanceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication instance.
       MigrationType:
-        $ref: '#/definitions/MigrationTypeValue'
+        $ref: '#/definitions/[object Object]'
         description: The migration type.
       TableMappings:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with "file://". When working with the DMS API, provide the JSON as the parameter value.</p> <p>For example, --table-mappings file://mappingfile.json</p>'
       ReplicationTaskSettings:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'Settings for the task, such as target metadata settings. For a complete list of task settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html">Task Settings for AWS Database Migration Service Tasks</a> in the <i>AWS Database Migration User Guide.</i> '
       CdcStartTime:
-        $ref: '#/definitions/TStamp'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p>Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”</p>'
       CdcStartPosition:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p> The value can be in date, checkpoint, or LSN/SCN format.</p> <p>Date Example: --cdc-start-position “2018-03-08T12:12:12”</p> <p>Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"</p> <p>LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”</p>'
       CdcStopPosition:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>'
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: Tags to be added to the replication instance.
     description: <p/>
   DeleteCertificateResponse:
@@ -2406,7 +2185,7 @@ definitions:
       Certificate: {}
     properties:
       Certificate:
-        $ref: '#/definitions/Certificate'
+        $ref: '#/definitions/[object Object]'
         description: The Secure Sockets Layer (SSL) certificate.
   DeleteCertificateMessage:
     type: object
@@ -2416,7 +2195,7 @@ definitions:
       CertificateArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUSM457DE6XFJCJQ'
     properties:
       CertificateArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the deleted certificate.
   DeleteEndpointResponse:
     type: object
@@ -2433,7 +2212,7 @@ definitions:
         Username: username
     properties:
       Endpoint:
-        $ref: '#/definitions/Endpoint'
+        $ref: '#/definitions/[object Object]'
         description: The endpoint that was deleted.
     description: <p/>
   DeleteEndpointMessage:
@@ -2444,14 +2223,14 @@ definitions:
       EndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM'
     properties:
       EndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
     description: <p/>
   DeleteEventSubscriptionResponse:
     type: object
     properties:
       EventSubscription:
-        $ref: '#/definitions/EventSubscription'
+        $ref: '#/definitions/[object Object]'
         description: The event subscription that was deleted.
     description: <p/>
   DeleteEventSubscriptionMessage:
@@ -2460,7 +2239,7 @@ definitions:
       - SubscriptionName
     properties:
       SubscriptionName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the DMS event notification subscription to be deleted.
     description: <p/>
   DeleteReplicationInstanceResponse:
@@ -2502,7 +2281,7 @@ definitions:
           VpcId: vpc-6741a603
     properties:
       ReplicationInstance:
-        $ref: '#/definitions/ReplicationInstance'
+        $ref: '#/definitions/[object Object]'
         description: The replication instance that was deleted.
     description: <p/>
   DeleteReplicationInstanceMessage:
@@ -2513,7 +2292,7 @@ definitions:
       ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
     properties:
       ReplicationInstanceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication instance to be deleted.
     description: <p/>
   DeleteReplicationSubnetGroupResponse:
@@ -2529,7 +2308,7 @@ definitions:
       ReplicationSubnetGroupIdentifier: us-west-2ab-vpc-215ds366
     properties:
       ReplicationSubnetGroupIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The subnet group name of the replication instance.
     description: <p/>
   DeleteReplicationTaskResponse:
@@ -2548,7 +2327,7 @@ definitions:
         TargetEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
     properties:
       ReplicationTask:
-        $ref: '#/definitions/ReplicationTask'
+        $ref: '#/definitions/[object Object]'
         description: The deleted replication task.
     description: <p/>
   DeleteReplicationTaskMessage:
@@ -2559,7 +2338,7 @@ definitions:
       ReplicationTaskArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
     properties:
       ReplicationTaskArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication task to be deleted.
     description: <p/>
   DescribeAccountAttributesResponse:
@@ -2577,7 +2356,7 @@ definitions:
           Used: 0
     properties:
       AccountQuotas:
-        $ref: '#/definitions/AccountQuotaList'
+        $ref: '#/definitions/[object Object]'
         description: Account quota information.
     description: <p/>
   DescribeAccountAttributesMessage:
@@ -2592,10 +2371,10 @@ definitions:
       Marker: ''
     properties:
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The pagination token.
       Certificates:
-        $ref: '#/definitions/CertificateList'
+        $ref: '#/definitions/[object Object]'
         description: The Secure Sockets Layer (SSL) certificates associated with the replication instance.
   DescribeCertificatesMessage:
     type: object
@@ -2609,13 +2388,13 @@ definitions:
       MaxRecords: 123
     properties:
       Filters:
-        $ref: '#/definitions/FilterList'
+        $ref: '#/definitions/[object Object]'
         description: Filters applied to the certificate described in the form of key-value pairs.
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 10</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
   DescribeConnectionsResponse:
     type: object
@@ -2629,10 +2408,10 @@ definitions:
       Marker: ''
     properties:
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       Connections:
-        $ref: '#/definitions/ConnectionList'
+        $ref: '#/definitions/[object Object]'
         description: A description of the connections.
     description: <p/>
   DescribeConnectionsMessage:
@@ -2647,13 +2426,13 @@ definitions:
       MaxRecords: 123
     properties:
       Filters:
-        $ref: '#/definitions/FilterList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The filters applied to the connection.</p> <p>Valid filter names: endpoint-arn | replication-instance-arn</p>'
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeEndpointTypesResponse:
@@ -2663,10 +2442,10 @@ definitions:
       SupportedEndpointTypes: []
     properties:
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       SupportedEndpointTypes:
-        $ref: '#/definitions/SupportedEndpointTypeList'
+        $ref: '#/definitions/[object Object]'
         description: The type of endpoints that are supported.
     description: <p/>
   DescribeEndpointTypesMessage:
@@ -2681,13 +2460,13 @@ definitions:
       MaxRecords: 123
     properties:
       Filters:
-        $ref: '#/definitions/FilterList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Filters applied to the describe action.</p> <p>Valid filter names: engine-name | endpoint-type</p>'
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeEndpointsResponse:
@@ -2697,10 +2476,10 @@ definitions:
       Marker: ''
     properties:
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       Endpoints:
-        $ref: '#/definitions/EndpointList'
+        $ref: '#/definitions/[object Object]'
         description: Endpoint description.
     description: <p/>
   DescribeEndpointsMessage:
@@ -2715,97 +2494,97 @@ definitions:
       MaxRecords: 123
     properties:
       Filters:
-        $ref: '#/definitions/FilterList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Filters applied to the describe action.</p> <p>Valid filter names: endpoint-arn | endpoint-type | endpoint-id | engine-name</p>'
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeEventCategoriesResponse:
     type: object
     properties:
       EventCategoryGroupList:
-        $ref: '#/definitions/EventCategoryGroupList'
+        $ref: '#/definitions/[object Object]'
         description: A list of event categories.
     description: <p/>
   DescribeEventCategoriesMessage:
     type: object
     properties:
       SourceType:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The type of AWS DMS resource that generates events. </p> <p>Valid values: replication-instance | migration-task</p>'
       Filters:
-        $ref: '#/definitions/FilterList'
+        $ref: '#/definitions/[object Object]'
         description: Filters applied to the action.
     description: <p/>
   DescribeEventSubscriptionsResponse:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       EventSubscriptionsList:
-        $ref: '#/definitions/EventSubscriptionsList'
+        $ref: '#/definitions/[object Object]'
         description: A list of event subscriptions.
     description: <p/>
   DescribeEventSubscriptionsMessage:
     type: object
     properties:
       SubscriptionName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS DMS event subscription to be described.
       Filters:
-        $ref: '#/definitions/FilterList'
+        $ref: '#/definitions/[object Object]'
         description: Filters applied to the action.
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeEventsResponse:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       Events:
-        $ref: '#/definitions/EventList'
+        $ref: '#/definitions/[object Object]'
         description: The events described.
     description: <p/>
   DescribeEventsMessage:
     type: object
     properties:
       SourceIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The identifier of the event source. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens. It cannot end with a hyphen or contain two consecutive hyphens. '
       SourceType:
-        $ref: '#/definitions/SourceType'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The type of AWS DMS resource that generates events.</p> <p>Valid values: replication-instance | migration-task</p>'
       StartTime:
-        $ref: '#/definitions/TStamp'
+        $ref: '#/definitions/[object Object]'
         description: The start time for the events to be listed.
       EndTime:
-        $ref: '#/definitions/TStamp'
+        $ref: '#/definitions/[object Object]'
         description: The end time for the events to be listed.
       Duration:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: The duration of the events to be listed.
       EventCategories:
-        $ref: '#/definitions/EventCategoriesList'
+        $ref: '#/definitions/[object Object]'
         description: A list of event categories for a source type that you want to subscribe to.
       Filters:
-        $ref: '#/definitions/FilterList'
+        $ref: '#/definitions/[object Object]'
         description: Filters applied to the action.
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeOrderableReplicationInstancesResponse:
@@ -2815,10 +2594,10 @@ definitions:
       OrderableReplicationInstances: []
     properties:
       OrderableReplicationInstances:
-        $ref: '#/definitions/OrderableReplicationInstanceList'
+        $ref: '#/definitions/[object Object]'
         description: The order-able replication instances available.
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeOrderableReplicationInstancesMessage:
@@ -2828,10 +2607,10 @@ definitions:
       MaxRecords: 123
     properties:
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeRefreshSchemasStatusResponse:
@@ -2840,7 +2619,7 @@ definitions:
       RefreshSchemasStatus: {}
     properties:
       RefreshSchemasStatus:
-        $ref: '#/definitions/RefreshSchemasStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status of the schema.
     description: <p/>
   DescribeRefreshSchemasStatusMessage:
@@ -2851,20 +2630,20 @@ definitions:
       EndpointArn: ''
     properties:
       EndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
     description: <p/>
   DescribeReplicationInstanceTaskLogsResponse:
     type: object
     properties:
       ReplicationInstanceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication instance.
       ReplicationInstanceTaskLogs:
-        $ref: '#/definitions/ReplicationInstanceTaskLogsList'
+        $ref: '#/definitions/[object Object]'
         description: 'An array of replication task log metadata. Each member of the array contains the replication task name, ARN, and task log size (in bytes). '
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
   DescribeReplicationInstanceTaskLogsMessage:
     type: object
@@ -2872,13 +2651,13 @@ definitions:
       - ReplicationInstanceArn
     properties:
       ReplicationInstanceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication instance.
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
   DescribeReplicationInstancesResponse:
     type: object
@@ -2887,10 +2666,10 @@ definitions:
       ReplicationInstances: []
     properties:
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       ReplicationInstances:
-        $ref: '#/definitions/ReplicationInstanceList'
+        $ref: '#/definitions/[object Object]'
         description: The replication instances described.
     description: <p/>
   DescribeReplicationInstancesMessage:
@@ -2905,13 +2684,13 @@ definitions:
       MaxRecords: 123
     properties:
       Filters:
-        $ref: '#/definitions/FilterList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Filters applied to the describe action.</p> <p>Valid filter names: replication-instance-arn | replication-instance-id | replication-instance-class | engine-version</p>'
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeReplicationSubnetGroupsResponse:
@@ -2921,10 +2700,10 @@ definitions:
       ReplicationSubnetGroups: []
     properties:
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       ReplicationSubnetGroups:
-        $ref: '#/definitions/ReplicationSubnetGroups'
+        $ref: '#/definitions/[object Object]'
         description: A description of the replication subnet groups.
     description: <p/>
   DescribeReplicationSubnetGroupsMessage:
@@ -2939,39 +2718,39 @@ definitions:
       MaxRecords: 123
     properties:
       Filters:
-        $ref: '#/definitions/FilterList'
+        $ref: '#/definitions/[object Object]'
         description: Filters applied to the describe action.
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeReplicationTaskAssessmentResultsResponse:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       BucketName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '- The Amazon S3 bucket where the task assessment report is located. '
       ReplicationTaskAssessmentResults:
-        $ref: '#/definitions/ReplicationTaskAssessmentResultList'
+        $ref: '#/definitions/[object Object]'
         description: ' The task assessment report. '
     description: <p/>
   DescribeReplicationTaskAssessmentResultsMessage:
     type: object
     properties:
       ReplicationTaskArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '- The Amazon Resource Name (ARN) string that uniquely identifies the task. When this input parameter is specified the API will return only one result and ignore the values of the max-records and marker parameters. '
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeReplicationTasksResponse:
@@ -2981,10 +2760,10 @@ definitions:
       ReplicationTasks: []
     properties:
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       ReplicationTasks:
-        $ref: '#/definitions/ReplicationTaskList'
+        $ref: '#/definitions/[object Object]'
         description: A description of the replication tasks.
     description: <p/>
   DescribeReplicationTasksMessage:
@@ -2999,13 +2778,13 @@ definitions:
       MaxRecords: 123
     properties:
       Filters:
-        $ref: '#/definitions/FilterList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Filters applied to the describe action.</p> <p>Valid filter names: replication-task-arn | replication-task-id | migration-type | endpoint-arn | replication-instance-arn</p>'
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeSchemasResponse:
@@ -3015,10 +2794,10 @@ definitions:
       Schemas: []
     properties:
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       Schemas:
-        $ref: '#/definitions/SchemaList'
+        $ref: '#/definitions/[object Object]'
         description: The described schema.
     description: <p/>
   DescribeSchemasMessage:
@@ -3031,13 +2810,13 @@ definitions:
       MaxRecords: 123
     properties:
       EndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeTableStatisticsResponse:
@@ -3048,13 +2827,13 @@ definitions:
       TableStatistics: []
     properties:
       ReplicationTaskArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication task.
       TableStatistics:
-        $ref: '#/definitions/TableStatisticsList'
+        $ref: '#/definitions/[object Object]'
         description: The table statistics.
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
   DescribeTableStatisticsMessage:
@@ -3067,16 +2846,16 @@ definitions:
       ReplicationTaskArn: ''
     properties:
       ReplicationTaskArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication task.
       MaxRecords:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 500.</p>'
       Marker:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       Filters:
-        $ref: '#/definitions/FilterList'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Filters applied to the describe table statistics action.</p> <p>Valid filter names: schema-name | table-name | table-state</p> <p>A combination of filters creates an AND condition where each record matches all specified filters.</p>'
     description: <p/>
   ImportCertificateResponse:
@@ -3085,7 +2864,7 @@ definitions:
       Certificate: {}
     properties:
       Certificate:
-        $ref: '#/definitions/Certificate'
+        $ref: '#/definitions/[object Object]'
         description: The certificate to be uploaded.
   ImportCertificateMessage:
     type: object
@@ -3096,16 +2875,16 @@ definitions:
       CertificatePem: ''
     properties:
       CertificateIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The customer-assigned name of the certificate. Valid characters are A-z and 0-9.
       CertificatePem:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The contents of the .pem X.509 certificate file for the certificate.
       CertificateWallet:
-        $ref: '#/definitions/CertificateWallet'
+        $ref: '#/definitions/[object Object]'
         description: The location of the imported Oracle Wallet certificate for use with SSL.
       Tags:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: The tags associated with the certificate.
   InvalidCertificateFault: {}
   ListTagsForResourceResponse:
@@ -3114,7 +2893,7 @@ definitions:
       TagList: []
     properties:
       TagList:
-        $ref: '#/definitions/TagList'
+        $ref: '#/definitions/[object Object]'
         description: A list of tags for the resource.
     description: <p/>
   ListTagsForResourceMessage:
@@ -3125,7 +2904,7 @@ definitions:
       ResourceArn: ''
     properties:
       ResourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the AWS DMS resource.
     description: <p/>
   ModifyEndpointResponse:
@@ -3134,7 +2913,7 @@ definitions:
       Endpoint: {}
     properties:
       Endpoint:
-        $ref: '#/definitions/Endpoint'
+        $ref: '#/definitions/[object Object]'
         description: The modified endpoint.
     description: <p/>
   ModifyEndpointMessage:
@@ -3156,71 +2935,71 @@ definitions:
       Username: ''
     properties:
       EndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
       EndpointIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.'
       EndpointType:
-        $ref: '#/definitions/ReplicationEndpointTypeValue'
+        $ref: '#/definitions/[object Object]'
         description: The type of endpoint.
       EngineName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.'
       Username:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The user name to be used to login to the endpoint database.
       Password:
-        $ref: '#/definitions/SecretString'
+        $ref: '#/definitions/[object Object]'
         description: The password to be used to login to the endpoint database.
       ServerName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the server where the endpoint database resides.
       Port:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: The port used by the endpoint database.
       DatabaseName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the endpoint database.
       ExtraConnectionAttributes:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'Additional attributes associated with the connection. To reset this parameter, pass the empty string ("") as an argument.'
       CertificateArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the certificate used for SSL connection.
       SslMode:
-        $ref: '#/definitions/DmsSslModeValue'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The SSL mode to be used.</p> <p>SSL mode can be one of four values: none, require, verify-ca, verify-full. </p> <p>The default value is none.</p>'
       ServiceAccessRoleArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The Amazon Resource Name (ARN) for the service access role you want to use to modify the endpoint. '
       ExternalTableDefinition:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The external table definition.
       DynamoDbSettings:
-        $ref: '#/definitions/DynamoDbSettings'
+        $ref: '#/definitions/[object Object]'
         description: 'Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html">Using Object Mapping to Migrate Data to DynamoDB</a> in the <i>AWS Database Migration Service User Guide.</i> '
       S3Settings:
-        $ref: '#/definitions/S3Settings'
+        $ref: '#/definitions/[object Object]'
         description: 'Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring">Extra Connection Attributes When Using Amazon S3 as a Target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
       DmsTransferSettings:
-        $ref: '#/definitions/DmsTransferSettings'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Attributes include the following:</p> <ul> <li> <p>serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p>BucketName - The name of the S3 bucket to use.</p> </li> <li> <p>compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.</p> </li> </ul> <p>Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string</p> <p>JSON syntax:</p> <p> { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </p>'
       MongoDbSettings:
-        $ref: '#/definitions/MongoDbSettings'
+        $ref: '#/definitions/[object Object]'
         description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
       KinesisSettings:
-        $ref: '#/definitions/KinesisSettings'
+        $ref: '#/definitions/[object Object]'
         description: 'Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping ">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> '
       ElasticsearchSettings:
-        $ref: '#/definitions/ElasticsearchSettings'
+        $ref: '#/definitions/[object Object]'
         description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration User Guide.</i> '
     description: <p/>
   ModifyEventSubscriptionResponse:
     type: object
     properties:
       EventSubscription:
-        $ref: '#/definitions/EventSubscription'
+        $ref: '#/definitions/[object Object]'
         description: The modified event subscription.
     description: <p/>
   ModifyEventSubscriptionMessage:
@@ -3229,19 +3008,19 @@ definitions:
       - SubscriptionName
     properties:
       SubscriptionName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS DMS event notification subscription to be modified.
       SnsTopicArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The Amazon Resource Name (ARN) of the Amazon SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it.'
       SourceType:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The type of AWS DMS resource that generates the events you want to subscribe to. </p> <p>Valid values: replication-instance | migration-task</p>'
       EventCategories:
-        $ref: '#/definitions/EventCategoriesList'
+        $ref: '#/definitions/[object Object]'
         description: ' A list of event categories for a source type that you want to subscribe to. Use the <code>DescribeEventCategories</code> action to see a list of event categories. '
       Enabled:
-        $ref: '#/definitions/BooleanOptional'
+        $ref: '#/definitions/[object Object]'
         description: ' A Boolean value; set to <b>true</b> to activate the subscription. '
     description: <p/>
   ModifyReplicationInstanceResponse:
@@ -3283,7 +3062,7 @@ definitions:
           VpcId: vpc-6741a603
     properties:
       ReplicationInstance:
-        $ref: '#/definitions/ReplicationInstance'
+        $ref: '#/definitions/[object Object]'
         description: The modified replication instance.
     description: <p/>
   ModifyReplicationInstanceMessage:
@@ -3304,37 +3083,37 @@ definitions:
       VpcSecurityGroupIds: []
     properties:
       ReplicationInstanceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication instance.
       AllocatedStorage:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: The amount of storage (in gigabytes) to be allocated for the replication instance.
       ApplyImmediately:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: Indicates whether the changes should be applied immediately or during the next maintenance window.
       ReplicationInstanceClass:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The compute and memory capacity of the replication instance.</p> <p> Valid Values: <code>dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge </code> </p>'
       VpcSecurityGroupIds:
-        $ref: '#/definitions/VpcSecurityGroupIdList'
+        $ref: '#/definitions/[object Object]'
         description: ' Specifies the VPC security group to be used with the replication instance. The VPC security group must work with the VPC containing the replication instance. '
       PreferredMaintenanceWindow:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The weekly time range (in UTC) during which system maintenance can occur, which might result in an outage. Changing this parameter does not result in an outage, except in the following situation, and the change is asynchronously applied as soon as possible. If moving this window to the current time, there must be at least 30 minutes between the current time and end of the window to ensure pending changes are applied.</p> <p>Default: Uses existing setting</p> <p>Format: ddd:hh24:mi-ddd:hh24:mi</p> <p>Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun</p> <p>Constraints: Must be at least 30 minutes</p>'
       MultiAZ:
-        $ref: '#/definitions/BooleanOptional'
+        $ref: '#/definitions/[object Object]'
         description: ' Specifies if the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. '
       EngineVersion:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The engine version number of the replication instance.
       AllowMajorVersionUpgrade:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible.</p> <p>Constraints: This parameter must be set to true when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the replication instance''s current version.</p>'
       AutoMinorVersionUpgrade:
-        $ref: '#/definitions/BooleanOptional'
+        $ref: '#/definitions/[object Object]'
         description: ' Indicates that minor version upgrades will be applied automatically to the replication instance during the maintenance window. Changing this parameter does not result in an outage except in the following case and the change is asynchronously applied as soon as possible. An outage will result if this parameter is set to <code>true</code> during the maintenance window, and a newer minor version is available, and AWS DMS has enabled auto patching for that engine version. '
       ReplicationInstanceIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The replication instance identifier. This parameter is stored as a lowercase string.
     description: <p/>
   UpgradeDependencyFailureFault: {}
@@ -3344,7 +3123,7 @@ definitions:
       ReplicationSubnetGroup: {}
     properties:
       ReplicationSubnetGroup:
-        $ref: '#/definitions/ReplicationSubnetGroup'
+        $ref: '#/definitions/[object Object]'
         description: The modified replication subnet group.
     description: <p/>
   ModifyReplicationSubnetGroupMessage:
@@ -3358,13 +3137,13 @@ definitions:
       SubnetIds: []
     properties:
       ReplicationSubnetGroupIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the replication instance subnet group.
       ReplicationSubnetGroupDescription:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The description of the replication instance subnet group.
       SubnetIds:
-        $ref: '#/definitions/SubnetIdentifierList'
+        $ref: '#/definitions/[object Object]'
         description: A list of subnet IDs.
     description: <p/>
   SubnetAlreadyInUse: {}
@@ -3372,7 +3151,7 @@ definitions:
     type: object
     properties:
       ReplicationTask:
-        $ref: '#/definitions/ReplicationTask'
+        $ref: '#/definitions/[object Object]'
         description: The replication task that was modified.
     description: <p/>
   ModifyReplicationTaskMessage:
@@ -3381,35 +3160,35 @@ definitions:
       - ReplicationTaskArn
     properties:
       ReplicationTaskArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication task.
       ReplicationTaskIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The replication task identifier.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
       MigrationType:
-        $ref: '#/definitions/MigrationTypeValue'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The migration type.</p> <p>Valid values: full-load | cdc | full-load-and-cdc</p>'
       TableMappings:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with "file://". When working with the DMS API, provide the JSON as the parameter value.</p> <p>For example, --table-mappings file://mappingfile.json</p>'
       ReplicationTaskSettings:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'JSON file that contains settings for the task, such as target metadata settings.'
       CdcStartTime:
-        $ref: '#/definitions/TStamp'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p>Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”</p>'
       CdcStartPosition:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p> The value can be in date, checkpoint, or LSN/SCN format.</p> <p>Date Example: --cdc-start-position “2018-03-08T12:12:12”</p> <p>Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"</p> <p>LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”</p>'
       CdcStopPosition:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>'
     description: <p/>
   RebootReplicationInstanceResponse:
     type: object
     properties:
       ReplicationInstance:
-        $ref: '#/definitions/ReplicationInstance'
+        $ref: '#/definitions/[object Object]'
         description: 'The replication instance that is being rebooted. '
   RebootReplicationInstanceMessage:
     type: object
@@ -3417,10 +3196,10 @@ definitions:
       - ReplicationInstanceArn
     properties:
       ReplicationInstanceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication instance.
       ForceFailover:
-        $ref: '#/definitions/BooleanOptional'
+        $ref: '#/definitions/[object Object]'
         description: 'If this parameter is <code>true</code>, the reboot is conducted through a Multi-AZ failover. (If the instance isn''t configured for Multi-AZ, then you can''t specify <code>true</code>.)'
   RefreshSchemasResponse:
     type: object
@@ -3428,7 +3207,7 @@ definitions:
       RefreshSchemasStatus: {}
     properties:
       RefreshSchemasStatus:
-        $ref: '#/definitions/RefreshSchemasStatus'
+        $ref: '#/definitions/[object Object]'
         description: The status of the refreshed schema.
     description: <p/>
   RefreshSchemasMessage:
@@ -3441,17 +3220,17 @@ definitions:
       ReplicationInstanceArn: ''
     properties:
       EndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
       ReplicationInstanceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication instance.
     description: <p/>
   ReloadTablesResponse:
     type: object
     properties:
       ReplicationTaskArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The Amazon Resource Name (ARN) of the replication task. '
   ReloadTablesMessage:
     type: object
@@ -3460,13 +3239,13 @@ definitions:
       - TablesToReload
     properties:
       ReplicationTaskArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The Amazon Resource Name (ARN) of the replication task. '
       TablesToReload:
-        $ref: '#/definitions/TableListToReload'
+        $ref: '#/definitions/[object Object]'
         description: 'The name and schema of the table to be reloaded. '
       ReloadOption:
-        $ref: '#/definitions/ReloadOptionValue'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Options for reload. Specify <code>data-reload</code> to reload the data and re-validate it if validation is enabled. Specify <code>validate-only</code> to re-validate the table. This option applies only when validation is enabled for the task. </p> <p>Valid values: data-reload, validate-only</p> <p>Default value is data-reload.</p>'
   RemoveTagsFromResourceResponse:
     type: object
@@ -3483,10 +3262,10 @@ definitions:
       TagKeys: []
     properties:
       ResourceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '&gt;The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to be removed from.'
       TagKeys:
-        $ref: '#/definitions/KeyList'
+        $ref: '#/definitions/[object Object]'
         description: The tag key (name) of the tag to be removed.
     description: <p/>
   StartReplicationTaskResponse:
@@ -3505,7 +3284,7 @@ definitions:
         TargetEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
     properties:
       ReplicationTask:
-        $ref: '#/definitions/ReplicationTask'
+        $ref: '#/definitions/[object Object]'
         description: The replication task started.
     description: <p/>
   StartReplicationTaskMessage:
@@ -3519,26 +3298,26 @@ definitions:
       StartReplicationTaskType: start-replication
     properties:
       ReplicationTaskArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication task to be started.
       StartReplicationTaskType:
-        $ref: '#/definitions/StartReplicationTaskTypeValue'
+        $ref: '#/definitions/[object Object]'
         description: The type of replication task.
       CdcStartTime:
-        $ref: '#/definitions/TStamp'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p>Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”</p>'
       CdcStartPosition:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p> The value can be in date, checkpoint, or LSN/SCN format.</p> <p>Date Example: --cdc-start-position “2018-03-08T12:12:12”</p> <p>Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"</p> <p>LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”</p>'
       CdcStopPosition:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>'
     description: <p/>
   StartReplicationTaskAssessmentResponse:
     type: object
     properties:
       ReplicationTask:
-        $ref: '#/definitions/ReplicationTask'
+        $ref: '#/definitions/[object Object]'
         description: ' The assessed replication task. '
     description: <p/>
   StartReplicationTaskAssessmentMessage:
@@ -3547,7 +3326,7 @@ definitions:
       - ReplicationTaskArn
     properties:
       ReplicationTaskArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The Amazon Resource Name (ARN) of the replication task. '
     description: <p/>
   StopReplicationTaskResponse:
@@ -3566,7 +3345,7 @@ definitions:
         TargetEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
     properties:
       ReplicationTask:
-        $ref: '#/definitions/ReplicationTask'
+        $ref: '#/definitions/[object Object]'
         description: The replication task stopped.
     description: <p/>
   StopReplicationTaskMessage:
@@ -3577,7 +3356,7 @@ definitions:
       ReplicationTaskArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
     properties:
       ReplicationTaskArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name(ARN) of the replication task to be stopped.
     description: <p/>
   TestConnectionResponse:
@@ -3586,7 +3365,7 @@ definitions:
       Connection: {}
     properties:
       Connection:
-        $ref: '#/definitions/Connection'
+        $ref: '#/definitions/[object Object]'
         description: The connection tested.
     description: <p/>
   TestConnectionMessage:
@@ -3599,37 +3378,30 @@ definitions:
       ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
     properties:
       ReplicationInstanceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication instance.
       EndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
     description: <p/>
-  String:
-    type: string
-  Long:
-    type: integer
+  '[object Object]': {}
   AccountQuota:
     type: object
     properties:
       AccountQuotaName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the AWS DMS quota for this AWS account.
       Used:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The amount currently used toward the quota maximum.
       Max:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The maximum allowed value for the quota.
     description: 'Describes a quota for an AWS account, for example, the number of replication instances allowed.'
   AccountQuotaList:
     type: array
     items:
-      $ref: '#/definitions/AccountQuota'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
+      $ref: '#/definitions/[object Object]'
   AuthMechanismValue:
     type: string
     enum:
@@ -3645,58 +3417,53 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the availability zone.
     description: <p/>
   Boolean:
     type: boolean
   BooleanOptional:
     type: boolean
-  TStamp:
-    type: string
-    format: date-time
-  CertificateWallet:
-    type: string
-  IntegerOptional:
-    type: integer
   Certificate:
     type: object
     properties:
       CertificateIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The customer-assigned name of the certificate. Valid characters are A-z and 0-9.
       CertificateCreationDate:
-        $ref: '#/definitions/TStamp'
+        $ref: '#/definitions/[object Object]'
         description: The date that the certificate was created.
       CertificatePem:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The contents of the .pem X.509 certificate file for the certificate.
       CertificateWallet:
-        $ref: '#/definitions/CertificateWallet'
+        $ref: '#/definitions/[object Object]'
         description: The location of the imported Oracle Wallet certificate for use with SSL.
       CertificateArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) for the certificate.
       CertificateOwner:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The owner of the certificate.
       ValidFromDate:
-        $ref: '#/definitions/TStamp'
+        $ref: '#/definitions/[object Object]'
         description: The beginning date that the certificate is valid.
       ValidToDate:
-        $ref: '#/definitions/TStamp'
+        $ref: '#/definitions/[object Object]'
         description: The final date that the certificate is valid.
       SigningAlgorithm:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The signing algorithm for the certificate.
       KeyLength:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: The key length of the cryptographic algorithm being used.
     description: The SSL certificate that can be used to encrypt connections between the endpoints and the replication instance.
   CertificateList:
     type: array
     items:
-      $ref: '#/definitions/Certificate'
+      $ref: '#/definitions/[object Object]'
+  CertificateWallet:
+    type: string
   CompressionTypeValue:
     type: string
     enum:
@@ -3706,36 +3473,28 @@ definitions:
     type: object
     properties:
       ReplicationInstanceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication instance.
       EndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
       Status:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The connection status.
       LastFailureMessage:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The error message when the connection last failed.
       EndpointIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The identifier of the endpoint. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.'
       ReplicationInstanceIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The replication instance identifier. This parameter is stored as a lowercase string.
     description: <p/>
   ConnectionList:
     type: array
     items:
-      $ref: '#/definitions/Connection'
-  ReplicationEndpointTypeValue:
-    type: string
-    enum:
-      - source
-      - target
-  SecretString:
-    type: string
-    format: password
+      $ref: '#/definitions/[object Object]'
   DmsSslModeValue:
     type: string
     enum:
@@ -3743,102 +3502,24 @@ definitions:
       - require
       - verify-ca
       - verify-full
+  DmsTransferSettings:
+    type: object
+    properties:
+      ServiceAccessRoleArn:
+        $ref: '#/definitions/[object Object]'
+        description: ' The IAM role that has permission to access the Amazon S3 bucket. '
+      BucketName:
+        $ref: '#/definitions/[object Object]'
+        description: ' The name of the S3 bucket to use. '
+    description: ' The settings in JSON format for the DMS Transfer type source endpoint. '
   DynamoDbSettings:
     type: object
     required:
       - ServiceAccessRoleArn
     properties:
       ServiceAccessRoleArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The Amazon Resource Name (ARN) used by the service access IAM role. '
-    description: <p/>
-  S3Settings:
-    type: object
-    properties:
-      ServiceAccessRoleArn:
-        $ref: '#/definitions/String'
-        description: ' The Amazon Resource Name (ARN) used by the service access IAM role. '
-      ExternalTableDefinition:
-        $ref: '#/definitions/String'
-        description: ' The external table definition. '
-      CsvRowDelimiter:
-        $ref: '#/definitions/String'
-        description: ' The delimiter used to separate rows in the source files. The default is a carriage return (\n). '
-      CsvDelimiter:
-        $ref: '#/definitions/String'
-        description: ' The delimiter used to separate columns in the source files. The default is a comma. '
-      BucketFolder:
-        $ref: '#/definitions/String'
-        description: ' An optional parameter to set a folder name in the S3 bucket. If provided, tables are created in the path &lt;bucketFolder&gt;/&lt;schema_name&gt;/&lt;table_name&gt;/. If this parameter is not specified, then the path used is &lt;schema_name&gt;/&lt;table_name&gt;/. '
-      BucketName:
-        $ref: '#/definitions/String'
-        description: ' The name of the S3 bucket. '
-      CompressionType:
-        $ref: '#/definitions/CompressionTypeValue'
-        description: ' An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed. '
-    description: <p/>
-  DmsTransferSettings:
-    type: object
-    properties:
-      ServiceAccessRoleArn:
-        $ref: '#/definitions/String'
-        description: ' The IAM role that has permission to access the Amazon S3 bucket. '
-      BucketName:
-        $ref: '#/definitions/String'
-        description: ' The name of the S3 bucket to use. '
-    description: ' The settings in JSON format for the DMS Transfer type source endpoint. '
-  MongoDbSettings:
-    type: object
-    properties:
-      Username:
-        $ref: '#/definitions/String'
-        description: 'The user name you use to access the MongoDB source endpoint. '
-      Password:
-        $ref: '#/definitions/SecretString'
-        description: ' The password for the user account you use to access the MongoDB source endpoint. '
-      ServerName:
-        $ref: '#/definitions/String'
-        description: ' The name of the server on the MongoDB source endpoint. '
-      Port:
-        $ref: '#/definitions/IntegerOptional'
-        description: ' The port value for the MongoDB source endpoint. '
-      DatabaseName:
-        $ref: '#/definitions/String'
-        description: ' The database name on the MongoDB source endpoint. '
-      AuthType:
-        $ref: '#/definitions/AuthTypeValue'
-        description: '<p> The authentication type you use to access the MongoDB source endpoint.</p> <p>Valid values: NO, PASSWORD </p> <p>When NO is selected, user name and password parameters are not used and can be empty. </p>'
-      AuthMechanism:
-        $ref: '#/definitions/AuthMechanismValue'
-        description: '<p> The authentication mechanism you use to access the MongoDB source endpoint.</p> <p>Valid values: DEFAULT, MONGODB_CR, SCRAM_SHA_1 </p> <p>DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version 3.x, use SCRAM_SHA_1. This attribute is not used when authType=No.</p>'
-      NestingLevel:
-        $ref: '#/definitions/NestingLevelValue'
-        description: '<p> Specifies either document or table mode. </p> <p>Valid values: NONE, ONE</p> <p>Default value is NONE. Specify NONE to use document mode. Specify ONE to use table mode.</p>'
-      ExtractDocId:
-        $ref: '#/definitions/String'
-        description: <p> Specifies the document ID. Use this attribute when <code>NestingLevel</code> is set to NONE. </p> <p>Default value is false. </p>
-      DocsToInvestigate:
-        $ref: '#/definitions/String'
-        description: <p> Indicates the number of documents to preview to determine the document organization. Use this attribute when <code>NestingLevel</code> is set to ONE. </p> <p>Must be a positive value greater than 0. Default value is 1000.</p>
-      AuthSource:
-        $ref: '#/definitions/String'
-        description: <p> The MongoDB database name. This attribute is not used when <code>authType=NO</code>. </p> <p>The default is admin.</p>
-      KmsKeyId:
-        $ref: '#/definitions/String'
-        description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
-    description: <p/>
-  KinesisSettings:
-    type: object
-    properties:
-      StreamArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.
-      MessageFormat:
-        $ref: '#/definitions/MessageFormatValue'
-        description: The output format for the records created on the endpoint. The message format is <code>JSON</code>.
-      ServiceAccessRoleArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) for the IAM role that DMS uses to write to the Amazon Kinesis data stream.
     description: <p/>
   ElasticsearchSettings:
     type: object
@@ -3847,403 +3528,171 @@ definitions:
       - EndpointUri
     properties:
       ServiceAccessRoleArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) used by service to access the IAM role.
       EndpointUri:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The endpoint for the ElasticSearch cluster.
       FullLoadErrorPercentage:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: 'The maximum percentage of records that can fail to be written before a full load operation stops. '
       ErrorRetryDuration:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: The maximum number of seconds that DMS retries failed API requests to the Elasticsearch cluster.
     description: <p/>
   Endpoint:
     type: object
     properties:
       EndpointIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.'
       EndpointType:
-        $ref: '#/definitions/ReplicationEndpointTypeValue'
+        $ref: '#/definitions/[object Object]'
         description: The type of endpoint.
       EngineName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.'
       EngineDisplayName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The expanded name for the engine name. For example, if the <code>EngineName</code> parameter is "aurora," this value would be "Amazon Aurora MySQL."'
       Username:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The user name used to connect to the endpoint.
       ServerName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the server at the endpoint.
       Port:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: The port value used to access the endpoint.
       DatabaseName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the database at the endpoint.
       ExtraConnectionAttributes:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Additional connection attributes used to connect to the endpoint.
       Status:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The status of the endpoint.
       KmsKeyId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
       EndpointArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
       CertificateArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) used for SSL connection to the endpoint.
       SslMode:
-        $ref: '#/definitions/DmsSslModeValue'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The SSL mode used to connect to the endpoint.</p> <p>SSL mode can be one of four values: none, require, verify-ca, verify-full. </p> <p>The default value is none.</p>'
       ServiceAccessRoleArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) used by the service access IAM role.
       ExternalTableDefinition:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The external table definition.
       ExternalId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' Value returned by a call to CreateEndpoint that can be used for cross-account validation. Use it on a subsequent call to CreateEndpoint to create the endpoint with a cross-account. '
       DynamoDbSettings:
-        $ref: '#/definitions/DynamoDbSettings'
+        $ref: '#/definitions/[object Object]'
         description: 'The settings for the target DynamoDB database. For more information, see the <code>DynamoDBSettings</code> structure.'
       S3Settings:
-        $ref: '#/definitions/S3Settings'
+        $ref: '#/definitions/[object Object]'
         description: 'The settings for the S3 target endpoint. For more information, see the <code>S3Settings</code> structure.'
       DmsTransferSettings:
-        $ref: '#/definitions/DmsTransferSettings'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Possible attributes include the following:</p> <ul> <li> <p> <code>serviceAccessRoleArn</code> - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p> <code>bucketName</code> - The name of the S3 bucket to use.</p> </li> <li> <p> <code>compressionType</code> - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to <code>NONE</code> (the default). To keep the files uncompressed, don''t use this value. </p> </li> </ul> <p>Shorthand syntax for these attributes is as follows: <code>ServiceAccessRoleArn=string,BucketName=string,CompressionType=string</code> </p> <p>JSON syntax for these attributes is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </code> </p>'
       MongoDbSettings:
-        $ref: '#/definitions/MongoDbSettings'
+        $ref: '#/definitions/[object Object]'
         description: 'The settings for the MongoDB source endpoint. For more information, see the <code>MongoDbSettings</code> structure.'
       KinesisSettings:
-        $ref: '#/definitions/KinesisSettings'
+        $ref: '#/definitions/[object Object]'
         description: 'The settings for the Amazon Kinesis source endpoint. For more information, see the <code>KinesisSettings</code> structure.'
       ElasticsearchSettings:
-        $ref: '#/definitions/ElasticsearchSettings'
+        $ref: '#/definitions/[object Object]'
         description: 'The settings for the Elasticsearch source endpoint. For more information, see the <code>ElasticsearchSettings</code> structure.'
     description: <p/>
-  EventCategoriesList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SourceIdsList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  EventSubscription:
-    type: object
-    properties:
-      CustomerAwsId:
-        $ref: '#/definitions/String'
-        description: The AWS customer account associated with the AWS DMS event notification subscription.
-      CustSubscriptionId:
-        $ref: '#/definitions/String'
-        description: The AWS DMS event notification subscription Id.
-      SnsTopicArn:
-        $ref: '#/definitions/String'
-        description: The topic ARN of the AWS DMS event notification subscription.
-      Status:
-        $ref: '#/definitions/String'
-        description: '<p>The status of the AWS DMS event notification subscription.</p> <p>Constraints:</p> <p>Can be one of the following: creating | modifying | deleting | active | no-permission | topic-not-exist</p> <p>The status "no-permission" indicates that AWS DMS no longer has permission to post to the SNS topic. The status "topic-not-exist" indicates that the topic was deleted after the subscription was created.</p>'
-      SubscriptionCreationTime:
-        $ref: '#/definitions/String'
-        description: The time the RDS event notification subscription was created.
-      SourceType:
-        $ref: '#/definitions/String'
-        description: '<p> The type of AWS DMS resource that generates events. </p> <p>Valid values: replication-instance | replication-server | security-group | migration-task</p>'
-      SourceIdsList:
-        $ref: '#/definitions/SourceIdsList'
-        description: A list of source Ids for the event subscription.
-      EventCategoriesList:
-        $ref: '#/definitions/EventCategoriesList'
-        description: A lists of event categories.
-      Enabled:
-        $ref: '#/definitions/Boolean'
-        description: Boolean value that indicates if the event subscription is enabled.
-    description: <p/>
-  VpcSecurityGroupIdList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ReplicationInstance:
-    type: object
-    properties:
-      ReplicationInstanceIdentifier:
-        $ref: '#/definitions/String'
-        description: '<p>The replication instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>'
-      ReplicationInstanceClass:
-        $ref: '#/definitions/String'
-        description: '<p>The compute and memory capacity of the replication instance.</p> <p> Valid Values: <code>dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge </code> </p>'
-      ReplicationInstanceStatus:
-        $ref: '#/definitions/String'
-        description: The status of the replication instance.
-      AllocatedStorage:
-        $ref: '#/definitions/Integer'
-        description: The amount of storage (in gigabytes) that is allocated for the replication instance.
-      InstanceCreateTime:
-        $ref: '#/definitions/TStamp'
-        description: The time the replication instance was created.
-      VpcSecurityGroups:
-        $ref: '#/definitions/VpcSecurityGroupMembershipList'
-        description: The VPC security group for the instance.
-      AvailabilityZone:
-        $ref: '#/definitions/String'
-        description: The Availability Zone for the instance.
-      ReplicationSubnetGroup:
-        $ref: '#/definitions/ReplicationSubnetGroup'
-        description: The subnet group for the replication instance.
-      PreferredMaintenanceWindow:
-        $ref: '#/definitions/String'
-        description: The maintenance window times for the replication instance.
-      PendingModifiedValues:
-        $ref: '#/definitions/ReplicationPendingModifiedValues'
-        description: The pending modification values.
-      MultiAZ:
-        $ref: '#/definitions/Boolean'
-        description: ' Specifies if the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. '
-      EngineVersion:
-        $ref: '#/definitions/String'
-        description: The engine version number of the replication instance.
-      AutoMinorVersionUpgrade:
-        $ref: '#/definitions/Boolean'
-        description: Boolean value indicating if minor version upgrades will be automatically applied to the instance.
-      KmsKeyId:
-        $ref: '#/definitions/String'
-        description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
-      ReplicationInstanceArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the replication instance.
-      ReplicationInstancePublicIpAddress:
-        $ref: '#/definitions/String'
-        description: The public IP address of the replication instance.
-      ReplicationInstancePrivateIpAddress:
-        $ref: '#/definitions/String'
-        description: The private IP address of the replication instance.
-      ReplicationInstancePublicIpAddresses:
-        $ref: '#/definitions/ReplicationInstancePublicIpAddressList'
-        description: The public IP address of the replication instance.
-      ReplicationInstancePrivateIpAddresses:
-        $ref: '#/definitions/ReplicationInstancePrivateIpAddressList'
-        description: The private IP address of the replication instance.
-      PubliclyAccessible:
-        $ref: '#/definitions/Boolean'
-        description: ' Specifies the accessibility options for the replication instance. A value of <code>true</code> represents an instance with a public IP address. A value of <code>false</code> represents an instance with a private IP address. The default value is <code>true</code>. '
-      SecondaryAvailabilityZone:
-        $ref: '#/definitions/String'
-        description: The availability zone of the standby replication instance in a Multi-AZ deployment.
-      FreeUntil:
-        $ref: '#/definitions/TStamp'
-        description: ' The expiration date of the free replication instance that is part of the Free DMS program. '
-      DnsNameServers:
-        $ref: '#/definitions/String'
-        description: The DNS name servers for the replication instance.
-    description: <p/>
-  SubnetIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ReplicationSubnetGroup:
-    type: object
-    properties:
-      ReplicationSubnetGroupIdentifier:
-        $ref: '#/definitions/String'
-        description: The identifier of the replication instance subnet group.
-      ReplicationSubnetGroupDescription:
-        $ref: '#/definitions/String'
-        description: The description of the replication subnet group.
-      VpcId:
-        $ref: '#/definitions/String'
-        description: The ID of the VPC.
-      SubnetGroupStatus:
-        $ref: '#/definitions/String'
-        description: The status of the subnet group.
-      Subnets:
-        $ref: '#/definitions/SubnetList'
-        description: The subnets that are in the subnet group.
-    description: <p/>
-  MigrationTypeValue:
-    type: string
-    enum:
-      - full-load
-      - cdc
-      - full-load-and-cdc
-  ReplicationTask:
-    type: object
-    properties:
-      ReplicationTaskIdentifier:
-        $ref: '#/definitions/String'
-        description: '<p>The user-assigned replication task identifier or name.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
-      SourceEndpointArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-      TargetEndpointArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-      ReplicationInstanceArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the replication instance.
-      MigrationType:
-        $ref: '#/definitions/MigrationTypeValue'
-        description: The type of migration.
-      TableMappings:
-        $ref: '#/definitions/String'
-        description: Table mappings specified in the task.
-      ReplicationTaskSettings:
-        $ref: '#/definitions/String'
-        description: The settings for the replication task.
-      Status:
-        $ref: '#/definitions/String'
-        description: The status of the replication task.
-      LastFailureMessage:
-        $ref: '#/definitions/String'
-        description: The last error (failure) message generated for the replication instance.
-      StopReason:
-        $ref: '#/definitions/String'
-        description: The reason the replication task was stopped.
-      ReplicationTaskCreationDate:
-        $ref: '#/definitions/TStamp'
-        description: The date the replication task was created.
-      ReplicationTaskStartDate:
-        $ref: '#/definitions/TStamp'
-        description: The date the replication task is scheduled to start.
-      CdcStartPosition:
-        $ref: '#/definitions/String'
-        description: '<p>Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p> The value can be in date, checkpoint, or LSN/SCN format.</p> <p>Date Example: --cdc-start-position “2018-03-08T12:12:12”</p> <p>Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"</p> <p>LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”</p>'
-      CdcStopPosition:
-        $ref: '#/definitions/String'
-        description: '<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>'
-      RecoveryCheckpoint:
-        $ref: '#/definitions/String'
-        description: Indicates the last checkpoint that occurred during a change data capture (CDC) operation. You can provide this value to the <code>CdcStartPosition</code> parameter to start a CDC operation that begins at that checkpoint.
-      ReplicationTaskArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the replication task.
-      ReplicationTaskStats:
-        $ref: '#/definitions/ReplicationTaskStats'
-        description: 'The statistics for the task, including elapsed time, tables loaded, and table errors.'
-    description: <p/>
-  FilterList:
-    type: array
-    items:
-      $ref: '#/definitions/Filter'
-  SupportedEndpointTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/SupportedEndpointType'
   EndpointList:
     type: array
     items:
-      $ref: '#/definitions/Endpoint'
-  EventCategoryGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/EventCategoryGroup'
-  EventSubscriptionsList:
-    type: array
-    items:
-      $ref: '#/definitions/EventSubscription'
-  SourceType:
-    type: string
-    enum:
-      - replication-instance
-  EventList:
-    type: array
-    items:
-      $ref: '#/definitions/Event'
-  OrderableReplicationInstanceList:
-    type: array
-    items:
-      $ref: '#/definitions/OrderableReplicationInstance'
-  RefreshSchemasStatus:
-    type: object
-    properties:
-      EndpointArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-      ReplicationInstanceArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the replication instance.
-      Status:
-        $ref: '#/definitions/RefreshSchemasStatusTypeValue'
-        description: The status of the schema.
-      LastRefreshDate:
-        $ref: '#/definitions/TStamp'
-        description: The date the schema was last refreshed.
-      LastFailureMessage:
-        $ref: '#/definitions/String'
-        description: The last failure message for the schema.
-    description: <p/>
-  ReplicationInstanceTaskLogsList:
-    type: array
-    items:
-      $ref: '#/definitions/ReplicationInstanceTaskLog'
-  ReplicationInstanceList:
-    type: array
-    items:
-      $ref: '#/definitions/ReplicationInstance'
-  ReplicationSubnetGroups:
-    type: array
-    items:
-      $ref: '#/definitions/ReplicationSubnetGroup'
-  ReplicationTaskAssessmentResultList:
-    type: array
-    items:
-      $ref: '#/definitions/ReplicationTaskAssessmentResult'
-  ReplicationTaskList:
-    type: array
-    items:
-      $ref: '#/definitions/ReplicationTask'
-  SchemaList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  TableStatisticsList:
-    type: array
-    items:
-      $ref: '#/definitions/TableStatistics'
+      $ref: '#/definitions/[object Object]'
   Event:
     type: object
     properties:
       SourceIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The identifier of the event source. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens. </p> <p>Constraints:replication instance, endpoint, migration task</p>'
       SourceType:
-        $ref: '#/definitions/SourceType'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The type of AWS DMS resource that generates events. </p> <p>Valid values: replication-instance | endpoint | migration-task</p>'
       Message:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The event message.
       EventCategories:
-        $ref: '#/definitions/EventCategoriesList'
+        $ref: '#/definitions/[object Object]'
         description: The event categories available for the specified source type.
       Date:
-        $ref: '#/definitions/TStamp'
+        $ref: '#/definitions/[object Object]'
         description: The date of the event.
     description: <p/>
+  EventCategoriesList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   EventCategoryGroup:
     type: object
     properties:
       SourceType:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p> The type of AWS DMS resource that generates events. </p> <p>Valid values: replication-instance | replication-server | security-group | migration-task</p>'
       EventCategories:
-        $ref: '#/definitions/EventCategoriesList'
+        $ref: '#/definitions/[object Object]'
         description: ' A list of event categories for a <code>SourceType</code> that you want to subscribe to. '
     description: <p/>
-  FilterValueList:
+  EventCategoryGroupList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/[object Object]'
+  EventList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  EventSubscription:
+    type: object
+    properties:
+      CustomerAwsId:
+        $ref: '#/definitions/[object Object]'
+        description: The AWS customer account associated with the AWS DMS event notification subscription.
+      CustSubscriptionId:
+        $ref: '#/definitions/[object Object]'
+        description: The AWS DMS event notification subscription Id.
+      SnsTopicArn:
+        $ref: '#/definitions/[object Object]'
+        description: The topic ARN of the AWS DMS event notification subscription.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The status of the AWS DMS event notification subscription.</p> <p>Constraints:</p> <p>Can be one of the following: creating | modifying | deleting | active | no-permission | topic-not-exist</p> <p>The status "no-permission" indicates that AWS DMS no longer has permission to post to the SNS topic. The status "topic-not-exist" indicates that the topic was deleted after the subscription was created.</p>'
+      SubscriptionCreationTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time the RDS event notification subscription was created.
+      SourceType:
+        $ref: '#/definitions/[object Object]'
+        description: '<p> The type of AWS DMS resource that generates events. </p> <p>Valid values: replication-instance | replication-server | security-group | migration-task</p>'
+      SourceIdsList:
+        $ref: '#/definitions/[object Object]'
+        description: A list of source Ids for the event subscription.
+      EventCategoriesList:
+        $ref: '#/definitions/[object Object]'
+        description: A lists of event categories.
+      Enabled:
+        $ref: '#/definitions/[object Object]'
+        description: Boolean value that indicates if the event subscription is enabled.
+    description: <p/>
+  EventSubscriptionsList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Filter:
     type: object
     required:
@@ -4251,22 +3700,93 @@ definitions:
       - Values
     properties:
       Name:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the filter.
       Values:
-        $ref: '#/definitions/FilterValueList'
+        $ref: '#/definitions/[object Object]'
         description: The filter value.
     description: <p/>
+  FilterList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  FilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   Integer:
+    type: integer
+  IntegerOptional:
     type: integer
   KeyList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/[object Object]'
+  KinesisSettings:
+    type: object
+    properties:
+      StreamArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.
+      MessageFormat:
+        $ref: '#/definitions/[object Object]'
+        description: The output format for the records created on the endpoint. The message format is <code>JSON</code>.
+      ServiceAccessRoleArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) for the IAM role that DMS uses to write to the Amazon Kinesis data stream.
+    description: <p/>
+  Long:
+    type: integer
   MessageFormatValue:
     type: string
     enum:
       - json
+  MigrationTypeValue:
+    type: string
+    enum:
+      - full-load
+      - cdc
+      - full-load-and-cdc
+  MongoDbSettings:
+    type: object
+    properties:
+      Username:
+        $ref: '#/definitions/[object Object]'
+        description: 'The user name you use to access the MongoDB source endpoint. '
+      Password:
+        $ref: '#/definitions/[object Object]'
+        description: ' The password for the user account you use to access the MongoDB source endpoint. '
+      ServerName:
+        $ref: '#/definitions/[object Object]'
+        description: ' The name of the server on the MongoDB source endpoint. '
+      Port:
+        $ref: '#/definitions/[object Object]'
+        description: ' The port value for the MongoDB source endpoint. '
+      DatabaseName:
+        $ref: '#/definitions/[object Object]'
+        description: ' The database name on the MongoDB source endpoint. '
+      AuthType:
+        $ref: '#/definitions/[object Object]'
+        description: '<p> The authentication type you use to access the MongoDB source endpoint.</p> <p>Valid values: NO, PASSWORD </p> <p>When NO is selected, user name and password parameters are not used and can be empty. </p>'
+      AuthMechanism:
+        $ref: '#/definitions/[object Object]'
+        description: '<p> The authentication mechanism you use to access the MongoDB source endpoint.</p> <p>Valid values: DEFAULT, MONGODB_CR, SCRAM_SHA_1 </p> <p>DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version 3.x, use SCRAM_SHA_1. This attribute is not used when authType=No.</p>'
+      NestingLevel:
+        $ref: '#/definitions/[object Object]'
+        description: '<p> Specifies either document or table mode. </p> <p>Valid values: NONE, ONE</p> <p>Default value is NONE. Specify NONE to use document mode. Specify ONE to use table mode.</p>'
+      ExtractDocId:
+        $ref: '#/definitions/[object Object]'
+        description: <p> Specifies the document ID. Use this attribute when <code>NestingLevel</code> is set to NONE. </p> <p>Default value is false. </p>
+      DocsToInvestigate:
+        $ref: '#/definitions/[object Object]'
+        description: <p> Indicates the number of documents to preview to determine the document organization. Use this attribute when <code>NestingLevel</code> is set to ONE. </p> <p>Must be a positive value greater than 0. Default value is 1000.</p>
+      AuthSource:
+        $ref: '#/definitions/[object Object]'
+        description: <p> The MongoDB database name. This attribute is not used when <code>authType=NO</code>. </p> <p>The default is admin.</p>
+      KmsKeyId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
+    description: <p/>
   NestingLevelValue:
     type: string
     enum:
@@ -4276,26 +3796,49 @@ definitions:
     type: object
     properties:
       EngineVersion:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The version of the replication engine.
       ReplicationInstanceClass:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The compute and memory capacity of the replication instance.</p> <p> Valid Values: <code>dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge </code> </p>'
       StorageType:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The type of storage used by the replication instance.
       MinAllocatedStorage:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The minimum amount of storage (in gigabytes) that can be allocated for the replication instance.
       MaxAllocatedStorage:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The minimum amount of storage (in gigabytes) that can be allocated for the replication instance.
       DefaultAllocatedStorage:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The default amount of storage (in gigabytes) that is allocated for the replication instance.
       IncludedAllocatedStorage:
-        $ref: '#/definitions/Integer'
+        $ref: '#/definitions/[object Object]'
         description: The amount of storage (in gigabytes) that is allocated for the replication instance.
+    description: <p/>
+  OrderableReplicationInstanceList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  RefreshSchemasStatus:
+    type: object
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+      ReplicationInstanceArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the replication instance.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the schema.
+      LastRefreshDate:
+        $ref: '#/definitions/[object Object]'
+        description: The date the schema was last refreshed.
+      LastFailureMessage:
+        $ref: '#/definitions/[object Object]'
+        description: The last failure message for the schema.
     description: <p/>
   RefreshSchemasStatusTypeValue:
     type: string
@@ -4308,216 +3851,453 @@ definitions:
     enum:
       - data-reload
       - validate-only
-  TableListToReload:
-    type: array
-    items:
-      $ref: '#/definitions/TableToReload'
-  VpcSecurityGroupMembershipList:
-    type: array
-    items:
-      $ref: '#/definitions/VpcSecurityGroupMembership'
-  ReplicationPendingModifiedValues:
+  ReplicationEndpointTypeValue:
+    type: string
+    enum:
+      - source
+      - target
+  ReplicationInstance:
     type: object
     properties:
+      ReplicationInstanceIdentifier:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The replication instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>'
       ReplicationInstanceClass:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The compute and memory capacity of the replication instance.</p> <p> Valid Values: <code>dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge </code> </p>'
+      ReplicationInstanceStatus:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the replication instance.
       AllocatedStorage:
-        $ref: '#/definitions/IntegerOptional'
+        $ref: '#/definitions/[object Object]'
         description: The amount of storage (in gigabytes) that is allocated for the replication instance.
+      InstanceCreateTime:
+        $ref: '#/definitions/[object Object]'
+        description: The time the replication instance was created.
+      VpcSecurityGroups:
+        $ref: '#/definitions/[object Object]'
+        description: The VPC security group for the instance.
+      AvailabilityZone:
+        $ref: '#/definitions/[object Object]'
+        description: The Availability Zone for the instance.
+      ReplicationSubnetGroup:
+        $ref: '#/definitions/[object Object]'
+        description: The subnet group for the replication instance.
+      PreferredMaintenanceWindow:
+        $ref: '#/definitions/[object Object]'
+        description: The maintenance window times for the replication instance.
+      PendingModifiedValues:
+        $ref: '#/definitions/[object Object]'
+        description: The pending modification values.
       MultiAZ:
-        $ref: '#/definitions/BooleanOptional'
+        $ref: '#/definitions/[object Object]'
         description: ' Specifies if the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. '
       EngineVersion:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The engine version number of the replication instance.
+      AutoMinorVersionUpgrade:
+        $ref: '#/definitions/[object Object]'
+        description: Boolean value indicating if minor version upgrades will be automatically applied to the instance.
+      KmsKeyId:
+        $ref: '#/definitions/[object Object]'
+        description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
+      ReplicationInstanceArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the replication instance.
+      ReplicationInstancePublicIpAddress:
+        $ref: '#/definitions/[object Object]'
+        description: The public IP address of the replication instance.
+      ReplicationInstancePrivateIpAddress:
+        $ref: '#/definitions/[object Object]'
+        description: The private IP address of the replication instance.
+      ReplicationInstancePublicIpAddresses:
+        $ref: '#/definitions/[object Object]'
+        description: The public IP address of the replication instance.
+      ReplicationInstancePrivateIpAddresses:
+        $ref: '#/definitions/[object Object]'
+        description: The private IP address of the replication instance.
+      PubliclyAccessible:
+        $ref: '#/definitions/[object Object]'
+        description: ' Specifies the accessibility options for the replication instance. A value of <code>true</code> represents an instance with a public IP address. A value of <code>false</code> represents an instance with a private IP address. The default value is <code>true</code>. '
+      SecondaryAvailabilityZone:
+        $ref: '#/definitions/[object Object]'
+        description: The availability zone of the standby replication instance in a Multi-AZ deployment.
+      FreeUntil:
+        $ref: '#/definitions/[object Object]'
+        description: ' The expiration date of the free replication instance that is part of the Free DMS program. '
+      DnsNameServers:
+        $ref: '#/definitions/[object Object]'
+        description: The DNS name servers for the replication instance.
     description: <p/>
-  ReplicationInstancePublicIpAddressList:
+  ReplicationInstanceList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/[object Object]'
   ReplicationInstancePrivateIpAddressList:
     type: array
     items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/[object Object]'
+  ReplicationInstancePublicIpAddressList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   ReplicationInstanceTaskLog:
     type: object
     properties:
       ReplicationTaskName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the replication task.
       ReplicationTaskArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The Amazon Resource Name (ARN) of the replication task.
       ReplicationInstanceTaskLogSize:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: 'The size, in bytes, of the replication task log.'
     description: Contains metadata for a replication instance task log.
-  SubnetList:
+  ReplicationInstanceTaskLogsList:
     type: array
     items:
-      $ref: '#/definitions/Subnet'
-  ReplicationTaskStats:
+      $ref: '#/definitions/[object Object]'
+  ReplicationPendingModifiedValues:
     type: object
     properties:
-      FullLoadProgressPercent:
-        $ref: '#/definitions/Integer'
-        description: The percent complete for the full load migration task.
-      ElapsedTimeMillis:
-        $ref: '#/definitions/Long'
-        description: 'The elapsed time of the task, in milliseconds.'
-      TablesLoaded:
-        $ref: '#/definitions/Integer'
-        description: The number of tables loaded for this task.
-      TablesLoading:
-        $ref: '#/definitions/Integer'
-        description: The number of tables currently loading for this task.
-      TablesQueued:
-        $ref: '#/definitions/Integer'
-        description: The number of tables queued for this task.
-      TablesErrored:
-        $ref: '#/definitions/Integer'
-        description: The number of errors that have occurred during this task.
+      ReplicationInstanceClass:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The compute and memory capacity of the replication instance.</p> <p> Valid Values: <code>dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge </code> </p>'
+      AllocatedStorage:
+        $ref: '#/definitions/[object Object]'
+        description: The amount of storage (in gigabytes) that is allocated for the replication instance.
+      MultiAZ:
+        $ref: '#/definitions/[object Object]'
+        description: ' Specifies if the replication instance is a Multi-AZ deployment. You cannot set the <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to <code>true</code>. '
+      EngineVersion:
+        $ref: '#/definitions/[object Object]'
+        description: The engine version number of the replication instance.
+    description: <p/>
+  ReplicationSubnetGroup:
+    type: object
+    properties:
+      ReplicationSubnetGroupIdentifier:
+        $ref: '#/definitions/[object Object]'
+        description: The identifier of the replication instance subnet group.
+      ReplicationSubnetGroupDescription:
+        $ref: '#/definitions/[object Object]'
+        description: The description of the replication subnet group.
+      VpcId:
+        $ref: '#/definitions/[object Object]'
+        description: The ID of the VPC.
+      SubnetGroupStatus:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the subnet group.
+      Subnets:
+        $ref: '#/definitions/[object Object]'
+        description: The subnets that are in the subnet group.
+    description: <p/>
+  ReplicationSubnetGroups:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ReplicationTask:
+    type: object
+    properties:
+      ReplicationTaskIdentifier:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>The user-assigned replication task identifier or name.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+      SourceEndpointArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+      TargetEndpointArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+      ReplicationInstanceArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the replication instance.
+      MigrationType:
+        $ref: '#/definitions/[object Object]'
+        description: The type of migration.
+      TableMappings:
+        $ref: '#/definitions/[object Object]'
+        description: Table mappings specified in the task.
+      ReplicationTaskSettings:
+        $ref: '#/definitions/[object Object]'
+        description: The settings for the replication task.
+      Status:
+        $ref: '#/definitions/[object Object]'
+        description: The status of the replication task.
+      LastFailureMessage:
+        $ref: '#/definitions/[object Object]'
+        description: The last error (failure) message generated for the replication instance.
+      StopReason:
+        $ref: '#/definitions/[object Object]'
+        description: The reason the replication task was stopped.
+      ReplicationTaskCreationDate:
+        $ref: '#/definitions/[object Object]'
+        description: The date the replication task was created.
+      ReplicationTaskStartDate:
+        $ref: '#/definitions/[object Object]'
+        description: The date the replication task is scheduled to start.
+      CdcStartPosition:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p> The value can be in date, checkpoint, or LSN/SCN format.</p> <p>Date Example: --cdc-start-position “2018-03-08T12:12:12”</p> <p>Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"</p> <p>LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”</p>'
+      CdcStopPosition:
+        $ref: '#/definitions/[object Object]'
+        description: '<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>'
+      RecoveryCheckpoint:
+        $ref: '#/definitions/[object Object]'
+        description: Indicates the last checkpoint that occurred during a change data capture (CDC) operation. You can provide this value to the <code>CdcStartPosition</code> parameter to start a CDC operation that begins at that checkpoint.
+      ReplicationTaskArn:
+        $ref: '#/definitions/[object Object]'
+        description: The Amazon Resource Name (ARN) of the replication task.
+      ReplicationTaskStats:
+        $ref: '#/definitions/[object Object]'
+        description: 'The statistics for the task, including elapsed time, tables loaded, and table errors.'
     description: <p/>
   ReplicationTaskAssessmentResult:
     type: object
     properties:
       ReplicationTaskIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The replication task identifier of the task on which the task assessment was run. '
       ReplicationTaskArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The Amazon Resource Name (ARN) of the replication task. '
       ReplicationTaskLastAssessmentDate:
-        $ref: '#/definitions/TStamp'
+        $ref: '#/definitions/[object Object]'
         description: 'The date the task assessment was completed. '
       AssessmentStatus:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The status of the task assessment. '
       AssessmentResultsFile:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The file containing the results of the task assessment. '
       AssessmentResults:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The task assessment results in JSON format. '
       S3ObjectUrl:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: ' The URL of the S3 object containing the task assessment results. '
     description: ' The task assessment report in JSON format. '
+  ReplicationTaskAssessmentResultList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ReplicationTaskList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  ReplicationTaskStats:
+    type: object
+    properties:
+      FullLoadProgressPercent:
+        $ref: '#/definitions/[object Object]'
+        description: The percent complete for the full load migration task.
+      ElapsedTimeMillis:
+        $ref: '#/definitions/[object Object]'
+        description: 'The elapsed time of the task, in milliseconds.'
+      TablesLoaded:
+        $ref: '#/definitions/[object Object]'
+        description: The number of tables loaded for this task.
+      TablesLoading:
+        $ref: '#/definitions/[object Object]'
+        description: The number of tables currently loading for this task.
+      TablesQueued:
+        $ref: '#/definitions/[object Object]'
+        description: The number of tables queued for this task.
+      TablesErrored:
+        $ref: '#/definitions/[object Object]'
+        description: The number of errors that have occurred during this task.
+    description: <p/>
+  S3Settings:
+    type: object
+    properties:
+      ServiceAccessRoleArn:
+        $ref: '#/definitions/[object Object]'
+        description: ' The Amazon Resource Name (ARN) used by the service access IAM role. '
+      ExternalTableDefinition:
+        $ref: '#/definitions/[object Object]'
+        description: ' The external table definition. '
+      CsvRowDelimiter:
+        $ref: '#/definitions/[object Object]'
+        description: ' The delimiter used to separate rows in the source files. The default is a carriage return (\n). '
+      CsvDelimiter:
+        $ref: '#/definitions/[object Object]'
+        description: ' The delimiter used to separate columns in the source files. The default is a comma. '
+      BucketFolder:
+        $ref: '#/definitions/[object Object]'
+        description: ' An optional parameter to set a folder name in the S3 bucket. If provided, tables are created in the path &lt;bucketFolder&gt;/&lt;schema_name&gt;/&lt;table_name&gt;/. If this parameter is not specified, then the path used is &lt;schema_name&gt;/&lt;table_name&gt;/. '
+      BucketName:
+        $ref: '#/definitions/[object Object]'
+        description: ' The name of the S3 bucket. '
+      CompressionType:
+        $ref: '#/definitions/[object Object]'
+        description: ' An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed. '
+    description: <p/>
+  SchemaList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  SecretString:
+    type: string
+    format: password
+  SourceIdsList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  SourceType:
+    type: string
+    enum:
+      - replication-instance
   StartReplicationTaskTypeValue:
     type: string
     enum:
       - start-replication
       - resume-processing
       - reload-target
+  String:
+    type: string
   Subnet:
     type: object
     properties:
       SubnetIdentifier:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The subnet identifier.
       SubnetAvailabilityZone:
-        $ref: '#/definitions/AvailabilityZone'
+        $ref: '#/definitions/[object Object]'
         description: The Availability Zone of the subnet.
       SubnetStatus:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The status of the subnet.
     description: <p/>
+  SubnetIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  SubnetList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   SupportedEndpointType:
     type: object
     properties:
       EngineName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.'
       SupportsCDC:
-        $ref: '#/definitions/Boolean'
+        $ref: '#/definitions/[object Object]'
         description: Indicates if Change Data Capture (CDC) is supported.
       EndpointType:
-        $ref: '#/definitions/ReplicationEndpointTypeValue'
+        $ref: '#/definitions/[object Object]'
         description: The type of endpoint.
       EngineDisplayName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'The expanded name for the engine name. For example, if the <code>EngineName</code> parameter is "aurora," this value would be "Amazon Aurora MySQL."'
     description: <p/>
-  TableToReload:
-    type: object
-    properties:
-      SchemaName:
-        $ref: '#/definitions/String'
-        description: The schema name of the table to be reloaded.
-      TableName:
-        $ref: '#/definitions/String'
-        description: The table name of the table to be reloaded.
-    description: <p/>
+  SupportedEndpointTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  TStamp:
+    type: string
+    format: date-time
+  TableListToReload:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   TableStatistics:
     type: object
     properties:
       SchemaName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The schema name.
       TableName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The name of the table.
       Inserts:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of insert actions performed on a table.
       Deletes:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of delete actions performed on a table.
       Updates:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of update actions performed on a table.
       Ddls:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The Data Definition Language (DDL) used to build and modify the structure of your tables.
       FullLoadRows:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of rows added during the Full Load operation.
       FullLoadCondtnlChkFailedRows:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of rows that failed conditional checks during the Full Load operation (valid only for DynamoDB as a target migrations).
       FullLoadErrorRows:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of rows that failed to load during the Full Load operation (valid only for DynamoDB as a target migrations).
       LastUpdateTime:
-        $ref: '#/definitions/TStamp'
+        $ref: '#/definitions/[object Object]'
         description: The last time the table was updated.
       TableState:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The state of the tables described.</p> <p>Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table all | Table updates | Table is being reloaded</p>'
       ValidationPendingRecords:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of records that have yet to be validated.
       ValidationFailedRecords:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of records that failed validation.
       ValidationSuspendedRecords:
-        $ref: '#/definitions/Long'
+        $ref: '#/definitions/[object Object]'
         description: The number of records that could not be validated.
       ValidationState:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: '<p>The validation state of the table.</p> <p>The parameter can have the following values</p> <ul> <li> <p>Not enabled—Validation is not enabled for the table in the migration task.</p> </li> <li> <p>Pending records—Some records in the table are waiting for validation.</p> </li> <li> <p>Mismatched records—Some records in the table do not match between the source and target.</p> </li> <li> <p>Suspended records—Some records in the table could not be validated.</p> </li> <li> <p>No primary key—The table could not be validated because it had no primary key.</p> </li> <li> <p>Table error—The table was not validated because it was in an error state and some data was not migrated.</p> </li> <li> <p>Validated—All rows in the table were validated. If the table is updated, the status can change from Validated.</p> </li> <li> <p>Error—The table could not be validated because of an unexpected error.</p> </li> </ul>'
       ValidationStateDetails:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: Additional details about the state of validation.
+    description: <p/>
+  TableStatisticsList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  TableToReload:
+    type: object
+    properties:
+      SchemaName:
+        $ref: '#/definitions/[object Object]'
+        description: The schema name of the table to be reloaded.
+      TableName:
+        $ref: '#/definitions/[object Object]'
+        description: The table name of the table to be reloaded.
     description: <p/>
   Tag:
     type: object
     properties:
       Key:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and cannot be prefixed with "aws:" or "dms:". The string can only contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
       Value:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: 'A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and cannot be prefixed with "aws:" or "dms:". The string can only contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
     description: <p/>
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
+  VpcSecurityGroupIdList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
   VpcSecurityGroupMembership:
     type: object
     properties:
       VpcSecurityGroupId:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The VPC security group Id.
       Status:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/[object Object]'
         description: The status of the VPC security group.
     description: <p/>
+  VpcSecurityGroupMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/[object Object]'
