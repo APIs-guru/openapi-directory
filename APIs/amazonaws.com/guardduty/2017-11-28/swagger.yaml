@@ -1592,10 +1592,10 @@ definitions:
       - InvitationId
     properties:
       InvitationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InvitationId'
         description: This value is used to validate the master account to the member account.
       MasterId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MasterId'
         description: The account ID of the master GuardDuty account whose invitation you're accepting.
     description: AcceptInvitation request body.
   BadRequestException: {}
@@ -1609,14 +1609,14 @@ definitions:
       - FindingIds
     properties:
       FindingIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingIds'
         description: IDs of the findings that you want to archive.
     description: ArchiveFindings request body.
   CreateDetectorResponse:
     type: object
     properties:
       DetectorId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DetectorId'
         description: The unique ID of the created detector.
   CreateDetectorRequest:
     type: object
@@ -1624,20 +1624,20 @@ definitions:
       - Enable
     properties:
       ClientToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin0Max64'
         description: The idempotency token for the create request.
       Enable:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Enable'
         description: A boolean value that specifies whether the detector is to be enabled.
       FindingPublishingFrequency:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingPublishingFrequency'
         description: A enum value that specifies how frequently customer got Finding updates published.
     description: CreateDetector request body.
   CreateFilterResponse:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterName'
         description: The name of the successfully created filter.
   CreateFilterRequest:
     type: object
@@ -1646,29 +1646,29 @@ definitions:
       - Name
     properties:
       Action:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterAction'
         description: Specifies the action that is to be applied to the findings that match the filter.
       ClientToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin0Max64'
         description: The idempotency token for the create request.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterDescription'
         description: The description of the filter.
       FindingCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingCriteria'
         description: Represents the criteria to be used in the filter for querying findings.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterName'
         description: The name of the filter.
       Rank:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterRank'
         description: Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
     description: CreateFilterRequest request body.
   CreateIPSetResponse:
     type: object
     properties:
       IpSetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpSetId'
   CreateIPSetRequest:
     type: object
     required:
@@ -1678,26 +1678,26 @@ definitions:
       - Name
     properties:
       Activate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Activate'
         description: A boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
       ClientToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin0Max64'
         description: The idempotency token for the create request.
       Format:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpSetFormat'
         description: The format of the file that contains the IPSet.
       Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Location'
         description: 'The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The user friendly name to identify the IPSet. This name is displayed in all findings that are triggered by activity that involves IP addresses included in this IPSet.
     description: CreateIPSet request body.
   CreateMembersResponse:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UnprocessedAccounts'
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   CreateMembersRequest:
     type: object
@@ -1705,7 +1705,7 @@ definitions:
       - AccountDetails
     properties:
       AccountDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountDetails'
         description: A list of account ID and email address pairs of the accounts that you want to associate with the master GuardDuty account.
     description: CreateMembers request body.
   CreateSampleFindingsResponse:
@@ -1715,14 +1715,14 @@ definitions:
     type: object
     properties:
       FindingTypes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingTypes'
         description: Types of sample findings that you want to generate.
     description: CreateSampleFindings request body.
   CreateThreatIntelSetResponse:
     type: object
     properties:
       ThreatIntelSetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ThreatIntelSetId'
   CreateThreatIntelSetRequest:
     type: object
     required:
@@ -1732,26 +1732,26 @@ definitions:
       - Name
     properties:
       Activate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Activate'
         description: A boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
       ClientToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin0Max64'
         description: The idempotency token for the create request.
       Format:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ThreatIntelSetFormat'
         description: The format of the file that contains the ThreatIntelSet.
       Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Location'
         description: 'The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).'
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: A user-friendly ThreatIntelSet name that is displayed in all finding generated by activity that involves IP addresses included in this ThreatIntelSet.
     description: CreateThreatIntelSet request body.
   DeclineInvitationsResponse:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UnprocessedAccounts'
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   DeclineInvitationsRequest:
     type: object
@@ -1759,7 +1759,7 @@ definitions:
       - AccountIds
     properties:
       AccountIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountIds'
         description: A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to decline invitations from.
     description: DeclineInvitations request body.
   DeleteDetectorResponse:
@@ -1784,7 +1784,7 @@ definitions:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UnprocessedAccounts'
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   DeleteInvitationsRequest:
     type: object
@@ -1792,14 +1792,14 @@ definitions:
       - AccountIds
     properties:
       AccountIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountIds'
         description: A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to delete invitations from.
     description: DeleteInvitations request body.
   DeleteMembersResponse:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UnprocessedAccounts'
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   DeleteMembersRequest:
     type: object
@@ -1807,7 +1807,7 @@ definitions:
       - AccountIds
     properties:
       AccountIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountIds'
         description: A list of account IDs of the GuardDuty member accounts that you want to delete.
     description: DeleteMembers request body.
   DeleteThreatIntelSetResponse:
@@ -1826,7 +1826,7 @@ definitions:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UnprocessedAccounts'
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   DisassociateMembersRequest:
     type: object
@@ -1834,22 +1834,22 @@ definitions:
       - AccountIds
     properties:
       AccountIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountIds'
         description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from master.
     description: DisassociateMembers request body.
   GetDetectorResponse:
     type: object
     properties:
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
       FindingPublishingFrequency:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingPublishingFrequency'
       ServiceRole:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServiceRole'
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DetectorStatus'
       UpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdatedAt'
   GetDetectorRequest:
     type: object
     properties: {}
@@ -1857,19 +1857,19 @@ definitions:
     type: object
     properties:
       Action:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterAction'
         description: Specifies the action that is to be applied to the findings that match the filter.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterDescription'
         description: The description of the filter.
       FindingCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingCriteria'
         description: Represents the criteria to be used in the filter for querying findings.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterName'
         description: The name of the filter.
       Rank:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterRank'
         description: Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
   GetFilterRequest:
     type: object
@@ -1878,24 +1878,24 @@ definitions:
     type: object
     properties:
       Findings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Findings'
   GetFindingsRequest:
     type: object
     required:
       - FindingIds
     properties:
       FindingIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingIds'
         description: IDs of the findings that you want to retrieve.
       SortCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SortCriteria'
         description: Represents the criteria used for sorting findings.
     description: GetFindings request body.
   GetFindingsStatisticsResponse:
     type: object
     properties:
       FindingStatistics:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingStatistics'
         description: Finding statistics object.
   GetFindingsStatisticsRequest:
     type: object
@@ -1903,26 +1903,26 @@ definitions:
       - FindingStatisticTypes
     properties:
       FindingCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingCriteria'
         description: Represents the criteria used for querying findings.
       FindingStatisticTypes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingStatisticTypes'
         description: Types of finding statistics to retrieve.
     description: GetFindingsStatistics request body.
   GetIPSetResponse:
     type: object
     properties:
       Format:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpSetFormat'
         description: The format of the file that contains the IPSet.
       Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Location'
         description: 'The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The user friendly name to identify the IPSet. This name is displayed in all findings that are triggered by activity that involves IP addresses included in this IPSet.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpSetStatus'
         description: The status of ipSet file uploaded.
   GetIPSetRequest:
     type: object
@@ -1931,7 +1931,7 @@ definitions:
     type: object
     properties:
       InvitationsCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: The number of received invitations.
   GetInvitationsCountRequest:
     type: object
@@ -1940,7 +1940,7 @@ definitions:
     type: object
     properties:
       Master:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Master'
   GetMasterAccountRequest:
     type: object
     properties: {}
@@ -1948,9 +1948,9 @@ definitions:
     type: object
     properties:
       Members:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Members'
       UnprocessedAccounts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UnprocessedAccounts'
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   GetMembersRequest:
     type: object
@@ -1958,23 +1958,23 @@ definitions:
       - AccountIds
     properties:
       AccountIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountIds'
         description: A list of account IDs of the GuardDuty member accounts that you want to describe.
     description: GetMembers request body.
   GetThreatIntelSetResponse:
     type: object
     properties:
       Format:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ThreatIntelSetFormat'
         description: The format of the threatIntelSet.
       Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Location'
         description: 'The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).'
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: A user-friendly ThreatIntelSet name that is displayed in all finding generated by activity that involves IP addresses included in this ThreatIntelSet.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ThreatIntelSetStatus'
         description: The status of threatIntelSet file uploaded.
   GetThreatIntelSetRequest:
     type: object
@@ -1983,7 +1983,7 @@ definitions:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UnprocessedAccounts'
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   InviteMembersRequest:
     type: object
@@ -1991,22 +1991,22 @@ definitions:
       - AccountIds
     properties:
       AccountIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountIds'
         description: A list of account IDs of the accounts that you want to invite to GuardDuty as members.
       DisableEmailNotification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__boolean'
         description: A boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Message'
         description: The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
     description: InviteMembers request body.
   ListDetectorsResponse:
     type: object
     properties:
       DetectorIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DetectorIds'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
   ListDetectorsRequest:
     type: object
     properties: {}
@@ -2014,9 +2014,9 @@ definitions:
     type: object
     properties:
       FilterNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterNames'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
   ListFiltersRequest:
     type: object
     properties: {}
@@ -2024,32 +2024,32 @@ definitions:
     type: object
     properties:
       FindingIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingIds'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
   ListFindingsRequest:
     type: object
     properties:
       FindingCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingCriteria'
         description: Represents the criteria used for querying findings.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListFindings action. For subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
       SortCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SortCriteria'
         description: Represents the criteria used for sorting findings.
     description: ListFindings request body.
   ListIPSetsResponse:
     type: object
     properties:
       IpSetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpSetIds'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
   ListIPSetsRequest:
     type: object
     properties: {}
@@ -2057,9 +2057,9 @@ definitions:
     type: object
     properties:
       Invitations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Invitations'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
   ListInvitationsRequest:
     type: object
     properties: {}
@@ -2067,9 +2067,9 @@ definitions:
     type: object
     properties:
       Members:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Members'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
   ListMembersRequest:
     type: object
     properties: {}
@@ -2077,9 +2077,9 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
       ThreatIntelSetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ThreatIntelSetIds'
   ListThreatIntelSetsRequest:
     type: object
     properties: {}
@@ -2087,7 +2087,7 @@ definitions:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UnprocessedAccounts'
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   StartMonitoringMembersRequest:
     type: object
@@ -2095,14 +2095,14 @@ definitions:
       - AccountIds
     properties:
       AccountIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountIds'
         description: A list of account IDs of the GuardDuty member accounts whose findings you want the master account to monitor.
     description: StartMonitoringMembers request body.
   StopMonitoringMembersResponse:
     type: object
     properties:
       UnprocessedAccounts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UnprocessedAccounts'
         description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
   StopMonitoringMembersRequest:
     type: object
@@ -2110,7 +2110,7 @@ definitions:
       - AccountIds
     properties:
       AccountIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountIds'
         description: A list of account IDs of the GuardDuty member accounts whose findings you want the master account to stop monitoring.
     description: StopMonitoringMembers request body.
   UnarchiveFindingsResponse:
@@ -2122,7 +2122,7 @@ definitions:
       - FindingIds
     properties:
       FindingIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingIds'
         description: IDs of the findings that you want to unarchive.
     description: UnarchiveFindings request body.
   UpdateDetectorResponse:
@@ -2132,32 +2132,32 @@ definitions:
     type: object
     properties:
       Enable:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Enable'
         description: Updated boolean value for the detector that specifies whether the detector is enabled.
       FindingPublishingFrequency:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingPublishingFrequency'
         description: A enum value that specifies how frequently customer got Finding updates published.
     description: UpdateDetector request body.
   UpdateFilterResponse:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterName'
         description: The name of the filter.
   UpdateFilterRequest:
     type: object
     properties:
       Action:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterAction'
         description: Specifies the action that is to be applied to the findings that match the filter.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterDescription'
         description: The description of the filter.
       FindingCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingCriteria'
         description: Represents the criteria to be used in the filter for querying findings.
       Rank:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterRank'
         description: Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
     description: UpdateFilterRequest request body.
   UpdateFindingsFeedbackResponse:
@@ -2170,13 +2170,13 @@ definitions:
       - FindingIds
     properties:
       Comments:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Comments'
         description: Additional feedback about the GuardDuty findings.
       Feedback:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Feedback'
         description: 'Valid values: USEFUL | NOT_USEFUL'
       FindingIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FindingIds'
         description: IDs of the findings that you want to mark as useful or not useful.
     description: UpdateFindingsFeedback request body.
   UpdateIPSetResponse:
@@ -2186,13 +2186,13 @@ definitions:
     type: object
     properties:
       Activate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Activate'
         description: The updated boolean value that specifies whether the IPSet is active or not.
       Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Location'
         description: 'The updated URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).'
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The unique ID that specifies the IPSet that you want to update.
     description: UpdateIPSet request body.
   UpdateThreatIntelSetResponse:
@@ -2202,13 +2202,13 @@ definitions:
     type: object
     properties:
       Activate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Activate'
         description: The updated boolean value that specifies whether the ThreateIntelSet is active or not.
       Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Location'
         description: 'The updated URI of the file that contains the ThreateIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The unique ID that specifies the ThreatIntelSet that you want to update.
     description: UpdateThreatIntelSet request body.
   '[object Object]': {}
@@ -2216,16 +2216,16 @@ definitions:
     type: object
     properties:
       AccessKeyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Access key ID of the user.
       PrincipalId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The principal ID of the user.
       UserName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the user.
       UserType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The type of the user.
     description: The IAM access key details (IAM user information) of a user that engaged in the activity that prompted GuardDuty to generate a finding.
   AccountDetail:
@@ -2235,17 +2235,17 @@ definitions:
       - AccountId
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: Member account ID.
       Email:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Email'
         description: Member account's email address.
     description: An object containing the member's accountId and email address.
   AccountDetails:
     type: array
     description: A list of account/email pairs.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AccountDetail'
   AccountId:
     type: string
     description: AWS account ID.
@@ -2253,24 +2253,24 @@ definitions:
     type: array
     description: A list of account IDs.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/__string'
   Action:
     type: object
     properties:
       ActionType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: GuardDuty Finding activity type.
       AwsApiCallAction:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AwsApiCallAction'
         description: Information about the AWS_API_CALL action described in this finding.
       DnsRequestAction:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DnsRequestAction'
         description: Information about the DNS_REQUEST action described in this finding.
       NetworkConnectionAction:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NetworkConnectionAction'
         description: Information about the NETWORK_CONNECTION action described in this finding.
       PortProbeAction:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PortProbeAction'
         description: Information about the PORT_PROBE action described in this finding.
     description: Information about the activity described in a finding.
   Activate:
@@ -2280,26 +2280,26 @@ definitions:
     type: object
     properties:
       Api:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: AWS API name.
       CallerType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: AWS API caller type.
       DomainDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DomainDetails'
         description: Domain information for the AWS API call.
       RemoteIpDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RemoteIpDetails'
         description: Remote IP information of the connection.
       ServiceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: AWS service name whose API was invoked.
     description: Information about the AWS_API_CALL action described in this finding.
   City:
     type: object
     properties:
       CityName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: City name of the remote IP address.
     description: City information of the remote IP address.
   Comments:
@@ -2309,22 +2309,22 @@ definitions:
     type: object
     properties:
       Eq:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eq'
         description: Represents the equal condition to be applied to a single field when querying for findings.
       Gt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: Represents the greater than condition to be applied to a single field when querying for findings.
       Gte:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: Represents the greater than equal condition to be applied to a single field when querying for findings.
       Lt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: Represents the less than condition to be applied to a single field when querying for findings.
       Lte:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: Represents the less than equal condition to be applied to a single field when querying for findings.
       Neq:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Neq'
         description: Represents the not equal condition to be applied to a single field when querying for findings.
     description: 'Finding attribute (for example, accountId) for which conditions and values must be specified when querying findings.'
   CountBySeverityFindingStatistic:
@@ -2334,10 +2334,10 @@ definitions:
     type: object
     properties:
       CountryCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Country code of the remote IP address.
       CountryName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Country name of the remote IP address.
     description: Country information of the remote IP address.
   CreatedAt:
@@ -2350,7 +2350,7 @@ definitions:
     type: array
     description: A list of detector Ids.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DetectorId'
   DetectorStatus:
     type: string
     enum:
@@ -2361,7 +2361,7 @@ definitions:
     type: object
     properties:
       Domain:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Domain'
         description: Domain information for the DNS request.
     description: Information about the DNS_REQUEST action described in this finding.
   Domain:
@@ -2381,7 +2381,7 @@ definitions:
     type: array
     description: Represents the equal condition to be applied to a single field when querying for findings.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/__string'
   Feedback:
     type: string
     enum:
@@ -2404,7 +2404,7 @@ definitions:
     type: array
     description: A list of filter names
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FilterName'
   FilterRank:
     type: integer
     description: Relative position of filter among list of exisiting filters.
@@ -2423,56 +2423,56 @@ definitions:
       - Arn
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: AWS account ID where the activity occurred that prompted GuardDuty to generate a finding.
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of a finding described by the action.
       Confidence:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__double'
         description: The confidence level of a finding.
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: The time stamp at which a finding was generated.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The description of a finding.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The identifier that corresponds to a finding described by the action.
       Partition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The AWS resource partition.
       Region:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The AWS region where the activity occurred that prompted GuardDuty to generate a finding.
       Resource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Resource'
         description: The AWS resource associated with the activity that prompted GuardDuty to generate a finding.
       SchemaVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Findings' schema version.
       Service:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Service'
         description: Additional information assigned to the generated finding by GuardDuty.
       Severity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__double'
         description: The severity of a finding.
       Title:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The title of a finding.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The type of a finding described by the action.
       UpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdatedAt'
         description: The time stamp at which a finding was last updated.
     description: Representation of a abnormal or suspicious activity.
   FindingCriteria:
     type: object
     properties:
       Criterion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOfCondition'
         description: Represents a map of finding properties that match specified conditions and values when querying findings.
     description: Represents the criteria used for querying findings.
   FindingId:
@@ -2482,7 +2482,7 @@ definitions:
     type: array
     description: The list of the Findings.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FindingId'
   FindingPublishingFrequency:
     type: string
     enum:
@@ -2499,12 +2499,12 @@ definitions:
     type: array
     description: The list of the finding statistics.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FindingStatisticType'
   FindingStatistics:
     type: object
     properties:
       CountBySeverity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOfCountBySeverityFindingStatistic'
         description: Represents a map of severity to count statistic for a set of findings
     description: Finding statistics object.
   FindingType:
@@ -2514,85 +2514,85 @@ definitions:
     type: array
     description: The list of the finding types.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FindingType'
   Findings:
     type: array
     description: A list of findings.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Finding'
   GeoLocation:
     type: object
     properties:
       Lat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__double'
         description: Latitude information of remote IP address.
       Lon:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__double'
         description: Longitude information of remote IP address.
     description: Location information of the remote IP address.
   IamInstanceProfile:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: AWS EC2 instance profile ARN.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: AWS EC2 instance profile ID.
     description: The profile information of the EC2 instance.
   InstanceDetails:
     type: object
     properties:
       AvailabilityZone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The availability zone of the EC2 instance.
       IamInstanceProfile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IamInstanceProfile'
       ImageDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The image description of the EC2 instance.
       ImageId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The image ID of the EC2 instance.
       InstanceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the EC2 instance.
       InstanceState:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The state of the EC2 instance.
       InstanceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The type of the EC2 instance.
       LaunchTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The launch time of the EC2 instance.
       NetworkInterfaces:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NetworkInterfaces'
         description: The network interface information of the EC2 instance.
       Platform:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The platform of the EC2 instance.
       ProductCodes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProductCodes'
         description: The product code of the EC2 instance.
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: The tags of the EC2 instance.
     description: The information about the EC2 instance associated with the activity that prompted GuardDuty to generate a finding.
   Invitation:
     type: object
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Inviter account ID
       InvitationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InvitationId'
         description: This value is used to validate the inviter account to the member account.
       InvitedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InvitedAt'
         description: Timestamp at which the invitation was sent
       RelationshipStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The status of the relationship between the inviter and invitee accounts.
     description: Invitation from an AWS account to become the current account's master.
   InvitationId:
@@ -2602,7 +2602,7 @@ definitions:
     type: array
     description: A list of invitation descriptions.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Invitation'
   InvitedAt:
     type: string
     description: Timestamp at which a member has been invited. The format will be ISO-8601.
@@ -2623,7 +2623,7 @@ definitions:
     type: array
     description: A list of the IP set IDs
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/IpSetId'
   IpSetStatus:
     type: string
     enum:
@@ -2642,15 +2642,15 @@ definitions:
     type: array
     description: A list of EC2 instance IPv6 address information.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Ipv6Address'
   LocalPortDetails:
     type: object
     properties:
       Port:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: Port number of the local connection.
       PortName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Port name of the local connection.
     description: Local port information of the connection.
   Location:
@@ -2660,16 +2660,16 @@ definitions:
     type: object
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Master account ID
       InvitationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InvitationId'
         description: This value is used to validate the master account to the member account.
       InvitedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InvitedAt'
         description: Timestamp at which the invitation was sent
       RelationshipStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The status of the relationship between the master and member accounts.
     description: Contains details about the master account.
   MasterId:
@@ -2689,28 +2689,28 @@ definitions:
       - RelationshipStatus
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
       DetectorId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DetectorId'
       Email:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Email'
         description: Member account's email address.
       InvitedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InvitedAt'
         description: Timestamp at which the invitation was sent
       MasterId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MasterId'
       RelationshipStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The status of the relationship between the member and the master.
       UpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdatedAt'
     description: Contains details about the member account.
   Members:
     type: array
     description: A list of member descriptions.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Member'
   Message:
     type: string
     description: The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
@@ -2721,61 +2721,61 @@ definitions:
     type: array
     description: Represents the not equal condition to be applied to a single field when querying for findings.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/__string'
   NetworkConnectionAction:
     type: object
     properties:
       Blocked:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__boolean'
         description: Network connection blocked information.
       ConnectionDirection:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Network connection direction.
       LocalPortDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LocalPortDetails'
         description: Local port information of the connection.
       Protocol:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Network connection protocol.
       RemoteIpDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RemoteIpDetails'
         description: Remote IP information of the connection.
       RemotePortDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RemotePortDetails'
         description: Remote port information of the connection.
     description: Information about the NETWORK_CONNECTION action described in this finding.
   NetworkInterface:
     type: object
     properties:
       Ipv6Addresses:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Ipv6Addresses'
         description: A list of EC2 instance IPv6 address information.
       NetworkInterfaceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NetworkInterfaceId'
         description: The ID of the network interface
       PrivateDnsName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PrivateDnsName'
         description: Private DNS name of the EC2 instance.
       PrivateIpAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PrivateIpAddress'
         description: Private IP address of the EC2 instance.
       PrivateIpAddresses:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PrivateIpAddresses'
         description: Other private IP address information of the EC2 instance.
       PublicDnsName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Public DNS name of the EC2 instance.
       PublicIp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Public IP address of the EC2 instance.
       SecurityGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SecurityGroups'
         description: Security groups associated with the EC2 instance.
       SubnetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The subnet ID of the EC2 instance.
       VpcId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The VPC ID of the EC2 instance.
     description: The network interface information of the EC2 instance.
   NetworkInterfaceId:
@@ -2785,7 +2785,7 @@ definitions:
     type: array
     description: The network interface information of the EC2 instance.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/NetworkInterface'
   NextToken:
     type: string
     description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
@@ -2798,36 +2798,36 @@ definitions:
     type: object
     properties:
       Asn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Autonomous system number of the internet provider of the remote IP address.
       AsnOrg:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Organization that registered this ASN.
       Isp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: ISP information for the internet provider.
       Org:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Name of the internet provider.
     description: ISP Organization information of the remote IP address.
   PortProbeAction:
     type: object
     properties:
       Blocked:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__boolean'
         description: Port probe blocked information.
       PortProbeDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfPortProbeDetail'
         description: A list of port probe details objects.
     description: Information about the PORT_PROBE action described in this finding.
   PortProbeDetail:
     type: object
     properties:
       LocalPortDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LocalPortDetails'
         description: Local port information of the connection.
       RemoteIpDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RemoteIpDetails'
         description: Remote IP information of the connection.
     description: Details about the port probe finding.
   PrivateDnsName:
@@ -2840,116 +2840,116 @@ definitions:
     type: object
     properties:
       PrivateDnsName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PrivateDnsName'
         description: Private DNS name of the EC2 instance.
       PrivateIpAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PrivateIpAddress'
         description: Private IP address of the EC2 instance.
     description: Other private IP address information of the EC2 instance.
   PrivateIpAddresses:
     type: array
     description: Other private IP address information of the EC2 instance.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/PrivateIpAddressDetails'
   ProductCode:
     type: object
     properties:
       Code:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Product code information.
       ProductType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Product code type.
     description: The product code of the EC2 instance.
   ProductCodes:
     type: array
     description: The product code of the EC2 instance.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ProductCode'
   RemoteIpDetails:
     type: object
     properties:
       City:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/City'
         description: City information of the remote IP address.
       Country:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Country'
         description: Country code of the remote IP address.
       GeoLocation:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GeoLocation'
         description: Location information of the remote IP address.
       IpAddressV4:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: IPV4 remote address of the connection.
       Organization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Organization'
         description: ISP Organization information of the remote IP address.
     description: Remote IP information of the connection.
   RemotePortDetails:
     type: object
     properties:
       Port:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: Port number of the remote connection.
       PortName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Port name of the remote connection.
     description: Remote port information of the connection.
   Resource:
     type: object
     properties:
       AccessKeyDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccessKeyDetails'
       InstanceDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceDetails'
       ResourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The type of the AWS resource.
     description: The AWS resource associated with the activity that prompted GuardDuty to generate a finding.
   SecurityGroup:
     type: object
     properties:
       GroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: EC2 instance's security group ID.
       GroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: EC2 instance's security group name.
     description: Security groups associated with the EC2 instance.
   SecurityGroups:
     type: array
     description: Security groups associated with the EC2 instance.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SecurityGroup'
   Service:
     type: object
     properties:
       Action:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Action'
         description: Information about the activity described in a finding.
       Archived:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__boolean'
         description: Indicates whether this finding is archived.
       Count:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: Total count of the occurrences of this finding type.
       DetectorId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DetectorId'
         description: Detector ID for the GuardDuty service.
       EventFirstSeen:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: First seen timestamp of the activity that prompted GuardDuty to generate this finding.
       EventLastSeen:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Last seen timestamp of the activity that prompted GuardDuty to generate this finding.
       ResourceRole:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Resource role information for this finding.
       ServiceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the AWS service (GuardDuty) that generated a finding.
       UserFeedback:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Feedback left about the finding.
     description: Additional information assigned to the generated finding by GuardDuty.
   ServiceRole:
@@ -2959,27 +2959,27 @@ definitions:
     type: object
     properties:
       AttributeName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Represents the finding attribute (for example, accountId) by which to sort findings.'
       OrderBy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OrderBy'
         description: Order by which the sorted findings are to be displayed.
     description: Represents the criteria used for sorting findings.
   Tag:
     type: object
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: EC2 instance tag key.
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: EC2 instance tag value.
     description: A tag of the EC2 instance.
   Tags:
     type: array
     description: The tags of the EC2 instance.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Tag'
   ThreatIntelSetFormat:
     type: string
     enum:
@@ -2997,7 +2997,7 @@ definitions:
     type: array
     description: The list of the threat intel set IDs
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ThreatIntelSetId'
   ThreatIntelSetStatus:
     type: string
     enum:
@@ -3016,17 +3016,17 @@ definitions:
       - Result
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: AWS Account ID.
       Result:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: A reason why the account hasn't been processed.
     description: An object containing the unprocessed account and a result string explaining why it was unprocessed.
   UnprocessedAccounts:
     type: array
     description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/UnprocessedAccount'
   UpdatedAt:
     type: string
     description: The first time a resource was created. The format will be ISO-8601.
@@ -3040,7 +3040,7 @@ definitions:
   __listOfPortProbeDetail:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/PortProbeDetail'
   __string:
     type: string
   __mapOfCondition:

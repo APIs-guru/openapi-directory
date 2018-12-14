@@ -1076,10 +1076,10 @@ definitions:
       - configurationIds
     properties:
       applicationConfigurationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationId'
         description: The configuration ID of an application with which items are to be associated.
       configurationIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationIdList'
         description: The ID of each configuration item to be associated with an application.
   AuthorizationErrorException: {}
   InvalidParameterException: {}
@@ -1089,7 +1089,7 @@ definitions:
     type: object
     properties:
       configurationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Configuration ID of an application to be created.
   CreateApplicationRequest:
     type: object
@@ -1097,10 +1097,10 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Name of the application to be created.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Description of the application to be created.
   CreateTagsResponse:
     type: object
@@ -1112,10 +1112,10 @@ definitions:
       - tags
     properties:
       configurationIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationIdList'
         description: A list of configuration items that you want to tag.
       tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagSet'
         description: '<p>Tags that you want to associate with one or more configuration items. Specify the tags that you want to create in a <i>key</i>-<i>value</i> format. For example:</p> <p> <code>{"key": "serverType", "value": "webServer"}</code> </p>'
   ResourceNotFoundException: {}
   DeleteApplicationsResponse:
@@ -1127,7 +1127,7 @@ definitions:
       - configurationIds
     properties:
       configurationIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationIdsList'
         description: Configuration ID of an application to be deleted.
   DeleteTagsResponse:
     type: object
@@ -1138,40 +1138,40 @@ definitions:
       - configurationIds
     properties:
       configurationIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationIdList'
         description: A list of configuration items with tags that you want to delete.
       tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagSet'
         description: '<p>Tags that you want to delete from one or more configuration items. Specify the tags that you want to delete in a <i>key</i>-<i>value</i> format. For example:</p> <p> <code>{"key": "serverType", "value": "webServer"}</code> </p>'
   DescribeAgentsResponse:
     type: object
     properties:
       agentsInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AgentsInfo'
         description: 'Lists agents or the Connector by ID or lists all agents/Connectors associated with your user account if you did not specify an agent/Connector ID. The output includes agent/Connector IDs, IP addresses, media access control (MAC) addresses, agent/Connector health, host name where the agent/Connector resides, and the version number of each agent/Connector.'
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'Token to retrieve the next set of results. For example, if you specified 100 IDs for <code>DescribeAgentsRequest$agentIds</code> but set <code>DescribeAgentsRequest$maxResults</code> to 10, you received a set of 10 results along with this token. Use this token in the next query to retrieve the next set of 10.'
   DescribeAgentsRequest:
     type: object
     properties:
       agentIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AgentIds'
         description: 'The agent or the Connector IDs for which you want information. If you specify no IDs, the system returns information about all agents/Connectors associated with your AWS user account.'
       filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Filters'
         description: '<p>You can filter the request using various logical operators and a <i>key</i>-<i>value</i> format. For example: </p> <p> <code>{"key": "collectionStatus", "value": "STARTED"}</code> </p>'
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: The total number of agents/Connectors to return in a single page of output. The maximum value is 100.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'Token to retrieve the next set of results. For example, if you previously specified 100 IDs for <code>DescribeAgentsRequest$agentIds</code> but set <code>DescribeAgentsRequest$maxResults</code> to 10, you received a set of 10 results along with a token. Use that token in this query to get the next set of 10.'
   DescribeConfigurationsResponse:
     type: object
     properties:
       configurations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DescribeConfigurationsAttributes'
         description: A key in the response map. The value is an array of data.
   DescribeConfigurationsRequest:
     type: object
@@ -1179,95 +1179,95 @@ definitions:
       - configurationIds
     properties:
       configurationIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationIdList'
         description: One or more configuration IDs.
   DescribeContinuousExportsResponse:
     type: object
     properties:
       descriptions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContinuousExportDescriptions'
         description: A list of continuous export descriptions.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token from the previous call to <code>DescribeExportTasks</code>.
   DescribeContinuousExportsRequest:
     type: object
     properties:
       exportIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContinuousExportIds'
         description: The unique IDs assigned to the exports.
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DescribeContinuousExportsMaxResults'
         description: A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token from the previous call to <code>DescribeExportTasks</code>.
   OperationNotPermittedException: {}
   DescribeExportConfigurationsResponse:
     type: object
     properties:
       exportsInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExportsInfo'
         description: <p/>
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token from the previous call to describe-export-tasks.
   DescribeExportConfigurationsRequest:
     type: object
     properties:
       exportIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExportIds'
         description: A list of continuous export ids to search for.
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token from the previous call to describe-export-tasks.
   DescribeExportTasksResponse:
     type: object
     properties:
       exportsInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExportsInfo'
         description: 'Contains one or more sets of export request details. When the status of a request is <code>SUCCEEDED</code>, the response includes a URL for an Amazon S3 bucket where you can view the data in a CSV file.'
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'The <code>nextToken</code> value to include in a future <code>DescribeExportTasks</code> request. When the results of a <code>DescribeExportTasks</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.'
   DescribeExportTasksRequest:
     type: object
     properties:
       exportIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExportIds'
         description: One or more unique identifiers used to query the status of an export request.
       filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExportFilters'
         description: <p>One or more filters.</p> <ul> <li> <p> <code>AgentId</code> - ID of the agent whose collected data will be exported</p> </li> </ul>
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: 'The maximum number of volume results returned by <code>DescribeExportTasks</code> in paginated output. When this parameter is used, <code>DescribeExportTasks</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element.'
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The <code>nextToken</code> value returned from a previous paginated <code>DescribeExportTasks</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is null when there are no more results to return.
   DescribeTagsResponse:
     type: object
     properties:
       tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationTagSet'
         description: 'Depending on the input, this is a list of configuration items tagged with a specific tag, or a list of tags for a specific configuration item.'
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The call returns a token. Use this token to get the next set of results.
   DescribeTagsRequest:
     type: object
     properties:
       filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagFilters'
         description: 'You can filter the list using a <i>key</i>-<i>value</i> format. You can separate these items by using logical operators. Allowed filters include <code>tagKey</code>, <code>tagValue</code>, and <code>configurationId</code>. '
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: The total number of items to return in a single page of output. The maximum value is 100.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: A token to start the list. Use this token to get the next set of results.
   DisassociateConfigurationItemsFromApplicationResponse:
     type: object
@@ -1279,37 +1279,37 @@ definitions:
       - configurationIds
     properties:
       applicationConfigurationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationId'
         description: Configuration ID of an application from which each item is disassociated.
       configurationIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationIdList'
         description: Configuration ID of each item to be disassociated from an application.
   ExportConfigurationsResponse:
     type: object
     properties:
       exportId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationsExportId'
         description: A unique identifier that you can use to query the export status.
   GetDiscoverySummaryResponse:
     type: object
     properties:
       servers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The number of servers discovered.
       applications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The number of applications discovered.
       serversMappedToApplications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The number of servers mapped to applications.
       serversMappedtoTags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The number of servers mapped to tags.
       agentSummary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CustomerAgentInfo'
         description: 'Details about discovered agents, including agent status and health.'
       connectorSummary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CustomerConnectorInfo'
         description: 'Details about discovered connectors, including connector status and health.'
   GetDiscoverySummaryRequest:
     type: object
@@ -1318,10 +1318,10 @@ definitions:
     type: object
     properties:
       configurations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Configurations'
         description: 'Returns configuration details, including the configuration ID, attribute names, and attribute values.'
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'Token to retrieve the next set of results. For example, if your call to ListConfigurations returned 100 items, but you set <code>ListConfigurationsRequest$maxResults</code> to 10, you received a set of 10 results along with this token. Use this token in the next query to retrieve the next set of 10.'
   ListConfigurationsRequest:
     type: object
@@ -1329,19 +1329,19 @@ definitions:
       - configurationType
     properties:
       configurationType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationItemType'
         description: 'A valid configuration identified by Application Discovery Service. '
       filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Filters'
         description: '<p>You can filter the request using various logical operators and a <i>key</i>-<i>value</i> format. For example: </p> <p> <code>{"key": "serverType", "value": "webServer"}</code> </p> <p>For a complete list of filter options and guidance about using them with this action, see <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations">Querying Discovered Configuration Items</a>. </p>'
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: The total number of items to return. The maximum value is 100.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'Token to retrieve the next set of results. For example, if a previous call to ListConfigurations returned 100 items, but you set <code>ListConfigurationsRequest$maxResults</code> to 10, you received a set of 10 results along with a token. Use that token in this query to get the next set of 10.'
       orderBy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OrderByList'
         description: 'Certain filter criteria return output that can be sorted in ascending or descending order. For a list of output characteristics for each filter, see <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations">Using the ListConfigurations Action</a>.'
   ListServerNeighborsResponse:
     type: object
@@ -1349,13 +1349,13 @@ definitions:
       - neighbors
     properties:
       neighbors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NeighborDetailsList'
         description: List of distinct servers that are one hop away from the given server.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'Token to retrieve the next set of results. For example, if you specified 100 IDs for <code>ListServerNeighborsRequest$neighborConfigurationIds</code> but set <code>ListServerNeighborsRequest$maxResults</code> to 10, you received a set of 10 results along with this token. Use this token in the next query to retrieve the next set of 10.'
       knownDependencyCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: Count of distinct servers that are one hop away from the given server.
   ListServerNeighborsRequest:
     type: object
@@ -1363,37 +1363,37 @@ definitions:
       - configurationId
     properties:
       configurationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationId'
         description: Configuration ID of the server for which neighbors are being listed.
       portInformationNeeded:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Flag to indicate if port and protocol information is needed as part of the response.
       neighborConfigurationIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationIdList'
         description: List of configuration IDs to test for one-hop-away.
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Maximum number of results to return in a single page of output.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'Token to retrieve the next set of results. For example, if you previously specified 100 IDs for <code>ListServerNeighborsRequest$neighborConfigurationIds</code> but set <code>ListServerNeighborsRequest$maxResults</code> to 10, you received a set of 10 results along with a token. Use that token in this query to get the next set of 10.'
   StartContinuousExportResponse:
     type: object
     properties:
       exportId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationsExportId'
         description: The unique ID assigned to this export.
       s3Bucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Bucket'
         description: The name of the s3 bucket where the export data parquet files are stored.
       startTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeStamp'
         description: The timestamp representing when the continuous export was started.
       dataSource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DataSource'
         description: The type of data collector used to gather this data (currently only offered for AGENT).
       schemaStorageConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SchemaStorageConfig'
         description: <p>A dictionary which describes how the data is stored.</p> <ul> <li> <p> <code>databaseName</code> - the name of the Glue database used to store the schema.</p> </li> </ul>
   StartContinuousExportRequest:
     type: object
@@ -1404,7 +1404,7 @@ definitions:
     type: object
     properties:
       agentsConfigurationStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AgentConfigurationStatusList'
         description: 'Information about agents or the connector that were instructed to start collecting data. Information includes the agent/connector ID, a description of the operation performed, and whether the agent/connector configuration was updated.'
   StartDataCollectionByAgentIdsRequest:
     type: object
@@ -1412,37 +1412,37 @@ definitions:
       - agentIds
     properties:
       agentIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AgentIds'
         description: 'The IDs of the agents or connectors from which to start collecting data. If you send a request to an agent/connector ID that you do not have permission to contact, according to your AWS account, the service does not throw an exception. Instead, it returns the error in the <i>Description</i> field. If you send a request to multiple agents/connectors and you do not have permission to contact some of those agents/connectors, the system does not throw an exception. Instead, the system shows <code>Failed</code> in the <i>Description</i> field.'
   StartExportTaskResponse:
     type: object
     properties:
       exportId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationsExportId'
         description: A unique identifier used to query the status of an export request.
   StartExportTaskRequest:
     type: object
     properties:
       exportDataFormat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExportDataFormats'
         description: 'The file format for the returned export data. Default value is <code>CSV</code>. <b>Note:</b> <i>The</i> <code>GRAPHML</code> <i>option has been deprecated.</i> '
       filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExportFilters'
         description: 'If a filter is present, it selects the single <code>agentId</code> of the Application Discovery Agent for which data is exported. The <code>agentId</code> can be found in the results of the <code>DescribeAgents</code> API or CLI. If no filter is present, <code>startTime</code> and <code>endTime</code> are ignored and exported data includes both Agentless Discovery Connector data and summary data from Application Discovery agents. '
       startTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeStamp'
         description: 'The start timestamp for exported data from the single Application Discovery Agent selected in the filters. If no value is specified, data is exported starting from the first data collected by the agent.'
       endTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeStamp'
         description: 'The end timestamp for exported data from the single Application Discovery Agent selected in the filters. If no value is specified, exported data includes the most recent data collected by the agent.'
   StopContinuousExportResponse:
     type: object
     properties:
       startTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeStamp'
         description: Timestamp that represents when this continuous export started collecting data.
       stopTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeStamp'
         description: Timestamp that represents when this continuous export was stopped.
   StopContinuousExportRequest:
     type: object
@@ -1450,13 +1450,13 @@ definitions:
       - exportId
     properties:
       exportId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationsExportId'
         description: The unique ID assigned to this export.
   StopDataCollectionByAgentIdsResponse:
     type: object
     properties:
       agentsConfigurationStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AgentConfigurationStatusList'
         description: 'Information about the agents or connector that were instructed to stop collecting data. Information includes the agent/connector ID, a description of the operation performed, and whether the agent/connector configuration was updated.'
   StopDataCollectionByAgentIdsRequest:
     type: object
@@ -1464,7 +1464,7 @@ definitions:
       - agentIds
     properties:
       agentIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AgentIds'
         description: The IDs of the agents or connectors from which to stop collecting data.
   UpdateApplicationResponse:
     type: object
@@ -1475,86 +1475,86 @@ definitions:
       - configurationId
     properties:
       configurationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationId'
         description: Configuration ID of the application to be updated.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: New name of the application to be updated.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: New description of the application to be updated.
   '[object Object]': {}
   AgentConfigurationStatus:
     type: object
     properties:
       agentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The agent/connector ID.
       operationSucceeded:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'Information about the status of the <code>StartDataCollection</code> and <code>StopDataCollection</code> operations. The system has recorded the data collection operation. The agent/connector receives this command the next time it polls for a new command. '
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: A description of the operation performed.
     description: 'Information about agents or connectors that were instructed to start collecting data. Information includes the agent/connector ID, a description of the operation, and whether the agent/connector configuration was updated.'
   AgentConfigurationStatusList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AgentConfigurationStatus'
   AgentId:
     type: string
   AgentIds:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AgentId'
   AgentInfo:
     type: object
     properties:
       agentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AgentId'
         description: The agent or connector ID.
       hostName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The name of the host where the agent or connector resides. The host can be a server or virtual machine.
       agentNetworkInfoList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AgentNetworkInfoList'
         description: Network details about the host where the agent or connector resides.
       connectorId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The ID of the connector.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The agent or connector version.
       health:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AgentStatus'
         description: The health of the agent or connector.
       lastHealthPingTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Time since agent or connector health was reported.
       collectionStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Status of the collection process for an agent or connector.
       agentType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Type of agent.
       registeredTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Agent's first registration timestamp in UTC.
     description: 'Information about agents or connectors associated with the user’s AWS account. Information includes agent or connector IDs, IP addresses, media access control (MAC) addresses, agent or connector health, hostname where the agent or connector resides, and agent version for each agent.'
   AgentNetworkInfo:
     type: object
     properties:
       ipAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The IP address for the host where the agent/connector resides.
       macAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The MAC address for the host where the agent/connector resides.
     description: Network details about the host where the agent/connector resides.
   AgentNetworkInfoList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AgentNetworkInfo'
   AgentStatus:
     type: string
     enum:
@@ -1567,13 +1567,13 @@ definitions:
   AgentsInfo:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AgentInfo'
   ApplicationId:
     type: string
   ApplicationIdsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ApplicationId'
   Boolean:
     type: boolean
   BoxedInteger:
@@ -1596,7 +1596,7 @@ definitions:
   ConfigurationIdList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ConfigurationId'
   ConfigurationItemType:
     type: string
     enum:
@@ -1608,29 +1608,29 @@ definitions:
     type: object
     properties:
       configurationType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationItemType'
         description: A type of IT asset to tag.
       configurationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationId'
         description: The configuration ID for the item to tag. You can specify a list of keys and values.
       key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagKey'
         description: 'A type of tag on which to filter. For example, <i>serverType</i>.'
       value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagValue'
         description: A value on which to filter. For example <i>key = serverType</i> and <i>value = web server</i>.
       timeOfCreation:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeStamp'
         description: The time the configuration tag was created in Coordinated Universal Time (UTC).
     description: Tags for a configuration item. Tags are metadata that help you categorize IT assets.
   ConfigurationTagSet:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ConfigurationTag'
   Configurations:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Configuration'
   ConfigurationsDownloadUrl:
     type: string
   ConfigurationsExportId:
@@ -1639,38 +1639,38 @@ definitions:
     type: object
     properties:
       exportId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationsExportId'
         description: The unique ID assigned to this export.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContinuousExportStatus'
         description: '<p>Describes the status of the export. Can be one of the following values:</p> <ul> <li> <p>START_IN_PROGRESS - setting up resources to start continuous export.</p> </li> <li> <p>START_FAILED - an error occurred setting up continuous export. To recover, call start-continuous-export again.</p> </li> <li> <p>ACTIVE - data is being exported to the customer bucket.</p> </li> <li> <p>ERROR - an error occurred during export. To fix the issue, call stop-continuous-export and start-continuous-export.</p> </li> <li> <p>STOP_IN_PROGRESS - stopping the export.</p> </li> <li> <p>STOP_FAILED - an error occurred stopping the export. To recover, call stop-continuous-export again.</p> </li> <li> <p>INACTIVE - the continuous export has been stopped. Data is no longer being exported to the customer bucket.</p> </li> </ul>'
       statusDetail:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringMax255'
         description: Contains information about any errors that may have occurred.
       s3Bucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Bucket'
         description: The name of the s3 bucket where the export data parquet files are stored.
       startTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeStamp'
         description: The timestamp representing when the continuous export was started.
       stopTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeStamp'
         description: The timestamp that represents when this continuous export was stopped.
       dataSource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DataSource'
         description: The type of data collector used to gather this data (currently only offered for AGENT).
       schemaStorageConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SchemaStorageConfig'
         description: <p>An object which describes how the data is stored.</p> <ul> <li> <p> <code>databaseName</code> - the name of the Glue database used to store the schema.</p> </li> </ul>
     description: A list of continuous export descriptions.
   ContinuousExportDescriptions:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ContinuousExportDescription'
   ContinuousExportIds:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ConfigurationsExportId'
   ContinuousExportStatus:
     type: string
     enum:
@@ -1693,25 +1693,25 @@ definitions:
       - unknownAgents
     properties:
       activeAgents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Number of active discovery agents.
       healthyAgents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Number of healthy discovery agents
       blackListedAgents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Number of blacklisted discovery agents.
       shutdownAgents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Number of discovery agents with status SHUTDOWN.
       unhealthyAgents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Number of unhealthy discovery agents.
       totalAgents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Total number of discovery agents.
       unknownAgents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Number of unknown discovery agents.
     description: Inventory data for installed discovery agents.
   CustomerConnectorInfo:
@@ -1726,25 +1726,25 @@ definitions:
       - unknownConnectors
     properties:
       activeConnectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Number of active discovery connectors.
       healthyConnectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Number of healthy discovery connectors.
       blackListedConnectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Number of blacklisted discovery connectors.
       shutdownConnectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: 'Number of discovery connectors with status SHUTDOWN,'
       unhealthyConnectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Number of unhealthy discovery connectors.
       totalConnectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Total number of discovery connectors.
       unknownConnectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Number of unknown discovery connectors.
     description: Inventory data for installed discovery connectors.
   DataSource:
@@ -1767,7 +1767,7 @@ definitions:
   DescribeConfigurationsAttributes:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DescribeConfigurationsAttribute'
   DescribeContinuousExportsMaxResults:
     type: integer
     minimum: 1
@@ -1780,7 +1780,7 @@ definitions:
   ExportDataFormats:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ExportDataFormat'
   ExportFilter:
     type: object
     required:
@@ -1789,23 +1789,23 @@ definitions:
       - condition
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterName'
         description: 'A single <code>ExportFilter</code> name. Supported filters: <code>agentId</code>.'
       values:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterValues'
         description: 'A single <code>agentId</code> for a Discovery Agent. An <code>agentId</code> can be found using the <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html">DescribeAgents</a> action. Typically an ADS <code>agentId</code> is in the form <code>o-0123456789abcdef0</code>.'
       condition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Condition'
         description: 'Supported condition: <code>EQUALS</code> '
     description: 'Used to select which agent''s data is to be exported. A single agent ID may be selected for export using the <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html">StartExportTask</a> action.'
   ExportFilters:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ExportFilter'
   ExportIds:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ConfigurationsExportId'
   ExportInfo:
     type: object
     required:
@@ -1815,28 +1815,28 @@ definitions:
       - exportRequestTime
     properties:
       exportId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationsExportId'
         description: A unique identifier used to query an export.
       exportStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExportStatus'
         description: The status of the data export job.
       statusMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExportStatusMessage'
         description: A status message provided for API callers.
       configurationsDownloadUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationsDownloadUrl'
         description: A URL for an Amazon S3 bucket where you can review the exported data. The URL is displayed only if the export succeeded.
       exportRequestTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExportRequestTime'
         description: The time that the data export was initiated.
       isTruncated:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'If true, the export of agent information exceeded the size limit for a single export and the exported data is incomplete for the requested time range. To address this, select a smaller time range for the export by using <code>startDate</code> and <code>endDate</code>.'
       requestedStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeStamp'
         description: 'The value of <code>startTime</code> parameter in the <code>StartExportTask</code> request. If no <code>startTime</code> was requested, this result does not appear in <code>ExportInfo</code>.'
       requestedEndTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeStamp'
         description: 'The <code>endTime</code> used in the <code>StartExportTask</code> request. If no <code>endTime</code> was requested, this result does not appear in <code>ExportInfo</code>.'
     description: Information regarding the export status of discovered data. The value is an array of objects.
   ExportRequestTime:
@@ -1853,7 +1853,7 @@ definitions:
   ExportsInfo:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ExportInfo'
   Filter:
     type: object
     required:
@@ -1862,13 +1862,13 @@ definitions:
       - condition
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The name of the filter.
       values:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterValues'
         description: 'A string value on which to filter. For example, if you choose the <code>destinationServer.osVersion</code> filter name, you could specify <code>Ubuntu</code> for the value.'
       condition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Condition'
         description: 'A conditional operator. The following operators are valid: EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS. If you specify multiple filters, the system utilizes all filters as though concatenated by <i>AND</i>. If you specify multiple values for a particular filter, the system differentiates the values using <i>OR</i>. Calling either <i>DescribeConfigurations</i> or <i>ListConfigurations</i> returns attributes of matching configuration items.'
     description: '<p>A filter that can use conditional operators.</p> <p>For more information about filters, see <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html">Querying Discovered Configuration Items</a>. </p>'
   FilterName:
@@ -1878,11 +1878,11 @@ definitions:
   FilterValues:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FilterValue'
   Filters:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Filter'
   Integer:
     type: integer
   Long:
@@ -1895,25 +1895,25 @@ definitions:
       - connectionsCount
     properties:
       sourceServerId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationId'
         description: The ID of the server that opened the network connection.
       destinationServerId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationId'
         description: The ID of the server that accepted the network connection.
       destinationPort:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BoxedInteger'
         description: The destination network port for the connection.
       transportProtocol:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The network protocol used for the connection.
       connectionsCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The number of open network connections with the neighboring server.
     description: Details about neighboring servers.
   NeighborDetailsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/NeighborConnectionDetail'
   NextToken:
     type: string
   OrderByElement:
@@ -1922,16 +1922,16 @@ definitions:
       - fieldName
     properties:
       fieldName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The field on which to order.
       sortOrder:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/orderString'
         description: Ordering direction.
     description: A field and direction for ordered output.
   OrderByList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OrderByElement'
   S3Bucket:
     type: string
   SchemaStorageConfig:
@@ -1954,10 +1954,10 @@ definitions:
       - value
     properties:
       key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagKey'
         description: The type of tag on which to filter.
       value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagValue'
         description: A value for a tag key on which to filter.
     description: Metadata that help you categorize IT assets.
   TagFilter:
@@ -1967,22 +1967,22 @@ definitions:
       - values
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterName'
         description: A name of the tag filter.
       values:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterValues'
         description: Values for the tag filter.
     description: 'The tag filter. Valid names are: <code>tagKey</code>, <code>tagValue</code>, <code>configurationId</code>.'
   TagFilters:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TagFilter'
   TagKey:
     type: string
   TagSet:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Tag'
   TagValue:
     type: string
   TimeStamp:

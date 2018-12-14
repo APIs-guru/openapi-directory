@@ -1790,10 +1790,10 @@ definitions:
     type: object
     properties:
       Statement:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The permission statement.
       RevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: A unique identifier for the current revision of the policy.
   AddLayerVersionPermissionRequest:
     type: object
@@ -1803,16 +1803,16 @@ definitions:
       - Principal
     properties:
       StatementId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StatementId'
         description: An identifier that distinguishes the policy from others on the same layer version.
       Action:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerPermissionAllowedAction'
         description: 'The API action that grants access to the layer. For example, <code>lambda:GetLayerVersion</code>.'
       Principal:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerPermissionAllowedPrincipal'
         description: 'An account ID, or <code>*</code> to grant permission to all AWS accounts.'
       OrganizationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OrganizationId'
         description: 'With the principal set to <code>*</code>, grant permission to all accounts in the specified organization.'
   ServiceException: {}
   ResourceNotFoundException: {}
@@ -1827,7 +1827,7 @@ definitions:
       Statement: ID-1
     properties:
       Statement:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The permission statement you specified in the request. The response returns the same as a string using a backslash ("\") as an escape character in the JSON.
   AddPermissionRequest:
     type: object
@@ -1844,25 +1844,25 @@ definitions:
       StatementId: ID-1
     properties:
       StatementId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StatementId'
         description: A unique statement identifier.
       Action:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Action'
         description: 'The AWS Lambda action you want to allow in this statement. Each Lambda action is a string starting with <code>lambda:</code> followed by the API name . For example, <code>lambda:CreateFunction</code>. You can use wildcard (<code>lambda:*</code>) to grant permission for all AWS Lambda actions. '
       Principal:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Principal'
         description: 'The principal who is getting this permission. The principal can be an AWS service (e.g. <code>s3.amazonaws.com</code> or <code>sns.amazonaws.com</code>) for service triggers, or an account ID for cross-account access. If you specify a service as a principal, use the <code>SourceArn</code> parameter to limit who can invoke the function through that service.'
       SourceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name of the invoker. </p> <important> <p>If you add a permission to a service principal without providing the source ARN, any AWS account that creates a mapping to your function ARN can invoke your Lambda function.</p> </important>'
       SourceAccount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SourceOwner'
         description: 'This parameter is used for S3 and SES. The AWS account ID (without a hyphen) of the source owner. For example, if the <code>SourceArn</code> identifies a bucket, then this is the bucket owner''s account ID. You can use this additional condition to ensure the bucket you specify is owned by a specific account (it is possible the bucket owner deleted the bucket and some other AWS account created the bucket). You can also use this condition to specify all sources (that is, you don''t specify the <code>SourceArn</code>) owned by a specific account. '
       EventSourceToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventSourceToken'
         description: A unique token that must be supplied by the principal invoking the function. This is currently only used for Alexa Smart Home functions.
       RevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn''t match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either <a>GetFunction</a> or <a>GetAlias</a> '
   AliasConfiguration:
     type: object
@@ -1873,22 +1873,22 @@ definitions:
       Name: functionAlias
     properties:
       AliasArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionArn'
         description: 'Lambda function ARN that is qualified using the alias name as the suffix. For example, if you create an alias called <code>BETA</code> that points to a helloworld function version, the ARN is <code>arn:aws:lambda:aws-regions:acct-id:function:helloworld:BETA</code>.'
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Alias'
         description: Alias name.
       FunctionVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: Function version to which the alias points.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: Alias description.
       RoutingConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AliasRoutingConfiguration'
         description: 'Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version.'
       RevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Represents the latest updated revision of the function or alias.
     description: Provides configuration information about a Lambda function version alias.
   CreateAliasRequest:
@@ -1898,16 +1898,16 @@ definitions:
       - FunctionVersion
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Alias'
         description: Name for the alias you are creating.
       FunctionVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: Lambda function version for which you are creating the alias.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: Description of the alias.
       RoutingConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AliasRoutingConfiguration'
         description: 'Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">Traffic Shifting Using Aliases</a>.'
   EventSourceMappingConfiguration:
     type: object
@@ -1922,28 +1922,28 @@ definitions:
       UUID: 1234xCy789012
     properties:
       UUID:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The identifier of the event source mapping.
       BatchSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BatchSize'
         description: The maximum number of items to retrieve in a single batch.
       EventSourceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the event source.
       FunctionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionArn'
         description: The ARN of the Lambda function.
       LastModified:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Date'
         description: 'The date that the event source mapping was last updated, in Unix time seconds.'
       LastProcessingResult:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The result of the last AWS Lambda invocation of your Lambda function.
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The state of the event source mapping. It can be one of the following: <code>Creating</code>, <code>Enabling</code>, <code>Enabled</code>, <code>Disabling</code>, <code>Disabled</code>, <code>Updating</code>, or <code>Deleting</code>.'
       StateTransitionReason:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The cause of the last state change, either <code>User initiated</code> or <code>Lambda initiated</code>.'
     description: A mapping between an AWS resource and an AWS Lambda function. See <a>CreateEventSourceMapping</a> for details.
   CreateEventSourceMappingRequest:
@@ -1953,22 +1953,22 @@ definitions:
       - FunctionName
     properties:
       EventSourceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: <p>The Amazon Resource Name (ARN) of the event source.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - The ARN of the data stream or a stream consumer.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - The ARN of the stream.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - The ARN of the queue.</p> </li> </ul>
       FunctionName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionName'
         description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
       Enabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Enabled'
         description: Disables the event source mapping to pause polling and invocation.
       BatchSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BatchSize'
         description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
       StartingPosition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventSourcePosition'
         description: The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.
       StartingPositionTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Date'
         description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the Unix time in seconds from which to start reading.'
   FunctionConfiguration:
     type: object
@@ -1988,64 +1988,64 @@ definitions:
       VpcConfig: {}
     properties:
       FunctionName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NamespacedFunctionName'
         description: The name of the function.
       FunctionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NameSpacedFunctionArn'
         description: The function's Amazon Resource Name.
       Runtime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Runtime'
         description: The runtime environment for the Lambda function.
       Role:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleArn'
         description: The function's execution role.
       Handler:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Handler'
         description: The function Lambda calls to begin executing your function.
       CodeSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The size of the function's deployment package in bytes.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: The function's description.
       Timeout:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timeout'
         description: The amount of time that Lambda allows a function to run before terminating it.
       MemorySize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MemorySize'
         description: The memory allocated to the function
       LastModified:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: 'The date and time that the function was last updated, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).'
       CodeSha256:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The SHA256 hash of the function's deployment package.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the Lambda function.
       VpcConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VpcConfigResponse'
         description: The function's networking configuration.
       DeadLetterConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeadLetterConfig'
         description: The function's dead letter queue.
       Environment:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnvironmentResponse'
         description: The function's environment variables.
       KMSKeyArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KMSKeyArn'
         description: The KMS key used to encrypt the function's environment variables. Only returned if you've configured a customer managed CMK.
       TracingConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TracingConfigResponse'
         description: The function's AWS X-Ray tracing configuration.
       MasterArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionArn'
         description: The ARN of the master function.
       RevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Represents the latest updated revision of the function or alias.
       Layers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayersReferenceList'
         description: 'A list of <a href="http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a>.'
     description: A Lambda function's configuration settings.
   CreateFunctionRequest:
@@ -2069,52 +2069,52 @@ definitions:
       VpcConfig: {}
     properties:
       FunctionName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionName'
         description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
       Runtime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Runtime'
         description: The runtime version for the function.
       Role:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleArn'
         description: 'The Amazon Resource Name (ARN) of the function''s <a href="http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>.'
       Handler:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Handler'
         description: 'The name of the method within your code that Lambda calls to execute your function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a>.'
       Code:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionCode'
         description: The code for the function.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: A description of the function.
       Timeout:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timeout'
         description: The amount of time that Lambda allows a function to run before terminating it. The default is 3 seconds. The maximum allowed value is 900 seconds.
       MemorySize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MemorySize'
         description: The amount of memory that your function has access to. Increasing the function's memory also increases it's CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
       Publish:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Set to true to publish the first version of the function during creation.
       VpcConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VpcConfig'
         description: 'If your Lambda function accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID.'
       DeadLetterConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeadLetterConfig'
         description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/dlq.html">Dead Letter Queues</a>. '
       Environment:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Environment'
         description: Environment variables that are accessible from function code during execution.
       KMSKeyArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KMSKeyArn'
         description: 'The ARN of the KMS key used to encrypt your function''s environment variables. If not provided, AWS Lambda will use a default service key.'
       TracingConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TracingConfig'
         description: Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with AWS X-Ray.
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: 'The list of tags (key-value pairs) assigned to the new function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/tagging.html">Tagging Lambda Functions</a> in the <b>AWS Lambda Developer Guide</b>.'
       Layers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerList'
         description: 'A list of <a href="http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment.'
   CodeStorageExceededException: {}
   DeleteAliasRequest:
@@ -2148,10 +2148,10 @@ definitions:
       AccountUsage: {}
     properties:
       AccountLimit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountLimit'
         description: Limits related to concurrency and code storage.
       AccountUsage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountUsage'
         description: The number of functions and amount of storage in use.
   GetAccountSettingsRequest:
     type: object
@@ -2195,16 +2195,16 @@ definitions:
           SubnetIds: []
     properties:
       Configuration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionConfiguration'
         description: The function's configuration.
       Code:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionCodeLocation'
         description: The function's code.
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: 'Returns the list of tags associated with the function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/tagging.html">Tagging Lambda Functions</a> in the <b>AWS Lambda Developer Guide</b>.'
       Concurrency:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Concurrency'
         description: 'The concurrent execution limit set for this function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a>.'
     description: This response contains the object for the Lambda function location (see <a>FunctionCodeLocation</a>.
   GetFunctionRequest:
@@ -2223,28 +2223,28 @@ definitions:
     type: object
     properties:
       Content:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerVersionContentOutput'
         description: Details about the layer version.
       LayerArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerArn'
         description: The Amazon Resource Name (ARN) of the function layer.
       LayerVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerVersionArn'
         description: The ARN of the layer version.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: The description of the version.
       CreatedDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: 'The date that the layer version was created, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).'
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerVersionNumber'
         description: The version number.
       CompatibleRuntimes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CompatibleRuntimes'
         description: The layer's compatible runtimes.
       LicenseInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LicenseInfo'
         description: The layer's software license.
   GetLayerVersionRequest:
     type: object
@@ -2253,10 +2253,10 @@ definitions:
     type: object
     properties:
       Policy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The policy document.
       RevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: A unique identifier for the current revision of the policy.
   GetLayerVersionPolicyRequest:
     type: object
@@ -2267,10 +2267,10 @@ definitions:
       Policy: ''
     properties:
       Policy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The resource policy associated with the specified function. The response returns the same as a string using a backslash ("\") as an escape character in the JSON.
       RevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Represents the latest updated revision of the function or alias.
   GetPolicyRequest:
     type: object
@@ -2287,10 +2287,10 @@ definitions:
       StatusCode: 123
     properties:
       StatusCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: 'The HTTP status code will be in the 200 range for successful request. For the <code>RequestResponse</code> invocation type this status code will be 200. For the <code>Event</code> invocation type this status code will be 202. For the <code>DryRun</code> invocation type the status code will be 204. '
       Payload:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Blob'
         description: <p> It is the JSON representation of the object returned by the Lambda function. This is present only if the invocation type is <code>RequestResponse</code>. </p> <p>In the event of a function error this field contains a message describing the error. For the <code>Handled</code> errors the Lambda function will report this message. For <code>Unhandled</code> errors AWS Lambda reports the message. </p>
     description: 'Upon success, returns an empty response. Otherwise, throws an exception.'
   InvocationRequest:
@@ -2304,7 +2304,7 @@ definitions:
       Qualifier: '1'
     properties:
       Payload:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Blob'
         description: JSON that you want to provide to your Lambda function as input.
   InvalidRequestContentException: {}
   RequestTooLargeException: {}
@@ -2328,7 +2328,7 @@ definitions:
       Status: 123
     properties:
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HttpStatus'
         description: It will be 202 upon success.
     description: 'Upon success, it returns empty response. Otherwise, throws an exception.'
   InvokeAsyncRequest:
@@ -2340,7 +2340,7 @@ definitions:
       InvokeArgs: 'fileb://file-path/input.json'
     properties:
       InvokeArgs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BlobStream'
         description: JSON that you want to provide to your Lambda function as input.
   ListAliasesResponse:
     type: object
@@ -2349,10 +2349,10 @@ definitions:
       NextMarker: ''
     properties:
       NextMarker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'A string, present if there are more aliases.'
       Aliases:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AliasList'
         description: A list of aliases.
   ListAliasesRequest:
     type: object
@@ -2366,10 +2366,10 @@ definitions:
     type: object
     properties:
       NextMarker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: A pagination token that's returned when the response doesn't contain all event source mappings.
       EventSourceMappings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventSourceMappingsList'
         description: A list of event source mappings.
   ListEventSourceMappingsRequest:
     type: object
@@ -2381,10 +2381,10 @@ definitions:
       NextMarker: ''
     properties:
       NextMarker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'A string, present if there are more functions.'
       Functions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionList'
         description: A list of Lambda functions.
     description: A list of Lambda functions.
   ListFunctionsRequest:
@@ -2397,10 +2397,10 @@ definitions:
     type: object
     properties:
       NextMarker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: A pagination token returned when the response doesn't contain all versions.
       LayerVersions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerVersionsList'
         description: A list of versions.
   ListLayerVersionsRequest:
     type: object
@@ -2409,10 +2409,10 @@ definitions:
     type: object
     properties:
       NextMarker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: A pagination token returned when the response doesn't contain all layers.
       Layers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayersList'
         description: A list of function layers.
   ListLayersRequest:
     type: object
@@ -2421,7 +2421,7 @@ definitions:
     type: object
     properties:
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: 'The list of tags assigned to the function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/tagging.html">Tagging Lambda Functions</a> in the <b>AWS Lambda Developer Guide</b>.'
   ListTagsRequest:
     type: object
@@ -2433,10 +2433,10 @@ definitions:
       Versions: []
     properties:
       NextMarker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'A string, present if there are more function versions.'
       Versions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionList'
         description: A list of Lambda function versions.
   ListVersionsByFunctionRequest:
     type: object
@@ -2449,28 +2449,28 @@ definitions:
     type: object
     properties:
       Content:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerVersionContentOutput'
         description: Details about the layer version.
       LayerArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerArn'
         description: The Amazon Resource Name (ARN) of the function layer.
       LayerVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerVersionArn'
         description: The ARN of the layer version.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: The description of the version.
       CreatedDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: 'The date that the layer version was created, in <a href="https://www.w3.org/TR/NOTE-datetime">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).'
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerVersionNumber'
         description: The version number.
       CompatibleRuntimes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CompatibleRuntimes'
         description: The layer's compatible runtimes.
       LicenseInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LicenseInfo'
         description: The layer's software license.
   PublishLayerVersionRequest:
     type: object
@@ -2478,16 +2478,16 @@ definitions:
       - Content
     properties:
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: The description of the version.
       Content:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerVersionContentInput'
         description: The function layer archive.
       CompatibleRuntimes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CompatibleRuntimes'
         description: 'A list of compatible <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">function runtimes</a>. Used for filtering with <a>ListLayers</a> and <a>ListLayerVersions</a>.'
       LicenseInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LicenseInfo'
         description: '<p>The layer''s software license. It can be any of the following:</p> <ul> <li> <p>An <a href="https://spdx.org/licenses/">SPDX license identifier</a>. For example, <code>MIT</code>.</p> </li> <li> <p>The URL of a license hosted on the internet. For example, <code>https://opensource.org/licenses/MIT</code>.</p> </li> <li> <p>The full text of the license.</p> </li> </ul>'
   PublishVersionRequest:
     type: object
@@ -2497,19 +2497,19 @@ definitions:
       FunctionName: myFunction
     properties:
       CodeSha256:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The SHA256 hash of the deployment package you want to publish. This provides validation on the code you are publishing. If you provide this parameter, the value must match the SHA256 of the $LATEST version for the publication to succeed. You can use the <b>DryRun</b> parameter of <a>UpdateFunctionCode</a> to verify the hash value that will be returned before publishing your new version.'
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: 'The description for the version you are publishing. If not provided, AWS Lambda copies the description from the $LATEST version.'
       RevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn''t match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you retrieve the latest function version or alias <code>RevisionID</code> using either <a>GetFunction</a> or <a>GetAlias</a>.'
   Concurrency:
     type: object
     properties:
       ReservedConcurrentExecutions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReservedConcurrentExecutions'
         description: 'The number of concurrent executions reserved for this function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a>.'
   PutFunctionConcurrencyRequest:
     type: object
@@ -2517,7 +2517,7 @@ definitions:
       - ReservedConcurrentExecutions
     properties:
       ReservedConcurrentExecutions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReservedConcurrentExecutions'
         description: The concurrent execution limit reserved for this function.
   RemoveLayerVersionPermissionRequest:
     type: object
@@ -2535,7 +2535,7 @@ definitions:
       - Tags
     properties:
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: 'The list of tags (key-value pairs) you are assigning to the Lambda function. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/tagging.html">Tagging Lambda Functions</a> in the <b>AWS Lambda Developer Guide</b>.'
   UntagResourceRequest:
     type: object
@@ -2549,16 +2549,16 @@ definitions:
       Name: functionAlias
     properties:
       FunctionVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: Using this parameter you can change the Lambda function version to which the alias points.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: You can change the description of the alias using this parameter.
       RoutingConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AliasRoutingConfiguration'
         description: 'Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">Traffic Shifting Using Aliases</a>.'
       RevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn''t match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you retrieve the latest function version or alias <code>RevisionID</code> using either <a>GetFunction</a> or <a>GetAlias</a>.'
   UpdateEventSourceMappingRequest:
     type: object
@@ -2569,13 +2569,13 @@ definitions:
       UUID: 1234xCy789012
     properties:
       FunctionName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionName'
         description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Version or Alias ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it''s limited to 64 characters in length.</p>'
       Enabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Enabled'
         description: Disables the event source mapping to pause polling and invocation.
       BatchSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BatchSize'
         description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
   UpdateFunctionCodeRequest:
     type: object
@@ -2588,25 +2588,25 @@ definitions:
       ZipFile: 'fileb://file-path/file.zip'
     properties:
       ZipFile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Blob'
         description: 'The contents of your zip file containing your deployment package. If you are using the web API directly, the contents of the zip file must be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you. For more information about creating a .zip file, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html">Execution Permissions</a>. '
       S3Bucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Bucket'
         description: Amazon S3 bucket name where the .zip file containing your deployment package is stored. This bucket must reside in the same AWS Region where you are creating the Lambda function.
       S3Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Key'
         description: The Amazon S3 object (the deployment package) key name you want to upload.
       S3ObjectVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3ObjectVersion'
         description: The Amazon S3 object (the deployment package) version you want to upload.
       Publish:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: This boolean parameter can be used to request AWS Lambda to update the Lambda function and publish a version as an atomic operation.
       DryRun:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the <code>CodeSha256</code> hash value of the provided code will also be computed and returned in the response.'
       RevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn''t match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either using using either <a>GetFunction</a> or <a>GetAlias</a>.'
   UpdateFunctionConfigurationRequest:
     type: object
@@ -2621,72 +2621,72 @@ definitions:
       VpcConfig: {}
     properties:
       Role:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleArn'
         description: The Amazon Resource Name (ARN) of the IAM role that Lambda will assume when it executes your function.
       Handler:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Handler'
         description: 'The function that Lambda calls to begin executing your function. For Node.js, it is the <code>module-name.export</code> value in your function. '
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: A short user-defined function description. AWS Lambda does not use this value. Assign a meaningful description as you see fit.
       Timeout:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timeout'
         description: The amount of time that Lambda allows a function to run before terminating it. The default is 3 seconds. The maximum allowed value is 900 seconds.
       MemorySize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MemorySize'
         description: 'The amount of memory, in MB, your Lambda function is given. AWS Lambda uses this memory size to infer the amount of CPU allocated to your function. Your function use-case determines your CPU and memory requirements. For example, a database operation might need less memory compared to an image processing function. The default value is 128 MB. The value must be a multiple of 64 MB.'
       VpcConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VpcConfig'
         description: Specify security groups and subnets in a VPC to which your Lambda function needs access.
       Environment:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Environment'
         description: The parent object that contains your environment's configuration settings.
       Runtime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Runtime'
         description: The runtime version for the function.
       DeadLetterConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeadLetterConfig'
         description: 'A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/dlq.html">Dead Letter Queues</a>.'
       KMSKeyArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KMSKeyArn'
         description: 'The Amazon Resource Name (ARN) of the KMS key used to encrypt your function''s environment variables. If you elect to use the AWS Lambda default service key, pass in an empty string ("") for this parameter.'
       TracingConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TracingConfig'
         description: Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with AWS X-Ray.
       RevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn''t match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either <a>GetFunction</a> or <a>GetAlias</a>.'
       Layers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerList'
         description: 'A list of <a href="http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment.'
   '[object Object]': {}
   AccountLimit:
     type: object
     properties:
       TotalCodeSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: 'Maximum size, in bytes, of a code package you can upload per region. The default size is 75 GB. '
       CodeSizeUnzipped:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: 'Size, in bytes, of code/dependencies that you can zip into a deployment package (uncompressed zip/jar size) for uploading. The default limit is 250 MB.'
       CodeSizeZipped:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: 'Size, in bytes, of a single zipped code/dependencies package you can upload for your Lambda function(.zip/.jar file). Try using Amazon S3 for uploading larger files. Default limit is 50 MB.'
       ConcurrentExecutions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: Number of simultaneous executions of your function per region. The default limit is 1000.
       UnreservedConcurrentExecutions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UnreservedConcurrentExecutions'
         description: 'The number of concurrent executions available to functions that do not have concurrency limits set. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a>.'
     description: 'Provides limits of code size and concurrency associated with the current account and region. For more information or to request a limit increase for concurrent executions, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/limits.html">Lambda Limits</a>. '
   AccountUsage:
     type: object
     properties:
       TotalCodeSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: 'Total size, in bytes, of the account''s deployment packages per region.'
       FunctionCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The number of your account's existing functions per region.
     description: Provides code size usage and function count associated with the current account and region.
   Action:
@@ -2719,12 +2719,12 @@ definitions:
   AliasList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AliasConfiguration'
   AliasRoutingConfiguration:
     type: object
     properties:
       AdditionalVersionWeights:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AdditionalVersionWeights'
         description: 'The name of the second alias, and the percentage of traffic that is routed to it.'
     description: 'The alias''s <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">traffic shifting</a> configuration.'
   Arn:
@@ -2744,7 +2744,7 @@ definitions:
   CompatibleRuntimes:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Runtime'
     maxItems: 5
   Date:
     type: string
@@ -2753,7 +2753,7 @@ definitions:
     type: object
     properties:
       TargetArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceArn'
         description: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
     description: 'The <a href="http://docs.aws.amazon.com/lambda/latest/dg/dlq.html">dead letter queue</a> for failed asynchronous invocations.'
   Description:
@@ -2766,27 +2766,27 @@ definitions:
     type: object
     properties:
       Variables:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnvironmentVariables'
         description: Environment variable key-value pairs.
     description: A function's environment variable settings.
   EnvironmentError:
     type: object
     properties:
       ErrorCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The error code.
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveString'
         description: The error message.
     description: Error messages for environment variables that could not be applied.
   EnvironmentResponse:
     type: object
     properties:
       Variables:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnvironmentVariables'
         description: Environment variable key-value pairs.
       Error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnvironmentError'
         description: Error messages for environment variables that could not be applied.
     description: The results of a configuration update that applied environment variables.
   EnvironmentVariableName:
@@ -2808,7 +2808,7 @@ definitions:
   EventSourceMappingsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/EventSourceMappingConfiguration'
   EventSourcePosition:
     type: string
     enum:
@@ -2827,32 +2827,32 @@ definitions:
     type: object
     properties:
       ZipFile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Blob'
         description: The base64-encoded contents of your zip file containing your deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
       S3Bucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Bucket'
         description: An Amazon S3 bucket in the same region as your function.
       S3Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Key'
         description: The Amazon S3 key of the deployment package.
       S3ObjectVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3ObjectVersion'
         description: 'For versioned objects, the version of the deployment package object to use.'
     description: 'The code for the Lambda function. You can specify either an S3 location, or upload a deployment package directly.'
   FunctionCodeLocation:
     type: object
     properties:
       RepositoryType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The repository from which you can download the function.
       Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The presigned URL you can use to download the function's .zip file that you previously uploaded. The URL is valid for up to 10 minutes.
     description: The object for the Lambda function location.
   FunctionList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FunctionConfiguration'
   FunctionName:
     type: string
     pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
@@ -2883,10 +2883,10 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerVersionArn'
         description: The Amazon Resource Name (ARN) of the function layer.
       CodeSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The size of the layer archive in bytes.
     description: A function layer.
   LayerArn:
@@ -2897,7 +2897,7 @@ definitions:
   LayerList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/LayerVersionArn'
   LayerName:
     type: string
     pattern: '(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+'
@@ -2918,29 +2918,29 @@ definitions:
     type: object
     properties:
       S3Bucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Bucket'
         description: The Amazon S3 bucket of the layer archive.
       S3Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Key'
         description: The Amazon S3 key of the layer archive.
       S3ObjectVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3ObjectVersion'
         description: 'For versioned objects, the version of the layer archive object to use.'
       ZipFile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Blob'
         description: The base64-encoded contents of the layer archive. AWS SDK and AWS CLI clients handle the encoding for you.
     description: 'A ZIP archive that contains the contents of the function layer. You can specify either an Amazon S3 location, or upload a layer archive directly.'
   LayerVersionContentOutput:
     type: object
     properties:
       Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: A link to the layer archive in Amazon S3 that is valid for 10 minutes.
       CodeSha256:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The SHA-256 hash of the layer archive.
       CodeSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The size of the layer archive in bytes.
     description: Details about a layer version.
   LayerVersionNumber:
@@ -2948,50 +2948,50 @@ definitions:
   LayerVersionsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/LayerVersionsListItem'
   LayerVersionsListItem:
     type: object
     properties:
       LayerVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerVersionArn'
         description: The ARN of the layer version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerVersionNumber'
         description: The version number.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: The description of the version.
       CreatedDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: 'The date that the version was created, in ISO 8601 format. For example, <code>2018-11-27T15:10:45.123+0000</code>.'
       CompatibleRuntimes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CompatibleRuntimes'
         description: The layer's compatible runtimes.
       LicenseInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LicenseInfo'
         description: The layer's open-source license.
     description: Details about a layer version.
   LayersList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/LayersListItem'
   LayersListItem:
     type: object
     properties:
       LayerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerName'
         description: The name of the layer.
       LayerArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerArn'
         description: The Amazon Resource Name (ARN) of the function layer.
       LatestMatchingVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LayerVersionsListItem'
         description: The newest version of the layer.
     description: Details about a function layer.
   LayersReferenceList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Layer'
   LicenseInfo:
     type: string
     maxLength: 512
@@ -3086,7 +3086,7 @@ definitions:
   SecurityGroupIds:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SecurityGroupId'
     maxItems: 5
   SensitiveString:
     type: string
@@ -3106,14 +3106,14 @@ definitions:
   SubnetIds:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SubnetId'
     maxItems: 16
   TagKey:
     type: string
   TagKeyList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TagKey'
   TagValue:
     type: string
   Tags:
@@ -3134,14 +3134,14 @@ definitions:
     type: object
     properties:
       Mode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TracingMode'
         description: The tracing mode.
     description: The function's AWS X-Ray tracing configuration.
   TracingConfigResponse:
     type: object
     properties:
       Mode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TracingMode'
         description: The tracing mode.
     description: The function's AWS X-Ray tracing configuration.
   TracingMode:
@@ -3161,23 +3161,23 @@ definitions:
     type: object
     properties:
       SubnetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetIds'
         description: A list of VPC subnet IDs.
       SecurityGroupIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SecurityGroupIds'
         description: A list of VPC security groups IDs.
     description: The VPC security groups and subnets attached to a Lambda function.
   VpcConfigResponse:
     type: object
     properties:
       SubnetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetIds'
         description: A list of VPC subnet IDs.
       SecurityGroupIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SecurityGroupIds'
         description: A list of VPC security groups IDs.
       VpcId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VpcId'
         description: The ID of the VPC.
     description: The VPC security groups and subnets attached to a Lambda function.
   VpcId:

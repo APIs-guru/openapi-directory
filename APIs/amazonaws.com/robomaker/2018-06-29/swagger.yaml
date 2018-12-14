@@ -1463,10 +1463,10 @@ definitions:
     type: object
     properties:
       jobs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationJobs'
         description: A list of simulation jobs.
       unprocessedJobs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arns'
         description: A list of unprocessed simulation job Amazon Resource Names (ARNs).
   BatchDescribeSimulationJobRequest:
     type: object
@@ -1474,7 +1474,7 @@ definitions:
       - jobs
     properties:
       jobs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arns'
         description: A list of Amazon Resource Names (ARNs) of simulation jobs to describe.
   ResourceNotFoundException: {}
   InvalidParameterException: {}
@@ -1489,34 +1489,34 @@ definitions:
       - job
     properties:
       job:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The simulation job ARN to cancel.
   CreateDeploymentJobResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the deployment job.
       fleet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The target fleet for the deployment job.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStatus'
         description: The status of the deployment job.
       deploymentApplicationConfigs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentApplicationConfigs'
         description: The deployment application configuration.
       failureReason:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The failure reason of the deployment job if it failed.
       failureCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentJobErrorCode'
         description: The failure code of the deployment job if it failed.
       createdAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the fleet was created.'
       deploymentConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfig'
         description: The deployment configuration.
   CreateDeploymentJobRequest:
     type: object
@@ -1526,16 +1526,16 @@ definitions:
       - deploymentApplicationConfigs
     properties:
       deploymentConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfig'
         description: The requested deployment configuration.
       clientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
       fleet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet to deploy.
       deploymentApplicationConfigs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentApplicationConfigs'
         description: The deployment application configuration.
   LimitExceededException: {}
   ConcurrentDeploymentException: {}
@@ -1544,13 +1544,13 @@ definitions:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the fleet.
       createdAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the fleet was created.'
   CreateFleetRequest:
     type: object
@@ -1558,25 +1558,25 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the fleet.
   CreateRobotResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the robot.
       createdAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot was created.'
       greengrassGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Id'
         description: The Amazon Resource Name (ARN) of the Greengrass group associated with the robot.
       architecture:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Architecture'
         description: The target architecture of the robot.
   CreateRobotRequest:
     type: object
@@ -1586,38 +1586,38 @@ definitions:
       - greengrassGroupId
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name for the robot.
       architecture:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Architecture'
         description: The target architecture of the robot.
       greengrassGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Id'
         description: The Greengrass group id.
   ResourceAlreadyExistsException: {}
   CreateRobotApplicationResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot application.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the robot application.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the robot application.
       sources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Sources'
         description: The sources of the robot application.
       robotSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuite'
         description: The robot software suite used by the robot application.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
       revisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionId'
         description: The revision id of the robot application.
   CreateRobotApplicationRequest:
     type: object
@@ -1627,37 +1627,37 @@ definitions:
       - robotSoftwareSuite
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the robot application.
       sources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SourceConfigs'
         description: The sources of the robot application.
       robotSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuite'
         description: The robot software suite used by the robot application.
   CreateRobotApplicationVersionResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot application.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the robot application.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the robot application.
       sources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Sources'
         description: The sources of the robot application.
       robotSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuite'
         description: The robot software suite used by the robot application.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
       revisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionId'
         description: The revision id of the robot application.
   CreateRobotApplicationVersionRequest:
     type: object
@@ -1665,40 +1665,40 @@ definitions:
       - application
     properties:
       application:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The application information for the robot application.
       currentRevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionId'
         description: 'The current revision id for the robot application. If you provide a value and it matches the latest revision ID, a new version will be created.'
   CreateSimulationApplicationResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the simulation application.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the simulation application.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the simulation application.
       sources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Sources'
         description: The sources of the simulation application.
       simulationSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationSoftwareSuite'
         description: The simulation software suite used by the simulation application.
       robotSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuite'
         description: Information about the robot software suite.
       renderingEngine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
       revisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionId'
         description: The revision id of the simulation application.
   CreateSimulationApplicationRequest:
     type: object
@@ -1710,49 +1710,49 @@ definitions:
       - renderingEngine
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the simulation application.
       sources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SourceConfigs'
         description: The sources of the simulation application.
       simulationSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationSoftwareSuite'
         description: The simulation software suite used by the simulation application.
       robotSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuite'
         description: The robot software suite of the simulation application.
       renderingEngine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
   CreateSimulationApplicationVersionResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the simulation application.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the simulation application.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the simulation application.
       sources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Sources'
         description: The sources of the simulation application.
       simulationSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationSoftwareSuite'
         description: The simulation software suite used by the simulation application.
       robotSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuite'
         description: Information about the robot software suite.
       renderingEngine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
       revisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionId'
         description: The revision ID of the simulation application.
   CreateSimulationApplicationVersionRequest:
     type: object
@@ -1760,52 +1760,52 @@ definitions:
       - application
     properties:
       application:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The application information for the simulation application.
       currentRevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionId'
         description: 'The current revision id for the simulation application. If you provide a value and it matches the latest revision ID, a new version will be created.'
   CreateSimulationJobResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the simulation job.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationJobStatus'
         description: The status of the simulation job.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation job was last updated.'
       failureBehavior:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FailureBehavior'
         description: the failure behavior for the simulation job.
       failureCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationJobErrorCode'
         description: The failure code of the simulation job if it failed.
       clientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
       outputLocation:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputLocation'
         description: Simulation job output files location.
       maxJobDurationInSeconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobDuration'
         description: 'The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less. '
       simulationTimeMillis:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationTimeMillis'
         description: The simulation job execution duration in milliseconds.
       iamRole:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IamRole'
         description: The IAM role that allows the simulation job to call the AWS APIs that are specified in its associated policies on your behalf.
       robotApplications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotApplicationConfigs'
         description: The robot application used by the simulation job.
       simulationApplications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationApplicationConfigs'
         description: The simulation application used by the simulation job.
       vpcConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VPCConfigResponse'
         description: Information about the vpc configuration.
   CreateSimulationJobRequest:
     type: object
@@ -1814,28 +1814,28 @@ definitions:
       - iamRole
     properties:
       clientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
       outputLocation:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputLocation'
         description: Location for output files generated by the simulation job.
       maxJobDurationInSeconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobDuration'
         description: 'The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds. When <code>maxJobDurationInSeconds</code> is reached, the simulation job will status will transition to <code>Completed</code>.'
       iamRole:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IamRole'
         description: 'The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. See how to <a href="https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials">specify AWS security credentials for your application</a>. '
       failureBehavior:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FailureBehavior'
         description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
       robotApplications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotApplicationConfigs'
         description: The robot application to use in the simulation job.
       simulationApplications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationApplicationConfigs'
         description: The simulation application to use in the simulation job.
       vpcConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VPCConfig'
         description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID. '
   DeleteFleetResponse:
     type: object
@@ -1846,7 +1846,7 @@ definitions:
       - fleet
     properties:
       fleet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
   DeleteRobotResponse:
     type: object
@@ -1857,7 +1857,7 @@ definitions:
       - robot
     properties:
       robot:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot.
   DeleteRobotApplicationResponse:
     type: object
@@ -1868,10 +1868,10 @@ definitions:
       - application
     properties:
       application:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the the robot application.
       applicationVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the robot application to delete.
   DeleteSimulationApplicationResponse:
     type: object
@@ -1882,19 +1882,19 @@ definitions:
       - application
     properties:
       application:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The application information for the simulation application to delete.
       applicationVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the simulation application to delete.
   DeregisterRobotResponse:
     type: object
     properties:
       fleet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
       robot:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot.
   DeregisterRobotRequest:
     type: object
@@ -1903,40 +1903,40 @@ definitions:
       - robot
     properties:
       fleet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
       robot:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot.
   DescribeDeploymentJobResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the deployment job.
       fleet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStatus'
         description: The status of the deployment job.
       deploymentConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfig'
         description: The deployment configuration.
       deploymentApplicationConfigs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentApplicationConfigs'
         description: The deployment application configuration.
       failureReason:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: A short description of the reason why the deployment job failed.
       failureCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentJobErrorCode'
         description: The deployment job failure code.
       createdAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the deployment job was created.'
       robotDeploymentSummary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotDeploymentSummary'
         description: A list of robot deployment summaries.
   DescribeDeploymentJobRequest:
     type: object
@@ -1944,31 +1944,31 @@ definitions:
       - job
     properties:
       job:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the deployment job.
   DescribeFleetResponse:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the fleet.
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
       robots:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Robots'
         description: A list of robots.
       createdAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the fleet was created.'
       lastDeploymentStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStatus'
         description: The status of the last deployment.
       lastDeploymentJob:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the last deployment job.
       lastDeploymentTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: The time of the last deployment.
   DescribeFleetRequest:
     type: object
@@ -1976,37 +1976,37 @@ definitions:
       - fleet
     properties:
       fleet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
   DescribeRobotResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the robot.
       fleetArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotStatus'
         description: The status of the fleet.
       greengrassGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Id'
         description: The Greengrass group id.
       createdAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot was created.'
       architecture:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Architecture'
         description: The target architecture of the robot application.
       lastDeploymentJob:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the last deployment job.
       lastDeploymentTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: The time of the last deployment job.
   DescribeRobotRequest:
     type: object
@@ -2014,31 +2014,31 @@ definitions:
       - robot
     properties:
       robot:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot to be described.
   DescribeRobotApplicationResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot application.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the robot application.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the robot application.
       sources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Sources'
         description: The sources of the robot application.
       robotSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuite'
         description: The robot software suite used by the robot application.
       revisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionId'
         description: The revision id of the robot application.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
   DescribeRobotApplicationRequest:
     type: object
@@ -2046,40 +2046,40 @@ definitions:
       - application
     properties:
       application:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot application.
       applicationVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the robot application to describe.
   DescribeSimulationApplicationResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot simulation application.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the simulation application.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the simulation application.
       sources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Sources'
         description: The sources of the simulation application.
       simulationSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationSoftwareSuite'
         description: The simulation software suite used by the simulation application.
       robotSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuite'
         description: Information about the robot software suite.
       renderingEngine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
       revisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionId'
         description: The revision id of the simulation application.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
   DescribeSimulationApplicationRequest:
     type: object
@@ -2087,55 +2087,55 @@ definitions:
       - application
     properties:
       application:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The application information for the simulation application.
       applicationVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the simulation application to describe.
   DescribeSimulationJobResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the simulation job.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the simulation job.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationJobStatus'
         description: The status of the simulation job.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation job was last updated.'
       failureBehavior:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FailureBehavior'
         description: The failure behavior for the simulation job.
       failureCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationJobErrorCode'
         description: '<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally (segfault, etc.)</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally (segfault, etc.)</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, etc.)</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, etc.)</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation</p> </dd> </dl>'
       clientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
       outputLocation:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputLocation'
         description: Location for output files generated by the simulation job.
       maxJobDurationInSeconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobDuration'
         description: 'The maximum job duration in seconds. The value must be 8 days (691,200 seconds) or less.'
       simulationTimeMillis:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationTimeMillis'
         description: The simulation job execution duration in milliseconds.
       iamRole:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IamRole'
         description: The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf.
       robotApplications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotApplicationConfigs'
         description: A list of robot applications.
       simulationApplications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationApplicationConfigs'
         description: A list of simulation applications.
       vpcConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VPCConfigResponse'
         description: The VPC configuration.
   DescribeSimulationJobRequest:
     type: object
@@ -2143,118 +2143,118 @@ definitions:
       - job
     properties:
       job:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the simulation job to be described.
   ListDeploymentJobsResponse:
     type: object
     properties:
       deploymentJobs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentJobs'
         description: A list of deployment jobs that meet the criteria of the request.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListDeploymentJobs</code> request. When the results of a <code>ListDeploymentJobs</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
   ListDeploymentJobsRequest:
     type: object
     properties:
       filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Filters'
         description: Optional filters to limit results.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of deployment job results returned by <code>ListDeploymentJobs</code> in paginated output. When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
   ListFleetsResponse:
     type: object
     properties:
       fleetDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Fleets'
         description: A list of fleet details meeting the request criteria.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListDeploymentJobs</code> request. When the results of a <code>ListFleets</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
   ListFleetsRequest:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListFleets</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of deployment job results returned by <code>ListFleets</code> in paginated output. When this parameter is used, <code>ListFleets</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListFleets</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
       filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Filters'
         description: Optional filters to limit results.
   ListRobotApplicationsResponse:
     type: object
     properties:
       robotApplicationSummaries:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotApplicationSummaries'
         description: A list of robot application summaries that meet the criteria of the request.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListRobotApplications</code> request. When the results of a <code>ListRobotApplications</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
   ListRobotApplicationsRequest:
     type: object
     properties:
       versionQualifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VersionQualifier'
         description: The version qualifier of the robot application.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
       filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Filters'
         description: Optional filters to limit results.
   ListRobotsResponse:
     type: object
     properties:
       robots:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Robots'
         description: A list of robots that meet the criteria of the request.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListRobots</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
   ListRobotsRequest:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
       filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Filters'
         description: Optional filters to limit results.
   ListSimulationApplicationsResponse:
     type: object
     properties:
       simulationApplicationSummaries:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationApplicationSummaries'
         description: A list of simulation application summaries that meet the criteria of the request.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListSimulationApplications</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
   ListSimulationApplicationsRequest:
     type: object
     properties:
       versionQualifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VersionQualifier'
         description: The version qualifier of the simulation application.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
       filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Filters'
         description: Optional list of filters to limit results. The only valid filter name is <code>name</code>.
   ListSimulationJobsResponse:
     type: object
@@ -2262,31 +2262,31 @@ definitions:
       - simulationJobSummaries
     properties:
       simulationJobSummaries:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationJobSummaries'
         description: A list of simulation job summaries that meet the criteria of the request.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: 'The <code>nextToken</code> value to include in a future <code>ListSimulationJobs</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
   ListSimulationJobsRequest:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
       filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Filters'
         description: Optional filters to limit results.
   RegisterRobotResponse:
     type: object
     properties:
       fleet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet that the robot will join.
       robot:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: Information about the robot registration.
   RegisterRobotRequest:
     type: object
@@ -2295,10 +2295,10 @@ definitions:
       - robot
     properties:
       fleet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
       robot:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot.
   RestartSimulationJobResponse:
     type: object
@@ -2309,34 +2309,34 @@ definitions:
       - job
     properties:
       job:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the simulation job.
   SyncDeploymentJobResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the synchronization request.
       fleet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStatus'
         description: The status of the synchronization job.
       deploymentConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfig'
         description: Information about the deployment configuration.
       deploymentApplicationConfigs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentApplicationConfigs'
         description: Information about the deployment application configurations.
       failureReason:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The failure reason if the job fails.
       failureCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentJobErrorCode'
         description: The failure code if the job fails.
       createdAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the fleet was created.'
   SyncDeploymentJobRequest:
     type: object
@@ -2345,34 +2345,34 @@ definitions:
       - fleet
     properties:
       clientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
       fleet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The target fleet for the synchronization.
   UpdateRobotApplicationResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the updated robot application.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the robot application.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the robot application.
       sources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Sources'
         description: The sources of the robot application.
       robotSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuite'
         description: The robot software suite used by the robot application.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
       revisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionId'
         description: The revision id of the robot application.
   UpdateRobotApplicationRequest:
     type: object
@@ -2382,46 +2382,46 @@ definitions:
       - robotSoftwareSuite
     properties:
       application:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The application information for the robot application.
       sources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SourceConfigs'
         description: The sources of the robot application.
       robotSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuite'
         description: The robot software suite used by the robot application.
       currentRevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionId'
         description: The revision id for the robot application.
   UpdateSimulationApplicationResponse:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the updated simulation application.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the simulation application.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the robot application.
       sources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Sources'
         description: The sources of the simulation application.
       simulationSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationSoftwareSuite'
         description: The simulation software suite used by the simulation application.
       robotSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuite'
         description: Information about the robot software suite.
       renderingEngine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
       revisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionId'
         description: The revision id of the simulation application.
   UpdateSimulationApplicationRequest:
     type: object
@@ -2433,22 +2433,22 @@ definitions:
       - renderingEngine
     properties:
       application:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The application information for the simulation application.
       sources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SourceConfigs'
         description: The sources of the simulation application.
       simulationSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationSoftwareSuite'
         description: The simulation software suite used by the simulation application.
       robotSoftwareSuite:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuite'
         description: Information about the robot software suite.
       renderingEngine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
       currentRevisionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionId'
         description: The revision id for the robot application.
   Architecture:
     type: string
@@ -2465,7 +2465,7 @@ definitions:
   Arns:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Arn'
     minItems: 1
     maxItems: 100
   Boolean:
@@ -2486,57 +2486,57 @@ definitions:
       - launchConfig
     properties:
       application:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The application.
       applicationVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the application.
       launchConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentLaunchConfig'
         description: 'The launch configuration, usually <code>roslaunch</code>.'
     description: Information about a deployment application configuration.
   DeploymentApplicationConfigs:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DeploymentApplicationConfig'
     minItems: 1
     maxItems: 1
   DeploymentConfig:
     type: object
     properties:
       concurrentDeploymentPercentage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Percentage'
         description: The percentage of robots receiving the deployment at the same time.
       failureThresholdPercentage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Percentage'
         description: The percentage of deployments that need to fail before stopping deployment.
     description: Information about a deployment configuration.
   DeploymentJob:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the deployment job.
       fleet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStatus'
         description: The status of the deployment job.
       deploymentApplicationConfigs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentApplicationConfigs'
         description: The deployment application configuration.
       deploymentConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfig'
         description: The deployment configuration.
       failureReason:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: A short description of the reason why the deployment job failed.
       failureCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentJobErrorCode'
         description: The deployment job failure code.
       createdAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the deployment job was created.'
     description: Information about a deployment job.
   DeploymentJobErrorCode:
@@ -2558,7 +2558,7 @@ definitions:
   DeploymentJobs:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DeploymentJob'
     minItems: 0
     maxItems: 200
   DeploymentLaunchConfig:
@@ -2568,19 +2568,19 @@ definitions:
       - launchFile
     properties:
       packageName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The package name.
       preLaunchFile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The deployment pre-launch file. This file will be executed prior to the deployment launch file.
       launchFile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The deployment launch file.
       postLaunchFile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The deployment post-launch file. This file will be executed after the deployment launch file.
       environmentVariables:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnvironmentVariableMap'
         description: An array of key/value pairs specifying environment variables for the deployment application.
     description: Configuration information for a deployment launch.
   DeploymentStatus:
@@ -2620,50 +2620,50 @@ definitions:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the filter.
       values:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterValues'
         description: A list of values.
     description: Information about a filter.
   FilterValues:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Name'
     minItems: 1
     maxItems: 1
   Filters:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Filter'
     minItems: 1
     maxItems: 1
   Fleet:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the fleet.
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
       createdAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the fleet was created.'
       lastDeploymentStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStatus'
         description: The status of the last fleet deployment.
       lastDeploymentJob:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the last deployment job.
       lastDeploymentTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: The time of the last deployment.
     description: Information about a fleet.
   Fleets:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Fleet'
     minItems: 0
     maxItems: 200
   GenericString:
@@ -2689,13 +2689,13 @@ definitions:
       - launchFile
     properties:
       packageName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The package name.
       launchFile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The launch file.
       environmentVariables:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnvironmentVariableMap'
         description: The environment variables for the application launch.
     description: Information about a launch configuration.
   MaxResults:
@@ -2709,10 +2709,10 @@ definitions:
     type: object
     properties:
       s3Bucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Bucket'
         description: The S3 bucket for output.
       s3Prefix:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Key'
         description: The S3 folder in the <code>s3Bucket</code> where output files will be placed.
     description: The output location.
   PaginationToken:
@@ -2728,20 +2728,20 @@ definitions:
     type: object
     properties:
       currentProgress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The current progress status.
       targetResource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The Amazon Resource Name (ARN) of the deployment job.
     description: Information about the progress of a deployment job.
   RenderingEngine:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RenderingEngineType'
         description: The name of the rendering engine.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RenderingEngineVersionType'
         description: The version of the rendering engine.
     description: Information about a rendering engine.
   RenderingEngineType:
@@ -2760,31 +2760,31 @@ definitions:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the robot.
       fleetArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the fleet.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotStatus'
         description: The status of the robot.
       greenGrassGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Id'
         description: The Greengrass group associated with the robot.
       createdAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot was created.'
       architecture:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Architecture'
         description: The architecture of the robot.
       lastDeploymentJob:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the last deployment job.
       lastDeploymentTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: The time of the last deployment.
     description: Information about a robot.
   RobotApplicationConfig:
@@ -2794,86 +2794,86 @@ definitions:
       - launchConfig
     properties:
       application:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The application information for the robot application.
       applicationVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the robot application.
       launchConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LaunchConfig'
         description: The launch configuration for the robot application.
     description: Application configuration information for a robot.
   RobotApplicationConfigs:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/RobotApplicationConfig'
     minItems: 1
     maxItems: 1
   RobotApplicationNames:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Name'
     minItems: 1
     maxItems: 1
   RobotApplicationSummaries:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/RobotApplicationSummary'
     minItems: 0
     maxItems: 100
   RobotApplicationSummary:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the robot application.
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the robot.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the robot application.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
     description: Summary information for a robot application.
   RobotDeployment:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The robot deployment Amazon Resource Name (ARN).
       deploymentStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the deployment was started.'
       deploymentFinishTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the deployment finished.'
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotStatus'
         description: The status of the robot deployment.
       progressDetail:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressDetail'
         description: Information about how the deployment is progressing.
       failureReason:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: A short description of the reason why the robot deployment failed.
       failureCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentJobErrorCode'
         description: The robot deployment failure code.
     description: Information about a robot deployment.
   RobotDeploymentSummary:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/RobotDeployment'
   RobotSoftwareSuite:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuiteType'
         description: The name of the robot software suite.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotSoftwareSuiteVersionType'
         description: The version of the robot software suite.
     description: Information about a robot software suite.
   RobotSoftwareSuiteType:
@@ -2897,7 +2897,7 @@ definitions:
   Robots:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Robot'
     minItems: 0
     maxItems: 1000
   S3Bucket:
@@ -2915,7 +2915,7 @@ definitions:
   SecurityGroups:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/GenericString'
     minItems: 1
     maxItems: 5
   SimulationApplicationConfig:
@@ -2925,93 +2925,93 @@ definitions:
       - launchConfig
     properties:
       application:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The application information for the simulation application.
       applicationVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the simulation application.
       launchConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LaunchConfig'
         description: The launch configuration for the simulation application.
     description: Information about a simulation application configuration.
   SimulationApplicationConfigs:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SimulationApplicationConfig'
     minItems: 1
     maxItems: 1
   SimulationApplicationNames:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Name'
     minItems: 1
     maxItems: 1
   SimulationApplicationSummaries:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SimulationApplicationSummary'
     minItems: 0
     maxItems: 100
   SimulationApplicationSummary:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the simulation application.
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the simulation application.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Version'
         description: The version of the simulation application.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
     description: Summary information for a simulation application.
   SimulationJob:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the simulation job.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the simulation job.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationJobStatus'
         description: Status of the simulation job.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation job was last updated.'
       failureBehavior:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FailureBehavior'
         description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
       failureCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationJobErrorCode'
         description: The failure code of the simulation job if it failed.
       clientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: A unique identifier for this <code>SimulationJob</code> request.
       outputLocation:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputLocation'
         description: Location for output files generated by the simulation job.
       maxJobDurationInSeconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobDuration'
         description: 'The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less.'
       simulationTimeMillis:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationTimeMillis'
         description: The simulation job execution duration in milliseconds.
       iamRole:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IamRole'
         description: 'The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. See how to <a href="https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials">specify AWS security credentials for your application</a>. '
       robotApplications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotApplicationConfigs'
         description: A list of robot applications.
       simulationApplications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationApplicationConfigs'
         description: A list of simulation applications.
       vpcConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VPCConfigResponse'
         description: VPC configuration information.
     description: Information about a simulation job.
   SimulationJobErrorCode:
@@ -3047,43 +3047,43 @@ definitions:
   SimulationJobSummaries:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SimulationJobSummary'
     minItems: 0
     maxItems: 100
   SimulationJobSummary:
     type: object
     properties:
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the simulation job.
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation job was last updated.'
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the simulation job.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationJobStatus'
         description: The status of the simulation job.
       simulationApplicationNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationApplicationNames'
         description: A list of simulation job simulation application names.
       robotApplicationNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RobotApplicationNames'
         description: A list of simulation job robot application names.
     description: Summary information for a simulation job.
   SimulationJobs:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SimulationJob'
   SimulationSoftwareSuite:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationSoftwareSuiteType'
         description: The name of the simulation software suite.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SimulationSoftwareSuiteVersionType'
         description: The version of the simulation software suite.
     description: Information about a simulation software suite.
   SimulationSoftwareSuiteType:
@@ -3099,43 +3099,43 @@ definitions:
     type: object
     properties:
       s3Bucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Bucket'
         description: The s3 bucket name.
       s3Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Key'
         description: The s3 object key.
       etag:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Etag'
         description: A hash of the object specified by <code>s3Bucket</code> and <code>s3Key</code>.
       architecture:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Architecture'
         description: The taget processor architecture for the application.
     description: Information about a source.
   SourceConfig:
     type: object
     properties:
       s3Bucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Bucket'
         description: The Amazon S3 bucket name.
       s3Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Key'
         description: The s3 object key.
       architecture:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Architecture'
         description: The target processor architecture for the application.
     description: Information about a source configuration.
   SourceConfigs:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SourceConfig'
   Sources:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Source'
   Subnets:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/GenericString'
     minItems: 1
     maxItems: 16
   VPCConfig:
@@ -3144,29 +3144,29 @@ definitions:
       - subnets
     properties:
       subnets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subnets'
         description: A list of one or more subnet IDs in your VPC.
       securityGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SecurityGroups'
         description: A list of one or more security groups IDs in your VPC.
       assignPublicIp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: A boolean indicating whether to assign a public IP address.
     description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and two subnet IDs.'
   VPCConfigResponse:
     type: object
     properties:
       subnets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subnets'
         description: A list of subnet IDs associated with the simulation job.
       securityGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SecurityGroups'
         description: A list of security group IDs associated with the simulation job.
       vpcId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The VPC ID associated with your simulation job.
       assignPublicIp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: A boolean indicating if a public IP was assigned.
     description: VPC configuration associated with your simulation job.
   Version:

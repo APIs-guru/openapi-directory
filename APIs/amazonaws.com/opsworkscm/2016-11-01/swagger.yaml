@@ -688,7 +688,7 @@ definitions:
     type: object
     properties:
       NodeAssociationStatusToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NodeAssociationStatusToken'
         description: 'Contains a token which can be passed to the <code>DescribeNodeAssociationStatus</code> API call to get the status of the association request. '
   AssociateNodeRequest:
     type: object
@@ -698,13 +698,13 @@ definitions:
       - EngineAttributes
     properties:
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: 'The name of the server with which to associate the node. '
       NodeName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NodeName'
         description: 'The name of the node. '
       EngineAttributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EngineAttributes'
         description: '<p>Engine attributes used for associating the node. </p> <p class="title"> <b>Attributes accepted in a AssociateNode request for Chef</b> </p> <ul> <li> <p> <code>CHEF_ORGANIZATION</code>: The Chef organization with which the node is associated. By default only one organization named <code>default</code> can exist. </p> </li> <li> <p> <code>CHEF_NODE_PUBLIC_KEY</code>: A PEM-formatted public key. This key is required for the <code>chef-client</code> agent to access the Chef API. </p> </li> </ul> <p class="title"> <b>Attributes accepted in a AssociateNode request for Puppet</b> </p> <ul> <li> <p> <code>PUPPET_NODE_CSR</code>: A PEM-formatted certificate-signing request (CSR) that is created by the node. </p> </li> </ul>'
   InvalidStateException: {}
   ResourceNotFoundException: {}
@@ -713,7 +713,7 @@ definitions:
     type: object
     properties:
       Backup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Backup'
         description: Backup created by request.
   CreateBackupRequest:
     type: object
@@ -721,17 +721,17 @@ definitions:
       - ServerName
     properties:
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: 'The name of the server that you want to back up. '
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' A user-defined description of the backup. '
   LimitExceededException: {}
   CreateServerResponse:
     type: object
     properties:
       Server:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Server'
         description: 'The server that is created by the request. '
   CreateServerRequest:
     type: object
@@ -742,55 +742,55 @@ definitions:
       - ServiceRoleArn
     properties:
       AssociatePublicIpAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: ' Associate a public IP address with a server that you are launching. Valid values are <code>true</code> or <code>false</code>. The default value is <code>true</code>. '
       DisableAutomatedBackup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: ' Enable or disable scheduled backups. Valid values are <code>true</code> or <code>false</code>. The default value is <code>true</code>. '
       Engine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The configuration management engine to use. Valid values include <code>Chef</code> and <code>Puppet</code>. '
       EngineModel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The engine model of the server. Valid values in this release include <code>Monolithic</code> for Puppet and <code>Single</code> for Chef. '
       EngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The major release version of the engine that you want to use. For a Chef server, the valid value for EngineVersion is currently <code>12</code>. For a Puppet server, the valid value is <code>2017</code>. '
       EngineAttributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EngineAttributes'
         description: '<p>Optional engine attributes on a specified server. </p> <p class="title"> <b>Attributes accepted in a Chef createServer request:</b> </p> <ul> <li> <p> <code>CHEF_PIVOTAL_KEY</code>: A base64-encoded RSA private key that is not stored by AWS OpsWorks for Chef Automate. This private key is required to access the Chef API. When no CHEF_PIVOTAL_KEY is set, one is generated and returned in the response. </p> </li> <li> <p> <code>CHEF_DELIVERY_ADMIN_PASSWORD</code>: The password for the administrative user in the Chef Automate GUI. The password length is a minimum of eight characters, and a maximum of 32. The password can contain letters, numbers, and special characters (!/@#$%^&amp;+=_). The password must contain at least one lower case letter, one upper case letter, one number, and one special character. When no CHEF_DELIVERY_ADMIN_PASSWORD is set, one is generated and returned in the response.</p> </li> </ul> <p class="title"> <b>Attributes accepted in a Puppet createServer request:</b> </p> <ul> <li> <p> <code>PUPPET_ADMIN_PASSWORD</code>: To work with the Puppet Enterprise console, a password must use ASCII characters.</p> </li> </ul>'
       BackupRetentionCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupRetentionCountDefinition'
         description: ' The number of automated backups that you want to keep. Whenever a new backup is created, AWS OpsWorks CM deletes the oldest backups if this number is exceeded. The default value is <code>1</code>. '
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: ' The name of the server. The server name must be unique within your AWS account, within each region. Server names must start with a letter; then letters, numbers, or hyphens (-) are allowed, up to a maximum of 40 characters. '
       InstanceProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceProfileArn'
         description: ' The ARN of the instance profile that your Amazon EC2 instances use. Although the AWS OpsWorks console typically creates the instance profile for you, if you are using API commands instead, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml. This template creates a CloudFormation stack that includes the instance profile you need. '
       InstanceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The Amazon EC2 instance type to use. For example, <code>m4.large</code>. Recommended instance types include <code>t2.medium</code> and greater, <code>m4.*</code>, or <code>c4.xlarge</code> and greater. '
       KeyPair:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KeyPair'
         description: ' The Amazon EC2 key pair to set for the instance. This parameter is optional; if desired, you may specify this parameter to connect to your instances by using SSH. '
       PreferredMaintenanceWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeWindowDefinition'
         description: '<p> The start time for a one-hour period each week during which AWS OpsWorks CM performs maintenance on the instance. Valid values must be specified in the following format: <code>DDD:HH:MM</code>. The specified time is in coordinated universal time (UTC). The default value is a random one-hour period on Tuesday, Wednesday, or Friday. See <code>TimeWindowDefinition</code> for more information. </p> <p> <b>Example:</b> <code>Mon:08:00</code>, which represents a start time of every Monday at 08:00 UTC. (8:00 a.m.) </p>'
       PreferredBackupWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeWindowDefinition'
         description: '<p> The start time for a one-hour period during which AWS OpsWorks CM backs up application-level data on your server if automated backups are enabled. Valid values must be specified in one of the following formats: </p> <ul> <li> <p> <code>HH:MM</code> for daily backups</p> </li> <li> <p> <code>DDD:HH:MM</code> for weekly backups</p> </li> </ul> <p>The specified time is in coordinated universal time (UTC). The default value is a random, daily start time.</p> <p> <b>Example:</b> <code>08:00</code>, which represents a daily start time of 08:00 UTC.</p> <p> <b>Example:</b> <code>Mon:08:00</code>, which represents a start time of every Monday at 08:00 UTC. (8:00 a.m.)</p>'
       SecurityGroupIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Strings'
         description: '<p> A list of security group IDs to attach to the Amazon EC2 instance. If you add this parameter, the specified security groups must be within the VPC that is specified by <code>SubnetIds</code>. </p> <p> If you do not specify this parameter, AWS OpsWorks CM creates one new security group that uses TCP ports 22 and 443, open to 0.0.0.0/0 (everyone). </p>'
       ServiceRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServiceRoleArn'
         description: ' The service role that the AWS OpsWorks CM service backend uses to work with your account. Although the AWS OpsWorks management console typically creates the service role for you, if you are using the AWS CLI or API commands, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml. This template creates a CloudFormation stack that includes the service role and instance profile that you need. '
       SubnetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Strings'
         description: '<p> The IDs of subnets in which to launch the server EC2 instance. </p> <p> Amazon EC2-Classic customers: This field is required. All servers must run within a VPC. The VPC must have "Auto Assign Public IP" enabled. </p> <p> EC2-VPC customers: This field is optional. If you do not specify subnet IDs, your EC2 instances are created in a default subnet that is selected by Amazon EC2. If you specify subnet IDs, the VPC must have "Auto Assign Public IP" enabled. </p> <p>For more information about supported Amazon EC2 platforms, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html">Supported Platforms</a>.</p>'
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: ' If you specify this field, AWS OpsWorks CM creates the server by using the backup represented by BackupId. '
   ResourceAlreadyExistsException: {}
   DeleteBackupResponse:
@@ -802,7 +802,7 @@ definitions:
       - BackupId
     properties:
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: 'The ID of the backup to delete. Run the DescribeBackups command to get a list of backup IDs. Backup IDs are in the format <code>ServerName-yyyyMMddHHmmssSSS</code>. '
   DeleteServerResponse:
     type: object
@@ -813,13 +813,13 @@ definitions:
       - ServerName
     properties:
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: The ID of the server to delete.
   DescribeAccountAttributesResponse:
     type: object
     properties:
       Attributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountAttributes'
         description: ' The attributes that are currently set for the account. '
   DescribeAccountAttributesRequest:
     type: object
@@ -828,35 +828,35 @@ definitions:
     type: object
     properties:
       Backups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Backups'
         description: 'Contains the response to a <code>DescribeBackups</code> request. '
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: This is not currently implemented for <code>DescribeBackups</code> requests.
   DescribeBackupsRequest:
     type: object
     properties:
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: 'Describes a single backup. '
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: 'Returns backups for the server with the specified ServerName. '
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: This is not currently implemented for <code>DescribeBackups</code> requests.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: This is not currently implemented for <code>DescribeBackups</code> requests.
   InvalidNextTokenException: {}
   DescribeEventsResponse:
     type: object
     properties:
       ServerEvents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerEvents'
         description: 'Contains the response to a <code>DescribeEvents</code> request. '
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call <code>DescribeEvents</code> again, and assign the token from the previous results as the value of the <code>nextToken</code> parameter. If there are no more results, the response object''s <code>nextToken</code> parameter value is <code>null</code>. Setting a <code>nextToken</code> value that was not returned in your previous results causes an <code>InvalidNextTokenException</code> to occur. '
   DescribeEventsRequest:
     type: object
@@ -864,22 +864,22 @@ definitions:
       - ServerName
     properties:
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: The name of the server for which you want to view events.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call <code>DescribeEvents</code> again, and assign the token from the previous results as the value of the <code>nextToken</code> parameter. If there are no more results, the response object''s <code>nextToken</code> parameter value is <code>null</code>. Setting a <code>nextToken</code> value that was not returned in your previous results causes an <code>InvalidNextTokenException</code> to occur. '
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results. '
   DescribeNodeAssociationStatusResponse:
     type: object
     properties:
       NodeAssociationStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NodeAssociationStatus'
         description: '<p>The status of the association or disassociation request. </p> <p class="title"> <b>Possible values:</b> </p> <ul> <li> <p> <code>SUCCESS</code>: The association or disassociation succeeded. </p> </li> <li> <p> <code>FAILED</code>: The association or disassociation failed. </p> </li> <li> <p> <code>IN_PROGRESS</code>: The association or disassociation is still in progress. </p> </li> </ul>'
       EngineAttributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EngineAttributes'
         description: 'Attributes specific to the node association. In Puppet, the attibute PUPPET_NODE_CERT contains the signed certificate (the result of the CSR). '
   DescribeNodeAssociationStatusRequest:
     type: object
@@ -888,37 +888,37 @@ definitions:
       - ServerName
     properties:
       NodeAssociationStatusToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NodeAssociationStatusToken'
         description: 'The token returned in either the AssociateNodeResponse or the DisassociateNodeResponse. '
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: 'The name of the server from which to disassociate the node. '
   DescribeServersResponse:
     type: object
     properties:
       Servers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Servers'
         description: '<p>Contains the response to a <code>DescribeServers</code> request.</p> <p> <i>For Puppet Server:</i> <code>DescribeServersResponse$Servers$EngineAttributes</code> contains PUPPET_API_CA_CERT. This is the PEM-encoded CA certificate that is used by the Puppet API over TCP port number 8140. The CA certificate is also used to sign node certificates.</p>'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'This is not currently implemented for <code>DescribeServers</code> requests. '
   DescribeServersRequest:
     type: object
     properties:
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: Describes the server with the specified ServerName.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'This is not currently implemented for <code>DescribeServers</code> requests. '
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'This is not currently implemented for <code>DescribeServers</code> requests. '
   DisassociateNodeResponse:
     type: object
     properties:
       NodeAssociationStatusToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NodeAssociationStatusToken'
         description: 'Contains a token which can be passed to the <code>DescribeNodeAssociationStatus</code> API call to get the status of the disassociation request. '
   DisassociateNodeRequest:
     type: object
@@ -927,22 +927,22 @@ definitions:
       - NodeName
     properties:
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: 'The name of the server from which to disassociate the node. '
       NodeName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NodeName'
         description: 'The name of the client node. '
       EngineAttributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EngineAttributes'
         description: '<p>Engine attributes that are used for disassociating the node. No attributes are required for Puppet. </p> <p class="title"> <b>Attributes required in a DisassociateNode request for Chef</b> </p> <ul> <li> <p> <code>CHEF_ORGANIZATION</code>: The Chef organization with which the node was associated. By default only one organization named <code>default</code> can exist. </p> </li> </ul>'
   ExportServerEngineAttributeResponse:
     type: object
     properties:
       EngineAttribute:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EngineAttribute'
         description: 'The requested engine attribute pair with attribute name and value. '
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: 'The requested ServerName. '
   ExportServerEngineAttributeRequest:
     type: object
@@ -951,13 +951,13 @@ definitions:
       - ServerName
     properties:
       ExportAttributeName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The name of the export attribute. Currently supported export attribute is "Userdata" which exports a userdata script filled out with parameters provided in the <code>InputAttributes</code> list.
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: 'The name of the Server to which the attribute is being exported from '
       InputAttributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EngineAttributes'
         description: 'The list of engine attributes. The list type is <code>EngineAttribute</code>. <code>EngineAttribute</code> is a pair of attribute name and value. For <code>ExportAttributeName</code> "Userdata", currently supported input attribute names are: - "RunList": For Chef, an ordered list of roles and/or recipes that are run in the exact order. For Puppet, this parameter is ignored. - "OrganizationName": For Chef, an organization name. AWS OpsWorks for Chef Server always creates the organization "default". For Puppet, this parameter is ignored. - "NodeEnvironment": For Chef, a node environment (eg. development, staging, onebox). For Puppet, this parameter is ignored. - "NodeClientVersion": For Chef, version of Chef Engine (3 numbers separated by dots, eg. "13.8.5"). If empty, it uses the latest one. For Puppet, this parameter is ignored. '
   RestoreServerResponse:
     type: object
@@ -969,22 +969,22 @@ definitions:
       - ServerName
     properties:
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: ' The ID of the backup that you want to use to restore a server. '
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: ' The name of the server that you want to restore. '
       InstanceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The type of the instance to create. Valid values must be specified in the following format: <code>^([cm][34]|t2).*</code> For example, <code>m4.large</code>. Valid values are <code>t2.medium</code>, <code>m4.large</code>, and <code>m4.2xlarge</code>. If you do not specify this parameter, RestoreServer uses the instance type from the specified backup. '
       KeyPair:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KeyPair'
         description: ' The name of the key pair to set on the new EC2 instance. This can be helpful if the administrator no longer has the SSH key. '
   StartMaintenanceResponse:
     type: object
     properties:
       Server:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Server'
         description: 'Contains the response to a <code>StartMaintenance</code> request. '
   StartMaintenanceRequest:
     type: object
@@ -992,16 +992,16 @@ definitions:
       - ServerName
     properties:
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: 'The name of the server on which to run maintenance. '
       EngineAttributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EngineAttributes'
         description: 'Engine attributes that are specific to the server on which you want to run maintenance. '
   UpdateServerResponse:
     type: object
     properties:
       Server:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Server'
         description: 'Contains the response to a <code>UpdateServer</code> request. '
   UpdateServerRequest:
     type: object
@@ -1009,23 +1009,23 @@ definitions:
       - ServerName
     properties:
       DisableAutomatedBackup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'Setting DisableAutomatedBackup to <code>true</code> disables automated or scheduled backups. Automated backups are enabled by default. '
       BackupRetentionCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: 'Sets the number of automated backups that you want to keep. '
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: 'The name of the server to update. '
       PreferredMaintenanceWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeWindowDefinition'
       PreferredBackupWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeWindowDefinition'
   UpdateServerEngineAttributesResponse:
     type: object
     properties:
       Server:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Server'
         description: 'Contains the response to an <code>UpdateServerEngineAttributes</code> request. '
   UpdateServerEngineAttributesRequest:
     type: object
@@ -1034,33 +1034,33 @@ definitions:
       - AttributeName
     properties:
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: 'The name of the server to update. '
       AttributeName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttributeName'
         description: 'The name of the engine attribute to update. '
       AttributeValue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttributeValue'
         description: 'The value to set for the attribute. '
   '[object Object]': {}
   AccountAttribute:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: '<p> The attribute name. The following are supported attribute names. </p> <ul> <li> <p> <i>ServerLimit:</i> The number of current servers/maximum number of servers allowed. By default, you can have a maximum of 10 servers. </p> </li> <li> <p> <i>ManualBackupLimit:</i> The number of current manual backups/maximum number of backups allowed. By default, you can have a maximum of 50 manual backups saved. </p> </li> </ul>'
       Maximum:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: ' The maximum allowed value. '
       Used:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: ' The current usage, such as the current number of servers that are associated with the account. '
     description: 'Stores account attributes. '
   AccountAttributes:
     type: array
     description: ' A list of individual account attributes. '
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AccountAttribute'
   AttributeName:
     type: string
     pattern: '[A-Z][A-Z0-9_]*'
@@ -1072,76 +1072,76 @@ definitions:
     type: object
     properties:
       BackupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The ARN of the backup. '
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: ' The generated ID of the backup. Example: <code>myServerName-yyyyMMddHHmmssSSS</code> '
       BackupType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupType'
         description: ' The backup type. Valid values are <code>automated</code> or <code>manual</code>. '
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: ' The time stamp when the backup was created in the database. Example: <code>2016-07-29T13:38:47.520Z</code> '
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' A user-provided description for a manual backup. This field is empty for automated backups. '
       Engine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The engine type that is obtained from the server when the backup is created. '
       EngineModel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The engine model that is obtained from the server when the backup is created. '
       EngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The engine version that is obtained from the server when the backup is created. '
       InstanceProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The EC2 instance profile ARN that is obtained from the server when the backup is created. Because this value is stored, you are not required to provide the InstanceProfileArn again if you restore a backup. '
       InstanceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The instance type that is obtained from the server when the backup is created. '
       KeyPair:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The key pair that is obtained from the server when the backup is created. '
       PreferredBackupWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeWindowDefinition'
         description: ' The preferred backup period that is obtained from the server when the backup is created. '
       PreferredMaintenanceWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeWindowDefinition'
         description: ' The preferred maintenance period that is obtained from the server when the backup is created. '
       S3DataSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: ' This field is deprecated and is no longer used. '
       S3DataUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' This field is deprecated and is no longer used. '
       S3LogUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The Amazon S3 URL of the backup''s log file. '
       SecurityGroupIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Strings'
         description: ' The security group IDs that are obtained from the server when the backup is created. '
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerName'
         description: ' The name of the server from which the backup was made. '
       ServiceRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The service role ARN that is obtained from the server when the backup is created. '
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupStatus'
         description: 'The status of a backup while in progress. '
       StatusDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' An informational message about backup status. '
       SubnetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Strings'
         description: ' The subnet IDs that are obtained from the server when the backup is created. '
       ToolsVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The version of AWS OpsWorks CM-specific tools that is obtained from the server when the backup is created. '
       UserArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The IAM user ARN of the requester for manual backups. This field is empty for automated backups. '
     description: 'Describes a single backup. '
   BackupId:
@@ -1165,17 +1165,17 @@ definitions:
   Backups:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Backup'
   Boolean:
     type: boolean
   EngineAttribute:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EngineAttributeName'
         description: 'The name of the engine attribute. '
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EngineAttributeValue'
         description: 'The value of the engine attribute. '
     description: 'A name and value pair that is specific to the engine of the server. '
   EngineAttributeName:
@@ -1186,7 +1186,7 @@ definitions:
   EngineAttributes:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/EngineAttribute'
   InstanceProfileArn:
     type: string
     pattern: 'arn:aws:iam::[0-9]{12}:instance-profile/.*'
@@ -1221,95 +1221,95 @@ definitions:
     type: object
     properties:
       AssociatePublicIpAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'Associate a public IP address with a server that you are launching. '
       BackupRetentionCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: 'The number of automated backups to keep. '
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The name of the server. '
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: 'Time stamp of server creation. Example <code>2016-07-29T13:38:47.520Z</code> '
       CloudFormationStackArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The ARN of the CloudFormation stack that was used to create the server. '
       DisableAutomatedBackup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'Disables automated backups. The number of stored backups is dependent on the value of PreferredBackupCount. '
       Endpoint:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' A DNS name that can be used to access the engine. Example: <code>myserver-asdfghjkl.us-east-1.opsworks.io</code> '
       Engine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The engine type of the server. Valid values in this release include <code>Chef</code> and <code>Puppet</code>. '
       EngineModel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The engine model of the server. Valid values in this release include <code>Monolithic</code> for Puppet and <code>Single</code> for Chef. '
       EngineAttributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EngineAttributes'
         description: '<p>The response of a createServer() request returns the master credential to access the server in EngineAttributes. These credentials are not stored by AWS OpsWorks CM; they are returned only as part of the result of createServer(). </p> <p class="title"> <b>Attributes returned in a createServer response for Chef</b> </p> <ul> <li> <p> <code>CHEF_PIVOTAL_KEY</code>: A base64-encoded RSA private key that is generated by AWS OpsWorks for Chef Automate. This private key is required to access the Chef API.</p> </li> <li> <p> <code>CHEF_STARTER_KIT</code>: A base64-encoded ZIP file. The ZIP file contains a Chef starter kit, which includes a README, a configuration file, and the required RSA private key. Save this file, unzip it, and then change to the directory where you''ve unzipped the file contents. From this directory, you can run Knife commands.</p> </li> </ul> <p class="title"> <b>Attributes returned in a createServer response for Puppet</b> </p> <ul> <li> <p> <code>PUPPET_STARTER_KIT</code>: A base64-encoded ZIP file. The ZIP file contains a Puppet starter kit, including a README and a required private key. Save this file, unzip it, and then change to the directory where you''ve unzipped the file contents.</p> </li> <li> <p> <code>PUPPET_ADMIN_PASSWORD</code>: An administrator password that you can use to sign in to the Puppet Enterprise console after the server is online.</p> </li> </ul>'
       EngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The engine version of the server. For a Chef server, the valid value for EngineVersion is currently <code>12</code>. For a Puppet server, the valid value is <code>2017</code>. '
       InstanceProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The instance profile ARN of the server. '
       InstanceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' The instance type for the server, as specified in the CloudFormation stack. This might not be the same instance type that is shown in the EC2 console. '
       KeyPair:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The key pair associated with the server. '
       MaintenanceStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaintenanceStatus'
         description: 'The status of the most recent server maintenance run. Shows <code>SUCCESS</code> or <code>FAILED</code>. '
       PreferredMaintenanceWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeWindowDefinition'
         description: 'The preferred maintenance period specified for the server. '
       PreferredBackupWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeWindowDefinition'
         description: 'The preferred backup period specified for the server. '
       SecurityGroupIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Strings'
         description: ' The security group IDs for the server, as specified in the CloudFormation stack. These might not be the same security groups that are shown in the EC2 console. '
       ServiceRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The service role ARN used to create the server. '
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerStatus'
         description: ' The server''s status. This field displays the states of actions in progress, such as creating, running, or backing up the server, as well as the server''s health state. '
       StatusReason:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: ' Depending on the server status, this field has either a human-readable message (such as a create or backup error), or an escaped block of JSON (used for health check results). '
       SubnetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Strings'
         description: ' The subnet IDs specified in a CreateServer request. '
       ServerArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The ARN of the server. '
     description: 'Describes a configuration management server. '
   ServerEvent:
     type: object
     properties:
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: 'The time when the event occurred. '
       ServerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The name of the server on or for which the event occurred. '
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: A human-readable informational or status message.
       LogUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The Amazon S3 URL of the event's log file.
     description: 'An event that is related to the server, such as the start of maintenance or backup. '
   ServerEvents:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ServerEvent'
   ServerName:
     type: string
     pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
@@ -1334,7 +1334,7 @@ definitions:
   Servers:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Server'
   ServiceRoleArn:
     type: string
     pattern: 'arn:aws:iam::[0-9]{12}:role/.*'
@@ -1343,7 +1343,7 @@ definitions:
   Strings:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   TimeWindowDefinition:
     type: string
     pattern: '^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$'

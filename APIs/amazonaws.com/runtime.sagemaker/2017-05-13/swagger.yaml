@@ -150,7 +150,7 @@ definitions:
       - Body
     properties:
       Body:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BodyBlob'
         description: '<p>Includes the inference provided by the model.</p> <p>For information about the format of the response body, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
   InvokeEndpointInput:
     type: object
@@ -158,7 +158,7 @@ definitions:
       - Body
     properties:
       Body:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BodyBlob'
         description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
   InternalFailure: {}
   ServiceUnavailable: {}

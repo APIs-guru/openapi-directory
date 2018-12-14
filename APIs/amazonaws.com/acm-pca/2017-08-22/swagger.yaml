@@ -807,7 +807,7 @@ definitions:
     type: object
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>If successful, the Amazon Resource Name (ARN) of the certificate authority (CA). This is of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
   CreateCertificateAuthorityRequest:
     type: object
@@ -816,43 +816,43 @@ definitions:
       - CertificateAuthorityType
     properties:
       CertificateAuthorityConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateAuthorityConfiguration'
         description: 'Name and bit size of the private key algorithm, the name of the signing algorithm, and X.500 certificate subject information.'
       RevocationConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevocationConfiguration'
         description: 'Contains a Boolean value that you can use to enable a certification revocation list (CRL) for the CA, the name of the S3 bucket to which ACM PCA will write the CRL, and an optional CNAME alias that you can use to hide the name of your bucket in the <b>CRL Distribution Points</b> extension of your CA certificate. For more information, see the <a>CrlConfiguration</a> structure. '
       CertificateAuthorityType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateAuthorityType'
         description: 'The type of the certificate authority. Currently, this must be <b>SUBORDINATE</b>.'
       IdempotencyToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdempotencyToken'
         description: 'Alphanumeric string that can be used to distinguish between calls to <b>CreateCertificateAuthority</b>. Idempotency tokens time out after five minutes. Therefore, if you call <b>CreateCertificateAuthority</b> multiple times with the same idempotency token within a five minute period, ACM PCA recognizes that you are requesting only one certificate. As a result, ACM PCA issues only one. If you change the idempotency token for each call, however, ACM PCA recognizes that you are requesting multiple certificates.'
   InvalidArgsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: One or more of the specified arguments was not valid.
   InvalidPolicyException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: The S3 bucket policy is not valid. The policy must give ACM PCA rights to read from and write to the bucket and find the bucket location.
   LimitExceededException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: An ACM PCA limit has been exceeded. See the exception message returned to determine the limit that was exceeded.
   CreateCertificateAuthorityAuditReportResponse:
     type: object
     properties:
       AuditReportId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AuditReportId'
         description: An alphanumeric string that contains a report identifier.
       S3Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The <b>key</b> that uniquely identifies the report file in your S3 bucket.
   CreateCertificateAuthorityAuditReportRequest:
     type: object
@@ -862,43 +862,43 @@ definitions:
       - AuditReportResponseFormat
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>Amazon Resource Name (ARN) of the CA to be audited. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>.</p>'
       S3BucketName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Name of the S3 bucket that will contain the audit report.
       AuditReportResponseFormat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AuditReportResponseFormat'
         description: Format in which to create the report. This can be either <b>JSON</b> or <b>CSV</b>.
   RequestInProgressException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: Your request is already in progress.
   RequestFailedException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: The request has failed for an unspecified reason.
   ResourceNotFoundException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: 'A resource such as a private CA, S3 bucket, certificate, or audit report cannot be found.'
   InvalidArnException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: The requested Amazon Resource Name (ARN) does not refer to an existing resource.
   InvalidStateException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: The private CA is in a state during which a report cannot be generated.
   DeleteCertificateAuthorityRequest:
     type: object
@@ -906,22 +906,22 @@ definitions:
       - CertificateAuthorityArn
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a>CreateCertificateAuthority</a>. This must have the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
       PermanentDeletionTimeInDays:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PermanentDeletionTimeInDays'
         description: 'The number of days to make a CA restorable after it has been deleted. This can be anywhere from 7 to 30 days, with 30 being the default.'
   ConcurrentModificationException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: A previous update to your private CA is still ongoing.
   DescribeCertificateAuthorityResponse:
     type: object
     properties:
       CertificateAuthority:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateAuthority'
         description: A <a>CertificateAuthority</a> structure that contains information about your private CA.
   DescribeCertificateAuthorityRequest:
     type: object
@@ -929,22 +929,22 @@ definitions:
       - CertificateAuthorityArn
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a>CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
   DescribeCertificateAuthorityAuditReportResponse:
     type: object
     properties:
       AuditReportStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AuditReportStatus'
         description: 'Specifies whether report creation is in progress, has succeeded, or has failed.'
       S3BucketName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Name of the S3 bucket that contains the report.
       S3Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: S3 <b>key</b> that uniquely identifies the report file in your S3 bucket.
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
         description: The date and time at which the report was created.
   DescribeCertificateAuthorityAuditReportRequest:
     type: object
@@ -953,19 +953,19 @@ definitions:
       - AuditReportId
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) of the private CA. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
       AuditReportId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AuditReportId'
         description: The report ID returned by calling the <a>CreateCertificateAuthorityAuditReport</a> operation.
   GetCertificateResponse:
     type: object
     properties:
       Certificate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateBody'
         description: The base64 PEM-encoded certificate specified by the <code>CertificateArn</code> parameter.
       CertificateChain:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateChain'
         description: 'The base64 PEM-encoded certificate chain that chains up to the on-premises root CA certificate that you used to sign your private CA certificate. '
   GetCertificateRequest:
     type: object
@@ -974,19 +974,19 @@ definitions:
       - CertificateArn
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a>CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
       CertificateArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The ARN of the issued certificate. The ARN contains the certificate serial number and must be in the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i>/certificate/<i>286535153982981100925020015808220737245</i> </code> </p>'
   GetCertificateAuthorityCertificateResponse:
     type: object
     properties:
       Certificate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateBody'
         description: Base64-encoded certificate authority (CA) certificate.
       CertificateChain:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateChain'
         description: 'Base64-encoded certificate chain that includes any intermediate certificates and chains up to root on-premises certificate that you used to sign your private CA certificate. The chain does not include your private CA certificate. '
   GetCertificateAuthorityCertificateRequest:
     type: object
@@ -994,13 +994,13 @@ definitions:
       - CertificateAuthorityArn
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) of your private CA. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
   GetCertificateAuthorityCsrResponse:
     type: object
     properties:
       Csr:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CsrBody'
         description: The base64 PEM-encoded certificate signing request (CSR) for your private CA certificate.
   GetCertificateAuthorityCsrRequest:
     type: object
@@ -1008,7 +1008,7 @@ definitions:
       - CertificateAuthorityArn
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) that was returned when you called the <a>CreateCertificateAuthority</a> operation. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
   ImportCertificateAuthorityCertificateRequest:
     type: object
@@ -1018,31 +1018,31 @@ definitions:
       - CertificateChain
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a>CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
       Certificate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateBodyBlob'
         description: The PEM-encoded certificate for your private CA. This must be signed by using your on-premises CA.
       CertificateChain:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateChainBlob'
         description: 'A PEM-encoded file that contains all of your certificates, other than the certificate you''re importing, chaining up to your root CA. Your on-premises root certificate is the last in the chain, and each certificate in the chain signs the one preceding. '
   MalformedCertificateException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: One or more fields in the certificate are invalid.
   CertificateMismatchException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: The certificate authority certificate you are importing does not comply with conditions specified in the certificate that signed it.
   IssueCertificateResponse:
     type: object
     properties:
       CertificateArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) of the issued certificate and the certificate serial number. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i>/certificate/<i>286535153982981100925020015808220737245</i> </code> </p>'
   IssueCertificateRequest:
     type: object
@@ -1053,58 +1053,58 @@ definitions:
       - Validity
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a>CreateCertificateAuthority</a>. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
       Csr:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CsrBlob'
         description: '<p>The certificate signing request (CSR) for the certificate you want to issue. You can use the following OpenSSL command to create the CSR and a 2048 bit RSA private key. </p> <p> <code>openssl req -new -newkey rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr</code> </p> <p>If you have a configuration file, you can use the following OpenSSL command. The <code>usr_cert</code> block in the configuration file contains your X509 version 3 extensions. </p> <p> <code>openssl req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048 -days -365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr</code> </p>'
       SigningAlgorithm:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SigningAlgorithm'
         description: The name of the algorithm that will be used to sign the certificate to be issued.
       Validity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Validity'
         description: The type of the validity period.
       IdempotencyToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdempotencyToken'
         description: 'Custom string that can be used to distinguish between calls to the <b>IssueCertificate</b> operation. Idempotency tokens time out after one hour. Therefore, if you call <b>IssueCertificate</b> multiple times with the same idempotency token within 5 minutes, ACM PCA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificates.'
   MalformedCSRException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: The certificate signing request is invalid.
   ListCertificateAuthoritiesResponse:
     type: object
     properties:
       CertificateAuthorities:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateAuthorities'
         description: Summary information about each certificate authority you have created.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'When the list is truncated, this value is present and should be used for the <code>NextToken</code> parameter in a subsequent pagination request.'
   ListCertificateAuthoritiesRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results. Set it to the value of the <code>NextToken</code> parameter from the response you just received.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'Use this parameter when paginating results to specify the maximum number of items to return in the response on each page. If additional items exist beyond the number you specify, the <code>NextToken</code> element is sent in the response. Use this <code>NextToken</code> value in a subsequent request to retrieve additional items.'
   InvalidNextTokenException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: The token specified in the <code>NextToken</code> argument is not valid. Use the token returned from your previous call to <a>ListCertificateAuthorities</a>.
   ListTagsResponse:
     type: object
     properties:
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: The tags associated with your private CA.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'When the list is truncated, this value is present and should be used for the <b>NextToken</b> parameter in a subsequent pagination request. '
   ListTagsRequest:
     type: object
@@ -1112,13 +1112,13 @@ definitions:
       - CertificateAuthorityArn
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) that was returned when you called the <a>CreateCertificateAuthority</a> operation. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results. Set it to the value of <b>NextToken</b> from the response you just received.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'Use this parameter when paginating results to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <b>NextToken</b> element is sent in the response. Use this <b>NextToken</b> value in a subsequent request to retrieve additional items.'
   RestoreCertificateAuthorityRequest:
     type: object
@@ -1126,7 +1126,7 @@ definitions:
       - CertificateAuthorityArn
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) that was returned when you called the <a>CreateCertificateAuthority</a> operation. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
   RevokeCertificateRequest:
     type: object
@@ -1136,19 +1136,19 @@ definitions:
       - RevocationReason
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>Amazon Resource Name (ARN) of the private CA that issued the certificate to be revoked. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
       CertificateSerial:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String128'
         description: '<p>Serial number of the certificate to be revoked. This must be in hexadecimal format. You can retrieve the serial number by calling <a>GetCertificate</a> with the Amazon Resource Name (ARN) of the certificate you want and the ARN of your private CA. The <b>GetCertificate</b> operation retrieves the certificate in the PEM format. You can use the following OpenSSL command to list the certificate in text format and copy the hexadecimal serial number. </p> <p> <code>openssl x509 -in <i>file_path</i> -text -noout</code> </p> <p>You can also copy the serial number from the console or use the <a href="https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html">DescribeCertificate</a> operation in the <i>AWS Certificate Manager API Reference</i>. </p>'
       RevocationReason:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevocationReason'
         description: Specifies why you revoked the certificate.
   RequestAlreadyProcessedException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: Your request has already been completed.
   TagCertificateAuthorityRequest:
     type: object
@@ -1157,22 +1157,22 @@ definitions:
       - Tags
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a>CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: List of tags to be associated with the CA.
   InvalidTagException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: The tag associated with the CA is not valid. The invalid argument is contained in the message field.
   TooManyTagsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: You can associate up to 50 tags with a private CA. Exception information is contained in the exception message field.
   UntagCertificateAuthorityRequest:
     type: object
@@ -1181,10 +1181,10 @@ definitions:
       - Tags
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a>CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: List of tags to be removed from the CA.
   UpdateCertificateAuthorityRequest:
     type: object
@@ -1192,59 +1192,59 @@ definitions:
       - CertificateAuthorityArn
     properties:
       CertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: '<p>Amazon Resource Name (ARN) of the private CA that issued the certificate to be revoked. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
       RevocationConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevocationConfiguration'
         description: Revocation information for your private CA.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateAuthorityStatus'
         description: Status of your private CA.
   '[object Object]': {}
   ASN1Subject:
     type: object
     properties:
       Country:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CountryCodeString'
         description: Two-digit code that specifies the country in which the certificate subject located.
       Organization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String64'
         description: 'Legal name of the organization with which the certificate subject is affiliated. '
       OrganizationalUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String64'
         description: A subdivision or unit of the organization (such as sales or finance) with which the certificate subject is affiliated.
       DistinguishedNameQualifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DistinguishedNameQualifierString'
         description: Disambiguating information for the certificate subject.
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String128'
         description: State in which the subject of the certificate is located.
       CommonName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String64'
         description: Fully qualified domain name (FQDN) associated with the certificate subject.
       SerialNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String64'
         description: The certificate serial number.
       Locality:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String128'
         description: The locality (such as a city or town) in which the certificate subject is located.
       Title:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String64'
         description: 'A title such as Mr. or Ms., which is pre-pended to the name to refer formally to the certificate subject.'
       Surname:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String40'
         description: 'Family name. In the US and the UK, for example, the surname of an individual is ordered last. In Asian cultures the surname is typically ordered first.'
       GivenName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String16'
         description: First name.
       Initials:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String5'
         description: 'Concatenation that typically contains the first letter of the <b>GivenName</b>, the first letter of the middle name if one exists, and the first letter of the <b>SurName</b>.'
       Pseudonym:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String128'
         description: 'Typically a shortened version of a longer <b>GivenName</b>. For example, Jonathan is often shortened to John. Elizabeth is often shortened to Beth, Liz, or Eliza.'
       GenerationQualifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String3'
         description: 'Typically a qualifier appended to the name of an individual. Examples include Jr. for junior, Sr. for senior, and III for third.'
     description: 'Contains information about the certificate subject. The certificate can be one issued by your private certificate authority (CA) or it can be your private CA certificate. The <b>Subject</b> field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The <b>Subject</b> must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate. The DN must be unique for each entity, but your private CA can issue more than one certificate with the same DN to the same entity. '
   Arn:
@@ -1273,45 +1273,45 @@ definitions:
   CertificateAuthorities:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/CertificateAuthority'
   CertificateAuthority:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: Amazon Resource Name (ARN) for your private certificate authority (CA). The format is <code> <i>12345678-1234-1234-1234-123456789012</i> </code>.
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
         description: Date and time at which your private CA was created.
       LastStateChangeAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
         description: Date and time at which your private CA was last updated.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateAuthorityType'
         description: Type of your private CA.
       Serial:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Serial number of your private CA.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateAuthorityStatus'
         description: Status of your private CA.
       NotBefore:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
         description: Date and time before which your private CA certificate is not valid.
       NotAfter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
         description: Date and time after which your private CA certificate is not valid.
       FailureReason:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FailureReason'
         description: Reason the request to create your private CA failed.
       CertificateAuthorityConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateAuthorityConfiguration'
         description: Your private CA configuration.
       RevocationConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevocationConfiguration'
         description: 'Information about the certificate revocation list (CRL) created and maintained by your private CA. '
       RestorableUntil:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
         description: 'The period during which a deleted CA can be restored. For more information, see the <code>PermanentDeletionTimeInDays</code> parameter of the <a>DeleteCertificateAuthorityRequest</a> operation. '
     description: 'Contains information about your private certificate authority (CA). Your private CA can issue and revoke X.509 digital certificates. Digital certificates verify that the entity named in the certificate <b>Subject</b> field owns or controls the public key contained in the <b>Subject Public Key Info</b> field. Call the <a>CreateCertificateAuthority</a> operation to create your private CA. You must then call the <a>GetCertificateAuthorityCertificate</a> operation to retrieve a private CA certificate signing request (CSR). Take the CSR to your on-premises CA and sign it with the root CA certificate or a subordinate certificate. Call the <a>ImportCertificateAuthorityCertificate</a> operation to import the signed certificate into AWS Certificate Manager (ACM). '
   CertificateAuthorityConfiguration:
@@ -1322,13 +1322,13 @@ definitions:
       - Subject
     properties:
       KeyAlgorithm:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KeyAlgorithm'
         description: 'Type of the public key algorithm and size, in bits, of the key pair that your key pair creates when it issues a certificate.'
       SigningAlgorithm:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SigningAlgorithm'
         description: Name of the algorithm your private CA uses to sign certificate requests.
       Subject:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ASN1Subject'
         description: Structure that contains X.500 distinguished name information for your private CA.
     description: 'Contains configuration information for your private certificate authority (CA). This includes information about the class of public key algorithm and the key pair that your private CA creates when it issues a certificate, the signature algorithm it uses used when issuing certificates, and its X.500 distinguished name. You must specify this information when you call the <a>CreateCertificateAuthority</a> operation. '
   CertificateAuthorityStatus:
@@ -1366,16 +1366,16 @@ definitions:
       - Enabled
     properties:
       Enabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'Boolean value that specifies whether certificate revocation lists (CRLs) are enabled. You can use this value to enable certificate revocation for a new CA when you call the <a>CreateCertificateAuthority</a> operation or for an existing CA when you call the <a>UpdateCertificateAuthority</a> operation. '
       ExpirationInDays:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer1To5000'
         description: Number of days until a certificate expires.
       CustomCname:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String253'
         description: Name inserted into the certificate <b>CRL Distribution Points</b> extension that enables the use of an alias for the CRL distribution point. Use this value if you don't want the name of your S3 bucket to be public.
       S3BucketName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String3To255'
         description: 'Name of the S3 bucket that contains the CRL. If you do not provide a value for the <b>CustomCname</b> argument, the name of your S3 bucket is placed into the <b>CRL Distribution Points</b> extension of the issued certificate. You can change the name of your bucket by calling the <a>UpdateCertificateAuthority</a> operation. You must specify a bucket policy that allows ACM PCA to write the CRL to your bucket.'
     description: '<p>Contains configuration information for a certificate revocation list (CRL). Your private certificate authority (CA) creates base CRLs. Delta CRLs are not supported. You can enable CRLs for your new or an existing private CA by setting the <b>Enabled</b> parameter to <code>true</code>. Your private CA writes CRLs to an S3 bucket that you specify in the <b>S3BucketName</b> parameter. You can hide the name of your bucket by specifying a value for the <b>CustomCname</b> parameter. Your private CA copies the CNAME or the S3 bucket name to the <b>CRL Distribution Points</b> extension of each certificate it issues. Your S3 bucket policy must give write permission to ACM PCA. </p> <p>Your private CA uses the value in the <b>ExpirationInDays</b> parameter to calculate the <b>nextUpdate</b> field in the CRL. The CRL is refreshed at 1/2 the age of next update or when a certificate is revoked. When a certificate is revoked, it is recorded in the next CRL that is generated and in the next audit report. Only time valid certificates are listed in the CRL. Expired certificates are not included. </p> <p>CRLs contain the following fields:</p> <ul> <li> <p> <b>Version</b>: The current version number defined in RFC 5280 is V2. The integer value is 0x1. </p> </li> <li> <p> <b>Signature Algorithm</b>: The name of the algorithm used to sign the CRL.</p> </li> <li> <p> <b>Issuer</b>: The X.500 distinguished name of your private CA that issued the CRL.</p> </li> <li> <p> <b>Last Update</b>: The issue date and time of this CRL.</p> </li> <li> <p> <b>Next Update</b>: The day and time by which the next CRL will be issued.</p> </li> <li> <p> <b>Revoked Certificates</b>: List of revoked certificates. Each list item contains the following information.</p> <ul> <li> <p> <b>Serial Number</b>: The serial number, in hexadecimal format, of the revoked certificate.</p> </li> <li> <p> <b>Revocation Date</b>: Date and time the certificate was revoked.</p> </li> <li> <p> <b>CRL Entry Extensions</b>: Optional extensions for the CRL entry.</p> <ul> <li> <p> <b>X509v3 CRL Reason Code</b>: Reason the certificate was revoked.</p> </li> </ul> </li> </ul> </li> <li> <p> <b>CRL Extensions</b>: Optional extensions for the CRL.</p> <ul> <li> <p> <b>X509v3 Authority Key Identifier</b>: Identifies the public key associated with the private key used to sign the certificate.</p> </li> <li> <p> <b>X509v3 CRL Number:</b>: Decimal sequence number for the CRL.</p> </li> </ul> </li> <li> <p> <b>Signature Algorithm</b>: Algorithm used by your private CA to sign the CRL.</p> </li> <li> <p> <b>Signature Value</b>: Signature computed over the CRL.</p> </li> </ul> <p>Certificate revocation lists created by ACM PCA are DER-encoded. You can use the following OpenSSL command to list a CRL.</p> <p> <code>openssl crl -inform DER -text -in <i>crl_path</i> -noout</code> </p>'
   CsrBlob:
@@ -1430,7 +1430,7 @@ definitions:
     type: object
     properties:
       CrlConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CrlConfiguration'
         description: 'Configuration of the certificate revocation list (CRL), if any, maintained by your private CA.'
     description: 'Certificate revocation information used by the <a>CreateCertificateAuthority</a> and <a>UpdateCertificateAuthority</a> operations. Your private certificate authority (CA) can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates revoked by your CA. For more information, see <a>RevokeCertificate</a>.'
   RevocationReason:
@@ -1496,10 +1496,10 @@ definitions:
       - Key
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagKey'
         description: Key (name) of the tag.
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagValue'
         description: Value of the tag.
     description: 'Tags are labels that you can use to identify and organize your private CAs. Each tag consists of a key and an optional value. You can associate up to 50 tags with a private CA. To add one or more tags to a private CA, call the <a>TagCertificateAuthority</a> operation. To remove a tag, call the <a>UntagCertificateAuthority</a> operation. '
   TagKey:
@@ -1510,7 +1510,7 @@ definitions:
   TagList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Tag'
     minItems: 1
     maxItems: 50
   TagValue:
@@ -1525,10 +1525,10 @@ definitions:
       - Type
     properties:
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PositiveLong'
         description: Time period.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ValidityPeriodType'
         description: 'Specifies whether the <code>Value</code> parameter represents days, months, or years.'
     description: 'Length of time for which the certificate issued by your private certificate authority (CA), or by the private CA itself, is valid in days, months, or years. You can issue a certificate by calling the <a>IssueCertificate</a> operation.'
   ValidityPeriodType:

@@ -304,7 +304,7 @@ definitions:
     type: object
     properties:
       execution:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobExecution'
         description: Contains data about a job execution.
   DescribeJobExecutionRequest:
     type: object
@@ -319,10 +319,10 @@ definitions:
     type: object
     properties:
       inProgressJobs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobExecutionSummaryList'
         description: A list of JobExecutionSummary objects with status IN_PROGRESS.
       queuedJobs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobExecutionSummaryList'
         description: A list of JobExecutionSummary objects with status QUEUED.
   GetPendingJobExecutionsRequest:
     type: object
@@ -331,25 +331,25 @@ definitions:
     type: object
     properties:
       execution:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobExecution'
         description: A JobExecution object.
   StartNextPendingJobExecutionRequest:
     type: object
     properties:
       statusDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DetailsMap'
         description: 'A collection of name/value pairs that describe the status of the job execution. If not specified, the statusDetails are unchanged.'
       stepTimeoutInMinutes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StepTimeoutInMinutes'
         description: 'Specifies the amount of time this device has to finish execution of this job. If the job execution status is not set to a terminal state before this timer expires, or before the timer is reset (by calling <code>UpdateJobExecution</code>, setting the status to <code>IN_PROGRESS</code> and specifying a new timeout value in field <code>stepTimeoutInMinutes</code>) the job execution status will be automatically set to <code>TIMED_OUT</code>. Note that setting this timeout has no effect on that job execution timeout which may have been specified when the job was created (<code>CreateJob</code> using field <code>timeoutConfig</code>).'
   UpdateJobExecutionResponse:
     type: object
     properties:
       executionState:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobExecutionState'
         description: A JobExecutionState object.
       jobDocument:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobDocument'
         description: The contents of the Job Documents.
   UpdateJobExecutionRequest:
     type: object
@@ -357,25 +357,25 @@ definitions:
       - status
     properties:
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobExecutionStatus'
         description: 'The new status for the job execution (IN_PROGRESS, FAILED, SUCCESS, or REJECTED). This must be specified on every update.'
       statusDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DetailsMap'
         description: ' Optional. A collection of name/value pairs that describe the status of the job execution. If not specified, the statusDetails are unchanged.'
       stepTimeoutInMinutes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StepTimeoutInMinutes'
         description: 'Specifies the amount of time this device has to finish execution of this job. If the job execution status is not set to a terminal state before this timer expires, or before the timer is reset (by again calling <code>UpdateJobExecution</code>, setting the status to <code>IN_PROGRESS</code> and specifying a new timeout value in this field) the job execution status will be automatically set to <code>TIMED_OUT</code>. Note that setting or resetting this timeout has no effect on that job execution timeout which may have been specified when the job was created (<code>CreateJob</code> using field <code>timeoutConfig</code>).'
       expectedVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExpectedVersion'
         description: 'Optional. The expected current version of the job execution. Each time you update the job execution, its version is incremented. If the version of the job execution stored in Jobs does not match, the update is rejected with a VersionMismatch error, and an ErrorResponse that contains the current job execution status data is returned. (This makes it unnecessary to perform a separate DescribeJobExecution request in order to obtain the job execution status data.)'
       includeJobExecutionState:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IncludeExecutionState'
         description: 'Optional. When included and set to true, the response contains the JobExecutionState data. The default is false.'
       includeJobDocument:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IncludeJobDocument'
         description: 'Optional. When set to true, the response contains the job document. The default is false.'
       executionNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionNumber'
         description: Optional. A number that identifies a particular job execution on a particular device.
   InvalidStateTransitionException: {}
   ApproximateSecondsBeforeTimedOut:
@@ -418,50 +418,50 @@ definitions:
     type: object
     properties:
       jobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobId'
         description: The unique identifier you assigned to this job when it was created.
       thingName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ThingName'
         description: The name of the thing that is executing the job.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobExecutionStatus'
         description: 'The status of the job execution. Can be one of: "QUEUED", "IN_PROGRESS", "FAILED", "SUCCESS", "CANCELED", "REJECTED", or "REMOVED".'
       statusDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DetailsMap'
         description: A collection of name/value pairs that describe the status of the job execution.
       queuedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/QueuedAt'
         description: 'The time, in milliseconds since the epoch, when the job execution was enqueued.'
       startedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StartedAt'
         description: 'The time, in milliseconds since the epoch, when the job execution was started.'
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the job execution was last updated. '
       approximateSecondsBeforeTimedOut:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApproximateSecondsBeforeTimedOut'
         description: The estimated number of seconds that remain before the job execution status will be changed to <code>TIMED_OUT</code>.
       versionNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VersionNumber'
         description: The version of the job execution. Job execution versions are incremented each time they are updated by a device.
       executionNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionNumber'
         description: A number that identifies a particular job execution on a particular device. It can be used later in commands that return or update job execution information.
       jobDocument:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobDocument'
         description: The content of the job document.
     description: Contains data about a job execution.
   JobExecutionState:
     type: object
     properties:
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobExecutionStatus'
         description: 'The status of the job execution. Can be one of: "QUEUED", "IN_PROGRESS", "FAILED", "SUCCESS", "CANCELED", "REJECTED", or "REMOVED".'
       statusDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DetailsMap'
         description: A collection of name/value pairs that describe the status of the job execution.
       versionNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VersionNumber'
         description: The version of the job execution. Job execution versions are incremented each time they are updated by a device.
     description: Contains data about the state of a job execution.
   JobExecutionStatus:
@@ -479,28 +479,28 @@ definitions:
     type: object
     properties:
       jobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobId'
         description: The unique identifier you assigned to this job when it was created.
       queuedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/QueuedAt'
         description: 'The time, in milliseconds since the epoch, when the job execution was enqueued.'
       startedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StartedAt'
         description: 'The time, in milliseconds since the epoch, when the job execution started.'
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the job execution was last updated.'
       versionNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VersionNumber'
         description: The version of the job execution. Job execution versions are incremented each time AWS IoT Jobs receives an update from a device.
       executionNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionNumber'
         description: A number that identifies a particular job execution on a particular device.
     description: Contains a subset of information about a job execution.
   JobExecutionSummaryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/JobExecutionSummary'
   JobId:
     type: string
     pattern: '[a-zA-Z0-9_-]+'

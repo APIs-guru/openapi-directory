@@ -283,10 +283,10 @@ definitions:
     type: object
     properties:
       Body:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PayloadBlob'
         description: 'The bytes of the object. '
       StatusCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/statusCode'
         description: The HTML status code of the request. Status codes ranging from 200 to 299 indicate success. All other status codes indicate the type of error that occurred.
   GetObjectRequest:
     type: object
@@ -296,10 +296,10 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ItemList'
         description: The metadata entries for the folders and objects at the requested path.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: 'The token that can be used in a request to view the next set of results. For example, you submit a <code>ListItems</code> request that matches 2,000 items with <code>MaxResults</code> set at 500. The service returns the first batch of results (up to 500) and a <code>NextToken</code> value that can be used to fetch the next batch of results.'
   ListItemsRequest:
     type: object
@@ -308,13 +308,13 @@ definitions:
     type: object
     properties:
       ContentSHA256:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SHA256Hash'
         description: The SHA256 digest of the object that is persisted.
       ETag:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ETag'
         description: Unique identifier of the object in the container.
       StorageClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StorageClass'
         description: The storage class where the object was persisted. The class should be “Temporal”.
   PutObjectRequest:
     type: object
@@ -322,7 +322,7 @@ definitions:
       - Body
     properties:
       Body:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PayloadBlob'
         description: 'The bytes to be stored. '
   ContentRangePattern:
     type: string
@@ -340,28 +340,28 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ItemName'
         description: The name of the item.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ItemType'
         description: The item type (folder or object).
       ETag:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ETag'
         description: The ETag that represents a unique instance of the item.
       LastModified:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeStamp'
         description: The date and time that the item was last modified.
       ContentType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContentType'
         description: The content type of the item.
       ContentLength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NonNegativeLong'
         description: The length of the item in bytes.
     description: A metadata entry for a folder or object.
   ItemList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Item'
   ItemName:
     type: string
     pattern: '[A-Za-z0-9_\.\-\~]+'

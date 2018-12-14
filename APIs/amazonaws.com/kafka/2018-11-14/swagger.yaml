@@ -363,13 +363,13 @@ definitions:
     type: object
     properties:
       ClusterArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The Amazon Resource Name (ARN) of the cluster.
       ClusterName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the MSK cluster.
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterState'
         description: 'The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.'
   CreateClusterRequest:
     type: object
@@ -380,22 +380,22 @@ definitions:
       - ClusterName
     properties:
       BrokerNodeGroupInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BrokerNodeGroupInfo'
         description: Information about the broker nodes in the cluster.
       ClusterName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin1Max64'
         description: The name of the cluster.
       EncryptionInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EncryptionInfo'
         description: Includes all encryption-related information.
       EnhancedMonitoring:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnhancedMonitoring'
         description: 'Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.'
       KafkaVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin1Max128'
         description: The version of Apache Kafka.
       NumberOfBrokerNodes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max15'
         description: The number of Kafka broker nodes in the Amazon MSK cluster.
   BadRequestException: {}
   InternalServerErrorException: {}
@@ -408,10 +408,10 @@ definitions:
     type: object
     properties:
       ClusterArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The Amazon Resource Name (ARN) of the cluster.
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterState'
         description: 'The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.'
   DeleteClusterRequest:
     type: object
@@ -421,7 +421,7 @@ definitions:
     type: object
     properties:
       ClusterInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterInfo'
         description: The cluster information.
   DescribeClusterRequest:
     type: object
@@ -430,7 +430,7 @@ definitions:
     type: object
     properties:
       BootstrapBrokerString:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'A string containing one or more hostname:port pairs.'
   GetBootstrapBrokersRequest:
     type: object
@@ -439,10 +439,10 @@ definitions:
     type: object
     properties:
       ClusterInfoList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfClusterInfo'
         description: Information on each of the MSK clusters in the response.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: |-
           The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
            To get another batch of clusters, provide this token in your next request.
@@ -453,12 +453,12 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: |-
           The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response. 
            To get another batch of nodes, provide this token in your next request.
       NodeInfoList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfNodeInfo'
         description: List containing a NodeInfo object.
   ListNodesRequest:
     type: object
@@ -476,90 +476,90 @@ definitions:
       - InstanceType
     properties:
       BrokerAZDistribution:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BrokerAZDistribution'
         description: The distribution of broker nodes across Availability Zones.
       ClientSubnets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOf__string'
         description: The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't be in Availability Zone us-east-1e.
       InstanceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin5Max32'
         description: |-
           The type of Amazon EC2 instances to use for Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
           kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
       SecurityGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOf__string'
         description: The AWS security groups to associate with the elastic network interfaces in order to specify who can connect to and communicate with the Amazon MSK cluster.
       StorageInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StorageInfo'
         description: Contains information about storage volumes attached to MSK broker nodes.
     description: Describes the setup to be used for Kafka broker nodes in the cluster.
   BrokerNodeInfo:
     type: object
     properties:
       AttachedENIId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The attached elastic network interface of the broker.
       BrokerId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__double'
         description: The ID of the broker.
       ClientSubnet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The client subnet to which this broker node belongs.
       ClientVpcIpAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The virtual private cloud (VPC) of the client.
       CurrentBrokerSoftwareInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BrokerSoftwareInfo'
         description: Information about the version of software currently deployed on the Kafka brokers in the cluster.
     description: BrokerNodeInfo
   BrokerSoftwareInfo:
     type: object
     properties:
       ConfigurationArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The Amazon Resource Name (ARN) of the configuration used for the cluster.
       ConfigurationRevision:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The revision of the configuration to use.
       KafkaVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The version of Apache Kafka.
     description: Information about the current software installed on the cluster.
   ClusterInfo:
     type: object
     properties:
       BrokerNodeGroupInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BrokerNodeGroupInfo'
         description: Information about the broker nodes.
       ClusterArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
       ClusterName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the cluster.
       CreationTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampIso8601'
         description: The time when the cluster was created.
       CurrentBrokerSoftwareInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BrokerSoftwareInfo'
         description: Information about the version of software currently deployed on the Kafka brokers in the cluster.
       CurrentVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The current version of the MSK cluster.
       EncryptionInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EncryptionInfo'
         description: Includes all encryption-related information.
       EnhancedMonitoring:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnhancedMonitoring'
         description: 'Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.'
       NumberOfBrokerNodes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: The number of Kafka broker nodes in the cluster.
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterState'
         description: 'The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.'
       ZookeeperConnectString:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The connection string to use to connect to the Apache ZooKeeper cluster.
     description: Returns information about a cluster.
   ClusterState:
@@ -574,7 +574,7 @@ definitions:
     type: object
     properties:
       VolumeSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max16384'
         description: The size in GiB of the EBS volume for the data drive on each broker node.
     description: Contains information about the EBS storage volumes attached to Kafka broker nodes.
   EncryptionAtRest:
@@ -583,14 +583,14 @@ definitions:
       - DataVolumeKMSKeyId
     properties:
       DataVolumeKMSKeyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The AWS KMS key used for data encryption.
     description: The data volume encryption details.
   EncryptionInfo:
     type: object
     properties:
       EncryptionAtRest:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EncryptionAtRest'
         description: The data volume encryption details.
     description: 'Includes encryption-related information, such as the AWS KMS key used for encrypting data at rest.'
   EnhancedMonitoring:
@@ -608,22 +608,22 @@ definitions:
     type: object
     properties:
       AddedToClusterTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The start time.
       BrokerNodeInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BrokerNodeInfo'
         description: The broker node info.
       InstanceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The instance type.
       NodeARN:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The Amazon Resource Name (ARN) of the node.
       NodeType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NodeType'
         description: The node type.
       ZookeeperNodeInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ZookeeperNodeInfo'
         description: The ZookeeperNodeInfo.
     description: The node information object.
   NodeType:
@@ -635,23 +635,23 @@ definitions:
     type: object
     properties:
       EbsStorageInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EBSStorageInfo'
         description: EBS volume information.
     description: Contains information about storage volumes attached to MSK broker nodes.
   ZookeeperNodeInfo:
     type: object
     properties:
       AttachedENIId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The attached elastic network interface of the broker.
       ClientVpcIpAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The virtual private cloud (VPC) IP address of the client.
       ZookeeperId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__double'
         description: The role-specific ID for Zookeeper.
       ZookeeperVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The version of Zookeeper.
     description: Zookeeper node information.
   __double:
@@ -670,15 +670,15 @@ definitions:
   __listOfClusterInfo:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ClusterInfo'
   __listOfNodeInfo:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/NodeInfo'
   __listOf__string:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/__string'
   __string:
     type: string
   __stringMin1Max128:

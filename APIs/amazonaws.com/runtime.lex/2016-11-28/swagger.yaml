@@ -253,7 +253,7 @@ definitions:
     type: object
     properties:
       audioStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BlobStream'
         description: 'The prompt (or statement) to convey to the user. This is based on the bot configuration and context. For example, if Amazon Lex did not understand the user intent, it sends the <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex sends that message in the response. '
   PostContentRequest:
     type: object
@@ -261,100 +261,100 @@ definitions:
       - inputStream
     properties:
       inputStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BlobStream'
         description: '<p> User input in PCM or Opus audio format or text format as described in the <code>Content-Type</code> HTTP header. </p> <p>You can stream audio data to Amazon Lex or you can create a local buffer that captures all of the audio data before sending. In general, you get better performance if you stream audio data rather than buffering the data locally.</p>'
   NotFoundException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: The resource (such as the Amazon Lex bot or an alias) that is referred to is not found.
   BadRequestException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: ' Request validation failed, there is no usable message in the context, or the bot build failed, is still in progress, or contains unbuilt changes. '
   LimitExceededException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: Exceeded a limit.
   InternalFailureException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: Internal service error. Retry the call.
   ConflictException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: ' Two clients are using the same AWS account, Amazon Lex bot, and user ID. '
   UnsupportedMediaTypeException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: 'The Content-Type header (<code>PostContent</code> API) has an invalid value. '
   NotAcceptableException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: The accept header in the request does not have a valid value.
   RequestTimeoutException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
     description: The input speech is too long.
   DependencyFailedException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: '<p> One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception. For example, </p> <ul> <li> <p>If Amazon Lex does not have sufficient permissions to call a Lambda function.</p> </li> <li> <p>If a Lambda function takes longer than 30 seconds to execute.</p> </li> <li> <p>If a fulfillment Lambda function returns a <code>Delegate</code> dialog action without removing any slot values.</p> </li> </ul>'
   BadGatewayException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: 'Either the Amazon Lex bot is still building, or one of the dependent services (Amazon Polly, AWS Lambda) failed with an internal service error.'
   LoopDetectedException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: This exception is not used.
   PostTextResponse:
     type: object
     properties:
       intentName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntentName'
         description: The current user intent that Amazon Lex is aware of.
       slots:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringMap'
         description: '<p> The intent slots that Amazon Lex detected from the user input in the conversation. </p> <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type was created or updated. If <code>valueSelectionStrategy</code> is set to <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value is similar to the slot values. If <code>valueSelectionStrategy</code> is set to <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if there is no resolution list, null. If you don''t specify a <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>'
       sessionAttributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringMap'
         description: A map of key-value pairs representing the session-specific context information.
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Text'
         description: '<p>The message to convey to the user. The message can come from the bot''s configuration or from a Lambda function.</p> <p>If the intent is not configured with a Lambda function, or if the Lambda function returned <code>Delegate</code> as the <code>dialogAction.type</code> its response, Amazon Lex decides on the next course of action and selects an appropriate message from the bot''s configuration based on the current interaction context. For example, if Amazon Lex isn''t able to understand user input, it uses a clarification prompt message.</p> <p>When you create an intent you can assign messages to groups. When messages are assigned to groups Amazon Lex returns one message from each group in the response. The message field is an escaped JSON string containing the messages. For more information about the structure of the JSON string returned, see <a>msg-prompts-formats</a>.</p> <p>If the Lambda function returns a message, Amazon Lex passes it to the client in its response.</p>'
       messageFormat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MessageFormatType'
         description: '<p>The format of the response message. One of the following values:</p> <ul> <li> <p> <code>PlainText</code> - The message contains plain UTF-8 text.</p> </li> <li> <p> <code>CustomPayload</code> - The message is a custom format defined by the Lambda function.</p> </li> <li> <p> <code>SSML</code> - The message contains text formatted for voice output.</p> </li> <li> <p> <code>Composite</code> - The message contains an escaped JSON object containing one or more messages from the groups that messages were assigned to when the intent was created.</p> </li> </ul>'
       dialogState:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DialogState'
         description: '<p> Identifies the current state of the user interaction. Amazon Lex returns one of the following values as <code>dialogState</code>. The client can optionally use this information to customize the user interface. </p> <ul> <li> <p> <code>ElicitIntent</code> - Amazon Lex wants to elicit user intent. </p> <p>For example, a user might utter an intent ("I want to order a pizza"). If Amazon Lex cannot infer the user intent from this utterance, it will return this dialogState.</p> </li> <li> <p> <code>ConfirmIntent</code> - Amazon Lex is expecting a "yes" or "no" response. </p> <p> For example, Amazon Lex wants user confirmation before fulfilling an intent. </p> <p>Instead of a simple "yes" or "no," a user might respond with additional information. For example, "yes, but make it thick crust pizza" or "no, I want to order a drink". Amazon Lex can process such additional information (in these examples, update the crust type slot value, or change intent from OrderPizza to OrderDrink).</p> </li> <li> <p> <code>ElicitSlot</code> - Amazon Lex is expecting a slot value for the current intent. </p> <p>For example, suppose that in the response Amazon Lex sends this message: "What size pizza would you like?". A user might reply with the slot value (e.g., "medium"). The user might also provide additional information in the response (e.g., "medium thick crust pizza"). Amazon Lex can process such additional information appropriately. </p> </li> <li> <p> <code>Fulfilled</code> - Conveys that the Lambda function configured for the intent has successfully fulfilled the intent. </p> </li> <li> <p> <code>ReadyForFulfillment</code> - Conveys that the client has to fulfill the intent. </p> </li> <li> <p> <code>Failed</code> - Conveys that the conversation with the user failed. </p> <p> This can happen for various reasons including that the user did not provide an appropriate response to prompts from the service (you can configure how many times Amazon Lex can prompt a user for specific information), or the Lambda function failed to fulfill the intent. </p> </li> </ul>'
       slotToElicit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'If the <code>dialogState</code> value is <code>ElicitSlot</code>, returns the name of the slot for which Amazon Lex is eliciting a value. '
       responseCard:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResponseCard'
         description: 'Represents the options that the user has to respond to the current prompt. Response Card can come from the bot configuration (in the Amazon Lex console, choose the settings button next to a slot) or from a code hook (Lambda function). '
   PostTextRequest:
     type: object
@@ -362,13 +362,13 @@ definitions:
       - inputText
     properties:
       sessionAttributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringMap'
         description: '<p>Application-specific information passed between Amazon Lex and a client application.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs">Setting Session Attributes</a>.</p>'
       requestAttributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringMap'
         description: '<p>Request-specific information passed between Amazon Lex and a client application.</p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs">Setting Request Attributes</a>.</p>'
       inputText:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Text'
         description: The text that the user entered (Amazon Lex interprets this text).
   Accept:
     type: string
@@ -389,10 +389,10 @@ definitions:
       - value
     properties:
       text:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ButtonTextStringWithLength'
         description: Text that is visible to the user on the button.
       value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ButtonValueStringWithLength'
         description: 'The value sent to Amazon Lex when a user chooses the button. For example, consider button text "NYC." When the user chooses the button, the value sent can be "New York City."'
     description: 'Represents an option to be shown on the client platform (Facebook, Slack, etc.)'
   ButtonTextStringWithLength:
@@ -422,19 +422,19 @@ definitions:
     type: object
     properties:
       title:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringWithLength'
         description: The title of the option.
       subTitle:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringWithLength'
         description: The subtitle shown below the title.
       attachmentLinkUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringUrlWithLength'
         description: The URL of an attachment to the response card.
       imageUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringUrlWithLength'
         description: The URL of an image that is displayed to the user.
       buttons:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/listOfButtons'
         description: The list of options to show to the user.
     description: 'Represents an option rendered to the user when a prompt is shown. It could be an image, a button, a link, or text. '
   HttpContentType:
@@ -452,13 +452,13 @@ definitions:
     type: object
     properties:
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The version of the response card format.
       contentType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContentType'
         description: The content type of the response.
       genericAttachments:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/genericAttachmentList'
         description: An array of attachment objects representing options.
     description: 'If you configure a response card when creating your bots, Amazon Lex substitutes the session attributes and slot values that are available, and then returns it. The response card can also come from a Lambda function ( <code>dialogCodeHook</code> and <code>fulfillmentActivity</code> on an intent).'
   String:
@@ -493,12 +493,12 @@ definitions:
   genericAttachmentList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/GenericAttachment'
     minItems: 0
     maxItems: 10
   listOfButtons:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Button'
     minItems: 0
     maxItems: 5

@@ -286,7 +286,7 @@ definitions:
     type: object
     properties:
       PolicyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PolicyId'
         description: The identifier of the lifecycle policy.
   CreateLifecyclePolicyRequest:
     type: object
@@ -297,16 +297,16 @@ definitions:
       - PolicyDetails
     properties:
       ExecutionRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionRoleArn'
         description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PolicyDescription'
         description: 'A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are supported.'
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SettablePolicyStateValues'
         description: The desired activation state of the lifecycle policy after creation.
       PolicyDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PolicyDetails'
         description: <p>The configuration details of the lifecycle policy.</p> <p>Target tags cannot be re-used across lifecycle policies.</p>
   InvalidRequestException: {}
   LimitExceededException: {}
@@ -322,7 +322,7 @@ definitions:
     type: object
     properties:
       Policies:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecyclePolicySummaryList'
         description: Summary information about the lifecycle policies.
   GetLifecyclePoliciesRequest:
     type: object
@@ -331,7 +331,7 @@ definitions:
     type: object
     properties:
       Policy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecyclePolicy'
         description: Detailed information about the lifecycle policy.
   GetLifecyclePolicyRequest:
     type: object
@@ -343,16 +343,16 @@ definitions:
     type: object
     properties:
       ExecutionRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionRoleArn'
         description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SettablePolicyStateValues'
         description: The desired activation state of the lifecycle policy after creation.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PolicyDescription'
         description: A description of the lifecycle policy.
       PolicyDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PolicyDetails'
         description: <p>The configuration of the lifecycle policy.</p> <p>Target tags cannot be re-used across policies.</p>
   CopyTags:
     type: boolean
@@ -368,13 +368,13 @@ definitions:
       - IntervalUnit
     properties:
       Interval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Interval'
         description: The interval. The supported values are 12 and 24.
       IntervalUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntervalUnitValues'
         description: The interval unit.
       Times:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimesList'
         description: '<p>The time, in UTC, to start the operation.</p> <p>The operation occurs within a one-hour window following the specified time.</p>'
     description: Specifies when to create snapshots of EBS volumes.
   ExecutionRoleArn:
@@ -396,44 +396,44 @@ definitions:
     type: object
     properties:
       PolicyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PolicyId'
         description: The identifier of the lifecycle policy.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PolicyDescription'
         description: The description of the lifecycle policy.
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GettablePolicyStateValues'
         description: The activation state of the lifecycle policy.
       ExecutionRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionRoleArn'
         description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
       DateCreated:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The local date and time when the lifecycle policy was created.
       DateModified:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The local date and time when the lifecycle policy was last modified.
       PolicyDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PolicyDetails'
         description: The configuration of the lifecycle policy
     description: Detailed information about a lifecycle policy.
   LifecyclePolicySummary:
     type: object
     properties:
       PolicyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PolicyId'
         description: The identifier of the lifecycle policy.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PolicyDescription'
         description: The description of the lifecycle policy.
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GettablePolicyStateValues'
         description: The activation state of the lifecycle policy.
     description: Summary information about a lifecycle policy.
   LifecyclePolicySummaryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/LifecyclePolicySummary'
   PolicyDescription:
     type: string
     minLength: 0
@@ -442,13 +442,13 @@ definitions:
     type: object
     properties:
       ResourceTypes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceTypeValuesList'
         description: The resource type.
       TargetTags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetTagList'
         description: The single tag that identifies targeted resources for this policy.
       Schedules:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ScheduleList'
         description: The schedule of policy-defined actions.
     description: Specifies the configuration of a lifecycle policy.
   PolicyId:
@@ -456,7 +456,7 @@ definitions:
   PolicyIdList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/PolicyId'
   ResourceTypeValues:
     type: string
     enum:
@@ -464,7 +464,7 @@ definitions:
   ResourceTypeValuesList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ResourceTypeValues'
     minItems: 1
     maxItems: 1
   RetainRule:
@@ -473,31 +473,31 @@ definitions:
       - Count
     properties:
       Count:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Count'
         description: 'The number of snapshots to keep for each volume, up to a maximum of 1000.'
     description: Specifies the number of snapshots to keep for each EBS volume.
   Schedule:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ScheduleName'
         description: The name of the schedule.
       CopyTags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CopyTags'
       TagsToAdd:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagsToAddList'
         description: The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.
       CreateRule:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreateRule'
         description: The create rule.
       RetainRule:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RetainRule'
         description: The retain rule.
     description: Specifies a schedule.
   ScheduleList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Schedule'
     minItems: 1
     maxItems: 1
   ScheduleName:
@@ -518,10 +518,10 @@ definitions:
       - Value
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The tag key.
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The tag value.
     description: Specifies a tag for a resource.
   TagFilter:
@@ -529,25 +529,25 @@ definitions:
   TagsToAddFilterList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TagFilter'
     minItems: 0
     maxItems: 50
   TagsToAddList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Tag'
     minItems: 0
     maxItems: 50
   TargetTagList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Tag'
     minItems: 1
     maxItems: 50
   TargetTagsFilterList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TagFilter'
     minItems: 1
     maxItems: 50
   Time:
@@ -556,7 +556,7 @@ definitions:
   TimesList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Time'
     maxItems: 1
   Timestamp:
     type: string

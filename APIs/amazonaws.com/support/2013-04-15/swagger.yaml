@@ -590,10 +590,10 @@ definitions:
     type: object
     properties:
       attachmentSetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttachmentSetId'
         description: 'The ID of the attachment set. If an <code>attachmentSetId</code> was not specified, a new attachment set is created, and the ID of the set is returned in the response. If an <code>attachmentSetId</code> was specified, the attachments are added to the specified set, if it exists.'
       expiryTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExpiryTime'
         description: The time and date when the attachment set expires.
     description: The ID and expiry time of the attachment set returned by the <a>AddAttachmentsToSet</a> operation.
   AddAttachmentsToSetRequest:
@@ -602,52 +602,52 @@ definitions:
       - attachments
     properties:
       attachmentSetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttachmentSetId'
         description: 'The ID of the attachment set. If an <code>attachmentSetId</code> is not specified, a new attachment set is created, and the ID of the set is returned in the response. If an <code>attachmentSetId</code> is specified, the attachments are added to the specified set, if it exists.'
       attachments:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Attachments'
         description: 'One or more attachments to add to the set. The limit is 3 attachments per set, and the size limit is 5 MB per attachment.'
     description: <p/>
   InternalServerError:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: An internal server error occurred.
     description: An internal server error occurred.
   AttachmentSetIdNotFound:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: An attachment set with the specified ID could not be found.
     description: An attachment set with the specified ID could not be found.
   AttachmentSetExpired:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: The expiration time of the attachment set has passed. The set expires 1 hour after it is created.
     description: The expiration time of the attachment set has passed. The set expires 1 hour after it is created.
   AttachmentSetSizeLimitExceeded:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: A limit for the size of an attachment set has been exceeded. The limits are 3 attachments and 5 MB per attachment.
     description: A limit for the size of an attachment set has been exceeded. The limits are 3 attachments and 5 MB per attachment.
   AttachmentLimitExceeded:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: The limit for the number of attachment sets created in a short period of time has been exceeded.
     description: The limit for the number of attachment sets created in a short period of time has been exceeded.
   AddCommunicationToCaseResponse:
     type: object
     properties:
       result:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Result'
         description: 'True if <a>AddCommunicationToCase</a> succeeds. Otherwise, returns an error.'
     description: The result of the <a>AddCommunicationToCase</a> operation.
   AddCommunicationToCaseRequest:
@@ -656,30 +656,30 @@ definitions:
       - communicationBody
     properties:
       caseId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaseId'
         description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
       communicationBody:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommunicationBody'
         description: The body of an email communication to add to the support case.
       ccEmailAddresses:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CcEmailAddressList'
         description: The email addresses in the CC line of an email to be added to the support case.
       attachmentSetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttachmentSetId'
         description: 'The ID of a set of one or more attachments for the communication to add to the case. Create the set by calling <a>AddAttachmentsToSet</a> '
     description: To be written.
   CaseIdNotFound:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: The requested <code>CaseId</code> could not be located.
     description: The requested <code>caseId</code> could not be located.
   CreateCaseResponse:
     type: object
     properties:
       caseId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaseId'
         description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
     description: 'The AWS Support case ID returned by a successful completion of the <a>CreateCase</a> operation. '
   CreateCaseRequest:
@@ -689,45 +689,45 @@ definitions:
       - communicationBody
     properties:
       subject:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subject'
         description: The title of the AWS Support case.
       serviceCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServiceCode'
         description: The code for the AWS service returned by the call to <a>DescribeServices</a>.
       severityCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SeverityCode'
         description: '<p>The code for the severity level returned by the call to <a>DescribeSeverityLevels</a>.</p> <note> <p>The availability of severity levels depends on each customer''s support subscription. In other words, your subscription may not necessarily require the urgent level of response time.</p> </note>'
       categoryCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CategoryCode'
         description: The category of problem for the AWS Support case.
       communicationBody:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommunicationBody'
         description: The communication body text when you create an AWS Support case by calling <a>CreateCase</a>.
       ccEmailAddresses:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CcEmailAddressList'
         description: A list of email addresses that AWS Support copies on case correspondence.
       language:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Language'
         description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
       issueType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IssueType'
         description: 'The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."'
       attachmentSetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttachmentSetId'
         description: The ID of a set of one or more attachments for the case. Create the set by using <a>AddAttachmentsToSet</a>.
     description: <p/>
   CaseCreationLimitExceeded:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: An error message that indicates that you have exceeded the number of cases you can have open.
     description: The case creation limit for the account has been exceeded.
   DescribeAttachmentResponse:
     type: object
     properties:
       attachment:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Attachment'
         description: The attachment content and file name.
     description: The content and file name of the attachment returned by the <a>DescribeAttachment</a> operation.
   DescribeAttachmentRequest:
@@ -736,71 +736,71 @@ definitions:
       - attachmentId
     properties:
       attachmentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttachmentId'
         description: The ID of the attachment to return. Attachment IDs are returned by the <a>DescribeCommunications</a> operation.
   DescribeAttachmentLimitExceeded:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: The limit for the number of <a>DescribeAttachment</a> requests in a short period of time has been exceeded.
     description: The limit for the number of <a>DescribeAttachment</a> requests in a short period of time has been exceeded.
   AttachmentIdNotFound:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: An attachment with the specified ID could not be found.
     description: An attachment with the specified ID could not be found.
   DescribeCasesResponse:
     type: object
     properties:
       cases:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaseList'
         description: The details for the cases that match the request.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: A resumption point for pagination.
     description: Returns an array of <a>CaseDetails</a> objects and a <code>nextToken</code> that defines a point for pagination in the result set.
   DescribeCasesRequest:
     type: object
     properties:
       caseIdList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaseIdList'
         description: A list of ID numbers of the support cases you want returned. The maximum number of cases is 100.
       displayId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DisplayId'
         description: The ID displayed for a case in the AWS Support Center user interface.
       afterTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AfterTime'
         description: The start date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
       beforeTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BeforeTime'
         description: The end date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
       includeResolvedCases:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IncludeResolvedCases'
         description: Specifies whether resolved support cases should be included in the <a>DescribeCases</a> results. The default is <i>false</i>.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: A resumption point for pagination.
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: The maximum number of results to return before paginating.
       language:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Language'
         description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
       includeCommunications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IncludeCommunications'
         description: Specifies whether communications should be included in the <a>DescribeCases</a> results. The default is <i>true</i>.
     description: <p/>
   DescribeCommunicationsResponse:
     type: object
     properties:
       communications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommunicationList'
         description: The communications for the case.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: A resumption point for pagination.
     description: The communications returned by the <a>DescribeCommunications</a> operation.
   DescribeCommunicationsRequest:
@@ -809,50 +809,50 @@ definitions:
       - caseId
     properties:
       caseId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaseId'
         description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
       beforeTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BeforeTime'
         description: The end date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
       afterTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AfterTime'
         description: The start date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: A resumption point for pagination.
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: The maximum number of results to return before paginating.
     description: <p/>
   DescribeServicesResponse:
     type: object
     properties:
       services:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServiceList'
         description: A JSON-formatted list of AWS services.
     description: The list of AWS services returned by the <a>DescribeServices</a> operation.
   DescribeServicesRequest:
     type: object
     properties:
       serviceCodeList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServiceCodeList'
         description: A JSON-formatted list of service codes available for AWS services.
       language:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Language'
         description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
     description: <p/>
   DescribeSeverityLevelsResponse:
     type: object
     properties:
       severityLevels:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SeverityLevelsList'
         description: The available severity levels for the support case. Available severity levels are defined by your service level agreement with AWS.
     description: The list of severity levels returned by the <a>DescribeSeverityLevels</a> operation.
   DescribeSeverityLevelsRequest:
     type: object
     properties:
       language:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Language'
         description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
     description: <p/>
   DescribeTrustedAdvisorCheckRefreshStatusesResponse:
@@ -861,7 +861,7 @@ definitions:
       - statuses
     properties:
       statuses:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrustedAdvisorCheckRefreshStatusList'
         description: The refresh status of the specified Trusted Advisor checks.
     description: The statuses of the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorCheckRefreshStatuses</a> operation.
   DescribeTrustedAdvisorCheckRefreshStatusesRequest:
@@ -870,14 +870,14 @@ definitions:
       - checkIds
     properties:
       checkIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringList'
         description: 'The IDs of the Trusted Advisor checks to get the status of. <b>Note:</b> Specifying the check ID of a check that is automatically refreshed causes an <code>InvalidParameterValue</code> error.'
     description: <p/>
   DescribeTrustedAdvisorCheckResultResponse:
     type: object
     properties:
       result:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrustedAdvisorCheckResult'
         description: The detailed results of the Trusted Advisor check.
     description: The result of the Trusted Advisor check returned by the <a>DescribeTrustedAdvisorCheckResult</a> operation.
   DescribeTrustedAdvisorCheckResultRequest:
@@ -886,10 +886,10 @@ definitions:
       - checkId
     properties:
       checkId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The unique identifier for the Trusted Advisor check.
       language:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
     description: <p/>
   DescribeTrustedAdvisorCheckSummariesResponse:
@@ -898,7 +898,7 @@ definitions:
       - summaries
     properties:
       summaries:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrustedAdvisorCheckSummaryList'
         description: The summary information for the requested Trusted Advisor checks.
     description: The summaries of the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorCheckSummaries</a> operation.
   DescribeTrustedAdvisorCheckSummariesRequest:
@@ -907,7 +907,7 @@ definitions:
       - checkIds
     properties:
       checkIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringList'
         description: The IDs of the Trusted Advisor checks.
     description: <p/>
   DescribeTrustedAdvisorChecksResponse:
@@ -916,7 +916,7 @@ definitions:
       - checks
     properties:
       checks:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrustedAdvisorCheckList'
         description: Information about all available Trusted Advisor checks.
     description: Information about the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorChecks</a> operation.
   DescribeTrustedAdvisorChecksRequest:
@@ -925,7 +925,7 @@ definitions:
       - language
     properties:
       language:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
     description: <p/>
   RefreshTrustedAdvisorCheckResponse:
@@ -934,7 +934,7 @@ definitions:
       - status
     properties:
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrustedAdvisorCheckRefreshStatus'
         description: 'The current refresh status for a check, including the amount of time until the check is eligible for refresh.'
     description: The current refresh status of a Trusted Advisor check.
   RefreshTrustedAdvisorCheckRequest:
@@ -943,24 +943,24 @@ definitions:
       - checkId
     properties:
       checkId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The unique identifier for the Trusted Advisor check to refresh. <b>Note:</b> Specifying the check ID of a check that is automatically refreshed causes an <code>InvalidParameterValue</code> error.'
     description: <p/>
   ResolveCaseResponse:
     type: object
     properties:
       initialCaseStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaseStatus'
         description: The status of the case when the <a>ResolveCase</a> request was sent.
       finalCaseStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaseStatus'
         description: The status of the case after the <a>ResolveCase</a> request was processed.
     description: The status of the case returned by the <a>ResolveCase</a> operation.
   ResolveCaseRequest:
     type: object
     properties:
       caseId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaseId'
         description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
     description: <p/>
   '[object Object]': {}
@@ -970,20 +970,20 @@ definitions:
     type: object
     properties:
       fileName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileName'
         description: The name of the attachment file.
       data:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Data'
         description: The content of the attachment file.
     description: An attachment to a case communication. The attachment consists of the file name and the content of the file.
   AttachmentDetails:
     type: object
     properties:
       attachmentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttachmentId'
         description: The ID of the attachment.
       fileName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileName'
         description: The file name of the attachment.
     description: The file name and ID of an attachment to a case communication. You can use the ID to retrieve the attachment with the <a>DescribeAttachment</a> operation.
   AttachmentId:
@@ -991,13 +991,13 @@ definitions:
   AttachmentSet:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AttachmentDetails'
   AttachmentSetId:
     type: string
   Attachments:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Attachment'
   BeforeTime:
     type: string
   Boolean:
@@ -1006,40 +1006,40 @@ definitions:
     type: object
     properties:
       caseId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaseId'
         description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
       displayId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DisplayId'
         description: The ID displayed for the case in the AWS Support Center. This is a numeric string.
       subject:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subject'
         description: The subject line for the case in the AWS Support Center.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Status'
         description: The status of the case.
       serviceCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServiceCode'
         description: The code for the AWS service returned by the call to <a>DescribeServices</a>.
       categoryCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CategoryCode'
         description: The category of problem for the AWS Support case.
       severityCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SeverityCode'
         description: The code for the severity level returned by the call to <a>DescribeSeverityLevels</a>.
       submittedBy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubmittedBy'
         description: The email address of the account that submitted the case.
       timeCreated:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeCreated'
         description: The time that the case was case created in the AWS Support Center.
       recentCommunications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RecentCaseCommunications'
         description: 'The five most recent communications between you and AWS Support Center, including the IDs of any attachments to the communications. Also includes a <code>nextToken</code> that you can use to retrieve earlier communications.'
       ccEmailAddresses:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CcEmailAddressList'
         description: The email addresses that receive copies of communication about the case.
       language:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Language'
         description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
     description: '<p>A JSON-formatted object that contains the metadata for a support case. It is contained the response from a <a>DescribeCases</a> request. <b>CaseDetails</b> contains the following fields:</p> <ul> <li> <p> <b>caseId.</b> The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>.</p> </li> <li> <p> <b>categoryCode.</b> The category of problem for the AWS Support case. Corresponds to the CategoryCode values returned by a call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>displayId.</b> The identifier for the case on pages in the AWS Support Center.</p> </li> <li> <p> <b>language.</b> The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.</p> </li> <li> <p> <b>recentCommunications.</b> One or more <a>Communication</a> objects. Fields of these objects are <code>attachments</code>, <code>body</code>, <code>caseId</code>, <code>submittedBy</code>, and <code>timeCreated</code>.</p> </li> <li> <p> <b>nextToken.</b> A resumption point for pagination.</p> </li> <li> <p> <b>serviceCode.</b> The identifier for the AWS service that corresponds to the service code defined in the call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>severityCode. </b>The severity code assigned to the case. Contains one of the values returned by the call to <a>DescribeSeverityLevels</a>.</p> </li> <li> <p> <b>status.</b> The status of the case in the AWS Support Center.</p> </li> <li> <p> <b>subject.</b> The subject line of the case.</p> </li> <li> <p> <b>submittedBy.</b> The email address of the account that submitted the case.</p> </li> <li> <p> <b>timeCreated.</b> The time the case was created, in ISO-8601 format.</p> </li> </ul>'
   CaseId:
@@ -1047,23 +1047,23 @@ definitions:
   CaseIdList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/CaseId'
     minItems: 0
     maxItems: 100
   CaseList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/CaseDetails'
   CaseStatus:
     type: string
   Category:
     type: object
     properties:
       code:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CategoryCode'
         description: The category code for the support case.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CategoryName'
         description: The category name for the support case.
     description: 'A JSON-formatted name/value pair that represents the category name and category code of the problem, selected from the <a>DescribeServices</a> response for each AWS service.'
   CategoryCode:
@@ -1071,7 +1071,7 @@ definitions:
   CategoryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Category'
   CategoryName:
     type: string
   CcEmailAddress:
@@ -1079,26 +1079,26 @@ definitions:
   CcEmailAddressList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/CcEmailAddress'
     minItems: 0
     maxItems: 10
   Communication:
     type: object
     properties:
       caseId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaseId'
         description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
       body:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommunicationBody'
         description: The text of the communication between the customer and AWS Support.
       submittedBy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubmittedBy'
         description: The email address of the account that submitted the AWS Support case.
       timeCreated:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeCreated'
         description: The time the communication was created.
       attachmentSet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttachmentSet'
         description: Information about the attachments to the case communication.
     description: 'A communication associated with an AWS Support case. The communication consists of the case ID, the message body, attachment information, the account email address, and the date and time of the communication.'
   CommunicationBody:
@@ -1108,7 +1108,7 @@ definitions:
   CommunicationList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Communication'
   Data:
     type: string
   DisplayId:
@@ -1142,10 +1142,10 @@ definitions:
     type: object
     properties:
       communications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommunicationList'
         description: The five most recent communications associated with the case.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: A resumption point for pagination.
     description: The five most recent communications associated with the case.
   Result:
@@ -1154,13 +1154,13 @@ definitions:
     type: object
     properties:
       code:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServiceCode'
         description: The code for an AWS service returned by the <a>DescribeServices</a> response. The <code>name</code> element contains the corresponding friendly name.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServiceName'
         description: The friendly name for an AWS service. The <code>code</code> element contains the corresponding code.
       categories:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CategoryList'
         description: A list of categories that describe the type of support issue a case describes. Categories consist of a category name and a category code. Category names and codes are passed to AWS Support when you call <a>CreateCase</a>.
     description: 'Information about an AWS service returned by the <a>DescribeServices</a> operation. '
   ServiceCode:
@@ -1168,13 +1168,13 @@ definitions:
   ServiceCodeList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ServiceCode'
     minItems: 0
     maxItems: 100
   ServiceList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Service'
   ServiceName:
     type: string
   SeverityCode:
@@ -1183,10 +1183,10 @@ definitions:
     type: object
     properties:
       code:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SeverityLevelCode'
         description: 'One of four values: "low," "medium," "high," and "urgent". These values correspond to response times returned to the caller in <code>severityLevel.name</code>. '
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SeverityLevelName'
         description: The name of the severity level that corresponds to the severity level code.
     description: A code and name pair that represent a severity level that can be applied to a support case.
   SeverityLevelCode:
@@ -1196,7 +1196,7 @@ definitions:
   SeverityLevelsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SeverityLevel'
   Status:
     type: string
   String:
@@ -1204,7 +1204,7 @@ definitions:
   StringList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   Subject:
     type: string
   SubmittedBy:
@@ -1215,7 +1215,7 @@ definitions:
     type: object
     properties:
       costOptimizing:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrustedAdvisorCostOptimizingSummary'
         description: The summary information about cost savings for a Trusted Advisor check that is in the Cost Optimizing category.
     description: The container for summary information that relates to the category of the Trusted Advisor check.
   TrustedAdvisorCheckDescription:
@@ -1228,25 +1228,25 @@ definitions:
       - metadata
     properties:
       id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The unique identifier for the Trusted Advisor check.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The display name for the Trusted Advisor check.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The description of the Trusted Advisor check, which includes the alert criteria and recommended actions (contains HTML markup).'
       category:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The category of the Trusted Advisor check.
       metadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringList'
         description: 'The column headings for the data returned by the Trusted Advisor check. The order of the headings corresponds to the order of the data in the <b>Metadata</b> element of the <a>TrustedAdvisorResourceDetail</a> for the check. <b>Metadata</b> contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data. '
     description: The description and metadata for a Trusted Advisor check.
   TrustedAdvisorCheckList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TrustedAdvisorCheckDescription'
   TrustedAdvisorCheckRefreshStatus:
     type: object
     required:
@@ -1255,19 +1255,19 @@ definitions:
       - millisUntilNextRefreshable
     properties:
       checkId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The unique identifier for the Trusted Advisor check.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The status of the Trusted Advisor check for which a refresh has been requested: "none", "enqueued", "processing", "success", or "abandoned".'
       millisUntilNextRefreshable:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: 'The amount of time, in milliseconds, until the Trusted Advisor check is eligible for refresh.'
     description: The refresh status of a Trusted Advisor check.
   TrustedAdvisorCheckRefreshStatusList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TrustedAdvisorCheckRefreshStatus'
   TrustedAdvisorCheckResult:
     type: object
     required:
@@ -1279,21 +1279,21 @@ definitions:
       - flaggedResources
     properties:
       checkId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The unique identifier for the Trusted Advisor check.
       timestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The time of the last refresh of the check.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The alert status of the check: "ok" (green), "warning" (yellow), "error" (red), or "not_available".'
       resourcesSummary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrustedAdvisorResourcesSummary'
       categorySpecificSummary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrustedAdvisorCategorySpecificSummary'
         description: Summary information that relates to the category of the check. Cost Optimizing is the only category that is currently supported.
       flaggedResources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrustedAdvisorResourceDetailList'
         description: The details about each resource listed in the check result.
     description: The results of a Trusted Advisor check returned by <a>DescribeTrustedAdvisorCheckResult</a>.
   TrustedAdvisorCheckSummary:
@@ -1306,27 +1306,27 @@ definitions:
       - categorySpecificSummary
     properties:
       checkId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The unique identifier for the Trusted Advisor check.
       timestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The time of the last refresh of the check.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The alert status of the check: "ok" (green), "warning" (yellow), "error" (red), or "not_available".'
       hasFlaggedResources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Specifies whether the Trusted Advisor check has flagged resources.
       resourcesSummary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrustedAdvisorResourcesSummary'
       categorySpecificSummary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrustedAdvisorCategorySpecificSummary'
         description: Summary information that relates to the category of the check. Cost Optimizing is the only category that is currently supported.
     description: 'A summary of a Trusted Advisor check result, including the alert status, last refresh, and number of resources examined.'
   TrustedAdvisorCheckSummaryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TrustedAdvisorCheckSummary'
   TrustedAdvisorCostOptimizingSummary:
     type: object
     required:
@@ -1334,10 +1334,10 @@ definitions:
       - estimatedPercentMonthlySavings
     properties:
       estimatedMonthlySavings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Double'
         description: The estimated monthly savings that might be realized if the recommended actions are taken.
       estimatedPercentMonthlySavings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Double'
         description: The estimated percentage of savings that might be realized if the recommended actions are taken.
     description: The estimated cost savings that might be realized if the recommended actions are taken.
   TrustedAdvisorResourceDetail:
@@ -1348,25 +1348,25 @@ definitions:
       - metadata
     properties:
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The status code for the resource identified in the Trusted Advisor check.
       region:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The AWS region in which the identified resource is located.
       resourceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The unique identifier for the identified resource.
       isSuppressed:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Specifies whether the AWS resource was ignored by Trusted Advisor because it was marked as suppressed by the user.
       metadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringList'
         description: 'Additional information about the identified resource. The exact metadata and its order can be obtained by inspecting the <a>TrustedAdvisorCheckDescription</a> object returned by the call to <a>DescribeTrustedAdvisorChecks</a>. <b>Metadata</b> contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data. '
     description: Contains information about a resource identified by a Trusted Advisor check.
   TrustedAdvisorResourceDetailList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TrustedAdvisorResourceDetail'
   TrustedAdvisorResourcesSummary:
     type: object
     required:
@@ -1376,15 +1376,15 @@ definitions:
       - resourcesSuppressed
     properties:
       resourcesProcessed:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The number of AWS resources that were analyzed by the Trusted Advisor check.
       resourcesFlagged:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The number of AWS resources that were flagged (listed) by the Trusted Advisor check.
       resourcesIgnored:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The number of AWS resources ignored by Trusted Advisor because information was unavailable.
       resourcesSuppressed:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The number of AWS resources ignored by Trusted Advisor because they were marked as suppressed by the user.
     description: 'Details about AWS resources that were analyzed in a call to Trusted Advisor <a>DescribeTrustedAdvisorCheckSummaries</a>. '

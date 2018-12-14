@@ -1376,34 +1376,34 @@ definitions:
     type: object
     properties:
       appSummary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppSummary'
         description: Summary description of the application.
       serverGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroups'
         description: List of server groups included in the application.
       tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: List of taags associated with the application.
   CreateAppRequest:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppName'
         description: Name of the new application.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppDescription'
         description: Description of the new application
       roleName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleName'
         description: Name of service role in customer's account to be used by AWS SMS.
       clientToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientToken'
         description: 'A unique, case-sensitive identifier you provide to ensure idempotency of application creation.'
       serverGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroups'
         description: List of server groups to include in the application.
       tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: List of tags to be associated with the application.
   UnauthorizedOperationException: {}
   InvalidParameterException: {}
@@ -1414,7 +1414,7 @@ definitions:
     type: object
     properties:
       replicationJobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJobId'
         description: The unique identifier of the replication job.
   CreateReplicationJobRequest:
     type: object
@@ -1423,34 +1423,34 @@ definitions:
       - seedReplicationTime
     properties:
       serverId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerId'
         description: The identifier of the server.
       seedReplicationTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The seed replication time.
       frequency:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Frequency'
         description: 'The time between consecutive replication runs, in hours.'
       runOnce:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RunOnce'
         description: <p/>
       licenseType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LicenseType'
         description: The license type to be used for the AMI created by a successful replication run.
       roleName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleName'
         description: The name of the IAM role to be used by the AWS SMS.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: The description of the replication job.
       numberOfRecentAmisToKeep:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NumberOfRecentAmisToKeep'
         description: The maximum number of SMS-created AMIs to retain. The oldest will be deleted once the maximum number is reached and a new AMI is created.
       encrypted:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Encrypted'
         description: 'When <i>true</i>, the replication job produces encrypted AMIs. See also <code>KmsKeyId</code> below.'
       kmsKeyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KmsKeyId'
         description: '<p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer''s default KMS key for EBS is used. </p>'
   ServerCannotBeReplicatedException: {}
   ReplicationJobAlreadyExistsException: {}
@@ -1463,13 +1463,13 @@ definitions:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application to delete.
       forceStopAppReplication:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ForceStopAppReplication'
         description: 'While deleting the application, stop all replication jobs corresponding to the servers in the application.'
       forceTerminateApp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ForceTerminateApp'
         description: 'While deleting the application, terminate the stack corresponding to the application.'
   DeleteAppLaunchConfigurationResponse:
     type: object
@@ -1478,7 +1478,7 @@ definitions:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application associated with the launch configuration.
   DeleteAppReplicationConfigurationResponse:
     type: object
@@ -1487,7 +1487,7 @@ definitions:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application associated with the replication configuration.
   DeleteReplicationJobResponse:
     type: object
@@ -1498,7 +1498,7 @@ definitions:
       - replicationJobId
     properties:
       replicationJobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJobId'
         description: The identifier of the replication job.
   ReplicationJobNotFoundException: {}
   DeleteServerCatalogResponse:
@@ -1516,136 +1516,136 @@ definitions:
       - connectorId
     properties:
       connectorId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConnectorId'
         description: The identifier of the connector.
   GenerateChangeSetResponse:
     type: object
     properties:
       s3Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Location'
         description: Location of the Amazon S3 object.
   GenerateChangeSetRequest:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application associated with the change set.
       changesetFormat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputFormat'
         description: Format for the change set.
   GenerateTemplateResponse:
     type: object
     properties:
       s3Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Location'
         description: Location of the Amazon S3 object.
   GenerateTemplateRequest:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application associated with the Amazon CloudFormation template.
       templateFormat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputFormat'
         description: Format for generating the Amazon CloudFormation template.
   GetAppResponse:
     type: object
     properties:
       appSummary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppSummary'
         description: Information about the application.
       serverGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroups'
         description: List of server groups belonging to the application.
       tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: List of tags associated with the application.
   GetAppRequest:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application whose information is being retrieved.
   GetAppLaunchConfigurationResponse:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application associated with the launch configuration.
       roleName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleName'
         description: Name of the service role in the customer's account that Amazon CloudFormation uses to launch the application.
       serverGroupLaunchConfigurations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroupLaunchConfigurations'
         description: List of launch configurations for server groups in this application.
   GetAppLaunchConfigurationRequest:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application launch configuration.
   GetAppReplicationConfigurationResponse:
     type: object
     properties:
       serverGroupReplicationConfigurations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroupReplicationConfigurations'
         description: Replication configurations associated with server groups in this application.
   GetAppReplicationConfigurationRequest:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application associated with the replication configuration.
   GetConnectorsResponse:
     type: object
     properties:
       connectorList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConnectorList'
         description: Information about the registered connectors.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
   GetConnectorsRequest:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token for the next set of results.
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
   GetReplicationJobsResponse:
     type: object
     properties:
       replicationJobList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJobList'
         description: Information about the replication jobs.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
   GetReplicationJobsRequest:
     type: object
     properties:
       replicationJobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJobId'
         description: The identifier of the replication job.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token for the next set of results.
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
   GetReplicationRunsResponse:
     type: object
     properties:
       replicationJob:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJob'
         description: Information about the replication job.
       replicationRunList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationRunList'
         description: Information about the replication runs.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
   GetReplicationRunsRequest:
     type: object
@@ -1653,40 +1653,40 @@ definitions:
       - replicationJobId
     properties:
       replicationJobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJobId'
         description: The identifier of the replication job.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token for the next set of results.
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
   GetServersResponse:
     type: object
     properties:
       lastModifiedOn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The time when the server was last modified.
       serverCatalogStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerCatalogStatus'
         description: The status of the server catalog.
       serverList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerList'
         description: Information about the servers.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
   GetServersRequest:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token for the next set of results.
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
       vmServerAddressList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmServerAddressList'
         description: List of <code>VmServerAddress</code> objects
   ImportServerCatalogResponse:
     type: object
@@ -1701,28 +1701,28 @@ definitions:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application to launch.
   ListAppsResponse:
     type: object
     properties:
       apps:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Apps'
         description: A list of application summaries.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
   ListAppsRequest:
     type: object
     properties:
       appIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppIds'
         description: <p/>
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token for the next set of results.
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. '
   PutAppLaunchConfigurationResponse:
     type: object
@@ -1731,13 +1731,13 @@ definitions:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application associated with the launch configuration.
       roleName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleName'
         description: Name of service role in the customer's account that Amazon CloudFormation uses to launch the application.
       serverGroupLaunchConfigurations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroupLaunchConfigurations'
         description: Launch configurations for server groups in the application.
   PutAppReplicationConfigurationResponse:
     type: object
@@ -1746,10 +1746,10 @@ definitions:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application tassociated with the replication configuration.
       serverGroupReplicationConfigurations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroupReplicationConfigurations'
         description: Replication configurations for server groups in the application.
   StartAppReplicationResponse:
     type: object
@@ -1758,13 +1758,13 @@ definitions:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application to replicate.
   StartOnDemandReplicationRunResponse:
     type: object
     properties:
       replicationRunId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationRunId'
         description: The identifier of the replication run.
   StartOnDemandReplicationRunRequest:
     type: object
@@ -1772,10 +1772,10 @@ definitions:
       - replicationJobId
     properties:
       replicationJobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJobId'
         description: The identifier of the replication job.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: The description of the replication run.
   ReplicationRunLimitExceededException: {}
   StopAppReplicationResponse:
@@ -1785,7 +1785,7 @@ definitions:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application to stop replicating.
   TerminateAppResponse:
     type: object
@@ -1794,40 +1794,40 @@ definitions:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application to terminate.
   UpdateAppResponse:
     type: object
     properties:
       appSummary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppSummary'
         description: Summary description of the application.
       serverGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroups'
         description: List of updated server groups in the application.
       tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: List of tags associated with the application.
   UpdateAppRequest:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: ID of the application to update.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppName'
         description: New name of the application.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppDescription'
         description: New description of the application.
       roleName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleName'
         description: Name of the service role in the customer's account used by AWS SMS.
       serverGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroups'
         description: List of server groups in the application to update.
       tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: List of tags to associate with the application.
   UpdateReplicationJobResponse:
     type: object
@@ -1838,31 +1838,31 @@ definitions:
       - replicationJobId
     properties:
       replicationJobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJobId'
         description: The identifier of the replication job.
       frequency:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Frequency'
         description: 'The time between consecutive replication runs, in hours.'
       nextReplicationRunStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The start time of the next replication run.
       licenseType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LicenseType'
         description: The license type to be used for the AMI created by a successful replication run.
       roleName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleName'
         description: The name of the IAM role to be used by AWS SMS.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: The description of the replication job.
       numberOfRecentAmisToKeep:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NumberOfRecentAmisToKeep'
         description: The maximum number of SMS-created AMIs to retain. The oldest will be deleted once the maximum number is reached and a new AMI is created.
       encrypted:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Encrypted'
         description: 'When true, the replication job produces encrypted AMIs . See also <code>KmsKeyId</code> below.'
       kmsKeyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KmsKeyId'
         description: '<p/> <p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer''s default KMS key for EBS is used. </p>'
   AmiId:
     type: string
@@ -1874,7 +1874,7 @@ definitions:
   AppIds:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AppId'
   AppLaunchStatus:
     type: string
     enum:
@@ -1931,58 +1931,58 @@ definitions:
     type: object
     properties:
       appId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppId'
         description: Unique ID of the application.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppName'
         description: Name of the application.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppDescription'
         description: Description of the application.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppStatus'
         description: Status of the application.
       statusMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppStatusMessage'
         description: A message related to the status of the application
       replicationStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppReplicationStatus'
         description: Replication status of the application.
       replicationStatusMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppReplicationStatusMessage'
         description: A message related to the replication status of the application.
       latestReplicationTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: Timestamp of the application's most recent successful replication.
       launchStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppLaunchStatus'
         description: Launch status of the application.
       launchStatusMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppLaunchStatusMessage'
         description: A message related to the launch status of the application.
       launchDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LaunchDetails'
         description: Details about the latest launch of the application.
       creationTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: Time of creation of this application.
       lastModified:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: Timestamp of the application's creation.
       roleName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleName'
         description: Name of the service role in the customer's account used by AWS SMS.
       totalServerGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TotalServerGroups'
         description: Number of server groups present in the application.
       totalServers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TotalServers'
         description: Number of servers present in the application.
     description: Information about the application.
   Apps:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AppSummary'
   AssociatePublicIpAddress:
     type: boolean
   BucketName:
@@ -1993,34 +1993,34 @@ definitions:
     type: object
     properties:
       connectorId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConnectorId'
         description: The identifier of the connector.
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConnectorVersion'
         description: The connector version.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConnectorStatus'
         description: The status of the connector.
       capabilityList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConnectorCapabilityList'
         description: The capabilities of the connector.
       vmManagerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmManagerName'
         description: The name of the VM manager.
       vmManagerType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmManagerType'
         description: The VM management product.
       vmManagerId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmManagerId'
         description: The identifier of the VM manager.
       ipAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpAddress'
         description: The IP address of the connector.
       macAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MacAddress'
         description: The MAC address of the connector.
       associatedOn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The time the connector was associated.
     description: Represents a connector.
   ConnectorCapability:
@@ -2033,13 +2033,13 @@ definitions:
   ConnectorCapabilityList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ConnectorCapability'
   ConnectorId:
     type: string
   ConnectorList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Connector'
   ConnectorStatus:
     type: string
     enum:
@@ -2071,13 +2071,13 @@ definitions:
     type: object
     properties:
       latestLaunchTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: Latest time this application was launched successfully.
       stackName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StackName'
         description: Name of the latest stack launched for this application.
       stackId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StackId'
         description: Identifier of the latest stack launched for this application.
     description: Details about the latest launch of an application.
   LaunchOrder:
@@ -2106,58 +2106,58 @@ definitions:
     type: object
     properties:
       replicationJobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJobId'
         description: The identifier of the replication job.
       serverId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerId'
         description: The identifier of the server.
       serverType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerType'
         description: The type of server.
       vmServer:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmServer'
         description: Information about the VM server.
       seedReplicationTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The seed replication time.
       frequency:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Frequency'
         description: 'The time between consecutive replication runs, in hours.'
       runOnce:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RunOnce'
         description: <p/>
       nextReplicationRunStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The start time of the next replication run.
       licenseType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LicenseType'
         description: The license type to be used for the AMI created by a successful replication run.
       roleName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleName'
         description: The name of the IAM role to be used by the Server Migration Service.
       latestAmiId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AmiId'
         description: The ID of the latest Amazon Machine Image (AMI).
       state:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJobState'
         description: The state of the replication job.
       statusMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJobStatusMessage'
         description: The description of the current status of the replication job.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: The description of the replication job.
       numberOfRecentAmisToKeep:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NumberOfRecentAmisToKeep'
         description: 'Number of recent AMIs to keep in the customer''s account for a replication job. By default the value is set to zero, meaning that all AMIs are kept.'
       encrypted:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Encrypted'
         description: Whether the replication job should produce encrypted AMIs or not. See also <code>KmsKeyId</code> below.
       kmsKeyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KmsKeyId'
         description: '<p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer''s default KMS key for EBS is used. </p>'
       replicationRunList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationRunList'
         description: Information about the replication runs.
     description: Represents a replication job.
   ReplicationJobId:
@@ -2165,7 +2165,7 @@ definitions:
   ReplicationJobList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ReplicationJob'
   ReplicationJobState:
     type: string
     enum:
@@ -2185,37 +2185,37 @@ definitions:
     type: object
     properties:
       replicationRunId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationRunId'
         description: The identifier of the replication run.
       state:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationRunState'
         description: The state of the replication run.
       type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationRunType'
         description: The type of replication run.
       stageDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationRunStageDetails'
         description: Details of the current stage of the replication run.
       statusMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationRunStatusMessage'
         description: The description of the current status of the replication job.
       amiId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AmiId'
         description: The identifier of the Amazon Machine Image (AMI) from the replication run.
       scheduledStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The start time of the next replication run.
       completedTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The completion time of the last replication run.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: The description of the replication run.
       encrypted:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Encrypted'
         description: Whether the replication run should produce encrypted AMI or not. See also <code>KmsKeyId</code> below.
       kmsKeyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KmsKeyId'
         description: '<p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer''s default KMS key for EBS is used. </p>'
     description: Represents a replication run.
   ReplicationRunId:
@@ -2223,17 +2223,17 @@ definitions:
   ReplicationRunList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ReplicationRun'
   ReplicationRunStage:
     type: string
   ReplicationRunStageDetails:
     type: object
     properties:
       stage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationRunStage'
         description: String describing the current stage of a replication run.
       stageProgress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationRunStageProgress'
         description: String describing the progress of the current stage of a replication run.
     description: Details of the current stage of a replication run.
   ReplicationRunStageProgress:
@@ -2263,10 +2263,10 @@ definitions:
     type: object
     properties:
       bucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BucketName'
         description: Amazon S3 bucket name.
       key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KeyName'
         description: Amazon S3 bucket key.
     description: Location of the Amazon S3 object in the customer's account.
   SecurityGroup:
@@ -2275,19 +2275,19 @@ definitions:
     type: object
     properties:
       serverId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerId'
         description: The identifier of the server.
       serverType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerType'
         description: The type of server.
       vmServer:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmServer'
         description: Information about the VM server.
       replicationJobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJobId'
         description: The identifier of the replication job.
       replicationJobTerminated:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReplicationJobTerminated'
         description: Indicates whether the replication job is deleted or failed.
     description: Represents a server.
   ServerCatalogStatus:
@@ -2302,13 +2302,13 @@ definitions:
     type: object
     properties:
       serverGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroupId'
         description: Identifier of a server group.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroupName'
         description: Name of a server group.
       serverList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerList'
         description: List of servers belonging to a server group.
     description: A logical grouping of servers.
   ServerGroupId:
@@ -2317,117 +2317,117 @@ definitions:
     type: object
     properties:
       serverGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroupId'
         description: Identifier of the server group the launch configuration is associated with.
       launchOrder:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LaunchOrder'
         description: Launch order of servers in the server group.
       serverLaunchConfigurations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerLaunchConfigurations'
         description: Launch configuration for servers in the server group.
     description: Launch configuration for a server group.
   ServerGroupLaunchConfigurations:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ServerGroupLaunchConfiguration'
   ServerGroupName:
     type: string
   ServerGroupReplicationConfiguration:
     type: object
     properties:
       serverGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerGroupId'
         description: Identifier of the server group this replication configuration is associated with.
       serverReplicationConfigurations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerReplicationConfigurations'
         description: Replication configuration for servers in the server group.
     description: Replication configuration for a server group.
   ServerGroupReplicationConfigurations:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ServerGroupReplicationConfiguration'
   ServerGroups:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ServerGroup'
   ServerId:
     type: string
   ServerLaunchConfiguration:
     type: object
     properties:
       server:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Server'
         description: Identifier of the server the launch configuration is associated with.
       logicalId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LogicalId'
         description: Logical ID of the server in the Amazon CloudFormation template.
       vpc:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VPC'
         description: Identifier of the VPC the server should be launched into.
       subnet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subnet'
         description: Identifier of the subnet the server should be launched into.
       securityGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SecurityGroup'
         description: Identifier of the security group that applies to the launched server.
       ec2KeyName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EC2KeyName'
         description: Name of the EC2 SSH Key to be used for connecting to the launched server.
       userData:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserData'
         description: Location of the user-data script to be executed when launching the server.
       instanceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceType'
         description: Instance type to be used for launching the server.
       associatePublicIpAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AssociatePublicIpAddress'
         description: 'If true, a publicly accessible IP address is created when launching the server.'
     description: Launch configuration for a server.
   ServerLaunchConfigurations:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ServerLaunchConfiguration'
   ServerList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Server'
   ServerReplicationConfiguration:
     type: object
     properties:
       server:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Server'
         description: Identifier of the server this replication configuration is associated with.
       serverReplicationParameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ServerReplicationParameters'
         description: Parameters for replicating the server.
     description: Replication configuration of a server.
   ServerReplicationConfigurations:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ServerReplicationConfiguration'
   ServerReplicationParameters:
     type: object
     properties:
       seedTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: Seed time for creating a replication job for the server.
       frequency:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Frequency'
         description: Frequency of creating replication jobs for the server.
       runOnce:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RunOnce'
         description: <p/>
       licenseType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LicenseType'
         description: License type for creating a replication job for the server.
       numberOfRecentAmisToKeep:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NumberOfRecentAmisToKeep'
         description: Number of recent AMIs to keep when creating a replication job for this server.
       encrypted:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Encrypted'
         description: 'When true, the replication job produces encrypted AMIs. See also <code>KmsKeyId</code> below.'
       kmsKeyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KmsKeyId'
         description: '<p/> <p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer''s default KMS key for EBS is used. </p>'
     description: Replication parameters for replicating a server.
   ServerType:
@@ -2444,10 +2444,10 @@ definitions:
     type: object
     properties:
       key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagKey'
         description: Tag key.
       value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagValue'
         description: Tag value.
     description: A label that can be assigned to an application.
   TagKey:
@@ -2457,7 +2457,7 @@ definitions:
   Tags:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Tag'
   Timestamp:
     type: string
     format: date-time
@@ -2469,7 +2469,7 @@ definitions:
     type: object
     properties:
       s3Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Location'
         description: Amazon S3 location of the user-data script.
     description: A script that runs on first launch of an Amazon EC2 instance. Used for configuring the server during launch.
   VPC:
@@ -2494,32 +2494,32 @@ definitions:
     type: object
     properties:
       vmServerAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmServerAddress'
         description: Information about the VM server location.
       vmName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmName'
         description: The name of the VM.
       vmManagerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmManagerName'
         description: The name of the VM manager.
       vmManagerType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmManagerType'
         description: The type of VM management product.
       vmPath:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmPath'
         description: The VM folder path in the vCenter Server virtual machine inventory tree.
     description: Represents a VM server.
   VmServerAddress:
     type: object
     properties:
       vmManagerId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmManagerId'
         description: The identifier of the VM manager.
       vmId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VmId'
         description: The identifier of the VM.
     description: Represents a VM server location.
   VmServerAddressList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/VmServerAddress'

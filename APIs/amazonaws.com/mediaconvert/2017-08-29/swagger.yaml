@@ -1308,7 +1308,7 @@ definitions:
       - Arn
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the ACM certificate that you want to associate with your MediaConvert resource.
   BadRequestException: {}
   InternalServerErrorException: {}
@@ -1326,7 +1326,7 @@ definitions:
     type: object
     properties:
       Job:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Job'
   CreateJobRequest:
     type: object
     required:
@@ -1334,29 +1334,29 @@ definitions:
       - Settings
     properties:
       BillingTagsSource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BillingTagsSource'
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Idempotency token for CreateJob operation.
       JobTemplate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'When you create a job, you can either specify a job template or specify the transcoding settings individually'
       Queue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Optional. When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.'
       Role:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Required. The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.'
       Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobSettings'
       UserMetadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOf__string'
         description: User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
   CreateJobTemplateResponse:
     type: object
     properties:
       JobTemplate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobTemplate'
   CreateJobTemplateRequest:
     type: object
     required:
@@ -1364,27 +1364,27 @@ definitions:
       - Name
     properties:
       Category:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Optional. A category for the job template you are creating
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Optional. A description of the job template you are creating.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the job template you are creating.
       Queue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Optional. The queue that jobs created from this template are assigned to. If you don''t specify this, jobs will go to the default queue.'
       Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobTemplateSettings'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOf__string'
         description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
   CreatePresetResponse:
     type: object
     properties:
       Preset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Preset'
   CreatePresetRequest:
     type: object
     required:
@@ -1392,43 +1392,43 @@ definitions:
       - Name
     properties:
       Category:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Optional. A category for the preset you are creating.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Optional. A description of the preset you are creating.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the preset you are creating.
       Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PresetSettings'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOf__string'
         description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
   CreateQueueResponse:
     type: object
     properties:
       Queue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Queue'
   CreateQueueRequest:
     type: object
     required:
       - Name
     properties:
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Optional. A description of the queue that you are creating.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the queue that you are creating.
       PricingPlan:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PricingPlan'
         description: 'Specifies whether the pricing plan for the queue is on-demand or reserved. For on-demand, you pay per minute, billed in increments of .01 minute. For reserved, you pay for the transcoding capacity of the entire queue, regardless of how much or how little you use it. Reserved pricing requires a 12-month commitment. When you use the API to create a queue, the default is on-demand.'
       ReservationPlanSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReservationPlanSettings'
         description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOf__string'
         description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
   DeleteJobTemplateResponse:
     type: object
@@ -1452,21 +1452,21 @@ definitions:
     type: object
     properties:
       Endpoints:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfEndpoint'
         description: List of endpoints
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Use this string to request the next batch of endpoints.
   DescribeEndpointsRequest:
     type: object
     properties:
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: 'Optional. Max number of endpoints, up to twenty, that will be returned at one time.'
       Mode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DescribeEndpointsMode'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Use this string, provided with the response to a previous request, to request the next batch of endpoints.'
     description: DescribeEndpointsRequest
   DisassociateCertificateResponse:
@@ -1478,13 +1478,13 @@ definitions:
       - Arn
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the ACM certificate that you want to disassociate from your MediaConvert resource.
   GetJobResponse:
     type: object
     properties:
       Job:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Job'
   GetJobRequest:
     type: object
     properties: {}
@@ -1492,7 +1492,7 @@ definitions:
     type: object
     properties:
       JobTemplate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobTemplate'
   GetJobTemplateRequest:
     type: object
     properties: {}
@@ -1500,7 +1500,7 @@ definitions:
     type: object
     properties:
       Preset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Preset'
   GetPresetRequest:
     type: object
     properties: {}
@@ -1508,7 +1508,7 @@ definitions:
     type: object
     properties:
       Queue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Queue'
   GetQueueRequest:
     type: object
     properties: {}
@@ -1516,10 +1516,10 @@ definitions:
     type: object
     properties:
       JobTemplates:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfJobTemplate'
         description: List of Job templates.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Use this string to request the next batch of job templates.
   ListJobTemplatesRequest:
     type: object
@@ -1528,10 +1528,10 @@ definitions:
     type: object
     properties:
       Jobs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfJob'
         description: List of jobs
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Use this string to request the next batch of jobs.
   ListJobsRequest:
     type: object
@@ -1540,10 +1540,10 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Use this string to request the next batch of presets.
       Presets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfPreset'
         description: List of presets
   ListPresetsRequest:
     type: object
@@ -1552,10 +1552,10 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Use this string to request the next batch of queues.
       Queues:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfQueue'
         description: List of queues.
   ListQueuesRequest:
     type: object
@@ -1564,7 +1564,7 @@ definitions:
     type: object
     properties:
       ResourceTags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceTags'
   ListTagsForResourceRequest:
     type: object
     properties: {}
@@ -1578,10 +1578,10 @@ definitions:
       - Tags
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The Amazon Resource Name (ARN) of the resource that you want to tag. To get the ARN, send a GET request with the resource name.'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOf__string'
         description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
   UntagResourceResponse:
     type: object
@@ -1590,59 +1590,59 @@ definitions:
     type: object
     properties:
       TagKeys:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOf__string'
         description: The keys of the tags that you want to remove from the resource.
   UpdateJobTemplateResponse:
     type: object
     properties:
       JobTemplate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobTemplate'
   UpdateJobTemplateRequest:
     type: object
     properties:
       Category:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The new category for the job template, if you are changing it.'
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The new description for the job template, if you are changing it.'
       Queue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The new queue for the job template, if you are changing it.'
       Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobTemplateSettings'
   UpdatePresetResponse:
     type: object
     properties:
       Preset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Preset'
   UpdatePresetRequest:
     type: object
     properties:
       Category:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The new category for the preset, if you are changing it.'
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The new description for the preset, if you are changing it.'
       Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PresetSettings'
   UpdateQueueResponse:
     type: object
     properties:
       Queue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Queue'
   UpdateQueueRequest:
     type: object
     properties:
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The new description for the queue, if you are changing it.'
       ReservationPlanSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReservationPlanSettings'
         description: 'The new details of your pricing plan for your reserved queue. When you set up a new pricing plan to replace an expired one, you enter into another 12-month commitment. When you add capacity to your queue by increasing the number of RTS, you extend the term of your commitment to 12 months from when you add capacity. After you make these commitments, you can''t cancel them.'
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/QueueStatus'
         description: 'Pause or activate a queue by changing its status between ACTIVE and PAUSED. If you pause a queue, jobs in that queue won''t begin. Jobs that are running when you pause the queue continue to run until they finish or result in an error.'
   AacAudioDescriptionBroadcasterMix:
     type: string
@@ -1683,25 +1683,25 @@ definitions:
     type: object
     properties:
       AudioDescriptionBroadcasterMix:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AacAudioDescriptionBroadcasterMix'
       Bitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin6000Max1024000'
         description: Average bitrate in bits/second. Defaults and valid values depend on rate control mode and profile.
       CodecProfile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AacCodecProfile'
       CodingMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AacCodingMode'
       RateControlMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AacRateControlMode'
       RawFormat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AacRawFormat'
       SampleRate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin8000Max96000'
         description: Sample rate in Hz. Valid values depend on rate control mode and profile.
       Specification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AacSpecification'
       VbrQuality:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AacVbrQuality'
     description: 'Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AAC. The service accepts one of two mutually exclusive groups of AAC settings--VBR and CBR. To select one of these modes, set the value of Bitrate control mode (rateControlMode) to "VBR" or "CBR".  In VBR mode, you control the audio quality with the setting VBR quality (vbrQuality). In CBR mode, you use the setting Bitrate (bitrate). Defaults and valid values depend on the rate control mode.'
   AacSpecification:
     type: string
@@ -1759,23 +1759,23 @@ definitions:
     type: object
     properties:
       Bitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin64000Max640000'
         description: Average bitrate in bits/second. Valid bitrates depend on the coding mode.
       BitstreamMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Ac3BitstreamMode'
       CodingMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Ac3CodingMode'
       Dialnorm:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max31'
         description: 'Sets the dialnorm for the output. If blank and input audio is Dolby Digital, dialnorm will be passed through.'
       DynamicRangeCompressionProfile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Ac3DynamicRangeCompressionProfile'
       LfeFilter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Ac3LfeFilter'
       MetadataControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Ac3MetadataControl'
       SampleRate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin48000Max48000'
         description: Sample rate in hz. Sample rate is always 48000.
     description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AC3.
   AfdSignaling:
@@ -1789,20 +1789,20 @@ definitions:
     type: object
     properties:
       BitDepth:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin16Max24'
         description: 'Specify Bit depth (BitDepth), in bits per sample, to choose the encoding quality for this audio track.'
       Channels:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2'
         description: 'Set Channels to specify the number of channels in this output audio track. Choosing Mono in the console will give you 1 output channel; choosing Stereo will give you 2. In the API, valid values are 1 and 2.'
       SampleRate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin8000Max192000'
         description: Sample rate in hz.
     description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AIFF.
   AncillarySourceSettings:
     type: object
     properties:
       SourceAncillaryChannelNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max4'
         description: Specifies the 608 channel number in the ancillary data track from which to extract captions. Unused for passthrough.
     description: Settings for ancillary captions source.
   AntiAlias:
@@ -1826,19 +1826,19 @@ definitions:
     type: object
     properties:
       AacSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AacSettings'
       Ac3Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Ac3Settings'
       AiffSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AiffSettings'
       Codec:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AudioCodec'
       Eac3Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3Settings'
       Mp2Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mp2Settings'
       WavSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WavSettings'
     description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value you choose for Audio codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings'
   AudioDefaultSelection:
     type: string
@@ -1850,30 +1850,30 @@ definitions:
     type: object
     properties:
       AudioNormalizationSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AudioNormalizationSettings'
       AudioSourceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Specifies which audio data to use from each input. In the simplest case, specify an "Audio Selector":#inputs-audio_selector by name based on its order within each input. For example if you specify "Audio Selector 3", then the third audio selector will be used from each input. If an input does not have an "Audio Selector 3", then the audio selector marked as "default" in that input will be used. If there is no audio selector marked as "default", silence will be inserted for the duration of that input. Alternatively, an "Audio Selector Group":#inputs-audio_selector_group name may be specified, with similar default/silence behavior. If no audio_source_name is specified, then "Audio Selector 1" will be chosen automatically.'
       AudioType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max255'
         description: 'Applies only if Follow Input Audio Type is unchecked (false). A number between 0 and 255. The following are defined in ISO-IEC 13818-1: 0 = Undefined, 1 = Clean Effects, 2 = Hearing Impaired, 3 = Visually Impaired Commentary, 4-255 = Reserved.'
       AudioTypeControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AudioTypeControl'
       CodecSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AudioCodecSettings'
       CustomLanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
         description: 'Specify the language for this audio output track, using the ISO 639-2 or ISO 639-3 three-letter language code. The language specified will be used when ''Follow Input Language Code'' is not selected or when ''Follow Input Language Code'' is selected but there is no ISO 639 language code specified by the input.'
       LanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageCode'
         description: Indicates the language of the audio output track. The ISO 639 language specified in the 'Language Code' drop down will be used when 'Follow Input Language Code' is not selected or when 'Follow Input Language Code' is selected but there is no ISO 639 language code specified by the input.
       LanguageCodeControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AudioLanguageCodeControl'
       RemixSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RemixSettings'
         description: Advanced audio remixing settings.
       StreamName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternWS'
         description: 'Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the player (eg. English, or Director Commentary). Alphanumeric characters, spaces, and underscore are legal.'
     description: Description of audio output
   AudioLanguageCodeControl:
@@ -1910,57 +1910,57 @@ definitions:
     type: object
     properties:
       Algorithm:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AudioNormalizationAlgorithm'
       AlgorithmControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AudioNormalizationAlgorithmControl'
       CorrectionGateLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative70Max0'
         description: Content measuring above this level will be corrected to the target level. Content measuring below this level will not be corrected. Gating only applies when not using real_time_correction.
       LoudnessLogging:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AudioNormalizationLoudnessLogging'
       PeakCalculation:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AudioNormalizationPeakCalculation'
       TargetLkfs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMinNegative59Max0'
         description: 'Target LKFS(loudness) to adjust volume to. If no value is entered, a default value will be used according to the chosen algorithm. The CALM Act (1770-1) recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends a target of -23 LKFS.'
     description: Advanced audio normalization settings.
   AudioSelector:
     type: object
     properties:
       CustomLanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
         description: 'Selects a specific language code from within an audio source, using the ISO 639-2 or ISO 639-3 three-letter language code'
       DefaultSelection:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AudioDefaultSelection'
       ExternalAudioFileInput:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE'
         description: Specifies audio data from an external file source.
       LanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageCode'
         description: Selects a specific language code from within an audio source.
       Offset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Specifies a time delta in milliseconds to offset the audio from the input video.
       Pids:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOf__integerMin1Max2147483647'
         description: Selects a specific PID from within an audio source (e.g. 257 selects PID 0x101).
       ProgramSelection:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max8'
         description: 'Use this setting for input streams that contain Dolby E, to have the service extract specific program data from the track. To select multiple programs, create multiple selectors with the same Track and different Program numbers. In the console, this setting is visible when you set Selector type to Track. Choose the program number from the dropdown list. If you are sending a JSON file, provide the program ID, which is part of the audio metadata. If your input file has incorrect metadata, you can choose All channels instead of a program number to have the service ignore the program IDs and include all the programs in the track.'
       RemixSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RemixSettings'
         description: 'Use these settings to reorder the audio channels of one input to match those of another input. This allows you to combine the two files into a single output, one after the other.'
       SelectorType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AudioSelectorType'
       Tracks:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOf__integerMin1Max2147483647'
         description: 'Identify a track from the input audio to include in this selector by entering the track index number. To include several tracks in a single audio selector, specify multiple tracks as follows. Using the console, enter a comma-separated list. For examle, type "1,2,3" to include tracks 1 through 3. Specifying directly in your JSON job file, provide the track numbers in an array. For example, "tracks": [1,2,3].'
     description: Selector for Audio
   AudioSelectorGroup:
     type: object
     properties:
       AudioSelectorNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOf__stringMin1'
         description: 'Name of an Audio Selector within the same input to include in the group.  Audio selector names are standardized, based on their order within the input (e.g., "Audio Selector 1"). The audio selector name parameter can be repeated to add any number of audio selectors to the group.'
     description: Group of Audio Selectors
   AudioSelectorType:
@@ -1980,7 +1980,7 @@ definitions:
     type: object
     properties:
       AvailBlankingImage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin14PatternS3BmpBMPPngPNG'
         description: Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
     description: Settings for Avail Blanking
   BillingTagsSource:
@@ -1994,50 +1994,50 @@ definitions:
     type: object
     properties:
       Alignment:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BurninSubtitleAlignment'
       BackgroundColor:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BurninSubtitleBackgroundColor'
       BackgroundOpacity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max255'
         description: Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match.
       FontColor:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BurninSubtitleFontColor'
       FontOpacity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max255'
         description: |-
           Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.
           All burn-in and DVB-Sub font settings must match.
       FontResolution:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin96Max600'
         description: |-
           Font resolution in DPI (dots per inch); default is 96 dpi.
           All burn-in and DVB-Sub font settings must match.
       FontSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max96'
         description: A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match.
       OutlineColor:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BurninSubtitleOutlineColor'
       OutlineSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max10'
         description: Specifies font outline size in pixels. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
       ShadowColor:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BurninSubtitleShadowColor'
       ShadowOpacity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max255'
         description: Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match.
       ShadowXOffset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Specifies the horizontal offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
       ShadowYOffset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Specifies the vertical offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
       TeletextSpacing:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BurninSubtitleTeletextSpacing'
       XPosition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Specifies the horizontal position of the caption relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit x_position is provided, the horizontal caption position will be determined by the alignment parameter. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.'
       YPosition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.'
     description: Burn-In Destination Settings.
   BurninSubtitleAlignment:
@@ -2094,50 +2094,50 @@ definitions:
     type: object
     properties:
       CaptionSelectorName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin1'
         description: 'Specifies which "Caption Selector":#inputs-caption_selector to use from each input when generating captions. The name should be of the format "Caption Selector <N>", which denotes that the Nth Caption Selector will be used from each input.'
       CustomLanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
         description: 'Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code'
       DestinationSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaptionDestinationSettings'
       LanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageCode'
         description: Indicates the language of the caption output track.
       LanguageDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Human readable information to indicate captions available for players (eg. English, or Spanish). Alphanumeric characters, spaces, and underscore are legal.'
     description: Description of Caption output
   CaptionDescriptionPreset:
     type: object
     properties:
       CustomLanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
         description: 'Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code'
       DestinationSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaptionDestinationSettings'
       LanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageCode'
         description: Indicates the language of the caption output track.
       LanguageDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Human readable information to indicate captions available for players (eg. English, or Spanish). Alphanumeric characters, spaces, and underscore are legal.'
     description: Caption Description for preset
   CaptionDestinationSettings:
     type: object
     properties:
       BurninDestinationSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BurninDestinationSettings'
       DestinationType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaptionDestinationType'
       DvbSubDestinationSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DvbSubDestinationSettings'
       SccDestinationSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SccDestinationSettings'
       TeletextDestinationSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TeletextDestinationSettings'
       TtmlDestinationSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TtmlDestinationSettings'
     description: Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext.
   CaptionDestinationType:
     type: string
@@ -2158,29 +2158,29 @@ definitions:
     type: object
     properties:
       CustomLanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
         description: 'The specific language to extract from source, using the ISO 639-2 or ISO 639-3 three-letter language code. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.'
       LanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageCode'
         description: 'The specific language to extract from source. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.'
       SourceSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaptionSourceSettings'
     description: Set up captions in your outputs by first selecting them from your input here.
   CaptionSourceSettings:
     type: object
     properties:
       AncillarySourceSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AncillarySourceSettings'
       DvbSubSourceSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DvbSubSourceSettings'
       EmbeddedSourceSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EmbeddedSourceSettings'
       FileSourceSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSourceSettings'
       SourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CaptionSourceType'
       TeletextSourceSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TeletextSourceSettings'
     description: Source settings (SourceSettings) contains the group of settings for captions in the input.
   CaptionSourceType:
     type: string
@@ -2201,7 +2201,7 @@ definitions:
     type: object
     properties:
       OutputChannels:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfOutputChannelMapping'
         description: List of output channels
     description: Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel. Units are in dB. Acceptable values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification).
   CmafClientCache:
@@ -2220,16 +2220,16 @@ definitions:
     type: object
     properties:
       ConstantInitializationVector:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin32Max32Pattern09aFAF32'
         description: 'This is a 128-bit, 16-byte hex value represented by a 32-character text string. If this parameter is not set then the Initialization Vector will follow the segment number by default.'
       EncryptionMethod:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafEncryptionType'
       InitializationVectorInManifest:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafInitializationVectorInManifest'
       StaticKeyProvider:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StaticKeyProvider'
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafKeyProviderType'
     description: Settings for CMAF encryption
   CmafEncryptionType:
     type: string
@@ -2240,42 +2240,42 @@ definitions:
     type: object
     properties:
       BaseUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: A partial URI prefix that will be put in the manifest file at the top level BaseURL element. Can be used if streams are delivered from a different URL than the manifest file.
       ClientCache:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafClientCache'
       CodecSpecification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafCodecSpecification'
       Destination:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternS3'
         description: 'Use Destination (Destination) to specify the S3 output location and the output filename base. Destination accepts format identifiers. If you do not specify the base filename in the URI, the service will use the filename of the input file. If your job has multiple inputs, the service uses the filename of the first input file.'
       Encryption:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafEncryptionSettings'
         description: DRM settings.
       FragmentLength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Length of fragments to generate (in seconds). Fragment length must be compatible with GOP size and Framerate. Note that fragments will end on the next keyframe after this number of seconds, so actual fragment length may be longer. When Emit Single File is checked, the fragmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.'
       ManifestCompression:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafManifestCompression'
       ManifestDurationFormat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafManifestDurationFormat'
       MinBufferTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: Minimum time of initially buffered media that is needed to ensure smooth playout.
       MinFinalSegmentLength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMin0Max2147483647'
         description: 'Keep this setting at the default value of 0, unless you are troubleshooting a problem with how devices play back the end of your video asset. If you know that player devices are hanging on the final segment of your video because the length of your final segment is too short, use this setting to specify a minimum final segment length, in seconds. Choose a value that is greater than or equal to 1 and less than your segment length. When you specify a value for this setting, the encoder will combine any final segment that is shorter than the length that you specify with the previous segment. For example, your segment length is 3 seconds and your final segment is .5 seconds without a minimum final segment length; when you set the minimum final segment length to 1, your final segment is 3.5 seconds.'
       SegmentControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafSegmentControl'
       SegmentLength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Use this setting to specify the length, in seconds, of each individual CMAF segment. This value applies to the whole package; that is, to every output in the output group. Note that segments end on the first keyframe after this number of seconds, so the actual segment length might be slightly longer. If you set Segment control (CmafSegmentControl) to single file, the service puts the content of each output in a single file that has metadata that marks these segments. If you set it to segmented files, the service creates multiple files for each output, each with the content of one segment.'
       StreamInfResolution:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafStreamInfResolution'
       WriteDashManifest:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafWriteDASHManifest'
       WriteHlsManifest:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafWriteHLSManifest'
     description: 'Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain a single video, audio, or caption output.'
   CmafInitializationVectorInManifest:
     type: string
@@ -2328,20 +2328,20 @@ definitions:
     type: object
     properties:
       Brightness:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max100'
         description: Brightness level.
       ColorSpaceConversion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ColorSpaceConversion'
       Contrast:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max100'
         description: Contrast level.
       Hdr10Metadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Hdr10Metadata'
       Hue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative180Max180'
         description: Hue in degrees.
       Saturation:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max100'
         description: Saturation level.
     description: Settings for color correction.
   ColorMetadata:
@@ -2383,17 +2383,17 @@ definitions:
     type: object
     properties:
       Container:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContainerType'
       F4vSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/F4vSettings'
       M2tsSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M2tsSettings'
       M3u8Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M3u8Settings'
       MovSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MovSettings'
       Mp4Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mp4Settings'
     description: Container specific settings.
   ContainerType:
     type: string
@@ -2413,35 +2413,35 @@ definitions:
     type: object
     properties:
       SpekeKeyProvider:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SpekeKeyProvider'
     description: Specifies DRM settings for DASH outputs.
   DashIsoGroupSettings:
     type: object
     properties:
       BaseUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: A partial URI prefix that will be put in the manifest (.mpd) file at the top level BaseURL element. Can be used if streams are delivered from a different URL than the manifest file.
       Destination:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternS3'
         description: 'Use Destination (Destination) to specify the S3 output location and the output filename base. Destination accepts format identifiers. If you do not specify the base filename in the URI, the service will use the filename of the input file. If your job has multiple inputs, the service uses the filename of the first input file.'
       Encryption:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DashIsoEncryptionSettings'
         description: DRM settings.
       FragmentLength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Length of fragments to generate (in seconds). Fragment length must be compatible with GOP size and Framerate. Note that fragments will end on the next keyframe after this number of seconds, so actual fragment length may be longer. When Emit Single File is checked, the fragmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.'
       HbbtvCompliance:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DashIsoHbbtvCompliance'
       MinBufferTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: Minimum time of initially buffered media that is needed to ensure smooth playout.
       SegmentControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DashIsoSegmentControl'
       SegmentLength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Length of mpd segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer. When Emit Single File is checked, the segmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.'
       WriteSegmentTimelineInRepresentation:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DashIsoWriteSegmentTimelineInRepresentation'
         description: 'When you enable Precise segment duration in manifests (writeSegmentTimelineInRepresentation), your DASH manifest shows precise segment durations. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When this feature isn''t enabled, the segment durations in your DASH manifest are approximate. The segment duration information appears in the duration attribute of the SegmentTemplate element.'
     description: Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to DASH_ISO_GROUP_SETTINGS.
   DashIsoHbbtvCompliance:
@@ -2481,11 +2481,11 @@ definitions:
     type: object
     properties:
       Algorithm:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeinterlaceAlgorithm'
       Control:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeinterlacerControl'
       Mode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeinterlacerMode'
     description: Settings for deinterlacer
   DeinterlacerControl:
     type: string
@@ -2516,85 +2516,85 @@ definitions:
     type: object
     properties:
       NetworkId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max65535'
         description: The numeric value placed in the Network Information Table (NIT).
       NetworkName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin1Max256'
         description: The network name text placed in the network_name_descriptor inside the Network Information Table. Maximum length is 256 characters.
       NitInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin25Max10000'
         description: The number of milliseconds between instances of this table in the output transport stream.
     description: Inserts DVB Network Information Table (NIT) at the specified table repetition interval.
   DvbSdtSettings:
     type: object
     properties:
       OutputSdt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputSdt'
       SdtInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin25Max2000'
         description: The number of milliseconds between instances of this table in the output transport stream.
       ServiceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin1Max256'
         description: The service name placed in the service_descriptor in the Service Description Table. Maximum length is 256 characters.
       ServiceProviderName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin1Max256'
         description: The service provider name placed in the service_descriptor in the Service Description Table. Maximum length is 256 characters.
     description: Inserts DVB Service Description Table (NIT) at the specified table repetition interval.
   DvbSubDestinationSettings:
     type: object
     properties:
       Alignment:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DvbSubtitleAlignment'
       BackgroundColor:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DvbSubtitleBackgroundColor'
       BackgroundOpacity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max255'
         description: Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match.
       FontColor:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DvbSubtitleFontColor'
       FontOpacity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max255'
         description: |-
           Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.
           All burn-in and DVB-Sub font settings must match.
       FontResolution:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin96Max600'
         description: |-
           Font resolution in DPI (dots per inch); default is 96 dpi.
           All burn-in and DVB-Sub font settings must match.
       FontSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max96'
         description: A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match.
       OutlineColor:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DvbSubtitleOutlineColor'
       OutlineSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max10'
         description: Specifies font outline size in pixels. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
       ShadowColor:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DvbSubtitleShadowColor'
       ShadowOpacity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max255'
         description: Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match.
       ShadowXOffset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Specifies the horizontal offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
       ShadowYOffset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Specifies the vertical offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
       TeletextSpacing:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DvbSubtitleTeletextSpacing'
       XPosition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Specifies the horizontal position of the caption relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit x_position is provided, the horizontal caption position will be determined by the alignment parameter. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.'
       YPosition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.'
     description: DVB-Sub Destination Settings
   DvbSubSourceSettings:
     type: object
     properties:
       Pid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.'
     description: DVB Sub Source Settings
   DvbSubtitleAlignment:
@@ -2651,7 +2651,7 @@ definitions:
     type: object
     properties:
       TdtInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1000Max30000'
         description: The number of milliseconds between instances of this table in the output transport stream.
     description: Inserts DVB Time and Date Table (TDT) at the specified table repetition interval.
   Eac3AttenuationControl:
@@ -2736,62 +2736,62 @@ definitions:
     type: object
     properties:
       AttenuationControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3AttenuationControl'
       Bitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin64000Max640000'
         description: Average bitrate in bits/second. Valid bitrates depend on the coding mode.
       BitstreamMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3BitstreamMode'
       CodingMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3CodingMode'
       DcFilter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3DcFilter'
       Dialnorm:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max31'
         description: 'Sets the dialnorm for the output. If blank and input audio is Dolby Digital Plus, dialnorm will be passed through.'
       DynamicRangeCompressionLine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3DynamicRangeCompressionLine'
       DynamicRangeCompressionRf:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3DynamicRangeCompressionRf'
       LfeControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3LfeControl'
       LfeFilter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3LfeFilter'
       LoRoCenterMixLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMinNegative60Max3'
         description: |-
           Left only/Right only center mix level. Only used for 3/2 coding mode.
           Valid values: 3.0, 1.5, 0.0, -1.5 -3.0 -4.5 -6.0 -60
       LoRoSurroundMixLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMinNegative60MaxNegative1'
         description: |-
           Left only/Right only surround mix level. Only used for 3/2 coding mode.
           Valid values: -1.5 -3.0 -4.5 -6.0 -60
       LtRtCenterMixLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMinNegative60Max3'
         description: |-
           Left total/Right total center mix level. Only used for 3/2 coding mode.
           Valid values: 3.0, 1.5, 0.0, -1.5 -3.0 -4.5 -6.0 -60
       LtRtSurroundMixLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMinNegative60MaxNegative1'
         description: |-
           Left total/Right total surround mix level. Only used for 3/2 coding mode.
           Valid values: -1.5 -3.0 -4.5 -6.0 -60
       MetadataControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3MetadataControl'
       PassthroughControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3PassthroughControl'
       PhaseControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3PhaseControl'
       SampleRate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin48000Max48000'
         description: Sample rate in hz. Sample rate is always 48000.
       StereoDownmix:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3StereoDownmix'
       SurroundExMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3SurroundExMode'
       SurroundMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Eac3SurroundMode'
     description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value EAC3.
   Eac3StereoDownmix:
     type: string
@@ -2825,19 +2825,19 @@ definitions:
     type: object
     properties:
       Convert608To708:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EmbeddedConvert608To708'
       Source608ChannelNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max4'
         description: Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
       Source608TrackNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max1'
         description: 'Specifies the video track index used for extracting captions. The system only supports one input video track, so this should always be set to ''1''.'
     description: Settings for embedded captions Source
   Endpoint:
     type: object
     properties:
       Url:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: URL of endpoint
     description: Describes an account-specific API endpoint.
   F4vMoovPlacement:
@@ -2850,13 +2850,13 @@ definitions:
     type: object
     properties:
       MoovPlacement:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/F4vMoovPlacement'
     description: Settings for F4v container
   FileGroupSettings:
     type: object
     properties:
       Destination:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternS3'
         description: 'Use Destination (Destination) to specify the S3 output location and the output filename base. Destination accepts format identifiers. If you do not specify the base filename in the URI, the service will use the filename of the input file. If your job has multiple inputs, the service uses the filename of the first input file.'
     description: Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to FILE_GROUP_SETTINGS.
   FileSourceConvert608To708:
@@ -2869,28 +2869,28 @@ definitions:
     type: object
     properties:
       Convert608To708:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSourceConvert608To708'
       SourceFile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI'
         description: 'External caption file used for loading captions. Accepted file extensions are ''scc'', ''ttml'', ''dfxp'', ''stl'', ''srt'', and ''smi''.'
       TimeDelta:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Specifies a time delta in seconds to offset the captions from the source file.
     description: Settings for File-based Captions in Source
   FrameCaptureSettings:
     type: object
     properties:
       FramerateDenominator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Frame capture will encode the first frame of the output stream, then one frame every framerateDenominator/framerateNumerator seconds. For example, settings of framerateNumerator = 1 and framerateDenominator = 3 (a rate of 1/3 frame per second) will capture the first frame, then 1 frame every 3s. Files will be named as filename.n.jpg where n is the 0-based sequence number of each Capture.'
       FramerateNumerator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Frame capture will encode the first frame of the output stream, then one frame every framerateDenominator/framerateNumerator seconds. For example, settings of framerateNumerator = 1 and framerateDenominator = 3 (a rate of 1/3 frame per second) will capture the first frame, then 1 frame every 3s. Files will be named as filename.NNNNNNN.jpg where N is the 0-based frame sequence number zero padded to 7 decimal places.'
       MaxCaptures:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max10000000'
         description: Maximum number of captures (encoded jpg output files).
       Quality:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max100'
         description: JPEG Quality - a higher value equals higher quality.
     description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value FRAME_CAPTURE.
   H264AdaptiveQuantization:
@@ -3011,10 +3011,10 @@ definitions:
     type: object
     properties:
       MaxAverageBitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1000Max1152000000'
         description: 'Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.'
       QvbrQualityLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max10'
         description: 'Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h264Settings. Specify the target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9.'
     description: 'Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don''t define Rate control mode.'
   H264RateControlMode:
@@ -3040,100 +3040,100 @@ definitions:
     type: object
     properties:
       AdaptiveQuantization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264AdaptiveQuantization'
       Bitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1000Max1152000000'
         description: 'Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.'
       CodecLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264CodecLevel'
       CodecProfile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264CodecProfile'
       DynamicSubGop:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264DynamicSubGop'
         description: Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
       EntropyEncoding:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264EntropyEncoding'
       FieldEncoding:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264FieldEncoding'
       FlickerAdaptiveQuantization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264FlickerAdaptiveQuantization'
       FramerateControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264FramerateControl'
       FramerateConversionAlgorithm:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264FramerateConversionAlgorithm'
       FramerateDenominator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'When you use the API for transcode jobs that use framerate conversion, specify the framerate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use framerate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
       FramerateNumerator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
       GopBReference:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264GopBReference'
       GopClosedCadence:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.'
       GopSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMin0'
         description: GOP Length (keyframe interval) in frames or seconds. Must be greater than zero.
       GopSizeUnits:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264GopSizeUnits'
       HrdBufferInitialFillPercentage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max100'
         description: Percentage of the buffer that should initially be filled (HRD buffer model).
       HrdBufferSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max1152000000'
         description: 'Size of buffer (HRD buffer model) in bits. For example, enter five megabits as 5000000.'
       InterlaceMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264InterlaceMode'
       MaxBitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1000Max1152000000'
         description: 'Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR.'
       MinIInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max30'
         description: 'Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. This setting is only used when Scene Change Detect is enabled. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1'
       NumberBFramesBetweenReferenceFrames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max7'
         description: Number of B-frames between reference frames.
       NumberReferenceFrames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max6'
         description: Number of reference frames to use. The encoder may use more than requested if using B-frames and/or interlaced encoding.
       ParControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264ParControl'
       ParDenominator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: Pixel Aspect Ratio denominator.
       ParNumerator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: Pixel Aspect Ratio numerator.
       QualityTuningLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264QualityTuningLevel'
       QvbrSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264QvbrSettings'
         description: 'Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don''t define Rate control mode.'
       RateControlMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264RateControlMode'
       RepeatPps:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264RepeatPps'
       SceneChangeDetect:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264SceneChangeDetect'
       Slices:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max32'
         description: 'Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.'
       SlowPal:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264SlowPal'
       Softness:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max128'
         description: 'Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.'
       SpatialAdaptiveQuantization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264SpatialAdaptiveQuantization'
       Syntax:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264Syntax'
       Telecine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264Telecine'
       TemporalAdaptiveQuantization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264TemporalAdaptiveQuantization'
       UnregisteredSeiTimecode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264UnregisteredSeiTimecode'
     description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value H_264.
   H264SlowPal:
     type: string
@@ -3283,10 +3283,10 @@ definitions:
     type: object
     properties:
       MaxAverageBitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1000Max1466400000'
         description: 'Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.'
       QvbrQualityLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max10'
         description: 'Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h265Settings. Specify the target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9.'
     description: 'Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don''t define Rate control mode.'
   H265RateControlMode:
@@ -3313,99 +3313,99 @@ definitions:
     type: object
     properties:
       AdaptiveQuantization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265AdaptiveQuantization'
       AlternateTransferFunctionSei:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265AlternateTransferFunctionSei'
       Bitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1000Max1466400000'
         description: 'Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.'
       CodecLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265CodecLevel'
       CodecProfile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265CodecProfile'
       DynamicSubGop:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265DynamicSubGop'
         description: Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
       FlickerAdaptiveQuantization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265FlickerAdaptiveQuantization'
       FramerateControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265FramerateControl'
       FramerateConversionAlgorithm:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265FramerateConversionAlgorithm'
       FramerateDenominator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: Framerate denominator.
       FramerateNumerator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
       GopBReference:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265GopBReference'
       GopClosedCadence:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.'
       GopSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMin0'
         description: GOP Length (keyframe interval) in frames or seconds. Must be greater than zero.
       GopSizeUnits:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265GopSizeUnits'
       HrdBufferInitialFillPercentage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max100'
         description: Percentage of the buffer that should initially be filled (HRD buffer model).
       HrdBufferSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max1466400000'
         description: 'Size of buffer (HRD buffer model) in bits. For example, enter five megabits as 5000000.'
       InterlaceMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265InterlaceMode'
       MaxBitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1000Max1466400000'
         description: 'Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR.'
       MinIInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max30'
         description: 'Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. This setting is only used when Scene Change Detect is enabled. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1'
       NumberBFramesBetweenReferenceFrames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max7'
         description: Number of B-frames between reference frames.
       NumberReferenceFrames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max6'
         description: Number of reference frames to use. The encoder may use more than requested if using B-frames and/or interlaced encoding.
       ParControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265ParControl'
       ParDenominator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: Pixel Aspect Ratio denominator.
       ParNumerator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: Pixel Aspect Ratio numerator.
       QualityTuningLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265QualityTuningLevel'
       QvbrSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265QvbrSettings'
         description: 'Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don''t define Rate control mode.'
       RateControlMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265RateControlMode'
       SampleAdaptiveOffsetFilterMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265SampleAdaptiveOffsetFilterMode'
       SceneChangeDetect:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265SceneChangeDetect'
       Slices:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max32'
         description: 'Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.'
       SlowPal:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265SlowPal'
       SpatialAdaptiveQuantization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265SpatialAdaptiveQuantization'
       Telecine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265Telecine'
       TemporalAdaptiveQuantization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265TemporalAdaptiveQuantization'
       TemporalIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265TemporalIds'
       Tiles:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265Tiles'
       UnregisteredSeiTimecode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265UnregisteredSeiTimecode'
       WriteMp4PackagingType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265WriteMp4PackagingType'
     description: Settings for H265 codec
   H265SlowPal:
     type: string
@@ -3460,40 +3460,40 @@ definitions:
     type: object
     properties:
       BluePrimaryX:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max50000'
         description: 'HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.'
       BluePrimaryY:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max50000'
         description: 'HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.'
       GreenPrimaryX:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max50000'
         description: 'HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.'
       GreenPrimaryY:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max50000'
         description: 'HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.'
       MaxContentLightLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max65535'
         description: 'Maximum light level among all samples in the coded video sequence, in units of candelas per square meter.'
       MaxFrameAverageLightLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max65535'
         description: 'Maximum average light level of any frame in the coded video sequence, in units of candelas per square meter.'
       MaxLuminance:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: Nominal maximum mastering display luminance in units of of 0.0001 candelas per square meter.
       MinLuminance:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: Nominal minimum mastering display luminance in units of of 0.0001 candelas per square meter
       RedPrimaryX:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max50000'
         description: 'HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.'
       RedPrimaryY:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max50000'
         description: 'HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.'
       WhitePointX:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max50000'
         description: 'HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.'
       WhitePointY:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max50000'
         description: 'HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.'
     description: 'Use the HDR master display (Hdr10Metadata) settings to correct HDR metadata or to provide missing metadata. These values vary depending on the input video and must be provided by a color grader. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that these settings are not color correction. Note that if you are creating HDR outputs inside of an HLS CMAF package, to comply with the Apple specification, you must use the HVC1 for H.265 setting.'
   HlsAdMarkers:
@@ -3513,15 +3513,15 @@ definitions:
     type: object
     properties:
       CaptionChannel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Caption channel.
       CustomLanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
         description: 'Specify the language for this caption channel, using the ISO 639-2 or ISO 639-3 three-letter language code'
       LanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageCode'
       LanguageDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Caption language description.
     description: Caption Language Mapping
   HlsCaptionLanguageSetting:
@@ -3553,18 +3553,18 @@ definitions:
     type: object
     properties:
       ConstantInitializationVector:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin32Max32Pattern09aFAF32'
         description: 'This is a 128-bit, 16-byte hex value represented by a 32-character text string. If this parameter is not set then the Initialization Vector will follow the segment number by default.'
       EncryptionMethod:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsEncryptionType'
       InitializationVectorInManifest:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsInitializationVectorInManifest'
       SpekeKeyProvider:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SpekeKeyProvider'
       StaticKeyProvider:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StaticKeyProvider'
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsKeyProviderType'
     description: Settings for HLS encryption
   HlsEncryptionType:
     type: string
@@ -3576,62 +3576,62 @@ definitions:
     type: object
     properties:
       AdMarkers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfHlsAdMarkers'
         description: Choose one or more ad marker types to pass SCTE35 signals through to this group of Apple HLS outputs.
       BaseUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: A partial URI prefix that will be prepended to each output in the media .m3u8 file. Can be used if base manifest is delivered from a different URL than the main .m3u8 file.
       CaptionLanguageMappings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfHlsCaptionLanguageMapping'
         description: Language to be used on Caption outputs
       CaptionLanguageSetting:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsCaptionLanguageSetting'
       ClientCache:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsClientCache'
       CodecSpecification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsCodecSpecification'
       Destination:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternS3'
         description: 'Use Destination (Destination) to specify the S3 output location and the output filename base. Destination accepts format identifiers. If you do not specify the base filename in the URI, the service will use the filename of the input file. If your job has multiple inputs, the service uses the filename of the first input file.'
       DirectoryStructure:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsDirectoryStructure'
       Encryption:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsEncryptionSettings'
         description: DRM settings.
       ManifestCompression:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsManifestCompression'
       ManifestDurationFormat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsManifestDurationFormat'
       MinFinalSegmentLength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMin0Max2147483647'
         description: 'Keep this setting at the default value of 0, unless you are troubleshooting a problem with how devices play back the end of your video asset. If you know that player devices are hanging on the final segment of your video because the length of your final segment is too short, use this setting to specify a minimum final segment length, in seconds. Choose a value that is greater than or equal to 1 and less than your segment length. When you specify a value for this setting, the encoder will combine any final segment that is shorter than the length that you specify with the previous segment. For example, your segment length is 3 seconds and your final segment is .5 seconds without a minimum final segment length; when you set the minimum final segment length to 1, your final segment is 3.5 seconds.'
       MinSegmentLength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'When set, Minimum Segment Size is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.'
       OutputSelection:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsOutputSelection'
       ProgramDateTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsProgramDateTime'
       ProgramDateTimePeriod:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max3600'
         description: 'Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.'
       SegmentControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsSegmentControl'
       SegmentLength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.'
       SegmentsPerSubdirectory:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: Number of segments to write to a subdirectory before starting a new one. directoryStructure must be SINGLE_DIRECTORY for this setting to have an effect.
       StreamInfResolution:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsStreamInfResolution'
       TimedMetadataId3Frame:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsTimedMetadataId3Frame'
       TimedMetadataId3Period:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Timed Metadata interval in seconds.
       TimestampDeltaMilliseconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Provides an extra millisecond delta offset to fine tune the timestamps.
     description: Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to HLS_GROUP_SETTINGS.
   HlsIFrameOnlyManifest:
@@ -3686,17 +3686,17 @@ definitions:
     type: object
     properties:
       AudioGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Specifies the group to which the audio Rendition belongs.
       AudioRenditionSets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are associated to the video, separate by '',''.'
       AudioTrackType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsAudioTrackType'
       IFrameOnlyManifest:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsIFrameOnlyManifest'
       SegmentModifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'String concatenated to end of segment filenames. Accepts "Format Identifiers":#format_identifier_parameters.'
     description: Settings for HLS output groups
   HlsStreamInfResolution:
@@ -3716,70 +3716,70 @@ definitions:
     type: object
     properties:
       Id3:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternAZaZ0902'
         description: Use ID3 tag (Id3) to provide a tag value in base64-encode format.
       Timecode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPattern010920405090509092'
         description: 'Provide a Timecode (TimeCode) in HH:MM:SS:FF or HH:MM:SS;FF format.'
     description: 'To insert ID3 tags in your output, specify two values. Use ID3 tag (Id3) to specify the base 64 encoded string and use Timecode (TimeCode) to specify the time when the tag should be inserted. To insert multiple ID3 tags in your output, create multiple instances of ID3 insertion (Id3Insertion).'
   ImageInserter:
     type: object
     properties:
       InsertableImages:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfInsertableImage'
         description: Specify the images that you want to overlay on your video. The images must be PNG or TGA files.
     description: Enable the Image inserter (ImageInserter) feature to include a graphic overlay on your video. Enable or disable this feature for each input or output individually. This setting is disabled by default.
   Input:
     type: object
     properties:
       AudioSelectorGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOfAudioSelectorGroup'
         description: 'Specifies set of audio selectors within an input to combine. An input may have multiple audio selector groups. See "Audio Selector Group":#inputs-audio_selector_group for more information.'
       AudioSelectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOfAudioSelector'
         description: Use Audio selectors (AudioSelectors) to specify a track or set of tracks from the input that you will use in your outputs. You can use mutiple Audio selectors per input.
       CaptionSelectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOfCaptionSelector'
         description: Use Captions selectors (CaptionSelectors) to specify the captions data from the input that you will use in your outputs. You can use mutiple captions selectors per input.
       DeblockFilter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InputDeblockFilter'
       DecryptionSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InputDecryptionSettings'
         description: 'If the input file is encrypted, decryption settings to decrypt the media file'
       DenoiseFilter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InputDenoiseFilter'
       FileInput:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM'
         description: 'Use Input (fileInput) to define the source file used in the transcode job. There can be multiple inputs in a job. These inputs are concantenated, in the order they are specified in the job, to create the output.'
       FilterEnable:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InputFilterEnable'
       FilterStrength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative5Max5'
         description: Use Filter strength (FilterStrength) to adjust the magnitude the input filter settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
       ImageInserter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ImageInserter'
         description: Enable the Image inserter (ImageInserter) feature to include a graphic overlay on your video. Enable or disable this feature for each input individually. This setting is disabled by default.
       InputClippings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfInputClipping'
         description: '(InputClippings) contains sets of start and end times that together specify a portion of the input to be used in the outputs. If you provide only a start time, the clip will be the entire input from that point to the end. If you provide only an end time, it will be the entire input up to that point. When you specify more than one input clip, the transcoding service creates the job outputs by stringing the clips together in the order you specify them.'
       ProgramNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Use Program (programNumber) to select a specific program from within a multi-program transport stream. Note that Quad 4K is not currently supported. Default is the first program within the transport stream. If the program you specify doesn''t exist, the transcoding service will use this default.'
       PsiControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InputPsiControl'
       TimecodeSource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InputTimecodeSource'
       VideoSelector:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VideoSelector'
     description: Specifies media input
   InputClipping:
     type: object
     properties:
       EndTimecode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPattern010920405090509092'
         description: 'Set End timecode (EndTimecode) to the end of the portion of the input you are clipping. The frame corresponding to the End timecode value is included in the clip. Start timecode or End timecode may be left blank, but not both. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When choosing this value, take into account your setting for timecode source under input settings (InputTimecodeSource). For example, if you have embedded timecodes that start at 01:00:00:00 and you want your clip to end six minutes into the video, use 01:06:00:00.'
       StartTimecode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPattern010920405090509092'
         description: 'Set Start timecode (StartTimecode) to the beginning of the portion of the input you are clipping. The frame corresponding to the Start timecode value is included in the clip. Start timecode or End timecode may be left blank, but not both. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When choosing this value, take into account your setting for Input timecode source. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your clip to begin five minutes into the video, use 01:05:00:00.'
     description: 'To transcode only portions of your input (clips), include one Input clipping (one instance of InputClipping in the JSON job file) for each input clip. All input clips you specify will be included in every output of the job.'
   InputDeblockFilter:
@@ -3792,15 +3792,15 @@ definitions:
     type: object
     properties:
       DecryptionMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DecryptionMode'
       EncryptedDecryptionKey:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin24Max512PatternAZaZ0902'
         description: Decryption key either 128 or 192 or 256 bits encrypted with KMS
       InitializationVector:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin16Max24PatternAZaZ0922AZaZ0916'
         description: Initialization Vector 96 bits (CTR/GCM mode only) or 128 bits.
       KmsKeyRegion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912'
         description: The AWS region in which decryption key was encrypted with KMS
     description: Specify the decryption settings used to decrypt encrypted input
   InputDenoiseFilter:
@@ -3826,38 +3826,38 @@ definitions:
     type: object
     properties:
       AudioSelectorGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOfAudioSelectorGroup'
         description: 'Specifies set of audio selectors within an input to combine. An input may have multiple audio selector groups. See "Audio Selector Group":#inputs-audio_selector_group for more information.'
       AudioSelectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOfAudioSelector'
         description: Use Audio selectors (AudioSelectors) to specify a track or set of tracks from the input that you will use in your outputs. You can use mutiple Audio selectors per input.
       CaptionSelectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOfCaptionSelector'
         description: Use Captions selectors (CaptionSelectors) to specify the captions data from the input that you will use in your outputs. You can use mutiple captions selectors per input.
       DeblockFilter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InputDeblockFilter'
       DenoiseFilter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InputDenoiseFilter'
       FilterEnable:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InputFilterEnable'
       FilterStrength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative5Max5'
         description: Use Filter strength (FilterStrength) to adjust the magnitude the input filter settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
       ImageInserter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ImageInserter'
         description: Enable the Image inserter (ImageInserter) feature to include a graphic overlay on your video. Enable or disable this feature for each input individually. This setting is disabled by default.
       InputClippings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfInputClipping'
         description: '(InputClippings) contains sets of start and end times that together specify a portion of the input to be used in the outputs. If you provide only a start time, the clip will be the entire input from that point to the end. If you provide only an end time, it will be the entire input up to that point. When you specify more than one input clip, the transcoding service creates the job outputs by stringing the clips together in the order you specify them.'
       ProgramNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Use Program (programNumber) to select a specific program from within a multi-program transport stream. Note that Quad 4K is not currently supported. Default is the first program within the transport stream. If the program you specify doesn''t exist, the transcoding service will use this default.'
       PsiControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InputPsiControl'
       TimecodeSource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InputTimecodeSource'
       VideoSelector:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VideoSelector'
     description: Specified video input in a template.
   InputTimecodeSource:
     type: string
@@ -3870,37 +3870,37 @@ definitions:
     type: object
     properties:
       Duration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Set the time, in milliseconds, for the image to remain on the output video.'
       FadeIn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Set the length of time, in milliseconds, between the Start time that you specify for the image insertion and the time that the image appears at full opacity. Full opacity is the level that you specify for the opacity setting. If you don''t specify a value for Fade-in, the image will appear abruptly at the overlay start time.'
       FadeOut:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Specify the length of time, in milliseconds, between the end of the time that you have specified for the image overlay Duration and when the overlaid image has faded to total transparency. If you don''t specify a value for Fade-out, the image will disappear abruptly at the end of the inserted image duration.'
       Height:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Specify the height of the inserted image in pixels. If you specify a value that''s larger than the video resolution height, the service will crop your overlaid image to fit. To use the native height of the image, keep this setting blank.'
       ImageInserterInput:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin14PatternS3BmpBMPPngPNGTgaTGA'
         description: Use Image location (imageInserterInput) to specify the Amazon S3 location of the image to be inserted into the output. Use a PNG or TGA file that fits inside the video frame.
       ImageX:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Use Left (ImageX) to set the distance, in pixels, between the inserted image and the left edge of the video frame. Required for any image overlay that you specify.'
       ImageY:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Use Top (ImageY) to set the distance, in pixels, between the overlaid image and the top edge of the video frame. Required for any image overlay that you specify.'
       Layer:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max99'
         description: Specify how overlapping inserted images appear. Images with higher values for Layer appear on top of images with lower values for Layer.
       Opacity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max100'
         description: Use Opacity (Opacity) to specify how much of the underlying video shows through the inserted image. 0 is transparent and 100 is fully opaque. Default is 50.
       StartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPattern01D20305D205D'
         description: 'Use Start time (StartTime) to specify the video timecode when the image is inserted in the output. This must be in timecode (HH:MM:SS:FF or HH:MM:SS;FF) format.'
       Width:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Specify the width of the inserted image in pixels. If you specify a value that''s larger than the video resolution width, the service will crop your overlaid image to fit. To use the native width of the image, keep this setting blank.'
     description: Settings that specify how your overlay appears.
   Job:
@@ -3910,69 +3910,69 @@ definitions:
       - Settings
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: An identifier for this resource that is unique within all of AWS.
       BillingTagsSource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BillingTagsSource'
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampUnix'
         description: 'The time, in Unix epoch format in seconds, when the job got created.'
       ErrorCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: Error code for the job
       ErrorMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Error message of Job
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'A portion of the job''s ARN, unique within your AWS Elemental MediaConvert resources'
       JobTemplate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The job template that the job is created from, if it is created from a job template.'
       OutputGroupDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfOutputGroupDetail'
         description: List of output group details
       Queue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Optional. When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
       Role:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html'
       Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobSettings'
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobStatus'
       Timing:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timing'
       UserMetadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOf__string'
         description: User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
     description: 'Each job converts an input file into an output file or files. For more information, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
   JobSettings:
     type: object
     properties:
       AdAvailOffset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative1000Max1000'
         description: 'When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time.'
       AvailBlanking:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AvailBlanking'
         description: 'Settings for ad avail blanking.  Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails.'
       Inputs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfInput'
         description: Use Inputs (inputs) to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output.
       MotionImageInserter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MotionImageInserter'
         description: Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
       NielsenConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NielsenConfiguration'
       OutputGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfOutputGroup'
         description: '(OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings'
       TimecodeConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimecodeConfig'
         description: Contains settings used to acquire and adjust timecode information from inputs.
       TimedMetadataInsertion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimedMetadataInsertion'
     description: JobSettings contains all the transcode settings for a job.
   JobStatus:
     type: string
@@ -3990,30 +3990,30 @@ definitions:
       - Name
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: An identifier for this resource that is unique within all of AWS.
       Category:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: An optional category you create to organize your job templates.
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds for Job template creation.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: An optional description you create for each job template.
       LastUpdated:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds when the Job template was last updated.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: A name you create for each job template. Each name must be unique within your account.
       Queue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Optional. The queue that jobs created from this template are assigned to. If you don''t specify this, jobs will go to the default queue.'
       Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobTemplateSettings'
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Type'
         description: 'A job template can be of two types: system or custom. System or built-in job templates can''t be modified or deleted by the user.'
     description: A job template is a pre-made set of encoding instructions that you can use to quickly create a job.
   JobTemplateListBy:
@@ -4027,27 +4027,27 @@ definitions:
     type: object
     properties:
       AdAvailOffset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative1000Max1000'
         description: 'When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time.'
       AvailBlanking:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AvailBlanking'
         description: 'Settings for ad avail blanking.  Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails.'
       Inputs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfInputTemplate'
         description: 'Use Inputs (inputs) to define the source file used in the transcode job. There can only be one input in a job template.  Using the API, you can include multiple inputs when referencing a job template.'
       MotionImageInserter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MotionImageInserter'
         description: Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups.
       NielsenConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NielsenConfiguration'
       OutputGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfOutputGroup'
         description: '(OutputGroups) contains one group of settings for each set of outputs that share a common package type. All unpackaged files (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in a single output group as well. Required in (OutputGroups) is a group of settings that apply to the whole group. This required object depends on the value you set for (Type) under (OutputGroups)>(OutputGroupSettings). Type, settings object pairs are as follows. * FILE_GROUP_SETTINGS, FileGroupSettings * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS, CmafGroupSettings'
       TimecodeConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimecodeConfig'
         description: Contains settings used to acquire and adjust timecode information from inputs.
       TimedMetadataInsertion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimedMetadataInsertion'
     description: JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it.
   LanguageCode:
     type: string
@@ -4318,92 +4318,92 @@ definitions:
     type: object
     properties:
       AudioBufferModel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M2tsAudioBufferModel'
       AudioFramesPerPes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: The number of audio frames to insert for each PES packet.
       AudioPids:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOf__integerMin32Max8182'
         description: 'Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation.'
       Bitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'The output bitrate of the transport stream in bits per second. Setting to 0 lets the muxer automatically determine the appropriate bitrate. Other common values are 3750000, 7500000, and 15000000.'
       BufferModel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M2tsBufferModel'
       DvbNitSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DvbNitSettings'
       DvbSdtSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DvbSdtSettings'
       DvbSubPids:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOf__integerMin32Max8182'
         description: 'Packet Identifier (PID) for input source DVB Subtitle data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation.'
       DvbTdtSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DvbTdtSettings'
       DvbTeletextPid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: Packet Identifier (PID) for input source DVB Teletext data to this output.
       EbpAudioInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M2tsEbpAudioInterval'
       EbpPlacement:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M2tsEbpPlacement'
       EsRateInPes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M2tsEsRateInPes'
       FragmentTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMin0'
         description: The length in seconds of each fragment. Only used with EBP markers.
       MaxPcrInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max500'
         description: Maximum time in milliseconds between Program Clock References (PCRs) inserted into the transport stream.
       MinEbpInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max10000'
         description: 'When set, enforces that Encoder Boundary Points do not come within the specified time interval of each other by looking ahead at input video. If another EBP is going to come in within the specified time interval, the current EBP is not emitted, and the segment is "stretched" to the next marker. The lookahead value does not add latency to the system. The Live Event must be configured elsewhere to create sufficient latency to make the lookahead accurate.'
       NielsenId3:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M2tsNielsenId3'
       NullPacketBitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMin0'
         description: Value in bits per second of extra null packets to insert into the transport stream. This can be used if a downstream encryption system requires periodic null packets.
       PatInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max1000'
         description: The number of milliseconds between instances of this table in the output transport stream.
       PcrControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M2tsPcrControl'
       PcrPid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: 'Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID.'
       PmtInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max1000'
         description: The number of milliseconds between instances of this table in the output transport stream.
       PmtPid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream.
       PrivateMetadataPid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: Packet Identifier (PID) of the private metadata stream in the transport stream.
       ProgramNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max65535'
         description: The value of the program number field in the Program Map Table.
       RateMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M2tsRateMode'
       Scte35Pid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
       Scte35Source:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M2tsScte35Source'
       SegmentationMarkers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M2tsSegmentationMarkers'
       SegmentationStyle:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M2tsSegmentationStyle'
       SegmentationTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMin0'
         description: The length in seconds of each segment. Required unless markers is set to _none_.
       TimedMetadataPid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: Packet Identifier (PID) of the timed metadata stream in the transport stream.
       TransportStreamId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max65535'
         description: The value of the transport stream ID field in the Program Map Table.
       VideoPid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: Packet Identifier (PID) of the elementary video stream in the transport stream.
     description: Settings for M2TS Container.
   M3u8NielsenId3:
@@ -4428,80 +4428,80 @@ definitions:
     type: object
     properties:
       AudioFramesPerPes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: The number of audio frames to insert for each PES packet.
       AudioPids:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOf__integerMin32Max8182'
         description: 'Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation.'
       NielsenId3:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M3u8NielsenId3'
       PatInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max1000'
         description: The number of milliseconds between instances of this table in the output transport stream.
       PcrControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M3u8PcrControl'
       PcrPid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: 'Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID.'
       PmtInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max1000'
         description: The number of milliseconds between instances of this table in the output transport stream.
       PmtPid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream.
       PrivateMetadataPid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: Packet Identifier (PID) of the private metadata stream in the transport stream.
       ProgramNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max65535'
         description: The value of the program number field in the Program Map Table.
       Scte35Pid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
       Scte35Source:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/M3u8Scte35Source'
       TimedMetadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimedMetadata'
       TimedMetadataPid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: Packet Identifier (PID) of the timed metadata stream in the transport stream.
       TransportStreamId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max65535'
         description: The value of the transport stream ID field in the Program Map Table.
       VideoPid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max8182'
         description: Packet Identifier (PID) of the elementary video stream in the transport stream.
     description: Settings for TS segments in HLS
   MotionImageInserter:
     type: object
     properties:
       Framerate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MotionImageInsertionFramerate'
         description: 'If your motion graphic asset is a .mov file, keep this setting unspecified. If your motion graphic asset is a series of .png files, specify the framerate of the overlay in frames per second, as a fraction. For example, specify 24 fps as 24/1. Make sure that the number of images in your series matches the framerate and your intended overlay duration. For example, if you want a 30-second overlay at 30 fps, you should have 900 .png images. This overlay framerate doesn''t need to match the framerate of the underlying video.'
       Input:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin14Max1285PatternS3Mov09Png'
         description: 'Specify the .mov file or series of .png files that you want to overlay on your video. For .png files, provide the file name of the first file in the series. Make sure that the names of the .png files end with sequential numbers that specify the order that they are played in. For example, overlay_000.png, overlay_001.png, overlay_002.png, and so on. The sequence must start at zero, and each image file name must have the same number of digits. Pad your initial file names with enough zeros to complete the sequence. For example, if the first image is overlay_0.png, there can be only 10 images in the sequence, with the last image being overlay_9.png. But if the first image is overlay_00.png, there can be 100 images in the sequence.'
       InsertionMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MotionImageInsertionMode'
         description: Choose the type of motion graphic asset that you are providing for your overlay. You can choose either a .mov file or a series of .png files.
       Offset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MotionImageInsertionOffset'
         description: 'Use Offset to specify the placement of your motion graphic overlay on the video frame. Specify in pixels, from the upper-left corner of the frame. If you don''t specify an offset, the service scales your overlay to the full size of the frame. Otherwise, the service inserts the overlay at its native resolution and scales the size up or down with any video scaling.'
       Playback:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MotionImagePlayback'
         description: Specify whether your motion graphic overlay repeats on a loop or plays only once.
       StartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin11Max11Pattern01D20305D205D'
         description: 'Specify when the motion overlay begins. Use timecode format (HH:MM:SS:FF or HH:MM:SS;FF). Make sure that the timecode you provide here takes into account how you have set up your timecode configuration under both job settings and input settings. The simplest way to do that is to set both to start at 0. If you need to set up your job to follow timecodes embedded in your source that don''t start at zero, make sure that you specify a start time that is after the first embedded timecode. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/setting-up-timecode.html Find job-wide and input timecode configuration settings in your JSON job settings specification at settings>timecodeConfig>source and settings>inputs>timecodeSource.'
     description: Overlay motion graphics on top of your video at the time that you specify.
   MotionImageInsertionFramerate:
     type: object
     properties:
       FramerateDenominator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max17895697'
         description: 'The bottom of the fraction that expresses your overlay framerate. For example, if your framerate is 24 fps, set this value to 1.'
       FramerateNumerator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483640'
         description: 'The top of the fraction that expresses your overlay framerate. For example, if your framerate is 24 fps, set this value to 24.'
     description: 'For motion overlays that don''t have a built-in framerate, specify the framerate of the overlay in frames per second, as a fraction. For example, specify 24 fps as 24/1. The overlay framerate doesn''t need to match the framerate of the underlying video.'
   MotionImageInsertionMode:
@@ -4514,10 +4514,10 @@ definitions:
     type: object
     properties:
       ImageX:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Set the distance, in pixels, between the overlay and the left edge of the video frame.'
       ImageY:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Set the distance, in pixels, between the overlay and the top edge of the video frame.'
     description: Specify the offset between the upper-left corner of the video frame and the top left corner of the overlay.
   MotionImagePlayback:
@@ -4560,27 +4560,27 @@ definitions:
     type: object
     properties:
       ClapAtom:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MovClapAtom'
       CslgAtom:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MovCslgAtom'
       Mpeg2FourCCControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MovMpeg2FourCCControl'
       PaddingControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MovPaddingControl'
       Reference:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MovReference'
     description: Settings for MOV Container.
   Mp2Settings:
     type: object
     properties:
       Bitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32000Max384000'
         description: Average bitrate in bits/second.
       Channels:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2'
         description: 'Set Channels to specify the number of channels in this output audio track. Choosing Mono in the console will give you 1 output channel; choosing Stereo will give you 2. In the API, valid values are 1 and 2.'
       SampleRate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32000Max48000'
         description: Sample rate in hz.
     description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value MP2.
   Mp4CslgAtom:
@@ -4605,13 +4605,13 @@ definitions:
     type: object
     properties:
       CslgAtom:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mp4CslgAtom'
       FreeSpaceBox:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mp4FreeSpaceBox'
       MoovPlacement:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mp4MoovPlacement'
       Mp4MajorBrand:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Overrides the "Major Brand" field in the output file. Usually not necessary to specify.
     description: Settings for MP4 Container
   Mpeg2AdaptiveQuantization:
@@ -4710,81 +4710,81 @@ definitions:
     type: object
     properties:
       AdaptiveQuantization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2AdaptiveQuantization'
       Bitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1000Max288000000'
         description: 'Average bitrate in bits/second. Required for VBR and CBR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.'
       CodecLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2CodecLevel'
       CodecProfile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2CodecProfile'
       DynamicSubGop:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2DynamicSubGop'
         description: Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
       FramerateControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2FramerateControl'
       FramerateConversionAlgorithm:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2FramerateConversionAlgorithm'
       FramerateDenominator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max1001'
         description: Framerate denominator.
       FramerateNumerator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin24Max60000'
         description: 'Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
       GopClosedCadence:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.'
       GopSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__doubleMin0'
         description: GOP Length (keyframe interval) in frames or seconds. Must be greater than zero.
       GopSizeUnits:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2GopSizeUnits'
       HrdBufferInitialFillPercentage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max100'
         description: Percentage of the buffer that should initially be filled (HRD buffer model).
       HrdBufferSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max47185920'
         description: 'Size of buffer (HRD buffer model) in bits. For example, enter five megabits as 5000000.'
       InterlaceMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2InterlaceMode'
       IntraDcPrecision:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2IntraDcPrecision'
       MaxBitrate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1000Max300000000'
         description: 'Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000.'
       MinIInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max30'
         description: 'Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. This setting is only used when Scene Change Detect is enabled. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1'
       NumberBFramesBetweenReferenceFrames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max7'
         description: Number of B-frames between reference frames.
       ParControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2ParControl'
       ParDenominator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: Pixel Aspect Ratio denominator.
       ParNumerator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: Pixel Aspect Ratio numerator.
       QualityTuningLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2QualityTuningLevel'
       RateControlMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2RateControlMode'
       SceneChangeDetect:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2SceneChangeDetect'
       SlowPal:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2SlowPal'
       Softness:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max128'
         description: 'Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.'
       SpatialAdaptiveQuantization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2SpatialAdaptiveQuantization'
       Syntax:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2Syntax'
       Telecine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2Telecine'
       TemporalAdaptiveQuantization:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2TemporalAdaptiveQuantization'
     description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value MPEG2.
   Mpeg2SlowPal:
     type: string
@@ -4827,23 +4827,23 @@ definitions:
     type: object
     properties:
       SpekeKeyProvider:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SpekeKeyProvider'
     description: 'If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify the value SpekeKeyProvider.'
   MsSmoothGroupSettings:
     type: object
     properties:
       AudioDeduplication:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MsSmoothAudioDeduplication'
       Destination:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternS3'
         description: 'Use Destination (Destination) to specify the S3 output location and the output filename base. Destination accepts format identifiers. If you do not specify the base filename in the URI, the service will use the filename of the input file. If your job has multiple inputs, the service uses the filename of the first input file.'
       Encryption:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MsSmoothEncryptionSettings'
       FragmentLength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds. Fragment length must be compatible with GOP size and framerate.
       ManifestEncoding:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MsSmoothManifestEncoding'
     description: Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to MS_SMOOTH_GROUP_SETTINGS.
   MsSmoothManifestEncoding:
     type: string
@@ -4855,21 +4855,21 @@ definitions:
     type: object
     properties:
       BreakoutCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max9'
         description: 'Use Nielsen Configuration (NielsenConfiguration) to set the Nielsen measurement system breakout code. Supported values are 0, 3, 7, and 9.'
       DistributorId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Use Distributor ID (DistributorID) to specify the distributor ID that is assigned to your organization by Neilsen.
     description: Settings for Nielsen Configuration
   NoiseReducer:
     type: object
     properties:
       Filter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NoiseReducerFilter'
       FilterSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NoiseReducerFilterSettings'
       SpatialFilterSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NoiseReducerSpatialFilterSettings'
     description: 'Enable the Noise reducer (NoiseReducer) feature to remove noise from your video output if necessary. Enable or disable this feature for each output individually. This setting is disabled by default. When you enable Noise reducer (NoiseReducer), you must also select a value for Noise reducer filter (NoiseReducerFilter).'
   NoiseReducerFilter:
     type: string
@@ -4886,20 +4886,20 @@ definitions:
     type: object
     properties:
       Strength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max3'
         description: Relative strength of noise reducing filter. Higher values produce stronger filtering.
     description: Settings for a noise reducer filter
   NoiseReducerSpatialFilterSettings:
     type: object
     properties:
       PostFilterSharpenStrength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max3'
         description: 'Specify strength of post noise reduction sharpening filter, with 0 disabling the filter and 3 enabling it at maximum strength.'
       Speed:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative2Max3'
         description: 'The speed of the filter, from -2 (lower speed) to 3 (higher speed), with 0 being the nominal value.'
       Strength:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max16'
         description: Relative strength of noise reducing filter. Higher values produce stronger filtering.
     description: Noise reducer filter settings for spatial filter.
   Order:
@@ -4912,81 +4912,81 @@ definitions:
     type: object
     properties:
       AudioDescriptions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfAudioDescription'
         description: (AudioDescriptions) contains groups of audio encoding settings organized by audio codec. Include one instance of (AudioDescriptions) per output. (AudioDescriptions) can contain multiple groups of encoding settings.
       CaptionDescriptions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfCaptionDescription'
         description: '(CaptionDescriptions) contains groups of captions settings. For each output that has captions, include one instance of (CaptionDescriptions). (CaptionDescriptions) can contain multiple groups of captions settings.'
       ContainerSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContainerSettings'
       Extension:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Use Extension (Extension) to specify the file extension for outputs in File output groups. If you do not specify a value, the service will use default extensions by container type as follows * MPEG-2 transport stream, m2ts * Quicktime, mov * MXF container, mxf * MPEG-4 container, mp4 * No Container, the service will use codec extensions (e.g. AAC, H265, H265, AC3)'
       NameModifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin1'
         description: 'Use Name modifier (NameModifier) to have the service add a string to the end of each output filename. You specify the base filename as part of your destination URI. When you create multiple outputs in the same output group, Name modifier (NameModifier) is required. Name modifier also accepts format identifiers. For DASH ISO outputs, if you use the format identifiers $Number$ or $Time$ in one output, you must use them in the same way in all outputs of the output group.'
       OutputSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputSettings'
       Preset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin0'
         description: 'Use Preset (Preset) to specifiy a preset for your transcoding settings. Provide the system or custom preset name. You can specify either Preset (Preset) or Container settings (ContainerSettings), but not both.'
       VideoDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VideoDescription'
         description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
     description: An output object describes the settings for a single output file or stream in an output group.
   OutputChannelMapping:
     type: object
     properties:
       InputChannels:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOf__integerMinNegative60Max6'
         description: List of input channels
     description: OutputChannel mapping settings.
   OutputDetail:
     type: object
     properties:
       DurationInMs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: Duration in milliseconds
       VideoDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VideoDetail'
     description: Details regarding output
   OutputGroup:
     type: object
     properties:
       CustomName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Use Custom Group Name (CustomName) to specify a name for the output group. This value is displayed on the console and can make your job settings JSON more human-readable. It does not affect your outputs. Use up to twelve characters that are either letters, numbers, spaces, or underscores.'
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Name of the output group
       OutputGroupSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputGroupSettings'
       Outputs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfOutput'
         description: 'This object holds groups of encoding settings, one group of settings per output.'
     description: Group of outputs
   OutputGroupDetail:
     type: object
     properties:
       OutputDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfOutputDetail'
         description: Details about the output
     description: Contains details about the output groups specified in the job settings.
   OutputGroupSettings:
     type: object
     properties:
       CmafGroupSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CmafGroupSettings'
       DashIsoGroupSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DashIsoGroupSettings'
       FileGroupSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileGroupSettings'
       HlsGroupSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsGroupSettings'
       MsSmoothGroupSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MsSmoothGroupSettings'
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputGroupType'
     description: 'Output Group settings, including type'
   OutputGroupType:
     type: string
@@ -5009,7 +5009,7 @@ definitions:
     type: object
     properties:
       HlsSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HlsSettings'
     description: Specific settings for this type of output.
   Preset:
     type: object
@@ -5018,27 +5018,27 @@ definitions:
       - Name
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: An identifier for this resource that is unique within all of AWS.
       Category:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: An optional category you create to organize your presets.
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds for preset creation.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: An optional description you create for each preset.
       LastUpdated:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds when the preset was last updated.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: A name you create for each preset. Each name must be unique within your account.
       Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PresetSettings'
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Type'
         description: 'A preset can be of two types: system or custom. System or built-in preset can''t be modified or deleted by the user.'
     description: A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
   PresetListBy:
@@ -5052,15 +5052,15 @@ definitions:
     type: object
     properties:
       AudioDescriptions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfAudioDescription'
         description: (AudioDescriptions) contains groups of audio encoding settings organized by audio codec. Include one instance of (AudioDescriptions) per output. (AudioDescriptions) can contain multiple groups of encoding settings.
       CaptionDescriptions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfCaptionDescriptionPreset'
         description: Caption settings for this preset. There can be multiple caption settings in a single output.
       ContainerSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContainerSettings'
       VideoDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VideoDescription'
         description: (VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output.
     description: Settings for preset
   PricingPlan:
@@ -5111,31 +5111,31 @@ definitions:
     type: object
     properties:
       CodecProfile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProresCodecProfile'
       FramerateControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProresFramerateControl'
       FramerateConversionAlgorithm:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProresFramerateConversionAlgorithm'
       FramerateDenominator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: Framerate denominator.
       FramerateNumerator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'When you use the API for transcode jobs that use framerate conversion, specify the framerate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator.'
       InterlaceMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProresInterlaceMode'
       ParControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProresParControl'
       ParDenominator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: Pixel Aspect Ratio denominator.
       ParNumerator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: Pixel Aspect Ratio numerator.
       SlowPal:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProresSlowPal'
       Telecine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProresTelecine'
     description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value PRORES.
   ProresSlowPal:
     type: string
@@ -5155,37 +5155,37 @@ definitions:
       - Name
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: An identifier for this resource that is unique within all of AWS.
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds for when you created the queue.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: An optional description that you create for each queue.
       LastUpdated:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds for when you most recently updated the queue.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: A name that you create for each queue. Each name must be unique within your account.
       PricingPlan:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PricingPlan'
         description: 'Specifies whether the pricing plan for the queue is on-demand or reserved. For on-demand, you pay per minute, billed in increments of .01 minute. For reserved, you pay for the transcoding capacity of the entire queue, regardless of how much or how little you use it. Reserved pricing requires a 12-month commitment.'
       ProgressingJobsCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: The estimated number of jobs with a PROGRESSING status.
       ReservationPlan:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReservationPlan'
         description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/QueueStatus'
         description: 'Queues can be ACTIVE or PAUSED. If you pause a queue, the service won''t begin processing jobs in that queue. Jobs that are running when you pause the queue continue to run until they finish or result in an error.'
       SubmittedJobsCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: The estimated number of jobs with a SUBMITTED status.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Type'
         description: Specifies whether this on-demand queue is system or custom. System queues are built in. You can't modify or delete system queues. You can create and modify custom queues.
     description: 'You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don''t specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.'
   QueueListBy:
@@ -5204,28 +5204,28 @@ definitions:
     type: object
     properties:
       Height:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin2Max2147483647'
         description: Height of rectangle in pixels. Specify only even numbers.
       Width:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin2Max2147483647'
         description: Width of rectangle in pixels. Specify only even numbers.
       X:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'The distance, in pixels, between the rectangle and the left edge of the video frame. Specify only even numbers.'
       'Y':
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'The distance, in pixels, between the rectangle and the top edge of the video frame. Specify only even numbers.'
     description: Use Rectangle to identify a specific area of the video frame.
   RemixSettings:
     type: object
     properties:
       ChannelMapping:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ChannelMapping'
       ChannelsIn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max16'
         description: 'Specify the number of audio channels from your input that you want to use in your output. With remixing, you might combine or split the data in these channels, so the number of channels in your final output might be different.'
       ChannelsOut:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max8'
         description: 'Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8'
     description: 'Use Manual audio remixing (RemixSettings) to adjust audio levels for each audio channel in each output of your job. With audio remixing, you can output more or fewer audio channels than your input audio source provides.'
   RenewalType:
@@ -5238,22 +5238,22 @@ definitions:
     type: object
     properties:
       Commitment:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Commitment'
         description: The length of the term of your reserved queue pricing plan commitment.
       ExpiresAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds for when the current pricing plan term for this reserved queue expires.
       PurchasedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampUnix'
         description: The timestamp in epoch seconds for when you set up the current pricing plan for this reserved queue.
       RenewalType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RenewalType'
         description: Specifies whether the term of your reserved queue pricing plan is automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term.
       ReservedSlots:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: 'Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. When you increase this number, you extend your existing commitment with a new 12-month commitment for a larger number of RTS. The new commitment begins when you purchase the additional capacity. You can''t decrease the number of RTS in your reserved queue.'
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReservationPlanStatus'
         description: Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
     description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
   ReservationPlanSettings:
@@ -5264,13 +5264,13 @@ definitions:
       - RenewalType
     properties:
       Commitment:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Commitment'
         description: The length of the term of your reserved queue pricing plan commitment.
       RenewalType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RenewalType'
         description: 'Specifies whether the term of your reserved queue pricing plan is automatically extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term. When your term is auto renewed, you extend your commitment by 12 months from the auto renew date. You can cancel this commitment.'
       ReservedSlots:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: Specifies the number of reserved transcode slots (RTS) for this queue. The number of RTS determines how many jobs the queue can process in parallel; each RTS can process one job at a time. You can't decrease the number of RTS in your reserved queue. You can increase the number of RTS by extending your existing commitment with a new 12-month commitment for the larger number. The new commitment begins when you purchase the additional capacity. You can't cancel your commitment or revert to your original commitment after you increase the capacity.
     description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
   ReservationPlanStatus:
@@ -5283,10 +5283,10 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The Amazon Resource Name (ARN) of the resource.
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOf__string'
         description: The tags for the resource.
     description: The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert resource.
   RespondToAfd:
@@ -5314,64 +5314,64 @@ definitions:
     type: object
     properties:
       Framerate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SccDestinationFramerate'
     description: Settings for SCC caption output.
   SpekeKeyProvider:
     type: object
     properties:
       CertificateArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternArnAwsAcm'
         description: Optional AWS Certificate Manager ARN for a certificate to send to the keyprovider. The certificate holds a key used by the keyprovider to encrypt the keys in its response.
       ResourceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The SPEKE-compliant server uses Resource ID (ResourceId) to identify content.
       SystemIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12'
         description: Relates to SPEKE implementation. DRM system identifiers. DASH output groups support a max of two system ids. Other group types support one system id.
       Url:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternHttps'
         description: Use URL (Url) to specify the SPEKE-compliant server that will provide keys for content.
     description: Settings for use with a SPEKE key provider
   StaticKeyProvider:
     type: object
     properties:
       KeyFormat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternIdentityAZaZ26AZaZ09163'
         description: Relates to DRM implementation. Sets the value of the KEYFORMAT attribute. Must be 'identity' or a reverse DNS string. May be omitted to indicate an implicit value of 'identity'.
       KeyFormatVersions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternDD'
         description: Relates to DRM implementation. Either a single positive integer version value or a slash delimited list of version values (1/2/3).
       StaticKeyValue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPatternAZaZ0932'
         description: Relates to DRM implementation. Use a 32-character hexidecimal string to specify Key Value (StaticKeyValue).
       Url:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Relates to DRM implementation. The location of the license server used for protecting content.
     description: Use these settings to set up encryption with a static key provider.
   TeletextDestinationSettings:
     type: object
     properties:
       PageNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin3Max3Pattern1809aFAF09aEAE'
         description: 'Set pageNumber to the Teletext page number for the destination captions for this output. This value must be a three-digit hexadecimal string; strings ending in -FF are invalid. If you are passing through the entire set of Teletext data, do not use this field.'
     description: Settings for Teletext caption output
   TeletextSourceSettings:
     type: object
     properties:
       PageNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringMin3Max3Pattern1809aFAF09aEAE'
         description: Use Page Number (PageNumber) to specify the three-digit hexadecimal page number that will be used for Teletext captions. Do not use this setting if you are passing through teletext from the input source to output.
     description: 'Settings specific to Teletext caption sources, including Page number.'
   TimecodeBurnin:
     type: object
     properties:
       FontSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin10Max48'
         description: 'Use Font Size (FontSize) to set the font size of any burned-in timecode. Valid values are 10, 16, 32, 48.'
       Position:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimecodeBurninPosition'
       Prefix:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPattern'
         description: 'Use Prefix (Prefix) to place ASCII characters before any burned-in timecode. For example, a prefix of "EZ-" will result in the timecode "EZ-00:00:00:00". Provide either the characters themselves or the ASCII code equivalents. The supported range of characters is 0x20 through 0x7e. This includes letters, numbers, and all special characters represented on a standard English keyboard.'
     description: Timecode burn-in (TimecodeBurnIn)--Burns the output timecode and specified prefix into the output.
   TimecodeBurninPosition:
@@ -5391,15 +5391,15 @@ definitions:
     type: object
     properties:
       Anchor:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPattern010920405090509092'
         description: 'If you use an editing platform that relies on an anchor timecode, use Anchor Timecode (Anchor) to specify a timecode that will match the input video frame to the output video frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF). This setting ignores framerate conversion. System behavior for Anchor Timecode varies depending on your setting for Source (TimecodeSource). * If Source (TimecodeSource) is set to Specified Start (SPECIFIEDSTART), the first input frame is the specified value in Start Timecode (Start). Anchor Timecode (Anchor) and Start Timecode (Start) are used calculate output timecode. * If Source (TimecodeSource) is set to Start at 0 (ZEROBASED)  the  first frame is 00:00:00:00. * If Source (TimecodeSource) is set to Embedded (EMBEDDED), the  first frame is the timecode value on the first input frame of the input.'
       Source:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimecodeSource'
       Start:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPattern010920405090509092'
         description: 'Only use when you set Source (TimecodeSource) to Specified start (SPECIFIEDSTART). Use Start timecode (Start) to specify the timecode for the initial frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF).'
       TimestampOffset:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__stringPattern0940191020191209301'
         description: 'Only applies to outputs that support program-date-time stamp. Use Timestamp offset (TimestampOffset) to overwrite the timecode date without affecting the time and frame number. Provide the new date as a string in the format "yyyy-mm-dd".  To use Time stamp offset, you must also enable Insert program-date-time (InsertProgramDateTime) in the output settings. For example, if the date part of your timecodes is 2002-1-25 and you want to change it to one year later, set Timestamp offset (TimestampOffset) to 2003-1-25.'
     description: These settings control how the service handles timecodes throughout the job. These settings don't affect input clipping.
   TimecodeSource:
@@ -5419,27 +5419,27 @@ definitions:
     type: object
     properties:
       Id3Insertions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfId3Insertion'
         description: Id3Insertions contains the array of Id3Insertion instances.
     description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
   Timing:
     type: object
     properties:
       FinishTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampUnix'
         description: 'The time, in Unix epoch format, that the transcoding job finished'
       StartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampUnix'
         description: 'The time, in Unix epoch format, that transcoding for the job began.'
       SubmitTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__timestampUnix'
         description: 'The time, in Unix epoch format, that you submitted the job.'
     description: 'Information about when jobs are submitted, started, and finished is specified in Unix epoch format in seconds.'
   TtmlDestinationSettings:
     type: object
     properties:
       StylePassthrough:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TtmlStylePassthrough'
     description: 'Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough).'
   TtmlStylePassthrough:
     type: string
@@ -5465,103 +5465,103 @@ definitions:
     type: object
     properties:
       Codec:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VideoCodec'
         description: Specifies the video codec. This must be equal to one of the enum values defined by the object  VideoCodec.
       FrameCaptureSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FrameCaptureSettings'
       H264Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H264Settings'
       H265Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/H265Settings'
       Mpeg2Settings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Mpeg2Settings'
       ProresSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProresSettings'
     description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value you choose for Video codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings'
   VideoDescription:
     type: object
     properties:
       AfdSignaling:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AfdSignaling'
       AntiAlias:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AntiAlias'
       CodecSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VideoCodecSettings'
       ColorMetadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ColorMetadata'
       Crop:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Rectangle'
         description: 'Applies only if your input aspect ratio is different from your output aspect ratio. Use Input cropping rectangle (Crop) to specify the  video area the service will include in the output. This will crop the input source, causing video pixels to be removed on encode. Do not use this setting if you have enabled Stretch to output (stretchToOutput) in your output settings.'
       DropFrameTimecode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DropFrameTimecode'
       FixedAfd:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max15'
         description: Applies only if you set AFD Signaling(AfdSignaling) to Fixed (FIXED). Use Fixed (FixedAfd) to specify a four-bit AFD value which the service will write on all  frames of this video output.
       Height:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max2160'
         description: 'Use the Height (Height) setting to define the video resolution height for this output. Specify in pixels. If you don''t provide a value here, the service will use the input height.'
       Position:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Rectangle'
         description: Use Position (Position) to point to a rectangle object to define your position. This setting overrides any other aspect ratio.
       RespondToAfd:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RespondToAfd'
       ScalingBehavior:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ScalingBehavior'
       Sharpness:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin0Max100'
         description: 'Use Sharpness (Sharpness)setting to specify the strength of anti-aliasing. This setting changes the width of the anti-alias filter kernel used for scaling. Sharpness only applies if your output resolution is different from your input resolution, and if you set Anti-alias (AntiAlias) to ENABLED. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.'
       TimecodeInsertion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VideoTimecodeInsertion'
       VideoPreprocessors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VideoPreprocessor'
         description: Find additional transcoding features under Preprocessors (VideoPreprocessors). Enable the features at each output individually. These features are disabled by default.
       Width:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin32Max4096'
         description: 'Use Width (Width) to define the video resolution width, in pixels, for this output. If you don''t provide a value here, the service will use the input width.'
     description: Settings for video outputs
   VideoDetail:
     type: object
     properties:
       HeightInPx:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: Height in pixels for the output
       WidthInPx:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: Width in pixels for the output
     description: Contains details about the output's video stream
   VideoPreprocessor:
     type: object
     properties:
       ColorCorrector:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ColorCorrector'
         description: Enable the Color corrector (ColorCorrector) feature if necessary. Enable or disable this feature for each output individually. This setting is disabled by default.
       Deinterlacer:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Deinterlacer'
         description: Use Deinterlacer (Deinterlacer) to produce smoother motion and a clearer picture.
       ImageInserter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ImageInserter'
         description: Enable the Image inserter (ImageInserter) feature to include a graphic overlay on your video. Enable or disable this feature for each output individually. This setting is disabled by default.
       NoiseReducer:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NoiseReducer'
         description: Enable the Noise reducer (NoiseReducer) feature to remove noise from your video output if necessary. Enable or disable this feature for each output individually. This setting is disabled by default.
       TimecodeBurnin:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimecodeBurnin'
         description: Timecode burn-in (TimecodeBurnIn)--Burns the output timecode and specified prefix into the output.
     description: Find additional transcoding features under Preprocessors (VideoPreprocessors). Enable the features at each output individually. These features are disabled by default.
   VideoSelector:
     type: object
     properties:
       ColorSpace:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ColorSpace'
       ColorSpaceUsage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ColorSpaceUsage'
       Hdr10Metadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Hdr10Metadata'
       Pid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max2147483647'
         description: 'Use PID (Pid) to select specific video data from an input file. Specify this value as an integer; the system automatically converts it to the hexidecimal value. For example, 257 selects PID 0x101. A PID, or packet identifier, is an identifier for a set of data in an MPEG-2 transport stream container.'
       ProgramNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Selects a specific program from within a multi-program transport stream. Note that Quad 4K is not currently supported.
     description: Selector for video.
   VideoTimecodeInsertion:
@@ -5580,15 +5580,15 @@ definitions:
     type: object
     properties:
       BitDepth:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin16Max24'
         description: 'Specify Bit depth (BitDepth), in bits per sample, to choose the encoding quality for this audio track.'
       Channels:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin1Max8'
         description: 'Set Channels to specify the number of channels in this output audio track. With WAV, valid values 1, 2, 4, and 8. In the console, these values are Mono, Stereo, 4-Channel, and 8-Channel, respectively.'
       Format:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WavFormat'
       SampleRate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integerMin8000Max192000'
         description: Sample rate in Hz.
     description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value WAV.
   __doubleMin0:
@@ -5883,107 +5883,107 @@ definitions:
   __listOfAudioDescription:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AudioDescription'
   __listOfCaptionDescription:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/CaptionDescription'
   __listOfCaptionDescriptionPreset:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/CaptionDescriptionPreset'
   __listOfEndpoint:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Endpoint'
   __listOfHlsAdMarkers:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/HlsAdMarkers'
   __listOfHlsCaptionLanguageMapping:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/HlsCaptionLanguageMapping'
   __listOfId3Insertion:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Id3Insertion'
   __listOfInput:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Input'
   __listOfInputClipping:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/InputClipping'
   __listOfInputTemplate:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/InputTemplate'
   __listOfInsertableImage:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/InsertableImage'
   __listOfJob:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Job'
   __listOfJobTemplate:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/JobTemplate'
   __listOfOutput:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Output'
   __listOfOutputChannelMapping:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OutputChannelMapping'
   __listOfOutputDetail:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OutputDetail'
   __listOfOutputGroup:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OutputGroup'
   __listOfOutputGroupDetail:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OutputGroupDetail'
   __listOfPreset:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Preset'
   __listOfQueue:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Queue'
   __listOf__integerMin1Max2147483647:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/__integerMin1Max2147483647'
   __listOf__integerMin32Max8182:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/__integerMin32Max8182'
   __listOf__integerMinNegative60Max6:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/__integerMinNegative60Max6'
   __listOf__string:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/__string'
   __listOf__stringMin1:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/__stringMin1'
   __listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12'
   __string:
     type: string
   __mapOfAudioSelector:

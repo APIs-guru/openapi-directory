@@ -2159,7 +2159,7 @@ definitions:
     type: object
     properties:
       EventSubscription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventSubscription'
   AddSourceIdentifierToSubscriptionMessage:
     type: object
     required:
@@ -2167,9 +2167,9 @@ definitions:
       - SourceIdentifier
     properties:
       SubscriptionName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SourceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   SubscriptionNotFoundFault: {}
   SourceNotFoundFault: {}
   AddTagsToResourceMessage:
@@ -2179,31 +2179,31 @@ definitions:
       - Tags
     properties:
       ResourceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
   DBInstanceNotFoundFault: {}
   DBSnapshotNotFoundFault: {}
   AuthorizeDBSecurityGroupIngressResult:
     type: object
     properties:
       DBSecurityGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSecurityGroup'
   AuthorizeDBSecurityGroupIngressMessage:
     type: object
     required:
       - DBSecurityGroupName
     properties:
       DBSecurityGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       CIDRIP:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EC2SecurityGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EC2SecurityGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EC2SecurityGroupOwnerId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBSecurityGroupNotFoundFault: {}
   InvalidDBSecurityGroupStateFault: {}
   AuthorizationAlreadyExistsFault: {}
@@ -2212,7 +2212,7 @@ definitions:
     type: object
     properties:
       DBParameterGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBParameterGroup'
   CopyDBParameterGroupMessage:
     type: object
     required:
@@ -2221,13 +2221,13 @@ definitions:
       - TargetDBParameterGroupDescription
     properties:
       SourceDBParameterGroupIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TargetDBParameterGroupIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TargetDBParameterGroupDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
   DBParameterGroupNotFoundFault: {}
   DBParameterGroupAlreadyExistsFault: {}
   DBParameterGroupQuotaExceededFault: {}
@@ -2235,7 +2235,7 @@ definitions:
     type: object
     properties:
       DBSnapshot:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSnapshot'
   CopyDBSnapshotMessage:
     type: object
     required:
@@ -2243,11 +2243,11 @@ definitions:
       - TargetDBSnapshotIdentifier
     properties:
       SourceDBSnapshotIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TargetDBSnapshotIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
   DBSnapshotAlreadyExistsFault: {}
   InvalidDBSnapshotStateFault: {}
   SnapshotQuotaExceededFault: {}
@@ -2255,7 +2255,7 @@ definitions:
     type: object
     properties:
       OptionGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionGroup'
   CopyOptionGroupMessage:
     type: object
     required:
@@ -2264,13 +2264,13 @@ definitions:
       - TargetOptionGroupDescription
     properties:
       SourceOptionGroupIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TargetOptionGroupIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TargetOptionGroupDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
   OptionGroupAlreadyExistsFault: {}
   OptionGroupNotFoundFault: {}
   OptionGroupQuotaExceededFault: {}
@@ -2278,7 +2278,7 @@ definitions:
     type: object
     properties:
       DBInstance:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBInstance'
   CreateDBInstanceMessage:
     type: object
     required:
@@ -2290,61 +2290,61 @@ definitions:
       - MasterUserPassword
     properties:
       DBName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AllocatedStorage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Engine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MasterUsername:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MasterUserPassword:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSecurityGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSecurityGroupNameList'
       VpcSecurityGroupIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VpcSecurityGroupIdList'
       AvailabilityZone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSubnetGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       PreferredMaintenanceWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBParameterGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       BackupRetentionPeriod:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       PreferredBackupWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Port:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       MultiAZ:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       EngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AutoMinorVersionUpgrade:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       LicenseModel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Iops:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       OptionGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       CharacterSetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       PubliclyAccessible:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
       StorageType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TdeCredentialArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TdeCredentialPassword:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBInstanceAlreadyExistsFault: {}
   InsufficientDBInstanceCapacityFault: {}
   InstanceQuotaExceededFault: {}
@@ -2360,7 +2360,7 @@ definitions:
     type: object
     properties:
       DBInstance:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBInstance'
   CreateDBInstanceReadReplicaMessage:
     type: object
     required:
@@ -2368,29 +2368,29 @@ definitions:
       - SourceDBInstanceIdentifier
     properties:
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SourceDBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AvailabilityZone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Port:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       AutoMinorVersionUpgrade:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       Iops:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       OptionGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       PubliclyAccessible:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
       DBSubnetGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       StorageType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   InvalidDBInstanceStateFault: {}
   DBSubnetGroupNotAllowedFault: {}
   InvalidDBSubnetGroupFault: {}
@@ -2398,7 +2398,7 @@ definitions:
     type: object
     properties:
       DBParameterGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBParameterGroup'
   CreateDBParameterGroupMessage:
     type: object
     required:
@@ -2407,18 +2407,18 @@ definitions:
       - Description
     properties:
       DBParameterGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBParameterGroupFamily:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
   CreateDBSecurityGroupResult:
     type: object
     properties:
       DBSecurityGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSecurityGroup'
   CreateDBSecurityGroupMessage:
     type: object
     required:
@@ -2426,11 +2426,11 @@ definitions:
       - DBSecurityGroupDescription
     properties:
       DBSecurityGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSecurityGroupDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
   DBSecurityGroupAlreadyExistsFault: {}
   DBSecurityGroupQuotaExceededFault: {}
   DBSecurityGroupNotSupportedFault: {}
@@ -2438,7 +2438,7 @@ definitions:
     type: object
     properties:
       DBSnapshot:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSnapshot'
   CreateDBSnapshotMessage:
     type: object
     required:
@@ -2446,16 +2446,16 @@ definitions:
       - DBInstanceIdentifier
     properties:
       DBSnapshotIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
   CreateDBSubnetGroupResult:
     type: object
     properties:
       DBSubnetGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSubnetGroup'
   CreateDBSubnetGroupMessage:
     type: object
     required:
@@ -2464,13 +2464,13 @@ definitions:
       - SubnetIds
     properties:
       DBSubnetGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSubnetGroupDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SubnetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetIdentifierList'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
   DBSubnetGroupAlreadyExistsFault: {}
   DBSubnetGroupQuotaExceededFault: {}
   DBSubnetQuotaExceededFault: {}
@@ -2478,7 +2478,7 @@ definitions:
     type: object
     properties:
       EventSubscription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventSubscription'
   CreateEventSubscriptionMessage:
     type: object
     required:
@@ -2486,19 +2486,19 @@ definitions:
       - SnsTopicArn
     properties:
       SubscriptionName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SnsTopicArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EventCategories:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventCategoriesList'
       SourceIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SourceIdsList'
       Enabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
   EventSubscriptionQuotaExceededFault: {}
   SubscriptionAlreadyExistFault: {}
   SNSInvalidTopicFault: {}
@@ -2509,7 +2509,7 @@ definitions:
     type: object
     properties:
       OptionGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionGroup'
   CreateOptionGroupMessage:
     type: object
     required:
@@ -2519,38 +2519,38 @@ definitions:
       - OptionGroupDescription
     properties:
       OptionGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EngineName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MajorEngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       OptionGroupDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
   DeleteDBInstanceResult:
     type: object
     properties:
       DBInstance:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBInstance'
   DeleteDBInstanceMessage:
     type: object
     required:
       - DBInstanceIdentifier
     properties:
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SkipFinalSnapshot:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       FinalDBSnapshotIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DeleteDBParameterGroupMessage:
     type: object
     required:
       - DBParameterGroupName
     properties:
       DBParameterGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   InvalidDBParameterGroupStateFault: {}
   DeleteDBSecurityGroupMessage:
     type: object
@@ -2558,40 +2558,40 @@ definitions:
       - DBSecurityGroupName
     properties:
       DBSecurityGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DeleteDBSnapshotResult:
     type: object
     properties:
       DBSnapshot:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSnapshot'
   DeleteDBSnapshotMessage:
     type: object
     required:
       - DBSnapshotIdentifier
     properties:
       DBSnapshotIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DeleteDBSubnetGroupMessage:
     type: object
     required:
       - DBSubnetGroupName
     properties:
       DBSubnetGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   InvalidDBSubnetGroupStateFault: {}
   InvalidDBSubnetStateFault: {}
   DeleteEventSubscriptionResult:
     type: object
     properties:
       EventSubscription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventSubscription'
   DeleteEventSubscriptionMessage:
     type: object
     required:
       - SubscriptionName
     properties:
       SubscriptionName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   InvalidEventSubscriptionStateFault: {}
   DeleteOptionGroupMessage:
     type: object
@@ -2599,393 +2599,393 @@ definitions:
       - OptionGroupName
     properties:
       OptionGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   InvalidOptionGroupStateFault: {}
   DBEngineVersionMessage:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBEngineVersions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBEngineVersionList'
   DescribeDBEngineVersionsMessage:
     type: object
     properties:
       Engine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBParameterGroupFamily:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DefaultOnly:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       ListSupportedCharacterSets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
   DBInstanceMessage:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstances:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBInstanceList'
   DescribeDBInstancesMessage:
     type: object
     properties:
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DescribeDBLogFilesResponse:
     type: object
     properties:
       DescribeDBLogFiles:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DescribeDBLogFilesList'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DescribeDBLogFilesMessage:
     type: object
     required:
       - DBInstanceIdentifier
     properties:
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       FilenameContains:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       FileLastWritten:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
       FileSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBParameterGroupsMessage:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBParameterGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBParameterGroupList'
   DescribeDBParameterGroupsMessage:
     type: object
     properties:
       DBParameterGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBParameterGroupDetails:
     type: object
     properties:
       Parameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ParametersList'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DescribeDBParametersMessage:
     type: object
     required:
       - DBParameterGroupName
     properties:
       DBParameterGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Source:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBSecurityGroupMessage:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSecurityGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSecurityGroups'
   DescribeDBSecurityGroupsMessage:
     type: object
     properties:
       DBSecurityGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBSnapshotMessage:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSnapshots:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSnapshotList'
   DescribeDBSnapshotsMessage:
     type: object
     properties:
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSnapshotIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SnapshotType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBSubnetGroupMessage:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSubnetGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSubnetGroups'
   DescribeDBSubnetGroupsMessage:
     type: object
     properties:
       DBSubnetGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DescribeEngineDefaultParametersResult:
     type: object
     properties:
       EngineDefaults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EngineDefaults'
   DescribeEngineDefaultParametersMessage:
     type: object
     required:
       - DBParameterGroupFamily
     properties:
       DBParameterGroupFamily:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   EventCategoriesMessage:
     type: object
     properties:
       EventCategoriesMapList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventCategoriesMapList'
   DescribeEventCategoriesMessage:
     type: object
     properties:
       SourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
   EventSubscriptionsMessage:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EventSubscriptionsList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventSubscriptionsList'
   DescribeEventSubscriptionsMessage:
     type: object
     properties:
       SubscriptionName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   EventsMessage:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Events:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventList'
   DescribeEventsMessage:
     type: object
     properties:
       SourceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SourceType'
       StartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
       EndTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
       Duration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       EventCategories:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventCategoriesList'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   OptionGroupOptionsMessage:
     type: object
     properties:
       OptionGroupOptions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionGroupOptionsList'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DescribeOptionGroupOptionsMessage:
     type: object
     required:
       - EngineName
     properties:
       EngineName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MajorEngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   OptionGroups:
     type: object
     properties:
       OptionGroupsList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionGroupsList'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DescribeOptionGroupsMessage:
     type: object
     properties:
       OptionGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       EngineName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MajorEngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   OrderableDBInstanceOptionsMessage:
     type: object
     properties:
       OrderableDBInstanceOptions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OrderableDBInstanceOptionsList'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DescribeOrderableDBInstanceOptionsMessage:
     type: object
     required:
       - Engine
     properties:
       Engine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       LicenseModel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Vpc:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   ReservedDBInstanceMessage:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ReservedDBInstances:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReservedDBInstanceList'
   DescribeReservedDBInstancesMessage:
     type: object
     properties:
       ReservedDBInstanceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ReservedDBInstancesOfferingId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Duration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ProductDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       OfferingType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MultiAZ:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   ReservedDBInstanceNotFoundFault: {}
   ReservedDBInstancesOfferingMessage:
     type: object
     properties:
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ReservedDBInstancesOfferings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReservedDBInstancesOfferingList'
   DescribeReservedDBInstancesOfferingsMessage:
     type: object
     properties:
       ReservedDBInstancesOfferingId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Duration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ProductDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       OfferingType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MultiAZ:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
       MaxRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   ReservedDBInstancesOfferingNotFoundFault: {}
   DownloadDBLogFilePortionDetails:
     type: object
     properties:
       LogFileData:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AdditionalDataPending:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
   DownloadDBLogFilePortionMessage:
     type: object
     required:
@@ -2993,86 +2993,86 @@ definitions:
       - LogFileName
     properties:
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       LogFileName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       NumberOfLines:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
   DBLogFileNotFoundFault: {}
   TagListMessage:
     type: object
     properties:
       TagList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
   ListTagsForResourceMessage:
     type: object
     required:
       - ResourceName
     properties:
       ResourceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
   ModifyDBInstanceResult:
     type: object
     properties:
       DBInstance:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBInstance'
   ModifyDBInstanceMessage:
     type: object
     required:
       - DBInstanceIdentifier
     properties:
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AllocatedStorage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSecurityGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSecurityGroupNameList'
       VpcSecurityGroupIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VpcSecurityGroupIdList'
       ApplyImmediately:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       MasterUserPassword:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBParameterGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       BackupRetentionPeriod:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       PreferredBackupWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       PreferredMaintenanceWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MultiAZ:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       EngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AllowMajorVersionUpgrade:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       AutoMinorVersionUpgrade:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       Iops:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       OptionGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       NewDBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       StorageType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TdeCredentialArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TdeCredentialPassword:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBUpgradeDependencyFailureFault: {}
   DBParameterGroupNameMessage:
     type: object
     properties:
       DBParameterGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   ModifyDBParameterGroupMessage:
     type: object
     required:
@@ -3080,14 +3080,14 @@ definitions:
       - Parameters
     properties:
       DBParameterGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Parameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ParametersList'
   ModifyDBSubnetGroupResult:
     type: object
     properties:
       DBSubnetGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSubnetGroup'
   ModifyDBSubnetGroupMessage:
     type: object
     required:
@@ -3095,105 +3095,105 @@ definitions:
       - SubnetIds
     properties:
       DBSubnetGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSubnetGroupDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SubnetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetIdentifierList'
   SubnetAlreadyInUse: {}
   ModifyEventSubscriptionResult:
     type: object
     properties:
       EventSubscription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventSubscription'
   ModifyEventSubscriptionMessage:
     type: object
     required:
       - SubscriptionName
     properties:
       SubscriptionName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SnsTopicArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EventCategories:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventCategoriesList'
       Enabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
   ModifyOptionGroupResult:
     type: object
     properties:
       OptionGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionGroup'
   ModifyOptionGroupMessage:
     type: object
     required:
       - OptionGroupName
     properties:
       OptionGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       OptionsToInclude:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionConfigurationList'
       OptionsToRemove:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionNamesList'
       ApplyImmediately:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
   PromoteReadReplicaResult:
     type: object
     properties:
       DBInstance:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBInstance'
   PromoteReadReplicaMessage:
     type: object
     required:
       - DBInstanceIdentifier
     properties:
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       BackupRetentionPeriod:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       PreferredBackupWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   PurchaseReservedDBInstancesOfferingResult:
     type: object
     properties:
       ReservedDBInstance:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReservedDBInstance'
   PurchaseReservedDBInstancesOfferingMessage:
     type: object
     required:
       - ReservedDBInstancesOfferingId
     properties:
       ReservedDBInstancesOfferingId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ReservedDBInstanceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
   ReservedDBInstanceAlreadyExistsFault: {}
   ReservedDBInstanceQuotaExceededFault: {}
   RebootDBInstanceResult:
     type: object
     properties:
       DBInstance:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBInstance'
   RebootDBInstanceMessage:
     type: object
     required:
       - DBInstanceIdentifier
     properties:
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ForceFailover:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
   RemoveSourceIdentifierFromSubscriptionResult:
     type: object
     properties:
       EventSubscription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventSubscription'
   RemoveSourceIdentifierFromSubscriptionMessage:
     type: object
     required:
@@ -3201,9 +3201,9 @@ definitions:
       - SourceIdentifier
     properties:
       SubscriptionName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SourceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   RemoveTagsFromResourceMessage:
     type: object
     required:
@@ -3211,25 +3211,25 @@ definitions:
       - TagKeys
     properties:
       ResourceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TagKeys:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KeyList'
   ResetDBParameterGroupMessage:
     type: object
     required:
       - DBParameterGroupName
     properties:
       DBParameterGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ResetAllParameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       Parameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ParametersList'
   RestoreDBInstanceFromDBSnapshotResult:
     type: object
     properties:
       DBInstance:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBInstance'
   RestoreDBInstanceFromDBSnapshotMessage:
     type: object
     required:
@@ -3237,47 +3237,47 @@ definitions:
       - DBSnapshotIdentifier
     properties:
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSnapshotIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Port:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       AvailabilityZone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSubnetGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MultiAZ:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       PubliclyAccessible:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       AutoMinorVersionUpgrade:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       LicenseModel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Engine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Iops:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       OptionGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
       StorageType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TdeCredentialArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TdeCredentialPassword:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   InvalidRestoreFault: {}
   RestoreDBInstanceToPointInTimeResult:
     type: object
     properties:
       DBInstance:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBInstance'
   RestoreDBInstanceToPointInTimeMessage:
     type: object
     required:
@@ -3285,66 +3285,66 @@ definitions:
       - TargetDBInstanceIdentifier
     properties:
       SourceDBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TargetDBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       RestoreTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
       UseLatestRestorableTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Port:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       AvailabilityZone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSubnetGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MultiAZ:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       PubliclyAccessible:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       AutoMinorVersionUpgrade:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       LicenseModel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Engine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Iops:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       OptionGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
       StorageType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TdeCredentialArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TdeCredentialPassword:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   PointInTimeRestoreNotEnabledFault: {}
   RevokeDBSecurityGroupIngressResult:
     type: object
     properties:
       DBSecurityGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSecurityGroup'
   RevokeDBSecurityGroupIngressMessage:
     type: object
     required:
       - DBSecurityGroupName
     properties:
       DBSecurityGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       CIDRIP:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EC2SecurityGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EC2SecurityGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EC2SecurityGroupOwnerId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   '[object Object]': {}
   ApplyMethod:
     type: string
@@ -3355,11 +3355,11 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   AvailabilityZoneList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AvailabilityZone'
   Boolean:
     type: boolean
   BooleanOptional:
@@ -3368,253 +3368,253 @@ definitions:
     type: object
     properties:
       CharacterSetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       CharacterSetDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBEngineVersion:
     type: object
     properties:
       Engine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBParameterGroupFamily:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBEngineDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBEngineVersionDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DefaultCharacterSet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CharacterSet'
       SupportedCharacterSets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SupportedCharacterSetsList'
   DBEngineVersionList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DBEngineVersion'
   DBInstance:
     type: object
     properties:
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Engine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MasterUsername:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Endpoint:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Endpoint'
       AllocatedStorage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
       InstanceCreateTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
       PreferredBackupWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       BackupRetentionPeriod:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
       DBSecurityGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSecurityGroupMembershipList'
       VpcSecurityGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VpcSecurityGroupMembershipList'
       DBParameterGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBParameterGroupStatusList'
       AvailabilityZone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSubnetGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSubnetGroup'
       PreferredMaintenanceWindow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       PendingModifiedValues:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PendingModifiedValues'
       LatestRestorableTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
       MultiAZ:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       EngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AutoMinorVersionUpgrade:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       ReadReplicaSourceDBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ReadReplicaDBInstanceIdentifiers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReadReplicaDBInstanceIdentifierList'
       LicenseModel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Iops:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       OptionGroupMemberships:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionGroupMembershipList'
       CharacterSetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SecondaryAvailabilityZone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       PubliclyAccessible:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       StatusInfos:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBInstanceStatusInfoList'
       StorageType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TdeCredentialArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBInstanceList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DBInstance'
   DBInstanceStatusInfo:
     type: object
     properties:
       StatusType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Normal:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBInstanceStatusInfoList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DBInstanceStatusInfo'
   DBParameterGroup:
     type: object
     properties:
       DBParameterGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBParameterGroupFamily:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBParameterGroupList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DBParameterGroup'
   DBParameterGroupStatus:
     type: object
     properties:
       DBParameterGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ParameterApplyStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBParameterGroupStatusList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DBParameterGroupStatus'
   DBSecurityGroup:
     type: object
     properties:
       OwnerId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSecurityGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSecurityGroupDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       VpcId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EC2SecurityGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EC2SecurityGroupList'
       IPRanges:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IPRangeList'
   DBSecurityGroupMembership:
     type: object
     properties:
       DBSecurityGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBSecurityGroupMembershipList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DBSecurityGroupMembership'
   DBSecurityGroupNameList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   DBSecurityGroups:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DBSecurityGroup'
   DBSnapshot:
     type: object
     properties:
       DBSnapshotIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SnapshotCreateTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
       Engine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AllocatedStorage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Port:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
       AvailabilityZone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       VpcId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       InstanceCreateTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
       MasterUsername:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       LicenseModel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SnapshotType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Iops:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       OptionGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       PercentProgress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
       SourceRegion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       StorageType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       TdeCredentialArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   DBSnapshotList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DBSnapshot'
   DBSubnetGroup:
     type: object
     properties:
       DBSubnetGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBSubnetGroupDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       VpcId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SubnetGroupStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Subnets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetList'
   DBSubnetGroups:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DBSubnetGroup'
   DescribeDBLogFilesDetails:
     type: object
     properties:
       LogFileName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       LastWritten:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
       Size:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
   DescribeDBLogFilesList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DescribeDBLogFilesDetails'
   Double:
     type: number
     format: double
@@ -3622,90 +3622,90 @@ definitions:
     type: object
     properties:
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EC2SecurityGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EC2SecurityGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EC2SecurityGroupOwnerId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   EC2SecurityGroupList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/EC2SecurityGroup'
   Endpoint:
     type: object
     properties:
       Address:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Port:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
   EngineDefaults:
     type: object
     properties:
       DBParameterGroupFamily:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Parameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ParametersList'
   Event:
     type: object
     properties:
       SourceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SourceType'
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EventCategories:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventCategoriesList'
       Date:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
   EventCategoriesList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   EventCategoriesMap:
     type: object
     properties:
       SourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EventCategories:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventCategoriesList'
   EventCategoriesMapList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/EventCategoriesMap'
   EventList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Event'
   EventSubscription:
     type: object
     properties:
       CustomerAwsId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       CustSubscriptionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SnsTopicArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SubscriptionCreationTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SourceIdsList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SourceIdsList'
       EventCategoriesList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventCategoriesList'
       Enabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
   EventSubscriptionsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/EventSubscription'
   Filter:
     type: object
     required:
@@ -3713,28 +3713,28 @@ definitions:
       - Values
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Values:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterValueList'
   FilterList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Filter'
   FilterValueList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   IPRange:
     type: object
     properties:
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       CIDRIP:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   IPRangeList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/IPRange'
   Integer:
     type: integer
   IntegerOptional:
@@ -3742,326 +3742,326 @@ definitions:
   KeyList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   Long:
     type: integer
   Option:
     type: object
     properties:
       OptionName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       OptionDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Persistent:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       Permanent:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       Port:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       OptionSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionSettingConfigurationList'
       DBSecurityGroupMemberships:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSecurityGroupMembershipList'
       VpcSecurityGroupMemberships:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VpcSecurityGroupMembershipList'
   OptionConfiguration:
     type: object
     required:
       - OptionName
     properties:
       OptionName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Port:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       DBSecurityGroupMemberships:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DBSecurityGroupNameList'
       VpcSecurityGroupMemberships:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VpcSecurityGroupIdList'
       OptionSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionSettingsList'
   OptionConfigurationList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OptionConfiguration'
   OptionGroup:
     type: object
     properties:
       OptionGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       OptionGroupDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EngineName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MajorEngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Options:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionsList'
       AllowsVpcAndNonVpcInstanceMemberships:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       VpcId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   OptionGroupMembership:
     type: object
     properties:
       OptionGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   OptionGroupMembershipList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OptionGroupMembership'
   OptionGroupOption:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EngineName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MajorEngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MinimumRequiredMinorEngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       PortRequired:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       DefaultPort:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       OptionsDependedOn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionsDependedOn'
       Persistent:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       Permanent:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       OptionGroupOptionSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OptionGroupOptionSettingsList'
   OptionGroupOptionSetting:
     type: object
     properties:
       SettingName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SettingDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DefaultValue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ApplyType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AllowedValues:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       IsModifiable:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
   OptionGroupOptionSettingsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OptionGroupOptionSetting'
   OptionGroupOptionsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OptionGroupOption'
   OptionGroupsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OptionGroup'
   OptionNamesList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   OptionSetting:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DefaultValue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ApplyType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DataType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AllowedValues:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       IsModifiable:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       IsCollection:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
   OptionSettingConfigurationList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OptionSetting'
   OptionSettingsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OptionSetting'
   OptionsDependedOn:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   OptionsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Option'
   OrderableDBInstanceOption:
     type: object
     properties:
       Engine:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       EngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       LicenseModel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AvailabilityZones:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AvailabilityZoneList'
       MultiAZCapable:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       ReadReplicaCapable:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       Vpc:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       StorageType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SupportsIops:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
   OrderableDBInstanceOptionsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/OrderableDBInstanceOption'
   Parameter:
     type: object
     properties:
       ParameterName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ParameterValue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Source:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ApplyType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DataType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AllowedValues:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       IsModifiable:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       MinimumEngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ApplyMethod:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplyMethod'
   ParametersList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Parameter'
   PendingModifiedValues:
     type: object
     properties:
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       AllocatedStorage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       MasterUserPassword:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Port:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       BackupRetentionPeriod:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       MultiAZ:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanOptional'
       EngineVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Iops:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IntegerOptional'
       DBInstanceIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       StorageType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   ReadReplicaDBInstanceIdentifierList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   RecurringCharge:
     type: object
     properties:
       RecurringChargeAmount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Double'
       RecurringChargeFrequency:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   RecurringChargeList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/RecurringCharge'
   ReservedDBInstance:
     type: object
     properties:
       ReservedDBInstanceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ReservedDBInstancesOfferingId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       StartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TStamp'
       Duration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
       FixedPrice:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Double'
       UsagePrice:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Double'
       CurrencyCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
       ProductDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       OfferingType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MultiAZ:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       RecurringCharges:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RecurringChargeList'
   ReservedDBInstanceList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ReservedDBInstance'
   ReservedDBInstancesOffering:
     type: object
     properties:
       ReservedDBInstancesOfferingId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       DBInstanceClass:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Duration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
       FixedPrice:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Double'
       UsagePrice:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Double'
       CurrencyCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       ProductDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       OfferingType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       MultiAZ:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
       RecurringCharges:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RecurringChargeList'
   ReservedDBInstancesOfferingList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ReservedDBInstancesOffering'
   SourceIdsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   SourceType:
     type: string
     enum:
@@ -4075,23 +4075,23 @@ definitions:
     type: object
     properties:
       SubnetIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       SubnetAvailabilityZone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AvailabilityZone'
       SubnetStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   SubnetIdentifierList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   SubnetList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Subnet'
   SupportedCharacterSetsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/CharacterSet'
   TStamp:
     type: string
     format: date-time
@@ -4099,25 +4099,25 @@ definitions:
     type: object
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   TagList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Tag'
   VpcSecurityGroupIdList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   VpcSecurityGroupMembership:
     type: object
     properties:
       VpcSecurityGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
   VpcSecurityGroupMembershipList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/VpcSecurityGroupMembership'

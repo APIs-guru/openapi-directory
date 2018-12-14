@@ -558,66 +558,66 @@ definitions:
     type: object
     properties:
       details:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProjectDetails'
         description: ' Detailed information about the created AWS Mobile Hub project. '
     description: ' Result structure used in response to a request to create a project. '
   CreateProjectRequest:
     type: object
     properties:
       contents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Contents'
         description: ' ZIP or YAML file which contains configuration settings to be used when creating the project. This may be the contents of the file downloaded from the URL provided in an export project operation. '
     description: ' Request structure used to request a project be created. '
   InternalFailureException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: ' The service has encountered an unexpected error condition which prevents it from servicing the request. '
   ServiceUnavailableException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: ' The service is temporarily unavailable. The request should be retried after some time delay. '
   UnauthorizedException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: ' Credentials of the caller are insufficient to authorize the request. '
   TooManyRequestsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: ' Too many requests have been received for this AWS account in too short a time. The request should be retried after some time delay. '
   BadRequestException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: ' The request cannot be processed because some parameter is not valid or the project state prevents the operation from being performed. '
   NotFoundException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: ' No entity can be found with the specified identifier. '
   LimitExceededException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: ' There are too many AWS Mobile Hub projects in the account or the account has exceeded the maximum number of resources in some AWS service. You should create another sub-account using AWS Organizations or remove some resources and retry your request. '
   DeleteProjectResult:
     type: object
     properties:
       deletedResources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Resources'
         description: ' Resources which were deleted. '
       orphanedResources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Resources'
         description: ' Resources which were not deleted, due to a risk of losing potentially important data or files. '
     description: ' Result structure used in response to request to delete a project. '
   DeleteProjectRequest:
@@ -628,7 +628,7 @@ definitions:
     type: object
     properties:
       details:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BundleDetails'
         description: ' The details of the bundle. '
     description: ' Result structure contains the details of the bundle. '
   DescribeBundleRequest:
@@ -639,7 +639,7 @@ definitions:
     type: object
     properties:
       details:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProjectDetails'
     description: ' Result structure used for requests of project details. '
   DescribeProjectRequest:
     type: object
@@ -649,7 +649,7 @@ definitions:
     type: object
     properties:
       downloadUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DownloadUrl'
         description: ' URL which contains the custom-generated SDK and tool packages used to integrate the client mobile app or web app with the AWS resources created by the AWS Mobile Hub project. '
     description: ' Result structure which contains link to download custom-generated SDK and tool packages used to integrate mobile web or app clients with backed AWS resources. '
   ExportBundleRequest:
@@ -660,13 +660,13 @@ definitions:
     type: object
     properties:
       downloadUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DownloadUrl'
         description: ' URL which can be used to download the exported project configuation file(s). '
       shareUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ShareUrl'
         description: ' URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. '
       snapshotId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SnapshotId'
         description: ' Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. '
     description: ' Result structure used for requests to export project configuration details. '
   ExportProjectRequest:
@@ -677,10 +677,10 @@ definitions:
     type: object
     properties:
       bundleList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BundleList'
         description: ' A list of bundles. '
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
     description: ' Result structure contains a list of all available bundles with details. '
   ListBundlesRequest:
@@ -691,9 +691,9 @@ definitions:
     type: object
     properties:
       projects:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProjectSummaries'
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
     description: ' Result structure used for requests to list projects in AWS Mobile Hub. '
   ListProjectsRequest:
     type: object
@@ -703,21 +703,21 @@ definitions:
     type: object
     properties:
       details:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProjectDetails'
         description: ' Detailed information about the updated AWS Mobile Hub project. '
     description: ' Result structure used for requests to updated project configuration. '
   UpdateProjectRequest:
     type: object
     properties:
       contents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Contents'
         description: ' ZIP or YAML file which contains project configuration to be updated. This should be the contents of the file downloaded from the URL provided in an export project operation. '
     description: ' Request structure used for requests to update project configuration. '
   AccountActionRequiredException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: ' Account Action is required in order to continue the request. '
   '[object Object]': {}
   AttributeKey:
@@ -745,17 +745,17 @@ definitions:
     type: object
     properties:
       bundleId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BundleId'
       title:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BundleTitle'
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BundleVersion'
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BundleDescription'
       iconUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IconUrl'
       availablePlatforms:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Platforms'
     description: ' The details of the bundle. '
   BundleId:
     type: string
@@ -764,7 +764,7 @@ definitions:
     type: array
     description: ' A list of bundles. '
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/BundleDetails'
   BundleTitle:
     type: string
     description: ' Title of the download bundle. '
@@ -812,29 +812,29 @@ definitions:
     type: array
     description: ' Developer desktop or mobile app or website platforms. '
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Platform'
   ProjectDetails:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProjectName'
       projectId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProjectId'
       region:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProjectRegion'
       state:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProjectState'
       createdDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Date'
         description: ' Date the project was created. '
       lastUpdatedDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Date'
         description: ' Date of the last modification of the project. '
       consoleUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConsoleUrl'
         description: ' Website URL for this project in the AWS Mobile Hub console. '
       resources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Resources'
     description: ' Detailed information about an AWS Mobile Hub project. '
   ProjectId:
     type: string
@@ -856,30 +856,30 @@ definitions:
     type: array
     description: ' List of projects. '
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ProjectSummary'
   ProjectSummary:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProjectName'
         description: ' Name of the project. '
       projectId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProjectId'
         description: ' Unique project identifier. '
     description: ' Summary information about an AWS Mobile Hub project. '
   Resource:
     type: object
     properties:
       type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceType'
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceName'
       arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceArn'
       feature:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Feature'
       attributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Attributes'
     description: ' Information about an instance of an AWS resource associated with a project. '
   ResourceArn:
     type: string
@@ -894,7 +894,7 @@ definitions:
     type: array
     description: ' List of AWS resources associated with a project. '
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Resource'
   ShareUrl:
     type: string
     description: ' URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. '

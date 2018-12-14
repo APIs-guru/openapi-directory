@@ -217,41 +217,41 @@ definitions:
     type: object
     properties:
       ResponseMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeleteResponseMessage'
     description: Response of DeleteReportDefinition
   DeleteReportDefinitionRequest:
     type: object
     properties:
       ReportName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReportName'
     description: Request of DeleteReportDefinition
   InternalErrorException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: This exception is thrown on a known dependency failure.
   ValidationException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: 'This exception is thrown when providing an invalid input. eg. Put a report preference with an invalid report name, or Delete a report preference with an empty report name.'
   DescribeReportDefinitionsResponse:
     type: object
     properties:
       ReportDefinitions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReportDefinitionList'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
     description: Response of DescribeReportDefinitions
   DescribeReportDefinitionsRequest:
     type: object
     properties:
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
     description: Request of DescribeReportDefinitions
   PutReportDefinitionResponse:
     type: object
@@ -263,19 +263,19 @@ definitions:
       - ReportDefinition
     properties:
       ReportDefinition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReportDefinition'
     description: Request of PutReportDefinition
   DuplicateReportNameException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: This exception is thrown when putting a report preference with a name that already exists.
   ReportLimitReachedException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: This exception is thrown when the number of report preference reaches max limit. The max number is 5.
   AWSRegion:
     type: string
@@ -300,7 +300,7 @@ definitions:
     type: array
     description: A list of additional artifacts.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AdditionalArtifact'
   CompressionFormat:
     type: string
     enum:
@@ -334,29 +334,29 @@ definitions:
       - S3Region
     properties:
       ReportName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReportName'
       TimeUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeUnit'
       Format:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReportFormat'
       Compression:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CompressionFormat'
       AdditionalSchemaElements:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SchemaElementList'
       S3Bucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Bucket'
       S3Prefix:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Prefix'
       S3Region:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AWSRegion'
       AdditionalArtifacts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AdditionalArtifactList'
     description: 'The definition of AWS Cost and Usage Report. Customer can specify the report name, time unit, report format, compression format, S3 bucket and additional artifacts and schema elements in the definition.'
   ReportDefinitionList:
     type: array
     description: A list of report definitions.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ReportDefinition'
   ReportFormat:
     type: string
     enum:
@@ -385,7 +385,7 @@ definitions:
     type: array
     description: A list of schema elements.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SchemaElement'
   TimeUnit:
     type: string
     enum:

@@ -2145,7 +2145,7 @@ definitions:
     type: object
     properties:
       User:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/User'
         description: The user information.
   ActivateUserRequest:
     type: object
@@ -2154,7 +2154,7 @@ definitions:
     type: object
     properties:
       ShareResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ShareResultsList'
         description: The share results.
   AddResourcePermissionsRequest:
     type: object
@@ -2162,16 +2162,16 @@ definitions:
       - Principals
     properties:
       Principals:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SharePrincipalList'
         description: 'The users, groups, or organization being granted permission.'
       NotificationOptions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NotificationOptions'
         description: The notification options.
   CreateCommentResponse:
     type: object
     properties:
       Comment:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Comment'
         description: The comment that has been created.
   CreateCommentRequest:
     type: object
@@ -2179,19 +2179,19 @@ definitions:
       - Text
     properties:
       ParentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentIdType'
         description: The ID of the parent comment.
       ThreadId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentIdType'
         description: The ID of the root comment in the thread.
       Text:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentTextType'
         description: The text of the comment.
       Visibility:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentVisibilityType'
         description: 'The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.'
       NotifyCollaborators:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanType'
         description: Set this parameter to TRUE to send an email out to the document collaborators after the comment is created.
   DocumentLockedForCommentsException: {}
   InvalidCommentOperationException: {}
@@ -2204,14 +2204,14 @@ definitions:
       - CustomMetadata
     properties:
       CustomMetadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CustomMetadataMap'
         description: Custom metadata in the form of name-value pairs.
   CustomMetadataLimitExceededException: {}
   CreateFolderResponse:
     type: object
     properties:
       Metadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FolderMetadata'
         description: The metadata of the folder.
   CreateFolderRequest:
     type: object
@@ -2219,10 +2219,10 @@ definitions:
       - ParentFolderId
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceNameType'
         description: The name of the new folder.
       ParentFolderId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the parent folder.
   EntityAlreadyExistsException: {}
   ConflictingOperationException: {}
@@ -2236,14 +2236,14 @@ definitions:
       - Labels
     properties:
       Labels:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SharedLabels'
         description: List of labels to add to the resource.
   TooManyLabelsException: {}
   CreateNotificationSubscriptionResponse:
     type: object
     properties:
       Subscription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subscription'
         description: The subscription.
   CreateNotificationSubscriptionRequest:
     type: object
@@ -2253,20 +2253,20 @@ definitions:
       - SubscriptionType
     properties:
       Endpoint:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriptionEndPointType'
         description: 'The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with "https://".'
       Protocol:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriptionProtocolType'
         description: 'The protocol to use. The supported value is https, which delivers JSON-encoded messages using HTTPS POST.'
       SubscriptionType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriptionType'
         description: The notification type.
   TooManySubscriptionsException: {}
   CreateUserResponse:
     type: object
     properties:
       User:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/User'
         description: The user information.
   CreateUserRequest:
     type: object
@@ -2277,28 +2277,28 @@ definitions:
       - Password
     properties:
       OrganizationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the organization.
       Username:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UsernameType'
         description: The login name of the user.
       EmailAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EmailAddressType'
         description: The email address of the user.
       GivenName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserAttributeValueType'
         description: The given name of the user.
       Surname:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserAttributeValueType'
         description: The surname of the user.
       Password:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PasswordType'
         description: The password of the user.
       TimeZoneId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeZoneIdType'
         description: The time zone ID of the user.
       StorageRule:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StorageRuleType'
         description: The amount of storage for the user.
   DeactivateUserRequest:
     type: object
@@ -2338,10 +2338,10 @@ definitions:
     type: object
     properties:
       UserActivities:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserActivities'
         description: The list of activities for the specified user and time period.
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MarkerType'
         description: The marker for the next set of results.
   DescribeActivitiesRequest:
     type: object
@@ -2351,10 +2351,10 @@ definitions:
     type: object
     properties:
       Comments:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentList'
         description: The list of comments for the specified document version.
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MarkerType'
         description: The marker for the next set of results. This marker was received from a previous call.
   DescribeCommentsRequest:
     type: object
@@ -2363,10 +2363,10 @@ definitions:
     type: object
     properties:
       DocumentVersions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentVersionMetadataList'
         description: The document versions.
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageMarkerType'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
   DescribeDocumentVersionsRequest:
     type: object
@@ -2375,13 +2375,13 @@ definitions:
     type: object
     properties:
       Folders:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FolderMetadataList'
         description: The subfolders in the specified folder.
       Documents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentMetadataList'
         description: The documents in the specified folder.
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageMarkerType'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
   DescribeFolderContentsRequest:
     type: object
@@ -2390,10 +2390,10 @@ definitions:
     type: object
     properties:
       Groups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GroupMetadataList'
         description: The list of groups.
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MarkerType'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
   DescribeGroupsRequest:
     type: object
@@ -2402,10 +2402,10 @@ definitions:
     type: object
     properties:
       Subscriptions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriptionList'
         description: The subscriptions.
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageMarkerType'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
   DescribeNotificationSubscriptionsRequest:
     type: object
@@ -2414,10 +2414,10 @@ definitions:
     type: object
     properties:
       Principals:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PrincipalList'
         description: The principals.
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageMarkerType'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
   DescribeResourcePermissionsRequest:
     type: object
@@ -2426,10 +2426,10 @@ definitions:
     type: object
     properties:
       Folders:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FolderMetadataList'
         description: The user's special folders.
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageMarkerType'
         description: The marker for the next set of results.
   DescribeRootFoldersRequest:
     type: object
@@ -2438,13 +2438,13 @@ definitions:
     type: object
     properties:
       Users:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OrganizationUserList'
         description: The users.
       TotalNumberOfUsers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SizeType'
         description: The total number of users included in the results.
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageMarkerType'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
   DescribeUsersRequest:
     type: object
@@ -2454,7 +2454,7 @@ definitions:
     type: object
     properties:
       User:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/User'
         description: Metadata of the user.
   GetCurrentUserRequest:
     type: object
@@ -2463,10 +2463,10 @@ definitions:
     type: object
     properties:
       Metadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentMetadata'
         description: The metadata details of the document.
       CustomMetadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CustomMetadataMap'
         description: The custom metadata on the document.
   GetDocumentRequest:
     type: object
@@ -2476,7 +2476,7 @@ definitions:
     type: object
     properties:
       Path:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourcePath'
         description: The path information.
   GetDocumentPathRequest:
     type: object
@@ -2485,10 +2485,10 @@ definitions:
     type: object
     properties:
       Metadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentVersionMetadata'
         description: The version metadata.
       CustomMetadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CustomMetadataMap'
         description: The custom metadata on the document version.
   GetDocumentVersionRequest:
     type: object
@@ -2497,10 +2497,10 @@ definitions:
     type: object
     properties:
       Metadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FolderMetadata'
         description: The metadata of the folder.
       CustomMetadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CustomMetadataMap'
         description: The custom metadata on the folder.
   GetFolderRequest:
     type: object
@@ -2509,7 +2509,7 @@ definitions:
     type: object
     properties:
       Path:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourcePath'
         description: The path information.
   GetFolderPathRequest:
     type: object
@@ -2518,13 +2518,13 @@ definitions:
     type: object
     properties:
       Folders:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FolderMetadataList'
         description: The folders in the specified folder.
       Documents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentMetadataList'
         description: The documents in the specified collection.
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageMarkerType'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
   GetResourcesRequest:
     type: object
@@ -2533,10 +2533,10 @@ definitions:
     type: object
     properties:
       Metadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentMetadata'
         description: The document metadata.
       UploadMetadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UploadMetadata'
         description: The upload metadata.
   InitiateDocumentVersionUploadRequest:
     type: object
@@ -2544,25 +2544,25 @@ definitions:
       - ParentFolderId
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the document.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceNameType'
         description: The name of the document.
       ContentCreatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The timestamp when the content of the document was originally created.
       ContentModifiedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The timestamp when the content of the document was modified.
       ContentType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentContentType'
         description: The content type of the document.
       DocumentSizeInBytes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SizeType'
         description: 'The size of the document, in bytes.'
       ParentFolderId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the parent folder.
   StorageLimitExceededException: {}
   StorageLimitWillExceedException: {}
@@ -2578,62 +2578,62 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceNameType'
         description: The name of the document.
       ParentFolderId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the parent folder.
       ResourceState:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceStateType'
         description: The resource state of the document. Only ACTIVE and RECYCLED are supported.
   UpdateDocumentVersionRequest:
     type: object
     properties:
       VersionStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentVersionStatus'
         description: The status of the version.
   InvalidOperationException: {}
   UpdateFolderRequest:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceNameType'
         description: The name of the folder.
       ParentFolderId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the parent folder.
       ResourceState:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceStateType'
         description: The resource state of the folder. Only ACTIVE and RECYCLED are accepted values from the API.
   UpdateUserResponse:
     type: object
     properties:
       User:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/User'
         description: The user information.
   UpdateUserRequest:
     type: object
     properties:
       GivenName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserAttributeValueType'
         description: The given name of the user.
       Surname:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserAttributeValueType'
         description: The surname of the user.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserType'
         description: The type of the user.
       StorageRule:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StorageRuleType'
         description: The amount of storage for the user.
       TimeZoneId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeZoneIdType'
         description: The time zone ID of the user.
       Locale:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LocaleType'
         description: The locale of the user.
       GrantPoweruserPrivileges:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanEnumType'
         description: Boolean value to determine whether the user is granted Poweruser privileges.
   IllegalUserStateException: {}
   DeactivatingLastSystemUserException: {}
@@ -2642,31 +2642,31 @@ definitions:
     type: object
     properties:
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ActivityType'
         description: The activity type.
       TimeStamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The timestamp when the action was performed.
       IsIndirectActivity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanType'
         description: 'Indicates whether an activity is indirect or direct. An indirect activity results from a direct activity performed on a parent resource. For example, sharing a parent folder (the direct activity) shares all of the subfolders and documents within the parent folder (the indirect activity).'
       OrganizationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the organization.
       Initiator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserMetadata'
         description: The user who performed the action.
       Participants:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Participants'
         description: 'The list of users or groups impacted by this action. This is an optional field and is filled for the following sharing activities: DOCUMENT_SHARED, DOCUMENT_SHARED, DOCUMENT_UNSHARED, FOLDER_SHARED, FOLDER_UNSHARED.'
       ResourceMetadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceMetadata'
         description: The metadata of the resource involved in the user action.
       OriginalParent:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceMetadata'
         description: The original parent of the resource. This is an optional field and is filled for move activities.
       CommentMetadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentMetadata'
         description: Metadata of the commenting activity. This is an optional field and is filled for commenting activities.
     description: Describes the activity information.
   ActivityNamesFilterType:
@@ -2728,31 +2728,31 @@ definitions:
       - CommentId
     properties:
       CommentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentIdType'
         description: The ID of the comment.
       ParentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentIdType'
         description: The ID of the parent comment.
       ThreadId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentIdType'
         description: The ID of the root comment in the thread.
       Text:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentTextType'
         description: The text of the comment.
       Contributor:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/User'
         description: The details of the user who made the comment.
       CreatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The time that the comment was created.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentStatusType'
         description: The status of the comment.
       Visibility:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentVisibilityType'
         description: 'The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.'
       RecipientId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: 'If the comment is a reply to another user''s comment, this field contains the user ID of the user being replied to.'
     description: Describes a comment.
   CommentIdType:
@@ -2763,24 +2763,24 @@ definitions:
   CommentList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Comment'
   CommentMetadata:
     type: object
     properties:
       CommentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentIdType'
         description: The ID of the comment.
       Contributor:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/User'
         description: The user who made the comment.
       CreatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The timestamp that the comment was created.
       CommentStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommentStatusType'
         description: The status of the comment.
       RecipientId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the user being replied to.
     description: Describes the metadata of a comment.
   CommentStatusType:
@@ -2802,7 +2802,7 @@ definitions:
   CustomMetadataKeyList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/CustomMetadataKeyType'
     maxItems: 8
   CustomMetadataKeyType:
     type: string
@@ -2833,34 +2833,34 @@ definitions:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the document.
       CreatorId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the creator.
       ParentFolderId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the parent folder.
       CreatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The time when the document was created.
       ModifiedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The time when the document was updated.
       LatestVersionMetadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentVersionMetadata'
         description: The latest version of the document.
       ResourceState:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceStateType'
         description: The resource state.
       Labels:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SharedLabels'
         description: List of labels on the document.
     description: Describes the document.
   DocumentMetadataList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DocumentMetadata'
   DocumentSourceType:
     type: string
     enum:
@@ -2909,49 +2909,49 @@ definitions:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentVersionIdType'
         description: The ID of the version.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceNameType'
         description: The name of the version.
       ContentType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentContentType'
         description: The content type of the document.
       Size:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SizeType'
         description: 'The size of the document, in bytes.'
       Signature:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HashType'
         description: The signature of the document.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentStatusType'
         description: The status of the document.
       CreatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The timestamp when the document was first uploaded.
       ModifiedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The timestamp when the document was last uploaded.
       ContentCreatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The timestamp when the content of the document was originally created.
       ContentModifiedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The timestamp when the content of the document was modified.
       CreatorId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the creator.
       Thumbnail:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentThumbnailUrlMap'
         description: The thumbnail of the document.
       Source:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentSourceUrlMap'
         description: The source of the document.
     description: Describes a version of a document.
   DocumentVersionMetadataList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DocumentVersionMetadata'
   DocumentVersionStatus:
     type: string
     enum:
@@ -2976,57 +2976,57 @@ definitions:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the folder.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceNameType'
         description: The name of the folder.
       CreatorId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the creator.
       ParentFolderId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the parent folder.
       CreatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The time when the folder was created.
       ModifiedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The time when the folder was updated.
       ResourceState:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceStateType'
         description: The resource state of the folder.
       Signature:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HashType'
         description: The unique identifier created from the subfolders and documents of the folder.
       Labels:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SharedLabels'
         description: List of labels on the folder.
       Size:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SizeType'
         description: The size of the folder metadata.
       LatestVersionSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SizeType'
         description: The size of the latest version of the folder metadata.
     description: Describes a folder.
   FolderMetadataList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FolderMetadata'
   GroupMetadata:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the user group.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GroupNameType'
         description: The name of the group.
     description: Describes the metadata of a user group.
   GroupMetadataList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/GroupMetadata'
   GroupNameType:
     type: string
   HashType:
@@ -3080,10 +3080,10 @@ definitions:
     type: object
     properties:
       SendEmail:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BooleanType'
         description: Boolean value to indicate an email notification should be sent to the receipients.
       EmailMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MessageType'
         description: Text value to be included in the email body.
     description: Set of options which defines notification preferences of given action.
   OrderType:
@@ -3094,7 +3094,7 @@ definitions:
   OrganizationUserList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/User'
   PageMarkerType:
     type: string
     minLength: 1
@@ -3103,10 +3103,10 @@ definitions:
     type: object
     properties:
       Users:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserMetadataList'
         description: The list of users.
       Groups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GroupMetadataList'
         description: The list of user groups.
     description: Describes the users or user groups.
   PasswordType:
@@ -3119,16 +3119,16 @@ definitions:
     type: object
     properties:
       Role:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleType'
         description: The role of the user.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RolePermissionType'
         description: The type of permissions.
     description: Describes the permissions.
   PermissionInfoList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/PermissionInfo'
   PositiveIntegerType:
     type: integer
     minimum: 1
@@ -3139,19 +3139,19 @@ definitions:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the resource.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PrincipalType'
         description: The type of resource.
       Roles:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PermissionInfoList'
         description: The permission information for the resource.
     description: Describes a resource.
   PrincipalList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Principal'
   PrincipalType:
     type: string
     enum:
@@ -3173,25 +3173,25 @@ definitions:
     type: object
     properties:
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceType'
         description: The type of resource.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceNameType'
         description: The name of the resource.
       OriginalName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceNameType'
         description: The original name of the resource before a rename operation.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the resource.
       VersionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DocumentVersionIdType'
         description: The version ID of the resource. This is an optional field and is filled for action on document version.
       Owner:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserMetadata'
         description: The owner of the resource.
       ParentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The parent ID of the resource before a rename operation.
     description: Describes the metadata of a resource.
   ResourceNameType:
@@ -3203,23 +3203,23 @@ definitions:
     type: object
     properties:
       Components:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourcePathComponentList'
         description: The components of the resource path.
     description: Describes the path information of a resource.
   ResourcePathComponent:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the resource path.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceNameType'
         description: The name of the resource path.
     description: Describes the resource path.
   ResourcePathComponentList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ResourcePathComponent'
   ResourceSortType:
     type: string
     enum:
@@ -3263,45 +3263,45 @@ definitions:
       - Role
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the recipient.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PrincipalType'
         description: The type of the recipient.
       Role:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleType'
         description: The role of the recipient.
     description: 'Describes the recipient type and ID, if available.'
   SharePrincipalList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SharePrincipal'
   ShareResult:
     type: object
     properties:
       PrincipalId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the principal.
       InviteePrincipalId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the invited user.
       Role:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleType'
         description: The role.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ShareStatusType'
         description: The status.
       ShareId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the resource that was shared.
       StatusMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MessageType'
         description: The status message.
     description: Describes the share results of a resource.
   ShareResultsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ShareResult'
   ShareStatusType:
     type: string
     enum:
@@ -3315,7 +3315,7 @@ definitions:
   SharedLabels:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SharedLabel'
     maxItems: 20
   SignedHeaderMap:
     type: array
@@ -3332,10 +3332,10 @@ definitions:
     type: object
     properties:
       StorageAllocatedInBytes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PositiveSizeType'
         description: 'The amount of storage allocated, in bytes.'
       StorageType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StorageType'
         description: The type of storage.
     description: Describes the storage for a user.
   StorageType:
@@ -3347,13 +3347,13 @@ definitions:
     type: object
     properties:
       SubscriptionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the subscription.
       EndPoint:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriptionEndPointType'
         description: The endpoint of the subscription.
       Protocol:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriptionProtocolType'
         description: The protocol of the subscription.
     description: Describes a subscription.
   SubscriptionEndPointType:
@@ -3363,7 +3363,7 @@ definitions:
   SubscriptionList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Subscription'
     maxItems: 256
   SubscriptionProtocolType:
     type: string
@@ -3384,65 +3384,65 @@ definitions:
     type: object
     properties:
       UploadUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UrlType'
         description: The URL of the upload.
       SignedHeaders:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SignedHeaderMap'
         description: The signed headers.
     description: Describes the upload.
   User:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the user.
       Username:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UsernameType'
         description: The login name of the user.
       EmailAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EmailAddressType'
         description: The email address of the user.
       GivenName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserAttributeValueType'
         description: The given name of the user.
       Surname:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserAttributeValueType'
         description: The surname of the user.
       OrganizationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the organization.
       RootFolderId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the root folder.
       RecycleBinFolderId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceIdType'
         description: The ID of the recycle bin folder.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserStatusType'
         description: The status of the user.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserType'
         description: The type of user.
       CreatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The time when the user was created.
       ModifiedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimestampType'
         description: The time when the user was modified.
       TimeZoneId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeZoneIdType'
         description: The time zone ID of the user.
       Locale:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LocaleType'
         description: The locale of the user.
       Storage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserStorageMetadata'
         description: The storage for the user.
     description: Describes a user.
   UserActivities:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Activity'
   UserAttributeValueType:
     type: string
     minLength: 1
@@ -3461,25 +3461,25 @@ definitions:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IdType'
         description: The ID of the user.
       Username:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UsernameType'
         description: The name of the user.
       GivenName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserAttributeValueType'
         description: The given name of the user before a rename operation.
       Surname:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserAttributeValueType'
         description: The surname of the user.
       EmailAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EmailAddressType'
         description: The email address of the user.
     description: Describes the metadata of the user.
   UserMetadataList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/UserMetadata'
   UserSortType:
     type: string
     enum:
@@ -3498,10 +3498,10 @@ definitions:
     type: object
     properties:
       StorageUtilizedInBytes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SizeType'
         description: 'The amount of storage used, in bytes.'
       StorageRule:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StorageRuleType'
         description: The storage for a user.
     description: Describes the storage for a user.
   UserType:

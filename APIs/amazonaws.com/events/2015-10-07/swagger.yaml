@@ -643,10 +643,10 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleName'
         description: The name of the rule.
       Force:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'If this is a managed rule, created by an AWS service on your behalf, you must specify <code>Force</code> as <code>True</code> to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code> field of the response.'
   ConcurrentModificationException: {}
   ManagedRuleException: {}
@@ -655,13 +655,13 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The name of the event bus. Currently, this is always <code>default</code>.'
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the account permitted to write events to the current account.
       Policy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The policy that enables the external account to send events to your account.
   DescribeEventBusRequest:
     type: object
@@ -671,28 +671,28 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleName'
         description: The name of the rule.
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleArn'
         description: The Amazon Resource Name (ARN) of the rule.
       EventPattern:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventPattern'
         description: 'The event pattern. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html">Events and Event Patterns</a> in the <i>Amazon CloudWatch Events User Guide</i>.'
       ScheduleExpression:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ScheduleExpression'
         description: 'The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".'
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleState'
         description: Specifies whether the rule is enabled or disabled.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleDescription'
         description: The description of the rule.
       RoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleArn'
         description: The Amazon Resource Name (ARN) of the IAM role associated with the rule.
       ManagedBy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ManagedBy'
         description: 'If this is a managed rule, created by an AWS service on your behalf, this field displays the principal name of the AWS service that created the rule.'
   DescribeRuleRequest:
     type: object
@@ -700,7 +700,7 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleName'
         description: The name of the rule.
   DisableRuleRequest:
     type: object
@@ -708,7 +708,7 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleName'
         description: The name of the rule.
   EnableRuleRequest:
     type: object
@@ -716,16 +716,16 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleName'
         description: The name of the rule.
   ListRuleNamesByTargetResponse:
     type: object
     properties:
       RuleNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleNameList'
         description: The names of the rules that can invoke the given target.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'Indicates whether there are additional results to retrieve. If there are no more results, the value is null.'
   ListRuleNamesByTargetRequest:
     type: object
@@ -733,43 +733,43 @@ definitions:
       - TargetArn
     properties:
       TargetArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetArn'
         description: The Amazon Resource Name (ARN) of the target resource.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned by a previous call to retrieve the next set of results.
       Limit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LimitMax100'
         description: The maximum number of results to return.
   ListRulesResponse:
     type: object
     properties:
       Rules:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleResponseList'
         description: The rules that match the specified criteria.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'Indicates whether there are additional results to retrieve. If there are no more results, the value is null.'
   ListRulesRequest:
     type: object
     properties:
       NamePrefix:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleName'
         description: The prefix matching the rule name.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned by a previous call to retrieve the next set of results.
       Limit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LimitMax100'
         description: The maximum number of results to return.
   ListTargetsByRuleResponse:
     type: object
     properties:
       Targets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetList'
         description: The targets assigned to the rule.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'Indicates whether there are additional results to retrieve. If there are no more results, the value is null.'
   ListTargetsByRuleRequest:
     type: object
@@ -777,22 +777,22 @@ definitions:
       - Rule
     properties:
       Rule:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleName'
         description: The name of the rule.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned by a previous call to retrieve the next set of results.
       Limit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LimitMax100'
         description: The maximum number of results to return.
   PutEventsResponse:
     type: object
     properties:
       FailedEntryCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: The number of failed entries.
       Entries:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PutEventsResultEntryList'
         description: 'The successfully and unsuccessfully ingested events results. If the ingestion was successful, the entry has the event ID in it. Otherwise, you can use the error code and error message to identify the problem with the entry.'
   PutEventsRequest:
     type: object
@@ -800,7 +800,7 @@ definitions:
       - Entries
     properties:
       Entries:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PutEventsRequestEntryList'
         description: 'The entry that defines an event in your system. You can specify several parameters for the entry such as the source and type of the event, resources associated with the event, and so on.'
   PutPermissionRequest:
     type: object
@@ -810,23 +810,23 @@ definitions:
       - StatementId
     properties:
       Action:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Action'
         description: 'The action that you are enabling the other account to perform. Currently, this must be <code>events:PutEvents</code>.'
       Principal:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Principal'
         description: '<p>The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify "*" to permit any account to put events to your default event bus.</p> <p>If you specify "*" without specifying <code>Condition</code>, avoid creating rules that may match undesirable events. To create more secure rules, make sure that the event pattern for each rule contains an <code>account</code> field with a specific account ID from which to receive events. Rules with an account field do not match any events sent from other accounts.</p>'
       StatementId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StatementId'
         description: 'An identifier string for the external account that you are granting permissions to. If you later want to revoke the permission for this external account, specify this <code>StatementId</code> when you run <a>RemovePermission</a>.'
       Condition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Condition'
         description: '<p>This parameter enables you to limit the permission to accounts that fulfill a certain condition, such as being a member of a certain AWS organization. For more information about AWS Organizations, see <a href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html">What Is AWS Organizations</a> in the <i>AWS Organizations User Guide</i>.</p> <p>If you specify <code>Condition</code> with an AWS organization ID, and specify "*" as the value for <code>Principal</code>, you grant permission to all the accounts in the named organization.</p> <p>The <code>Condition</code> is a JSON string which must contain <code>Type</code>, <code>Key</code>, and <code>Value</code> fields.</p>'
   PolicyLengthExceededException: {}
   PutRuleResponse:
     type: object
     properties:
       RuleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleArn'
         description: The Amazon Resource Name (ARN) of the rule.
   PutRuleRequest:
     type: object
@@ -834,22 +834,22 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleName'
         description: The name of the rule that you are creating or updating.
       ScheduleExpression:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ScheduleExpression'
         description: 'The scheduling expression. For example, "cron(0 20 * * ? *)" or "rate(5 minutes)".'
       EventPattern:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventPattern'
         description: 'The event pattern. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html">Events and Event Patterns</a> in the <i>Amazon CloudWatch Events User Guide</i>.'
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleState'
         description: Indicates whether the rule is enabled or disabled.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleDescription'
         description: A description of the rule.
       RoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleArn'
         description: The Amazon Resource Name (ARN) of the IAM role associated with the rule.
   InvalidEventPatternException: {}
   LimitExceededException: {}
@@ -857,10 +857,10 @@ definitions:
     type: object
     properties:
       FailedEntryCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: The number of failed entries.
       FailedEntries:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PutTargetsResultEntryList'
         description: The failed target entries.
   PutTargetsRequest:
     type: object
@@ -869,10 +869,10 @@ definitions:
       - Targets
     properties:
       Rule:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleName'
         description: The name of the rule.
       Targets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetList'
         description: The targets to update or add to the rule.
   RemovePermissionRequest:
     type: object
@@ -880,16 +880,16 @@ definitions:
       - StatementId
     properties:
       StatementId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StatementId'
         description: The statement ID corresponding to the account that is no longer allowed to put events to the default event bus.
   RemoveTargetsResponse:
     type: object
     properties:
       FailedEntryCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: The number of failed entries.
       FailedEntries:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RemoveTargetsResultEntryList'
         description: The failed target entries.
   RemoveTargetsRequest:
     type: object
@@ -898,19 +898,19 @@ definitions:
       - Ids
     properties:
       Rule:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleName'
         description: The name of the rule.
       Ids:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetIdList'
         description: The IDs of the targets to remove from the rule.
       Force:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'If this is a managed rule, created by an AWS service on your behalf, you must specify <code>Force</code> as <code>True</code> to remove targets. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code> field of the response.'
   TestEventPatternResponse:
     type: object
     properties:
       Result:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Indicates whether the event matches the event pattern.
   TestEventPatternRequest:
     type: object
@@ -919,10 +919,10 @@ definitions:
       - Event
     properties:
       EventPattern:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventPattern'
         description: 'The event pattern. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html">Events and Event Patterns</a> in the <i>Amazon CloudWatch Events User Guide</i>.'
       Event:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The event, in JSON format, to test against the event pattern.'
   Action:
     type: string
@@ -945,20 +945,20 @@ definitions:
       - Subnets
     properties:
       Subnets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringList'
         description: Specifies the subnets associated with the task. These subnets must all be in the same VPC. You can specify as many as 16 subnets.
       SecurityGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StringList'
         description: 'Specifies the security groups associated with the task. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.'
       AssignPublicIp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AssignPublicIp'
         description: Specifies whether the task's elastic network interface receives a public IP address. You can specify <code>ENABLED</code> only when <code>LaunchType</code> in <code>EcsParameters</code> is set to <code>FARGATE</code>.
     description: 'This structure specifies the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the <code>awsvpc</code> network mode.'
   BatchArrayProperties:
     type: object
     properties:
       Size:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: 'The size of the array, if this is an array batch job. Valid values are integers between 2 and 10,000.'
     description: 'The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an AWS Batch job.'
   BatchParameters:
@@ -968,23 +968,23 @@ definitions:
       - JobName
     properties:
       JobDefinition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The ARN or name of the job definition to use if the event target is an AWS Batch job. This job definition must already exist.
       JobName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The name to use for this execution of the job, if the target is an AWS Batch job.'
       ArrayProperties:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BatchArrayProperties'
         description: 'The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an AWS Batch job.'
       RetryStrategy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BatchRetryStrategy'
         description: 'The retry strategy to use for failed jobs, if the target is an AWS Batch job. The retry strategy is the number of times to retry the failed job execution. Valid values are 1–10. When you specify a retry strategy here, it overrides the retry strategy defined in the job definition.'
     description: The custom parameters to be used when the target is an AWS Batch job.
   BatchRetryStrategy:
     type: object
     properties:
       Attempts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: 'The number of times to attempt to retry, if the job fails. Valid values are 1–10.'
     description: 'The retry strategy to use for failed jobs, if the target is an AWS Batch job. If you specify a retry strategy here, it overrides the retry strategy defined in the job definition.'
   Boolean:
@@ -997,13 +997,13 @@ definitions:
       - Value
     properties:
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Specifies the type of condition. Currently the only supported value is <code>StringEquals</code>.
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'Specifies the key for the condition. Currently the only supported key is <code>aws:PrincipalOrgID</code>.'
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'Specifies the value for the key. Currently, this must be the ID of the organization.'
     description: '<p>A JSON string which you can use to limit the event bus permissions you are granting to only accounts that fulfill the condition. Currently, the only supported condition is membership in a certain AWS organization. The string must contain <code>Type</code>, <code>Key</code>, and <code>Value</code> fields. The <code>Value</code> field specifies the ID of the AWS organization. Following is an example value for <code>Condition</code>:</p> <p> <code>''{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value": "o-1234567890"}''</code> </p>'
   EcsParameters:
@@ -1012,22 +1012,22 @@ definitions:
       - TaskDefinitionArn
     properties:
       TaskDefinitionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: 'The ARN of the task definition to use if the event target is an Amazon ECS task. '
       TaskCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LimitMin1'
         description: The number of tasks to create based on <code>TaskDefinition</code>. The default is 1.
       LaunchType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LaunchType'
         description: 'Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The <code>FARGATE</code> value is supported only in the Regions where AWS Fargate with Amazon ECS is supported. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html">AWS Fargate on Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
       NetworkConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NetworkConfiguration'
         description: '<p>Use this structure if the ECS task uses the <code>awsvpc</code> network mode. This structure specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. This structure is required if <code>LaunchType</code> is <code>FARGATE</code> because the <code>awsvpc</code> mode is required for Fargate tasks.</p> <p>If you specify <code>NetworkConfiguration</code> when the target ECS task does not use the <code>awsvpc</code> network mode, the task fails.</p>'
       PlatformVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: '<p>Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as <code>1.1.0</code>.</p> <p>This structure is used only if <code>LaunchType</code> is <code>FARGATE</code>. For more information about valid platform versions, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
       Group:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Specifies an ECS task group for the task. The maximum length is 255 characters.
     description: The custom parameters to be used when the target is an Amazon ECS task.
   ErrorCode:
@@ -1043,7 +1043,7 @@ definitions:
   EventResourceList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/EventResource'
   EventTime:
     type: string
     format: date-time
@@ -1053,10 +1053,10 @@ definitions:
       - InputTemplate
     properties:
       InputPathsMap:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TransformerPaths'
         description: '<p>Map of JSON paths to be extracted from the event. You can then insert these in the template in <code>InputTemplate</code> to produce the output you want to be sent to the target.</p> <p> <code>InputPathsMap</code> is an array key-value pairs, where each value is a valid JSON path. You can have as many as 10 key-value pairs. You must use JSON dot notation, not bracket notation.</p> <p>The keys cannot start with "AWS." </p>'
       InputTemplate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TransformerInput'
         description: '<p>Input template where you specify placeholders that will be filled with the values of the keys from <code>InputPathsMap</code> to customize the data sent to the target. Enclose each <code>InputPathsMaps</code> value in brackets: &lt;<i>value</i>&gt; The InputTemplate must be valid JSON.</p> <p>If <code>InputTemplate</code> is a JSON object (surrounded by curly braces), the following restrictions apply:</p> <ul> <li> <p>The placeholder cannot be used as an object key.</p> </li> <li> <p>Object values cannot include quote marks.</p> </li> </ul> <p>The following example shows the syntax for using <code>InputPathsMap</code> and <code>InputTemplate</code>.</p> <p> <code> "InputTransformer":</code> </p> <p> <code>{</code> </p> <p> <code>"InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},</code> </p> <p> <code>"InputTemplate": "&lt;instance&gt; is in state &lt;status&gt;"</code> </p> <p> <code>}</code> </p> <p>To have the <code>InputTemplate</code> include quote marks within a JSON string, escape each quote marks with a slash, as in the following example:</p> <p> <code> "InputTransformer":</code> </p> <p> <code>{</code> </p> <p> <code>"InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},</code> </p> <p> <code>"InputTemplate": "&lt;instance&gt; is in state \"&lt;status&gt;\""</code> </p> <p> <code>}</code> </p>'
     description: Contains the parameters needed for you to provide custom input to a target based on one or more pieces of data extracted from the event.
   InputTransformerPathKey:
@@ -1072,7 +1072,7 @@ definitions:
       - PartitionKeyPath
     properties:
       PartitionKeyPath:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetPartitionKeyPath'
         description: 'The JSON path to be extracted from the event and used as the partition key. For more information, see <a href="http://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key">Amazon Kinesis Streams Key Concepts</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.'
     description: 'This object enables you to specify a JSON path to extract from the event and use as the partition key for the Amazon Kinesis data stream, so that you can control the shard to which the event goes. If you do not include this parameter, the default is to use the <code>eventId</code> as the partition key.'
   LaunchType:
@@ -1097,7 +1097,7 @@ definitions:
     type: object
     properties:
       awsvpcConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AwsVpcConfiguration'
         description: 'Use this structure to specify the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the <code>awsvpc</code> network mode.'
     description: This structure specifies the network configuration for an ECS task.
   NextToken:
@@ -1113,78 +1113,78 @@ definitions:
     type: object
     properties:
       Time:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventTime'
         description: 'The time stamp of the event, per <a href="https://www.rfc-editor.org/rfc/rfc3339.txt">RFC3339</a>. If no time stamp is provided, the time stamp of the <a>PutEvents</a> call is used.'
       Source:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The source of the event. This field is required.
       Resources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventResourceList'
         description: 'AWS resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. Any number, including zero, may be present.'
       DetailType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Free-form string used to decide what fields to expect in the event detail.
       Detail:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: A valid JSON string. There is no other schema imposed. The JSON string may contain fields and nested subobjects.
     description: Represents an event to be submitted.
   PutEventsRequestEntryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/PutEventsRequestEntry'
     minItems: 1
     maxItems: 10
   PutEventsResultEntry:
     type: object
     properties:
       EventId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventId'
         description: The ID of the event.
       ErrorCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorCode'
         description: The error code that indicates why the event submission failed.
       ErrorMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: The error message that explains why the event submission failed.
     description: Represents an event that failed to be submitted.
   PutEventsResultEntryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/PutEventsResultEntry'
   PutTargetsResultEntry:
     type: object
     properties:
       TargetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetId'
         description: The ID of the target.
       ErrorCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorCode'
         description: 'The error code that indicates why the target addition failed. If the value is <code>ConcurrentModificationException</code>, too many requests were made at the same time.'
       ErrorMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: The error message that explains why the target addition failed.
     description: Represents a target that failed to be added to a rule.
   PutTargetsResultEntryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/PutTargetsResultEntry'
   RemoveTargetsResultEntry:
     type: object
     properties:
       TargetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetId'
         description: The ID of the target.
       ErrorCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorCode'
         description: 'The error code that indicates why the target removal failed. If the value is <code>ConcurrentModificationException</code>, too many requests were made at the same time.'
       ErrorMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: The error message that explains why the target removal failed.
     description: Represents a target that failed to be removed from a rule.
   RemoveTargetsResultEntryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/RemoveTargetsResultEntry'
   RoleArn:
     type: string
     minLength: 1
@@ -1193,28 +1193,28 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleName'
         description: The name of the rule.
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleArn'
         description: The Amazon Resource Name (ARN) of the rule.
       EventPattern:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventPattern'
         description: 'The event pattern of the rule. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html">Events and Event Patterns</a> in the <i>Amazon CloudWatch Events User Guide</i>.'
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleState'
         description: The state of the rule.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RuleDescription'
         description: The description of the rule.
       ScheduleExpression:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ScheduleExpression'
         description: 'The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".'
       RoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleArn'
         description: The Amazon Resource Name (ARN) of the role that is used for target invocation.
       ManagedBy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ManagedBy'
         description: 'If the rule was created on behalf of your account by an AWS service, this field displays the principal name of the service that created the rule.'
     description: Contains information about a rule in Amazon CloudWatch Events.
   RuleArn:
@@ -1232,11 +1232,11 @@ definitions:
   RuleNameList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/RuleName'
   RuleResponseList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Rule'
   RuleState:
     type: string
     enum:
@@ -1248,7 +1248,7 @@ definitions:
       - RunCommandTargets
     properties:
       RunCommandTargets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RunCommandTargets'
         description: 'Currently, we support including only one RunCommandTarget block, which specifies either an array of InstanceIds or a tag.'
     description: 'This parameter contains the criteria (either InstanceIds or a tag) used to specify which EC2 instances are to be sent the command. '
   RunCommandTarget:
@@ -1258,10 +1258,10 @@ definitions:
       - Values
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RunCommandTargetKey'
         description: 'Can be either <code>tag:</code> <i>tag-key</i> or <code>InstanceIds</code>.'
       Values:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RunCommandTargetValues'
         description: 'If <code>Key</code> is <code>tag:</code> <i>tag-key</i>, <code>Values</code> is a list of tag values. If <code>Key</code> is <code>InstanceIds</code>, <code>Values</code> is a list of Amazon EC2 instance IDs.'
     description: 'Information about the EC2 instances that are to be sent the command, specified as key-value pairs. Each <code>RunCommandTarget</code> block can include only one key, but this key may specify multiple values.'
   RunCommandTargetKey:
@@ -1276,13 +1276,13 @@ definitions:
   RunCommandTargetValues:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/RunCommandTargetValue'
     minItems: 1
     maxItems: 50
   RunCommandTargets:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/RunCommandTarget'
     minItems: 1
     maxItems: 5
   ScheduleExpression:
@@ -1292,7 +1292,7 @@ definitions:
     type: object
     properties:
       MessageGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MessageGroupId'
         description: The FIFO message group ID to use as the target.
     description: This structure includes the custom parameter to be used when the target is an SQS FIFO queue.
   StatementId:
@@ -1305,7 +1305,7 @@ definitions:
   StringList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   Target:
     type: object
     required:
@@ -1313,37 +1313,37 @@ definitions:
       - Arn
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetId'
         description: The ID of the target.
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetArn'
         description: The Amazon Resource Name (ARN) of the target.
       RoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleArn'
         description: 'The Amazon Resource Name (ARN) of the IAM role to be used for this target when the rule is triggered. If one rule triggers multiple targets, you can use a different IAM role for each target.'
       Input:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetInput'
         description: 'Valid JSON text passed to the target. In this case, nothing from the event itself is passed to the target. For more information, see <a href="http://www.rfc-editor.org/rfc/rfc7159.txt">The JavaScript Object Notation (JSON) Data Interchange Format</a>.'
       InputPath:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetInputPath'
         description: 'The value of the JSONPath that is used for extracting part of the matched event when passing it to the target. You must use JSON dot notation, not bracket notation. For more information about JSON paths, see <a href="http://goessner.net/articles/JsonPath/">JSONPath</a>.'
       InputTransformer:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InputTransformer'
         description: Settings to enable you to provide custom input to a target based on certain event data. You can extract one or more key-value pairs from the event and then use that data to send customized input to the target.
       KinesisParameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KinesisParameters'
         description: 'The custom parameter you can use to control the shard assignment, when the target is a Kinesis data stream. If you do not include this parameter, the default is to use the <code>eventId</code> as the partition key.'
       RunCommandParameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RunCommandParameters'
         description: Parameters used when you are using the rule to invoke Amazon EC2 Run Command.
       EcsParameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EcsParameters'
         description: 'Contains the Amazon ECS task definition and task count to be used, if the event target is an Amazon ECS task. For more information about Amazon ECS tasks, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html">Task Definitions </a> in the <i>Amazon EC2 Container Service Developer Guide</i>.'
       BatchParameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BatchParameters'
         description: 'If the event target is an AWS Batch job, this contains the job definition, job name, and other parameters. For more information, see <a href="http://docs.aws.amazon.com/batch/latest/userguide/jobs.html">Jobs</a> in the <i>AWS Batch User Guide</i>.'
       SqsParameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SqsParameters'
         description: '<p>Contains the message group ID to use when the target is a FIFO queue.</p> <p>If you specify an SQS FIFO queue as a target, the queue must have content-based deduplication enabled.</p>'
     description: '<p>Targets are the resources to be invoked when a rule is triggered. For a complete list of services and resources that can be set as a target, see <a>PutTargets</a>.</p> <p>If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code> structure. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>'
   TargetArn:
@@ -1358,7 +1358,7 @@ definitions:
   TargetIdList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TargetId'
     minItems: 1
     maxItems: 100
   TargetInput:
@@ -1370,7 +1370,7 @@ definitions:
   TargetList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Target'
     minItems: 1
     maxItems: 100
   TargetPartitionKeyPath:

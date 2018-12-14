@@ -819,7 +819,7 @@ definitions:
       - LogBucket
     properties:
       LogBucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LogBucket'
         description: The Amazon S3 bucket that contains your flow logs.
   InternalErrorException: {}
   InvalidOperationException: {}
@@ -838,13 +838,13 @@ definitions:
       - RoleArn
     properties:
       RoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleArn'
         description: '<p>The Amazon Resource Name (ARN) of the role the DRT will use to access your AWS account.</p> <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href="https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy">AWSShieldDRTAccessPolicy</a> managed policy to this role. For more information see <a href=" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html">Attaching and Detaching IAM Policies</a>.</p>'
   CreateProtectionResponse:
     type: object
     properties:
       ProtectionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProtectionId'
         description: The unique identifier (ID) for the <a>Protection</a> object that is created.
   CreateProtectionRequest:
     type: object
@@ -853,10 +853,10 @@ definitions:
       - ResourceArn
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProtectionName'
         description: Friendly name for the <code>Protection</code> you are creating.
       ResourceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceArn'
         description: '<p>The ARN (Amazon Resource Name) of the resource to be protected.</p> <p>The ARN should be in one of the following formats:</p> <ul> <li> <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i> </code> </p> </li> <li> <p>For AWS CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i> </code> </p> </li> <li> <p>For Amazon Route 53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i> </code> </p> </li> <li> <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i> </code> </p> </li> </ul>'
   InvalidResourceException: {}
   ResourceAlreadyExistsException: {}
@@ -875,7 +875,7 @@ definitions:
       - ProtectionId
     properties:
       ProtectionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProtectionId'
         description: The unique identifier (ID) for the <a>Protection</a> object to be deleted.
   DeleteSubscriptionResponse:
     type: object
@@ -888,7 +888,7 @@ definitions:
     type: object
     properties:
       Attack:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackDetail'
         description: The attack that is described.
   DescribeAttackRequest:
     type: object
@@ -896,17 +896,17 @@ definitions:
       - AttackId
     properties:
       AttackId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackId'
         description: The unique identifier (ID) for the attack that to be described.
   AccessDeniedException: {}
   DescribeDRTAccessResponse:
     type: object
     properties:
       RoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoleArn'
         description: The Amazon Resource Name (ARN) of the role the DRT used to access your AWS account.
       LogBucketList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LogBucketList'
         description: The list of Amazon S3 buckets accessed by the DRT.
   DescribeDRTAccessRequest:
     type: object
@@ -915,7 +915,7 @@ definitions:
     type: object
     properties:
       EmergencyContactList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EmergencyContactList'
         description: A list of email addresses that the DRT can use to contact you during a suspected attack.
   DescribeEmergencyContactSettingsRequest:
     type: object
@@ -924,7 +924,7 @@ definitions:
     type: object
     properties:
       Protection:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Protection'
         description: The <a>Protection</a> object that is described.
   DescribeProtectionRequest:
     type: object
@@ -932,13 +932,13 @@ definitions:
       - ProtectionId
     properties:
       ProtectionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProtectionId'
         description: The unique identifier (ID) for the <a>Protection</a> object that is described.
   DescribeSubscriptionResponse:
     type: object
     properties:
       Subscription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subscription'
         description: The AWS Shield Advanced subscription details for an account.
   DescribeSubscriptionRequest:
     type: object
@@ -952,7 +952,7 @@ definitions:
       - LogBucket
     properties:
       LogBucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LogBucket'
         description: The Amazon S3 bucket that contains your flow logs.
   DisassociateDRTRoleResponse:
     type: object
@@ -966,7 +966,7 @@ definitions:
       - SubscriptionState
     properties:
       SubscriptionState:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriptionState'
         description: The status of the subscription.
   GetSubscriptionStateRequest:
     type: object
@@ -975,46 +975,46 @@ definitions:
     type: object
     properties:
       AttackSummaries:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackSummaries'
         description: The attack information for the specified time range.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Token'
         description: '<p>The token returned by a previous call to indicate that there is more data available. If not null, more results are available. Pass this value for the <code>NextMarker</code> parameter in a subsequent call to <code>ListAttacks</code> to retrieve the next set of items.</p> <p>AWS WAF might return the list of <a>AttackSummary</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>AttackSummary</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>'
   ListAttacksRequest:
     type: object
     properties:
       ResourceArns:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceArnFilterList'
         description: 'The ARN (Amazon Resource Name) of the resource that was attacked. If this is left blank, all applicable resources for this account will be included.'
       StartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeRange'
         description: 'The start of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp format</a> is allowed. '
       EndTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeRange'
         description: 'The end of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp format</a> is allowed. '
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Token'
         description: The <code>ListAttacksRequest.NextMarker</code> value from a previous call to <code>ListAttacksRequest</code>. Pass null if this is the first call.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: '<p>The maximum number of <a>AttackSummary</a> objects to be returned. If this is left blank, the first 20 results will be returned.</p> <p>This is a maximum value; it is possible that AWS WAF will return the results in smaller batches. That is, the number of <a>AttackSummary</a> objects returned could be less than <code>MaxResults</code>, even if there are still more <a>AttackSummary</a> objects yet to return. If there are more <a>AttackSummary</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>'
   ListProtectionsResponse:
     type: object
     properties:
       Protections:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Protections'
         description: The array of enabled <a>Protection</a> objects.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Token'
         description: '<p>If you specify a value for <code>MaxResults</code> and you have more Protections than the value of MaxResults, AWS Shield Advanced returns a NextToken value in the response that allows you to list another group of Protections. For the second and subsequent ListProtections requests, specify the value of NextToken from the previous response to get information about another batch of Protections.</p> <p>AWS WAF might return the list of <a>Protection</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>Protection</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>'
   ListProtectionsRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Token'
         description: The <code>ListProtectionsRequest.NextToken</code> value from a previous call to <code>ListProtections</code>. Pass null if this is the first call.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: '<p>The maximum number of <a>Protection</a> objects to be returned. If this is left blank the first 20 results will be returned.</p> <p>This is a maximum value; it is possible that AWS WAF will return the results in smaller batches. That is, the number of <a>Protection</a> objects returned could be less than <code>MaxResults</code>, even if there are still more <a>Protection</a> objects yet to return. If there are more <a>Protection</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>'
   InvalidPaginationTokenException: {}
   UpdateEmergencyContactSettingsResponse:
@@ -1024,7 +1024,7 @@ definitions:
     type: object
     properties:
       EmergencyContactList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EmergencyContactList'
         description: A list of email addresses that the DRT can use to contact you during a suspected attack.
   UpdateSubscriptionResponse:
     type: object
@@ -1033,35 +1033,35 @@ definitions:
     type: object
     properties:
       AutoRenew:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoRenew'
         description: 'When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.'
   '[object Object]': {}
   AttackDetail:
     type: object
     properties:
       AttackId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackId'
         description: The unique identifier (ID) of the attack.
       ResourceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceArn'
         description: The ARN (Amazon Resource Name) of the resource that was attacked.
       SubResources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubResourceSummaryList'
         description: 'If applicable, additional detail about the resource being attacked, for example, IP address or URL.'
       StartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackTimestamp'
         description: 'The time the attack started, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
       EndTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackTimestamp'
         description: 'The time the attack ended, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
       AttackCounters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SummarizedCounterList'
         description: List of counters that describe the attack for the specified time period.
       AttackProperties:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackProperties'
         description: The array of <a>AttackProperty</a> objects.
       Mitigations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MitigationList'
         description: List of mitigation actions taken for the attack.
     description: The details of a DDoS attack.
   AttackId:
@@ -1077,24 +1077,24 @@ definitions:
   AttackProperties:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AttackProperty'
   AttackProperty:
     type: object
     properties:
       AttackLayer:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackLayer'
         description: The type of DDoS event that was observed. <code>NETWORK</code> indicates layer 3 and layer 4 events and <code>APPLICATION</code> indicates layer 7 events.
       AttackPropertyIdentifier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackPropertyIdentifier'
         description: Defines the DDoS attack property information that is provided.
       TopContributors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TopContributors'
         description: 'The array of <a>Contributor</a> objects that includes the top five contributors to an attack. '
       Unit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Unit'
         description: The unit of the <code>Value</code> of the contributions.
       Total:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: 'The total contributions made to this attack by all contributors, not just the five listed in the <code>TopContributors</code> list.'
     description: Details of the described attack.
   AttackPropertyIdentifier:
@@ -1109,24 +1109,24 @@ definitions:
   AttackSummaries:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AttackSummary'
   AttackSummary:
     type: object
     properties:
       AttackId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The unique identifier (ID) of the attack.
       ResourceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The ARN (Amazon Resource Name) of the resource that was attacked.
       StartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackTimestamp'
         description: 'The start time of the attack, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
       EndTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackTimestamp'
         description: 'The end time of the attack, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
       AttackVectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackVectorDescriptionList'
         description: The list of attacks for a specified time period.
     description: Summarizes all DDoS attacks for a specified time period.
   AttackTimestamp:
@@ -1138,13 +1138,13 @@ definitions:
       - VectorType
     properties:
       VectorType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: '<p>The attack type. Valid values:</p> <ul> <li> <p>UDP_TRAFFIC</p> </li> <li> <p>UDP_FRAGMENT</p> </li> <li> <p>GENERIC_UDP_REFLECTION</p> </li> <li> <p>DNS_REFLECTION</p> </li> <li> <p>NTP_REFLECTION</p> </li> <li> <p>CHARGEN_REFLECTION</p> </li> <li> <p>SSDP_REFLECTION</p> </li> <li> <p>PORT_MAPPER</p> </li> <li> <p>RIP_REFLECTION</p> </li> <li> <p>SNMP_REFLECTION</p> </li> <li> <p>MSSQL_REFLECTION</p> </li> <li> <p>NET_BIOS_REFLECTION</p> </li> <li> <p>SYN_FLOOD</p> </li> <li> <p>ACK_FLOOD</p> </li> <li> <p>REQUEST_FLOOD</p> </li> </ul>'
     description: Describes the attack.
   AttackVectorDescriptionList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AttackVectorDescription'
   AutoRenew:
     type: string
     enum:
@@ -1154,10 +1154,10 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The name of the contributor. This is dependent on the <code>AttackPropertyIdentifier</code>. For example, if the <code>AttackPropertyIdentifier</code> is <code>SOURCE_COUNTRY</code>, the <code>Name</code> could be <code>United States</code>.'
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: 'The contribution of this contributor expressed in <a>Protection</a> units. For example <code>10,000</code>.'
     description: A contributor to the attack and their contribution.
   Double:
@@ -1177,13 +1177,13 @@ definitions:
       - EmailAddress
     properties:
       EmailAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EmailAddress'
         description: An email address that the DRT can use to contact you during a suspected attack.
     description: Contact information that the DRT can use to contact you during a suspected attack.
   EmergencyContactList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/EmergencyContact'
     minItems: 0
     maxItems: 10
   Integer:
@@ -1192,16 +1192,16 @@ definitions:
     type: object
     properties:
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The type of protection.
       Max:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Long'
         description: The maximum number of protections that can be created for the specified <code>Type</code>.
     description: Specifies how many protections of a given type you can create.
   Limits:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Limit'
   LogBucket:
     type: string
     pattern: '^([a-z]|(\d(?!\d{0,2}\.\d{1,3}\.\d{1,3}\.\d{1,3})))([a-z\d]|(\.(?!(\.|-)))|(-(?!\.))){1,61}[a-z\d]$'
@@ -1210,7 +1210,7 @@ definitions:
   LogBucketList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/LogBucket'
     minItems: 0
     maxItems: 10
   Long:
@@ -1223,24 +1223,24 @@ definitions:
     type: object
     properties:
       MitigationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The name of the mitigation taken for this attack.
     description: The mitigation applied to a DDoS attack.
   MitigationList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Mitigation'
   Protection:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProtectionId'
         description: The unique identifier (ID) of the protection.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProtectionName'
         description: 'The friendly name of the protection. For example, <code>My CloudFront distributions</code>.'
       ResourceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceArn'
         description: The ARN (Amazon Resource Name) of the AWS resource that is protected.
     description: An object that represents a resource that is under DDoS protection.
   ProtectionId:
@@ -1256,7 +1256,7 @@ definitions:
   Protections:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Protection'
   ResourceArn:
     type: string
     pattern: '^arn:aws.*'
@@ -1265,7 +1265,7 @@ definitions:
   ResourceArnFilterList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ResourceArn'
   RoleArn:
     type: string
     pattern: '^arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
@@ -1277,22 +1277,22 @@ definitions:
     type: object
     properties:
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubResourceType'
         description: The <code>SubResource</code> type.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The unique identifier (ID) of the <code>SubResource</code>.
       AttackVectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SummarizedAttackVectorList'
         description: The list of attack types and associated counters.
       Counters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SummarizedCounterList'
         description: The counters that describe the details of the attack.
     description: The attack information for the specified SubResource.
   SubResourceSummaryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SubResourceSummary'
   SubResourceType:
     type: string
     enum:
@@ -1302,19 +1302,19 @@ definitions:
     type: object
     properties:
       StartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: 'The start time of the subscription, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
       EndTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date and time your subscription will end.
       TimeCommitmentInSeconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DurationInSeconds'
         description: 'The length, in seconds, of the AWS Shield Advanced subscription for the account.'
       AutoRenew:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoRenew'
         description: '<p>If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period.</p> <p>When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.</p>'
       Limits:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Limits'
         description: Specifies how many protections of a given type you can create.
     description: Information about the AWS Shield Advanced subscription for an account.
   SubscriptionState:
@@ -1328,50 +1328,50 @@ definitions:
       - VectorType
     properties:
       VectorType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: 'The attack type, for example, SNMP reflection or SYN flood.'
       VectorCounters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SummarizedCounterList'
         description: The list of counters that describe the details of the attack.
     description: A summary of information about the attack.
   SummarizedAttackVectorList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SummarizedAttackVector'
   SummarizedCounter:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The counter name.
       Max:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Double'
         description: The maximum value of the counter for a specified time period.
       Average:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Double'
         description: The average value of the counter for a specified time period.
       Sum:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Double'
         description: The total of counter values for a specified time period.
       'N':
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Integer'
         description: The number of counters for a specified time period.
       Unit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The unit of the counters.
     description: The counter that describes a DDoS attack.
   SummarizedCounterList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SummarizedCounter'
   TimeRange:
     type: object
     properties:
       FromInclusive:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackTimestamp'
         description: 'The start time, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
       ToExclusive:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AttackTimestamp'
         description: 'The end time, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
     description: The time range.
   Timestamp:
@@ -1385,7 +1385,7 @@ definitions:
   TopContributors:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Contributor'
   Unit:
     type: string
     enum:

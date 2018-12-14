@@ -689,13 +689,13 @@ definitions:
       - Budget
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budget.
       Budget:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Budget'
         description: The budget object that you want to create.
       NotificationsWithSubscribers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NotificationWithSubscribersList'
         description: 'A notification that you want to associate with a budget. A budget can have up to five notifications, and each notification can have one SNS subscriber and up to 10 email subscribers. If you include notifications and subscribers in your <code>CreateBudget</code> call, AWS creates the notifications and subscribers for you.'
     description: ' Request of CreateBudget '
   InvalidParameterException: {}
@@ -715,16 +715,16 @@ definitions:
       - Subscribers
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budget that you want to create a notification for.
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
         description: The name of the budget that you want AWS to notify you about. Budget names must be unique within an account.
       Notification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Notification'
         description: The notification that you want to create.
       Subscribers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subscribers'
         description: A list of subscribers that you want to associate with the notification. Each notification can have one SNS subscriber and up to 10 email subscribers.
     description: ' Request of CreateNotification '
   NotFoundException: {}
@@ -741,16 +741,16 @@ definitions:
       - Subscriber
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budget that you want to create a subscriber for.
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
         description: The name of the budget that you want to subscribe to. Budget names must be unique within an account.
       Notification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Notification'
         description: The notification that you want to create a subscriber for.
       Subscriber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subscriber'
         description: The subscriber that you want to associate with a budget notification.
     description: ' Request of CreateSubscriber '
   DeleteBudgetResponse:
@@ -764,10 +764,10 @@ definitions:
       - BudgetName
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budget that you want to delete.
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
         description: The name of the budget that you want to delete.
     description: ' Request of DeleteBudget '
   DeleteNotificationResponse:
@@ -782,13 +782,13 @@ definitions:
       - Notification
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budget whose notification you want to delete.
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
         description: The name of the budget whose notification you want to delete.
       Notification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Notification'
         description: The notification that you want to delete.
     description: ' Request of DeleteNotification '
   DeleteSubscriberResponse:
@@ -804,23 +804,23 @@ definitions:
       - Subscriber
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budget whose subscriber you want to delete.
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
         description: The name of the budget whose subscriber you want to delete.
       Notification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Notification'
         description: The notification whose subscriber you want to delete.
       Subscriber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subscriber'
         description: The subscriber that you want to delete.
     description: ' Request of DeleteSubscriber '
   DescribeBudgetResponse:
     type: object
     properties:
       Budget:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Budget'
         description: The description of the budget.
     description: ' Response of DescribeBudget '
   DescribeBudgetRequest:
@@ -830,20 +830,20 @@ definitions:
       - BudgetName
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budget that you want a description of.
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
         description: The name of the budget that you want a description of.
     description: ' Request of DescribeBudget '
   DescribeBudgetPerformanceHistoryResponse:
     type: object
     properties:
       BudgetPerformanceHistory:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetPerformanceHistory'
         description: '<p>The history of how often the budget has gone into an <code>ALARM</code> state.</p> <p>For <code>DAILY</code> budgets, the history saves the state of the budget for the last 60 days. For <code>MONTHLY</code> budgets, the history saves the state of the budget for the current month plus the last 12 months. For <code>QUARTERLY</code> budgets, the history saves the state of the budget for the last four quarters.</p>'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
   DescribeBudgetPerformanceHistoryRequest:
     type: object
     required:
@@ -851,26 +851,26 @@ definitions:
       - BudgetName
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
       TimePeriod:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimePeriod'
         description: Retrieves how often the budget went into an <code>ALARM</code> state for the specified time period.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
   InvalidNextTokenException: {}
   ExpiredNextTokenException: {}
   DescribeBudgetsResponse:
     type: object
     properties:
       Budgets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Budgets'
         description: A list of budgets.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The pagination token in the service response that indicates the next set of results that you can retrieve.
     description: ' Response of DescribeBudgets '
   DescribeBudgetsRequest:
@@ -879,23 +879,23 @@ definitions:
       - AccountId
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budgets that you want descriptions of.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: An optional integer that represents how many entries a paginated response contains. The maximum is 100.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
     description: ' Request of DescribeBudgets '
   DescribeNotificationsForBudgetResponse:
     type: object
     properties:
       Notifications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Notifications'
         description: A list of notifications that are associated with a budget.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The pagination token in the service response that indicates the next set of results that you can retrieve.
     description: ' Response of GetNotificationsForBudget '
   DescribeNotificationsForBudgetRequest:
@@ -905,26 +905,26 @@ definitions:
       - BudgetName
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budget whose notifications you want descriptions of.
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
         description: The name of the budget whose notifications you want descriptions of.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: An optional integer that represents how many entries a paginated response contains. The maximum is 100.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
     description: ' Request of DescribeNotificationsForBudget '
   DescribeSubscribersForNotificationResponse:
     type: object
     properties:
       Subscribers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subscribers'
         description: A list of subscribers that are associated with a notification.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The pagination token in the service response that indicates the next set of results that you can retrieve.
     description: ' Response of DescribeSubscribersForNotification '
   DescribeSubscribersForNotificationRequest:
@@ -935,19 +935,19 @@ definitions:
       - Notification
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budget whose subscribers you want descriptions of.
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
         description: The name of the budget whose subscribers you want descriptions of.
       Notification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Notification'
         description: The notification whose subscribers you want to list.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: An optional integer that represents how many entries a paginated response contains. The maximum is 100.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
         description: The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
     description: ' Request of DescribeSubscribersForNotification '
   UpdateBudgetResponse:
@@ -961,10 +961,10 @@ definitions:
       - NewBudget
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budget that you want to update.
       NewBudget:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Budget'
         description: The budget that you want to update your budget to.
     description: ' Request of UpdateBudget '
   UpdateNotificationResponse:
@@ -980,16 +980,16 @@ definitions:
       - NewNotification
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budget whose notification you want to update.
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
         description: The name of the budget whose notification you want to update.
       OldNotification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Notification'
         description: The previous notification that is associated with a budget.
       NewNotification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Notification'
         description: The updated notification to be associated with a budget.
     description: ' Request of UpdateNotification '
   UpdateSubscriberResponse:
@@ -1006,19 +1006,19 @@ definitions:
       - NewSubscriber
     properties:
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountId'
         description: The <code>accountId</code> that is associated with the budget whose subscriber you want to update.
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
         description: The name of the budget whose subscriber you want to update.
       Notification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Notification'
         description: The notification whose subscriber you want to update.
       OldSubscriber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subscriber'
         description: The previous subscriber that is associated with a budget notification.
       NewSubscriber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subscriber'
         description: The updated subscriber that is associated with a budget notification.
     description: ' Request of UpdateSubscriber '
   AccountId:
@@ -1036,31 +1036,31 @@ definitions:
       - BudgetType
     properties:
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
         description: 'The name of a budget. The name must be unique within accounts. The <code>:</code> and <code>\</code> characters aren''t allowed in <code>BudgetName</code>.'
       BudgetLimit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Spend'
         description: '<p>The total amount of cost, usage, RI utilization, or RI coverage that you want to track with your budget.</p> <p> <code>BudgetLimit</code> is required for cost or usage budgets, but optional for RI utilization or coverage budgets. RI utilization or coverage budgets default to <code>100</code>, which is the only valid value for RI utilization or coverage budgets.</p>'
       CostFilters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CostFilters'
         description: '<p>The cost filters, such as service or region, that are applied to a budget.</p> <p>AWS Budgets supports the following services as a filter for RI budgets:</p> <ul> <li> <p>Amazon Elastic Compute Cloud - Compute</p> </li> <li> <p>Amazon Redshift</p> </li> <li> <p>Amazon Relational Database Service</p> </li> <li> <p>Amazon ElastiCache</p> </li> <li> <p>Amazon Elasticsearch Service</p> </li> </ul>'
       CostTypes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CostTypes'
         description: '<p>The types of costs that are included in this <code>COST</code> budget.</p> <p> <code>USAGE</code>, <code>RI_UTILIZATION</code>, and <code>RI_COVERAGE</code> budgets do not have <code>CostTypes</code>.</p>'
       TimeUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeUnit'
         description: The length of time until a budget resets the actual and forecasted spend. <code>DAILY</code> is available only for <code>RI_UTILIZATION</code> and <code>RI_COVERAGE</code> budgets.
       TimePeriod:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimePeriod'
         description: '<p>The period of time that is covered by a budget. The period has a start date and an end date. The start date must come before the end date. The end date must come before <code>06/15/87 00:00 UTC</code>. </p> <p>If you create your budget and don''t specify a start date, AWS defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on January 24, 2018, chose <code>DAILY</code>, and didn''t set a start date, AWS set your start date to <code>01/24/18 00:00 UTC</code>. If you chose <code>MONTHLY</code>, AWS set your start date to <code>01/01/18 00:00 UTC</code>. If you didn''t specify an end date, AWS set your end date to <code>06/15/87 00:00 UTC</code>. The defaults are the same for the AWS Billing and Cost Management console and the API. </p> <p>You can change either date with the <code>UpdateBudget</code> operation.</p> <p>After the end date, AWS deletes the budget and all associated notifications and subscribers.</p>'
       CalculatedSpend:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CalculatedSpend'
         description: The actual and forecasted cost or usage that the budget tracks.
       BudgetType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetType'
         description: 'Whether this budget tracks monetary costs, usage, RI utilization, or RI coverage.'
       LastUpdatedTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericTimestamp'
         description: The last time that you updated this budget.
     description: '<p>Represents the output of the <code>CreateBudget</code> operation. The content consists of the detailed metadata and data file information, and the current status of the <code>budget</code> object.</p> <p>This is the ARN pattern for a budget: </p> <p> <code>arn:aws:budgetservice::AccountId:budget/budgetName</code> </p>'
   BudgetName:
@@ -1073,19 +1073,19 @@ definitions:
     type: object
     properties:
       BudgetName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetName'
       BudgetType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetType'
       CostFilters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CostFilters'
         description: The history of the cost filters for a budget during the specified time period.
       CostTypes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CostTypes'
         description: The history of the cost types for a budget during the specified time period.
       TimeUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeUnit'
       BudgetedAndActualAmountsList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BudgetedAndActualAmountsList'
         description: 'A list of amounts of cost or usage that you created budgets for, compared to your actual costs or usage.'
     description: A history of the state of a budget at the end of the budget's specified time period.
   BudgetType:
@@ -1100,34 +1100,34 @@ definitions:
     type: object
     properties:
       BudgetedAmount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Spend'
         description: The amount of cost or usage that you created the budget for.
       ActualAmount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Spend'
         description: Your actual costs or usage for a budget period.
       TimePeriod:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimePeriod'
         description: The time period covered by this budget comparison.
     description: 'The amount of cost or usage that you created the budget for, compared to your actual costs or usage.'
   BudgetedAndActualAmountsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/BudgetedAndActualAmounts'
   Budgets:
     type: array
     description: ' A list of budgets.'
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Budget'
   CalculatedSpend:
     type: object
     required:
       - ActualSpend
     properties:
       ActualSpend:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Spend'
         description: 'The amount of cost, usage, or RI units that you have used.'
       ForecastedSpend:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Spend'
         description: 'The amount of cost, usage, or RI units that you are forecasted to use.'
     description: '<p>The spend objects that are associated with this budget. The <code>actualSpend</code> tracks how much you''ve used, cost, usage, or RI units, and the <code>forecastedSpend</code> tracks how much you are predicted to spend if your current usage remains steady.</p> <p>For example, if it is the 20th of the month and you have spent <code>50</code> dollars on Amazon EC2, your <code>actualSpend</code> is <code>50 USD</code>, and your <code>forecastedSpend</code> is <code>75 USD</code>.</p>'
   ComparisonOperator:
@@ -1146,7 +1146,7 @@ definitions:
   DimensionValues:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/GenericString'
   CostFilters:
     type: array
     description: ' A map that represents the cost filters that are applied to the budget.'
@@ -1161,37 +1161,37 @@ definitions:
     type: object
     properties:
       IncludeTax:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NullableBoolean'
         description: <p>Specifies whether a budget includes taxes.</p> <p>The default value is <code>true</code>.</p>
       IncludeSubscription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NullableBoolean'
         description: <p>Specifies whether a budget includes subscriptions.</p> <p>The default value is <code>true</code>.</p>
       UseBlended:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NullableBoolean'
         description: <p>Specifies whether a budget uses a blended rate.</p> <p>The default value is <code>false</code>.</p>
       IncludeRefund:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NullableBoolean'
         description: <p>Specifies whether a budget includes refunds.</p> <p>The default value is <code>true</code>.</p>
       IncludeCredit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NullableBoolean'
         description: <p>Specifies whether a budget includes credits.</p> <p>The default value is <code>true</code>.</p>
       IncludeUpfront:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NullableBoolean'
         description: <p>Specifies whether a budget includes upfront RI costs.</p> <p>The default value is <code>true</code>.</p>
       IncludeRecurring:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NullableBoolean'
         description: <p>Specifies whether a budget includes recurring fees such as monthly RI fees.</p> <p>The default value is <code>true</code>.</p>
       IncludeOtherSubscription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NullableBoolean'
         description: <p>Specifies whether a budget includes non-RI subscription costs.</p> <p>The default value is <code>true</code>.</p>
       IncludeSupport:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NullableBoolean'
         description: <p>Specifies whether a budget includes support subscription fees.</p> <p>The default value is <code>true</code>.</p>
       IncludeDiscount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NullableBoolean'
         description: <p>Specifies whether a budget includes discounts.</p> <p>The default value is <code>true</code>.</p>
       UseAmortized:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NullableBoolean'
         description: <p>Specifies whether a budget uses the amortized rate.</p> <p>The default value is <code>false</code>.</p>
     description: '<p>The types of cost that are included in a <code>COST</code> budget, such as tax and subscriptions.</p> <p> <code>USAGE</code>, <code>RI_UTILIZATION</code>, and <code>RI_COVERAGE</code> budgets do not have <code>CostTypes</code>.</p>'
   GenericTimestamp:
@@ -1211,19 +1211,19 @@ definitions:
       - Threshold
     properties:
       NotificationType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NotificationType'
         description: Whether the notification is for how much you have spent (<code>ACTUAL</code>) or for how much you're forecasted to spend (<code>FORECASTED</code>).
       ComparisonOperator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ComparisonOperator'
         description: The comparison that is used for this notification.
       Threshold:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NotificationThreshold'
         description: The threshold that is associated with a notification. Thresholds are always a percentage.
       ThresholdType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ThresholdType'
         description: 'The type of threshold for a notification. For <code>ABSOLUTE_VALUE</code> thresholds, AWS notifies you when you go over or are forecasted to go over your total cost threshold. For <code>PERCENTAGE</code> thresholds, AWS notifies you when you go over or are forecasted to go over a certain percentage of your forecasted spend. For example, if you have a budget for 200 dollars and you have a <code>PERCENTAGE</code> threshold of 80%, AWS notifies you when you go over 160 dollars.'
       NotificationState:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NotificationState'
         description: 'Whether this notification is in alarm. If a budget notification is in the <code>ALARM</code> state, you have passed the set threshold for the budget.'
     description: '<p>A notification that is associated with a budget. A budget can have up to five notifications. </p> <p>Each notification must have at least one subscriber. A notification can have one SNS subscriber and up to 10 email subscribers, for a total of 11 subscribers.</p> <p>For example, if you have a budget for 200 dollars and you want to be notified when you go over 160 dollars, create a notification with the following parameters:</p> <ul> <li> <p>A notificationType of <code>ACTUAL</code> </p> </li> <li> <p>A <code>thresholdType</code> of <code>PERCENTAGE</code> </p> </li> <li> <p>A <code>comparisonOperator</code> of <code>GREATER_THAN</code> </p> </li> <li> <p>A notification <code>threshold</code> of <code>80</code> </p> </li> </ul>'
   NotificationState:
@@ -1250,23 +1250,23 @@ definitions:
       - Subscribers
     properties:
       Notification:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Notification'
         description: The notification that is associated with a budget.
       Subscribers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Subscribers'
         description: A list of subscribers who are subscribed to this notification.
     description: 'A notification with subscribers. A notification can have one SNS subscriber and up to 10 email subscribers, for a total of 11 subscribers.'
   NotificationWithSubscribersList:
     type: array
     description: ' A list of notifications, each with a list of subscribers.'
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/NotificationWithSubscribers'
     maxItems: 5
   Notifications:
     type: array
     description: ' A list of notifications.'
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Notification'
   NullableBoolean:
     type: boolean
   NumericValue:
@@ -1282,10 +1282,10 @@ definitions:
       - Unit
     properties:
       Amount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NumericValue'
         description: 'The cost or usage amount that is associated with a budget forecast, actual spend, or budget threshold.'
       Unit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UnitValue'
         description: 'The unit of measurement that is used for the budget forecast, actual spend, or budget threshold, such as dollars or GB.'
     description: '<p>The amount of cost or usage that is measured for a budget.</p> <p>For example, a <code>Spend</code> for <code>3 GB</code> of S3 usage would have the following parameters:</p> <ul> <li> <p>An <code>Amount</code> of <code>3</code> </p> </li> <li> <p>A <code>unit</code> of <code>GB</code> </p> </li> </ul>'
   Subscriber:
@@ -1295,10 +1295,10 @@ definitions:
       - Address
     properties:
       SubscriptionType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriptionType'
         description: The type of notification that AWS sends to a subscriber.
       Address:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriberAddress'
         description: 'The address that AWS sends budget notifications to, either an SNS topic or an email.'
     description: '<p>The subscriber to a budget notification. The subscriber consists of a subscription type and either an Amazon SNS topic or an email address.</p> <p>For example, an email subscriber would have the following parameters:</p> <ul> <li> <p>A <code>subscriptionType</code> of <code>EMAIL</code> </p> </li> <li> <p>An <code>address</code> of <code>example@example.com</code> </p> </li> </ul>'
   SubscriberAddress:
@@ -1312,7 +1312,7 @@ definitions:
     type: array
     description: ' A list of subscribers.'
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Subscriber'
     minItems: 1
     maxItems: 11
   SubscriptionType:
@@ -1331,10 +1331,10 @@ definitions:
     type: object
     properties:
       Start:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericTimestamp'
         description: '<p>The start date for a budget. If you created your budget and didn''t specify a start date, AWS defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on January 24, 2018, chose <code>DAILY</code>, and didn''t set a start date, AWS set your start date to <code>01/24/18 00:00 UTC</code>. If you chose <code>MONTHLY</code>, AWS set your start date to <code>01/01/18 00:00 UTC</code>. The defaults are the same for the AWS Billing and Cost Management console and the API.</p> <p>You can change your start date with the <code>UpdateBudget</code> operation.</p>'
       End:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericTimestamp'
         description: '<p>The end date for a budget. If you didn''t specify an end date, AWS set your end date to <code>06/15/87 00:00 UTC</code>. The defaults are the same for the AWS Billing and Cost Management console and the API.</p> <p>After the end date, AWS deletes the budget and all associated notifications and subscribers. You can change your end date with the <code>UpdateBudget</code> operation.</p>'
     description: 'The period of time that is covered by a budget. The period has a start date and an end date. The start date must come before the end date. There are no restrictions on the end date. '
   TimeUnit:

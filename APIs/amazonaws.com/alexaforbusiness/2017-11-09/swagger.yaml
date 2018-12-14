@@ -2562,7 +2562,7 @@ definitions:
       - SkillId
     properties:
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The unique identifier of the skill.
   LimitExceededException: {}
   NotFoundException: {}
@@ -2577,10 +2577,10 @@ definitions:
       - AddressBookArn
     properties:
       ContactArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the contact to associate with an address book.
       AddressBookArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the address book with which to associate the contact.
   AssociateDeviceWithRoomResponse:
     type: object
@@ -2589,10 +2589,10 @@ definitions:
     type: object
     properties:
       DeviceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the device to associate to a room. Required.
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room with which to associate the device. Required.
   DeviceNotRegisteredException: {}
   AssociateSkillGroupWithRoomResponse:
@@ -2602,10 +2602,10 @@ definitions:
     type: object
     properties:
       SkillGroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the skill group to associate with a room. Required.
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room with which to associate the skill group. Required.
   AssociateSkillWithSkillGroupResponse:
     type: object
@@ -2616,10 +2616,10 @@ definitions:
       - SkillId
     properties:
       SkillGroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the skill group to associate the skill to. Required.
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The unique identifier of the skill.
   SkillNotLinkedException: {}
   AssociateSkillWithUsersResponse:
@@ -2631,16 +2631,16 @@ definitions:
       - SkillId
     properties:
       OrganizationArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the organization.
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The private skill ID you want to make available to enrolled users.&gt;
   CreateAddressBookResponse:
     type: object
     properties:
       AddressBookArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the newly created address book.
   CreateAddressBookRequest:
     type: object
@@ -2648,20 +2648,20 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AddressBookName'
         description: The name of the address book.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AddressBookDescription'
         description: The description of the address book.
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: 'A unique, user-specified identifier for the request that ensures idempotency.'
   AlreadyExistsException: {}
   CreateBusinessReportScheduleResponse:
     type: object
     properties:
       ScheduleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the business report schedule.
   CreateBusinessReportScheduleRequest:
     type: object
@@ -2670,31 +2670,31 @@ definitions:
       - ContentRange
     properties:
       ScheduleName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportScheduleName'
         description: The name identifier of the schedule.
       S3BucketName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CustomerS3BucketName'
         description: The S3 bucket name of the output reports.
       S3KeyPrefix:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3KeyPrefix'
         description: The S3 key where the report is delivered.
       Format:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportFormat'
         description: The format of the generated report (individual CSV files or zipped files of individual files).
       ContentRange:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportContentRange'
         description: The content range of the reports.
       Recurrence:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportRecurrence'
         description: The recurrence of the reports.
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: The client request token.
   CreateConferenceProviderResponse:
     type: object
     properties:
       ConferenceProviderArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the newly-created conference provider.
   CreateConferenceProviderRequest:
     type: object
@@ -2704,28 +2704,28 @@ definitions:
       - MeetingSetting
     properties:
       ConferenceProviderName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConferenceProviderName'
         description: The name of the conference provider.
       ConferenceProviderType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConferenceProviderType'
         description: Represents a type within a list of predefined types.
       IPDialIn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IPDialIn'
         description: The IP endpoint and protocol for calling.
       PSTNDialIn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PSTNDialIn'
         description: The information for PSTN conferencing.
       MeetingSetting:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MeetingSetting'
         description: The meeting settings for the conference provider.
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: The request token of the client.
   CreateContactResponse:
     type: object
     properties:
       ContactArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the newly created address book.
   CreateContactRequest:
     type: object
@@ -2733,25 +2733,25 @@ definitions:
       - FirstName
     properties:
       DisplayName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactName'
         description: The name of the contact to display on the console.
       FirstName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactName'
         description: The first name of the contact that is used to call the contact on the device.
       LastName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactName'
         description: The last name of the contact that is used to call the contact on the device.
       PhoneNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/E164PhoneNumber'
         description: The phone number of the contact in E.164 format.
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: 'A unique, user-specified identifier for this request that ensures idempotency.'
   CreateProfileResponse:
     type: object
     properties:
       ProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the newly created room profile in the response.
   CreateProfileRequest:
     type: object
@@ -2764,40 +2764,40 @@ definitions:
       - WakeWord
     properties:
       ProfileName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProfileName'
         description: The name of a room profile.
       Timezone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timezone'
         description: The time zone used by a room profile.
       Address:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Address'
         description: The valid address for the room.
       DistanceUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DistanceUnit'
         description: The distance unit to be used by devices in the profile.
       TemperatureUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TemperatureUnit'
         description: The temperature unit to be used by devices in the profile.
       WakeWord:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WakeWord'
         description: 'A wake word for Alexa, Echo, Amazon, or a computer.'
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: The user-specified token that is used during the creation of a profile.
       SetupModeDisabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Whether room profile setup is enabled.
       MaxVolumeLimit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxVolumeLimit'
         description: The maximum volume limit for a room profile.
       PSTNEnabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Whether PSTN calling is enabled.
   CreateRoomResponse:
     type: object
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the newly created room in the response.
   CreateRoomRequest:
     type: object
@@ -2805,28 +2805,28 @@ definitions:
       - RoomName
     properties:
       RoomName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomName'
         description: The name for the room.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomDescription'
         description: The description for the room.
       ProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The profile ARN for the room.
       ProviderCalendarId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProviderCalendarId'
         description: The calendar ARN for the room.
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: 'A unique, user-specified identifier for this request that ensures idempotency. '
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: The tags for the room.
   CreateSkillGroupResponse:
     type: object
     properties:
       SkillGroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the newly created skill group in the response.
   CreateSkillGroupRequest:
     type: object
@@ -2834,19 +2834,19 @@ definitions:
       - SkillGroupName
     properties:
       SkillGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillGroupName'
         description: The name for the skill group.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillGroupDescription'
         description: The description for the skill group.
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: 'A unique, user-specified identifier for this request that ensures idempotency. '
   CreateUserResponse:
     type: object
     properties:
       UserArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the newly created user in the response.
   CreateUserRequest:
     type: object
@@ -2854,22 +2854,22 @@ definitions:
       - UserId
     properties:
       UserId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/user_UserId'
         description: The ARN for the user.
       FirstName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/user_FirstName'
         description: The first name for the user.
       LastName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/user_LastName'
         description: The last name for the user.
       Email:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Email'
         description: The email address for the user.
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: 'A unique, user-specified identifier for this request that ensures idempotency. '
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: The tags for the user.
   ResourceInUseException: {}
   DeleteAddressBookResponse:
@@ -2881,7 +2881,7 @@ definitions:
       - AddressBookArn
     properties:
       AddressBookArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the address book to delete.
   DeleteBusinessReportScheduleResponse:
     type: object
@@ -2892,7 +2892,7 @@ definitions:
       - ScheduleArn
     properties:
       ScheduleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the business report schedule.
   DeleteConferenceProviderResponse:
     type: object
@@ -2903,7 +2903,7 @@ definitions:
       - ConferenceProviderArn
     properties:
       ConferenceProviderArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the conference provider.
   DeleteContactResponse:
     type: object
@@ -2914,7 +2914,7 @@ definitions:
       - ContactArn
     properties:
       ContactArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the contact to delete.
   DeleteDeviceResponse:
     type: object
@@ -2925,7 +2925,7 @@ definitions:
       - DeviceArn
     properties:
       DeviceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the device for which to request details.
   InvalidCertificateAuthorityException: {}
   DeleteProfileResponse:
@@ -2935,7 +2935,7 @@ definitions:
     type: object
     properties:
       ProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room profile to delete. Required.
   DeleteRoomResponse:
     type: object
@@ -2944,7 +2944,7 @@ definitions:
     type: object
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room to delete. Required.
   DeleteRoomSkillParameterResponse:
     type: object
@@ -2956,13 +2956,13 @@ definitions:
       - ParameterKey
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room from which to remove the room skill parameter details.
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The ID of the skill from which to remove the room skill parameter details.
       ParameterKey:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomSkillParameterKey'
         description: The room skill parameter key for which to remove details.
   DeleteSkillAuthorizationResponse:
     type: object
@@ -2973,10 +2973,10 @@ definitions:
       - SkillId
     properties:
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The unique identifier of a skill.
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The room that the skill is authorized for.
   DeleteSkillGroupResponse:
     type: object
@@ -2985,7 +2985,7 @@ definitions:
     type: object
     properties:
       SkillGroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the skill group to delete. Required.
   DeleteUserResponse:
     type: object
@@ -2996,10 +2996,10 @@ definitions:
       - EnrollmentId
     properties:
       UserArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the user to delete in the organization. Required.
       EnrollmentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnrollmentId'
         description: The ARN of the user's enrollment in the organization. Required.
   DisassociateContactFromAddressBookResponse:
     type: object
@@ -3011,10 +3011,10 @@ definitions:
       - AddressBookArn
     properties:
       ContactArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the contact to disassociate from an address book.
       AddressBookArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the address from which to disassociate the contact.
   DisassociateDeviceFromRoomResponse:
     type: object
@@ -3023,7 +3023,7 @@ definitions:
     type: object
     properties:
       DeviceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the device to disassociate from a room. Required.
   DisassociateSkillFromSkillGroupResponse:
     type: object
@@ -3034,10 +3034,10 @@ definitions:
       - SkillId
     properties:
       SkillGroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The unique identifier of a skill. Required.
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The ARN of a skill group to associate to a skill.
   DisassociateSkillFromUsersResponse:
     type: object
@@ -3048,10 +3048,10 @@ definitions:
       - SkillId
     properties:
       OrganizationArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the organization.
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: ' The private skill ID you want to make unavailable for enrolled users.'
   DisassociateSkillGroupFromRoomResponse:
     type: object
@@ -3060,10 +3060,10 @@ definitions:
     type: object
     properties:
       SkillGroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the skill group to disassociate from a room. Required.
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room from which the skill group is to be disassociated. Required.
   ForgetSmartHomeAppliancesResponse:
     type: object
@@ -3074,13 +3074,13 @@ definitions:
       - RoomArn
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The room that the appliances are associated with.
   GetAddressBookResponse:
     type: object
     properties:
       AddressBook:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AddressBook'
         description: The details of the requested address book.
   GetAddressBookRequest:
     type: object
@@ -3088,13 +3088,13 @@ definitions:
       - AddressBookArn
     properties:
       AddressBookArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the address book for which to request details.
   GetConferencePreferenceResponse:
     type: object
     properties:
       Preference:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConferencePreference'
         description: The conference preference.
   GetConferencePreferenceRequest:
     type: object
@@ -3103,7 +3103,7 @@ definitions:
     type: object
     properties:
       ConferenceProvider:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConferenceProvider'
         description: The conference provider.
   GetConferenceProviderRequest:
     type: object
@@ -3111,13 +3111,13 @@ definitions:
       - ConferenceProviderArn
     properties:
       ConferenceProviderArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the newly created conference provider.
   GetContactResponse:
     type: object
     properties:
       Contact:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Contact'
         description: The details of the requested contact.
   GetContactRequest:
     type: object
@@ -3125,49 +3125,49 @@ definitions:
       - ContactArn
     properties:
       ContactArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the contact for which to request details.
   GetDeviceResponse:
     type: object
     properties:
       Device:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Device'
         description: The details of the device requested. Required.
   GetDeviceRequest:
     type: object
     properties:
       DeviceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the device for which to request details. Required.
   GetProfileResponse:
     type: object
     properties:
       Profile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Profile'
         description: The details of the room profile requested. Required.
   GetProfileRequest:
     type: object
     properties:
       ProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room profile for which to request details. Required.
   GetRoomResponse:
     type: object
     properties:
       Room:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Room'
         description: The details of the room requested.
   GetRoomRequest:
     type: object
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room for which to request details. Required.
   GetRoomSkillParameterResponse:
     type: object
     properties:
       RoomSkillParameter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomSkillParameter'
         description: The details of the room skill parameter requested. Required.
   GetRoomSkillParameterRequest:
     type: object
@@ -3176,70 +3176,70 @@ definitions:
       - ParameterKey
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: 'The ARN of the room from which to get the room skill parameter details. '
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The ARN of the skill from which to get the room skill parameter details. Required.
       ParameterKey:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomSkillParameterKey'
         description: The room skill parameter key for which to get details. Required.
   GetSkillGroupResponse:
     type: object
     properties:
       SkillGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillGroup'
         description: The details of the skill group requested. Required.
   GetSkillGroupRequest:
     type: object
     properties:
       SkillGroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the skill group for which to get details. Required.
   ListBusinessReportSchedulesResponse:
     type: object
     properties:
       BusinessReportSchedules:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportScheduleList'
         description: The schedule of the reports.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token used to list the remaining schedules from the previous API call.
   ListBusinessReportSchedulesRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token used to list the remaining schedules from the previous API call.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: The maximum number of schedules listed in the call.
   ListConferenceProvidersResponse:
     type: object
     properties:
       ConferenceProviders:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConferenceProvidersList'
         description: The conference providers.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The tokens used for pagination.
   ListConferenceProvidersRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The tokens used for pagination.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of conference providers to be returned, per paginated calls.'
   ListDeviceEventsResponse:
     type: object
     properties:
       DeviceEvents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceEventList'
         description: The device events requested for the device ARN.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned to indicate that there is more data available.
   ListDeviceEventsRequest:
     type: object
@@ -3247,70 +3247,70 @@ definitions:
       - DeviceArn
     properties:
       DeviceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of a device.
       EventType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceEventType'
         description: 'The event type to filter device events. If EventType isn''t specified, this returns a list of all device events in reverse chronological order. If EventType is specified, this returns a list of device events for that EventType in reverse chronological order. '
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults. When the end of results is reached, the response has a value of null.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to include in the response. The default value is 50. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. '
   ListSkillsResponse:
     type: object
     properties:
       SkillSummaries:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillSummaryList'
         description: The list of enabled skills requested. Required.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned to indicate that there is more data available.
   ListSkillsRequest:
     type: object
     properties:
       SkillGroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the skill group for which to list enabled skills.
       EnablementType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnablementTypeFilter'
         description: 'Whether the skill is enabled under the user''s account, or if it requires linking to be used.'
       SkillType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillTypeFilter'
         description: Whether the skill is publicly available or is a private skill.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillListMaxResults'
         description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
   ListSkillsStoreCategoriesResponse:
     type: object
     properties:
       CategoryList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CategoryList'
         description: The list of categories.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The tokens used for pagination.
   ListSkillsStoreCategoriesRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The tokens used for pagination.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of categories returned, per paginated calls.'
   ListSkillsStoreSkillsByCategoryResponse:
     type: object
     properties:
       SkillsStoreSkills:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillsStoreSkillList'
         description: The skill store skills.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The tokens used for pagination.
   ListSkillsStoreSkillsByCategoryRequest:
     type: object
@@ -3318,22 +3318,22 @@ definitions:
       - CategoryId
     properties:
       CategoryId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CategoryId'
         description: The category ID for which the skills are being retrieved from the skill store.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The tokens used for pagination.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillListMaxResults'
         description: The maximum number of skills returned per paginated calls.
   ListSmartHomeAppliancesResponse:
     type: object
     properties:
       SmartHomeAppliances:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SmartHomeApplianceList'
         description: The smart home appliances.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The tokens used for pagination.
   ListSmartHomeAppliancesRequest:
     type: object
@@ -3341,22 +3341,22 @@ definitions:
       - RoomArn
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The room that the appliances are associated with.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of appliances to be returned, per paginated calls.'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The tokens used for pagination.
   ListTagsResponse:
     type: object
     properties:
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: The tags requested for the specified resource.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned to indicate that there is more data available.
   ListTagsRequest:
     type: object
@@ -3364,13 +3364,13 @@ definitions:
       - Arn
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the specified resource for which to list tags.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. '
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
   PutConferencePreferenceResponse:
     type: object
@@ -3381,7 +3381,7 @@ definitions:
       - ConferencePreference
     properties:
       ConferencePreference:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConferencePreference'
         description: The conference preference of a specific conference provider.
   PutRoomSkillParameterResponse:
     type: object
@@ -3393,13 +3393,13 @@ definitions:
       - RoomSkillParameter
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room associated with the room skill parameter. Required.
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The ARN of the skill associated with the room skill parameter. Required.
       RoomSkillParameter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomSkillParameter'
         description: The updated room skill parameter. Required.
   PutSkillAuthorizationResponse:
     type: object
@@ -3411,20 +3411,20 @@ definitions:
       - SkillId
     properties:
       AuthorizationResult:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AuthorizationResult'
         description: The authorization result specific to OAUTH code grant output. "Code” must be populated in the AuthorizationResult map to establish the authorization.
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The unique identifier of a skill.
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The room that the skill is authorized for.
   UnauthorizedException: {}
   RegisterAVSDeviceResponse:
     type: object
     properties:
       DeviceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the device.
   RegisterAVSDeviceRequest:
     type: object
@@ -3436,19 +3436,19 @@ definitions:
       - AmazonId
     properties:
       ClientId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientId'
         description: The client ID of the OEM used for code-based linking authorization on an AVS device.
       UserCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserCode'
         description: The code that is obtained after your AVS device has made a POST request to LWA as a part of the Device Authorization Request component of the OAuth code-based linking specification.
       ProductId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProductId'
         description: The product ID used to identify your AVS device during authorization.
       DeviceSerialNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceSerialNumberForAVS'
         description: The key generated by the OEM that uniquely identifies a specified instance of your AVS device.
       AmazonId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AmazonId'
         description: The device type ID for your AVS device generated by Amazon when the OEM creates a new product on Amazon's Developer Console.
   InvalidDeviceException: {}
   RejectSkillResponse:
@@ -3460,19 +3460,19 @@ definitions:
       - SkillId
     properties:
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The unique identifier of the skill.
   ResolveRoomResponse:
     type: object
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room from which the skill request was invoked.
       RoomName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomName'
         description: The name of the room from which the skill request was invoked.
       RoomSkillParameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomSkillParameters'
         description: Response to get the room profile request. Required.
   ResolveRoomRequest:
     type: object
@@ -3481,10 +3481,10 @@ definitions:
       - SkillId
     properties:
       UserId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserId'
         description: The ARN of the user. Required.
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The ARN of the skill that was requested. Required.
   RevokeInvitationResponse:
     type: object
@@ -3493,199 +3493,199 @@ definitions:
     type: object
     properties:
       UserArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the user for whom to revoke an enrollment invitation. Required.
       EnrollmentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnrollmentId'
         description: The ARN of the enrollment invitation to revoke. Required.
   SearchAddressBooksResponse:
     type: object
     properties:
       AddressBooks:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AddressBookDataList'
         description: 'The address books that meet the specified set of filter criteria, in sort order.'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned to indicate that there is more data available.
       TotalCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TotalCount'
         description: The total number of address books returned.
   SearchAddressBooksRequest:
     type: object
     properties:
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
         description: The filters to use to list a specified set of address books. The supported filter key is AddressBookName.
       SortCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SortList'
         description: The sort order to use in listing the specified set of address books. The supported sort key is AddressBookName.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
   SearchContactsResponse:
     type: object
     properties:
       Contacts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactDataList'
         description: 'The contacts that meet the specified set of filter criteria, in sort order.'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned to indicate that there is more data available.
       TotalCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TotalCount'
         description: The total number of contacts returned.
   SearchContactsRequest:
     type: object
     properties:
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
         description: 'The filters to use to list a specified set of address books. The supported filter keys are DisplayName, FirstName, LastName, and AddressBookArns.'
       SortCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SortList'
         description: 'The sort order to use in listing the specified set of contacts. The supported sort keys are DisplayName, FirstName, and LastName.'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response only includes results beyond the token, up to the value specified by MaxResults.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.'
   SearchDevicesResponse:
     type: object
     properties:
       Devices:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceDataList'
         description: 'The devices that meet the specified set of filter criteria, in sort order.'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned to indicate that there is more data available.
       TotalCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TotalCount'
         description: The total number of devices returned.
   SearchDevicesRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
         description: 'The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).'
       SortCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SortList'
         description: 'The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and ConnectionStatus.'
   SearchProfilesResponse:
     type: object
     properties:
       Profiles:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProfileDataList'
         description: 'The profiles that meet the specified set of filter criteria, in sort order.'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned to indicate that there is more data available.
       TotalCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TotalCount'
         description: The total number of room profiles returned.
   SearchProfilesRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
         description: 'The filters to use to list a specified set of room profiles. Supported filter keys are ProfileName and Address. Required. '
       SortCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SortList'
         description: The sort order to use in listing the specified set of room profiles. Supported sort keys are ProfileName and Address.
   SearchRoomsResponse:
     type: object
     properties:
       Rooms:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomDataList'
         description: 'The rooms that meet the specified set of filter criteria, in sort order.'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned to indicate that there is more data available.
       TotalCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TotalCount'
         description: The total number of rooms returned.
   SearchRoomsRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. '
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
         description: The filters to use to list a specified set of rooms. The supported filter keys are RoomName and ProfileName.
       SortCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SortList'
         description: The sort order to use in listing the specified set of rooms. The supported sort keys are RoomName and ProfileName.
   SearchSkillGroupsResponse:
     type: object
     properties:
       SkillGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillGroupDataList'
         description: 'The skill groups that meet the filter criteria, in sort order.'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned to indicate that there is more data available.
       TotalCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TotalCount'
         description: The total number of skill groups returned.
   SearchSkillGroupsRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. '
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
         description: 'The filters to use to list a specified set of skill groups. The supported filter key is SkillGroupName. '
       SortCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SortList'
         description: 'The sort order to use in listing the specified set of skill groups. The supported sort key is SkillGroupName. '
   SearchUsersResponse:
     type: object
     properties:
       Users:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserDataList'
         description: 'The users that meet the specified set of filter criteria, in sort order.'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The token returned to indicate that there is more data available.
       TotalCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TotalCount'
         description: The total number of users returned.
   SearchUsersRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: 'The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterList'
         description: 'The filters to use for listing a specific set of users. Required. Supported filter keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.'
       SortCriteria:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SortList'
         description: 'The sort order to use in listing the filtered set of users. Required. Supported sort keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.'
   SendInvitationResponse:
     type: object
@@ -3694,7 +3694,7 @@ definitions:
     type: object
     properties:
       UserArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the user to whom to send an invitation. Required.
   InvalidUserStatusException: {}
   StartDeviceSyncResponse:
@@ -3706,13 +3706,13 @@ definitions:
       - Features
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room with which the device to sync is associated. Required.
       DeviceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the device to sync. Required.
       Features:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Features'
         description: Request structure to start the device sync. Required.
   StartSmartHomeApplianceDiscoveryResponse:
     type: object
@@ -3723,7 +3723,7 @@ definitions:
       - RoomArn
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The room where smart home appliance discovery was initiated.
   TagResourceResponse:
     type: object
@@ -3735,10 +3735,10 @@ definitions:
       - Tags
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: 'The ARN of the resource to which to add metadata tags. Required. '
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: 'The tags to be added to the specified resource. Do not provide system tags. Required. '
   UntagResourceResponse:
     type: object
@@ -3750,10 +3750,10 @@ definitions:
       - TagKeys
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: 'The ARN of the resource from which to remove metadata tags. Required. '
       TagKeys:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagKeyList'
         description: 'The tags to be removed from the specified resource. Do not provide system tags. Required. '
   UpdateAddressBookResponse:
     type: object
@@ -3764,13 +3764,13 @@ definitions:
       - AddressBookArn
     properties:
       AddressBookArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room to update.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AddressBookName'
         description: The updated name of the room.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AddressBookDescription'
         description: The updated description of the room.
   NameInUseException: {}
   UpdateBusinessReportScheduleResponse:
@@ -3782,22 +3782,22 @@ definitions:
       - ScheduleArn
     properties:
       ScheduleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the business report schedule.
       S3BucketName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CustomerS3BucketName'
         description: The S3 location of the output reports.
       S3KeyPrefix:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3KeyPrefix'
         description: The S3 key where the report is delivered.
       Format:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportFormat'
         description: The format of the generated report (individual CSV files or zipped files of individual files).
       ScheduleName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportScheduleName'
         description: The name identifier of the schedule.
       Recurrence:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportRecurrence'
         description: The recurrence of the reports.
   UpdateConferenceProviderResponse:
     type: object
@@ -3810,19 +3810,19 @@ definitions:
       - MeetingSetting
     properties:
       ConferenceProviderArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the conference provider.
       ConferenceProviderType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConferenceProviderType'
         description: The type of the conference provider.
       IPDialIn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IPDialIn'
         description: The IP endpoint and protocol for calling.
       PSTNDialIn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PSTNDialIn'
         description: The information for PSTN conferencing.
       MeetingSetting:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MeetingSetting'
         description: The meeting settings for the conference provider.
   UpdateContactResponse:
     type: object
@@ -3833,19 +3833,19 @@ definitions:
       - ContactArn
     properties:
       ContactArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the contact to update.
       DisplayName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactName'
         description: The updated display name of the contact.
       FirstName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactName'
         description: The updated first name of the contact.
       LastName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactName'
         description: The updated last name of the contact.
       PhoneNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/E164PhoneNumber'
         description: The updated phone number of the contact.
   UpdateDeviceResponse:
     type: object
@@ -3854,10 +3854,10 @@ definitions:
     type: object
     properties:
       DeviceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the device to update. Required.
       DeviceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceName'
         description: The updated device name. Required.
   UpdateProfileResponse:
     type: object
@@ -3866,37 +3866,37 @@ definitions:
     type: object
     properties:
       ProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the room profile to update. Required.
       ProfileName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProfileName'
         description: The updated name for the room profile.
       IsDefault:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'Sets the profile as default if selected. If this is missing, no update is done to the default status.'
       Timezone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timezone'
         description: The updated timezone for the room profile.
       Address:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Address'
         description: The updated address for the room profile.
       DistanceUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DistanceUnit'
         description: The updated distance unit for the room profile.
       TemperatureUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TemperatureUnit'
         description: The updated temperature unit for the room profile.
       WakeWord:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WakeWord'
         description: The updated wake word for the room profile.
       SetupModeDisabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Whether the setup mode of the profile is enabled.
       MaxVolumeLimit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxVolumeLimit'
         description: The updated maximum volume limit for the room profile.
       PSTNEnabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Whether the PSTN setting of the room profile is enabled.
   UpdateRoomResponse:
     type: object
@@ -3905,19 +3905,19 @@ definitions:
     type: object
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: 'The ARN of the room to update. '
       RoomName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomName'
         description: The updated name for the room.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomDescription'
         description: The updated description for the room.
       ProviderCalendarId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProviderCalendarId'
         description: The updated provider calendar ARN for the room.
       ProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The updated profile ARN for the room.
   UpdateSkillGroupResponse:
     type: object
@@ -3926,13 +3926,13 @@ definitions:
     type: object
     properties:
       SkillGroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: 'The ARN of the skill group to update. '
       SkillGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillGroupName'
         description: The updated name for the skill group.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillGroupDescription'
         description: The updated description for the skill group.
   Address:
     type: string
@@ -3943,32 +3943,32 @@ definitions:
     type: object
     properties:
       AddressBookArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the address book.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AddressBookName'
         description: The name of the address book.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AddressBookDescription'
         description: The description of the address book.
     description: An address book with attributes.
   AddressBookData:
     type: object
     properties:
       AddressBookArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the address book.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AddressBookName'
         description: The name of the address book.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AddressBookDescription'
         description: The description of the address book.
     description: Information related to an address book.
   AddressBookDataList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AddressBookData'
   AddressBookDescription:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -4013,31 +4013,31 @@ definitions:
   BulletPoints:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/BulletPoint'
   BusinessReport:
     type: object
     properties:
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportStatus'
         description: 'The status of the report generation execution (RUNNING, SUCCEEDED, or FAILED).'
       FailureCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportFailureCode'
         description: The failure code.
       S3Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportS3Location'
         description: The S3 location of the output reports.
       DeliveryTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The time of report delivery.
       DownloadUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportDownloadUrl'
         description: The download link where a user can download the report.
     description: Usage report with specified parameters.
   BusinessReportContentRange:
     type: object
     properties:
       Interval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportInterval'
         description: The interval of the content range.
     description: The content range of the report.
   BusinessReportDownloadUrl:
@@ -4062,17 +4062,17 @@ definitions:
     type: object
     properties:
       StartDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Date'
         description: The start date.
     description: The recurrence of the reports.
   BusinessReportS3Location:
     type: object
     properties:
       Path:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportS3Path'
         description: The path of the business report.
       BucketName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CustomerS3BucketName'
         description: The S3 bucket name of the output reports.
     description: The S3 location of the output reports.
   BusinessReportS3Path:
@@ -4081,34 +4081,34 @@ definitions:
     type: object
     properties:
       ScheduleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the business report schedule.
       ScheduleName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportScheduleName'
         description: The name identifier of the schedule.
       S3BucketName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CustomerS3BucketName'
         description: The S3 bucket name of the output reports.
       S3KeyPrefix:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3KeyPrefix'
         description: The S3 key where the report is delivered.
       Format:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportFormat'
         description: The format of the generated report (individual CSV files or zipped files of individual files).
       ContentRange:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportContentRange'
         description: The content range of the reports.
       Recurrence:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReportRecurrence'
         description: The recurrence of the reports.
       LastBusinessReport:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BusinessReport'
         description: The details of the last business report delivery for a specified time interval.
     description: The schedule of the usage report.
   BusinessReportScheduleList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/BusinessReportSchedule'
   BusinessReportScheduleName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -4124,10 +4124,10 @@ definitions:
     type: object
     properties:
       CategoryId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CategoryId'
         description: The ID of the skill store category.
       CategoryName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CategoryName'
         description: The name of the skill store category.
     description: 'The skill store category that is shown. Alexa skills are assigned a specific skill category during creation, such as News, Social, and Sports.'
   CategoryId:
@@ -4136,7 +4136,7 @@ definitions:
   CategoryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Category'
   CategoryName:
     type: string
   ClientId:
@@ -4158,29 +4158,29 @@ definitions:
     type: object
     properties:
       DefaultConferenceProviderArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the default conference provider.
     description: The default conference provider that is used if no other scheduled meetings are detected.
   ConferenceProvider:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the newly created conference provider.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConferenceProviderName'
         description: The name of the conference provider.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConferenceProviderType'
         description: The type of conference providers.
       IPDialIn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IPDialIn'
         description: The IP endpoint and protocol for calling.
       PSTNDialIn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PSTNDialIn'
         description: The information for PSTN conferencing.
       MeetingSetting:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MeetingSetting'
         description: The meeting settings for the conference provider.
     description: 'An entity that provides a conferencing solution. Alexa for Business acts as the voice interface and mediator that connects users to their preferred conference provider. Examples of conference providers include Amazon Chime, Zoom, Cisco, and Polycom. '
   ConferenceProviderName:
@@ -4204,7 +4204,7 @@ definitions:
   ConferenceProvidersList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ConferenceProvider'
   ConnectionStatus:
     type: string
     enum:
@@ -4214,44 +4214,44 @@ definitions:
     type: object
     properties:
       ContactArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the contact.
       DisplayName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactName'
         description: The name of the contact to display on the console.
       FirstName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactName'
         description: 'The first name of the contact, used to call the contact on the device.'
       LastName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactName'
         description: 'The last name of the contact, used to call the contact on the device.'
       PhoneNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/E164PhoneNumber'
         description: The phone number of the contact.
     description: A contact with attributes.
   ContactData:
     type: object
     properties:
       ContactArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the contact.
       DisplayName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactName'
         description: The name of the contact to display on the console.
       FirstName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactName'
         description: 'The first name of the contact, used to call the contact on the device.'
       LastName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ContactName'
         description: 'The last name of the contact, used to call the contact on the device.'
       PhoneNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/E164PhoneNumber'
         description: The phone number of the contact.
     description: Information related to a contact.
   ContactDataList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ContactData'
   ContactName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -4270,16 +4270,16 @@ definitions:
     type: object
     properties:
       DeveloperName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeveloperName'
         description: The name of the developer.
       PrivacyPolicy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PrivacyPolicy'
         description: The URL of the privacy policy.
       Email:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Email'
         description: The email of the developer.
       Url:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Url'
         description: The website of the developer.
     description: The details about the developer that published the skill.
   DeveloperName:
@@ -4288,88 +4288,88 @@ definitions:
     type: object
     properties:
       DeviceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of a device.
       DeviceSerialNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceSerialNumber'
         description: The serial number of a device.
       DeviceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceType'
         description: The type of a device.
       DeviceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceName'
         description: The name of a device.
       SoftwareVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SoftwareVersion'
         description: The software version of a device.
       MacAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MacAddress'
         description: The MAC address of a device.
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The room ARN of a device.
       DeviceStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceStatus'
         description: 'The status of a device. If the status is not READY, check the DeviceStatusInfo value for details.'
       DeviceStatusInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceStatusInfo'
         description: Detailed information about a device's status.
     description: A device with attributes.
   DeviceData:
     type: object
     properties:
       DeviceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of a device.
       DeviceSerialNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceSerialNumber'
         description: The serial number of a device.
       DeviceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceType'
         description: The type of a device.
       DeviceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceName'
         description: The name of a device.
       SoftwareVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SoftwareVersion'
         description: The software version of a device.
       MacAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MacAddress'
         description: The MAC address of a device.
       DeviceStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceStatus'
         description: The status of a device.
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The room ARN associated with a device.
       RoomName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomName'
         description: The name of the room associated with a device.
       DeviceStatusInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceStatusInfo'
         description: Detailed information about a device's status.
     description: Device attributes.
   DeviceDataList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DeviceData'
   DeviceEvent:
     type: object
     properties:
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceEventType'
         description: The type of device event.
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceEventValue'
         description: The value of the event.
       Timestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: 'The time (in epoch) when the event occurred. '
     description: The list of device events.
   DeviceEventList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DeviceEvent'
   DeviceEventType:
     type: string
     enum:
@@ -4399,7 +4399,7 @@ definitions:
     type: object
     properties:
       Code:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceStatusDetailCode'
         description: The device status detail code.
     description: Details of a device’s status.
   DeviceStatusDetailCode:
@@ -4410,15 +4410,15 @@ definitions:
   DeviceStatusDetails:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DeviceStatusDetail'
   DeviceStatusInfo:
     type: object
     properties:
       DeviceStatusDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceStatusDetails'
         description: One or more device status detail descriptions.
       ConnectionStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConnectionStatus'
         description: 'The latest available information about the connection status of a device. '
     description: Detailed information about a device's status.
   DeviceType:
@@ -4478,7 +4478,7 @@ definitions:
   Features:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Feature'
   Filter:
     type: object
     required:
@@ -4486,10 +4486,10 @@ definitions:
       - Values
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterKey'
         description: The key of a filter.
       Values:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterValueList'
         description: The values of a filter.
     description: A filter name and value pair that is used to return a more specific list of results. Filters can be used to match a set of resources by various criteria.
   FilterKey:
@@ -4499,7 +4499,7 @@ definitions:
   FilterList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Filter'
     maxItems: 25
   FilterValue:
     type: string
@@ -4508,14 +4508,14 @@ definitions:
   FilterValueList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FilterValue'
     maxItems: 5
   GenericKeyword:
     type: string
   GenericKeywords:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/GenericKeyword'
   IPDialIn:
     type: object
     required:
@@ -4523,10 +4523,10 @@ definitions:
       - CommsProtocol
     properties:
       Endpoint:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Endpoint'
         description: The IP address.
       CommsProtocol:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommsProtocol'
         description: 'The protocol, including SIP, SIPS, and H323.'
     description: The IP endpoint and protocol for calling.
   IconUrl:
@@ -4547,13 +4547,13 @@ definitions:
       - RequirePin
     properties:
       RequirePin:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RequirePin'
         description: The values that indicate whether the pin is always required.
     description: '<p>The values that indicate whether a pin is always required (YES), never required (NO), or OPTIONAL.</p> <ul> <li> <p>If YES, Alexa will always ask for a meeting pin.</p> </li> <li> <p>If NO, Alexa will never ask for a meeting pin.</p> </li> <li> <p>If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer responds with yes, it will ask for the meeting pin.</p> </li> </ul>'
   NewInThisVersionBulletPoints:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/BulletPoint'
   NextToken:
     type: string
     minLength: 1
@@ -4578,16 +4578,16 @@ definitions:
       - OneClickPinDelay
     properties:
       CountryCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CountryCode'
         description: The zip code.
       PhoneNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutboundPhoneNumber'
         description: The phone number to call to join the conference.
       OneClickIdDelay:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OneClickIdDelay'
         description: 'The delay duration before Alexa enters the conference ID with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.'
       OneClickPinDelay:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OneClickPinDelay'
         description: 'The delay duration before Alexa enters the conference pin with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.'
     description: The information for public switched telephone network (PSTN) conferencing.
   PrivacyPolicy:
@@ -4601,74 +4601,74 @@ definitions:
     type: object
     properties:
       ProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of a room profile.
       ProfileName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProfileName'
         description: The name of a room profile.
       IsDefault:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Retrieves if the profile is default or not.
       Address:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Address'
         description: The address of a room profile.
       Timezone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timezone'
         description: The time zone of a room profile.
       DistanceUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DistanceUnit'
         description: The distance unit of a room profile.
       TemperatureUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TemperatureUnit'
         description: The temperature unit of a room profile.
       WakeWord:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WakeWord'
         description: The wake word of a room profile.
       SetupModeDisabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: The setup mode of a room profile.
       MaxVolumeLimit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxVolumeLimit'
         description: The max volume limit of a room profile.
       PSTNEnabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: The PSTN setting of a room profile.
       AddressBookArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of the address book.
     description: A room profile with attributes.
   ProfileData:
     type: object
     properties:
       ProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of a room profile.
       ProfileName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProfileName'
         description: The name of a room profile.
       IsDefault:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Retrieves if the profile data is default or not.
       Address:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Address'
         description: The address of a room profile.
       Timezone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timezone'
         description: The timezone of a room profile.
       DistanceUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DistanceUnit'
         description: The distance unit of a room profile.
       TemperatureUnit:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TemperatureUnit'
         description: The temperature unit of a room profile.
       WakeWord:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WakeWord'
         description: The wake word of a room profile.
     description: The data of a room profile.
   ProfileDataList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ProfileData'
   ProfileName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -4703,47 +4703,47 @@ definitions:
     type: object
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of a room.
       RoomName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomName'
         description: The name of a room.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomDescription'
         description: The description of a room.
       ProviderCalendarId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProviderCalendarId'
         description: The provider calendar ARN of a room.
       ProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The profile ARN of a room.
     description: A room with attributes.
   RoomData:
     type: object
     properties:
       RoomArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of a room.
       RoomName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomName'
         description: The name of a room.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomDescription'
         description: The description of a room.
       ProviderCalendarId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProviderCalendarId'
         description: The provider calendar ARN of a room.
       ProfileArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The profile ARN of a room.
       ProfileName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProfileName'
         description: The profile name of a room.
     description: The data of a room.
   RoomDataList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/RoomData'
   RoomDescription:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -4761,10 +4761,10 @@ definitions:
       - ParameterValue
     properties:
       ParameterKey:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomSkillParameterKey'
         description: The parameter key of a room skill parameter. ParameterKey is an enumerated type that only takes “DEFAULT” or “SCOPE” as valid values.
       ParameterValue:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RoomSkillParameterValue'
         description: The parameter value of a room skill parameter.
     description: A skill parameter associated with a room.
   RoomSkillParameterKey:
@@ -4778,7 +4778,7 @@ definitions:
   RoomSkillParameters:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/RoomSkillParameter'
   S3KeyPrefix:
     type: string
     pattern: '[A-Za-z0-9!_\-\.\*''()/]*'
@@ -4787,73 +4787,73 @@ definitions:
   SampleUtterances:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Utterance'
   ShortDescription:
     type: string
   SkillDetails:
     type: object
     properties:
       ProductDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProductDescription'
         description: The description of the product.
       InvocationPhrase:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InvocationPhrase'
         description: The phrase used to trigger the skill.
       ReleaseDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReleaseDate'
         description: The date when the skill was released.
       EndUserLicenseAgreement:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EndUserLicenseAgreement'
         description: The URL of the end user license agreement.
       GenericKeywords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericKeywords'
         description: The generic keywords associated with the skill that can be used to find a skill.
       BulletPoints:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BulletPoints'
         description: The details about what the skill supports organized as bullet points.
       NewInThisVersionBulletPoints:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NewInThisVersionBulletPoints'
         description: The updates added in bullet points.
       SkillTypes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillTypes'
         description: The types of skills.
       Reviews:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Reviews'
         description: 'The list of reviews for the skill, including Key and Value pair.'
       DeveloperInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeveloperInfo'
         description: The details about the developer that published the skill.
     description: Granular information about the skill.
   SkillGroup:
     type: object
     properties:
       SkillGroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of a skill group.
       SkillGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillGroupName'
         description: The name of a skill group.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillGroupDescription'
         description: The description of a skill group.
     description: A skill group with attributes.
   SkillGroupData:
     type: object
     properties:
       SkillGroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The skill group ARN of a skill group.
       SkillGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillGroupName'
         description: The skill group name of a skill group.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillGroupDescription'
         description: The description of a skill group.
     description: The attributes of a skill group.
   SkillGroupDataList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SkillGroupData'
   SkillGroupDescription:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -4882,25 +4882,25 @@ definitions:
     type: object
     properties:
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The ARN of the skill summary.
       SkillName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillName'
         description: The name of the skill.
       SupportsLinking:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/boolean'
         description: Linking support for a skill.
       EnablementType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnablementType'
         description: 'Whether the skill is enabled under the user''s account, or if it requires linking to be used.'
       SkillType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillType'
         description: Whether the skill is publicly available or is a private skill.
     description: The summary of skills.
   SkillSummaryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SkillSummary'
   SkillType:
     type: string
     enum:
@@ -4918,53 +4918,53 @@ definitions:
   SkillTypes:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SkillStoreType'
   SkillsStoreSkill:
     type: object
     properties:
       SkillId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillId'
         description: The ARN of the skill.
       SkillName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillName'
         description: The name of the skill.
       ShortDescription:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ShortDescription'
         description: Short description about the skill.
       IconUrl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IconUrl'
         description: The URL where the skill icon resides.
       SampleUtterances:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SampleUtterances'
         description: Sample utterances that interact with the skill.
       SkillDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SkillDetails'
         description: Information about the skill.
       SupportsLinking:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/boolean'
         description: Linking support for a skill.
     description: The detailed information about an Alexa skill.
   SkillsStoreSkillList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SkillsStoreSkill'
   SmartHomeAppliance:
     type: object
     properties:
       FriendlyName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplianceFriendlyName'
         description: The friendly name of the smart home appliance.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplianceDescription'
         description: The description of the smart home appliance.
       ManufacturerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplianceManufacturerName'
         description: The name of the manufacturer of the smart home appliance.
     description: 'A smart home appliance that can connect to a central system. Any domestic device can be a smart appliance. '
   SmartHomeApplianceList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SmartHomeAppliance'
   SoftwareVersion:
     type: string
   Sort:
@@ -4974,10 +4974,10 @@ definitions:
       - Value
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SortKey'
         description: The sort key of a sort object.
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SortValue'
         description: The sort value of a sort object.
     description: 'An object representing a sort criteria. '
   SortKey:
@@ -4987,7 +4987,7 @@ definitions:
   SortList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Sort'
     maxItems: 25
   SortValue:
     type: string
@@ -5001,10 +5001,10 @@ definitions:
       - Value
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagKey'
         description: 'The key of a tag. Tag keys are case-sensitive. '
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagValue'
         description: The value of a tag. Tag values are case-sensitive and can be null.
     description: 'A key-value pair that can be associated with a resource. '
   TagKey:
@@ -5015,11 +5015,11 @@ definitions:
   TagKeyList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TagKey'
   TagList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Tag'
   TagValue:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -5049,28 +5049,28 @@ definitions:
     type: object
     properties:
       UserArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The ARN of a user.
       FirstName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/user_FirstName'
         description: The first name of a user.
       LastName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/user_LastName'
         description: The last name of a user.
       Email:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Email'
         description: The email of a user.
       EnrollmentStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnrollmentStatus'
         description: The enrollment status of a user.
       EnrollmentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EnrollmentId'
         description: The enrollment ARN of a user.
     description: Information related to a user.
   UserDataList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/UserData'
   UserId:
     type: string
     pattern: 'amzn1\.[A-Za-z0-9+-\/=.]{1,300}'

@@ -834,10 +834,10 @@ definitions:
       - creationDate
     properties:
       activityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the created activity.
       creationDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date the activity is created.
   CreateActivityInput:
     type: object
@@ -845,7 +845,7 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: '<p>The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
   ActivityLimitExceeded: {}
   InvalidName: {}
@@ -856,10 +856,10 @@ definitions:
       - creationDate
     properties:
       stateMachineArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the created state machine.
       creationDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date the state machine is created.
   CreateStateMachineInput:
     type: object
@@ -869,13 +869,13 @@ definitions:
       - roleArn
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: '<p>The name of the state machine. </p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       definition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Definition'
         description: 'The Amazon States Language definition of the state machine. See <a href="http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
       roleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
   InvalidArn: {}
   InvalidDefinition: {}
@@ -891,7 +891,7 @@ definitions:
       - activityArn
     properties:
       activityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the activity to delete.
   DeleteStateMachineOutput:
     type: object
@@ -902,7 +902,7 @@ definitions:
       - stateMachineArn
     properties:
       stateMachineArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the state machine to delete.
   DescribeActivityOutput:
     type: object
@@ -912,13 +912,13 @@ definitions:
       - creationDate
     properties:
       activityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the activity.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       creationDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date the activity is created.
   DescribeActivityInput:
     type: object
@@ -926,7 +926,7 @@ definitions:
       - activityArn
     properties:
       activityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the activity to describe.
   ActivityDoesNotExist: {}
   DescribeExecutionOutput:
@@ -939,28 +939,28 @@ definitions:
       - input
     properties:
       executionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the execution.
       stateMachineArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the executed stated machine.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: '<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionStatus'
         description: The current status of the execution.
       startDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date the execution is started.
       stopDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: 'If the execution has already ended, the date the execution stopped.'
       input:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The string that contains the JSON input data of the execution.
       output:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: '<p>The JSON output data of the execution.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>'
   DescribeExecutionInput:
     type: object
@@ -968,7 +968,7 @@ definitions:
       - executionArn
     properties:
       executionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the execution to describe.
   ExecutionDoesNotExist: {}
   DescribeStateMachineOutput:
@@ -981,22 +981,22 @@ definitions:
       - creationDate
     properties:
       stateMachineArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the state machine.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StateMachineStatus'
         description: The current status of the state machine.
       definition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Definition'
         description: 'The Amazon States Language definition of the state machine. See <a href="http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
       roleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to AWS resources.)
       creationDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date the state machine is created.
   DescribeStateMachineInput:
     type: object
@@ -1004,7 +1004,7 @@ definitions:
       - stateMachineArn
     properties:
       stateMachineArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the state machine to describe.
   StateMachineDoesNotExist: {}
   DescribeStateMachineForExecutionOutput:
@@ -1017,19 +1017,19 @@ definitions:
       - updateDate
     properties:
       stateMachineArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the state machine associated with the execution.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the state machine associated with the execution.
       definition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Definition'
         description: 'The Amazon States Language definition of the state machine. See <a href="http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
       roleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: 'The Amazon Resource Name (ARN) of the IAM role of the State Machine for the execution. '
       updateDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: 'The date and time the state machine associated with an execution was updated. For a newly created state machine, this is the creation date.'
   DescribeStateMachineForExecutionInput:
     type: object
@@ -1037,16 +1037,16 @@ definitions:
       - executionArn
     properties:
       executionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the execution you want state machine information for.
   GetActivityTaskOutput:
     type: object
     properties:
       taskToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskToken'
         description: 'A token that identifies the scheduled task. This token must be copied and included in subsequent calls to <a>SendTaskHeartbeat</a>, <a>SendTaskSuccess</a> or <a>SendTaskFailure</a> in order to report the progress or completion of the task.'
       input:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The string that contains the JSON input data for the task.
   GetActivityTaskInput:
     type: object
@@ -1054,10 +1054,10 @@ definitions:
       - activityArn
     properties:
       activityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task using <a>CreateActivity</a>.)
       workerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name is used when it is logged in the execution history.
   ActivityWorkerLimitExceeded: {}
   GetExecutionHistoryOutput:
@@ -1066,10 +1066,10 @@ definitions:
       - events
     properties:
       events:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HistoryEventList'
         description: The list of events that occurred in the execution.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageToken'
         description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   GetExecutionHistoryInput:
     type: object
@@ -1077,16 +1077,16 @@ definitions:
       - executionArn
     properties:
       executionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the execution.
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageSize'
         description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
       reverseOrder:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ReverseOrder'
         description: Lists events in descending order of their <code>timeStamp</code>.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageToken'
         description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   InvalidToken: {}
   ListActivitiesOutput:
@@ -1095,19 +1095,19 @@ definitions:
       - activities
     properties:
       activities:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ActivityList'
         description: The list of activities.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageToken'
         description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListActivitiesInput:
     type: object
     properties:
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageSize'
         description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageToken'
         description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListExecutionsOutput:
     type: object
@@ -1115,10 +1115,10 @@ definitions:
       - executions
     properties:
       executions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionList'
         description: The list of matching executions.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageToken'
         description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListExecutionsInput:
     type: object
@@ -1126,16 +1126,16 @@ definitions:
       - stateMachineArn
     properties:
       stateMachineArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the state machine whose executions is listed.
       statusFilter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionStatus'
         description: 'If specified, only list the executions whose current execution status matches the given filter.'
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageSize'
         description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageToken'
         description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListStateMachinesOutput:
     type: object
@@ -1143,18 +1143,18 @@ definitions:
       - stateMachines
     properties:
       stateMachines:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StateMachineList'
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageToken'
         description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListStateMachinesInput:
     type: object
     properties:
       maxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageSize'
         description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PageToken'
         description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   SendTaskFailureOutput:
     type: object
@@ -1165,13 +1165,13 @@ definitions:
       - taskToken
     properties:
       taskToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskToken'
         description: 'The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see GetActivityTask::taskToken).'
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
   TaskDoesNotExist: {}
   TaskTimedOut: {}
@@ -1184,7 +1184,7 @@ definitions:
       - taskToken
     properties:
       taskToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskToken'
         description: The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see <a>GetActivityTaskOutput$taskToken</a>).
   SendTaskSuccessOutput:
     type: object
@@ -1196,10 +1196,10 @@ definitions:
       - output
     properties:
       taskToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskToken'
         description: The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see <a>GetActivityTaskOutput$taskToken</a>).
       output:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The JSON output of the task.
   InvalidOutput: {}
   StartExecutionOutput:
@@ -1209,10 +1209,10 @@ definitions:
       - startDate
     properties:
       executionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the execution.
       startDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date the execution is started.
   StartExecutionInput:
     type: object
@@ -1220,13 +1220,13 @@ definitions:
       - stateMachineArn
     properties:
       stateMachineArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the state machine to execute.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: '<p>The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       input:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: '<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>"input": "{\"first_name\" : \"test\"}"</code> </p> <note> <p>If you don''t include any JSON input data, you still must include the two braces, for example: <code>"input": "{}"</code> </p> </note>'
   ExecutionLimitExceeded: {}
   ExecutionAlreadyExists: {}
@@ -1237,7 +1237,7 @@ definitions:
       - stopDate
     properties:
       stopDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date the execution is stopped.
   StopExecutionInput:
     type: object
@@ -1245,13 +1245,13 @@ definitions:
       - executionArn
     properties:
       executionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the execution to stop.
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
   UpdateStateMachineOutput:
     type: object
@@ -1259,7 +1259,7 @@ definitions:
       - updateDate
     properties:
       updateDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date and time the state machine was updated.
   UpdateStateMachineInput:
     type: object
@@ -1267,13 +1267,13 @@ definitions:
       - stateMachineArn
     properties:
       stateMachineArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the state machine.
       definition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Definition'
         description: 'The Amazon States Language definition of the state machine. See <a href="http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
       roleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role of the state machine.
   MissingRequiredParameter: {}
   '[object Object]': {}
@@ -1281,16 +1281,16 @@ definitions:
     type: object
     properties:
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about an activity that failed during an execution.
   ActivityList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ActivityListItem'
   ActivityListItem:
     type: object
     required:
@@ -1299,23 +1299,23 @@ definitions:
       - creationDate
     properties:
       activityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the activity.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       creationDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date the activity is created.
     description: Contains details about an activity.
   ActivityScheduleFailedEventDetails:
     type: object
     properties:
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about an activity schedule failure that occurred during an execution.
   ActivityScheduledEventDetails:
@@ -1324,40 +1324,40 @@ definitions:
       - resource
     properties:
       resource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the scheduled activity.
       input:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The JSON data input to the activity task.
       timeoutInSeconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeoutInSeconds'
         description: The maximum allowed duration of the activity task.
       heartbeatInSeconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeoutInSeconds'
         description: The maximum allowed duration between two heartbeats for the activity task.
     description: Contains details about an activity scheduled during an execution.
   ActivityStartedEventDetails:
     type: object
     properties:
       workerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Identity'
         description: The name of the worker that the task is assigned to. These names are provided by the workers when calling <a>GetActivityTask</a>.
     description: Contains details about the start of an activity during an execution.
   ActivitySucceededEventDetails:
     type: object
     properties:
       output:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The JSON data output by the activity task.
     description: Contains details about an activity that successfully terminated during an execution.
   ActivityTimedOutEventDetails:
     type: object
     properties:
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the timeout.
     description: Contains details about an activity timeout that occurred during an execution.
   Arn:
@@ -1380,26 +1380,26 @@ definitions:
     type: object
     properties:
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about an abort of an execution.
   ExecutionFailedEventDetails:
     type: object
     properties:
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about an execution failure event.
   ExecutionList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ExecutionListItem'
   ExecutionListItem:
     type: object
     required:
@@ -1410,32 +1410,32 @@ definitions:
       - startDate
     properties:
       executionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the execution.
       stateMachineArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the executed state machine.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: '<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionStatus'
         description: The current status of the execution.
       startDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date the execution started.
       stopDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: 'If the execution already ended, the date the execution stopped.'
     description: Contains details about an execution.
   ExecutionStartedEventDetails:
     type: object
     properties:
       input:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The JSON data input to the execution.
       roleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda tasks.
     description: Contains details about the start of the execution.
   ExecutionStatus:
@@ -1450,17 +1450,17 @@ definitions:
     type: object
     properties:
       output:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The JSON data output by the execution.
     description: Contains details about the successful termination of the execution.
   ExecutionTimedOutEventDetails:
     type: object
     properties:
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the timeout.
     description: Contains details about the execution timeout that occurred during the execution.
   HistoryEvent:
@@ -1471,80 +1471,80 @@ definitions:
       - id
     properties:
       timestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date and time the event occurred.
       type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HistoryEventType'
         description: The type of the event.
       id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventId'
         description: 'The id of the event. Events are numbered sequentially, starting at one.'
       previousEventId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EventId'
         description: The id of the previous event.
       activityFailedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ActivityFailedEventDetails'
       activityScheduleFailedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ActivityScheduleFailedEventDetails'
         description: Contains details about an activity schedule event that failed during an execution.
       activityScheduledEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ActivityScheduledEventDetails'
       activityStartedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ActivityStartedEventDetails'
       activitySucceededEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ActivitySucceededEventDetails'
       activityTimedOutEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ActivityTimedOutEventDetails'
       taskFailedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskFailedEventDetails'
       taskScheduledEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskScheduledEventDetails'
       taskStartFailedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskStartFailedEventDetails'
       taskStartedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskStartedEventDetails'
       taskSubmitFailedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskSubmitFailedEventDetails'
       taskSubmittedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskSubmittedEventDetails'
       taskSucceededEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskSucceededEventDetails'
       taskTimedOutEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskTimedOutEventDetails'
       executionFailedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionFailedEventDetails'
       executionStartedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionStartedEventDetails'
       executionSucceededEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionSucceededEventDetails'
       executionAbortedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionAbortedEventDetails'
       executionTimedOutEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExecutionTimedOutEventDetails'
       lambdaFunctionFailedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LambdaFunctionFailedEventDetails'
       lambdaFunctionScheduleFailedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LambdaFunctionScheduleFailedEventDetails'
       lambdaFunctionScheduledEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LambdaFunctionScheduledEventDetails'
       lambdaFunctionStartFailedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LambdaFunctionStartFailedEventDetails'
         description: Contains details about a lambda function that failed to start during an execution.
       lambdaFunctionSucceededEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LambdaFunctionSucceededEventDetails'
         description: Contains details about a lambda function that terminated successfully during an execution.
       lambdaFunctionTimedOutEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LambdaFunctionTimedOutEventDetails'
       stateEnteredEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StateEnteredEventDetails'
       stateExitedEventDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StateExitedEventDetails'
     description: Contains details about the events of an execution.
   HistoryEventList:
     type: array
     description: Contains details about the events that occurred during an execution.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/HistoryEvent'
   HistoryEventType:
     type: string
     enum:
@@ -1600,20 +1600,20 @@ definitions:
     type: object
     properties:
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about a lambda function that failed during an execution.
   LambdaFunctionScheduleFailedEventDetails:
     type: object
     properties:
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about a failed lambda function schedule event that occurred during an execution.
   LambdaFunctionScheduledEventDetails:
@@ -1622,40 +1622,40 @@ definitions:
       - resource
     properties:
       resource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the scheduled lambda function.
       input:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The JSON data input to the lambda function.
       timeoutInSeconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeoutInSeconds'
         description: The maximum allowed duration of the lambda function.
     description: Contains details about a lambda function scheduled during an execution.
   LambdaFunctionStartFailedEventDetails:
     type: object
     properties:
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about a lambda function that failed to start during an execution.
   LambdaFunctionSucceededEventDetails:
     type: object
     properties:
       output:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The JSON data output by the lambda function.
     description: Contains details about a lambda function that successfully terminated during an execution.
   LambdaFunctionTimedOutEventDetails:
     type: object
     properties:
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the timeout.
     description: Contains details about a lambda function timeout that occurred during an execution.
   Name:
@@ -1692,10 +1692,10 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The name of the state.
       input:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The string that contains the JSON input data for the state.
     description: Contains details about a state entered during an execution.
   StateExitedEventDetails:
@@ -1704,16 +1704,16 @@ definitions:
       - name
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: '<p>The name of the state.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       output:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The JSON output data of the state.
     description: Contains details about an exit from a state during an execution.
   StateMachineList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/StateMachineListItem'
   StateMachineListItem:
     type: object
     required:
@@ -1722,13 +1722,13 @@ definitions:
       - creationDate
     properties:
       stateMachineArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) that identifies the state machine.
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
       creationDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date the state machine is created.
     description: Contains details about the state machine.
   StateMachineStatus:
@@ -1743,16 +1743,16 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The action of the connected service called by a task state.
       resource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The service name of the connected service in a task state.
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about a task failure event.
   TaskScheduledEventDetails:
@@ -1764,18 +1764,18 @@ definitions:
       - parameters
     properties:
       resourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The action of the connected service called by a task state.
       resource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The service name of the connected service in a task state.
       region:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
       parameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConnectorParameters'
         description: The JSON data passed to the connected service referenced in a task state.
       timeoutInSeconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeoutInSeconds'
         description: The maximum allowed duration of the task.
     description: Contains details about a task scheduled during an execution.
   TaskStartFailedEventDetails:
@@ -1785,16 +1785,16 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The action of the connected service called by a task state.
       resource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The service name of the connected service in a task state.
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about a task that failed to start during an execution.
   TaskStartedEventDetails:
@@ -1804,10 +1804,10 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The action of the connected service called by a task state.
       resource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The service name of the connected service in a task state.
     description: Contains details about the start of a task during an execution.
   TaskSubmitFailedEventDetails:
@@ -1817,16 +1817,16 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The action of the connected service called by a task state.
       resource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The service name of the connected service in a task state.
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: <p/>
   TaskSubmittedEventDetails:
@@ -1836,13 +1836,13 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The action of the connected service called by a task state.
       resource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The service name of the connected service in a task state.
       output:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The response from a connected service when a task has started.
     description: <p/>
   TaskSucceededEventDetails:
@@ -1852,13 +1852,13 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The action of the connected service called by a task state.
       resource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The service name of the connected service in a task state.
       output:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveData'
         description: The full JSON response from a connected service when a task has succeeded. This response becomes the output of the related task.
     description: Contains details about the start of connected service by a task state.
   TaskTimedOutEventDetails:
@@ -1868,16 +1868,16 @@ definitions:
       - resource
     properties:
       resourceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The action of the connected service called by a task state.
       resource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Name'
         description: The service name of the connected service in a task state.
       error:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about a connected service timeout that occured during an execution.
   TaskToken:

@@ -715,7 +715,7 @@ definitions:
     type: object
     properties:
       DestinationBackup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DestinationBackup'
         description: '<p>Information on the backup that will be copied to the destination region, including CreateTimestamp, SourceBackup, SourceCluster, and Source Region. CreateTimestamp of the destination backup will be the same as that of the source backup.</p> <p>You will need to use the <code>sourceBackupID</code> returned in this operation to use the <a>DescribeBackups</a> operation on the backup that will be copied to the destination region.</p>'
   CopyBackupToRegionRequest:
     type: object
@@ -724,10 +724,10 @@ definitions:
       - BackupId
     properties:
       DestinationRegion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Region'
         description: The AWS region that will contain your copied CloudHSM cluster backup.
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: 'The ID of the backup that will be copied to the destination region. '
   CloudHsmInternalFailureException: {}
   CloudHsmServiceException: {}
@@ -738,7 +738,7 @@ definitions:
     type: object
     properties:
       Cluster:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Cluster'
         description: Information about the cluster that was created.
   CreateClusterRequest:
     type: object
@@ -747,19 +747,19 @@ definitions:
       - HsmType
     properties:
       SubnetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetIds'
         description: '<p>The identifiers (IDs) of the subnets where you are creating the cluster. You must specify at least one subnet. If you specify multiple subnets, they must meet the following criteria:</p> <ul> <li> <p>All subnets must be in the same virtual private cloud (VPC).</p> </li> <li> <p>You can specify only one subnet per Availability Zone.</p> </li> </ul>'
       HsmType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmType'
         description: The type of HSM to use in the cluster. Currently the only allowed value is <code>hsm1.medium</code>.
       SourceBackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: 'The identifier (ID) of the cluster backup to restore. Use this value to restore the cluster from a backup instead of creating a new cluster. To find the backup ID, use <a>DescribeBackups</a>.'
   CreateHsmResponse:
     type: object
     properties:
       Hsm:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Hsm'
         description: Information about the HSM that was created.
   CreateHsmRequest:
     type: object
@@ -768,19 +768,19 @@ definitions:
       - AvailabilityZone
     properties:
       ClusterId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterId'
         description: 'The identifier (ID) of the HSM''s cluster. To find the cluster ID, use <a>DescribeClusters</a>.'
       AvailabilityZone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExternalAz'
         description: 'The Availability Zone where you are creating the HSM. To find the cluster''s Availability Zones, use <a>DescribeClusters</a>.'
       IpAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpAddress'
         description: 'The HSM''s IP address. If you specify an IP address, use an available address from the subnet that maps to the Availability Zone where you are creating the HSM. If you don''t specify an IP address, one is chosen for you from that subnet.'
   DeleteBackupResponse:
     type: object
     properties:
       Backup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Backup'
         description: Information on the <code>Backup</code> object deleted.
   DeleteBackupRequest:
     type: object
@@ -788,13 +788,13 @@ definitions:
       - BackupId
     properties:
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: 'The ID of the backup to be deleted. To find the ID of a backup, use the <a>DescribeBackups</a> operation.'
   DeleteClusterResponse:
     type: object
     properties:
       Cluster:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Cluster'
         description: Information about the cluster that was deleted.
   DeleteClusterRequest:
     type: object
@@ -802,13 +802,13 @@ definitions:
       - ClusterId
     properties:
       ClusterId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterId'
         description: 'The identifier (ID) of the cluster that you are deleting. To find the cluster ID, use <a>DescribeClusters</a>.'
   DeleteHsmResponse:
     type: object
     properties:
       HsmId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmId'
         description: The identifier (ID) of the HSM that was deleted.
   DeleteHsmRequest:
     type: object
@@ -816,69 +816,69 @@ definitions:
       - ClusterId
     properties:
       ClusterId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterId'
         description: The identifier (ID) of the cluster that contains the HSM that you are deleting.
       HsmId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmId'
         description: The identifier (ID) of the HSM that you are deleting.
       EniId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EniId'
         description: The identifier (ID) of the elastic network interface (ENI) of the HSM that you are deleting.
       EniIp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpAddress'
         description: The IP address of the elastic network interface (ENI) of the HSM that you are deleting.
   DescribeBackupsResponse:
     type: object
     properties:
       Backups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Backups'
         description: A list of backups.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: An opaque string that indicates that the response contains only a subset of backups. Use this value in a subsequent <code>DescribeBackups</code> request to get more backups.
   DescribeBackupsRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more backups.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxSize'
         description: 'The maximum number of backups to return in the response. When there are more backups than the number you specify, the response contains a <code>NextToken</code> value.'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Filters'
         description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>sourceBackupIds</code> filter to return only the backups created from a source backup. The <code>sourceBackupID</code> of a source backup is returned by the <a>CopyBackupToRegion</a> operation.</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p>
       SortAscending:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
   DescribeClustersResponse:
     type: object
     properties:
       Clusters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Clusters'
         description: A list of clusters.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: An opaque string that indicates that the response contains only a subset of clusters. Use this value in a subsequent <code>DescribeClusters</code> request to get more clusters.
   DescribeClustersRequest:
     type: object
     properties:
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Filters'
         description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>clusterIds</code> filter to return only the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>vpcIds</code> filter to return only the clusters in the specified virtual private clouds (VPCs). Specify VPCs by their VPC identifier (ID).</p> <p>Use the <code>states</code> filter to return only clusters that match the specified state.</p>
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more clusters.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxSize'
         description: 'The maximum number of clusters to return in the response. When there are more clusters than the number you specify, the response contains a <code>NextToken</code> value.'
   InitializeClusterResponse:
     type: object
     properties:
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterState'
         description: The cluster's state.
       StateMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StateMessage'
         description: A description of the cluster's state.
   InitializeClusterRequest:
     type: object
@@ -888,13 +888,13 @@ definitions:
       - TrustAnchor
     properties:
       ClusterId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterId'
         description: 'The identifier (ID) of the cluster that you are claiming. To find the cluster ID, use <a>DescribeClusters</a>.'
       SignedCert:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Cert'
         description: The cluster certificate issued (signed) by your issuing certificate authority (CA). The certificate must be in PEM format and can contain a maximum of 5000 characters.
       TrustAnchor:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Cert'
         description: The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate. This can be a root (self-signed) certificate or a certificate chain that begins with the certificate that issued the cluster certificate and ends with a root certificate. The certificate or certificate chain must be in PEM format and can contain a maximum of 5000 characters.
   ListTagsResponse:
     type: object
@@ -902,10 +902,10 @@ definitions:
       - TagList
     properties:
       TagList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: A list of tags.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: An opaque string that indicates that the response contains only a subset of tags. Use this value in a subsequent <code>ListTags</code> request to get more tags.
   ListTagsRequest:
     type: object
@@ -913,19 +913,19 @@ definitions:
       - ResourceId
     properties:
       ResourceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterId'
         description: 'The cluster identifier (ID) for the cluster whose tags you are getting. To find the cluster ID, use <a>DescribeClusters</a>.'
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more tags.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxSize'
         description: 'The maximum number of tags to return in the response. When there are more tags than the number you specify, the response contains a <code>NextToken</code> value.'
   RestoreBackupResponse:
     type: object
     properties:
       Backup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Backup'
         description: Information on the <code>Backup</code> object created.
   RestoreBackupRequest:
     type: object
@@ -933,7 +933,7 @@ definitions:
       - BackupId
     properties:
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: 'The ID of the backup to be restored. To find the ID of a backup, use the <a>DescribeBackups</a> operation.'
   TagResourceResponse:
     type: object
@@ -945,10 +945,10 @@ definitions:
       - TagList
     properties:
       ResourceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterId'
         description: 'The cluster identifier (ID) for the cluster that you are tagging. To find the cluster ID, use <a>DescribeClusters</a>.'
       TagList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: A list of one or more tags.
   UntagResourceResponse:
     type: object
@@ -960,10 +960,10 @@ definitions:
       - TagKeyList
     properties:
       ResourceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterId'
         description: 'The cluster identifier (ID) for the cluster whose tags you are removing. To find the cluster ID, use <a>DescribeClusters</a>.'
       TagKeyList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagKeyList'
         description: 'A list of one or more tag keys for the tags that you are removing. Specify only the tag keys, not the tag values.'
   '[object Object]': {}
   Backup:
@@ -972,27 +972,27 @@ definitions:
       - BackupId
     properties:
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: The identifier (ID) of the backup.
       BackupState:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupState'
         description: The state of the backup.
       ClusterId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterId'
         description: The identifier (ID) of the cluster that was backed up.
       CreateTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date and time when the backup was created.
       CopyTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
       SourceRegion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Region'
       SourceBackup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
       SourceCluster:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterId'
       DeleteTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date and time when the backup will be permanently deleted.
     description: Contains information about a backup of an AWS CloudHSM cluster.
   BackupId:
@@ -1012,7 +1012,7 @@ definitions:
   Backups:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Backup'
   Boolean:
     type: boolean
   Cert:
@@ -1023,62 +1023,62 @@ definitions:
     type: object
     properties:
       ClusterCsr:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Cert'
         description: The cluster's certificate signing request (CSR). The CSR exists only when the cluster's state is <code>UNINITIALIZED</code>.
       HsmCertificate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Cert'
         description: The HSM certificate issued (signed) by the HSM hardware.
       AwsHardwareCertificate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Cert'
         description: The HSM hardware certificate issued (signed) by AWS CloudHSM.
       ManufacturerHardwareCertificate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Cert'
         description: The HSM hardware certificate issued (signed) by the hardware manufacturer.
       ClusterCertificate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Cert'
         description: The cluster certificate issued (signed) by the issuing certificate authority (CA) of the cluster's owner.
     description: Contains one or more certificates or a certificate signing request (CSR).
   Cluster:
     type: object
     properties:
       BackupPolicy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupPolicy'
         description: The cluster's backup policy.
       ClusterId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterId'
         description: The cluster's identifier (ID).
       CreateTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date and time when the cluster was created.
       Hsms:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Hsms'
         description: Contains information about the HSMs in the cluster.
       HsmType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmType'
         description: The type of HSM that the cluster contains.
       PreCoPassword:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PreCoPassword'
         description: The default password for the cluster's Pre-Crypto Officer (PRECO) user.
       SecurityGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SecurityGroup'
         description: The identifier (ID) of the cluster's security group.
       SourceBackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: The identifier (ID) of the backup used to create the cluster. This value exists only when the cluster was created from a backup.
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterState'
         description: The cluster's state.
       StateMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StateMessage'
         description: A description of the cluster's state.
       SubnetMapping:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExternalSubnetMapping'
         description: A map of the cluster's subnets and their corresponding Availability Zones.
       VpcId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VpcId'
         description: The identifier (ID) of the virtual private cloud (VPC) that contains the cluster.
       Certificates:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Certificates'
         description: Contains one or more certificates or a certificate signing request (CSR).
     description: Contains information about an AWS CloudHSM cluster.
   ClusterId:
@@ -1099,18 +1099,18 @@ definitions:
   Clusters:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Cluster'
   DestinationBackup:
     type: object
     properties:
       CreateTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
       SourceRegion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Region'
       SourceBackup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
       SourceCluster:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterId'
   EniId:
     type: string
     pattern: 'eni-[0-9a-fA-F]{8,17}'
@@ -1135,7 +1135,7 @@ definitions:
   Strings:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/String'
   Filters:
     type: array
     items:
@@ -1151,28 +1151,28 @@ definitions:
       - HsmId
     properties:
       AvailabilityZone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExternalAz'
         description: The Availability Zone that contains the HSM.
       ClusterId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClusterId'
         description: The identifier (ID) of the cluster that contains the HSM.
       SubnetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetId'
         description: The subnet that contains the HSM's elastic network interface (ENI).
       EniId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EniId'
         description: The identifier (ID) of the HSM's elastic network interface (ENI).
       EniIp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpAddress'
         description: The IP address of the HSM's elastic network interface (ENI).
       HsmId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmId'
         description: The HSM's identifier (ID).
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmState'
         description: The HSM's state.
       StateMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: A description of the HSM's state.
     description: Contains information about a hardware security module (HSM) in an AWS CloudHSM cluster.
   HsmId:
@@ -1192,7 +1192,7 @@ definitions:
   Hsms:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Hsm'
   IpAddress:
     type: string
     pattern: '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
@@ -1223,7 +1223,7 @@ definitions:
   SubnetIds:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SubnetId'
     minItems: 1
     maxItems: 10
   Tag:
@@ -1233,10 +1233,10 @@ definitions:
       - Value
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagKey'
         description: The key of the tag.
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagValue'
         description: The value of the tag.
     description: Contains a tag. A tag is a key-value pair.
   TagKey:
@@ -1247,13 +1247,13 @@ definitions:
   TagKeyList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 50
   TagList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Tag'
     minItems: 1
     maxItems: 50
   TagValue:

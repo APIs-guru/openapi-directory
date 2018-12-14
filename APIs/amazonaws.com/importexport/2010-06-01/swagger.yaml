@@ -551,7 +551,7 @@ definitions:
     type: object
     properties:
       Success:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Success'
     description: Output structure for the CancelJob operation.
   CancelJobInput:
     type: object
@@ -559,61 +559,61 @@ definitions:
       - JobId
     properties:
       JobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobId'
       APIVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/APIVersion'
     description: Input structure for the CancelJob operation.
   InvalidJobIdException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: 'The JOBID was missing, not found, or not associated with the AWS account.'
   ExpiredJobIdException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: Indicates that the specified job has expired out of the system.
   CanceledJobIdException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: The specified job ID has been canceled and is no longer valid.
   UnableToCancelJobIdException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: AWS Import/Export cannot cancel the job
   InvalidAccessKeyIdException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: The AWS Access Key ID specified in the request did not match the manifest's accessKeyId value. The manifest and the request authentication must use the same AWS Access Key ID.
   InvalidVersionException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: The client tool version is invalid.
   CreateJobOutput:
     type: object
     properties:
       JobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobId'
       JobType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobType'
       Signature:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Signature'
       SignatureFileContents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SignatureFileContents'
       WarningMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WarningMessage'
       ArtifactList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ArtifactList'
     description: Output structure for the CreateJob operation.
   CreateJobInput:
     type: object
@@ -623,165 +623,165 @@ definitions:
       - ValidateOnly
     properties:
       JobType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobType'
       Manifest:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Manifest'
       ManifestAddendum:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ManifestAddendum'
       ValidateOnly:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ValidateOnly'
       APIVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/APIVersion'
     description: Input structure for the CreateJob operation.
   MissingParameterException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: One or more required parameters was missing from the request.
   InvalidParameterException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: One or more parameters had an invalid value.
   InvalidAddressException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: The address specified in the manifest is invalid.
   InvalidManifestFieldException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: One or more manifest fields was invalid. Please correct and resubmit.
   MissingManifestFieldException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: One or more required fields were missing from the manifest file. Please correct and resubmit.
   NoSuchBucketException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: 'The specified bucket does not exist. Create the specified bucket or change the manifest''s bucket, exportBucket, or logBucket field to a bucket that the account, as specified by the manifest''s Access Key ID, has write permissions to.'
   MissingCustomsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: One or more required customs parameters was missing from the manifest.
   InvalidCustomsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: One or more customs parameters was invalid. Please correct and resubmit.
   InvalidFileSystemException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: File system specified in export manifest is invalid.
   MultipleRegionsException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: Your manifest file contained buckets from multiple regions. A job is restricted to buckets from one region. Please correct and resubmit.
   BucketPermissionException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: The account specified does not have the appropriate bucket permissions.
   MalformedManifestException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: Your manifest is not well-formed.
   CreateJobQuotaExceededException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: 'Each account can create only a certain number of jobs per day. If you need to create more than this, please contact awsimportexport@amazon.com to explain your particular use case.'
   GetShippingLabelOutput:
     type: object
     properties:
       ShippingLabelURL:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
       Warning:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericString'
   GetShippingLabelInput:
     type: object
     required:
       - jobIds
     properties:
       jobIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobIdList'
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/name'
       company:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/company'
       phoneNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/phoneNumber'
       country:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/country'
       stateOrProvince:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/stateOrProvince'
       city:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/city'
       postalCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/postalCode'
       street1:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/street1'
       street2:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/street2'
       street3:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/street3'
       APIVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/APIVersion'
   GetStatusOutput:
     type: object
     properties:
       JobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobId'
       JobType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobType'
       LocationCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LocationCode'
       LocationMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LocationMessage'
       ProgressCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressCode'
       ProgressMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressMessage'
       Carrier:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Carrier'
       TrackingNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrackingNumber'
       LogBucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LogBucket'
       LogKey:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LogKey'
       ErrorCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorCount'
       Signature:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Signature'
       SignatureFileContents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Signature'
       CurrentManifest:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CurrentManifest'
       CreationDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreationDate'
       ArtifactList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ArtifactList'
     description: Output structure for the GetStatus operation.
   GetStatusInput:
     type: object
@@ -789,37 +789,37 @@ definitions:
       - JobId
     properties:
       JobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobId'
       APIVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/APIVersion'
     description: Input structure for the GetStatus operation.
   ListJobsOutput:
     type: object
     properties:
       Jobs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobsList'
       IsTruncated:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IsTruncated'
     description: Output structure for the ListJobs operation.
   ListJobsInput:
     type: object
     properties:
       MaxJobs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxJobs'
       Marker:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Marker'
       APIVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/APIVersion'
     description: Input structure for the ListJobs operation.
   UpdateJobOutput:
     type: object
     properties:
       Success:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Success'
       WarningMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WarningMessage'
       ArtifactList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ArtifactList'
     description: Output structure for the UpateJob operation.
   UpdateJobInput:
     type: object
@@ -830,21 +830,21 @@ definitions:
       - ValidateOnly
     properties:
       JobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobId'
       Manifest:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Manifest'
       JobType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobType'
       ValidateOnly:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ValidateOnly'
       APIVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/APIVersion'
     description: Input structure for the UpateJob operation.
   UnableToUpdateJobIdException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: AWS Import/Export cannot update the job
   APIVersion:
     type: string
@@ -854,15 +854,15 @@ definitions:
     type: object
     properties:
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
       URL:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/URL'
     description: A discrete item that contains the description and URL of an artifact (such as a PDF).
   ArtifactList:
     type: array
     description: A collection of artifacts.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Artifact'
   Carrier:
     type: string
     description: Name of the shipping company. This value is included when the LocationCode is "Returned".
@@ -894,13 +894,13 @@ definitions:
     type: object
     properties:
       JobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobId'
       CreationDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreationDate'
       IsCanceled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IsCanceled'
       JobType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/JobType'
     description: Representation of a job returned by the ListJobs operation.
   JobId:
     type: string
@@ -908,7 +908,7 @@ definitions:
   JobIdList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/GenericString'
   JobType:
     type: string
     enum:
@@ -919,7 +919,7 @@ definitions:
     type: array
     description: A list container for Jobs returned by the ListJobs operation.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Job'
   LocationCode:
     type: string
     description: 'A token representing the location of the storage device, such as "AtAWS".'

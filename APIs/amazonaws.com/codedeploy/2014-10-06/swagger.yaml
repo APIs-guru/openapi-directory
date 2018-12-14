@@ -2392,10 +2392,10 @@ definitions:
       - instanceNames
     properties:
       tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: <p>The tag key-value pairs to add to the on-premises instances.</p> <p>Keys and values are both required. Keys cannot be null or empty strings. Value-only tags are not allowed.</p>
       instanceNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceNameList'
         description: The names of the on-premises instances to which to add tags.
     description: 'Represents the input of, and adds tags to, an on-premises instance operation.'
   InstanceNameRequiredException: {}
@@ -2409,13 +2409,13 @@ definitions:
     type: object
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of the application that corresponds to the revisions.
       errorMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: Information about errors that may have occurred during the API call.
       revisions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionInfoList'
         description: 'Additional information about the revisions, including the type and location.'
     description: Represents the output of a BatchGetApplicationRevisions operation.
   BatchGetApplicationRevisionsInput:
@@ -2425,10 +2425,10 @@ definitions:
       - revisions
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application about which to get revision information.
       revisions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionLocationList'
         description: 'Information to get about the application revisions, including type and location.'
     description: Represents the input of a BatchGetApplicationRevisions operation.
   ApplicationDoesNotExistException: {}
@@ -2441,7 +2441,7 @@ definitions:
     type: object
     properties:
       applicationsInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationsInfoList'
         description: Information about the applications.
     description: Represents the output of a BatchGetApplications operation.
   BatchGetApplicationsInput:
@@ -2450,17 +2450,17 @@ definitions:
       - applicationNames
     properties:
       applicationNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationsList'
         description: A list of application names separated by spaces.
     description: Represents the input of a BatchGetApplications operation.
   BatchGetDeploymentGroupsOutput:
     type: object
     properties:
       deploymentGroupsInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupInfoList'
         description: Information about the deployment groups.
       errorMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: Information about errors that may have occurred during the API call.
     description: Represents the output of a BatchGetDeploymentGroups operation.
   BatchGetDeploymentGroupsInput:
@@ -2470,10 +2470,10 @@ definitions:
       - deploymentGroupNames
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
       deploymentGroupNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupsList'
         description: The deployment groups' names.
     description: Represents the input of a BatchGetDeploymentGroups operation.
   DeploymentGroupNameRequiredException: {}
@@ -2483,10 +2483,10 @@ definitions:
     type: object
     properties:
       instancesSummary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceSummaryList'
         description: Information about the instance.
       errorMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: Information about errors that may have occurred during the API call.
     description: Represents the output of a BatchGetDeploymentInstances operation.
   BatchGetDeploymentInstancesInput:
@@ -2496,10 +2496,10 @@ definitions:
       - instanceIds
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       instanceIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstancesList'
         description: The unique IDs of instances of the deployment.
     description: ' Represents the input of a BatchGetDeploymentInstances operation. '
   DeploymentIdRequiredException: {}
@@ -2511,16 +2511,16 @@ definitions:
     type: object
     properties:
       deploymentTargets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentTargetList'
         description: '<p> A list of target objects for a deployment. Each target object contains details about the target, such as its status and lifecycle events. The type of the target objects depends on the deployment'' compute platform. </p> <ul> <li> <p> <b>EC2/On-premises</b> - Each target object is an EC2 or on-premises instance. </p> </li> <li> <p> <b>AWS Lambda</b> - The target object is a specific version of an AWS Lambda function. </p> </li> <li> <p> <b>Amazon ECS</b> - The target object is an Amazon ECS service. </p> </li> </ul>'
   BatchGetDeploymentTargetsInput:
     type: object
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       targetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetIdList'
         description: '<p> The unique IDs of the deployment targets. The compute platform of the deployment determines the type of the targets and their formats. </p> <ul> <li> <p> For deployments that use the EC2/On-premises compute platform, the target IDs are EC2 or on-premises instances IDs and their target type is <code>instanceTarget</code>. </p> </li> <li> <p> For deployments that use the AWS Lambda compute platform, the target IDs are the names of Lambda functions and their target type is <code>instanceTarget</code>. </p> </li> <li> <p> For deployments that use the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS clusters and services specified using the format <code>&lt;clustername&gt;:&lt;servicename&gt;</code>. Their target type is <code>ecsTarget</code>. </p> </li> </ul>'
   DeploymentTargetIdRequiredException: {}
   InvalidDeploymentTargetIdException: {}
@@ -2530,7 +2530,7 @@ definitions:
     type: object
     properties:
       deploymentsInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentsInfoList'
         description: ' Information about the deployments. '
     description: ' Represents the output of a BatchGetDeployments operation. '
   BatchGetDeploymentsInput:
@@ -2539,14 +2539,14 @@ definitions:
       - deploymentIds
     properties:
       deploymentIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentsList'
         description: ' A list of deployment IDs, separated by spaces. '
     description: ' Represents the input of a BatchGetDeployments operation. '
   BatchGetOnPremisesInstancesOutput:
     type: object
     properties:
       instanceInfos:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceInfoList'
         description: Information about the on-premises instances.
     description: Represents the output of a BatchGetOnPremisesInstances operation.
   BatchGetOnPremisesInstancesInput:
@@ -2555,17 +2555,17 @@ definitions:
       - instanceNames
     properties:
       instanceNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceNameList'
         description: The names of the on-premises instances about which to get information.
     description: Represents the input of a BatchGetOnPremisesInstances operation.
   ContinueDeploymentInput:
     type: object
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a blue/green deployment for which you want to start rerouting traffic to the replacement environment. '
       deploymentWaitType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentWaitType'
         description: ' The status of the deployment''s waiting period. READY_WAIT indicates the deployment is ready to start shifting traffic. TERMINATION_WAIT indicates the traffic is shifted, but the original target is not terminated. '
   DeploymentAlreadyCompletedException: {}
   DeploymentIsNotInReadyStateException: {}
@@ -2576,7 +2576,7 @@ definitions:
     type: object
     properties:
       applicationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationId'
         description: A unique application ID.
     description: Represents the output of a CreateApplication operation.
   CreateApplicationInput:
@@ -2585,10 +2585,10 @@ definitions:
       - applicationName
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of the application. This name must be unique with the applicable IAM user or AWS account.
       computePlatform:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ComputePlatform'
         description: ' The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>).'
     description: Represents the input of a CreateApplication operation.
   ApplicationAlreadyExistsException: {}
@@ -2597,7 +2597,7 @@ definitions:
     type: object
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
     description: ' Represents the output of a CreateDeployment operation. '
   CreateDeploymentInput:
@@ -2606,34 +2606,34 @@ definitions:
       - applicationName
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
       deploymentGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupName'
         description: The name of the deployment group.
       revision:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionLocation'
         description: ' The type and location of the revision to deploy. '
       deploymentConfigName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigName'
         description: '<p>The name of a deployment configuration associated with the applicable IAM user or AWS account.</p> <p>If not specified, the value configured in the deployment group will be used as the default. If the deployment group does not have a deployment configuration associated with it, then CodeDeployDefault.OneAtATime will be used by default.</p>'
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: A comment about the deployment.
       ignoreApplicationStopFailures:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: '<p> If set to true, then if the deployment causes the ApplicationStop deployment lifecycle event to an instance to fail, the deployment to that instance will not be considered to have failed at that point and will continue on to the BeforeInstall deployment lifecycle event. </p> <p> If set to false or not specified, then if the deployment causes the ApplicationStop deployment lifecycle event to fail to an instance, the deployment to that instance will stop, and the deployment to that instance will be considered to have failed. </p>'
       targetInstances:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetInstances'
         description: ' Information about the instances that will belong to the replacement environment in a blue/green deployment. '
       autoRollbackConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoRollbackConfiguration'
         description: Configuration information for an automatic rollback that is added when a deployment is created.
       updateOutdatedInstancesOnly:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: ' Indicates whether to deploy to all instances or only to instances that are not running the latest application revision. '
       fileExistsBehavior:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileExistsBehavior'
         description: '<p>Information about how AWS CodeDeploy handles files that already exist in a deployment target location but weren''t part of the previous successful deployment.</p> <p>The fileExistsBehavior parameter takes any of the following values:</p> <ul> <li> <p>DISALLOW: The deployment fails. This is also the default behavior if no option is specified.</p> </li> <li> <p>OVERWRITE: The version of the file from the application revision currently being deployed replaces the version already on the instance.</p> </li> <li> <p>RETAIN: The version of the file already on the instance is kept and used as part of the new deployment.</p> </li> </ul>'
     description: Represents the input of a CreateDeployment operation.
   DeploymentGroupDoesNotExistException: {}
@@ -2655,7 +2655,7 @@ definitions:
     type: object
     properties:
       deploymentConfigId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigId'
         description: A unique deployment configuration ID.
     description: Represents the output of a CreateDeploymentConfig operation.
   CreateDeploymentConfigInput:
@@ -2664,16 +2664,16 @@ definitions:
       - deploymentConfigName
     properties:
       deploymentConfigName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigName'
         description: The name of the deployment configuration to create.
       minimumHealthyHosts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MinimumHealthyHosts'
         description: '<p>The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value.</p> <p>The type parameter takes either of the following values:</p> <ul> <li> <p>HOST_COUNT: The value parameter represents the minimum number of healthy instances as an absolute value.</p> </li> <li> <p>FLEET_PERCENT: The value parameter represents the minimum number of healthy instances as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.</p> </li> </ul> <p>The value parameter takes an integer.</p> <p>For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT and a value of 95.</p>'
       trafficRoutingConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrafficRoutingConfig'
         description: The configuration that specifies how the deployment traffic will be routed.
       computePlatform:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ComputePlatform'
         description: The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>&gt;).
     description: Represents the input of a CreateDeploymentConfig operation.
   DeploymentConfigNameRequiredException: {}
@@ -2685,7 +2685,7 @@ definitions:
     type: object
     properties:
       deploymentGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupId'
         description: A unique deployment group ID.
     description: Represents the output of a CreateDeploymentGroup operation.
   CreateDeploymentGroupInput:
@@ -2696,52 +2696,52 @@ definitions:
       - serviceRoleArn
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
       deploymentGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupName'
         description: The name of a new deployment group for the specified application.
       deploymentConfigName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigName'
         description: '<p>If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation.</p> <p>CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn''t specified for the deployment or the deployment group.</p> <p>For more information about the predefined deployment configurations in AWS CodeDeploy, see <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html">Working with Deployment Groups in AWS CodeDeploy</a> in the AWS CodeDeploy User Guide.</p>'
       ec2TagFilters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EC2TagFilterList'
         description: The Amazon EC2 tags on which to filter. The deployment group will include EC2 instances with any of the specified tags. Cannot be used in the same call as ec2TagSet.
       onPremisesInstanceTagFilters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagFilterList'
         description: The on-premises instance tags on which to filter. The deployment group will include on-premises instances with any of the specified tags. Cannot be used in the same call as OnPremisesTagSet.
       autoScalingGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoScalingGroupNameList'
         description: A list of associated Auto Scaling groups.
       serviceRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Role'
         description: A service role ARN that allows AWS CodeDeploy to act on the user's behalf when interacting with AWS services.
       triggerConfigurations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TriggerConfigList'
         description: 'Information about triggers to create when the deployment group is created. For examples, see <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html">Create a Trigger for an AWS CodeDeploy Event</a> in the AWS CodeDeploy User Guide.'
       alarmConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AlarmConfiguration'
         description: Information to add about Amazon CloudWatch alarms when the deployment group is created.
       autoRollbackConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoRollbackConfiguration'
         description: Configuration information for an automatic rollback that is added when a deployment group is created.
       deploymentStyle:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStyle'
         description: 'Information about the type of deployment, in-place or blue/green, that you want to run and whether to route deployment traffic behind a load balancer.'
       blueGreenDeploymentConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BlueGreenDeploymentConfiguration'
         description: Information about blue/green deployment options for a deployment group.
       loadBalancerInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LoadBalancerInfo'
         description: Information about the load balancer used in a deployment.
       ec2TagSet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EC2TagSet'
         description: Information about groups of tags applied to EC2 instances. The deployment group will include only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.
       ecsServices:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ECSServiceList'
         description: ' The target ECS services in the deployment group. This only applies to deployment groups that use the Amazon ECS compute platform. A target ECS service is specified as an Amazon ECS cluster and service name pair using the format <code>&lt;clustername&gt;:&lt;servicename&gt;</code>. '
       onPremisesTagSet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OnPremisesTagSet'
         description: Information about groups of tags applied to on-premises instances. The deployment group will include only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
     description: Represents the input of a CreateDeploymentGroup operation.
   DeploymentGroupAlreadyExistsException: {}
@@ -2768,7 +2768,7 @@ definitions:
       - applicationName
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
     description: Represents the input of a DeleteApplication operation.
   DeleteDeploymentConfigInput:
@@ -2777,7 +2777,7 @@ definitions:
       - deploymentConfigName
     properties:
       deploymentConfigName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigName'
         description: The name of a deployment configuration associated with the applicable IAM user or AWS account.
     description: Represents the input of a DeleteDeploymentConfig operation.
   DeploymentConfigInUseException: {}
@@ -2786,7 +2786,7 @@ definitions:
     type: object
     properties:
       hooksNotCleanedUp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoScalingGroupList'
         description: 'If the output contains no data, and the corresponding deployment group contained at least one Auto Scaling group, AWS CodeDeploy successfully removed all corresponding Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto Scaling group. If the output contains data, AWS CodeDeploy could not remove some Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto Scaling group.'
     description: Represents the output of a DeleteDeploymentGroup operation.
   DeleteDeploymentGroupInput:
@@ -2796,24 +2796,24 @@ definitions:
       - deploymentGroupName
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
       deploymentGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupName'
         description: The name of an existing deployment group for the specified application.
     description: Represents the input of a DeleteDeploymentGroup operation.
   DeleteGitHubAccountTokenOutput:
     type: object
     properties:
       tokenName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GitHubAccountTokenName'
         description: The name of the GitHub account connection that was deleted.
     description: Represents the output of a DeleteGitHubAccountToken operation.
   DeleteGitHubAccountTokenInput:
     type: object
     properties:
       tokenName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GitHubAccountTokenName'
         description: The name of the GitHub account connection to delete.
     description: Represents the input of a DeleteGitHubAccount operation.
   GitHubAccountTokenNameRequiredException: {}
@@ -2827,14 +2827,14 @@ definitions:
       - instanceName
     properties:
       instanceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceName'
         description: The name of the on-premises instance to deregister.
     description: Represents the input of a DeregisterOnPremisesInstance operation.
   GetApplicationOutput:
     type: object
     properties:
       application:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationInfo'
         description: Information about the application.
     description: Represents the output of a GetApplication operation.
   GetApplicationInput:
@@ -2843,20 +2843,20 @@ definitions:
       - applicationName
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
     description: Represents the input of a GetApplication operation.
   GetApplicationRevisionOutput:
     type: object
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of the application that corresponds to the revision.
       revision:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionLocation'
         description: 'Additional information about the revision, including type and location.'
       revisionInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericRevisionInfo'
         description: General information about the revision.
     description: Represents the output of a GetApplicationRevision operation.
   GetApplicationRevisionInput:
@@ -2866,17 +2866,17 @@ definitions:
       - revision
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of the application that corresponds to the revision.
       revision:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionLocation'
         description: 'Information about the application revision to get, including type and location.'
     description: Represents the input of a GetApplicationRevision operation.
   GetDeploymentOutput:
     type: object
     properties:
       deploymentInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentInfo'
         description: Information about the deployment.
     description: Represents the output of a GetDeployment operation.
   GetDeploymentInput:
@@ -2885,14 +2885,14 @@ definitions:
       - deploymentId
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment associated with the applicable IAM user or AWS account. '
     description: Represents the input of a GetDeployment operation.
   GetDeploymentConfigOutput:
     type: object
     properties:
       deploymentConfigInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigInfo'
         description: Information about the deployment configuration.
     description: Represents the output of a GetDeploymentConfig operation.
   GetDeploymentConfigInput:
@@ -2901,14 +2901,14 @@ definitions:
       - deploymentConfigName
     properties:
       deploymentConfigName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigName'
         description: The name of a deployment configuration associated with the applicable IAM user or AWS account.
     description: Represents the input of a GetDeploymentConfig operation.
   GetDeploymentGroupOutput:
     type: object
     properties:
       deploymentGroupInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupInfo'
         description: Information about the deployment group.
     description: Represents the output of a GetDeploymentGroup operation.
   GetDeploymentGroupInput:
@@ -2918,17 +2918,17 @@ definitions:
       - deploymentGroupName
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
       deploymentGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupName'
         description: The name of an existing deployment group for the specified application.
     description: Represents the input of a GetDeploymentGroup operation.
   GetDeploymentInstanceOutput:
     type: object
     properties:
       instanceSummary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceSummary'
         description: ' Information about the instance. '
     description: ' Represents the output of a GetDeploymentInstance operation. '
   GetDeploymentInstanceInput:
@@ -2938,10 +2938,10 @@ definitions:
       - instanceId
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       instanceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceId'
         description: ' The unique ID of an instance in the deployment group. '
     description: ' Represents the input of a GetDeploymentInstance operation. '
   InstanceDoesNotExistException: {}
@@ -2949,22 +2949,22 @@ definitions:
     type: object
     properties:
       deploymentTarget:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentTarget'
         description: ' A deployment target that contains information about a deployment such as its status, lifecyle events, and when it was updated last. It also contains metadata about the deployment target. The deployment target metadata depends on the deployment target''s type (<code>instanceTarget</code>, <code>lambdaTarget</code>, or <code>ecsTarget</code>). '
   GetDeploymentTargetInput:
     type: object
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       targetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetId'
         description: ' The unique ID of a deployment target. '
   GetOnPremisesInstanceOutput:
     type: object
     properties:
       instanceInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceInfo'
         description: ' Information about the on-premises instance. '
     description: ' Represents the output of a GetOnPremisesInstance operation. '
   GetOnPremisesInstanceInput:
@@ -2973,17 +2973,17 @@ definitions:
       - instanceName
     properties:
       instanceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceName'
         description: ' The name of the on-premises instance about which to get information. '
     description: ' Represents the input of a GetOnPremisesInstance operation. '
   ListApplicationRevisionsOutput:
     type: object
     properties:
       revisions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionLocationList'
         description: A list of locations that contain the matching revisions.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier will also be returned. It can be used in a subsequent list application revisions call to return the next set of application revisions in the list.'
     description: Represents the output of a ListApplicationRevisions operation.
   ListApplicationRevisionsInput:
@@ -2992,25 +2992,25 @@ definitions:
       - applicationName
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: ' The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account. '
       sortBy:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationRevisionSortBy'
         description: '<p>The column name to use to sort the list results:</p> <ul> <li> <p>registerTime: Sort by the time the revisions were registered with AWS CodeDeploy.</p> </li> <li> <p>firstUsedTime: Sort by the time the revisions were first used in a deployment.</p> </li> <li> <p>lastUsedTime: Sort by the time the revisions were last used in a deployment.</p> </li> </ul> <p> If not specified or set to null, the results will be returned in an arbitrary order. </p>'
       sortOrder:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SortOrder'
         description: '<p> The order in which to sort the list results: </p> <ul> <li> <p>ascending: ascending order.</p> </li> <li> <p>descending: descending order.</p> </li> </ul> <p>If not specified, the results will be sorted in ascending order.</p> <p>If set to null, the results will be sorted in an arbitrary order.</p>'
       s3Bucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Bucket'
         description: '<p> An Amazon S3 bucket name to limit the search for revisions. </p> <p> If set to null, all of the user''s buckets are searched. </p>'
       s3KeyPrefix:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Key'
         description: ' A key prefix for the set of Amazon S3 objects to limit the search for revisions. '
       deployed:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ListStateFilterAction'
         description: '<p> Whether to list revisions based on whether the revision is the target revision of an deployment group: </p> <ul> <li> <p>include: List revisions that are target revisions of a deployment group.</p> </li> <li> <p>exclude: Do not list revisions that are target revisions of a deployment group.</p> </li> <li> <p>ignore: List all revisions.</p> </li> </ul>'
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous <code>ListApplicationRevisions</code> call. It can be used to return the next set of applications in the list.
     description: ' Represents the input of a ListApplicationRevisions operation. '
   InvalidSortByException: {}
@@ -3024,47 +3024,47 @@ definitions:
     type: object
     properties:
       applications:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationsList'
         description: A list of application names.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list applications call to return the next set of applications, will also be returned. in the list.'
     description: Represents the output of a ListApplications operation.
   ListApplicationsInput:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list applications call. It can be used to return the next set of applications in the list.
     description: Represents the input of a ListApplications operation.
   ListDeploymentConfigsOutput:
     type: object
     properties:
       deploymentConfigsList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigsList'
         description: 'A list of deployment configurations, including built-in configurations such as CodeDeployDefault.OneAtATime.'
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment configurations call to return the next set of deployment configurations in the list.'
     description: Represents the output of a ListDeploymentConfigs operation.
   ListDeploymentConfigsInput:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An identifier returned from the previous <code>ListDeploymentConfigs</code> call. It can be used to return the next set of deployment configurations in the list. '
     description: Represents the input of a ListDeploymentConfigs operation.
   ListDeploymentGroupsOutput:
     type: object
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The application name.
       deploymentGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupsList'
         description: A list of corresponding deployment group names.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment groups call to return the next set of deployment groups in the list.'
     description: Represents the output of a ListDeploymentGroups operation.
   ListDeploymentGroupsInput:
@@ -3073,20 +3073,20 @@ definitions:
       - applicationName
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list deployment groups call. It can be used to return the next set of deployment groups in the list.
     description: Represents the input of a ListDeploymentGroups operation.
   ListDeploymentInstancesOutput:
     type: object
     properties:
       instancesList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstancesList'
         description: A list of instance IDs.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment instances call to return the next set of deployment instances in the list.'
     description: Represents the output of a ListDeploymentInstances operation.
   ListDeploymentInstancesInput:
@@ -3095,16 +3095,16 @@ definitions:
       - deploymentId
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list deployment instances call. It can be used to return the next set of deployment instances in the list.
       instanceStatusFilter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceStatusList'
         description: '<p>A subset of instances to list by status:</p> <ul> <li> <p>Pending: Include those instance with pending deployments.</p> </li> <li> <p>InProgress: Include those instance where deployments are still in progress.</p> </li> <li> <p>Succeeded: Include those instances with successful deployments.</p> </li> <li> <p>Failed: Include those instance with failed deployments.</p> </li> <li> <p>Skipped: Include those instance with skipped deployments.</p> </li> <li> <p>Unknown: Include those instance with deployments in an unknown state.</p> </li> </ul>'
       instanceTypeFilter:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceTypeList'
         description: 'The set of instances in a blue/green deployment, either those in the original environment ("BLUE") or those in the replacement environment ("GREEN"), for which you want to view instance information.'
     description: ' Represents the input of a ListDeploymentInstances operation. '
   DeploymentNotStartedException: {}
@@ -3116,50 +3116,50 @@ definitions:
     type: object
     properties:
       targetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetIdList'
         description: ' The unique IDs of deployment targets. '
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: ' If a large amount of information is returned, a token identifier will also be returned. It can be used in a subsequent <code>ListDeploymentTargets</code> call to return the next set of deployment targets in the list. '
   ListDeploymentTargetsInput:
     type: object
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: ' A token identifier returned from the previous <code>ListDeploymentTargets</code> call. It can be used to return the next set of deployment targets in the list. '
       targetFilters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetFilters'
         description: ' A key used to filter the returned targets. '
   ListDeploymentsOutput:
     type: object
     properties:
       deployments:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentsList'
         description: A list of deployment IDs.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployments call to return the next set of deployments in the list.'
     description: Represents the output of a ListDeployments operation.
   ListDeploymentsInput:
     type: object
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
       deploymentGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupName'
         description: The name of an existing deployment group for the specified application.
       includeOnlyStatuses:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStatusList'
         description: '<p>A subset of deployments to list by status:</p> <ul> <li> <p>Created: Include created deployments in the resulting list.</p> </li> <li> <p>Queued: Include queued deployments in the resulting list.</p> </li> <li> <p>In Progress: Include in-progress deployments in the resulting list.</p> </li> <li> <p>Succeeded: Include successful deployments in the resulting list.</p> </li> <li> <p>Failed: Include failed deployments in the resulting list.</p> </li> <li> <p>Stopped: Include stopped deployments in the resulting list.</p> </li> </ul>'
       createTimeRange:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeRange'
         description: A time range (start and end) for returning a subset of the list of deployments.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list deployments call. It can be used to return the next set of deployments in the list.
     description: Represents the input of a ListDeployments operation.
   InvalidTimeRangeException: {}
@@ -3167,40 +3167,40 @@ definitions:
     type: object
     properties:
       tokenNameList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GitHubAccountTokenNameList'
         description: A list of names of connections to GitHub accounts.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent ListGitHubAccountTokenNames call to return the next set of names in the list. '
     description: Represents the output of a ListGitHubAccountTokenNames operation.
   ListGitHubAccountTokenNamesInput:
     type: object
     properties:
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An identifier returned from the previous ListGitHubAccountTokenNames call. It can be used to return the next set of names in the list. '
     description: Represents the input of a ListGitHubAccountTokenNames operation.
   ListOnPremisesInstancesOutput:
     type: object
     properties:
       instanceNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceNameList'
         description: The list of matching on-premises instance names.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list on-premises instances call to return the next set of on-premises instances in the list.'
     description: Represents the output of list on-premises instances operation.
   ListOnPremisesInstancesInput:
     type: object
     properties:
       registrationStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RegistrationStatus'
         description: '<p>The registration status of the on-premises instances:</p> <ul> <li> <p>Deregistered: Include deregistered on-premises instances in the resulting list.</p> </li> <li> <p>Registered: Include registered on-premises instances in the resulting list.</p> </li> </ul>'
       tagFilters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagFilterList'
         description: The on-premises instance tags that will be used to restrict the corresponding on-premises instance names returned.
       nextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: An identifier returned from the previous list on-premises instances call. It can be used to return the next set of on-premises instances in the list.
     description: Represents the input of a ListOnPremisesInstances operation.
   InvalidRegistrationStatusException: {}
@@ -3209,19 +3209,19 @@ definitions:
     type: object
     properties:
       lifecycleEventHookExecutionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecycleEventHookExecutionId'
         description: The execution ID of the lifecycle event hook. A hook is specified in the <code>hooks</code> section of the deployment's AppSpec file.
   PutLifecycleEventHookExecutionStatusInput:
     type: object
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. Pass this ID to a Lambda function that validates a deployment lifecycle event. '
       lifecycleEventHookExecutionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecycleEventHookExecutionId'
         description: ' The execution ID of a deployment''s lifecycle hook. A deployment lifecycle hook is specified in the <code>hooks</code> section of the AppSpec file. '
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecycleEventStatus'
         description: The result of a Lambda function that validates a deployment lifecycle event (<code>Succeeded</code> or <code>Failed</code>).
   InvalidLifecycleEventHookExecutionStatusException: {}
   InvalidLifecycleEventHookExecutionIdException: {}
@@ -3233,13 +3233,13 @@ definitions:
       - revision
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: A comment about the revision.
       revision:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionLocation'
         description: 'Information about the application revision to register, including type and location.'
     description: Represents the input of a RegisterApplicationRevision operation.
   RegisterOnPremisesInstanceInput:
@@ -3248,13 +3248,13 @@ definitions:
       - instanceName
     properties:
       instanceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceName'
         description: The name of the on-premises instance to register.
       iamSessionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IamSessionArn'
         description: The ARN of the IAM session to associate with the on-premises instance.
       iamUserArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IamUserArn'
         description: The ARN of the IAM user to associate with the on-premises instance.
     description: Represents the input of the register on-premises instance operation.
   InstanceNameAlreadyRegisteredException: {}
@@ -3272,26 +3272,26 @@ definitions:
       - instanceNames
     properties:
       tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: The tag key-value pairs to remove from the on-premises instances.
       instanceNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceNameList'
         description: The names of the on-premises instances from which to remove tags.
     description: Represents the input of a RemoveTagsFromOnPremisesInstances operation.
   SkipWaitTimeForInstanceTerminationInput:
     type: object
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a blue/green deployment for which you want to skip the instance termination wait time. '
   StopDeploymentOutput:
     type: object
     properties:
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StopStatus'
         description: '<p>The status of the stop deployment operation:</p> <ul> <li> <p>Pending: The stop operation is pending.</p> </li> <li> <p>Succeeded: The stop operation was successful.</p> </li> </ul>'
       statusMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Message'
         description: An accompanying status message.
     description: ' Represents the output of a StopDeployment operation. '
   StopDeploymentInput:
@@ -3300,27 +3300,27 @@ definitions:
       - deploymentId
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       autoRollbackEnabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NullableBoolean'
         description: ' Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision. '
     description: ' Represents the input of a StopDeployment operation. '
   UpdateApplicationInput:
     type: object
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The current name of the application you want to change.
       newApplicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The new name to give the application.
     description: Represents the input of an UpdateApplication operation.
   UpdateDeploymentGroupOutput:
     type: object
     properties:
       hooksNotCleanedUp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoScalingGroupList'
         description: 'If the output contains no data, and the corresponding deployment group contained at least one Auto Scaling group, AWS CodeDeploy successfully removed all corresponding Auto Scaling lifecycle event hooks from the AWS account. If the output contains data, AWS CodeDeploy could not remove some Auto Scaling lifecycle event hooks from the AWS account.'
     description: Represents the output of an UpdateDeploymentGroup operation.
   UpdateDeploymentGroupInput:
@@ -3330,55 +3330,55 @@ definitions:
       - currentDeploymentGroupName
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The application name corresponding to the deployment group to update.
       currentDeploymentGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupName'
         description: The current name of the deployment group.
       newDeploymentGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupName'
         description: 'The new name of the deployment group, if you want to change it.'
       deploymentConfigName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigName'
         description: 'The replacement deployment configuration name to use, if you want to change it.'
       ec2TagFilters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EC2TagFilterList'
         description: 'The replacement set of Amazon EC2 tags on which to filter, if you want to change them. To keep the existing tags, enter their names. To remove tags, do not enter any tag names.'
       onPremisesInstanceTagFilters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagFilterList'
         description: 'The replacement set of on-premises instance tags on which to filter, if you want to change them. To keep the existing tags, enter their names. To remove tags, do not enter any tag names.'
       autoScalingGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoScalingGroupNameList'
         description: 'The replacement list of Auto Scaling groups to be included in the deployment group, if you want to change them. To keep the Auto Scaling groups, enter their names. To remove Auto Scaling groups, do not enter any Auto Scaling group names.'
       serviceRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Role'
         description: 'A replacement ARN for the service role, if you want to change it.'
       triggerConfigurations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TriggerConfigList'
         description: 'Information about triggers to change when the deployment group is updated. For examples, see <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html">Modify Triggers in an AWS CodeDeploy Deployment Group</a> in the AWS CodeDeploy User Guide.'
       alarmConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AlarmConfiguration'
         description: Information to add or change about Amazon CloudWatch alarms when the deployment group is updated.
       autoRollbackConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoRollbackConfiguration'
         description: Information for an automatic rollback configuration that is added or changed when a deployment group is updated.
       deploymentStyle:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStyle'
         description: 'Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.'
       blueGreenDeploymentConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BlueGreenDeploymentConfiguration'
         description: Information about blue/green deployment options for a deployment group.
       loadBalancerInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LoadBalancerInfo'
         description: Information about the load balancer used in a deployment.
       ec2TagSet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EC2TagSet'
         description: Information about groups of tags applied to on-premises instances. The deployment group will include only EC2 instances identified by all the tag groups.
       ecsServices:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ECSServiceList'
         description: ' The target ECS services in the deployment group. This only applies to deployment groups that use the Amazon ECS compute platform. A target ECS service is specified as an Amazon ECS cluster and service name pair using the format <code>&lt;clustername&gt;:&lt;servicename&gt;</code>. '
       onPremisesTagSet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OnPremisesTagSet'
         description: Information about an on-premises instance tag set. The deployment group will include only on-premises instances identified by all the tag groups.
     description: Represents the input of an UpdateDeploymentGroup operation.
   '[object Object]': {}
@@ -3389,36 +3389,36 @@ definitions:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AlarmName'
         description: The name of the alarm. Maximum length is 255 characters. Each alarm name can be used only once in a list of alarms.
     description: Information about an alarm.
   AlarmConfiguration:
     type: object
     properties:
       enabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Indicates whether the alarm configuration is enabled.
       ignorePollAlarmFailure:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: '<p>Indicates whether a deployment should continue if information about the current state of alarms cannot be retrieved from Amazon CloudWatch. The default value is false.</p> <ul> <li> <p>true: The deployment will proceed even if alarm status information can''t be retrieved from Amazon CloudWatch.</p> </li> <li> <p>false: The deployment will stop if alarm status information can''t be retrieved from Amazon CloudWatch.</p> </li> </ul>'
       alarms:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AlarmList'
         description: A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
     description: Information about alarms associated with the deployment group.
   AlarmList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Alarm'
   AlarmName:
     type: string
   AppSpecContent:
     type: object
     properties:
       content:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RawStringContent'
         description: '<p> The YAML-formatted or JSON-formatted revision string. </p> <p> For an AWS Lambda deployment the content includes a Lambda function name, the alias for its original version, and the alias for its replacement version. The deployment shifts traffic from the original version of the Lambda function to the replacement version. </p> <p> For an Amazon ECS deployment the content includes the task name, information about the load balancer that serves traffic to the container, and more. </p> <p> For both types of deployments, the content can specify Lambda functions that run at specified hooks, such as <code>BeforeInstall</code>, during a deployment. </p>'
       sha256:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RawStringSha256'
         description: ' The SHA256 hash value of the revision content. '
     description: ' A revision for an AWS Lambda or Amazon ECS deployment that is a YAML-formatted or JSON-formatted string. For AWS Lambda and Amazon ECS deployments, the revision is the same as the AppSpec file. This method replaces the deprecated <code>RawString</code> data type. '
   ApplicationId:
@@ -3427,22 +3427,22 @@ definitions:
     type: object
     properties:
       applicationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationId'
         description: The application ID.
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The application name.
       createTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The time at which the application was created.
       linkedToGitHub:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'True if the user has authenticated with GitHub for the specified application; otherwise, false.'
       gitHubAccountName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GitHubAccountTokenName'
         description: The name for a connection to a GitHub account.
       computePlatform:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ComputePlatform'
         description: The destination platform type for deployment of the application (<code>Lambda</code> or <code>Server</code>).
     description: Information about an application.
   ApplicationName:
@@ -3458,19 +3458,19 @@ definitions:
   ApplicationsInfoList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ApplicationInfo'
   ApplicationsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ApplicationName'
   AutoRollbackConfiguration:
     type: object
     properties:
       enabled:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Indicates whether a defined automatic rollback configuration is currently enabled.
       events:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoRollbackEventsList'
         description: The event type or types that trigger a rollback.
     description: Information about a configuration for automatically rolling back to a previous version of an application revision when a deployment doesn't complete successfully.
   AutoRollbackEvent:
@@ -3482,15 +3482,15 @@ definitions:
   AutoRollbackEventsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AutoRollbackEvent'
   AutoScalingGroup:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoScalingGroupName'
         description: The Auto Scaling group name.
       hook:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoScalingGroupHook'
         description: An Auto Scaling lifecycle event hook name.
     description: Information about an Auto Scaling group.
   AutoScalingGroupHook:
@@ -3498,34 +3498,34 @@ definitions:
   AutoScalingGroupList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AutoScalingGroup'
   AutoScalingGroupName:
     type: string
   AutoScalingGroupNameList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AutoScalingGroupName'
   BlueGreenDeploymentConfiguration:
     type: object
     properties:
       terminateBlueInstancesOnDeploymentSuccess:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BlueInstanceTerminationOption'
         description: Information about whether to terminate instances in the original fleet during a blue/green deployment.
       deploymentReadyOption:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentReadyOption'
         description: Information about the action to take when newly provisioned instances are ready to receive traffic in a blue/green deployment.
       greenFleetProvisioningOption:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GreenFleetProvisioningOption'
         description: Information about how instances are provisioned for a replacement environment in a blue/green deployment.
     description: Information about blue/green deployment options for a deployment group.
   BlueInstanceTerminationOption:
     type: object
     properties:
       action:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceAction'
         description: '<p>The action to take on instances in the original environment after a successful blue/green deployment.</p> <ul> <li> <p>TERMINATE: Instances are terminated after a specified wait time.</p> </li> <li> <p>KEEP_ALIVE: Instances are left running after they are deregistered from the load balancer and removed from the deployment group.</p> </li> </ul>'
       terminationWaitTimeInMinutes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Duration'
         description: The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment. The maximum setting is 2880 minutes (2 days).
     description: Information about whether instances in the original environment are terminated when a blue/green deployment is successful.
   Boolean:
@@ -3552,22 +3552,22 @@ definitions:
     type: object
     properties:
       deploymentConfigId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigId'
         description: The deployment configuration ID.
       deploymentConfigName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigName'
         description: The deployment configuration name.
       minimumHealthyHosts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MinimumHealthyHosts'
         description: Information about the number or percentage of minimum healthy instance.
       createTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The time at which the deployment configuration was created.
       computePlatform:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ComputePlatform'
         description: The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>).
       trafficRoutingConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrafficRoutingConfig'
         description: The configuration specifying how the deployment traffic will be routed. Only deployments with a Lambda compute platform can specify this.
     description: Information about a deployment configuration.
   DeploymentConfigName:
@@ -3577,7 +3577,7 @@ definitions:
   DeploymentConfigsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DeploymentConfigName'
   DeploymentCreator:
     type: string
     enum:
@@ -3590,73 +3590,73 @@ definitions:
     type: object
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The application name.
       deploymentGroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupId'
         description: The deployment group ID.
       deploymentGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupName'
         description: The deployment group name.
       deploymentConfigName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigName'
         description: The deployment configuration name.
       ec2TagFilters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EC2TagFilterList'
         description: The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances with any of the specified tags.
       onPremisesInstanceTagFilters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagFilterList'
         description: The on-premises instance tags on which to filter. The deployment group includes on-premises instances with any of the specified tags.
       autoScalingGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoScalingGroupList'
         description: A list of associated Auto Scaling groups.
       serviceRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Role'
         description: A service role ARN.
       targetRevision:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionLocation'
         description: 'Information about the deployment group''s target revision, including type and location.'
       triggerConfigurations:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TriggerConfigList'
         description: Information about triggers associated with the deployment group.
       alarmConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AlarmConfiguration'
         description: A list of alarms associated with the deployment group.
       autoRollbackConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoRollbackConfiguration'
         description: Information about the automatic rollback configuration associated with the deployment group.
       deploymentStyle:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStyle'
         description: 'Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.'
       blueGreenDeploymentConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BlueGreenDeploymentConfiguration'
         description: Information about blue/green deployment options for a deployment group.
       loadBalancerInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LoadBalancerInfo'
         description: Information about the load balancer to use in a deployment.
       lastSuccessfulDeployment:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastDeploymentInfo'
         description: Information about the most recent successful deployment to the deployment group.
       lastAttemptedDeployment:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastDeploymentInfo'
         description: Information about the most recent attempted deployment to the deployment group.
       ec2TagSet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EC2TagSet'
         description: Information about groups of tags applied to an EC2 instance. The deployment group includes only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.
       onPremisesTagSet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OnPremisesTagSet'
         description: Information about groups of tags applied to an on-premises instance. The deployment group includes only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
       computePlatform:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ComputePlatform'
         description: The destination platform type for the deployment group (<code>Lambda</code> or <code>Server</code>).
       ecsServices:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ECSServiceList'
         description: ' The target ECS services in the deployment group. This only applies to deployment groups that use the Amazon ECS compute platform. A target ECS service is specified as an Amazon ECS cluster and service name pair using the format <code>&lt;clustername&gt;:&lt;servicename&gt;</code>. '
     description: Information about a deployment group.
   DeploymentGroupInfoList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DeploymentGroupInfo'
   DeploymentGroupName:
     type: string
     minLength: 1
@@ -3664,92 +3664,92 @@ definitions:
   DeploymentGroupsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DeploymentGroupName'
   DeploymentId:
     type: string
   DeploymentInfo:
     type: object
     properties:
       applicationName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationName'
         description: The application name.
       deploymentGroupName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupName'
         description: ' The deployment group name. '
       deploymentConfigName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentConfigName'
         description: ' The deployment configuration name. '
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       previousRevision:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionLocation'
         description: Information about the application revision that was deployed to the deployment group before the most recent successful deployment.
       revision:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionLocation'
         description: Information about the location of stored application artifacts and the service from which to retrieve them.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStatus'
         description: The current state of the deployment as a whole.
       errorInformation:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorInformation'
         description: Information about any error associated with this deployment.
       createTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: A timestamp indicating when the deployment was created.
       startTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: '<p>A timestamp indicating when the deployment was deployed to the deployment group.</p> <p>In some cases, the reported value of the start time may be later than the complete time. This is due to differences in the clock settings of back-end servers that participate in the deployment process.</p>'
       completeTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: A timestamp indicating when the deployment was complete.
       deploymentOverview:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentOverview'
         description: A summary of the deployment status of the instances in the deployment.
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: A comment about the deployment.
       creator:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentCreator'
         description: '<p>The means by which the deployment was created:</p> <ul> <li> <p>user: A user created the deployment.</p> </li> <li> <p>autoscaling: Auto Scaling created the deployment.</p> </li> <li> <p>codeDeployRollback: A rollback process created the deployment.</p> </li> </ul>'
       ignoreApplicationStopFailures:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: '<p>If true, then if the deployment causes the ApplicationStop deployment lifecycle event to an instance to fail, the deployment to that instance will not be considered to have failed at that point and will continue on to the BeforeInstall deployment lifecycle event.</p> <p>If false or not specified, then if the deployment causes the ApplicationStop deployment lifecycle event to an instance to fail, the deployment to that instance will stop, and the deployment to that instance will be considered to have failed.</p>'
       autoRollbackConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoRollbackConfiguration'
         description: Information about the automatic rollback configuration associated with the deployment.
       updateOutdatedInstancesOnly:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Indicates whether only instances that are not running the latest application revision are to be deployed to.
       rollbackInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RollbackInfo'
         description: Information about a deployment rollback.
       deploymentStyle:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStyle'
         description: 'Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.'
       targetInstances:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetInstances'
         description: Information about the instances that belong to the replacement environment in a blue/green deployment.
       instanceTerminationWaitTimeStarted:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'Indicates whether the wait period set for the termination of instances in the original environment has started. Status is ''false'' if the KEEP_ALIVE option is specified; otherwise, ''true'' as soon as the termination wait period starts.'
       blueGreenDeploymentConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BlueGreenDeploymentConfiguration'
         description: Information about blue/green deployment options for this deployment.
       loadBalancerInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LoadBalancerInfo'
         description: Information about the load balancer used in the deployment.
       additionalDeploymentStatusInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AdditionalDeploymentStatusInfo'
         description: 'Provides information about the results of a deployment, such as whether instances in the original environment in a blue/green deployment were not terminated.'
       fileExistsBehavior:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileExistsBehavior'
         description: '<p>Information about how AWS CodeDeploy handles files that already exist in a deployment target location but weren''t part of the previous successful deployment.</p> <ul> <li> <p>DISALLOW: The deployment fails. This is also the default behavior if no option is specified.</p> </li> <li> <p>OVERWRITE: The version of the file from the application revision currently being deployed replaces the version already on the instance.</p> </li> <li> <p>RETAIN: The version of the file already on the instance is kept and used as part of the new deployment.</p> </li> </ul>'
       deploymentStatusMessages:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStatusMessageList'
         description: Messages that contain information about the status of a deployment.
       computePlatform:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ComputePlatform'
         description: ' The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>). '
     description: Information about a deployment.
   DeploymentOption:
@@ -3761,22 +3761,22 @@ definitions:
     type: object
     properties:
       Pending:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceCount'
         description: The number of instances in the deployment in a pending state.
       InProgress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceCount'
         description: The number of instances in which the deployment is in progress.
       Succeeded:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceCount'
         description: The number of instances in the deployment to which revisions have been successfully deployed.
       Failed:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceCount'
         description: The number of instances in the deployment in a failed state.
       Skipped:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceCount'
         description: The number of instances in the deployment in a skipped state.
       Ready:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceCount'
         description: The number of instances in a replacement environment ready to receive traffic in a blue/green deployment.
     description: Information about the deployment status of the instances in the deployment.
   DeploymentReadyAction:
@@ -3788,10 +3788,10 @@ definitions:
     type: object
     properties:
       actionOnTimeout:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentReadyAction'
         description: '<p>Information about when to reroute traffic from an original environment to a replacement environment in a blue/green deployment.</p> <ul> <li> <p>CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately after the new application revision is installed on the instances in the replacement environment.</p> </li> <li> <p>STOP_DEPLOYMENT: Do not register new instances with a load balancer unless traffic rerouting is started using <a>ContinueDeployment</a>. If traffic rerouting is not started before the end of the specified wait period, the deployment status is changed to Stopped.</p> </li> </ul>'
       waitTimeInMinutes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Duration'
         description: The number of minutes to wait before the status of a blue/green deployment changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for actionOnTimeout
     description: Information about how traffic is rerouted to instances in a replacement environment in a blue/green deployment.
   DeploymentStatus:
@@ -3807,41 +3807,41 @@ definitions:
   DeploymentStatusList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DeploymentStatus'
   DeploymentStatusMessageList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ErrorMessage'
   DeploymentStyle:
     type: object
     properties:
       deploymentType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentType'
         description: Indicates whether to run an in-place deployment or a blue/green deployment.
       deploymentOption:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentOption'
         description: Indicates whether to route deployment traffic behind a load balancer.
     description: 'Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.'
   DeploymentTarget:
     type: object
     properties:
       deploymentTargetType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentTargetType'
         description: ' The deployment type which is specific to the deployment''s compute platform. '
       instanceTarget:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceTarget'
         description: ' Information about the target for a deployment that uses the EC2/On-premises compute platform. '
       lambdaTarget:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LambdaTarget'
         description: ' Information about the target for a deployment that uses the AWS Lambda compute platform. '
       ecsTarget:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ECSTarget'
         description: ' Information about the target for a deployment that uses the Amazon ECS compute platform. '
     description: ' Information about the deployment target. '
   DeploymentTargetList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DeploymentTarget'
   DeploymentTargetType:
     type: string
     enum:
@@ -3861,27 +3861,27 @@ definitions:
   DeploymentsInfoList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DeploymentInfo'
   DeploymentsList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DeploymentId'
   Description:
     type: string
   Diagnostics:
     type: object
     properties:
       errorCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecycleErrorCode'
         description: '<p>The associated error code:</p> <ul> <li> <p>Success: The specified script ran.</p> </li> <li> <p>ScriptMissing: The specified script was not found in the specified location.</p> </li> <li> <p>ScriptNotExecutable: The specified script is not a recognized executable file type.</p> </li> <li> <p>ScriptTimedOut: The specified script did not finish running in the specified time period.</p> </li> <li> <p>ScriptFailed: The specified script failed to run as expected.</p> </li> <li> <p>UnknownError: The specified script did not run for an unknown reason.</p> </li> </ul>'
       scriptName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ScriptName'
         description: The name of the script.
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecycleMessage'
         description: The message associated with the error.
       logTail:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LogTail'
         description: '<p>The last portion of the diagnostic log.</p> <p>If available, AWS CodeDeploy returns up to the last 4 KB of the diagnostic log.</p>'
     description: Diagnostic information about executable scripts that are part of a deployment.
   Duration:
@@ -3890,19 +3890,19 @@ definitions:
     type: object
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Key'
         description: The tag filter key.
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Value'
         description: The tag filter value.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EC2TagFilterType'
         description: '<p>The tag filter type:</p> <ul> <li> <p>KEY_ONLY: Key only.</p> </li> <li> <p>VALUE_ONLY: Value only.</p> </li> <li> <p>KEY_AND_VALUE: Key and value.</p> </li> </ul>'
     description: Information about an EC2 tag filter.
   EC2TagFilterList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/EC2TagFilter'
   EC2TagFilterType:
     type: string
     enum:
@@ -3913,82 +3913,82 @@ definitions:
     type: object
     properties:
       ec2TagSetList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EC2TagSetList'
         description: 'A list containing other lists of EC2 instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.'
     description: Information about groups of EC2 instance tags.
   EC2TagSetList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/EC2TagFilterList'
   ECSClusterName:
     type: string
   ECSService:
     type: object
     properties:
       serviceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ECSServiceName'
         description: ' The name of the target ECS service. '
       clusterName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ECSClusterName'
         description: ' The name of the cluster that the ECS service is associated with. '
     description: ' Contains the service and cluster names used to identify an Amazon ECS deployment''s target. '
   ECSServiceList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ECSService'
   ECSServiceName:
     type: string
   ECSTarget:
     type: object
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       targetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetId'
         description: ' The unique ID of a deployment target that has a type of <code>ecsTarget</code>. '
       targetArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetArn'
         description: ' The ARN of the target. '
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Time'
         description: ' The date and time when the target Amazon ECS application was updated by a deployment. '
       lifecycleEvents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecycleEventList'
         description: ' The lifecycle events of the deployment to this target Amazon ECS application. '
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetStatus'
         description: ' The status an Amazon ECS deployment''s target ECS application. '
       taskSetsInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ECSTaskSetList'
         description: ' The <code>ECSTaskSet</code> objects associated with the ECS target. '
     description: ' Information about the target of an Amazon ECS deployment. '
   ECSTaskSet:
     type: object
     properties:
       identifer:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ECSTaskSetIdentifier'
         description: ' A unique ID of an <code>ECSTaskSet</code>. '
       desiredCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ECSTaskSetCount'
         description: ' The number of tasks in a task set. During a deployment that uses the Amazon ECS compute type, CodeDeploy asks Amazon ECS to create a new task set and uses this value to determine how many tasks to create. After the updated task set is created, CodeDeploy shifts traffic to the new task set. '
       pendingCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ECSTaskSetCount'
         description: ' The number of tasks in the task set that are in the <code>PENDING</code> status during an Amazon ECS deployment. A task in the <code>PENDING</code> state is preparing to enter the <code>RUNNING</code> state. A task set enters the <code>PENDING</code> status when it launches for the first time, or when it is restarted after being in the <code>STOPPED</code> state. '
       runningCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ECSTaskSetCount'
         description: ' The number of tasks in the task set that are in the <code>RUNNING</code> status during an Amazon ECS deployment. A task in the <code>RUNNING</code> state is running and ready for use. '
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ECSTaskSetStatus'
         description: '<p> The status of the task set. There are three valid task set statuses: </p> <ul> <li> <p> <code>PRIMARY</code> - indicates the task set is serving production traffic. </p> </li> <li> <p> <code>ACTIVE</code> - indicates the task set is not serving production traffic. </p> </li> <li> <p> <code>DRAINING</code> - indicates the tasks in the task set are being stopped and their corresponding targets are being deregistered from their target group. </p> </li> </ul>'
       trafficWeight:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrafficWeight'
         description: ' The percentage of traffic served by this task set. '
       targetGroup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetGroupInfo'
         description: ' The target group associated with the task set. The target group is used by AWS CodeDeploy to manage traffic to a task set. '
       taskSetLabel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetLabel'
         description: ' A label that identifies whether the ECS task set is an original target (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). '
     description: ' A set of Amazon ECS tasks. A task set runs a specified number of instances of a task definition simultaneously inside an Amazon ECS service. Information about a set of Amazon ECS tasks in an AWS CodeDeploy deployment. An Amazon ECS task set includes details such as the desired number of tasks, how many tasks are running, and whether the task set serves production traffic or not. '
   ECSTaskSetCount:
@@ -3998,20 +3998,20 @@ definitions:
   ECSTaskSetList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ECSTaskSet'
   ECSTaskSetStatus:
     type: string
   ELBInfo:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ELBName'
         description: 'For blue/green deployments, the name of the load balancer that will be used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.'
     description: 'Information about a load balancer in Elastic Load Balancing to use in a deployment. Instances are registered directly with a load balancer, and traffic is routed to the load balancer.'
   ELBInfoList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ELBInfo'
   ELBName:
     type: string
   ETag:
@@ -4053,10 +4053,10 @@ definitions:
     type: object
     properties:
       code:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorCode'
         description: '<p>For information about additional error codes, see <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html">Error Codes for AWS CodeDeploy</a> in the <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide">AWS CodeDeploy User Guide</a>.</p> <p>The error code:</p> <ul> <li> <p>APPLICATION_MISSING: The application was missing. This error code will most likely be raised if the application is deleted after the deployment is created but before it is started.</p> </li> <li> <p>DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code will most likely be raised if the deployment group is deleted after the deployment is created but before it is started.</p> </li> <li> <p>HEALTH_CONSTRAINTS: The deployment failed on too many instances to be successfully deployed within the instance health constraints specified.</p> </li> <li> <p>HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed within the instance health constraints specified.</p> </li> <li> <p>IAM_ROLE_MISSING: The service role cannot be accessed.</p> </li> <li> <p>IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.</p> </li> <li> <p>INTERNAL_ERROR: There was an internal error.</p> </li> <li> <p>NO_EC2_SUBSCRIPTION: The calling account is not subscribed to the Amazon EC2 service.</p> </li> <li> <p>NO_INSTANCES: No instance were specified, or no instance can be found.</p> </li> <li> <p>OVER_MAX_INSTANCES: The maximum number of instance was exceeded.</p> </li> <li> <p>THROTTLED: The operation was throttled because the calling account exceeded the throttling limits of one or more AWS services.</p> </li> <li> <p>TIMEOUT: The deployment has timed out.</p> </li> <li> <p>REVISION_MISSING: The revision ID was missing. This error code will most likely be raised if the revision is deleted after the deployment is created but before it is started.</p> </li> </ul>'
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: An accompanying error message.
     description: Information about a deployment error.
   ErrorMessage:
@@ -4072,24 +4072,24 @@ definitions:
   FilterValueList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FilterValue'
   GenericRevisionInfo:
     type: object
     properties:
       description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: A comment about the revision.
       deploymentGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentGroupsList'
         description: The deployment groups for which this is the current target revision.
       firstUsedTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: When the revision was first used by AWS CodeDeploy.
       lastUsedTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: When the revision was last used by AWS CodeDeploy.
       registerTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: When the revision was registered with AWS CodeDeploy.
     description: Information about an application revision.
   GitHubAccountTokenName:
@@ -4097,15 +4097,15 @@ definitions:
   GitHubAccountTokenNameList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/GitHubAccountTokenName'
   GitHubLocation:
     type: object
     properties:
       repository:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Repository'
         description: <p>The GitHub account and repository pair that stores a reference to the commit that represents the bundled artifacts for the application revision. </p> <p>Specified as account/repository.</p>
       commitId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CommitId'
         description: The SHA1 commit ID of the GitHub commit that represents the bundled artifacts for the application revision.
     description: Information about the location of application artifacts stored in GitHub.
   GreenFleetProvisioningAction:
@@ -4117,7 +4117,7 @@ definitions:
     type: object
     properties:
       action:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GreenFleetProvisioningAction'
         description: '<p>The method used to add instances to a replacement environment.</p> <ul> <li> <p>DISCOVER_EXISTING: Use instances that already exist or will be created manually.</p> </li> <li> <p>COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling group to define and create instances in a new Auto Scaling group.</p> </li> </ul>'
     description: Information about the instances that belong to the replacement environment in a blue/green deployment.
   IamSessionArn:
@@ -4139,37 +4139,37 @@ definitions:
     type: object
     properties:
       instanceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceName'
         description: The name of the on-premises instance.
       iamSessionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IamSessionArn'
         description: The ARN of the IAM session associated with the on-premises instance.
       iamUserArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IamUserArn'
         description: The IAM user ARN associated with the on-premises instance.
       instanceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceArn'
         description: The ARN of the on-premises instance.
       registerTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The time at which the on-premises instance was registered.
       deregisterTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: 'If the on-premises instance was deregistered, the time at which the on-premises instance was deregistered.'
       tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: The tags currently associated with the on-premises instance.
     description: Information about an on-premises instance.
   InstanceInfoList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/InstanceInfo'
   InstanceName:
     type: string
   InstanceNameList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/InstanceName'
   InstanceStatus:
     type: string
     enum:
@@ -4184,57 +4184,57 @@ definitions:
   InstanceStatusList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/InstanceStatus'
   InstanceSummary:
     type: object
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       instanceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceId'
         description: The instance ID.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceStatus'
         description: '<p>The deployment status for this instance:</p> <ul> <li> <p>Pending: The deployment is pending for this instance.</p> </li> <li> <p>In Progress: The deployment is in progress for this instance.</p> </li> <li> <p>Succeeded: The deployment has succeeded for this instance.</p> </li> <li> <p>Failed: The deployment has failed for this instance.</p> </li> <li> <p>Skipped: The deployment has been skipped for this instance.</p> </li> <li> <p>Unknown: The deployment status is unknown for this instance.</p> </li> </ul>'
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: A timestamp indicating when the instance information was last updated.
       lifecycleEvents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecycleEventList'
         description: A list of lifecycle events for this instance.
       instanceType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InstanceType'
         description: '<p>Information about which environment an instance belongs to in a blue/green deployment.</p> <ul> <li> <p>BLUE: The instance is part of the original environment.</p> </li> <li> <p>GREEN: The instance is part of the replacement environment.</p> </li> </ul>'
     description: Information about an instance in a deployment.
     x-deprecation: 'InstanceSummary is deprecated, use DeploymentTarget instead.'
   InstanceSummaryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/InstanceSummary'
   InstanceTarget:
     type: object
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       targetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetId'
         description: ' The unique ID of a deployment target that has a type of <code>instanceTarget</code>. '
       targetArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetArn'
         description: ' The ARN of the target. '
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetStatus'
         description: ' The status an EC2/On-premises deployment''s target instance. '
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Time'
         description: ' The date and time when the target instance was updated by a deployment. '
       lifecycleEvents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecycleEventList'
         description: ' The lifecycle events of the deployment to this target instance. '
       instanceLabel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetLabel'
         description: ' A label that identifies whether the instance is an original target (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). '
     description: ' A target Amazon EC2 or on-premises instance during a deployment that uses the EC2/On-premises compute platform. '
   InstanceType:
@@ -4245,49 +4245,49 @@ definitions:
   InstanceTypeList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/InstanceType'
   InstancesList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/InstanceId'
   Key:
     type: string
   LambdaTarget:
     type: object
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       targetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetId'
         description: ' The unique ID of a deployment target that has a type of <code>lambdaTarget</code>. '
       targetArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetArn'
         description: ' The ARN of the target. '
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetStatus'
         description: ' The status an AWS Lambda deployment''s target Lambda function. '
       lastUpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Time'
         description: ' The date and time when the target Lambda function was updated by a deployment. '
       lifecycleEvents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecycleEventList'
         description: ' The lifecycle events of the deployment to this target Lambda function. '
     description: ' Information about the target AWS Lambda function during an AWS Lambda deployment. '
   LastDeploymentInfo:
     type: object
     properties:
       deploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: ' The unique ID of a deployment. '
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentStatus'
         description: The status of the most recent deployment.
       endTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: A timestamp indicating when the most recent deployment to the deployment group completed.
       createTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: A timestamp indicating when the most recent deployment to the deployment group started.
     description: Information about the most recent attempted or successful deployment to a deployment group.
   LifecycleErrorCode:
@@ -4303,19 +4303,19 @@ definitions:
     type: object
     properties:
       lifecycleEventName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecycleEventName'
         description: 'The deployment lifecycle event name, such as ApplicationStop, BeforeInstall, AfterInstall, ApplicationStart, or ValidateService.'
       diagnostics:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Diagnostics'
         description: Diagnostic information about the deployment lifecycle event.
       startTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: A timestamp indicating when the deployment lifecycle event started.
       endTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: A timestamp indicating when the deployment lifecycle event ended.
       status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LifecycleEventStatus'
         description: '<p>The deployment lifecycle event status:</p> <ul> <li> <p>Pending: The deployment lifecycle event is pending.</p> </li> <li> <p>InProgress: The deployment lifecycle event is in progress.</p> </li> <li> <p>Succeeded: The deployment lifecycle event ran successfully.</p> </li> <li> <p>Failed: The deployment lifecycle event has failed.</p> </li> <li> <p>Skipped: The deployment lifecycle event has been skipped.</p> </li> <li> <p>Unknown: The deployment lifecycle event is unknown.</p> </li> </ul>'
     description: Information about a deployment lifecycle event.
   LifecycleEventHookExecutionId:
@@ -4323,7 +4323,7 @@ definitions:
   LifecycleEventList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/LifecycleEvent'
   LifecycleEventName:
     type: string
   LifecycleEventStatus:
@@ -4348,18 +4348,18 @@ definitions:
   ListenerArnList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ListenerArn'
   LoadBalancerInfo:
     type: object
     properties:
       elbInfoList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ELBInfoList'
         description: '<p>An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.</p> <note> <p> Adding more than one load balancer to the array is not supported. </p> </note>'
       targetGroupInfoList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetGroupInfoList'
         description: '<p>An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.</p> <note> <p> Adding more than one target group to the array is not supported. </p> </note>'
       targetGroupPairInfoList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetGroupPairInfoList'
         description: ' The target group pair information. This is an array of <code>TargeGroupPairInfo</code> objects with a maximum size of one. '
     description: Information about the Elastic Load Balancing load balancer or target group used in a deployment.
   LogTail:
@@ -4370,10 +4370,10 @@ definitions:
     type: object
     properties:
       value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MinimumHealthyHostsValue'
         description: The minimum healthy instance value.
       type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MinimumHealthyHostsType'
         description: '<p>The minimum healthy instance type:</p> <ul> <li> <p>HOST_COUNT: The minimum number of healthy instance as an absolute value.</p> </li> <li> <p>FLEET_PERCENT: The minimum number of healthy instance as a percentage of the total number of instance in the deployment.</p> </li> </ul> <p>In an example of nine instance, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment will be successful if six or more instances are deployed to successfully; otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instance at a time. The deployment will be successful if four or more instance are deployed to successfully; otherwise, the deployment fails.</p> <note> <p>In a call to the get deployment configuration operation, CodeDeployDefault.OneAtATime will return a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy will try to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment still succeeds.</p> </note> <p>For more information, see <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html">AWS CodeDeploy Instance Health</a> in the <i>AWS CodeDeploy User Guide</i>.</p>'
     description: Information about minimum healthy instance.
   MinimumHealthyHostsType:
@@ -4391,23 +4391,23 @@ definitions:
     type: object
     properties:
       onPremisesTagSetList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OnPremisesTagSetList'
         description: 'A list containing other lists of on-premises instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.'
     description: Information about groups of on-premises instance tags.
   OnPremisesTagSetList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TagFilterList'
   Percentage:
     type: integer
   RawString:
     type: object
     properties:
       content:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RawStringContent'
         description: The YAML-formatted or JSON-formatted revision string. It includes information about which Lambda function to update and optional Lambda functions that validate deployment lifecycle events.
       sha256:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RawStringSha256'
         description: The SHA256 hash value of the revision content.
     description: 'A revision for an AWS Lambda deployment that is a YAML-formatted or JSON-formatted string. For AWS Lambda deployments, the revision is the same as the AppSpec file.'
     x-deprecation: 'RawString and String revision type are deprecated, use AppSpecContent type instead.'
@@ -4426,39 +4426,39 @@ definitions:
     type: object
     properties:
       revisionLocation:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionLocation'
         description: Information about the location and type of an application revision.
       genericRevisionInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GenericRevisionInfo'
         description: 'Information about an application revision, including usage details and associated deployment groups.'
     description: Information about an application revision.
   RevisionInfoList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/RevisionInfo'
   RevisionLocation:
     type: object
     properties:
       revisionType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RevisionLocationType'
         description: '<p>The type of application revision:</p> <ul> <li> <p>S3: An application revision stored in Amazon S3.</p> </li> <li> <p>GitHub: An application revision stored in GitHub (EC2/On-premises deployments only)</p> </li> <li> <p>String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments only)</p> </li> </ul>'
       s3Location:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Location'
         description: 'Information about the location of a revision stored in Amazon S3. '
       gitHubLocation:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GitHubLocation'
         description: Information about the location of application artifacts stored in GitHub.
       string:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RawString'
         description: Information about the location of an AWS Lambda deployment revision stored as a RawString.
       appSpecContent:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AppSpecContent'
         description: ' The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The content is formatted as JSON or YAML and stored as a RawString. '
     description: Information about the location of an application revision.
   RevisionLocationList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/RevisionLocation'
   RevisionLocationType:
     type: string
     enum:
@@ -4472,13 +4472,13 @@ definitions:
     type: object
     properties:
       rollbackDeploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: The ID of the deployment rollback.
       rollbackTriggeringDeploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentId'
         description: The deployment ID of the deployment that was underway and triggered a rollback deployment because it failed or was stopped.
       rollbackMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Description'
         description: 'Information describing the status of a deployment rollback; for example, whether the deployment can''t be rolled back, is in progress, failed, or succeeded. '
     description: Information about a deployment rollback.
   S3Bucket:
@@ -4489,19 +4489,19 @@ definitions:
     type: object
     properties:
       bucket:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Bucket'
         description: The name of the Amazon S3 bucket where the application revision is stored.
       key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3Key'
         description: The name of the Amazon S3 object that represents the bundled artifacts for the application revision.
       bundleType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BundleType'
         description: '<p>The file type of the application revision. Must be one of the following:</p> <ul> <li> <p>tar: A tar archive file.</p> </li> <li> <p>tgz: A compressed tar archive file.</p> </li> <li> <p>zip: A zip archive file.</p> </li> </ul>'
       version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VersionId'
         description: '<p>A specific version of the Amazon S3 object that represents the bundled artifacts for the application revision.</p> <p>If the version is not specified, the system will use the most recent version by default.</p>'
       eTag:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ETag'
         description: '<p>The ETag of the Amazon S3 object that represents the bundled artifacts for the application revision.</p> <p>If the ETag is not specified as an input parameter, ETag validation of the object will be skipped.</p>'
     description: Information about the location of application artifacts stored in Amazon S3.
   ScriptName:
@@ -4520,29 +4520,29 @@ definitions:
     type: object
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Key'
         description: The tag's key.
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Value'
         description: The tag's value.
     description: Information about a tag.
   TagFilter:
     type: object
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Key'
         description: The on-premises instance tag filter key.
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Value'
         description: The on-premises instance tag filter value.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagFilterType'
         description: '<p>The on-premises instance tag filter type:</p> <ul> <li> <p>KEY_ONLY: Key only.</p> </li> <li> <p>VALUE_ONLY: Value only.</p> </li> <li> <p>KEY_AND_VALUE: Key and value.</p> </li> </ul>'
     description: Information about an on-premises instance tag filter.
   TagFilterList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TagFilter'
   TagFilterType:
     type: string
     enum:
@@ -4552,7 +4552,7 @@ definitions:
   TagList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Tag'
   TargetArn:
     type: string
   TargetFilterName:
@@ -4573,49 +4573,49 @@ definitions:
     type: object
     properties:
       name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetGroupName'
         description: 'For blue/green deployments, the name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes. '
     description: 'Information about a target group in Elastic Load Balancing to use in a deployment. Instances are registered as targets in a target group, and traffic is routed to the target group.'
   TargetGroupInfoList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TargetGroupInfo'
   TargetGroupName:
     type: string
   TargetGroupPairInfo:
     type: object
     properties:
       targetGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TargetGroupInfoList'
         description: ' One pair of target groups. One is associated with the original task set. The second target is associated with the task set that serves traffic after the deployment completes. '
       prodTrafficRoute:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrafficRoute'
         description: ' The path used by a load balancer to route production traffic when an Amazon ECS deployment is complete. '
       testTrafficRoute:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrafficRoute'
         description: ' An optional path used by a load balancer to route test traffic after an Amazon ECS deployment. Validation can happen while test traffic is served during a deployment. '
     description: ' Information about two target groups and how traffic routes during an Amazon ECS deployment. An optional test traffic route can be specified. '
   TargetGroupPairInfoList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TargetGroupPairInfo'
   TargetId:
     type: string
   TargetIdList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TargetId'
   TargetInstances:
     type: object
     properties:
       tagFilters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EC2TagFilterList'
         description: 'The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment. Cannot be used in the same call as ec2TagSet.'
       autoScalingGroups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutoScalingGroupNameList'
         description: The names of one or more Auto Scaling groups to identify a replacement environment for a blue/green deployment.
       ec2TagSet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EC2TagSet'
         description: Information about the groups of EC2 instance tags that an instance must be identified by in order for it to be included in the replacement environment for a blue/green deployment. Cannot be used in the same call as tagFilters.
     description: Information about the instances to be used in the replacement environment in a blue/green deployment.
   TargetLabel:
@@ -4640,30 +4640,30 @@ definitions:
     type: object
     properties:
       canaryPercentage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Percentage'
         description: The percentage of traffic to shift in the first increment of a <code>TimeBasedCanary</code> deployment.
       canaryInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WaitTimeInMins'
         description: The number of minutes between the first and second traffic shifts of a <code>TimeBasedCanary</code> deployment.
     description: A configuration that shifts traffic from one version of a Lambda function to another in two increments. The original and target Lambda function versions are specified in the deployment's AppSpec file.
   TimeBasedLinear:
     type: object
     properties:
       linearPercentage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Percentage'
         description: The percentage of traffic that is shifted at the start of each increment of a <code>TimeBasedLinear</code> deployment.
       linearInterval:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WaitTimeInMins'
         description: The number of minutes between each incremental traffic shift of a <code>TimeBasedLinear</code> deployment.
     description: 'A configuration that shifts traffic from one version of a Lambda function to another in equal increments, with an equal number of minutes between each increment. The original and target Lambda function versions are specified in the deployment''s AppSpec file.'
   TimeRange:
     type: object
     properties:
       start:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: <p>The start time of the time range.</p> <note> <p>Specify null to leave the start time open-ended.</p> </note>
       end:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: <p>The end time of the time range.</p> <note> <p>Specify null to leave the end time open-ended.</p> </note>
     description: Information about a time range.
   Timestamp:
@@ -4673,20 +4673,20 @@ definitions:
     type: object
     properties:
       listenerArns:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ListenerArnList'
         description: ' The ARN of one listener. The listener identifies the route between a target group and a load balancer. This is an array of strings with a maximum size of one. '
     description: ' Information about a listener. The listener contains the path used to route traffic that is received from the load balancer to a target group. '
   TrafficRoutingConfig:
     type: object
     properties:
       type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TrafficRoutingType'
         description: The type of traffic shifting (<code>TimeBasedCanary</code> or <code>TimeBasedLinear</code>) used by a deployment configuration .
       timeBasedCanary:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeBasedCanary'
         description: A configuration that shifts traffic from one version of a Lambda function to another in two increments. The original and target Lambda function versions are specified in the deployment's AppSpec file.
       timeBasedLinear:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TimeBasedLinear'
         description: 'A configuration that shifts traffic from one version of a Lambda function to another in equal increments, with an equal number of minutes between each increment. The original and target Lambda function versions are specified in the deployment''s AppSpec file.'
     description: The configuration that specifies how traffic is shifted from one version of a Lambda function to another version during an AWS Lambda deployment.
   TrafficRoutingType:
@@ -4702,19 +4702,19 @@ definitions:
     type: object
     properties:
       triggerName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TriggerName'
         description: The name of the notification trigger.
       triggerTargetArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TriggerTargetArn'
         description: The ARN of the Amazon Simple Notification Service topic through which notifications about deployment or instance events are sent.
       triggerEvents:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TriggerEventTypeList'
         description: The event type or types for which notifications are triggered.
     description: Information about notification triggers for the deployment group.
   TriggerConfigList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TriggerConfig'
   TriggerEventType:
     type: string
     enum:
@@ -4731,7 +4731,7 @@ definitions:
   TriggerEventTypeList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TriggerEventType'
   TriggerName:
     type: string
   TriggerTargetArn:

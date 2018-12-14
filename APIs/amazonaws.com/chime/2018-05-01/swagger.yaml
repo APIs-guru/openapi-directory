@@ -1082,7 +1082,7 @@ definitions:
     type: object
     properties:
       UserErrors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserErrorList'
         description: 'If the <a>BatchSuspendUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.'
   BatchSuspendUserRequest:
     type: object
@@ -1090,7 +1090,7 @@ definitions:
       - UserIdList
     properties:
       UserIdList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserIdList'
         description: The request containing the user IDs to suspend.
   UnauthorizedClientException: {}
   NotFoundException: {}
@@ -1103,7 +1103,7 @@ definitions:
     type: object
     properties:
       UserErrors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserErrorList'
         description: 'If the <a>BatchUnsuspendUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.'
   BatchUnsuspendUserRequest:
     type: object
@@ -1111,13 +1111,13 @@ definitions:
       - UserIdList
     properties:
       UserIdList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserIdList'
         description: The request containing the user IDs to unsuspend.
   BatchUpdateUserResponse:
     type: object
     properties:
       UserErrors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserErrorList'
         description: 'If the <a>BatchUpdateUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.'
   BatchUpdateUserRequest:
     type: object
@@ -1125,13 +1125,13 @@ definitions:
       - UpdateUserRequestItems
     properties:
       UpdateUserRequestItems:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdateUserRequestItemList'
         description: The request containing the user IDs and details to update.
   CreateAccountResponse:
     type: object
     properties:
       Account:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Account'
         description: The Amazon Chime account details.
   CreateAccountRequest:
     type: object
@@ -1139,7 +1139,7 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountName'
         description: The name of the Amazon Chime account.
   DeleteAccountResponse:
     type: object
@@ -1152,7 +1152,7 @@ definitions:
     type: object
     properties:
       Account:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Account'
         description: The Amazon Chime account details.
   GetAccountRequest:
     type: object
@@ -1161,7 +1161,7 @@ definitions:
     type: object
     properties:
       AccountSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountSettings'
         description: The Amazon Chime account settings.
   GetAccountSettingsRequest:
     type: object
@@ -1170,7 +1170,7 @@ definitions:
     type: object
     properties:
       User:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/User'
         description: The user details.
   GetUserRequest:
     type: object
@@ -1179,7 +1179,7 @@ definitions:
     type: object
     properties:
       Invites:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InviteList'
         description: The invite details.
   InviteUsersRequest:
     type: object
@@ -1187,16 +1187,16 @@ definitions:
       - UserEmailList
     properties:
       UserEmailList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserEmailList'
         description: The user email addresses to which to send the invite.
   ListAccountsResponse:
     type: object
     properties:
       Accounts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountList'
         description: List of Amazon Chime accounts and account details.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
   ListAccountsRequest:
     type: object
@@ -1205,10 +1205,10 @@ definitions:
     type: object
     properties:
       Users:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UserList'
         description: List of users and user details.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
   ListUsersRequest:
     type: object
@@ -1223,7 +1223,7 @@ definitions:
     type: object
     properties:
       User:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/User'
         description: The user details and new personal meeting PIN.
   ResetPersonalPINRequest:
     type: object
@@ -1232,13 +1232,13 @@ definitions:
     type: object
     properties:
       Account:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Account'
         description: The updated Amazon Chime account details.
   UpdateAccountRequest:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountName'
         description: The new name for the specified Amazon Chime account.
   UpdateAccountSettingsResponse:
     type: object
@@ -1249,20 +1249,20 @@ definitions:
       - AccountSettings
     properties:
       AccountSettings:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountSettings'
         description: The Amazon Chime account settings to update.
   ConflictException: {}
   UpdateUserResponse:
     type: object
     properties:
       User:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/User'
         description: The updated user details.
   UpdateUserRequest:
     type: object
     properties:
       LicenseType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/License'
         description: The user license type to update. This must be a supported license type for the Amazon Chime account that the user belongs to.
   '[object Object]': {}
   Account:
@@ -1273,31 +1273,31 @@ definitions:
       - Name
     properties:
       AwsAccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The AWS account ID.
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The Amazon Chime account ID.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The Amazon Chime account name.
       AccountType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AccountType'
         description: 'The Amazon Chime account type. For more information about different account types, see <a href="http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.'
       CreatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Iso8601Timestamp'
         description: 'The Amazon Chime account creation timestamp, in ISO 8601 format.'
       DefaultLicense:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/License'
         description: The default license for the Amazon Chime account.
       SupportedLicenses:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LicenseList'
         description: Supported licenses for the Amazon Chime account.
     description: The Amazon Chime account details. An AWS account can have multiple Amazon Chime accounts.
   AccountList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Account'
   AccountName:
     type: string
     pattern: .*\S.*
@@ -1307,10 +1307,10 @@ definitions:
     type: object
     properties:
       DisableRemoteControl:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Setting that stops or starts remote control of shared screens during meetings.
       EnableDialOut:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: 'Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href="http://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.'
     description: 'Settings related to the Amazon Chime account. This includes settings that start or stop remote control of shared screens, or start or stop the dial-out option in the Amazon Chime web application. For more information about these settings, see <a href="http://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
   AccountType:
@@ -1349,22 +1349,22 @@ definitions:
     type: object
     properties:
       InviteId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The invite ID.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InviteStatus'
         description: The status of the invite.
       EmailAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EmailAddress'
         description: The email address to which the invite is sent.
       EmailStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EmailStatus'
         description: The status of the invite email.
     description: Invitation object returned after emailing users to invite them to join the Amazon Chime <code>Team</code> account.
   InviteList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Invite'
   InviteStatus:
     type: string
     enum:
@@ -1384,7 +1384,7 @@ definitions:
   LicenseList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/License'
   NonEmptyString:
     type: string
     pattern: .*\S.*
@@ -1409,16 +1409,16 @@ definitions:
       - UserId
     properties:
       UserId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NonEmptyString'
         description: The user ID.
       LicenseType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/License'
         description: The user license type.
     description: 'The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action.'
   UpdateUserRequestItemList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/UpdateUserRequestItem'
     maxItems: 20
   User:
     type: object
@@ -1426,64 +1426,64 @@ definitions:
       - UserId
     properties:
       UserId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The user ID.
       AccountId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The Amazon Chime account ID.
       PrimaryEmail:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EmailAddress'
         description: The primary email address of the user.
       DisplayName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SensitiveString'
         description: The display name of the user.
       LicenseType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/License'
         description: The license type for the user.
       UserRegistrationStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RegistrationStatus'
         description: The user registration status.
       UserInvitationStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/InviteStatus'
         description: The user invite status.
       RegisteredOn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Iso8601Timestamp'
         description: 'Date and time when the user is registered, in ISO 8601 format.'
       InvitedOn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Iso8601Timestamp'
         description: 'Date and time when the user is invited to the Amazon Chime account, in ISO 8601 format.'
       PersonalPIN:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The user's personal meeting PIN.
     description: The user on the Amazon Chime account.
   UserEmailList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/EmailAddress'
     maxItems: 50
   UserError:
     type: object
     properties:
       UserId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NonEmptyString'
         description: The user ID for which the action failed.
       ErrorCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorCode'
         description: The error code.
       ErrorMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The error message.
     description: 'The list of errors returned when errors are encountered during the <a>BatchSuspendUser</a>, <a>BatchUnsuspendUser</a>, or <a>BatchUpdateUser</a> actions. This includes user IDs, error codes, and error messages.'
   UserErrorList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/UserError'
   UserIdList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/NonEmptyString'
     maxItems: 50
   UserList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/User'

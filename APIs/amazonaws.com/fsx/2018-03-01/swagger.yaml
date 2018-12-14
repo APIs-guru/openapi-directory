@@ -655,7 +655,7 @@ definitions:
         Type: USER_INITIATED
     properties:
       Backup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Backup'
         description: A description of the backup.
     description: The response object for the <code>CreateBackup</code> operation.
   CreateBackupRequest:
@@ -669,13 +669,13 @@ definitions:
           Value: MyBackup
     properties:
       FileSystemId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystemId'
         description: The ID of the file system to back up.
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: The tags to apply to the backup at backup creation. The key value of the <code>Name</code> tag appears in the console as the backup name.
     description: The request object for the <code>CreateBackup</code> operation.
   BadRequest: {}
@@ -710,7 +710,7 @@ definitions:
           WeeklyMaintenanceStartTime: '1:05:00'
     properties:
       FileSystem:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystem'
         description: A description of the file system.
     description: The response object for the <code>CreateFileSystem</code> operation.
   CreateFileSystemRequest:
@@ -739,30 +739,30 @@ definitions:
         WeeklyMaintenanceStartTime: '1:05:00'
     properties:
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
       FileSystemType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystemType'
         description: The type of file system.
       StorageCapacity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StorageCapacity'
         description: '<p>The storage capacity of the file system.</p> <p>For Windows file systems, the storage capacity has a minimum of 300 GiB, and a maximum of 65,536 GiB.</p> <p>For Lustre file systems, the storage capacity has a minimum of 3,600 GiB. Storage capacity is provisioned in increments of 3,600 GiB.</p>'
       SubnetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetIds'
         description: A list of IDs for the subnets that the file system will be accessible from. File systems support only one subnet. The file server is also launched in that subnet's Availability Zone.
       SecurityGroupIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SecurityGroupIds'
         description: A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces. This list isn't returned in later describe requests.
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: The tags to be applied to the file system at file system creation. The key value of the <code>Name</code> tag appears in the console as the file system name.
       KmsKeyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KmsKeyId'
       WindowsConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreateFileSystemWindowsConfiguration'
         description: The configuration for this Microsoft Windows file system.
       LustreConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreateFileSystemLustreConfiguration'
     description: The request object for the <code>CreateFileSystem</code> operation.
   ActiveDirectoryError: {}
   InvalidImportPath: {}
@@ -794,7 +794,7 @@ definitions:
           WeeklyMaintenanceStartTime: '1:05:00'
     properties:
       FileSystem:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystem'
         description: A description of the file system.
     description: The response object for the <code>CreateFileSystemFromBackup</code> operation.
   CreateFileSystemFromBackupRequest:
@@ -816,21 +816,21 @@ definitions:
         ThroughputCapacity: 8
     properties:
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
       SubnetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetIds'
         description: 'A list of IDs for the subnets that the file system will be accessible from. Currently, you can specify only one subnet. The file server is also launched in that subnet''s Availability Zone.'
       SecurityGroupIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SecurityGroupIds'
         description: A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups apply to all network interfaces. This value isn't returned in later describe requests.
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: The tags to be applied to the file system at file system creation. The key value of the <code>Name</code> tag appears in the console as the file system name.
       WindowsConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreateFileSystemWindowsConfiguration'
         description: The configuration for this Microsoft Windows file system.
     description: The request object for the <code>CreateFileSystemFromBackup</code> operation.
   BackupNotFound: {}
@@ -841,10 +841,10 @@ definitions:
       Lifecycle: DELETED
     properties:
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: The ID of the backup deleted.
       Lifecycle:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupLifecycle'
         description: The lifecycle of the backup. Should be <code>DELETED</code>.
     description: The response object for <code>DeleteBackup</code> operation.
   DeleteBackupRequest:
@@ -855,10 +855,10 @@ definitions:
       BackupId: backup-03e3c82e0183b7b6b
     properties:
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: The ID of the backup you want to delete.
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent deletion. This is automatically filled on your behalf when using the AWS CLI or SDK.
     description: The request object for <code>DeleteBackup</code> operation.
   BackupRestoring: {}
@@ -869,13 +869,13 @@ definitions:
       Lifecycle: DELETING
     properties:
       FileSystemId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystemId'
         description: The ID of the file system being deleted.
       Lifecycle:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystemLifecycle'
         description: The file system lifecycle for the deletion request. Should be <code>DELETING</code>.
       WindowsResponse:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeleteFileSystemWindowsResponse'
     description: The response object for the <code>DeleteFileSystem</code> operation.
   DeleteFileSystemRequest:
     type: object
@@ -885,13 +885,13 @@ definitions:
       FileSystemId: fs-0498eed5fe91001ec
     properties:
       FileSystemId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystemId'
         description: The ID of the file system you want to delete.
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent deletion. This is automatically filled on your behalf when using the AWS CLI or SDK.
       WindowsConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeleteFileSystemWindowsConfiguration'
     description: The request object for <code>DeleteFileSystem</code> operation.
   DescribeBackupsResponse:
     type: object
@@ -916,10 +916,10 @@ definitions:
           Type: USER_INITIATED
     properties:
       Backups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Backups'
         description: Any array of backups.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'This is present if there are more backups than returned in the response (String). You can use the <code>NextToken</code> value in the later request to fetch the backups. '
     description: Response object for <code>DescribeBackups</code> operation.
   DescribeBackupsRequest:
@@ -927,16 +927,16 @@ definitions:
     example: {}
     properties:
       BackupIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupIds'
         description: '(Optional) IDs of the backups you want to retrieve (String). This overrides any filters. If any IDs are not found, BackupNotFound will be thrown.'
       Filters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Filters'
         description: (Optional) Filters structure. Supported names are file-system-id and backup-type.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: (Optional) Maximum number of backups to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the <code>MaxResults</code> parameter specified in the request and the service's internal maximum number of items per page.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: '(Optional) Opaque pagination token returned from a previous <code>DescribeBackups</code> operation (String). If a token present, the action continues the list from where the returning call left off.'
     description: The request object for <code>DescribeBackups</code> operation.
   DescribeFileSystemsResponse:
@@ -967,10 +967,10 @@ definitions:
             WeeklyMaintenanceStartTime: '1:05:00'
     properties:
       FileSystems:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystems'
         description: An array of file system descriptions.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'Present if there are more file systems than returned in the response (String). You can use the <code>NextToken</code> value in the later request to fetch the descriptions. '
     description: The response object for <code>DescribeFileSystems</code> operation.
   DescribeFileSystemsRequest:
@@ -978,13 +978,13 @@ definitions:
     example: {}
     properties:
       FileSystemIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystemIds'
         description: (Optional) IDs of the file systems whose descriptions you want to retrieve (String).
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: (Optional) Maximum number of file systems to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the <code>MaxResults</code> parameter specified in the request and the service's internal maximum number of items per page.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: '(Optional) Opaque pagination token returned from a previous <code>DescribeFileSystems</code> operation (String). If a token present, the action continues the list from where the returning call left off.'
     description: The request object for <code>DescribeFileSystems</code> operation.
   ListTagsForResourceResponse:
@@ -995,10 +995,10 @@ definitions:
           Value: MyFileSystem
     properties:
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: A list of tags on the resource.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'This is present if there are more tags than returned in the response (String). You can use the <code>NextToken</code> value in the later request to fetch the tags. '
     description: The response object for <code>ListTagsForResource</code> operation.
   ListTagsForResourceRequest:
@@ -1009,13 +1009,13 @@ definitions:
       ResourceARN: 'arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec'
     properties:
       ResourceARN:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceARN'
         description: The ARN of the Amazon FSx resource that will have its tags listed.
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: (Optional) Maximum number of tags to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the <code>MaxResults</code> parameter specified in the request and the service's internal maximum number of items per page.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: '(Optional) Opaque pagination token returned from a previous <code>ListTagsForResource</code> operation (String). If a token present, the action continues the list from where the returning call left off.'
     description: The request object for <code>ListTagsForResource</code> operation.
   ResourceNotFound: {}
@@ -1037,10 +1037,10 @@ definitions:
           Value: MyFileSystem
     properties:
       ResourceARN:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceARN'
         description: The Amazon Resource Name (ARN) of the Amazon FSx resource that you want to tag.
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: 'A list of tags for the resource. If a tag with a given key already exists, the value is replaced by the one specified in this parameter.'
     description: The request object for the <code>TagResource</code> operation.
   UntagResourceResponse:
@@ -1058,10 +1058,10 @@ definitions:
         - Name
     properties:
       ResourceARN:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceARN'
         description: The ARN of the Amazon FSx resource to untag.
       TagKeys:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagKeys'
         description: 'A list of keys of tags on the resource to untag. In case the tag key doesn''t exist, the call will still succeed to be idempotent.'
     description: The request object for <code>UntagResource</code> action.
   UpdateFileSystemResponse:
@@ -1089,7 +1089,7 @@ definitions:
           WeeklyMaintenanceStartTime: '3:06:00'
     properties:
       FileSystem:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystem'
         description: A description of the file system.
     description: The response object for the <code>UpdateFileSystem</code> operation.
   UpdateFileSystemRequest:
@@ -1104,15 +1104,15 @@ definitions:
         WeeklyMaintenanceStartTime: '3:06:00'
     properties:
       FileSystemId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystemId'
       ClientRequestToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientRequestToken'
         description: (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent updates. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
       WindowsConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdateFileSystemWindowsConfiguration'
         description: The configuration for this Microsoft Windows file system. The only supported options are for backup and maintenance.
       LustreConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdateFileSystemLustreConfiguration'
     description: The request object for the <code>UpdateFileSystem</code> operation.
   AWSAccountId:
     type: string
@@ -1140,40 +1140,40 @@ definitions:
       - FileSystem
     properties:
       BackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: The ID of the backup.
       Lifecycle:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupLifecycle'
         description: The lifecycle status of the backup.
       FailureDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupFailureDetails'
         description: Details explaining any failures that occur when creating a backup.
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupType'
         description: The type of the backup.
       ProgressPercent:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressPercent'
       CreationTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreationTime'
         description: The time when a particular backup was created.
       KmsKeyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KmsKeyId'
         description: The ID of the AWS Key Management Service (AWS KMS) key used to encrypt this backup's data.
       ResourceARN:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceARN'
         description: The Amazon Resource Name (ARN) for the backup resource.
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: Tags associated with a particular file system.
       FileSystem:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystem'
         description: Metadata of the file system associated with the backup. This metadata is persisted even if the file system is deleted.
     description: A backup of an Amazon FSx for Windows File Server file system. You can create a new file system from a backup to protect against data loss.
   BackupFailureDetails:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: A message describing the backup creation failure.
     description: 'If backup creation fails, this structure contains the details of that failure.'
   BackupId:
@@ -1186,7 +1186,7 @@ definitions:
     type: array
     description: A list of backup IDs.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/BackupId'
     maxItems: 50
   BackupLifecycle:
     type: string
@@ -1206,7 +1206,7 @@ definitions:
     type: array
     description: A list of backups.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Backup'
     maxItems: 50
   ClientRequestToken:
     type: string
@@ -1218,13 +1218,13 @@ definitions:
     type: object
     properties:
       WeeklyMaintenanceStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WeeklyTime'
         description: 'The preferred time to perform weekly maintenance, in the UTC time zone.'
       ImportPath:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ArchivePath'
         description: '(Optional) The path to the Amazon S3 bucket (and optional prefix) that you''re using as the data repository for your FSx for Lustre file system, for example <code>s3://import-bucket/optional-prefix</code>. If you specify a prefix after the Amazon S3 bucket name, only object keys with that prefix are loaded into the file system.'
       ImportedFileChunkSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Megabytes'
         description: '<p>(Optional) For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.</p> <p>The chunk size default is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>'
     description: The configuration object for Lustre file systems used in the <code>CreateFileSystem</code> operation.
   CreateFileSystemWindowsConfiguration:
@@ -1233,22 +1233,22 @@ definitions:
       - ThroughputCapacity
     properties:
       ActiveDirectoryId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DirectoryId'
         description: The ID for an existing Microsoft Active Directory instance that the file system should join when it's created.
       ThroughputCapacity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MegabytesPerSecond'
         description: 'The throughput of an Amazon FSx file system, measured in megabytes per second.'
       WeeklyMaintenanceStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WeeklyTime'
         description: 'The preferred start time to perform weekly maintenance, in the UTC time zone.'
       DailyAutomaticBackupStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DailyTime'
         description: 'The preferred time to take daily automatic backups, in the UTC time zone.'
       AutomaticBackupRetentionDays:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutomaticBackupRetentionDays'
         description: The number of days to retain automatic backups. The default is to retain backups for 7 days. Setting this value to 0 disables the creation of automatic backups. The maximum retention period for backups is 35 days.
       CopyTagsToBackups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Flag'
         description: 'A boolean flag indicating whether tags on the file system should be copied to backups. This value defaults to false. If it''s set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn''t specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups.'
     description: The configuration object for the Microsoft Windows file system used in <code>CreateFileSystem</code> and <code>CreateFileSystemFromBackup</code> operations.
   CreationTime:
@@ -1271,33 +1271,33 @@ definitions:
     type: object
     properties:
       ImportPath:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ArchivePath'
         description: 'The import path to the Amazon S3 bucket (and optional prefix) that you''re using as the data repository for your FSx for Lustre file system, for example <code>s3://import-bucket/optional-prefix</code>. If a prefix is specified after the Amazon S3 bucket name, only object keys with that prefix are loaded into the file system.'
       ExportPath:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ArchivePath'
         description: 'The Amazon S3 commit path to use for storing new and changed Lustre file system files as part of the archive operation from the file system to Amazon S3. The value is <code>s3://import-bucket/FSxLustre[creationtimestamp]</code>. The timestamp is presented in UTC format, for example <code>s3://import-bucket/FSxLustre20181105T222312Z</code>. Files are archived to a different prefix in the Amazon S3 bucket, preventing input data from being overwritten.'
       ImportedFileChunkSize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Megabytes'
         description: '<p>For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.</p> <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>'
     description: The data repository configuration object for Lustre file systems returned in the response of the <code>CreateFileSystem</code> operation.
   DeleteFileSystemWindowsConfiguration:
     type: object
     properties:
       SkipFinalBackup:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Flag'
         description: 'By default, Amazon FSx for Windows takes a final backup on your behalf when the <code>DeleteFileSystem</code> operation is invoked. Doing this helps protect you from data loss, and we highly recommend taking the final backup. If you want to skip this backup, use this flag to do so.'
       FinalBackupTags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: A set of tags for your final backup.
     description: The configuration object for the Microsoft Windows file system used in the <code>DeleteFileSystem</code> operation.
   DeleteFileSystemWindowsResponse:
     type: object
     properties:
       FinalBackupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BackupId'
         description: The ID of the final backup for this file system.
       FinalBackupTags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: The set of tags applied to the final backup.
     description: The response object for the Microsoft Windows file system used in the <code>DeleteFileSystem</code> operation.
   DirectoryId:
@@ -1314,57 +1314,57 @@ definitions:
     type: object
     properties:
       OwnerId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AWSAccountId'
         description: 'The AWS account that created the file system. If the file system was created by an IAM user, the AWS account to which the IAM user belongs is the owner.'
       CreationTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreationTime'
         description: 'The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z), also known as Unix time.'
       FileSystemId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystemId'
         description: The eight-digit ID of the file system that was automatically assigned by Amazon FSx.
       FileSystemType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystemType'
         description: Type of file system. Currently the only supported type is WINDOWS.
       Lifecycle:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystemLifecycle'
         description: The lifecycle status of the file system.
       FailureDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystemFailureDetails'
       StorageCapacity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StorageCapacity'
         description: The storage capacity of the file system in gigabytes.
       VpcId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VpcId'
         description: The ID of the primary VPC for the file system.
       SubnetIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetIds'
         description: The IDs of the subnets to contain the endpoint for the file system. One and only one is supported. The file system is launched in the Availability Zone associated with this subnet.
       NetworkInterfaceIds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NetworkInterfaceIds'
         description: '<p>The IDs of the elastic network interface from which a specific file system is accessible. The elastic network interface is automatically created in the same VPC that the Amazon FSx file system was created in. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html">Elastic Network Interfaces</a> in the <i>Amazon EC2 User Guide.</i> </p> <p>For an Amazon FSx for Windows File Server file system, you can have one network interface Id. For an Amazon FSx for Lustre file system, you can have more than one.</p>'
       DNSName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DNSName'
         description: The DNS name for the file system.
       KmsKeyId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/KmsKeyId'
         description: The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system's data for an Amazon FSx for Windows File Server file system.
       ResourceARN:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceARN'
         description: The resource ARN of the file system.
       Tags:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Tags'
         description: 'The tags to associate with the file system. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Amazon EC2 Resources</a> in the <i>Amazon EC2 User Guide</i>.'
       WindowsConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WindowsFileSystemConfiguration'
         description: The configuration for this Microsoft Windows file system.
       LustreConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LustreFileSystemConfiguration'
     description: A description of a specific Amazon FSx file system.
   FileSystemFailureDetails:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
         description: Message describing the failures that occurred during file system creation.
     description: Structure providing details of any failures that occur when creating the file system has failed.
   FileSystemId:
@@ -1377,7 +1377,7 @@ definitions:
     type: array
     description: A list of <code>FileSystemId</code>s.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FileSystemId'
     maxItems: 50
   FileSystemLifecycle:
     type: string
@@ -1397,7 +1397,7 @@ definitions:
     type: array
     description: A list of maintenance operations.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FileSystemMaintenanceOperation'
     maxItems: 20
   FileSystemType:
     type: string
@@ -1409,16 +1409,16 @@ definitions:
     type: array
     description: A list of file systems.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FileSystem'
     maxItems: 50
   Filter:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterName'
         description: The name for this filter.
       Values:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FilterValues'
         description: The values of the filter. These are all the values for any of the applied filters.
     description: A filter used to restrict the results of describe calls. You can use multiple filters to return results that meet all applied filter requirements.
   FilterName:
@@ -1437,13 +1437,13 @@ definitions:
     type: array
     description: A list of filter values.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/FilterValue'
     maxItems: 20
   Filters:
     type: array
     description: A list of <code>Filter</code> elements.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Filter'
     maxItems: 10
   Flag:
     type: boolean
@@ -1457,10 +1457,10 @@ definitions:
     type: object
     properties:
       WeeklyMaintenanceStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WeeklyTime'
         description: The UTC time that you want to begin your weekly maintenance window.
       DataRepositoryConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DataRepositoryConfiguration'
     description: The configuration for the Amazon FSx for Lustre file system.
   MaxResults:
     type: integer
@@ -1485,7 +1485,7 @@ definitions:
     type: array
     description: A list of network interface IDs.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/NetworkInterfaceId'
     maxItems: 50
   NextToken:
     type: string
@@ -1514,7 +1514,7 @@ definitions:
     type: array
     description: A list of security group IDs.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SecurityGroupId'
     maxItems: 50
   StorageCapacity:
     type: integer
@@ -1530,16 +1530,16 @@ definitions:
     type: array
     description: 'A list of subnet IDs. Currently, you can specify only one subnet ID in a call to the <code>CreateFileSystem</code> operation.'
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SubnetId'
     maxItems: 50
   Tag:
     type: object
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagKey'
         description: 'A value that specifies the <code>TagKey</code>, the name of the tag. Tag keys must be unique for the resource to which they are attached.'
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagValue'
         description: 'A value that specifies the <code>TagValue</code>, the value assigned to the corresponding tag key. Tag values can be null and don''t have to be unique in a tag set. For example, you can have a key-value pair in a tag set of <code>finances : April</code> and also of <code>payroll : April</code>.'
     description: Specifies a key-value pair for a resource tag.
   TagKey:
@@ -1552,7 +1552,7 @@ definitions:
     type: array
     description: 'A list of <code>TagKey</code> values, with a maximum of 50 elements.'
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 50
   TagValue:
@@ -1565,27 +1565,27 @@ definitions:
     type: array
     description: 'A list of <code>Tag</code> values, with a maximum of 50 elements.'
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Tag'
     minItems: 1
     maxItems: 50
   UpdateFileSystemLustreConfiguration:
     type: object
     properties:
       WeeklyMaintenanceStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WeeklyTime'
         description: 'The preferred time to perform weekly maintenance, in the UTC time zone.'
     description: The configuration object for Amazon FSx for Lustre file systems used in the <code>UpdateFileSystem</code> operation.
   UpdateFileSystemWindowsConfiguration:
     type: object
     properties:
       WeeklyMaintenanceStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WeeklyTime'
         description: 'The preferred time to perform weekly maintenance, in the UTC time zone.'
       DailyAutomaticBackupStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DailyTime'
         description: 'The preferred time to take daily automatic backups, in the UTC time zone.'
       AutomaticBackupRetentionDays:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutomaticBackupRetentionDays'
         description: The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 35 days.
     description: The configuration object for the Microsoft Windows file system used in the <code>UpdateFileSystem</code> operation.
   VpcId:
@@ -1604,24 +1604,24 @@ definitions:
     type: object
     properties:
       ActiveDirectoryId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DirectoryId'
         description: The ID for an existing Microsoft Active Directory instance that the file system should join when it's created.
       ThroughputCapacity:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MegabytesPerSecond'
         description: 'The throughput of an Amazon FSx file system, measured in megabytes per second.'
       MaintenanceOperationsInProgress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FileSystemMaintenanceOperations'
         description: The list of maintenance operations in progress for this file system.
       WeeklyMaintenanceStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/WeeklyTime'
         description: 'The preferred time to perform weekly maintenance, in the UTC time zone.'
       DailyAutomaticBackupStartTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DailyTime'
         description: 'The preferred time to take daily automatic backups, in the UTC time zone.'
       AutomaticBackupRetentionDays:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AutomaticBackupRetentionDays'
         description: The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 35 days.
       CopyTagsToBackups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Flag'
         description: 'A boolean flag indicating whether tags on the file system should be copied to backups. This value defaults to false. If it''s set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn''t specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups.'
     description: The configuration for this Microsoft Windows file system.

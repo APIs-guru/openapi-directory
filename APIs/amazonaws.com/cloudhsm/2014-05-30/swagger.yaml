@@ -838,7 +838,7 @@ definitions:
       - Status
     properties:
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The status of the operation.
   AddTagsToResourceRequest:
     type: object
@@ -847,19 +847,19 @@ definitions:
       - TagList
     properties:
       ResourceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the AWS CloudHSM resource to tag.
       TagList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: One or more tags.
   CloudHsmServiceException:
     type: object
     properties:
       message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Additional information about the error.
       retryable:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Boolean'
         description: Indicates if the action can be retried.
     description: Indicates that an exception occurred in the AWS CloudHSM service.
   CloudHsmInternalException:
@@ -874,7 +874,7 @@ definitions:
     type: object
     properties:
       HapgArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HapgArn'
         description: The ARN of the high-availability partition group.
     description: Contains the output of the <a>CreateHAPartitionGroup</a> action.
   CreateHapgRequest:
@@ -883,14 +883,14 @@ definitions:
       - Label
     properties:
       Label:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Label'
         description: The label of the new high-availability partition group.
     description: Contains the inputs for the <a>CreateHapgRequest</a> action.
   CreateHsmResponse:
     type: object
     properties:
       HsmArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmArn'
         description: The ARN of the HSM.
     description: Contains the output of the <code>CreateHsm</code> operation.
   CreateHsmRequest:
@@ -902,34 +902,34 @@ definitions:
       - SubscriptionType
     properties:
       SubnetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetId'
         description: The identifier of the subnet in your VPC in which to place the HSM.
       SshKey:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SshKey'
         description: The SSH public key to install on the HSM.
       EniIp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpAddress'
         description: '<p>The IP address to assign to the HSM''s ENI.</p> <p>If an IP address is not specified, an IP address will be randomly chosen from the CIDR range of the subnet.</p>'
       IamRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IamRoleArn'
         description: The ARN of an IAM role to enable the AWS CloudHSM service to allocate an ENI on your behalf.
       ExternalId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExternalId'
         description: 'The external ID from <code>IamRoleArn</code>, if present.'
       SubscriptionType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriptionType'
       ClientToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientToken'
         description: A user-defined token to ensure idempotence. Subsequent calls to this operation with the same token will be ignored.
       SyslogIp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpAddress'
         description: The IP address for the syslog monitoring server. The AWS CloudHSM service only supports one syslog monitoring server.
     description: Contains the inputs for the <code>CreateHsm</code> operation.
   CreateLunaClientResponse:
     type: object
     properties:
       ClientArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientArn'
         description: The ARN of the client.
     description: Contains the output of the <a>CreateLunaClient</a> action.
   CreateLunaClientRequest:
@@ -938,10 +938,10 @@ definitions:
       - Certificate
     properties:
       Label:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientLabel'
         description: The label for the client.
       Certificate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Certificate'
         description: The contents of a Base64-Encoded X.509 v3 certificate to be installed on the HSMs used by this client.
     description: Contains the inputs for the <a>CreateLunaClient</a> action.
   DeleteHapgResponse:
@@ -950,7 +950,7 @@ definitions:
       - Status
     properties:
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The status of the action.
     description: Contains the output of the <a>DeleteHapg</a> action.
   DeleteHapgRequest:
@@ -959,7 +959,7 @@ definitions:
       - HapgArn
     properties:
       HapgArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HapgArn'
         description: The ARN of the high-availability partition group to delete.
     description: Contains the inputs for the <a>DeleteHapg</a> action.
   DeleteHsmResponse:
@@ -968,7 +968,7 @@ definitions:
       - Status
     properties:
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The status of the operation.
     description: Contains the output of the <a>DeleteHsm</a> operation.
   DeleteHsmRequest:
@@ -977,7 +977,7 @@ definitions:
       - HsmArn
     properties:
       HsmArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmArn'
         description: The ARN of the HSM to delete.
     description: Contains the inputs for the <a>DeleteHsm</a> operation.
   DeleteLunaClientResponse:
@@ -986,7 +986,7 @@ definitions:
       - Status
     properties:
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The status of the action.
   DeleteLunaClientRequest:
     type: object
@@ -994,37 +994,37 @@ definitions:
       - ClientArn
     properties:
       ClientArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientArn'
         description: The ARN of the client to delete.
   DescribeHapgResponse:
     type: object
     properties:
       HapgArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HapgArn'
         description: The ARN of the high-availability partition group.
       HapgSerial:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The serial number of the high-availability partition group.
       HsmsLastActionFailed:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmList'
         description: <p/>
       HsmsPendingDeletion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmList'
         description: <p/>
       HsmsPendingRegistration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmList'
         description: <p/>
       Label:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Label'
         description: The label for the high-availability partition group.
       LastModifiedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date and time the high-availability partition group was last modified.
       PartitionSerialList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PartitionSerialList'
         description: The list of partition serial numbers that belong to the high-availability partition group.
       State:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CloudHsmObjectState'
         description: The state of the high-availability partition group.
     description: Contains the output of the <a>DescribeHapg</a> action.
   DescribeHapgRequest:
@@ -1033,123 +1033,123 @@ definitions:
       - HapgArn
     properties:
       HapgArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HapgArn'
         description: The ARN of the high-availability partition group to describe.
     description: Contains the inputs for the <a>DescribeHapg</a> action.
   DescribeHsmResponse:
     type: object
     properties:
       HsmArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmArn'
         description: The ARN of the HSM.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmStatus'
         description: The status of the HSM.
       StatusDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: Contains additional information about the status of the HSM.
       AvailabilityZone:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AZ'
         description: The Availability Zone that the HSM is in.
       EniId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EniId'
         description: The identifier of the elastic network interface (ENI) attached to the HSM.
       EniIp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpAddress'
         description: The IP address assigned to the HSM's ENI.
       SubscriptionType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriptionType'
       SubscriptionStartDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The subscription start date.
       SubscriptionEndDate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The subscription end date.
       VpcId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VpcId'
         description: The identifier of the VPC that the HSM is in.
       SubnetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetId'
         description: The identifier of the subnet that the HSM is in.
       IamRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IamRoleArn'
         description: The ARN of the IAM role assigned to the HSM.
       SerialNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmSerialNumber'
         description: The serial number of the HSM.
       VendorName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The name of the HSM vendor.
       HsmType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The HSM model type.
       SoftwareVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The HSM software version.
       SshPublicKey:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SshKey'
         description: The public SSH key.
       SshKeyLastUpdated:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date and time that the SSH key was last updated.
       ServerCertUri:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The URI of the certificate server.
       ServerCertLastUpdated:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date and time that the server certificate was last updated.
       Partitions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PartitionList'
         description: The list of partitions on the HSM.
     description: Contains the output of the <a>DescribeHsm</a> operation.
   DescribeHsmRequest:
     type: object
     properties:
       HsmArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmArn'
         description: The ARN of the HSM. Either the <code>HsmArn</code> or the <code>SerialNumber</code> parameter must be specified.
       HsmSerialNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmSerialNumber'
         description: The serial number of the HSM. Either the <code>HsmArn</code> or the <code>HsmSerialNumber</code> parameter must be specified.
     description: Contains the inputs for the <a>DescribeHsm</a> operation.
   DescribeLunaClientResponse:
     type: object
     properties:
       ClientArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientArn'
         description: The ARN of the client.
       Certificate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Certificate'
         description: The certificate installed on the HSMs used by this client.
       CertificateFingerprint:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateFingerprint'
         description: The certificate fingerprint.
       LastModifiedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Timestamp'
         description: The date and time the client was last modified.
       Label:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Label'
         description: The label of the client.
   DescribeLunaClientRequest:
     type: object
     properties:
       ClientArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientArn'
         description: The ARN of the client.
       CertificateFingerprint:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CertificateFingerprint'
         description: The certificate fingerprint.
   GetConfigResponse:
     type: object
     properties:
       ConfigType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The type of credentials.
       ConfigFile:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The chrystoki.conf configuration file.
       ConfigCred:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The certificate file containing the server.pem files of the HSMs.
   GetConfigRequest:
     type: object
@@ -1159,19 +1159,19 @@ definitions:
       - HapgList
     properties:
       ClientArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientArn'
         description: The ARN of the client.
       ClientVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientVersion'
         description: The client version.
       HapgList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HapgList'
         description: A list of ARNs that identify the high-availability partition groups that are associated with the client.
   ListAvailableZonesResponse:
     type: object
     properties:
       AZList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AZList'
         description: The list of Availability Zones that have available AWS CloudHSM capacity.
   ListAvailableZonesRequest:
     type: object
@@ -1183,32 +1183,32 @@ definitions:
       - HapgList
     properties:
       HapgList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HapgList'
         description: The list of high-availability partition groups.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: 'If not null, more results are available. Pass this value to <code>ListHapgs</code> to retrieve the next set of items.'
   ListHapgsRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: The <code>NextToken</code> value from a previous call to <code>ListHapgs</code>. Pass null if this is the first call.
   ListHsmsResponse:
     type: object
     properties:
       HsmList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmList'
         description: The list of ARNs that identify the HSMs.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: 'If not null, more results are available. Pass this value to <code>ListHsms</code> to retrieve the next set of items.'
     description: Contains the output of the <code>ListHsms</code> operation.
   ListHsmsRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: The <code>NextToken</code> value from a previous call to <code>ListHsms</code>. Pass null if this is the first call.
   ListLunaClientsResponse:
     type: object
@@ -1216,16 +1216,16 @@ definitions:
       - ClientList
     properties:
       ClientList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientList'
         description: The list of clients.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: 'If not null, more results are available. Pass this to <code>ListLunaClients</code> to retrieve the next set of items.'
   ListLunaClientsRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PaginationToken'
         description: The <code>NextToken</code> value from a previous call to <code>ListLunaClients</code>. Pass null if this is the first call.
   ListTagsForResourceResponse:
     type: object
@@ -1233,7 +1233,7 @@ definitions:
       - TagList
     properties:
       TagList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagList'
         description: One or more tags.
   ListTagsForResourceRequest:
     type: object
@@ -1241,13 +1241,13 @@ definitions:
       - ResourceArn
     properties:
       ResourceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
   ModifyHapgResponse:
     type: object
     properties:
       HapgArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HapgArn'
         description: The ARN of the high-availability partition group.
   ModifyHapgRequest:
     type: object
@@ -1255,19 +1255,19 @@ definitions:
       - HapgArn
     properties:
       HapgArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HapgArn'
         description: The ARN of the high-availability partition group to modify.
       Label:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Label'
         description: The new label for the high-availability partition group.
       PartitionSerialList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/PartitionSerialList'
         description: The list of partition serial numbers to make members of the high-availability partition group.
   ModifyHsmResponse:
     type: object
     properties:
       HsmArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmArn'
         description: The ARN of the HSM.
     description: Contains the output of the <a>ModifyHsm</a> operation.
   ModifyHsmRequest:
@@ -1276,29 +1276,29 @@ definitions:
       - HsmArn
     properties:
       HsmArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/HsmArn'
         description: The ARN of the HSM to modify.
       SubnetId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubnetId'
         description: The new identifier of the subnet that the HSM is in. The new subnet must be in the same Availability Zone as the current subnet.
       EniIp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpAddress'
         description: '<p>The new IP address for the elastic network interface (ENI) attached to the HSM.</p> <p>If the HSM is moved to a different subnet, and an IP address is not specified, an IP address will be randomly chosen from the CIDR range of the new subnet.</p>'
       IamRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IamRoleArn'
         description: The new IAM role ARN.
       ExternalId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ExternalId'
         description: The new external ID.
       SyslogIp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/IpAddress'
         description: The new IP address for the syslog monitoring server. The AWS CloudHSM service only supports one syslog monitoring server.
     description: Contains the inputs for the <a>ModifyHsm</a> operation.
   ModifyLunaClientResponse:
     type: object
     properties:
       ClientArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientArn'
         description: The ARN of the client.
   ModifyLunaClientRequest:
     type: object
@@ -1307,10 +1307,10 @@ definitions:
       - Certificate
     properties:
       ClientArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ClientArn'
         description: The ARN of the client.
       Certificate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Certificate'
         description: The new certificate for the client.
   RemoveTagsFromResourceResponse:
     type: object
@@ -1318,7 +1318,7 @@ definitions:
       - Status
     properties:
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The status of the operation.
   RemoveTagsFromResourceRequest:
     type: object
@@ -1327,10 +1327,10 @@ definitions:
       - TagKeyList
     properties:
       ResourceArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
       TagKeyList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagKeyList'
         description: '<p>The tag key or keys to remove.</p> <p>Specify only the tag key to remove (not the value). To overwrite the value for an existing tag, use <a>AddTagsToResource</a>.</p>'
   AZ:
     type: string
@@ -1339,7 +1339,7 @@ definitions:
   AZList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/AZ'
   Boolean:
     type: boolean
   Certificate:
@@ -1359,7 +1359,7 @@ definitions:
   ClientList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ClientArn'
   ClientToken:
     type: string
     pattern: '[a-zA-Z0-9]{1,64}'
@@ -1386,7 +1386,7 @@ definitions:
   HapgList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/HapgArn'
   HsmArn:
     type: string
     pattern: 'arn:aws(-iso)?:cloudhsm:[a-zA-Z0-9\-]*:[0-9]{12}:hsm-[0-9a-f]{8}'
@@ -1395,7 +1395,7 @@ definitions:
     type: array
     description: Contains a list of ARNs that identify the HSMs.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/HsmArn'
   HsmSerialNumber:
     type: string
     pattern: '\d{1,16}'
@@ -1427,14 +1427,14 @@ definitions:
   PartitionList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/PartitionArn'
   PartitionSerial:
     type: string
     pattern: '\d{6,12}'
   PartitionSerialList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/PartitionSerial'
   SshKey:
     type: string
     pattern: '[a-zA-Z0-9+/= ._:\\@-]*'
@@ -1456,10 +1456,10 @@ definitions:
       - Value
     properties:
       Key:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagKey'
         description: The key of the tag.
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TagValue'
         description: The value of the tag.
     description: A key-value pair that identifies or specifies metadata about an AWS CloudHSM resource.
   TagKey:
@@ -1469,11 +1469,11 @@ definitions:
   TagKeyList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/TagKey'
   TagList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Tag'
   TagValue:
     type: string
     minLength: 0

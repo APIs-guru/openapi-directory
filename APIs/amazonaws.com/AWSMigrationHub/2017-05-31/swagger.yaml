@@ -919,58 +919,58 @@ definitions:
       - CreatedArtifact
     properties:
       ProgressUpdateStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskName'
         description: Unique identifier that references the migration task.
       CreatedArtifact:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedArtifact'
         description: 'An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance, RDS instance, etc.) '
       DryRun:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
   AccessDeniedException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: You do not have sufficient access to perform this action.
   InternalServerError:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: 'Exception raised when there is an internal, configuration, or dependency error encountered.'
   ServiceUnavailableException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: 'Exception raised when there is an internal, configuration, or dependency error encountered.'
   DryRunOperation:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: Exception raised to indicate a successfully authorized action when the <code>DryRun</code> flag is set to "true".
   UnauthorizedOperation:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: Exception raised to indicate a request was not authorized when the <code>DryRun</code> flag is set to "true".
   InvalidInputException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: Exception raised when the provided input violates a policy constraint or is entered in the wrong format or data type.
   ResourceNotFoundException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: 'Exception raised when the request references a resource (ADS configuration, update stream, migration task, etc.) that does not exist in ADS (Application Discovery Service) or in Migration Hub''s repository.'
   AssociateDiscoveredResourceResult:
     type: object
@@ -983,22 +983,22 @@ definitions:
       - DiscoveredResource
     properties:
       ProgressUpdateStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: The name of the ProgressUpdateStream.
       MigrationTaskName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskName'
         description: The identifier given to the MigrationTask.
       DiscoveredResource:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DiscoveredResource'
         description: Object representing a Resource.
       DryRun:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
   PolicyErrorException:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorMessage'
     description: Exception raised when there are problems accessing ADS (Application Discovery Service); most likely due to a misconfigured policy or the <code>migrationhub-discovery</code> role is missing or not configured correctly.
   CreateProgressUpdateStreamResult:
     type: object
@@ -1009,10 +1009,10 @@ definitions:
       - ProgressUpdateStreamName
     properties:
       ProgressUpdateStreamName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: 'The name of the ProgressUpdateStream. '
       DryRun:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
   DeleteProgressUpdateStreamResult:
     type: object
@@ -1023,19 +1023,19 @@ definitions:
       - ProgressUpdateStreamName
     properties:
       ProgressUpdateStreamName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: 'The name of the ProgressUpdateStream. '
       DryRun:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
   DescribeApplicationStateResult:
     type: object
     properties:
       ApplicationStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationStatus'
         description: 'Status of the application - Not Started, In-Progress, Complete.'
       LastUpdatedTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdateDateTime'
         description: The timestamp when the application status was last updated.
   DescribeApplicationStateRequest:
     type: object
@@ -1043,13 +1043,13 @@ definitions:
       - ApplicationId
     properties:
       ApplicationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationId'
         description: The configurationId in ADS that uniquely identifies the grouped application.
   DescribeMigrationTaskResult:
     type: object
     properties:
       MigrationTask:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTask'
         description: Object encapsulating information about the migration task.
   DescribeMigrationTaskRequest:
     type: object
@@ -1058,10 +1058,10 @@ definitions:
       - MigrationTaskName
     properties:
       ProgressUpdateStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskName'
         description: The identifier given to the MigrationTask.
   DisassociateCreatedArtifactResult:
     type: object
@@ -1074,16 +1074,16 @@ definitions:
       - CreatedArtifactName
     properties:
       ProgressUpdateStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskName'
         description: Unique identifier that references the migration task to be disassociated with the artifact.
       CreatedArtifactName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedArtifactName'
         description: 'An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance, RDS instance, etc.)'
       DryRun:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
   DisassociateDiscoveredResourceResult:
     type: object
@@ -1096,16 +1096,16 @@ definitions:
       - ConfigurationId
     properties:
       ProgressUpdateStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: The name of the ProgressUpdateStream.
       MigrationTaskName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskName'
         description: The identifier given to the MigrationTask.
       ConfigurationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationId'
         description: ConfigurationId of the ADS resource to be disassociated.
       DryRun:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
   ImportMigrationTaskResult:
     type: object
@@ -1117,22 +1117,22 @@ definitions:
       - MigrationTaskName
     properties:
       ProgressUpdateStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskName'
         description: Unique identifier that references the migration task.
       DryRun:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
   ListCreatedArtifactsResult:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Token'
         description: 'If there are more created artifacts than the max result, return the next token to be passed to the next call as a bookmark of where to start from.'
       CreatedArtifactList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedArtifactList'
         description: List of created artifacts up to the maximum number of results specified in the request.
   ListCreatedArtifactsRequest:
     type: object
@@ -1141,25 +1141,25 @@ definitions:
       - MigrationTaskName
     properties:
       ProgressUpdateStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskName'
         description: Unique identifier that references the migration task.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Token'
         description: 'If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResultsCreatedArtifacts'
         description: Maximum number of results to be returned per page.
   ListDiscoveredResourcesResult:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Token'
         description: 'If there are more discovered resources than the max result, return the next token to be passed to the next call as a bookmark of where to start from.'
       DiscoveredResourceList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DiscoveredResourceList'
         description: Returned list of discovered resources associated with the given MigrationTask.
   ListDiscoveredResourcesRequest:
     type: object
@@ -1168,55 +1168,55 @@ definitions:
       - MigrationTaskName
     properties:
       ProgressUpdateStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: The name of the ProgressUpdateStream.
       MigrationTaskName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskName'
         description: The name of the MigrationTask.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Token'
         description: 'If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResultsResources'
         description: The maximum number of results returned per page.
   ListMigrationTasksResult:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Token'
         description: 'If there are more migration tasks than the max result, return the next token to be passed to the next call as a bookmark of where to start from.'
       MigrationTaskSummaryList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskSummaryList'
         description: 'Lists the migration task''s summary which includes: <code>MigrationTaskName</code>, <code>ProgressPercent</code>, <code>ProgressUpdateStream</code>, <code>Status</code>, and the <code>UpdateDateTime</code> for each task.'
   ListMigrationTasksRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Token'
         description: 'If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: Value to specify how many results are returned per page.
       ResourceName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceName'
         description: Filter migration tasks by discovered resource name.
   ListProgressUpdateStreamsResult:
     type: object
     properties:
       ProgressUpdateStreamSummaryList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStreamSummaryList'
         description: List of progress update streams up to the max number of results passed in the input.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Token'
         description: 'If there are more streams created than the max result, return the next token to be passed to the next call as a bookmark of where to start from.'
   ListProgressUpdateStreamsRequest:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Token'
         description: 'If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
       MaxResults:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MaxResults'
         description: Filter to limit the maximum number of results to list per page.
   NotifyApplicationStateResult:
     type: object
@@ -1228,13 +1228,13 @@ definitions:
       - Status
     properties:
       ApplicationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationId'
         description: The configurationId in ADS that uniquely identifies the grouped application.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ApplicationStatus'
         description: 'Status of the application - Not Started, In-Progress, Complete.'
       DryRun:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
   NotifyMigrationTaskStateResult:
     type: object
@@ -1249,22 +1249,22 @@ definitions:
       - NextUpdateSeconds
     properties:
       ProgressUpdateStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskName'
         description: Unique identifier that references the migration task.
       Task:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Task'
         description: Information about the task's progress and status.
       UpdateDateTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdateDateTime'
         description: The timestamp when the task was gathered.
       NextUpdateSeconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextUpdateSeconds'
         description: 'Number of seconds after the UpdateDateTime within which the Migration Hub can expect an update. If Migration Hub does not receive an update within the specified interval, then the migration task will be considered stale.'
       DryRun:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
   PutResourceAttributesResult:
     type: object
@@ -1277,16 +1277,16 @@ definitions:
       - ResourceAttributeList
     properties:
       ProgressUpdateStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: 'The name of the ProgressUpdateStream. '
       MigrationTaskName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskName'
         description: Unique identifier that references the migration task.
       ResourceAttributeList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceAttributeList'
         description: '<p>Information about the resource that is being migrated. This data will be used to map the task to a resource in the Application Discovery Service (ADS)''s repository.</p> <note> <p>Takes the object array of <code>ResourceAttribute</code> where the <code>Type</code> field is reserved for the following values: <code>IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER</code> where the identifying value can be a string up to 256 characters.</p> </note> <important> <ul> <li> <p>If any "VM" related value is set for a <code>ResourceAttribute</code> object, it is required that <code>VM_MANAGER_ID</code>, as a minimum, is always set. If <code>VM_MANAGER_ID</code> is not set, then all "VM" fields will be discarded and "VM" fields will not be used for matching the migration task to a server in Application Discovery Service (ADS)''s repository. See the <a href="https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples">Example</a> section below for a use case of specifying "VM" related values.</p> </li> <li> <p> If a server you are trying to match has multiple IP or MAC addresses, you should provide as many as you know in separate type/value pairs passed to the <code>ResourceAttributeList</code> parameter to maximize the chances of matching.</p> </li> </ul> </important>'
       DryRun:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
   '[object Object]': {}
   ApplicationId:
@@ -1308,10 +1308,10 @@ definitions:
       - Name
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedArtifactName'
         description: An ARN that uniquely identifies the result of a migration task.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CreatedArtifactDescription'
         description: A description that can be free-form text to record additional detail about the artifact for clarity or for later reference.
     description: 'An ARN of the AWS cloud resource target receiving the migration (e.g., AMI, EC2 instance, RDS instance, etc.).'
   CreatedArtifactDescription:
@@ -1321,7 +1321,7 @@ definitions:
   CreatedArtifactList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/CreatedArtifact'
   CreatedArtifactName:
     type: string
     pattern: 'arn:[a-z-]+:[a-z0-9-]+:(?:[a-z0-9-]+|):(?:[0-9]{12}|):.*'
@@ -1333,10 +1333,10 @@ definitions:
       - ConfigurationId
     properties:
       ConfigurationId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConfigurationId'
         description: The configurationId in ADS that uniquely identifies the on-premise resource.
       Description:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DiscoveredResourceDescription'
         description: A description that can be free-form text to record additional detail about the discovered resource for clarity or later reference.
     description: Object representing the on-premises resource being migrated.
   DiscoveredResourceDescription:
@@ -1346,7 +1346,7 @@ definitions:
   DiscoveredResourceList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DiscoveredResource'
   DryRun:
     type: boolean
   ErrorMessage:
@@ -1354,7 +1354,7 @@ definitions:
   LatestResourceAttributeList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ResourceAttribute'
     minItems: 0
     maxItems: 100
   MaxResults:
@@ -1373,19 +1373,19 @@ definitions:
     type: object
     properties:
       ProgressUpdateStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: A name that identifies the vendor of the migration tool being used.
       MigrationTaskName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskName'
         description: Unique identifier that references the migration task.
       Task:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Task'
         description: Task object encapsulating task information.
       UpdateDateTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdateDateTime'
         description: The timestamp when the task was gathered.
       ResourceAttributeList:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LatestResourceAttributeList'
         description: <p/>
     description: Represents a migration task in a migration tool.
   MigrationTaskName:
@@ -1397,28 +1397,28 @@ definitions:
     type: object
     properties:
       ProgressUpdateStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: An AWS resource used for access control. It should uniquely identify the migration tool as it is used for all updates made by the tool.
       MigrationTaskName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/MigrationTaskName'
         description: Unique identifier that references the migration task.
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Status'
         description: Status of the task.
       ProgressPercent:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressPercent'
         description: <p/>
       StatusDetail:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StatusDetail'
         description: Detail information of what is being done within the overall status state.
       UpdateDateTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdateDateTime'
         description: The timestamp when the task was gathered.
     description: 'MigrationTaskSummary includes <code>MigrationTaskName</code>, <code>ProgressPercent</code>, <code>ProgressUpdateStream</code>, <code>Status</code>, and <code>UpdateDateTime</code> for each task.'
   MigrationTaskSummaryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/MigrationTaskSummary'
   NextUpdateSeconds:
     type: integer
     minimum: 0
@@ -1435,13 +1435,13 @@ definitions:
     type: object
     properties:
       ProgressUpdateStreamName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressUpdateStream'
         description: 'The name of the ProgressUpdateStream. '
     description: Summary of the AWS resource used for access control that is implicitly linked to your AWS account.
   ProgressUpdateStreamSummaryList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ProgressUpdateStreamSummary'
   ResourceAttribute:
     type: object
     required:
@@ -1449,16 +1449,16 @@ definitions:
       - Value
     properties:
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceAttributeType'
         description: Type of resource.
       Value:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceAttributeValue'
         description: Value of the resource type.
     description: '<p>Attribute associated with a resource.</p> <p>Note the corresponding format required per type listed below:</p> <dl> <dt>IPV4</dt> <dd> <p> <code>x.x.x.x</code> </p> <p> <i>where x is an integer in the range [0,255]</i> </p> </dd> <dt>IPV6</dt> <dd> <p> <code>y : y : y : y : y : y : y : y</code> </p> <p> <i>where y is a hexadecimal between 0 and FFFF. [0, FFFF]</i> </p> </dd> <dt>MAC_ADDRESS</dt> <dd> <p> <code>^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$</code> </p> </dd> <dt>FQDN</dt> <dd> <p> <code>^[^&lt;&gt;{}\\\\/?,=\\p{Cntrl}]{1,256}$</code> </p> </dd> </dl>'
   ResourceAttributeList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ResourceAttribute'
     minItems: 1
     maxItems: 100
   ResourceAttributeType:
@@ -1499,13 +1499,13 @@ definitions:
       - Status
     properties:
       Status:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Status'
         description: 'Status of the task - Not Started, In-Progress, Complete.'
       StatusDetail:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/StatusDetail'
         description: Details of task status as notified by a migration tool. A tool might use this field to provide clarifying information about the status that is unique to that tool or that explains an error state.
       ProgressPercent:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ProgressPercent'
         description: Indication of the percentage completion of the task.
     description: Task object encapsulating task information.
   Token:

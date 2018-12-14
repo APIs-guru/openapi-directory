@@ -2492,13 +2492,13 @@ definitions:
     type: object
     properties:
       AssociatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the role ARN was associated with the group.'
   AssociateRoleToGroupRequest:
     type: object
     properties:
       RoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the role you wish to associate with this group.
   BadRequestException: {}
   InternalServerErrorException: {}
@@ -2506,294 +2506,294 @@ definitions:
     type: object
     properties:
       AssociatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The time when the service role was associated with the account.
   AssociateServiceRoleToAccountRequest:
     type: object
     properties:
       RoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the service role you wish to associate with your account.
   CreateConnectorDefinitionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   CreateConnectorDefinitionRequest:
     type: object
     properties:
       InitialVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConnectorDefinitionVersion'
         description: Information about the initial version of the connector definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the connector definition.
   CreateConnectorDefinitionVersionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The unique ID of the version.
   CreateConnectorDefinitionVersionRequest:
     type: object
     properties:
       Connectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfConnector'
         description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
   CreateCoreDefinitionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   CreateCoreDefinitionRequest:
     type: object
     properties:
       InitialVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CoreDefinitionVersion'
         description: Information about the initial version of the core definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the core definition.
     description: Information needed to create a core definition.
   CreateCoreDefinitionVersionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The unique ID of the version.
   CreateCoreDefinitionVersionRequest:
     type: object
     properties:
       Cores:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfCore'
         description: A list of cores in the core definition version.
   CreateDeploymentResponse:
     type: object
     properties:
       DeploymentArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the deployment.
       DeploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the deployment.
   CreateDeploymentRequest:
     type: object
     properties:
       DeploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the deployment if you wish to redeploy a previous deployment.
       DeploymentType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentType'
         description: 'The type of deployment. When used in ''''CreateDeployment'''', only ''''NewDeployment'''' and ''''Redeployment'''' are valid.'
       GroupVersionId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the group version to be deployed.
   CreateDeviceDefinitionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   CreateDeviceDefinitionRequest:
     type: object
     properties:
       InitialVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceDefinitionVersion'
         description: Information about the initial version of the device definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the device definition.
   CreateDeviceDefinitionVersionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The unique ID of the version.
   CreateDeviceDefinitionVersionRequest:
     type: object
     properties:
       Devices:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfDevice'
         description: A list of devices in the definition version.
   CreateFunctionDefinitionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   CreateFunctionDefinitionRequest:
     type: object
     properties:
       InitialVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionDefinitionVersion'
         description: Information about the initial version of the function definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the function definition.
   CreateFunctionDefinitionVersionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The unique ID of the version.
   CreateFunctionDefinitionVersionRequest:
     type: object
     properties:
       DefaultConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionDefaultConfig'
         description: Default configuration that will apply to all Lambda functions in this function definition version
       Functions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfFunction'
         description: A list of Lambda functions in this function definition version.
     description: Information needed to create a function definition version.
   CreateGroupResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   CreateGroupRequest:
     type: object
     properties:
       InitialVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GroupVersion'
         description: Information about the initial version of the group.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the group.
   CreateGroupCertificateAuthorityResponse:
     type: object
     properties:
       GroupCertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the group certificate authority.
   CreateGroupCertificateAuthorityRequest:
     type: object
@@ -2802,226 +2802,226 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The unique ID of the version.
   CreateGroupVersionRequest:
     type: object
     properties:
       ConnectorDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the connector definition version for this group.
       CoreDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the core definition version for this group.
       DeviceDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the device definition version for this group.
       FunctionDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the function definition version for this group.
       LoggerDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the logger definition version for this group.
       ResourceDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the resource definition version for this group.
       SubscriptionDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the subscription definition version for this group.
   CreateLoggerDefinitionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   CreateLoggerDefinitionRequest:
     type: object
     properties:
       InitialVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LoggerDefinitionVersion'
         description: Information about the initial version of the logger definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the logger definition.
   CreateLoggerDefinitionVersionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The unique ID of the version.
   CreateLoggerDefinitionVersionRequest:
     type: object
     properties:
       Loggers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfLogger'
         description: A list of loggers.
   CreateResourceDefinitionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   CreateResourceDefinitionRequest:
     type: object
     properties:
       InitialVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceDefinitionVersion'
         description: Information about the initial version of the resource definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the resource definition.
   CreateResourceDefinitionVersionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The unique ID of the version.
   CreateResourceDefinitionVersionRequest:
     type: object
     properties:
       Resources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfResource'
         description: A list of resources.
   CreateSoftwareUpdateJobResponse:
     type: object
     properties:
       IotJobArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The IoT Job ARN corresponding to this update.
       IotJobId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The IoT Job Id corresponding to this update.
   CreateSoftwareUpdateJobRequest:
     type: object
     properties:
       S3UrlSignerRole:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3UrlSignerRole'
       SoftwareToUpdate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SoftwareToUpdate'
       UpdateAgentLogLevel:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdateAgentLogLevel'
       UpdateTargets:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdateTargets'
       UpdateTargetsArchitecture:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdateTargetsArchitecture'
       UpdateTargetsOperatingSystem:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/UpdateTargetsOperatingSystem'
   CreateSubscriptionDefinitionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   CreateSubscriptionDefinitionRequest:
     type: object
     properties:
       InitialVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriptionDefinitionVersion'
         description: Information about the initial version of the subscription definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the subscription definition.
   CreateSubscriptionDefinitionVersionResponse:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The unique ID of the version.
   CreateSubscriptionDefinitionVersionRequest:
     type: object
     properties:
       Subscriptions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfSubscription'
         description: A list of subscriptions.
   DeleteConnectorDefinitionResponse:
     type: object
@@ -3075,7 +3075,7 @@ definitions:
     type: object
     properties:
       DisassociatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the role was disassociated from the group.'
   DisassociateRoleFromGroupRequest:
     type: object
@@ -3084,7 +3084,7 @@ definitions:
     type: object
     properties:
       DisassociatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The time when the service role was disassociated from the account.
   DisassociateServiceRoleFromAccountRequest:
     type: object
@@ -3093,10 +3093,10 @@ definitions:
     type: object
     properties:
       AssociatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The time when the role was associated with the group.
       RoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the role that is associated with the group.
   GetAssociatedRoleRequest:
     type: object
@@ -3105,19 +3105,19 @@ definitions:
     type: object
     properties:
       BulkDeploymentMetrics:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BulkDeploymentMetrics'
         description: Relevant metrics on input records processed during bulk deployment.
       BulkDeploymentStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BulkDeploymentStatus'
         description: The status of the bulk deployment.
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in ISO format, when the deployment was created.'
       ErrorDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorDetails'
         description: Error details
       ErrorMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Error message
   GetBulkDeploymentStatusRequest:
     type: object
@@ -3126,10 +3126,10 @@ definitions:
     type: object
     properties:
       ConnectivityInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfConnectivityInfo'
         description: Connectivity info list.
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: A message about the connectivity info request.
   GetConnectivityInfoRequest:
     type: object
@@ -3138,25 +3138,25 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   GetConnectorDefinitionRequest:
     type: object
@@ -3165,22 +3165,22 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the connector definition version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the connector definition version was created.'
       Definition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ConnectorDefinitionVersion'
         description: Information about the connector definition version.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the connector definition version.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The version of the connector definition version.
   GetConnectorDefinitionVersionRequest:
     type: object
@@ -3189,25 +3189,25 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   GetCoreDefinitionRequest:
     type: object
@@ -3216,22 +3216,22 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the core definition version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the core definition version was created.'
       Definition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/CoreDefinitionVersion'
         description: Information about the core definition version.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the core definition version.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The version of the core definition version.
   GetCoreDefinitionVersionRequest:
     type: object
@@ -3240,19 +3240,19 @@ definitions:
     type: object
     properties:
       DeploymentStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The status of the deployment: ''''Pending'''', ''''InProgress'''', ''''Success'''', or ''''Failure''''.'
       DeploymentType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentType'
         description: The type of the deployment.
       ErrorDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorDetails'
         description: Error details
       ErrorMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Error message
       UpdatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the deployment status was updated.'
   GetDeploymentStatusRequest:
     type: object
@@ -3261,25 +3261,25 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   GetDeviceDefinitionRequest:
     type: object
@@ -3288,22 +3288,22 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the device definition version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the device definition version was created.'
       Definition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeviceDefinitionVersion'
         description: Information about the device definition version.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the device definition version.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The version of the device definition version.
   GetDeviceDefinitionVersionRequest:
     type: object
@@ -3312,25 +3312,25 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   GetFunctionDefinitionRequest:
     type: object
@@ -3339,22 +3339,22 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the function definition version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the function definition version was created.'
       Definition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionDefinitionVersion'
         description: Information on the definition.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the function definition version.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The version of the function definition version.
   GetFunctionDefinitionVersionRequest:
     type: object
@@ -3363,25 +3363,25 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   GetGroupRequest:
     type: object
@@ -3390,13 +3390,13 @@ definitions:
     type: object
     properties:
       GroupCertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the certificate authority for the group.
       GroupCertificateAuthorityId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the certificate authority for the group.
       PemEncodedCertificate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The PEM encoded certificate for the group.
   GetGroupCertificateAuthorityRequest:
     type: object
@@ -3405,13 +3405,13 @@ definitions:
     type: object
     properties:
       CertificateAuthorityExpiryInMilliseconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The amount of time remaining before the certificate authority expires, in milliseconds.'
       CertificateExpiryInMilliseconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The amount of time remaining before the certificate expires, in milliseconds.'
       GroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the group certificate configuration.
   GetGroupCertificateConfigurationRequest:
     type: object
@@ -3420,19 +3420,19 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the group version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the group version was created.'
       Definition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GroupVersion'
         description: Information about the group version definition.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the group version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The unique ID for the version of the group.
   GetGroupVersionRequest:
     type: object
@@ -3441,25 +3441,25 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   GetLoggerDefinitionRequest:
     type: object
@@ -3468,19 +3468,19 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the logger definition version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the logger definition version was created.'
       Definition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LoggerDefinitionVersion'
         description: Information about the logger definition version.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the logger definition version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The version of the logger definition version.
   GetLoggerDefinitionVersionRequest:
     type: object
@@ -3489,25 +3489,25 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   GetResourceDefinitionRequest:
     type: object
@@ -3516,19 +3516,19 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Arn of the resource definition version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the resource definition version was created.'
       Definition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceDefinitionVersion'
         description: Information about the definition.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the resource definition version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The version of the resource definition version.
   GetResourceDefinitionVersionRequest:
     type: object
@@ -3537,10 +3537,10 @@ definitions:
     type: object
     properties:
       AssociatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The time when the service role was associated with the account.
       RoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the role which is associated with the account.
   GetServiceRoleForAccountRequest:
     type: object
@@ -3549,25 +3549,25 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   GetSubscriptionDefinitionRequest:
     type: object
@@ -3576,22 +3576,22 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the subscription definition version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the subscription definition version was created.'
       Definition:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SubscriptionDefinitionVersion'
         description: Information about the subscription definition version.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the subscription definition version.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The version of the subscription definition version.
   GetSubscriptionDefinitionVersionRequest:
     type: object
@@ -3600,10 +3600,10 @@ definitions:
     type: object
     properties:
       Deployments:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BulkDeploymentResults'
         description: A list of the individual group deployments in the bulk deployment operation.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
   ListBulkDeploymentDetailedReportsRequest:
     type: object
@@ -3612,10 +3612,10 @@ definitions:
     type: object
     properties:
       BulkDeployments:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/BulkDeployments'
         description: A list of bulk deployments.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
   ListBulkDeploymentsRequest:
     type: object
@@ -3624,10 +3624,10 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
   ListConnectorDefinitionVersionsRequest:
     type: object
@@ -3636,10 +3636,10 @@ definitions:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfDefinitionInformation'
         description: Information about a definition.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
   ListConnectorDefinitionsRequest:
     type: object
@@ -3648,10 +3648,10 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
   ListCoreDefinitionVersionsRequest:
     type: object
@@ -3660,10 +3660,10 @@ definitions:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfDefinitionInformation'
         description: Information about a definition.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
   ListCoreDefinitionsRequest:
     type: object
@@ -3672,10 +3672,10 @@ definitions:
     type: object
     properties:
       Deployments:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Deployments'
         description: A list of deployments for the requested groups.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
   ListDeploymentsRequest:
     type: object
@@ -3684,10 +3684,10 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
   ListDeviceDefinitionVersionsRequest:
     type: object
@@ -3696,10 +3696,10 @@ definitions:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfDefinitionInformation'
         description: Information about a definition.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
   ListDeviceDefinitionsRequest:
     type: object
@@ -3708,10 +3708,10 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
   ListFunctionDefinitionVersionsRequest:
     type: object
@@ -3720,10 +3720,10 @@ definitions:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfDefinitionInformation'
         description: Information about a definition.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
   ListFunctionDefinitionsRequest:
     type: object
@@ -3732,7 +3732,7 @@ definitions:
     type: object
     properties:
       GroupCertificateAuthorities:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfGroupCertificateAuthorityProperties'
         description: A list of certificate authorities associated with the group.
   ListGroupCertificateAuthoritiesRequest:
     type: object
@@ -3741,10 +3741,10 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
   ListGroupVersionsRequest:
     type: object
@@ -3753,10 +3753,10 @@ definitions:
     type: object
     properties:
       Groups:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfGroupInformation'
         description: Information about a group.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
   ListGroupsRequest:
     type: object
@@ -3765,10 +3765,10 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
   ListLoggerDefinitionVersionsRequest:
     type: object
@@ -3777,10 +3777,10 @@ definitions:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfDefinitionInformation'
         description: Information about a definition.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
   ListLoggerDefinitionsRequest:
     type: object
@@ -3789,10 +3789,10 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
   ListResourceDefinitionVersionsRequest:
     type: object
@@ -3801,10 +3801,10 @@ definitions:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfDefinitionInformation'
         description: Information about a definition.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
   ListResourceDefinitionsRequest:
     type: object
@@ -3813,10 +3813,10 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
       Versions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfVersionInformation'
         description: Information about a version.
   ListSubscriptionDefinitionVersionsRequest:
     type: object
@@ -3825,10 +3825,10 @@ definitions:
     type: object
     properties:
       Definitions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfDefinitionInformation'
         description: Information about a definition.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
   ListSubscriptionDefinitionsRequest:
     type: object
@@ -3837,35 +3837,35 @@ definitions:
     type: object
     properties:
       DeploymentArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the deployment.
       DeploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the deployment.
   ResetDeploymentsRequest:
     type: object
     properties:
       Force:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__boolean'
         description: 'If true, performs a best-effort only core reset.'
     description: Information needed to reset deployments.
   StartBulkDeploymentResponse:
     type: object
     properties:
       BulkDeploymentArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the bulk deployment.
       BulkDeploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the bulk deployment.
   StartBulkDeploymentRequest:
     type: object
     properties:
       ExecutionRoleArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''''greengrass:CreateDeployment'''' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.'
       InputFileUri:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''''NewDeployment'''' deployment types.'
   StopBulkDeploymentResponse:
     type: object
@@ -3877,16 +3877,16 @@ definitions:
     type: object
     properties:
       Message:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: A message about the connectivity info update request.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The new version of the connectivity info.
   UpdateConnectivityInfoRequest:
     type: object
     properties:
       ConnectivityInfo:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfConnectivityInfo'
         description: A list of connectivity info.
     description: Connectivity information.
   UpdateConnectorDefinitionResponse:
@@ -3896,7 +3896,7 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   UpdateCoreDefinitionResponse:
     type: object
@@ -3905,7 +3905,7 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   UpdateDeviceDefinitionResponse:
     type: object
@@ -3914,7 +3914,7 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   UpdateFunctionDefinitionResponse:
     type: object
@@ -3923,7 +3923,7 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   UpdateGroupResponse:
     type: object
@@ -3932,25 +3932,25 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   UpdateGroupCertificateConfigurationResponse:
     type: object
     properties:
       CertificateAuthorityExpiryInMilliseconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The amount of time remaining before the certificate authority expires, in milliseconds.'
       CertificateExpiryInMilliseconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The amount of time remaining before the certificate expires, in milliseconds.'
       GroupId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the group certificate configuration.
   UpdateGroupCertificateConfigurationRequest:
     type: object
     properties:
       CertificateExpiryInMilliseconds:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The amount of time remaining before the certificate expires, in milliseconds.'
   UpdateLoggerDefinitionResponse:
     type: object
@@ -3959,7 +3959,7 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   UpdateResourceDefinitionResponse:
     type: object
@@ -3968,7 +3968,7 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   UpdateSubscriptionDefinitionResponse:
     type: object
@@ -3977,67 +3977,67 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
   '[object Object]': {}
   BulkDeployment:
     type: object
     properties:
       BulkDeploymentArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the bulk deployment.
       BulkDeploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the bulk deployment.
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in ISO format, when the deployment was created.'
     description: Information about a bulk deployment. You cannot start a new bulk deployment while another one is still running or in a non-terminal state.
   BulkDeploymentMetrics:
     type: object
     properties:
       InvalidInputRecords:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: 'The total number of records that returned a non-retryable error. For example, this can occur if a group record from the input file uses an invalid format or specifies a nonexistent group version, or if the execution role doesn''t grant permission to deploy a group or group version.'
       RecordsProcessed:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: 'The total number of group records from the input file that have been processed so far, or attempted.'
       RetryAttempts:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: 'The total number of deployment attempts that returned a retryable error. For example, a retry is triggered if the attempt to deploy a group returns a throttling error. ''''StartBulkDeployment'''' retries a group deployment up to five times.'
     description: Relevant metrics on input records processed during bulk deployment.
   BulkDeploymentResult:
     type: object
     properties:
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in ISO format, when the deployment was created.'
       DeploymentArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the group deployment.
       DeploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the group deployment.
       DeploymentStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The current status of the group deployment: ''''Pending'''', ''''InProgress'''', ''''Success'''', or ''''Failure''''.'
       DeploymentType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentType'
         description: The type of the deployment.
       ErrorDetails:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ErrorDetails'
         description: Details about the error.
       ErrorMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The error message for a failed deployment
       GroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the Greengrass group.
     description: Information about an individual group deployment in a bulk deployment operation.
   BulkDeploymentResults:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/BulkDeploymentResult'
   BulkDeploymentStatus:
     type: string
     enum:
@@ -4051,108 +4051,108 @@ definitions:
   BulkDeployments:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/BulkDeployment'
   ConnectivityInfo:
     type: object
     properties:
       HostAddress:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The endpoint for the Greengrass core. Can be an IP address or DNS.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the connectivity information.
       Metadata:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: Metadata for this endpoint.
       PortNumber:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: The port of the Greengrass core. Usually 8883.
     description: Information about a Greengrass core's connectivity.
   Connector:
     type: object
     properties:
       ConnectorArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the connector.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'A descriptive or arbitrary ID for the connector. This value must be unique within the connector definition version. Max length is 128 characters with pattern [a-zA-Z0-9:_-]+.'
       Parameters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOf__string'
         description: The parameters or configuration that the connector uses.
     description: 'Information about a connector. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.'
   ConnectorDefinitionVersion:
     type: object
     properties:
       Connectors:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfConnector'
         description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
     description: 'Information about the connector definition version, which is a container for connectors.'
   Core:
     type: object
     properties:
       CertificateArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the certificate associated with the core.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
       SyncShadow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__boolean'
         description: 'If true, the core''s local shadow is automatically synced with the cloud.'
       ThingArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the thing which is the core.
     description: Information about a core.
   CoreDefinitionVersion:
     type: object
     properties:
       Cores:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfCore'
         description: A list of cores in the core definition version.
     description: Information about a core definition version.
   DefinitionInformation:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the definition.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the definition.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the definition.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the definition.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the definition.
     description: Information about a definition.
   Deployment:
     type: object
     properties:
       CreatedAt:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the deployment was created.'
       DeploymentArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the deployment.
       DeploymentId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the deployment.
       DeploymentType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DeploymentType'
         description: The type of the deployment.
       GroupArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the group for this deployment.
     description: Information about a deployment.
   DeploymentType:
@@ -4166,28 +4166,28 @@ definitions:
   Deployments:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Deployment'
   Device:
     type: object
     properties:
       CertificateArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the certificate associated with the device.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
       SyncShadow:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__boolean'
         description: 'If true, the device''s local shadow will be automatically synced with the cloud.'
       ThingArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The thing ARN of the device.
     description: Information about a device.
   DeviceDefinitionVersion:
     type: object
     properties:
       Devices:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfDevice'
         description: A list of devices in the definition version.
     description: Information about a device definition version.
   EncodingType:
@@ -4199,100 +4199,100 @@ definitions:
     type: object
     properties:
       DetailedErrorCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: A detailed error code.
       DetailedErrorMessage:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: A detailed error message.
     description: Details about the error.
   ErrorDetails:
     type: array
     description: A list of error details.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ErrorDetail'
   Function:
     type: object
     properties:
       FunctionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the Lambda function.
       FunctionConfiguration:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionConfiguration'
         description: The configuration of the Lambda function.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
     description: Information about a Lambda function.
   FunctionConfiguration:
     type: object
     properties:
       EncodingType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/EncodingType'
         description: The expected encoding type of the input payload for the function. The default is ''json''.
       Environment:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionConfigurationEnvironment'
         description: The environment configuration of the function.
       ExecArgs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The execution arguments.
       Executable:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the function executable.
       MemorySize:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: 'The memory size, in KB, which the function requires. This setting is not applicable and should be cleared when you run the Lambda function without containerization.'
       Pinned:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__boolean'
         description: True if the function is pinned. Pinned means the function is long-lived and starts when the core starts.
       Timeout:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: 'The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned Lambda functions for each request.'
     description: The configuration of the Lambda function.
   FunctionConfigurationEnvironment:
     type: object
     properties:
       AccessSysfs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__boolean'
         description: 'If true, the Lambda function is allowed to access the host''s /sys folder. Use this when the Lambda function needs to read device information from /sys. This setting applies only when you run the Lambda function in a Greengrass container.'
       Execution:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionExecutionConfig'
         description: Configuration related to executing the Lambda function
       ResourceAccessPolicies:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfResourceAccessPolicy'
         description: 'A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources. ResourceAccessPolicies apply only when you run the Lambda function in a Greengrass container.'
       Variables:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__mapOf__string'
         description: Environment variables for the Lambda function's configuration.
     description: The environment configuration of the function.
   FunctionDefaultConfig:
     type: object
     properties:
       Execution:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionDefaultExecutionConfig'
     description: Default configuration that will apply to all Lambda functions in the group.
   FunctionDefaultExecutionConfig:
     type: object
     properties:
       IsolationMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionIsolationMode'
     description: Configuration that defines the default containerization used for when running Lambda functions in the group. Individual Lambda functions can be override this setting.
   FunctionDefinitionVersion:
     type: object
     properties:
       DefaultConfig:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionDefaultConfig'
         description: Default configuration that will apply to all Lambda functions in this function definition version
       Functions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfFunction'
         description: A list of Lambda functions in this function definition version.
     description: Information about a function definition version.
   FunctionExecutionConfig:
     type: object
     properties:
       IsolationMode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionIsolationMode'
       RunAs:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/FunctionRunAsConfig'
     description: 'Configuration information that specifies how the Lambda function runs. '
   FunctionIsolationMode:
     type: string
@@ -4304,122 +4304,122 @@ definitions:
     type: object
     properties:
       Gid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: The Group ID whose permissions are used to run a Lambda function.
       Uid:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: The User ID whose permissions are used to run a Lambda function.
     description: 'Specifies the user and/or group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values (ggc_user/ggc_group). We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set IsolationMode to NoContainer and you must update config.json in greengrass-root/config to set allowFunctionsToRunAsRoot to yes.'
   GroupCertificateAuthorityProperties:
     type: object
     properties:
       GroupCertificateAuthorityArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the certificate authority for the group.
       GroupCertificateAuthorityId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the certificate authority for the group.
     description: Information about a certificate authority for a group.
   GroupInformation:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the group.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the group was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the group.
       LastUpdatedTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the group was last updated.'
       LatestVersion:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The latest version of the group.
       LatestVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the latest version of the group.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the group.
     description: Information about a group.
   GroupOwnerSetting:
     type: object
     properties:
       AutoAddGroupOwner:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__boolean'
         description: 'If true, AWS IoT Greengrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group.'
       GroupOwner:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The name of the Linux OS group whose privileges will be added to the Lambda process. This field is optional.
     description: Group owner related settings for local resources.
   GroupVersion:
     type: object
     properties:
       ConnectorDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the connector definition version for this group.
       CoreDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the core definition version for this group.
       DeviceDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the device definition version for this group.
       FunctionDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the function definition version for this group.
       LoggerDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the logger definition version for this group.
       ResourceDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the resource definition version for this group.
       SubscriptionDefinitionVersionArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the subscription definition version for this group.
     description: Information about a group version.
   LocalDeviceResourceData:
     type: object
     properties:
       GroupOwnerSetting:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GroupOwnerSetting'
         description: Group/owner related settings for local resources.
       SourcePath:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The local absolute path of the device resource. The source path for a device resource can refer only to a character device or block device under ''/dev''.
     description: Attributes that define a local device resource.
   LocalVolumeResourceData:
     type: object
     properties:
       DestinationPath:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The absolute local path of the resource inside the Lambda environment.
       GroupOwnerSetting:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/GroupOwnerSetting'
         description: Allows you to configure additional group privileges for the Lambda process. This field is optional.
       SourcePath:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
     description: Attributes that define a local volume resource.
   Logger:
     type: object
     properties:
       Component:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LoggerComponent'
         description: The component that will be subject to logging.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
       Level:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LoggerLevel'
         description: The level of the logs.
       Space:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__integer'
         description: 'The amount of file space, in KB, to use if the local file system is used for logging purposes.'
       Type:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LoggerType'
         description: The type of log output which will be used.
     description: Information about a logger
   LoggerComponent:
@@ -4431,7 +4431,7 @@ definitions:
     type: object
     properties:
       Loggers:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfLogger'
         description: A list of loggers.
     description: Information about a logger definition version.
   LoggerLevel:
@@ -4457,59 +4457,59 @@ definitions:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The resource ID, used to refer to a resource in the Lambda function configuration. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The descriptive resource name, which is displayed on the AWS IoT Greengrass console. Max length 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
       ResourceDataContainer:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/ResourceDataContainer'
         description: A container of data for all resource types.
     description: Information about a resource.
   ResourceAccessPolicy:
     type: object
     properties:
       Permission:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Permission'
         description: The permissions that the Lambda function has to the resource. Can be one of ''rw'' (read/write) or ''ro'' (read-only).
       ResourceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the resource. (This ID is assigned to the resource when you create the resource definiton.)
     description: A policy used by the function to access a resource.
   ResourceDataContainer:
     type: object
     properties:
       LocalDeviceResourceData:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LocalDeviceResourceData'
         description: Attributes that define the local device resource.
       LocalVolumeResourceData:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LocalVolumeResourceData'
         description: Attributes that define the local volume resource.
       S3MachineLearningModelResourceData:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/S3MachineLearningModelResourceData'
         description: Attributes that define an Amazon S3 machine learning resource.
       SageMakerMachineLearningModelResourceData:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SageMakerMachineLearningModelResourceData'
         description: Attributes that define an Amazon SageMaker machine learning resource.
       SecretsManagerSecretResourceData:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SecretsManagerSecretResourceData'
         description: 'Attributes that define a secret resource, which references a secret from AWS Secrets Manager.'
     description: 'A container for resource data. The container takes only one of the following supported resource data types: ''''LocalDeviceResourceData'''', ''''LocalVolumeResourceData'''', ''''SageMakerMachineLearningModelResourceData'''', ''''S3MachineLearningModelResourceData'''', ''''SecretsManagerSecretResourceData''''.'
   ResourceDefinitionVersion:
     type: object
     properties:
       Resources:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfResource'
         description: A list of resources.
     description: Information about a resource definition version.
   S3MachineLearningModelResourceData:
     type: object
     properties:
       DestinationPath:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The absolute local path of the resource inside the Lambda environment.
       S3Uri:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The URI of the source model in an S3 bucket. The model package must be in tar.gz or .zip format.
     description: Attributes that define an Amazon S3 machine learning resource.
   S3UrlSignerRole:
@@ -4519,20 +4519,20 @@ definitions:
     type: object
     properties:
       DestinationPath:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The absolute local path of the resource inside the Lambda environment.
       SageMakerJobArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the Amazon SageMaker training job that represents the source model.
     description: Attributes that define an Amazon SageMaker machine learning resource.
   SecretsManagerSecretResourceData:
     type: object
     properties:
       ARN:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the Secrets Manager secret to make available on the core. The value of the secret's latest version (represented by the ''AWSCURRENT'' staging label) is included by default.
       AdditionalStagingLabelsToDownload:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOf__string'
         description: 'Optional. The staging labels whose values you want to make available on the core, in addition to ''''AWSCURRENT''''.'
     description: 'Attributes that define a secret resource, which references a secret from AWS Secrets Manager. AWS IoT Greengrass stores a local, encrypted copy of the secret on the Greengrass core, where it can be securely accessed by connectors and Lambda functions.'
   SoftwareToUpdate:
@@ -4545,23 +4545,23 @@ definitions:
     type: object
     properties:
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
       Source:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The source of the subscription. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
       Subject:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The subject of the message.
       Target:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
     description: Information about a subscription.
   SubscriptionDefinitionVersion:
     type: object
     properties:
       Subscriptions:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__listOfSubscription'
         description: A list of subscriptions.
     description: Information about a subscription definition version.
   UpdateAgentLogLevel:
@@ -4580,7 +4580,7 @@ definitions:
     type: array
     description: The ARNs of the targets (IoT things or IoT thing groups) that this update will be applied to.
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/__string'
   UpdateTargetsArchitecture:
     type: string
     enum:
@@ -4599,16 +4599,16 @@ definitions:
     type: object
     properties:
       Arn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ARN of the version.
       CreationTimestamp:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: 'The time, in milliseconds since the epoch, when the version was created.'
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The ID of the version.
       Version:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/__string'
         description: The unique ID of the version.
     description: Information about a version.
   __boolean:
@@ -4618,59 +4618,59 @@ definitions:
   __listOfConnectivityInfo:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ConnectivityInfo'
   __listOfConnector:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Connector'
   __listOfCore:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Core'
   __listOfDefinitionInformation:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/DefinitionInformation'
   __listOfDevice:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Device'
   __listOfFunction:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Function'
   __listOfGroupCertificateAuthorityProperties:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/GroupCertificateAuthorityProperties'
   __listOfGroupInformation:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/GroupInformation'
   __listOfLogger:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Logger'
   __listOfResource:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Resource'
   __listOfResourceAccessPolicy:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/ResourceAccessPolicy'
   __listOfSubscription:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Subscription'
   __listOfVersionInformation:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/VersionInformation'
   __listOf__string:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/__string'
   __string:
     type: string
   __mapOf__string:

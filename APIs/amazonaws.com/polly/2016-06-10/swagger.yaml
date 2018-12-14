@@ -506,10 +506,10 @@ definitions:
           Name: Amy
     properties:
       Voices:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VoiceList'
         description: A list of voices with their properties.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The pagination token to use in the next request to continue the listing of voices. <code>NextToken</code> is returned only if the response is truncated.
   DescribeVoicesInput:
     type: object
@@ -532,10 +532,10 @@ definitions:
         Size: 503
     properties:
       Lexicon:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Lexicon'
         description: 'Lexicon object that provides name and the string content of the lexicon. '
       LexiconAttributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LexiconAttributes'
         description: 'Metadata of the lexicon, including phonetic alphabetic used, language code, lexicon ARN, number of lexemes defined in the lexicon, and size of lexicon in bytes.'
   GetLexiconInput:
     type: object
@@ -546,7 +546,7 @@ definitions:
     type: object
     properties:
       SynthesisTask:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SynthesisTask'
         description: 'SynthesisTask object that provides information from the requested task, including output format, creation time, task status, and so on.'
   GetSpeechSynthesisTaskInput:
     type: object
@@ -567,10 +567,10 @@ definitions:
           Name: example
     properties:
       Lexicons:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LexiconDescriptionList'
         description: A list of lexicon names and attributes.
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: The pagination token to use in the next request to continue the listing of lexicons. <code>NextToken</code> is returned only if the response is truncated.
   ListLexiconsInput:
     type: object
@@ -580,10 +580,10 @@ definitions:
     type: object
     properties:
       NextToken:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/NextToken'
         description: 'An opaque pagination token returned from the previous List operation in this request. If present, this indicates where to continue the listing.'
       SynthesisTasks:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SynthesisTasks'
         description: 'List of SynthesisTask objects that provides information from the specified task in the list request, including output format, creation time, task status, and so on.'
   ListSpeechSynthesisTasksInput:
     type: object
@@ -601,7 +601,7 @@ definitions:
       Name: W3C
     properties:
       Content:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LexiconContent'
         description: Content of the PLS lexicon as string data.
   InvalidLexiconException: {}
   UnsupportedPlsAlphabetException: {}
@@ -613,7 +613,7 @@ definitions:
     type: object
     properties:
       SynthesisTask:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SynthesisTask'
         description: SynthesisTask object that provides information and attributes about a newly submitted speech synthesis task.
   StartSpeechSynthesisTaskInput:
     type: object
@@ -624,37 +624,37 @@ definitions:
       - VoiceId
     properties:
       LexiconNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LexiconNameList'
         description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. '
       OutputFormat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputFormat'
         description: 'The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. '
       OutputS3BucketName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputS3BucketName'
         description: Amazon S3 bucket name to which the output file will be saved.
       OutputS3KeyPrefix:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputS3KeyPrefix'
         description: The Amazon S3 key prefix for the output speech file.
       SampleRate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SampleRate'
         description: '<p>The audio frequency specified in Hz.</p> <p>The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050". The default value is "22050".</p> <p>Valid values for pcm are "8000" and "16000" The default value is "16000". </p>'
       SnsTopicArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SnsTopicArn'
         description: ARN for the SNS topic optionally used for providing status notification for a speech synthesis task.
       SpeechMarkTypes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SpeechMarkTypeList'
         description: The type of speech marks returned for the input text.
       Text:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Text'
         description: 'The input text to synthesize. If you specify ssml as the TextType, follow the SSML format for the input text. '
       TextType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TextType'
         description: 'Specifies whether the input text is plain text or SSML. The default value is plain text. '
       VoiceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VoiceId'
         description: 'Voice ID to use for the synthesis. '
       LanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageCode'
         description: '<p>Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>'
   TextLengthExceededException: {}
   InvalidS3BucketException: {}
@@ -673,7 +673,7 @@ definitions:
       RequestCharacters: 37
     properties:
       AudioStream:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/AudioStream'
         description: ' Stream containing the synthesized speech. '
   SynthesizeSpeechInput:
     type: object
@@ -691,28 +691,28 @@ definitions:
       VoiceId: Joanna
     properties:
       LexiconNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LexiconNameList'
         description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. For information about storing lexicons, see <a href="http://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html">PutLexicon</a>.'
       OutputFormat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputFormat'
         description: '<p> The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. </p> <p>When pcm is used, the content returned is audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format. </p>'
       SampleRate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SampleRate'
         description: '<p> The audio frequency specified in Hz. </p> <p>The valid values for <code>mp3</code> and <code>ogg_vorbis</code> are "8000", "16000", and "22050". The default value is "22050". </p> <p> Valid values for <code>pcm</code> are "8000" and "16000" The default value is "16000". </p>'
       SpeechMarkTypes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SpeechMarkTypeList'
         description: The type of speech marks returned for the input text.
       Text:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Text'
         description: ' Input text to synthesize. If you specify <code>ssml</code> as the <code>TextType</code>, follow the SSML format for the input text. '
       TextType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TextType'
         description: ' Specifies whether the input text is plain text or SSML. The default value is plain text. For more information, see <a href="http://docs.aws.amazon.com/polly/latest/dg/ssml.html">Using SSML</a>.'
       VoiceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VoiceId'
         description: ' Voice ID to use for the synthesis. You can get a list of available voice IDs by calling the <a href="http://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation. '
       LanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageCode'
         description: '<p>Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>'
   Alphabet:
     type: string
@@ -765,7 +765,7 @@ definitions:
   LanguageCodeList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/LanguageCode'
   LanguageName:
     type: string
   LastModified:
@@ -777,10 +777,10 @@ definitions:
     type: object
     properties:
       Content:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LexiconContent'
         description: Lexicon content in string format. The content of a lexicon must be in PLS format.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LexiconName'
         description: Name of the lexicon.
     description: 'Provides lexicon name and lexicon content in string format. For more information, see <a href="https://www.w3.org/TR/pronunciation-lexicon/">Pronunciation Lexicon Specification (PLS) Version 1.0</a>.'
   LexiconArn:
@@ -789,22 +789,22 @@ definitions:
     type: object
     properties:
       Alphabet:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Alphabet'
         description: Phonetic alphabet used in the lexicon. Valid values are <code>ipa</code> and <code>x-sampa</code>.
       LanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageCode'
         description: 'Language code that the lexicon applies to. A lexicon with a language code such as "en" would be applied to all English languages (en-GB, en-US, en-AUS, en-WLS, and so on.'
       LastModified:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LastModified'
         description: Date lexicon was last modified (a timestamp value).
       LexiconArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LexiconArn'
         description: Amazon Resource Name (ARN) of the lexicon.
       LexemesCount:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LexemesCount'
         description: Number of lexemes in the lexicon.
       Size:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Size'
         description: 'Total size of the lexicon, in characters.'
     description: 'Contains metadata describing the lexicon such as the number of lexemes, language code, and so on. For more information, see <a href="http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html">Managing Lexicons</a>.'
   LexiconContent:
@@ -813,16 +813,16 @@ definitions:
     type: object
     properties:
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LexiconName'
         description: Name of the lexicon.
       Attributes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LexiconAttributes'
         description: Provides lexicon metadata.
     description: Describes the content of the lexicon.
   LexiconDescriptionList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/LexiconDescription'
   LexiconName:
     type: string
     pattern: '[0-9A-Za-z]{1,20}'
@@ -830,7 +830,7 @@ definitions:
   LexiconNameList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/LexiconName'
     maxItems: 5
   MaxResults:
     type: integer
@@ -872,58 +872,58 @@ definitions:
   SpeechMarkTypeList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SpeechMarkType'
     maxItems: 4
   SynthesisTask:
     type: object
     properties:
       TaskId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskId'
         description: The Amazon Polly generated identifier for a speech synthesis task.
       TaskStatus:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskStatus'
         description: Current status of the individual speech synthesis task.
       TaskStatusReason:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TaskStatusReason'
         description: 'Reason for the current status of a specific speech synthesis task, including errors if the task has failed.'
       OutputUri:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputUri'
         description: Pathway for the output speech file.
       CreationTime:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/DateTime'
         description: Timestamp for the time the synthesis task was started.
       RequestCharacters:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/RequestCharacters'
         description: Number of billable characters synthesized.
       SnsTopicArn:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SnsTopicArn'
         description: ARN for the SNS topic optionally used for providing status notification for a speech synthesis task.
       LexiconNames:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LexiconNameList'
         description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. '
       OutputFormat:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/OutputFormat'
         description: 'The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. '
       SampleRate:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SampleRate'
         description: '<p>The audio frequency specified in Hz.</p> <p>The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050". The default value is "22050".</p> <p>Valid values for pcm are "8000" and "16000" The default value is "16000". </p>'
       SpeechMarkTypes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/SpeechMarkTypeList'
         description: The type of speech marks returned for the input text.
       TextType:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/TextType'
         description: 'Specifies whether the input text is plain text or SSML. The default value is plain text. '
       VoiceId:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VoiceId'
         description: 'Voice ID to use for the synthesis. '
       LanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageCode'
         description: '<p>Optional language code for a synthesis task. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>'
     description: SynthesisTask object that provides information about a speech synthesis task.
   SynthesisTasks:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/SynthesisTask'
   TaskId:
     type: string
     minLength: 1
@@ -948,22 +948,22 @@ definitions:
     type: object
     properties:
       Gender:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/Gender'
         description: Gender of the voice.
       Id:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VoiceId'
         description: Amazon Polly assigned voice ID. This is the ID that you specify when calling the <code>SynthesizeSpeech</code> operation.
       LanguageCode:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageCode'
         description: Language code of the voice.
       LanguageName:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageName'
         description: Human readable name of the language in English.
       Name:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/VoiceName'
         description: 'Name of the voice (for example, Salli, Kendra, etc.). This provides a human readable voice name that you might display in your application.'
       AdditionalLanguageCodes:
-        $ref: '#/definitions/[object Object]'
+        $ref: '#/definitions/LanguageCodeList'
         description: '<p>Additional codes for languages available for the specified voice in addition to its default language. </p> <p>For example, the default language for Aditi is Indian English (en-IN) because it was first used for that language. Since Aditi is bilingual and fluent in both Indian English and Hindi, this parameter would show the code <code>hi-IN</code>.</p>'
     description: Description of the voice.
   VoiceId:
@@ -1029,6 +1029,6 @@ definitions:
   VoiceList:
     type: array
     items:
-      $ref: '#/definitions/[object Object]'
+      $ref: '#/definitions/Voice'
   VoiceName:
     type: string
