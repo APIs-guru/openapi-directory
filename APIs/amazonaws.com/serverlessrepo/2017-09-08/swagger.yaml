@@ -66,12 +66,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1239,7 +1239,7 @@ definitions:
       ReadmeUrl:
         $ref: '#/definitions/__string'
         description: <p>A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
-  '[object Object]': {}
+  undefined: {}
   ApplicationDependencySummary:
     type: object
     required:

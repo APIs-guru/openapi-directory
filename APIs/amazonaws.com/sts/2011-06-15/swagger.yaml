@@ -44,12 +44,12 @@ produces: []
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -687,7 +687,7 @@ definitions:
       TokenCode:
         $ref: '#/definitions/tokenCodeType'
         description: '<p>The value provided by the MFA device, if MFA is required. If any policy requires the IAM user to submit an MFA code, specify this value. If MFA authentication is required, and the user does not provide a code when requesting a set of temporary security credentials, the user will receive an "access denied" response when requesting resources that require MFA authentication.</p> <p>The format for this parameter, as described by its regex pattern, is a sequence of six numeric digits.</p>'
-  '[object Object]': {}
+  undefined: {}
   AssumedRoleUser:
     type: object
     required:

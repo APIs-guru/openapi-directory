@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -5608,7 +5608,7 @@ definitions:
       DryRun:
         $ref: '#/definitions/Bool'
         description: 'Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded. If schema compatibility fails, an exception would be thrown else the call would succeed. This parameter is optional and defaults to false.'
-  '[object Object]': {}
+  undefined: {}
   Arn:
     type: string
   Arns:

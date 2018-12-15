@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -7415,7 +7415,7 @@ definitions:
         $ref: '#/definitions/ListOfPatchOperation'
         description: A list of update operations to be applied to the specified resource and in the order specified in this list.
     description: Updates an existing <a>VpcLink</a> of a specified identifier.
-  '[object Object]': {}
+  undefined: {}
   AccessLogSettings:
     type: object
     properties:

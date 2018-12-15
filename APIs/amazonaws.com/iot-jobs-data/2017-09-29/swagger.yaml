@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -383,7 +383,7 @@ definitions:
   DescribeJobExecutionJobId:
     type: string
     pattern: '[a-zA-Z0-9_-]+|^\$next'
-  '[object Object]': {}
+  undefined: {}
   DetailsKey:
     type: string
     pattern: '[a-zA-Z0-9:_-]+'

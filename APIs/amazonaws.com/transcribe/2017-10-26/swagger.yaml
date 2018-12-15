@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -697,7 +697,7 @@ definitions:
         description: An array of strings containing the vocabulary entries.
   Boolean:
     type: boolean
-  '[object Object]': {}
+  undefined: {}
   DateTime:
     type: string
     format: date-time

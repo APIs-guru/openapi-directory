@@ -44,12 +44,12 @@ produces: []
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -3331,7 +3331,7 @@ definitions:
     enum:
       - single-az
       - cross-az
-  '[object Object]': {}
+  undefined: {}
   AllowedNodeGroupId:
     type: string
     pattern: \d+

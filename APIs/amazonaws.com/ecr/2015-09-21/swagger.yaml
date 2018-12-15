@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1850,7 +1850,7 @@ definitions:
     description: 'The layer part size is not valid, or the first byte specified is not consecutive to the last byte of a previous layer part upload.'
   Arn:
     type: string
-  '[object Object]': {}
+  undefined: {}
   AuthorizationData:
     type: object
     properties:

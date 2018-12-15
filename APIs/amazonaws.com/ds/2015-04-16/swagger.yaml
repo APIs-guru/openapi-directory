@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -3392,7 +3392,7 @@ definitions:
         $ref: '#/definitions/TrustId'
         description: The unique Trust ID of the trust relationship to verify.
     description: Initiates the verification of an existing trust relationship between an AWS Managed Microsoft AD directory and an external domain.
-  '[object Object]': {}
+  undefined: {}
   AccessUrl:
     type: string
     minLength: 1

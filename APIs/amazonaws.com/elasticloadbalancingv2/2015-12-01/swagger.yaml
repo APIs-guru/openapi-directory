@@ -44,12 +44,12 @@ produces: []
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -2663,7 +2663,7 @@ definitions:
       SubnetMappings:
         $ref: '#/definitions/SubnetMappings'
         description: <p>The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>You cannot specify Elastic IP addresses for your subnets.</p>
-  '[object Object]': {}
+  undefined: {}
   Action:
     type: object
     required:

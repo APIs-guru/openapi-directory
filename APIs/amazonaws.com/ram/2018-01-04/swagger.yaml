@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1434,7 +1434,7 @@ definitions:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   MissingRequiredParameterException: {}
-  '[object Object]': {}
+  undefined: {}
   Boolean:
     type: boolean
   DateTime:

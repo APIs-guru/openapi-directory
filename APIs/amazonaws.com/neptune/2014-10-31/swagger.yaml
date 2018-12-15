@@ -44,12 +44,12 @@ produces: []
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -4251,7 +4251,7 @@ definitions:
         $ref: '#/definitions/BooleanOptional'
         description: '<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>'
     description: <p/>
-  '[object Object]': {}
+  undefined: {}
   ApplyMethod:
     type: string
     enum:

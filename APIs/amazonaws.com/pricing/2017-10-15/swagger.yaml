@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -418,7 +418,7 @@ definitions:
       MaxResults:
         $ref: '#/definitions/BoxedInteger'
         description: The maximum number of results to return in the response.
-  '[object Object]': {}
+  undefined: {}
   AttributeNameList:
     type: array
     items:

@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -2709,7 +2709,7 @@ definitions:
       - FILE_UPLOAD
       - FILE_DOWNLOAD
       - PRINTING_TO_LOCAL_DEVICE
-  '[object Object]': {}
+  undefined: {}
   Application:
     type: object
     properties:

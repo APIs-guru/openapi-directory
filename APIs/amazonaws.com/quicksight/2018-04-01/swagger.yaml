@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1314,7 +1314,7 @@ definitions:
     maxLength: 12
   Boolean:
     type: boolean
-  '[object Object]': {}
+  undefined: {}
   EmbeddingUrl:
     type: string
     format: password

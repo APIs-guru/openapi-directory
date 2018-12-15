@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -425,7 +425,7 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
         description: The message for the exception.
     description: The payload exceeds the maximum size allowed.
-  '[object Object]': {}
+  undefined: {}
   ErrorMessage:
     type: string
   JsonDocument:

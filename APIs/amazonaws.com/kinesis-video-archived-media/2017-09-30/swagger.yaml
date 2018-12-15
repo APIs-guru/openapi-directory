@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -360,7 +360,7 @@ definitions:
       FragmentSelector:
         $ref: '#/definitions/FragmentSelector'
         description: Describes the time stamp range and time stamp origin for the range of fragments to return.
-  '[object Object]': {}
+  undefined: {}
   ContentType:
     type: string
     pattern: '^[a-zA-Z0-9_\.\-]+$'

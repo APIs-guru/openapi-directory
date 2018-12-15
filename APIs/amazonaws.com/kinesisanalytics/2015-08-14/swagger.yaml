@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1188,7 +1188,7 @@ definitions:
       ApplicationUpdate:
         $ref: '#/definitions/ApplicationUpdate'
         description: Describes application updates.
-  '[object Object]': {}
+  undefined: {}
   ApplicationCode:
     type: string
     minLength: 0

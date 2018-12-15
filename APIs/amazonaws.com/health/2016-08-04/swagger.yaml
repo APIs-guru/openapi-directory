@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -456,7 +456,7 @@ definitions:
       locale:
         $ref: '#/definitions/locale'
         description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
-  '[object Object]': {}
+  undefined: {}
   AffectedEntity:
     type: object
     properties:

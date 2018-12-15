@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -360,7 +360,7 @@ definitions:
     type: integer
     minimum: 1
     maximum: 1000
-  '[object Object]': {}
+  undefined: {}
   CreateRule:
     type: object
     required:

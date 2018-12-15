@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -502,7 +502,7 @@ definitions:
       ScalingInstructions:
         $ref: '#/definitions/ScalingInstructions'
         description: The scaling instructions.
-  '[object Object]': {}
+  undefined: {}
   ApplicationSource:
     type: object
     properties:

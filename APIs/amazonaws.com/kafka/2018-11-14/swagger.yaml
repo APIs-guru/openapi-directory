@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -468,7 +468,7 @@ definitions:
     enum:
       - DEFAULT
     description: 'The distribution of broker nodes across Availability Zones. By default, broker nodes are distributed among three Availability Zones. Currently, the only supported value is DEFAULT. You can either specify this value explicitly or leave it out.'
-  '[object Object]': {}
+  undefined: {}
   BrokerNodeGroupInfo:
     type: object
     required:

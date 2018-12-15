@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1200,7 +1200,7 @@ definitions:
       Status:
         $ref: '#/definitions/CertificateAuthorityStatus'
         description: Status of your private CA.
-  '[object Object]': {}
+  undefined: {}
   ASN1Subject:
     type: object
     properties:

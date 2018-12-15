@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1882,7 +1882,7 @@ definitions:
       ScalingType:
         $ref: '#/definitions/ScalingType'
         description: The scaling type. Uniform scaling creates shards of equal size.
-  '[object Object]': {}
+  undefined: {}
   BooleanObject:
     type: boolean
   Consumer:

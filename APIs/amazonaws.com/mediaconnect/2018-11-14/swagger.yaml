@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1069,7 +1069,7 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
     description: A request to update the source of a flow.
-  '[object Object]': {}
+  undefined: {}
   AddOutputRequest:
     type: object
     required:

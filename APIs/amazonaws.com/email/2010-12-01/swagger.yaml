@@ -44,12 +44,12 @@ produces: []
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -3837,7 +3837,7 @@ definitions:
         $ref: '#/definitions/Address'
         description: The email address to be verified.
     description: 'Represents a request to begin email address verification with Amazon SES. For information about email address verification, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html">Amazon SES Developer Guide</a>.'
-  '[object Object]': {}
+  undefined: {}
   AddHeaderAction:
     type: object
     required:

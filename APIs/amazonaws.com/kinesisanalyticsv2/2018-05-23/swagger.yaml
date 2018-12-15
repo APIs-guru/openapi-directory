@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1528,7 +1528,7 @@ definitions:
       CloudWatchLoggingOptionUpdates:
         $ref: '#/definitions/CloudWatchLoggingOptionUpdates'
         description: 'Describes application Amazon CloudWatch logging option updates. You can only update existing CloudWatch logging options with this action. To add a new CloudWatch logging option, use <a>AddApplicationCloudWatchLoggingOption</a>.'
-  '[object Object]': {}
+  undefined: {}
   ApplicationCodeConfiguration:
     type: object
     required:

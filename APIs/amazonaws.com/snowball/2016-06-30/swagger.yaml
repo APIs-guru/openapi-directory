@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1321,7 +1321,7 @@ definitions:
       ForwardingAddressId:
         $ref: '#/definitions/AddressId'
         description: The updated ID for the forwarding address for a job. This field is not supported in most regions.
-  '[object Object]': {}
+  undefined: {}
   Address:
     type: object
     properties:

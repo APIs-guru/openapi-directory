@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -784,7 +784,7 @@ definitions:
       LifecyclePolicy:
         $ref: '#/definitions/LifecyclePolicy'
         description: The object lifecycle policy to apply to the container.
-  '[object Object]': {}
+  undefined: {}
   AllowedHeaders:
     type: array
     items:

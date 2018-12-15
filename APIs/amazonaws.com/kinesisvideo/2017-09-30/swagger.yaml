@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -814,7 +814,7 @@ definitions:
       - LIST_FRAGMENTS
       - GET_MEDIA_FOR_FRAGMENT_LIST
       - GET_HLS_STREAMING_SESSION_URL
-  '[object Object]': {}
+  undefined: {}
   ComparisonOperator:
     type: string
     enum:

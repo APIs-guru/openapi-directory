@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -3381,7 +3381,7 @@ definitions:
         $ref: '#/definitions/OnPremisesTagSet'
         description: Information about an on-premises instance tag set. The deployment group will include only on-premises instances identified by all the tag groups.
     description: Represents the input of an UpdateDeploymentGroup operation.
-  '[object Object]': {}
+  undefined: {}
   AdditionalDeploymentStatusInfo:
     type: string
     description: 'AdditionalDeploymentStatusInfo is deprecated, use DeploymentStatusMessageList instead.'
@@ -4206,8 +4206,7 @@ definitions:
       instanceType:
         $ref: '#/definitions/InstanceType'
         description: '<p>Information about which environment an instance belongs to in a blue/green deployment.</p> <ul> <li> <p>BLUE: The instance is part of the original environment.</p> </li> <li> <p>GREEN: The instance is part of the replacement environment.</p> </li> </ul>'
-    description: Information about an instance in a deployment.
-    x-deprecation: 'InstanceSummary is deprecated, use DeploymentTarget instead.'
+    description: 'Information about an instance in a deployment.InstanceSummary is deprecated, use DeploymentTarget instead.'
   InstanceSummaryList:
     type: array
     items:
@@ -4409,8 +4408,7 @@ definitions:
       sha256:
         $ref: '#/definitions/RawStringSha256'
         description: The SHA256 hash value of the revision content.
-    description: 'A revision for an AWS Lambda deployment that is a YAML-formatted or JSON-formatted string. For AWS Lambda deployments, the revision is the same as the AppSpec file.'
-    x-deprecation: 'RawString and String revision type are deprecated, use AppSpecContent type instead.'
+    description: 'A revision for an AWS Lambda deployment that is a YAML-formatted or JSON-formatted string. For AWS Lambda deployments, the revision is the same as the AppSpec file.RawString and String revision type are deprecated, use AppSpecContent type instead.'
   RawStringContent:
     type: string
   RawStringSha256:

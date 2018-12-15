@@ -44,12 +44,12 @@ produces: []
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -2895,7 +2895,7 @@ definitions:
     description: A list of validation messages for a specified configuration template.
   ARN:
     type: string
-  '[object Object]': {}
+  undefined: {}
   AbortableOperationInProgress:
     type: boolean
   ActionHistoryStatus:

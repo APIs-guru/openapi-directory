@@ -44,12 +44,12 @@ produces: []
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -2005,7 +2005,7 @@ definitions:
         $ref: '#/definitions/PolicyNames'
         description: 'The names of the policies. This list must include all policies to be enabled. If you omit a policy that is currently enabled, it is disabled. If the list is empty, all current policies are disabled.'
     description: Contains the parameters for SetLoadBalancePoliciesOfListener.
-  '[object Object]': {}
+  undefined: {}
   AccessLog:
     type: object
     required:

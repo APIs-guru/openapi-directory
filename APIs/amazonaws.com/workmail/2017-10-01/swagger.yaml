@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -2470,7 +2470,7 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: The configuration for a resource isn't valid. A resource must either be able to auto-respond to requests or have at least one delegate associated that can do it on its behalf.
-  '[object Object]': {}
+  undefined: {}
   Aliases:
     type: array
     items:

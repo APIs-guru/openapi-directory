@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -2371,7 +2371,7 @@ definitions:
       AutoGrantedValue:
         $ref: '#/definitions/Integer'
         description: The Qualification value to use for automatically granted Qualifications. This parameter is used only if the AutoGranted parameter is true.
-  '[object Object]': {}
+  undefined: {}
   Assignment:
     type: object
     properties:

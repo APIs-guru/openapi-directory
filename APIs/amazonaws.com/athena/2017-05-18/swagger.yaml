@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -698,7 +698,7 @@ definitions:
       QueryExecutionId:
         $ref: '#/definitions/QueryExecutionId'
         description: The unique ID of the query execution to stop.
-  '[object Object]': {}
+  undefined: {}
   Boolean:
     type: boolean
   ColumnInfo:

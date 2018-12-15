@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -3910,7 +3910,7 @@ definitions:
       MountPoint:
         $ref: '#/definitions/String'
         description: The new mount point.
-  '[object Object]': {}
+  undefined: {}
   AgentVersion:
     type: object
     properties:

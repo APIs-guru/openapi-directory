@@ -44,12 +44,12 @@ produces: []
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -3276,7 +3276,7 @@ definitions:
       ServiceLinkedRoleARN:
         $ref: '#/definitions/ResourceName'
         description: The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf.
-  '[object Object]': {}
+  undefined: {}
   Activities:
     type: array
     items:

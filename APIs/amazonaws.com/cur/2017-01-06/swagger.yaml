@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -295,7 +295,7 @@ definitions:
       - REDSHIFT
       - QUICKSIGHT
     description: Enable support for Redshift and/or QuickSight.
-  '[object Object]': {}
+  undefined: {}
   AdditionalArtifactList:
     type: array
     description: A list of additional artifacts.

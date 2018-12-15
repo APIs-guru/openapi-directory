@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -5695,7 +5695,7 @@ definitions:
       FunctionInput:
         $ref: '#/definitions/UserDefinedFunctionInput'
         description: A <code>FunctionInput</code> object that re-defines the function in the Data Catalog.
-  '[object Object]': {}
+  undefined: {}
   Action:
     type: object
     properties:

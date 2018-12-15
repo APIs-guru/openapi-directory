@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1134,7 +1134,7 @@ definitions:
     description: 'Returned if you don’t wait at least 24 hours before changing the throughput mode, or decreasing the Provisioned Throughput value.'
   AwsAccountId:
     type: string
-  '[object Object]': {}
+  undefined: {}
   CreationToken:
     type: string
     minLength: 1

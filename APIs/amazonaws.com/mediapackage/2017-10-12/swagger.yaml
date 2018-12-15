@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1030,7 +1030,7 @@ definitions:
       - SCTE35_ENHANCED
       - PASSTHROUGH
     type: string
-  '[object Object]': {}
+  undefined: {}
   Channel:
     type: object
     properties:

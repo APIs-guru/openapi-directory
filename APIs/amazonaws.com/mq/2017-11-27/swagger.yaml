@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1338,7 +1338,7 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
     description: Updates the information for an ActiveMQ user.
-  '[object Object]': {}
+  undefined: {}
   BrokerInstance:
     type: object
     properties:

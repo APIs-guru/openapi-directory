@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -4494,7 +4494,7 @@ definitions:
       DeviceType:
         $ref: '#/definitions/DeviceType'
         description: '<p>The type of medium changer you want to select.</p> <p> Valid Values: "STK-L700", "AWS-Gateway-VTL"</p>'
-  '[object Object]': {}
+  undefined: {}
   ActivationKey:
     type: string
     minLength: 1

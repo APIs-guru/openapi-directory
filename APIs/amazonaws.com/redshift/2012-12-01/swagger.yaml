@@ -44,12 +44,12 @@ produces: []
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -5582,7 +5582,7 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The unique identifier of the cluster that you want to rotate the encryption keys for.</p> <p>Constraints: Must be the name of valid cluster that has encryption enabled.</p>'
     description: <p/>
-  '[object Object]': {}
+  undefined: {}
   AccountAttribute:
     type: object
     properties:

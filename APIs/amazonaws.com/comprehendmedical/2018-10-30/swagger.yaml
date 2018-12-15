@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -245,7 +245,7 @@ definitions:
       Text:
         $ref: '#/definitions/BoundedLengthString'
         description: ' A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters. '
-  '[object Object]': {}
+  undefined: {}
   Attribute:
     type: object
     properties:

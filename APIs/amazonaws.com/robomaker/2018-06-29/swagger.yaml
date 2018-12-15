@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -2461,7 +2461,7 @@ definitions:
     pattern: 'arn:.*'
     minLength: 1
     maxLength: 1224
-  '[object Object]': {}
+  undefined: {}
   Arns:
     type: array
     items:

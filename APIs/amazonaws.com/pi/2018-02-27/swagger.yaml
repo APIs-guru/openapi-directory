@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -304,7 +304,7 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.'
-  '[object Object]': {}
+  undefined: {}
   DataPoint:
     type: object
     required:

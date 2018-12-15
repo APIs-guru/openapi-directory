@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1394,7 +1394,7 @@ definitions:
         $ref: '#/definitions/ExceptionMessage'
         description: A message returned when an LambdaThrottledException is thrown
     description: 'AWS Lambda throttled your account, please contact AWS Support'
-  '[object Object]': {}
+  undefined: {}
   ApplicationArn:
     type: string
     pattern: 'arn:aws:sns:[-0-9a-z]+:\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+'

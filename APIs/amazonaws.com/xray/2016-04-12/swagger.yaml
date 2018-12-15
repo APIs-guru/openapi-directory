@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1101,7 +1101,7 @@ definitions:
       SamplingRuleUpdate:
         $ref: '#/definitions/SamplingRuleUpdate'
         description: The rule and fields to change.
-  '[object Object]': {}
+  undefined: {}
   Alias:
     type: object
     properties:

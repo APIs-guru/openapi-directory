@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -3979,7 +3979,7 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The name of the definition.
-  '[object Object]': {}
+  undefined: {}
   BulkDeployment:
     type: object
     properties:

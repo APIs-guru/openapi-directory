@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -801,7 +801,7 @@ definitions:
       placementTemplate:
         $ref: '#/definitions/PlacementTemplate'
         description: 'An object defining the project update. Once a project has been created, you cannot add device template names to the project. However, for a given <code>placementTemplate</code>, you can update the associated <code>callbackOverrides</code> for the device definition using this API.'
-  '[object Object]': {}
+  undefined: {}
   AttributeDefaultValue:
     type: string
     maxLength: 800

@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1444,7 +1444,7 @@ definitions:
     type: string
     pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$'
     maxLength: 128
-  '[object Object]': {}
+  undefined: {}
   AgentArnList:
     type: array
     items:

@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -2637,7 +2637,7 @@ definitions:
         description: Boolean value to determine whether the user is granted Poweruser privileges.
   IllegalUserStateException: {}
   DeactivatingLastSystemUserException: {}
-  '[object Object]': {}
+  undefined: {}
   Activity:
     type: object
     properties:

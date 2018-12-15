@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -3268,7 +3268,7 @@ definitions:
       Name:
         $ref: '#/definitions/StreamProcessorName'
         description: The name of a stream processor created by .
-  '[object Object]': {}
+  undefined: {}
   AgeRange:
     type: object
     properties:

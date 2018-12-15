@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -963,7 +963,7 @@ definitions:
         $ref: '#/definitions/CaseId'
         description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
     description: <p/>
-  '[object Object]': {}
+  undefined: {}
   AfterTime:
     type: string
   Attachment:

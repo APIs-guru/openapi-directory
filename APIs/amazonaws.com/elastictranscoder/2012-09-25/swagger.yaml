@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1221,7 +1221,7 @@ definitions:
   AccessControl:
     type: string
     pattern: (^FullControl$)|(^Read$)|(^ReadAcp$)|(^WriteAcp$)
-  '[object Object]': {}
+  undefined: {}
   AccessControls:
     type: array
     items:

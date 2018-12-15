@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -965,7 +965,7 @@ definitions:
       TagKeyList:
         $ref: '#/definitions/TagKeyList'
         description: 'A list of one or more tag keys for the tags that you are removing. Specify only the tag keys, not the tag values.'
-  '[object Object]': {}
+  undefined: {}
   Backup:
     type: object
     required:

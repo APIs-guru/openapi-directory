@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -3480,7 +3480,7 @@ definitions:
         description: The version of the traffic policy that you want Amazon Route 53 to use to update resource record sets for the specified traffic policy instance.
     description: A complex type that contains information about the resource record sets that you want to update based on a specified traffic policy instance.
   ConflictingTypes: {}
-  '[object Object]': {}
+  undefined: {}
   AccountLimit:
     type: object
     required:

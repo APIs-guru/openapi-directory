@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1589,7 +1589,7 @@ definitions:
       GroupByAttribute:
         $ref: '#/definitions/NonEmptyString'
         description: The updated GroupBy attribute that defines this insight.
-  '[object Object]': {}
+  undefined: {}
   AccountDetails:
     type: object
     properties:

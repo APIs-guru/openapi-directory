@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -3638,7 +3638,7 @@ definitions:
     description: The request to update a streaming distribution.
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2017-10-30/'
-  '[object Object]': {}
+  undefined: {}
   ActiveTrustedSigners:
     type: object
     required:

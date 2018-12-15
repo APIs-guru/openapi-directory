@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1027,7 +1027,7 @@ definitions:
     description: The account ID of the user. It should be a 12-digit number.
     minLength: 12
     maxLength: 12
-  '[object Object]': {}
+  undefined: {}
   Budget:
     type: object
     required:

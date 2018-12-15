@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -516,7 +516,7 @@ definitions:
   AWSAccountId:
     type: string
     pattern: '[0-9]{12}'
-  '[object Object]': {}
+  undefined: {}
   BucketName:
     type: string
     maxLength: 500

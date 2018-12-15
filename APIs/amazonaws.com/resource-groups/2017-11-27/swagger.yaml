@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -797,8 +797,7 @@ definitions:
         description: A list of GroupIdentifier objects. Each identifier is an object that contains both the GroupName and the GroupArn.
       Groups:
         $ref: '#/definitions/GroupList'
-        description: A list of resource groups.
-        x-deprecation: 'This field is deprecated, use GroupIdentifiers instead.'
+        description: 'A list of resource groups.This field is deprecated, use GroupIdentifiers instead.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The NextToken value to include in a subsequent <code>ListGroups</code> request, to get more results.'
@@ -894,7 +893,7 @@ definitions:
       ResourceQuery:
         $ref: '#/definitions/ResourceQuery'
         description: The resource query that determines which AWS resources are members of the resource group.
-  '[object Object]': {}
+  undefined: {}
   Group:
     type: object
     required:

@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1107,7 +1107,7 @@ definitions:
       ClientAffinity:
         $ref: '#/definitions/ClientAffinity'
         description: '<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the source port and protocol of the user request. This gives you control over whether and how to maintain client affinity to a given endpoint.</p> <p>The default value is <code>NONE</code>.</p>'
-  '[object Object]': {}
+  undefined: {}
   Accelerator:
     type: object
     properties:

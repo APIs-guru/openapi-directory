@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -2670,7 +2670,7 @@ definitions:
     description: The input for the <a>StopConfigurationRecorder</a> action.
   ARN:
     type: string
-  '[object Object]': {}
+  undefined: {}
   AccountAggregationSource:
     type: object
     required:

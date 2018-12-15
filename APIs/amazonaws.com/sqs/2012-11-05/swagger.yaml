@@ -44,12 +44,12 @@ produces: []
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1090,7 +1090,7 @@ definitions:
       TagKeys:
         $ref: '#/definitions/TagKeyList'
         description: The list of tags to be removed from the specified queue.
-  '[object Object]': {}
+  undefined: {}
   AWSAccountIdList:
     type: array
     items:

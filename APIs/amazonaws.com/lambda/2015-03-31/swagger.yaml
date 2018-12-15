@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -2659,7 +2659,7 @@ definitions:
       Layers:
         $ref: '#/definitions/LayerList'
         description: 'A list of <a href="http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment.'
-  '[object Object]': {}
+  undefined: {}
   AccountLimit:
     type: object
     properties:

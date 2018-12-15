@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -2665,7 +2665,7 @@ definitions:
         description: The identifier of the sentiment detection job to stop.
   AnyLengthString:
     type: string
-  '[object Object]': {}
+  undefined: {}
   BatchDetectDominantLanguageItemResult:
     type: object
     properties:

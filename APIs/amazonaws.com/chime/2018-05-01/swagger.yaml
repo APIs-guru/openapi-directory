@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1264,7 +1264,7 @@ definitions:
       LicenseType:
         $ref: '#/definitions/License'
         description: The user license type to update. This must be a supported license type for the Amazon Chime account that the user belongs to.
-  '[object Object]': {}
+  undefined: {}
   Account:
     type: object
     required:

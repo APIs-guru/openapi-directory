@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -719,7 +719,7 @@ definitions:
       message:
         $ref: '#/definitions/ErrorMessage'
     description: ' Account Action is required in order to continue the request. '
-  '[object Object]': {}
+  undefined: {}
   AttributeKey:
     type: string
     description: ' Key part of key-value attribute pairs. '

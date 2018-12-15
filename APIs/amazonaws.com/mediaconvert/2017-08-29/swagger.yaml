@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1678,7 +1678,7 @@ definitions:
       - LATM_LOAS
       - NONE
     description: 'Enables LATM/LOAS AAC output. Note that if you use LATM/LOAS AAC in an output, you must choose "No container" for the output container.'
-  '[object Object]': {}
+  undefined: {}
   AacSettings:
     type: object
     properties:

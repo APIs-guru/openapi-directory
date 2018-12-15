@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -2211,7 +2211,7 @@ definitions:
         $ref: '#/definitions/Name'
         description: The unique ID that specifies the ThreatIntelSet that you want to update.
     description: UpdateThreatIntelSet request body.
-  '[object Object]': {}
+  undefined: {}
   AccessKeyDetails:
     type: object
     properties:

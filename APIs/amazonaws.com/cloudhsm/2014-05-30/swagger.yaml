@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1335,7 +1335,7 @@ definitions:
   AZ:
     type: string
     pattern: '[a-zA-Z0-9\-]*'
-  '[object Object]': {}
+  undefined: {}
   AZList:
     type: array
     items:

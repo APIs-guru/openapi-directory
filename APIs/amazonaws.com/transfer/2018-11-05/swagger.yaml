@@ -45,12 +45,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1203,7 +1203,7 @@ definitions:
     type: string
     minLength: 20
     maxLength: 1600
-  '[object Object]': {}
+  undefined: {}
   DateImported:
     type: string
     format: date-time

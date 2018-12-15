@@ -46,12 +46,12 @@ produces:
 parameters:
   Action:
     name: Action
-    in: header
+    in: query
     type: string
     required: true
   Version:
     name: Version
-    in: header
+    in: query
     type: string
     required: true
   X-Amz-Content-Sha256:
@@ -1129,7 +1129,7 @@ definitions:
     description: The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 35 days.
     minimum: 0
     maximum: 35
-  '[object Object]': {}
+  undefined: {}
   Backup:
     type: object
     required:
