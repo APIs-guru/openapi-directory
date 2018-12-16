@@ -1314,10 +1314,36 @@ definitions:
     maxLength: 12
   Boolean:
     type: boolean
-  undefined: {}
-  EmbeddingUrl:
+  GroupMemberName:
     type: string
-    format: password
+    pattern: '[\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 256
+  GroupName:
+    type: string
+    pattern: '[\u0020-\u00FF]+'
+    minLength: 1
+  Namespace:
+    type: string
+    pattern: default
+  GroupMember:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) for the group member (user).
+      MemberName:
+        $ref: '#/definitions/GroupMemberName'
+        description: The name of the group member (user).
+    description: 'A member of an Amazon QuickSight group. Currently, group members must be users. Groups can''t be members of another group. '
+  String:
+    type: string
+  StatusCode:
+    type: integer
+  GroupDescription:
+    type: string
+    minLength: 1
+    maxLength: 512
   Group:
     type: object
     properties:
@@ -1331,57 +1357,10 @@ definitions:
         $ref: '#/definitions/GroupDescription'
         description: The group description.
     description: 'A <i>group</i> in Amazon QuickSight consists of a set of users. You can use groups to make it easier to manage access and security. Currently, an Amazon QuickSight subscription can''t contain more than 500 Amazon QuickSight groups.'
-  GroupDescription:
-    type: string
-    minLength: 1
-    maxLength: 512
-  GroupList:
-    type: array
-    items:
-      $ref: '#/definitions/Group'
-  GroupMember:
-    type: object
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) for the group member (user).
-      MemberName:
-        $ref: '#/definitions/GroupMemberName'
-        description: The name of the group member (user).
-    description: 'A member of an Amazon QuickSight group. Currently, group members must be users. Groups can''t be members of another group. '
-  GroupMemberList:
-    type: array
-    items:
-      $ref: '#/definitions/GroupMember'
-  GroupMemberName:
+  UserName:
     type: string
     pattern: '[\u0020-\u00FF]+'
     minLength: 1
-    maxLength: 256
-  GroupName:
-    type: string
-    pattern: '[\u0020-\u00FF]+'
-    minLength: 1
-  IdentityType:
-    type: string
-    enum:
-      - IAM
-      - QUICKSIGHT
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100000
-  Namespace:
-    type: string
-    pattern: default
-  SessionLifetimeInMinutes:
-    type: integer
-    minimum: 15
-    maximum: 600
-  StatusCode:
-    type: integer
-  String:
-    type: string
   User:
     type: object
     properties:
@@ -1404,14 +1383,36 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an AD user, that user is inactive until they sign in and provide a password'
     description: 'A registered user of Amazon QuickSight. Currently, an Amazon QuickSight subscription can''t contain more than 20 million users.'
+  EmbeddingUrl:
+    type: string
+    format: password
+  IdentityType:
+    type: string
+    enum:
+      - IAM
+      - QUICKSIGHT
+  SessionLifetimeInMinutes:
+    type: integer
+    minimum: 15
+    maximum: 600
+  boolean:
+    type: boolean
+  GroupList:
+    type: array
+    items:
+      $ref: '#/definitions/Group'
+  GroupMemberList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupMember'
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100000
   UserList:
     type: array
     items:
       $ref: '#/definitions/User'
-  UserName:
-    type: string
-    pattern: '[\u0020-\u00FF]+'
-    minLength: 1
   UserRole:
     type: string
     enum:
@@ -1420,5 +1421,3 @@ definitions:
       - READER
       - RESTRICTED_AUTHOR
       - RESTRICTED_READER
-  boolean:
-    type: boolean

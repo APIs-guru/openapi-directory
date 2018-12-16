@@ -1134,24 +1134,86 @@ definitions:
     description: 'Returned if you don’t wait at least 24 hours before changing the throughput mode, or decreasing the Provisioned Throughput value.'
   AwsAccountId:
     type: string
-  undefined: {}
-  CreationToken:
-    type: string
-    minLength: 1
-    maxLength: 64
-  Encrypted:
-    type: boolean
   ErrorCode:
     type: string
     minLength: 1
   ErrorMessage:
     type: string
+  CreationToken:
+    type: string
+    minLength: 1
+    maxLength: 64
+  PerformanceMode:
+    type: string
+    enum:
+      - generalPurpose
+      - maxIO
+  Encrypted:
+    type: boolean
+  KmsKeyId:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  ThroughputMode:
+    type: string
+    enum:
+      - bursting
+      - provisioned
+  ProvisionedThroughputInMibps:
+    type: number
+    format: double
+    minimum: 0
+  FileSystemId:
+    type: string
+  SubnetId:
+    type: string
+  IpAddress:
+    type: string
+  SecurityGroups:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroup'
+    maxItems: 5
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  MountTargetId:
+    type: string
+  TagKeys:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  MaxItems:
+    type: integer
+    minimum: 1
+  Marker:
+    type: string
   FileSystemDescriptions:
     type: array
     items:
       $ref: '#/definitions/FileSystemDescription'
-  FileSystemId:
+  MountTargetDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/MountTargetDescription'
+  Timestamp:
     type: string
+    format: date-time
+  LifeCycleState:
+    type: string
+    enum:
+      - creating
+      - available
+      - updating
+      - deleting
+      - deleted
+  TagValue:
+    type: string
+    maxLength: 256
+  MountTargetCount:
+    type: integer
+    minimum: 0
   FileSystemSize:
     type: object
     required:
@@ -1167,54 +1229,14 @@ definitions:
   FileSystemSizeValue:
     type: integer
     minimum: 0
-  IpAddress:
-    type: string
-  KmsKeyId:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  LifeCycleState:
-    type: string
-    enum:
-      - creating
-      - available
-      - updating
-      - deleting
-      - deleted
-  Marker:
-    type: string
-  MaxItems:
-    type: integer
-    minimum: 1
-  MountTargetCount:
-    type: integer
-    minimum: 0
-  MountTargetDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/MountTargetDescription'
-  MountTargetId:
-    type: string
   NetworkInterfaceId:
     type: string
-  PerformanceMode:
-    type: string
-    enum:
-      - generalPurpose
-      - maxIO
-  ProvisionedThroughputInMibps:
-    type: number
-    format: double
-    minimum: 0
   SecurityGroup:
     type: string
-  SecurityGroups:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityGroup'
-    maxItems: 5
-  SubnetId:
+  TagKey:
     type: string
+    minLength: 1
+    maxLength: 128
   Tag:
     type: object
     required:
@@ -1228,26 +1250,3 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: Value of the tag key.
     description: 'A tag is a key-value pair. Allowed characters: letters, whitespace, and numbers, representable in UTF-8, and the following characters:<code> + - = . _ : /</code> '
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagKeys:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-  TagValue:
-    type: string
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  ThroughputMode:
-    type: string
-    enum:
-      - bursting
-      - provisioned
-  Timestamp:
-    type: string
-    format: date-time

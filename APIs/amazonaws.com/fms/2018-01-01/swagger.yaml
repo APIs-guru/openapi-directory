@@ -770,9 +770,22 @@ definitions:
       - PENDING_DELETION
       - DELETING
       - DELETED
-  undefined: {}
   Boolean:
     type: boolean
+  ResourceId:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  ViolationReason:
+    type: string
+    enum:
+      - WEB_ACL_MISSING_RULE_GROUP
+      - RESOURCE_MISSING_WEB_ACL
+      - RESOURCE_INCORRECT_WEB_ACL
+  ResourceType:
+    type: string
+    minLength: 1
+    maxLength: 128
   ComplianceViolator:
     type: object
     properties:
@@ -811,6 +824,10 @@ definitions:
           $ref: '#/definitions/CustomerPolicyScopeIdType'
         value:
           $ref: '#/definitions/CustomerPolicyScopeIdList'
+  PolicyId:
+    type: string
+    minLength: 36
+    maxLength: 36
   DependentServiceName:
     type: string
     enum:
@@ -820,6 +837,14 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1024
+  PolicyComplianceStatusType:
+    type: string
+    enum:
+      - COMPLIANT
+      - NON_COMPLIANT
+  ResourceCount:
+    type: integer
+    minimum: 0
   EvaluationResult:
     type: object
     properties:
@@ -837,30 +862,35 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EvaluationResult'
-  IssueInfoMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DependentServiceName'
-        value:
-          $ref: '#/definitions/DetailedInfo'
-  ManagedServiceData:
+  PolicyComplianceDetail:
+    type: object
+    properties:
+      PolicyOwner:
+        $ref: '#/definitions/AWSAccountId'
+        description: The AWS account that created the AWS Firewall Manager policy.
+      PolicyId:
+        $ref: '#/definitions/PolicyId'
+        description: The ID of the AWS Firewall Manager policy.
+      MemberAccount:
+        $ref: '#/definitions/AWSAccountId'
+        description: The AWS account ID.
+      Violators:
+        $ref: '#/definitions/ComplianceViolators'
+        description: An array of resources that are not protected by the policy.
+      EvaluationLimitExceeded:
+        $ref: '#/definitions/Boolean'
+        description: Indicates if over 100 resources are non-compliant with the AWS Firewall Manager policy.
+      ExpiredAt:
+        $ref: '#/definitions/TimeStamp'
+        description: A time stamp that indicates when the returned information should be considered out-of-date.
+      IssueInfoMap:
+        $ref: '#/definitions/IssueInfoMap'
+        description: 'Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message recieved indicating the problem with the service.'
+    description: 'Describes the non-compliant resources in a member account for a specific AWS Firewall Manager policy. A maximum of 100 entries are displayed. If more than 100 resources are non-compliant, <code>EvaluationLimitExceeded</code> is set to <code>True</code>.'
+  ResourceArn:
     type: string
     minLength: 1
     maxLength: 1024
-  MemberAccounts:
-    type: array
-    items:
-      $ref: '#/definitions/AWSAccountId'
-  PaginationMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  PaginationToken:
-    type: string
-    minLength: 1
   Policy:
     type: object
     required:
@@ -901,31 +931,67 @@ definitions:
         $ref: '#/definitions/CustomerPolicyScopeMap'
         description: '<p>Specifies the AWS account IDs to exclude from the policy. The <code>IncludeMap</code> values are evaluated first, with all of the appropriate account IDs added to the policy. Then the accounts listed in <code>ExcludeMap</code> are removed, resulting in the final list of accounts to add to the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>ExcludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>'
     description: An AWS Firewall Manager policy.
-  PolicyComplianceDetail:
+  IssueInfoMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DependentServiceName'
+        value:
+          $ref: '#/definitions/DetailedInfo'
+  PaginationToken:
+    type: string
+    minLength: 1
+  PaginationMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  PolicyComplianceStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyComplianceStatus'
+  MemberAccounts:
+    type: array
+    items:
+      $ref: '#/definitions/AWSAccountId'
+  PolicySummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/PolicySummary'
+  ManagedServiceData:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  ResourceName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  PolicyUpdateToken:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  SecurityServicePolicyData:
     type: object
+    required:
+      - Type
     properties:
-      PolicyOwner:
-        $ref: '#/definitions/AWSAccountId'
-        description: The AWS account that created the AWS Firewall Manager policy.
-      PolicyId:
-        $ref: '#/definitions/PolicyId'
-        description: The ID of the AWS Firewall Manager policy.
-      MemberAccount:
-        $ref: '#/definitions/AWSAccountId'
-        description: The AWS account ID.
-      Violators:
-        $ref: '#/definitions/ComplianceViolators'
-        description: An array of resources that are not protected by the policy.
-      EvaluationLimitExceeded:
-        $ref: '#/definitions/Boolean'
-        description: Indicates if over 100 resources are non-compliant with the AWS Firewall Manager policy.
-      ExpiredAt:
-        $ref: '#/definitions/TimeStamp'
-        description: A time stamp that indicates when the returned information should be considered out-of-date.
-      IssueInfoMap:
-        $ref: '#/definitions/IssueInfoMap'
-        description: 'Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message recieved indicating the problem with the service.'
-    description: 'Describes the non-compliant resources in a member account for a specific AWS Firewall Manager policy. A maximum of 100 entries are displayed. If more than 100 resources are non-compliant, <code>EvaluationLimitExceeded</code> is set to <code>True</code>.'
+      Type:
+        $ref: '#/definitions/SecurityServiceType'
+        description: The service that the policy is using to protect the resources. This value is <code>WAF</code>.
+      ManagedServiceData:
+        $ref: '#/definitions/ManagedServiceData'
+        description: '<p>Details about the service. This contains <code>WAF</code> data in JSON format, as shown in the following example:</p> <p> <code>ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}</code> </p>'
+    description: Details about the security service that is being used to protect the resources.
+  ResourceTags:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceTag'
+    minItems: 0
+    maxItems: 8
+  TimeStamp:
+    type: string
+    format: date-time
   PolicyComplianceStatus:
     type: object
     properties:
@@ -951,19 +1017,10 @@ definitions:
         $ref: '#/definitions/IssueInfoMap'
         description: 'Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message recieved indicating the problem with the service.'
     description: Indicates whether the account is compliant with the specified policy. An account is considered non-compliant if it includes resources that are not protected by the policy.
-  PolicyComplianceStatusList:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyComplianceStatus'
-  PolicyComplianceStatusType:
+  SecurityServiceType:
     type: string
     enum:
-      - COMPLIANT
-      - NON_COMPLIANT
-  PolicyId:
-    type: string
-    minLength: 36
-    maxLength: 36
+      - WAF
   PolicySummary:
     type: object
     properties:
@@ -986,29 +1043,15 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Indicates if the policy should be automatically applied to new resources.
     description: 'Details of the AWS Firewall Manager policy. '
-  PolicySummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/PolicySummary'
-  PolicyUpdateToken:
+  TagKey:
     type: string
-    minLength: 1
-    maxLength: 1024
-  ResourceArn:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  ResourceCount:
-    type: integer
-    minimum: 0
-  ResourceId:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  ResourceName:
-    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    maxLength: 256
   ResourceTag:
     type: object
     required:
@@ -1021,47 +1064,3 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The resource tag value.
     description: 'The resource tags that AWS Firewall Manager uses to determine if a particular resource should be included or excluded from protection by the AWS Firewall Manager policy. Tags enable you to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. Tags are combined with an "OR." That is, if you add more than one tag, if any of the tags matches, the resource is considered a match for the include or exclude. <a href="https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html">Working with Tag Editor</a>.'
-  ResourceTags:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceTag'
-    minItems: 0
-    maxItems: 8
-  ResourceType:
-    type: string
-    minLength: 1
-    maxLength: 128
-  SecurityServicePolicyData:
-    type: object
-    required:
-      - Type
-    properties:
-      Type:
-        $ref: '#/definitions/SecurityServiceType'
-        description: The service that the policy is using to protect the resources. This value is <code>WAF</code>.
-      ManagedServiceData:
-        $ref: '#/definitions/ManagedServiceData'
-        description: '<p>Details about the service. This contains <code>WAF</code> data in JSON format, as shown in the following example:</p> <p> <code>ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}</code> </p>'
-    description: Details about the security service that is being used to protect the resources.
-  SecurityServiceType:
-    type: string
-    enum:
-      - WAF
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    maxLength: 256
-  TimeStamp:
-    type: string
-    format: date-time
-  ViolationReason:
-    type: string
-    enum:
-      - WEB_ACL_MISSING_RULE_GROUP
-      - RESOURCE_MISSING_WEB_ACL
-      - RESOURCE_INCORRECT_WEB_ACL

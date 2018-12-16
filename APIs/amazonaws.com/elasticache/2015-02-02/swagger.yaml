@@ -3331,12 +3331,37 @@ definitions:
     enum:
       - single-az
       - cross-az
-  undefined: {}
+  String:
+    type: string
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   AllowedNodeGroupId:
     type: string
     pattern: \d+
     minLength: 1
     maxLength: 4
+  NodeTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  CacheSecurityGroup:
+    type: object
+    properties:
+      OwnerId:
+        $ref: '#/definitions/String'
+        description: The AWS account ID of the cache security group owner.
+      CacheSecurityGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the cache security group.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description of the cache security group.
+      EC2SecurityGroups:
+        $ref: '#/definitions/EC2SecurityGroupList'
+        description: A list of Amazon EC2 security groups that are associated with this cache security group.
+    description: '<p>Represents the output of one of the following operations:</p> <ul> <li> <p> <code>AuthorizeCacheSecurityGroupIngress</code> </p> </li> <li> <p> <code>CreateCacheSecurityGroup</code> </p> </li> <li> <p> <code>RevokeCacheSecurityGroupIngress</code> </p> </li> </ul>'
   AutomaticFailoverStatus:
     type: string
     enum:
@@ -3359,6 +3384,72 @@ definitions:
     type: boolean
   BooleanOptional:
     type: boolean
+  Endpoint:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/String'
+        description: The DNS hostname of the cache node.
+      Port:
+        $ref: '#/definitions/Integer'
+        description: The port number that the cache engine is listening on.
+    description: Represents the information required for client programs to connect to a cache node.
+  IntegerOptional:
+    type: integer
+  TStamp:
+    type: string
+    format: date-time
+  PendingModifiedValues:
+    type: object
+    properties:
+      NumCacheNodes:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The new number of cache nodes for the cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p>'
+      CacheNodeIdsToRemove:
+        $ref: '#/definitions/CacheNodeIdsList'
+        description: 'A list of cache node IDs that are being removed (or will be removed) from the cluster. A node ID is a 4-digit numeric identifier (0001, 0002, etc.).'
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: The new cache engine version that the cluster runs.
+      CacheNodeType:
+        $ref: '#/definitions/String'
+        description: The cache node type that this cluster or replication group is scaled to.
+    description: 'A group of settings that are applied to the cluster in the future, or that are currently being applied.'
+  NotificationConfiguration:
+    type: object
+    properties:
+      TopicArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) that identifies the topic.
+      TopicStatus:
+        $ref: '#/definitions/String'
+        description: The current state of the topic.
+    description: Describes a notification topic and its status. Notification topics are used for publishing ElastiCache events to subscribers using Amazon Simple Notification Service (SNS).
+  CacheSecurityGroupMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/CacheSecurityGroupMembership'
+  CacheParameterGroupStatus:
+    type: object
+    properties:
+      CacheParameterGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the cache parameter group.
+      ParameterApplyStatus:
+        $ref: '#/definitions/String'
+        description: The status of parameter updates.
+      CacheNodeIdsToReboot:
+        $ref: '#/definitions/CacheNodeIdsList'
+        description: 'A list of the cache node IDs which need to be rebooted for parameter changes to be applied. A node ID is a numeric identifier (0001, 0002, etc.).'
+    description: Status of the cache parameter group.
+  CacheNodeList:
+    type: array
+    items:
+      $ref: '#/definitions/CacheNode'
+  SecurityGroupMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupMembership'
   CacheCluster:
     type: object
     properties:
@@ -3493,10 +3584,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
-  CacheNodeList:
+  CacheNodeTypeSpecificValueList:
     type: array
     items:
-      $ref: '#/definitions/CacheNode'
+      $ref: '#/definitions/CacheNodeTypeSpecificValue'
+  ChangeType:
+    type: string
+    enum:
+      - immediate
+      - requires-reboot
   CacheNodeTypeSpecificParameter:
     type: object
     properties:
@@ -3542,10 +3638,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The value for the cache node type.
     description: A value that applies only to a certain cache node type.
-  CacheNodeTypeSpecificValueList:
-    type: array
-    items:
-      $ref: '#/definitions/CacheNodeTypeSpecificValue'
   CacheParameterGroup:
     type: object
     properties:
@@ -3559,39 +3651,18 @@ definitions:
         $ref: '#/definitions/String'
         description: The description for this cache parameter group.
     description: Represents the output of a <code>CreateCacheParameterGroup</code> operation.
+  ParametersList:
+    type: array
+    items:
+      $ref: '#/definitions/Parameter'
   CacheParameterGroupList:
     type: array
     items:
       $ref: '#/definitions/CacheParameterGroup'
-  CacheParameterGroupStatus:
-    type: object
-    properties:
-      CacheParameterGroupName:
-        $ref: '#/definitions/String'
-        description: The name of the cache parameter group.
-      ParameterApplyStatus:
-        $ref: '#/definitions/String'
-        description: The status of parameter updates.
-      CacheNodeIdsToReboot:
-        $ref: '#/definitions/CacheNodeIdsList'
-        description: 'A list of the cache node IDs which need to be rebooted for parameter changes to be applied. A node ID is a numeric identifier (0001, 0002, etc.).'
-    description: Status of the cache parameter group.
-  CacheSecurityGroup:
-    type: object
-    properties:
-      OwnerId:
-        $ref: '#/definitions/String'
-        description: The AWS account ID of the cache security group owner.
-      CacheSecurityGroupName:
-        $ref: '#/definitions/String'
-        description: The name of the cache security group.
-      Description:
-        $ref: '#/definitions/String'
-        description: The description of the cache security group.
-      EC2SecurityGroups:
-        $ref: '#/definitions/EC2SecurityGroupList'
-        description: A list of Amazon EC2 security groups that are associated with this cache security group.
-    description: '<p>Represents the output of one of the following operations:</p> <ul> <li> <p> <code>AuthorizeCacheSecurityGroupIngress</code> </p> </li> <li> <p> <code>CreateCacheSecurityGroup</code> </p> </li> <li> <p> <code>RevokeCacheSecurityGroupIngress</code> </p> </li> </ul>'
+  EC2SecurityGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/EC2SecurityGroup'
   CacheSecurityGroupMembership:
     type: object
     properties:
@@ -3602,18 +3673,18 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The membership status in the cache security group. The status changes when a cache security group is modified, or when the cache security groups assigned to a cluster are modified.'
     description: Represents a cluster's status within a particular cache security group.
-  CacheSecurityGroupMembershipList:
-    type: array
-    items:
-      $ref: '#/definitions/CacheSecurityGroupMembership'
-  CacheSecurityGroupNameList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   CacheSecurityGroups:
     type: array
     items:
       $ref: '#/definitions/CacheSecurityGroup'
+  CacheSecurityGroupNameList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  SubnetList:
+    type: array
+    items:
+      $ref: '#/definitions/Subnet'
   CacheSubnetGroup:
     type: object
     properties:
@@ -3634,12 +3705,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CacheSubnetGroup'
-  ChangeType:
-    type: string
-    enum:
-      - immediate
-      - requires-reboot
   ClusterIdList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  Integer:
+    type: integer
+  PreferredAvailabilityZoneList:
     type: array
     items:
       $ref: '#/definitions/String'
@@ -3659,490 +3731,6 @@ definitions:
         $ref: '#/definitions/PreferredAvailabilityZoneList'
         description: 'A list of <code>PreferredAvailabilityZone</code> strings that specify which availability zones the replication group''s nodes are to be in. The nummber of <code>PreferredAvailabilityZone</code> values must equal the value of <code>NewReplicaCount</code> plus 1 to account for the primary node. If this member of <code>ReplicaConfiguration</code> is omitted, ElastiCache for Redis selects the availability zone for each of the replicas.'
     description: 'Node group (shard) configuration options when adding or removing replicas. Each node group (shard) configuration has the following members: NodeGroupId, NewReplicaCount, and PreferredAvailabilityZones. '
-  Double:
-    type: number
-    format: double
-  EC2SecurityGroup:
-    type: object
-    properties:
-      Status:
-        $ref: '#/definitions/String'
-        description: The status of the Amazon EC2 security group.
-      EC2SecurityGroupName:
-        $ref: '#/definitions/String'
-        description: The name of the Amazon EC2 security group.
-      EC2SecurityGroupOwnerId:
-        $ref: '#/definitions/String'
-        description: The AWS account ID of the Amazon EC2 security group owner.
-    description: Provides ownership and status information for an Amazon EC2 security group.
-  EC2SecurityGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/EC2SecurityGroup'
-  Endpoint:
-    type: object
-    properties:
-      Address:
-        $ref: '#/definitions/String'
-        description: The DNS hostname of the cache node.
-      Port:
-        $ref: '#/definitions/Integer'
-        description: The port number that the cache engine is listening on.
-    description: Represents the information required for client programs to connect to a cache node.
-  EngineDefaults:
-    type: object
-    properties:
-      CacheParameterGroupFamily:
-        $ref: '#/definitions/String'
-        description: '<p>Specifies the name of the cache parameter group family to which the engine default parameters apply.</p> <p>Valid values are: <code>memcached1.4</code> | <code>redis2.6</code> | <code>redis2.8</code> | <code>redis3.2</code> | <code>redis4.0</code> </p>'
-      Marker:
-        $ref: '#/definitions/String'
-        description: Provides an identifier to allow retrieval of paginated results.
-      Parameters:
-        $ref: '#/definitions/ParametersList'
-        description: Contains a list of engine default parameters.
-      CacheNodeTypeSpecificParameters:
-        $ref: '#/definitions/CacheNodeTypeSpecificParametersList'
-        description: A list of parameters specific to a particular cache node type. Each element in the list contains detailed information about one parameter.
-    description: Represents the output of a <code>DescribeEngineDefaultParameters</code> operation.
-  Event:
-    type: object
-    properties:
-      SourceIdentifier:
-        $ref: '#/definitions/String'
-        description: 'The identifier for the source of the event. For example, if the event occurred at the cluster level, the identifier would be the name of the cluster.'
-      SourceType:
-        $ref: '#/definitions/SourceType'
-        description: 'Specifies the origin of this event - a cluster, a parameter group, a security group, etc.'
-      Message:
-        $ref: '#/definitions/String'
-        description: The text of the event.
-      Date:
-        $ref: '#/definitions/TStamp'
-        description: The date and time when the event occurred.
-    description: 'Represents a single occurrence of something interesting within the system. Some examples of events are creating a cluster, adding or removing a cache node, or rebooting a node.'
-  EventList:
-    type: array
-    items:
-      $ref: '#/definitions/Event'
-  Integer:
-    type: integer
-  IntegerOptional:
-    type: integer
-  KeyList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  NodeGroup:
-    type: object
-    properties:
-      NodeGroupId:
-        $ref: '#/definitions/String'
-        description: 'The identifier for the node group (shard). A Redis (cluster mode disabled) replication group contains only 1 node group; therefore, the node group ID is 0001. A Redis (cluster mode enabled) replication group contains 1 to 15 node groups numbered 0001 to 0015. '
-      Status:
-        $ref: '#/definitions/String'
-        description: 'The current state of this replication group - <code>creating</code>, <code>available</code>, etc.'
-      PrimaryEndpoint:
-        $ref: '#/definitions/Endpoint'
-        description: The endpoint of the primary node in this node group (shard).
-      Slots:
-        $ref: '#/definitions/String'
-        description: The keyspace for this node group (shard).
-      NodeGroupMembers:
-        $ref: '#/definitions/NodeGroupMemberList'
-        description: A list containing information about individual nodes within the node group (shard).
-    description: Represents a collection of cache nodes in a replication group. One node in the node group is the read/write primary node. All the other nodes are read-only Replica nodes.
-  NodeGroupConfiguration:
-    type: object
-    properties:
-      NodeGroupId:
-        $ref: '#/definitions/AllowedNodeGroupId'
-        description: The 4-digit id for the node group these configuration values apply to.
-      Slots:
-        $ref: '#/definitions/String'
-        description: '<p>A string that specifies the keyspace for a particular node group. Keyspaces range from 0 to 16,383. The string is in the format <code>startkey-endkey</code>.</p> <p>Example: <code>"0-3999"</code> </p>'
-      ReplicaCount:
-        $ref: '#/definitions/IntegerOptional'
-        description: The number of read replica nodes in this node group (shard).
-      PrimaryAvailabilityZone:
-        $ref: '#/definitions/String'
-        description: The Availability Zone where the primary node of this node group (shard) is launched.
-      ReplicaAvailabilityZones:
-        $ref: '#/definitions/AvailabilityZonesList'
-        description: A list of Availability Zones to be used for the read replicas. The number of Availability Zones in this list must match the value of <code>ReplicaCount</code> or <code>ReplicasPerNodeGroup</code> if not specified.
-    description: 'Node group (shard) configuration options. Each node group (shard) configuration has the following: <code>Slots</code>, <code>PrimaryAvailabilityZone</code>, <code>ReplicaAvailabilityZones</code>, <code>ReplicaCount</code>.'
-  NodeGroupConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/NodeGroupConfiguration'
-  NodeGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/NodeGroup'
-  NodeGroupMember:
-    type: object
-    properties:
-      CacheClusterId:
-        $ref: '#/definitions/String'
-        description: The ID of the cluster to which the node belongs.
-      CacheNodeId:
-        $ref: '#/definitions/String'
-        description: 'The ID of the node within its cluster. A node ID is a numeric identifier (0001, 0002, etc.).'
-      ReadEndpoint:
-        $ref: '#/definitions/Endpoint'
-        description: The information required for client programs to connect to a node for read operations. The read endpoint is only applicable on Redis (cluster mode disabled) clusters.
-      PreferredAvailabilityZone:
-        $ref: '#/definitions/String'
-        description: The name of the Availability Zone in which the node is located.
-      CurrentRole:
-        $ref: '#/definitions/String'
-        description: The role that is currently assigned to the node - <code>primary</code> or <code>replica</code>. This member is only applicable for Redis (cluster mode disabled) replication groups.
-    description: Represents a single node within a node group (shard).
-  NodeGroupMemberList:
-    type: array
-    items:
-      $ref: '#/definitions/NodeGroupMember'
-  NodeGroupsToRemoveList:
-    type: array
-    items:
-      $ref: '#/definitions/AllowedNodeGroupId'
-  NodeGroupsToRetainList:
-    type: array
-    items:
-      $ref: '#/definitions/AllowedNodeGroupId'
-  NodeSnapshot:
-    type: object
-    properties:
-      CacheClusterId:
-        $ref: '#/definitions/String'
-        description: A unique identifier for the source cluster.
-      NodeGroupId:
-        $ref: '#/definitions/String'
-        description: A unique identifier for the source node group (shard).
-      CacheNodeId:
-        $ref: '#/definitions/String'
-        description: The cache node identifier for the node in the source cluster.
-      NodeGroupConfiguration:
-        $ref: '#/definitions/NodeGroupConfiguration'
-        description: The configuration for the source node group (shard).
-      CacheSize:
-        $ref: '#/definitions/String'
-        description: The size of the cache on the source cache node.
-      CacheNodeCreateTime:
-        $ref: '#/definitions/TStamp'
-        description: The date and time when the cache node was created in the source cluster.
-      SnapshotCreateTime:
-        $ref: '#/definitions/TStamp'
-        description: The date and time when the source node's metadata and cache data set was obtained for the snapshot.
-    description: Represents an individual cache node in a snapshot of a cluster.
-  NodeSnapshotList:
-    type: array
-    items:
-      $ref: '#/definitions/NodeSnapshot'
-  NodeTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  NotificationConfiguration:
-    type: object
-    properties:
-      TopicArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) that identifies the topic.
-      TopicStatus:
-        $ref: '#/definitions/String'
-        description: The current state of the topic.
-    description: Describes a notification topic and its status. Notification topics are used for publishing ElastiCache events to subscribers using Amazon Simple Notification Service (SNS).
-  Parameter:
-    type: object
-    properties:
-      ParameterName:
-        $ref: '#/definitions/String'
-        description: The name of the parameter.
-      ParameterValue:
-        $ref: '#/definitions/String'
-        description: The value of the parameter.
-      Description:
-        $ref: '#/definitions/String'
-        description: A description of the parameter.
-      Source:
-        $ref: '#/definitions/String'
-        description: The source of the parameter.
-      DataType:
-        $ref: '#/definitions/String'
-        description: The valid data type for the parameter.
-      AllowedValues:
-        $ref: '#/definitions/String'
-        description: The valid range of values for the parameter.
-      IsModifiable:
-        $ref: '#/definitions/Boolean'
-        description: Indicates whether (<code>true</code>) or not (<code>false</code>) the parameter can be modified. Some parameters have security or operational implications that prevent them from being changed.
-      MinimumEngineVersion:
-        $ref: '#/definitions/String'
-        description: The earliest cache engine version to which the parameter can apply.
-      ChangeType:
-        $ref: '#/definitions/ChangeType'
-        description: 'Indicates whether a change to the parameter is applied immediately or requires a reboot for the change to be applied. You can force a reboot or wait until the next maintenance window''s reboot. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html">Rebooting a Cluster</a>.'
-    description: Describes an individual setting that controls some aspect of ElastiCache behavior.
-  ParameterNameValue:
-    type: object
-    properties:
-      ParameterName:
-        $ref: '#/definitions/String'
-        description: The name of the parameter.
-      ParameterValue:
-        $ref: '#/definitions/String'
-        description: The value of the parameter.
-    description: Describes a name-value pair that is used to update the value of a parameter.
-  ParameterNameValueList:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterNameValue'
-  ParametersList:
-    type: array
-    items:
-      $ref: '#/definitions/Parameter'
-  PendingAutomaticFailoverStatus:
-    type: string
-    enum:
-      - enabled
-      - disabled
-  PendingModifiedValues:
-    type: object
-    properties:
-      NumCacheNodes:
-        $ref: '#/definitions/IntegerOptional'
-        description: '<p>The new number of cache nodes for the cluster.</p> <p>For clusters running Redis, this value must be 1. For clusters running Memcached, this value must be between 1 and 20.</p>'
-      CacheNodeIdsToRemove:
-        $ref: '#/definitions/CacheNodeIdsList'
-        description: 'A list of cache node IDs that are being removed (or will be removed) from the cluster. A node ID is a 4-digit numeric identifier (0001, 0002, etc.).'
-      EngineVersion:
-        $ref: '#/definitions/String'
-        description: The new cache engine version that the cluster runs.
-      CacheNodeType:
-        $ref: '#/definitions/String'
-        description: The cache node type that this cluster or replication group is scaled to.
-    description: 'A group of settings that are applied to the cluster in the future, or that are currently being applied.'
-  PreferredAvailabilityZoneList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  RecurringCharge:
-    type: object
-    properties:
-      RecurringChargeAmount:
-        $ref: '#/definitions/Double'
-        description: The monetary amount of the recurring charge.
-      RecurringChargeFrequency:
-        $ref: '#/definitions/String'
-        description: The frequency of the recurring charge.
-    description: 'Contains the specific price and frequency of a recurring charges for a reserved cache node, or for a reserved cache node offering.'
-  RecurringChargeList:
-    type: array
-    items:
-      $ref: '#/definitions/RecurringCharge'
-  RemoveReplicasList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ReplicaConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigureShard'
-  ReplicationGroup:
-    type: object
-    properties:
-      ReplicationGroupId:
-        $ref: '#/definitions/String'
-        description: The identifier for the replication group.
-      Description:
-        $ref: '#/definitions/String'
-        description: The user supplied description of the replication group.
-      Status:
-        $ref: '#/definitions/String'
-        description: 'The current state of this replication group - <code>creating</code>, <code>available</code>, <code>modifying</code>, <code>deleting</code>, <code>create-failed</code>, <code>snapshotting</code>.'
-      PendingModifiedValues:
-        $ref: '#/definitions/ReplicationGroupPendingModifiedValues'
-        description: 'A group of settings to be applied to the replication group, either immediately or during the next maintenance window.'
-      MemberClusters:
-        $ref: '#/definitions/ClusterIdList'
-        description: The names of all the cache clusters that are part of this replication group.
-      NodeGroups:
-        $ref: '#/definitions/NodeGroupList'
-        description: 'A list of node groups in this replication group. For Redis (cluster mode disabled) replication groups, this is a single-element list. For Redis (cluster mode enabled) replication groups, the list contains an entry for each node group (shard).'
-      SnapshottingClusterId:
-        $ref: '#/definitions/String'
-        description: The cluster ID that is used as the daily snapshot source for the replication group.
-      AutomaticFailover:
-        $ref: '#/definitions/AutomaticFailoverStatus'
-        description: '<p>Indicates the status of Multi-AZ with automatic failover for this Redis replication group.</p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 and T2 cache node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
-      ConfigurationEndpoint:
-        $ref: '#/definitions/Endpoint'
-        description: The configuration endpoint for this replication group. Use the configuration endpoint to connect to this replication group.
-      SnapshotRetentionLimit:
-        $ref: '#/definitions/IntegerOptional'
-        description: '<p>The number of days for which ElastiCache retains automatic cluster snapshots before deleting them. For example, if you set <code>SnapshotRetentionLimit</code> to 5, a snapshot that was taken today is retained for 5 days before being deleted.</p> <important> <p> If the value of <code>SnapshotRetentionLimit</code> is set to zero (0), backups are turned off.</p> </important>'
-      SnapshotWindow:
-        $ref: '#/definitions/String'
-        description: '<p>The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).</p> <p>Example: <code>05:00-09:00</code> </p> <p>If you do not specify this parameter, ElastiCache automatically chooses an appropriate time range.</p> <note> <p>This parameter is only valid if the <code>Engine</code> parameter is <code>redis</code>.</p> </note>'
-      ClusterEnabled:
-        $ref: '#/definitions/BooleanOptional'
-        description: '<p>A flag indicating whether or not this replication group is cluster enabled; i.e., whether its data can be partitioned across multiple shards (API/CLI: node groups).</p> <p>Valid values: <code>true</code> | <code>false</code> </p>'
-      CacheNodeType:
-        $ref: '#/definitions/String'
-        description: The name of the compute and memory capacity node type for each node in the replication group.
-      AuthTokenEnabled:
-        $ref: '#/definitions/BooleanOptional'
-        description: '<p>A flag that enables using an <code>AuthToken</code> (password) when issuing Redis commands.</p> <p>Default: <code>false</code> </p>'
-      TransitEncryptionEnabled:
-        $ref: '#/definitions/BooleanOptional'
-        description: '<p>A flag that enables in-transit encryption when set to <code>true</code>.</p> <p>You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code> or <code>4.x</code>.</p> <p>Default: <code>false</code> </p>'
-      AtRestEncryptionEnabled:
-        $ref: '#/definitions/BooleanOptional'
-        description: '<p>A flag that enables encryption at-rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the cluster is created. To enable encryption at-rest on a cluster you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code> or <code>4.x</code>.</p> <p>Default: <code>false</code> </p>'
-    description: Contains all of the attributes of a specific Redis replication group.
-  ReplicationGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/ReplicationGroup'
-  ReplicationGroupPendingModifiedValues:
-    type: object
-    properties:
-      PrimaryClusterId:
-        $ref: '#/definitions/String'
-        description: 'The primary cluster ID that is applied immediately (if <code>--apply-immediately</code> was specified), or during the next maintenance window.'
-      AutomaticFailoverStatus:
-        $ref: '#/definitions/PendingAutomaticFailoverStatus'
-        description: '<p>Indicates the status of Multi-AZ with automatic failover for this Redis replication group.</p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 and T2 cache node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
-      Resharding:
-        $ref: '#/definitions/ReshardingStatus'
-        description: The status of an online resharding operation.
-    description: 'The settings to be applied to the Redis replication group, either immediately or during the next maintenance window.'
-  ReservedCacheNode:
-    type: object
-    properties:
-      ReservedCacheNodeId:
-        $ref: '#/definitions/String'
-        description: The unique identifier for the reservation.
-      ReservedCacheNodesOfferingId:
-        $ref: '#/definitions/String'
-        description: The offering identifier.
-      CacheNodeType:
-        $ref: '#/definitions/String'
-        description: '<p>The cache node type for the reserved cache nodes.</p> <p>The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.</p> <ul> <li> <p>General purpose:</p> <ul> <li> <p>Current generation: </p> <p> <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code> </p> <p> <b>M3 node types:</b> <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code> </p> <p> <b>M4 node types:</b> <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>, <code>cache.m4.2xlarge</code>, <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>T1 node types:</b> <code>cache.t1.micro</code> </p> <p> <b>M1 node types:</b> <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code> </p> </li> </ul> </li> <li> <p>Compute optimized:</p> <ul> <li> <p>Previous generation: (not recommended)</p> <p> <b>C1 node types:</b> <code>cache.c1.xlarge</code> </p> </li> </ul> </li> <li> <p>Memory optimized:</p> <ul> <li> <p>Current generation: </p> <p> <b>R3 node types:</b> <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code> </p> <p> <b>R4 node types;</b> <code>cache.r4.large</code>, <code>cache.r4.xlarge</code>, <code>cache.r4.2xlarge</code>, <code>cache.r4.4xlarge</code>, <code>cache.r4.8xlarge</code>, <code>cache.r4.16xlarge</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>M2 node types:</b> <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code> </p> </li> </ul> </li> </ul> <p> <b>Notes:</b> </p> <ul> <li> <p>All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).</p> </li> <li> <p>Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances. </p> </li> <li> <p>Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.</p> </li> <li> <p>Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.</p> </li> </ul> <p>For a complete listing of node types and specifications, see:</p> <ul> <li> <p> <a href="http://aws.amazon.com/elasticache/details">Amazon ElastiCache Product Features and Details</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/ParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific">Cache Node Type-Specific Parameters for Memcached</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific">Cache Node Type-Specific Parameters for Redis</a> </p> </li> </ul>'
-      StartTime:
-        $ref: '#/definitions/TStamp'
-        description: The time the reservation started.
-      Duration:
-        $ref: '#/definitions/Integer'
-        description: The duration of the reservation in seconds.
-      FixedPrice:
-        $ref: '#/definitions/Double'
-        description: The fixed price charged for this reserved cache node.
-      UsagePrice:
-        $ref: '#/definitions/Double'
-        description: The hourly price charged for this reserved cache node.
-      CacheNodeCount:
-        $ref: '#/definitions/Integer'
-        description: The number of cache nodes that have been reserved.
-      ProductDescription:
-        $ref: '#/definitions/String'
-        description: The description of the reserved cache node.
-      OfferingType:
-        $ref: '#/definitions/String'
-        description: The offering type of this reserved cache node.
-      State:
-        $ref: '#/definitions/String'
-        description: The state of the reserved cache node.
-      RecurringCharges:
-        $ref: '#/definitions/RecurringChargeList'
-        description: The recurring price charged to run this reserved cache node.
-      ReservationARN:
-        $ref: '#/definitions/String'
-        description: '<p>The Amazon Resource Name (ARN) of the reserved cache node.</p> <p>Example: <code>arn:aws:elasticache:us-east-1:123456789012:reserved-instance:ri-2017-03-27-08-33-25-582</code> </p>'
-    description: Represents the output of a <code>PurchaseReservedCacheNodesOffering</code> operation.
-  ReservedCacheNodeList:
-    type: array
-    items:
-      $ref: '#/definitions/ReservedCacheNode'
-  ReservedCacheNodesOffering:
-    type: object
-    properties:
-      ReservedCacheNodesOfferingId:
-        $ref: '#/definitions/String'
-        description: A unique identifier for the reserved cache node offering.
-      CacheNodeType:
-        $ref: '#/definitions/String'
-        description: '<p>The cache node type for the reserved cache node.</p> <p>The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.</p> <ul> <li> <p>General purpose:</p> <ul> <li> <p>Current generation: </p> <p> <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code> </p> <p> <b>M3 node types:</b> <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code> </p> <p> <b>M4 node types:</b> <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>, <code>cache.m4.2xlarge</code>, <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>T1 node types:</b> <code>cache.t1.micro</code> </p> <p> <b>M1 node types:</b> <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code> </p> </li> </ul> </li> <li> <p>Compute optimized:</p> <ul> <li> <p>Previous generation: (not recommended)</p> <p> <b>C1 node types:</b> <code>cache.c1.xlarge</code> </p> </li> </ul> </li> <li> <p>Memory optimized:</p> <ul> <li> <p>Current generation: </p> <p> <b>R3 node types:</b> <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code> </p> <p> <b>R4 node types;</b> <code>cache.r4.large</code>, <code>cache.r4.xlarge</code>, <code>cache.r4.2xlarge</code>, <code>cache.r4.4xlarge</code>, <code>cache.r4.8xlarge</code>, <code>cache.r4.16xlarge</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>M2 node types:</b> <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code> </p> </li> </ul> </li> </ul> <p> <b>Notes:</b> </p> <ul> <li> <p>All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).</p> </li> <li> <p>Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances. </p> </li> <li> <p>Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.</p> </li> <li> <p>Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.</p> </li> </ul> <p>For a complete listing of node types and specifications, see:</p> <ul> <li> <p> <a href="http://aws.amazon.com/elasticache/details">Amazon ElastiCache Product Features and Details</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/ParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific">Cache Node Type-Specific Parameters for Memcached</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific">Cache Node Type-Specific Parameters for Redis</a> </p> </li> </ul>'
-      Duration:
-        $ref: '#/definitions/Integer'
-        description: The duration of the offering. in seconds.
-      FixedPrice:
-        $ref: '#/definitions/Double'
-        description: The fixed price charged for this offering.
-      UsagePrice:
-        $ref: '#/definitions/Double'
-        description: The hourly price charged for this offering.
-      ProductDescription:
-        $ref: '#/definitions/String'
-        description: The cache engine used by the offering.
-      OfferingType:
-        $ref: '#/definitions/String'
-        description: The offering type.
-      RecurringCharges:
-        $ref: '#/definitions/RecurringChargeList'
-        description: The recurring price charged to run this reserved cache node.
-    description: Describes all of the attributes of a reserved cache node offering.
-  ReservedCacheNodesOfferingList:
-    type: array
-    items:
-      $ref: '#/definitions/ReservedCacheNodesOffering'
-  ReshardingConfiguration:
-    type: object
-    properties:
-      NodeGroupId:
-        $ref: '#/definitions/AllowedNodeGroupId'
-        description: The 4-digit id for the node group these configuration values apply to.
-      PreferredAvailabilityZones:
-        $ref: '#/definitions/AvailabilityZonesList'
-        description: A list of preferred availability zones for the nodes in this cluster.
-    description: A list of <code>PreferredAvailabilityZones</code> objects that specifies the configuration of a node group in the resharded cluster.
-  ReshardingConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/ReshardingConfiguration'
-  ReshardingStatus:
-    type: object
-    properties:
-      SlotMigration:
-        $ref: '#/definitions/SlotMigration'
-        description: Represents the progress of an online resharding operation.
-    description: The status of an online resharding operation.
-  SecurityGroupIdsList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SecurityGroupMembership:
-    type: object
-    properties:
-      SecurityGroupId:
-        $ref: '#/definitions/String'
-        description: The identifier of the cache security group.
-      Status:
-        $ref: '#/definitions/String'
-        description: 'The status of the cache security group membership. The status changes whenever a cache security group is modified, or when the cache security groups assigned to a cluster are modified.'
-    description: Represents a single cache security group and its status.
-  SecurityGroupMembershipList:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityGroupMembership'
-  SlotMigration:
-    type: object
-    properties:
-      ProgressPercentage:
-        $ref: '#/definitions/Double'
-        description: The percentage of the slot migration that is complete.
-    description: Represents the progress of an online resharding operation.
   Snapshot:
     type: object
     properties:
@@ -4219,14 +3807,98 @@ definitions:
         $ref: '#/definitions/NodeSnapshotList'
         description: A list of the cache nodes in the source cluster.
     description: Represents a copy of an entire Redis cluster as of the time when the snapshot was taken.
+  SecurityGroupIdsList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   SnapshotArnsList:
     type: array
     items:
       $ref: '#/definitions/String'
-  SnapshotList:
+  SubnetIdentifierList:
     type: array
     items:
-      $ref: '#/definitions/Snapshot'
+      $ref: '#/definitions/String'
+  NodeGroupConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/NodeGroupConfiguration'
+  ReplicationGroup:
+    type: object
+    properties:
+      ReplicationGroupId:
+        $ref: '#/definitions/String'
+        description: The identifier for the replication group.
+      Description:
+        $ref: '#/definitions/String'
+        description: The user supplied description of the replication group.
+      Status:
+        $ref: '#/definitions/String'
+        description: 'The current state of this replication group - <code>creating</code>, <code>available</code>, <code>modifying</code>, <code>deleting</code>, <code>create-failed</code>, <code>snapshotting</code>.'
+      PendingModifiedValues:
+        $ref: '#/definitions/ReplicationGroupPendingModifiedValues'
+        description: 'A group of settings to be applied to the replication group, either immediately or during the next maintenance window.'
+      MemberClusters:
+        $ref: '#/definitions/ClusterIdList'
+        description: The names of all the cache clusters that are part of this replication group.
+      NodeGroups:
+        $ref: '#/definitions/NodeGroupList'
+        description: 'A list of node groups in this replication group. For Redis (cluster mode disabled) replication groups, this is a single-element list. For Redis (cluster mode enabled) replication groups, the list contains an entry for each node group (shard).'
+      SnapshottingClusterId:
+        $ref: '#/definitions/String'
+        description: The cluster ID that is used as the daily snapshot source for the replication group.
+      AutomaticFailover:
+        $ref: '#/definitions/AutomaticFailoverStatus'
+        description: '<p>Indicates the status of Multi-AZ with automatic failover for this Redis replication group.</p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 and T2 cache node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
+      ConfigurationEndpoint:
+        $ref: '#/definitions/Endpoint'
+        description: The configuration endpoint for this replication group. Use the configuration endpoint to connect to this replication group.
+      SnapshotRetentionLimit:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of days for which ElastiCache retains automatic cluster snapshots before deleting them. For example, if you set <code>SnapshotRetentionLimit</code> to 5, a snapshot that was taken today is retained for 5 days before being deleted.</p> <important> <p> If the value of <code>SnapshotRetentionLimit</code> is set to zero (0), backups are turned off.</p> </important>'
+      SnapshotWindow:
+        $ref: '#/definitions/String'
+        description: '<p>The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).</p> <p>Example: <code>05:00-09:00</code> </p> <p>If you do not specify this parameter, ElastiCache automatically chooses an appropriate time range.</p> <note> <p>This parameter is only valid if the <code>Engine</code> parameter is <code>redis</code>.</p> </note>'
+      ClusterEnabled:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>A flag indicating whether or not this replication group is cluster enabled; i.e., whether its data can be partitioned across multiple shards (API/CLI: node groups).</p> <p>Valid values: <code>true</code> | <code>false</code> </p>'
+      CacheNodeType:
+        $ref: '#/definitions/String'
+        description: The name of the compute and memory capacity node type for each node in the replication group.
+      AuthTokenEnabled:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>A flag that enables using an <code>AuthToken</code> (password) when issuing Redis commands.</p> <p>Default: <code>false</code> </p>'
+      TransitEncryptionEnabled:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>A flag that enables in-transit encryption when set to <code>true</code>.</p> <p>You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code> or <code>4.x</code>.</p> <p>Default: <code>false</code> </p>'
+      AtRestEncryptionEnabled:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>A flag that enables encryption at-rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the cluster is created. To enable encryption at-rest on a cluster you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code> or <code>4.x</code>.</p> <p>Default: <code>false</code> </p>'
+    description: Contains all of the attributes of a specific Redis replication group.
+  ReplicaConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigureShard'
+  RemoveReplicasList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  EngineDefaults:
+    type: object
+    properties:
+      CacheParameterGroupFamily:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the name of the cache parameter group family to which the engine default parameters apply.</p> <p>Valid values are: <code>memcached1.4</code> | <code>redis2.6</code> | <code>redis2.8</code> | <code>redis3.2</code> | <code>redis4.0</code> </p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: Provides an identifier to allow retrieval of paginated results.
+      Parameters:
+        $ref: '#/definitions/ParametersList'
+        description: Contains a list of engine default parameters.
+      CacheNodeTypeSpecificParameters:
+        $ref: '#/definitions/CacheNodeTypeSpecificParametersList'
+        description: A list of parameters specific to a particular cache node type. Each element in the list contains detailed information about one parameter.
+    description: Represents the output of a <code>DescribeEngineDefaultParameters</code> operation.
   SourceType:
     type: string
     enum:
@@ -4235,8 +3907,350 @@ definitions:
       - cache-security-group
       - cache-subnet-group
       - replication-group
-  String:
+  SnapshotList:
+    type: array
+    items:
+      $ref: '#/definitions/Snapshot'
+  Double:
+    type: number
+    format: double
+  EC2SecurityGroup:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/String'
+        description: The status of the Amazon EC2 security group.
+      EC2SecurityGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the Amazon EC2 security group.
+      EC2SecurityGroupOwnerId:
+        $ref: '#/definitions/String'
+        description: The AWS account ID of the Amazon EC2 security group owner.
+    description: Provides ownership and status information for an Amazon EC2 security group.
+  Event:
+    type: object
+    properties:
+      SourceIdentifier:
+        $ref: '#/definitions/String'
+        description: 'The identifier for the source of the event. For example, if the event occurred at the cluster level, the identifier would be the name of the cluster.'
+      SourceType:
+        $ref: '#/definitions/SourceType'
+        description: 'Specifies the origin of this event - a cluster, a parameter group, a security group, etc.'
+      Message:
+        $ref: '#/definitions/String'
+        description: The text of the event.
+      Date:
+        $ref: '#/definitions/TStamp'
+        description: The date and time when the event occurred.
+    description: 'Represents a single occurrence of something interesting within the system. Some examples of events are creating a cluster, adding or removing a cache node, or rebooting a node.'
+  EventList:
+    type: array
+    items:
+      $ref: '#/definitions/Event'
+  KeyList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ParameterNameValueList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterNameValue'
+  ReshardingConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/ReshardingConfiguration'
+  NodeGroupsToRemoveList:
+    type: array
+    items:
+      $ref: '#/definitions/AllowedNodeGroupId'
+  NodeGroupsToRetainList:
+    type: array
+    items:
+      $ref: '#/definitions/AllowedNodeGroupId'
+  NodeGroupMemberList:
+    type: array
+    items:
+      $ref: '#/definitions/NodeGroupMember'
+  NodeGroup:
+    type: object
+    properties:
+      NodeGroupId:
+        $ref: '#/definitions/String'
+        description: 'The identifier for the node group (shard). A Redis (cluster mode disabled) replication group contains only 1 node group; therefore, the node group ID is 0001. A Redis (cluster mode enabled) replication group contains 1 to 15 node groups numbered 0001 to 0015. '
+      Status:
+        $ref: '#/definitions/String'
+        description: 'The current state of this replication group - <code>creating</code>, <code>available</code>, etc.'
+      PrimaryEndpoint:
+        $ref: '#/definitions/Endpoint'
+        description: The endpoint of the primary node in this node group (shard).
+      Slots:
+        $ref: '#/definitions/String'
+        description: The keyspace for this node group (shard).
+      NodeGroupMembers:
+        $ref: '#/definitions/NodeGroupMemberList'
+        description: A list containing information about individual nodes within the node group (shard).
+    description: Represents a collection of cache nodes in a replication group. One node in the node group is the read/write primary node. All the other nodes are read-only Replica nodes.
+  NodeGroupConfiguration:
+    type: object
+    properties:
+      NodeGroupId:
+        $ref: '#/definitions/AllowedNodeGroupId'
+        description: The 4-digit id for the node group these configuration values apply to.
+      Slots:
+        $ref: '#/definitions/String'
+        description: '<p>A string that specifies the keyspace for a particular node group. Keyspaces range from 0 to 16,383. The string is in the format <code>startkey-endkey</code>.</p> <p>Example: <code>"0-3999"</code> </p>'
+      ReplicaCount:
+        $ref: '#/definitions/IntegerOptional'
+        description: The number of read replica nodes in this node group (shard).
+      PrimaryAvailabilityZone:
+        $ref: '#/definitions/String'
+        description: The Availability Zone where the primary node of this node group (shard) is launched.
+      ReplicaAvailabilityZones:
+        $ref: '#/definitions/AvailabilityZonesList'
+        description: A list of Availability Zones to be used for the read replicas. The number of Availability Zones in this list must match the value of <code>ReplicaCount</code> or <code>ReplicasPerNodeGroup</code> if not specified.
+    description: 'Node group (shard) configuration options. Each node group (shard) configuration has the following: <code>Slots</code>, <code>PrimaryAvailabilityZone</code>, <code>ReplicaAvailabilityZones</code>, <code>ReplicaCount</code>.'
+  NodeGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/NodeGroup'
+  NodeGroupMember:
+    type: object
+    properties:
+      CacheClusterId:
+        $ref: '#/definitions/String'
+        description: The ID of the cluster to which the node belongs.
+      CacheNodeId:
+        $ref: '#/definitions/String'
+        description: 'The ID of the node within its cluster. A node ID is a numeric identifier (0001, 0002, etc.).'
+      ReadEndpoint:
+        $ref: '#/definitions/Endpoint'
+        description: The information required for client programs to connect to a node for read operations. The read endpoint is only applicable on Redis (cluster mode disabled) clusters.
+      PreferredAvailabilityZone:
+        $ref: '#/definitions/String'
+        description: The name of the Availability Zone in which the node is located.
+      CurrentRole:
+        $ref: '#/definitions/String'
+        description: The role that is currently assigned to the node - <code>primary</code> or <code>replica</code>. This member is only applicable for Redis (cluster mode disabled) replication groups.
+    description: Represents a single node within a node group (shard).
+  NodeSnapshot:
+    type: object
+    properties:
+      CacheClusterId:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the source cluster.
+      NodeGroupId:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the source node group (shard).
+      CacheNodeId:
+        $ref: '#/definitions/String'
+        description: The cache node identifier for the node in the source cluster.
+      NodeGroupConfiguration:
+        $ref: '#/definitions/NodeGroupConfiguration'
+        description: The configuration for the source node group (shard).
+      CacheSize:
+        $ref: '#/definitions/String'
+        description: The size of the cache on the source cache node.
+      CacheNodeCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: The date and time when the cache node was created in the source cluster.
+      SnapshotCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: The date and time when the source node's metadata and cache data set was obtained for the snapshot.
+    description: Represents an individual cache node in a snapshot of a cluster.
+  NodeSnapshotList:
+    type: array
+    items:
+      $ref: '#/definitions/NodeSnapshot'
+  Parameter:
+    type: object
+    properties:
+      ParameterName:
+        $ref: '#/definitions/String'
+        description: The name of the parameter.
+      ParameterValue:
+        $ref: '#/definitions/String'
+        description: The value of the parameter.
+      Description:
+        $ref: '#/definitions/String'
+        description: A description of the parameter.
+      Source:
+        $ref: '#/definitions/String'
+        description: The source of the parameter.
+      DataType:
+        $ref: '#/definitions/String'
+        description: The valid data type for the parameter.
+      AllowedValues:
+        $ref: '#/definitions/String'
+        description: The valid range of values for the parameter.
+      IsModifiable:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether (<code>true</code>) or not (<code>false</code>) the parameter can be modified. Some parameters have security or operational implications that prevent them from being changed.
+      MinimumEngineVersion:
+        $ref: '#/definitions/String'
+        description: The earliest cache engine version to which the parameter can apply.
+      ChangeType:
+        $ref: '#/definitions/ChangeType'
+        description: 'Indicates whether a change to the parameter is applied immediately or requires a reboot for the change to be applied. You can force a reboot or wait until the next maintenance window''s reboot. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html">Rebooting a Cluster</a>.'
+    description: Describes an individual setting that controls some aspect of ElastiCache behavior.
+  ParameterNameValue:
+    type: object
+    properties:
+      ParameterName:
+        $ref: '#/definitions/String'
+        description: The name of the parameter.
+      ParameterValue:
+        $ref: '#/definitions/String'
+        description: The value of the parameter.
+    description: Describes a name-value pair that is used to update the value of a parameter.
+  PendingAutomaticFailoverStatus:
     type: string
+    enum:
+      - enabled
+      - disabled
+  ReservedCacheNode:
+    type: object
+    properties:
+      ReservedCacheNodeId:
+        $ref: '#/definitions/String'
+        description: The unique identifier for the reservation.
+      ReservedCacheNodesOfferingId:
+        $ref: '#/definitions/String'
+        description: The offering identifier.
+      CacheNodeType:
+        $ref: '#/definitions/String'
+        description: '<p>The cache node type for the reserved cache nodes.</p> <p>The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.</p> <ul> <li> <p>General purpose:</p> <ul> <li> <p>Current generation: </p> <p> <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code> </p> <p> <b>M3 node types:</b> <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code> </p> <p> <b>M4 node types:</b> <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>, <code>cache.m4.2xlarge</code>, <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>T1 node types:</b> <code>cache.t1.micro</code> </p> <p> <b>M1 node types:</b> <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code> </p> </li> </ul> </li> <li> <p>Compute optimized:</p> <ul> <li> <p>Previous generation: (not recommended)</p> <p> <b>C1 node types:</b> <code>cache.c1.xlarge</code> </p> </li> </ul> </li> <li> <p>Memory optimized:</p> <ul> <li> <p>Current generation: </p> <p> <b>R3 node types:</b> <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code> </p> <p> <b>R4 node types;</b> <code>cache.r4.large</code>, <code>cache.r4.xlarge</code>, <code>cache.r4.2xlarge</code>, <code>cache.r4.4xlarge</code>, <code>cache.r4.8xlarge</code>, <code>cache.r4.16xlarge</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>M2 node types:</b> <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code> </p> </li> </ul> </li> </ul> <p> <b>Notes:</b> </p> <ul> <li> <p>All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).</p> </li> <li> <p>Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances. </p> </li> <li> <p>Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.</p> </li> <li> <p>Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.</p> </li> </ul> <p>For a complete listing of node types and specifications, see:</p> <ul> <li> <p> <a href="http://aws.amazon.com/elasticache/details">Amazon ElastiCache Product Features and Details</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/ParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific">Cache Node Type-Specific Parameters for Memcached</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific">Cache Node Type-Specific Parameters for Redis</a> </p> </li> </ul>'
+      StartTime:
+        $ref: '#/definitions/TStamp'
+        description: The time the reservation started.
+      Duration:
+        $ref: '#/definitions/Integer'
+        description: The duration of the reservation in seconds.
+      FixedPrice:
+        $ref: '#/definitions/Double'
+        description: The fixed price charged for this reserved cache node.
+      UsagePrice:
+        $ref: '#/definitions/Double'
+        description: The hourly price charged for this reserved cache node.
+      CacheNodeCount:
+        $ref: '#/definitions/Integer'
+        description: The number of cache nodes that have been reserved.
+      ProductDescription:
+        $ref: '#/definitions/String'
+        description: The description of the reserved cache node.
+      OfferingType:
+        $ref: '#/definitions/String'
+        description: The offering type of this reserved cache node.
+      State:
+        $ref: '#/definitions/String'
+        description: The state of the reserved cache node.
+      RecurringCharges:
+        $ref: '#/definitions/RecurringChargeList'
+        description: The recurring price charged to run this reserved cache node.
+      ReservationARN:
+        $ref: '#/definitions/String'
+        description: '<p>The Amazon Resource Name (ARN) of the reserved cache node.</p> <p>Example: <code>arn:aws:elasticache:us-east-1:123456789012:reserved-instance:ri-2017-03-27-08-33-25-582</code> </p>'
+    description: Represents the output of a <code>PurchaseReservedCacheNodesOffering</code> operation.
+  RecurringCharge:
+    type: object
+    properties:
+      RecurringChargeAmount:
+        $ref: '#/definitions/Double'
+        description: The monetary amount of the recurring charge.
+      RecurringChargeFrequency:
+        $ref: '#/definitions/String'
+        description: The frequency of the recurring charge.
+    description: 'Contains the specific price and frequency of a recurring charges for a reserved cache node, or for a reserved cache node offering.'
+  RecurringChargeList:
+    type: array
+    items:
+      $ref: '#/definitions/RecurringCharge'
+  ReplicationGroupPendingModifiedValues:
+    type: object
+    properties:
+      PrimaryClusterId:
+        $ref: '#/definitions/String'
+        description: 'The primary cluster ID that is applied immediately (if <code>--apply-immediately</code> was specified), or during the next maintenance window.'
+      AutomaticFailoverStatus:
+        $ref: '#/definitions/PendingAutomaticFailoverStatus'
+        description: '<p>Indicates the status of Multi-AZ with automatic failover for this Redis replication group.</p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 and T2 cache node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
+      Resharding:
+        $ref: '#/definitions/ReshardingStatus'
+        description: The status of an online resharding operation.
+    description: 'The settings to be applied to the Redis replication group, either immediately or during the next maintenance window.'
+  ReplicationGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicationGroup'
+  ReshardingStatus:
+    type: object
+    properties:
+      SlotMigration:
+        $ref: '#/definitions/SlotMigration'
+        description: Represents the progress of an online resharding operation.
+    description: The status of an online resharding operation.
+  ReservedCacheNodeList:
+    type: array
+    items:
+      $ref: '#/definitions/ReservedCacheNode'
+  ReservedCacheNodesOffering:
+    type: object
+    properties:
+      ReservedCacheNodesOfferingId:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the reserved cache node offering.
+      CacheNodeType:
+        $ref: '#/definitions/String'
+        description: '<p>The cache node type for the reserved cache node.</p> <p>The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.</p> <ul> <li> <p>General purpose:</p> <ul> <li> <p>Current generation: </p> <p> <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code> </p> <p> <b>M3 node types:</b> <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code> </p> <p> <b>M4 node types:</b> <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>, <code>cache.m4.2xlarge</code>, <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>T1 node types:</b> <code>cache.t1.micro</code> </p> <p> <b>M1 node types:</b> <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code> </p> </li> </ul> </li> <li> <p>Compute optimized:</p> <ul> <li> <p>Previous generation: (not recommended)</p> <p> <b>C1 node types:</b> <code>cache.c1.xlarge</code> </p> </li> </ul> </li> <li> <p>Memory optimized:</p> <ul> <li> <p>Current generation: </p> <p> <b>R3 node types:</b> <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code> </p> <p> <b>R4 node types;</b> <code>cache.r4.large</code>, <code>cache.r4.xlarge</code>, <code>cache.r4.2xlarge</code>, <code>cache.r4.4xlarge</code>, <code>cache.r4.8xlarge</code>, <code>cache.r4.16xlarge</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>M2 node types:</b> <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code> </p> </li> </ul> </li> </ul> <p> <b>Notes:</b> </p> <ul> <li> <p>All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).</p> </li> <li> <p>Redis (cluster mode disabled): Redis backup/restore is not supported on T1 and T2 instances. </p> </li> <li> <p>Redis (cluster mode enabled): Backup/restore is not supported on T1 instances.</p> </li> <li> <p>Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.</p> </li> </ul> <p>For a complete listing of node types and specifications, see:</p> <ul> <li> <p> <a href="http://aws.amazon.com/elasticache/details">Amazon ElastiCache Product Features and Details</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/ParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific">Cache Node Type-Specific Parameters for Memcached</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific">Cache Node Type-Specific Parameters for Redis</a> </p> </li> </ul>'
+      Duration:
+        $ref: '#/definitions/Integer'
+        description: The duration of the offering. in seconds.
+      FixedPrice:
+        $ref: '#/definitions/Double'
+        description: The fixed price charged for this offering.
+      UsagePrice:
+        $ref: '#/definitions/Double'
+        description: The hourly price charged for this offering.
+      ProductDescription:
+        $ref: '#/definitions/String'
+        description: The cache engine used by the offering.
+      OfferingType:
+        $ref: '#/definitions/String'
+        description: The offering type.
+      RecurringCharges:
+        $ref: '#/definitions/RecurringChargeList'
+        description: The recurring price charged to run this reserved cache node.
+    description: Describes all of the attributes of a reserved cache node offering.
+  ReservedCacheNodesOfferingList:
+    type: array
+    items:
+      $ref: '#/definitions/ReservedCacheNodesOffering'
+  ReshardingConfiguration:
+    type: object
+    properties:
+      NodeGroupId:
+        $ref: '#/definitions/AllowedNodeGroupId'
+        description: The 4-digit id for the node group these configuration values apply to.
+      PreferredAvailabilityZones:
+        $ref: '#/definitions/AvailabilityZonesList'
+        description: A list of preferred availability zones for the nodes in this cluster.
+    description: A list of <code>PreferredAvailabilityZones</code> objects that specifies the configuration of a node group in the resharded cluster.
+  SlotMigration:
+    type: object
+    properties:
+      ProgressPercentage:
+        $ref: '#/definitions/Double'
+        description: The percentage of the slot migration that is complete.
+    description: Represents the progress of an online resharding operation.
+  SecurityGroupMembership:
+    type: object
+    properties:
+      SecurityGroupId:
+        $ref: '#/definitions/String'
+        description: The identifier of the cache security group.
+      Status:
+        $ref: '#/definitions/String'
+        description: 'The status of the cache security group membership. The status changes whenever a cache security group is modified, or when the cache security groups assigned to a cluster are modified.'
+    description: Represents a single cache security group and its status.
   Subnet:
     type: object
     properties:
@@ -4247,17 +4261,6 @@ definitions:
         $ref: '#/definitions/AvailabilityZone'
         description: The Availability Zone associated with the subnet.
     description: Represents the subnet associated with a cluster. This parameter refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with ElastiCache.
-  SubnetIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SubnetList:
-    type: array
-    items:
-      $ref: '#/definitions/Subnet'
-  TStamp:
-    type: string
-    format: date-time
   Tag:
     type: object
     properties:
@@ -4268,7 +4271,3 @@ definitions:
         $ref: '#/definitions/String'
         description: The tag's value. May be null.
     description: A cost allocation Tag that can be added to an ElastiCache cluster or replication group. Tags are composed of a Key/Value pair. A tag with a null Value is permitted.
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'

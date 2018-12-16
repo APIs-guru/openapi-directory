@@ -2049,7 +2049,10 @@ definitions:
       format:
         $ref: '#/definitions/TypeDefinitionFormat'
         description: 'The new type format: SDL or JSON.'
-  undefined: {}
+  String:
+    type: string
+  Long:
+    type: integer
   ApiKey:
     type: object
     properties:
@@ -2074,18 +2077,6 @@ definitions:
       - AWS_IAM
       - AMAZON_COGNITO_USER_POOLS
       - OPENID_CONNECT
-  AuthorizationConfig:
-    type: object
-    required:
-      - authorizationType
-    properties:
-      authorizationType:
-        $ref: '#/definitions/AuthorizationType'
-        description: '<p>The authorization type required by the HTTP endpoint.</p> <ul> <li> <p> <b>AWS_IAM</b>: The authorization type is Sigv4.</p> </li> </ul>'
-      awsIamConfig:
-        $ref: '#/definitions/AwsIamConfig'
-        description: The AWS IAM settings.
-    description: The authorization config in case the HTTP endpoint requires authorization.
   AuthorizationType:
     type: string
     enum:
@@ -2100,10 +2091,92 @@ definitions:
         $ref: '#/definitions/String'
         description: The signing service name for AWS IAM authorization.
     description: The AWS IAM configuration.
+  AuthorizationConfig:
+    type: object
+    required:
+      - authorizationType
+    properties:
+      authorizationType:
+        $ref: '#/definitions/AuthorizationType'
+        description: '<p>The authorization type required by the HTTP endpoint.</p> <ul> <li> <p> <b>AWS_IAM</b>: The authorization type is Sigv4.</p> </li> </ul>'
+      awsIamConfig:
+        $ref: '#/definitions/AwsIamConfig'
+        description: The AWS IAM settings.
+    description: The authorization config in case the HTTP endpoint requires authorization.
   Blob:
     type: string
   Boolean:
     type: boolean
+  ResourceName:
+    type: string
+    pattern: '[_A-Za-z][_0-9A-Za-z]*'
+  DataSourceType:
+    type: string
+    enum:
+      - AWS_LAMBDA
+      - AMAZON_DYNAMODB
+      - AMAZON_ELASTICSEARCH
+      - NONE
+      - HTTP
+      - RELATIONAL_DATABASE
+  DynamodbDataSourceConfig:
+    type: object
+    required:
+      - tableName
+      - awsRegion
+    properties:
+      tableName:
+        $ref: '#/definitions/String'
+        description: The table name.
+      awsRegion:
+        $ref: '#/definitions/String'
+        description: The AWS Region.
+      useCallerCredentials:
+        $ref: '#/definitions/Boolean'
+        description: Set to TRUE to use Amazon Cognito credentials with this data source.
+    description: Describes an Amazon DynamoDB data source configuration.
+  LambdaDataSourceConfig:
+    type: object
+    required:
+      - lambdaFunctionArn
+    properties:
+      lambdaFunctionArn:
+        $ref: '#/definitions/String'
+        description: The ARN for the Lambda function.
+    description: Describes an AWS Lambda data source configuration.
+  ElasticsearchDataSourceConfig:
+    type: object
+    required:
+      - endpoint
+      - awsRegion
+    properties:
+      endpoint:
+        $ref: '#/definitions/String'
+        description: The endpoint.
+      awsRegion:
+        $ref: '#/definitions/String'
+        description: The AWS Region.
+    description: Describes an Elasticsearch data source configuration.
+  HttpDataSourceConfig:
+    type: object
+    properties:
+      endpoint:
+        $ref: '#/definitions/String'
+        description: 'The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AWS AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.'
+      authorizationConfig:
+        $ref: '#/definitions/AuthorizationConfig'
+        description: The authorization config in case the HTTP endpoint requires authorization.
+    description: Describes an HTTP data source configuration.
+  RelationalDatabaseDataSourceConfig:
+    type: object
+    properties:
+      relationalDatabaseSourceType:
+        $ref: '#/definitions/RelationalDatabaseSourceType'
+        description: '<p>Source type for the relational database.</p> <ul> <li> <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database source type is an Amazon RDS HTTP endpoint.</p> </li> </ul>'
+      rdsHttpEndpointConfig:
+        $ref: '#/definitions/RdsHttpEndpointConfig'
+        description: Amazon RDS HTTP endpoint settings.
+    description: Describes a relational database data source configuration.
   DataSource:
     type: object
     properties:
@@ -2138,59 +2211,10 @@ definitions:
         $ref: '#/definitions/RelationalDatabaseDataSourceConfig'
         description: Relational database settings.
     description: Describes a data source.
-  DataSourceType:
+  MappingTemplate:
     type: string
-    enum:
-      - AWS_LAMBDA
-      - AMAZON_DYNAMODB
-      - AMAZON_ELASTICSEARCH
-      - NONE
-      - HTTP
-      - RELATIONAL_DATABASE
-  DataSources:
-    type: array
-    items:
-      $ref: '#/definitions/DataSource'
-  DefaultAction:
-    type: string
-    enum:
-      - ALLOW
-      - DENY
-  DynamodbDataSourceConfig:
-    type: object
-    required:
-      - tableName
-      - awsRegion
-    properties:
-      tableName:
-        $ref: '#/definitions/String'
-        description: The table name.
-      awsRegion:
-        $ref: '#/definitions/String'
-        description: The AWS Region.
-      useCallerCredentials:
-        $ref: '#/definitions/Boolean'
-        description: Set to TRUE to use Amazon Cognito credentials with this data source.
-    description: Describes an Amazon DynamoDB data source configuration.
-  ElasticsearchDataSourceConfig:
-    type: object
-    required:
-      - endpoint
-      - awsRegion
-    properties:
-      endpoint:
-        $ref: '#/definitions/String'
-        description: The endpoint.
-      awsRegion:
-        $ref: '#/definitions/String'
-        description: The AWS Region.
-    description: Describes an Elasticsearch data source configuration.
-  FieldLogLevel:
-    type: string
-    enum:
-      - NONE
-      - ERROR
-      - ALL
+    minLength: 1
+    maxLength: 65536
   FunctionConfiguration:
     type: object
     properties:
@@ -2219,14 +2243,57 @@ definitions:
         $ref: '#/definitions/String'
         description: The version of the request mapping template. Currently only the 2018-05-29 version of the template is supported.
     description: A function is a reusable entity. Multiple functions can be used to compose the resolver logic.
-  Functions:
-    type: array
-    items:
-      $ref: '#/definitions/FunctionConfiguration'
-  FunctionsIds:
-    type: array
-    items:
-      $ref: '#/definitions/String'
+  LogConfig:
+    type: object
+    required:
+      - fieldLogLevel
+      - cloudWatchLogsRoleArn
+    properties:
+      fieldLogLevel:
+        $ref: '#/definitions/FieldLogLevel'
+        description: '<p>The field logging level. Values can be NONE, ERROR, or ALL. </p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>'
+      cloudWatchLogsRoleArn:
+        $ref: '#/definitions/String'
+        description: 'The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. '
+    description: The CloudWatch Logs configuration.
+  UserPoolConfig:
+    type: object
+    required:
+      - userPoolId
+      - awsRegion
+      - defaultAction
+    properties:
+      userPoolId:
+        $ref: '#/definitions/String'
+        description: The user pool ID.
+      awsRegion:
+        $ref: '#/definitions/String'
+        description: The AWS Region in which the user pool was created.
+      defaultAction:
+        $ref: '#/definitions/DefaultAction'
+        description: The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pool authentication doesn't match the Amazon Cognito user pool configuration.
+      appIdClientRegex:
+        $ref: '#/definitions/String'
+        description: A regular expression for validating the incoming Amazon Cognito user pool app client ID.
+    description: Describes an Amazon Cognito user pool configuration.
+  OpenIDConnectConfig:
+    type: object
+    required:
+      - issuer
+    properties:
+      issuer:
+        $ref: '#/definitions/String'
+        description: The issuer for the OpenID Connect configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
+      clientId:
+        $ref: '#/definitions/String'
+        description: The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
+      iatTTL:
+        $ref: '#/definitions/Long'
+        description: The number of milliseconds a token is valid after being issued to a user.
+      authTTL:
+        $ref: '#/definitions/Long'
+        description: The number of milliseconds a token is valid after being authenticated.
+    description: Describes an OpenID Connect configuration.
   GraphqlApi:
     type: object
     properties:
@@ -2255,89 +2322,11 @@ definitions:
         $ref: '#/definitions/MapOfStringToString'
         description: The URIs.
     description: Describes a GraphQL API.
-  GraphqlApis:
-    type: array
-    items:
-      $ref: '#/definitions/GraphqlApi'
-  HttpDataSourceConfig:
-    type: object
-    properties:
-      endpoint:
-        $ref: '#/definitions/String'
-        description: 'The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AWS AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.'
-      authorizationConfig:
-        $ref: '#/definitions/AuthorizationConfig'
-        description: The authorization config in case the HTTP endpoint requires authorization.
-    description: Describes an HTTP data source configuration.
-  LambdaDataSourceConfig:
-    type: object
-    required:
-      - lambdaFunctionArn
-    properties:
-      lambdaFunctionArn:
-        $ref: '#/definitions/String'
-        description: The ARN for the Lambda function.
-    description: Describes an AWS Lambda data source configuration.
-  LogConfig:
-    type: object
-    required:
-      - fieldLogLevel
-      - cloudWatchLogsRoleArn
-    properties:
-      fieldLogLevel:
-        $ref: '#/definitions/FieldLogLevel'
-        description: '<p>The field logging level. Values can be NONE, ERROR, or ALL. </p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>'
-      cloudWatchLogsRoleArn:
-        $ref: '#/definitions/String'
-        description: 'The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. '
-    description: The CloudWatch Logs configuration.
-  Long:
-    type: integer
-  String:
-    type: string
-  MapOfStringToString:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  MappingTemplate:
-    type: string
-    minLength: 1
-    maxLength: 65536
-  MaxResults:
-    type: integer
-    minimum: 0
-    maximum: 25
-  OpenIDConnectConfig:
-    type: object
-    required:
-      - issuer
-    properties:
-      issuer:
-        $ref: '#/definitions/String'
-        description: The issuer for the OpenID Connect configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
-      clientId:
-        $ref: '#/definitions/String'
-        description: The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
-      iatTTL:
-        $ref: '#/definitions/Long'
-        description: The number of milliseconds a token is valid after being issued to a user.
-      authTTL:
-        $ref: '#/definitions/Long'
-        description: The number of milliseconds a token is valid after being authenticated.
-    description: Describes an OpenID Connect configuration.
-  OutputType:
+  ResolverKind:
     type: string
     enum:
-      - SDL
-      - JSON
-  PaginationToken:
-    type: string
-    pattern: '[\\S]+'
+      - UNIT
+      - PIPELINE
   PipelineConfig:
     type: object
     properties:
@@ -2345,39 +2334,6 @@ definitions:
         $ref: '#/definitions/FunctionsIds'
         description: A list of <code>Function</code> objects.
     description: The pipeline configuration for a resolver of kind <code>PIPELINE</code>.
-  RdsHttpEndpointConfig:
-    type: object
-    properties:
-      awsRegion:
-        $ref: '#/definitions/String'
-        description: AWS Region for RDS HTTP endpoint.
-      dbClusterIdentifier:
-        $ref: '#/definitions/String'
-        description: Amazon RDS cluster identifier.
-      databaseName:
-        $ref: '#/definitions/String'
-        description: Logical database name.
-      schema:
-        $ref: '#/definitions/String'
-        description: Logical schema name.
-      awsSecretStoreArn:
-        $ref: '#/definitions/String'
-        description: AWS secret store ARN for database credentials.
-    description: The Amazon RDS HTTP endpoint configuration.
-  RelationalDatabaseDataSourceConfig:
-    type: object
-    properties:
-      relationalDatabaseSourceType:
-        $ref: '#/definitions/RelationalDatabaseSourceType'
-        description: '<p>Source type for the relational database.</p> <ul> <li> <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database source type is an Amazon RDS HTTP endpoint.</p> </li> </ul>'
-      rdsHttpEndpointConfig:
-        $ref: '#/definitions/RdsHttpEndpointConfig'
-        description: Amazon RDS HTTP endpoint settings.
-    description: Describes a relational database data source configuration.
-  RelationalDatabaseSourceType:
-    type: string
-    enum:
-      - RDS_HTTP_ENDPOINT
   Resolver:
     type: object
     properties:
@@ -2406,24 +2362,11 @@ definitions:
         $ref: '#/definitions/PipelineConfig'
         description: The <code>PipelineConfig</code>.
     description: Describes a resolver.
-  ResolverKind:
+  TypeDefinitionFormat:
     type: string
     enum:
-      - UNIT
-      - PIPELINE
-  Resolvers:
-    type: array
-    items:
-      $ref: '#/definitions/Resolver'
-  ResourceName:
-    type: string
-    pattern: '[_A-Za-z][_0-9A-Za-z]*'
-  SchemaStatus:
-    type: string
-    enum:
-      - PROCESSING
-      - ACTIVE
-      - DELETING
+      - SDL
+      - JSON
   Type:
     type: object
     properties:
@@ -2443,32 +2386,88 @@ definitions:
         $ref: '#/definitions/TypeDefinitionFormat'
         description: 'The type format: SDL or JSON.'
     description: Describes a type.
-  TypeDefinitionFormat:
+  DataSources:
+    type: array
+    items:
+      $ref: '#/definitions/DataSource'
+  DefaultAction:
+    type: string
+    enum:
+      - ALLOW
+      - DENY
+  FieldLogLevel:
+    type: string
+    enum:
+      - NONE
+      - ERROR
+      - ALL
+  Functions:
+    type: array
+    items:
+      $ref: '#/definitions/FunctionConfiguration'
+  FunctionsIds:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  OutputType:
     type: string
     enum:
       - SDL
       - JSON
+  SchemaStatus:
+    type: string
+    enum:
+      - PROCESSING
+      - ACTIVE
+      - DELETING
+  MapOfStringToString:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  GraphqlApis:
+    type: array
+    items:
+      $ref: '#/definitions/GraphqlApi'
+  PaginationToken:
+    type: string
+    pattern: '[\\S]+'
+  MaxResults:
+    type: integer
+    minimum: 0
+    maximum: 25
+  Resolvers:
+    type: array
+    items:
+      $ref: '#/definitions/Resolver'
   TypeList:
     type: array
     items:
       $ref: '#/definitions/Type'
-  UserPoolConfig:
+  RdsHttpEndpointConfig:
     type: object
-    required:
-      - userPoolId
-      - awsRegion
-      - defaultAction
     properties:
-      userPoolId:
-        $ref: '#/definitions/String'
-        description: The user pool ID.
       awsRegion:
         $ref: '#/definitions/String'
-        description: The AWS Region in which the user pool was created.
-      defaultAction:
-        $ref: '#/definitions/DefaultAction'
-        description: The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pool authentication doesn't match the Amazon Cognito user pool configuration.
-      appIdClientRegex:
+        description: AWS Region for RDS HTTP endpoint.
+      dbClusterIdentifier:
         $ref: '#/definitions/String'
-        description: A regular expression for validating the incoming Amazon Cognito user pool app client ID.
-    description: Describes an Amazon Cognito user pool configuration.
+        description: Amazon RDS cluster identifier.
+      databaseName:
+        $ref: '#/definitions/String'
+        description: Logical database name.
+      schema:
+        $ref: '#/definitions/String'
+        description: Logical schema name.
+      awsSecretStoreArn:
+        $ref: '#/definitions/String'
+        description: AWS secret store ARN for database credentials.
+    description: The Amazon RDS HTTP endpoint configuration.
+  RelationalDatabaseSourceType:
+    type: string
+    enum:
+      - RDS_HTTP_ENDPOINT

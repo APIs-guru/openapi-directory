@@ -963,8 +963,33 @@ definitions:
         $ref: '#/definitions/CaseId'
         description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
     description: <p/>
-  undefined: {}
+  AttachmentSetId:
+    type: string
+  Attachments:
+    type: array
+    items:
+      $ref: '#/definitions/Attachment'
+  ExpiryTime:
+    type: string
+  CaseId:
+    type: string
+  CommunicationBody:
+    type: string
+    minLength: 1
+    maxLength: 8000
+  CcEmailAddressList:
+    type: array
+    items:
+      $ref: '#/definitions/CcEmailAddress'
+    minItems: 0
+    maxItems: 10
+  Result:
+    type: boolean
   AfterTime:
+    type: string
+  FileName:
+    type: string
+  Data:
     type: string
   Attachment:
     type: object
@@ -976,6 +1001,8 @@ definitions:
         $ref: '#/definitions/Data'
         description: The content of the attachment file.
     description: An attachment to a case communication. The attachment consists of the file name and the content of the file.
+  AttachmentId:
+    type: string
   AttachmentDetails:
     type: object
     properties:
@@ -986,22 +1013,44 @@ definitions:
         $ref: '#/definitions/FileName'
         description: The file name of the attachment.
     description: The file name and ID of an attachment to a case communication. You can use the ID to retrieve the attachment with the <a>DescribeAttachment</a> operation.
-  AttachmentId:
+  ErrorMessage:
     type: string
   AttachmentSet:
     type: array
     items:
       $ref: '#/definitions/AttachmentDetails'
-  AttachmentSetId:
-    type: string
-  Attachments:
-    type: array
-    items:
-      $ref: '#/definitions/Attachment'
   BeforeTime:
     type: string
   Boolean:
     type: boolean
+  DisplayId:
+    type: string
+  Subject:
+    type: string
+  Status:
+    type: string
+  ServiceCode:
+    type: string
+  CategoryCode:
+    type: string
+  SeverityCode:
+    type: string
+  SubmittedBy:
+    type: string
+  TimeCreated:
+    type: string
+  RecentCaseCommunications:
+    type: object
+    properties:
+      communications:
+        $ref: '#/definitions/CommunicationList'
+        description: The five most recent communications associated with the case.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: A resumption point for pagination.
+    description: The five most recent communications associated with the case.
+  Language:
+    type: string
   CaseDetails:
     type: object
     properties:
@@ -1042,8 +1091,6 @@ definitions:
         $ref: '#/definitions/Language'
         description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
     description: '<p>A JSON-formatted object that contains the metadata for a support case. It is contained the response from a <a>DescribeCases</a> request. <b>CaseDetails</b> contains the following fields:</p> <ul> <li> <p> <b>caseId.</b> The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>.</p> </li> <li> <p> <b>categoryCode.</b> The category of problem for the AWS Support case. Corresponds to the CategoryCode values returned by a call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>displayId.</b> The identifier for the case on pages in the AWS Support Center.</p> </li> <li> <p> <b>language.</b> The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.</p> </li> <li> <p> <b>recentCommunications.</b> One or more <a>Communication</a> objects. Fields of these objects are <code>attachments</code>, <code>body</code>, <code>caseId</code>, <code>submittedBy</code>, and <code>timeCreated</code>.</p> </li> <li> <p> <b>nextToken.</b> A resumption point for pagination.</p> </li> <li> <p> <b>serviceCode.</b> The identifier for the AWS service that corresponds to the service code defined in the call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>severityCode. </b>The severity code assigned to the case. Contains one of the values returned by the call to <a>DescribeSeverityLevels</a>.</p> </li> <li> <p> <b>status.</b> The status of the case in the AWS Support Center.</p> </li> <li> <p> <b>subject.</b> The subject line of the case.</p> </li> <li> <p> <b>submittedBy.</b> The email address of the account that submitted the case.</p> </li> <li> <p> <b>timeCreated.</b> The time the case was created, in ISO-8601 format.</p> </li> </ul>'
-  CaseId:
-    type: string
   CaseIdList:
     type: array
     items:
@@ -1056,6 +1103,8 @@ definitions:
       $ref: '#/definitions/CaseDetails'
   CaseStatus:
     type: string
+  CategoryName:
+    type: string
   Category:
     type: object
     properties:
@@ -1066,22 +1115,12 @@ definitions:
         $ref: '#/definitions/CategoryName'
         description: The category name for the support case.
     description: 'A JSON-formatted name/value pair that represents the category name and category code of the problem, selected from the <a>DescribeServices</a> response for each AWS service.'
-  CategoryCode:
-    type: string
   CategoryList:
     type: array
     items:
       $ref: '#/definitions/Category'
-  CategoryName:
-    type: string
   CcEmailAddress:
     type: string
-  CcEmailAddressList:
-    type: array
-    items:
-      $ref: '#/definitions/CcEmailAddress'
-    minItems: 0
-    maxItems: 10
   Communication:
     type: object
     properties:
@@ -1101,55 +1140,106 @@ definitions:
         $ref: '#/definitions/AttachmentSet'
         description: Information about the attachments to the case communication.
     description: 'A communication associated with an AWS Support case. The communication consists of the case ID, the message body, attachment information, the account email address, and the date and time of the communication.'
-  CommunicationBody:
-    type: string
-    minLength: 1
-    maxLength: 8000
   CommunicationList:
     type: array
     items:
       $ref: '#/definitions/Communication'
-  Data:
-    type: string
-  DisplayId:
-    type: string
-  Double:
-    type: number
-    format: double
-  ErrorMessage:
-    type: string
-  ExpiryTime:
-    type: string
-  FileName:
-    type: string
-  IncludeCommunications:
-    type: boolean
-  IncludeResolvedCases:
-    type: boolean
   IssueType:
     type: string
-  Language:
+  IncludeResolvedCases:
+    type: boolean
+  NextToken:
     type: string
-  Long:
-    type: integer
   MaxResults:
     type: integer
     minimum: 10
     maximum: 100
-  NextToken:
-    type: string
-  RecentCaseCommunications:
-    type: object
-    properties:
-      communications:
-        $ref: '#/definitions/CommunicationList'
-        description: The five most recent communications associated with the case.
-      nextToken:
-        $ref: '#/definitions/NextToken'
-        description: A resumption point for pagination.
-    description: The five most recent communications associated with the case.
-  Result:
+  IncludeCommunications:
     type: boolean
+  ServiceCodeList:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceCode'
+    minItems: 0
+    maxItems: 100
+  ServiceList:
+    type: array
+    items:
+      $ref: '#/definitions/Service'
+  SeverityLevelsList:
+    type: array
+    items:
+      $ref: '#/definitions/SeverityLevel'
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  TrustedAdvisorCheckRefreshStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/TrustedAdvisorCheckRefreshStatus'
+  String:
+    type: string
+  TrustedAdvisorCheckResult:
+    type: object
+    required:
+      - checkId
+      - timestamp
+      - status
+      - resourcesSummary
+      - categorySpecificSummary
+      - flaggedResources
+    properties:
+      checkId:
+        $ref: '#/definitions/String'
+        description: The unique identifier for the Trusted Advisor check.
+      timestamp:
+        $ref: '#/definitions/String'
+        description: The time of the last refresh of the check.
+      status:
+        $ref: '#/definitions/String'
+        description: 'The alert status of the check: "ok" (green), "warning" (yellow), "error" (red), or "not_available".'
+      resourcesSummary:
+        $ref: '#/definitions/TrustedAdvisorResourcesSummary'
+      categorySpecificSummary:
+        $ref: '#/definitions/TrustedAdvisorCategorySpecificSummary'
+        description: Summary information that relates to the category of the check. Cost Optimizing is the only category that is currently supported.
+      flaggedResources:
+        $ref: '#/definitions/TrustedAdvisorResourceDetailList'
+        description: The details about each resource listed in the check result.
+    description: The results of a Trusted Advisor check returned by <a>DescribeTrustedAdvisorCheckResult</a>.
+  TrustedAdvisorCheckSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/TrustedAdvisorCheckSummary'
+  TrustedAdvisorCheckList:
+    type: array
+    items:
+      $ref: '#/definitions/TrustedAdvisorCheckDescription'
+  Double:
+    type: number
+    format: double
+  Long:
+    type: integer
+  TrustedAdvisorCheckRefreshStatus:
+    type: object
+    required:
+      - checkId
+      - status
+      - millisUntilNextRefreshable
+    properties:
+      checkId:
+        $ref: '#/definitions/String'
+        description: The unique identifier for the Trusted Advisor check.
+      status:
+        $ref: '#/definitions/String'
+        description: 'The status of the Trusted Advisor check for which a refresh has been requested: "none", "enqueued", "processing", "success", or "abandoned".'
+      millisUntilNextRefreshable:
+        $ref: '#/definitions/Long'
+        description: 'The amount of time, in milliseconds, until the Trusted Advisor check is eligible for refresh.'
+    description: The refresh status of a Trusted Advisor check.
+  ServiceName:
+    type: string
   Service:
     type: object
     properties:
@@ -1163,21 +1253,9 @@ definitions:
         $ref: '#/definitions/CategoryList'
         description: A list of categories that describe the type of support issue a case describes. Categories consist of a category name and a category code. Category names and codes are passed to AWS Support when you call <a>CreateCase</a>.
     description: 'Information about an AWS service returned by the <a>DescribeServices</a> operation. '
-  ServiceCode:
+  SeverityLevelCode:
     type: string
-  ServiceCodeList:
-    type: array
-    items:
-      $ref: '#/definitions/ServiceCode'
-    minItems: 0
-    maxItems: 100
-  ServiceList:
-    type: array
-    items:
-      $ref: '#/definitions/Service'
-  ServiceName:
-    type: string
-  SeverityCode:
+  SeverityLevelName:
     type: string
   SeverityLevel:
     type: object
@@ -1189,28 +1267,19 @@ definitions:
         $ref: '#/definitions/SeverityLevelName'
         description: The name of the severity level that corresponds to the severity level code.
     description: A code and name pair that represent a severity level that can be applied to a support case.
-  SeverityLevelCode:
-    type: string
-  SeverityLevelName:
-    type: string
-  SeverityLevelsList:
-    type: array
-    items:
-      $ref: '#/definitions/SeverityLevel'
-  Status:
-    type: string
-  String:
-    type: string
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  Subject:
-    type: string
-  SubmittedBy:
-    type: string
-  TimeCreated:
-    type: string
+  TrustedAdvisorCostOptimizingSummary:
+    type: object
+    required:
+      - estimatedMonthlySavings
+      - estimatedPercentMonthlySavings
+    properties:
+      estimatedMonthlySavings:
+        $ref: '#/definitions/Double'
+        description: The estimated monthly savings that might be realized if the recommended actions are taken.
+      estimatedPercentMonthlySavings:
+        $ref: '#/definitions/Double'
+        description: The estimated percentage of savings that might be realized if the recommended actions are taken.
+    description: The estimated cost savings that might be realized if the recommended actions are taken.
   TrustedAdvisorCategorySpecificSummary:
     type: object
     properties:
@@ -1243,59 +1312,31 @@ definitions:
         $ref: '#/definitions/StringList'
         description: 'The column headings for the data returned by the Trusted Advisor check. The order of the headings corresponds to the order of the data in the <b>Metadata</b> element of the <a>TrustedAdvisorResourceDetail</a> for the check. <b>Metadata</b> contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data. '
     description: The description and metadata for a Trusted Advisor check.
-  TrustedAdvisorCheckList:
-    type: array
-    items:
-      $ref: '#/definitions/TrustedAdvisorCheckDescription'
-  TrustedAdvisorCheckRefreshStatus:
+  TrustedAdvisorResourcesSummary:
     type: object
     required:
-      - checkId
-      - status
-      - millisUntilNextRefreshable
+      - resourcesProcessed
+      - resourcesFlagged
+      - resourcesIgnored
+      - resourcesSuppressed
     properties:
-      checkId:
-        $ref: '#/definitions/String'
-        description: The unique identifier for the Trusted Advisor check.
-      status:
-        $ref: '#/definitions/String'
-        description: 'The status of the Trusted Advisor check for which a refresh has been requested: "none", "enqueued", "processing", "success", or "abandoned".'
-      millisUntilNextRefreshable:
+      resourcesProcessed:
         $ref: '#/definitions/Long'
-        description: 'The amount of time, in milliseconds, until the Trusted Advisor check is eligible for refresh.'
-    description: The refresh status of a Trusted Advisor check.
-  TrustedAdvisorCheckRefreshStatusList:
+        description: The number of AWS resources that were analyzed by the Trusted Advisor check.
+      resourcesFlagged:
+        $ref: '#/definitions/Long'
+        description: The number of AWS resources that were flagged (listed) by the Trusted Advisor check.
+      resourcesIgnored:
+        $ref: '#/definitions/Long'
+        description: The number of AWS resources ignored by Trusted Advisor because information was unavailable.
+      resourcesSuppressed:
+        $ref: '#/definitions/Long'
+        description: The number of AWS resources ignored by Trusted Advisor because they were marked as suppressed by the user.
+    description: 'Details about AWS resources that were analyzed in a call to Trusted Advisor <a>DescribeTrustedAdvisorCheckSummaries</a>. '
+  TrustedAdvisorResourceDetailList:
     type: array
     items:
-      $ref: '#/definitions/TrustedAdvisorCheckRefreshStatus'
-  TrustedAdvisorCheckResult:
-    type: object
-    required:
-      - checkId
-      - timestamp
-      - status
-      - resourcesSummary
-      - categorySpecificSummary
-      - flaggedResources
-    properties:
-      checkId:
-        $ref: '#/definitions/String'
-        description: The unique identifier for the Trusted Advisor check.
-      timestamp:
-        $ref: '#/definitions/String'
-        description: The time of the last refresh of the check.
-      status:
-        $ref: '#/definitions/String'
-        description: 'The alert status of the check: "ok" (green), "warning" (yellow), "error" (red), or "not_available".'
-      resourcesSummary:
-        $ref: '#/definitions/TrustedAdvisorResourcesSummary'
-      categorySpecificSummary:
-        $ref: '#/definitions/TrustedAdvisorCategorySpecificSummary'
-        description: Summary information that relates to the category of the check. Cost Optimizing is the only category that is currently supported.
-      flaggedResources:
-        $ref: '#/definitions/TrustedAdvisorResourceDetailList'
-        description: The details about each resource listed in the check result.
-    description: The results of a Trusted Advisor check returned by <a>DescribeTrustedAdvisorCheckResult</a>.
+      $ref: '#/definitions/TrustedAdvisorResourceDetail'
   TrustedAdvisorCheckSummary:
     type: object
     required:
@@ -1323,23 +1364,6 @@ definitions:
         $ref: '#/definitions/TrustedAdvisorCategorySpecificSummary'
         description: Summary information that relates to the category of the check. Cost Optimizing is the only category that is currently supported.
     description: 'A summary of a Trusted Advisor check result, including the alert status, last refresh, and number of resources examined.'
-  TrustedAdvisorCheckSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/TrustedAdvisorCheckSummary'
-  TrustedAdvisorCostOptimizingSummary:
-    type: object
-    required:
-      - estimatedMonthlySavings
-      - estimatedPercentMonthlySavings
-    properties:
-      estimatedMonthlySavings:
-        $ref: '#/definitions/Double'
-        description: The estimated monthly savings that might be realized if the recommended actions are taken.
-      estimatedPercentMonthlySavings:
-        $ref: '#/definitions/Double'
-        description: The estimated percentage of savings that might be realized if the recommended actions are taken.
-    description: The estimated cost savings that might be realized if the recommended actions are taken.
   TrustedAdvisorResourceDetail:
     type: object
     required:
@@ -1363,28 +1387,3 @@ definitions:
         $ref: '#/definitions/StringList'
         description: 'Additional information about the identified resource. The exact metadata and its order can be obtained by inspecting the <a>TrustedAdvisorCheckDescription</a> object returned by the call to <a>DescribeTrustedAdvisorChecks</a>. <b>Metadata</b> contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data. '
     description: Contains information about a resource identified by a Trusted Advisor check.
-  TrustedAdvisorResourceDetailList:
-    type: array
-    items:
-      $ref: '#/definitions/TrustedAdvisorResourceDetail'
-  TrustedAdvisorResourcesSummary:
-    type: object
-    required:
-      - resourcesProcessed
-      - resourcesFlagged
-      - resourcesIgnored
-      - resourcesSuppressed
-    properties:
-      resourcesProcessed:
-        $ref: '#/definitions/Long'
-        description: The number of AWS resources that were analyzed by the Trusted Advisor check.
-      resourcesFlagged:
-        $ref: '#/definitions/Long'
-        description: The number of AWS resources that were flagged (listed) by the Trusted Advisor check.
-      resourcesIgnored:
-        $ref: '#/definitions/Long'
-        description: The number of AWS resources ignored by Trusted Advisor because information was unavailable.
-      resourcesSuppressed:
-        $ref: '#/definitions/Long'
-        description: The number of AWS resources ignored by Trusted Advisor because they were marked as suppressed by the user.
-    description: 'Details about AWS resources that were analyzed in a call to Trusted Advisor <a>DescribeTrustedAdvisorCheckSummaries</a>. '

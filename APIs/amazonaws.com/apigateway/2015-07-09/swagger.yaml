@@ -7415,7 +7415,8 @@ definitions:
         $ref: '#/definitions/ListOfPatchOperation'
         description: A list of update operations to be applied to the specified resource and in the order specified in this list.
     description: Updates an existing <a>VpcLink</a> of a specified identifier.
-  undefined: {}
+  String:
+    type: string
   AccessLogSettings:
     type: object
     properties:
@@ -7426,15 +7427,47 @@ definitions:
         $ref: '#/definitions/String'
         description: The ARN of the CloudWatch Logs log group to receive access logs.
     description: 'Access log settings, including the access log format and access log destination ARN.'
+  ThrottleSettings:
+    type: object
+    properties:
+      burstLimit:
+        $ref: '#/definitions/Integer'
+        description: 'The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.'
+      rateLimit:
+        $ref: '#/definitions/Double'
+        description: The API request steady-state rate limit.
+    description: ' The API request rate limits.'
+  ListOfString:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  Boolean:
+    type: boolean
+  Timestamp:
+    type: string
+    format: date-time
   ApiKeySourceType:
     type: string
     enum:
       - HEADER
       - AUTHORIZER
+  ListOfApiKey:
+    type: array
+    items:
+      $ref: '#/definitions/ApiKey'
   ApiKeysFormat:
     type: string
     enum:
       - csv
+  MapOfApiStageThrottleSettings:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/ThrottleSettings'
   ApiStage:
     type: object
     properties:
@@ -7455,10 +7488,22 @@ definitions:
       - REQUEST
       - COGNITO_USER_POOLS
     description: 'The authorizer type. Valid values are <code>TOKEN</code> for a Lambda function using a single authorization token submitted in a custom header, <code>REQUEST</code> for a Lambda function using incoming request parameters, and <code>COGNITO_USER_POOLS</code> for using an Amazon Cognito user pool.'
+  ListOfARNs:
+    type: array
+    items:
+      $ref: '#/definitions/ProviderARN'
+  NullableInteger:
+    type: integer
+  ListOfAuthorizer:
+    type: array
+    items:
+      $ref: '#/definitions/Authorizer'
+  ListOfBasePathMapping:
+    type: array
+    items:
+      $ref: '#/definitions/BasePathMapping'
   Blob:
     type: string
-  Boolean:
-    type: boolean
   CacheClusterSize:
     type: string
     enum:
@@ -7480,6 +7525,18 @@ definitions:
       - NOT_AVAILABLE
       - FLUSH_IN_PROGRESS
     description: Returns the status of the <b>CacheCluster</b>.
+  Double:
+    type: number
+    format: double
+  MapOfStringToString:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
   CanarySettings:
     type: object
     properties:
@@ -7496,6 +7553,10 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: A Boolean flag to indicate whether the canary deployment uses the stage cache or not.
     description: Configuration settings of a canary deployment.
+  ListOfClientCertificate:
+    type: array
+    items:
+      $ref: '#/definitions/ClientCertificate'
   ConnectionType:
     type: string
     enum:
@@ -7506,6 +7567,12 @@ definitions:
     enum:
       - CONVERT_TO_BINARY
       - CONVERT_TO_TEXT
+  ListOfStageKeys:
+    type: array
+    items:
+      $ref: '#/definitions/StageKey'
+  NullableBoolean:
+    type: boolean
   DeploymentCanarySettings:
     type: object
     properties:
@@ -7540,27 +7607,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The name of the targeted API entity. It is a valid and required field for the API entity types of <code>AUTHORIZER</code>, <code>MODEL</code>, <code>PATH_PARAMETER</code>, <code>QUERY_PARAMETER</code>, <code>REQUEST_HEADER</code>, <code>REQUEST_BODY</code> and <code>RESPONSE_HEADER</code>. It is an invalid field for any other entity type.'
     description: Specifies the target API entity to which the documentation applies.
-  DocumentationPartLocationStatusCode:
-    type: string
-    pattern: '^([1-5]\d\d|\*|\s*)$'
-  DocumentationPartType:
-    type: string
-    enum:
-      - API
-      - AUTHORIZER
-      - MODEL
-      - RESOURCE
-      - METHOD
-      - PATH_PARAMETER
-      - QUERY_PARAMETER
-      - REQUEST_HEADER
-      - REQUEST_BODY
-      - RESPONSE
-      - RESPONSE_HEADER
-      - RESPONSE_BODY
-  Double:
-    type: number
-    format: double
   EndpointConfiguration:
     type: object
     properties:
@@ -7568,13 +7614,23 @@ definitions:
         $ref: '#/definitions/ListOfEndpointType'
         description: 'A list of endpoint types of an API (<a>RestApi</a>) or its custom domain name (<a>DomainName</a>). For an edge-optimized API and its custom domain name, the endpoint type is <code>"EDGE"</code>. For a regional API and its custom domain name, the endpoint type is <code>REGIONAL</code>. For a private API, the endpoint type is <code>PRIVATE</code>.'
     description: 'The endpoint configuration to indicate the types of endpoints an API (<a>RestApi</a>) or its custom domain name (<a>DomainName</a>) has. '
-  EndpointType:
-    type: string
-    enum:
-      - REGIONAL
-      - EDGE
-      - PRIVATE
-    description: 'The endpoint type. The valid values are <code>EDGE</code> for edge-optimized API setup, most suitable for mobile applications; <code>REGIONAL</code> for regional API endpoint setup, most suitable for calling from AWS Region; and <code>PRIVATE</code> for private APIs.'
+  ListOfApiStage:
+    type: array
+    items:
+      $ref: '#/definitions/ApiStage'
+  QuotaSettings:
+    type: object
+    properties:
+      limit:
+        $ref: '#/definitions/Integer'
+        description: The maximum number of requests that can be made in a given time period.
+      offset:
+        $ref: '#/definitions/Integer'
+        description: The number of requests subtracted from the given limit in the initial time period.
+      period:
+        $ref: '#/definitions/QuotaPeriodType'
+        description: 'The time period in which the limit applies. Valid values are "DAY", "WEEK" or "MONTH".'
+    description: Quotas configured for a usage plan.
   GatewayResponseType:
     type: string
     enum:
@@ -7598,45 +7654,41 @@ definitions:
       - REQUEST_TOO_LARGE
       - THROTTLED
       - QUOTA_EXCEEDED
-  Integer:
-    type: integer
-  IntegrationType:
+  StatusCode:
     type: string
-    enum:
-      - HTTP
-      - AWS
-      - MOCK
-      - HTTP_PROXY
-      - AWS_PROXY
-    description: 'The integration type. The valid value is <code>HTTP</code> for integrating an API method with an HTTP backend; <code>AWS</code> with any AWS service endpoints; <code>MOCK</code> for testing without actually invoking the backend; <code>HTTP_PROXY</code> for integrating with the HTTP proxy integration; <code>AWS_PROXY</code> for integrating with the Lambda proxy integration. '
-  ListOfARNs:
+    pattern: '[1-5]\d\d'
+    description: The status code.
+  PathToMapOfMethodSnapshot:
     type: array
     items:
-      $ref: '#/definitions/ProviderARN'
-  ListOfApiKey:
-    type: array
-    items:
-      $ref: '#/definitions/ApiKey'
-  ListOfApiStage:
-    type: array
-    items:
-      $ref: '#/definitions/ApiStage'
-  ListOfAuthorizer:
-    type: array
-    items:
-      $ref: '#/definitions/Authorizer'
-  ListOfBasePathMapping:
-    type: array
-    items:
-      $ref: '#/definitions/BasePathMapping'
-  ListOfClientCertificate:
-    type: array
-    items:
-      $ref: '#/definitions/ClientCertificate'
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/MapOfMethodSnapshot'
   ListOfDeployment:
     type: array
     items:
       $ref: '#/definitions/Deployment'
+  DocumentationPartType:
+    type: string
+    enum:
+      - API
+      - AUTHORIZER
+      - MODEL
+      - RESOURCE
+      - METHOD
+      - PATH_PARAMETER
+      - QUERY_PARAMETER
+      - REQUEST_HEADER
+      - REQUEST_BODY
+      - RESPONSE
+      - RESPONSE_HEADER
+      - RESPONSE_BODY
+  DocumentationPartLocationStatusCode:
+    type: string
+    pattern: '^([1-5]\d\d|\*|\s*)$'
   ListOfDocumentationPart:
     type: array
     items:
@@ -7653,10 +7705,51 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EndpointType'
+  EndpointType:
+    type: string
+    enum:
+      - REGIONAL
+      - EDGE
+      - PRIVATE
+    description: 'The endpoint type. The valid values are <code>EDGE</code> for edge-optimized API setup, most suitable for mobile applications; <code>REGIONAL</code> for regional API endpoint setup, most suitable for calling from AWS Region; and <code>PRIVATE</code> for private APIs.'
   ListOfGatewayResponse:
     type: array
     items:
       $ref: '#/definitions/GatewayResponse'
+  LocationStatusType:
+    type: string
+    enum:
+      - DOCUMENTED
+      - UNDOCUMENTED
+  PutMode:
+    type: string
+    enum:
+      - merge
+      - overwrite
+  Integer:
+    type: integer
+  IntegrationType:
+    type: string
+    enum:
+      - HTTP
+      - AWS
+      - MOCK
+      - HTTP_PROXY
+      - AWS_PROXY
+    description: 'The integration type. The valid value is <code>HTTP</code> for integrating an API method with an HTTP backend; <code>AWS</code> with any AWS service endpoints; <code>MOCK</code> for testing without actually invoking the backend; <code>HTTP_PROXY</code> for integrating with the HTTP proxy integration; <code>AWS_PROXY</code> for integrating with the Lambda proxy integration. '
+  MapOfIntegrationResponse:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/IntegrationResponse'
+  ProviderARN:
+    type: string
+  Long:
+    type: integer
   ListOfLong:
     type: array
     items:
@@ -7665,6 +7758,22 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Model'
+  PatchOperation:
+    type: object
+    properties:
+      op:
+        $ref: '#/definitions/Op'
+        description: ' An update operation to be performed with this PATCH request. The valid value can be <code>add</code>, <code>remove</code>, <code>replace</code> or <code>copy</code>. Not all valid operations are supported for a given resource. Support of the operations depends on specific operational contexts. Attempts to apply an unsupported operation on a resource will return an error message.'
+      path:
+        $ref: '#/definitions/String'
+        description: 'The <code>op</code> operation''s target, as identified by a <a href="https://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08">JSON Pointer</a> value that references a location within the targeted resource. For example, if the target resource has an updateable property of <code>{"name":"value"}</code>, the path for this property is <code>/name</code>. If the <code>name</code> property value is a JSON object (e.g., <code>{"name": {"child/name": "child-value"}}</code>), the path for the <code>child/name</code> property will be <code>/name/child~1name</code>. Any slash ("/") character appearing in path names must be escaped with "~1", as shown in the example above. Each <code>op</code> operation can have only one <code>path</code> associated with it.'
+      value:
+        $ref: '#/definitions/String'
+        description: 'The new target value of the update operation. It is applicable for the <code>add</code> or <code>replace</code> operation. When using AWS CLI to update a property of a JSON value, enclose the JSON object with a pair of single quotes in a Linux shell, e.g., ''{"a": ...}''. In a Windows shell, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using JSON for Parameters</a>.'
+      from:
+        $ref: '#/definitions/String'
+        description: 'The <code>copy</code> update operation''s source as identified by a <code>JSON-Pointer</code> value referencing the location within the targeted resource to copy the value from. For example, to promote a canary deployment, you copy the canary deployment ID to the affiliated deployment ID by calling a PATCH request on a <a>Stage</a> resource with <code>"op":"copy"</code>, <code>"from":"/canarySettings/deploymentId"</code> and <code>"path":"/deploymentId"</code>.'
+    description: 'A single patch operation to apply to the specified resource. Please refer to http://tools.ietf.org/html/rfc6902#section-4 for an explanation of how each operation is used.'
   ListOfPatchOperation:
     type: array
     description: A list of operations describing the updates to apply to the specified resource. The patches are applied in the order specified in the list.
@@ -7682,6 +7791,25 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RestApi'
+  SdkConfigurationProperty:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/String'
+        description: The name of a an <a>SdkType</a> configuration property.
+      friendlyName:
+        $ref: '#/definitions/String'
+        description: The user-friendly name of an <a>SdkType</a> configuration property.
+      description:
+        $ref: '#/definitions/String'
+        description: The description of an <a>SdkType</a> configuration property.
+      required:
+        $ref: '#/definitions/Boolean'
+        description: A boolean flag of an <a>SdkType</a> configuration property to indicate if the associated SDK configuration property is required (<code>true</code>) or not (<code>false</code>).
+      defaultValue:
+        $ref: '#/definitions/String'
+        description: The default value of an <a>SdkType</a> configuration property.
+    description: A configuration property of an SDK type.
   ListOfSdkConfigurationProperty:
     type: array
     items:
@@ -7694,14 +7822,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Stage'
-  ListOfStageKeys:
-    type: array
-    items:
-      $ref: '#/definitions/StageKey'
-  ListOfString:
-    type: array
-    items:
-      $ref: '#/definitions/String'
+  StageKey:
+    type: object
+    properties:
+      restApiId:
+        $ref: '#/definitions/String'
+        description: The string identifier of the associated <a>RestApi</a>.
+      stageName:
+        $ref: '#/definitions/String'
+        description: The stage name associated with the stage key.
+    description: 'A reference to a unique stage identified in the format <code>{restApiId}/{stage}</code>.'
   ListOfUsage:
     type: array
     items:
@@ -7718,43 +7848,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/VpcLink'
-  LocationStatusType:
-    type: string
-    enum:
-      - DOCUMENTED
-      - UNDOCUMENTED
-  Long:
-    type: integer
-  String:
-    type: string
-  ThrottleSettings:
-    type: object
-    properties:
-      burstLimit:
-        $ref: '#/definitions/Integer'
-        description: 'The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.'
-      rateLimit:
-        $ref: '#/definitions/Double'
-        description: The API request steady-state rate limit.
-    description: ' The API request rate limits.'
-  MapOfApiStageThrottleSettings:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/ThrottleSettings'
-  MapOfIntegrationResponse:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/IntegrationResponse'
   MapOfKeyUsages:
     type: array
     items:
@@ -7844,8 +7937,6 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/MethodSnapshot'
-  NullableBoolean:
-    type: boolean
   MapOfStringToBoolean:
     type: array
     items:
@@ -7864,17 +7955,12 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/ListOfString'
-  MapOfStringToString:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  NullableInteger:
-    type: integer
+  UnauthorizedCacheControlHeaderStrategy:
+    type: string
+    enum:
+      - FAIL_WITH_403
+      - SUCCEED_WITH_RESPONSE_HEADER
+      - SUCCEED_WITHOUT_RESPONSE_HEADER
   Op:
     type: string
     enum:
@@ -7884,99 +7970,12 @@ definitions:
       - move
       - copy
       - test
-  PatchOperation:
-    type: object
-    properties:
-      op:
-        $ref: '#/definitions/Op'
-        description: ' An update operation to be performed with this PATCH request. The valid value can be <code>add</code>, <code>remove</code>, <code>replace</code> or <code>copy</code>. Not all valid operations are supported for a given resource. Support of the operations depends on specific operational contexts. Attempts to apply an unsupported operation on a resource will return an error message.'
-      path:
-        $ref: '#/definitions/String'
-        description: 'The <code>op</code> operation''s target, as identified by a <a href="https://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08">JSON Pointer</a> value that references a location within the targeted resource. For example, if the target resource has an updateable property of <code>{"name":"value"}</code>, the path for this property is <code>/name</code>. If the <code>name</code> property value is a JSON object (e.g., <code>{"name": {"child/name": "child-value"}}</code>), the path for the <code>child/name</code> property will be <code>/name/child~1name</code>. Any slash ("/") character appearing in path names must be escaped with "~1", as shown in the example above. Each <code>op</code> operation can have only one <code>path</code> associated with it.'
-      value:
-        $ref: '#/definitions/String'
-        description: 'The new target value of the update operation. It is applicable for the <code>add</code> or <code>replace</code> operation. When using AWS CLI to update a property of a JSON value, enclose the JSON object with a pair of single quotes in a Linux shell, e.g., ''{"a": ...}''. In a Windows shell, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using JSON for Parameters</a>.'
-      from:
-        $ref: '#/definitions/String'
-        description: 'The <code>copy</code> update operation''s source as identified by a <code>JSON-Pointer</code> value referencing the location within the targeted resource to copy the value from. For example, to promote a canary deployment, you copy the canary deployment ID to the affiliated deployment ID by calling a PATCH request on a <a>Stage</a> resource with <code>"op":"copy"</code>, <code>"from":"/canarySettings/deploymentId"</code> and <code>"path":"/deploymentId"</code>.'
-    description: 'A single patch operation to apply to the specified resource. Please refer to http://tools.ietf.org/html/rfc6902#section-4 for an explanation of how each operation is used.'
-  PathToMapOfMethodSnapshot:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/MapOfMethodSnapshot'
-  ProviderARN:
-    type: string
-  PutMode:
-    type: string
-    enum:
-      - merge
-      - overwrite
   QuotaPeriodType:
     type: string
     enum:
       - DAY
       - WEEK
       - MONTH
-  QuotaSettings:
-    type: object
-    properties:
-      limit:
-        $ref: '#/definitions/Integer'
-        description: The maximum number of requests that can be made in a given time period.
-      offset:
-        $ref: '#/definitions/Integer'
-        description: The number of requests subtracted from the given limit in the initial time period.
-      period:
-        $ref: '#/definitions/QuotaPeriodType'
-        description: 'The time period in which the limit applies. Valid values are "DAY", "WEEK" or "MONTH".'
-    description: Quotas configured for a usage plan.
-  SdkConfigurationProperty:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/String'
-        description: The name of a an <a>SdkType</a> configuration property.
-      friendlyName:
-        $ref: '#/definitions/String'
-        description: The user-friendly name of an <a>SdkType</a> configuration property.
-      description:
-        $ref: '#/definitions/String'
-        description: The description of an <a>SdkType</a> configuration property.
-      required:
-        $ref: '#/definitions/Boolean'
-        description: A boolean flag of an <a>SdkType</a> configuration property to indicate if the associated SDK configuration property is required (<code>true</code>) or not (<code>false</code>).
-      defaultValue:
-        $ref: '#/definitions/String'
-        description: The default value of an <a>SdkType</a> configuration property.
-    description: A configuration property of an SDK type.
-  StageKey:
-    type: object
-    properties:
-      restApiId:
-        $ref: '#/definitions/String'
-        description: The string identifier of the associated <a>RestApi</a>.
-      stageName:
-        $ref: '#/definitions/String'
-        description: The stage name associated with the stage key.
-    description: 'A reference to a unique stage identified in the format <code>{restApiId}/{stage}</code>.'
-  StatusCode:
-    type: string
-    pattern: '[1-5]\d\d'
-    description: The status code.
-  Timestamp:
-    type: string
-    format: date-time
-  UnauthorizedCacheControlHeaderStrategy:
-    type: string
-    enum:
-      - FAIL_WITH_403
-      - SUCCEED_WITH_RESPONSE_HEADER
-      - SUCCEED_WITHOUT_RESPONSE_HEADER
   VpcLinkStatus:
     type: string
     enum:

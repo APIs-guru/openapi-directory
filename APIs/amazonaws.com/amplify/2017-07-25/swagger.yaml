@@ -1422,7 +1422,94 @@ definitions:
   ActiveJobId:
     type: string
     maxLength: 1000
-  undefined: {}
+  AppId:
+    type: string
+    minLength: 1
+    maxLength: 255
+  AppArn:
+    type: string
+    maxLength: 1000
+  Name:
+    type: string
+    minLength: 1
+    maxLength: 255
+  Tags:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
+  Description:
+    type: string
+    maxLength: 1000
+  Repository:
+    type: string
+    maxLength: 1000
+  Platform:
+    type: string
+    enum:
+      - IOS
+      - ANDROID
+      - WEB
+      - REACT_NATIVE
+  CreateTime:
+    type: string
+    format: date-time
+  UpdateTime:
+    type: string
+    format: date-time
+  ServiceRoleArn:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  EnvironmentVariables:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/EnvKey'
+        value:
+          $ref: '#/definitions/EnvValue'
+  DefaultDomain:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  EnableBranchAutoBuild:
+    type: boolean
+  EnableBasicAuth:
+    type: boolean
+  BasicAuthCredentials:
+    type: string
+    maxLength: 2000
+  CustomRules:
+    type: array
+    items:
+      $ref: '#/definitions/CustomRule'
+  ProductionBranch:
+    type: object
+    properties:
+      lastDeployTime:
+        $ref: '#/definitions/LastDeployTime'
+        description: ' Last Deploy Time of Production Branch. '
+      status:
+        $ref: '#/definitions/Status'
+        description: ' Status of Production Branch. '
+      thumbnailUrl:
+        $ref: '#/definitions/ThumbnailUrl'
+        description: ' Thumbnail Url for Production Branch. '
+      branchName:
+        $ref: '#/definitions/BranchName'
+        description: ' Branch Name for Production Branch. '
+    description: ' Structure with Production Branch information. '
+  BuildSpec:
+    type: string
+    description: ' BuildSpec file for Amplify app build. '
+    minLength: 1
+    maxLength: 25000
   App:
     type: object
     required:
@@ -1494,13 +1581,6 @@ definitions:
         $ref: '#/definitions/BuildSpec'
         description: ' BuildSpec content for Amplify App. '
     description: ' Amplify App represents different branches of a repository for building, deploying, and hosting. '
-  AppArn:
-    type: string
-    maxLength: 1000
-  AppId:
-    type: string
-    minLength: 1
-    maxLength: 255
   Apps:
     type: array
     items:
@@ -1508,9 +1588,45 @@ definitions:
   ArtifactsUrl:
     type: string
     maxLength: 1000
-  BasicAuthCredentials:
+  BranchArn:
     type: string
+    maxLength: 1000
+  BranchName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  Stage:
+    type: string
+    enum:
+      - PRODUCTION
+      - BETA
+      - DEVELOPMENT
+      - EXPERIMENTAL
+  DisplayName:
+    type: string
+    maxLength: 255
+  EnableNotification:
+    type: boolean
+  EnableAutoBuild:
+    type: boolean
+  CustomDomains:
+    type: array
+    items:
+      $ref: '#/definitions/CustomDomain'
+    maxItems: 255
+  Framework:
+    type: string
+    maxLength: 255
+  TotalNumberOfJobs:
+    type: string
+    maxLength: 1000
+  ThumbnailUrl:
+    type: string
+    minLength: 1
     maxLength: 2000
+  TTL:
+    type: string
+    description: ' The content TTL for the website in seconds. '
   Branch:
     type: object
     required:
@@ -1591,23 +1707,11 @@ definitions:
         $ref: '#/definitions/TTL'
         description: ' The content TTL for the website in seconds. '
     description: ' Branch for an Amplify App, which maps to a 3rd party repository branch. '
-  BranchArn:
-    type: string
-    maxLength: 1000
-  BranchName:
-    type: string
-    minLength: 1
-    maxLength: 255
   Branches:
     type: array
     items:
       $ref: '#/definitions/Branch'
     maxItems: 255
-  BuildSpec:
-    type: string
-    description: ' BuildSpec file for Amplify app build. '
-    minLength: 1
-    maxLength: 25000
   CertificateVerificationDNSRecord:
     type: string
     maxLength: 1000
@@ -1624,53 +1728,19 @@ definitions:
     type: string
     minLength: 1
     maxLength: 2048
-  CreateTime:
+  OauthToken:
     type: string
-    format: date-time
-  CustomDomain:
+    maxLength: 100
+  DomainName:
     type: string
     maxLength: 255
-  CustomDomains:
+  EnableAutoSubDomain:
+    type: boolean
+  SubDomainSettings:
     type: array
     items:
-      $ref: '#/definitions/CustomDomain'
+      $ref: '#/definitions/SubDomainSetting'
     maxItems: 255
-  CustomRule:
-    type: object
-    required:
-      - source
-      - target
-    properties:
-      source:
-        $ref: '#/definitions/Source'
-        description: ' The source pattern for a URL rewrite or redirect rule. '
-      target:
-        $ref: '#/definitions/Target'
-        description: ' The target pattern for a URL rewrite or redirect rule. '
-      status:
-        $ref: '#/definitions/Status'
-        description: ' The status code for a URL rewrite or redirect rule. '
-      condition:
-        $ref: '#/definitions/Condition'
-        description: ' The condition for a URL rewrite or redirect rule, e.g. country code. '
-    description: ' Custom rewrite / redirect rule. '
-  CustomRules:
-    type: array
-    items:
-      $ref: '#/definitions/CustomRule'
-  DNSRecord:
-    type: string
-    maxLength: 1000
-  DefaultDomain:
-    type: string
-    minLength: 1
-    maxLength: 1000
-  Description:
-    type: string
-    maxLength: 1000
-  DisplayName:
-    type: string
-    maxLength: 255
   DomainAssociation:
     type: object
     required:
@@ -1704,95 +1774,46 @@ definitions:
         $ref: '#/definitions/SubDomains'
         description: ' Subdomains for the Domain Association. '
     description: ' Structure for Domain Association, which associates a custom domain with an Amplify App. '
-  DomainAssociationArn:
-    type: string
-    maxLength: 1000
-  DomainAssociations:
-    type: array
-    items:
-      $ref: '#/definitions/DomainAssociation'
-    maxItems: 255
-  DomainName:
+  CustomDomain:
     type: string
     maxLength: 255
-  DomainPrefix:
+  Source:
     type: string
-    maxLength: 255
-  DomainStatus:
+    minLength: 1
+    maxLength: 2048
+  Target:
     type: string
-    enum:
-      - PENDING_VERIFICATION
-      - IN_PROGRESS
-      - AVAILABLE
-      - PENDING_DEPLOYMENT
-      - FAILED
-  EnableAutoBuild:
-    type: boolean
-  EnableAutoSubDomain:
-    type: boolean
-  EnableBasicAuth:
-    type: boolean
-  EnableBranchAutoBuild:
-    type: boolean
-  EnableNotification:
-    type: boolean
-  EndTime:
+    minLength: 1
+    maxLength: 2048
+  Status:
     type: string
-    format: date-time
-  EnvKey:
-    type: string
-    maxLength: 255
-  EnvValue:
-    type: string
-    maxLength: 1000
-  EnvironmentVariables:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/EnvKey'
-        value:
-          $ref: '#/definitions/EnvValue'
-  Framework:
-    type: string
-    maxLength: 255
-  Job:
+    minLength: 3
+    maxLength: 3
+  CustomRule:
     type: object
     required:
-      - summary
-      - steps
+      - source
+      - target
     properties:
-      summary:
-        $ref: '#/definitions/JobSummary'
-        description: ' Summary for an execution job for an Amplify App. '
-      steps:
-        $ref: '#/definitions/Steps'
-        description: ' Execution steps for an execution job, for an Amplify App. '
-    description: ' Structure for an execution job for an Amplify App. '
-  JobArn:
+      source:
+        $ref: '#/definitions/Source'
+        description: ' The source pattern for a URL rewrite or redirect rule. '
+      target:
+        $ref: '#/definitions/Target'
+        description: ' The target pattern for a URL rewrite or redirect rule. '
+      status:
+        $ref: '#/definitions/Status'
+        description: ' The status code for a URL rewrite or redirect rule. '
+      condition:
+        $ref: '#/definitions/Condition'
+        description: ' The condition for a URL rewrite or redirect rule, e.g. country code. '
+    description: ' Custom rewrite / redirect rule. '
+  DNSRecord:
     type: string
     maxLength: 1000
   JobId:
     type: string
     maxLength: 255
-  JobReason:
-    type: string
-    maxLength: 255
-  JobStatus:
-    type: string
-    enum:
-      - PENDING
-      - PROVISIONING
-      - RUNNING
-      - FAILED
-      - SUCCEED
-      - CANCELLING
-      - CANCELLED
-  JobSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/JobSummary'
   JobSummary:
     type: object
     required:
@@ -1833,6 +1854,82 @@ definitions:
         $ref: '#/definitions/JobType'
         description: ' Type for the Job. '
     description: ' Structure for the summary of a Job. '
+  DomainAssociationArn:
+    type: string
+    maxLength: 1000
+  DomainStatus:
+    type: string
+    enum:
+      - PENDING_VERIFICATION
+      - IN_PROGRESS
+      - AVAILABLE
+      - PENDING_DEPLOYMENT
+      - FAILED
+  StatusReason:
+    type: string
+    maxLength: 1000
+  SubDomains:
+    type: array
+    items:
+      $ref: '#/definitions/SubDomain'
+    maxItems: 255
+  DomainAssociations:
+    type: array
+    items:
+      $ref: '#/definitions/DomainAssociation'
+    maxItems: 255
+  DomainPrefix:
+    type: string
+    maxLength: 255
+  EndTime:
+    type: string
+    format: date-time
+  EnvKey:
+    type: string
+    maxLength: 255
+  EnvValue:
+    type: string
+    maxLength: 1000
+  Job:
+    type: object
+    required:
+      - summary
+      - steps
+    properties:
+      summary:
+        $ref: '#/definitions/JobSummary'
+        description: ' Summary for an execution job for an Amplify App. '
+      steps:
+        $ref: '#/definitions/Steps'
+        description: ' Execution steps for an execution job, for an Amplify App. '
+    description: ' Structure for an execution job for an Amplify App. '
+  Steps:
+    type: array
+    items:
+      $ref: '#/definitions/Step'
+  JobArn:
+    type: string
+    maxLength: 1000
+  JobReason:
+    type: string
+    maxLength: 255
+  JobStatus:
+    type: string
+    enum:
+      - PENDING
+      - PROVISIONING
+      - RUNNING
+      - FAILED
+      - SUCCEED
+      - CANCELLING
+      - CANCELLED
+  JobSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/JobSummary'
+  StartTime:
+    type: string
+    format: date-time
   JobType:
     type: string
     enum:
@@ -1843,56 +1940,19 @@ definitions:
   LastDeployTime:
     type: string
     format: date-time
-  LogUrl:
+  NextToken:
     type: string
-    maxLength: 1000
+    maxLength: 2000
   MaxResults:
     type: integer
     minimum: 1
     maximum: 100
-  Name:
-    type: string
-    minLength: 1
-    maxLength: 255
-  NextToken:
-    type: string
-    maxLength: 2000
-  OauthToken:
-    type: string
-    maxLength: 100
-  Platform:
-    type: string
-    enum:
-      - IOS
-      - ANDROID
-      - WEB
-      - REACT_NATIVE
-  ProductionBranch:
-    type: object
-    properties:
-      lastDeployTime:
-        $ref: '#/definitions/LastDeployTime'
-        description: ' Last Deploy Time of Production Branch. '
-      status:
-        $ref: '#/definitions/Status'
-        description: ' Status of Production Branch. '
-      thumbnailUrl:
-        $ref: '#/definitions/ThumbnailUrl'
-        description: ' Thumbnail Url for Production Branch. '
-      branchName:
-        $ref: '#/definitions/BranchName'
-        description: ' Branch Name for Production Branch. '
-    description: ' Structure with Production Branch information. '
-  Repository:
+  LogUrl:
     type: string
     maxLength: 1000
   ThumbnailName:
     type: string
     maxLength: 256
-  ThumbnailUrl:
-    type: string
-    minLength: 1
-    maxLength: 2000
   Screenshots:
     type: array
     items:
@@ -1902,31 +1962,9 @@ definitions:
           $ref: '#/definitions/ThumbnailName'
         value:
           $ref: '#/definitions/ThumbnailUrl'
-  ServiceRoleArn:
+  StepName:
     type: string
-    minLength: 1
-    maxLength: 1000
-  Source:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  Stage:
-    type: string
-    enum:
-      - PRODUCTION
-      - BETA
-      - DEVELOPMENT
-      - EXPERIMENTAL
-  StartTime:
-    type: string
-    format: date-time
-  Status:
-    type: string
-    minLength: 3
-    maxLength: 3
-  StatusReason:
-    type: string
-    maxLength: 1000
+    maxLength: 255
   Step:
     type: object
     required:
@@ -1957,13 +1995,21 @@ definitions:
         $ref: '#/definitions/Screenshots'
         description: ' List of screenshot Urls for the execution step, if relevant. '
     description: ' Structure for an execution step for an execution job, for an Amplify App. '
-  StepName:
-    type: string
-    maxLength: 255
-  Steps:
-    type: array
-    items:
-      $ref: '#/definitions/Step'
+  SubDomainSetting:
+    type: object
+    required:
+      - prefix
+      - branchName
+    properties:
+      prefix:
+        $ref: '#/definitions/DomainPrefix'
+        description: ' Prefix setting for the Subdomain. '
+      branchName:
+        $ref: '#/definitions/BranchName'
+        description: ' Branch name setting for the Subdomain. '
+    description: ' Setting for the Subdomain. '
+  Verified:
+    type: boolean
   SubDomain:
     type: object
     required:
@@ -1981,56 +2027,9 @@ definitions:
         $ref: '#/definitions/DNSRecord'
         description: ' DNS record for the Subdomain. '
     description: ' Subdomain for the Domain Association. '
-  SubDomainSetting:
-    type: object
-    required:
-      - prefix
-      - branchName
-    properties:
-      prefix:
-        $ref: '#/definitions/DomainPrefix'
-        description: ' Prefix setting for the Subdomain. '
-      branchName:
-        $ref: '#/definitions/BranchName'
-        description: ' Branch name setting for the Subdomain. '
-    description: ' Setting for the Subdomain. '
-  SubDomainSettings:
-    type: array
-    items:
-      $ref: '#/definitions/SubDomainSetting'
-    maxItems: 255
-  SubDomains:
-    type: array
-    items:
-      $ref: '#/definitions/SubDomain'
-    maxItems: 255
-  TTL:
-    type: string
-    description: ' The content TTL for the website in seconds. '
   TagKey:
     type: string
     maxLength: 1000
   TagValue:
     type: string
     maxLength: 1000
-  Tags:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-  Target:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  TotalNumberOfJobs:
-    type: string
-    maxLength: 1000
-  UpdateTime:
-    type: string
-    format: date-time
-  Verified:
-    type: boolean

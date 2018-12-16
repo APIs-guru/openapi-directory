@@ -5695,7 +5695,30 @@ definitions:
       FunctionInput:
         $ref: '#/definitions/UserDefinedFunctionInput'
         description: A <code>FunctionInput</code> object that re-defines the function in the Data Catalog.
-  undefined: {}
+  NameString:
+    type: string
+    minLength: 1
+    maxLength: 255
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+  GenericMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/GenericString'
+        value:
+          $ref: '#/definitions/GenericString'
+  Timeout:
+    type: integer
+    minimum: 1
+  NotificationProperty:
+    type: object
+    properties:
+      NotifyDelayAfter:
+        $ref: '#/definitions/NotifyDelayAfter'
+        description: 'After a job run starts, the number of minutes to wait before sending a job run delay notification.'
+    description: Specifies configuration properties of a notification.
   Action:
     type: object
     properties:
@@ -5721,30 +5744,105 @@ definitions:
       $ref: '#/definitions/Action'
   AttemptCount:
     type: integer
+  CatalogIdString:
+    type: string
+    minLength: 1
+    maxLength: 255
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+  PartitionInputList:
+    type: array
+    items:
+      $ref: '#/definitions/PartitionInput'
+    minItems: 0
+    maxItems: 100
+  PartitionErrors:
+    type: array
+    items:
+      $ref: '#/definitions/PartitionError'
+  DeleteConnectionNameList:
+    type: array
+    items:
+      $ref: '#/definitions/NameString'
+    minItems: 0
+    maxItems: 25
+  NameStringList:
+    type: array
+    items:
+      $ref: '#/definitions/NameString'
+  ErrorByName:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/NameString'
+        value:
+          $ref: '#/definitions/ErrorDetail'
   BatchDeletePartitionValueList:
     type: array
     items:
       $ref: '#/definitions/PartitionValueList'
     minItems: 0
     maxItems: 25
+  PartitionValueList:
+    type: object
+    required:
+      - Values
+    properties:
+      Values:
+        $ref: '#/definitions/ValueStringList'
+        description: The list of values.
+    description: Contains a list of values defining partitions.
   BatchDeleteTableNameList:
     type: array
     items:
       $ref: '#/definitions/NameString'
     minItems: 0
     maxItems: 100
+  TableErrors:
+    type: array
+    items:
+      $ref: '#/definitions/TableError'
+  VersionString:
+    type: string
+    minLength: 1
+    maxLength: 255
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
   BatchDeleteTableVersionList:
     type: array
     items:
       $ref: '#/definitions/VersionString'
     minItems: 0
     maxItems: 100
+  TableVersionErrors:
+    type: array
+    items:
+      $ref: '#/definitions/TableVersionError'
   BatchGetPartitionValueList:
     type: array
     items:
       $ref: '#/definitions/PartitionValueList'
     minItems: 0
     maxItems: 1000
+  PartitionList:
+    type: array
+    items:
+      $ref: '#/definitions/Partition'
+  IdString:
+    type: string
+    minLength: 1
+    maxLength: 255
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+  ErrorDetail:
+    type: object
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/NameString'
+        description: The code associated with this error.
+      ErrorMessage:
+        $ref: '#/definitions/DescriptionString'
+        description: A message describing the error.
+    description: Contains details about an error.
   BatchStopJobRunError:
     type: object
     properties:
@@ -5768,6 +5866,10 @@ definitions:
       $ref: '#/definitions/IdString'
     minItems: 1
     maxItems: 25
+  BatchStopJobRunSuccessfulSubmissionList:
+    type: array
+    items:
+      $ref: '#/definitions/BatchStopJobRunSuccessfulSubmission'
   BatchStopJobRunSuccessfulSubmission:
     type: object
     properties:
@@ -5778,16 +5880,15 @@ definitions:
         $ref: '#/definitions/IdString'
         description: The JobRunId of the job run that was stopped.
     description: Records a successful request to stop a specified JobRun.
-  BatchStopJobRunSuccessfulSubmissionList:
-    type: array
-    items:
-      $ref: '#/definitions/BatchStopJobRunSuccessfulSubmission'
   Boolean:
     type: boolean
   BooleanNullable:
     type: boolean
   BooleanValue:
     type: boolean
+  ValueString:
+    type: string
+    maxLength: 1024
   BoundedPartitionValueList:
     type: array
     items:
@@ -5799,10 +5900,6 @@ definitions:
     enum:
       - DISABLED
       - SSE-KMS
-  CatalogEntries:
-    type: array
-    items:
-      $ref: '#/definitions/CatalogEntry'
   CatalogEntry:
     type: object
     required:
@@ -5816,11 +5913,13 @@ definitions:
         $ref: '#/definitions/NameString'
         description: The name of the table in question.
     description: Specifies a table definition in the Data Catalog.
-  CatalogIdString:
+  CatalogEntries:
+    type: array
+    items:
+      $ref: '#/definitions/CatalogEntry'
+  Timestamp:
     type: string
-    minLength: 1
-    maxLength: 255
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+    format: date-time
   CatalogImportStatus:
     type: object
     properties:
@@ -5836,6 +5935,82 @@ definitions:
     description: A structure containing migration status information.
   Classification:
     type: string
+  GrokClassifier:
+    type: object
+    required:
+      - Name
+      - Classification
+      - GrokPattern
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the classifier.
+      Classification:
+        $ref: '#/definitions/Classification'
+        description: 'An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, and so on.'
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time this classifier was registered.
+      LastUpdated:
+        $ref: '#/definitions/Timestamp'
+        description: The time this classifier was last updated.
+      Version:
+        $ref: '#/definitions/VersionId'
+        description: The version of this classifier.
+      GrokPattern:
+        $ref: '#/definitions/GrokPattern'
+        description: 'The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in <a href="http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html">Writing Custom Classifers</a>.'
+      CustomPatterns:
+        $ref: '#/definitions/CustomPatterns'
+        description: 'Optional custom grok patterns defined by this classifier. For more information, see custom patterns in <a href="http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html">Writing Custom Classifers</a>.'
+    description: A classifier that uses <code>grok</code> patterns.
+  XMLClassifier:
+    type: object
+    required:
+      - Name
+      - Classification
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the classifier.
+      Classification:
+        $ref: '#/definitions/Classification'
+        description: An identifier of the data format that the classifier matches.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time this classifier was registered.
+      LastUpdated:
+        $ref: '#/definitions/Timestamp'
+        description: The time this classifier was last updated.
+      Version:
+        $ref: '#/definitions/VersionId'
+        description: The version of this classifier.
+      RowTag:
+        $ref: '#/definitions/RowTag'
+        description: 'The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a="A" item_b="B"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a="A" item_b="B" /&gt;</code> is not).'
+    description: A classifier for <code>XML</code> content.
+  JsonClassifier:
+    type: object
+    required:
+      - Name
+      - JsonPath
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the classifier.
+      CreationTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time this classifier was registered.
+      LastUpdated:
+        $ref: '#/definitions/Timestamp'
+        description: The time this classifier was last updated.
+      Version:
+        $ref: '#/definitions/VersionId'
+        description: The version of this classifier.
+      JsonPath:
+        $ref: '#/definitions/JsonPath'
+        description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
+    description: A classifier for <code>JSON</code> content.
   Classifier:
     type: object
     properties:
@@ -5857,6 +6032,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/NameString'
+  CloudWatchEncryptionMode:
+    type: string
+    enum:
+      - DISABLED
+      - SSE-KMS
+  KmsKeyArn:
+    type: string
+    pattern: 'arn:aws:kms:.*'
   CloudWatchEncryption:
     type: object
     properties:
@@ -5867,15 +6050,15 @@ definitions:
         $ref: '#/definitions/KmsKeyArn'
         description: The AWS ARN of the KMS key to be used to encrypt the data.
     description: Specifies how CloudWatch data should be encrypted.
-  CloudWatchEncryptionMode:
-    type: string
-    enum:
-      - DISABLED
-      - SSE-KMS
   CodeGenArgName:
     type: string
   CodeGenArgValue:
     type: string
+  CodeGenIdentifier:
+    type: string
+    pattern: '[A-Za-z_][A-Za-z0-9_]*'
+    minLength: 1
+    maxLength: 255
   CodeGenEdge:
     type: object
     required:
@@ -5892,11 +6075,16 @@ definitions:
         $ref: '#/definitions/CodeGenArgName'
         description: The target of the edge.
     description: Represents a directional edge in a directed acyclic graph (DAG).
-  CodeGenIdentifier:
+  CodeGenNodeType:
     type: string
-    pattern: '[A-Za-z_][A-Za-z0-9_]*'
-    minLength: 1
-    maxLength: 255
+  CodeGenNodeArgs:
+    type: array
+    items:
+      $ref: '#/definitions/CodeGenNodeArg'
+    minItems: 0
+    maxItems: 50
+  Integer:
+    type: integer
   CodeGenNode:
     type: object
     required:
@@ -5933,14 +6121,16 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: True if the value is used as a parameter.
     description: An argument or property of a node.
-  CodeGenNodeArgs:
-    type: array
-    items:
-      $ref: '#/definitions/CodeGenNodeArg'
-    minItems: 0
-    maxItems: 50
-  CodeGenNodeType:
+  ColumnTypeString:
     type: string
+    minLength: 0
+    maxLength: 131072
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+  CommentString:
+    type: string
+    minLength: 0
+    maxLength: 255
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
   Column:
     type: object
     required:
@@ -5960,22 +6150,26 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Column'
-  ColumnTypeString:
+  ColumnValuesString:
     type: string
-    minLength: 0
-    maxLength: 131072
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
   ColumnValueStringList:
     type: array
     items:
       $ref: '#/definitions/ColumnValuesString'
-  ColumnValuesString:
+  LogicalOperator:
     type: string
-  CommentString:
+    enum:
+      - EQUALS
+  JobRunState:
     type: string
-    minLength: 0
-    maxLength: 255
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+    enum:
+      - STARTING
+      - RUNNING
+      - STOPPING
+      - STOPPED
+      - SUCCEEDED
+      - FAILED
+      - TIMEOUT
   Condition:
     type: object
     properties:
@@ -5993,6 +6187,46 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Condition'
+  DescriptionString:
+    type: string
+    minLength: 0
+    maxLength: 2048
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  ConnectionType:
+    type: string
+    enum:
+      - JDBC
+      - SFTP
+  MatchCriteria:
+    type: array
+    items:
+      $ref: '#/definitions/NameString'
+    minItems: 0
+    maxItems: 10
+  ConnectionProperties:
+    type: array
+    minItems: 0
+    maxItems: 100
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ConnectionPropertyKey'
+        value:
+          $ref: '#/definitions/ValueString'
+  PhysicalConnectionRequirements:
+    type: object
+    properties:
+      SubnetId:
+        $ref: '#/definitions/NameString'
+        description: The subnet ID used by the connection.
+      SecurityGroupIdList:
+        $ref: '#/definitions/SecurityGroupIdList'
+        description: The security group ID list used by the connection.
+      AvailabilityZone:
+        $ref: '#/definitions/NameString'
+        description: 'The connection''s availability zone. This field is redundant, since the specified subnet implies the availability zone to be used. The field must be populated now, but will be deprecated in the future.'
+    description: Specifies the physical requirements for a connection.
   Connection:
     type: object
     properties:
@@ -6084,25 +6318,10 @@ definitions:
       - INSTANCE_ID
       - JDBC_CONNECTION_URL
       - JDBC_ENFORCE_SSL
-  ValueString:
-    type: string
-    maxLength: 1024
-  ConnectionProperties:
+  StringList:
     type: array
-    minItems: 0
-    maxItems: 100
     items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ConnectionPropertyKey'
-        value:
-          $ref: '#/definitions/ValueString'
-  ConnectionType:
-    type: string
-    enum:
-      - JDBC
-      - SFTP
+      $ref: '#/definitions/GenericString'
   ConnectionsList:
     type: object
     properties:
@@ -6110,6 +6329,85 @@ definitions:
         $ref: '#/definitions/StringList'
         description: A list of connections used by the job.
     description: Specifies the connections used by a job.
+  Role:
+    type: string
+  CrawlerTargets:
+    type: object
+    properties:
+      S3Targets:
+        $ref: '#/definitions/S3TargetList'
+        description: Specifies Amazon S3 targets.
+      JdbcTargets:
+        $ref: '#/definitions/JdbcTargetList'
+        description: Specifies JDBC targets.
+      DynamoDBTargets:
+        $ref: '#/definitions/DynamoDBTargetList'
+        description: Specifies DynamoDB targets.
+    description: Specifies data stores to crawl.
+  DatabaseName:
+    type: string
+  SchemaChangePolicy:
+    type: object
+    properties:
+      UpdateBehavior:
+        $ref: '#/definitions/UpdateBehavior'
+        description: The update behavior when the crawler finds a changed schema.
+      DeleteBehavior:
+        $ref: '#/definitions/DeleteBehavior'
+        description: The deletion behavior when the crawler finds a deleted object.
+    description: Crawler policy for update and deletion behavior.
+  CrawlerState:
+    type: string
+    enum:
+      - READY
+      - RUNNING
+      - STOPPING
+  TablePrefix:
+    type: string
+    minLength: 0
+    maxLength: 128
+  Schedule:
+    type: object
+    properties:
+      ScheduleExpression:
+        $ref: '#/definitions/CronExpression'
+        description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
+      State:
+        $ref: '#/definitions/ScheduleState'
+        description: The state of the schedule.
+    description: A scheduling object using a <code>cron</code> statement to schedule an event.
+  MillisecondsCount:
+    type: integer
+  LastCrawlInfo:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/LastCrawlStatus'
+        description: Status of the last crawl.
+      ErrorMessage:
+        $ref: '#/definitions/DescriptionString'
+        description: 'If an error occurred, the error information about the last crawl.'
+      LogGroup:
+        $ref: '#/definitions/LogGroup'
+        description: The log group for the last crawl.
+      LogStream:
+        $ref: '#/definitions/LogStream'
+        description: The log stream for the last crawl.
+      MessagePrefix:
+        $ref: '#/definitions/MessagePrefix'
+        description: The prefix for a message about this crawl.
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which the crawl started.
+    description: Status and error information about the most recent crawl.
+  VersionId:
+    type: integer
+  CrawlerConfiguration:
+    type: string
+  CrawlerSecurityConfiguration:
+    type: string
+    minLength: 0
+    maxLength: 128
   Crawler:
     type: object
     properties:
@@ -6165,12 +6463,17 @@ definitions:
         $ref: '#/definitions/CrawlerSecurityConfiguration'
         description: The name of the SecurityConfiguration structure to be used by this Crawler.
     description: 'Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metadata concerning the data source in the AWS Glue Data Catalog.'
-  CrawlerConfiguration:
-    type: string
   CrawlerList:
     type: array
     items:
       $ref: '#/definitions/Crawler'
+  NonNegativeDouble:
+    type: number
+    format: double
+    minimum: 0
+  NonNegativeInteger:
+    type: integer
+    minimum: 0
   CrawlerMetrics:
     type: object
     properties:
@@ -6209,29 +6512,18 @@ definitions:
       $ref: '#/definitions/NameString'
     minItems: 0
     maxItems: 100
-  CrawlerSecurityConfiguration:
-    type: string
-    minLength: 0
-    maxLength: 128
-  CrawlerState:
-    type: string
-    enum:
-      - READY
-      - RUNNING
-      - STOPPING
-  CrawlerTargets:
-    type: object
-    properties:
-      S3Targets:
-        $ref: '#/definitions/S3TargetList'
-        description: Specifies Amazon S3 targets.
-      JdbcTargets:
-        $ref: '#/definitions/JdbcTargetList'
-        description: Specifies JDBC targets.
-      DynamoDBTargets:
-        $ref: '#/definitions/DynamoDBTargetList'
-        description: Specifies DynamoDB targets.
-    description: Specifies data stores to crawl.
+  S3TargetList:
+    type: array
+    items:
+      $ref: '#/definitions/S3Target'
+  JdbcTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/JdbcTarget'
+  DynamoDBTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/DynamoDBTarget'
   CreateGrokClassifierRequest:
     type: object
     required:
@@ -6252,19 +6544,6 @@ definitions:
         $ref: '#/definitions/CustomPatterns'
         description: Optional custom grok patterns used by this classifier.
     description: Specifies a <code>grok</code> classifier for <code>CreateClassifier</code> to create.
-  CreateJsonClassifierRequest:
-    type: object
-    required:
-      - Name
-      - JsonPath
-    properties:
-      Name:
-        $ref: '#/definitions/NameString'
-        description: The name of the classifier.
-      JsonPath:
-        $ref: '#/definitions/JsonPath'
-        description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
-    description: Specifies a JSON classifier for <code>CreateClassifier</code> to create.
   CreateXMLClassifierRequest:
     type: object
     required:
@@ -6281,21 +6560,229 @@ definitions:
         $ref: '#/definitions/RowTag'
         description: 'The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a="A" item_b="B"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a="A" item_b="B" /&gt;</code> is not).'
     description: Specifies an XML classifier for <code>CreateClassifier</code> to create.
+  CreateJsonClassifierRequest:
+    type: object
+    required:
+      - Name
+      - JsonPath
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the classifier.
+      JsonPath:
+        $ref: '#/definitions/JsonPath'
+        description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
+    description: Specifies a JSON classifier for <code>CreateClassifier</code> to create.
   CronExpression:
     type: string
+  DatabaseInput:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: 'Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.'
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: Description of the database
+      LocationUri:
+        $ref: '#/definitions/URI'
+        description: 'The location of the database (for example, an HDFS path).'
+      Parameters:
+        $ref: '#/definitions/ParametersMap'
+        description: Thes key-value pairs define parameters and properties of the database.
+    description: The structure used to create or update a database.
+  GenericString:
+    type: string
+  RoleArn:
+    type: string
+    pattern: 'arn:aws:iam::\d{12}:role/.*'
+  PublicKeysList:
+    type: array
+    items:
+      $ref: '#/definitions/GenericString'
+    maxItems: 5
+  IntegerValue:
+    type: integer
+  TimestampValue:
+    type: string
+    format: date-time
+  GrokPattern:
+    type: string
+    minLength: 1
+    maxLength: 2048
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\t]*'
   CustomPatterns:
     type: string
     minLength: 0
     maxLength: 16000
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  DagEdges:
-    type: array
-    items:
-      $ref: '#/definitions/CodeGenEdge'
+  UriString:
+    type: string
+  RoleString:
+    type: string
+  ExecutionProperty:
+    type: object
+    properties:
+      MaxConcurrentRuns:
+        $ref: '#/definitions/MaxConcurrentRuns'
+        description: The maximum number of concurrent runs allowed for the job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
+    description: An execution property of a job.
+  JobCommand:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/GenericString'
+        description: 'The name of the job command: this must be <code>glueetl</code>.'
+      ScriptLocation:
+        $ref: '#/definitions/ScriptLocationString'
+        description: Specifies the S3 path to a script that executes a job (required).
+    description: Specifies code executed when a job is run.
+  MaxRetries:
+    type: integer
+  JsonPath:
+    type: string
+  PartitionInput:
+    type: object
+    properties:
+      Values:
+        $ref: '#/definitions/ValueStringList'
+        description: The values of the partition.
+      LastAccessTime:
+        $ref: '#/definitions/Timestamp'
+        description: The last time at which the partition was accessed.
+      StorageDescriptor:
+        $ref: '#/definitions/StorageDescriptor'
+        description: Provides information about the physical location where the partition is stored.
+      Parameters:
+        $ref: '#/definitions/ParametersMap'
+        description: These key-value pairs define partition parameters.
+      LastAnalyzedTime:
+        $ref: '#/definitions/Timestamp'
+        description: The last time at which column statistics were computed for this partition.
+    description: The structure used to create and update a partion.
   DagNodes:
     type: array
     items:
       $ref: '#/definitions/CodeGenNode'
+  DagEdges:
+    type: array
+    items:
+      $ref: '#/definitions/CodeGenEdge'
+  Language:
+    type: string
+    enum:
+      - PYTHON
+      - SCALA
+  PythonScript:
+    type: string
+  ScalaCode:
+    type: string
+  EncryptionConfiguration:
+    type: object
+    properties:
+      S3Encryption:
+        $ref: '#/definitions/S3EncryptionList'
+        description: The encryption configuration for S3 data.
+      CloudWatchEncryption:
+        $ref: '#/definitions/CloudWatchEncryption'
+        description: The encryption configuration for CloudWatch.
+      JobBookmarksEncryption:
+        $ref: '#/definitions/JobBookmarksEncryption'
+        description: The encryption configuration for Job Bookmarks.
+    description: Specifies an encryption configuration.
+  TableInput:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: 'Name of the table. For Hive compatibility, this is folded to lowercase when it is stored.'
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: Description of the table.
+      Owner:
+        $ref: '#/definitions/NameString'
+        description: Owner of the table.
+      LastAccessTime:
+        $ref: '#/definitions/Timestamp'
+        description: Last time the table was accessed.
+      LastAnalyzedTime:
+        $ref: '#/definitions/Timestamp'
+        description: Last time column statistics were computed for this table.
+      Retention:
+        $ref: '#/definitions/NonNegativeInteger'
+        description: Retention time for this table.
+      StorageDescriptor:
+        $ref: '#/definitions/StorageDescriptor'
+        description: A storage descriptor containing information about the physical storage of this table.
+      PartitionKeys:
+        $ref: '#/definitions/ColumnList'
+        description: '<p>A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.</p> <p>When creating a table used by Athena, and you do not specify any <code>partitionKeys</code>, you must at least set the value of <code>partitionKeys</code> to an empty list. For example:</p> <p> <code>"PartitionKeys": []</code> </p>'
+      ViewOriginalText:
+        $ref: '#/definitions/ViewTextString'
+        description: 'If the table is a view, the original text of the view; otherwise <code>null</code>.'
+      ViewExpandedText:
+        $ref: '#/definitions/ViewTextString'
+        description: 'If the table is a view, the expanded text of the view; otherwise <code>null</code>.'
+      TableType:
+        $ref: '#/definitions/TableTypeString'
+        description: 'The type of this table (<code>EXTERNAL_TABLE</code>, <code>VIRTUAL_VIEW</code>, etc.).'
+      Parameters:
+        $ref: '#/definitions/ParametersMap'
+        description: These key-value pairs define properties associated with the table.
+    description: Structure used to create or update the table.
+  TriggerType:
+    type: string
+    enum:
+      - SCHEDULED
+      - CONDITIONAL
+      - ON_DEMAND
+  Predicate:
+    type: object
+    properties:
+      Logical:
+        $ref: '#/definitions/Logical'
+        description: 'Optional field if only one condition is listed. If multiple conditions are listed, then this field is required.'
+      Conditions:
+        $ref: '#/definitions/ConditionList'
+        description: A list of the conditions that determine when the trigger will fire.
+    description: 'Defines the predicate of the trigger, which determines when it fires.'
+  UserDefinedFunctionInput:
+    type: object
+    properties:
+      FunctionName:
+        $ref: '#/definitions/NameString'
+        description: The name of the function.
+      ClassName:
+        $ref: '#/definitions/NameString'
+        description: The Java class that contains the function code.
+      OwnerName:
+        $ref: '#/definitions/NameString'
+        description: The owner of the function.
+      OwnerType:
+        $ref: '#/definitions/PrincipalType'
+        description: The owner type.
+      ResourceUris:
+        $ref: '#/definitions/ResourceUriList'
+        description: The resource URIs for the function.
+    description: A structure used to create or updata a user-defined function.
+  RowTag:
+    type: string
+  EncryptionAtRest:
+    type: object
+    required:
+      - CatalogEncryptionMode
+    properties:
+      CatalogEncryptionMode:
+        $ref: '#/definitions/CatalogEncryptionMode'
+        description: The encryption-at-rest mode for encrypting Data Catalog data.
+      SseAwsKmsKeyId:
+        $ref: '#/definitions/NameString'
+        description: The ID of the AWS KMS key to use for encryption at rest.
+    description: Specifies encryption-at-rest configuration for the Data Catalog.
   DataCatalogEncryptionSettings:
     type: object
     properties:
@@ -6306,6 +6793,20 @@ definitions:
         $ref: '#/definitions/ConnectionPasswordEncryption'
         description: 'When password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of <code>CreateConnection</code> or <code>UpdateConnection</code> and store it in the <code>ENCRYPTED_PASSWORD</code> field in the connection properties. You can enable catalog encryption or only password encryption.'
     description: Contains configuration information for maintaining Data Catalog security.
+  URI:
+    type: string
+    minLength: 1
+    maxLength: 1024
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  ParametersMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/KeyString'
+        value:
+          $ref: '#/definitions/ParametersMapValue'
   Database:
     type: object
     required:
@@ -6327,47 +6828,25 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The time at which the metadata database was created in the catalog.
     description: The <code>Database</code> object represents a logical grouping of tables that may reside in a Hive metastore or an RDBMS.
-  DatabaseInput:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/NameString'
-        description: 'Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.'
-      Description:
-        $ref: '#/definitions/DescriptionString'
-        description: Description of the database
-      LocationUri:
-        $ref: '#/definitions/URI'
-        description: 'The location of the database (for example, an HDFS path).'
-      Parameters:
-        $ref: '#/definitions/ParametersMap'
-        description: Thes key-value pairs define parameters and properties of the database.
-    description: The structure used to create or update a database.
   DatabaseList:
     type: array
     items:
       $ref: '#/definitions/Database'
-  DatabaseName:
-    type: string
   DeleteBehavior:
     type: string
     enum:
       - LOG
       - DELETE_FROM_DATABASE
       - DEPRECATE_IN_DATABASE
-  DeleteConnectionNameList:
+  ValueStringList:
     type: array
     items:
-      $ref: '#/definitions/NameString'
-    minItems: 0
-    maxItems: 25
-  DescriptionString:
+      $ref: '#/definitions/ValueString'
+  HashString:
     type: string
-    minLength: 0
-    maxLength: 2048
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    minLength: 1
+    maxLength: 255
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
   DescriptionStringRemovable:
     type: string
     minLength: 0
@@ -6454,6 +6933,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DevEndpoint'
+  Path:
+    type: string
   DynamoDBTarget:
     type: object
     properties:
@@ -6461,68 +6942,24 @@ definitions:
         $ref: '#/definitions/Path'
         description: The name of the DynamoDB table to crawl.
     description: Specifies a DynamoDB table to crawl.
-  DynamoDBTargetList:
+  S3EncryptionList:
     type: array
     items:
-      $ref: '#/definitions/DynamoDBTarget'
-  EncryptionAtRest:
-    type: object
-    required:
-      - CatalogEncryptionMode
-    properties:
-      CatalogEncryptionMode:
-        $ref: '#/definitions/CatalogEncryptionMode'
-        description: The encryption-at-rest mode for encrypting Data Catalog data.
-      SseAwsKmsKeyId:
-        $ref: '#/definitions/NameString'
-        description: The ID of the AWS KMS key to use for encryption at rest.
-    description: Specifies encryption-at-rest configuration for the Data Catalog.
-  EncryptionConfiguration:
+      $ref: '#/definitions/S3Encryption'
+  JobBookmarksEncryption:
     type: object
     properties:
-      S3Encryption:
-        $ref: '#/definitions/S3EncryptionList'
-        description: The encryption configuration for S3 data.
-      CloudWatchEncryption:
-        $ref: '#/definitions/CloudWatchEncryption'
-        description: The encryption configuration for CloudWatch.
-      JobBookmarksEncryption:
-        $ref: '#/definitions/JobBookmarksEncryption'
-        description: The encryption configuration for Job Bookmarks.
-    description: Specifies an encryption configuration.
-  NameString:
-    type: string
-    minLength: 1
-    maxLength: 255
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
-  ErrorDetail:
-    type: object
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/NameString'
-        description: The code associated with this error.
-      ErrorMessage:
-        $ref: '#/definitions/DescriptionString'
-        description: A message describing the error.
-    description: Contains details about an error.
-  ErrorByName:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/NameString'
-        value:
-          $ref: '#/definitions/ErrorDetail'
+      JobBookmarksEncryptionMode:
+        $ref: '#/definitions/JobBookmarksEncryptionMode'
+        description: The encryption mode to use for Job bookmarks data.
+      KmsKeyArn:
+        $ref: '#/definitions/KmsKeyArn'
+        description: The AWS ARN of the KMS key to be used to encrypt the data.
+    description: Specifies how Job bookmark data should be encrypted.
   ErrorString:
     type: string
-  ExecutionProperty:
-    type: object
-    properties:
-      MaxConcurrentRuns:
-        $ref: '#/definitions/MaxConcurrentRuns'
-        description: The maximum number of concurrent runs allowed for the job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
-    description: An execution property of a job.
+  MaxConcurrentRuns:
+    type: integer
   ExecutionTime:
     type: integer
   ExistCondition:
@@ -6542,17 +6979,12 @@ definitions:
     type: string
     maxLength: 128
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
-  GenericString:
+  PageSize:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  Token:
     type: string
-  GenericMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/GenericString'
-        value:
-          $ref: '#/definitions/GenericString'
   GetConnectionsFilter:
     type: object
     properties:
@@ -6563,79 +6995,6 @@ definitions:
         $ref: '#/definitions/ConnectionType'
         description: 'The type of connections to return. Currently, only JDBC is supported; SFTP is not supported.'
     description: Filters the connection definitions returned by the <code>GetConnections</code> API.
-  GetTableVersionsList:
-    type: array
-    items:
-      $ref: '#/definitions/TableVersion'
-  GrokClassifier:
-    type: object
-    required:
-      - Name
-      - Classification
-      - GrokPattern
-    properties:
-      Name:
-        $ref: '#/definitions/NameString'
-        description: The name of the classifier.
-      Classification:
-        $ref: '#/definitions/Classification'
-        description: 'An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, and so on.'
-      CreationTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time this classifier was registered.
-      LastUpdated:
-        $ref: '#/definitions/Timestamp'
-        description: The time this classifier was last updated.
-      Version:
-        $ref: '#/definitions/VersionId'
-        description: The version of this classifier.
-      GrokPattern:
-        $ref: '#/definitions/GrokPattern'
-        description: 'The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in <a href="http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html">Writing Custom Classifers</a>.'
-      CustomPatterns:
-        $ref: '#/definitions/CustomPatterns'
-        description: 'Optional custom grok patterns defined by this classifier. For more information, see custom patterns in <a href="http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html">Writing Custom Classifers</a>.'
-    description: A classifier that uses <code>grok</code> patterns.
-  GrokPattern:
-    type: string
-    minLength: 1
-    maxLength: 2048
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\t]*'
-  HashString:
-    type: string
-    minLength: 1
-    maxLength: 255
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
-  IdString:
-    type: string
-    minLength: 1
-    maxLength: 255
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
-  Integer:
-    type: integer
-  IntegerFlag:
-    type: integer
-    minimum: 0
-    maximum: 1
-  IntegerValue:
-    type: integer
-  JdbcTarget:
-    type: object
-    properties:
-      ConnectionName:
-        $ref: '#/definitions/ConnectionName'
-        description: The name of the connection to use to connect to the JDBC target.
-      Path:
-        $ref: '#/definitions/Path'
-        description: The path of the JDBC target.
-      Exclusions:
-        $ref: '#/definitions/PathList'
-        description: 'A list of glob patterns used to exclude from the crawl. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html">Catalog Tables with a Crawler</a>.'
-    description: Specifies a JDBC data store to crawl.
-  JdbcTargetList:
-    type: array
-    items:
-      $ref: '#/definitions/JdbcTarget'
   Job:
     type: object
     properties:
@@ -6685,56 +7044,6 @@ definitions:
         $ref: '#/definitions/NameString'
         description: The name of the SecurityConfiguration structure to be used with this job.
     description: Specifies a job definition.
-  JobBookmarkEntry:
-    type: object
-    properties:
-      JobName:
-        $ref: '#/definitions/JobName'
-        description: Name of the job in question.
-      Version:
-        $ref: '#/definitions/IntegerValue'
-        description: Version of the job.
-      Run:
-        $ref: '#/definitions/IntegerValue'
-        description: The run ID number.
-      Attempt:
-        $ref: '#/definitions/IntegerValue'
-        description: The attempt ID number.
-      JobBookmark:
-        $ref: '#/definitions/JsonValue'
-        description: The bookmark itself.
-    description: Defines a point which a job can resume processing.
-  JobBookmarksEncryption:
-    type: object
-    properties:
-      JobBookmarksEncryptionMode:
-        $ref: '#/definitions/JobBookmarksEncryptionMode'
-        description: The encryption mode to use for Job bookmarks data.
-      KmsKeyArn:
-        $ref: '#/definitions/KmsKeyArn'
-        description: The AWS ARN of the KMS key to be used to encrypt the data.
-    description: Specifies how Job bookmark data should be encrypted.
-  JobBookmarksEncryptionMode:
-    type: string
-    enum:
-      - DISABLED
-      - CSE-KMS
-  JobCommand:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/GenericString'
-        description: 'The name of the job command: this must be <code>glueetl</code>.'
-      ScriptLocation:
-        $ref: '#/definitions/ScriptLocationString'
-        description: Specifies the S3 path to a script that executes a job (required).
-    description: Specifies code executed when a job is run.
-  JobList:
-    type: array
-    items:
-      $ref: '#/definitions/Job'
-  JobName:
-    type: string
   JobRun:
     type: object
     properties:
@@ -6797,123 +7106,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/JobRun'
-  JobRunState:
-    type: string
-    enum:
-      - STARTING
-      - RUNNING
-      - STOPPING
-      - STOPPED
-      - SUCCEEDED
-      - FAILED
-      - TIMEOUT
-  JobUpdate:
-    type: object
-    properties:
-      Description:
-        $ref: '#/definitions/DescriptionString'
-        description: Description of the job being defined.
-      LogUri:
-        $ref: '#/definitions/UriString'
-        description: This field is reserved for future use.
-      Role:
-        $ref: '#/definitions/RoleString'
-        description: The name or ARN of the IAM role associated with this job (required).
-      ExecutionProperty:
-        $ref: '#/definitions/ExecutionProperty'
-        description: An ExecutionProperty specifying the maximum number of concurrent runs allowed for this job.
-      Command:
-        $ref: '#/definitions/JobCommand'
-        description: The JobCommand that executes this job (required).
-      DefaultArguments:
-        $ref: '#/definitions/GenericMap'
-        description: '<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
-      Connections:
-        $ref: '#/definitions/ConnectionsList'
-        description: The connections used for this job.
-      MaxRetries:
-        $ref: '#/definitions/MaxRetries'
-        description: The maximum number of times to retry this job if it fails.
-      AllocatedCapacity:
-        $ref: '#/definitions/IntegerValue'
-        description: 'The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
-      Timeout:
-        $ref: '#/definitions/Timeout'
-        description: 'The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).'
-      NotificationProperty:
-        $ref: '#/definitions/NotificationProperty'
-        description: Specifies configuration properties of a job notification.
-      SecurityConfiguration:
-        $ref: '#/definitions/NameString'
-        description: The name of the SecurityConfiguration structure to be used with this job.
-    description: Specifies information used to update an existing job definition. Note that the previous job definition will be completely overwritten by this information.
-  JsonClassifier:
-    type: object
-    required:
-      - Name
-      - JsonPath
-    properties:
-      Name:
-        $ref: '#/definitions/NameString'
-        description: The name of the classifier.
-      CreationTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time this classifier was registered.
-      LastUpdated:
-        $ref: '#/definitions/Timestamp'
-        description: The time this classifier was last updated.
-      Version:
-        $ref: '#/definitions/VersionId'
-        description: The version of this classifier.
-      JsonPath:
-        $ref: '#/definitions/JsonPath'
-        description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
-    description: A classifier for <code>JSON</code> content.
-  JsonPath:
-    type: string
-  JsonValue:
-    type: string
-  KeyString:
-    type: string
-    minLength: 1
-    maxLength: 255
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
-  KmsKeyArn:
-    type: string
-    pattern: 'arn:aws:kms:.*'
-  Language:
-    type: string
-    enum:
-      - PYTHON
-      - SCALA
-  LastCrawlInfo:
-    type: object
-    properties:
-      Status:
-        $ref: '#/definitions/LastCrawlStatus'
-        description: Status of the last crawl.
-      ErrorMessage:
-        $ref: '#/definitions/DescriptionString'
-        description: 'If an error occurred, the error information about the last crawl.'
-      LogGroup:
-        $ref: '#/definitions/LogGroup'
-        description: The log group for the last crawl.
-      LogStream:
-        $ref: '#/definitions/LogStream'
-        description: The log stream for the last crawl.
-      MessagePrefix:
-        $ref: '#/definitions/MessagePrefix'
-        description: The prefix for a message about this crawl.
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time at which the crawl started.
-    description: Status and error information about the most recent crawl.
-  LastCrawlStatus:
-    type: string
-    enum:
-      - SUCCEEDED
-      - CANCELLED
-      - FAILED
+  JobList:
+    type: array
+    items:
+      $ref: '#/definitions/Job'
   Location:
     type: object
     properties:
@@ -6927,135 +7123,10 @@ definitions:
         $ref: '#/definitions/CodeGenNodeArgs'
         description: A DynamoDB Table location.
     description: The location of resources.
-  LocationMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ColumnValuesString'
-        value:
-          $ref: '#/definitions/ColumnValuesString'
-  LocationString:
-    type: string
-    maxLength: 2056
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  LogGroup:
-    type: string
-    pattern: '[\.\-_/#A-Za-z0-9]+'
-    minLength: 1
-    maxLength: 512
-  LogStream:
-    type: string
-    pattern: '[^:*]*'
-    minLength: 1
-    maxLength: 512
-  Logical:
-    type: string
-    enum:
-      - AND
-      - ANY
-  LogicalOperator:
-    type: string
-    enum:
-      - EQUALS
-  MappingEntry:
-    type: object
-    properties:
-      SourceTable:
-        $ref: '#/definitions/TableName'
-        description: The name of the source table.
-      SourcePath:
-        $ref: '#/definitions/SchemaPathString'
-        description: The source path.
-      SourceType:
-        $ref: '#/definitions/FieldType'
-        description: The source type.
-      TargetTable:
-        $ref: '#/definitions/TableName'
-        description: The target table.
-      TargetPath:
-        $ref: '#/definitions/SchemaPathString'
-        description: The target path.
-      TargetType:
-        $ref: '#/definitions/FieldType'
-        description: The target type.
-    description: Defines a mapping.
   MappingList:
     type: array
     items:
       $ref: '#/definitions/MappingEntry'
-  MatchCriteria:
-    type: array
-    items:
-      $ref: '#/definitions/NameString'
-    minItems: 0
-    maxItems: 10
-  MaxConcurrentRuns:
-    type: integer
-  MaxRetries:
-    type: integer
-  MessagePrefix:
-    type: string
-    minLength: 1
-    maxLength: 255
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
-  MillisecondsCount:
-    type: integer
-  NameStringList:
-    type: array
-    items:
-      $ref: '#/definitions/NameString'
-  NonNegativeDouble:
-    type: number
-    format: double
-    minimum: 0
-  NonNegativeInteger:
-    type: integer
-    minimum: 0
-  NotificationProperty:
-    type: object
-    properties:
-      NotifyDelayAfter:
-        $ref: '#/definitions/NotifyDelayAfter'
-        description: 'After a job run starts, the number of minutes to wait before sending a job run delay notification.'
-    description: Specifies configuration properties of a notification.
-  NotifyDelayAfter:
-    type: integer
-    minimum: 1
-  Order:
-    type: object
-    required:
-      - Column
-      - SortOrder
-    properties:
-      Column:
-        $ref: '#/definitions/NameString'
-        description: The name of the column.
-      SortOrder:
-        $ref: '#/definitions/IntegerFlag'
-        description: 'Indicates that the column is sorted in ascending order (<code>== 1</code>), or in descending order (<code>==0</code>).'
-    description: Specifies the sort order of a sorted column.
-  OrderList:
-    type: array
-    items:
-      $ref: '#/definitions/Order'
-  PageSize:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  ParametersMapValue:
-    type: string
-    maxLength: 512000
-  ParametersMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/KeyString'
-        value:
-          $ref: '#/definitions/ParametersMapValue'
   Partition:
     type: object
     properties:
@@ -7084,220 +7155,28 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The last time at which column statistics were computed for this partition.
     description: Represents a slice of table data.
-  PartitionError:
-    type: object
-    properties:
-      PartitionValues:
-        $ref: '#/definitions/ValueStringList'
-        description: The values that define the partition.
-      ErrorDetail:
-        $ref: '#/definitions/ErrorDetail'
-        description: Details about the partition error.
-    description: Contains information about a partition error.
-  PartitionErrors:
-    type: array
-    items:
-      $ref: '#/definitions/PartitionError'
-  PartitionInput:
-    type: object
-    properties:
-      Values:
-        $ref: '#/definitions/ValueStringList'
-        description: The values of the partition.
-      LastAccessTime:
-        $ref: '#/definitions/Timestamp'
-        description: The last time at which the partition was accessed.
-      StorageDescriptor:
-        $ref: '#/definitions/StorageDescriptor'
-        description: Provides information about the physical location where the partition is stored.
-      Parameters:
-        $ref: '#/definitions/ParametersMap'
-        description: These key-value pairs define partition parameters.
-      LastAnalyzedTime:
-        $ref: '#/definitions/Timestamp'
-        description: The last time at which column statistics were computed for this partition.
-    description: The structure used to create and update a partion.
-  PartitionInputList:
-    type: array
-    items:
-      $ref: '#/definitions/PartitionInput'
-    minItems: 0
-    maxItems: 100
-  PartitionList:
-    type: array
-    items:
-      $ref: '#/definitions/Partition'
-  PartitionValueList:
-    type: object
-    required:
-      - Values
-    properties:
-      Values:
-        $ref: '#/definitions/ValueStringList'
-        description: The list of values.
-    description: Contains a list of values defining partitions.
-  Path:
-    type: string
-  PathList:
-    type: array
-    items:
-      $ref: '#/definitions/Path'
-  PhysicalConnectionRequirements:
-    type: object
-    properties:
-      SubnetId:
-        $ref: '#/definitions/NameString'
-        description: The subnet ID used by the connection.
-      SecurityGroupIdList:
-        $ref: '#/definitions/SecurityGroupIdList'
-        description: The security group ID list used by the connection.
-      AvailabilityZone:
-        $ref: '#/definitions/NameString'
-        description: 'The connection''s availability zone. This field is redundant, since the specified subnet implies the availability zone to be used. The field must be populated now, but will be deprecated in the future.'
-    description: Specifies the physical requirements for a connection.
-  PolicyJsonString:
-    type: string
-    minLength: 2
-    maxLength: 10240
-  Predecessor:
-    type: object
-    properties:
-      JobName:
-        $ref: '#/definitions/NameString'
-        description: The name of the job definition used by the predecessor job run.
-      RunId:
-        $ref: '#/definitions/IdString'
-        description: The job-run ID of the predecessor job run.
-    description: A job run that was used in the predicate of a conditional trigger that triggered this job run.
-  PredecessorList:
-    type: array
-    items:
-      $ref: '#/definitions/Predecessor'
-  Predicate:
-    type: object
-    properties:
-      Logical:
-        $ref: '#/definitions/Logical'
-        description: 'Optional field if only one condition is listed. If multiple conditions are listed, then this field is required.'
-      Conditions:
-        $ref: '#/definitions/ConditionList'
-        description: A list of the conditions that determine when the trigger will fire.
-    description: 'Defines the predicate of the trigger, which determines when it fires.'
   PredicateString:
     type: string
     minLength: 0
     maxLength: 2048
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  PrincipalType:
-    type: string
-    enum:
-      - USER
-      - ROLE
-      - GROUP
-  PublicKeysList:
-    type: array
-    items:
-      $ref: '#/definitions/GenericString'
-    maxItems: 5
-  PythonScript:
-    type: string
-  ResourceType:
-    type: string
-    enum:
-      - JAR
-      - FILE
-      - ARCHIVE
-  ResourceUri:
+  Segment:
     type: object
+    required:
+      - SegmentNumber
+      - TotalSegments
     properties:
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The type of the resource.
-      Uri:
-        $ref: '#/definitions/URI'
-        description: The URI for accessing the resource.
-    description: URIs for function resources.
-  ResourceUriList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceUri'
-    minItems: 0
-    maxItems: 1000
-  Role:
+      SegmentNumber:
+        $ref: '#/definitions/NonNegativeInteger'
+        description: 'The zero-based index number of the this segment. For example, if the total number of segments is 4, SegmentNumber values will range from zero through three.'
+      TotalSegments:
+        $ref: '#/definitions/TotalSegmentsInteger'
+        description: The total numer of segments.
+    description: 'Defines a non-overlapping region of a table''s partitions, allowing multiple requests to be executed in parallel.'
+  PolicyJsonString:
     type: string
-  RoleArn:
-    type: string
-    pattern: 'arn:aws:iam::\d{12}:role/.*'
-  RoleString:
-    type: string
-  RowTag:
-    type: string
-  S3Encryption:
-    type: object
-    properties:
-      S3EncryptionMode:
-        $ref: '#/definitions/S3EncryptionMode'
-        description: The encryption mode to use for S3 data.
-      KmsKeyArn:
-        $ref: '#/definitions/KmsKeyArn'
-        description: The AWS ARN of the KMS key to be used to encrypt the data.
-    description: Specifies how S3 data should be encrypted.
-  S3EncryptionList:
-    type: array
-    items:
-      $ref: '#/definitions/S3Encryption'
-  S3EncryptionMode:
-    type: string
-    enum:
-      - DISABLED
-      - SSE-KMS
-      - SSE-S3
-  S3Target:
-    type: object
-    properties:
-      Path:
-        $ref: '#/definitions/Path'
-        description: The path to the Amazon S3 target.
-      Exclusions:
-        $ref: '#/definitions/PathList'
-        description: 'A list of glob patterns used to exclude from the crawl. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html">Catalog Tables with a Crawler</a>.'
-    description: Specifies a data store in Amazon S3.
-  S3TargetList:
-    type: array
-    items:
-      $ref: '#/definitions/S3Target'
-  ScalaCode:
-    type: string
-  Schedule:
-    type: object
-    properties:
-      ScheduleExpression:
-        $ref: '#/definitions/CronExpression'
-        description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
-      State:
-        $ref: '#/definitions/ScheduleState'
-        description: The state of the schedule.
-    description: A scheduling object using a <code>cron</code> statement to schedule an event.
-  ScheduleState:
-    type: string
-    enum:
-      - SCHEDULED
-      - NOT_SCHEDULED
-      - TRANSITIONING
-  SchemaChangePolicy:
-    type: object
-    properties:
-      UpdateBehavior:
-        $ref: '#/definitions/UpdateBehavior'
-        description: The update behavior when the crawler finds a changed schema.
-      DeleteBehavior:
-        $ref: '#/definitions/DeleteBehavior'
-        description: The deletion behavior when the crawler finds a deleted object.
-    description: Crawler policy for update and deletion behavior.
-  SchemaPathString:
-    type: string
-  ScriptLocationString:
-    type: string
+    minLength: 2
+    maxLength: 10240
   SecurityConfiguration:
     type: object
     properties:
@@ -7315,95 +7194,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SecurityConfiguration'
-  SecurityGroupIdList:
-    type: array
-    items:
-      $ref: '#/definitions/NameString'
-    minItems: 0
-    maxItems: 50
-  Segment:
-    type: object
-    required:
-      - SegmentNumber
-      - TotalSegments
-    properties:
-      SegmentNumber:
-        $ref: '#/definitions/NonNegativeInteger'
-        description: 'The zero-based index number of the this segment. For example, if the total number of segments is 4, SegmentNumber values will range from zero through three.'
-      TotalSegments:
-        $ref: '#/definitions/TotalSegmentsInteger'
-        description: The total numer of segments.
-    description: 'Defines a non-overlapping region of a table''s partitions, allowing multiple requests to be executed in parallel.'
-  SerDeInfo:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/NameString'
-        description: Name of the SerDe.
-      SerializationLibrary:
-        $ref: '#/definitions/NameString'
-        description: 'Usually the class that implements the SerDe. An example is: <code>org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe</code>.'
-      Parameters:
-        $ref: '#/definitions/ParametersMap'
-        description: These key-value pairs define initialization parameters for the SerDe.
-    description: Information about a serialization/deserialization program (SerDe) which serves as an extractor and loader.
-  SkewedInfo:
-    type: object
-    properties:
-      SkewedColumnNames:
-        $ref: '#/definitions/NameStringList'
-        description: A list of names of columns that contain skewed values.
-      SkewedColumnValues:
-        $ref: '#/definitions/ColumnValueStringList'
-        description: A list of values that appear so frequently as to be considered skewed.
-      SkewedColumnValueLocationMaps:
-        $ref: '#/definitions/LocationMap'
-        description: A mapping of skewed values to the columns that contain them.
-    description: Specifies skewed values in a table. Skewed are ones that occur with very high frequency.
-  StorageDescriptor:
-    type: object
-    properties:
-      Columns:
-        $ref: '#/definitions/ColumnList'
-        description: A list of the <code>Columns</code> in the table.
-      Location:
-        $ref: '#/definitions/LocationString'
-        description: 'The physical location of the table. By default this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name.'
-      InputFormat:
-        $ref: '#/definitions/FormatString'
-        description: 'The input format: <code>SequenceFileInputFormat</code> (binary), or <code>TextInputFormat</code>, or a custom format.'
-      OutputFormat:
-        $ref: '#/definitions/FormatString'
-        description: 'The output format: <code>SequenceFileOutputFormat</code> (binary), or <code>IgnoreKeyTextOutputFormat</code>, or a custom format.'
-      Compressed:
-        $ref: '#/definitions/Boolean'
-        description: 'True if the data in the table is compressed, or False if not.'
-      NumberOfBuckets:
-        $ref: '#/definitions/Integer'
-        description: Must be specified if the table contains any dimension columns.
-      SerdeInfo:
-        $ref: '#/definitions/SerDeInfo'
-        description: Serialization/deserialization (SerDe) information.
-      BucketColumns:
-        $ref: '#/definitions/NameStringList'
-        description: 'A list of reducer grouping columns, clustering columns, and bucketing columns in the table.'
-      SortColumns:
-        $ref: '#/definitions/OrderList'
-        description: A list specifying the sort order of each bucket in the table.
-      Parameters:
-        $ref: '#/definitions/ParametersMap'
-        description: User-supplied properties in key-value form.
-      SkewedInfo:
-        $ref: '#/definitions/SkewedInfo'
-        description: Information about values that appear very frequently in a column (skewed values).
-      StoredAsSubDirectories:
-        $ref: '#/definitions/Boolean'
-        description: 'True if the table data is stored in subdirectories, or False if not.'
-    description: Describes the physical storage of table data.
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/GenericString'
   Table:
     type: object
     required:
@@ -7458,75 +7248,6 @@ definitions:
         $ref: '#/definitions/NameString'
         description: Person or entity who created the table.
     description: Represents a collection of related data organized in columns and rows.
-  TableError:
-    type: object
-    properties:
-      TableName:
-        $ref: '#/definitions/NameString'
-        description: 'Name of the table. For Hive compatibility, this must be entirely lowercase.'
-      ErrorDetail:
-        $ref: '#/definitions/ErrorDetail'
-        description: Detail about the error.
-    description: An error record for table operations.
-  TableErrors:
-    type: array
-    items:
-      $ref: '#/definitions/TableError'
-  TableInput:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/NameString'
-        description: 'Name of the table. For Hive compatibility, this is folded to lowercase when it is stored.'
-      Description:
-        $ref: '#/definitions/DescriptionString'
-        description: Description of the table.
-      Owner:
-        $ref: '#/definitions/NameString'
-        description: Owner of the table.
-      LastAccessTime:
-        $ref: '#/definitions/Timestamp'
-        description: Last time the table was accessed.
-      LastAnalyzedTime:
-        $ref: '#/definitions/Timestamp'
-        description: Last time column statistics were computed for this table.
-      Retention:
-        $ref: '#/definitions/NonNegativeInteger'
-        description: Retention time for this table.
-      StorageDescriptor:
-        $ref: '#/definitions/StorageDescriptor'
-        description: A storage descriptor containing information about the physical storage of this table.
-      PartitionKeys:
-        $ref: '#/definitions/ColumnList'
-        description: '<p>A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.</p> <p>When creating a table used by Athena, and you do not specify any <code>partitionKeys</code>, you must at least set the value of <code>partitionKeys</code> to an empty list. For example:</p> <p> <code>"PartitionKeys": []</code> </p>'
-      ViewOriginalText:
-        $ref: '#/definitions/ViewTextString'
-        description: 'If the table is a view, the original text of the view; otherwise <code>null</code>.'
-      ViewExpandedText:
-        $ref: '#/definitions/ViewTextString'
-        description: 'If the table is a view, the expanded text of the view; otherwise <code>null</code>.'
-      TableType:
-        $ref: '#/definitions/TableTypeString'
-        description: 'The type of this table (<code>EXTERNAL_TABLE</code>, <code>VIRTUAL_VIEW</code>, etc.).'
-      Parameters:
-        $ref: '#/definitions/ParametersMap'
-        description: These key-value pairs define properties associated with the table.
-    description: Structure used to create or update the table.
-  TableList:
-    type: array
-    items:
-      $ref: '#/definitions/Table'
-  TableName:
-    type: string
-  TablePrefix:
-    type: string
-    minLength: 0
-    maxLength: 128
-  TableTypeString:
-    type: string
-    maxLength: 255
   TableVersion:
     type: object
     properties:
@@ -7537,38 +7258,14 @@ definitions:
         $ref: '#/definitions/VersionString'
         description: The ID value that identifies this table version. A <code>VersionId</code> is a string representation of an integer. Each version is incremented by 1.
     description: Specifies a version of a table.
-  TableVersionError:
-    type: object
-    properties:
-      TableName:
-        $ref: '#/definitions/NameString'
-        description: The name of the table in question.
-      VersionId:
-        $ref: '#/definitions/VersionString'
-        description: The ID value of the version in question. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1.
-      ErrorDetail:
-        $ref: '#/definitions/ErrorDetail'
-        description: Detail about the error.
-    description: An error record for table-version operations.
-  TableVersionErrors:
+  GetTableVersionsList:
     type: array
     items:
-      $ref: '#/definitions/TableVersionError'
-  Timeout:
-    type: integer
-    minimum: 1
-  Timestamp:
-    type: string
-    format: date-time
-  TimestampValue:
-    type: string
-    format: date-time
-  Token:
-    type: string
-  TotalSegmentsInteger:
-    type: integer
-    minimum: 1
-    maximum: 10
+      $ref: '#/definitions/TableVersion'
+  TableList:
+    type: array
+    items:
+      $ref: '#/definitions/Table'
   Trigger:
     type: object
     properties:
@@ -7601,99 +7298,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Trigger'
-  TriggerState:
-    type: string
-    enum:
-      - CREATING
-      - CREATED
-      - ACTIVATING
-      - ACTIVATED
-      - DEACTIVATING
-      - DEACTIVATED
-      - DELETING
-      - UPDATING
-  TriggerType:
-    type: string
-    enum:
-      - SCHEDULED
-      - CONDITIONAL
-      - ON_DEMAND
-  TriggerUpdate:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/NameString'
-        description: Reserved for future use.
-      Description:
-        $ref: '#/definitions/DescriptionString'
-        description: A description of this trigger.
-      Schedule:
-        $ref: '#/definitions/GenericString'
-        description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
-      Actions:
-        $ref: '#/definitions/ActionList'
-        description: The actions initiated by this trigger.
-      Predicate:
-        $ref: '#/definitions/Predicate'
-        description: 'The predicate of this trigger, which defines when it will fire.'
-    description: A structure used to provide information used to update a trigger. This object will update the the previous trigger definition by overwriting it completely.
-  URI:
-    type: string
-    minLength: 1
-    maxLength: 1024
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  UpdateBehavior:
-    type: string
-    enum:
-      - LOG
-      - UPDATE_IN_DATABASE
-  UpdateGrokClassifierRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/NameString'
-        description: The name of the <code>GrokClassifier</code>.
-      Classification:
-        $ref: '#/definitions/Classification'
-        description: 'An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.'
-      GrokPattern:
-        $ref: '#/definitions/GrokPattern'
-        description: The grok pattern used by this classifier.
-      CustomPatterns:
-        $ref: '#/definitions/CustomPatterns'
-        description: Optional custom grok patterns used by this classifier.
-    description: Specifies a grok classifier to update when passed to <code>UpdateClassifier</code>.
-  UpdateJsonClassifierRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/NameString'
-        description: The name of the classifier.
-      JsonPath:
-        $ref: '#/definitions/JsonPath'
-        description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
-    description: Specifies a JSON classifier to be updated.
-  UpdateXMLClassifierRequest:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/NameString'
-        description: The name of the classifier.
-      Classification:
-        $ref: '#/definitions/Classification'
-        description: An identifier of the data format that the classifier matches.
-      RowTag:
-        $ref: '#/definitions/RowTag'
-        description: 'The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a="A" item_b="B"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a="A" item_b="B" /&gt;</code> is not).'
-    description: Specifies an XML classifier to be updated.
-  UriString:
-    type: string
   UserDefinedFunction:
     type: object
     properties:
@@ -7716,48 +7320,440 @@ definitions:
         $ref: '#/definitions/ResourceUriList'
         description: The resource URIs for the function.
     description: Represents the equivalent of a Hive user-defined function (<code>UDF</code>) definition.
-  UserDefinedFunctionInput:
-    type: object
-    properties:
-      FunctionName:
-        $ref: '#/definitions/NameString'
-        description: The name of the function.
-      ClassName:
-        $ref: '#/definitions/NameString'
-        description: The Java class that contains the function code.
-      OwnerName:
-        $ref: '#/definitions/NameString'
-        description: The owner of the function.
-      OwnerType:
-        $ref: '#/definitions/PrincipalType'
-        description: The owner type.
-      ResourceUris:
-        $ref: '#/definitions/ResourceUriList'
-        description: The resource URIs for the function.
-    description: A structure used to create or updata a user-defined function.
   UserDefinedFunctionList:
     type: array
     items:
       $ref: '#/definitions/UserDefinedFunction'
-  ValueStringList:
+  IntegerFlag:
+    type: integer
+    minimum: 0
+    maximum: 1
+  PathList:
     type: array
     items:
-      $ref: '#/definitions/ValueString'
-  VersionId:
-    type: integer
-  VersionString:
+      $ref: '#/definitions/Path'
+  JdbcTarget:
+    type: object
+    properties:
+      ConnectionName:
+        $ref: '#/definitions/ConnectionName'
+        description: The name of the connection to use to connect to the JDBC target.
+      Path:
+        $ref: '#/definitions/Path'
+        description: The path of the JDBC target.
+      Exclusions:
+        $ref: '#/definitions/PathList'
+        description: 'A list of glob patterns used to exclude from the crawl. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html">Catalog Tables with a Crawler</a>.'
+    description: Specifies a JDBC data store to crawl.
+  JobName:
+    type: string
+  JsonValue:
+    type: string
+  JobBookmarkEntry:
+    type: object
+    properties:
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: Name of the job in question.
+      Version:
+        $ref: '#/definitions/IntegerValue'
+        description: Version of the job.
+      Run:
+        $ref: '#/definitions/IntegerValue'
+        description: The run ID number.
+      Attempt:
+        $ref: '#/definitions/IntegerValue'
+        description: The attempt ID number.
+      JobBookmark:
+        $ref: '#/definitions/JsonValue'
+        description: The bookmark itself.
+    description: Defines a point which a job can resume processing.
+  JobBookmarksEncryptionMode:
+    type: string
+    enum:
+      - DISABLED
+      - CSE-KMS
+  ScriptLocationString:
+    type: string
+  PredecessorList:
+    type: array
+    items:
+      $ref: '#/definitions/Predecessor'
+  JobUpdate:
+    type: object
+    properties:
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: Description of the job being defined.
+      LogUri:
+        $ref: '#/definitions/UriString'
+        description: This field is reserved for future use.
+      Role:
+        $ref: '#/definitions/RoleString'
+        description: The name or ARN of the IAM role associated with this job (required).
+      ExecutionProperty:
+        $ref: '#/definitions/ExecutionProperty'
+        description: An ExecutionProperty specifying the maximum number of concurrent runs allowed for this job.
+      Command:
+        $ref: '#/definitions/JobCommand'
+        description: The JobCommand that executes this job (required).
+      DefaultArguments:
+        $ref: '#/definitions/GenericMap'
+        description: '<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
+      Connections:
+        $ref: '#/definitions/ConnectionsList'
+        description: The connections used for this job.
+      MaxRetries:
+        $ref: '#/definitions/MaxRetries'
+        description: The maximum number of times to retry this job if it fails.
+      AllocatedCapacity:
+        $ref: '#/definitions/IntegerValue'
+        description: 'The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing page</a>.'
+      Timeout:
+        $ref: '#/definitions/Timeout'
+        description: 'The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).'
+      NotificationProperty:
+        $ref: '#/definitions/NotificationProperty'
+        description: Specifies configuration properties of a job notification.
+      SecurityConfiguration:
+        $ref: '#/definitions/NameString'
+        description: The name of the SecurityConfiguration structure to be used with this job.
+    description: Specifies information used to update an existing job definition. Note that the previous job definition will be completely overwritten by this information.
+  KeyString:
     type: string
     minLength: 1
     maxLength: 255
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+  LastCrawlStatus:
+    type: string
+    enum:
+      - SUCCEEDED
+      - CANCELLED
+      - FAILED
+  LogGroup:
+    type: string
+    pattern: '[\.\-_/#A-Za-z0-9]+'
+    minLength: 1
+    maxLength: 512
+  LogStream:
+    type: string
+    pattern: '[^:*]*'
+    minLength: 1
+    maxLength: 512
+  MessagePrefix:
+    type: string
+    minLength: 1
+    maxLength: 255
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+  LocationMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ColumnValuesString'
+        value:
+          $ref: '#/definitions/ColumnValuesString'
+  LocationString:
+    type: string
+    maxLength: 2056
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  Logical:
+    type: string
+    enum:
+      - AND
+      - ANY
+  TableName:
+    type: string
+  SchemaPathString:
+    type: string
+  MappingEntry:
+    type: object
+    properties:
+      SourceTable:
+        $ref: '#/definitions/TableName'
+        description: The name of the source table.
+      SourcePath:
+        $ref: '#/definitions/SchemaPathString'
+        description: The source path.
+      SourceType:
+        $ref: '#/definitions/FieldType'
+        description: The source type.
+      TargetTable:
+        $ref: '#/definitions/TableName'
+        description: The target table.
+      TargetPath:
+        $ref: '#/definitions/SchemaPathString'
+        description: The target path.
+      TargetType:
+        $ref: '#/definitions/FieldType'
+        description: The target type.
+    description: Defines a mapping.
+  NotifyDelayAfter:
+    type: integer
+    minimum: 1
+  Order:
+    type: object
+    required:
+      - Column
+      - SortOrder
+    properties:
+      Column:
+        $ref: '#/definitions/NameString'
+        description: The name of the column.
+      SortOrder:
+        $ref: '#/definitions/IntegerFlag'
+        description: 'Indicates that the column is sorted in ascending order (<code>== 1</code>), or in descending order (<code>==0</code>).'
+    description: Specifies the sort order of a sorted column.
+  OrderList:
+    type: array
+    items:
+      $ref: '#/definitions/Order'
+  ParametersMapValue:
+    type: string
+    maxLength: 512000
+  StorageDescriptor:
+    type: object
+    properties:
+      Columns:
+        $ref: '#/definitions/ColumnList'
+        description: A list of the <code>Columns</code> in the table.
+      Location:
+        $ref: '#/definitions/LocationString'
+        description: 'The physical location of the table. By default this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name.'
+      InputFormat:
+        $ref: '#/definitions/FormatString'
+        description: 'The input format: <code>SequenceFileInputFormat</code> (binary), or <code>TextInputFormat</code>, or a custom format.'
+      OutputFormat:
+        $ref: '#/definitions/FormatString'
+        description: 'The output format: <code>SequenceFileOutputFormat</code> (binary), or <code>IgnoreKeyTextOutputFormat</code>, or a custom format.'
+      Compressed:
+        $ref: '#/definitions/Boolean'
+        description: 'True if the data in the table is compressed, or False if not.'
+      NumberOfBuckets:
+        $ref: '#/definitions/Integer'
+        description: Must be specified if the table contains any dimension columns.
+      SerdeInfo:
+        $ref: '#/definitions/SerDeInfo'
+        description: Serialization/deserialization (SerDe) information.
+      BucketColumns:
+        $ref: '#/definitions/NameStringList'
+        description: 'A list of reducer grouping columns, clustering columns, and bucketing columns in the table.'
+      SortColumns:
+        $ref: '#/definitions/OrderList'
+        description: A list specifying the sort order of each bucket in the table.
+      Parameters:
+        $ref: '#/definitions/ParametersMap'
+        description: User-supplied properties in key-value form.
+      SkewedInfo:
+        $ref: '#/definitions/SkewedInfo'
+        description: Information about values that appear very frequently in a column (skewed values).
+      StoredAsSubDirectories:
+        $ref: '#/definitions/Boolean'
+        description: 'True if the table data is stored in subdirectories, or False if not.'
+    description: Describes the physical storage of table data.
+  PartitionError:
+    type: object
+    properties:
+      PartitionValues:
+        $ref: '#/definitions/ValueStringList'
+        description: The values that define the partition.
+      ErrorDetail:
+        $ref: '#/definitions/ErrorDetail'
+        description: Details about the partition error.
+    description: Contains information about a partition error.
+  SecurityGroupIdList:
+    type: array
+    items:
+      $ref: '#/definitions/NameString'
+    minItems: 0
+    maxItems: 50
+  Predecessor:
+    type: object
+    properties:
+      JobName:
+        $ref: '#/definitions/NameString'
+        description: The name of the job definition used by the predecessor job run.
+      RunId:
+        $ref: '#/definitions/IdString'
+        description: The job-run ID of the predecessor job run.
+    description: A job run that was used in the predicate of a conditional trigger that triggered this job run.
+  PrincipalType:
+    type: string
+    enum:
+      - USER
+      - ROLE
+      - GROUP
+  ResourceType:
+    type: string
+    enum:
+      - JAR
+      - FILE
+      - ARCHIVE
+  ResourceUri:
+    type: object
+    properties:
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of the resource.
+      Uri:
+        $ref: '#/definitions/URI'
+        description: The URI for accessing the resource.
+    description: URIs for function resources.
+  ResourceUriList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceUri'
+    minItems: 0
+    maxItems: 1000
+  S3EncryptionMode:
+    type: string
+    enum:
+      - DISABLED
+      - SSE-KMS
+      - SSE-S3
+  S3Encryption:
+    type: object
+    properties:
+      S3EncryptionMode:
+        $ref: '#/definitions/S3EncryptionMode'
+        description: The encryption mode to use for S3 data.
+      KmsKeyArn:
+        $ref: '#/definitions/KmsKeyArn'
+        description: The AWS ARN of the KMS key to be used to encrypt the data.
+    description: Specifies how S3 data should be encrypted.
+  S3Target:
+    type: object
+    properties:
+      Path:
+        $ref: '#/definitions/Path'
+        description: The path to the Amazon S3 target.
+      Exclusions:
+        $ref: '#/definitions/PathList'
+        description: 'A list of glob patterns used to exclude from the crawl. For more information, see <a href="http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html">Catalog Tables with a Crawler</a>.'
+    description: Specifies a data store in Amazon S3.
+  ScheduleState:
+    type: string
+    enum:
+      - SCHEDULED
+      - NOT_SCHEDULED
+      - TRANSITIONING
+  UpdateBehavior:
+    type: string
+    enum:
+      - LOG
+      - UPDATE_IN_DATABASE
+  TotalSegmentsInteger:
+    type: integer
+    minimum: 1
+    maximum: 10
+  SerDeInfo:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: Name of the SerDe.
+      SerializationLibrary:
+        $ref: '#/definitions/NameString'
+        description: 'Usually the class that implements the SerDe. An example is: <code>org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe</code>.'
+      Parameters:
+        $ref: '#/definitions/ParametersMap'
+        description: These key-value pairs define initialization parameters for the SerDe.
+    description: Information about a serialization/deserialization program (SerDe) which serves as an extractor and loader.
+  SkewedInfo:
+    type: object
+    properties:
+      SkewedColumnNames:
+        $ref: '#/definitions/NameStringList'
+        description: A list of names of columns that contain skewed values.
+      SkewedColumnValues:
+        $ref: '#/definitions/ColumnValueStringList'
+        description: A list of values that appear so frequently as to be considered skewed.
+      SkewedColumnValueLocationMaps:
+        $ref: '#/definitions/LocationMap'
+        description: A mapping of skewed values to the columns that contain them.
+    description: Specifies skewed values in a table. Skewed are ones that occur with very high frequency.
   ViewTextString:
     type: string
     maxLength: 409600
-  XMLClassifier:
+  TableTypeString:
+    type: string
+    maxLength: 255
+  TableError:
+    type: object
+    properties:
+      TableName:
+        $ref: '#/definitions/NameString'
+        description: 'Name of the table. For Hive compatibility, this must be entirely lowercase.'
+      ErrorDetail:
+        $ref: '#/definitions/ErrorDetail'
+        description: Detail about the error.
+    description: An error record for table operations.
+  TableVersionError:
+    type: object
+    properties:
+      TableName:
+        $ref: '#/definitions/NameString'
+        description: The name of the table in question.
+      VersionId:
+        $ref: '#/definitions/VersionString'
+        description: The ID value of the version in question. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1.
+      ErrorDetail:
+        $ref: '#/definitions/ErrorDetail'
+        description: Detail about the error.
+    description: An error record for table-version operations.
+  TriggerState:
+    type: string
+    enum:
+      - CREATING
+      - CREATED
+      - ACTIVATING
+      - ACTIVATED
+      - DEACTIVATING
+      - DEACTIVATED
+      - DELETING
+      - UPDATING
+  TriggerUpdate:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: Reserved for future use.
+      Description:
+        $ref: '#/definitions/DescriptionString'
+        description: A description of this trigger.
+      Schedule:
+        $ref: '#/definitions/GenericString'
+        description: 'A <code>cron</code> expression used to specify the schedule (see <a href="http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.'
+      Actions:
+        $ref: '#/definitions/ActionList'
+        description: The actions initiated by this trigger.
+      Predicate:
+        $ref: '#/definitions/Predicate'
+        description: 'The predicate of this trigger, which defines when it will fire.'
+    description: A structure used to provide information used to update a trigger. This object will update the the previous trigger definition by overwriting it completely.
+  UpdateGrokClassifierRequest:
     type: object
     required:
       - Name
-      - Classification
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the <code>GrokClassifier</code>.
+      Classification:
+        $ref: '#/definitions/Classification'
+        description: 'An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.'
+      GrokPattern:
+        $ref: '#/definitions/GrokPattern'
+        description: The grok pattern used by this classifier.
+      CustomPatterns:
+        $ref: '#/definitions/CustomPatterns'
+        description: Optional custom grok patterns used by this classifier.
+    description: Specifies a grok classifier to update when passed to <code>UpdateClassifier</code>.
+  UpdateXMLClassifierRequest:
+    type: object
+    required:
+      - Name
     properties:
       Name:
         $ref: '#/definitions/NameString'
@@ -7765,16 +7761,19 @@ definitions:
       Classification:
         $ref: '#/definitions/Classification'
         description: An identifier of the data format that the classifier matches.
-      CreationTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time this classifier was registered.
-      LastUpdated:
-        $ref: '#/definitions/Timestamp'
-        description: The time this classifier was last updated.
-      Version:
-        $ref: '#/definitions/VersionId'
-        description: The version of this classifier.
       RowTag:
         $ref: '#/definitions/RowTag'
         description: 'The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a="A" item_b="B"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a="A" item_b="B" /&gt;</code> is not).'
-    description: A classifier for <code>XML</code> content.
+    description: Specifies an XML classifier to be updated.
+  UpdateJsonClassifierRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/NameString'
+        description: The name of the classifier.
+      JsonPath:
+        $ref: '#/definitions/JsonPath'
+        description: 'A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href="https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json">Writing JsonPath Custom Classifiers</a>.'
+    description: Specifies a JSON classifier to be updated.

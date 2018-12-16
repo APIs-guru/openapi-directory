@@ -5582,7 +5582,54 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The unique identifier of the cluster that you want to rotate the encryption keys for.</p> <p>Constraints: Must be the name of valid cluster that has encryption enabled.</p>'
     description: <p/>
-  undefined: {}
+  String:
+    type: string
+  ReservedNode:
+    type: object
+    properties:
+      ReservedNodeId:
+        $ref: '#/definitions/String'
+        description: The unique identifier for the reservation.
+      ReservedNodeOfferingId:
+        $ref: '#/definitions/String'
+        description: The identifier for the reserved node offering.
+      NodeType:
+        $ref: '#/definitions/String'
+        description: The node type of the reserved node.
+      StartTime:
+        $ref: '#/definitions/TStamp'
+        description: The time the reservation started. You purchase a reserved node offering for a duration. This is the start time of that duration.
+      Duration:
+        $ref: '#/definitions/Integer'
+        description: The duration of the node reservation in seconds.
+      FixedPrice:
+        $ref: '#/definitions/Double'
+        description: The fixed cost Amazon Redshift charges you for this reserved node.
+      UsagePrice:
+        $ref: '#/definitions/Double'
+        description: The hourly rate Amazon Redshift charges you for this reserved node.
+      CurrencyCode:
+        $ref: '#/definitions/String'
+        description: The currency code for the reserved cluster.
+      NodeCount:
+        $ref: '#/definitions/Integer'
+        description: The number of reserved compute nodes.
+      State:
+        $ref: '#/definitions/String'
+        description: '<p>The state of the reserved compute node.</p> <p>Possible Values:</p> <ul> <li> <p>pending-payment-This reserved node has recently been purchased, and the sale has been approved, but payment has not yet been confirmed.</p> </li> <li> <p>active-This reserved node is owned by the caller and is available for use.</p> </li> <li> <p>payment-failed-Payment failed for the purchase attempt.</p> </li> <li> <p>retired-The reserved node is no longer available. </p> </li> <li> <p>exchanging-The owner is exchanging the reserved node for another reserved node.</p> </li> </ul>'
+      OfferingType:
+        $ref: '#/definitions/String'
+        description: 'The anticipated utilization of the reserved node, as defined in the reserved node offering.'
+      RecurringCharges:
+        $ref: '#/definitions/RecurringChargeList'
+        description: The recurring charges for the reserved node.
+      ReservedNodeOfferingType:
+        $ref: '#/definitions/ReservedNodeOfferingType'
+    description: 'Describes a reserved node. You can call the <a>DescribeReservedNodeOfferings</a> API to obtain the available reserved node offerings. '
+  AttributeValueList:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeValueTarget'
   AccountAttribute:
     type: object
     properties:
@@ -5593,6 +5640,10 @@ definitions:
         $ref: '#/definitions/AttributeValueList'
         description: A list of attribute values.
     description: 'A name value pair that describes an aspect of an account. '
+  AttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/AccountAttribute'
   AccountWithRestoreAccess:
     type: object
     properties:
@@ -5607,18 +5658,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AccountWithRestoreAccess'
-  AttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/AccountAttribute'
   AttributeNameList:
     type: array
     items:
       $ref: '#/definitions/String'
-  AttributeValueList:
-    type: array
-    items:
-      $ref: '#/definitions/AttributeValueTarget'
   AttributeValueTarget:
     type: object
     properties:
@@ -5626,6 +5669,132 @@ definitions:
         $ref: '#/definitions/String'
         description: The value of the attribute.
     description: Describes an attribute value.
+  ClusterSecurityGroup:
+    type: object
+    properties:
+      ClusterSecurityGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the cluster security group to which the operation was applied.
+      Description:
+        $ref: '#/definitions/String'
+        description: A description of the security group.
+      EC2SecurityGroups:
+        $ref: '#/definitions/EC2SecurityGroupList'
+        description: A list of EC2 security groups that are permitted to access clusters associated with this cluster security group.
+      IPRanges:
+        $ref: '#/definitions/IPRangeList'
+        description: A list of IP ranges (CIDR blocks) that are permitted to access clusters associated with this cluster security group.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The list of tags for the cluster security group.
+    description: Describes a security group.
+  Snapshot:
+    type: object
+    properties:
+      SnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: The snapshot identifier that is provided in the request.
+      ClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The identifier of the cluster for which the snapshot was taken.
+      SnapshotCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: The time (in UTC format) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time.
+      Status:
+        $ref: '#/definitions/String'
+        description: '<p>The snapshot status. The value of the status depends on the API operation used: </p> <ul> <li> <p> <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as "creating". </p> </li> <li> <p> <a>DescribeClusterSnapshots</a> returns status as "creating", "available", "final snapshot", or "failed".</p> </li> <li> <p> <a>DeleteClusterSnapshot</a> returns status as "deleted".</p> </li> </ul>'
+      Port:
+        $ref: '#/definitions/Integer'
+        description: The port that the cluster is listening on.
+      AvailabilityZone:
+        $ref: '#/definitions/String'
+        description: The Availability Zone in which the cluster was created.
+      ClusterCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: The time (UTC) when the cluster was originally created.
+      MasterUsername:
+        $ref: '#/definitions/String'
+        description: The master user name for the cluster.
+      ClusterVersion:
+        $ref: '#/definitions/String'
+        description: The version ID of the Amazon Redshift engine that is running on the cluster.
+      SnapshotType:
+        $ref: '#/definitions/String'
+        description: 'The snapshot type. Snapshots created using <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> are of type "manual". '
+      NodeType:
+        $ref: '#/definitions/String'
+        description: The node type of the nodes in the cluster.
+      NumberOfNodes:
+        $ref: '#/definitions/Integer'
+        description: The number of nodes in the cluster.
+      DBName:
+        $ref: '#/definitions/String'
+        description: The name of the database that was created when the cluster was created.
+      VpcId:
+        $ref: '#/definitions/String'
+        description: 'The VPC identifier of the cluster if the snapshot is from a cluster in a VPC. Otherwise, this field is not in the output.'
+      Encrypted:
+        $ref: '#/definitions/Boolean'
+        description: 'If <code>true</code>, the data in the snapshot is encrypted at rest.'
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: The AWS Key Management Service (KMS) key ID of the encryption key that was used to encrypt data in the cluster from which the snapshot was taken.
+      EncryptedWithHSM:
+        $ref: '#/definitions/Boolean'
+        description: A boolean that indicates whether the snapshot data is encrypted using the HSM keys of the source cluster. <code>true</code> indicates that the data is encrypted using HSM keys.
+      AccountsWithRestoreAccess:
+        $ref: '#/definitions/AccountsWithRestoreAccessList'
+        description: 'A list of the AWS customer accounts authorized to restore the snapshot. Returns <code>null</code> if no accounts are authorized. Visible only to the snapshot owner. '
+      OwnerAccount:
+        $ref: '#/definitions/String'
+        description: 'For manual snapshots, the AWS customer account used to create or copy the snapshot. For automatic snapshots, the owner of the cluster. The owner can perform all snapshot actions, such as sharing a manual snapshot.'
+      TotalBackupSizeInMegaBytes:
+        $ref: '#/definitions/Double'
+        description: The size of the complete set of backup data that would be used to restore the cluster.
+      ActualIncrementalBackupSizeInMegaBytes:
+        $ref: '#/definitions/Double'
+        description: The size of the incremental backup.
+      BackupProgressInMegaBytes:
+        $ref: '#/definitions/Double'
+        description: The number of megabytes that have been transferred to the snapshot backup.
+      CurrentBackupRateInMegaBytesPerSecond:
+        $ref: '#/definitions/Double'
+        description: 'The number of megabytes per second being transferred to the snapshot backup. Returns <code>0</code> for a completed backup. '
+      EstimatedSecondsToCompletion:
+        $ref: '#/definitions/Long'
+        description: 'The estimate of the time remaining before the snapshot backup will complete. Returns <code>0</code> for a completed backup. '
+      ElapsedTimeInSeconds:
+        $ref: '#/definitions/Long'
+        description: 'The amount of time an in-progress snapshot backup has been running, or the amount of time it took a completed backup to finish.'
+      SourceRegion:
+        $ref: '#/definitions/String'
+        description: The source region from which the snapshot was copied.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The list of tags for the cluster snapshot.
+      RestorableNodeTypes:
+        $ref: '#/definitions/RestorableNodeTypeList'
+        description: The list of node types that this cluster snapshot is able to restore into.
+      EnhancedVpcRouting:
+        $ref: '#/definitions/Boolean'
+        description: '<p>An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html">Enhanced VPC Routing</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p> <p>Default: false</p>'
+      MaintenanceTrackName:
+        $ref: '#/definitions/String'
+        description: The name of the maintenance track for the snapshot.
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
+      ManualSnapshotRemainingDays:
+        $ref: '#/definitions/IntegerOptional'
+        description: The number of days until a manual snapshot will pass its retention period.
+      SnapshotRetentionStartTime:
+        $ref: '#/definitions/TStamp'
+        description: A timestamp representing the start of the retention period for the snapshot.
+    description: Describes a snapshot.
+  SupportedPlatformsList:
+    type: array
+    items:
+      $ref: '#/definitions/SupportedPlatform'
   AvailabilityZone:
     type: object
     properties:
@@ -5639,18 +5808,227 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AvailabilityZone'
+  DeleteClusterSnapshotMessageList:
+    type: array
+    items:
+      $ref: '#/definitions/DeleteClusterSnapshotMessage'
+  SnapshotIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   BatchSnapshotOperationErrorList:
     type: array
     items:
       $ref: '#/definitions/SnapshotErrorMessage'
+  IntegerOptional:
+    type: integer
+  Boolean:
+    type: boolean
   BatchSnapshotOperationErrors:
     type: array
     items:
       $ref: '#/definitions/SnapshotErrorMessage'
-  Boolean:
-    type: boolean
+  SnapshotErrorMessage:
+    type: object
+    properties:
+      SnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the snapshot returning the error.
+      SnapshotClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the cluster.
+      FailureCode:
+        $ref: '#/definitions/String'
+        description: The failure code for the error.
+      FailureReason:
+        $ref: '#/definitions/String'
+        description: The text message describing the error.
+    description: Describes the errors returned by a snapshot.
   BooleanOptional:
     type: boolean
+  Endpoint:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/String'
+        description: The DNS address of the Cluster.
+      Port:
+        $ref: '#/definitions/Integer'
+        description: The port that the database engine is listening on.
+    description: Describes a connection endpoint.
+  TStamp:
+    type: string
+    format: date-time
+  Integer:
+    type: integer
+  ClusterSecurityGroupMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/ClusterSecurityGroupMembership'
+  VpcSecurityGroupMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/VpcSecurityGroupMembership'
+  ClusterParameterGroupStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/ClusterParameterGroupStatus'
+  PendingModifiedValues:
+    type: object
+    properties:
+      MasterUserPassword:
+        $ref: '#/definitions/String'
+        description: The pending or in-progress change of the master user password for the cluster.
+      NodeType:
+        $ref: '#/definitions/String'
+        description: The pending or in-progress change of the cluster's node type.
+      NumberOfNodes:
+        $ref: '#/definitions/IntegerOptional'
+        description: The pending or in-progress change of the number of nodes in the cluster.
+      ClusterType:
+        $ref: '#/definitions/String'
+        description: The pending or in-progress change of the cluster type.
+      ClusterVersion:
+        $ref: '#/definitions/String'
+        description: The pending or in-progress change of the service version.
+      AutomatedSnapshotRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: The pending or in-progress change of the automated snapshot retention period.
+      ClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The pending or in-progress change of the new identifier for the cluster.
+      PubliclyAccessible:
+        $ref: '#/definitions/BooleanOptional'
+        description: The pending or in-progress change of the ability to connect to the cluster from the public network.
+      EnhancedVpcRouting:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html">Enhanced VPC Routing</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p> <p>Default: false</p>'
+      MaintenanceTrackName:
+        $ref: '#/definitions/String'
+        description: The name of the maintenance track that the cluster will change to during the next maintenance window.
+      EncryptionType:
+        $ref: '#/definitions/String'
+        description: 'The encryption type for a cluster. Possible values are: KMS and None. For the China region the possible values are None, and Legacy. '
+    description: Describes cluster attributes that are in a pending state. A change to one or more the attributes was requested and is in progress or will be applied.
+  RestoreStatus:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/String'
+        description: 'The status of the restore action. Returns starting, restoring, completed, or failed.'
+      CurrentRestoreRateInMegaBytesPerSecond:
+        $ref: '#/definitions/Double'
+        description: The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup.
+      SnapshotSizeInMegaBytes:
+        $ref: '#/definitions/Long'
+        description: The size of the set of snapshot data used to restore the cluster.
+      ProgressInMegaBytes:
+        $ref: '#/definitions/Long'
+        description: The number of megabytes that have been transferred from snapshot storage.
+      ElapsedTimeInSeconds:
+        $ref: '#/definitions/Long'
+        description: 'The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish.'
+      EstimatedTimeToCompletionInSeconds:
+        $ref: '#/definitions/Long'
+        description: The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore.
+    description: Describes the status of a cluster restore action. Returns null if the cluster was not created by restoring a snapshot.
+  DataTransferProgress:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/String'
+        description: Describes the status of the cluster. While the transfer is in progress the status is <code>transferringdata</code>.
+      CurrentRateInMegaBytesPerSecond:
+        $ref: '#/definitions/DoubleOptional'
+        description: Describes the data transfer rate in MB's per second.
+      TotalDataInMegaBytes:
+        $ref: '#/definitions/Long'
+        description: Describes the total amount of data to be transfered in megabytes.
+      DataTransferredInMegaBytes:
+        $ref: '#/definitions/Long'
+        description: Describes the total amount of data that has been transfered in MB's.
+      EstimatedTimeToCompletionInSeconds:
+        $ref: '#/definitions/LongOptional'
+        description: Describes the estimated number of seconds remaining to complete the transfer.
+      ElapsedTimeInSeconds:
+        $ref: '#/definitions/LongOptional'
+        description: Describes the number of seconds that have elapsed during the data transfer.
+    description: Describes the status of a cluster while it is in the process of resizing with an incremental resize.
+  HsmStatus:
+    type: object
+    properties:
+      HsmClientCertificateIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption keys stored in an HSM.
+      HsmConfigurationIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM.
+      Status:
+        $ref: '#/definitions/String'
+        description: '<p>Reports whether the Amazon Redshift cluster has finished applying any HSM settings changes specified in a modify cluster command.</p> <p>Values: active, applying</p>'
+    description: Describes the status of changes to HSM settings.
+  ClusterSnapshotCopyStatus:
+    type: object
+    properties:
+      DestinationRegion:
+        $ref: '#/definitions/String'
+        description: The destination region that snapshots are automatically copied to when cross-region snapshot copy is enabled.
+      RetentionPeriod:
+        $ref: '#/definitions/Long'
+        description: The number of days that automated snapshots are retained in the destination region after they are copied from a source region.
+      ManualSnapshotRetentionPeriod:
+        $ref: '#/definitions/Integer'
+        description: '<p>The number of days that automated snapshots are retained in the destination region after they are copied from a source region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
+      SnapshotCopyGrantName:
+        $ref: '#/definitions/String'
+        description: The name of the snapshot copy grant.
+    description: Returns the destination region and retention period that are configured for cross-region snapshot copy.
+  ClusterNodesList:
+    type: array
+    items:
+      $ref: '#/definitions/ClusterNode'
+  ElasticIpStatus:
+    type: object
+    properties:
+      ElasticIp:
+        $ref: '#/definitions/String'
+        description: The elastic IP (EIP) address for the cluster.
+      Status:
+        $ref: '#/definitions/String'
+        description: The status of the elastic IP (EIP) address.
+    description: Describes the status of the elastic IP (EIP) address.
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  ClusterIamRoleList:
+    type: array
+    items:
+      $ref: '#/definitions/ClusterIamRole'
+  PendingActionsList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  DeferredMaintenanceWindowsList:
+    type: array
+    items:
+      $ref: '#/definitions/DeferredMaintenanceWindow'
+  ScheduleState:
+    type: string
+    enum:
+      - MODIFYING
+      - ACTIVE
+      - FAILED
+  ResizeInfo:
+    type: object
+    properties:
+      ResizeType:
+        $ref: '#/definitions/String'
+        description: Returns the value <code>ClassicResize</code>.
+      AllowCancelResize:
+        $ref: '#/definitions/Boolean'
+        description: A boolean value indicating if the resize operation can be cancelled.
+    description: Describes a resize operation.
   Cluster:
     type: object
     properties:
@@ -5780,6 +6158,13 @@ definitions:
         $ref: '#/definitions/ResizeInfo'
         description: '<p>Returns the following:</p> <ul> <li> <p>AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.</p> </li> <li> <p>ResizeType: Returns ClassicResize</p> </li> </ul>'
     description: Describes a cluster.
+  SensitiveString:
+    type: string
+    format: password
+  RevisionTargetsList:
+    type: array
+    items:
+      $ref: '#/definitions/RevisionTarget'
   ClusterDbRevision:
     type: object
     properties:
@@ -5810,10 +6195,6 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>A value that describes the status of the IAM role''s association with an Amazon Redshift cluster.</p> <p>The following are possible statuses and descriptions.</p> <ul> <li> <p> <code>in-sync</code>: The role is available for use by the cluster.</p> </li> <li> <p> <code>adding</code>: The role is in the process of being associated with the cluster.</p> </li> <li> <p> <code>removing</code>: The role is in the process of being disassociated with the cluster.</p> </li> </ul>'
     description: An AWS Identity and Access Management (IAM) role that can be used by the associated Amazon Redshift cluster to access other AWS services.
-  ClusterIamRoleList:
-    type: array
-    items:
-      $ref: '#/definitions/ClusterIamRole'
   ClusterList:
     type: array
     items:
@@ -5831,10 +6212,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The public IP address of a node within a cluster.
     description: The identifier of a node in a cluster.
-  ClusterNodesList:
-    type: array
-    items:
-      $ref: '#/definitions/ClusterNode'
   ClusterParameterGroup:
     type: object
     properties:
@@ -5851,6 +6228,14 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The list of tags for the cluster parameter group.
     description: Describes a parameter group.
+  ParametersList:
+    type: array
+    items:
+      $ref: '#/definitions/Parameter'
+  ClusterParameterStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/ClusterParameterStatus'
   ClusterParameterGroupStatus:
     type: object
     properties:
@@ -5864,10 +6249,10 @@ definitions:
         $ref: '#/definitions/ClusterParameterStatusList'
         description: '<p>The list of parameter statuses.</p> <p> For more information about parameters and parameter groups, go to <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
     description: Describes the status of a parameter group.
-  ClusterParameterGroupStatusList:
+  ParameterGroupList:
     type: array
     items:
-      $ref: '#/definitions/ClusterParameterGroupStatus'
+      $ref: '#/definitions/ClusterParameterGroup'
   ClusterParameterStatus:
     type: object
     properties:
@@ -5881,29 +6266,14 @@ definitions:
         $ref: '#/definitions/String'
         description: The error that prevented the parameter from being applied to the database.
     description: Describes the status of a parameter group.
-  ClusterParameterStatusList:
+  EC2SecurityGroupList:
     type: array
     items:
-      $ref: '#/definitions/ClusterParameterStatus'
-  ClusterSecurityGroup:
-    type: object
-    properties:
-      ClusterSecurityGroupName:
-        $ref: '#/definitions/String'
-        description: The name of the cluster security group to which the operation was applied.
-      Description:
-        $ref: '#/definitions/String'
-        description: A description of the security group.
-      EC2SecurityGroups:
-        $ref: '#/definitions/EC2SecurityGroupList'
-        description: A list of EC2 security groups that are permitted to access clusters associated with this cluster security group.
-      IPRanges:
-        $ref: '#/definitions/IPRangeList'
-        description: A list of IP ranges (CIDR blocks) that are permitted to access clusters associated with this cluster security group.
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The list of tags for the cluster security group.
-    description: Describes a security group.
+      $ref: '#/definitions/EC2SecurityGroup'
+  IPRangeList:
+    type: array
+    items:
+      $ref: '#/definitions/IPRange'
   ClusterSecurityGroupMembership:
     type: object
     properties:
@@ -5914,34 +6284,20 @@ definitions:
         $ref: '#/definitions/String'
         description: The status of the cluster security group.
     description: Describes a cluster security group.
-  ClusterSecurityGroupMembershipList:
-    type: array
-    items:
-      $ref: '#/definitions/ClusterSecurityGroupMembership'
-  ClusterSecurityGroupNameList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   ClusterSecurityGroups:
     type: array
     items:
       $ref: '#/definitions/ClusterSecurityGroup'
-  ClusterSnapshotCopyStatus:
-    type: object
-    properties:
-      DestinationRegion:
-        $ref: '#/definitions/String'
-        description: The destination region that snapshots are automatically copied to when cross-region snapshot copy is enabled.
-      RetentionPeriod:
-        $ref: '#/definitions/Long'
-        description: The number of days that automated snapshots are retained in the destination region after they are copied from a source region.
-      ManualSnapshotRetentionPeriod:
-        $ref: '#/definitions/Integer'
-        description: '<p>The number of days that automated snapshots are retained in the destination region after they are copied from a source region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
-      SnapshotCopyGrantName:
-        $ref: '#/definitions/String'
-        description: The name of the snapshot copy grant.
-    description: Returns the destination region and retention period that are configured for cross-region snapshot copy.
+  ClusterSecurityGroupNameList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  Long:
+    type: integer
+  SubnetList:
+    type: array
+    items:
+      $ref: '#/definitions/Subnet'
   ClusterSubnetGroup:
     type: object
     properties:
@@ -5985,183 +6341,26 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ClusterVersion'
-  DataTransferProgress:
-    type: object
-    properties:
-      Status:
-        $ref: '#/definitions/String'
-        description: Describes the status of the cluster. While the transfer is in progress the status is <code>transferringdata</code>.
-      CurrentRateInMegaBytesPerSecond:
-        $ref: '#/definitions/DoubleOptional'
-        description: Describes the data transfer rate in MB's per second.
-      TotalDataInMegaBytes:
-        $ref: '#/definitions/Long'
-        description: Describes the total amount of data to be transfered in megabytes.
-      DataTransferredInMegaBytes:
-        $ref: '#/definitions/Long'
-        description: Describes the total amount of data that has been transfered in MB's.
-      EstimatedTimeToCompletionInSeconds:
-        $ref: '#/definitions/LongOptional'
-        description: Describes the estimated number of seconds remaining to complete the transfer.
-      ElapsedTimeInSeconds:
-        $ref: '#/definitions/LongOptional'
-        description: Describes the number of seconds that have elapsed during the data transfer.
-    description: Describes the status of a cluster while it is in the process of resizing with an incremental resize.
-  DbGroupList:
+  VpcSecurityGroupIdList:
     type: array
     items:
       $ref: '#/definitions/String'
-  DefaultClusterParameters:
-    type: object
-    properties:
-      ParameterGroupFamily:
-        $ref: '#/definitions/String'
-        description: The name of the cluster parameter group family to which the engine default parameters apply.
-      Marker:
-        $ref: '#/definitions/String'
-        description: 'A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field is empty, all response records have been retrieved for the request. '
-      Parameters:
-        $ref: '#/definitions/ParametersList'
-        description: The list of cluster default parameters.
-    description: Describes the default cluster parameters for a parameter group family.
-  DeferredMaintenanceWindow:
-    type: object
-    properties:
-      DeferMaintenanceIdentifier:
-        $ref: '#/definitions/String'
-        description: A unique identifier for the maintenance window.
-      DeferMaintenanceStartTime:
-        $ref: '#/definitions/TStamp'
-        description: ' A timestamp for the beginning of the time period when we defer maintenance.'
-      DeferMaintenanceEndTime:
-        $ref: '#/definitions/TStamp'
-        description: ' A timestamp for the end of the time period when we defer maintenance.'
-    description: Describes a deferred maintenance window
-  DeferredMaintenanceWindowsList:
+  IamRoleArnList:
     type: array
     items:
-      $ref: '#/definitions/DeferredMaintenanceWindow'
-  DeleteClusterSnapshotMessageList:
+      $ref: '#/definitions/String'
+  SubnetIdentifierList:
     type: array
     items:
-      $ref: '#/definitions/DeleteClusterSnapshotMessage'
-  Double:
-    type: number
-    format: double
-  DoubleOptional:
-    type: number
-    format: double
-  EC2SecurityGroup:
-    type: object
-    properties:
-      Status:
-        $ref: '#/definitions/String'
-        description: The status of the EC2 security group.
-      EC2SecurityGroupName:
-        $ref: '#/definitions/String'
-        description: The name of the EC2 Security Group.
-      EC2SecurityGroupOwnerId:
-        $ref: '#/definitions/String'
-        description: 'The AWS ID of the owner of the EC2 security group specified in the <code>EC2SecurityGroupName</code> field. '
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The list of tags for the EC2 security group.
-    description: Describes an Amazon EC2 security group.
-  EC2SecurityGroupList:
+      $ref: '#/definitions/String'
+  SourceIdsList:
     type: array
     items:
-      $ref: '#/definitions/EC2SecurityGroup'
-  ElasticIpStatus:
-    type: object
-    properties:
-      ElasticIp:
-        $ref: '#/definitions/String'
-        description: The elastic IP (EIP) address for the cluster.
-      Status:
-        $ref: '#/definitions/String'
-        description: The status of the elastic IP (EIP) address.
-    description: Describes the status of the elastic IP (EIP) address.
-  EligibleTracksToUpdateList:
-    type: array
-    items:
-      $ref: '#/definitions/UpdateTarget'
-  Endpoint:
-    type: object
-    properties:
-      Address:
-        $ref: '#/definitions/String'
-        description: The DNS address of the Cluster.
-      Port:
-        $ref: '#/definitions/Integer'
-        description: The port that the database engine is listening on.
-    description: Describes a connection endpoint.
-  Event:
-    type: object
-    properties:
-      SourceIdentifier:
-        $ref: '#/definitions/String'
-        description: The identifier for the source of the event.
-      SourceType:
-        $ref: '#/definitions/SourceType'
-        description: The source type for this event.
-      Message:
-        $ref: '#/definitions/String'
-        description: The text of this event.
-      EventCategories:
-        $ref: '#/definitions/EventCategoriesList'
-        description: '<p>A list of the event categories.</p> <p>Values: Configuration, Management, Monitoring, Security</p>'
-      Severity:
-        $ref: '#/definitions/String'
-        description: '<p>The severity of the event.</p> <p>Values: ERROR, INFO</p>'
-      Date:
-        $ref: '#/definitions/TStamp'
-        description: The date and time of the event.
-      EventId:
-        $ref: '#/definitions/String'
-        description: The identifier of the event.
-    description: Describes an event.
+      $ref: '#/definitions/String'
   EventCategoriesList:
     type: array
     items:
       $ref: '#/definitions/String'
-  EventCategoriesMap:
-    type: object
-    properties:
-      SourceType:
-        $ref: '#/definitions/String'
-        description: 'The source type, such as cluster or cluster-snapshot, that the returned categories belong to.'
-      Events:
-        $ref: '#/definitions/EventInfoMapList'
-        description: The events in the event category.
-    description: Describes event categories.
-  EventCategoriesMapList:
-    type: array
-    items:
-      $ref: '#/definitions/EventCategoriesMap'
-  EventInfoMap:
-    type: object
-    properties:
-      EventId:
-        $ref: '#/definitions/String'
-        description: The identifier of an Amazon Redshift event.
-      EventCategories:
-        $ref: '#/definitions/EventCategoriesList'
-        description: The category of an Amazon Redshift event.
-      EventDescription:
-        $ref: '#/definitions/String'
-        description: The description of an Amazon Redshift event.
-      Severity:
-        $ref: '#/definitions/String'
-        description: '<p>The severity of the event.</p> <p>Values: ERROR, INFO</p>'
-    description: Describes event information.
-  EventInfoMapList:
-    type: array
-    items:
-      $ref: '#/definitions/EventInfoMap'
-  EventList:
-    type: array
-    items:
-      $ref: '#/definitions/Event'
   EventSubscription:
     type: object
     properties:
@@ -6199,10 +6398,6 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The list of tags for the event subscription.
     description: Describes event subscriptions.
-  EventSubscriptionsList:
-    type: array
-    items:
-      $ref: '#/definitions/EventSubscription'
   HsmClientCertificate:
     type: object
     properties:
@@ -6216,10 +6411,6 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The list of tags for the HSM client certificate.
     description: 'Returns information about an HSM client certificate. The certificate is stored in a secure Hardware Storage Module (HSM), and used by the Amazon Redshift cluster to encrypt data files.'
-  HsmClientCertificateList:
-    type: array
-    items:
-      $ref: '#/definitions/HsmClientCertificate'
   HsmConfiguration:
     type: object
     properties:
@@ -6239,23 +6430,196 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The list of tags for the HSM configuration.
     description: 'Returns information about an HSM configuration, which is an object that describes to Amazon Redshift clusters the information they require to connect to an HSM where they can store database encryption keys.'
+  SnapshotCopyGrant:
+    type: object
+    properties:
+      SnapshotCopyGrantName:
+        $ref: '#/definitions/String'
+        description: The name of the snapshot copy grant.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: The unique identifier of the customer master key (CMK) in AWS KMS to which Amazon Redshift is granted permission.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: A list of tag instances.
+    description: '<p>The snapshot copy grant that grants Amazon Redshift permission to encrypt copied snapshots with the specified customer master key (CMK) from AWS KMS in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
+  ScheduleDefinitionList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  Double:
+    type: number
+    format: double
+  DoubleOptional:
+    type: number
+    format: double
+  LongOptional:
+    type: integer
+  DbGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  DefaultClusterParameters:
+    type: object
+    properties:
+      ParameterGroupFamily:
+        $ref: '#/definitions/String'
+        description: The name of the cluster parameter group family to which the engine default parameters apply.
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field is empty, all response records have been retrieved for the request. '
+      Parameters:
+        $ref: '#/definitions/ParametersList'
+        description: The list of cluster default parameters.
+    description: Describes the default cluster parameters for a parameter group family.
+  DeferredMaintenanceWindow:
+    type: object
+    properties:
+      DeferMaintenanceIdentifier:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the maintenance window.
+      DeferMaintenanceStartTime:
+        $ref: '#/definitions/TStamp'
+        description: ' A timestamp for the beginning of the time period when we defer maintenance.'
+      DeferMaintenanceEndTime:
+        $ref: '#/definitions/TStamp'
+        description: ' A timestamp for the end of the time period when we defer maintenance.'
+    description: Describes a deferred maintenance window
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  TagValueList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  SnapshotSortingEntityList:
+    type: array
+    items:
+      $ref: '#/definitions/SnapshotSortingEntity'
+  SourceType:
+    type: string
+    enum:
+      - cluster
+      - cluster-parameter-group
+      - cluster-security-group
+      - cluster-snapshot
+  SnapshotScheduleList:
+    type: array
+    items:
+      $ref: '#/definitions/SnapshotSchedule'
+  EC2SecurityGroup:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/String'
+        description: The status of the EC2 security group.
+      EC2SecurityGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the EC2 Security Group.
+      EC2SecurityGroupOwnerId:
+        $ref: '#/definitions/String'
+        description: 'The AWS ID of the owner of the EC2 security group specified in the <code>EC2SecurityGroupName</code> field. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The list of tags for the EC2 security group.
+    description: Describes an Amazon EC2 security group.
+  UpdateTarget:
+    type: object
+    properties:
+      MaintenanceTrackName:
+        $ref: '#/definitions/String'
+        description: The name of the new maintenance track.
+      DatabaseVersion:
+        $ref: '#/definitions/String'
+        description: The cluster version for the new maintenance track.
+      SupportedOperations:
+        $ref: '#/definitions/SupportedOperationList'
+        description: A list of operations supported by the maintenance track.
+    description: A maintenance track that you can switch the current track to.
+  EligibleTracksToUpdateList:
+    type: array
+    items:
+      $ref: '#/definitions/UpdateTarget'
+  Event:
+    type: object
+    properties:
+      SourceIdentifier:
+        $ref: '#/definitions/String'
+        description: The identifier for the source of the event.
+      SourceType:
+        $ref: '#/definitions/SourceType'
+        description: The source type for this event.
+      Message:
+        $ref: '#/definitions/String'
+        description: The text of this event.
+      EventCategories:
+        $ref: '#/definitions/EventCategoriesList'
+        description: '<p>A list of the event categories.</p> <p>Values: Configuration, Management, Monitoring, Security</p>'
+      Severity:
+        $ref: '#/definitions/String'
+        description: '<p>The severity of the event.</p> <p>Values: ERROR, INFO</p>'
+      Date:
+        $ref: '#/definitions/TStamp'
+        description: The date and time of the event.
+      EventId:
+        $ref: '#/definitions/String'
+        description: The identifier of the event.
+    description: Describes an event.
+  EventInfoMapList:
+    type: array
+    items:
+      $ref: '#/definitions/EventInfoMap'
+  EventCategoriesMap:
+    type: object
+    properties:
+      SourceType:
+        $ref: '#/definitions/String'
+        description: 'The source type, such as cluster or cluster-snapshot, that the returned categories belong to.'
+      Events:
+        $ref: '#/definitions/EventInfoMapList'
+        description: The events in the event category.
+    description: Describes event categories.
+  EventCategoriesMapList:
+    type: array
+    items:
+      $ref: '#/definitions/EventCategoriesMap'
+  EventInfoMap:
+    type: object
+    properties:
+      EventId:
+        $ref: '#/definitions/String'
+        description: The identifier of an Amazon Redshift event.
+      EventCategories:
+        $ref: '#/definitions/EventCategoriesList'
+        description: The category of an Amazon Redshift event.
+      EventDescription:
+        $ref: '#/definitions/String'
+        description: The description of an Amazon Redshift event.
+      Severity:
+        $ref: '#/definitions/String'
+        description: '<p>The severity of the event.</p> <p>Values: ERROR, INFO</p>'
+    description: Describes event information.
+  EventList:
+    type: array
+    items:
+      $ref: '#/definitions/Event'
+  EventSubscriptionsList:
+    type: array
+    items:
+      $ref: '#/definitions/EventSubscription'
+  ReservedNodeOfferingList:
+    type: array
+    items:
+      $ref: '#/definitions/ReservedNodeOffering'
+  HsmClientCertificateList:
+    type: array
+    items:
+      $ref: '#/definitions/HsmClientCertificate'
   HsmConfigurationList:
     type: array
     items:
       $ref: '#/definitions/HsmConfiguration'
-  HsmStatus:
-    type: object
-    properties:
-      HsmClientCertificateIdentifier:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption keys stored in an HSM.
-      HsmConfigurationIdentifier:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM.
-      Status:
-        $ref: '#/definitions/String'
-        description: '<p>Reports whether the Amazon Redshift cluster has finished applying any HSM settings changes specified in a modify cluster command.</p> <p>Values: active, applying</p>'
-    description: Describes the status of changes to HSM settings.
   IPRange:
     type: object
     properties:
@@ -6269,14 +6633,6 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The list of tags for the IP range.
     description: Describes an IP range used in a security group.
-  IPRangeList:
-    type: array
-    items:
-      $ref: '#/definitions/IPRange'
-  IamRoleArnList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   ImportTablesCompleted:
     type: array
     items:
@@ -6289,14 +6645,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
-  Integer:
-    type: integer
-  IntegerOptional:
-    type: integer
-  Long:
-    type: integer
-  LongOptional:
-    type: integer
   MaintenanceTrack:
     type: object
     properties:
@@ -6330,6 +6678,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/OrderableClusterOption'
+  ParameterApplyType:
+    type: string
+    enum:
+      - static
+      - dynamic
   Parameter:
     type: object
     properties:
@@ -6361,60 +6714,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The earliest engine version to which the parameter can apply.
     description: Describes a parameter in a cluster parameter group.
-  ParameterApplyType:
-    type: string
-    enum:
-      - static
-      - dynamic
-  ParameterGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/ClusterParameterGroup'
-  ParametersList:
-    type: array
-    items:
-      $ref: '#/definitions/Parameter'
-  PendingActionsList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  PendingModifiedValues:
-    type: object
-    properties:
-      MasterUserPassword:
-        $ref: '#/definitions/String'
-        description: The pending or in-progress change of the master user password for the cluster.
-      NodeType:
-        $ref: '#/definitions/String'
-        description: The pending or in-progress change of the cluster's node type.
-      NumberOfNodes:
-        $ref: '#/definitions/IntegerOptional'
-        description: The pending or in-progress change of the number of nodes in the cluster.
-      ClusterType:
-        $ref: '#/definitions/String'
-        description: The pending or in-progress change of the cluster type.
-      ClusterVersion:
-        $ref: '#/definitions/String'
-        description: The pending or in-progress change of the service version.
-      AutomatedSnapshotRetentionPeriod:
-        $ref: '#/definitions/IntegerOptional'
-        description: The pending or in-progress change of the automated snapshot retention period.
-      ClusterIdentifier:
-        $ref: '#/definitions/String'
-        description: The pending or in-progress change of the new identifier for the cluster.
-      PubliclyAccessible:
-        $ref: '#/definitions/BooleanOptional'
-        description: The pending or in-progress change of the ability to connect to the cluster from the public network.
-      EnhancedVpcRouting:
-        $ref: '#/definitions/BooleanOptional'
-        description: '<p>An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html">Enhanced VPC Routing</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p> <p>Default: false</p>'
-      MaintenanceTrackName:
-        $ref: '#/definitions/String'
-        description: The name of the maintenance track that the cluster will change to during the next maintenance window.
-      EncryptionType:
-        $ref: '#/definitions/String'
-        description: 'The encryption type for a cluster. Possible values are: KMS and None. For the China region the possible values are None, and Legacy. '
-    description: Describes cluster attributes that are in a pending state. A change to one or more the attributes was requested and is in progress or will be applied.
   RecurringCharge:
     type: object
     properties:
@@ -6429,48 +6728,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RecurringCharge'
-  ReservedNode:
-    type: object
-    properties:
-      ReservedNodeId:
-        $ref: '#/definitions/String'
-        description: The unique identifier for the reservation.
-      ReservedNodeOfferingId:
-        $ref: '#/definitions/String'
-        description: The identifier for the reserved node offering.
-      NodeType:
-        $ref: '#/definitions/String'
-        description: The node type of the reserved node.
-      StartTime:
-        $ref: '#/definitions/TStamp'
-        description: The time the reservation started. You purchase a reserved node offering for a duration. This is the start time of that duration.
-      Duration:
-        $ref: '#/definitions/Integer'
-        description: The duration of the node reservation in seconds.
-      FixedPrice:
-        $ref: '#/definitions/Double'
-        description: The fixed cost Amazon Redshift charges you for this reserved node.
-      UsagePrice:
-        $ref: '#/definitions/Double'
-        description: The hourly rate Amazon Redshift charges you for this reserved node.
-      CurrencyCode:
-        $ref: '#/definitions/String'
-        description: The currency code for the reserved cluster.
-      NodeCount:
-        $ref: '#/definitions/Integer'
-        description: The number of reserved compute nodes.
-      State:
-        $ref: '#/definitions/String'
-        description: '<p>The state of the reserved compute node.</p> <p>Possible Values:</p> <ul> <li> <p>pending-payment-This reserved node has recently been purchased, and the sale has been approved, but payment has not yet been confirmed.</p> </li> <li> <p>active-This reserved node is owned by the caller and is available for use.</p> </li> <li> <p>payment-failed-Payment failed for the purchase attempt.</p> </li> <li> <p>retired-The reserved node is no longer available. </p> </li> <li> <p>exchanging-The owner is exchanging the reserved node for another reserved node.</p> </li> </ul>'
-      OfferingType:
-        $ref: '#/definitions/String'
-        description: 'The anticipated utilization of the reserved node, as defined in the reserved node offering.'
-      RecurringCharges:
-        $ref: '#/definitions/RecurringChargeList'
-        description: The recurring charges for the reserved node.
-      ReservedNodeOfferingType:
-        $ref: '#/definitions/ReservedNodeOfferingType'
-    description: 'Describes a reserved node. You can call the <a>DescribeReservedNodeOfferings</a> API to obtain the available reserved node offerings. '
+  ReservedNodeOfferingType:
+    type: string
+    enum:
+      - Regular
+      - Upgradable
   ReservedNodeList:
     type: array
     items:
@@ -6505,317 +6767,10 @@ definitions:
       ReservedNodeOfferingType:
         $ref: '#/definitions/ReservedNodeOfferingType'
     description: Describes a reserved node offering.
-  ReservedNodeOfferingList:
-    type: array
-    items:
-      $ref: '#/definitions/ReservedNodeOffering'
-  ReservedNodeOfferingType:
-    type: string
-    enum:
-      - Regular
-      - Upgradable
-  ResizeInfo:
-    type: object
-    properties:
-      ResizeType:
-        $ref: '#/definitions/String'
-        description: Returns the value <code>ClassicResize</code>.
-      AllowCancelResize:
-        $ref: '#/definitions/Boolean'
-        description: A boolean value indicating if the resize operation can be cancelled.
-    description: Describes a resize operation.
   RestorableNodeTypeList:
     type: array
     items:
       $ref: '#/definitions/String'
-  RestoreStatus:
-    type: object
-    properties:
-      Status:
-        $ref: '#/definitions/String'
-        description: 'The status of the restore action. Returns starting, restoring, completed, or failed.'
-      CurrentRestoreRateInMegaBytesPerSecond:
-        $ref: '#/definitions/Double'
-        description: The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup.
-      SnapshotSizeInMegaBytes:
-        $ref: '#/definitions/Long'
-        description: The size of the set of snapshot data used to restore the cluster.
-      ProgressInMegaBytes:
-        $ref: '#/definitions/Long'
-        description: The number of megabytes that have been transferred from snapshot storage.
-      ElapsedTimeInSeconds:
-        $ref: '#/definitions/Long'
-        description: 'The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish.'
-      EstimatedTimeToCompletionInSeconds:
-        $ref: '#/definitions/Long'
-        description: The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore.
-    description: Describes the status of a cluster restore action. Returns null if the cluster was not created by restoring a snapshot.
-  RevisionTarget:
-    type: object
-    properties:
-      DatabaseRevision:
-        $ref: '#/definitions/String'
-        description: A unique string that identifies the version to update the cluster to. You can use this value in <a>ModifyClusterDbRevision</a>.
-      Description:
-        $ref: '#/definitions/String'
-        description: A string that describes the changes and features that will be applied to the cluster when it is updated to the corresponding <a>ClusterDbRevision</a>.
-      DatabaseRevisionReleaseDate:
-        $ref: '#/definitions/TStamp'
-        description: The date on which the database revision was released.
-    description: Describes a <code>RevisionTarget</code>.
-  RevisionTargetsList:
-    type: array
-    items:
-      $ref: '#/definitions/RevisionTarget'
-  ScheduleDefinitionList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ScheduleState:
-    type: string
-    enum:
-      - MODIFYING
-      - ACTIVE
-      - FAILED
-  ScheduledSnapshotTimeList:
-    type: array
-    items:
-      $ref: '#/definitions/TStamp'
-  SensitiveString:
-    type: string
-    format: password
-  Snapshot:
-    type: object
-    properties:
-      SnapshotIdentifier:
-        $ref: '#/definitions/String'
-        description: The snapshot identifier that is provided in the request.
-      ClusterIdentifier:
-        $ref: '#/definitions/String'
-        description: The identifier of the cluster for which the snapshot was taken.
-      SnapshotCreateTime:
-        $ref: '#/definitions/TStamp'
-        description: The time (in UTC format) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time.
-      Status:
-        $ref: '#/definitions/String'
-        description: '<p>The snapshot status. The value of the status depends on the API operation used: </p> <ul> <li> <p> <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> returns status as "creating". </p> </li> <li> <p> <a>DescribeClusterSnapshots</a> returns status as "creating", "available", "final snapshot", or "failed".</p> </li> <li> <p> <a>DeleteClusterSnapshot</a> returns status as "deleted".</p> </li> </ul>'
-      Port:
-        $ref: '#/definitions/Integer'
-        description: The port that the cluster is listening on.
-      AvailabilityZone:
-        $ref: '#/definitions/String'
-        description: The Availability Zone in which the cluster was created.
-      ClusterCreateTime:
-        $ref: '#/definitions/TStamp'
-        description: The time (UTC) when the cluster was originally created.
-      MasterUsername:
-        $ref: '#/definitions/String'
-        description: The master user name for the cluster.
-      ClusterVersion:
-        $ref: '#/definitions/String'
-        description: The version ID of the Amazon Redshift engine that is running on the cluster.
-      SnapshotType:
-        $ref: '#/definitions/String'
-        description: 'The snapshot type. Snapshots created using <a>CreateClusterSnapshot</a> and <a>CopyClusterSnapshot</a> are of type "manual". '
-      NodeType:
-        $ref: '#/definitions/String'
-        description: The node type of the nodes in the cluster.
-      NumberOfNodes:
-        $ref: '#/definitions/Integer'
-        description: The number of nodes in the cluster.
-      DBName:
-        $ref: '#/definitions/String'
-        description: The name of the database that was created when the cluster was created.
-      VpcId:
-        $ref: '#/definitions/String'
-        description: 'The VPC identifier of the cluster if the snapshot is from a cluster in a VPC. Otherwise, this field is not in the output.'
-      Encrypted:
-        $ref: '#/definitions/Boolean'
-        description: 'If <code>true</code>, the data in the snapshot is encrypted at rest.'
-      KmsKeyId:
-        $ref: '#/definitions/String'
-        description: The AWS Key Management Service (KMS) key ID of the encryption key that was used to encrypt data in the cluster from which the snapshot was taken.
-      EncryptedWithHSM:
-        $ref: '#/definitions/Boolean'
-        description: A boolean that indicates whether the snapshot data is encrypted using the HSM keys of the source cluster. <code>true</code> indicates that the data is encrypted using HSM keys.
-      AccountsWithRestoreAccess:
-        $ref: '#/definitions/AccountsWithRestoreAccessList'
-        description: 'A list of the AWS customer accounts authorized to restore the snapshot. Returns <code>null</code> if no accounts are authorized. Visible only to the snapshot owner. '
-      OwnerAccount:
-        $ref: '#/definitions/String'
-        description: 'For manual snapshots, the AWS customer account used to create or copy the snapshot. For automatic snapshots, the owner of the cluster. The owner can perform all snapshot actions, such as sharing a manual snapshot.'
-      TotalBackupSizeInMegaBytes:
-        $ref: '#/definitions/Double'
-        description: The size of the complete set of backup data that would be used to restore the cluster.
-      ActualIncrementalBackupSizeInMegaBytes:
-        $ref: '#/definitions/Double'
-        description: The size of the incremental backup.
-      BackupProgressInMegaBytes:
-        $ref: '#/definitions/Double'
-        description: The number of megabytes that have been transferred to the snapshot backup.
-      CurrentBackupRateInMegaBytesPerSecond:
-        $ref: '#/definitions/Double'
-        description: 'The number of megabytes per second being transferred to the snapshot backup. Returns <code>0</code> for a completed backup. '
-      EstimatedSecondsToCompletion:
-        $ref: '#/definitions/Long'
-        description: 'The estimate of the time remaining before the snapshot backup will complete. Returns <code>0</code> for a completed backup. '
-      ElapsedTimeInSeconds:
-        $ref: '#/definitions/Long'
-        description: 'The amount of time an in-progress snapshot backup has been running, or the amount of time it took a completed backup to finish.'
-      SourceRegion:
-        $ref: '#/definitions/String'
-        description: The source region from which the snapshot was copied.
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: The list of tags for the cluster snapshot.
-      RestorableNodeTypes:
-        $ref: '#/definitions/RestorableNodeTypeList'
-        description: The list of node types that this cluster snapshot is able to restore into.
-      EnhancedVpcRouting:
-        $ref: '#/definitions/Boolean'
-        description: '<p>An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html">Enhanced VPC Routing</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p> <p>Default: false</p>'
-      MaintenanceTrackName:
-        $ref: '#/definitions/String'
-        description: The name of the maintenance track for the snapshot.
-      ManualSnapshotRetentionPeriod:
-        $ref: '#/definitions/IntegerOptional'
-        description: '<p>The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
-      ManualSnapshotRemainingDays:
-        $ref: '#/definitions/IntegerOptional'
-        description: The number of days until a manual snapshot will pass its retention period.
-      SnapshotRetentionStartTime:
-        $ref: '#/definitions/TStamp'
-        description: A timestamp representing the start of the retention period for the snapshot.
-    description: Describes a snapshot.
-  SnapshotAttributeToSortBy:
-    type: string
-    enum:
-      - SOURCE_TYPE
-      - TOTAL_SIZE
-      - CREATE_TIME
-  SnapshotCopyGrant:
-    type: object
-    properties:
-      SnapshotCopyGrantName:
-        $ref: '#/definitions/String'
-        description: The name of the snapshot copy grant.
-      KmsKeyId:
-        $ref: '#/definitions/String'
-        description: The unique identifier of the customer master key (CMK) in AWS KMS to which Amazon Redshift is granted permission.
-      Tags:
-        $ref: '#/definitions/TagList'
-        description: A list of tag instances.
-    description: '<p>The snapshot copy grant that grants Amazon Redshift permission to encrypt copied snapshots with the specified customer master key (CMK) from AWS KMS in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
-  SnapshotCopyGrantList:
-    type: array
-    items:
-      $ref: '#/definitions/SnapshotCopyGrant'
-  SnapshotErrorMessage:
-    type: object
-    properties:
-      SnapshotIdentifier:
-        $ref: '#/definitions/String'
-        description: A unique identifier for the snapshot returning the error.
-      SnapshotClusterIdentifier:
-        $ref: '#/definitions/String'
-        description: A unique identifier for the cluster.
-      FailureCode:
-        $ref: '#/definitions/String'
-        description: The failure code for the error.
-      FailureReason:
-        $ref: '#/definitions/String'
-        description: The text message describing the error.
-    description: Describes the errors returned by a snapshot.
-  SnapshotIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SnapshotList:
-    type: array
-    items:
-      $ref: '#/definitions/Snapshot'
-  SnapshotScheduleList:
-    type: array
-    items:
-      $ref: '#/definitions/SnapshotSchedule'
-  SnapshotSortingEntity:
-    type: object
-    required:
-      - Attribute
-    properties:
-      Attribute:
-        $ref: '#/definitions/SnapshotAttributeToSortBy'
-        description: The category for sorting the snapshots.
-      SortOrder:
-        $ref: '#/definitions/SortByOrder'
-        description: The order for listing the attributes.
-    description: Describes a sorting entity
-  SnapshotSortingEntityList:
-    type: array
-    items:
-      $ref: '#/definitions/SnapshotSortingEntity'
-  SortByOrder:
-    type: string
-    enum:
-      - ASC
-      - DESC
-  SourceIdsList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SourceType:
-    type: string
-    enum:
-      - cluster
-      - cluster-parameter-group
-      - cluster-security-group
-      - cluster-snapshot
-  String:
-    type: string
-  Subnet:
-    type: object
-    properties:
-      SubnetIdentifier:
-        $ref: '#/definitions/String'
-        description: The identifier of the subnet.
-      SubnetAvailabilityZone:
-        $ref: '#/definitions/AvailabilityZone'
-      SubnetStatus:
-        $ref: '#/definitions/String'
-        description: The status of the subnet.
-    description: Describes a subnet.
-  SubnetIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SubnetList:
-    type: array
-    items:
-      $ref: '#/definitions/Subnet'
-  SupportedOperation:
-    type: object
-    properties:
-      OperationName:
-        $ref: '#/definitions/String'
-        description: A list of the supported operations.
-    description: Describes the operations that are allowed on a maintenance track.
-  SupportedOperationList:
-    type: array
-    items:
-      $ref: '#/definitions/SupportedOperation'
-  SupportedPlatform:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-    description: A list of supported platforms for orderable clusters.
-  SupportedPlatformsList:
-    type: array
-    items:
-      $ref: '#/definitions/SupportedPlatform'
-  TStamp:
-    type: string
-    format: date-time
   TableRestoreStatus:
     type: object
     properties:
@@ -6862,10 +6817,83 @@ definitions:
         $ref: '#/definitions/String'
         description: The name of the table to create as a result of the table restore request.
     description: Describes the status of a <a>RestoreTableFromClusterSnapshot</a> operation.
-  TableRestoreStatusList:
+  RevisionTarget:
+    type: object
+    properties:
+      DatabaseRevision:
+        $ref: '#/definitions/String'
+        description: A unique string that identifies the version to update the cluster to. You can use this value in <a>ModifyClusterDbRevision</a>.
+      Description:
+        $ref: '#/definitions/String'
+        description: A string that describes the changes and features that will be applied to the cluster when it is updated to the corresponding <a>ClusterDbRevision</a>.
+      DatabaseRevisionReleaseDate:
+        $ref: '#/definitions/TStamp'
+        description: The date on which the database revision was released.
+    description: Describes a <code>RevisionTarget</code>.
+  ScheduledSnapshotTimeList:
     type: array
     items:
-      $ref: '#/definitions/TableRestoreStatus'
+      $ref: '#/definitions/TStamp'
+  SnapshotAttributeToSortBy:
+    type: string
+    enum:
+      - SOURCE_TYPE
+      - TOTAL_SIZE
+      - CREATE_TIME
+  SnapshotCopyGrantList:
+    type: array
+    items:
+      $ref: '#/definitions/SnapshotCopyGrant'
+  SnapshotList:
+    type: array
+    items:
+      $ref: '#/definitions/Snapshot'
+  SortByOrder:
+    type: string
+    enum:
+      - ASC
+      - DESC
+  SnapshotSortingEntity:
+    type: object
+    required:
+      - Attribute
+    properties:
+      Attribute:
+        $ref: '#/definitions/SnapshotAttributeToSortBy'
+        description: The category for sorting the snapshots.
+      SortOrder:
+        $ref: '#/definitions/SortByOrder'
+        description: The order for listing the attributes.
+    description: Describes a sorting entity
+  Subnet:
+    type: object
+    properties:
+      SubnetIdentifier:
+        $ref: '#/definitions/String'
+        description: The identifier of the subnet.
+      SubnetAvailabilityZone:
+        $ref: '#/definitions/AvailabilityZone'
+      SubnetStatus:
+        $ref: '#/definitions/String'
+        description: The status of the subnet.
+    description: Describes a subnet.
+  SupportedOperation:
+    type: object
+    properties:
+      OperationName:
+        $ref: '#/definitions/String'
+        description: A list of the supported operations.
+    description: Describes the operations that are allowed on a maintenance track.
+  SupportedOperationList:
+    type: array
+    items:
+      $ref: '#/definitions/SupportedOperation'
+  SupportedPlatform:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+    description: A list of supported platforms for orderable clusters.
   TableRestoreStatusType:
     type: string
     enum:
@@ -6874,6 +6902,10 @@ definitions:
       - SUCCEEDED
       - FAILED
       - CANCELED
+  TableRestoreStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/TableRestoreStatus'
   Tag:
     type: object
     properties:
@@ -6884,18 +6916,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The value for the resource tag.
     description: A tag consisting of a name/value pair for a resource.
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValueList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   TaggedResource:
     type: object
     properties:
@@ -6917,23 +6937,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/MaintenanceTrack'
-  UpdateTarget:
-    type: object
-    properties:
-      MaintenanceTrackName:
-        $ref: '#/definitions/String'
-        description: The name of the new maintenance track.
-      DatabaseVersion:
-        $ref: '#/definitions/String'
-        description: The cluster version for the new maintenance track.
-      SupportedOperations:
-        $ref: '#/definitions/SupportedOperationList'
-        description: A list of operations supported by the maintenance track.
-    description: A maintenance track that you can switch the current track to.
-  VpcSecurityGroupIdList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   VpcSecurityGroupMembership:
     type: object
     properties:
@@ -6944,7 +6947,3 @@ definitions:
         $ref: '#/definitions/String'
         description: The status of the VPC security group.
     description: Describes the members of a VPC security group.
-  VpcSecurityGroupMembershipList:
-    type: array
-    items:
-      $ref: '#/definitions/VpcSecurityGroupMembership'

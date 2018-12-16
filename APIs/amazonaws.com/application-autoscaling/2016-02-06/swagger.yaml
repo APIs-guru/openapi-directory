@@ -973,7 +973,9 @@ definitions:
       - ChangeInCapacity
       - PercentChangeInCapacity
       - ExactCapacity
-  undefined: {}
+  ResourceId:
+    type: string
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   Alarm:
     type: object
     required:
@@ -991,8 +993,28 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Alarm'
+  ErrorMessage:
+    type: string
   Cooldown:
     type: integer
+  MetricName:
+    type: string
+  MetricNamespace:
+    type: string
+  MetricDimensions:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDimension'
+  MetricStatistic:
+    type: string
+    enum:
+      - Average
+      - Minimum
+      - Maximum
+      - SampleCount
+      - Sum
+  MetricUnit:
+    type: string
   CustomizedMetricSpecification:
     type: object
     required:
@@ -1016,112 +1038,22 @@ definitions:
         $ref: '#/definitions/MetricUnit'
         description: The unit of the metric.
     description: Configures a customized metric for a target tracking policy.
-  DisableScaleIn:
-    type: boolean
-  ErrorMessage:
-    type: string
-  MaxResults:
-    type: integer
-  MetricAggregationType:
-    type: string
-    enum:
-      - Average
-      - Minimum
-      - Maximum
-  MetricDimension:
-    type: object
-    required:
-      - Name
-      - Value
-    properties:
-      Name:
-        $ref: '#/definitions/MetricDimensionName'
-        description: The name of the dimension.
-      Value:
-        $ref: '#/definitions/MetricDimensionValue'
-        description: The value of the dimension.
-    description: Describes the dimension of a metric.
-  MetricDimensionName:
-    type: string
-  MetricDimensionValue:
-    type: string
-  MetricDimensions:
-    type: array
-    items:
-      $ref: '#/definitions/MetricDimension'
-  MetricName:
-    type: string
-  MetricNamespace:
-    type: string
-  MetricScale:
-    type: number
-    format: double
-  MetricStatistic:
-    type: string
-    enum:
-      - Average
-      - Minimum
-      - Maximum
-      - SampleCount
-      - Sum
-  MetricType:
-    type: string
-    enum:
-      - DynamoDBReadCapacityUtilization
-      - DynamoDBWriteCapacityUtilization
-      - ALBRequestCountPerTarget
-      - RDSReaderAverageCPUUtilization
-      - RDSReaderAverageDatabaseConnections
-      - EC2SpotFleetRequestAverageCPUUtilization
-      - EC2SpotFleetRequestAverageNetworkIn
-      - EC2SpotFleetRequestAverageNetworkOut
-      - SageMakerVariantInvocationsPerInstance
-      - ECSServiceAverageCPUUtilization
-      - ECSServiceAverageMemoryUtilization
-  MetricUnit:
-    type: string
-  MinAdjustmentMagnitude:
-    type: integer
-  PolicyName:
-    type: string
-    pattern: '\p{Print}+'
-    minLength: 1
-    maxLength: 256
-  PolicyType:
-    type: string
-    enum:
-      - StepScaling
-      - TargetTrackingScaling
-  PredefinedMetricSpecification:
-    type: object
-    required:
-      - PredefinedMetricType
-    properties:
-      PredefinedMetricType:
-        $ref: '#/definitions/MetricType'
-        description: The metric type. The <code>ALBRequestCountPerTarget</code> metric type applies only to Spot fleet requests and ECS services.
-      ResourceLabel:
-        $ref: '#/definitions/ResourceLabel'
-        description: '<p>Identifies the resource associated with the metric type. You can''t specify a resource label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target group attached to the Spot fleet request or ECS service.</p> <p>The format is app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;, where:</p> <ul> <li> <p>app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN</p> </li> <li> <p>targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.</p> </li> </ul>'
-    description: Configures a predefined metric for a target tracking policy.
-  ResourceCapacity:
-    type: integer
-  ResourceId:
-    type: string
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   ResourceIdMaxLen1600:
     type: string
     minLength: 1
     maxLength: 1600
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  ResourceIdsMaxLen1600:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceIdMaxLen1600'
-  ResourceLabel:
+  ServiceNamespace:
     type: string
-    minLength: 1
-    maxLength: 1023
+    enum:
+      - ecs
+      - elasticmapreduce
+      - ec2
+      - appstream
+      - dynamodb
+      - rds
+      - sagemaker
+      - custom-resource
   ScalableDimension:
     type: string
     enum:
@@ -1136,6 +1068,164 @@ definitions:
       - 'rds:cluster:ReadReplicaCount'
       - 'sagemaker:variant:DesiredInstanceCount'
       - 'custom-resource:ResourceType:Property'
+  ResourceIdsMaxLen1600:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceIdMaxLen1600'
+  MaxResults:
+    type: integer
+  XmlString:
+    type: string
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  ScalableTargets:
+    type: array
+    items:
+      $ref: '#/definitions/ScalableTarget'
+  ScalingActivities:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingActivity'
+  ScalingPolicies:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingPolicy'
+  ScheduledActions:
+    type: array
+    items:
+      $ref: '#/definitions/ScheduledAction'
+  DisableScaleIn:
+    type: boolean
+  MetricAggregationType:
+    type: string
+    enum:
+      - Average
+      - Minimum
+      - Maximum
+  MetricDimensionName:
+    type: string
+  MetricDimensionValue:
+    type: string
+  MetricDimension:
+    type: object
+    required:
+      - Name
+      - Value
+    properties:
+      Name:
+        $ref: '#/definitions/MetricDimensionName'
+        description: The name of the dimension.
+      Value:
+        $ref: '#/definitions/MetricDimensionValue'
+        description: The value of the dimension.
+    description: Describes the dimension of a metric.
+  MetricScale:
+    type: number
+    format: double
+  MetricType:
+    type: string
+    enum:
+      - DynamoDBReadCapacityUtilization
+      - DynamoDBWriteCapacityUtilization
+      - ALBRequestCountPerTarget
+      - RDSReaderAverageCPUUtilization
+      - RDSReaderAverageDatabaseConnections
+      - EC2SpotFleetRequestAverageCPUUtilization
+      - EC2SpotFleetRequestAverageNetworkIn
+      - EC2SpotFleetRequestAverageNetworkOut
+      - SageMakerVariantInvocationsPerInstance
+      - ECSServiceAverageCPUUtilization
+      - ECSServiceAverageMemoryUtilization
+  MinAdjustmentMagnitude:
+    type: integer
+  PolicyName:
+    type: string
+    pattern: '\p{Print}+'
+    minLength: 1
+    maxLength: 256
+  PolicyType:
+    type: string
+    enum:
+      - StepScaling
+      - TargetTrackingScaling
+  ResourceLabel:
+    type: string
+    minLength: 1
+    maxLength: 1023
+  PredefinedMetricSpecification:
+    type: object
+    required:
+      - PredefinedMetricType
+    properties:
+      PredefinedMetricType:
+        $ref: '#/definitions/MetricType'
+        description: The metric type. The <code>ALBRequestCountPerTarget</code> metric type applies only to Spot fleet requests and ECS services.
+      ResourceLabel:
+        $ref: '#/definitions/ResourceLabel'
+        description: '<p>Identifies the resource associated with the metric type. You can''t specify a resource label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target group attached to the Spot fleet request or ECS service.</p> <p>The format is app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;, where:</p> <ul> <li> <p>app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN</p> </li> <li> <p>targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.</p> </li> </ul>'
+    description: Configures a predefined metric for a target tracking policy.
+  StepScalingPolicyConfiguration:
+    type: object
+    properties:
+      AdjustmentType:
+        $ref: '#/definitions/AdjustmentType'
+        description: 'The adjustment type, which specifies how the <code>ScalingAdjustment</code> parameter in a <a>StepAdjustment</a> is interpreted.'
+      StepAdjustments:
+        $ref: '#/definitions/StepAdjustments'
+        description: A set of adjustments that enable you to scale based on the size of the alarm breach.
+      MinAdjustmentMagnitude:
+        $ref: '#/definitions/MinAdjustmentMagnitude'
+        description: 'The minimum number to adjust your scalable dimension as a result of a scaling activity. If the adjustment type is <code>PercentChangeInCapacity</code>, the scaling policy changes the scalable dimension of the scalable target by this amount.'
+      Cooldown:
+        $ref: '#/definitions/Cooldown'
+        description: '<p>The amount of time, in seconds, after a scaling activity completes where previous trigger-related scaling activities can influence future scaling events.</p> <p>For scale out policies, while the cooldown period is in effect, the capacity that has been added by the previous scale out event that initiated the cooldown is calculated as part of the desired capacity for the next scale out. The intention is to continuously (but not excessively) scale out. For example, an alarm triggers a step scaling policy to scale out an Amazon ECS service by 2 tasks, the scaling activity completes successfully, and a cooldown period of 5 minutes starts. During the Cooldown period, if the alarm triggers the same policy again but at a more aggressive step adjustment to scale out the service by 3 tasks, the 2 tasks that were added in the previous scale out event are considered part of that capacity and only 1 additional task is added to the desired count.</p> <p>For scale in policies, the cooldown period is used to block subsequent scale in requests until it has expired. The intention is to scale in conservatively to protect your application''s availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, Application Auto Scaling scales out your scalable target immediately.</p>'
+      MetricAggregationType:
+        $ref: '#/definitions/MetricAggregationType'
+        description: 'The aggregation type for the CloudWatch metrics. Valid values are <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code>.'
+    description: Represents a step scaling policy configuration.
+  TargetTrackingScalingPolicyConfiguration:
+    type: object
+    required:
+      - TargetValue
+    properties:
+      TargetValue:
+        $ref: '#/definitions/MetricScale'
+        description: The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
+      PredefinedMetricSpecification:
+        $ref: '#/definitions/PredefinedMetricSpecification'
+        description: A predefined metric.
+      CustomizedMetricSpecification:
+        $ref: '#/definitions/CustomizedMetricSpecification'
+        description: A customized metric.
+      ScaleOutCooldown:
+        $ref: '#/definitions/Cooldown'
+        description: '<p>The amount of time, in seconds, after a scale out activity completes before another scale out activity can start.</p> <p>While the cooldown period is in effect, the capacity that has been added by the previous scale out event that initiated the cooldown is calculated as part of the desired capacity for the next scale out. The intention is to continuously (but not excessively) scale out.</p>'
+      ScaleInCooldown:
+        $ref: '#/definitions/Cooldown'
+        description: '<p>The amount of time, in seconds, after a scale in activity completes before another scale in activity can start.</p> <p>The cooldown period is used to block subsequent scale in requests until it has expired. The intention is to scale in conservatively to protect your application''s availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, Application Auto Scaling scales out your scalable target immediately.</p>'
+      DisableScaleIn:
+        $ref: '#/definitions/DisableScaleIn'
+        description: 'Indicates whether scale in by the target tracking policy is disabled. If the value is <code>true</code>, scale in is disabled and the target tracking policy won''t remove capacity from the scalable resource. Otherwise, scale in is enabled and the target tracking policy can remove capacity from the scalable resource. The default value is <code>false</code>.'
+    description: Represents a target tracking scaling policy configuration.
+  ScheduledActionName:
+    type: string
+    pattern: '(?!((^[ ]+.*)|(.*([\u0000-\u001f]|[\u007f-\u009f]|[:/|])+.*)|(.*[ ]+$))).+'
+    minLength: 1
+    maxLength: 256
+  TimestampType:
+    type: string
+    format: date-time
+  ScalableTargetAction:
+    type: object
+    properties:
+      MinCapacity:
+        $ref: '#/definitions/ResourceCapacity'
+        description: The minimum capacity.
+      MaxCapacity:
+        $ref: '#/definitions/ResourceCapacity'
+        description: The maximum capacity.
+    description: Represents the minimum and maximum capacity for a scheduled action.
+  ResourceCapacity:
+    type: integer
   ScalableTarget:
     type: object
     required:
@@ -1169,24 +1259,6 @@ definitions:
         $ref: '#/definitions/TimestampType'
         description: The Unix timestamp for when the scalable target was created.
     description: Represents a scalable target.
-  ScalableTargetAction:
-    type: object
-    properties:
-      MinCapacity:
-        $ref: '#/definitions/ResourceCapacity'
-        description: The minimum capacity.
-      MaxCapacity:
-        $ref: '#/definitions/ResourceCapacity'
-        description: The maximum capacity.
-    description: Represents the minimum and maximum capacity for a scheduled action.
-  ScalableTargets:
-    type: array
-    items:
-      $ref: '#/definitions/ScalableTarget'
-  ScalingActivities:
-    type: array
-    items:
-      $ref: '#/definitions/ScalingActivity'
   ScalingActivity:
     type: object
     required:
@@ -1244,10 +1316,6 @@ definitions:
       - Failed
   ScalingAdjustment:
     type: integer
-  ScalingPolicies:
-    type: array
-    items:
-      $ref: '#/definitions/ScalingPolicy'
   ScalingPolicy:
     type: object
     required:
@@ -1331,26 +1399,6 @@ definitions:
         $ref: '#/definitions/TimestampType'
         description: The date and time that the scheduled action was created.
     description: Represents a scheduled action.
-  ScheduledActionName:
-    type: string
-    pattern: '(?!((^[ ]+.*)|(.*([\u0000-\u001f]|[\u007f-\u009f]|[:/|])+.*)|(.*[ ]+$))).+'
-    minLength: 1
-    maxLength: 256
-  ScheduledActions:
-    type: array
-    items:
-      $ref: '#/definitions/ScheduledAction'
-  ServiceNamespace:
-    type: string
-    enum:
-      - ecs
-      - elasticmapreduce
-      - ec2
-      - appstream
-      - dynamodb
-      - rds
-      - sagemaker
-      - custom-resource
   StepAdjustment:
     type: object
     required:
@@ -1370,52 +1418,3 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/StepAdjustment'
-  StepScalingPolicyConfiguration:
-    type: object
-    properties:
-      AdjustmentType:
-        $ref: '#/definitions/AdjustmentType'
-        description: 'The adjustment type, which specifies how the <code>ScalingAdjustment</code> parameter in a <a>StepAdjustment</a> is interpreted.'
-      StepAdjustments:
-        $ref: '#/definitions/StepAdjustments'
-        description: A set of adjustments that enable you to scale based on the size of the alarm breach.
-      MinAdjustmentMagnitude:
-        $ref: '#/definitions/MinAdjustmentMagnitude'
-        description: 'The minimum number to adjust your scalable dimension as a result of a scaling activity. If the adjustment type is <code>PercentChangeInCapacity</code>, the scaling policy changes the scalable dimension of the scalable target by this amount.'
-      Cooldown:
-        $ref: '#/definitions/Cooldown'
-        description: '<p>The amount of time, in seconds, after a scaling activity completes where previous trigger-related scaling activities can influence future scaling events.</p> <p>For scale out policies, while the cooldown period is in effect, the capacity that has been added by the previous scale out event that initiated the cooldown is calculated as part of the desired capacity for the next scale out. The intention is to continuously (but not excessively) scale out. For example, an alarm triggers a step scaling policy to scale out an Amazon ECS service by 2 tasks, the scaling activity completes successfully, and a cooldown period of 5 minutes starts. During the Cooldown period, if the alarm triggers the same policy again but at a more aggressive step adjustment to scale out the service by 3 tasks, the 2 tasks that were added in the previous scale out event are considered part of that capacity and only 1 additional task is added to the desired count.</p> <p>For scale in policies, the cooldown period is used to block subsequent scale in requests until it has expired. The intention is to scale in conservatively to protect your application''s availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, Application Auto Scaling scales out your scalable target immediately.</p>'
-      MetricAggregationType:
-        $ref: '#/definitions/MetricAggregationType'
-        description: 'The aggregation type for the CloudWatch metrics. Valid values are <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code>.'
-    description: Represents a step scaling policy configuration.
-  TargetTrackingScalingPolicyConfiguration:
-    type: object
-    required:
-      - TargetValue
-    properties:
-      TargetValue:
-        $ref: '#/definitions/MetricScale'
-        description: The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
-      PredefinedMetricSpecification:
-        $ref: '#/definitions/PredefinedMetricSpecification'
-        description: A predefined metric.
-      CustomizedMetricSpecification:
-        $ref: '#/definitions/CustomizedMetricSpecification'
-        description: A customized metric.
-      ScaleOutCooldown:
-        $ref: '#/definitions/Cooldown'
-        description: '<p>The amount of time, in seconds, after a scale out activity completes before another scale out activity can start.</p> <p>While the cooldown period is in effect, the capacity that has been added by the previous scale out event that initiated the cooldown is calculated as part of the desired capacity for the next scale out. The intention is to continuously (but not excessively) scale out.</p>'
-      ScaleInCooldown:
-        $ref: '#/definitions/Cooldown'
-        description: '<p>The amount of time, in seconds, after a scale in activity completes before another scale in activity can start.</p> <p>The cooldown period is used to block subsequent scale in requests until it has expired. The intention is to scale in conservatively to protect your application''s availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, Application Auto Scaling scales out your scalable target immediately.</p>'
-      DisableScaleIn:
-        $ref: '#/definitions/DisableScaleIn'
-        description: 'Indicates whether scale in by the target tracking policy is disabled. If the value is <code>true</code>, scale in is disabled and the target tracking policy won''t remove capacity from the scalable resource. Otherwise, scale in is enabled and the target tracking policy can remove capacity from the scalable resource. The default value is <code>false</code>.'
-    description: Represents a target tracking scaling policy configuration.
-  TimestampType:
-    type: string
-    format: date-time
-  XmlString:
-    type: string
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'

@@ -1030,7 +1030,15 @@ definitions:
       - SCTE35_ENHANCED
       - PASSTHROUGH
     type: string
-  undefined: {}
+  __string:
+    type: string
+  HlsIngest:
+    type: object
+    properties:
+      IngestEndpoints:
+        description: A list of endpoints to which the source stream should be sent.
+        $ref: '#/definitions/__listOfIngestEndpoint'
+    description: An HTTP Live Streaming (HLS) ingest resource configuration.
   Channel:
     type: object
     properties:
@@ -1046,6 +1054,37 @@ definitions:
         description: The ID of the Channel.
         $ref: '#/definitions/__string'
     description: A Channel resource configuration.
+  __integer:
+    type: integer
+  SpekeKeyProvider:
+    required:
+      - Url
+      - ResourceId
+      - RoleArn
+      - SystemIds
+    type: object
+    properties:
+      CertificateArn:
+        description: |
+          An Amazon Resource Name (ARN) of a Certificate Manager certificate
+          that MediaPackage will use for enforcing secure end-to-end data
+          transfer with the key provider service.
+        $ref: '#/definitions/__string'
+      ResourceId:
+        description: The resource ID to include in key requests.
+        $ref: '#/definitions/__string'
+      RoleArn:
+        description: |
+          An Amazon Resource Name (ARN) of an IAM role that AWS Elemental
+          MediaPackage will assume when accessing the key provider service.
+        $ref: '#/definitions/__string'
+      SystemIds:
+        description: The system IDs to include in key requests.
+        $ref: '#/definitions/__listOf__string'
+      Url:
+        description: The URL of the external key provider service.
+        $ref: '#/definitions/__string'
+    description: A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
   CmafEncryption:
     required:
       - SpekeKeyProvider
@@ -1057,6 +1096,23 @@ definitions:
       SpekeKeyProvider:
         $ref: '#/definitions/SpekeKeyProvider'
     description: A Common Media Application Format (CMAF) encryption configuration.
+  __listOfHlsManifest:
+    type: array
+    items:
+      $ref: '#/definitions/HlsManifest'
+  StreamSelection:
+    type: object
+    properties:
+      MaxVideoBitsPerSecond:
+        description: The maximum video bitrate (bps) to include in output.
+        $ref: '#/definitions/__integer'
+      MinVideoBitsPerSecond:
+        description: The minimum video bitrate (bps) to include in output.
+        $ref: '#/definitions/__integer'
+      StreamOrder:
+        description: A directive that determines the order of streams in the output.
+        $ref: '#/definitions/StreamOrder'
+    description: A StreamSelection configuration.
   CmafPackage:
     type: object
     properties:
@@ -1076,6 +1132,10 @@ definitions:
       StreamSelection:
         $ref: '#/definitions/StreamSelection'
     description: A Common Media Application Format (CMAF) packaging configuration.
+  __listOfHlsManifestCreateOrUpdateParameters:
+    type: array
+    items:
+      $ref: '#/definitions/HlsManifestCreateOrUpdateParameters'
   CmafPackageCreateOrUpdateParameters:
     type: object
     properties:
@@ -1095,17 +1155,6 @@ definitions:
       StreamSelection:
         $ref: '#/definitions/StreamSelection'
     description: A Common Media Application Format (CMAF) packaging configuration.
-  DashEncryption:
-    required:
-      - SpekeKeyProvider
-    type: object
-    properties:
-      KeyRotationIntervalSeconds:
-        description: Time (in seconds) between each encryption key rotation.
-        $ref: '#/definitions/__integer'
-      SpekeKeyProvider:
-        $ref: '#/definitions/SpekeKeyProvider'
-    description: A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
   DashPackage:
     type: object
     properties:
@@ -1141,11 +1190,100 @@ definitions:
         description: Duration (in seconds) to delay live content before presentation.
         $ref: '#/definitions/__integer'
     description: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+  HlsPackage:
+    type: object
+    properties:
+      AdMarkers:
+        description: |
+          This setting controls how ad markers are included in the packaged OriginEndpoint.
+          "NONE" will omit all SCTE-35 ad markers from the output.
+          "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad
+          markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
+          "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
+          messages in the input source.
+        $ref: '#/definitions/AdMarkers'
+      Encryption:
+        $ref: '#/definitions/HlsEncryption'
+      IncludeIframeOnlyStream:
+        description: 'When enabled, an I-Frame only stream will be included in the output.'
+        $ref: '#/definitions/__boolean'
+      PlaylistType:
+        description: |
+          The HTTP Live Streaming (HLS) playlist type.
+          When either "EVENT" or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE
+          entry will be included in the media playlist.
+        $ref: '#/definitions/PlaylistType'
+      PlaylistWindowSeconds:
+        description: Time window (in seconds) contained in each parent manifest.
+        $ref: '#/definitions/__integer'
+      ProgramDateTimeIntervalSeconds:
+        description: |
+          The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
+          inserted into manifests. Additionally, when an interval is specified
+          ID3Timed Metadata messages will be generated every 5 seconds using the
+          ingest time of the content.
+          If the interval is not specified, or set to 0, then
+          no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no
+          ID3Timed Metadata messages will be generated. Note that irrespective
+          of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
+          it will be passed through to HLS output.
+        $ref: '#/definitions/__integer'
+      SegmentDurationSeconds:
+        description: |
+          Duration (in seconds) of each fragment. Actual fragments will be
+          rounded to the nearest multiple of the source fragment duration.
+        $ref: '#/definitions/__integer'
+      StreamSelection:
+        $ref: '#/definitions/StreamSelection'
+      UseAudioRenditionGroup:
+        description: 'When enabled, audio streams will be placed in rendition groups in the output.'
+        $ref: '#/definitions/__boolean'
+    description: An HTTP Live Streaming (HLS) packaging configuration.
+  MssPackage:
+    type: object
+    properties:
+      Encryption:
+        $ref: '#/definitions/MssEncryption'
+      ManifestWindowSeconds:
+        description: The time window (in seconds) contained in each manifest.
+        $ref: '#/definitions/__integer'
+      SegmentDurationSeconds:
+        description: The duration (in seconds) of each segment.
+        $ref: '#/definitions/__integer'
+      StreamSelection:
+        $ref: '#/definitions/StreamSelection'
+    description: A Microsoft Smooth Streaming (MSS) packaging configuration.
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
+  DashEncryption:
+    required:
+      - SpekeKeyProvider
+    type: object
+    properties:
+      KeyRotationIntervalSeconds:
+        description: Time (in seconds) between each encryption key rotation.
+        $ref: '#/definitions/__integer'
+      SpekeKeyProvider:
+        $ref: '#/definitions/SpekeKeyProvider'
+    description: A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+  __listOf__PeriodTriggersElement:
+    type: array
+    items:
+      $ref: '#/definitions/__PeriodTriggersElement'
+  Profile:
+    enum:
+      - NONE
+      - HBBTV_1_5
+    type: string
   EncryptionMethod:
     enum:
       - AES_128
       - SAMPLE_AES
     type: string
+  __boolean:
+    type: boolean
   HlsEncryption:
     required:
       - SpekeKeyProvider
@@ -1168,13 +1306,16 @@ definitions:
       SpekeKeyProvider:
         $ref: '#/definitions/SpekeKeyProvider'
     description: An HTTP Live Streaming (HLS) encryption configuration.
-  HlsIngest:
-    type: object
-    properties:
-      IngestEndpoints:
-        description: A list of endpoints to which the source stream should be sent.
-        $ref: '#/definitions/__listOfIngestEndpoint'
-    description: An HTTP Live Streaming (HLS) ingest resource configuration.
+  __listOfIngestEndpoint:
+    type: array
+    items:
+      $ref: '#/definitions/IngestEndpoint'
+  PlaylistType:
+    enum:
+      - NONE
+      - EVENT
+      - VOD
+    type: string
   HlsManifest:
     required:
       - Id
@@ -1268,55 +1409,6 @@ definitions:
           it will be passed through to HLS output.
         $ref: '#/definitions/__integer'
     description: A HTTP Live Streaming (HLS) manifest configuration.
-  HlsPackage:
-    type: object
-    properties:
-      AdMarkers:
-        description: |
-          This setting controls how ad markers are included in the packaged OriginEndpoint.
-          "NONE" will omit all SCTE-35 ad markers from the output.
-          "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad
-          markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
-          "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
-          messages in the input source.
-        $ref: '#/definitions/AdMarkers'
-      Encryption:
-        $ref: '#/definitions/HlsEncryption'
-      IncludeIframeOnlyStream:
-        description: 'When enabled, an I-Frame only stream will be included in the output.'
-        $ref: '#/definitions/__boolean'
-      PlaylistType:
-        description: |
-          The HTTP Live Streaming (HLS) playlist type.
-          When either "EVENT" or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE
-          entry will be included in the media playlist.
-        $ref: '#/definitions/PlaylistType'
-      PlaylistWindowSeconds:
-        description: Time window (in seconds) contained in each parent manifest.
-        $ref: '#/definitions/__integer'
-      ProgramDateTimeIntervalSeconds:
-        description: |
-          The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
-          inserted into manifests. Additionally, when an interval is specified
-          ID3Timed Metadata messages will be generated every 5 seconds using the
-          ingest time of the content.
-          If the interval is not specified, or set to 0, then
-          no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no
-          ID3Timed Metadata messages will be generated. Note that irrespective
-          of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
-          it will be passed through to HLS output.
-        $ref: '#/definitions/__integer'
-      SegmentDurationSeconds:
-        description: |
-          Duration (in seconds) of each fragment. Actual fragments will be
-          rounded to the nearest multiple of the source fragment duration.
-        $ref: '#/definitions/__integer'
-      StreamSelection:
-        $ref: '#/definitions/StreamSelection'
-      UseAudioRenditionGroup:
-        description: 'When enabled, audio streams will be placed in rendition groups in the output.'
-        $ref: '#/definitions/__boolean'
-    description: An HTTP Live Streaming (HLS) packaging configuration.
   IngestEndpoint:
     type: object
     properties:
@@ -1337,6 +1429,14 @@ definitions:
     type: integer
     minimum: 1
     maximum: 1000
+  __listOfChannel:
+    type: array
+    items:
+      $ref: '#/definitions/Channel'
+  __listOfOriginEndpoint:
+    type: array
+    items:
+      $ref: '#/definitions/OriginEndpoint'
   MssEncryption:
     required:
       - SpekeKeyProvider
@@ -1345,20 +1445,6 @@ definitions:
       SpekeKeyProvider:
         $ref: '#/definitions/SpekeKeyProvider'
     description: A Microsoft Smooth Streaming (MSS) encryption configuration.
-  MssPackage:
-    type: object
-    properties:
-      Encryption:
-        $ref: '#/definitions/MssEncryption'
-      ManifestWindowSeconds:
-        description: The time window (in seconds) contained in each manifest.
-        $ref: '#/definitions/__integer'
-      SegmentDurationSeconds:
-        description: The duration (in seconds) of each segment.
-        $ref: '#/definitions/__integer'
-      StreamSelection:
-        $ref: '#/definitions/StreamSelection'
-    description: A Microsoft Smooth Streaming (MSS) packaging configuration.
   OriginEndpoint:
     type: object
     properties:
@@ -1402,100 +1488,13 @@ definitions:
         description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
         $ref: '#/definitions/__listOf__string'
     description: An OriginEndpoint resource configuration.
-  PlaylistType:
-    enum:
-      - NONE
-      - EVENT
-      - VOD
-    type: string
-  Profile:
-    enum:
-      - NONE
-      - HBBTV_1_5
-    type: string
-  SpekeKeyProvider:
-    required:
-      - Url
-      - ResourceId
-      - RoleArn
-      - SystemIds
-    type: object
-    properties:
-      CertificateArn:
-        description: |
-          An Amazon Resource Name (ARN) of a Certificate Manager certificate
-          that MediaPackage will use for enforcing secure end-to-end data
-          transfer with the key provider service.
-        $ref: '#/definitions/__string'
-      ResourceId:
-        description: The resource ID to include in key requests.
-        $ref: '#/definitions/__string'
-      RoleArn:
-        description: |
-          An Amazon Resource Name (ARN) of an IAM role that AWS Elemental
-          MediaPackage will assume when accessing the key provider service.
-        $ref: '#/definitions/__string'
-      SystemIds:
-        description: The system IDs to include in key requests.
-        $ref: '#/definitions/__listOf__string'
-      Url:
-        description: The URL of the external key provider service.
-        $ref: '#/definitions/__string'
-    description: A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
   StreamOrder:
     enum:
       - ORIGINAL
       - VIDEO_BITRATE_ASCENDING
       - VIDEO_BITRATE_DESCENDING
     type: string
-  StreamSelection:
-    type: object
-    properties:
-      MaxVideoBitsPerSecond:
-        description: The maximum video bitrate (bps) to include in output.
-        $ref: '#/definitions/__integer'
-      MinVideoBitsPerSecond:
-        description: The minimum video bitrate (bps) to include in output.
-        $ref: '#/definitions/__integer'
-      StreamOrder:
-        description: A directive that determines the order of streams in the output.
-        $ref: '#/definitions/StreamOrder'
-    description: A StreamSelection configuration.
   __PeriodTriggersElement:
     enum:
       - ADS
-    type: string
-  __boolean:
-    type: boolean
-  __integer:
-    type: integer
-  __listOfChannel:
-    type: array
-    items:
-      $ref: '#/definitions/Channel'
-  __listOfHlsManifest:
-    type: array
-    items:
-      $ref: '#/definitions/HlsManifest'
-  __listOfHlsManifestCreateOrUpdateParameters:
-    type: array
-    items:
-      $ref: '#/definitions/HlsManifestCreateOrUpdateParameters'
-  __listOfIngestEndpoint:
-    type: array
-    items:
-      $ref: '#/definitions/IngestEndpoint'
-  __listOfOriginEndpoint:
-    type: array
-    items:
-      $ref: '#/definitions/OriginEndpoint'
-  __listOf__PeriodTriggersElement:
-    type: array
-    items:
-      $ref: '#/definitions/__PeriodTriggersElement'
-  __listOf__string:
-    type: array
-    items:
-      $ref: '#/definitions/__string'
-  __string:
     type: string

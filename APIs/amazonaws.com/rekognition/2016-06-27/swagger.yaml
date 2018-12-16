@@ -3268,7 +3268,9 @@ definitions:
       Name:
         $ref: '#/definitions/StreamProcessorName'
         description: The name of a stream processor created by .
-  undefined: {}
+  UInteger:
+    type: integer
+    minimum: 0
   AgeRange:
     type: object
     properties:
@@ -3288,6 +3290,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Attribute'
+  Boolean:
+    type: boolean
+  Percent:
+    type: number
+    format: float
+    minimum: 0
+    maximum: 100
   Beard:
     type: object
     properties:
@@ -3298,8 +3307,9 @@ definitions:
         $ref: '#/definitions/Percent'
         description: Level of confidence in the determination.
     description: 'Indicates whether or not the face has a beard, and the confidence level in the determination.'
-  Boolean:
-    type: boolean
+  Float:
+    type: number
+    format: float
   BoundingBox:
     type: object
     properties:
@@ -3316,102 +3326,15 @@ definitions:
         $ref: '#/definitions/Float'
         description: Top coordinate of the bounding box as a ratio of overall image height.
     description: '<p>Identifies the bounding box around the label, face, or text. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p>The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>'
-  Celebrity:
-    type: object
-    properties:
-      Urls:
-        $ref: '#/definitions/Urls'
-        description: 'An array of URLs pointing to additional information about the celebrity. If there is no additional information about the celebrity, this list is empty.'
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the celebrity.
-      Id:
-        $ref: '#/definitions/RekognitionUniqueId'
-        description: 'A unique identifier for the celebrity. '
-      Face:
-        $ref: '#/definitions/ComparedFace'
-        description: 'Provides information about the celebrity''s face, such as its location on the image.'
-      MatchConfidence:
-        $ref: '#/definitions/Percent'
-        description: 'The confidence, in percentage, that Amazon Rekognition has that the recognized face is the celebrity.'
-    description: Provides information about a celebrity recognized by the operation.
-  CelebrityDetail:
-    type: object
-    properties:
-      Urls:
-        $ref: '#/definitions/Urls'
-        description: 'An array of URLs pointing to additional celebrity information. '
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the celebrity.
-      Id:
-        $ref: '#/definitions/RekognitionUniqueId'
-        description: 'The unique identifier for the celebrity. '
-      Confidence:
-        $ref: '#/definitions/Percent'
-        description: 'The confidence, in percentage, that Amazon Rekognition has that the recognized face is the celebrity. '
-      BoundingBox:
-        $ref: '#/definitions/BoundingBox'
-        description: Bounding box around the body of a celebrity.
-      Face:
-        $ref: '#/definitions/FaceDetail'
-        description: Face details for the recognized celebrity.
-    description: Information about a recognized celebrity.
-  CelebrityList:
+  Urls:
     type: array
     items:
-      $ref: '#/definitions/Celebrity'
-  CelebrityRecognition:
-    type: object
-    properties:
-      Timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: 'The time, in milliseconds from the start of the video, that the celebrity was recognized.'
-      Celebrity:
-        $ref: '#/definitions/CelebrityDetail'
-        description: Information about a recognized celebrity.
-    description: 'Information about a detected celebrity and the time the celebrity was detected in a stored video. For more information, see GetCelebrityRecognition in the Amazon Rekognition Developer Guide.'
-  CelebrityRecognitionSortBy:
+      $ref: '#/definitions/Url'
+  String:
     type: string
-    enum:
-      - ID
-      - TIMESTAMP
-  CelebrityRecognitions:
-    type: array
-    items:
-      $ref: '#/definitions/CelebrityRecognition'
-  ClientRequestToken:
+  RekognitionUniqueId:
     type: string
-    pattern: '^[a-zA-Z0-9-_]+$'
-    minLength: 1
-    maxLength: 64
-  CollectionId:
-    type: string
-    pattern: '[a-zA-Z0-9_.\-]+'
-    minLength: 1
-    maxLength: 255
-  CollectionIdList:
-    type: array
-    items:
-      $ref: '#/definitions/CollectionId'
-  CompareFacesMatch:
-    type: object
-    properties:
-      Similarity:
-        $ref: '#/definitions/Percent'
-        description: Level of confidence that the faces match.
-      Face:
-        $ref: '#/definitions/ComparedFace'
-        description: Provides face metadata (bounding box and confidence that the bounding box actually contains a face).
-    description: Provides information about a face in a target image that matches the source image face analyzed by <code>CompareFaces</code>. The <code>Face</code> property contains the bounding box of the face in the target image. The <code>Similarity</code> property is the confidence that the source image face matches the face in the bounding box.
-  CompareFacesMatchList:
-    type: array
-    items:
-      $ref: '#/definitions/CompareFacesMatch'
-  CompareFacesUnmatchList:
-    type: array
-    items:
-      $ref: '#/definitions/ComparedFace'
+    pattern: '[0-9A-Za-z]*'
   ComparedFace:
     type: object
     properties:
@@ -3431,121 +3354,25 @@ definitions:
         $ref: '#/definitions/ImageQuality'
         description: 'Identifies face image brightness and sharpness. '
     description: Provides face metadata for target image faces that are analyzed by <code>CompareFaces</code> and <code>RecognizeCelebrities</code>.
-  ComparedFaceList:
-    type: array
-    items:
-      $ref: '#/definitions/ComparedFace'
-  ComparedSourceImageFace:
+  Celebrity:
     type: object
     properties:
-      BoundingBox:
-        $ref: '#/definitions/BoundingBox'
-        description: Bounding box of the face.
-      Confidence:
+      Urls:
+        $ref: '#/definitions/Urls'
+        description: 'An array of URLs pointing to additional information about the celebrity. If there is no additional information about the celebrity, this list is empty.'
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the celebrity.
+      Id:
+        $ref: '#/definitions/RekognitionUniqueId'
+        description: 'A unique identifier for the celebrity. '
+      Face:
+        $ref: '#/definitions/ComparedFace'
+        description: 'Provides information about the celebrity''s face, such as its location on the image.'
+      MatchConfidence:
         $ref: '#/definitions/Percent'
-        description: Confidence level that the selected bounding box contains a face.
-    description: 'Type that describes the face Amazon Rekognition chose to compare with the faces in the target. This contains a bounding box for the selected face and confidence level that the bounding box contains a face. Note that Amazon Rekognition selects the largest face in the source image for this comparison. '
-  ContentModerationDetection:
-    type: object
-    properties:
-      Timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: 'Time, in milliseconds from the beginning of the video, that the moderation label was detected.'
-      ModerationLabel:
-        $ref: '#/definitions/ModerationLabel'
-        description: The moderation label detected by in the stored video.
-    description: Information about a moderation label detection in a stored video.
-  ContentModerationDetections:
-    type: array
-    items:
-      $ref: '#/definitions/ContentModerationDetection'
-  ContentModerationSortBy:
-    type: string
-    enum:
-      - NAME
-      - TIMESTAMP
-  DateTime:
-    type: string
-    format: date-time
-  Degree:
-    type: number
-    format: float
-    minimum: -180
-    maximum: 180
-  Emotion:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/EmotionName'
-        description: Type of emotion detected.
-      Confidence:
-        $ref: '#/definitions/Percent'
-        description: Level of confidence in the determination.
-    description: 'The emotions detected on the face, and the confidence level in the determination. For example, HAPPY, SAD, and ANGRY.'
-  EmotionName:
-    type: string
-    enum:
-      - HAPPY
-      - SAD
-      - ANGRY
-      - CONFUSED
-      - DISGUSTED
-      - SURPRISED
-      - CALM
-      - UNKNOWN
-  Emotions:
-    type: array
-    items:
-      $ref: '#/definitions/Emotion'
-  ExternalImageId:
-    type: string
-    pattern: '[a-zA-Z0-9_.\-:]+'
-    minLength: 1
-    maxLength: 255
-  EyeOpen:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/Boolean'
-        description: Boolean value that indicates whether the eyes on the face are open.
-      Confidence:
-        $ref: '#/definitions/Percent'
-        description: Level of confidence in the determination.
-    description: 'Indicates whether or not the eyes on the face are open, and the confidence level in the determination.'
-  Eyeglasses:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/Boolean'
-        description: Boolean value that indicates whether the face is wearing eye glasses or not.
-      Confidence:
-        $ref: '#/definitions/Percent'
-        description: Level of confidence in the determination.
-    description: 'Indicates whether or not the face is wearing eye glasses, and the confidence level in the determination.'
-  Face:
-    type: object
-    properties:
-      FaceId:
-        $ref: '#/definitions/FaceId'
-        description: Unique identifier that Amazon Rekognition assigns to the face.
-      BoundingBox:
-        $ref: '#/definitions/BoundingBox'
-        description: Bounding box of the face.
-      ImageId:
-        $ref: '#/definitions/ImageId'
-        description: Unique identifier that Amazon Rekognition assigns to the input image.
-      ExternalImageId:
-        $ref: '#/definitions/ExternalImageId'
-        description: Identifier that you assign to all the faces in the input image.
-      Confidence:
-        $ref: '#/definitions/Percent'
-        description: Confidence level that the bounding box contains a face (and not a different object such as a tree).
-    description: 'Describes the face properties such as the bounding box, face ID, image ID of the input image, and external image ID that you assigned. '
-  FaceAttributes:
-    type: string
-    enum:
-      - DEFAULT
-      - ALL
+        description: 'The confidence, in percentage, that Amazon Rekognition has that the recognized face is the celebrity.'
+    description: Provides information about a celebrity recognized by the operation.
   FaceDetail:
     type: object
     properties:
@@ -3595,10 +3422,378 @@ definitions:
         $ref: '#/definitions/Percent'
         description: Confidence level that the bounding box contains a face (and not a different object such as a tree). Default attribute.
     description: '<p>Structure containing attributes of the face that the algorithm detected.</p> <p>A <code>FaceDetail</code> object contains either the default facial attributes or all facial attributes. The default attributes are <code>BoundingBox</code>, <code>Confidence</code>, <code>Landmarks</code>, <code>Pose</code>, and <code>Quality</code>.</p> <p> is the only Amazon Rekognition Video stored video operation that can return a <code>FaceDetail</code> object with all attributes. To specify which attributes to return, use the <code>FaceAttributes</code> input parameter for . The following Amazon Rekognition Video operations return only the default attributes. The corresponding Start operations don''t have a <code>FaceAttributes</code> input parameter.</p> <ul> <li> <p>GetCelebrityRecognition</p> </li> <li> <p>GetPersonTracking</p> </li> <li> <p>GetFaceSearch</p> </li> </ul> <p>The Amazon Rekognition Image and operations can return all facial attributes. To specify which attributes to return, use the <code>Attributes</code> input parameter for <code>DetectFaces</code>. For <code>IndexFaces</code>, use the <code>DetectAttributes</code> input parameter.</p>'
+  CelebrityDetail:
+    type: object
+    properties:
+      Urls:
+        $ref: '#/definitions/Urls'
+        description: 'An array of URLs pointing to additional celebrity information. '
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the celebrity.
+      Id:
+        $ref: '#/definitions/RekognitionUniqueId'
+        description: 'The unique identifier for the celebrity. '
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: 'The confidence, in percentage, that Amazon Rekognition has that the recognized face is the celebrity. '
+      BoundingBox:
+        $ref: '#/definitions/BoundingBox'
+        description: Bounding box around the body of a celebrity.
+      Face:
+        $ref: '#/definitions/FaceDetail'
+        description: Face details for the recognized celebrity.
+    description: Information about a recognized celebrity.
+  CelebrityList:
+    type: array
+    items:
+      $ref: '#/definitions/Celebrity'
+  Timestamp:
+    type: integer
+  CelebrityRecognition:
+    type: object
+    properties:
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time, in milliseconds from the start of the video, that the celebrity was recognized.'
+      Celebrity:
+        $ref: '#/definitions/CelebrityDetail'
+        description: Information about a recognized celebrity.
+    description: 'Information about a detected celebrity and the time the celebrity was detected in a stored video. For more information, see GetCelebrityRecognition in the Amazon Rekognition Developer Guide.'
+  CelebrityRecognitionSortBy:
+    type: string
+    enum:
+      - ID
+      - TIMESTAMP
+  CelebrityRecognitions:
+    type: array
+    items:
+      $ref: '#/definitions/CelebrityRecognition'
+  ClientRequestToken:
+    type: string
+    pattern: '^[a-zA-Z0-9-_]+$'
+    minLength: 1
+    maxLength: 64
+  CollectionId:
+    type: string
+    pattern: '[a-zA-Z0-9_.\-]+'
+    minLength: 1
+    maxLength: 255
+  CollectionIdList:
+    type: array
+    items:
+      $ref: '#/definitions/CollectionId'
+  CompareFacesMatch:
+    type: object
+    properties:
+      Similarity:
+        $ref: '#/definitions/Percent'
+        description: Level of confidence that the faces match.
+      Face:
+        $ref: '#/definitions/ComparedFace'
+        description: Provides face metadata (bounding box and confidence that the bounding box actually contains a face).
+    description: Provides information about a face in a target image that matches the source image face analyzed by <code>CompareFaces</code>. The <code>Face</code> property contains the bounding box of the face in the target image. The <code>Similarity</code> property is the confidence that the source image face matches the face in the bounding box.
+  CompareFacesMatchList:
+    type: array
+    items:
+      $ref: '#/definitions/CompareFacesMatch'
+  Image:
+    type: object
+    properties:
+      Bytes:
+        $ref: '#/definitions/ImageBlob'
+        description: Blob of image bytes up to 5 MBs.
+      S3Object:
+        $ref: '#/definitions/S3Object'
+        description: Identifies an S3 object as the image source.
+    description: '<p>Provides the input image either as bytes or an S3 object.</p> <p>You pass image bytes to an Amazon Rekognition API operation by using the <code>Bytes</code> property. For example, you would use the <code>Bytes</code> property to pass an image loaded from a local file system. Image bytes passed by using the <code>Bytes</code> property must be base64-encoded. Your code may not need to encode image bytes if you are using an AWS SDK to call Amazon Rekognition API operations. </p> <p>For more information, see Analyzing an Image Loaded from a Local File System in the Amazon Rekognition Developer Guide.</p> <p> You pass images stored in an S3 bucket to an Amazon Rekognition API operation by using the <code>S3Object</code> property. Images stored in an S3 bucket do not need to be base64-encoded.</p> <p>The region for the S3 bucket containing the S3 object must match the region you use for Amazon Rekognition operations.</p> <p>If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes using the Bytes property is not supported. You must first upload the image to an Amazon S3 bucket and then call the operation using the S3Object property.</p> <p>For Amazon Rekognition to process an S3 object, the user must have permission to access the S3 object. For more information, see Resource Based Policies in the Amazon Rekognition Developer Guide. </p>'
+  ComparedSourceImageFace:
+    type: object
+    properties:
+      BoundingBox:
+        $ref: '#/definitions/BoundingBox'
+        description: Bounding box of the face.
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: Confidence level that the selected bounding box contains a face.
+    description: 'Type that describes the face Amazon Rekognition chose to compare with the faces in the target. This contains a bounding box for the selected face and confidence level that the bounding box contains a face. Note that Amazon Rekognition selects the largest face in the source image for this comparison. '
+  CompareFacesUnmatchList:
+    type: array
+    items:
+      $ref: '#/definitions/ComparedFace'
+  OrientationCorrection:
+    type: string
+    enum:
+      - ROTATE_0
+      - ROTATE_90
+      - ROTATE_180
+      - ROTATE_270
+  Landmarks:
+    type: array
+    items:
+      $ref: '#/definitions/Landmark'
+  Pose:
+    type: object
+    properties:
+      Roll:
+        $ref: '#/definitions/Degree'
+        description: Value representing the face rotation on the roll axis.
+      Yaw:
+        $ref: '#/definitions/Degree'
+        description: Value representing the face rotation on the yaw axis.
+      Pitch:
+        $ref: '#/definitions/Degree'
+        description: Value representing the face rotation on the pitch axis.
+    description: 'Indicates the pose of the face as determined by its pitch, roll, and yaw.'
+  ImageQuality:
+    type: object
+    properties:
+      Brightness:
+        $ref: '#/definitions/Float'
+        description: Value representing brightness of the face. The service returns a value between 0 and 100 (inclusive). A higher value indicates a brighter face image.
+      Sharpness:
+        $ref: '#/definitions/Float'
+        description: Value representing sharpness of the face. The service returns a value between 0 and 100 (inclusive). A higher value indicates a sharper face image.
+    description: 'Identifies face image brightness and sharpness. '
+  ComparedFaceList:
+    type: array
+    items:
+      $ref: '#/definitions/ComparedFace'
+  ModerationLabel:
+    type: object
+    properties:
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: '<p>Specifies the confidence that Amazon Rekognition has that the label has been correctly identified.</p> <p>If you don''t specify the <code>MinConfidence</code> parameter in the call to <code>DetectModerationLabels</code>, the operation returns labels with a confidence value greater than or equal to 50 percent.</p>'
+      Name:
+        $ref: '#/definitions/String'
+        description: The label name for the type of content detected in the image.
+      ParentName:
+        $ref: '#/definitions/String'
+        description: The name for the parent label. Labels at the top level of the hierarchy have the parent label <code>""</code>.
+    description: 'Provides information about a single type of moderated content found in an image or video. Each type of moderated content has a label within a hierarchical taxonomy. For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.'
+  ContentModerationDetection:
+    type: object
+    properties:
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'Time, in milliseconds from the beginning of the video, that the moderation label was detected.'
+      ModerationLabel:
+        $ref: '#/definitions/ModerationLabel'
+        description: The moderation label detected by in the stored video.
+    description: Information about a moderation label detection in a stored video.
+  ContentModerationDetections:
+    type: array
+    items:
+      $ref: '#/definitions/ContentModerationDetection'
+  ContentModerationSortBy:
+    type: string
+    enum:
+      - NAME
+      - TIMESTAMP
+  StreamProcessorInput:
+    type: object
+    properties:
+      KinesisVideoStream:
+        $ref: '#/definitions/KinesisVideoStream'
+        description: The Kinesis video stream input stream for the source streaming video.
+    description: 'Information about the source streaming video. '
+  StreamProcessorOutput:
+    type: object
+    properties:
+      KinesisDataStream:
+        $ref: '#/definitions/KinesisDataStream'
+        description: The Amazon Kinesis Data Streams stream to which the Amazon Rekognition stream processor streams the analysis results.
+    description: 'Information about the Amazon Kinesis Data Streams stream to which a Amazon Rekognition Video stream processor streams the results of a video analysis. For more information, see CreateStreamProcessor in the Amazon Rekognition Developer Guide.'
+  StreamProcessorName:
+    type: string
+    pattern: '[a-zA-Z0-9_.\-]+'
+    minLength: 1
+    maxLength: 128
+  StreamProcessorSettings:
+    type: object
+    properties:
+      FaceSearch:
+        $ref: '#/definitions/FaceSearchSettings'
+        description: 'Face search settings to use on a streaming video. '
+    description: Input parameters used to recognize faces in a streaming video analyzed by a Amazon Rekognition stream processor.
+  RoleArn:
+    type: string
+    pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+  StreamProcessorArn:
+    type: string
+    pattern: '(^arn:[a-z\d-]+:rekognition:[a-z\d-]+:\d{12}:streamprocessor\/.+$)'
+  DateTime:
+    type: string
+    format: date-time
+  Degree:
+    type: number
+    format: float
+    minimum: -180
+    maximum: 180
+  FaceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/FaceId'
+    minItems: 1
+    maxItems: 4096
+  ULong:
+    type: integer
+    minimum: 0
+  StreamProcessorStatus:
+    type: string
+    enum:
+      - STOPPED
+      - STARTING
+      - RUNNING
+      - FAILED
+      - STOPPING
   FaceDetailList:
     type: array
     items:
       $ref: '#/definitions/FaceDetail'
+  Labels:
+    type: array
+    items:
+      $ref: '#/definitions/Label'
+  ModerationLabels:
+    type: array
+    items:
+      $ref: '#/definitions/ModerationLabel'
+  TextDetectionList:
+    type: array
+    items:
+      $ref: '#/definitions/TextDetection'
+  EmotionName:
+    type: string
+    enum:
+      - HAPPY
+      - SAD
+      - ANGRY
+      - CONFUSED
+      - DISGUSTED
+      - SURPRISED
+      - CALM
+      - UNKNOWN
+  Emotion:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/EmotionName'
+        description: Type of emotion detected.
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: Level of confidence in the determination.
+    description: 'The emotions detected on the face, and the confidence level in the determination. For example, HAPPY, SAD, and ANGRY.'
+  Emotions:
+    type: array
+    items:
+      $ref: '#/definitions/Emotion'
+  ExternalImageId:
+    type: string
+    pattern: '[a-zA-Z0-9_.\-:]+'
+    minLength: 1
+    maxLength: 255
+  EyeOpen:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/Boolean'
+        description: Boolean value that indicates whether the eyes on the face are open.
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: Level of confidence in the determination.
+    description: 'Indicates whether or not the eyes on the face are open, and the confidence level in the determination.'
+  Eyeglasses:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/Boolean'
+        description: Boolean value that indicates whether the face is wearing eye glasses or not.
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: Level of confidence in the determination.
+    description: 'Indicates whether or not the face is wearing eye glasses, and the confidence level in the determination.'
+  FaceId:
+    type: string
+    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+  ImageId:
+    type: string
+    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+  Face:
+    type: object
+    properties:
+      FaceId:
+        $ref: '#/definitions/FaceId'
+        description: Unique identifier that Amazon Rekognition assigns to the face.
+      BoundingBox:
+        $ref: '#/definitions/BoundingBox'
+        description: Bounding box of the face.
+      ImageId:
+        $ref: '#/definitions/ImageId'
+        description: Unique identifier that Amazon Rekognition assigns to the input image.
+      ExternalImageId:
+        $ref: '#/definitions/ExternalImageId'
+        description: Identifier that you assign to all the faces in the input image.
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: Confidence level that the bounding box contains a face (and not a different object such as a tree).
+    description: 'Describes the face properties such as the bounding box, face ID, image ID of the input image, and external image ID that you assigned. '
+  FaceAttributes:
+    type: string
+    enum:
+      - DEFAULT
+      - ALL
+  Smile:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/Boolean'
+        description: Boolean value that indicates whether the face is smiling or not.
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: Level of confidence in the determination.
+    description: 'Indicates whether or not the face is smiling, and the confidence level in the determination.'
+  Sunglasses:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/Boolean'
+        description: Boolean value that indicates whether the face is wearing sunglasses or not.
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: Level of confidence in the determination.
+    description: 'Indicates whether or not the face is wearing sunglasses, and the confidence level in the determination.'
+  Gender:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/GenderType'
+        description: Gender of the face.
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: Level of confidence in the determination.
+    description: Gender of the face and the confidence level in the determination.
+  Mustache:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/Boolean'
+        description: Boolean value that indicates whether the face has mustache or not.
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: Level of confidence in the determination.
+    description: 'Indicates whether or not the face has a mustache, and the confidence level in the determination.'
+  MouthOpen:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/Boolean'
+        description: Boolean value that indicates whether the mouth on the face is open or not.
+      Confidence:
+        $ref: '#/definitions/Percent'
+        description: Level of confidence in the determination.
+    description: 'Indicates whether or not the mouth on the face is open, and the confidence level in the determination.'
   FaceDetection:
     type: object
     properties:
@@ -3613,15 +3808,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/FaceDetection'
-  FaceId:
-    type: string
-    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
-  FaceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/FaceId'
-    minItems: 1
-    maxItems: 4096
   FaceList:
     type: array
     items:
@@ -3673,24 +3859,15 @@ definitions:
     enum:
       - INDEX
       - TIMESTAMP
-  Float:
-    type: number
-    format: float
-  Gender:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/GenderType'
-        description: Gender of the face.
-      Confidence:
-        $ref: '#/definitions/Percent'
-        description: Level of confidence in the determination.
-    description: Gender of the face and the confidence level in the determination.
   GenderType:
     type: string
     enum:
       - Male
       - Female
+  Polygon:
+    type: array
+    items:
+      $ref: '#/definitions/Point'
   Geometry:
     type: object
     properties:
@@ -3701,33 +3878,98 @@ definitions:
         $ref: '#/definitions/Polygon'
         description: 'Within the bounding box, a fine-grained polygon around the detected text.'
     description: Information about where the text detected by is located on an image.
-  Image:
+  JobId:
+    type: string
+    pattern: '^[a-zA-Z0-9-_]+$'
+    minLength: 1
+    maxLength: 64
+  MaxResults:
+    type: integer
+    minimum: 1
+  PaginationToken:
+    type: string
+    maxLength: 255
+  VideoJobStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - SUCCEEDED
+      - FAILED
+  StatusMessage:
+    type: string
+  VideoMetadata:
     type: object
     properties:
-      Bytes:
-        $ref: '#/definitions/ImageBlob'
-        description: Blob of image bytes up to 5 MBs.
-      S3Object:
-        $ref: '#/definitions/S3Object'
-        description: Identifies an S3 object as the image source.
-    description: '<p>Provides the input image either as bytes or an S3 object.</p> <p>You pass image bytes to an Amazon Rekognition API operation by using the <code>Bytes</code> property. For example, you would use the <code>Bytes</code> property to pass an image loaded from a local file system. Image bytes passed by using the <code>Bytes</code> property must be base64-encoded. Your code may not need to encode image bytes if you are using an AWS SDK to call Amazon Rekognition API operations. </p> <p>For more information, see Analyzing an Image Loaded from a Local File System in the Amazon Rekognition Developer Guide.</p> <p> You pass images stored in an S3 bucket to an Amazon Rekognition API operation by using the <code>S3Object</code> property. Images stored in an S3 bucket do not need to be base64-encoded.</p> <p>The region for the S3 bucket containing the S3 object must match the region you use for Amazon Rekognition operations.</p> <p>If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes using the Bytes property is not supported. You must first upload the image to an Amazon S3 bucket and then call the operation using the S3Object property.</p> <p>For Amazon Rekognition to process an S3 object, the user must have permission to access the S3 object. For more information, see Resource Based Policies in the Amazon Rekognition Developer Guide. </p>'
+      Codec:
+        $ref: '#/definitions/String'
+        description: 'Type of compression used in the analyzed video. '
+      DurationMillis:
+        $ref: '#/definitions/ULong'
+        description: Length of the video in milliseconds.
+      Format:
+        $ref: '#/definitions/String'
+        description: 'Format of the analyzed video. Possible values are MP4, MOV and AVI. '
+      FrameRate:
+        $ref: '#/definitions/Float'
+        description: Number of frames per second in the video.
+      FrameHeight:
+        $ref: '#/definitions/ULong'
+        description: Vertical pixel dimension of the video.
+      FrameWidth:
+        $ref: '#/definitions/ULong'
+        description: Horizontal pixel dimension of the video.
+    description: Information about a video that Amazon Rekognition analyzed. <code>Videometadata</code> is returned in every page of paginated responses from a Amazon Rekognition video operation.
+  PersonMatches:
+    type: array
+    items:
+      $ref: '#/definitions/PersonMatch'
+  LabelDetectionSortBy:
+    type: string
+    enum:
+      - NAME
+      - TIMESTAMP
+  LabelDetections:
+    type: array
+    items:
+      $ref: '#/definitions/LabelDetection'
+  PersonTrackingSortBy:
+    type: string
+    enum:
+      - INDEX
+      - TIMESTAMP
+  PersonDetections:
+    type: array
+    items:
+      $ref: '#/definitions/PersonDetection'
   ImageBlob:
     type: string
     minLength: 1
     maxLength: 5242880
-  ImageId:
-    type: string
-    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
-  ImageQuality:
+  S3Object:
     type: object
     properties:
-      Brightness:
-        $ref: '#/definitions/Float'
-        description: Value representing brightness of the face. The service returns a value between 0 and 100 (inclusive). A higher value indicates a brighter face image.
-      Sharpness:
-        $ref: '#/definitions/Float'
-        description: Value representing sharpness of the face. The service returns a value between 0 and 100 (inclusive). A higher value indicates a sharper face image.
-    description: 'Identifies face image brightness and sharpness. '
+      Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: Name of the S3 bucket.
+      Name:
+        $ref: '#/definitions/S3ObjectName'
+        description: S3 object key name.
+      Version:
+        $ref: '#/definitions/S3ObjectVersion'
+        description: 'If the bucket is versioning enabled, you can specify the object version. '
+    description: '<p>Provides the S3 bucket name and object name.</p> <p>The region for the S3 bucket containing the S3 object must match the region you use for Amazon Rekognition operations.</p> <p>For Amazon Rekognition to process an S3 object, the user must have permission to access the S3 object. For more information, see Resource-Based Policies in the Amazon Rekognition Developer Guide. </p>'
+  MaxFacesToIndex:
+    type: integer
+    minimum: 1
+  QualityFilter:
+    type: string
+    enum:
+      - NONE
+      - AUTO
+  UnindexedFaces:
+    type: array
+    items:
+      $ref: '#/definitions/UnindexedFace'
   Instance:
     type: object
     properties:
@@ -3742,11 +3984,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Instance'
-  JobId:
-    type: string
-    pattern: '^[a-zA-Z0-9-_]+$'
-    minLength: 1
-    maxLength: 64
   JobTag:
     type: string
     pattern: '[a-zA-Z0-9_.\-:]+'
@@ -3772,6 +4009,10 @@ definitions:
         $ref: '#/definitions/KinesisVideoArn'
         description: ARN of the Kinesis video stream stream that streams the source video.
     description: 'Kinesis video stream stream that provides the source streaming video for a Amazon Rekognition Video stream processor. For more information, see CreateStreamProcessor in the Amazon Rekognition Developer Guide.'
+  Parents:
+    type: array
+    items:
+      $ref: '#/definitions/Parent'
   Label:
     type: object
     properties:
@@ -3798,32 +4039,6 @@ definitions:
         $ref: '#/definitions/Label'
         description: Details about the detected label.
     description: 'Information about a label detected in a video analysis request and the time the label was detected in the video. '
-  LabelDetectionSortBy:
-    type: string
-    enum:
-      - NAME
-      - TIMESTAMP
-  LabelDetections:
-    type: array
-    items:
-      $ref: '#/definitions/LabelDetection'
-  Labels:
-    type: array
-    items:
-      $ref: '#/definitions/Label'
-  Landmark:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/LandmarkType'
-        description: Type of landmark.
-      X:
-        $ref: '#/definitions/Float'
-        description: 'The x-coordinate from the top left of the landmark expressed as the ratio of the width of the image. For example, if the image is 700 x 200 and the x-coordinate of the landmark is at 350 pixels, this value is 0.5. '
-      'Y':
-        $ref: '#/definitions/Float'
-        description: 'The y-coordinate from the top left of the landmark expressed as the ratio of the height of the image. For example, if the image is 700 x 200 and the y-coordinate of the landmark is at 100 pixels, this value is 0.5.'
-    description: Indicates the location of the landmark on the face.
   LandmarkType:
     type: string
     enum:
@@ -3857,57 +4072,34 @@ definitions:
       - chinBottom
       - midJawlineRight
       - upperJawlineRight
-  Landmarks:
+  Landmark:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/LandmarkType'
+        description: Type of landmark.
+      X:
+        $ref: '#/definitions/Float'
+        description: 'The x-coordinate from the top left of the landmark expressed as the ratio of the width of the image. For example, if the image is 700 x 200 and the x-coordinate of the landmark is at 350 pixels, this value is 0.5. '
+      'Y':
+        $ref: '#/definitions/Float'
+        description: 'The y-coordinate from the top left of the landmark expressed as the ratio of the height of the image. For example, if the image is 700 x 200 and the y-coordinate of the landmark is at 100 pixels, this value is 0.5.'
+    description: Indicates the location of the landmark on the face.
+  PageSize:
+    type: integer
+    minimum: 0
+    maximum: 4096
+  StreamProcessorList:
     type: array
     items:
-      $ref: '#/definitions/Landmark'
+      $ref: '#/definitions/StreamProcessor'
   MaxFaces:
     type: integer
     minimum: 1
     maximum: 4096
-  MaxFacesToIndex:
-    type: integer
-    minimum: 1
-  MaxResults:
-    type: integer
-    minimum: 1
-  ModerationLabel:
-    type: object
-    properties:
-      Confidence:
-        $ref: '#/definitions/Percent'
-        description: '<p>Specifies the confidence that Amazon Rekognition has that the label has been correctly identified.</p> <p>If you don''t specify the <code>MinConfidence</code> parameter in the call to <code>DetectModerationLabels</code>, the operation returns labels with a confidence value greater than or equal to 50 percent.</p>'
-      Name:
-        $ref: '#/definitions/String'
-        description: The label name for the type of content detected in the image.
-      ParentName:
-        $ref: '#/definitions/String'
-        description: The name for the parent label. Labels at the top level of the hierarchy have the parent label <code>""</code>.
-    description: 'Provides information about a single type of moderated content found in an image or video. Each type of moderated content has a label within a hierarchical taxonomy. For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.'
-  ModerationLabels:
-    type: array
-    items:
-      $ref: '#/definitions/ModerationLabel'
-  MouthOpen:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/Boolean'
-        description: Boolean value that indicates whether the mouth on the face is open or not.
-      Confidence:
-        $ref: '#/definitions/Percent'
-        description: Level of confidence in the determination.
-    description: 'Indicates whether or not the mouth on the face is open, and the confidence level in the determination.'
-  Mustache:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/Boolean'
-        description: Boolean value that indicates whether the face has mustache or not.
-      Confidence:
-        $ref: '#/definitions/Percent'
-        description: Level of confidence in the determination.
-    description: 'Indicates whether or not the face has a mustache, and the confidence level in the determination.'
+  SNSTopicArn:
+    type: string
+    pattern: '(^arn:aws:sns:.*:\w{12}:.+$)'
   NotificationChannel:
     type: object
     required:
@@ -3921,20 +4113,6 @@ definitions:
         $ref: '#/definitions/RoleArn'
         description: 'The ARN of an IAM role that gives Amazon Rekognition publishing permissions to the Amazon SNS topic. '
     description: 'The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the completion status of a video analysis operation. For more information, see <a>api-video</a>.'
-  OrientationCorrection:
-    type: string
-    enum:
-      - ROTATE_0
-      - ROTATE_90
-      - ROTATE_180
-      - ROTATE_270
-  PageSize:
-    type: integer
-    minimum: 0
-    maximum: 4096
-  PaginationToken:
-    type: string
-    maxLength: 255
   Parent:
     type: object
     properties:
@@ -3942,15 +4120,8 @@ definitions:
         $ref: '#/definitions/String'
         description: The name of the parent label.
     description: 'A parent label for a label. A label can have 0, 1, or more parents. '
-  Parents:
-    type: array
-    items:
-      $ref: '#/definitions/Parent'
-  Percent:
-    type: number
-    format: float
-    minimum: 0
-    maximum: 100
+  PersonIndex:
+    type: integer
   PersonDetail:
     type: object
     properties:
@@ -3974,12 +4145,6 @@ definitions:
         $ref: '#/definitions/PersonDetail'
         description: Details about a person whose path was tracked in a video.
     description: '<p>Details and path tracking information for a single time a person''s path is tracked in a video. Amazon Rekognition operations that track people''s paths return an array of <code>PersonDetection</code> objects with elements for each time a person''s path is tracked in a video. </p> <p>For more information, see API_GetPersonTracking in the Amazon Rekognition Developer Guide. </p>'
-  PersonDetections:
-    type: array
-    items:
-      $ref: '#/definitions/PersonDetection'
-  PersonIndex:
-    type: integer
   PersonMatch:
     type: object
     properties:
@@ -3993,15 +4158,6 @@ definitions:
         $ref: '#/definitions/FaceMatchList'
         description: Information about the faces in the input collection that match the face of a person in the video.
     description: 'Information about a person whose face matches a face(s) in an Amazon Rekognition collection. Includes information about the faces in the Amazon Rekognition collection (), information about the person (<a>PersonDetail</a>), and the time stamp for when the person was detected in a video. An array of <code>PersonMatch</code> objects is returned by . '
-  PersonMatches:
-    type: array
-    items:
-      $ref: '#/definitions/PersonMatch'
-  PersonTrackingSortBy:
-    type: string
-    enum:
-      - INDEX
-      - TIMESTAMP
   Point:
     type: object
     properties:
@@ -4012,28 +4168,6 @@ definitions:
         $ref: '#/definitions/Float'
         description: The value of the Y coordinate for a point on a <code>Polygon</code>.
     description: '<p>The X and Y coordinates of a point on an image. The X and Y values returned are ratios of the overall image size. For example, if the input image is 700x200 and the operation returns X=0.5 and Y=0.25, then the point is at the (350,50) pixel coordinate on the image.</p> <p>An array of <code>Point</code> objects, <code>Polygon</code>, is returned by . <code>Polygon</code> represents a fine-grained polygon around detected text. For more information, see Geometry in the Amazon Rekognition Developer Guide. </p>'
-  Polygon:
-    type: array
-    items:
-      $ref: '#/definitions/Point'
-  Pose:
-    type: object
-    properties:
-      Roll:
-        $ref: '#/definitions/Degree'
-        description: Value representing the face rotation on the roll axis.
-      Yaw:
-        $ref: '#/definitions/Degree'
-        description: Value representing the face rotation on the yaw axis.
-      Pitch:
-        $ref: '#/definitions/Degree'
-        description: Value representing the face rotation on the pitch axis.
-    description: 'Indicates the pose of the face as determined by its pitch, roll, and yaw.'
-  QualityFilter:
-    type: string
-    enum:
-      - NONE
-      - AUTO
   Reason:
     type: string
     enum:
@@ -4047,30 +4181,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Reason'
-  RekognitionUniqueId:
-    type: string
-    pattern: '[0-9A-Za-z]*'
-  RoleArn:
-    type: string
-    pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
   S3Bucket:
     type: string
     pattern: '[0-9A-Za-z\.\-_]*'
     minLength: 3
     maxLength: 255
-  S3Object:
-    type: object
-    properties:
-      Bucket:
-        $ref: '#/definitions/S3Bucket'
-        description: Name of the S3 bucket.
-      Name:
-        $ref: '#/definitions/S3ObjectName'
-        description: S3 object key name.
-      Version:
-        $ref: '#/definitions/S3ObjectVersion'
-        description: 'If the bucket is versioning enabled, you can specify the object version. '
-    description: '<p>Provides the S3 bucket name and object name.</p> <p>The region for the S3 bucket containing the S3 object must match the region you use for Amazon Rekognition operations.</p> <p>For Amazon Rekognition to process an S3 object, the user must have permission to access the S3 object. For more information, see Resource-Based Policies in the Amazon Rekognition Developer Guide. </p>'
   S3ObjectName:
     type: string
     minLength: 1
@@ -4079,21 +4194,13 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1024
-  SNSTopicArn:
-    type: string
-    pattern: '(^arn:aws:sns:.*:\w{12}:.+$)'
-  Smile:
+  Video:
     type: object
     properties:
-      Value:
-        $ref: '#/definitions/Boolean'
-        description: Boolean value that indicates whether the face is smiling or not.
-      Confidence:
-        $ref: '#/definitions/Percent'
-        description: Level of confidence in the determination.
-    description: 'Indicates whether or not the face is smiling, and the confidence level in the determination.'
-  StatusMessage:
-    type: string
+      S3Object:
+        $ref: '#/definitions/S3Object'
+        description: The Amazon S3 bucket name and file name for the video.
+    description: 'Video file stored in an Amazon S3 bucket. Amazon Rekognition video start operations such as use <code>Video</code> to specify a video for analysis. The supported file formats are .mp4, .mov and .avi.'
   StreamProcessor:
     type: object
     properties:
@@ -4104,59 +4211,11 @@ definitions:
         $ref: '#/definitions/StreamProcessorStatus'
         description: Current status of the Amazon Rekognition stream processor.
     description: 'An object that recognizes faces in a streaming video. An Amazon Rekognition stream processor is created by a call to . The request parameters for <code>CreateStreamProcessor</code> describe the Kinesis video stream source for the streaming video, face recognition parameters, and where to stream the analysis resullts. '
-  StreamProcessorArn:
-    type: string
-    pattern: '(^arn:[a-z\d-]+:rekognition:[a-z\d-]+:\d{12}:streamprocessor\/.+$)'
-  StreamProcessorInput:
-    type: object
-    properties:
-      KinesisVideoStream:
-        $ref: '#/definitions/KinesisVideoStream'
-        description: The Kinesis video stream input stream for the source streaming video.
-    description: 'Information about the source streaming video. '
-  StreamProcessorList:
-    type: array
-    items:
-      $ref: '#/definitions/StreamProcessor'
-  StreamProcessorName:
-    type: string
-    pattern: '[a-zA-Z0-9_.\-]+'
-    minLength: 1
-    maxLength: 128
-  StreamProcessorOutput:
-    type: object
-    properties:
-      KinesisDataStream:
-        $ref: '#/definitions/KinesisDataStream'
-        description: The Amazon Kinesis Data Streams stream to which the Amazon Rekognition stream processor streams the analysis results.
-    description: 'Information about the Amazon Kinesis Data Streams stream to which a Amazon Rekognition Video stream processor streams the results of a video analysis. For more information, see CreateStreamProcessor in the Amazon Rekognition Developer Guide.'
-  StreamProcessorSettings:
-    type: object
-    properties:
-      FaceSearch:
-        $ref: '#/definitions/FaceSearchSettings'
-        description: 'Face search settings to use on a streaming video. '
-    description: Input parameters used to recognize faces in a streaming video analyzed by a Amazon Rekognition stream processor.
-  StreamProcessorStatus:
+  TextTypes:
     type: string
     enum:
-      - STOPPED
-      - STARTING
-      - RUNNING
-      - FAILED
-      - STOPPING
-  String:
-    type: string
-  Sunglasses:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/Boolean'
-        description: Boolean value that indicates whether the face is wearing sunglasses or not.
-      Confidence:
-        $ref: '#/definitions/Percent'
-        description: Level of confidence in the determination.
-    description: 'Indicates whether or not the face is wearing sunglasses, and the confidence level in the determination.'
+      - LINE
+      - WORD
   TextDetection:
     type: object
     properties:
@@ -4179,23 +4238,6 @@ definitions:
         $ref: '#/definitions/Geometry'
         description: The location of the detected text on the image. Includes an axis aligned coarse bounding box surrounding the text and a finer grain polygon for more accurate spatial information.
     description: '<p>Information about a word or line of text detected by .</p> <p>The <code>DetectedText</code> field contains the text that Amazon Rekognition detected in the image. </p> <p>Every word and line has an identifier (<code>Id</code>). Each word belongs to a line and has a parent identifier (<code>ParentId</code>) that identifies the line of text in which the word appears. The word <code>Id</code> is also an index for the word within a line of words. </p> <p>For more information, see Detecting Text in the Amazon Rekognition Developer Guide.</p>'
-  TextDetectionList:
-    type: array
-    items:
-      $ref: '#/definitions/TextDetection'
-  TextTypes:
-    type: string
-    enum:
-      - LINE
-      - WORD
-  Timestamp:
-    type: integer
-  UInteger:
-    type: integer
-    minimum: 0
-  ULong:
-    type: integer
-    minimum: 0
   UnindexedFace:
     type: object
     properties:
@@ -4206,48 +4248,5 @@ definitions:
         $ref: '#/definitions/FaceDetail'
         description: 'The structure that contains attributes of a face that <code>IndexFaces</code>detected, but didn''t index. '
     description: 'A face that detected, but didn''t index. Use the <code>Reasons</code> response attribute to determine why a face wasn''t indexed.'
-  UnindexedFaces:
-    type: array
-    items:
-      $ref: '#/definitions/UnindexedFace'
   Url:
     type: string
-  Urls:
-    type: array
-    items:
-      $ref: '#/definitions/Url'
-  Video:
-    type: object
-    properties:
-      S3Object:
-        $ref: '#/definitions/S3Object'
-        description: The Amazon S3 bucket name and file name for the video.
-    description: 'Video file stored in an Amazon S3 bucket. Amazon Rekognition video start operations such as use <code>Video</code> to specify a video for analysis. The supported file formats are .mp4, .mov and .avi.'
-  VideoJobStatus:
-    type: string
-    enum:
-      - IN_PROGRESS
-      - SUCCEEDED
-      - FAILED
-  VideoMetadata:
-    type: object
-    properties:
-      Codec:
-        $ref: '#/definitions/String'
-        description: 'Type of compression used in the analyzed video. '
-      DurationMillis:
-        $ref: '#/definitions/ULong'
-        description: Length of the video in milliseconds.
-      Format:
-        $ref: '#/definitions/String'
-        description: 'Format of the analyzed video. Possible values are MP4, MOV and AVI. '
-      FrameRate:
-        $ref: '#/definitions/Float'
-        description: Number of frames per second in the video.
-      FrameHeight:
-        $ref: '#/definitions/ULong'
-        description: Vertical pixel dimension of the video.
-      FrameWidth:
-        $ref: '#/definitions/ULong'
-        description: Horizontal pixel dimension of the video.
-    description: Information about a video that Amazon Rekognition analyzed. <code>Videometadata</code> is returned in every page of paginated responses from a Amazon Rekognition video operation.

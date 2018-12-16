@@ -676,7 +676,11 @@ definitions:
     type: string
   BucketName:
     type: string
-  undefined: {}
+  ProfileName:
+    type: string
+    pattern: '^[a-zA-Z0-9_]{2,}'
+    minLength: 2
+    maxLength: 20
   Category:
     type: string
     enum:
@@ -691,6 +695,68 @@ definitions:
   CreatedAt:
     type: string
     format: date-time
+  JobId:
+    type: string
+  Source:
+    type: object
+    properties:
+      s3:
+        $ref: '#/definitions/S3Source'
+        description: The <code>S3Source</code> object.
+    description: An <code>S3Source</code> object that contains information about the S3 bucket where you saved your unsigned code.
+  SigningMaterial:
+    type: object
+    required:
+      - certificateArn
+    properties:
+      certificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+    description: The ACM certificate that is used to sign your code.
+  PlatformId:
+    type: string
+  SigningPlatformOverrides:
+    type: object
+    properties:
+      signingConfiguration:
+        $ref: '#/definitions/SigningConfigurationOverrides'
+    description: Any overrides that are applied to the signing configuration of an AWS Signer platform.
+  SigningParameters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/SigningParameterKey'
+        value:
+          $ref: '#/definitions/SigningParameterValue'
+  RequestedBy:
+    type: string
+  SigningStatus:
+    type: string
+    enum:
+      - InProgress
+      - Failed
+      - Succeeded
+  StatusReason:
+    type: string
+  SignedObject:
+    type: object
+    properties:
+      s3:
+        $ref: '#/definitions/S3SignedObject'
+        description: The <code>S3SignedObject</code>.
+    description: Points to an <code>S3SignedObject</code> object that contains information about your signed code image.
+  S3Destination:
+    type: object
+    properties:
+      bucketName:
+        $ref: '#/definitions/BucketName'
+        description: Name of the S3 bucket.
+      prefix:
+        $ref: '#/definitions/Prefix'
+        description: An Amazon S3 prefix that you can use to limit responses to those that begin with the specified prefix.
+    description: The name and prefix of the S3 bucket where AWS Signer saves your signed objects.
   Destination:
     type: object
     properties:
@@ -705,6 +771,10 @@ definitions:
     enum:
       - RSA
       - ECDSA
+  EncryptionAlgorithms:
+    type: array
+    items:
+      $ref: '#/definitions/EncryptionAlgorithm'
   EncryptionAlgorithmOptions:
     type: object
     required:
@@ -718,15 +788,50 @@ definitions:
         $ref: '#/definitions/EncryptionAlgorithm'
         description: The default encryption algorithm that is used by an AWS Signer job.
     description: The encryption algorithm options that are available to an AWS Signer job.
-  EncryptionAlgorithms:
-    type: array
-    items:
-      $ref: '#/definitions/EncryptionAlgorithm'
+  String:
+    type: string
+  SigningConfiguration:
+    type: object
+    required:
+      - encryptionAlgorithmOptions
+      - hashAlgorithmOptions
+    properties:
+      encryptionAlgorithmOptions:
+        $ref: '#/definitions/EncryptionAlgorithmOptions'
+        description: The encryption algorithm options that are available for an AWS Signer job.
+      hashAlgorithmOptions:
+        $ref: '#/definitions/HashAlgorithmOptions'
+        description: The hash algorithm options that are available for an AWS Signer job.
+    description: The configuration of an AWS Signer operation.
+  SigningImageFormat:
+    type: object
+    required:
+      - supportedFormats
+      - defaultFormat
+    properties:
+      supportedFormats:
+        $ref: '#/definitions/ImageFormats'
+        description: The supported formats of an AWS Signer signing image.
+      defaultFormat:
+        $ref: '#/definitions/ImageFormat'
+        description: The default format of an AWS Signer signing image.
+    description: The image format of an AWS Signer platform or profile.
+  MaxSizeInMB:
+    type: integer
+  SigningProfileStatus:
+    type: string
+    enum:
+      - Active
+      - Canceled
   HashAlgorithm:
     type: string
     enum:
       - SHA1
       - SHA256
+  HashAlgorithms:
+    type: array
+    items:
+      $ref: '#/definitions/HashAlgorithm'
   HashAlgorithmOptions:
     type: object
     required:
@@ -740,10 +845,6 @@ definitions:
         $ref: '#/definitions/HashAlgorithm'
         description: The default hash algorithm that is used in an AWS Signer job.
     description: The hash algorithms that are available to an AWS Signer job.
-  HashAlgorithms:
-    type: array
-    items:
-      $ref: '#/definitions/HashAlgorithm'
   ImageFormat:
     type: string
     enum:
@@ -752,39 +853,32 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ImageFormat'
-  JobId:
-    type: string
   Key:
     type: string
   MaxResults:
     type: integer
     minimum: 1
     maximum: 25
-  MaxSizeInMB:
-    type: integer
   NextToken:
     type: string
-  PlatformId:
-    type: string
+  SigningJobs:
+    type: array
+    items:
+      $ref: '#/definitions/SigningJob'
+  SigningPlatforms:
+    type: array
+    items:
+      $ref: '#/definitions/SigningPlatform'
+  bool:
+    type: boolean
+  SigningProfiles:
+    type: array
+    items:
+      $ref: '#/definitions/SigningProfile'
   Prefix:
     type: string
-  ProfileName:
+  string:
     type: string
-    pattern: '^[a-zA-Z0-9_]{2,}'
-    minLength: 2
-    maxLength: 20
-  RequestedBy:
-    type: string
-  S3Destination:
-    type: object
-    properties:
-      bucketName:
-        $ref: '#/definitions/BucketName'
-        description: Name of the S3 bucket.
-      prefix:
-        $ref: '#/definitions/Prefix'
-        description: An Amazon S3 prefix that you can use to limit responses to those that begin with the specified prefix.
-    description: The name and prefix of the S3 bucket where AWS Signer saves your signed objects.
   S3SignedObject:
     type: object
     properties:
@@ -795,6 +889,8 @@ definitions:
         $ref: '#/definitions/key'
         description: Key name that uniquely identifies a signed code image in your bucket.
     description: The S3 bucket name and key where AWS Signer saved your signed code image.
+  Version:
+    type: string
   S3Source:
     type: object
     required:
@@ -812,26 +908,6 @@ definitions:
         $ref: '#/definitions/Version'
         description: Version of your source image in your version enabled S3 bucket.
     description: Information about the S3 bucket where you saved your unsigned code.
-  SignedObject:
-    type: object
-    properties:
-      s3:
-        $ref: '#/definitions/S3SignedObject'
-        description: The <code>S3SignedObject</code>.
-    description: Points to an <code>S3SignedObject</code> object that contains information about your signed code image.
-  SigningConfiguration:
-    type: object
-    required:
-      - encryptionAlgorithmOptions
-      - hashAlgorithmOptions
-    properties:
-      encryptionAlgorithmOptions:
-        $ref: '#/definitions/EncryptionAlgorithmOptions'
-        description: The encryption algorithm options that are available for an AWS Signer job.
-      hashAlgorithmOptions:
-        $ref: '#/definitions/HashAlgorithmOptions'
-        description: The hash algorithm options that are available for an AWS Signer job.
-    description: The configuration of an AWS Signer operation.
   SigningConfigurationOverrides:
     type: object
     properties:
@@ -842,19 +918,6 @@ definitions:
         $ref: '#/definitions/HashAlgorithm'
         description: A specified override of the default hash algorithm that is used in an AWS Signer job.
     description: A signing configuration that overrides the default encryption or hash algorithm of a signing job.
-  SigningImageFormat:
-    type: object
-    required:
-      - supportedFormats
-      - defaultFormat
-    properties:
-      supportedFormats:
-        $ref: '#/definitions/ImageFormats'
-        description: The supported formats of an AWS Signer signing image.
-      defaultFormat:
-        $ref: '#/definitions/ImageFormat'
-        description: The default format of an AWS Signer signing image.
-    description: The image format of an AWS Signer platform or profile.
   SigningJob:
     type: object
     properties:
@@ -877,32 +940,10 @@ definitions:
         $ref: '#/definitions/SigningStatus'
         description: The status of the signing job.
     description: Contains information about a signing job.
-  SigningJobs:
-    type: array
-    items:
-      $ref: '#/definitions/SigningJob'
-  SigningMaterial:
-    type: object
-    required:
-      - certificateArn
-    properties:
-      certificateArn:
-        $ref: '#/definitions/CertificateArn'
-        description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
-    description: The ACM certificate that is used to sign your code.
   SigningParameterKey:
     type: string
   SigningParameterValue:
     type: string
-  SigningParameters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/SigningParameterKey'
-        value:
-          $ref: '#/definitions/SigningParameterValue'
   SigningPlatform:
     type: object
     properties:
@@ -931,16 +972,6 @@ definitions:
         $ref: '#/definitions/MaxSizeInMB'
         description: The maximum size (in MB) of code that can be signed by a AWS Signer platform.
     description: Contains information about the signing configurations and parameters that is used to perform an AWS Signer job.
-  SigningPlatformOverrides:
-    type: object
-    properties:
-      signingConfiguration:
-        $ref: '#/definitions/SigningConfigurationOverrides'
-    description: Any overrides that are applied to the signing configuration of an AWS Signer platform.
-  SigningPlatforms:
-    type: array
-    items:
-      $ref: '#/definitions/SigningPlatform'
   SigningProfile:
     type: object
     properties:
@@ -960,35 +991,3 @@ definitions:
         $ref: '#/definitions/SigningProfileStatus'
         description: The status of an AWS Signer profile.
     description: Contains information about the ACM certificates and AWS Signer configuration parameters that can be used by a given AWS Signer user.
-  SigningProfileStatus:
-    type: string
-    enum:
-      - Active
-      - Canceled
-  SigningProfiles:
-    type: array
-    items:
-      $ref: '#/definitions/SigningProfile'
-  SigningStatus:
-    type: string
-    enum:
-      - InProgress
-      - Failed
-      - Succeeded
-  Source:
-    type: object
-    properties:
-      s3:
-        $ref: '#/definitions/S3Source'
-        description: The <code>S3Source</code> object.
-    description: An <code>S3Source</code> object that contains information about the S3 bucket where you saved your unsigned code.
-  StatusReason:
-    type: string
-  String:
-    type: string
-  Version:
-    type: string
-  bool:
-    type: boolean
-  string:
-    type: string

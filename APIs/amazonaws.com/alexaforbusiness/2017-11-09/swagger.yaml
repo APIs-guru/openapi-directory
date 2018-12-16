@@ -3938,7 +3938,19 @@ definitions:
     type: string
     minLength: 1
     maxLength: 500
-  undefined: {}
+  Arn:
+    type: string
+    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+  AddressBookName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  AddressBookDescription:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 200
   AddressBook:
     type: object
     properties:
@@ -3969,16 +3981,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AddressBookData'
-  AddressBookDescription:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 200
-  AddressBookName:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 100
   AmazonId:
     type: string
     pattern: '[a-zA-Z0-9]{1,18}'
@@ -3988,9 +3990,9 @@ definitions:
     type: string
   ApplianceManufacturerName:
     type: string
-  Arn:
+  SkillId:
     type: string
-    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+    pattern: '(^amzn1\.ask\.skill\.[0-9a-f\-]{1,200})|(^amzn1\.echo-sdk-ams\.app\.[0-9a-f\-]{1,200})'
   Key:
     type: string
     minLength: 1
@@ -4014,6 +4016,33 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BulletPoint'
+  BusinessReportStatus:
+    type: string
+    enum:
+      - RUNNING
+      - SUCCEEDED
+      - FAILED
+  BusinessReportFailureCode:
+    type: string
+    enum:
+      - ACCESS_DENIED
+      - NO_SUCH_BUCKET
+      - INTERNAL_FAILURE
+  BusinessReportS3Location:
+    type: object
+    properties:
+      Path:
+        $ref: '#/definitions/BusinessReportS3Path'
+        description: The path of the business report.
+      BucketName:
+        $ref: '#/definitions/CustomerS3BucketName'
+        description: The S3 bucket name of the output reports.
+    description: The S3 location of the output reports.
+  Timestamp:
+    type: string
+    format: date-time
+  BusinessReportDownloadUrl:
+    type: string
   BusinessReport:
     type: object
     properties:
@@ -4033,6 +4062,11 @@ definitions:
         $ref: '#/definitions/BusinessReportDownloadUrl'
         description: The download link where a user can download the report.
     description: Usage report with specified parameters.
+  BusinessReportInterval:
+    type: string
+    enum:
+      - ONE_DAY
+      - ONE_WEEK
   BusinessReportContentRange:
     type: object
     properties:
@@ -4040,24 +4074,14 @@ definitions:
         $ref: '#/definitions/BusinessReportInterval'
         description: The interval of the content range.
     description: The content range of the report.
-  BusinessReportDownloadUrl:
-    type: string
-  BusinessReportFailureCode:
-    type: string
-    enum:
-      - ACCESS_DENIED
-      - NO_SUCH_BUCKET
-      - INTERNAL_FAILURE
   BusinessReportFormat:
     type: string
     enum:
       - CSV
       - CSV_ZIP
-  BusinessReportInterval:
+  Date:
     type: string
-    enum:
-      - ONE_DAY
-      - ONE_WEEK
+    pattern: '^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$'
   BusinessReportRecurrence:
     type: object
     properties:
@@ -4065,18 +4089,21 @@ definitions:
         $ref: '#/definitions/Date'
         description: The start date.
     description: The recurrence of the reports.
-  BusinessReportS3Location:
-    type: object
-    properties:
-      Path:
-        $ref: '#/definitions/BusinessReportS3Path'
-        description: The path of the business report.
-      BucketName:
-        $ref: '#/definitions/CustomerS3BucketName'
-        description: The S3 bucket name of the output reports.
-    description: The S3 location of the output reports.
   BusinessReportS3Path:
     type: string
+  CustomerS3BucketName:
+    type: string
+    pattern: '[a-z0-9-\.]{3,63}'
+  BusinessReportScheduleName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 0
+    maxLength: 64
+  S3KeyPrefix:
+    type: string
+    pattern: '[A-Za-z0-9!_\-\.\*''()/]*'
+    minLength: 0
+    maxLength: 100
   BusinessReportSchedule:
     type: object
     properties:
@@ -4109,17 +4136,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BusinessReportSchedule'
-  BusinessReportScheduleName:
+  CategoryId:
+    type: integer
+    minimum: 1
+  CategoryName:
     type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 0
-    maxLength: 64
-  BusinessReportStatus:
-    type: string
-    enum:
-      - RUNNING
-      - SUCCEEDED
-      - FAILED
   Category:
     type: object
     properties:
@@ -4130,15 +4151,10 @@ definitions:
         $ref: '#/definitions/CategoryName'
         description: The name of the skill store category.
     description: 'The skill store category that is shown. Alexa skills are assigned a specific skill category during creation, such as News, Social, and Sports.'
-  CategoryId:
-    type: integer
-    minimum: 1
   CategoryList:
     type: array
     items:
       $ref: '#/definitions/Category'
-  CategoryName:
-    type: string
   ClientId:
     type: string
     pattern: '^\S\+\{1,256\}$'
@@ -4161,6 +4177,67 @@ definitions:
         $ref: '#/definitions/Arn'
         description: The ARN of the default conference provider.
     description: The default conference provider that is used if no other scheduled meetings are detected.
+  ConferenceProviderName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 50
+  ConferenceProviderType:
+    type: string
+    enum:
+      - CHIME
+      - BLUEJEANS
+      - FUZE
+      - GOOGLE_HANGOUTS
+      - POLYCOM
+      - RINGCENTRAL
+      - SKYPE_FOR_BUSINESS
+      - WEBEX
+      - ZOOM
+      - CUSTOM
+  IPDialIn:
+    type: object
+    required:
+      - Endpoint
+      - CommsProtocol
+    properties:
+      Endpoint:
+        $ref: '#/definitions/Endpoint'
+        description: The IP address.
+      CommsProtocol:
+        $ref: '#/definitions/CommsProtocol'
+        description: 'The protocol, including SIP, SIPS, and H323.'
+    description: The IP endpoint and protocol for calling.
+  PSTNDialIn:
+    type: object
+    required:
+      - CountryCode
+      - PhoneNumber
+      - OneClickIdDelay
+      - OneClickPinDelay
+    properties:
+      CountryCode:
+        $ref: '#/definitions/CountryCode'
+        description: The zip code.
+      PhoneNumber:
+        $ref: '#/definitions/OutboundPhoneNumber'
+        description: The phone number to call to join the conference.
+      OneClickIdDelay:
+        $ref: '#/definitions/OneClickIdDelay'
+        description: 'The delay duration before Alexa enters the conference ID with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.'
+      OneClickPinDelay:
+        $ref: '#/definitions/OneClickPinDelay'
+        description: 'The delay duration before Alexa enters the conference pin with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.'
+    description: The information for public switched telephone network (PSTN) conferencing.
+  MeetingSetting:
+    type: object
+    required:
+      - RequirePin
+    properties:
+      RequirePin:
+        $ref: '#/definitions/RequirePin'
+        description: The values that indicate whether the pin is always required.
+    description: '<p>The values that indicate whether a pin is always required (YES), never required (NO), or OPTIONAL.</p> <ul> <li> <p>If YES, Alexa will always ask for a meeting pin.</p> </li> <li> <p>If NO, Alexa will never ask for a meeting pin.</p> </li> <li> <p>If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer responds with yes, it will ask for the meeting pin.</p> </li> </ul>'
   ConferenceProvider:
     type: object
     properties:
@@ -4183,24 +4260,6 @@ definitions:
         $ref: '#/definitions/MeetingSetting'
         description: The meeting settings for the conference provider.
     description: 'An entity that provides a conferencing solution. Alexa for Business acts as the voice interface and mediator that connects users to their preferred conference provider. Examples of conference providers include Amazon Chime, Zoom, Cisco, and Polycom. '
-  ConferenceProviderName:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 50
-  ConferenceProviderType:
-    type: string
-    enum:
-      - CHIME
-      - BLUEJEANS
-      - FUZE
-      - GOOGLE_HANGOUTS
-      - POLYCOM
-      - RINGCENTRAL
-      - SKYPE_FOR_BUSINESS
-      - WEBEX
-      - ZOOM
-      - CUSTOM
   ConferenceProvidersList:
     type: array
     items:
@@ -4210,6 +4269,15 @@ definitions:
     enum:
       - ONLINE
       - OFFLINE
+  ContactName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  E164PhoneNumber:
+    type: string
+    pattern: '^\+\d{8,}$'
+    format: password
   Contact:
     type: object
     properties:
@@ -4252,20 +4320,99 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ContactData'
-  ContactName:
+  CountryCode:
+    type: string
+    pattern: '\d{1,3}'
+  ProfileName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
     minLength: 1
     maxLength: 100
-  CountryCode:
+  Timezone:
     type: string
-    pattern: '\d{1,3}'
-  CustomerS3BucketName:
+    minLength: 1
+    maxLength: 100
+  DistanceUnit:
     type: string
-    pattern: '[a-z0-9-\.]{3,63}'
-  Date:
+    enum:
+      - METRIC
+      - IMPERIAL
+  TemperatureUnit:
     type: string
-    pattern: '^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$'
+    enum:
+      - FAHRENHEIT
+      - CELSIUS
+  WakeWord:
+    type: string
+    enum:
+      - ALEXA
+      - AMAZON
+      - ECHO
+      - COMPUTER
+  MaxVolumeLimit:
+    type: integer
+  RoomName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  RoomDescription:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 200
+  ProviderCalendarId:
+    type: string
+    minLength: 0
+    maxLength: 100
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  SkillGroupName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 100
+  SkillGroupDescription:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 1
+    maxLength: 200
+  user_UserId:
+    type: string
+    pattern: '[a-zA-Z0-9@_+.-]*'
+    minLength: 1
+    maxLength: 128
+  user_FirstName:
+    type: string
+    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
+    minLength: 0
+    maxLength: 30
+  user_LastName:
+    type: string
+    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
+    minLength: 0
+    maxLength: 30
+  Email:
+    type: string
+    pattern: '([0-9a-zA-Z]([+-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})'
+    minLength: 1
+    maxLength: 128
+  RoomSkillParameterKey:
+    type: string
+    minLength: 1
+    maxLength: 256
+  EnrollmentId:
+    type: string
+    minLength: 0
+    maxLength: 128
+  DeveloperName:
+    type: string
+  PrivacyPolicy:
+    type: string
+  Url:
+    type: string
   DeveloperInfo:
     type: object
     properties:
@@ -4282,8 +4429,38 @@ definitions:
         $ref: '#/definitions/Url'
         description: The website of the developer.
     description: The details about the developer that published the skill.
-  DeveloperName:
+  DeviceSerialNumber:
     type: string
+    pattern: '[a-zA-Z0-9]{1,200}'
+  DeviceType:
+    type: string
+    pattern: '[a-zA-Z0-9]{1,200}'
+  DeviceName:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+    minLength: 2
+    maxLength: 100
+  SoftwareVersion:
+    type: string
+  MacAddress:
+    type: string
+  DeviceStatus:
+    type: string
+    enum:
+      - READY
+      - PENDING
+      - WAS_OFFLINE
+      - DEREGISTERED
+  DeviceStatusInfo:
+    type: object
+    properties:
+      DeviceStatusDetails:
+        $ref: '#/definitions/DeviceStatusDetails'
+        description: One or more device status detail descriptions.
+      ConnectionStatus:
+        $ref: '#/definitions/ConnectionStatus'
+        description: 'The latest available information about the connection status of a device. '
+    description: Detailed information about a device's status.
   Device:
     type: object
     properties:
@@ -4353,6 +4530,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DeviceData'
+  DeviceEventType:
+    type: string
+    enum:
+      - CONNECTION_STATUS
+      - DEVICE_STATUS
+  DeviceEventValue:
+    type: string
   DeviceEvent:
     type: object
     properties:
@@ -4370,31 +4554,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DeviceEvent'
-  DeviceEventType:
-    type: string
-    enum:
-      - CONNECTION_STATUS
-      - DEVICE_STATUS
-  DeviceEventValue:
-    type: string
-  DeviceName:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 2
-    maxLength: 100
-  DeviceSerialNumber:
-    type: string
-    pattern: '[a-zA-Z0-9]{1,200}'
   DeviceSerialNumberForAVS:
     type: string
     pattern: '^[a-zA-Z0-9]{1,50}$'
-  DeviceStatus:
+  DeviceStatusDetailCode:
     type: string
     enum:
-      - READY
-      - PENDING
-      - WAS_OFFLINE
-      - DEREGISTERED
+      - DEVICE_SOFTWARE_UPDATE_NEEDED
+      - DEVICE_WAS_OFFLINE
   DeviceStatusDetail:
     type: object
     properties:
@@ -4402,42 +4569,10 @@ definitions:
         $ref: '#/definitions/DeviceStatusDetailCode'
         description: The device status detail code.
     description: Details of a device’s status.
-  DeviceStatusDetailCode:
-    type: string
-    enum:
-      - DEVICE_SOFTWARE_UPDATE_NEEDED
-      - DEVICE_WAS_OFFLINE
   DeviceStatusDetails:
     type: array
     items:
       $ref: '#/definitions/DeviceStatusDetail'
-  DeviceStatusInfo:
-    type: object
-    properties:
-      DeviceStatusDetails:
-        $ref: '#/definitions/DeviceStatusDetails'
-        description: One or more device status detail descriptions.
-      ConnectionStatus:
-        $ref: '#/definitions/ConnectionStatus'
-        description: 'The latest available information about the connection status of a device. '
-    description: Detailed information about a device's status.
-  DeviceType:
-    type: string
-    pattern: '[a-zA-Z0-9]{1,200}'
-  DistanceUnit:
-    type: string
-    enum:
-      - METRIC
-      - IMPERIAL
-  E164PhoneNumber:
-    type: string
-    pattern: '^\+\d{8,}$'
-    format: password
-  Email:
-    type: string
-    pattern: '([0-9a-zA-Z]([+-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})'
-    minLength: 1
-    maxLength: 128
   EnablementType:
     type: string
     enum:
@@ -4454,10 +4589,6 @@ definitions:
     type: string
     minLength: 1
     maxLength: 256
-  EnrollmentId:
-    type: string
-    minLength: 0
-    maxLength: 128
   EnrollmentStatus:
     type: string
     enum:
@@ -4479,6 +4610,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Feature'
+  FilterKey:
+    type: string
+    minLength: 1
+    maxLength: 500
+  FilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/FilterValue'
+    maxItems: 5
   Filter:
     type: object
     required:
@@ -4492,10 +4632,6 @@ definitions:
         $ref: '#/definitions/FilterValueList'
         description: The values of a filter.
     description: A filter name and value pair that is used to return a more specific list of results. Filters can be used to match a set of resources by various criteria.
-  FilterKey:
-    type: string
-    minLength: 1
-    maxLength: 500
   FilterList:
     type: array
     items:
@@ -4505,98 +4641,12 @@ definitions:
     type: string
     minLength: 1
     maxLength: 500
-  FilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/FilterValue'
-    maxItems: 5
   GenericKeyword:
     type: string
   GenericKeywords:
     type: array
     items:
       $ref: '#/definitions/GenericKeyword'
-  IPDialIn:
-    type: object
-    required:
-      - Endpoint
-      - CommsProtocol
-    properties:
-      Endpoint:
-        $ref: '#/definitions/Endpoint'
-        description: The IP address.
-      CommsProtocol:
-        $ref: '#/definitions/CommsProtocol'
-        description: 'The protocol, including SIP, SIPS, and H323.'
-    description: The IP endpoint and protocol for calling.
-  IconUrl:
-    type: string
-  InvocationPhrase:
-    type: string
-  MacAddress:
-    type: string
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 50
-  MaxVolumeLimit:
-    type: integer
-  MeetingSetting:
-    type: object
-    required:
-      - RequirePin
-    properties:
-      RequirePin:
-        $ref: '#/definitions/RequirePin'
-        description: The values that indicate whether the pin is always required.
-    description: '<p>The values that indicate whether a pin is always required (YES), never required (NO), or OPTIONAL.</p> <ul> <li> <p>If YES, Alexa will always ask for a meeting pin.</p> </li> <li> <p>If NO, Alexa will never ask for a meeting pin.</p> </li> <li> <p>If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer responds with yes, it will ask for the meeting pin.</p> </li> </ul>'
-  NewInThisVersionBulletPoints:
-    type: array
-    items:
-      $ref: '#/definitions/BulletPoint'
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 1000
-  OneClickIdDelay:
-    type: string
-    minLength: 1
-    maxLength: 2
-  OneClickPinDelay:
-    type: string
-    minLength: 1
-    maxLength: 2
-  OutboundPhoneNumber:
-    type: string
-    pattern: '\d{10}'
-  PSTNDialIn:
-    type: object
-    required:
-      - CountryCode
-      - PhoneNumber
-      - OneClickIdDelay
-      - OneClickPinDelay
-    properties:
-      CountryCode:
-        $ref: '#/definitions/CountryCode'
-        description: The zip code.
-      PhoneNumber:
-        $ref: '#/definitions/OutboundPhoneNumber'
-        description: The phone number to call to join the conference.
-      OneClickIdDelay:
-        $ref: '#/definitions/OneClickIdDelay'
-        description: 'The delay duration before Alexa enters the conference ID with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.'
-      OneClickPinDelay:
-        $ref: '#/definitions/OneClickPinDelay'
-        description: 'The delay duration before Alexa enters the conference pin with dual-tone multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is how we send data over the telephone network.'
-    description: The information for public switched telephone network (PSTN) conferencing.
-  PrivacyPolicy:
-    type: string
-  ProductDescription:
-    type: string
-  ProductId:
-    type: string
-    pattern: '^[a-zA-Z0-9_]{1,256}$'
   Profile:
     type: object
     properties:
@@ -4637,6 +4687,111 @@ definitions:
         $ref: '#/definitions/Arn'
         description: The ARN of the address book.
     description: A room profile with attributes.
+  Room:
+    type: object
+    properties:
+      RoomArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of a room.
+      RoomName:
+        $ref: '#/definitions/RoomName'
+        description: The name of a room.
+      Description:
+        $ref: '#/definitions/RoomDescription'
+        description: The description of a room.
+      ProviderCalendarId:
+        $ref: '#/definitions/ProviderCalendarId'
+        description: The provider calendar ARN of a room.
+      ProfileArn:
+        $ref: '#/definitions/Arn'
+        description: The profile ARN of a room.
+    description: A room with attributes.
+  RoomSkillParameter:
+    type: object
+    required:
+      - ParameterKey
+      - ParameterValue
+    properties:
+      ParameterKey:
+        $ref: '#/definitions/RoomSkillParameterKey'
+        description: The parameter key of a room skill parameter. ParameterKey is an enumerated type that only takes “DEFAULT” or “SCOPE” as valid values.
+      ParameterValue:
+        $ref: '#/definitions/RoomSkillParameterValue'
+        description: The parameter value of a room skill parameter.
+    description: A skill parameter associated with a room.
+  SkillGroup:
+    type: object
+    properties:
+      SkillGroupArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of a skill group.
+      SkillGroupName:
+        $ref: '#/definitions/SkillGroupName'
+        description: The name of a skill group.
+      Description:
+        $ref: '#/definitions/SkillGroupDescription'
+        description: The description of a skill group.
+    description: A skill group with attributes.
+  IconUrl:
+    type: string
+  InvocationPhrase:
+    type: string
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 50
+  SkillTypeFilter:
+    type: string
+    enum:
+      - PUBLIC
+      - PRIVATE
+      - ALL
+  SkillListMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 10
+  SkillSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/SkillSummary'
+  SkillsStoreSkillList:
+    type: array
+    items:
+      $ref: '#/definitions/SkillsStoreSkill'
+  SmartHomeApplianceList:
+    type: array
+    items:
+      $ref: '#/definitions/SmartHomeAppliance'
+  RequirePin:
+    type: string
+    enum:
+      - 'YES'
+      - 'NO'
+      - OPTIONAL
+  NewInThisVersionBulletPoints:
+    type: array
+    items:
+      $ref: '#/definitions/BulletPoint'
+  OneClickIdDelay:
+    type: string
+    minLength: 1
+    maxLength: 2
+  OneClickPinDelay:
+    type: string
+    minLength: 1
+    maxLength: 2
+  OutboundPhoneNumber:
+    type: string
+    pattern: '\d{10}'
+  ProductDescription:
+    type: string
+  ProductId:
+    type: string
+    pattern: '^[a-zA-Z0-9_]{1,256}$'
   ProfileData:
     type: object
     properties:
@@ -4669,23 +4824,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ProfileData'
-  ProfileName:
+  UserCode:
     type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
     minLength: 1
-    maxLength: 100
-  ProviderCalendarId:
-    type: string
-    minLength: 0
-    maxLength: 100
+    maxLength: 128
   ReleaseDate:
     type: string
-  RequirePin:
+  UserId:
     type: string
-    enum:
-      - 'YES'
-      - 'NO'
-      - OPTIONAL
+    pattern: 'amzn1\.[A-Za-z0-9+-\/=.]{1,300}'
+  RoomSkillParameters:
+    type: array
+    items:
+      $ref: '#/definitions/RoomSkillParameter'
   ReviewKey:
     type: string
   ReviewValue:
@@ -4699,25 +4850,6 @@ definitions:
           $ref: '#/definitions/ReviewKey'
         value:
           $ref: '#/definitions/ReviewValue'
-  Room:
-    type: object
-    properties:
-      RoomArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of a room.
-      RoomName:
-        $ref: '#/definitions/RoomName'
-        description: The name of a room.
-      Description:
-        $ref: '#/definitions/RoomDescription'
-        description: The description of a room.
-      ProviderCalendarId:
-        $ref: '#/definitions/ProviderCalendarId'
-        description: The provider calendar ARN of a room.
-      ProfileArn:
-        $ref: '#/definitions/Arn'
-        description: The profile ARN of a room.
-    description: A room with attributes.
   RoomData:
     type: object
     properties:
@@ -4744,52 +4876,37 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RoomData'
-  RoomDescription:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 200
-  RoomName:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 100
-  RoomSkillParameter:
-    type: object
-    required:
-      - ParameterKey
-      - ParameterValue
-    properties:
-      ParameterKey:
-        $ref: '#/definitions/RoomSkillParameterKey'
-        description: The parameter key of a room skill parameter. ParameterKey is an enumerated type that only takes “DEFAULT” or “SCOPE” as valid values.
-      ParameterValue:
-        $ref: '#/definitions/RoomSkillParameterValue'
-        description: The parameter value of a room skill parameter.
-    description: A skill parameter associated with a room.
-  RoomSkillParameterKey:
-    type: string
-    minLength: 1
-    maxLength: 256
   RoomSkillParameterValue:
     type: string
     minLength: 1
     maxLength: 512
-  RoomSkillParameters:
-    type: array
-    items:
-      $ref: '#/definitions/RoomSkillParameter'
-  S3KeyPrefix:
+  Utterance:
     type: string
-    pattern: '[A-Za-z0-9!_\-\.\*''()/]*'
-    minLength: 0
-    maxLength: 100
   SampleUtterances:
     type: array
     items:
       $ref: '#/definitions/Utterance'
+  SortList:
+    type: array
+    items:
+      $ref: '#/definitions/Sort'
+    maxItems: 25
+  TotalCount:
+    type: integer
+  SkillGroupDataList:
+    type: array
+    items:
+      $ref: '#/definitions/SkillGroupData'
+  UserDataList:
+    type: array
+    items:
+      $ref: '#/definitions/UserData'
   ShortDescription:
     type: string
+  SkillTypes:
+    type: array
+    items:
+      $ref: '#/definitions/SkillStoreType'
   SkillDetails:
     type: object
     properties:
@@ -4824,19 +4941,6 @@ definitions:
         $ref: '#/definitions/DeveloperInfo'
         description: The details about the developer that published the skill.
     description: Granular information about the skill.
-  SkillGroup:
-    type: object
-    properties:
-      SkillGroupArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of a skill group.
-      SkillGroupName:
-        $ref: '#/definitions/SkillGroupName'
-        description: The name of a skill group.
-      Description:
-        $ref: '#/definitions/SkillGroupDescription'
-        description: The description of a skill group.
-    description: A skill group with attributes.
   SkillGroupData:
     type: object
     properties:
@@ -4850,27 +4954,6 @@ definitions:
         $ref: '#/definitions/SkillGroupDescription'
         description: The description of a skill group.
     description: The attributes of a skill group.
-  SkillGroupDataList:
-    type: array
-    items:
-      $ref: '#/definitions/SkillGroupData'
-  SkillGroupDescription:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 200
-  SkillGroupName:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
-    minLength: 1
-    maxLength: 100
-  SkillId:
-    type: string
-    pattern: '(^amzn1\.ask\.skill\.[0-9a-f\-]{1,200})|(^amzn1\.echo-sdk-ams\.app\.[0-9a-f\-]{1,200})'
-  SkillListMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 10
   SkillName:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -4878,6 +4961,16 @@ definitions:
     maxLength: 100
   SkillStoreType:
     type: string
+  boolean:
+    type: boolean
+  SkillType:
+    type: string
+    enum:
+      - PUBLIC
+      - PRIVATE
+    pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
+    minLength: 1
+    maxLength: 100
   SkillSummary:
     type: object
     properties:
@@ -4897,28 +4990,6 @@ definitions:
         $ref: '#/definitions/SkillType'
         description: Whether the skill is publicly available or is a private skill.
     description: The summary of skills.
-  SkillSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/SkillSummary'
-  SkillType:
-    type: string
-    enum:
-      - PUBLIC
-      - PRIVATE
-    pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
-    minLength: 1
-    maxLength: 100
-  SkillTypeFilter:
-    type: string
-    enum:
-      - PUBLIC
-      - PRIVATE
-      - ALL
-  SkillTypes:
-    type: array
-    items:
-      $ref: '#/definitions/SkillStoreType'
   SkillsStoreSkill:
     type: object
     properties:
@@ -4944,10 +5015,6 @@ definitions:
         $ref: '#/definitions/boolean'
         description: Linking support for a skill.
     description: The detailed information about an Alexa skill.
-  SkillsStoreSkillList:
-    type: array
-    items:
-      $ref: '#/definitions/SkillsStoreSkill'
   SmartHomeAppliance:
     type: object
     properties:
@@ -4961,12 +5028,15 @@ definitions:
         $ref: '#/definitions/ApplianceManufacturerName'
         description: The name of the manufacturer of the smart home appliance.
     description: 'A smart home appliance that can connect to a central system. Any domestic device can be a smart appliance. '
-  SmartHomeApplianceList:
-    type: array
-    items:
-      $ref: '#/definitions/SmartHomeAppliance'
-  SoftwareVersion:
+  SortKey:
     type: string
+    minLength: 1
+    maxLength: 500
+  SortValue:
+    type: string
+    enum:
+      - ASC
+      - DESC
   Sort:
     type: object
     required:
@@ -4980,20 +5050,16 @@ definitions:
         $ref: '#/definitions/SortValue'
         description: The sort value of a sort object.
     description: 'An object representing a sort criteria. '
-  SortKey:
+  TagKey:
     type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
-    maxLength: 500
-  SortList:
-    type: array
-    items:
-      $ref: '#/definitions/Sort'
-    maxItems: 25
-  SortValue:
+    maxLength: 128
+  TagValue:
     type: string
-    enum:
-      - ASC
-      - DESC
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -5007,44 +5073,10 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value of a tag. Tag values are case-sensitive and can be null.
     description: 'A key-value pair that can be associated with a resource. '
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  TemperatureUnit:
-    type: string
-    enum:
-      - FAHRENHEIT
-      - CELSIUS
-  Timestamp:
-    type: string
-    format: date-time
-  Timezone:
-    type: string
-    minLength: 1
-    maxLength: 100
-  TotalCount:
-    type: integer
-  Url:
-    type: string
-  UserCode:
-    type: string
-    minLength: 1
-    maxLength: 128
   UserData:
     type: object
     properties:
@@ -5067,36 +5099,3 @@ definitions:
         $ref: '#/definitions/EnrollmentId'
         description: The enrollment ARN of a user.
     description: Information related to a user.
-  UserDataList:
-    type: array
-    items:
-      $ref: '#/definitions/UserData'
-  UserId:
-    type: string
-    pattern: 'amzn1\.[A-Za-z0-9+-\/=.]{1,300}'
-  Utterance:
-    type: string
-  WakeWord:
-    type: string
-    enum:
-      - ALEXA
-      - AMAZON
-      - ECHO
-      - COMPUTER
-  boolean:
-    type: boolean
-  user_FirstName:
-    type: string
-    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
-    minLength: 0
-    maxLength: 30
-  user_LastName:
-    type: string
-    pattern: '([A-Za-z\-'' 0-9._]|\p{IsLetter})*'
-    minLength: 0
-    maxLength: 30
-  user_UserId:
-    type: string
-    pattern: '[a-zA-Z0-9@_+.-]*'
-    minLength: 1
-    maxLength: 128

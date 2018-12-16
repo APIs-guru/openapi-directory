@@ -1574,78 +1574,62 @@ definitions:
     maximum: 1000
   BooleanType:
     type: boolean
-  undefined: {}
+  SecretIdType:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  SecretARNType:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  SecretNameType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  SecretVersionIdType:
+    type: string
+    minLength: 32
+    maxLength: 64
   ClientRequestTokenType:
     type: string
     minLength: 32
     maxLength: 64
+  NameType:
+    type: string
+    minLength: 1
+    maxLength: 512
+  DescriptionType:
+    type: string
+    maxLength: 2048
+  KmsKeyIdType:
+    type: string
+    minLength: 0
+    maxLength: 2048
+  SecretBinaryType:
+    type: string
+    minLength: 0
+    maxLength: 4096
+    format: password
+  SecretStringType:
+    type: string
+    minLength: 0
+    maxLength: 4096
+    format: password
+  TagListType:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   CreatedDateType:
+    type: string
+    format: date-time
+  RecoveryWindowInDaysType:
+    type: integer
+  DeletionDateType:
     type: string
     format: date-time
   DeletedDateType:
     type: string
     format: date-time
-  DeletionDateType:
-    type: string
-    format: date-time
-  DescriptionType:
-    type: string
-    maxLength: 2048
-  ExcludeCharactersType:
-    type: string
-    minLength: 0
-    maxLength: 4096
-  ExcludeLowercaseType:
-    type: boolean
-  ExcludeNumbersType:
-    type: boolean
-  ExcludePunctuationType:
-    type: boolean
-  ExcludeUppercaseType:
-    type: boolean
-  IncludeSpaceType:
-    type: boolean
-  KmsKeyIdType:
-    type: string
-    minLength: 0
-    maxLength: 2048
-  LastAccessedDateType:
-    type: string
-    format: date-time
-  LastChangedDateType:
-    type: string
-    format: date-time
-  LastRotatedDateType:
-    type: string
-    format: date-time
-  MaxResultsType:
-    type: integer
-    minimum: 1
-    maximum: 100
-  NameType:
-    type: string
-    minLength: 1
-    maxLength: 512
-  NextTokenType:
-    type: string
-    minLength: 1
-    maxLength: 4096
-  NonEmptyResourcePolicyType:
-    type: string
-    minLength: 1
-    maxLength: 4096
-  PasswordLengthType:
-    type: integer
-    minimum: 1
-    maximum: 4096
-  RandomPasswordType:
-    type: string
-    minLength: 0
-    maxLength: 4096
-  RecoveryWindowInDaysType:
-    type: integer
-  RequireEachIncludedTypeType:
-    type: boolean
   RotationEnabledType:
     type: boolean
   RotationLambdaARNType:
@@ -1659,19 +1643,78 @@ definitions:
         $ref: '#/definitions/AutomaticallyRotateAfterDaysType'
         description: '<p>Specifies the number of days between automatic scheduled rotations of the secret.</p> <p>Secrets Manager schedules the next rotation when the previous one is complete. Secrets Manager schedules the date by adding the rotation interval (number of days) to the actual date of the last rotation. The service chooses the hour within that 24-hour date window randomly. The minute is also chosen somewhat randomly, but weighted towards the top of the hour and influenced by a variety of factors that help distribute load.</p>'
     description: A structure that defines the rotation configuration for the secret.
-  SecretARNType:
+  LastRotatedDateType:
     type: string
-    minLength: 20
-    maxLength: 2048
-  SecretBinaryType:
+    format: date-time
+  LastChangedDateType:
+    type: string
+    format: date-time
+  LastAccessedDateType:
+    type: string
+    format: date-time
+  SecretVersionsToStagesMapType:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/SecretVersionIdType'
+        value:
+          $ref: '#/definitions/SecretVersionStagesType'
+  ExcludeCharactersType:
     type: string
     minLength: 0
     maxLength: 4096
-    format: password
-  SecretIdType:
+  ExcludeLowercaseType:
+    type: boolean
+  ExcludeNumbersType:
+    type: boolean
+  ExcludePunctuationType:
+    type: boolean
+  ExcludeUppercaseType:
+    type: boolean
+  PasswordLengthType:
+    type: integer
+    minimum: 1
+    maximum: 4096
+  IncludeSpaceType:
+    type: boolean
+  RequireEachIncludedTypeType:
+    type: boolean
+  RandomPasswordType:
+    type: string
+    minLength: 0
+    maxLength: 4096
+  NonEmptyResourcePolicyType:
     type: string
     minLength: 1
-    maxLength: 2048
+    maxLength: 4096
+  SecretVersionStageType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  SecretVersionStagesType:
+    type: array
+    items:
+      $ref: '#/definitions/SecretVersionStageType'
+    minItems: 1
+    maxItems: 20
+  MaxResultsType:
+    type: integer
+    minimum: 1
+    maximum: 100
+  NextTokenType:
+    type: string
+    minLength: 1
+    maxLength: 4096
+  SecretVersionsListType:
+    type: array
+    items:
+      $ref: '#/definitions/SecretVersionsListEntry'
+  SecretListType:
+    type: array
+    items:
+      $ref: '#/definitions/SecretListEntry'
   SecretListEntry:
     type: object
     properties:
@@ -1715,33 +1758,6 @@ definitions:
         $ref: '#/definitions/SecretVersionsToStagesMapType'
         description: <p>A list of all of the currently assigned <code>SecretVersionStage</code> staging labels and the <code>SecretVersionId</code> that each is attached to. Staging labels are used to keep track of the different versions during the rotation process.</p> <note> <p>A version that does not have any <code>SecretVersionStage</code> is considered deprecated and subject to deletion. Such versions are not included in this list.</p> </note>
     description: 'A structure that contains the details about a secret. It does not include the encrypted <code>SecretString</code> and <code>SecretBinary</code> values. To get those values, use the <a>GetSecretValue</a> operation.'
-  SecretListType:
-    type: array
-    items:
-      $ref: '#/definitions/SecretListEntry'
-  SecretNameType:
-    type: string
-    minLength: 1
-    maxLength: 256
-  SecretStringType:
-    type: string
-    minLength: 0
-    maxLength: 4096
-    format: password
-  SecretVersionIdType:
-    type: string
-    minLength: 32
-    maxLength: 64
-  SecretVersionStageType:
-    type: string
-    minLength: 1
-    maxLength: 256
-  SecretVersionStagesType:
-    type: array
-    items:
-      $ref: '#/definitions/SecretVersionStageType'
-    minItems: 1
-    maxItems: 20
   SecretVersionsListEntry:
     type: object
     properties:
@@ -1758,19 +1774,14 @@ definitions:
         $ref: '#/definitions/CreatedDateType'
         description: The date and time this version of the secret was created.
     description: A structure that contains information about one version of a secret.
-  SecretVersionsListType:
-    type: array
-    items:
-      $ref: '#/definitions/SecretVersionsListEntry'
-  SecretVersionsToStagesMapType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/SecretVersionIdType'
-        value:
-          $ref: '#/definitions/SecretVersionStagesType'
+  TagKeyType:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValueType:
+    type: string
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     properties:
@@ -1785,15 +1796,3 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagKeyType'
-  TagKeyType:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagListType:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValueType:
-    type: string
-    minLength: 0
-    maxLength: 256

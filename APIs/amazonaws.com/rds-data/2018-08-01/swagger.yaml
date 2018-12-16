@@ -178,7 +178,18 @@ definitions:
   ServiceUnavailableError: {}
   Boolean:
     type: boolean
-  undefined: {}
+  Long:
+    type: integer
+  ResultFrame:
+    type: object
+    properties:
+      records:
+        $ref: '#/definitions/Records'
+        description: ResultSet Metadata.
+      resultSetMetadata:
+        $ref: '#/definitions/ResultSetMetadata'
+        description: ResultSet Metadata.
+    description: Result Frame
   SqlStatementResult:
     type: object
     properties:
@@ -189,6 +200,30 @@ definitions:
         $ref: '#/definitions/ResultFrame'
         description: ResultFrame returned by executing the sql statement
     description: SQL statement execution result
+  ArrayValues:
+    type: array
+    description: Array value
+    items:
+      $ref: '#/definitions/Value'
+  Blob:
+    type: string
+  Double:
+    type: number
+    format: double
+  Integer:
+    type: integer
+  Float:
+    type: number
+    format: float
+  String:
+    type: string
+  StructValue:
+    type: object
+    properties:
+      attributes:
+        $ref: '#/definitions/ArrayValues'
+        description: Struct or UDT
+    description: User Defined Type
   Value:
     type: object
     properties:
@@ -228,62 +263,6 @@ definitions:
     description: SQL statement execution results
     items:
       $ref: '#/definitions/SqlStatementResult'
-  ColumnMetadataList:
-    type: array
-    description: List of Column metadata
-    items:
-      $ref: '#/definitions/ColumnMetadata'
-  ResultSetMetadata:
-    type: object
-    properties:
-      columnCount:
-        $ref: '#/definitions/Long'
-        description: Number of columns
-      columnMetadata:
-        $ref: '#/definitions/ColumnMetadataList'
-        description: List of columns and their types
-    description: List of columns and their types.
-  Records:
-    type: array
-    description: List of records
-    items:
-      $ref: '#/definitions/Record'
-  ResultFrame:
-    type: object
-    properties:
-      records:
-        $ref: '#/definitions/Records'
-        description: ResultSet Metadata.
-      resultSetMetadata:
-        $ref: '#/definitions/ResultSetMetadata'
-        description: ResultSet Metadata.
-    description: Result Frame
-  Long:
-    type: integer
-  StructValue:
-    type: object
-    properties:
-      attributes:
-        $ref: '#/definitions/ArrayValues'
-        description: Struct or UDT
-    description: User Defined Type
-  Blob:
-    type: string
-  Row:
-    type: array
-    description: List of column values
-    items:
-      $ref: '#/definitions/Value'
-  String:
-    type: string
-  ArrayValues:
-    type: array
-    description: Array value
-    items:
-      $ref: '#/definitions/Value'
-  Double:
-    type: number
-    format: double
   ColumnMetadata:
     type: object
     properties:
@@ -330,11 +309,21 @@ definitions:
         $ref: '#/definitions/String'
         description: Database-specific type name.
     description: Column Metadata
-  Integer:
-    type: integer
-  Float:
-    type: number
-    format: float
+  ColumnMetadataList:
+    type: array
+    description: List of Column metadata
+    items:
+      $ref: '#/definitions/ColumnMetadata'
+  ResultSetMetadata:
+    type: object
+    properties:
+      columnCount:
+        $ref: '#/definitions/Long'
+        description: Number of columns
+      columnMetadata:
+        $ref: '#/definitions/ColumnMetadataList'
+        description: List of columns and their types
+    description: List of columns and their types.
   Record:
     type: object
     properties:
@@ -342,3 +331,13 @@ definitions:
         $ref: '#/definitions/Row'
         description: Record
     description: Row or Record
+  Records:
+    type: array
+    description: List of records
+    items:
+      $ref: '#/definitions/Record'
+  Row:
+    type: array
+    description: List of column values
+    items:
+      $ref: '#/definitions/Value'

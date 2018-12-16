@@ -2470,11 +2470,27 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: The configuration for a resource isn't valid. A resource must either be able to auto-respond to requests or have at least one delegate associated that can do it on its behalf.
-  undefined: {}
+  EmailAddress:
+    type: string
+    pattern: '[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    minLength: 1
+    maxLength: 254
   Aliases:
     type: array
     items:
       $ref: '#/definitions/EmailAddress'
+  OrganizationId:
+    type: string
+    pattern: '^m-[0-9a-f]{32}$'
+  ResourceId:
+    type: string
+    pattern: '^r-[0-9a-f]{32}$'
+  WorkMailIdentifier:
+    type: string
+    minLength: 12
+    maxLength: 256
+  Boolean:
+    type: boolean
   BookingOptions:
     type: object
     properties:
@@ -2488,8 +2504,39 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: The resource's ability to automatically decline any conflicting requests.
     description: At least one delegate must be associated to the resource to disable automatic replies from the resource.
-  Boolean:
-    type: boolean
+  GroupName:
+    type: string
+    pattern: '[\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 256
+  ResourceName:
+    type: string
+    pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z0-9]{2,})?'
+    minLength: 1
+    maxLength: 20
+  ResourceType:
+    type: string
+    enum:
+      - ROOM
+      - EQUIPMENT
+  UserName:
+    type: string
+    pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z0-9]{2,})?'
+    minLength: 1
+    maxLength: 64
+  String:
+    type: string
+    maxLength: 256
+  Password:
+    type: string
+    pattern: '[\u0020-\u00FF]+'
+    maxLength: 256
+    format: password
+  MemberType:
+    type: string
+    enum:
+      - GROUP
+      - USER
   Delegate:
     type: object
     required:
@@ -2503,17 +2550,26 @@ definitions:
         $ref: '#/definitions/MemberType'
         description: 'The type of the delegate: user or group.'
     description: 'The name of the attribute, which is one of the values defined in the UserAttribute enumeration.'
-  EmailAddress:
-    type: string
-    pattern: '[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
-    minLength: 1
-    maxLength: 254
   EntityState:
     type: string
     enum:
       - ENABLED
       - DISABLED
       - DELETED
+  Timestamp:
+    type: string
+    format: date-time
+  OrganizationName:
+    type: string
+    pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*'
+    minLength: 1
+    maxLength: 62
+  UserRole:
+    type: string
+    enum:
+      - USER
+      - RESOURCE
+      - SYSTEM_USER
   Group:
     type: object
     properties:
@@ -2536,19 +2592,42 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The date indicating when the group was disabled from Amazon WorkMail use.
     description: The representation of an Amazon WorkMail group.
-  GroupName:
-    type: string
-    pattern: '[\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 256
   Groups:
     type: array
     items:
       $ref: '#/definitions/Group'
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 1024
   MaxResults:
     type: integer
     minimum: 1
     maximum: 100
+  Members:
+    type: array
+    items:
+      $ref: '#/definitions/Member'
+  Permissions:
+    type: array
+    items:
+      $ref: '#/definitions/Permission'
+  OrganizationSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/OrganizationSummary'
+  ResourceDelegates:
+    type: array
+    items:
+      $ref: '#/definitions/Delegate'
+  Resources:
+    type: array
+    items:
+      $ref: '#/definitions/Resource'
+  Users:
+    type: array
+    items:
+      $ref: '#/definitions/User'
   Member:
     type: object
     properties:
@@ -2571,31 +2650,6 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The date indicating when the member was disabled from Amazon WorkMail use.
     description: The representation of a group member (user or group).
-  MemberType:
-    type: string
-    enum:
-      - GROUP
-      - USER
-  Members:
-    type: array
-    items:
-      $ref: '#/definitions/Member'
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  OrganizationId:
-    type: string
-    pattern: '^m-[0-9a-f]{32}$'
-  OrganizationName:
-    type: string
-    pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*'
-    minLength: 1
-    maxLength: 62
-  OrganizationSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/OrganizationSummary'
   OrganizationSummary:
     type: object
     properties:
@@ -2612,11 +2666,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The state associated with the organization.
     description: The brief overview associated with an organization.
-  Password:
-    type: string
-    pattern: '[\u0020-\u00FF]+'
-    maxLength: 256
-    format: password
+  PermissionValues:
+    type: array
+    items:
+      $ref: '#/definitions/PermissionType'
   Permission:
     type: object
     required:
@@ -2640,14 +2693,6 @@ definitions:
       - FULL_ACCESS
       - SEND_AS
       - SEND_ON_BEHALF
-  PermissionValues:
-    type: array
-    items:
-      $ref: '#/definitions/PermissionType'
-  Permissions:
-    type: array
-    items:
-      $ref: '#/definitions/Permission'
   Resource:
     type: object
     properties:
@@ -2673,33 +2718,6 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The date indicating when the resource was disabled from Amazon WorkMail use.
     description: The overview for a resource containing relevant data regarding it.
-  ResourceDelegates:
-    type: array
-    items:
-      $ref: '#/definitions/Delegate'
-  ResourceId:
-    type: string
-    pattern: '^r-[0-9a-f]{32}$'
-  ResourceName:
-    type: string
-    pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z0-9]{2,})?'
-    minLength: 1
-    maxLength: 20
-  ResourceType:
-    type: string
-    enum:
-      - ROOM
-      - EQUIPMENT
-  Resources:
-    type: array
-    items:
-      $ref: '#/definitions/Resource'
-  String:
-    type: string
-    maxLength: 256
-  Timestamp:
-    type: string
-    format: date-time
   User:
     type: object
     properties:
@@ -2728,22 +2746,3 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The date indicating when the user was disabled from Amazon WorkMail use.
     description: The representation of an Amazon WorkMail user.
-  UserName:
-    type: string
-    pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z0-9]{2,})?'
-    minLength: 1
-    maxLength: 64
-  UserRole:
-    type: string
-    enum:
-      - USER
-      - RESOURCE
-      - SYSTEM_USER
-  Users:
-    type: array
-    items:
-      $ref: '#/definitions/User'
-  WorkMailIdentifier:
-    type: string
-    minLength: 12
-    maxLength: 256

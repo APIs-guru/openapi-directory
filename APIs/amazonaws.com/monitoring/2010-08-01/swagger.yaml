@@ -1071,7 +1071,27 @@ definitions:
     type: string
     minLength: 0
     maxLength: 1024
-  undefined: {}
+  AlarmName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  Timestamp:
+    type: string
+    format: date-time
+  HistoryItemType:
+    type: string
+    enum:
+      - ConfigurationUpdate
+      - StateUpdate
+      - Action
+  HistorySummary:
+    type: string
+    minLength: 1
+    maxLength: 255
+  HistoryData:
+    type: string
+    minLength: 1
+    maxLength: 4095
   AlarmHistoryItem:
     type: object
     properties:
@@ -1095,10 +1115,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AlarmHistoryItem'
-  AlarmName:
-    type: string
-    minLength: 1
-    maxLength: 255
   AlarmNamePrefix:
     type: string
     minLength: 1
@@ -1115,6 +1131,9 @@ definitions:
       - GreaterThanThreshold
       - LessThanThreshold
       - LessThanOrEqualToThreshold
+  DatapointValue:
+    type: number
+    format: double
   Counts:
     type: array
     items:
@@ -1123,10 +1142,6 @@ definitions:
     type: string
   DashboardBody:
     type: string
-  DashboardEntries:
-    type: array
-    items:
-      $ref: '#/definitions/DashboardEntry'
   DashboardEntry:
     type: object
     properties:
@@ -1143,14 +1158,27 @@ definitions:
         $ref: '#/definitions/Size'
         description: 'The size of the dashboard, in bytes.'
     description: Represents a specific dashboard.
+  DashboardEntries:
+    type: array
+    items:
+      $ref: '#/definitions/DashboardEntry'
   DashboardName:
     type: string
+  LastModified:
+    type: string
+    format: date-time
+  Size:
+    type: integer
   DashboardNamePrefix:
     type: string
   DashboardNames:
     type: array
     items:
       $ref: '#/definitions/DashboardName'
+  DataPath:
+    type: string
+  Message:
+    type: string
   DashboardValidationMessage:
     type: object
     properties:
@@ -1165,8 +1193,45 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DashboardValidationMessage'
-  DataPath:
+  StandardUnit:
     type: string
+    enum:
+      - Seconds
+      - Microseconds
+      - Milliseconds
+      - Bytes
+      - Kilobytes
+      - Megabytes
+      - Gigabytes
+      - Terabytes
+      - Bits
+      - Kilobits
+      - Megabits
+      - Gigabits
+      - Terabits
+      - Percent
+      - Count
+      - Bytes/Second
+      - Kilobytes/Second
+      - Megabytes/Second
+      - Gigabytes/Second
+      - Terabytes/Second
+      - Bits/Second
+      - Kilobits/Second
+      - Megabits/Second
+      - Gigabits/Second
+      - Terabits/Second
+      - Count/Second
+      - None
+  DatapointValueMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ExtendedStatistic'
+        value:
+          $ref: '#/definitions/DatapointValue'
   Datapoint:
     type: object
     properties:
@@ -1195,21 +1260,9 @@ definitions:
         $ref: '#/definitions/DatapointValueMap'
         description: The percentile statistic for the data point.
     description: Encapsulates the statistical data that CloudWatch computes from metric data.
-  DatapointValue:
-    type: number
-    format: double
   ExtendedStatistic:
     type: string
     pattern: 'p(\d{1,2}(\.\d{0,2})?|100)'
-  DatapointValueMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ExtendedStatistic'
-        value:
-          $ref: '#/definitions/DatapointValue'
   DatapointValues:
     type: array
     items:
@@ -1221,6 +1274,57 @@ definitions:
   DatapointsToAlarm:
     type: integer
     minimum: 1
+  MaxRecords:
+    type: integer
+    minimum: 1
+    maximum: 100
+  NextToken:
+    type: string
+    minLength: 0
+    maxLength: 1024
+  MetricName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  Namespace:
+    type: string
+    pattern: '[^:].*'
+    minLength: 1
+    maxLength: 255
+  Statistic:
+    type: string
+    enum:
+      - SampleCount
+      - Average
+      - Sum
+      - Minimum
+      - Maximum
+  Dimensions:
+    type: array
+    items:
+      $ref: '#/definitions/Dimension'
+    maxItems: 10
+  Period:
+    type: integer
+    minimum: 1
+  MetricAlarms:
+    type: array
+    items:
+      $ref: '#/definitions/MetricAlarm'
+  StateValue:
+    type: string
+    enum:
+      - OK
+      - ALARM
+      - INSUFFICIENT_DATA
+  DimensionName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  DimensionValue:
+    type: string
+    minLength: 1
+    maxLength: 255
   Dimension:
     type: object
     required:
@@ -1251,19 +1355,6 @@ definitions:
     items:
       $ref: '#/definitions/DimensionFilter'
     maxItems: 10
-  DimensionName:
-    type: string
-    minLength: 1
-    maxLength: 255
-  DimensionValue:
-    type: string
-    minLength: 1
-    maxLength: 255
-  Dimensions:
-    type: array
-    items:
-      $ref: '#/definitions/Dimension'
-    maxItems: 10
   EvaluateLowSampleCountPercentile:
     type: string
     minLength: 1
@@ -1277,30 +1368,42 @@ definitions:
       $ref: '#/definitions/ExtendedStatistic'
     minItems: 1
     maxItems: 10
-  GetMetricDataMaxDatapoints:
-    type: integer
-  HistoryData:
-    type: string
-    minLength: 1
-    maxLength: 4095
-  HistoryItemType:
+  MetricDataQueries:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDataQuery'
+  ScanBy:
     type: string
     enum:
-      - ConfigurationUpdate
-      - StateUpdate
-      - Action
-  HistorySummary:
-    type: string
-    minLength: 1
-    maxLength: 255
-  LastModified:
-    type: string
-    format: date-time
-  MaxRecords:
+      - TimestampDescending
+      - TimestampAscending
+  GetMetricDataMaxDatapoints:
     type: integer
-    minimum: 1
-    maximum: 100
-  Message:
+  MetricDataResults:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDataResult'
+  Statistics:
+    type: array
+    items:
+      $ref: '#/definitions/Statistic'
+    minItems: 1
+    maxItems: 5
+  MetricLabel:
+    type: string
+  MetricWidget:
+    type: string
+  OutputFormat:
+    type: string
+  MetricWidgetImage:
+    type: string
+  Metrics:
+    type: array
+    items:
+      $ref: '#/definitions/Metric'
+  MessageDataCode:
+    type: string
+  MessageDataValue:
     type: string
   MessageData:
     type: object
@@ -1312,10 +1415,6 @@ definitions:
         $ref: '#/definitions/MessageDataValue'
         description: The message text.
     description: 'A message returned by the <code>GetMetricData</code>API, including a code and a description.'
-  MessageDataCode:
-    type: string
-  MessageDataValue:
-    type: string
   Metric:
     type: object
     properties:
@@ -1329,6 +1428,26 @@ definitions:
         $ref: '#/definitions/Dimensions'
         description: The dimensions for the metric.
     description: Represents a specific metric.
+  ResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceName'
+    maxItems: 5
+  StateReason:
+    type: string
+    minLength: 0
+    maxLength: 1023
+  StateReasonData:
+    type: string
+    minLength: 0
+    maxLength: 4000
+  Threshold:
+    type: number
+    format: double
+  TreatMissingData:
+    type: string
+    minLength: 1
+    maxLength: 255
   MetricAlarm:
     type: object
     properties:
@@ -1411,69 +1530,6 @@ definitions:
         $ref: '#/definitions/MetricDataQueries'
         description: <p/>
     description: Represents an alarm.
-  MetricAlarms:
-    type: array
-    items:
-      $ref: '#/definitions/MetricAlarm'
-  MetricData:
-    type: array
-    items:
-      $ref: '#/definitions/MetricDatum'
-  MetricDataQueries:
-    type: array
-    items:
-      $ref: '#/definitions/MetricDataQuery'
-  MetricDataQuery:
-    type: object
-    required:
-      - Id
-    properties:
-      Id:
-        $ref: '#/definitions/MetricId'
-        description: 'A short name used to tie this object to the results in the response. This name must be unique within a single call to <code>GetMetricData</code>. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscore. The first character must be a lowercase letter.'
-      MetricStat:
-        $ref: '#/definitions/MetricStat'
-        description: '<p>The metric to be returned, along with statistics, period, and units. Use this parameter only if this object is retrieving a metric and not performing a math expression on returned data.</p> <p>Within one MetricDataQuery object, you must specify either <code>Expression</code> or <code>MetricStat</code> but not both.</p>'
-      Expression:
-        $ref: '#/definitions/MetricExpression'
-        description: '<p>The math expression to be performed on the returned data, if this object is performing a math expression. This expression can use the <code>Id</code> of the other metrics to refer to those metrics, and can also use the <code>Id</code> of other expressions to use the result of those expressions. For more information about metric math expressions, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Within each MetricDataQuery object, you must specify either <code>Expression</code> or <code>MetricStat</code> but not both.</p>'
-      Label:
-        $ref: '#/definitions/MetricLabel'
-        description: 'A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch generates a default.'
-      ReturnData:
-        $ref: '#/definitions/ReturnData'
-        description: '<p>When used in <code>GetMetricData</code>, this option indicates whether to return the timestamps and raw data values of this metric. If you are performing this call just to do math expressions and do not also need the raw data returned, you can specify <code>False</code>. If you omit this, the default of <code>True</code> is used.</p> <p>When used in <code>PutMetricAlarm</code>, specify <code>True</code> for the one expression result to use as the alarm. For all other metrics and expressions in the same <code>PutMetricAlarm</code> operation, specify <code>ReturnData</code> as False.</p>'
-    description: '<p>This structure is used in both <code>GetMetricData</code> and <code>PutMetricAlarm</code>. The supported use of this structure is different for those two operations.</p> <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and whether this call is just retrieving a batch set of data for one metric, or is performing a math expression on metric data. A single <code>GetMetricData</code> call can include up to 100 <code>MetricDataQuery</code> structures.</p> <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a metric math expression. Each <code>MetricDataQuery</code> in the array specifies either a metric to retrieve, or a math expression to be performed on retrieved metrics. A single <code>PutMetricAlarm</code> call can include up to 20 <code>MetricDataQuery</code> structures in the array. The 20 structures can include as many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a metric, and as many as 10 structures that contain the <code>Expression</code> parameter to perform a math expression. Any expression used in a <code>PutMetricAlarm</code> operation must return a single time series. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Some of the parameters of this structure also have different uses whether you are using this structure in a <code>GetMetricData</code> operation or a <code>PutMetricAlarm</code> operation. These differences are explained in the following parameter list.</p>'
-  MetricDataResult:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/MetricId'
-        description: The short name you specified to represent this metric.
-      Label:
-        $ref: '#/definitions/MetricLabel'
-        description: The human-readable label associated with the data.
-      Timestamps:
-        $ref: '#/definitions/Timestamps'
-        description: 'The timestamps for the data points, formatted in Unix timestamp format. The number of timestamps always matches the number of values and the value for Timestamps[x] is Values[x].'
-      Values:
-        $ref: '#/definitions/DatapointValues'
-        description: 'The data points for the metric corresponding to <code>Timestamps</code>. The number of values always matches the number of timestamps and the timestamp for Values[x] is Timestamps[x].'
-      StatusCode:
-        $ref: '#/definitions/StatusCode'
-        description: 'The status of the returned data. <code>Complete</code> indicates that all data points in the requested time range were returned. <code>PartialData</code> means that an incomplete set of data points were returned. You can use the <code>NextToken</code> value that was returned and repeat your request to get more data points. <code>NextToken</code> is not returned if you are performing a math expression. <code>InternalError</code> indicates that an error occurred. Retry your request using <code>NextToken</code>, if present.'
-      Messages:
-        $ref: '#/definitions/MetricDataResultMessages'
-        description: A list of messages with additional information about the data returned.
-    description: 'A <code>GetMetricData</code> call returns an array of <code>MetricDataResult</code> structures. Each of these structures includes the data points for that metric, along with the timestamps of those data points and other identifying information.'
-  MetricDataResultMessages:
-    type: array
-    items:
-      $ref: '#/definitions/MessageData'
-  MetricDataResults:
-    type: array
-    items:
-      $ref: '#/definitions/MetricDataResult'
   MetricDatum:
     type: object
     required:
@@ -1507,17 +1563,32 @@ definitions:
         $ref: '#/definitions/StorageResolution'
         description: '<p>Valid values are 1 and 60. Setting this to 1 specifies this metric as a high-resolution metric, so that CloudWatch stores the metric with sub-minute resolution down to one second. Setting this to 60 specifies this metric as a regular-resolution metric, which CloudWatch stores at 1-minute resolution. Currently, high resolution is available only for custom metrics. For more information about high-resolution metrics, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics">High-Resolution Metrics</a> in the <i>Amazon CloudWatch User Guide</i>. </p> <p>This field is optional, if you do not specify it the default of 60 is used.</p>'
     description: Encapsulates the information sent to either create a metric or add new values to be aggregated into an existing metric.
-  MetricExpression:
-    type: string
-    minLength: 1
-    maxLength: 1024
+  MetricData:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDatum'
+  MetricDataQuery:
+    type: object
+    required:
+      - Id
+    properties:
+      Id:
+        $ref: '#/definitions/MetricId'
+        description: 'A short name used to tie this object to the results in the response. This name must be unique within a single call to <code>GetMetricData</code>. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscore. The first character must be a lowercase letter.'
+      MetricStat:
+        $ref: '#/definitions/MetricStat'
+        description: '<p>The metric to be returned, along with statistics, period, and units. Use this parameter only if this object is retrieving a metric and not performing a math expression on returned data.</p> <p>Within one MetricDataQuery object, you must specify either <code>Expression</code> or <code>MetricStat</code> but not both.</p>'
+      Expression:
+        $ref: '#/definitions/MetricExpression'
+        description: '<p>The math expression to be performed on the returned data, if this object is performing a math expression. This expression can use the <code>Id</code> of the other metrics to refer to those metrics, and can also use the <code>Id</code> of other expressions to use the result of those expressions. For more information about metric math expressions, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Within each MetricDataQuery object, you must specify either <code>Expression</code> or <code>MetricStat</code> but not both.</p>'
+      Label:
+        $ref: '#/definitions/MetricLabel'
+        description: 'A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch generates a default.'
+      ReturnData:
+        $ref: '#/definitions/ReturnData'
+        description: '<p>When used in <code>GetMetricData</code>, this option indicates whether to return the timestamps and raw data values of this metric. If you are performing this call just to do math expressions and do not also need the raw data returned, you can specify <code>False</code>. If you omit this, the default of <code>True</code> is used.</p> <p>When used in <code>PutMetricAlarm</code>, specify <code>True</code> for the one expression result to use as the alarm. For all other metrics and expressions in the same <code>PutMetricAlarm</code> operation, specify <code>ReturnData</code> as False.</p>'
+    description: '<p>This structure is used in both <code>GetMetricData</code> and <code>PutMetricAlarm</code>. The supported use of this structure is different for those two operations.</p> <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and whether this call is just retrieving a batch set of data for one metric, or is performing a math expression on metric data. A single <code>GetMetricData</code> call can include up to 100 <code>MetricDataQuery</code> structures.</p> <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a metric math expression. Each <code>MetricDataQuery</code> in the array specifies either a metric to retrieve, or a math expression to be performed on retrieved metrics. A single <code>PutMetricAlarm</code> call can include up to 20 <code>MetricDataQuery</code> structures in the array. The 20 structures can include as many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a metric, and as many as 10 structures that contain the <code>Expression</code> parameter to perform a math expression. Any expression used in a <code>PutMetricAlarm</code> operation must return a single time series. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Some of the parameters of this structure also have different uses whether you are using this structure in a <code>GetMetricData</code> operation or a <code>PutMetricAlarm</code> operation. These differences are explained in the following parameter list.</p>'
   MetricId:
-    type: string
-    minLength: 1
-    maxLength: 255
-  MetricLabel:
-    type: string
-  MetricName:
     type: string
     minLength: 1
     maxLength: 255
@@ -1541,100 +1612,48 @@ definitions:
         $ref: '#/definitions/StandardUnit'
         description: The unit to use for the returned data points.
     description: 'This structure defines the metric to be returned, along with the statistics, period, and units.'
-  MetricWidget:
-    type: string
-  MetricWidgetImage:
-    type: string
-  Metrics:
-    type: array
-    items:
-      $ref: '#/definitions/Metric'
-  Namespace:
-    type: string
-    pattern: '[^:].*'
-    minLength: 1
-    maxLength: 255
-  NextToken:
-    type: string
-    minLength: 0
-    maxLength: 1024
-  OutputFormat:
-    type: string
-  Period:
-    type: integer
-    minimum: 1
-  ResourceList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceName'
-    maxItems: 5
-  ResourceName:
+  MetricExpression:
     type: string
     minLength: 1
     maxLength: 1024
   ReturnData:
     type: boolean
-  ScanBy:
+  Timestamps:
+    type: array
+    items:
+      $ref: '#/definitions/Timestamp'
+  StatusCode:
     type: string
     enum:
-      - TimestampDescending
-      - TimestampAscending
-  Size:
-    type: integer
-  StandardUnit:
-    type: string
-    enum:
-      - Seconds
-      - Microseconds
-      - Milliseconds
-      - Bytes
-      - Kilobytes
-      - Megabytes
-      - Gigabytes
-      - Terabytes
-      - Bits
-      - Kilobits
-      - Megabits
-      - Gigabits
-      - Terabits
-      - Percent
-      - Count
-      - Bytes/Second
-      - Kilobytes/Second
-      - Megabytes/Second
-      - Gigabytes/Second
-      - Terabytes/Second
-      - Bits/Second
-      - Kilobits/Second
-      - Megabits/Second
-      - Gigabits/Second
-      - Terabits/Second
-      - Count/Second
-      - None
-  Stat:
-    type: string
-  StateReason:
-    type: string
-    minLength: 0
-    maxLength: 1023
-  StateReasonData:
-    type: string
-    minLength: 0
-    maxLength: 4000
-  StateValue:
-    type: string
-    enum:
-      - OK
-      - ALARM
-      - INSUFFICIENT_DATA
-  Statistic:
-    type: string
-    enum:
-      - SampleCount
-      - Average
-      - Sum
-      - Minimum
-      - Maximum
+      - Complete
+      - InternalError
+      - PartialData
+  MetricDataResultMessages:
+    type: array
+    items:
+      $ref: '#/definitions/MessageData'
+  MetricDataResult:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/MetricId'
+        description: The short name you specified to represent this metric.
+      Label:
+        $ref: '#/definitions/MetricLabel'
+        description: The human-readable label associated with the data.
+      Timestamps:
+        $ref: '#/definitions/Timestamps'
+        description: 'The timestamps for the data points, formatted in Unix timestamp format. The number of timestamps always matches the number of values and the value for Timestamps[x] is Values[x].'
+      Values:
+        $ref: '#/definitions/DatapointValues'
+        description: 'The data points for the metric corresponding to <code>Timestamps</code>. The number of values always matches the number of timestamps and the timestamp for Values[x] is Timestamps[x].'
+      StatusCode:
+        $ref: '#/definitions/StatusCode'
+        description: 'The status of the returned data. <code>Complete</code> indicates that all data points in the requested time range were returned. <code>PartialData</code> means that an incomplete set of data points were returned. You can use the <code>NextToken</code> value that was returned and repeat your request to get more data points. <code>NextToken</code> is not returned if you are performing a math expression. <code>InternalError</code> indicates that an error occurred. Retry your request using <code>NextToken</code>, if present.'
+      Messages:
+        $ref: '#/definitions/MetricDataResultMessages'
+        description: A list of messages with additional information about the data returned.
+    description: 'A <code>GetMetricData</code> call returns an array of <code>MetricDataResult</code> structures. Each of these structures includes the data points for that metric, along with the timestamps of those data points and other identifying information.'
   StatisticSet:
     type: object
     required:
@@ -1656,36 +1675,16 @@ definitions:
         $ref: '#/definitions/DatapointValue'
         description: The maximum value of the sample set.
     description: 'Represents a set of statistics that describes a specific metric. '
-  Statistics:
-    type: array
-    items:
-      $ref: '#/definitions/Statistic'
-    minItems: 1
-    maxItems: 5
-  StatusCode:
-    type: string
-    enum:
-      - Complete
-      - InternalError
-      - PartialData
-  StorageResolution:
-    type: integer
-    minimum: 1
-  Threshold:
-    type: number
-    format: double
-  Timestamp:
-    type: string
-    format: date-time
-  Timestamps:
-    type: array
-    items:
-      $ref: '#/definitions/Timestamp'
-  TreatMissingData:
-    type: string
-    minLength: 1
-    maxLength: 255
   Values:
     type: array
     items:
       $ref: '#/definitions/DatapointValue'
+  StorageResolution:
+    type: integer
+    minimum: 1
+  Stat:
+    type: string
+  ResourceName:
+    type: string
+    minLength: 1
+    maxLength: 1024

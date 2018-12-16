@@ -2183,7 +2183,23 @@ definitions:
       ScoreThreshold:
         $ref: '#/definitions/ScoreThreshold'
         description: '<p>The <code>ScoreThreshold</code> used in binary classification <code>MLModel</code> that marks the boundary between a positive prediction and a negative prediction.</p> <p>Output values greater than or equal to the <code>ScoreThreshold</code> receive a positive result from the <code>MLModel</code>, such as <code>true</code>. Output values less than the <code>ScoreThreshold</code> receive a negative response from the <code>MLModel</code>, such as <code>false</code>.</p>'
-  undefined: {}
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    maxItems: 100
+  EntityId:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 64
+  TaggableResourceType:
+    type: string
+    enum:
+      - BatchPrediction
+      - DataSource
+      - Evaluation
+      - MLModel
   Algorithm:
     type: string
     enum:
@@ -2193,6 +2209,36 @@ definitions:
     type: string
     pattern: 'arn:aws:iam::[0-9]+:((user/.+)|(root))'
     description: An Amazon Web Service (AWS) user account identifier. The account identifier can be an AWS root account or an AWS Identity and Access Management (IAM) user.
+  S3Url:
+    type: string
+    pattern: 's3://([^/]+)(/.*)?'
+    description: A reference to a file or bucket on Amazon Simple Storage Service (Amazon S3).
+    maxLength: 2048
+  EpochTime:
+    type: string
+    description: A timestamp represented in epoch time.
+    format: date-time
+  EntityName:
+    type: string
+    pattern: .*\S.*|^$
+    description: A user-supplied name or description of the Amazon ML resource.
+    maxLength: 1024
+  EntityStatus:
+    type: string
+    enum:
+      - PENDING
+      - INPROGRESS
+      - FAILED
+      - COMPLETED
+      - DELETED
+    description: '<p>Object status with the following possible values:</p> <ul> <li><code>PENDING</code></li> <li><code>INPROGRESS</code></li> <li><code>FAILED</code></li> <li><code>COMPLETED</code></li> <li><code>DELETED</code></li> </ul>'
+  Message:
+    type: string
+    description: ' Description of the most recent details about an object.'
+    maxLength: 10240
+  LongType:
+    type: integer
+    description: Long integer type that is a 64-bit signed number.
   BatchPrediction:
     type: object
     properties:
@@ -2263,12 +2309,177 @@ definitions:
     maxLength: 1024
   ComputeStatistics:
     type: boolean
+  RDSDataSpec:
+    type: object
+    required:
+      - DatabaseInformation
+      - SelectSqlQuery
+      - DatabaseCredentials
+      - S3StagingLocation
+      - ResourceRole
+      - ServiceRole
+      - SubnetId
+      - SecurityGroupIds
+    properties:
+      DatabaseInformation:
+        $ref: '#/definitions/RDSDatabase'
+        description: Describes the <code>DatabaseName</code> and <code>InstanceIdentifier</code> of an Amazon RDS database.
+      SelectSqlQuery:
+        $ref: '#/definitions/RDSSelectSqlQuery'
+        description: The query that is used to retrieve the observation data for the <code>DataSource</code>.
+      DatabaseCredentials:
+        $ref: '#/definitions/RDSDatabaseCredentials'
+        description: The AWS Identity and Access Management (IAM) credentials that are used connect to the Amazon RDS database.
+      S3StagingLocation:
+        $ref: '#/definitions/S3Url'
+        description: The Amazon S3 location for staging Amazon RDS data. The data retrieved from Amazon RDS using <code>SelectSqlQuery</code> is stored in this location.
+      DataRearrangement:
+        $ref: '#/definitions/DataRearrangement'
+        description: '<p>A JSON string that represents the splitting and rearrangement processing to be applied to a <code>DataSource</code>. If the <code>DataRearrangement</code> parameter is not provided, all of the input data is used to create the <code>Datasource</code>.</p> <p>There are multiple parameters that control what data is used to create a datasource:</p> <ul> <li><p><b><code>percentBegin</code></b></p> <p>Use <code>percentBegin</code> to indicate the beginning of the range of the data used to create the Datasource. If you do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML includes all of the data when creating the datasource.</p></li> <li><p><b><code>percentEnd</code></b></p> <p>Use <code>percentEnd</code> to indicate the end of the range of the data used to create the Datasource. If you do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML includes all of the data when creating the datasource.</p></li> <li><p><b><code>complement</code></b></p> <p>The <code>complement</code> parameter instructs Amazon ML to use the data that is not included in the range of <code>percentBegin</code> to <code>percentEnd</code> to create a datasource. The <code>complement</code> parameter is useful if you need to create complementary datasources for training and evaluation. To create a complementary datasource, use the same values for <code>percentBegin</code> and <code>percentEnd</code>, along with the <code>complement</code> parameter.</p> <p>For example, the following two datasources do not share any data, and can be used to train and evaluate a model. The first datasource has 25 percent of the data, and the second one has 75 percent of the data.</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":0, "percentEnd":25}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":0, "percentEnd":25, "complement":"true"}}</code></p> </li> <li><p><b><code>strategy</code></b></p> <p>To change how Amazon ML splits the data for a datasource, use the <code>strategy</code> parameter.</p> <p>The default value for the <code>strategy</code> parameter is <code>sequential</code>, meaning that Amazon ML takes all of the data records between the <code>percentBegin</code> and <code>percentEnd</code> parameters for the datasource, in the order that the records appear in the input data.</p> <p>The following two <code>DataRearrangement</code> lines are examples of sequentially ordered training and evaluation datasources:</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential"}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential", "complement":"true"}}</code></p> <p>To randomly split the input data into the proportions indicated by the percentBegin and percentEnd parameters, set the <code>strategy</code> parameter to <code>random</code> and provide a string that is used as the seed value for the random data splitting (for example, you can use the S3 path to your data as the random seed string). If you choose the random split strategy, Amazon ML assigns each row of data a pseudo-random number between 0 and 100, and then selects the rows that have an assigned number between <code>percentBegin</code> and <code>percentEnd</code>. Pseudo-random numbers are assigned using both the input seed string value and the byte offset as a seed, so changing the data results in a different split. Any existing ordering is preserved. The random splitting strategy ensures that variables in the training and evaluation data are distributed similarly. It is useful in the cases where the input data may have an implicit sort order, which would otherwise result in training and evaluation datasources containing non-similar data records.</p> <p>The following two <code>DataRearrangement</code> lines are examples of non-sequentially ordered training and evaluation datasources:</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}</code></p> </li> </ul>'
+      DataSchema:
+        $ref: '#/definitions/DataSchema'
+        description: '<p>A JSON string that represents the schema for an Amazon RDS <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>.</p> <p>A <code>DataSchema</code> is not required if you specify a <code>DataSchemaUri</code></p> <p>Define your <code>DataSchema</code> as a series of key-value pairs. <code>attributes</code> and <code>excludedVariableNames</code> have an array of key-value pairs for their value. Use the following format to define your <code>DataSchema</code>.</p> <p>{ "version": "1.0",</p> <p> "recordAnnotationFieldName": "F1",</p> <p> "recordWeightFieldName": "F2",</p> <p> "targetFieldName": "F3",</p> <p> "dataFormat": "CSV",</p> <p> "dataFileContainsHeader": true,</p> <p> "attributes": [</p> <p> { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2", "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, { "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5", "fieldType": "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, { "fieldName": "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8", "fieldType": "WEIGHTED_STRING_SEQUENCE" } ],</p> <p> "excludedVariableNames": [ "F6" ] } </p> <?oxy_insert_end>'
+      DataSchemaUri:
+        $ref: '#/definitions/S3Url'
+        description: 'The Amazon S3 location of the <code>DataSchema</code>. '
+      ResourceRole:
+        $ref: '#/definitions/EDPResourceRole'
+        description: 'The role (DataPipelineDefaultResourceRole) assumed by an Amazon Elastic Compute Cloud (Amazon EC2) instance to carry out the copy operation from Amazon RDS to an Amazon S3 task. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html">Role templates</a> for data pipelines.'
+      ServiceRole:
+        $ref: '#/definitions/EDPServiceRole'
+        description: 'The role (DataPipelineDefaultRole) assumed by AWS Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon S3. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html">Role templates</a> for data pipelines.'
+      SubnetId:
+        $ref: '#/definitions/EDPSubnetId'
+        description: The subnet ID to be used to access a VPC-based RDS DB instance. This attribute is used by Data Pipeline to carry out the copy task from Amazon RDS to Amazon S3.
+      SecurityGroupIds:
+        $ref: '#/definitions/EDPSecurityGroupIds'
+        description: The security group IDs to be used to access a VPC-based RDS DB instance. Ensure that there are appropriate ingress rules set up to allow access to the RDS DB instance. This attribute is used by Data Pipeline to carry out the copy operation from Amazon RDS to an Amazon S3 task.
+    description: The data specification of an Amazon Relational Database Service (Amazon RDS) <code>DataSource</code>.
+  RoleARN:
+    type: string
+    description: 'The Amazon Resource Name (ARN) of an <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts">AWS IAM Role</a>, such as the following: arn:aws:iam::account:role/rolename. '
+    minLength: 1
+    maxLength: 110
+  RedshiftDataSpec:
+    type: object
+    required:
+      - DatabaseInformation
+      - SelectSqlQuery
+      - DatabaseCredentials
+      - S3StagingLocation
+    properties:
+      DatabaseInformation:
+        $ref: '#/definitions/RedshiftDatabase'
+        description: Describes the <code>DatabaseName</code> and <code>ClusterIdentifier</code> for an Amazon Redshift <code>DataSource</code>.
+      SelectSqlQuery:
+        $ref: '#/definitions/RedshiftSelectSqlQuery'
+        description: Describes the SQL Query to execute on an Amazon Redshift database for an Amazon Redshift <code>DataSource</code>.
+      DatabaseCredentials:
+        $ref: '#/definitions/RedshiftDatabaseCredentials'
+        description: Describes AWS Identity and Access Management (IAM) credentials that are used connect to the Amazon Redshift database.
+      S3StagingLocation:
+        $ref: '#/definitions/S3Url'
+        description: Describes an Amazon S3 location to store the result set of the <code>SelectSqlQuery</code> query.
+      DataRearrangement:
+        $ref: '#/definitions/DataRearrangement'
+        description: '<p>A JSON string that represents the splitting and rearrangement processing to be applied to a <code>DataSource</code>. If the <code>DataRearrangement</code> parameter is not provided, all of the input data is used to create the <code>Datasource</code>.</p> <p>There are multiple parameters that control what data is used to create a datasource:</p> <ul> <li><p><b><code>percentBegin</code></b></p> <p>Use <code>percentBegin</code> to indicate the beginning of the range of the data used to create the Datasource. If you do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML includes all of the data when creating the datasource.</p></li> <li><p><b><code>percentEnd</code></b></p> <p>Use <code>percentEnd</code> to indicate the end of the range of the data used to create the Datasource. If you do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML includes all of the data when creating the datasource.</p></li> <li><p><b><code>complement</code></b></p> <p>The <code>complement</code> parameter instructs Amazon ML to use the data that is not included in the range of <code>percentBegin</code> to <code>percentEnd</code> to create a datasource. The <code>complement</code> parameter is useful if you need to create complementary datasources for training and evaluation. To create a complementary datasource, use the same values for <code>percentBegin</code> and <code>percentEnd</code>, along with the <code>complement</code> parameter.</p> <p>For example, the following two datasources do not share any data, and can be used to train and evaluate a model. The first datasource has 25 percent of the data, and the second one has 75 percent of the data.</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":0, "percentEnd":25}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":0, "percentEnd":25, "complement":"true"}}</code></p> </li> <li><p><b><code>strategy</code></b></p> <p>To change how Amazon ML splits the data for a datasource, use the <code>strategy</code> parameter.</p> <p>The default value for the <code>strategy</code> parameter is <code>sequential</code>, meaning that Amazon ML takes all of the data records between the <code>percentBegin</code> and <code>percentEnd</code> parameters for the datasource, in the order that the records appear in the input data.</p> <p>The following two <code>DataRearrangement</code> lines are examples of sequentially ordered training and evaluation datasources:</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential"}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential", "complement":"true"}}</code></p> <p>To randomly split the input data into the proportions indicated by the percentBegin and percentEnd parameters, set the <code>strategy</code> parameter to <code>random</code> and provide a string that is used as the seed value for the random data splitting (for example, you can use the S3 path to your data as the random seed string). If you choose the random split strategy, Amazon ML assigns each row of data a pseudo-random number between 0 and 100, and then selects the rows that have an assigned number between <code>percentBegin</code> and <code>percentEnd</code>. Pseudo-random numbers are assigned using both the input seed string value and the byte offset as a seed, so changing the data results in a different split. Any existing ordering is preserved. The random splitting strategy ensures that variables in the training and evaluation data are distributed similarly. It is useful in the cases where the input data may have an implicit sort order, which would otherwise result in training and evaluation datasources containing non-similar data records.</p> <p>The following two <code>DataRearrangement</code> lines are examples of non-sequentially ordered training and evaluation datasources:</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}</code></p> </li> </ul>'
+      DataSchema:
+        $ref: '#/definitions/DataSchema'
+        description: '<p>A JSON string that represents the schema for an Amazon Redshift <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>.</p> <p>A <code>DataSchema</code> is not required if you specify a <code>DataSchemaUri</code>.</p> <p>Define your <code>DataSchema</code> as a series of key-value pairs. <code>attributes</code> and <code>excludedVariableNames</code> have an array of key-value pairs for their value. Use the following format to define your <code>DataSchema</code>.</p> <p>{ "version": "1.0",</p> <p> "recordAnnotationFieldName": "F1",</p> <p> "recordWeightFieldName": "F2",</p> <p> "targetFieldName": "F3",</p> <p> "dataFormat": "CSV",</p> <p> "dataFileContainsHeader": true,</p> <p> "attributes": [</p> <p> { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2", "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, { "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5", "fieldType": "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, { "fieldName": "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8", "fieldType": "WEIGHTED_STRING_SEQUENCE" } ],</p> <p> "excludedVariableNames": [ "F6" ] } </p>'
+      DataSchemaUri:
+        $ref: '#/definitions/S3Url'
+        description: Describes the schema location for an Amazon Redshift <code>DataSource</code>.
+    description: Describes the data specification of an Amazon Redshift <code>DataSource</code>.
+  S3DataSpec:
+    type: object
+    required:
+      - DataLocationS3
+    properties:
+      DataLocationS3:
+        $ref: '#/definitions/S3Url'
+        description: The location of the data file(s) used by a <code>DataSource</code>. The URI specifies a data file or an Amazon Simple Storage Service (Amazon S3) directory or bucket containing data files.
+      DataRearrangement:
+        $ref: '#/definitions/DataRearrangement'
+        description: '<p>A JSON string that represents the splitting and rearrangement processing to be applied to a <code>DataSource</code>. If the <code>DataRearrangement</code> parameter is not provided, all of the input data is used to create the <code>Datasource</code>.</p> <p>There are multiple parameters that control what data is used to create a datasource:</p> <ul> <li><p><b><code>percentBegin</code></b></p> <p>Use <code>percentBegin</code> to indicate the beginning of the range of the data used to create the Datasource. If you do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML includes all of the data when creating the datasource.</p></li> <li><p><b><code>percentEnd</code></b></p> <p>Use <code>percentEnd</code> to indicate the end of the range of the data used to create the Datasource. If you do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML includes all of the data when creating the datasource.</p></li> <li><p><b><code>complement</code></b></p> <p>The <code>complement</code> parameter instructs Amazon ML to use the data that is not included in the range of <code>percentBegin</code> to <code>percentEnd</code> to create a datasource. The <code>complement</code> parameter is useful if you need to create complementary datasources for training and evaluation. To create a complementary datasource, use the same values for <code>percentBegin</code> and <code>percentEnd</code>, along with the <code>complement</code> parameter.</p> <p>For example, the following two datasources do not share any data, and can be used to train and evaluate a model. The first datasource has 25 percent of the data, and the second one has 75 percent of the data.</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":0, "percentEnd":25}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":0, "percentEnd":25, "complement":"true"}}</code></p> </li> <li><p><b><code>strategy</code></b></p> <p>To change how Amazon ML splits the data for a datasource, use the <code>strategy</code> parameter.</p> <p>The default value for the <code>strategy</code> parameter is <code>sequential</code>, meaning that Amazon ML takes all of the data records between the <code>percentBegin</code> and <code>percentEnd</code> parameters for the datasource, in the order that the records appear in the input data.</p> <p>The following two <code>DataRearrangement</code> lines are examples of sequentially ordered training and evaluation datasources:</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential"}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential", "complement":"true"}}</code></p> <p>To randomly split the input data into the proportions indicated by the percentBegin and percentEnd parameters, set the <code>strategy</code> parameter to <code>random</code> and provide a string that is used as the seed value for the random data splitting (for example, you can use the S3 path to your data as the random seed string). If you choose the random split strategy, Amazon ML assigns each row of data a pseudo-random number between 0 and 100, and then selects the rows that have an assigned number between <code>percentBegin</code> and <code>percentEnd</code>. Pseudo-random numbers are assigned using both the input seed string value and the byte offset as a seed, so changing the data results in a different split. Any existing ordering is preserved. The random splitting strategy ensures that variables in the training and evaluation data are distributed similarly. It is useful in the cases where the input data may have an implicit sort order, which would otherwise result in training and evaluation datasources containing non-similar data records.</p> <p>The following two <code>DataRearrangement</code> lines are examples of non-sequentially ordered training and evaluation datasources:</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}</code></p> </li> </ul>'
+      DataSchema:
+        $ref: '#/definitions/DataSchema'
+        description: '<p> A JSON string that represents the schema for an Amazon S3 <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>.</p> <p>You must provide either the <code>DataSchema</code> or the <code>DataSchemaLocationS3</code>.</p> <p>Define your <code>DataSchema</code> as a series of key-value pairs. <code>attributes</code> and <code>excludedVariableNames</code> have an array of key-value pairs for their value. Use the following format to define your <code>DataSchema</code>.</p> <p>{ "version": "1.0",</p> <p> "recordAnnotationFieldName": "F1",</p> <p> "recordWeightFieldName": "F2",</p> <p> "targetFieldName": "F3",</p> <p> "dataFormat": "CSV",</p> <p> "dataFileContainsHeader": true,</p> <p> "attributes": [</p> <p> { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2", "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, { "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5", "fieldType": "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, { "fieldName": "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8", "fieldType": "WEIGHTED_STRING_SEQUENCE" } ],</p> <p> "excludedVariableNames": [ "F6" ] } </p> <?oxy_insert_end>'
+      DataSchemaLocationS3:
+        $ref: '#/definitions/S3Url'
+        description: Describes the schema location in Amazon S3. You must provide either the <code>DataSchema</code> or the <code>DataSchemaLocationS3</code>.
+    description: ' Describes the data specification of a <code>DataSource</code>.'
+  MLModelType:
+    type: string
+    enum:
+      - REGRESSION
+      - BINARY
+      - MULTICLASS
+  TrainingParameters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/StringType'
+        value:
+          $ref: '#/definitions/StringType'
+  Recipe:
+    type: string
+    maxLength: 131071
+  RealtimeEndpointInfo:
+    type: object
+    properties:
+      PeakRequestsPerSecond:
+        $ref: '#/definitions/IntegerType'
+        description: ' The maximum processing rate for the real-time endpoint for <code>MLModel</code>, measured in incoming requests per second.'
+      CreatedAt:
+        $ref: '#/definitions/EpochTime'
+        description: The time that the request to create the real-time endpoint for the <code>MLModel</code> was received. The time is expressed in epoch time.
+      EndpointUrl:
+        $ref: '#/definitions/VipURL'
+        description: <p>The URI that specifies where to send real-time prediction requests for the <code>MLModel</code>.</p> <note><title>Note</title> <p>The application must wait until the real-time endpoint is ready before using this URI.</p> </note>
+      EndpointStatus:
+        $ref: '#/definitions/RealtimeEndpointStatus'
+        description: '<p> The current status of the real-time endpoint for the <code>MLModel</code>. This element can have one of the following values: </p> <ul> <li> <code>NONE</code> - Endpoint does not exist or was previously deleted.</li> <li> <code>READY</code> - Endpoint is ready to be used for real-time predictions.</li> <li> <code>UPDATING</code> - Updating/creating the endpoint. </li> </ul>'
+    description: ' Describes the real-time endpoint information for an <code>MLModel</code>.'
   DataRearrangement:
     type: string
   DataSchema:
     type: string
     description: '<p>The schema of a <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>. The DataSource schema is expressed in JSON format.</p> <p><code>DataSchema</code> is not required if you specify a <code>DataSchemaUri</code></p> <p>{ "version": "1.0", "recordAnnotationFieldName": "F1", "recordWeightFieldName": "F2", "targetFieldName": "F3", "dataFormat": "CSV", "dataFileContainsHeader": true, "variables": [ { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2", "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, { "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5", "fieldType": "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, { "fieldName": "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8", "fieldType": "WEIGHTED_STRING_SEQUENCE" } ], "excludedVariableNames": [ "F6" ] } </p>'
     maxLength: 131071
+  RedshiftMetadata:
+    type: object
+    properties:
+      RedshiftDatabase:
+        $ref: '#/definitions/RedshiftDatabase'
+      DatabaseUserName:
+        $ref: '#/definitions/RedshiftDatabaseUsername'
+      SelectSqlQuery:
+        $ref: '#/definitions/RedshiftSelectSqlQuery'
+        description: ' The SQL query that is specified during <a>CreateDataSourceFromRedshift</a>. Returns only if <code>Verbose</code> is true in GetDataSourceInput. '
+    description: Describes the <code>DataSource</code> details specific to Amazon Redshift.
+  RDSMetadata:
+    type: object
+    properties:
+      Database:
+        $ref: '#/definitions/RDSDatabase'
+        description: The database details required to connect to an Amazon RDS.
+      DatabaseUserName:
+        $ref: '#/definitions/RDSDatabaseUsername'
+      SelectSqlQuery:
+        $ref: '#/definitions/RDSSelectSqlQuery'
+        description: 'The SQL query that is supplied during <a>CreateDataSourceFromRDS</a>. Returns only if <code>Verbose</code> is true in <code>GetDataSourceInput</code>. '
+      ResourceRole:
+        $ref: '#/definitions/EDPResourceRole'
+        description: 'The role (DataPipelineDefaultResourceRole) assumed by an Amazon EC2 instance to carry out the copy task from Amazon RDS to Amazon S3. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html">Role templates</a> for data pipelines.'
+      ServiceRole:
+        $ref: '#/definitions/EDPServiceRole'
+        description: 'The role (DataPipelineDefaultRole) assumed by the Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon S3. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html">Role templates</a> for data pipelines.'
+      DataPipelineId:
+        $ref: '#/definitions/EDPPipelineId'
+        description: The ID of the Data Pipeline instance that is used to carry to copy data from Amazon RDS to Amazon S3. You can use the ID to find details about the instance in the Data Pipeline console.
+    description: The datasource details that are specific to Amazon RDS.
   DataSource:
     type: object
     properties:
@@ -2335,6 +2546,57 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DataSource'
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    maxItems: 100
+  SortOrder:
+    type: string
+    enum:
+      - asc
+      - dsc
+    description: '<p>The sort order specified in a listing condition. Possible values include the following:</p> <ul> <li> <code>asc</code> - Present the information in ascending order (from A-Z).</li> <li> <code>dsc</code> - Present the information in descending order (from Z-A).</li> </ul>'
+  StringType:
+    type: string
+    description: String type.
+  PageLimit:
+    type: integer
+    minimum: 1
+    maximum: 100
+  EvaluationFilterVariable:
+    type: string
+    enum:
+      - CreatedAt
+      - LastUpdatedAt
+      - Status
+      - Name
+      - IAMUser
+      - MLModelId
+      - DataSourceId
+      - DataURI
+    description: <p>A list of the variables to use in searching or filtering <code>Evaluation</code>.</p> <ul> <li> <code>CreatedAt</code> - Sets the search criteria to <code>Evaluation</code> creation date.</li> <li> <code>Status</code> - Sets the search criteria to <code>Evaluation</code> status.</li> <li> <code>Name</code> - Sets the search criteria to the contents of <code>Evaluation</code> <b> </b> <code>Name</code>.</li> <li> <code>IAMUser</code> - Sets the search criteria to the user account that invoked an evaluation.</li> <li> <code>MLModelId</code> - Sets the search criteria to the <code>Predictor</code> that was evaluated.</li> <li> <code>DataSourceId</code> - Sets the search criteria to the <code>DataSource</code> used in evaluation.</li> <li> <code>DataUri</code> - Sets the search criteria to the data file(s) used in evaluation. The URL can identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</li> </ul>
+  Evaluations:
+    type: array
+    items:
+      $ref: '#/definitions/Evaluation'
+  MLModelFilterVariable:
+    type: string
+    enum:
+      - CreatedAt
+      - LastUpdatedAt
+      - Status
+      - Name
+      - IAMUser
+      - TrainingDataSourceId
+      - RealtimeEndpointStatus
+      - MLModelType
+      - Algorithm
+      - TrainingDataURI
+  MLModels:
+    type: array
+    items:
+      $ref: '#/definitions/MLModel'
   DetailsAttributes:
     type: string
     enum:
@@ -2378,34 +2640,17 @@ definitions:
     type: string
     minLength: 1
     maxLength: 255
-  EntityId:
-    type: string
-    pattern: '[a-zA-Z0-9_.-]+'
-    minLength: 1
-    maxLength: 64
-  EntityName:
-    type: string
-    pattern: .*\S.*|^$
-    description: A user-supplied name or description of the Amazon ML resource.
-    maxLength: 1024
-  EntityStatus:
-    type: string
-    enum:
-      - PENDING
-      - INPROGRESS
-      - FAILED
-      - COMPLETED
-      - DELETED
-    description: '<p>Object status with the following possible values:</p> <ul> <li><code>PENDING</code></li> <li><code>INPROGRESS</code></li> <li><code>FAILED</code></li> <li><code>COMPLETED</code></li> <li><code>DELETED</code></li> </ul>'
-  EpochTime:
-    type: string
-    description: A timestamp represented in epoch time.
-    format: date-time
   ErrorCode:
     type: integer
   ErrorMessage:
     type: string
     maxLength: 2048
+  PerformanceMetrics:
+    type: object
+    properties:
+      Properties:
+        $ref: '#/definitions/PerformanceMetricsProperties'
+    description: '<p>Measurements of how well the <code>MLModel</code> performed on known observations. One of the following metrics is returned, based on the type of the <code>MLModel</code>: </p> <ul> <li> <p>BinaryAUC: The binary <code>MLModel</code> uses the Area Under the Curve (AUC) technique to measure performance. </p> </li> <li> <p>RegressionRMSE: The regression <code>MLModel</code> uses the Root Mean Square Error (RMSE) technique to measure performance. RMSE measures the difference between predicted and actual values for a single variable.</p> </li> <li> <p>MulticlassAvgFScore: The multiclass <code>MLModel</code> uses the F1 score technique to measure performance. </p> </li> </ul> <p> For more information about performance metrics, please see the <a href="http://docs.aws.amazon.com/machine-learning/latest/dg">Amazon Machine Learning Developer Guide</a>. </p>'
   Evaluation:
     type: object
     properties:
@@ -2449,31 +2694,23 @@ definitions:
       StartedAt:
         $ref: '#/definitions/EpochTime'
     description: <p> Represents the output of <code>GetEvaluation</code> operation. </p> <p>The content consists of the detailed metadata and data file information and the current status of the <code>Evaluation</code>.</p>
-  EvaluationFilterVariable:
+  PresignedS3Url:
     type: string
-    enum:
-      - CreatedAt
-      - LastUpdatedAt
-      - Status
-      - Name
-      - IAMUser
-      - MLModelId
-      - DataSourceId
-      - DataURI
-    description: <p>A list of the variables to use in searching or filtering <code>Evaluation</code>.</p> <ul> <li> <code>CreatedAt</code> - Sets the search criteria to <code>Evaluation</code> creation date.</li> <li> <code>Status</code> - Sets the search criteria to <code>Evaluation</code> status.</li> <li> <code>Name</code> - Sets the search criteria to the contents of <code>Evaluation</code> <b> </b> <code>Name</code>.</li> <li> <code>IAMUser</code> - Sets the search criteria to the user account that invoked an evaluation.</li> <li> <code>MLModelId</code> - Sets the search criteria to the <code>Predictor</code> that was evaluated.</li> <li> <code>DataSourceId</code> - Sets the search criteria to the <code>DataSource</code> used in evaluation.</li> <li> <code>DataUri</code> - Sets the search criteria to the data file(s) used in evaluation. The URL can identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</li> </ul>
-  Evaluations:
-    type: array
-    items:
-      $ref: '#/definitions/Evaluation'
+  Verbose:
+    type: boolean
+    description: Specifies whether a describe operation should return exhaustive or abbreviated information.
+  MLModelName:
+    type: string
+    maxLength: 1024
+  ScoreThreshold:
+    type: number
+    format: float
   IntegerType:
     type: integer
     description: Integer type that is a 32-bit signed number.
   Label:
     type: string
     minLength: 1
-  LongType:
-    type: integer
-    description: Long integer type that is a 64-bit signed number.
   MLModel:
     type: object
     properties:
@@ -2530,50 +2767,6 @@ definitions:
       StartedAt:
         $ref: '#/definitions/EpochTime'
     description: <p> Represents the output of a <code>GetMLModel</code> operation. </p> <p>The content consists of the detailed metadata and the current status of the <code>MLModel</code>.</p>
-  MLModelFilterVariable:
-    type: string
-    enum:
-      - CreatedAt
-      - LastUpdatedAt
-      - Status
-      - Name
-      - IAMUser
-      - TrainingDataSourceId
-      - RealtimeEndpointStatus
-      - MLModelType
-      - Algorithm
-      - TrainingDataURI
-  MLModelName:
-    type: string
-    maxLength: 1024
-  MLModelType:
-    type: string
-    enum:
-      - REGRESSION
-      - BINARY
-      - MULTICLASS
-  MLModels:
-    type: array
-    items:
-      $ref: '#/definitions/MLModel'
-  Message:
-    type: string
-    description: ' Description of the most recent details about an object.'
-    maxLength: 10240
-  PageLimit:
-    type: integer
-    minimum: 1
-    maximum: 100
-  PerformanceMetrics:
-    type: object
-    properties:
-      Properties:
-        $ref: '#/definitions/PerformanceMetricsProperties'
-    description: '<p>Measurements of how well the <code>MLModel</code> performed on known observations. One of the following metrics is returned, based on the type of the <code>MLModel</code>: </p> <ul> <li> <p>BinaryAUC: The binary <code>MLModel</code> uses the Area Under the Curve (AUC) technique to measure performance. </p> </li> <li> <p>RegressionRMSE: The regression <code>MLModel</code> uses the Root Mean Square Error (RMSE) technique to measure performance. RMSE measures the difference between predicted and actual values for a single variable.</p> </li> <li> <p>MulticlassAvgFScore: The multiclass <code>MLModel</code> uses the F1 score technique to measure performance. </p> </li> </ul> <p> For more information about performance metrics, please see the <a href="http://docs.aws.amazon.com/machine-learning/latest/dg">Amazon Machine Learning Developer Guide</a>. </p>'
-  PerformanceMetricsPropertyKey:
-    type: string
-  PerformanceMetricsPropertyValue:
-    type: string
   PerformanceMetricsProperties:
     type: array
     items:
@@ -2583,6 +2776,24 @@ definitions:
           $ref: '#/definitions/PerformanceMetricsPropertyKey'
         value:
           $ref: '#/definitions/PerformanceMetricsPropertyValue'
+  PerformanceMetricsPropertyKey:
+    type: string
+  PerformanceMetricsPropertyValue:
+    type: string
+  Record:
+    type: array
+    description: A map of variable name-value pairs that represent an observation.
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/VariableName'
+        value:
+          $ref: '#/definitions/VariableValue'
+  VipURL:
+    type: string
+    pattern: 'https://[a-zA-Z0-9-.]*\.amazon(aws)?\.com[/]?'
+    maxLength: 2048
   Prediction:
     type: object
     properties:
@@ -2597,54 +2808,19 @@ definitions:
       details:
         $ref: '#/definitions/DetailsMap'
     description: '<p>The output from a <code>Predict</code> operation: </p> <ul> <li> <p> <code>Details</code> - Contains the following attributes: <code>DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY | MULTICLASS</code> <code>DetailsAttributes.ALGORITHM - SGD</code> </p> </li> <li> <p> <code>PredictedLabel</code> - Present for either a <code>BINARY</code> or <code>MULTICLASS</code> <code>MLModel</code> request. </p> </li> <li> <p> <code>PredictedScores</code> - Contains the raw classification score corresponding to each label. </p> </li> <li> <p> <code>PredictedValue</code> - Present for a <code>REGRESSION</code> <code>MLModel</code> request. </p> </li> </ul>'
-  PresignedS3Url:
-    type: string
-  RDSDataSpec:
-    type: object
-    required:
-      - DatabaseInformation
-      - SelectSqlQuery
-      - DatabaseCredentials
-      - S3StagingLocation
-      - ResourceRole
-      - ServiceRole
-      - SubnetId
-      - SecurityGroupIds
-    properties:
-      DatabaseInformation:
-        $ref: '#/definitions/RDSDatabase'
-        description: Describes the <code>DatabaseName</code> and <code>InstanceIdentifier</code> of an Amazon RDS database.
-      SelectSqlQuery:
-        $ref: '#/definitions/RDSSelectSqlQuery'
-        description: The query that is used to retrieve the observation data for the <code>DataSource</code>.
-      DatabaseCredentials:
-        $ref: '#/definitions/RDSDatabaseCredentials'
-        description: The AWS Identity and Access Management (IAM) credentials that are used connect to the Amazon RDS database.
-      S3StagingLocation:
-        $ref: '#/definitions/S3Url'
-        description: The Amazon S3 location for staging Amazon RDS data. The data retrieved from Amazon RDS using <code>SelectSqlQuery</code> is stored in this location.
-      DataRearrangement:
-        $ref: '#/definitions/DataRearrangement'
-        description: '<p>A JSON string that represents the splitting and rearrangement processing to be applied to a <code>DataSource</code>. If the <code>DataRearrangement</code> parameter is not provided, all of the input data is used to create the <code>Datasource</code>.</p> <p>There are multiple parameters that control what data is used to create a datasource:</p> <ul> <li><p><b><code>percentBegin</code></b></p> <p>Use <code>percentBegin</code> to indicate the beginning of the range of the data used to create the Datasource. If you do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML includes all of the data when creating the datasource.</p></li> <li><p><b><code>percentEnd</code></b></p> <p>Use <code>percentEnd</code> to indicate the end of the range of the data used to create the Datasource. If you do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML includes all of the data when creating the datasource.</p></li> <li><p><b><code>complement</code></b></p> <p>The <code>complement</code> parameter instructs Amazon ML to use the data that is not included in the range of <code>percentBegin</code> to <code>percentEnd</code> to create a datasource. The <code>complement</code> parameter is useful if you need to create complementary datasources for training and evaluation. To create a complementary datasource, use the same values for <code>percentBegin</code> and <code>percentEnd</code>, along with the <code>complement</code> parameter.</p> <p>For example, the following two datasources do not share any data, and can be used to train and evaluate a model. The first datasource has 25 percent of the data, and the second one has 75 percent of the data.</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":0, "percentEnd":25}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":0, "percentEnd":25, "complement":"true"}}</code></p> </li> <li><p><b><code>strategy</code></b></p> <p>To change how Amazon ML splits the data for a datasource, use the <code>strategy</code> parameter.</p> <p>The default value for the <code>strategy</code> parameter is <code>sequential</code>, meaning that Amazon ML takes all of the data records between the <code>percentBegin</code> and <code>percentEnd</code> parameters for the datasource, in the order that the records appear in the input data.</p> <p>The following two <code>DataRearrangement</code> lines are examples of sequentially ordered training and evaluation datasources:</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential"}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential", "complement":"true"}}</code></p> <p>To randomly split the input data into the proportions indicated by the percentBegin and percentEnd parameters, set the <code>strategy</code> parameter to <code>random</code> and provide a string that is used as the seed value for the random data splitting (for example, you can use the S3 path to your data as the random seed string). If you choose the random split strategy, Amazon ML assigns each row of data a pseudo-random number between 0 and 100, and then selects the rows that have an assigned number between <code>percentBegin</code> and <code>percentEnd</code>. Pseudo-random numbers are assigned using both the input seed string value and the byte offset as a seed, so changing the data results in a different split. Any existing ordering is preserved. The random splitting strategy ensures that variables in the training and evaluation data are distributed similarly. It is useful in the cases where the input data may have an implicit sort order, which would otherwise result in training and evaluation datasources containing non-similar data records.</p> <p>The following two <code>DataRearrangement</code> lines are examples of non-sequentially ordered training and evaluation datasources:</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}</code></p> </li> </ul>'
-      DataSchema:
-        $ref: '#/definitions/DataSchema'
-        description: '<p>A JSON string that represents the schema for an Amazon RDS <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>.</p> <p>A <code>DataSchema</code> is not required if you specify a <code>DataSchemaUri</code></p> <p>Define your <code>DataSchema</code> as a series of key-value pairs. <code>attributes</code> and <code>excludedVariableNames</code> have an array of key-value pairs for their value. Use the following format to define your <code>DataSchema</code>.</p> <p>{ "version": "1.0",</p> <p> "recordAnnotationFieldName": "F1",</p> <p> "recordWeightFieldName": "F2",</p> <p> "targetFieldName": "F3",</p> <p> "dataFormat": "CSV",</p> <p> "dataFileContainsHeader": true,</p> <p> "attributes": [</p> <p> { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2", "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, { "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5", "fieldType": "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, { "fieldName": "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8", "fieldType": "WEIGHTED_STRING_SEQUENCE" } ],</p> <p> "excludedVariableNames": [ "F6" ] } </p> <?oxy_insert_end>'
-      DataSchemaUri:
-        $ref: '#/definitions/S3Url'
-        description: 'The Amazon S3 location of the <code>DataSchema</code>. '
-      ResourceRole:
-        $ref: '#/definitions/EDPResourceRole'
-        description: 'The role (DataPipelineDefaultResourceRole) assumed by an Amazon Elastic Compute Cloud (Amazon EC2) instance to carry out the copy operation from Amazon RDS to an Amazon S3 task. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html">Role templates</a> for data pipelines.'
-      ServiceRole:
-        $ref: '#/definitions/EDPServiceRole'
-        description: 'The role (DataPipelineDefaultRole) assumed by AWS Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon S3. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html">Role templates</a> for data pipelines.'
-      SubnetId:
-        $ref: '#/definitions/EDPSubnetId'
-        description: The subnet ID to be used to access a VPC-based RDS DB instance. This attribute is used by Data Pipeline to carry out the copy task from Amazon RDS to Amazon S3.
-      SecurityGroupIds:
-        $ref: '#/definitions/EDPSecurityGroupIds'
-        description: The security group IDs to be used to access a VPC-based RDS DB instance. Ensure that there are appropriate ingress rules set up to allow access to the RDS DB instance. This attribute is used by Data Pipeline to carry out the copy operation from Amazon RDS to an Amazon S3 task.
-    description: The data specification of an Amazon Relational Database Service (Amazon RDS) <code>DataSource</code>.
+  floatLabel:
+    type: number
+    format: float
+  ScoreValuePerLabelMap:
+    type: array
+    description: Provides the raw classification score corresponding to each label.
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Label'
+        value:
+          $ref: '#/definitions/ScoreValue'
   RDSDatabase:
     type: object
     required:
@@ -2657,6 +2833,11 @@ definitions:
       DatabaseName:
         $ref: '#/definitions/RDSDatabaseName'
     description: The database details of an Amazon RDS database.
+  RDSSelectSqlQuery:
+    type: string
+    description: 'The SQL query to be executed against the Amazon RDS database. The SQL query should be valid for the Amazon RDS type being used. '
+    minLength: 1
+    maxLength: 16777216
   RDSDatabaseCredentials:
     type: object
     required:
@@ -2668,69 +2849,27 @@ definitions:
       Password:
         $ref: '#/definitions/RDSDatabasePassword'
     description: The database credentials to connect to a database on an RDS DB instance.
-  RDSDatabaseName:
-    type: string
-    description: The name of a database hosted on an RDS DB instance.
-    minLength: 1
-    maxLength: 64
-  RDSDatabasePassword:
-    type: string
-    description: The password to be used by Amazon ML to connect to a database on an RDS DB instance. The password should have sufficient permissions to execute the <code>RDSSelectQuery</code> query.
-    minLength: 8
-    maxLength: 128
-  RDSDatabaseUsername:
-    type: string
-    description: The username to be used by Amazon ML to connect to database on an Amazon RDS instance. The username should have sufficient permissions to execute an <code>RDSSelectSqlQuery</code> query.
-    minLength: 1
-    maxLength: 128
   RDSInstanceIdentifier:
     type: string
     pattern: '[a-z0-9-]+'
     description: Identifier of RDS DB Instances.
     minLength: 1
     maxLength: 63
-  RDSMetadata:
-    type: object
-    properties:
-      Database:
-        $ref: '#/definitions/RDSDatabase'
-        description: The database details required to connect to an Amazon RDS.
-      DatabaseUserName:
-        $ref: '#/definitions/RDSDatabaseUsername'
-      SelectSqlQuery:
-        $ref: '#/definitions/RDSSelectSqlQuery'
-        description: 'The SQL query that is supplied during <a>CreateDataSourceFromRDS</a>. Returns only if <code>Verbose</code> is true in <code>GetDataSourceInput</code>. '
-      ResourceRole:
-        $ref: '#/definitions/EDPResourceRole'
-        description: 'The role (DataPipelineDefaultResourceRole) assumed by an Amazon EC2 instance to carry out the copy task from Amazon RDS to Amazon S3. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html">Role templates</a> for data pipelines.'
-      ServiceRole:
-        $ref: '#/definitions/EDPServiceRole'
-        description: 'The role (DataPipelineDefaultRole) assumed by the Data Pipeline service to monitor the progress of the copy task from Amazon RDS to Amazon S3. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html">Role templates</a> for data pipelines.'
-      DataPipelineId:
-        $ref: '#/definitions/EDPPipelineId'
-        description: The ID of the Data Pipeline instance that is used to carry to copy data from Amazon RDS to Amazon S3. You can use the ID to find details about the instance in the Data Pipeline console.
-    description: The datasource details that are specific to Amazon RDS.
-  RDSSelectSqlQuery:
+  RDSDatabaseName:
     type: string
-    description: 'The SQL query to be executed against the Amazon RDS database. The SQL query should be valid for the Amazon RDS type being used. '
+    description: The name of a database hosted on an RDS DB instance.
     minLength: 1
-    maxLength: 16777216
-  RealtimeEndpointInfo:
-    type: object
-    properties:
-      PeakRequestsPerSecond:
-        $ref: '#/definitions/IntegerType'
-        description: ' The maximum processing rate for the real-time endpoint for <code>MLModel</code>, measured in incoming requests per second.'
-      CreatedAt:
-        $ref: '#/definitions/EpochTime'
-        description: The time that the request to create the real-time endpoint for the <code>MLModel</code> was received. The time is expressed in epoch time.
-      EndpointUrl:
-        $ref: '#/definitions/VipURL'
-        description: <p>The URI that specifies where to send real-time prediction requests for the <code>MLModel</code>.</p> <note><title>Note</title> <p>The application must wait until the real-time endpoint is ready before using this URI.</p> </note>
-      EndpointStatus:
-        $ref: '#/definitions/RealtimeEndpointStatus'
-        description: '<p> The current status of the real-time endpoint for the <code>MLModel</code>. This element can have one of the following values: </p> <ul> <li> <code>NONE</code> - Endpoint does not exist or was previously deleted.</li> <li> <code>READY</code> - Endpoint is ready to be used for real-time predictions.</li> <li> <code>UPDATING</code> - Updating/creating the endpoint. </li> </ul>'
-    description: ' Describes the real-time endpoint information for an <code>MLModel</code>.'
+    maxLength: 64
+  RDSDatabaseUsername:
+    type: string
+    description: The username to be used by Amazon ML to connect to database on an Amazon RDS instance. The username should have sufficient permissions to execute an <code>RDSSelectSqlQuery</code> query.
+    minLength: 1
+    maxLength: 128
+  RDSDatabasePassword:
+    type: string
+    description: The password to be used by Amazon ML to connect to a database on an RDS DB instance. The password should have sufficient permissions to execute the <code>RDSSelectQuery</code> query.
+    minLength: 8
+    maxLength: 128
   RealtimeEndpointStatus:
     type: string
     enum:
@@ -2738,61 +2877,18 @@ definitions:
       - READY
       - UPDATING
       - FAILED
-  Recipe:
-    type: string
-    maxLength: 131071
   VariableName:
     type: string
     description: 'The name of a variable. Currently it''s used to specify the name of the target value, label, weight, and tags.'
   VariableValue:
     type: string
     description: 'The value of a variable. Currently it''s used to specify values of the target value, weights, and tag variables and for filtering variable values.'
-  Record:
-    type: array
-    description: A map of variable name-value pairs that represent an observation.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/VariableName'
-        value:
-          $ref: '#/definitions/VariableValue'
   RedshiftClusterIdentifier:
     type: string
     pattern: '[a-z0-9-]+'
     description: The ID of an Amazon Redshift cluster.
     minLength: 1
     maxLength: 63
-  RedshiftDataSpec:
-    type: object
-    required:
-      - DatabaseInformation
-      - SelectSqlQuery
-      - DatabaseCredentials
-      - S3StagingLocation
-    properties:
-      DatabaseInformation:
-        $ref: '#/definitions/RedshiftDatabase'
-        description: Describes the <code>DatabaseName</code> and <code>ClusterIdentifier</code> for an Amazon Redshift <code>DataSource</code>.
-      SelectSqlQuery:
-        $ref: '#/definitions/RedshiftSelectSqlQuery'
-        description: Describes the SQL Query to execute on an Amazon Redshift database for an Amazon Redshift <code>DataSource</code>.
-      DatabaseCredentials:
-        $ref: '#/definitions/RedshiftDatabaseCredentials'
-        description: Describes AWS Identity and Access Management (IAM) credentials that are used connect to the Amazon Redshift database.
-      S3StagingLocation:
-        $ref: '#/definitions/S3Url'
-        description: Describes an Amazon S3 location to store the result set of the <code>SelectSqlQuery</code> query.
-      DataRearrangement:
-        $ref: '#/definitions/DataRearrangement'
-        description: '<p>A JSON string that represents the splitting and rearrangement processing to be applied to a <code>DataSource</code>. If the <code>DataRearrangement</code> parameter is not provided, all of the input data is used to create the <code>Datasource</code>.</p> <p>There are multiple parameters that control what data is used to create a datasource:</p> <ul> <li><p><b><code>percentBegin</code></b></p> <p>Use <code>percentBegin</code> to indicate the beginning of the range of the data used to create the Datasource. If you do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML includes all of the data when creating the datasource.</p></li> <li><p><b><code>percentEnd</code></b></p> <p>Use <code>percentEnd</code> to indicate the end of the range of the data used to create the Datasource. If you do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML includes all of the data when creating the datasource.</p></li> <li><p><b><code>complement</code></b></p> <p>The <code>complement</code> parameter instructs Amazon ML to use the data that is not included in the range of <code>percentBegin</code> to <code>percentEnd</code> to create a datasource. The <code>complement</code> parameter is useful if you need to create complementary datasources for training and evaluation. To create a complementary datasource, use the same values for <code>percentBegin</code> and <code>percentEnd</code>, along with the <code>complement</code> parameter.</p> <p>For example, the following two datasources do not share any data, and can be used to train and evaluate a model. The first datasource has 25 percent of the data, and the second one has 75 percent of the data.</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":0, "percentEnd":25}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":0, "percentEnd":25, "complement":"true"}}</code></p> </li> <li><p><b><code>strategy</code></b></p> <p>To change how Amazon ML splits the data for a datasource, use the <code>strategy</code> parameter.</p> <p>The default value for the <code>strategy</code> parameter is <code>sequential</code>, meaning that Amazon ML takes all of the data records between the <code>percentBegin</code> and <code>percentEnd</code> parameters for the datasource, in the order that the records appear in the input data.</p> <p>The following two <code>DataRearrangement</code> lines are examples of sequentially ordered training and evaluation datasources:</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential"}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential", "complement":"true"}}</code></p> <p>To randomly split the input data into the proportions indicated by the percentBegin and percentEnd parameters, set the <code>strategy</code> parameter to <code>random</code> and provide a string that is used as the seed value for the random data splitting (for example, you can use the S3 path to your data as the random seed string). If you choose the random split strategy, Amazon ML assigns each row of data a pseudo-random number between 0 and 100, and then selects the rows that have an assigned number between <code>percentBegin</code> and <code>percentEnd</code>. Pseudo-random numbers are assigned using both the input seed string value and the byte offset as a seed, so changing the data results in a different split. Any existing ordering is preserved. The random splitting strategy ensures that variables in the training and evaluation data are distributed similarly. It is useful in the cases where the input data may have an implicit sort order, which would otherwise result in training and evaluation datasources containing non-similar data records.</p> <p>The following two <code>DataRearrangement</code> lines are examples of non-sequentially ordered training and evaluation datasources:</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}</code></p> </li> </ul>'
-      DataSchema:
-        $ref: '#/definitions/DataSchema'
-        description: '<p>A JSON string that represents the schema for an Amazon Redshift <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>.</p> <p>A <code>DataSchema</code> is not required if you specify a <code>DataSchemaUri</code>.</p> <p>Define your <code>DataSchema</code> as a series of key-value pairs. <code>attributes</code> and <code>excludedVariableNames</code> have an array of key-value pairs for their value. Use the following format to define your <code>DataSchema</code>.</p> <p>{ "version": "1.0",</p> <p> "recordAnnotationFieldName": "F1",</p> <p> "recordWeightFieldName": "F2",</p> <p> "targetFieldName": "F3",</p> <p> "dataFormat": "CSV",</p> <p> "dataFileContainsHeader": true,</p> <p> "attributes": [</p> <p> { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2", "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, { "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5", "fieldType": "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, { "fieldName": "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8", "fieldType": "WEIGHTED_STRING_SEQUENCE" } ],</p> <p> "excludedVariableNames": [ "F6" ] } </p>'
-      DataSchemaUri:
-        $ref: '#/definitions/S3Url'
-        description: Describes the schema location for an Amazon Redshift <code>DataSource</code>.
-    description: Describes the data specification of an Amazon Redshift <code>DataSource</code>.
   RedshiftDatabase:
     type: object
     required:
@@ -2804,6 +2900,11 @@ definitions:
       ClusterIdentifier:
         $ref: '#/definitions/RedshiftClusterIdentifier'
     description: Describes the database details required to connect to an Amazon Redshift database.
+  RedshiftSelectSqlQuery:
+    type: string
+    description: ' Describes the SQL query to execute on the Amazon Redshift database. The SQL query should be valid for an Amazon Redshift <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_SELECT_synopsis.html">SELECT</a>. '
+    minLength: 1
+    maxLength: 16777216
   RedshiftDatabaseCredentials:
     type: object
     required:
@@ -2821,85 +2922,29 @@ definitions:
     description: The name of a database hosted on an Amazon Redshift cluster.
     minLength: 1
     maxLength: 64
-  RedshiftDatabasePassword:
-    type: string
-    description: 'A password to be used by Amazon ML to connect to a database on an Amazon Redshift cluster. The password should have sufficient permissions to execute a <code>RedshiftSelectSqlQuery</code> query. The password should be valid for an Amazon Redshift <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html">USER</a>.'
-    minLength: 8
-    maxLength: 64
   RedshiftDatabaseUsername:
     type: string
     description: 'A username to be used by Amazon Machine Learning (Amazon ML)to connect to a database on an Amazon Redshift cluster. The username should have sufficient permissions to execute the <code>RedshiftSelectSqlQuery</code> query. The username should be valid for an Amazon Redshift <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html">USER</a>.'
     minLength: 1
     maxLength: 128
-  RedshiftMetadata:
-    type: object
-    properties:
-      RedshiftDatabase:
-        $ref: '#/definitions/RedshiftDatabase'
-      DatabaseUserName:
-        $ref: '#/definitions/RedshiftDatabaseUsername'
-      SelectSqlQuery:
-        $ref: '#/definitions/RedshiftSelectSqlQuery'
-        description: ' The SQL query that is specified during <a>CreateDataSourceFromRedshift</a>. Returns only if <code>Verbose</code> is true in GetDataSourceInput. '
-    description: Describes the <code>DataSource</code> details specific to Amazon Redshift.
-  RedshiftSelectSqlQuery:
+  RedshiftDatabasePassword:
     type: string
-    description: ' Describes the SQL query to execute on the Amazon Redshift database. The SQL query should be valid for an Amazon Redshift <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_SELECT_synopsis.html">SELECT</a>. '
-    minLength: 1
-    maxLength: 16777216
-  RoleARN:
-    type: string
-    description: 'The Amazon Resource Name (ARN) of an <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts">AWS IAM Role</a>, such as the following: arn:aws:iam::account:role/rolename. '
-    minLength: 1
-    maxLength: 110
-  S3DataSpec:
-    type: object
-    required:
-      - DataLocationS3
-    properties:
-      DataLocationS3:
-        $ref: '#/definitions/S3Url'
-        description: The location of the data file(s) used by a <code>DataSource</code>. The URI specifies a data file or an Amazon Simple Storage Service (Amazon S3) directory or bucket containing data files.
-      DataRearrangement:
-        $ref: '#/definitions/DataRearrangement'
-        description: '<p>A JSON string that represents the splitting and rearrangement processing to be applied to a <code>DataSource</code>. If the <code>DataRearrangement</code> parameter is not provided, all of the input data is used to create the <code>Datasource</code>.</p> <p>There are multiple parameters that control what data is used to create a datasource:</p> <ul> <li><p><b><code>percentBegin</code></b></p> <p>Use <code>percentBegin</code> to indicate the beginning of the range of the data used to create the Datasource. If you do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML includes all of the data when creating the datasource.</p></li> <li><p><b><code>percentEnd</code></b></p> <p>Use <code>percentEnd</code> to indicate the end of the range of the data used to create the Datasource. If you do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML includes all of the data when creating the datasource.</p></li> <li><p><b><code>complement</code></b></p> <p>The <code>complement</code> parameter instructs Amazon ML to use the data that is not included in the range of <code>percentBegin</code> to <code>percentEnd</code> to create a datasource. The <code>complement</code> parameter is useful if you need to create complementary datasources for training and evaluation. To create a complementary datasource, use the same values for <code>percentBegin</code> and <code>percentEnd</code>, along with the <code>complement</code> parameter.</p> <p>For example, the following two datasources do not share any data, and can be used to train and evaluate a model. The first datasource has 25 percent of the data, and the second one has 75 percent of the data.</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":0, "percentEnd":25}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":0, "percentEnd":25, "complement":"true"}}</code></p> </li> <li><p><b><code>strategy</code></b></p> <p>To change how Amazon ML splits the data for a datasource, use the <code>strategy</code> parameter.</p> <p>The default value for the <code>strategy</code> parameter is <code>sequential</code>, meaning that Amazon ML takes all of the data records between the <code>percentBegin</code> and <code>percentEnd</code> parameters for the datasource, in the order that the records appear in the input data.</p> <p>The following two <code>DataRearrangement</code> lines are examples of sequentially ordered training and evaluation datasources:</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential"}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"sequential", "complement":"true"}}</code></p> <p>To randomly split the input data into the proportions indicated by the percentBegin and percentEnd parameters, set the <code>strategy</code> parameter to <code>random</code> and provide a string that is used as the seed value for the random data splitting (for example, you can use the S3 path to your data as the random seed string). If you choose the random split strategy, Amazon ML assigns each row of data a pseudo-random number between 0 and 100, and then selects the rows that have an assigned number between <code>percentBegin</code> and <code>percentEnd</code>. Pseudo-random numbers are assigned using both the input seed string value and the byte offset as a seed, so changing the data results in a different split. Any existing ordering is preserved. The random splitting strategy ensures that variables in the training and evaluation data are distributed similarly. It is useful in the cases where the input data may have an implicit sort order, which would otherwise result in training and evaluation datasources containing non-similar data records.</p> <p>The following two <code>DataRearrangement</code> lines are examples of non-sequentially ordered training and evaluation datasources:</p> <p>Datasource for evaluation: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}}</code></p> <p>Datasource for training: <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv", "complement":"true"}}</code></p> </li> </ul>'
-      DataSchema:
-        $ref: '#/definitions/DataSchema'
-        description: '<p> A JSON string that represents the schema for an Amazon S3 <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>.</p> <p>You must provide either the <code>DataSchema</code> or the <code>DataSchemaLocationS3</code>.</p> <p>Define your <code>DataSchema</code> as a series of key-value pairs. <code>attributes</code> and <code>excludedVariableNames</code> have an array of key-value pairs for their value. Use the following format to define your <code>DataSchema</code>.</p> <p>{ "version": "1.0",</p> <p> "recordAnnotationFieldName": "F1",</p> <p> "recordWeightFieldName": "F2",</p> <p> "targetFieldName": "F3",</p> <p> "dataFormat": "CSV",</p> <p> "dataFileContainsHeader": true,</p> <p> "attributes": [</p> <p> { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2", "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, { "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5", "fieldType": "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, { "fieldName": "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8", "fieldType": "WEIGHTED_STRING_SEQUENCE" } ],</p> <p> "excludedVariableNames": [ "F6" ] } </p> <?oxy_insert_end>'
-      DataSchemaLocationS3:
-        $ref: '#/definitions/S3Url'
-        description: Describes the schema location in Amazon S3. You must provide either the <code>DataSchema</code> or the <code>DataSchemaLocationS3</code>.
-    description: ' Describes the data specification of a <code>DataSource</code>.'
-  S3Url:
-    type: string
-    pattern: 's3://([^/]+)(/.*)?'
-    description: A reference to a file or bucket on Amazon Simple Storage Service (Amazon S3).
-    maxLength: 2048
-  ScoreThreshold:
-    type: number
-    format: float
+    description: 'A password to be used by Amazon ML to connect to a database on an Amazon Redshift cluster. The password should have sufficient permissions to execute a <code>RedshiftSelectSqlQuery</code> query. The password should be valid for an Amazon Redshift <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html">USER</a>.'
+    minLength: 8
+    maxLength: 64
   ScoreValue:
     type: number
     format: float
-  ScoreValuePerLabelMap:
-    type: array
-    description: Provides the raw classification score corresponding to each label.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Label'
-        value:
-          $ref: '#/definitions/ScoreValue'
-  SortOrder:
+  TagKey:
     type: string
-    enum:
-      - asc
-      - dsc
-    description: '<p>The sort order specified in a listing condition. Possible values include the following:</p> <ul> <li> <code>asc</code> - Present the information in ascending order (from A-Z).</li> <li> <code>dsc</code> - Present the information in descending order (from Z-A).</li> </ul>'
-  StringType:
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
     type: string
-    description: String type.
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     properties:
@@ -2910,49 +2955,3 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: 'An optional string, typically used to describe or define the tag. Valid characters include Unicode letters, digits, white space, _, ., /, =, +, -, %, and @.'
     description: 'A custom key-value pair associated with an ML object, such as an ML model.'
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-    maxItems: 100
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    maxItems: 100
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  TaggableResourceType:
-    type: string
-    enum:
-      - BatchPrediction
-      - DataSource
-      - Evaluation
-      - MLModel
-  TrainingParameters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/StringType'
-        value:
-          $ref: '#/definitions/StringType'
-  Verbose:
-    type: boolean
-    description: Specifies whether a describe operation should return exhaustive or abbreviated information.
-  VipURL:
-    type: string
-    pattern: 'https://[a-zA-Z0-9-.]*\.amazon(aws)?\.com[/]?'
-    maxLength: 2048
-  floatLabel:
-    type: number
-    format: float

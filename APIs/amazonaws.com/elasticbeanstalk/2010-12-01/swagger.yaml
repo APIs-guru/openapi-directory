@@ -2895,7 +2895,12 @@ definitions:
     description: A list of validation messages for a specified configuration template.
   ARN:
     type: string
-  undefined: {}
+  EnvironmentId:
+    type: string
+  EnvironmentName:
+    type: string
+    minLength: 4
+    maxLength: 40
   AbortableOperationInProgress:
     type: boolean
   ActionHistoryStatus:
@@ -2919,6 +2924,37 @@ definitions:
       - Unknown
   ApplicationArn:
     type: string
+  ApplicationName:
+    type: string
+    minLength: 1
+    maxLength: 100
+  Description:
+    type: string
+    maxLength: 200
+  CreationDate:
+    type: string
+    format: date-time
+  UpdateDate:
+    type: string
+    format: date-time
+  VersionLabelsList:
+    type: array
+    items:
+      $ref: '#/definitions/VersionLabel'
+  ConfigurationTemplateNamesList:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationTemplateName'
+  ApplicationResourceLifecycleConfig:
+    type: object
+    properties:
+      ServiceRole:
+        $ref: '#/definitions/String'
+        description: '<p>The ARN of an IAM service role that Elastic Beanstalk has permission to assume.</p> <p>The <code>ServiceRole</code> property is required the first time that you provide a <code>VersionLifecycleConfig</code> for the application in one of the supporting calls (<code>CreateApplication</code> or <code>UpdateApplicationResourceLifecycle</code>). After you provide it once, in either one of the calls, Elastic Beanstalk persists the Service Role with the application, and you don''t need to specify it again in subsequent <code>UpdateApplicationResourceLifecycle</code> calls. You can, however, specify it in subsequent calls to change the Service Role to another value.</p>'
+      VersionLifecycleConfig:
+        $ref: '#/definitions/ApplicationVersionLifecycleConfig'
+        description: The application version lifecycle configuration.
+    description: 'The resource lifecycle configuration for an application. Defines lifecycle settings for resources that belong to the application, and the service role that Elastic Beanstalk assumes in order to apply lifecycle settings. The version lifecycle configuration defines lifecycle settings for application versions.'
   ApplicationDescription:
     type: object
     properties:
@@ -2951,6 +2987,54 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ApplicationDescription'
+  NullableInteger:
+    type: integer
+  RequestCount:
+    type: integer
+  StatusCodes:
+    type: object
+    properties:
+      Status2xx:
+        $ref: '#/definitions/NullableInteger'
+        description: 'The percentage of requests over the last 10 seconds that resulted in a 2xx (200, 201, etc.) status code.'
+      Status3xx:
+        $ref: '#/definitions/NullableInteger'
+        description: 'The percentage of requests over the last 10 seconds that resulted in a 3xx (300, 301, etc.) status code.'
+      Status4xx:
+        $ref: '#/definitions/NullableInteger'
+        description: 'The percentage of requests over the last 10 seconds that resulted in a 4xx (400, 401, etc.) status code.'
+      Status5xx:
+        $ref: '#/definitions/NullableInteger'
+        description: 'The percentage of requests over the last 10 seconds that resulted in a 5xx (500, 501, etc.) status code.'
+    description: 'Represents the percentage of requests over the last 10 seconds that resulted in each type of status code response. For more information, see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">Status Code Definitions</a>.'
+  Latency:
+    type: object
+    properties:
+      P999:
+        $ref: '#/definitions/NullableDouble'
+        description: The average latency for the slowest 0.1 percent of requests over the last 10 seconds.
+      P99:
+        $ref: '#/definitions/NullableDouble'
+        description: The average latency for the slowest 1 percent of requests over the last 10 seconds.
+      P95:
+        $ref: '#/definitions/NullableDouble'
+        description: The average latency for the slowest 5 percent of requests over the last 10 seconds.
+      P90:
+        $ref: '#/definitions/NullableDouble'
+        description: The average latency for the slowest 10 percent of requests over the last 10 seconds.
+      P85:
+        $ref: '#/definitions/NullableDouble'
+        description: The average latency for the slowest 15 percent of requests over the last 10 seconds.
+      P75:
+        $ref: '#/definitions/NullableDouble'
+        description: The average latency for the slowest 25 percent of requests over the last 10 seconds.
+      P50:
+        $ref: '#/definitions/NullableDouble'
+        description: The average latency for the slowest 50 percent of requests over the last 10 seconds.
+      P10:
+        $ref: '#/definitions/NullableDouble'
+        description: The average latency for the slowest 90 percent of requests over the last 10 seconds.
+    description: Represents the average latency for the slowest X percent of requests over the last 10 seconds.
   ApplicationMetrics:
     type: object
     properties:
@@ -2967,26 +3051,63 @@ definitions:
         $ref: '#/definitions/Latency'
         description: Represents the average latency for the slowest X percent of requests over the last 10 seconds. Latencies are in seconds with one millisecond resolution.
     description: Application request metrics for an AWS Elastic Beanstalk environment.
-  ApplicationName:
-    type: string
-    minLength: 1
-    maxLength: 100
   ApplicationNamesList:
     type: array
     items:
       $ref: '#/definitions/ApplicationName'
-  ApplicationResourceLifecycleConfig:
+  String:
+    type: string
+  ApplicationVersionLifecycleConfig:
     type: object
     properties:
-      ServiceRole:
-        $ref: '#/definitions/String'
-        description: '<p>The ARN of an IAM service role that Elastic Beanstalk has permission to assume.</p> <p>The <code>ServiceRole</code> property is required the first time that you provide a <code>VersionLifecycleConfig</code> for the application in one of the supporting calls (<code>CreateApplication</code> or <code>UpdateApplicationResourceLifecycle</code>). After you provide it once, in either one of the calls, Elastic Beanstalk persists the Service Role with the application, and you don''t need to specify it again in subsequent <code>UpdateApplicationResourceLifecycle</code> calls. You can, however, specify it in subsequent calls to change the Service Role to another value.</p>'
-      VersionLifecycleConfig:
-        $ref: '#/definitions/ApplicationVersionLifecycleConfig'
-        description: The application version lifecycle configuration.
-    description: 'The resource lifecycle configuration for an application. Defines lifecycle settings for resources that belong to the application, and the service role that Elastic Beanstalk assumes in order to apply lifecycle settings. The version lifecycle configuration defines lifecycle settings for application versions.'
+      MaxCountRule:
+        $ref: '#/definitions/MaxCountRule'
+        description: Specify a max count rule to restrict the number of application versions that are retained for an application.
+      MaxAgeRule:
+        $ref: '#/definitions/MaxAgeRule'
+        description: Specify a max age rule to restrict the length of time that application versions are retained for an application.
+    description: '<p>The application version lifecycle settings for an application. Defines the rules that Elastic Beanstalk applies to an application''s versions in order to avoid hitting the per-region limit for application versions.</p> <p>When Elastic Beanstalk deletes an application version from its database, you can no longer deploy that version to an environment. The source bundle remains in S3 unless you configure the rule to delete it.</p>'
   ApplicationVersionArn:
     type: string
+  VersionLabel:
+    type: string
+    minLength: 1
+    maxLength: 100
+  SourceBuildInformation:
+    type: object
+    required:
+      - SourceType
+      - SourceRepository
+      - SourceLocation
+    properties:
+      SourceType:
+        $ref: '#/definitions/SourceType'
+        description: <p>The type of repository.</p> <ul> <li> <p> <code>Git</code> </p> </li> <li> <p> <code>Zip</code> </p> </li> </ul>
+      SourceRepository:
+        $ref: '#/definitions/SourceRepository'
+        description: <p>Location where the repository is stored.</p> <ul> <li> <p> <code>CodeCommit</code> </p> </li> <li> <p> <code>S3</code> </p> </li> </ul>
+      SourceLocation:
+        $ref: '#/definitions/SourceLocation'
+        description: '<p>The location of the source code, as a formatted string, depending on the value of <code>SourceRepository</code> </p> <ul> <li> <p>For <code>CodeCommit</code>, the format is the repository name and commit ID, separated by a forward slash. For example, <code>my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a</code>.</p> </li> <li> <p>For <code>S3</code>, the format is the S3 bucket name and object key, separated by a forward slash. For example, <code>my-s3-bucket/Folders/my-source-file</code>.</p> </li> </ul>'
+    description: Location of the source code for an application version.
+  S3Location:
+    type: object
+    properties:
+      S3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The Amazon S3 bucket where the data is located.
+      S3Key:
+        $ref: '#/definitions/S3Key'
+        description: The Amazon S3 key where the data is located.
+    description: The bucket and key of an item stored in Amazon S3.
+  ApplicationVersionStatus:
+    type: string
+    enum:
+      - Processed
+      - Unprocessed
+      - Failed
+      - Processing
+      - Building
   ApplicationVersionDescription:
     type: object
     properties:
@@ -3025,28 +3146,44 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ApplicationVersionDescription'
-  ApplicationVersionLifecycleConfig:
+  Token:
+    type: string
+  MaxCountRule:
     type: object
+    required:
+      - Enabled
     properties:
-      MaxCountRule:
-        $ref: '#/definitions/MaxCountRule'
-        description: Specify a max count rule to restrict the number of application versions that are retained for an application.
-      MaxAgeRule:
-        $ref: '#/definitions/MaxAgeRule'
-        description: Specify a max age rule to restrict the length of time that application versions are retained for an application.
-    description: '<p>The application version lifecycle settings for an application. Defines the rules that Elastic Beanstalk applies to an application''s versions in order to avoid hitting the per-region limit for application versions.</p> <p>When Elastic Beanstalk deletes an application version from its database, you can no longer deploy that version to an environment. The source bundle remains in S3 unless you configure the rule to delete it.</p>'
+      Enabled:
+        $ref: '#/definitions/BoxedBoolean'
+        description: 'Specify <code>true</code> to apply the rule, or <code>false</code> to disable it.'
+      MaxCount:
+        $ref: '#/definitions/BoxedInt'
+        description: Specify the maximum number of application versions to retain.
+      DeleteSourceFromS3:
+        $ref: '#/definitions/BoxedBoolean'
+        description: Set to <code>true</code> to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.
+    description: A lifecycle rule that deletes the oldest application version when the maximum count is exceeded.
+  MaxAgeRule:
+    type: object
+    required:
+      - Enabled
+    properties:
+      Enabled:
+        $ref: '#/definitions/BoxedBoolean'
+        description: 'Specify <code>true</code> to apply the rule, or <code>false</code> to disable it.'
+      MaxAgeInDays:
+        $ref: '#/definitions/BoxedInt'
+        description: Specify the number of days to retain an application versions.
+      DeleteSourceFromS3:
+        $ref: '#/definitions/BoxedBoolean'
+        description: Set to <code>true</code> to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.
+    description: A lifecycle rule that deletes application versions after the specified number of days.
   ApplicationVersionProccess:
     type: boolean
-  ApplicationVersionStatus:
-    type: string
-    enum:
-      - Processed
-      - Unprocessed
-      - Failed
-      - Processing
-      - Building
   AutoCreateApplication:
     type: boolean
+  ResourceId:
+    type: string
   AutoScalingGroup:
     type: object
     properties:
@@ -3058,10 +3195,22 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AutoScalingGroup'
+  SolutionStackDescription:
+    type: object
+    properties:
+      SolutionStackName:
+        $ref: '#/definitions/SolutionStackName'
+        description: The name of the solution stack.
+      PermittedFileTypes:
+        $ref: '#/definitions/SolutionStackFileTypeList'
+        description: The permitted file types allowed for a solution stack.
+    description: Describes the solution stack.
   AvailableSolutionStackDetailsList:
     type: array
     items:
       $ref: '#/definitions/SolutionStackDescription'
+  SolutionStackName:
+    type: string
   AvailableSolutionStackNamesList:
     type: array
     items:
@@ -3070,6 +3219,15 @@ definitions:
     type: boolean
   BoxedInt:
     type: integer
+  NonEmptyString:
+    type: string
+    pattern: .*\S.*
+  ComputeType:
+    type: string
+    enum:
+      - BUILD_GENERAL1_SMALL
+      - BUILD_GENERAL1_MEDIUM
+      - BUILD_GENERAL1_LARGE
   BuildConfiguration:
     type: object
     required:
@@ -3099,6 +3257,9 @@ definitions:
         $ref: '#/definitions/ARN'
         description: The ARN of the builder.
     description: The builder used to build the custom platform.
+  NullableDouble:
+    type: number
+    format: double
   CPUUtilization:
     type: object
     properties:
@@ -3135,14 +3296,24 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Cause'
+  DNSCnamePrefix:
+    type: string
+    minLength: 4
+    maxLength: 63
   CnameAvailability:
     type: boolean
-  ComputeType:
+  DNSCname:
     type: string
-    enum:
-      - BUILD_GENERAL1_SMALL
-      - BUILD_GENERAL1_MEDIUM
-      - BUILD_GENERAL1_LARGE
+    minLength: 1
+    maxLength: 255
+  GroupName:
+    type: string
+    minLength: 1
+    maxLength: 19
+  VersionLabels:
+    type: array
+    items:
+      $ref: '#/definitions/VersionLabel'
   ConfigurationDeploymentStatus:
     type: string
     enum:
@@ -3151,6 +3322,39 @@ definitions:
       - failed
   ConfigurationOptionDefaultValue:
     type: string
+  OptionNamespace:
+    type: string
+  ConfigurationOptionName:
+    type: string
+  ConfigurationOptionSeverity:
+    type: string
+  UserDefinedOption:
+    type: boolean
+  ConfigurationOptionValueType:
+    type: string
+    enum:
+      - Scalar
+      - List
+  ConfigurationOptionPossibleValues:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationOptionPossibleValue'
+  OptionRestrictionMinValue:
+    type: integer
+  OptionRestrictionMaxValue:
+    type: integer
+  OptionRestrictionMaxLength:
+    type: integer
+  OptionRestrictionRegex:
+    type: object
+    properties:
+      Pattern:
+        $ref: '#/definitions/RegexPattern'
+        description: The regular expression pattern that a string configuration option value with this restriction must match.
+      Label:
+        $ref: '#/definitions/RegexLabel'
+        description: A unique name representing this regular expression.
+    description: A regular expression representing a restriction on a string configuration option value.
   ConfigurationOptionDescription:
     type: object
     properties:
@@ -3192,14 +3396,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ConfigurationOptionDescription'
-  ConfigurationOptionName:
-    type: string
   ConfigurationOptionPossibleValue:
     type: string
-  ConfigurationOptionPossibleValues:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationOptionPossibleValue'
+  ResourceName:
+    type: string
+    minLength: 1
+    maxLength: 256
+  ConfigurationOptionValue:
+    type: string
   ConfigurationOptionSetting:
     type: object
     properties:
@@ -3220,30 +3424,90 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ConfigurationOptionSetting'
-  ConfigurationOptionSeverity:
+  PlatformArn:
     type: string
-  ConfigurationOptionValue:
-    type: string
-  ConfigurationOptionValueType:
-    type: string
-    enum:
-      - Scalar
-      - List
-  ConfigurationSettingsDescriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationSettingsDescription'
   ConfigurationTemplateName:
     type: string
     minLength: 1
     maxLength: 100
-  ConfigurationTemplateNamesList:
+  ConfigurationSettingsDescriptionList:
     type: array
     items:
-      $ref: '#/definitions/ConfigurationTemplateName'
-  CreationDate:
+      $ref: '#/definitions/ConfigurationSettingsDescription'
+  ValidationMessagesList:
+    type: array
+    items:
+      $ref: '#/definitions/ValidationMessage'
+  SourceConfiguration:
+    type: object
+    properties:
+      ApplicationName:
+        $ref: '#/definitions/ApplicationName'
+        description: The name of the application associated with the configuration.
+      TemplateName:
+        $ref: '#/definitions/ConfigurationTemplateName'
+        description: The name of the configuration template.
+    description: A specification for an environment configuration
+  EnvironmentTier:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of this environment tier.
+      Type:
+        $ref: '#/definitions/String'
+        description: The type of this environment tier.
+      Version:
+        $ref: '#/definitions/String'
+        description: '<p>The version of this environment tier. When you don''t set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.</p> <note> <p>This member is deprecated. Any specific version that you set may become out of date. We recommend leaving it unspecified.</p> </note>'
+    description: Describes the properties of an environment tier
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  OptionsSpecifierList:
+    type: array
+    items:
+      $ref: '#/definitions/OptionSpecification'
+  PlatformName:
     type: string
-    format: date-time
+  PlatformVersion:
+    type: string
+  PlatformSummary:
+    type: object
+    properties:
+      PlatformArn:
+        $ref: '#/definitions/PlatformArn'
+        description: The ARN of the platform.
+      PlatformOwner:
+        $ref: '#/definitions/PlatformOwner'
+        description: The AWS account ID of the person who created the platform.
+      PlatformStatus:
+        $ref: '#/definitions/PlatformStatus'
+        description: The status of the platform. You can create an environment from the platform once it is ready.
+      PlatformCategory:
+        $ref: '#/definitions/PlatformCategory'
+        description: The category of platform.
+      OperatingSystemName:
+        $ref: '#/definitions/OperatingSystemName'
+        description: The operating system used by the platform.
+      OperatingSystemVersion:
+        $ref: '#/definitions/OperatingSystemVersion'
+        description: The version of the operating system used by the platform.
+      SupportedTierList:
+        $ref: '#/definitions/SupportedTierList'
+        description: The tiers in which the platform runs.
+      SupportedAddonList:
+        $ref: '#/definitions/SupportedAddonList'
+        description: The additions associated with the platform.
+    description: Detailed information about a platform.
+  S3Bucket:
+    type: string
+    maxLength: 255
+  VirtualizationType:
+    type: string
+  ImageId:
+    type: string
   CustomAmi:
     type: object
     properties:
@@ -3258,16 +3522,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CustomAmi'
-  DNSCname:
-    type: string
-    minLength: 1
-    maxLength: 255
-  DNSCnamePrefix:
-    type: string
-    minLength: 4
-    maxLength: 63
+  TerminateEnvForce:
+    type: boolean
   DeleteSourceBundle:
     type: boolean
+  NullableLong:
+    type: integer
+  DeploymentTimestamp:
+    type: string
+    format: date-time
   Deployment:
     type: object
     properties:
@@ -3284,22 +3547,33 @@ definitions:
         $ref: '#/definitions/DeploymentTimestamp'
         description: '<p>For in-progress deployments, the time that the deployment started.</p> <p>For completed deployments, the time that the deployment ended.</p>'
     description: Information about an application version deployment.
-  DeploymentTimestamp:
-    type: string
-    format: date-time
-  Description:
-    type: string
-    maxLength: 200
-  Ec2InstanceId:
-    type: string
-  EndpointURL:
-    type: string
-  EnvironmentArn:
-    type: string
-  EnvironmentDescriptionsList:
+  ResourceQuotas:
+    type: object
+    properties:
+      ApplicationQuota:
+        $ref: '#/definitions/ResourceQuota'
+        description: The quota for applications in the AWS account.
+      ApplicationVersionQuota:
+        $ref: '#/definitions/ResourceQuota'
+        description: The quota for application versions in the AWS account.
+      EnvironmentQuota:
+        $ref: '#/definitions/ResourceQuota'
+        description: The quota for environments in the AWS account.
+      ConfigurationTemplateQuota:
+        $ref: '#/definitions/ResourceQuota'
+        description: The quota for configuration templates in the AWS account.
+      CustomPlatformQuota:
+        $ref: '#/definitions/ResourceQuota'
+        description: The quota for custom platforms in the AWS account.
+    description: A set of per-resource AWS Elastic Beanstalk quotas associated with an AWS account. They reflect Elastic Beanstalk resource limits for this account.
+  MaxRecords:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  EnvironmentHealthAttributes:
     type: array
     items:
-      $ref: '#/definitions/EnvironmentDescription'
+      $ref: '#/definitions/EnvironmentHealthAttribute'
   EnvironmentHealth:
     type: string
     enum:
@@ -3307,226 +3581,6 @@ definitions:
       - Yellow
       - Red
       - Grey
-  EnvironmentHealthAttribute:
-    type: string
-    enum:
-      - Status
-      - Color
-      - Causes
-      - ApplicationMetrics
-      - InstancesHealth
-      - All
-      - HealthStatus
-      - RefreshedAt
-  EnvironmentHealthAttributes:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentHealthAttribute'
-  EnvironmentHealthStatus:
-    type: string
-    enum:
-      - NoData
-      - Unknown
-      - Pending
-      - Ok
-      - Info
-      - Warning
-      - Degraded
-      - Severe
-      - Suspended
-  EnvironmentId:
-    type: string
-  EnvironmentIdList:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentId'
-  EnvironmentInfoDescription:
-    type: object
-    properties:
-      InfoType:
-        $ref: '#/definitions/EnvironmentInfoType'
-        description: The type of information retrieved.
-      Ec2InstanceId:
-        $ref: '#/definitions/Ec2InstanceId'
-        description: The Amazon EC2 Instance ID for this information.
-      SampleTimestamp:
-        $ref: '#/definitions/SampleTimestamp'
-        description: The time stamp when this information was retrieved.
-      Message:
-        $ref: '#/definitions/Message'
-        description: The retrieved information.
-    description: The information retrieved from the Amazon EC2 instances.
-  EnvironmentInfoDescriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentInfoDescription'
-  EnvironmentInfoType:
-    type: string
-    enum:
-      - tail
-      - bundle
-  EnvironmentLink:
-    type: object
-    properties:
-      LinkName:
-        $ref: '#/definitions/String'
-        description: The name of the link.
-      EnvironmentName:
-        $ref: '#/definitions/String'
-        description: The name of the linked environment (the dependency).
-    description: 'A link to another environment, defined in the environment''s manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest (env.yaml)</a> for details.'
-  EnvironmentLinks:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentLink'
-  EnvironmentName:
-    type: string
-    minLength: 4
-    maxLength: 40
-  EnvironmentNamesList:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentName'
-  EnvironmentResourceDescription:
-    type: object
-    properties:
-      EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
-        description: The name of the environment.
-      AutoScalingGroups:
-        $ref: '#/definitions/AutoScalingGroupList'
-        description: ' The <code>AutoScalingGroups</code> used by this environment. '
-      Instances:
-        $ref: '#/definitions/InstanceList'
-        description: The Amazon EC2 instances used by this environment.
-      LaunchConfigurations:
-        $ref: '#/definitions/LaunchConfigurationList'
-        description: The Auto Scaling launch configurations in use by this environment.
-      LoadBalancers:
-        $ref: '#/definitions/LoadBalancerList'
-        description: The LoadBalancers in use by this environment.
-      Triggers:
-        $ref: '#/definitions/TriggerList'
-        description: 'The <code>AutoScaling</code> triggers in use by this environment. '
-      Queues:
-        $ref: '#/definitions/QueueList'
-        description: The queues used by this environment.
-    description: Describes the AWS resources in use by this environment. This data is live.
-  EnvironmentResourcesDescription:
-    type: object
-    properties:
-      LoadBalancer:
-        $ref: '#/definitions/LoadBalancerDescription'
-        description: Describes the LoadBalancer.
-    description: Describes the AWS resources in use by this environment. This data is not live data.
-  EnvironmentStatus:
-    type: string
-    enum:
-      - Launching
-      - Updating
-      - Ready
-      - Terminating
-      - Terminated
-  EnvironmentTier:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of this environment tier.
-      Type:
-        $ref: '#/definitions/String'
-        description: The type of this environment tier.
-      Version:
-        $ref: '#/definitions/String'
-        description: '<p>The version of this environment tier. When you don''t set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.</p> <note> <p>This member is deprecated. Any specific version that you set may become out of date. We recommend leaving it unspecified.</p> </note>'
-    description: Describes the properties of an environment tier
-  EventDate:
-    type: string
-    format: date-time
-  EventDescription:
-    type: object
-    properties:
-      EventDate:
-        $ref: '#/definitions/EventDate'
-        description: The date when the event occurred.
-      Message:
-        $ref: '#/definitions/EventMessage'
-        description: The event message.
-      ApplicationName:
-        $ref: '#/definitions/ApplicationName'
-        description: The application associated with the event.
-      VersionLabel:
-        $ref: '#/definitions/VersionLabel'
-        description: The release label for the application version associated with this event.
-      TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
-        description: The name of the configuration associated with this event.
-      EnvironmentName:
-        $ref: '#/definitions/EnvironmentName'
-        description: The name of the environment associated with this event.
-      PlatformArn:
-        $ref: '#/definitions/PlatformArn'
-        description: The ARN of the platform.
-      RequestId:
-        $ref: '#/definitions/RequestId'
-        description: The web service request ID for the activity of this event.
-      Severity:
-        $ref: '#/definitions/EventSeverity'
-        description: The severity level of this event.
-    description: Describes an event.
-  EventDescriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/EventDescription'
-  EventMessage:
-    type: string
-  EventSeverity:
-    type: string
-    enum:
-      - TRACE
-      - DEBUG
-      - INFO
-      - WARN
-      - ERROR
-      - FATAL
-  FailureType:
-    type: string
-    enum:
-      - UpdateCancelled
-      - CancellationFailed
-      - RollbackFailed
-      - RollbackSuccessful
-      - InternalFailure
-      - InvalidEnvironmentState
-      - PermissionsError
-  FileTypeExtension:
-    type: string
-    minLength: 1
-    maxLength: 100
-  ForceTerminate:
-    type: boolean
-  GroupName:
-    type: string
-    minLength: 1
-    maxLength: 19
-  ImageId:
-    type: string
-  IncludeDeleted:
-    type: boolean
-  IncludeDeletedBackTo:
-    type: string
-    format: date-time
-  Instance:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/ResourceId'
-        description: The ID of the Amazon EC2 instance.
-    description: The description of an Amazon EC2 instance.
-  InstanceHealthList:
-    type: array
-    items:
-      $ref: '#/definitions/SingleInstanceHealth'
   InstanceHealthSummary:
     type: object
     properties:
@@ -3555,170 +3609,11 @@ definitions:
         $ref: '#/definitions/NullableInteger'
         description: ' <b>Red.</b> The health agent is reporting a very high number of request failures or other issues for an instance or environment.'
     description: 'Represents summary information about the health of an instance. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and Statuses</a>.'
-  InstanceId:
-    type: string
-    minLength: 1
-    maxLength: 255
-  InstanceList:
-    type: array
-    items:
-      $ref: '#/definitions/Instance'
-  InstancesHealthAttribute:
-    type: string
-    enum:
-      - HealthStatus
-      - Color
-      - Causes
-      - ApplicationMetrics
-      - RefreshedAt
-      - LaunchedAt
-      - System
-      - Deployment
-      - AvailabilityZone
-      - InstanceType
-      - All
-  InstancesHealthAttributes:
-    type: array
-    items:
-      $ref: '#/definitions/InstancesHealthAttribute'
-  Integer:
-    type: integer
-  Latency:
-    type: object
-    properties:
-      P999:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 0.1 percent of requests over the last 10 seconds.
-      P99:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 1 percent of requests over the last 10 seconds.
-      P95:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 5 percent of requests over the last 10 seconds.
-      P90:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 10 percent of requests over the last 10 seconds.
-      P85:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 15 percent of requests over the last 10 seconds.
-      P75:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 25 percent of requests over the last 10 seconds.
-      P50:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 50 percent of requests over the last 10 seconds.
-      P10:
-        $ref: '#/definitions/NullableDouble'
-        description: The average latency for the slowest 90 percent of requests over the last 10 seconds.
-    description: Represents the average latency for the slowest X percent of requests over the last 10 seconds.
-  LaunchConfiguration:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/ResourceId'
-        description: The name of the launch configuration.
-    description: Describes an Auto Scaling launch configuration.
-  LaunchConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/LaunchConfiguration'
-  LaunchedAt:
+  RefreshedAt:
     type: string
     format: date-time
-  Listener:
-    type: object
-    properties:
-      Protocol:
-        $ref: '#/definitions/String'
-        description: The protocol that is used by the Listener.
-      Port:
-        $ref: '#/definitions/Integer'
-        description: The port that is used by the Listener.
-    description: Describes the properties of a Listener for the LoadBalancer.
-  LoadAverage:
-    type: array
-    items:
-      $ref: '#/definitions/LoadAverageValue'
-  LoadAverageValue:
-    type: number
-    format: double
-  LoadBalancer:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/ResourceId'
-        description: The name of the LoadBalancer.
-    description: Describes a LoadBalancer.
-  LoadBalancerDescription:
-    type: object
-    properties:
-      LoadBalancerName:
-        $ref: '#/definitions/String'
-        description: The name of the LoadBalancer.
-      Domain:
-        $ref: '#/definitions/String'
-        description: The domain name of the LoadBalancer.
-      Listeners:
-        $ref: '#/definitions/LoadBalancerListenersDescription'
-        description: A list of Listeners used by the LoadBalancer.
-    description: Describes the details of a LoadBalancer.
-  LoadBalancerList:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancer'
-  LoadBalancerListenersDescription:
-    type: array
-    items:
-      $ref: '#/definitions/Listener'
-  Maintainer:
-    type: string
-  ManagedAction:
-    type: object
-    properties:
-      ActionId:
-        $ref: '#/definitions/String'
-        description: A unique identifier for the managed action.
-      ActionDescription:
-        $ref: '#/definitions/String'
-        description: A description of the managed action.
-      ActionType:
-        $ref: '#/definitions/ActionType'
-        description: The type of managed action.
-      Status:
-        $ref: '#/definitions/ActionStatus'
-        description: 'The status of the managed action. If the action is <code>Scheduled</code>, you can apply it immediately with <a>ApplyEnvironmentManagedAction</a>.'
-      WindowStartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The start time of the maintenance window in which the managed action will execute.
-    description: The record of an upcoming or in-progress managed action.
-  ManagedActionHistoryItem:
-    type: object
-    properties:
-      ActionId:
-        $ref: '#/definitions/String'
-        description: A unique identifier for the managed action.
-      ActionType:
-        $ref: '#/definitions/ActionType'
-        description: The type of the managed action.
-      ActionDescription:
-        $ref: '#/definitions/String'
-        description: A description of the managed action.
-      FailureType:
-        $ref: '#/definitions/FailureType'
-        description: 'If the action failed, the type of failure.'
-      Status:
-        $ref: '#/definitions/ActionHistoryStatus'
-        description: The status of the action.
-      FailureDescription:
-        $ref: '#/definitions/String'
-        description: 'If the action failed, a description of the failure.'
-      ExecutedTime:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time that the action started executing.
-      FinishedTime:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time that the action finished executing.
-    description: The record of a completed or failed managed action.
+  Integer:
+    type: integer
   ManagedActionHistoryItems:
     type: array
     items:
@@ -3731,99 +3626,48 @@ definitions:
       $ref: '#/definitions/ManagedAction'
     minItems: 1
     maxItems: 100
-  MaxAgeRule:
-    type: object
-    required:
-      - Enabled
-    properties:
-      Enabled:
-        $ref: '#/definitions/BoxedBoolean'
-        description: 'Specify <code>true</code> to apply the rule, or <code>false</code> to disable it.'
-      MaxAgeInDays:
-        $ref: '#/definitions/BoxedInt'
-        description: Specify the number of days to retain an application versions.
-      DeleteSourceFromS3:
-        $ref: '#/definitions/BoxedBoolean'
-        description: Set to <code>true</code> to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.
-    description: A lifecycle rule that deletes application versions after the specified number of days.
-  MaxCountRule:
-    type: object
-    required:
-      - Enabled
-    properties:
-      Enabled:
-        $ref: '#/definitions/BoxedBoolean'
-        description: 'Specify <code>true</code> to apply the rule, or <code>false</code> to disable it.'
-      MaxCount:
-        $ref: '#/definitions/BoxedInt'
-        description: Specify the maximum number of application versions to retain.
-      DeleteSourceFromS3:
-        $ref: '#/definitions/BoxedBoolean'
-        description: Set to <code>true</code> to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.
-    description: A lifecycle rule that deletes the oldest application version when the maximum count is exceeded.
-  MaxRecords:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  Message:
+  EnvironmentIdList:
+    type: array
+    items:
+      $ref: '#/definitions/EnvironmentId'
+  EnvironmentNamesList:
+    type: array
+    items:
+      $ref: '#/definitions/EnvironmentName'
+  IncludeDeleted:
+    type: boolean
+  IncludeDeletedBackTo:
     type: string
+    format: date-time
+  RequestId:
+    type: string
+  EventSeverity:
+    type: string
+    enum:
+      - TRACE
+      - DEBUG
+      - INFO
+      - WARN
+      - ERROR
+      - FATAL
+  TimeFilterStart:
+    type: string
+    format: date-time
+  TimeFilterEnd:
+    type: string
+    format: date-time
+  InstancesHealthAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/InstancesHealthAttribute'
   NextToken:
     type: string
     minLength: 1
     maxLength: 100
-  NonEmptyString:
-    type: string
-    pattern: .*\S.*
-  NullableDouble:
-    type: number
-    format: double
-  NullableInteger:
-    type: integer
-  NullableLong:
-    type: integer
-  OperatingSystemName:
-    type: string
-  OperatingSystemVersion:
-    type: string
-  OptionNamespace:
-    type: string
-  OptionRestrictionMaxLength:
-    type: integer
-  OptionRestrictionMaxValue:
-    type: integer
-  OptionRestrictionMinValue:
-    type: integer
-  OptionRestrictionRegex:
-    type: object
-    properties:
-      Pattern:
-        $ref: '#/definitions/RegexPattern'
-        description: The regular expression pattern that a string configuration option value with this restriction must match.
-      Label:
-        $ref: '#/definitions/RegexLabel'
-        description: A unique name representing this regular expression.
-    description: A regular expression representing a restriction on a string configuration option value.
-  OptionSpecification:
-    type: object
-    properties:
-      ResourceName:
-        $ref: '#/definitions/ResourceName'
-        description: A unique resource name for a time-based scaling configuration option.
-      Namespace:
-        $ref: '#/definitions/OptionNamespace'
-        description: A unique namespace identifying the option's associated AWS resource.
-      OptionName:
-        $ref: '#/definitions/ConfigurationOptionName'
-        description: The name of the configuration option.
-    description: A specification identifying an individual configuration option.
-  OptionsSpecifierList:
+  InstanceHealthList:
     type: array
     items:
-      $ref: '#/definitions/OptionSpecification'
-  PlatformArn:
-    type: string
-  PlatformCategory:
-    type: string
+      $ref: '#/definitions/SingleInstanceHealth'
   PlatformDescription:
     type: object
     properties:
@@ -3882,188 +3726,219 @@ definitions:
         $ref: '#/definitions/SupportedAddonList'
         description: The additions supported by the platform.
     description: Detailed information about a platform.
-  PlatformFilter:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/PlatformFilterType'
-        description: '<p>The custom platform attribute to which the filter values are applied.</p> <p>Valid Values: <code>PlatformName</code> | <code>PlatformVersion</code> | <code>PlatformStatus</code> | <code>PlatformOwner</code> </p>'
-      Operator:
-        $ref: '#/definitions/PlatformFilterOperator'
-        description: '<p>The operator to apply to the <code>Type</code> with each of the <code>Values</code>.</p> <p> Valid Values: <code>=</code> (equal to) | <code>!=</code> (not equal to) | <code>&lt;</code> (less than) | <code>&lt;=</code> (less than or equal to) | <code>&gt;</code> (greater than) | <code>&gt;=</code> (greater than or equal to) | <code>contains</code> | <code>begins_with</code> | <code>ends_with</code> </p>'
-      Values:
-        $ref: '#/definitions/PlatformFilterValueList'
-        description: The list of values applied to the custom platform attribute.
-    description: '<p>Specify criteria to restrict the results when listing custom platforms.</p> <p>The filter is evaluated as the expression:</p> <p> <code>Type</code> <code>Operator</code> <code>Values[i]</code> </p>'
-  PlatformFilterOperator:
+  Ec2InstanceId:
     type: string
-  PlatformFilterType:
+  EndpointURL:
     type: string
-  PlatformFilterValue:
+  EnvironmentArn:
     type: string
-  PlatformFilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformFilterValue'
-  PlatformFilters:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformFilter'
-  PlatformFramework:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the framework.
-      Version:
-        $ref: '#/definitions/String'
-        description: The version of the framework.
-    description: A framework supported by the custom platform.
-  PlatformFrameworks:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformFramework'
-  PlatformMaxRecords:
-    type: integer
-    minimum: 1
-  PlatformName:
-    type: string
-  PlatformOwner:
-    type: string
-  PlatformProgrammingLanguage:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the programming language.
-      Version:
-        $ref: '#/definitions/String'
-        description: The version of the programming language.
-    description: A programming language supported by the platform.
-  PlatformProgrammingLanguages:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformProgrammingLanguage'
-  PlatformStatus:
+  EnvironmentStatus:
     type: string
     enum:
-      - Creating
-      - Failed
+      - Launching
+      - Updating
       - Ready
-      - Deleting
-      - Deleted
-  PlatformSummary:
+      - Terminating
+      - Terminated
+  EnvironmentHealthStatus:
+    type: string
+    enum:
+      - NoData
+      - Unknown
+      - Pending
+      - Ok
+      - Info
+      - Warning
+      - Degraded
+      - Severe
+      - Suspended
+  EnvironmentResourcesDescription:
     type: object
     properties:
-      PlatformArn:
-        $ref: '#/definitions/PlatformArn'
-        description: The ARN of the platform.
-      PlatformOwner:
-        $ref: '#/definitions/PlatformOwner'
-        description: The AWS account ID of the person who created the platform.
-      PlatformStatus:
-        $ref: '#/definitions/PlatformStatus'
-        description: The status of the platform. You can create an environment from the platform once it is ready.
-      PlatformCategory:
-        $ref: '#/definitions/PlatformCategory'
-        description: The category of platform.
-      OperatingSystemName:
-        $ref: '#/definitions/OperatingSystemName'
-        description: The operating system used by the platform.
-      OperatingSystemVersion:
-        $ref: '#/definitions/OperatingSystemVersion'
-        description: The version of the operating system used by the platform.
-      SupportedTierList:
-        $ref: '#/definitions/SupportedTierList'
-        description: The tiers in which the platform runs.
-      SupportedAddonList:
-        $ref: '#/definitions/SupportedAddonList'
-        description: The additions associated with the platform.
-    description: Detailed information about a platform.
-  PlatformSummaryList:
+      LoadBalancer:
+        $ref: '#/definitions/LoadBalancerDescription'
+        description: Describes the LoadBalancer.
+    description: Describes the AWS resources in use by this environment. This data is not live data.
+  EnvironmentLinks:
     type: array
     items:
-      $ref: '#/definitions/PlatformSummary'
-  PlatformVersion:
+      $ref: '#/definitions/EnvironmentLink'
+  EnvironmentDescriptionsList:
+    type: array
+    items:
+      $ref: '#/definitions/EnvironmentDescription'
+  EnvironmentHealthAttribute:
     type: string
-  Queue:
+    enum:
+      - Status
+      - Color
+      - Causes
+      - ApplicationMetrics
+      - InstancesHealth
+      - All
+      - HealthStatus
+      - RefreshedAt
+  EnvironmentInfoType:
+    type: string
+    enum:
+      - tail
+      - bundle
+  SampleTimestamp:
+    type: string
+    format: date-time
+  Message:
+    type: string
+  EnvironmentInfoDescription:
     type: object
     properties:
-      Name:
+      InfoType:
+        $ref: '#/definitions/EnvironmentInfoType'
+        description: The type of information retrieved.
+      Ec2InstanceId:
+        $ref: '#/definitions/Ec2InstanceId'
+        description: The Amazon EC2 Instance ID for this information.
+      SampleTimestamp:
+        $ref: '#/definitions/SampleTimestamp'
+        description: The time stamp when this information was retrieved.
+      Message:
+        $ref: '#/definitions/Message'
+        description: The retrieved information.
+    description: The information retrieved from the Amazon EC2 instances.
+  EnvironmentInfoDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/EnvironmentInfoDescription'
+  EnvironmentLink:
+    type: object
+    properties:
+      LinkName:
         $ref: '#/definitions/String'
-        description: The name of the queue.
-      URL:
+        description: The name of the link.
+      EnvironmentName:
         $ref: '#/definitions/String'
-        description: The URL of the queue.
-    description: Describes a queue.
+        description: The name of the linked environment (the dependency).
+    description: 'A link to another environment, defined in the environment''s manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest (env.yaml)</a> for details.'
+  InstanceList:
+    type: array
+    items:
+      $ref: '#/definitions/Instance'
+  LaunchConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/LaunchConfiguration'
+  LoadBalancerList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancer'
+  TriggerList:
+    type: array
+    items:
+      $ref: '#/definitions/Trigger'
   QueueList:
     type: array
     items:
       $ref: '#/definitions/Queue'
-  RefreshedAt:
+  EnvironmentResourceDescription:
+    type: object
+    properties:
+      EnvironmentName:
+        $ref: '#/definitions/EnvironmentName'
+        description: The name of the environment.
+      AutoScalingGroups:
+        $ref: '#/definitions/AutoScalingGroupList'
+        description: ' The <code>AutoScalingGroups</code> used by this environment. '
+      Instances:
+        $ref: '#/definitions/InstanceList'
+        description: The Amazon EC2 instances used by this environment.
+      LaunchConfigurations:
+        $ref: '#/definitions/LaunchConfigurationList'
+        description: The Auto Scaling launch configurations in use by this environment.
+      LoadBalancers:
+        $ref: '#/definitions/LoadBalancerList'
+        description: The LoadBalancers in use by this environment.
+      Triggers:
+        $ref: '#/definitions/TriggerList'
+        description: 'The <code>AutoScaling</code> triggers in use by this environment. '
+      Queues:
+        $ref: '#/definitions/QueueList'
+        description: The queues used by this environment.
+    description: Describes the AWS resources in use by this environment. This data is live.
+  LoadBalancerDescription:
+    type: object
+    properties:
+      LoadBalancerName:
+        $ref: '#/definitions/String'
+        description: The name of the LoadBalancer.
+      Domain:
+        $ref: '#/definitions/String'
+        description: The domain name of the LoadBalancer.
+      Listeners:
+        $ref: '#/definitions/LoadBalancerListenersDescription'
+        description: A list of Listeners used by the LoadBalancer.
+    description: Describes the details of a LoadBalancer.
+  EventDate:
     type: string
     format: date-time
-  RegexLabel:
+  EventMessage:
     type: string
-  RegexPattern:
+  EventDescription:
+    type: object
+    properties:
+      EventDate:
+        $ref: '#/definitions/EventDate'
+        description: The date when the event occurred.
+      Message:
+        $ref: '#/definitions/EventMessage'
+        description: The event message.
+      ApplicationName:
+        $ref: '#/definitions/ApplicationName'
+        description: The application associated with the event.
+      VersionLabel:
+        $ref: '#/definitions/VersionLabel'
+        description: The release label for the application version associated with this event.
+      TemplateName:
+        $ref: '#/definitions/ConfigurationTemplateName'
+        description: The name of the configuration associated with this event.
+      EnvironmentName:
+        $ref: '#/definitions/EnvironmentName'
+        description: The name of the environment associated with this event.
+      PlatformArn:
+        $ref: '#/definitions/PlatformArn'
+        description: The ARN of the platform.
+      RequestId:
+        $ref: '#/definitions/RequestId'
+        description: The web service request ID for the activity of this event.
+      Severity:
+        $ref: '#/definitions/EventSeverity'
+        description: The severity level of this event.
+    description: Describes an event.
+  EventDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/EventDescription'
+  FailureType:
     type: string
-  RequestCount:
-    type: integer
-  RequestId:
-    type: string
-  ResourceArn:
-    type: string
-  ResourceId:
-    type: string
-  ResourceName:
+    enum:
+      - UpdateCancelled
+      - CancellationFailed
+      - RollbackFailed
+      - RollbackSuccessful
+      - InternalFailure
+      - InvalidEnvironmentState
+      - PermissionsError
+  FileTypeExtension:
     type: string
     minLength: 1
-    maxLength: 256
-  ResourceQuota:
+    maxLength: 100
+  ForceTerminate:
+    type: boolean
+  Instance:
     type: object
     properties:
-      Maximum:
-        $ref: '#/definitions/BoxedInt'
-        description: The maximum number of instances of this Elastic Beanstalk resource type that an AWS account can use.
-    description: The AWS Elastic Beanstalk quota information for a single resource type in an AWS account. It reflects the resource's limits for this account.
-  ResourceQuotas:
-    type: object
-    properties:
-      ApplicationQuota:
-        $ref: '#/definitions/ResourceQuota'
-        description: The quota for applications in the AWS account.
-      ApplicationVersionQuota:
-        $ref: '#/definitions/ResourceQuota'
-        description: The quota for application versions in the AWS account.
-      EnvironmentQuota:
-        $ref: '#/definitions/ResourceQuota'
-        description: The quota for environments in the AWS account.
-      ConfigurationTemplateQuota:
-        $ref: '#/definitions/ResourceQuota'
-        description: The quota for configuration templates in the AWS account.
-      CustomPlatformQuota:
-        $ref: '#/definitions/ResourceQuota'
-        description: The quota for custom platforms in the AWS account.
-    description: A set of per-resource AWS Elastic Beanstalk quotas associated with an AWS account. They reflect Elastic Beanstalk resource limits for this account.
-  S3Bucket:
-    type: string
-    maxLength: 255
-  S3Key:
-    type: string
-    maxLength: 1024
-  S3Location:
-    type: object
-    properties:
-      S3Bucket:
-        $ref: '#/definitions/S3Bucket'
-        description: The Amazon S3 bucket where the data is located.
-      S3Key:
-        $ref: '#/definitions/S3Key'
-        description: The Amazon S3 key where the data is located.
-    description: The bucket and key of an item stored in Amazon S3.
-  SampleTimestamp:
-    type: string
-    format: date-time
+      Id:
+        $ref: '#/definitions/ResourceId'
+        description: The ID of the Amazon EC2 instance.
+    description: The description of an Amazon EC2 instance.
   SingleInstanceHealth:
     type: object
     properties:
@@ -4098,94 +3973,243 @@ definitions:
         $ref: '#/definitions/String'
         description: The instance's type.
     description: Detailed health information about an Amazon EC2 instance in your Elastic Beanstalk environment.
-  SolutionStackDescription:
-    type: object
-    properties:
-      SolutionStackName:
-        $ref: '#/definitions/SolutionStackName'
-        description: The name of the solution stack.
-      PermittedFileTypes:
-        $ref: '#/definitions/SolutionStackFileTypeList'
-        description: The permitted file types allowed for a solution stack.
-    description: Describes the solution stack.
-  SolutionStackFileTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/FileTypeExtension'
-  SolutionStackName:
+  InstanceId:
     type: string
-  SourceBuildInformation:
-    type: object
-    required:
-      - SourceType
-      - SourceRepository
-      - SourceLocation
-    properties:
-      SourceType:
-        $ref: '#/definitions/SourceType'
-        description: <p>The type of repository.</p> <ul> <li> <p> <code>Git</code> </p> </li> <li> <p> <code>Zip</code> </p> </li> </ul>
-      SourceRepository:
-        $ref: '#/definitions/SourceRepository'
-        description: <p>Location where the repository is stored.</p> <ul> <li> <p> <code>CodeCommit</code> </p> </li> <li> <p> <code>S3</code> </p> </li> </ul>
-      SourceLocation:
-        $ref: '#/definitions/SourceLocation'
-        description: '<p>The location of the source code, as a formatted string, depending on the value of <code>SourceRepository</code> </p> <ul> <li> <p>For <code>CodeCommit</code>, the format is the repository name and commit ID, separated by a forward slash. For example, <code>my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a</code>.</p> </li> <li> <p>For <code>S3</code>, the format is the S3 bucket name and object key, separated by a forward slash. For example, <code>my-s3-bucket/Folders/my-source-file</code>.</p> </li> </ul>'
-    description: Location of the source code for an application version.
-  SourceConfiguration:
-    type: object
-    properties:
-      ApplicationName:
-        $ref: '#/definitions/ApplicationName'
-        description: The name of the application associated with the configuration.
-      TemplateName:
-        $ref: '#/definitions/ConfigurationTemplateName'
-        description: The name of the configuration template.
-    description: A specification for an environment configuration
-  SourceLocation:
-    type: string
-    pattern: .+/.+
-    minLength: 3
+    minLength: 1
     maxLength: 255
-  SourceRepository:
+  InstancesHealthAttribute:
     type: string
     enum:
-      - CodeCommit
-      - S3
-  SourceType:
-    type: string
-    enum:
-      - Git
-      - Zip
-  StatusCodes:
+      - HealthStatus
+      - Color
+      - Causes
+      - ApplicationMetrics
+      - RefreshedAt
+      - LaunchedAt
+      - System
+      - Deployment
+      - AvailabilityZone
+      - InstanceType
+      - All
+  LaunchConfiguration:
     type: object
     properties:
-      Status2xx:
-        $ref: '#/definitions/NullableInteger'
-        description: 'The percentage of requests over the last 10 seconds that resulted in a 2xx (200, 201, etc.) status code.'
-      Status3xx:
-        $ref: '#/definitions/NullableInteger'
-        description: 'The percentage of requests over the last 10 seconds that resulted in a 3xx (300, 301, etc.) status code.'
-      Status4xx:
-        $ref: '#/definitions/NullableInteger'
-        description: 'The percentage of requests over the last 10 seconds that resulted in a 4xx (400, 401, etc.) status code.'
-      Status5xx:
-        $ref: '#/definitions/NullableInteger'
-        description: 'The percentage of requests over the last 10 seconds that resulted in a 5xx (500, 501, etc.) status code.'
-    description: 'Represents the percentage of requests over the last 10 seconds that resulted in each type of status code response. For more information, see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">Status Code Definitions</a>.'
-  String:
+      Name:
+        $ref: '#/definitions/ResourceId'
+        description: The name of the launch configuration.
+    description: Describes an Auto Scaling launch configuration.
+  LaunchedAt:
     type: string
-  SupportedAddon:
-    type: string
-  SupportedAddonList:
+    format: date-time
+  PlatformFilters:
     type: array
     items:
-      $ref: '#/definitions/SupportedAddon'
-  SupportedTier:
+      $ref: '#/definitions/PlatformFilter'
+  PlatformMaxRecords:
+    type: integer
+    minimum: 1
+  PlatformSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/PlatformSummary'
+  ResourceArn:
     type: string
+  Listener:
+    type: object
+    properties:
+      Protocol:
+        $ref: '#/definitions/String'
+        description: The protocol that is used by the Listener.
+      Port:
+        $ref: '#/definitions/Integer'
+        description: The port that is used by the Listener.
+    description: Describes the properties of a Listener for the LoadBalancer.
+  LoadAverageValue:
+    type: number
+    format: double
+  LoadAverage:
+    type: array
+    items:
+      $ref: '#/definitions/LoadAverageValue'
+  LoadBalancer:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/ResourceId'
+        description: The name of the LoadBalancer.
+    description: Describes a LoadBalancer.
+  LoadBalancerListenersDescription:
+    type: array
+    items:
+      $ref: '#/definitions/Listener'
+  Maintainer:
+    type: string
+  Timestamp:
+    type: string
+    format: date-time
+  ManagedAction:
+    type: object
+    properties:
+      ActionId:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the managed action.
+      ActionDescription:
+        $ref: '#/definitions/String'
+        description: A description of the managed action.
+      ActionType:
+        $ref: '#/definitions/ActionType'
+        description: The type of managed action.
+      Status:
+        $ref: '#/definitions/ActionStatus'
+        description: 'The status of the managed action. If the action is <code>Scheduled</code>, you can apply it immediately with <a>ApplyEnvironmentManagedAction</a>.'
+      WindowStartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start time of the maintenance window in which the managed action will execute.
+    description: The record of an upcoming or in-progress managed action.
+  ManagedActionHistoryItem:
+    type: object
+    properties:
+      ActionId:
+        $ref: '#/definitions/String'
+        description: A unique identifier for the managed action.
+      ActionType:
+        $ref: '#/definitions/ActionType'
+        description: The type of the managed action.
+      ActionDescription:
+        $ref: '#/definitions/String'
+        description: A description of the managed action.
+      FailureType:
+        $ref: '#/definitions/FailureType'
+        description: 'If the action failed, the type of failure.'
+      Status:
+        $ref: '#/definitions/ActionHistoryStatus'
+        description: The status of the action.
+      FailureDescription:
+        $ref: '#/definitions/String'
+        description: 'If the action failed, a description of the failure.'
+      ExecutedTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the action started executing.
+      FinishedTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time that the action finished executing.
+    description: The record of a completed or failed managed action.
+  OperatingSystemName:
+    type: string
+  OperatingSystemVersion:
+    type: string
+  RegexPattern:
+    type: string
+  RegexLabel:
+    type: string
+  OptionSpecification:
+    type: object
+    properties:
+      ResourceName:
+        $ref: '#/definitions/ResourceName'
+        description: A unique resource name for a time-based scaling configuration option.
+      Namespace:
+        $ref: '#/definitions/OptionNamespace'
+        description: A unique namespace identifying the option's associated AWS resource.
+      OptionName:
+        $ref: '#/definitions/ConfigurationOptionName'
+        description: The name of the configuration option.
+    description: A specification identifying an individual configuration option.
+  PlatformCategory:
+    type: string
+  PlatformOwner:
+    type: string
+  PlatformStatus:
+    type: string
+    enum:
+      - Creating
+      - Failed
+      - Ready
+      - Deleting
+      - Deleted
+  PlatformProgrammingLanguages:
+    type: array
+    items:
+      $ref: '#/definitions/PlatformProgrammingLanguage'
+  PlatformFrameworks:
+    type: array
+    items:
+      $ref: '#/definitions/PlatformFramework'
   SupportedTierList:
     type: array
     items:
       $ref: '#/definitions/SupportedTier'
+  SupportedAddonList:
+    type: array
+    items:
+      $ref: '#/definitions/SupportedAddon'
+  PlatformFilterType:
+    type: string
+  PlatformFilterOperator:
+    type: string
+  PlatformFilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/PlatformFilterValue'
+  PlatformFilter:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/PlatformFilterType'
+        description: '<p>The custom platform attribute to which the filter values are applied.</p> <p>Valid Values: <code>PlatformName</code> | <code>PlatformVersion</code> | <code>PlatformStatus</code> | <code>PlatformOwner</code> </p>'
+      Operator:
+        $ref: '#/definitions/PlatformFilterOperator'
+        description: '<p>The operator to apply to the <code>Type</code> with each of the <code>Values</code>.</p> <p> Valid Values: <code>=</code> (equal to) | <code>!=</code> (not equal to) | <code>&lt;</code> (less than) | <code>&lt;=</code> (less than or equal to) | <code>&gt;</code> (greater than) | <code>&gt;=</code> (greater than or equal to) | <code>contains</code> | <code>begins_with</code> | <code>ends_with</code> </p>'
+      Values:
+        $ref: '#/definitions/PlatformFilterValueList'
+        description: The list of values applied to the custom platform attribute.
+    description: '<p>Specify criteria to restrict the results when listing custom platforms.</p> <p>The filter is evaluated as the expression:</p> <p> <code>Type</code> <code>Operator</code> <code>Values[i]</code> </p>'
+  PlatformFilterValue:
+    type: string
+  PlatformFramework:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the framework.
+      Version:
+        $ref: '#/definitions/String'
+        description: The version of the framework.
+    description: A framework supported by the custom platform.
+  PlatformProgrammingLanguage:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the programming language.
+      Version:
+        $ref: '#/definitions/String'
+        description: The version of the programming language.
+    description: A programming language supported by the platform.
+  Queue:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the queue.
+      URL:
+        $ref: '#/definitions/String'
+        description: The URL of the queue.
+    description: Describes a queue.
+  ResourceQuota:
+    type: object
+    properties:
+      Maximum:
+        $ref: '#/definitions/BoxedInt'
+        description: The maximum number of instances of this Elastic Beanstalk resource type that an AWS account can use.
+    description: The AWS Elastic Beanstalk quota information for a single resource type in an AWS account. It reflects the resource's limits for this account.
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  S3Key:
+    type: string
+    maxLength: 1024
   SystemStatus:
     type: object
     properties:
@@ -4196,6 +4220,37 @@ definitions:
         $ref: '#/definitions/LoadAverage'
         description: 'Load average in the last 1-minute, 5-minute, and 15-minute periods. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os">Operating System Metrics</a>.'
     description: CPU utilization and load average metrics for an Amazon EC2 instance.
+  SolutionStackFileTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/FileTypeExtension'
+  SourceType:
+    type: string
+    enum:
+      - Git
+      - Zip
+  SourceRepository:
+    type: string
+    enum:
+      - CodeCommit
+      - S3
+  SourceLocation:
+    type: string
+    pattern: .+/.+
+    minLength: 3
+    maxLength: 255
+  SupportedAddon:
+    type: string
+  SupportedTier:
+    type: string
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 1
+    maxLength: 256
   Tag:
     type: object
     properties:
@@ -4206,41 +4261,12 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value of the tag.
     description: Describes a tag applied to a resource in an environment.
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValue:
-    type: string
-    minLength: 1
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TerminateEnvForce:
-    type: boolean
   TerminateEnvironmentResources:
     type: boolean
-  TimeFilterEnd:
-    type: string
-    format: date-time
-  TimeFilterStart:
-    type: string
-    format: date-time
-  Timestamp:
-    type: string
-    format: date-time
-  Token:
-    type: string
   Trigger:
     type: object
     properties:
@@ -4248,15 +4274,13 @@ definitions:
         $ref: '#/definitions/ResourceId'
         description: The name of the trigger.
     description: Describes a trigger.
-  TriggerList:
-    type: array
-    items:
-      $ref: '#/definitions/Trigger'
-  UpdateDate:
+  ValidationMessageString:
     type: string
-    format: date-time
-  UserDefinedOption:
-    type: boolean
+  ValidationSeverity:
+    type: string
+    enum:
+      - error
+      - warning
   ValidationMessage:
     type: object
     properties:
@@ -4273,28 +4297,3 @@ definitions:
         $ref: '#/definitions/ConfigurationOptionName'
         description: The name of the option.
     description: An error or warning for a desired configuration option value.
-  ValidationMessageString:
-    type: string
-  ValidationMessagesList:
-    type: array
-    items:
-      $ref: '#/definitions/ValidationMessage'
-  ValidationSeverity:
-    type: string
-    enum:
-      - error
-      - warning
-  VersionLabel:
-    type: string
-    minLength: 1
-    maxLength: 100
-  VersionLabels:
-    type: array
-    items:
-      $ref: '#/definitions/VersionLabel'
-  VersionLabelsList:
-    type: array
-    items:
-      $ref: '#/definitions/VersionLabel'
-  VirtualizationType:
-    type: string

@@ -2005,7 +2005,14 @@ definitions:
         $ref: '#/definitions/PolicyNames'
         description: 'The names of the policies. This list must include all policies to be enabled. If you omit a policy that is currently enabled, it is disabled. If the list is empty, all current policies are disabled.'
     description: Contains the parameters for SetLoadBalancePoliciesOfListener.
-  undefined: {}
+  AccessLogEnabled:
+    type: boolean
+  S3BucketName:
+    type: string
+  AccessLogInterval:
+    type: integer
+  AccessLogPrefix:
+    type: string
   AccessLog:
     type: object
     required:
@@ -2024,16 +2031,31 @@ definitions:
         $ref: '#/definitions/AccessLogPrefix'
         description: 'The logical hierarchy you created for your Amazon S3 bucket, for example <code>my-bucket-prefix/prod</code>. If the prefix is not provided, the log is placed at the root level of the bucket.'
     description: Information about the <code>AccessLog</code> attribute.
-  AccessLogEnabled:
-    type: boolean
-  AccessLogInterval:
-    type: integer
-  AccessLogPrefix:
-    type: string
   AccessPointName:
     type: string
   AccessPointPort:
     type: integer
+  AvailabilityZones:
+    type: array
+    items:
+      $ref: '#/definitions/AvailabilityZone'
+  LoadBalancerNames:
+    type: array
+    items:
+      $ref: '#/definitions/AccessPointName'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+  AdditionalAttributeKey:
+    type: string
+    pattern: '^[a-zA-Z0-9.]+$'
+    maxLength: 256
+  AdditionalAttributeValue:
+    type: string
+    pattern: '^[a-zA-Z0-9.]+$'
+    maxLength: 256
   AdditionalAttribute:
     type: object
     properties:
@@ -2044,23 +2066,11 @@ definitions:
         $ref: '#/definitions/AdditionalAttributeValue'
         description: This parameter is reserved.
     description: This data type is reserved.
-  AdditionalAttributeKey:
-    type: string
-    pattern: '^[a-zA-Z0-9.]+$'
-    maxLength: 256
-  AdditionalAttributeValue:
-    type: string
-    pattern: '^[a-zA-Z0-9.]+$'
-    maxLength: 256
   AdditionalAttributes:
     type: array
     items:
       $ref: '#/definitions/AdditionalAttribute'
     maxItems: 10
-  AppCookieStickinessPolicies:
-    type: array
-    items:
-      $ref: '#/definitions/AppCookieStickinessPolicy'
   AppCookieStickinessPolicy:
     type: object
     properties:
@@ -2071,6 +2081,22 @@ definitions:
         $ref: '#/definitions/CookieName'
         description: The name of the application cookie used for stickiness.
     description: Information about a policy for application-controlled session stickiness.
+  AppCookieStickinessPolicies:
+    type: array
+    items:
+      $ref: '#/definitions/AppCookieStickinessPolicy'
+  PolicyName:
+    type: string
+  CookieName:
+    type: string
+  SecurityGroups:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+  Subnets:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
   AttributeName:
     type: string
   AttributeType:
@@ -2079,10 +2105,14 @@ definitions:
     type: string
   AvailabilityZone:
     type: string
-  AvailabilityZones:
+  InstancePort:
+    type: integer
+    minimum: 1
+    maximum: 65535
+  PolicyNames:
     type: array
     items:
-      $ref: '#/definitions/AvailabilityZone'
+      $ref: '#/definitions/PolicyName'
   BackendServerDescription:
     type: object
     properties:
@@ -2099,57 +2129,6 @@ definitions:
       $ref: '#/definitions/BackendServerDescription'
   Cardinality:
     type: string
-  ConnectionDraining:
-    type: object
-    required:
-      - Enabled
-    properties:
-      Enabled:
-        $ref: '#/definitions/ConnectionDrainingEnabled'
-        description: Specifies whether connection draining is enabled for the load balancer.
-      Timeout:
-        $ref: '#/definitions/ConnectionDrainingTimeout'
-        description: 'The maximum time, in seconds, to keep the existing connections open before deregistering the instances.'
-    description: Information about the <code>ConnectionDraining</code> attribute.
-  ConnectionDrainingEnabled:
-    type: boolean
-  ConnectionDrainingTimeout:
-    type: integer
-  ConnectionSettings:
-    type: object
-    required:
-      - IdleTimeout
-    properties:
-      IdleTimeout:
-        $ref: '#/definitions/IdleTimeout'
-        description: 'The time, in seconds, that the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.'
-    description: Information about the <code>ConnectionSettings</code> attribute.
-  CookieExpirationPeriod:
-    type: integer
-  CookieName:
-    type: string
-  CreatedTime:
-    type: string
-    format: date-time
-  CrossZoneLoadBalancing:
-    type: object
-    required:
-      - Enabled
-    properties:
-      Enabled:
-        $ref: '#/definitions/CrossZoneLoadBalancingEnabled'
-        description: Specifies whether cross-zone load balancing is enabled for the load balancer.
-    description: Information about the <code>CrossZoneLoadBalancing</code> attribute.
-  CrossZoneLoadBalancingEnabled:
-    type: boolean
-  DNSName:
-    type: string
-  DefaultValue:
-    type: string
-  Description:
-    type: string
-  EndPointPort:
-    type: integer
   HealthCheck:
     type: object
     required:
@@ -2175,24 +2154,158 @@ definitions:
         $ref: '#/definitions/HealthyThreshold'
         description: The number of consecutive health checks successes required before moving the instance to the <code>Healthy</code> state.
     description: Information about a health check.
-  HealthCheckInterval:
+  ConnectionDrainingEnabled:
+    type: boolean
+  ConnectionDrainingTimeout:
     type: integer
-    minimum: 5
-    maximum: 300
-  HealthCheckTarget:
-    type: string
-  HealthCheckTimeout:
-    type: integer
-    minimum: 2
-    maximum: 60
-  HealthyThreshold:
-    type: integer
-    minimum: 2
-    maximum: 10
+  ConnectionDraining:
+    type: object
+    required:
+      - Enabled
+    properties:
+      Enabled:
+        $ref: '#/definitions/ConnectionDrainingEnabled'
+        description: Specifies whether connection draining is enabled for the load balancer.
+      Timeout:
+        $ref: '#/definitions/ConnectionDrainingTimeout'
+        description: 'The maximum time, in seconds, to keep the existing connections open before deregistering the instances.'
+    description: Information about the <code>ConnectionDraining</code> attribute.
   IdleTimeout:
     type: integer
     minimum: 1
     maximum: 3600
+  ConnectionSettings:
+    type: object
+    required:
+      - IdleTimeout
+    properties:
+      IdleTimeout:
+        $ref: '#/definitions/IdleTimeout'
+        description: 'The time, in seconds, that the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.'
+    description: Information about the <code>ConnectionSettings</code> attribute.
+  CookieExpirationPeriod:
+    type: integer
+  Listeners:
+    type: array
+    items:
+      $ref: '#/definitions/Listener'
+  LoadBalancerScheme:
+    type: string
+  DNSName:
+    type: string
+  PolicyTypeName:
+    type: string
+  PolicyAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyAttribute'
+  CreatedTime:
+    type: string
+    format: date-time
+  CrossZoneLoadBalancingEnabled:
+    type: boolean
+  CrossZoneLoadBalancing:
+    type: object
+    required:
+      - Enabled
+    properties:
+      Enabled:
+        $ref: '#/definitions/CrossZoneLoadBalancingEnabled'
+        description: Specifies whether cross-zone load balancing is enabled for the load balancer.
+    description: Information about the <code>CrossZoneLoadBalancing</code> attribute.
+  DefaultValue:
+    type: string
+  Ports:
+    type: array
+    items:
+      $ref: '#/definitions/AccessPointPort'
+  Instances:
+    type: array
+    items:
+      $ref: '#/definitions/Instance'
+  Marker:
+    type: string
+  PageSize:
+    type: integer
+    minimum: 1
+    maximum: 400
+  LoadBalancerDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerDescription'
+  Limits:
+    type: array
+    items:
+      $ref: '#/definitions/Limit'
+  InstanceStates:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceState'
+  LoadBalancerAttributes:
+    type: object
+    properties:
+      CrossZoneLoadBalancing:
+        $ref: '#/definitions/CrossZoneLoadBalancing'
+        description: '<p>If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html">Configure Cross-Zone Load Balancing</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+      AccessLog:
+        $ref: '#/definitions/AccessLog'
+        description: '<p>If enabled, the load balancer captures detailed information of all requests and delivers the information to the Amazon S3 bucket that you specify.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html">Enable Access Logs</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+      ConnectionDraining:
+        $ref: '#/definitions/ConnectionDraining'
+        description: '<p>If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html">Configure Connection Draining</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+      ConnectionSettings:
+        $ref: '#/definitions/ConnectionSettings'
+        description: '<p>If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.</p> <p>By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html">Configure Idle Connection Timeout</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+      AdditionalAttributes:
+        $ref: '#/definitions/AdditionalAttributes'
+        description: This parameter is reserved.
+    description: The attributes for a load balancer.
+  PolicyDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyDescription'
+  PolicyTypeNames:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyTypeName'
+  PolicyTypeDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyTypeDescription'
+  LoadBalancerNamesMax20:
+    type: array
+    items:
+      $ref: '#/definitions/AccessPointName'
+    minItems: 1
+    maxItems: 20
+  TagDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/TagDescription'
+  Description:
+    type: string
+  EndPointPort:
+    type: integer
+  HealthCheckTarget:
+    type: string
+  HealthCheckInterval:
+    type: integer
+    minimum: 5
+    maximum: 300
+  HealthCheckTimeout:
+    type: integer
+    minimum: 2
+    maximum: 60
+  UnhealthyThreshold:
+    type: integer
+    minimum: 2
+    maximum: 10
+  HealthyThreshold:
+    type: integer
+    minimum: 2
+    maximum: 10
+  InstanceId:
+    type: string
   Instance:
     type: object
     properties:
@@ -2200,12 +2313,10 @@ definitions:
         $ref: '#/definitions/InstanceId'
         description: The instance ID.
     description: The ID of an EC2 instance.
-  InstanceId:
+  State:
     type: string
-  InstancePort:
-    type: integer
-    minimum: 1
-    maximum: 65535
+  ReasonCode:
+    type: string
   InstanceState:
     type: object
     properties:
@@ -2222,18 +2333,6 @@ definitions:
         $ref: '#/definitions/Description'
         description: <p>A description of the instance state. This string can contain one or more of the following messages.</p> <ul> <li> <p> <code>N/A</code> </p> </li> <li> <p> <code>A transient error occurred. Please try again later.</code> </p> </li> <li> <p> <code>Instance has failed at least the UnhealthyThreshold number of health checks consecutively.</code> </p> </li> <li> <p> <code>Instance has not passed the configured HealthyThreshold number of health checks consecutively.</code> </p> </li> <li> <p> <code>Instance registration is still in progress.</code> </p> </li> <li> <p> <code>Instance is in the EC2 Availability Zone for which LoadBalancer is not configured to route traffic to.</code> </p> </li> <li> <p> <code>Instance is not currently registered with the LoadBalancer.</code> </p> </li> <li> <p> <code>Instance deregistration currently in progress.</code> </p> </li> <li> <p> <code>Disable Availability Zone is currently in progress.</code> </p> </li> <li> <p> <code>Instance is in pending state.</code> </p> </li> <li> <p> <code>Instance is in stopped state.</code> </p> </li> <li> <p> <code>Instance is in terminated state.</code> </p> </li> </ul>
     description: Information about the state of an EC2 instance.
-  InstanceStates:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceState'
-  Instances:
-    type: array
-    items:
-      $ref: '#/definitions/Instance'
-  LBCookieStickinessPolicies:
-    type: array
-    items:
-      $ref: '#/definitions/LBCookieStickinessPolicy'
   LBCookieStickinessPolicy:
     type: object
     properties:
@@ -2244,6 +2343,14 @@ definitions:
         $ref: '#/definitions/CookieExpirationPeriod'
         description: 'The time period, in seconds, after which the cookie should be considered stale. If this parameter is not specified, the stickiness session lasts for the duration of the browser session.'
     description: Information about a policy for duration-based session stickiness.
+  LBCookieStickinessPolicies:
+    type: array
+    items:
+      $ref: '#/definitions/LBCookieStickinessPolicy'
+  Name:
+    type: string
+  Max:
+    type: string
   Limit:
     type: object
     properties:
@@ -2254,10 +2361,10 @@ definitions:
         $ref: '#/definitions/Max'
         description: The maximum value of the limit.
     description: Information about an Elastic Load Balancing resource limit for your AWS account.
-  Limits:
-    type: array
-    items:
-      $ref: '#/definitions/Limit'
+  Protocol:
+    type: string
+  SSLCertificateId:
+    type: string
   Listener:
     type: object
     required:
@@ -2295,29 +2402,31 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ListenerDescription'
-  Listeners:
-    type: array
-    items:
-      $ref: '#/definitions/Listener'
-  LoadBalancerAttributes:
+  Policies:
     type: object
     properties:
-      CrossZoneLoadBalancing:
-        $ref: '#/definitions/CrossZoneLoadBalancing'
-        description: '<p>If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html">Configure Cross-Zone Load Balancing</a> in the <i>Classic Load Balancers Guide</i>.</p>'
-      AccessLog:
-        $ref: '#/definitions/AccessLog'
-        description: '<p>If enabled, the load balancer captures detailed information of all requests and delivers the information to the Amazon S3 bucket that you specify.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html">Enable Access Logs</a> in the <i>Classic Load Balancers Guide</i>.</p>'
-      ConnectionDraining:
-        $ref: '#/definitions/ConnectionDraining'
-        description: '<p>If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html">Configure Connection Draining</a> in the <i>Classic Load Balancers Guide</i>.</p>'
-      ConnectionSettings:
-        $ref: '#/definitions/ConnectionSettings'
-        description: '<p>If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.</p> <p>By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html">Configure Idle Connection Timeout</a> in the <i>Classic Load Balancers Guide</i>.</p>'
-      AdditionalAttributes:
-        $ref: '#/definitions/AdditionalAttributes'
-        description: This parameter is reserved.
-    description: The attributes for a load balancer.
+      AppCookieStickinessPolicies:
+        $ref: '#/definitions/AppCookieStickinessPolicies'
+        description: The stickiness policies created using <a>CreateAppCookieStickinessPolicy</a>.
+      LBCookieStickinessPolicies:
+        $ref: '#/definitions/LBCookieStickinessPolicies'
+        description: The stickiness policies created using <a>CreateLBCookieStickinessPolicy</a>.
+      OtherPolicies:
+        $ref: '#/definitions/PolicyNames'
+        description: The policies other than the stickiness policies.
+    description: The policies for a load balancer.
+  VPCId:
+    type: string
+  SourceSecurityGroup:
+    type: object
+    properties:
+      OwnerAlias:
+        $ref: '#/definitions/SecurityGroupOwnerAlias'
+        description: The owner of the security group.
+      GroupName:
+        $ref: '#/definitions/SecurityGroupName'
+        description: The name of the security group.
+    description: Information about a source security group.
   LoadBalancerDescription:
     type: object
     properties:
@@ -2370,45 +2479,6 @@ definitions:
         $ref: '#/definitions/LoadBalancerScheme'
         description: '<p>The type of load balancer. Valid only for load balancers in a VPC.</p> <p>If <code>Scheme</code> is <code>internet-facing</code>, the load balancer has a public DNS name that resolves to a public IP address.</p> <p>If <code>Scheme</code> is <code>internal</code>, the load balancer has a public DNS name that resolves to a private IP address.</p>'
     description: Information about a load balancer.
-  LoadBalancerDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerDescription'
-  LoadBalancerNames:
-    type: array
-    items:
-      $ref: '#/definitions/AccessPointName'
-  LoadBalancerNamesMax20:
-    type: array
-    items:
-      $ref: '#/definitions/AccessPointName'
-    minItems: 1
-    maxItems: 20
-  LoadBalancerScheme:
-    type: string
-  Marker:
-    type: string
-  Max:
-    type: string
-  Name:
-    type: string
-  PageSize:
-    type: integer
-    minimum: 1
-    maximum: 400
-  Policies:
-    type: object
-    properties:
-      AppCookieStickinessPolicies:
-        $ref: '#/definitions/AppCookieStickinessPolicies'
-        description: The stickiness policies created using <a>CreateAppCookieStickinessPolicy</a>.
-      LBCookieStickinessPolicies:
-        $ref: '#/definitions/LBCookieStickinessPolicies'
-        description: The stickiness policies created using <a>CreateLBCookieStickinessPolicy</a>.
-      OtherPolicies:
-        $ref: '#/definitions/PolicyNames'
-        description: The policies other than the stickiness policies.
-    description: The policies for a load balancer.
   PolicyAttribute:
     type: object
     properties:
@@ -2456,10 +2526,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PolicyAttributeTypeDescription'
-  PolicyAttributes:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyAttribute'
   PolicyDescription:
     type: object
     properties:
@@ -2473,16 +2539,6 @@ definitions:
         $ref: '#/definitions/PolicyAttributeDescriptions'
         description: The policy attributes.
     description: Information about a policy.
-  PolicyDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyDescription'
-  PolicyName:
-    type: string
-  PolicyNames:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyName'
   PolicyTypeDescription:
     type: object
     properties:
@@ -2496,56 +2552,29 @@ definitions:
         $ref: '#/definitions/PolicyAttributeTypeDescriptions'
         description: The description of the policy attributes associated with the policies defined by Elastic Load Balancing.
     description: Information about a policy type.
-  PolicyTypeDescriptions:
+  TagKeyList:
     type: array
     items:
-      $ref: '#/definitions/PolicyTypeDescription'
-  PolicyTypeName:
-    type: string
-  PolicyTypeNames:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyTypeName'
-  Ports:
-    type: array
-    items:
-      $ref: '#/definitions/AccessPointPort'
-  Protocol:
-    type: string
-  ReasonCode:
-    type: string
-  S3BucketName:
-    type: string
-  SSLCertificateId:
-    type: string
+      $ref: '#/definitions/TagKeyOnly'
+    minItems: 1
   SecurityGroupId:
     type: string
   SecurityGroupName:
     type: string
   SecurityGroupOwnerAlias:
     type: string
-  SecurityGroups:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityGroupId'
-  SourceSecurityGroup:
-    type: object
-    properties:
-      OwnerAlias:
-        $ref: '#/definitions/SecurityGroupOwnerAlias'
-        description: The owner of the security group.
-      GroupName:
-        $ref: '#/definitions/SecurityGroupName'
-        description: The name of the security group.
-    description: Information about a source security group.
-  State:
-    type: string
   SubnetId:
     type: string
-  Subnets:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetId'
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -2568,20 +2597,6 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags.
     description: The tags associated with a load balancer.
-  TagDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/TagDescription'
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKeyOnly'
-    minItems: 1
   TagKeyOnly:
     type: object
     properties:
@@ -2589,19 +2604,3 @@ definitions:
         $ref: '#/definitions/TagKey'
         description: The name of the key.
     description: The key of a tag.
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  UnhealthyThreshold:
-    type: integer
-    minimum: 2
-    maximum: 10
-  VPCId:
-    type: string

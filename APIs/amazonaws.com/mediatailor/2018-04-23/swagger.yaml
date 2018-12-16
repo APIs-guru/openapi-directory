@@ -307,7 +307,8 @@ definitions:
       VideoContentSourceUrl:
         $ref: '#/definitions/__string'
         description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
-  undefined: {}
+  __string:
+    type: string
   CdnConfiguration:
     type: object
     properties:
@@ -361,13 +362,11 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
     description: The AWSMediaTailor configuration.
-  __listOfPlaybackConfigurations:
-    type: array
-    items:
-      $ref: '#/definitions/PlaybackConfiguration'
-  __string:
-    type: string
   __integerMin1Max100:
     type: integer
     minimum: 1
     maximum: 100
+  __listOfPlaybackConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/PlaybackConfiguration'

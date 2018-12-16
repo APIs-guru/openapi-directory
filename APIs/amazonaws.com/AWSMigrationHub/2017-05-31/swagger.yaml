@@ -1288,7 +1288,8 @@ definitions:
       DryRun:
         $ref: '#/definitions/DryRun'
         description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
-  undefined: {}
+  ErrorMessage:
+    type: string
   ApplicationId:
     type: string
     minLength: 1
@@ -1299,9 +1300,16 @@ definitions:
       - NOT_STARTED
       - IN_PROGRESS
       - COMPLETED
-  ConfigurationId:
+  ProgressUpdateStream:
     type: string
+    pattern: '[^/:|\000-\037]+'
     minLength: 1
+    maxLength: 50
+  MigrationTaskName:
+    type: string
+    pattern: '[^:|]+'
+    minLength: 1
+    maxLength: 256
   CreatedArtifact:
     type: object
     required:
@@ -1314,19 +1322,8 @@ definitions:
         $ref: '#/definitions/CreatedArtifactDescription'
         description: A description that can be free-form text to record additional detail about the artifact for clarity or for later reference.
     description: 'An ARN of the AWS cloud resource target receiving the migration (e.g., AMI, EC2 instance, RDS instance, etc.).'
-  CreatedArtifactDescription:
-    type: string
-    minLength: 0
-    maxLength: 500
-  CreatedArtifactList:
-    type: array
-    items:
-      $ref: '#/definitions/CreatedArtifact'
-  CreatedArtifactName:
-    type: string
-    pattern: 'arn:[a-z-]+:[a-z0-9-]+:(?:[a-z0-9-]+|):(?:[0-9]{12}|):.*'
-    minLength: 1
-    maxLength: 1600
+  DryRun:
+    type: boolean
   DiscoveredResource:
     type: object
     required:
@@ -1339,36 +1336,25 @@ definitions:
         $ref: '#/definitions/DiscoveredResourceDescription'
         description: A description that can be free-form text to record additional detail about the discovered resource for clarity or later reference.
     description: Object representing the on-premises resource being migrated.
-  DiscoveredResourceDescription:
+  ConfigurationId:
+    type: string
+    minLength: 1
+  CreatedArtifactName:
+    type: string
+    pattern: 'arn:[a-z-]+:[a-z0-9-]+:(?:[a-z0-9-]+|):(?:[0-9]{12}|):.*'
+    minLength: 1
+    maxLength: 1600
+  CreatedArtifactDescription:
     type: string
     minLength: 0
     maxLength: 500
-  DiscoveredResourceList:
+  CreatedArtifactList:
     type: array
     items:
-      $ref: '#/definitions/DiscoveredResource'
-  DryRun:
-    type: boolean
-  ErrorMessage:
+      $ref: '#/definitions/CreatedArtifact'
+  UpdateDateTime:
     type: string
-  LatestResourceAttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceAttribute'
-    minItems: 0
-    maxItems: 100
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  MaxResultsCreatedArtifacts:
-    type: integer
-    minimum: 1
-    maximum: 10
-  MaxResultsResources:
-    type: integer
-    minimum: 1
-    maximum: 10
+    format: date-time
   MigrationTask:
     type: object
     properties:
@@ -1388,11 +1374,89 @@ definitions:
         $ref: '#/definitions/LatestResourceAttributeList'
         description: <p/>
     description: Represents a migration task in a migration tool.
-  MigrationTaskName:
+  DiscoveredResourceDescription:
     type: string
-    pattern: '[^:|]+'
+    minLength: 0
+    maxLength: 500
+  DiscoveredResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/DiscoveredResource'
+  ResourceAttribute:
+    type: object
+    required:
+      - Type
+      - Value
+    properties:
+      Type:
+        $ref: '#/definitions/ResourceAttributeType'
+        description: Type of resource.
+      Value:
+        $ref: '#/definitions/ResourceAttributeValue'
+        description: Value of the resource type.
+    description: '<p>Attribute associated with a resource.</p> <p>Note the corresponding format required per type listed below:</p> <dl> <dt>IPV4</dt> <dd> <p> <code>x.x.x.x</code> </p> <p> <i>where x is an integer in the range [0,255]</i> </p> </dd> <dt>IPV6</dt> <dd> <p> <code>y : y : y : y : y : y : y : y</code> </p> <p> <i>where y is a hexadecimal between 0 and FFFF. [0, FFFF]</i> </p> </dd> <dt>MAC_ADDRESS</dt> <dd> <p> <code>^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$</code> </p> </dd> <dt>FQDN</dt> <dd> <p> <code>^[^&lt;&gt;{}\\\\/?,=\\p{Cntrl}]{1,256}$</code> </p> </dd> </dl>'
+  LatestResourceAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceAttribute'
+    minItems: 0
+    maxItems: 100
+  Token:
+    type: string
+  MaxResultsCreatedArtifacts:
+    type: integer
+    minimum: 1
+    maximum: 10
+  MaxResultsResources:
+    type: integer
+    minimum: 1
+    maximum: 10
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  ResourceName:
+    type: string
     minLength: 1
-    maxLength: 256
+    maxLength: 1600
+  MigrationTaskSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/MigrationTaskSummary'
+  ProgressUpdateStreamSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/ProgressUpdateStreamSummary'
+  Task:
+    type: object
+    required:
+      - Status
+    properties:
+      Status:
+        $ref: '#/definitions/Status'
+        description: 'Status of the task - Not Started, In-Progress, Complete.'
+      StatusDetail:
+        $ref: '#/definitions/StatusDetail'
+        description: Details of task status as notified by a migration tool. A tool might use this field to provide clarifying information about the status that is unique to that tool or that explains an error state.
+      ProgressPercent:
+        $ref: '#/definitions/ProgressPercent'
+        description: Indication of the percentage completion of the task.
+    description: Task object encapsulating task information.
+  Status:
+    type: string
+    enum:
+      - NOT_STARTED
+      - IN_PROGRESS
+      - FAILED
+      - COMPLETED
+  ProgressPercent:
+    type: integer
+    minimum: 0
+    maximum: 100
+  StatusDetail:
+    type: string
+    minLength: 0
+    maxLength: 500
   MigrationTaskSummary:
     type: object
     properties:
@@ -1415,22 +1479,9 @@ definitions:
         $ref: '#/definitions/UpdateDateTime'
         description: The timestamp when the task was gathered.
     description: 'MigrationTaskSummary includes <code>MigrationTaskName</code>, <code>ProgressPercent</code>, <code>ProgressUpdateStream</code>, <code>Status</code>, and <code>UpdateDateTime</code> for each task.'
-  MigrationTaskSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/MigrationTaskSummary'
   NextUpdateSeconds:
     type: integer
     minimum: 0
-  ProgressPercent:
-    type: integer
-    minimum: 0
-    maximum: 100
-  ProgressUpdateStream:
-    type: string
-    pattern: '[^/:|\000-\037]+'
-    minLength: 1
-    maxLength: 50
   ProgressUpdateStreamSummary:
     type: object
     properties:
@@ -1438,23 +1489,6 @@ definitions:
         $ref: '#/definitions/ProgressUpdateStream'
         description: 'The name of the ProgressUpdateStream. '
     description: Summary of the AWS resource used for access control that is implicitly linked to your AWS account.
-  ProgressUpdateStreamSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/ProgressUpdateStreamSummary'
-  ResourceAttribute:
-    type: object
-    required:
-      - Type
-      - Value
-    properties:
-      Type:
-        $ref: '#/definitions/ResourceAttributeType'
-        description: Type of resource.
-      Value:
-        $ref: '#/definitions/ResourceAttributeValue'
-        description: Value of the resource type.
-    description: '<p>Attribute associated with a resource.</p> <p>Note the corresponding format required per type listed below:</p> <dl> <dt>IPV4</dt> <dd> <p> <code>x.x.x.x</code> </p> <p> <i>where x is an integer in the range [0,255]</i> </p> </dd> <dt>IPV6</dt> <dd> <p> <code>y : y : y : y : y : y : y : y</code> </p> <p> <i>where y is a hexadecimal between 0 and FFFF. [0, FFFF]</i> </p> </dd> <dt>MAC_ADDRESS</dt> <dd> <p> <code>^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$</code> </p> </dd> <dt>FQDN</dt> <dd> <p> <code>^[^&lt;&gt;{}\\\\/?,=\\p{Cntrl}]{1,256}$</code> </p> </dd> </dl>'
   ResourceAttributeList:
     type: array
     items:
@@ -1478,38 +1512,3 @@ definitions:
     type: string
     minLength: 1
     maxLength: 256
-  ResourceName:
-    type: string
-    minLength: 1
-    maxLength: 1600
-  Status:
-    type: string
-    enum:
-      - NOT_STARTED
-      - IN_PROGRESS
-      - FAILED
-      - COMPLETED
-  StatusDetail:
-    type: string
-    minLength: 0
-    maxLength: 500
-  Task:
-    type: object
-    required:
-      - Status
-    properties:
-      Status:
-        $ref: '#/definitions/Status'
-        description: 'Status of the task - Not Started, In-Progress, Complete.'
-      StatusDetail:
-        $ref: '#/definitions/StatusDetail'
-        description: Details of task status as notified by a migration tool. A tool might use this field to provide clarifying information about the status that is unique to that tool or that explains an error state.
-      ProgressPercent:
-        $ref: '#/definitions/ProgressPercent'
-        description: Indication of the percentage completion of the task.
-    description: Task object encapsulating task information.
-  Token:
-    type: string
-  UpdateDateTime:
-    type: string
-    format: date-time

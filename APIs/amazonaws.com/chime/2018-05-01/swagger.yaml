@@ -1264,7 +1264,29 @@ definitions:
       LicenseType:
         $ref: '#/definitions/License'
         description: The user license type to update. This must be a supported license type for the Amazon Chime account that the user belongs to.
-  undefined: {}
+  String:
+    type: string
+  AccountType:
+    type: string
+    enum:
+      - Team
+      - EnterpriseDirectory
+      - EnterpriseLWA
+      - EnterpriseOIDC
+  Iso8601Timestamp:
+    type: string
+    format: date-time
+  License:
+    type: string
+    enum:
+      - Basic
+      - Plus
+      - Pro
+      - ProTrial
+  LicenseList:
+    type: array
+    items:
+      $ref: '#/definitions/License'
   Account:
     type: object
     required:
@@ -1303,6 +1325,8 @@ definitions:
     pattern: .*\S.*
     minLength: 1
     maxLength: 100
+  Boolean:
+    type: boolean
   AccountSettings:
     type: object
     properties:
@@ -1313,15 +1337,23 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href="http://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.'
     description: 'Settings related to the Amazon Chime account. This includes settings that start or stop remote control of shared screens, or start or stop the dial-out option in the Amazon Chime web application. For more information about these settings, see <a href="http://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
-  AccountType:
+  NonEmptyString:
     type: string
-    enum:
-      - Team
-      - EnterpriseDirectory
-      - EnterpriseLWA
-      - EnterpriseOIDC
-  Boolean:
-    type: boolean
+    pattern: .*\S.*
+  UserIdList:
+    type: array
+    items:
+      $ref: '#/definitions/NonEmptyString'
+    maxItems: 50
+  UserErrorList:
+    type: array
+    items:
+      $ref: '#/definitions/UserError'
+  UpdateUserRequestItemList:
+    type: array
+    items:
+      $ref: '#/definitions/UpdateUserRequestItem'
+    maxItems: 20
   EmailAddress:
     type: string
     pattern: .+@.+\..+
@@ -1345,81 +1377,6 @@ definitions:
       - Unprocessable
       - Throttled
       - PreconditionFailed
-  Invite:
-    type: object
-    properties:
-      InviteId:
-        $ref: '#/definitions/String'
-        description: The invite ID.
-      Status:
-        $ref: '#/definitions/InviteStatus'
-        description: The status of the invite.
-      EmailAddress:
-        $ref: '#/definitions/EmailAddress'
-        description: The email address to which the invite is sent.
-      EmailStatus:
-        $ref: '#/definitions/EmailStatus'
-        description: The status of the invite email.
-    description: Invitation object returned after emailing users to invite them to join the Amazon Chime <code>Team</code> account.
-  InviteList:
-    type: array
-    items:
-      $ref: '#/definitions/Invite'
-  InviteStatus:
-    type: string
-    enum:
-      - Pending
-      - Accepted
-      - Failed
-  Iso8601Timestamp:
-    type: string
-    format: date-time
-  License:
-    type: string
-    enum:
-      - Basic
-      - Plus
-      - Pro
-      - ProTrial
-  LicenseList:
-    type: array
-    items:
-      $ref: '#/definitions/License'
-  NonEmptyString:
-    type: string
-    pattern: .*\S.*
-  ProfileServiceMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 200
-  RegistrationStatus:
-    type: string
-    enum:
-      - Unregistered
-      - Registered
-      - Suspended
-  SensitiveString:
-    type: string
-    format: password
-  String:
-    type: string
-  UpdateUserRequestItem:
-    type: object
-    required:
-      - UserId
-    properties:
-      UserId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The user ID.
-      LicenseType:
-        $ref: '#/definitions/License'
-        description: The user license type.
-    description: 'The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action.'
-  UpdateUserRequestItemList:
-    type: array
-    items:
-      $ref: '#/definitions/UpdateUserRequestItem'
-    maxItems: 20
   User:
     type: object
     required:
@@ -1456,11 +1413,66 @@ definitions:
         $ref: '#/definitions/String'
         description: The user's personal meeting PIN.
     description: The user on the Amazon Chime account.
+  InviteStatus:
+    type: string
+    enum:
+      - Pending
+      - Accepted
+      - Failed
+  Invite:
+    type: object
+    properties:
+      InviteId:
+        $ref: '#/definitions/String'
+        description: The invite ID.
+      Status:
+        $ref: '#/definitions/InviteStatus'
+        description: The status of the invite.
+      EmailAddress:
+        $ref: '#/definitions/EmailAddress'
+        description: The email address to which the invite is sent.
+      EmailStatus:
+        $ref: '#/definitions/EmailStatus'
+        description: The status of the invite email.
+    description: Invitation object returned after emailing users to invite them to join the Amazon Chime <code>Team</code> account.
+  InviteList:
+    type: array
+    items:
+      $ref: '#/definitions/Invite'
   UserEmailList:
     type: array
     items:
       $ref: '#/definitions/EmailAddress'
     maxItems: 50
+  ProfileServiceMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 200
+  UserList:
+    type: array
+    items:
+      $ref: '#/definitions/User'
+  RegistrationStatus:
+    type: string
+    enum:
+      - Unregistered
+      - Registered
+      - Suspended
+  SensitiveString:
+    type: string
+    format: password
+  UpdateUserRequestItem:
+    type: object
+    required:
+      - UserId
+    properties:
+      UserId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The user ID.
+      LicenseType:
+        $ref: '#/definitions/License'
+        description: The user license type.
+    description: 'The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action.'
   UserError:
     type: object
     properties:
@@ -1474,16 +1486,3 @@ definitions:
         $ref: '#/definitions/String'
         description: The error message.
     description: 'The list of errors returned when errors are encountered during the <a>BatchSuspendUser</a>, <a>BatchUnsuspendUser</a>, or <a>BatchUpdateUser</a> actions. This includes user IDs, error codes, and error messages.'
-  UserErrorList:
-    type: array
-    items:
-      $ref: '#/definitions/UserError'
-  UserIdList:
-    type: array
-    items:
-      $ref: '#/definitions/NonEmptyString'
-    maxItems: 50
-  UserList:
-    type: array
-    items:
-      $ref: '#/definitions/User'

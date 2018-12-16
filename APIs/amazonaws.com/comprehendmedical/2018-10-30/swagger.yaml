@@ -245,7 +245,49 @@ definitions:
       Text:
         $ref: '#/definitions/BoundedLengthString'
         description: ' A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters. '
-  undefined: {}
+  EntitySubType:
+    type: string
+    enum:
+      - NAME
+      - DOSAGE
+      - ROUTE_OR_MODE
+      - FORM
+      - FREQUENCY
+      - DURATION
+      - GENERIC_NAME
+      - BRAND_NAME
+      - STRENGTH
+      - RATE
+      - ACUITY
+      - TEST_NAME
+      - TEST_VALUE
+      - TEST_UNITS
+      - PROCEDURE_NAME
+      - TREATMENT_NAME
+      - DATE
+      - AGE
+      - CONTACT_POINT
+      - EMAIL
+      - IDENTIFIER
+      - URL
+      - ADDRESS
+      - PROFESSION
+      - SYSTEM_ORGAN_SITE
+      - DIRECTION
+      - QUALITY
+      - QUANTITY
+  Float:
+    type: number
+    format: float
+  Integer:
+    type: integer
+  String:
+    type: string
+    minLength: 1
+  TraitList:
+    type: array
+    items:
+      $ref: '#/definitions/Trait'
   Attribute:
     type: object
     properties:
@@ -289,6 +331,22 @@ definitions:
     type: string
     minLength: 1
     maxLength: 20000
+  EntityList:
+    type: array
+    items:
+      $ref: '#/definitions/Entity'
+  UnmappedAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/UnmappedAttribute'
+  EntityType:
+    type: string
+    enum:
+      - MEDICATION
+      - MEDICAL_CONDITION
+      - PROTECTED_HEALTH_INFORMATION
+      - TEST_TREATMENT_PROCEDURE
+      - ANATOMY
   Entity:
     type: object
     properties:
@@ -320,57 +378,6 @@ definitions:
         $ref: '#/definitions/AttributeList'
         description: ' The extracted attributes that relate to this entity.'
     description: ' Provides information about an extracted medical entity.'
-  EntityList:
-    type: array
-    items:
-      $ref: '#/definitions/Entity'
-  EntitySubType:
-    type: string
-    enum:
-      - NAME
-      - DOSAGE
-      - ROUTE_OR_MODE
-      - FORM
-      - FREQUENCY
-      - DURATION
-      - GENERIC_NAME
-      - BRAND_NAME
-      - STRENGTH
-      - RATE
-      - ACUITY
-      - TEST_NAME
-      - TEST_VALUE
-      - TEST_UNITS
-      - PROCEDURE_NAME
-      - TREATMENT_NAME
-      - DATE
-      - AGE
-      - CONTACT_POINT
-      - EMAIL
-      - IDENTIFIER
-      - URL
-      - ADDRESS
-      - PROFESSION
-      - SYSTEM_ORGAN_SITE
-      - DIRECTION
-      - QUALITY
-      - QUANTITY
-  EntityType:
-    type: string
-    enum:
-      - MEDICATION
-      - MEDICAL_CONDITION
-      - PROTECTED_HEALTH_INFORMATION
-      - TEST_TREATMENT_PROCEDURE
-      - ANATOMY
-  Float:
-    type: number
-    format: float
-  Integer:
-    type: integer
-  String:
-    type: string
-    minLength: 1
   Trait:
     type: object
     properties:
@@ -381,10 +388,6 @@ definitions:
         $ref: '#/definitions/Float'
         description: ' The level of confidence that Comprehend Medical has in the accuracy of this trait.'
     description: ' Provides contextual information about the extracted entity. '
-  TraitList:
-    type: array
-    items:
-      $ref: '#/definitions/Trait'
   UnmappedAttribute:
     type: object
     properties:
@@ -395,7 +398,3 @@ definitions:
         $ref: '#/definitions/Attribute'
         description: ' The specific attribute that has been extracted but not mapped to an entity. '
     description: ' An attribute that we extracted, but were unable to relate to an entity. '
-  UnmappedAttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/UnmappedAttribute'

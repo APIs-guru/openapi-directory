@@ -1489,7 +1489,18 @@ definitions:
     type: string
     minLength: 1
     maxLength: 128
-  undefined: {}
+  CognitoIdentityProviderName:
+    type: string
+    pattern: '[\w._:/-]+'
+    minLength: 1
+    maxLength: 128
+  CognitoIdentityProviderClientId:
+    type: string
+    pattern: '[\w_]+'
+    minLength: 1
+    maxLength: 128
+  CognitoIdentityProviderTokenCheck:
+    type: boolean
   CognitoIdentityProvider:
     type: object
     properties:
@@ -1503,22 +1514,49 @@ definitions:
         $ref: '#/definitions/CognitoIdentityProviderTokenCheck'
         description: TRUE if server-side token validation is enabled for the identity provider’s token.
     description: A provider representing an Amazon Cognito Identity User Pool and its client ID.
-  CognitoIdentityProviderClientId:
-    type: string
-    pattern: '[\w_]+'
-    minLength: 1
-    maxLength: 128
   CognitoIdentityProviderList:
     type: array
     items:
       $ref: '#/definitions/CognitoIdentityProvider'
-  CognitoIdentityProviderName:
+  String:
     type: string
-    pattern: '[\w._:/-]+'
+  IdentityPoolName:
+    type: string
+    pattern: '[\w ]+'
     minLength: 1
     maxLength: 128
-  CognitoIdentityProviderTokenCheck:
+  IdentityPoolUnauthenticated:
     type: boolean
+  IdentityProviders:
+    type: array
+    maxItems: 10
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/IdentityProviderName'
+        value:
+          $ref: '#/definitions/IdentityProviderId'
+  DeveloperProviderName:
+    type: string
+    pattern: '[\w._-]+'
+    minLength: 1
+    maxLength: 128
+  OIDCProviderList:
+    type: array
+    items:
+      $ref: '#/definitions/ARNString'
+  SAMLProviderList:
+    type: array
+    items:
+      $ref: '#/definitions/ARNString'
+  SecretKeyString:
+    type: string
+  SessionTokenString:
+    type: string
+  DateType:
+    type: string
+    format: date-time
   Credentials:
     type: object
     properties:
@@ -1535,14 +1573,27 @@ definitions:
         $ref: '#/definitions/DateType'
         description: The date at which these credentials will expire.
     description: Credentials for the provided identity ID.
-  DateType:
+  IdentityIdList:
+    type: array
+    items:
+      $ref: '#/definitions/IdentityId'
+    minItems: 1
+    maxItems: 60
+  UnprocessedIdentityIdList:
+    type: array
+    items:
+      $ref: '#/definitions/UnprocessedIdentityId'
+    maxItems: 60
+  IdentityPoolId:
     type: string
-    format: date-time
-  DeveloperProviderName:
-    type: string
-    pattern: '[\w._-]+'
+    pattern: '[\w-]+:[0-9a-f-]+'
     minLength: 1
-    maxLength: 128
+    maxLength: 55
+  IdentityId:
+    type: string
+    pattern: '[\w-]+:[0-9a-f-]+'
+    minLength: 1
+    maxLength: 55
   DeveloperUserIdentifier:
     type: string
     minLength: 1
@@ -1556,33 +1607,52 @@ definitions:
     enum:
       - AccessDenied
       - InternalServerError
+  LoginsMap:
+    type: array
+    maxItems: 10
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/IdentityProviderName'
+        value:
+          $ref: '#/definitions/IdentityProviderToken'
+  RolesMap:
+    type: array
+    maxItems: 2
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/RoleType'
+        value:
+          $ref: '#/definitions/ARNString'
+  RoleMappingMap:
+    type: array
+    maxItems: 10
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/IdentityProviderName'
+        value:
+          $ref: '#/definitions/RoleMapping'
+  TokenDuration:
+    type: integer
+    minimum: 1
+    maximum: 86400
+  OIDCToken:
+    type: string
   HideDisabled:
     type: boolean
   IdentitiesList:
     type: array
     items:
       $ref: '#/definitions/IdentityDescription'
-  IdentityId:
-    type: string
-    pattern: '[\w-]+:[0-9a-f-]+'
-    minLength: 1
-    maxLength: 55
-  IdentityIdList:
+  LoginsList:
     type: array
     items:
-      $ref: '#/definitions/IdentityId'
-    minItems: 1
-    maxItems: 60
-  IdentityPoolId:
-    type: string
-    pattern: '[\w-]+:[0-9a-f-]+'
-    minLength: 1
-    maxLength: 55
-  IdentityPoolName:
-    type: string
-    pattern: '[\w ]+'
-    minLength: 1
-    maxLength: 128
+      $ref: '#/definitions/IdentityProviderName'
   IdentityPoolShortDescription:
     type: object
     properties:
@@ -1593,8 +1663,6 @@ definitions:
         $ref: '#/definitions/IdentityPoolName'
         description: A string that you provide.
     description: A description of the identity pool.
-  IdentityPoolUnauthenticated:
-    type: boolean
   IdentityPoolsList:
     type: array
     items:
@@ -1612,30 +1680,21 @@ definitions:
     type: string
     minLength: 1
     maxLength: 50000
-  IdentityProviders:
-    type: array
-    maxItems: 10
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/IdentityProviderName'
-        value:
-          $ref: '#/definitions/IdentityProviderId'
-  LoginsList:
-    type: array
-    items:
-      $ref: '#/definitions/IdentityProviderName'
-  LoginsMap:
-    type: array
-    maxItems: 10
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/IdentityProviderName'
-        value:
-          $ref: '#/definitions/IdentityProviderToken'
+  QueryLimit:
+    type: integer
+    minimum: 1
+    maximum: 60
+  PaginationKey:
+    type: string
+    pattern: '[\S]+'
+    minLength: 1
+  MappingRuleMatchType:
+    type: string
+    enum:
+      - Equals
+      - Contains
+      - StartsWith
+      - NotEqual
   MappingRule:
     type: object
     required:
@@ -1657,33 +1716,26 @@ definitions:
         $ref: '#/definitions/ARNString'
         description: The role ARN.
     description: 'A rule that maps a claim name, a claim value, and a match type to a role ARN.'
-  MappingRuleMatchType:
-    type: string
-    enum:
-      - Equals
-      - Contains
-      - StartsWith
-      - NotEqual
   MappingRulesList:
     type: array
     items:
       $ref: '#/definitions/MappingRule'
     minItems: 1
     maxItems: 25
-  OIDCProviderList:
-    type: array
-    items:
-      $ref: '#/definitions/ARNString'
-  OIDCToken:
+  RoleMappingType:
     type: string
-  PaginationKey:
-    type: string
-    pattern: '[\S]+'
-    minLength: 1
-  QueryLimit:
-    type: integer
-    minimum: 1
-    maximum: 60
+    enum:
+      - Token
+      - Rules
+  RulesConfigurationType:
+    type: object
+    required:
+      - Rules
+    properties:
+      Rules:
+        $ref: '#/definitions/MappingRulesList'
+        description: <p>An array of rules. You can specify up to 25 rules per identity provider.</p> <p>Rules are evaluated in order. The first one to match specifies the role.</p>
+    description: A container for rules.
   RoleMapping:
     type: object
     required:
@@ -1699,57 +1751,9 @@ definitions:
         $ref: '#/definitions/RulesConfigurationType'
         description: '<p>The rules to be used for mapping users to roles.</p> <p>If you specify Rules as the role mapping type, <code>RulesConfiguration</code> is required.</p>'
     description: A role mapping.
-  RoleMappingMap:
-    type: array
-    maxItems: 10
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/IdentityProviderName'
-        value:
-          $ref: '#/definitions/RoleMapping'
-  RoleMappingType:
-    type: string
-    enum:
-      - Token
-      - Rules
   RoleType:
     type: string
     pattern: (un)?authenticated
-  RolesMap:
-    type: array
-    maxItems: 2
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/RoleType'
-        value:
-          $ref: '#/definitions/ARNString'
-  RulesConfigurationType:
-    type: object
-    required:
-      - Rules
-    properties:
-      Rules:
-        $ref: '#/definitions/MappingRulesList'
-        description: <p>An array of rules. You can specify up to 25 rules per identity provider.</p> <p>Rules are evaluated in order. The first one to match specifies the role.</p>
-    description: A container for rules.
-  SAMLProviderList:
-    type: array
-    items:
-      $ref: '#/definitions/ARNString'
-  SecretKeyString:
-    type: string
-  SessionTokenString:
-    type: string
-  String:
-    type: string
-  TokenDuration:
-    type: integer
-    minimum: 1
-    maximum: 86400
   UnprocessedIdentityId:
     type: object
     properties:
@@ -1760,8 +1764,3 @@ definitions:
         $ref: '#/definitions/ErrorCode'
         description: The error code indicating the type of error that occurred.
     description: 'An array of UnprocessedIdentityId objects, each of which contains an ErrorCode and IdentityId.'
-  UnprocessedIdentityIdList:
-    type: array
-    items:
-      $ref: '#/definitions/UnprocessedIdentityId'
-    maxItems: 60

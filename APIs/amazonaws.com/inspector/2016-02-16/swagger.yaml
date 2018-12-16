@@ -2921,12 +2921,42 @@ definitions:
       resourceGroupArn:
         $ref: '#/definitions/Arn'
         description: The ARN of the resource group that is used to specify the new resource group to associate with the assessment target.
-  undefined: {}
   AddRemoveAttributesFindingArnList:
     type: array
     items:
       $ref: '#/definitions/Arn'
     minItems: 1
+    maxItems: 10
+  UserAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/Attribute'
+    minItems: 0
+    maxItems: 10
+  FailedItems:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Arn'
+        value:
+          $ref: '#/definitions/FailedItemDetails'
+  Arn:
+    type: string
+    minLength: 1
+    maxLength: 300
+  AgentHealthList:
+    type: array
+    items:
+      $ref: '#/definitions/AgentHealth'
+    minItems: 0
+    maxItems: 10
+  AgentHealthCodeList:
+    type: array
+    items:
+      $ref: '#/definitions/AgentHealthCode'
+    minItems: 0
     maxItems: 10
   AgentFilter:
     type: object
@@ -2956,18 +2986,6 @@ definitions:
       - UNHEALTHY
       - THROTTLED
       - UNKNOWN
-  AgentHealthCodeList:
-    type: array
-    items:
-      $ref: '#/definitions/AgentHealthCode'
-    minItems: 0
-    maxItems: 10
-  AgentHealthList:
-    type: array
-    items:
-      $ref: '#/definitions/AgentHealth'
-    minItems: 0
-    maxItems: 10
   AgentId:
     type: string
     minLength: 1
@@ -2978,6 +2996,30 @@ definitions:
       $ref: '#/definitions/AgentId'
     minItems: 0
     maxItems: 500
+  Hostname:
+    type: string
+    minLength: 0
+    maxLength: 256
+  AutoScalingGroup:
+    type: string
+    minLength: 1
+    maxLength: 256
+  AgentVersion:
+    type: string
+    minLength: 1
+    maxLength: 128
+  OperatingSystem:
+    type: string
+    minLength: 1
+    maxLength: 256
+  KernelVersion:
+    type: string
+    minLength: 1
+    maxLength: 128
+  Ipv4Address:
+    type: string
+    minLength: 7
+    maxLength: 15
   AgentPreview:
     type: object
     required:
@@ -3014,18 +3056,10 @@ definitions:
       $ref: '#/definitions/AgentPreview'
     minItems: 0
     maxItems: 100
-  AgentVersion:
-    type: string
-    minLength: 1
-    maxLength: 128
   AmiId:
     type: string
     minLength: 0
     maxLength: 256
-  Arn:
-    type: string
-    minLength: 1
-    maxLength: 300
   ArnCount:
     type: integer
   AssessmentRulesPackageArnList:
@@ -3034,6 +3068,56 @@ definitions:
       $ref: '#/definitions/Arn'
     minItems: 1
     maxItems: 50
+  AssessmentRunName:
+    type: string
+    minLength: 1
+    maxLength: 140
+  AssessmentRunState:
+    type: string
+    enum:
+      - CREATED
+      - START_DATA_COLLECTION_PENDING
+      - START_DATA_COLLECTION_IN_PROGRESS
+      - COLLECTING_DATA
+      - STOP_DATA_COLLECTION_PENDING
+      - DATA_COLLECTED
+      - START_EVALUATING_RULES_PENDING
+      - EVALUATING_RULES
+      - FAILED
+      - ERROR
+      - COMPLETED
+      - COMPLETED_WITH_ERRORS
+      - CANCELED
+  AssessmentRunDuration:
+    type: integer
+    minimum: 180
+    maximum: 86400
+  Timestamp:
+    type: string
+    format: date-time
+  Bool:
+    type: boolean
+  AssessmentRunStateChangeList:
+    type: array
+    items:
+      $ref: '#/definitions/AssessmentRunStateChange'
+    minItems: 0
+    maxItems: 50
+  AssessmentRunNotificationList:
+    type: array
+    items:
+      $ref: '#/definitions/AssessmentRunNotification'
+    minItems: 0
+    maxItems: 50
+  AssessmentRunFindingCounts:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Severity'
+        value:
+          $ref: '#/definitions/FindingCount'
   AssessmentRun:
     type: object
     required:
@@ -3097,6 +3181,16 @@ definitions:
         $ref: '#/definitions/AssessmentRunFindingCounts'
         description: Provides a total count of generated findings per severity.
     description: <p>A snapshot of an Amazon Inspector assessment run that contains the findings of the assessment run .</p> <p>Used as the response element in the <a>DescribeAssessmentRuns</a> action.</p>
+  Message:
+    type: string
+    minLength: 0
+    maxLength: 1000
+  TelemetryMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/TelemetryMetadata'
+    minItems: 0
+    maxItems: 5000
   AssessmentRunAgent:
     type: object
     required:
@@ -3134,10 +3228,42 @@ definitions:
       $ref: '#/definitions/AssessmentRunAgent'
     minItems: 0
     maxItems: 500
-  AssessmentRunDuration:
-    type: integer
-    minimum: 180
-    maximum: 86400
+  NamePattern:
+    type: string
+    minLength: 1
+    maxLength: 140
+  AssessmentRunStateList:
+    type: array
+    items:
+      $ref: '#/definitions/AssessmentRunState'
+    minItems: 0
+    maxItems: 50
+  DurationRange:
+    type: object
+    properties:
+      minSeconds:
+        $ref: '#/definitions/AssessmentRunDuration'
+        description: The minimum value of the duration range. Must be greater than zero.
+      maxSeconds:
+        $ref: '#/definitions/AssessmentRunDuration'
+        description: The maximum value of the duration range. Must be less than or equal to 604800 seconds (1 week).
+    description: This data type is used in the <a>AssessmentTemplateFilter</a> data type.
+  FilterRulesPackageArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+    minItems: 0
+    maxItems: 50
+  TimestampRange:
+    type: object
+    properties:
+      beginDate:
+        $ref: '#/definitions/Timestamp'
+        description: The minimum value of the timestamp range.
+      endDate:
+        $ref: '#/definitions/Timestamp'
+        description: The maximum value of the timestamp range.
+    description: This data type is used in the <a>AssessmentRunFilter</a> data type.
   AssessmentRunFilter:
     type: object
     properties:
@@ -3173,25 +3299,27 @@ definitions:
       - Undefined
   FindingCount:
     type: integer
-  AssessmentRunFindingCounts:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Severity'
-        value:
-          $ref: '#/definitions/FindingCount'
   AssessmentRunList:
     type: array
     items:
       $ref: '#/definitions/AssessmentRun'
     minItems: 0
     maxItems: 10
-  AssessmentRunName:
+  InspectorEvent:
     type: string
-    minLength: 1
-    maxLength: 140
+    enum:
+      - ASSESSMENT_RUN_STARTED
+      - ASSESSMENT_RUN_COMPLETED
+      - ASSESSMENT_RUN_STATE_CHANGED
+      - FINDING_REPORTED
+      - OTHER
+  AssessmentRunNotificationSnsStatusCode:
+    type: string
+    enum:
+      - SUCCESS
+      - TOPIC_DOES_NOT_EXIST
+      - ACCESS_DENIED
+      - INTERNAL_ERROR
   AssessmentRunNotification:
     type: object
     required:
@@ -3218,35 +3346,6 @@ definitions:
         $ref: '#/definitions/AssessmentRunNotificationSnsStatusCode'
         description: The status code of the SNS notification.
     description: Used as one of the elements of the <a>AssessmentRun</a> data type.
-  AssessmentRunNotificationList:
-    type: array
-    items:
-      $ref: '#/definitions/AssessmentRunNotification'
-    minItems: 0
-    maxItems: 50
-  AssessmentRunNotificationSnsStatusCode:
-    type: string
-    enum:
-      - SUCCESS
-      - TOPIC_DOES_NOT_EXIST
-      - ACCESS_DENIED
-      - INTERNAL_ERROR
-  AssessmentRunState:
-    type: string
-    enum:
-      - CREATED
-      - START_DATA_COLLECTION_PENDING
-      - START_DATA_COLLECTION_IN_PROGRESS
-      - COLLECTING_DATA
-      - STOP_DATA_COLLECTION_PENDING
-      - DATA_COLLECTED
-      - START_EVALUATING_RULES_PENDING
-      - EVALUATING_RULES
-      - FAILED
-      - ERROR
-      - COMPLETED
-      - COMPLETED_WITH_ERRORS
-      - CANCELED
   AssessmentRunStateChange:
     type: object
     required:
@@ -3260,18 +3359,10 @@ definitions:
         $ref: '#/definitions/AssessmentRunState'
         description: The assessment run state.
     description: Used as one of the elements of the <a>AssessmentRun</a> data type.
-  AssessmentRunStateChangeList:
-    type: array
-    items:
-      $ref: '#/definitions/AssessmentRunStateChange'
-    minItems: 0
-    maxItems: 50
-  AssessmentRunStateList:
-    type: array
-    items:
-      $ref: '#/definitions/AssessmentRunState'
-    minItems: 0
-    maxItems: 50
+  AssessmentTargetName:
+    type: string
+    minLength: 1
+    maxLength: 140
   AssessmentTarget:
     type: object
     required:
@@ -3309,10 +3400,16 @@ definitions:
       $ref: '#/definitions/AssessmentTarget'
     minItems: 0
     maxItems: 10
-  AssessmentTargetName:
+  AssessmentTemplateName:
     type: string
     minLength: 1
     maxLength: 140
+  AssessmentTemplateRulesPackageArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Arn'
+    minItems: 0
+    maxItems: 50
   AssessmentTemplate:
     type: object
     required:
@@ -3372,16 +3469,23 @@ definitions:
       $ref: '#/definitions/AssessmentTemplate'
     minItems: 0
     maxItems: 10
-  AssessmentTemplateName:
-    type: string
-    minLength: 1
-    maxLength: 140
-  AssessmentTemplateRulesPackageArnList:
+  NumericVersion:
+    type: integer
+    minimum: 0
+  Ipv4AddressList:
     type: array
     items:
-      $ref: '#/definitions/Arn'
+      $ref: '#/definitions/Ipv4Address'
     minItems: 0
     maxItems: 50
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  NetworkInterfaces:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkInterface'
   AssetAttributes:
     type: object
     required:
@@ -3416,6 +3520,14 @@ definitions:
     type: string
     enum:
       - ec2-instance
+  AttributeKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  AttributeValue:
+    type: string
+    minLength: 1
+    maxLength: 256
   Attribute:
     type: object
     required:
@@ -3428,24 +3540,12 @@ definitions:
         $ref: '#/definitions/AttributeValue'
         description: The value assigned to the attribute key.
     description: This data type is used as a request parameter in the <a>AddAttributesToFindings</a> and <a>CreateAssessmentTemplate</a> actions.
-  AttributeKey:
-    type: string
-    minLength: 1
-    maxLength: 128
   AttributeList:
     type: array
     items:
       $ref: '#/definitions/Attribute'
     minItems: 0
     maxItems: 50
-  AttributeValue:
-    type: string
-    minLength: 1
-    maxLength: 256
-  AutoScalingGroup:
-    type: string
-    minLength: 1
-    maxLength: 256
   AutoScalingGroupList:
     type: array
     items:
@@ -3464,18 +3564,48 @@ definitions:
       $ref: '#/definitions/Arn'
     minItems: 1
     maxItems: 100
-  Bool:
-    type: boolean
-  DurationRange:
-    type: object
-    properties:
-      minSeconds:
-        $ref: '#/definitions/AssessmentRunDuration'
-        description: The minimum value of the duration range. Must be greater than zero.
-      maxSeconds:
-        $ref: '#/definitions/AssessmentRunDuration'
-        description: The maximum value of the duration range. Must be less than or equal to 604800 seconds (1 week).
-    description: This data type is used in the <a>AssessmentTemplateFilter</a> data type.
+  UUID:
+    type: string
+    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+  ResourceGroupTags:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceGroupTag'
+    minItems: 1
+    maxItems: 10
+  Locale:
+    type: string
+    enum:
+      - EN_US
+  ExclusionMap:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Arn'
+        value:
+          $ref: '#/definitions/Exclusion'
+  FindingList:
+    type: array
+    items:
+      $ref: '#/definitions/Finding'
+    minItems: 0
+    maxItems: 100
+  ResourceGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceGroup'
+    minItems: 0
+    maxItems: 10
+  RulesPackageList:
+    type: array
+    items:
+      $ref: '#/definitions/RulesPackage'
+    minItems: 0
+    maxItems: 10
   EventSubscription:
     type: object
     required:
@@ -3495,6 +3625,15 @@ definitions:
       $ref: '#/definitions/EventSubscription'
     minItems: 1
     maxItems: 50
+  Text:
+    type: string
+    minLength: 0
+    maxLength: 20000
+  ScopeList:
+    type: array
+    items:
+      $ref: '#/definitions/Scope'
+    minItems: 1
   Exclusion:
     type: object
     required:
@@ -3523,17 +3662,6 @@ definitions:
         $ref: '#/definitions/AttributeList'
         description: The system-defined attributes for the exclusion.
     description: Contains information about what was excluded from an assessment run.
-  ExclusionMap:
-    type: array
-    minItems: 1
-    maxItems: 100
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Arn'
-        value:
-          $ref: '#/definitions/Exclusion'
   ExclusionPreview:
     type: object
     required:
@@ -3564,6 +3692,15 @@ definitions:
       $ref: '#/definitions/ExclusionPreview'
     minItems: 0
     maxItems: 100
+  FailedItemErrorCode:
+    type: string
+    enum:
+      - INVALID_ARN
+      - DUPLICATE_ARN
+      - ITEM_DOES_NOT_EXIST
+      - ACCESS_DENIED
+      - LIMIT_EXCEEDED
+      - INTERNAL_ERROR
   FailedItemDetails:
     type: object
     required:
@@ -3577,30 +3714,38 @@ definitions:
         $ref: '#/definitions/Bool'
         description: Indicates whether you can immediately retry a request for this item for a specified resource.
     description: Includes details about the failed items.
-  FailedItemErrorCode:
+  ServiceName:
     type: string
-    enum:
-      - INVALID_ARN
-      - DUPLICATE_ARN
-      - ITEM_DOES_NOT_EXIST
-      - ACCESS_DENIED
-      - LIMIT_EXCEEDED
-      - INTERNAL_ERROR
-  FailedItems:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Arn'
-        value:
-          $ref: '#/definitions/FailedItemDetails'
-  FilterRulesPackageArnList:
-    type: array
-    items:
-      $ref: '#/definitions/Arn'
-    minItems: 0
-    maxItems: 50
+    minLength: 0
+    maxLength: 128
+  InspectorServiceAttributes:
+    type: object
+    required:
+      - schemaVersion
+    properties:
+      schemaVersion:
+        $ref: '#/definitions/NumericVersion'
+        description: The schema version of this data type.
+      assessmentRunArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the assessment run during which the finding is generated.
+      rulesPackageArn:
+        $ref: '#/definitions/Arn'
+        description: The ARN of the rules package that is used to generate the finding.
+    description: This data type is used in the <a>Finding</a> data type.
+  FindingId:
+    type: string
+    minLength: 0
+    maxLength: 128
+  NumericSeverity:
+    type: number
+    format: double
+    minimum: 0
+    maximum: 10
+  IocConfidence:
+    type: integer
+    minimum: 0
+    maximum: 10
   Finding:
     type: object
     required:
@@ -3665,6 +3810,18 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The time when <a>AddAttributesToFindings</a> is called.
     description: Contains information about an Amazon Inspector finding. This data type is used as the response element in the <a>DescribeFindings</a> action.
+  RuleNameList:
+    type: array
+    items:
+      $ref: '#/definitions/RuleName'
+    minItems: 0
+    maxItems: 50
+  SeverityList:
+    type: array
+    items:
+      $ref: '#/definitions/Severity'
+    minItems: 0
+    maxItems: 50
   FindingFilter:
     type: object
     properties:
@@ -3693,69 +3850,40 @@ definitions:
         $ref: '#/definitions/TimestampRange'
         description: The time range during which the finding is generated.
     description: This data type is used as a request parameter in the <a>ListFindings</a> action.
-  FindingId:
-    type: string
-    minLength: 0
-    maxLength: 128
-  FindingList:
-    type: array
-    items:
-      $ref: '#/definitions/Finding'
-    minItems: 0
-    maxItems: 100
-  Hostname:
-    type: string
-    minLength: 0
-    maxLength: 256
-  InspectorEvent:
+  ReportFileFormat:
     type: string
     enum:
-      - ASSESSMENT_RUN_STARTED
-      - ASSESSMENT_RUN_COMPLETED
-      - ASSESSMENT_RUN_STATE_CHANGED
-      - FINDING_REPORTED
-      - OTHER
-  InspectorServiceAttributes:
-    type: object
-    required:
-      - schemaVersion
-    properties:
-      schemaVersion:
-        $ref: '#/definitions/NumericVersion'
-        description: The schema version of this data type.
-      assessmentRunArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the assessment run during which the finding is generated.
-      rulesPackageArn:
-        $ref: '#/definitions/Arn'
-        description: The ARN of the rules package that is used to generate the finding.
-    description: This data type is used in the <a>Finding</a> data type.
-  IocConfidence:
-    type: integer
-    minimum: 0
-    maximum: 10
-  Ipv4Address:
+      - HTML
+      - PDF
+  ReportType:
     type: string
-    minLength: 7
-    maxLength: 15
-  Ipv4AddressList:
-    type: array
-    items:
-      $ref: '#/definitions/Ipv4Address'
-    minItems: 0
-    maxItems: 50
+    enum:
+      - FINDING
+      - FULL
+  ReportStatus:
+    type: string
+    enum:
+      - WORK_IN_PROGRESS
+      - FAILED
+      - COMPLETED
+  Url:
+    type: string
+    maxLength: 2048
+  PaginationToken:
+    type: string
+    minLength: 1
+    maxLength: 300
+  ListMaxResults:
+    type: integer
+  PreviewStatus:
+    type: string
+    enum:
+      - WORK_IN_PROGRESS
+      - COMPLETED
   Ipv6Addresses:
     type: array
     items:
       $ref: '#/definitions/Text'
-  KernelVersion:
-    type: string
-    minLength: 1
-    maxLength: 128
-  ListEventSubscriptionsMaxResults:
-    type: integer
-  ListMaxResults:
-    type: integer
   ListParentArnList:
     type: array
     items:
@@ -3768,24 +3896,34 @@ definitions:
       $ref: '#/definitions/Arn'
     minItems: 0
     maxItems: 100
-  Locale:
-    type: string
-    enum:
-      - EN_US
+  ListEventSubscriptionsMaxResults:
+    type: integer
+  SubscriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/Subscription'
+    minItems: 0
+    maxItems: 50
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 10
   Long:
     type: integer
-  Message:
-    type: string
-    minLength: 0
-    maxLength: 1000
   MessageType:
     type: string
     minLength: 1
     maxLength: 300
-  NamePattern:
-    type: string
-    minLength: 1
-    maxLength: 140
+  PrivateIpAddresses:
+    type: array
+    items:
+      $ref: '#/definitions/PrivateIp'
+  SecurityGroups:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroup'
   NetworkInterface:
     type: object
     properties:
@@ -3820,33 +3958,8 @@ definitions:
         $ref: '#/definitions/SecurityGroups'
         description: A list of the security groups associated with the network interface. Includes the groupId and groupName.
     description: Contains information about the network interfaces interacting with an EC2 instance. This data type is used as one of the elements of the <a>AssetAttributes</a> data type.
-  NetworkInterfaces:
-    type: array
-    items:
-      $ref: '#/definitions/NetworkInterface'
-  NumericSeverity:
-    type: number
-    format: double
-    minimum: 0
-    maximum: 10
-  NumericVersion:
-    type: integer
-    minimum: 0
-  OperatingSystem:
-    type: string
-    minLength: 1
-    maxLength: 256
-  PaginationToken:
-    type: string
-    minLength: 1
-    maxLength: 300
   PreviewAgentsMaxResults:
     type: integer
-  PreviewStatus:
-    type: string
-    enum:
-      - WORK_IN_PROGRESS
-      - COMPLETED
   PrivateIp:
     type: object
     properties:
@@ -3857,30 +3970,16 @@ definitions:
         $ref: '#/definitions/Text'
         description: The full IP address of the network inteface.
     description: Contains information about a private IP address associated with a network interface. This data type is used as a response element in the <a>DescribeFindings</a> action.
-  PrivateIpAddresses:
-    type: array
-    items:
-      $ref: '#/definitions/PrivateIp'
   ProviderName:
     type: string
     minLength: 0
     maxLength: 1000
-  ReportFileFormat:
-    type: string
-    enum:
-      - HTML
-      - PDF
-  ReportStatus:
-    type: string
-    enum:
-      - WORK_IN_PROGRESS
-      - FAILED
-      - COMPLETED
-  ReportType:
-    type: string
-    enum:
-      - FINDING
-      - FULL
+  UserAttributeKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeKey'
+    minItems: 0
+    maxItems: 10
   ResourceGroup:
     type: object
     required:
@@ -3898,12 +3997,14 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The time at which resource group is created.
     description: 'Contains information about a resource group. The resource group defines a set of tags that, when queried, identify the AWS resources that make up the assessment target. This data type is used as the response element in the <a>DescribeResourceGroups</a> action.'
-  ResourceGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceGroup'
-    minItems: 0
-    maxItems: 10
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 1
+    maxLength: 256
   ResourceGroupTag:
     type: object
     required:
@@ -3916,21 +4017,17 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value assigned to a tag key.
     description: This data type is used as one of the elements of the <a>ResourceGroup</a> data type.
-  ResourceGroupTags:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceGroupTag'
-    minItems: 1
-    maxItems: 10
   RuleName:
     type: string
     maxLength: 1000
-  RuleNameList:
-    type: array
-    items:
-      $ref: '#/definitions/RuleName'
-    minItems: 0
-    maxItems: 50
+  RulesPackageName:
+    type: string
+    minLength: 0
+    maxLength: 1000
+  Version:
+    type: string
+    minLength: 0
+    maxLength: 1000
   RulesPackage:
     type: object
     required:
@@ -3955,16 +4052,13 @@ definitions:
         $ref: '#/definitions/Text'
         description: The description of the rules package.
     description: Contains information about an Amazon Inspector rules package. This data type is used as the response element in the <a>DescribeRulesPackages</a> action.
-  RulesPackageList:
-    type: array
-    items:
-      $ref: '#/definitions/RulesPackage'
-    minItems: 0
-    maxItems: 10
-  RulesPackageName:
+  ScopeType:
     type: string
-    minLength: 0
-    maxLength: 1000
+    enum:
+      - INSTANCE_ID
+      - RULES_PACKAGE_ARN
+  ScopeValue:
+    type: string
   Scope:
     type: object
     properties:
@@ -3975,18 +4069,6 @@ definitions:
         $ref: '#/definitions/ScopeValue'
         description: The resource identifier for the specified scope type.
     description: This data type contains key-value pairs that identify various Amazon resources.
-  ScopeList:
-    type: array
-    items:
-      $ref: '#/definitions/Scope'
-    minItems: 1
-  ScopeType:
-    type: string
-    enum:
-      - INSTANCE_ID
-      - RULES_PACKAGE_ARN
-  ScopeValue:
-    type: string
   SecurityGroup:
     type: object
     properties:
@@ -3997,20 +4079,6 @@ definitions:
         $ref: '#/definitions/Text'
         description: The ID of the security group.
     description: Contains information about a security group associated with a network interface. This data type is used as one of the elements of the <a>NetworkInterface</a> data type.
-  SecurityGroups:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityGroup'
-  ServiceName:
-    type: string
-    minLength: 0
-    maxLength: 128
-  SeverityList:
-    type: array
-    items:
-      $ref: '#/definitions/Severity'
-    minItems: 0
-    maxItems: 50
   StopAction:
     type: string
     enum:
@@ -4033,12 +4101,6 @@ definitions:
         $ref: '#/definitions/EventSubscriptionList'
         description: The list of existing event subscriptions.
     description: This data type is used as a response element in the <a>ListEventSubscriptions</a> action.
-  SubscriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/Subscription'
-    minItems: 0
-    maxItems: 50
   Tag:
     type: object
     required:
@@ -4051,24 +4113,6 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: A value assigned to a tag key.
     description: A key and value pair. This data type is used as a request parameter in the <a>SetTagsForResource</a> action and a response element in the <a>ListTagsForResource</a> action.
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 0
-    maxItems: 10
-  TagValue:
-    type: string
-    minLength: 1
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
   TelemetryMetadata:
     type: object
     required:
@@ -4085,48 +4129,3 @@ definitions:
         $ref: '#/definitions/Long'
         description: The data size of messages that the agent sends to the Amazon Inspector service.
     description: The metadata about the Amazon Inspector application data metrics collected by the agent. This data type is used as the response element in the <a>GetTelemetryMetadata</a> action.
-  TelemetryMetadataList:
-    type: array
-    items:
-      $ref: '#/definitions/TelemetryMetadata'
-    minItems: 0
-    maxItems: 5000
-  Text:
-    type: string
-    minLength: 0
-    maxLength: 20000
-  Timestamp:
-    type: string
-    format: date-time
-  TimestampRange:
-    type: object
-    properties:
-      beginDate:
-        $ref: '#/definitions/Timestamp'
-        description: The minimum value of the timestamp range.
-      endDate:
-        $ref: '#/definitions/Timestamp'
-        description: The maximum value of the timestamp range.
-    description: This data type is used in the <a>AssessmentRunFilter</a> data type.
-  UUID:
-    type: string
-    pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
-  Url:
-    type: string
-    maxLength: 2048
-  UserAttributeKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/AttributeKey'
-    minItems: 0
-    maxItems: 10
-  UserAttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/Attribute'
-    minItems: 0
-    maxItems: 10
-  Version:
-    type: string
-    minLength: 0
-    maxLength: 1000

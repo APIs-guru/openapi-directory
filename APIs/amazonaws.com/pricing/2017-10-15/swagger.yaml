@@ -418,7 +418,8 @@ definitions:
       MaxResults:
         $ref: '#/definitions/BoxedInteger'
         description: The maximum number of results to return in the response.
-  undefined: {}
+  String:
+    type: string
   AttributeNameList:
     type: array
     items:
@@ -438,6 +439,16 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100
+  ServiceList:
+    type: array
+    items:
+      $ref: '#/definitions/Service'
+  errorMessage:
+    type: string
+  FilterType:
+    type: string
+    enum:
+      - TERM_MATCH
   Filter:
     type: object
     required:
@@ -455,10 +466,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The service code or attribute value that you want to filter by. If you are filtering by service code this is the actual service code, such as <code>AmazonEC2</code>. If you are filtering by attribute name, this is the attribute value that you want the returned products to match, such as a <code>Provisioned IOPS</code> volume.'
     description: The constraints that you want all returned products to match.
-  FilterType:
-    type: string
-    enum:
-      - TERM_MATCH
   Filters:
     type: array
     items:
@@ -479,11 +486,3 @@ definitions:
         $ref: '#/definitions/AttributeNameList'
         description: The attributes that are available for this service.
     description: 'The metadata for a service, such as the service code and available attribute names.'
-  ServiceList:
-    type: array
-    items:
-      $ref: '#/definitions/Service'
-  String:
-    type: string
-  errorMessage:
-    type: string

@@ -7772,7 +7772,13 @@ definitions:
     type: string
   AccountTakeoverActionNotifyType:
     type: boolean
-  undefined: {}
+  AccountTakeoverEventActionType:
+    type: string
+    enum:
+      - BLOCK
+      - MFA_IF_CONFIGURED
+      - MFA_REQUIRED
+      - NO_ACTION
   AccountTakeoverActionType:
     type: object
     required:
@@ -7799,13 +7805,30 @@ definitions:
         $ref: '#/definitions/AccountTakeoverActionType'
         description: Action to take for a high risk.
     description: Account takeover actions type.
-  AccountTakeoverEventActionType:
-    type: string
-    enum:
-      - BLOCK
-      - MFA_IF_CONFIGURED
-      - MFA_REQUIRED
-      - NO_ACTION
+  NotifyConfigurationType:
+    type: object
+    required:
+      - SourceArn
+    properties:
+      From:
+        $ref: '#/definitions/StringType'
+        description: 'The email address that is sending the email. It must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES.'
+      ReplyTo:
+        $ref: '#/definitions/StringType'
+        description: The destination to which the receiver of an email should reply to.
+      SourceArn:
+        $ref: '#/definitions/ArnType'
+        description: The Amazon Resource Name (ARN) of the identity that is associated with the sending authorization policy. It permits Amazon Cognito to send for the email address specified in the <code>From</code> parameter.
+      BlockEmail:
+        $ref: '#/definitions/NotifyEmailType'
+        description: Email template used when a detected risk event is blocked.
+      NoActionEmail:
+        $ref: '#/definitions/NotifyEmailType'
+        description: The email template used when a detected risk event is allowed.
+      MfaEmail:
+        $ref: '#/definitions/NotifyEmailType'
+        description: The MFA email template used when MFA is challenged as part of a detected risk.
+    description: The notify configuration type.
   AccountTakeoverRiskConfigurationType:
     type: object
     required:
@@ -7818,6 +7841,47 @@ definitions:
         $ref: '#/definitions/AccountTakeoverActionsType'
         description: Account takeover risk configuration actions
     description: Configuration for mitigation actions and notification for different levels of risk detected for a potential account takeover.
+  UserPoolIdType:
+    type: string
+    pattern: '[\w-]+_[0-9a-zA-Z]+'
+    minLength: 1
+    maxLength: 55
+  CustomAttributesListType:
+    type: array
+    items:
+      $ref: '#/definitions/SchemaAttributeType'
+    minItems: 1
+    maxItems: 25
+  UsernameType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
+    minLength: 1
+    maxLength: 128
+    format: password
+  GroupNameType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
+    minLength: 1
+    maxLength: 128
+  BooleanType:
+    type: boolean
+  AdminCreateUserUnusedAccountValidityDaysType:
+    type: integer
+    minimum: 0
+    maximum: 365
+  MessageTemplateType:
+    type: object
+    properties:
+      SMSMessage:
+        $ref: '#/definitions/SmsVerificationMessageType'
+        description: The message template for SMS messages.
+      EmailMessage:
+        $ref: '#/definitions/EmailVerificationMessageType'
+        description: The message template for email messages.
+      EmailSubject:
+        $ref: '#/definitions/EmailVerificationSubjectType'
+        description: The subject line for email messages.
+    description: The message template structure.
   AdminCreateUserConfigType:
     type: object
     properties:
@@ -7831,141 +7895,122 @@ definitions:
         $ref: '#/definitions/MessageTemplateType'
         description: '<p>The message template to be used for the welcome message to new users.</p> <p>See also <a href="http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-message-customizations.html#cognito-user-pool-settings-user-invitation-message-customization">Customizing User Invitation Messages</a>.</p>'
     description: The configuration for creating a new user profile.
-  AdminCreateUserUnusedAccountValidityDaysType:
-    type: integer
-    minimum: 0
-    maximum: 365
-  AdvancedSecurityModeType:
-    type: string
-    enum:
-      - 'OFF'
-      - AUDIT
-      - ENFORCED
-  AliasAttributeType:
-    type: string
-    enum:
-      - phone_number
-      - email
-      - preferred_username
-  AliasAttributesListType:
-    type: array
-    items:
-      $ref: '#/definitions/AliasAttributeType'
-  AnalyticsConfigurationType:
-    type: object
-    required:
-      - ApplicationId
-      - RoleArn
-      - ExternalId
-    properties:
-      ApplicationId:
-        $ref: '#/definitions/HexStringType'
-        description: The application ID for an Amazon Pinpoint application.
-      RoleArn:
-        $ref: '#/definitions/ArnType'
-        description: The ARN of an IAM role that authorizes Amazon Cognito to publish events to Amazon Pinpoint analytics.
-      ExternalId:
-        $ref: '#/definitions/StringType'
-        description: The external ID.
-      UserDataShared:
-        $ref: '#/definitions/BooleanType'
-        description: 'If <code>UserDataShared</code> is <code>true</code>, Amazon Cognito will include user data in the events it publishes to Amazon Pinpoint analytics.'
-    description: The Amazon Pinpoint analytics configuration for collecting metrics for a user pool.
-  AnalyticsMetadataType:
-    type: object
-    properties:
-      AnalyticsEndpointId:
-        $ref: '#/definitions/StringType'
-        description: The endpoint ID.
-    description: '<p>An Amazon Pinpoint analytics endpoint.</p> <p>An endpoint uniquely identifies a mobile device, email address, or phone number that can receive messages from Amazon Pinpoint analytics.</p>'
-  ArnType:
-    type: string
-    pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:([\w+=/,.@-]*)?:[0-9]+:[\w+=/,.@-]+(:[\w+=/,.@-]+)?(:[\w+=/,.@-]+)?'
-    minLength: 20
-    maxLength: 2048
-  AttributeDataType:
-    type: string
-    enum:
-      - String
-      - Number
-      - DateTime
-      - Boolean
   AttributeListType:
     type: array
     items:
       $ref: '#/definitions/AttributeType'
-  AttributeMappingKeyType:
+  PasswordType:
     type: string
-    minLength: 1
-    maxLength: 32
-  StringType:
+    pattern: '[\S]+'
+    minLength: 6
+    maxLength: 256
+    format: password
+  ForceAliasCreation:
+    type: boolean
+  MessageActionType:
     type: string
-  AttributeMappingType:
+    enum:
+      - RESEND
+      - SUPPRESS
+  DeliveryMediumListType:
     type: array
     items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeMappingKeyType'
-        value:
-          $ref: '#/definitions/StringType'
+      $ref: '#/definitions/DeliveryMediumType'
+  UserType:
+    type: object
+    properties:
+      Username:
+        $ref: '#/definitions/UsernameType'
+        description: The user name of the user you wish to describe.
+      Attributes:
+        $ref: '#/definitions/AttributeListType'
+        description: A container with information about the user type attributes.
+      UserCreateDate:
+        $ref: '#/definitions/DateType'
+        description: The creation date of the user.
+      UserLastModifiedDate:
+        $ref: '#/definitions/DateType'
+        description: The last modified date of the user.
+      Enabled:
+        $ref: '#/definitions/BooleanType'
+        description: Specifies whether the user is enabled.
+      UserStatus:
+        $ref: '#/definitions/UserStatusType'
+        description: '<p>The user status. Can be one of the following:</p> <ul> <li> <p>UNCONFIRMED - User has been created but not confirmed.</p> </li> <li> <p>CONFIRMED - User has been confirmed.</p> </li> <li> <p>ARCHIVED - User is no longer active.</p> </li> <li> <p>COMPROMISED - User is disabled due to a potential security threat.</p> </li> <li> <p>UNKNOWN - User status is not known.</p> </li> </ul>'
+      MFAOptions:
+        $ref: '#/definitions/MFAOptionListType'
+        description: The MFA options for the user.
+    description: The user type.
   AttributeNameListType:
     type: array
     items:
       $ref: '#/definitions/AttributeNameType'
-  AttributeNameType:
+  StringType:
     type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
-    minLength: 1
-    maxLength: 32
-  AttributeType:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/AttributeNameType'
-        description: The name of the attribute.
-      Value:
-        $ref: '#/definitions/AttributeValueType'
-        description: The value of the attribute.
-    description: Specifies whether the attribute is standard or custom.
-  AttributeValueType:
-    type: string
-    maxLength: 2048
-    format: password
-  AuthEventType:
+  ProviderUserIdentifierType:
     type: object
     properties:
-      EventId:
+      ProviderName:
+        $ref: '#/definitions/ProviderNameType'
+        description: 'The name of the provider, for example, Facebook, Google, or Login with Amazon.'
+      ProviderAttributeName:
         $ref: '#/definitions/StringType'
-        description: The event ID.
-      EventType:
-        $ref: '#/definitions/EventType'
-        description: The event type.
-      CreationDate:
+        description: 'The name of the provider attribute to link to, for example, <code>NameID</code>.'
+      ProviderAttributeValue:
+        $ref: '#/definitions/StringType'
+        description: 'The value of the provider attribute to link to, for example, <code>xxxxx_account</code>.'
+    description: A container for information about an identity provider for a user pool.
+  DeviceKeyType:
+    type: string
+    pattern: '[\w-]+_[0-9a-f-]+'
+    minLength: 1
+    maxLength: 55
+  DeviceType:
+    type: object
+    properties:
+      DeviceKey:
+        $ref: '#/definitions/DeviceKeyType'
+        description: The device key.
+      DeviceAttributes:
+        $ref: '#/definitions/AttributeListType'
+        description: The device attributes.
+      DeviceCreateDate:
         $ref: '#/definitions/DateType'
-        description: The creation date
-      EventResponse:
-        $ref: '#/definitions/EventResponseType'
-        description: The event response.
-      EventRisk:
-        $ref: '#/definitions/EventRiskType'
-        description: The event risk.
-      ChallengeResponses:
-        $ref: '#/definitions/ChallengeResponseListType'
-        description: The challenge responses.
-      EventContextData:
-        $ref: '#/definitions/EventContextDataType'
-        description: The user context data captured at the time of an event request. It provides additional information about the client from which event the request is received.
-      EventFeedback:
-        $ref: '#/definitions/EventFeedbackType'
-        description: 'A flag specifying the user feedback captured at the time of an event request is good or bad. '
-    description: The authentication event type.
-  AuthEventsType:
+        description: The creation date of the device.
+      DeviceLastModifiedDate:
+        $ref: '#/definitions/DateType'
+        description: The last modified date of the device.
+      DeviceLastAuthenticatedDate:
+        $ref: '#/definitions/DateType'
+        description: The date in which the device was last authenticated.
+    description: The device type.
+  DateType:
+    type: string
+    format: date-time
+  UserStatusType:
+    type: string
+    enum:
+      - UNCONFIRMED
+      - CONFIRMED
+      - ARCHIVED
+      - COMPROMISED
+      - UNKNOWN
+      - RESET_REQUIRED
+      - FORCE_CHANGE_PASSWORD
+  MFAOptionListType:
     type: array
     items:
-      $ref: '#/definitions/AuthEventType'
+      $ref: '#/definitions/MFAOptionType'
+  UserMFASettingListType:
+    type: array
+    items:
+      $ref: '#/definitions/StringType'
+  ClientIdType:
+    type: string
+    pattern: '[\w+]+'
+    minLength: 1
+    maxLength: 128
+    format: password
   AuthFlowType:
     type: string
     enum:
@@ -7976,6 +8021,72 @@ definitions:
       - ADMIN_NO_SRP_AUTH
       - USER_PASSWORD_AUTH
   AuthParametersType:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/StringType'
+        value:
+          $ref: '#/definitions/StringType'
+  ClientMetadataType:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/StringType'
+        value:
+          $ref: '#/definitions/StringType'
+  AnalyticsMetadataType:
+    type: object
+    properties:
+      AnalyticsEndpointId:
+        $ref: '#/definitions/StringType'
+        description: The endpoint ID.
+    description: '<p>An Amazon Pinpoint analytics endpoint.</p> <p>An endpoint uniquely identifies a mobile device, email address, or phone number that can receive messages from Amazon Pinpoint analytics.</p>'
+  ContextDataType:
+    type: object
+    required:
+      - IpAddress
+      - ServerName
+      - ServerPath
+      - HttpHeaders
+    properties:
+      IpAddress:
+        $ref: '#/definitions/StringType'
+        description: Source IP address of your user.
+      ServerName:
+        $ref: '#/definitions/StringType'
+        description: Your server endpoint where this API is invoked.
+      ServerPath:
+        $ref: '#/definitions/StringType'
+        description: 'Your server path where this API is invoked. '
+      HttpHeaders:
+        $ref: '#/definitions/HttpHeaderList'
+        description: HttpHeaders received on your server in same order.
+      EncodedData:
+        $ref: '#/definitions/StringType'
+        description: 'Encoded data containing device fingerprinting details, collected using the Amazon Cognito context data collection library.'
+    description: Contextual user data type used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
+  ChallengeNameType:
+    type: string
+    enum:
+      - SMS_MFA
+      - SOFTWARE_TOKEN_MFA
+      - SELECT_MFA_TYPE
+      - MFA_SETUP
+      - PASSWORD_VERIFIER
+      - CUSTOM_CHALLENGE
+      - DEVICE_SRP_AUTH
+      - DEVICE_PASSWORD_VERIFIER
+      - ADMIN_NO_SRP_AUTH
+      - NEW_PASSWORD_REQUIRED
+  SessionType:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  ChallengeParametersType:
     type: array
     items:
       type: object
@@ -8006,69 +8117,30 @@ definitions:
         $ref: '#/definitions/NewDeviceMetadataType'
         description: The new device metadata from an authentication result.
     description: The authentication result.
-  BlockedIPRangeListType:
+  QueryLimitType:
+    type: integer
+    minimum: 0
+    maximum: 60
+  SearchPaginationTokenType:
+    type: string
+    pattern: '[\S]+'
+    minLength: 1
+  DeviceListType:
     type: array
     items:
-      $ref: '#/definitions/StringType'
-    maxItems: 20
-  BooleanType:
-    type: boolean
-  CSSType:
+      $ref: '#/definitions/DeviceType'
+  PaginationKey:
     type: string
-  CSSVersionType:
-    type: string
-  CallbackURLsListType:
+    pattern: '[\S]+'
+    minLength: 1
+  GroupListType:
     type: array
     items:
-      $ref: '#/definitions/RedirectUrlType'
-    minItems: 0
-    maxItems: 100
-  ChallengeName:
-    type: string
-    enum:
-      - Password
-      - Mfa
-  ChallengeNameType:
-    type: string
-    enum:
-      - SMS_MFA
-      - SOFTWARE_TOKEN_MFA
-      - SELECT_MFA_TYPE
-      - MFA_SETUP
-      - PASSWORD_VERIFIER
-      - CUSTOM_CHALLENGE
-      - DEVICE_SRP_AUTH
-      - DEVICE_PASSWORD_VERIFIER
-      - ADMIN_NO_SRP_AUTH
-      - NEW_PASSWORD_REQUIRED
-  ChallengeParametersType:
+      $ref: '#/definitions/GroupType'
+  AuthEventsType:
     type: array
     items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/StringType'
-        value:
-          $ref: '#/definitions/StringType'
-  ChallengeResponse:
-    type: string
-    enum:
-      - Success
-      - Failure
-  ChallengeResponseListType:
-    type: array
-    items:
-      $ref: '#/definitions/ChallengeResponseType'
-  ChallengeResponseType:
-    type: object
-    properties:
-      ChallengeName:
-        $ref: '#/definitions/ChallengeName'
-        description: The challenge name
-      ChallengeResponse:
-        $ref: '#/definitions/ChallengeResponse'
-        description: The challenge response.
-    description: The challenge response type.
+      $ref: '#/definitions/AuthEventType'
   ChallengeResponsesType:
     type: array
     items:
@@ -8078,301 +8150,160 @@ definitions:
           $ref: '#/definitions/StringType'
         value:
           $ref: '#/definitions/StringType'
-  ClientIdType:
-    type: string
-    pattern: '[\w+]+'
-    minLength: 1
-    maxLength: 128
-    format: password
-  ClientMetadataType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/StringType'
-        value:
-          $ref: '#/definitions/StringType'
-  ClientNameType:
-    type: string
-    pattern: '[\w\s+=,.@-]+'
-    minLength: 1
-    maxLength: 128
-  ClientPermissionListType:
-    type: array
-    items:
-      $ref: '#/definitions/ClientPermissionType'
-  ClientPermissionType:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  ClientSecretType:
-    type: string
-    pattern: '[\w+]+'
-    minLength: 1
-    maxLength: 64
-    format: password
-  CodeDeliveryDetailsListType:
-    type: array
-    items:
-      $ref: '#/definitions/CodeDeliveryDetailsType'
-  CodeDeliveryDetailsType:
+  SMSMfaSettingsType:
     type: object
     properties:
-      Destination:
-        $ref: '#/definitions/StringType'
-        description: The destination for the code delivery details.
-      DeliveryMedium:
-        $ref: '#/definitions/DeliveryMediumType'
-        description: The delivery medium (email message or phone number).
-      AttributeName:
-        $ref: '#/definitions/AttributeNameType'
-        description: The attribute name.
-    description: The code delivery details being returned from the server.
-  CompletionMessageType:
-    type: string
-    pattern: '[\w]+'
-    minLength: 1
-    maxLength: 128
-  CompromisedCredentialsActionsType:
-    type: object
-    required:
-      - EventAction
-    properties:
-      EventAction:
-        $ref: '#/definitions/CompromisedCredentialsEventActionType'
-        description: The event action.
-    description: The compromised credentials actions type
-  CompromisedCredentialsEventActionType:
-    type: string
-    enum:
-      - BLOCK
-      - NO_ACTION
-  CompromisedCredentialsRiskConfigurationType:
-    type: object
-    required:
-      - Actions
-    properties:
-      EventFilter:
-        $ref: '#/definitions/EventFiltersType'
-        description: Perform the action for these events. The default is to perform all events if no event filter is specified.
-      Actions:
-        $ref: '#/definitions/CompromisedCredentialsActionsType'
-        description: The compromised credentials risk configuration actions.
-    description: The compromised credentials risk configuration type.
-  ConfirmationCodeType:
-    type: string
-    pattern: '[\S]+'
-    minLength: 1
-    maxLength: 2048
-  ContextDataType:
-    type: object
-    required:
-      - IpAddress
-      - ServerName
-      - ServerPath
-      - HttpHeaders
-    properties:
-      IpAddress:
-        $ref: '#/definitions/StringType'
-        description: Source IP address of your user.
-      ServerName:
-        $ref: '#/definitions/StringType'
-        description: Your server endpoint where this API is invoked.
-      ServerPath:
-        $ref: '#/definitions/StringType'
-        description: 'Your server path where this API is invoked. '
-      HttpHeaders:
-        $ref: '#/definitions/HttpHeaderList'
-        description: HttpHeaders received on your server in same order.
-      EncodedData:
-        $ref: '#/definitions/StringType'
-        description: 'Encoded data containing device fingerprinting details, collected using the Amazon Cognito context data collection library.'
-    description: Contextual user data type used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
-  CustomAttributeNameType:
-    type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
-    minLength: 1
-    maxLength: 20
-  CustomAttributesListType:
-    type: array
-    items:
-      $ref: '#/definitions/SchemaAttributeType'
-    minItems: 1
-    maxItems: 25
-  CustomDomainConfigType:
-    type: object
-    required:
-      - CertificateArn
-    properties:
-      CertificateArn:
-        $ref: '#/definitions/ArnType'
-        description: The Amazon Resource Name (ARN) of an AWS Certificate Manager SSL certificate. You use this certificate for the subdomain of your custom domain.
-    description: The configuration for a custom domain that hosts the sign-up and sign-in webpages for your application.
-  DateType:
-    type: string
-    format: date-time
-  DefaultEmailOptionType:
-    type: string
-    enum:
-      - CONFIRM_WITH_LINK
-      - CONFIRM_WITH_CODE
-  DeliveryMediumListType:
-    type: array
-    items:
-      $ref: '#/definitions/DeliveryMediumType'
-  DeliveryMediumType:
-    type: string
-    enum:
-      - SMS
-      - EMAIL
-  DescriptionType:
-    type: string
-    maxLength: 2048
-  DeviceConfigurationType:
-    type: object
-    properties:
-      ChallengeRequiredOnNewDevice:
+      Enabled:
         $ref: '#/definitions/BooleanType'
-        description: Indicates whether a challenge is required on a new device. Only applicable to a new device.
-      DeviceOnlyRememberedOnUserPrompt:
+        description: Specifies whether SMS text message MFA is enabled.
+      PreferredMfa:
         $ref: '#/definitions/BooleanType'
-        description: 'If true, a device is only remembered on user prompt.'
-    description: The configuration for the user pool's device tracking.
-  DeviceKeyType:
+        description: The preferred MFA method.
+    description: The SMS multi-factor authentication (MFA) settings type.
+  SoftwareTokenMfaSettingsType:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/BooleanType'
+        description: Specifies whether software token MFA is enabled.
+      PreferredMfa:
+        $ref: '#/definitions/BooleanType'
+        description: The preferred MFA method.
+    description: The type used for enabling software token MFA at the user level.
+  EventIdType:
     type: string
-    pattern: '[\w-]+_[0-9a-f-]+'
+    pattern: '[\w+-]+'
     minLength: 1
-    maxLength: 55
-  DeviceListType:
-    type: array
-    items:
-      $ref: '#/definitions/DeviceType'
-  DeviceNameType:
+    maxLength: 50
+  FeedbackValueType:
     type: string
-    minLength: 1
-    maxLength: 1024
+    enum:
+      - Valid
+      - Invalid
   DeviceRememberedStatusType:
     type: string
     enum:
       - remembered
       - not_remembered
-  DeviceSecretVerifierConfigType:
-    type: object
-    properties:
-      PasswordVerifier:
-        $ref: '#/definitions/StringType'
-        description: The password verifier.
-      Salt:
-        $ref: '#/definitions/StringType'
-        description: The salt.
-    description: The device verifier against which it will be authenticated.
-  DeviceType:
-    type: object
-    properties:
-      DeviceKey:
-        $ref: '#/definitions/DeviceKeyType'
-        description: The device key.
-      DeviceAttributes:
-        $ref: '#/definitions/AttributeListType'
-        description: The device attributes.
-      DeviceCreateDate:
-        $ref: '#/definitions/DateType'
-        description: The creation date of the device.
-      DeviceLastModifiedDate:
-        $ref: '#/definitions/DateType'
-        description: The last modified date of the device.
-      DeviceLastAuthenticatedDate:
-        $ref: '#/definitions/DateType'
-        description: The date in which the device was last authenticated.
-    description: The device type.
-  DomainDescriptionType:
-    type: object
-    properties:
-      UserPoolId:
-        $ref: '#/definitions/UserPoolIdType'
-        description: The user pool ID.
-      AWSAccountId:
-        $ref: '#/definitions/AWSAccountIdType'
-        description: The AWS account ID for the user pool owner.
-      Domain:
-        $ref: '#/definitions/DomainType'
-        description: The domain string.
-      S3Bucket:
-        $ref: '#/definitions/S3BucketType'
-        description: The S3 bucket where the static files for this domain are stored.
-      CloudFrontDistribution:
-        $ref: '#/definitions/StringType'
-        description: The ARN of the CloudFront distribution.
-      Version:
-        $ref: '#/definitions/DomainVersionType'
-        description: The app version.
-      Status:
-        $ref: '#/definitions/DomainStatusType'
-        description: The domain status.
-      CustomDomainConfig:
-        $ref: '#/definitions/CustomDomainConfigType'
-    description: A container for information about a domain.
-  DomainStatusType:
+  AdvancedSecurityModeType:
     type: string
     enum:
-      - CREATING
-      - DELETING
-      - UPDATING
-      - ACTIVE
-      - FAILED
-  DomainType:
+      - 'OFF'
+      - AUDIT
+      - ENFORCED
+  AliasAttributeType:
     type: string
-    pattern: '^[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9])?$'
+    enum:
+      - phone_number
+      - email
+      - preferred_username
+  AliasAttributesListType:
+    type: array
+    items:
+      $ref: '#/definitions/AliasAttributeType'
+  HexStringType:
+    type: string
+    pattern: '^[0-9a-fA-F]+$'
+  ArnType:
+    type: string
+    pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:([\w+=/,.@-]*)?:[0-9]+:[\w+=/,.@-]+(:[\w+=/,.@-]+)?(:[\w+=/,.@-]+)?'
+    minLength: 20
+    maxLength: 2048
+  AnalyticsConfigurationType:
+    type: object
+    required:
+      - ApplicationId
+      - RoleArn
+      - ExternalId
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/HexStringType'
+        description: The application ID for an Amazon Pinpoint application.
+      RoleArn:
+        $ref: '#/definitions/ArnType'
+        description: The ARN of an IAM role that authorizes Amazon Cognito to publish events to Amazon Pinpoint analytics.
+      ExternalId:
+        $ref: '#/definitions/StringType'
+        description: The external ID.
+      UserDataShared:
+        $ref: '#/definitions/BooleanType'
+        description: 'If <code>UserDataShared</code> is <code>true</code>, Amazon Cognito will include user data in the events it publishes to Amazon Pinpoint analytics.'
+    description: The Amazon Pinpoint analytics configuration for collecting metrics for a user pool.
+  TokenModelType:
+    type: string
+    pattern: '[A-Za-z0-9-_=.]+'
+    format: password
+  SecretCodeType:
+    type: string
+    pattern: '[A-Za-z0-9]+'
+    minLength: 16
+    format: password
+  AttributeDataType:
+    type: string
+    enum:
+      - String
+      - Number
+      - DateTime
+      - Boolean
+  AttributeType:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/AttributeNameType'
+        description: The name of the attribute.
+      Value:
+        $ref: '#/definitions/AttributeValueType'
+        description: The value of the attribute.
+    description: Specifies whether the attribute is standard or custom.
+  AttributeMappingKeyType:
+    type: string
     minLength: 1
-    maxLength: 63
-  DomainVersionType:
+    maxLength: 32
+  AttributeMappingType:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeMappingKeyType'
+        value:
+          $ref: '#/definitions/StringType'
+  AttributeNameType:
     type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
     minLength: 1
-    maxLength: 20
-  EmailAddressType:
+    maxLength: 32
+  AttributeValueType:
     type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+@[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
-  EmailConfigurationType:
+    maxLength: 2048
+    format: password
+  EventType:
+    type: string
+    enum:
+      - SignIn
+      - SignUp
+      - ForgotPassword
+  EventResponseType:
+    type: string
+    enum:
+      - Success
+      - Failure
+  EventRiskType:
     type: object
     properties:
-      SourceArn:
-        $ref: '#/definitions/ArnType'
-        description: The Amazon Resource Name (ARN) of the email source.
-      ReplyToEmailAddress:
-        $ref: '#/definitions/EmailAddressType'
-        description: The destination to which the receiver of the email should reply to.
-    description: The email configuration type.
-  EmailNotificationBodyType:
-    type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]+'
-    minLength: 6
-    maxLength: 20000
-  EmailNotificationSubjectType:
-    type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s]+'
-    minLength: 1
-    maxLength: 140
-  EmailVerificationMessageByLinkType:
-    type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*\{##[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*##\}[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*'
-    minLength: 6
-    maxLength: 20000
-  EmailVerificationMessageType:
-    type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*\{####\}[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*'
-    minLength: 6
-    maxLength: 20000
-  EmailVerificationSubjectByLinkType:
-    type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s]+'
-    minLength: 1
-    maxLength: 140
-  EmailVerificationSubjectType:
-    type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s]+'
-    minLength: 1
-    maxLength: 140
+      RiskDecision:
+        $ref: '#/definitions/RiskDecisionType'
+        description: The risk decision.
+      RiskLevel:
+        $ref: '#/definitions/RiskLevelType'
+        description: The risk level.
+    description: The event risk type.
+  ChallengeResponseListType:
+    type: array
+    items:
+      $ref: '#/definitions/ChallengeResponseType'
   EventContextDataType:
     type: object
     properties:
@@ -8408,70 +8339,204 @@ definitions:
         $ref: '#/definitions/DateType'
         description: The event feedback date.
     description: Specifies the event feedback type.
-  EventFilterType:
-    type: string
-    enum:
-      - SIGN_IN
-      - PASSWORD_CHANGE
-      - SIGN_UP
-  EventFiltersType:
+  AuthEventType:
+    type: object
+    properties:
+      EventId:
+        $ref: '#/definitions/StringType'
+        description: The event ID.
+      EventType:
+        $ref: '#/definitions/EventType'
+        description: The event type.
+      CreationDate:
+        $ref: '#/definitions/DateType'
+        description: The creation date
+      EventResponse:
+        $ref: '#/definitions/EventResponseType'
+        description: The event response.
+      EventRisk:
+        $ref: '#/definitions/EventRiskType'
+        description: The event risk.
+      ChallengeResponses:
+        $ref: '#/definitions/ChallengeResponseListType'
+        description: The challenge responses.
+      EventContextData:
+        $ref: '#/definitions/EventContextDataType'
+        description: The user context data captured at the time of an event request. It provides additional information about the client from which event the request is received.
+      EventFeedback:
+        $ref: '#/definitions/EventFeedbackType'
+        description: 'A flag specifying the user feedback captured at the time of an event request is good or bad. '
+    description: The authentication event type.
+  IntegerType:
+    type: integer
+  NewDeviceMetadataType:
+    type: object
+    properties:
+      DeviceKey:
+        $ref: '#/definitions/DeviceKeyType'
+        description: The device key.
+      DeviceGroupKey:
+        $ref: '#/definitions/StringType'
+        description: The device group key.
+    description: The new device metadata type.
+  BlockedIPRangeListType:
     type: array
     items:
-      $ref: '#/definitions/EventFilterType'
-  EventIdType:
+      $ref: '#/definitions/StringType'
+    maxItems: 20
+  CSSType:
     type: string
-    pattern: '[\w+-]+'
+  CSSVersionType:
+    type: string
+  RedirectUrlType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
     minLength: 1
-    maxLength: 50
-  EventResponseType:
+    maxLength: 1024
+  CallbackURLsListType:
+    type: array
+    items:
+      $ref: '#/definitions/RedirectUrlType'
+    minItems: 0
+    maxItems: 100
+  ChallengeName:
+    type: string
+    enum:
+      - Password
+      - Mfa
+  ChallengeResponse:
     type: string
     enum:
       - Success
       - Failure
-  EventRiskType:
+  ChallengeResponseType:
     type: object
     properties:
-      RiskDecision:
-        $ref: '#/definitions/RiskDecisionType'
-        description: The risk decision.
-      RiskLevel:
-        $ref: '#/definitions/RiskLevelType'
-        description: The risk level.
-    description: The event risk type.
-  EventType:
+      ChallengeName:
+        $ref: '#/definitions/ChallengeName'
+        description: The challenge name
+      ChallengeResponse:
+        $ref: '#/definitions/ChallengeResponse'
+        description: The challenge response.
+    description: The challenge response type.
+  ClientNameType:
     type: string
-    enum:
-      - SignIn
-      - SignUp
-      - ForgotPassword
-  ExplicitAuthFlowsListType:
-    type: array
-    items:
-      $ref: '#/definitions/ExplicitAuthFlowsType'
-  ExplicitAuthFlowsType:
-    type: string
-    enum:
-      - ADMIN_NO_SRP_AUTH
-      - CUSTOM_AUTH_FLOW_ONLY
-      - USER_PASSWORD_AUTH
-  FeedbackValueType:
-    type: string
-    enum:
-      - Valid
-      - Invalid
-  ForceAliasCreation:
-    type: boolean
-  GenerateSecret:
-    type: boolean
-  GroupListType:
-    type: array
-    items:
-      $ref: '#/definitions/GroupType'
-  GroupNameType:
-    type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
+    pattern: '[\w\s+=,.@-]+'
     minLength: 1
     maxLength: 128
+  ClientPermissionType:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  ClientPermissionListType:
+    type: array
+    items:
+      $ref: '#/definitions/ClientPermissionType'
+  ClientSecretType:
+    type: string
+    pattern: '[\w+]+'
+    minLength: 1
+    maxLength: 64
+    format: password
+  CodeDeliveryDetailsType:
+    type: object
+    properties:
+      Destination:
+        $ref: '#/definitions/StringType'
+        description: The destination for the code delivery details.
+      DeliveryMedium:
+        $ref: '#/definitions/DeliveryMediumType'
+        description: The delivery medium (email message or phone number).
+      AttributeName:
+        $ref: '#/definitions/AttributeNameType'
+        description: The attribute name.
+    description: The code delivery details being returned from the server.
+  CodeDeliveryDetailsListType:
+    type: array
+    items:
+      $ref: '#/definitions/CodeDeliveryDetailsType'
+  DeliveryMediumType:
+    type: string
+    enum:
+      - SMS
+      - EMAIL
+  CompletionMessageType:
+    type: string
+    pattern: '[\w]+'
+    minLength: 1
+    maxLength: 128
+  CompromisedCredentialsEventActionType:
+    type: string
+    enum:
+      - BLOCK
+      - NO_ACTION
+  CompromisedCredentialsActionsType:
+    type: object
+    required:
+      - EventAction
+    properties:
+      EventAction:
+        $ref: '#/definitions/CompromisedCredentialsEventActionType'
+        description: The event action.
+    description: The compromised credentials actions type
+  EventFiltersType:
+    type: array
+    items:
+      $ref: '#/definitions/EventFilterType'
+  CompromisedCredentialsRiskConfigurationType:
+    type: object
+    required:
+      - Actions
+    properties:
+      EventFilter:
+        $ref: '#/definitions/EventFiltersType'
+        description: Perform the action for these events. The default is to perform all events if no event filter is specified.
+      Actions:
+        $ref: '#/definitions/CompromisedCredentialsActionsType'
+        description: The compromised credentials risk configuration actions.
+    description: The compromised credentials risk configuration type.
+  DeviceSecretVerifierConfigType:
+    type: object
+    properties:
+      PasswordVerifier:
+        $ref: '#/definitions/StringType'
+        description: The password verifier.
+      Salt:
+        $ref: '#/definitions/StringType'
+        description: The salt.
+    description: The device verifier against which it will be authenticated.
+  DeviceNameType:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  SecretHashType:
+    type: string
+    pattern: '[\w+=/]+'
+    minLength: 1
+    maxLength: 128
+    format: password
+  ConfirmationCodeType:
+    type: string
+    pattern: '[\S]+'
+    minLength: 1
+    maxLength: 2048
+  UserContextDataType:
+    type: object
+    properties:
+      EncodedData:
+        $ref: '#/definitions/StringType'
+        description: 'Contextual data such as the user''s device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.'
+    description: 'Contextual data such as the user''s device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.'
+  HttpHeaderList:
+    type: array
+    items:
+      $ref: '#/definitions/HttpHeader'
+  DescriptionType:
+    type: string
+    maxLength: 2048
+  PrecedenceType:
+    type: integer
+    minimum: 0
   GroupType:
     type: object
     properties:
@@ -8497,23 +8562,34 @@ definitions:
         $ref: '#/definitions/DateType'
         description: The date the group was created.
     description: The group type.
-  HexStringType:
+  ProviderNameTypeV1:
     type: string
-    pattern: '^[0-9a-fA-F]+$'
-  HttpHeader:
-    type: object
-    properties:
-      headerName:
-        $ref: '#/definitions/StringType'
-        description: The header name
-      headerValue:
-        $ref: '#/definitions/StringType'
-        description: The header value.
-    description: The HTTP header.
-  HttpHeaderList:
+    pattern: '[^_][\p{L}\p{M}\p{S}\p{N}\p{P}][^_]+'
+    minLength: 1
+    maxLength: 32
+  IdentityProviderTypeType:
+    type: string
+    enum:
+      - SAML
+      - Facebook
+      - Google
+      - LoginWithAmazon
+      - OIDC
+  ProviderDetailsType:
     type: array
     items:
-      $ref: '#/definitions/HttpHeader'
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/StringType'
+        value:
+          $ref: '#/definitions/StringType'
+  IdpIdentifiersListType:
+    type: array
+    items:
+      $ref: '#/definitions/IdpIdentifierType'
+    minItems: 0
+    maxItems: 50
   IdentityProviderType:
     type: object
     properties:
@@ -8542,307 +8618,6 @@ definitions:
         $ref: '#/definitions/DateType'
         description: The date the identity provider was created.
     description: A container for information about an identity provider.
-  IdentityProviderTypeType:
-    type: string
-    enum:
-      - SAML
-      - Facebook
-      - Google
-      - LoginWithAmazon
-      - OIDC
-  IdpIdentifierType:
-    type: string
-    pattern: '[\w\s+=.@-]+'
-    minLength: 1
-    maxLength: 40
-  IdpIdentifiersListType:
-    type: array
-    items:
-      $ref: '#/definitions/IdpIdentifierType'
-    minItems: 0
-    maxItems: 50
-  ImageFileType:
-    type: string
-  ImageUrlType:
-    type: string
-  IntegerType:
-    type: integer
-  LambdaConfigType:
-    type: object
-    properties:
-      PreSignUp:
-        $ref: '#/definitions/ArnType'
-        description: A pre-registration AWS Lambda trigger.
-      CustomMessage:
-        $ref: '#/definitions/ArnType'
-        description: A custom Message AWS Lambda trigger.
-      PostConfirmation:
-        $ref: '#/definitions/ArnType'
-        description: A post-confirmation AWS Lambda trigger.
-      PreAuthentication:
-        $ref: '#/definitions/ArnType'
-        description: A pre-authentication AWS Lambda trigger.
-      PostAuthentication:
-        $ref: '#/definitions/ArnType'
-        description: A post-authentication AWS Lambda trigger.
-      DefineAuthChallenge:
-        $ref: '#/definitions/ArnType'
-        description: Defines the authentication challenge.
-      CreateAuthChallenge:
-        $ref: '#/definitions/ArnType'
-        description: Creates an authentication challenge.
-      VerifyAuthChallengeResponse:
-        $ref: '#/definitions/ArnType'
-        description: Verifies the authentication challenge response.
-      PreTokenGeneration:
-        $ref: '#/definitions/ArnType'
-        description: A Lambda trigger that is invoked before token generation.
-      UserMigration:
-        $ref: '#/definitions/ArnType'
-        description: The user migration Lambda config type.
-    description: Specifies the configuration for AWS Lambda triggers.
-  ListOfStringTypes:
-    type: array
-    items:
-      $ref: '#/definitions/StringType'
-  ListProvidersLimitType:
-    type: integer
-    minimum: 1
-    maximum: 60
-  ListResourceServersLimitType:
-    type: integer
-    minimum: 1
-    maximum: 50
-  LogoutURLsListType:
-    type: array
-    items:
-      $ref: '#/definitions/RedirectUrlType'
-    minItems: 0
-    maxItems: 100
-  LongType:
-    type: integer
-  MFAOptionListType:
-    type: array
-    items:
-      $ref: '#/definitions/MFAOptionType'
-  MFAOptionType:
-    type: object
-    properties:
-      DeliveryMedium:
-        $ref: '#/definitions/DeliveryMediumType'
-        description: The delivery medium (email message or SMS message) to send the MFA code.
-      AttributeName:
-        $ref: '#/definitions/AttributeNameType'
-        description: The attribute name of the MFA option type.
-    description: Specifies the different settings for multi-factor authentication (MFA).
-  MessageActionType:
-    type: string
-    enum:
-      - RESEND
-      - SUPPRESS
-  MessageTemplateType:
-    type: object
-    properties:
-      SMSMessage:
-        $ref: '#/definitions/SmsVerificationMessageType'
-        description: The message template for SMS messages.
-      EmailMessage:
-        $ref: '#/definitions/EmailVerificationMessageType'
-        description: The message template for email messages.
-      EmailSubject:
-        $ref: '#/definitions/EmailVerificationSubjectType'
-        description: The subject line for email messages.
-    description: The message template structure.
-  NewDeviceMetadataType:
-    type: object
-    properties:
-      DeviceKey:
-        $ref: '#/definitions/DeviceKeyType'
-        description: The device key.
-      DeviceGroupKey:
-        $ref: '#/definitions/StringType'
-        description: The device group key.
-    description: The new device metadata type.
-  NotifyConfigurationType:
-    type: object
-    required:
-      - SourceArn
-    properties:
-      From:
-        $ref: '#/definitions/StringType'
-        description: 'The email address that is sending the email. It must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES.'
-      ReplyTo:
-        $ref: '#/definitions/StringType'
-        description: The destination to which the receiver of an email should reply to.
-      SourceArn:
-        $ref: '#/definitions/ArnType'
-        description: The Amazon Resource Name (ARN) of the identity that is associated with the sending authorization policy. It permits Amazon Cognito to send for the email address specified in the <code>From</code> parameter.
-      BlockEmail:
-        $ref: '#/definitions/NotifyEmailType'
-        description: Email template used when a detected risk event is blocked.
-      NoActionEmail:
-        $ref: '#/definitions/NotifyEmailType'
-        description: The email template used when a detected risk event is allowed.
-      MfaEmail:
-        $ref: '#/definitions/NotifyEmailType'
-        description: The MFA email template used when MFA is challenged as part of a detected risk.
-    description: The notify configuration type.
-  NotifyEmailType:
-    type: object
-    required:
-      - Subject
-    properties:
-      Subject:
-        $ref: '#/definitions/EmailNotificationSubjectType'
-        description: The subject.
-      HtmlBody:
-        $ref: '#/definitions/EmailNotificationBodyType'
-        description: The HTML body.
-      TextBody:
-        $ref: '#/definitions/EmailNotificationBodyType'
-        description: The text body.
-    description: The notify email type.
-  NumberAttributeConstraintsType:
-    type: object
-    properties:
-      MinValue:
-        $ref: '#/definitions/StringType'
-        description: The minimum value of an attribute that is of the number data type.
-      MaxValue:
-        $ref: '#/definitions/StringType'
-        description: The maximum value of an attribute that is of the number data type.
-    description: The minimum and maximum value of an attribute that is of the number data type.
-  OAuthFlowType:
-    type: string
-    enum:
-      - code
-      - implicit
-      - client_credentials
-  OAuthFlowsType:
-    type: array
-    items:
-      $ref: '#/definitions/OAuthFlowType'
-    minItems: 0
-    maxItems: 3
-  PaginationKey:
-    type: string
-    pattern: '[\S]+'
-    minLength: 1
-  PaginationKeyType:
-    type: string
-    pattern: '[\S]+'
-    minLength: 1
-  PasswordPolicyMinLengthType:
-    type: integer
-    minimum: 6
-    maximum: 99
-  PasswordPolicyType:
-    type: object
-    properties:
-      MinimumLength:
-        $ref: '#/definitions/PasswordPolicyMinLengthType'
-        description: The minimum length of the password policy that you have set. Cannot be less than 6.
-      RequireUppercase:
-        $ref: '#/definitions/BooleanType'
-        description: 'In the password policy that you have set, refers to whether you have required users to use at least one uppercase letter in their password.'
-      RequireLowercase:
-        $ref: '#/definitions/BooleanType'
-        description: 'In the password policy that you have set, refers to whether you have required users to use at least one lowercase letter in their password.'
-      RequireNumbers:
-        $ref: '#/definitions/BooleanType'
-        description: 'In the password policy that you have set, refers to whether you have required users to use at least one number in their password.'
-      RequireSymbols:
-        $ref: '#/definitions/BooleanType'
-        description: 'In the password policy that you have set, refers to whether you have required users to use at least one symbol in their password.'
-    description: The password policy type.
-  PasswordType:
-    type: string
-    pattern: '[\S]+'
-    minLength: 6
-    maxLength: 256
-    format: password
-  PoolQueryLimitType:
-    type: integer
-    minimum: 1
-    maximum: 60
-  PreSignedUrlType:
-    type: string
-    minLength: 0
-    maxLength: 2048
-  PrecedenceType:
-    type: integer
-    minimum: 0
-  ProviderDescription:
-    type: object
-    properties:
-      ProviderName:
-        $ref: '#/definitions/ProviderNameType'
-        description: The identity provider name.
-      ProviderType:
-        $ref: '#/definitions/IdentityProviderTypeType'
-        description: The identity provider type.
-      LastModifiedDate:
-        $ref: '#/definitions/DateType'
-        description: The date the provider was last modified.
-      CreationDate:
-        $ref: '#/definitions/DateType'
-        description: The date the provider was added to the user pool.
-    description: A container for identity provider details.
-  ProviderDetailsType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/StringType'
-        value:
-          $ref: '#/definitions/StringType'
-  ProviderNameType:
-    type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
-    minLength: 1
-    maxLength: 32
-  ProviderNameTypeV1:
-    type: string
-    pattern: '[^_][\p{L}\p{M}\p{S}\p{N}\p{P}][^_]+'
-    minLength: 1
-    maxLength: 32
-  ProviderUserIdentifierType:
-    type: object
-    properties:
-      ProviderName:
-        $ref: '#/definitions/ProviderNameType'
-        description: 'The name of the provider, for example, Facebook, Google, or Login with Amazon.'
-      ProviderAttributeName:
-        $ref: '#/definitions/StringType'
-        description: 'The name of the provider attribute to link to, for example, <code>NameID</code>.'
-      ProviderAttributeValue:
-        $ref: '#/definitions/StringType'
-        description: 'The value of the provider attribute to link to, for example, <code>xxxxx_account</code>.'
-    description: A container for information about an identity provider for a user pool.
-  ProvidersListType:
-    type: array
-    items:
-      $ref: '#/definitions/ProviderDescription'
-    minItems: 0
-    maxItems: 50
-  QueryLimit:
-    type: integer
-    minimum: 1
-    maximum: 60
-  QueryLimitType:
-    type: integer
-    minimum: 0
-    maximum: 60
-  RedirectUrlType:
-    type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
-    minLength: 1
-    maxLength: 1024
-  RefreshTokenValidityType:
-    type: integer
-    minimum: 0
-    maximum: 3650
   ResourceServerIdentifierType:
     type: string
     pattern: '[\x21\x23-\x5B\x5D-\x7E]+'
@@ -8853,33 +8628,11 @@ definitions:
     pattern: '[\w\s+=,.@-]+'
     minLength: 1
     maxLength: 256
-  ResourceServerScopeDescriptionType:
-    type: string
-    minLength: 1
-    maxLength: 256
   ResourceServerScopeListType:
     type: array
     items:
       $ref: '#/definitions/ResourceServerScopeType'
     maxItems: 25
-  ResourceServerScopeNameType:
-    type: string
-    pattern: '[\x21\x23-\x2E\x30-\x5B\x5D-\x7E]+'
-    minLength: 1
-    maxLength: 256
-  ResourceServerScopeType:
-    type: object
-    required:
-      - ScopeName
-      - ScopeDescription
-    properties:
-      ScopeName:
-        $ref: '#/definitions/ResourceServerScopeNameType'
-        description: The name of the scope.
-      ScopeDescription:
-        $ref: '#/definitions/ResourceServerScopeDescriptionType'
-        description: A description of the scope.
-    description: A resource server scope.
   ResourceServerType:
     type: object
     properties:
@@ -8896,266 +8649,11 @@ definitions:
         $ref: '#/definitions/ResourceServerScopeListType'
         description: A list of scopes that are defined for the resource server.
     description: A container for information about a resource server for a user pool.
-  ResourceServersListType:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceServerType'
-  RiskConfigurationType:
-    type: object
-    properties:
-      UserPoolId:
-        $ref: '#/definitions/UserPoolIdType'
-        description: The user pool ID.
-      ClientId:
-        $ref: '#/definitions/ClientIdType'
-        description: The app client ID.
-      CompromisedCredentialsRiskConfiguration:
-        $ref: '#/definitions/CompromisedCredentialsRiskConfigurationType'
-        description: 'The compromised credentials risk configuration object including the <code>EventFilter</code> and the <code>EventAction</code> '
-      AccountTakeoverRiskConfiguration:
-        $ref: '#/definitions/AccountTakeoverRiskConfigurationType'
-        description: The account takeover risk configuration object including the <code>NotifyConfiguration</code> object and <code>Actions</code> to take in the case of an account takeover.
-      RiskExceptionConfiguration:
-        $ref: '#/definitions/RiskExceptionConfigurationType'
-        description: The configuration to override the risk decision.
-      LastModifiedDate:
-        $ref: '#/definitions/DateType'
-        description: The last modified date.
-    description: The risk configuration type.
-  RiskDecisionType:
-    type: string
-    enum:
-      - NoRisk
-      - AccountTakeover
-      - Block
-  RiskExceptionConfigurationType:
-    type: object
-    properties:
-      BlockedIPRangeList:
-        $ref: '#/definitions/BlockedIPRangeListType'
-        description: 'Overrides the risk decision to always block the pre-authentication requests. The IP range is in CIDR notation: a compact representation of an IP address and its associated routing prefix.'
-      SkippedIPRangeList:
-        $ref: '#/definitions/SkippedIPRangeListType'
-        description: Risk detection is not performed on the IP addresses in the range list. The IP range is in CIDR notation.
-    description: The type of the configuration to override the risk decision.
-  RiskLevelType:
-    type: string
-    enum:
-      - Low
-      - Medium
-      - High
-  S3BucketType:
-    type: string
-    pattern: '^[0-9A-Za-z\.\-_]*(?<!\.)$'
-    minLength: 3
-    maxLength: 1024
-  SMSMfaSettingsType:
-    type: object
-    properties:
-      Enabled:
-        $ref: '#/definitions/BooleanType'
-        description: Specifies whether SMS text message MFA is enabled.
-      PreferredMfa:
-        $ref: '#/definitions/BooleanType'
-        description: The preferred MFA method.
-    description: The SMS multi-factor authentication (MFA) settings type.
-  SchemaAttributeType:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/CustomAttributeNameType'
-        description: A schema attribute of the name type.
-      AttributeDataType:
-        $ref: '#/definitions/AttributeDataType'
-        description: The attribute data type.
-      DeveloperOnlyAttribute:
-        $ref: '#/definitions/BooleanType'
-        description: Specifies whether the attribute type is developer only.
-      Mutable:
-        $ref: '#/definitions/BooleanType'
-        description: Specifies whether the value of the attribute can be changed.
-      Required:
-        $ref: '#/definitions/BooleanType'
-        description: 'Specifies whether a user pool attribute is required. If the attribute is required and the user does not provide a value, registration or sign-in will fail.'
-      NumberAttributeConstraints:
-        $ref: '#/definitions/NumberAttributeConstraintsType'
-        description: Specifies the constraints for an attribute of the number type.
-      StringAttributeConstraints:
-        $ref: '#/definitions/StringAttributeConstraintsType'
-        description: Specifies the constraints for an attribute of the string type.
-    description: Contains information about the schema attribute.
-  SchemaAttributesListType:
-    type: array
-    items:
-      $ref: '#/definitions/SchemaAttributeType'
-    minItems: 1
-    maxItems: 50
-  ScopeListType:
-    type: array
-    items:
-      $ref: '#/definitions/ScopeType'
-    maxItems: 25
-  ScopeType:
-    type: string
-    pattern: '[\x21\x23-\x5B\x5D-\x7E]+'
-    minLength: 1
-    maxLength: 256
-  SearchPaginationTokenType:
-    type: string
-    pattern: '[\S]+'
-    minLength: 1
-  SearchedAttributeNamesListType:
-    type: array
-    items:
-      $ref: '#/definitions/AttributeNameType'
-  SecretCodeType:
-    type: string
-    pattern: '[A-Za-z0-9]+'
-    minLength: 16
-    format: password
-  SecretHashType:
-    type: string
-    pattern: '[\w+=/]+'
-    minLength: 1
-    maxLength: 128
-    format: password
-  SessionType:
-    type: string
-    minLength: 20
-    maxLength: 2048
-  SkippedIPRangeListType:
-    type: array
-    items:
-      $ref: '#/definitions/StringType'
-    maxItems: 20
-  SmsConfigurationType:
-    type: object
-    required:
-      - SnsCallerArn
-    properties:
-      SnsCallerArn:
-        $ref: '#/definitions/ArnType'
-        description: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) caller.
-      ExternalId:
-        $ref: '#/definitions/StringType'
-        description: The external ID.
-    description: The SMS configuration type.
-  SmsMfaConfigType:
-    type: object
-    properties:
-      SmsAuthenticationMessage:
-        $ref: '#/definitions/SmsVerificationMessageType'
-        description: The SMS authentication message.
-      SmsConfiguration:
-        $ref: '#/definitions/SmsConfigurationType'
-        description: The SMS configuration.
-    description: The SMS text message multi-factor authentication (MFA) configuration type.
-  SmsVerificationMessageType:
-    type: string
-    pattern: '.*\{####\}.*'
-    minLength: 6
-    maxLength: 140
-  SoftwareTokenMFAUserCodeType:
-    type: string
-    pattern: '[0-9]+'
-    minLength: 6
-    maxLength: 6
-  SoftwareTokenMfaConfigType:
-    type: object
-    properties:
-      Enabled:
-        $ref: '#/definitions/BooleanType'
-        description: Specifies whether software token MFA is enabled.
-    description: The type used for enabling software token MFA at the user pool level.
-  SoftwareTokenMfaSettingsType:
-    type: object
-    properties:
-      Enabled:
-        $ref: '#/definitions/BooleanType'
-        description: Specifies whether software token MFA is enabled.
-      PreferredMfa:
-        $ref: '#/definitions/BooleanType'
-        description: The preferred MFA method.
-    description: The type used for enabling software token MFA at the user level.
-  StatusType:
-    type: string
-    enum:
-      - Enabled
-      - Disabled
-  StringAttributeConstraintsType:
-    type: object
-    properties:
-      MinLength:
-        $ref: '#/definitions/StringType'
-        description: The minimum length.
-      MaxLength:
-        $ref: '#/definitions/StringType'
-        description: The maximum length.
-    description: The constraints associated with a string attribute.
-  SupportedIdentityProvidersListType:
-    type: array
-    items:
-      $ref: '#/definitions/ProviderNameType'
-  TokenModelType:
-    type: string
-    pattern: '[A-Za-z0-9-_=.]+'
-    format: password
-  UICustomizationType:
-    type: object
-    properties:
-      UserPoolId:
-        $ref: '#/definitions/UserPoolIdType'
-        description: The user pool ID for the user pool.
-      ClientId:
-        $ref: '#/definitions/ClientIdType'
-        description: The client ID for the client app.
-      ImageUrl:
-        $ref: '#/definitions/ImageUrlType'
-        description: The logo image for the UI customization.
-      CSS:
-        $ref: '#/definitions/CSSType'
-        description: The CSS values in the UI customization.
-      CSSVersion:
-        $ref: '#/definitions/CSSVersionType'
-        description: The CSS version number.
-      LastModifiedDate:
-        $ref: '#/definitions/DateType'
-        description: The last-modified date for the UI customization.
-      CreationDate:
-        $ref: '#/definitions/DateType'
-        description: The creation date for the UI customization.
-    description: A container for the UI customization information for a user pool's built-in app UI.
-  UserContextDataType:
-    type: object
-    properties:
-      EncodedData:
-        $ref: '#/definitions/StringType'
-        description: 'Contextual data such as the user''s device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.'
-    description: 'Contextual data such as the user''s device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.'
-  UserFilterType:
-    type: string
-    maxLength: 256
-  UserImportJobIdType:
-    type: string
-    pattern: 'import-[0-9a-zA-Z-]+'
-    minLength: 1
-    maxLength: 55
   UserImportJobNameType:
     type: string
     pattern: '[\w\s+=,.@-]+'
     minLength: 1
     maxLength: 128
-  UserImportJobStatusType:
-    type: string
-    enum:
-      - Created
-      - Pending
-      - InProgress
-      - Stopping
-      - Expired
-      - Stopped
-      - Failed
-      - Succeeded
   UserImportJobType:
     type: object
     properties:
@@ -9199,42 +8697,37 @@ definitions:
         $ref: '#/definitions/CompletionMessageType'
         description: The message returned when the user import job is completed.
     description: The user import job type.
-  UserImportJobsListType:
+  GenerateSecret:
+    type: boolean
+  RefreshTokenValidityType:
+    type: integer
+    minimum: 0
+    maximum: 3650
+  ExplicitAuthFlowsListType:
     type: array
     items:
-      $ref: '#/definitions/UserImportJobType'
-    minItems: 1
-    maxItems: 50
-  UserMFASettingListType:
+      $ref: '#/definitions/ExplicitAuthFlowsType'
+  SupportedIdentityProvidersListType:
     type: array
     items:
-      $ref: '#/definitions/StringType'
-  UserPoolAddOnsType:
-    type: object
-    required:
-      - AdvancedSecurityMode
-    properties:
-      AdvancedSecurityMode:
-        $ref: '#/definitions/AdvancedSecurityModeType'
-        description: The advanced security mode.
-    description: The user pool add-ons type.
-  UserPoolClientDescription:
-    type: object
-    properties:
-      ClientId:
-        $ref: '#/definitions/ClientIdType'
-        description: The ID of the client associated with the user pool.
-      UserPoolId:
-        $ref: '#/definitions/UserPoolIdType'
-        description: The user pool ID for the user pool where you want to describe the user pool client.
-      ClientName:
-        $ref: '#/definitions/ClientNameType'
-        description: The client name from the user pool client description.
-    description: The description of the user pool client.
-  UserPoolClientListType:
+      $ref: '#/definitions/ProviderNameType'
+  LogoutURLsListType:
     type: array
     items:
-      $ref: '#/definitions/UserPoolClientDescription'
+      $ref: '#/definitions/RedirectUrlType'
+    minItems: 0
+    maxItems: 100
+  OAuthFlowsType:
+    type: array
+    items:
+      $ref: '#/definitions/OAuthFlowType'
+    minItems: 0
+    maxItems: 3
+  ScopeListType:
+    type: array
+    items:
+      $ref: '#/definitions/ScopeType'
+    maxItems: 25
   UserPoolClientType:
     type: object
     properties:
@@ -9293,43 +8786,20 @@ definitions:
         $ref: '#/definitions/AnalyticsConfigurationType'
         description: The Amazon Pinpoint analytics configuration for the user pool client.
     description: Contains information about a user pool client.
-  UserPoolDescriptionType:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/UserPoolIdType'
-        description: The ID in a user pool description.
-      Name:
-        $ref: '#/definitions/UserPoolNameType'
-        description: The name in a user pool description.
-      LambdaConfig:
-        $ref: '#/definitions/LambdaConfigType'
-        description: The AWS Lambda configuration information in a user pool description.
-      Status:
-        $ref: '#/definitions/StatusType'
-        description: The user pool status in a user pool description.
-      LastModifiedDate:
-        $ref: '#/definitions/DateType'
-        description: The date the user pool description was last modified.
-      CreationDate:
-        $ref: '#/definitions/DateType'
-        description: The date the user pool description was created.
-    description: A user pool description.
-  UserPoolIdType:
+  DomainType:
     type: string
-    pattern: '[\w-]+_[0-9a-zA-Z]+'
+    pattern: '^[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9])?$'
     minLength: 1
-    maxLength: 55
-  UserPoolListType:
-    type: array
-    items:
-      $ref: '#/definitions/UserPoolDescriptionType'
-  UserPoolMfaType:
-    type: string
-    enum:
-      - 'OFF'
-      - 'ON'
-      - OPTIONAL
+    maxLength: 63
+  CustomDomainConfigType:
+    type: object
+    required:
+      - CertificateArn
+    properties:
+      CertificateArn:
+        $ref: '#/definitions/ArnType'
+        description: The Amazon Resource Name (ARN) of an AWS Certificate Manager SSL certificate. You use this certificate for the subdomain of your custom domain.
+    description: The configuration for a custom domain that hosts the sign-up and sign-in webpages for your application.
   UserPoolNameType:
     type: string
     pattern: '[\w\s+=,.@-]+'
@@ -9342,6 +8812,123 @@ definitions:
         $ref: '#/definitions/PasswordPolicyType'
         description: The password policy.
     description: The policy associated with a user pool.
+  LambdaConfigType:
+    type: object
+    properties:
+      PreSignUp:
+        $ref: '#/definitions/ArnType'
+        description: A pre-registration AWS Lambda trigger.
+      CustomMessage:
+        $ref: '#/definitions/ArnType'
+        description: A custom Message AWS Lambda trigger.
+      PostConfirmation:
+        $ref: '#/definitions/ArnType'
+        description: A post-confirmation AWS Lambda trigger.
+      PreAuthentication:
+        $ref: '#/definitions/ArnType'
+        description: A pre-authentication AWS Lambda trigger.
+      PostAuthentication:
+        $ref: '#/definitions/ArnType'
+        description: A post-authentication AWS Lambda trigger.
+      DefineAuthChallenge:
+        $ref: '#/definitions/ArnType'
+        description: Defines the authentication challenge.
+      CreateAuthChallenge:
+        $ref: '#/definitions/ArnType'
+        description: Creates an authentication challenge.
+      VerifyAuthChallengeResponse:
+        $ref: '#/definitions/ArnType'
+        description: Verifies the authentication challenge response.
+      PreTokenGeneration:
+        $ref: '#/definitions/ArnType'
+        description: A Lambda trigger that is invoked before token generation.
+      UserMigration:
+        $ref: '#/definitions/ArnType'
+        description: The user migration Lambda config type.
+    description: Specifies the configuration for AWS Lambda triggers.
+  VerifiedAttributesListType:
+    type: array
+    items:
+      $ref: '#/definitions/VerifiedAttributeType'
+  UsernameAttributesListType:
+    type: array
+    items:
+      $ref: '#/definitions/UsernameAttributeType'
+  SmsVerificationMessageType:
+    type: string
+    pattern: '.*\{####\}.*'
+    minLength: 6
+    maxLength: 140
+  EmailVerificationMessageType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*\{####\}[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*'
+    minLength: 6
+    maxLength: 20000
+  EmailVerificationSubjectType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s]+'
+    minLength: 1
+    maxLength: 140
+  VerificationMessageTemplateType:
+    type: object
+    properties:
+      SmsMessage:
+        $ref: '#/definitions/SmsVerificationMessageType'
+        description: The SMS message template.
+      EmailMessage:
+        $ref: '#/definitions/EmailVerificationMessageType'
+        description: The email message template.
+      EmailSubject:
+        $ref: '#/definitions/EmailVerificationSubjectType'
+        description: The subject line for the email message template.
+      EmailMessageByLink:
+        $ref: '#/definitions/EmailVerificationMessageByLinkType'
+        description: The email message template for sending a confirmation link to the user.
+      EmailSubjectByLink:
+        $ref: '#/definitions/EmailVerificationSubjectByLinkType'
+        description: The subject line for the email message template for sending a confirmation link to the user.
+      DefaultEmailOption:
+        $ref: '#/definitions/DefaultEmailOptionType'
+        description: The default email option.
+    description: The template for verification messages.
+  UserPoolMfaType:
+    type: string
+    enum:
+      - 'OFF'
+      - 'ON'
+      - OPTIONAL
+  DeviceConfigurationType:
+    type: object
+    properties:
+      ChallengeRequiredOnNewDevice:
+        $ref: '#/definitions/BooleanType'
+        description: Indicates whether a challenge is required on a new device. Only applicable to a new device.
+      DeviceOnlyRememberedOnUserPrompt:
+        $ref: '#/definitions/BooleanType'
+        description: 'If true, a device is only remembered on user prompt.'
+    description: The configuration for the user pool's device tracking.
+  EmailConfigurationType:
+    type: object
+    properties:
+      SourceArn:
+        $ref: '#/definitions/ArnType'
+        description: The Amazon Resource Name (ARN) of the email source.
+      ReplyToEmailAddress:
+        $ref: '#/definitions/EmailAddressType'
+        description: The destination to which the receiver of the email should reply to.
+    description: The email configuration type.
+  SmsConfigurationType:
+    type: object
+    required:
+      - SnsCallerArn
+    properties:
+      SnsCallerArn:
+        $ref: '#/definitions/ArnType'
+        description: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) caller.
+      ExternalId:
+        $ref: '#/definitions/StringType'
+        description: The external ID.
+    description: The SMS configuration type.
   UserPoolTagsType:
     type: array
     items:
@@ -9351,6 +8938,21 @@ definitions:
           $ref: '#/definitions/StringType'
         value:
           $ref: '#/definitions/StringType'
+  SchemaAttributesListType:
+    type: array
+    items:
+      $ref: '#/definitions/SchemaAttributeType'
+    minItems: 1
+    maxItems: 50
+  UserPoolAddOnsType:
+    type: object
+    required:
+      - AdvancedSecurityMode
+    properties:
+      AdvancedSecurityMode:
+        $ref: '#/definitions/AdvancedSecurityModeType'
+        description: The advanced security mode.
+    description: The user pool add-ons type.
   UserPoolType:
     type: object
     properties:
@@ -9441,91 +9043,488 @@ definitions:
         $ref: '#/definitions/ArnType'
         description: The Amazon Resource Name (ARN) for the user pool.
     description: A container for information about the user pool.
-  UserStatusType:
+  CustomAttributeNameType:
     type: string
-    enum:
-      - UNCONFIRMED
-      - CONFIRMED
-      - ARCHIVED
-      - COMPROMISED
-      - UNKNOWN
-      - RESET_REQUIRED
-      - FORCE_CHANGE_PASSWORD
-  UserType:
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
+    minLength: 1
+    maxLength: 20
+  SchemaAttributeType:
     type: object
     properties:
-      Username:
-        $ref: '#/definitions/UsernameType'
-        description: The user name of the user you wish to describe.
-      Attributes:
-        $ref: '#/definitions/AttributeListType'
-        description: A container with information about the user type attributes.
-      UserCreateDate:
+      Name:
+        $ref: '#/definitions/CustomAttributeNameType'
+        description: A schema attribute of the name type.
+      AttributeDataType:
+        $ref: '#/definitions/AttributeDataType'
+        description: The attribute data type.
+      DeveloperOnlyAttribute:
+        $ref: '#/definitions/BooleanType'
+        description: Specifies whether the attribute type is developer only.
+      Mutable:
+        $ref: '#/definitions/BooleanType'
+        description: Specifies whether the value of the attribute can be changed.
+      Required:
+        $ref: '#/definitions/BooleanType'
+        description: 'Specifies whether a user pool attribute is required. If the attribute is required and the user does not provide a value, registration or sign-in will fail.'
+      NumberAttributeConstraints:
+        $ref: '#/definitions/NumberAttributeConstraintsType'
+        description: Specifies the constraints for an attribute of the number type.
+      StringAttributeConstraints:
+        $ref: '#/definitions/StringAttributeConstraintsType'
+        description: Specifies the constraints for an attribute of the string type.
+    description: Contains information about the schema attribute.
+  DefaultEmailOptionType:
+    type: string
+    enum:
+      - CONFIRM_WITH_LINK
+      - CONFIRM_WITH_CODE
+  ProviderNameType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
+    minLength: 1
+    maxLength: 32
+  RiskConfigurationType:
+    type: object
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID.
+      ClientId:
+        $ref: '#/definitions/ClientIdType'
+        description: The app client ID.
+      CompromisedCredentialsRiskConfiguration:
+        $ref: '#/definitions/CompromisedCredentialsRiskConfigurationType'
+        description: 'The compromised credentials risk configuration object including the <code>EventFilter</code> and the <code>EventAction</code> '
+      AccountTakeoverRiskConfiguration:
+        $ref: '#/definitions/AccountTakeoverRiskConfigurationType'
+        description: The account takeover risk configuration object including the <code>NotifyConfiguration</code> object and <code>Actions</code> to take in the case of an account takeover.
+      RiskExceptionConfiguration:
+        $ref: '#/definitions/RiskExceptionConfigurationType'
+        description: The configuration to override the risk decision.
+      LastModifiedDate:
         $ref: '#/definitions/DateType'
-        description: The creation date of the user.
-      UserLastModifiedDate:
+        description: The last modified date.
+    description: The risk configuration type.
+  UserImportJobIdType:
+    type: string
+    pattern: 'import-[0-9a-zA-Z-]+'
+    minLength: 1
+    maxLength: 55
+  DomainDescriptionType:
+    type: object
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID.
+      AWSAccountId:
+        $ref: '#/definitions/AWSAccountIdType'
+        description: The AWS account ID for the user pool owner.
+      Domain:
+        $ref: '#/definitions/DomainType'
+        description: The domain string.
+      S3Bucket:
+        $ref: '#/definitions/S3BucketType'
+        description: The S3 bucket where the static files for this domain are stored.
+      CloudFrontDistribution:
+        $ref: '#/definitions/StringType'
+        description: The ARN of the CloudFront distribution.
+      Version:
+        $ref: '#/definitions/DomainVersionType'
+        description: The app version.
+      Status:
+        $ref: '#/definitions/DomainStatusType'
+        description: The domain status.
+      CustomDomainConfig:
+        $ref: '#/definitions/CustomDomainConfigType'
+    description: A container for information about a domain.
+  S3BucketType:
+    type: string
+    pattern: '^[0-9A-Za-z\.\-_]*(?<!\.)$'
+    minLength: 3
+    maxLength: 1024
+  DomainVersionType:
+    type: string
+    minLength: 1
+    maxLength: 20
+  DomainStatusType:
+    type: string
+    enum:
+      - CREATING
+      - DELETING
+      - UPDATING
+      - ACTIVE
+      - FAILED
+  EmailAddressType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+@[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
+  EmailNotificationBodyType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]+'
+    minLength: 6
+    maxLength: 20000
+  EmailNotificationSubjectType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s]+'
+    minLength: 1
+    maxLength: 140
+  EmailVerificationMessageByLinkType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*\{##[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*##\}[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*'
+    minLength: 6
+    maxLength: 20000
+  EmailVerificationSubjectByLinkType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s]+'
+    minLength: 1
+    maxLength: 140
+  EventFilterType:
+    type: string
+    enum:
+      - SIGN_IN
+      - PASSWORD_CHANGE
+      - SIGN_UP
+  RiskDecisionType:
+    type: string
+    enum:
+      - NoRisk
+      - AccountTakeover
+      - Block
+  RiskLevelType:
+    type: string
+    enum:
+      - Low
+      - Medium
+      - High
+  ExplicitAuthFlowsType:
+    type: string
+    enum:
+      - ADMIN_NO_SRP_AUTH
+      - CUSTOM_AUTH_FLOW_ONLY
+      - USER_PASSWORD_AUTH
+  ListOfStringTypes:
+    type: array
+    items:
+      $ref: '#/definitions/StringType'
+  IdpIdentifierType:
+    type: string
+    pattern: '[\w\s+=.@-]+'
+    minLength: 1
+    maxLength: 40
+  UICustomizationType:
+    type: object
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID for the user pool.
+      ClientId:
+        $ref: '#/definitions/ClientIdType'
+        description: The client ID for the client app.
+      ImageUrl:
+        $ref: '#/definitions/ImageUrlType'
+        description: The logo image for the UI customization.
+      CSS:
+        $ref: '#/definitions/CSSType'
+        description: The CSS values in the UI customization.
+      CSSVersion:
+        $ref: '#/definitions/CSSVersionType'
+        description: The CSS version number.
+      LastModifiedDate:
         $ref: '#/definitions/DateType'
-        description: The last modified date of the user.
+        description: The last-modified date for the UI customization.
+      CreationDate:
+        $ref: '#/definitions/DateType'
+        description: The creation date for the UI customization.
+    description: A container for the UI customization information for a user pool's built-in app UI.
+  SmsMfaConfigType:
+    type: object
+    properties:
+      SmsAuthenticationMessage:
+        $ref: '#/definitions/SmsVerificationMessageType'
+        description: The SMS authentication message.
+      SmsConfiguration:
+        $ref: '#/definitions/SmsConfigurationType'
+        description: The SMS configuration.
+    description: The SMS text message multi-factor authentication (MFA) configuration type.
+  SoftwareTokenMfaConfigType:
+    type: object
+    properties:
       Enabled:
         $ref: '#/definitions/BooleanType'
-        description: Specifies whether the user is enabled.
-      UserStatus:
-        $ref: '#/definitions/UserStatusType'
-        description: '<p>The user status. Can be one of the following:</p> <ul> <li> <p>UNCONFIRMED - User has been created but not confirmed.</p> </li> <li> <p>CONFIRMED - User has been confirmed.</p> </li> <li> <p>ARCHIVED - User is no longer active.</p> </li> <li> <p>COMPROMISED - User is disabled due to a potential security threat.</p> </li> <li> <p>UNKNOWN - User status is not known.</p> </li> </ul>'
-      MFAOptions:
-        $ref: '#/definitions/MFAOptionListType'
-        description: The MFA options for the user.
-    description: The user type.
+        description: Specifies whether software token MFA is enabled.
+    description: The type used for enabling software token MFA at the user pool level.
+  HttpHeader:
+    type: object
+    properties:
+      headerName:
+        $ref: '#/definitions/StringType'
+        description: The header name
+      headerValue:
+        $ref: '#/definitions/StringType'
+        description: The header value.
+    description: The HTTP header.
+  ImageFileType:
+    type: string
+  ImageUrlType:
+    type: string
+  ListProvidersLimitType:
+    type: integer
+    minimum: 1
+    maximum: 60
+  PaginationKeyType:
+    type: string
+    pattern: '[\S]+'
+    minLength: 1
+  ProvidersListType:
+    type: array
+    items:
+      $ref: '#/definitions/ProviderDescription'
+    minItems: 0
+    maxItems: 50
+  ListResourceServersLimitType:
+    type: integer
+    minimum: 1
+    maximum: 50
+  ResourceServersListType:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceServerType'
+  PoolQueryLimitType:
+    type: integer
+    minimum: 1
+    maximum: 60
+  UserImportJobsListType:
+    type: array
+    items:
+      $ref: '#/definitions/UserImportJobType'
+    minItems: 1
+    maxItems: 50
+  QueryLimit:
+    type: integer
+    minimum: 1
+    maximum: 60
+  UserPoolClientListType:
+    type: array
+    items:
+      $ref: '#/definitions/UserPoolClientDescription'
+  UserPoolListType:
+    type: array
+    items:
+      $ref: '#/definitions/UserPoolDescriptionType'
+  UsersListType:
+    type: array
+    items:
+      $ref: '#/definitions/UserType'
+  SearchedAttributeNamesListType:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeNameType'
+  UserFilterType:
+    type: string
+    maxLength: 256
+  LongType:
+    type: integer
+  MFAOptionType:
+    type: object
+    properties:
+      DeliveryMedium:
+        $ref: '#/definitions/DeliveryMediumType'
+        description: The delivery medium (email message or SMS message) to send the MFA code.
+      AttributeName:
+        $ref: '#/definitions/AttributeNameType'
+        description: The attribute name of the MFA option type.
+    description: Specifies the different settings for multi-factor authentication (MFA).
+  NotifyEmailType:
+    type: object
+    required:
+      - Subject
+    properties:
+      Subject:
+        $ref: '#/definitions/EmailNotificationSubjectType'
+        description: The subject.
+      HtmlBody:
+        $ref: '#/definitions/EmailNotificationBodyType'
+        description: The HTML body.
+      TextBody:
+        $ref: '#/definitions/EmailNotificationBodyType'
+        description: The text body.
+    description: The notify email type.
+  NumberAttributeConstraintsType:
+    type: object
+    properties:
+      MinValue:
+        $ref: '#/definitions/StringType'
+        description: The minimum value of an attribute that is of the number data type.
+      MaxValue:
+        $ref: '#/definitions/StringType'
+        description: The maximum value of an attribute that is of the number data type.
+    description: The minimum and maximum value of an attribute that is of the number data type.
+  OAuthFlowType:
+    type: string
+    enum:
+      - code
+      - implicit
+      - client_credentials
+  PasswordPolicyMinLengthType:
+    type: integer
+    minimum: 6
+    maximum: 99
+  PasswordPolicyType:
+    type: object
+    properties:
+      MinimumLength:
+        $ref: '#/definitions/PasswordPolicyMinLengthType'
+        description: The minimum length of the password policy that you have set. Cannot be less than 6.
+      RequireUppercase:
+        $ref: '#/definitions/BooleanType'
+        description: 'In the password policy that you have set, refers to whether you have required users to use at least one uppercase letter in their password.'
+      RequireLowercase:
+        $ref: '#/definitions/BooleanType'
+        description: 'In the password policy that you have set, refers to whether you have required users to use at least one lowercase letter in their password.'
+      RequireNumbers:
+        $ref: '#/definitions/BooleanType'
+        description: 'In the password policy that you have set, refers to whether you have required users to use at least one number in their password.'
+      RequireSymbols:
+        $ref: '#/definitions/BooleanType'
+        description: 'In the password policy that you have set, refers to whether you have required users to use at least one symbol in their password.'
+    description: The password policy type.
+  PreSignedUrlType:
+    type: string
+    minLength: 0
+    maxLength: 2048
+  ProviderDescription:
+    type: object
+    properties:
+      ProviderName:
+        $ref: '#/definitions/ProviderNameType'
+        description: The identity provider name.
+      ProviderType:
+        $ref: '#/definitions/IdentityProviderTypeType'
+        description: The identity provider type.
+      LastModifiedDate:
+        $ref: '#/definitions/DateType'
+        description: The date the provider was last modified.
+      CreationDate:
+        $ref: '#/definitions/DateType'
+        description: The date the provider was added to the user pool.
+    description: A container for identity provider details.
+  ResourceServerScopeDescriptionType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  ResourceServerScopeType:
+    type: object
+    required:
+      - ScopeName
+      - ScopeDescription
+    properties:
+      ScopeName:
+        $ref: '#/definitions/ResourceServerScopeNameType'
+        description: The name of the scope.
+      ScopeDescription:
+        $ref: '#/definitions/ResourceServerScopeDescriptionType'
+        description: A description of the scope.
+    description: A resource server scope.
+  ResourceServerScopeNameType:
+    type: string
+    pattern: '[\x21\x23-\x2E\x30-\x5B\x5D-\x7E]+'
+    minLength: 1
+    maxLength: 256
+  RiskExceptionConfigurationType:
+    type: object
+    properties:
+      BlockedIPRangeList:
+        $ref: '#/definitions/BlockedIPRangeListType'
+        description: 'Overrides the risk decision to always block the pre-authentication requests. The IP range is in CIDR notation: a compact representation of an IP address and its associated routing prefix.'
+      SkippedIPRangeList:
+        $ref: '#/definitions/SkippedIPRangeListType'
+        description: Risk detection is not performed on the IP addresses in the range list. The IP range is in CIDR notation.
+    description: The type of the configuration to override the risk decision.
+  SkippedIPRangeListType:
+    type: array
+    items:
+      $ref: '#/definitions/StringType'
+    maxItems: 20
+  StringAttributeConstraintsType:
+    type: object
+    properties:
+      MinLength:
+        $ref: '#/definitions/StringType'
+        description: The minimum length.
+      MaxLength:
+        $ref: '#/definitions/StringType'
+        description: The maximum length.
+    description: The constraints associated with a string attribute.
+  ScopeType:
+    type: string
+    pattern: '[\x21\x23-\x5B\x5D-\x7E]+'
+    minLength: 1
+    maxLength: 256
+  SoftwareTokenMFAUserCodeType:
+    type: string
+    pattern: '[0-9]+'
+    minLength: 6
+    maxLength: 6
+  StatusType:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+  UserImportJobStatusType:
+    type: string
+    enum:
+      - Created
+      - Pending
+      - InProgress
+      - Stopping
+      - Expired
+      - Stopped
+      - Failed
+      - Succeeded
+  UserPoolClientDescription:
+    type: object
+    properties:
+      ClientId:
+        $ref: '#/definitions/ClientIdType'
+        description: The ID of the client associated with the user pool.
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID for the user pool where you want to describe the user pool client.
+      ClientName:
+        $ref: '#/definitions/ClientNameType'
+        description: The client name from the user pool client description.
+    description: The description of the user pool client.
+  UserPoolDescriptionType:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The ID in a user pool description.
+      Name:
+        $ref: '#/definitions/UserPoolNameType'
+        description: The name in a user pool description.
+      LambdaConfig:
+        $ref: '#/definitions/LambdaConfigType'
+        description: The AWS Lambda configuration information in a user pool description.
+      Status:
+        $ref: '#/definitions/StatusType'
+        description: The user pool status in a user pool description.
+      LastModifiedDate:
+        $ref: '#/definitions/DateType'
+        description: The date the user pool description was last modified.
+      CreationDate:
+        $ref: '#/definitions/DateType'
+        description: The date the user pool description was created.
+    description: A user pool description.
   UsernameAttributeType:
     type: string
     enum:
       - phone_number
       - email
-  UsernameAttributesListType:
-    type: array
-    items:
-      $ref: '#/definitions/UsernameAttributeType'
-  UsernameType:
-    type: string
-    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
-    minLength: 1
-    maxLength: 128
-    format: password
-  UsersListType:
-    type: array
-    items:
-      $ref: '#/definitions/UserType'
-  VerificationMessageTemplateType:
-    type: object
-    properties:
-      SmsMessage:
-        $ref: '#/definitions/SmsVerificationMessageType'
-        description: The SMS message template.
-      EmailMessage:
-        $ref: '#/definitions/EmailVerificationMessageType'
-        description: The email message template.
-      EmailSubject:
-        $ref: '#/definitions/EmailVerificationSubjectType'
-        description: The subject line for the email message template.
-      EmailMessageByLink:
-        $ref: '#/definitions/EmailVerificationMessageByLinkType'
-        description: The email message template for sending a confirmation link to the user.
-      EmailSubjectByLink:
-        $ref: '#/definitions/EmailVerificationSubjectByLinkType'
-        description: The subject line for the email message template for sending a confirmation link to the user.
-      DefaultEmailOption:
-        $ref: '#/definitions/DefaultEmailOptionType'
-        description: The default email option.
-    description: The template for verification messages.
   VerifiedAttributeType:
     type: string
     enum:
       - phone_number
       - email
-  VerifiedAttributesListType:
-    type: array
-    items:
-      $ref: '#/definitions/VerifiedAttributeType'
   VerifySoftwareTokenResponseType:
     type: string
     enum:

@@ -1528,7 +1528,147 @@ definitions:
       CloudWatchLoggingOptionUpdates:
         $ref: '#/definitions/CloudWatchLoggingOptionUpdates'
         description: 'Describes application Amazon CloudWatch logging option updates. You can only update existing CloudWatch logging options with this action. To add a new CloudWatch logging option, use <a>AddApplicationCloudWatchLoggingOption</a>.'
-  undefined: {}
+  ApplicationName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 128
+  ApplicationVersionId:
+    type: integer
+    minimum: 1
+    maximum: 999999999
+  CloudWatchLoggingOption:
+    type: object
+    required:
+      - LogStreamARN
+    properties:
+      LogStreamARN:
+        $ref: '#/definitions/LogStreamARN'
+        description: The ARN of the CloudWatch log to receive application messages.
+    description: 'Provides a description of Amazon CloudWatch logging options, including the log stream Amazon Resource Name (ARN). '
+  ResourceARN:
+    type: string
+    pattern: 'arn:.*'
+    minLength: 1
+    maxLength: 2048
+  CloudWatchLoggingOptionDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/CloudWatchLoggingOptionDescription'
+  Id:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 50
+  InputProcessingConfiguration:
+    type: object
+    required:
+      - InputLambdaProcessor
+    properties:
+      InputLambdaProcessor:
+        $ref: '#/definitions/InputLambdaProcessor'
+        description: The <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream before being processed by your application code.
+    description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes a processor that is used to preprocess the records in the stream before being processed by your application code. Currently, the only input processor available is <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a>.'
+  InputProcessingConfigurationDescription:
+    type: object
+    properties:
+      InputLambdaProcessorDescription:
+        $ref: '#/definitions/InputLambdaProcessorDescription'
+        description: 'Provides configuration information about the associated <a>InputLambdaProcessorDescription</a> '
+    description: 'For an SQL-based Amazon Kinesis Data Analytics application, provides the configuration information about an input processor. Currently, the only input processor available is <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a>.'
+  Input:
+    type: object
+    required:
+      - NamePrefix
+      - InputSchema
+    properties:
+      NamePrefix:
+        $ref: '#/definitions/InAppStreamName'
+        description: 'The name prefix to use when creating an in-application stream. Suppose that you specify a prefix "<code>MyInApplicationStream</code>." Kinesis Data Analytics then creates one or more (as per the <code>InputParallelism</code> count you specified) in-application streams with the names "<code>MyInApplicationStream_001</code>," "<code>MyInApplicationStream_002</code>," and so on. '
+      InputProcessingConfiguration:
+        $ref: '#/definitions/InputProcessingConfiguration'
+        description: 'The <a>InputProcessingConfiguration</a> for the input. An input processor transforms records as they are received from the stream, before the application''s SQL code executes. Currently, the only input processing configuration available is <a>InputLambdaProcessor</a>. '
+      KinesisStreamsInput:
+        $ref: '#/definitions/KinesisStreamsInput'
+        description: 'If the streaming source is an Amazon Kinesis data stream, identifies the stream''s Amazon Resource Name (ARN). '
+      KinesisFirehoseInput:
+        $ref: '#/definitions/KinesisFirehoseInput'
+        description: 'If the streaming source is an Amazon Kinesis Data Firehose delivery stream, identifies the delivery stream''s ARN.'
+      InputParallelism:
+        $ref: '#/definitions/InputParallelism'
+        description: 'Describes the number of in-application streams to create. '
+      InputSchema:
+        $ref: '#/definitions/SourceSchema'
+        description: '<p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.</p> <p>Also used to describe the format of the reference data source.</p>'
+    description: 'When you configure the application input for an SQL-based Amazon Kinesis Data Analytics application, you specify the streaming source, the in-application stream name that is created, and the mapping between the two. '
+  InputDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/InputDescription'
+  Output:
+    type: object
+    required:
+      - Name
+      - DestinationSchema
+    properties:
+      Name:
+        $ref: '#/definitions/InAppStreamName'
+        description: The name of the in-application stream.
+      KinesisStreamsOutput:
+        $ref: '#/definitions/KinesisStreamsOutput'
+        description: Identifies an Amazon Kinesis data stream as the destination.
+      KinesisFirehoseOutput:
+        $ref: '#/definitions/KinesisFirehoseOutput'
+        description: Identifies an Amazon Kinesis Data Firehose delivery stream as the destination.
+      LambdaOutput:
+        $ref: '#/definitions/LambdaOutput'
+        description: Identifies an AWS Lambda function as the destination.
+      DestinationSchema:
+        $ref: '#/definitions/DestinationSchema'
+        description: 'Describes the data format when records are written to the destination. '
+    description: '<p> Describes an SQL-based Amazon Kinesis Data Analytics application''s output configuration, in which you identify an in-application stream and a destination where you want the in-application stream data to be written. The destination can be a Kinesis data stream or a Kinesis Data Firehose delivery stream. </p> <p/>'
+  OutputDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/OutputDescription'
+  ReferenceDataSource:
+    type: object
+    required:
+      - TableName
+      - ReferenceSchema
+    properties:
+      TableName:
+        $ref: '#/definitions/InAppTableName'
+        description: The name of the in-application table to create.
+      S3ReferenceDataSource:
+        $ref: '#/definitions/S3ReferenceDataSource'
+        description: 'Identifies the S3 bucket and object that contains the reference data. A Kinesis Data Analytics application loads reference data only once. If the data changes, you call the <a>UpdateApplication</a> operation to trigger reloading of data into your application. '
+      ReferenceSchema:
+        $ref: '#/definitions/SourceSchema'
+        description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.'
+    description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes the reference data source by providing the source information (Amazon S3 bucket name and object key name), the resulting in-application table name that is created, and the necessary schema to map the data elements in the Amazon S3 object to the in-application table.'
+  ReferenceDataSourceDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/ReferenceDataSourceDescription'
+  CodeContent:
+    type: object
+    properties:
+      TextContent:
+        $ref: '#/definitions/TextContent'
+        description: The text-format code for a Java-based Kinesis Data Analytics application.
+      ZipFileContent:
+        $ref: '#/definitions/ZipFileContent'
+        description: The zip-format code for a Java-based Kinesis Data Analytics application.
+      S3ContentLocation:
+        $ref: '#/definitions/S3ContentLocation'
+        description: Information about the Amazon S3 bucket containing the application code.
+    description: 'Specifies either the application code, or the location of the application code, for a Java-based Amazon Kinesis Data Analytics application. '
+  CodeContentType:
+    type: string
+    enum:
+      - PLAINTEXT
+      - ZIPFILE
   ApplicationCodeConfiguration:
     type: object
     required:
@@ -1541,6 +1681,22 @@ definitions:
         $ref: '#/definitions/CodeContentType'
         description: Specifies whether the code content is in text or zip format.
     description: Describes code configuration for a Java-based Kinesis Data Analytics application.
+  CodeContentDescription:
+    type: object
+    properties:
+      TextContent:
+        $ref: '#/definitions/TextContent'
+        description: The text-format code
+      CodeMD5:
+        $ref: '#/definitions/CodeMD5'
+        description: The checksum that can be used to validate zip-format code.
+      CodeSize:
+        $ref: '#/definitions/CodeSize'
+        description: The size in bytes of the application code. Can be used to validate zip-format code.
+      S3ApplicationCodeLocationDescription:
+        $ref: '#/definitions/S3ApplicationCodeLocationDescription'
+        description: 'The S3 bucket Amazon Resource Name (ARN), file key, and object version of the application code stored in Amazon S3.'
+    description: Describes details about the application code for a Java-based Kinesis Data Analytics application.
   ApplicationCodeConfigurationDescription:
     type: object
     required:
@@ -1553,6 +1709,19 @@ definitions:
         $ref: '#/definitions/CodeContentDescription'
         description: Describes details about the location and format of the application code.
     description: Describes code configuration for a Java-based Kinesis Data Analytics application.
+  CodeContentUpdate:
+    type: object
+    properties:
+      TextContentUpdate:
+        $ref: '#/definitions/TextContent'
+        description: Describes an update to the text code for an application.
+      ZipFileContentUpdate:
+        $ref: '#/definitions/ZipFileContent'
+        description: Describes an update to the zipped code for an application.
+      S3ContentLocationUpdate:
+        $ref: '#/definitions/S3ContentLocationUpdate'
+        description: Describes an update to the location of code for an application.
+    description: Describes an update to the code of a Java-based Kinesis Data Analytics application.
   ApplicationCodeConfigurationUpdate:
     type: object
     properties:
@@ -1563,6 +1732,50 @@ definitions:
         $ref: '#/definitions/CodeContentUpdate'
         description: Describes updates to the code content of an application.
     description: Describes updates to a Java-based Amazon Kinesis Data Analytics application.
+  SqlApplicationConfiguration:
+    type: object
+    properties:
+      Inputs:
+        $ref: '#/definitions/Inputs'
+        description: The array of <a>Input</a> objects describing the input streams used by the application.
+      Outputs:
+        $ref: '#/definitions/Outputs'
+        description: The array of <a>Output</a> objects describing the destination streams used by the application.
+      ReferenceDataSources:
+        $ref: '#/definitions/ReferenceDataSources'
+        description: The array of <a>ReferenceDataSource</a> objects describing the reference data sources used by the application.
+    description: 'Describes the inputs, outputs, and reference data sources for an SQL-based Kinesis Data Analytics application.'
+  FlinkApplicationConfiguration:
+    type: object
+    properties:
+      CheckpointConfiguration:
+        $ref: '#/definitions/CheckpointConfiguration'
+        description: 'Describes an application''s checkpointing configuration. Checkpointing is the process of persisting application state for fault tolerance. For more information, see <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/concepts/programming-model.html#checkpoints-for-fault-tolerance"> Checkpoints for Fault Tolerance</a> in the <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/">Apache Flink Documentation</a>. '
+      MonitoringConfiguration:
+        $ref: '#/definitions/MonitoringConfiguration'
+        description: Describes configuration parameters for Amazon CloudWatch logging for an application.
+      ParallelismConfiguration:
+        $ref: '#/definitions/ParallelismConfiguration'
+        description: Describes parameters for how an application executes multiple tasks simultaneously.
+    description: Describes configuration parameters for a Java-based Amazon Kinesis Data Analytics application.
+  EnvironmentProperties:
+    type: object
+    required:
+      - PropertyGroups
+    properties:
+      PropertyGroups:
+        $ref: '#/definitions/PropertyGroups'
+        description: Describes the execution property groups.
+    description: Describes execution properties for a Java-based Kinesis Data Analytics application.
+  ApplicationSnapshotConfiguration:
+    type: object
+    required:
+      - SnapshotsEnabled
+    properties:
+      SnapshotsEnabled:
+        $ref: '#/definitions/BooleanObject'
+        description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+    description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
   ApplicationConfiguration:
     type: object
     required:
@@ -1584,6 +1797,58 @@ definitions:
         $ref: '#/definitions/ApplicationSnapshotConfiguration'
         description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
     description: Specifies the creation parameters for an Amazon Kinesis Data Analytics application.
+  SqlApplicationConfigurationDescription:
+    type: object
+    properties:
+      InputDescriptions:
+        $ref: '#/definitions/InputDescriptions'
+        description: The array of <a>InputDescription</a> objects describing the input streams used by the application.
+      OutputDescriptions:
+        $ref: '#/definitions/OutputDescriptions'
+        description: The array of <a>OutputDescription</a> objects describing the destination streams used by the application.
+      ReferenceDataSourceDescriptions:
+        $ref: '#/definitions/ReferenceDataSourceDescriptions'
+        description: The array of <a>ReferenceDataSourceDescription</a> objects describing the reference data sources used by the application.
+    description: 'Describes the inputs, outputs, and reference data sources for an SQL-based Kinesis Data Analytics application.'
+  RunConfigurationDescription:
+    type: object
+    properties:
+      ApplicationRestoreConfigurationDescription:
+        $ref: '#/definitions/ApplicationRestoreConfiguration'
+        description: Describes the restore behavior of a restarting application.
+    description: Describes the starting properties for a Kinesis Data Analytics application.
+  FlinkApplicationConfigurationDescription:
+    type: object
+    properties:
+      CheckpointConfigurationDescription:
+        $ref: '#/definitions/CheckpointConfigurationDescription'
+        description: Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault tolerance.
+      MonitoringConfigurationDescription:
+        $ref: '#/definitions/MonitoringConfigurationDescription'
+        description: Describes configuration parameters for Amazon CloudWatch logging for an application.
+      ParallelismConfigurationDescription:
+        $ref: '#/definitions/ParallelismConfigurationDescription'
+        description: Describes parameters for how an application executes multiple tasks simultaneously.
+      JobPlanDescription:
+        $ref: '#/definitions/JobPlanDescription'
+        description: 'The job plan for an application. For more information about the job plan, see <a href="https://ci.apache.org/projects/flink/flink-docs-stable/internals/job_scheduling.html">Jobs and Scheduling</a> in the <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/">Apache Flink Documentation</a>. To retrieve the job plan for the application, use the <a>DescribeApplicationRequest$IncludeAdditionalDetails</a> parameter of the <a>DescribeApplication</a> operation.'
+    description: Describes configuration parameters for a Java-based Amazon Kinesis Data Analytics application.
+  EnvironmentPropertyDescriptions:
+    type: object
+    properties:
+      PropertyGroupDescriptions:
+        $ref: '#/definitions/PropertyGroups'
+        description: Describes the execution property groups.
+    description: Describes the execution properties for a Java-based Amazon Kinesis Data Analytics application.
+  ApplicationSnapshotConfigurationDescription:
+    type: object
+    required:
+      - SnapshotsEnabled
+    properties:
+      SnapshotsEnabled:
+        $ref: '#/definitions/BooleanObject'
+        description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+    description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
   ApplicationConfigurationDescription:
     type: object
     properties:
@@ -1606,6 +1871,50 @@ definitions:
         $ref: '#/definitions/ApplicationSnapshotConfigurationDescription'
         description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
     description: Describes details about the application code and starting parameters for an Amazon Kinesis Data Analytics application.
+  SqlApplicationConfigurationUpdate:
+    type: object
+    properties:
+      InputUpdates:
+        $ref: '#/definitions/InputUpdates'
+        description: The array of <a>InputUpdate</a> objects describing the new input streams used by the application.
+      OutputUpdates:
+        $ref: '#/definitions/OutputUpdates'
+        description: The array of <a>OutputUpdate</a> objects describing the new destination streams used by the application.
+      ReferenceDataSourceUpdates:
+        $ref: '#/definitions/ReferenceDataSourceUpdates'
+        description: The array of <a>ReferenceDataSourceUpdate</a> objects describing the new reference data sources used by the application.
+    description: 'Describes updates to the input streams, destination streams, and reference data sources for an SQL-based Kinesis Data Analytics application.'
+  FlinkApplicationConfigurationUpdate:
+    type: object
+    properties:
+      CheckpointConfigurationUpdate:
+        $ref: '#/definitions/CheckpointConfigurationUpdate'
+        description: Describes updates to an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault tolerance.
+      MonitoringConfigurationUpdate:
+        $ref: '#/definitions/MonitoringConfigurationUpdate'
+        description: Describes updates to the configuration parameters for Amazon CloudWatch logging for an application.
+      ParallelismConfigurationUpdate:
+        $ref: '#/definitions/ParallelismConfigurationUpdate'
+        description: Describes updates to the parameters for how an application executes multiple tasks simultaneously.
+    description: Describes updates to the configuration parameters for a Java-based Amazon Kinesis Data Analytics application.
+  EnvironmentPropertyUpdates:
+    type: object
+    required:
+      - PropertyGroups
+    properties:
+      PropertyGroups:
+        $ref: '#/definitions/PropertyGroups'
+        description: Describes updates to the execution property groups.
+    description: Describes updates to the execution property groups for a Java-based Amazon Kinesis Data Analytics application.
+  ApplicationSnapshotConfigurationUpdate:
+    type: object
+    required:
+      - SnapshotsEnabledUpdate
+    properties:
+      SnapshotsEnabledUpdate:
+        $ref: '#/definitions/BooleanObject'
+        description: Describes updates to whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+    description: Describes updates to whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
   ApplicationConfigurationUpdate:
     type: object
     properties:
@@ -1629,6 +1938,28 @@ definitions:
     type: string
     minLength: 0
     maxLength: 1024
+  RuntimeEnvironment:
+    type: string
+    enum:
+      - SQL-1_0
+      - FLINK-1_6
+  RoleARN:
+    type: string
+    pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+    minLength: 1
+    maxLength: 2048
+  ApplicationStatus:
+    type: string
+    enum:
+      - DELETING
+      - STARTING
+      - STOPPING
+      - READY
+      - RUNNING
+      - UPDATING
+  Timestamp:
+    type: string
+    format: date-time
   ApplicationDetail:
     type: object
     required:
@@ -1672,7 +2003,13 @@ definitions:
         $ref: '#/definitions/CloudWatchLoggingOptionDescriptions'
         description: Describes the application Amazon CloudWatch logging options.
     description: 'Describes the application, including the application Amazon Resource Name (ARN), status, latest version, and input and output configurations.'
-  ApplicationName:
+  ApplicationRestoreType:
+    type: string
+    enum:
+      - SKIP_RESTORE_FROM_SNAPSHOT
+      - RESTORE_FROM_LATEST_SNAPSHOT
+      - RESTORE_FROM_CUSTOM_SNAPSHOT
+  SnapshotName:
     type: string
     pattern: '[a-zA-Z0-9_.-]+'
     minLength: 1
@@ -1689,52 +2026,8 @@ definitions:
         $ref: '#/definitions/SnapshotName'
         description: The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if <code>RESTORE_FROM_CUSTOM_SNAPSHOT</code> is specified for the <code>ApplicationRestoreType</code>.
     description: Specifies the method and snapshot to use when restarting an application using previously saved application state.
-  ApplicationRestoreType:
-    type: string
-    enum:
-      - SKIP_RESTORE_FROM_SNAPSHOT
-      - RESTORE_FROM_LATEST_SNAPSHOT
-      - RESTORE_FROM_CUSTOM_SNAPSHOT
-  ApplicationSnapshotConfiguration:
-    type: object
-    required:
-      - SnapshotsEnabled
-    properties:
-      SnapshotsEnabled:
-        $ref: '#/definitions/BooleanObject'
-        description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
-    description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
-  ApplicationSnapshotConfigurationDescription:
-    type: object
-    required:
-      - SnapshotsEnabled
-    properties:
-      SnapshotsEnabled:
-        $ref: '#/definitions/BooleanObject'
-        description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
-    description: Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
-  ApplicationSnapshotConfigurationUpdate:
-    type: object
-    required:
-      - SnapshotsEnabledUpdate
-    properties:
-      SnapshotsEnabledUpdate:
-        $ref: '#/definitions/BooleanObject'
-        description: Describes updates to whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
-    description: Describes updates to whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
-  ApplicationStatus:
-    type: string
-    enum:
-      - DELETING
-      - STARTING
-      - STOPPING
-      - READY
-      - RUNNING
-      - UPDATING
-  ApplicationSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/ApplicationSummary'
+  BooleanObject:
+    type: boolean
   ApplicationSummary:
     type: object
     required:
@@ -1760,17 +2053,21 @@ definitions:
         $ref: '#/definitions/RuntimeEnvironment'
         description: The runtime environment for the application (<code>SQL-1.0</code> or <code>JAVA-8-FLINK-1.5</code>).
     description: 'Provides application summary information, including the application Amazon Resource Name (ARN), name, and status.'
-  ApplicationVersionId:
-    type: integer
-    minimum: 1
-    maximum: 999999999
-  BooleanObject:
-    type: boolean
+  ApplicationSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationSummary'
   BucketARN:
     type: string
     pattern: 'arn:.*'
     minLength: 1
     maxLength: 2048
+  RecordRowDelimiter:
+    type: string
+    minLength: 1
+  RecordColumnDelimiter:
+    type: string
+    minLength: 1
   CSVMappingParameters:
     type: object
     required:
@@ -1784,6 +2081,17 @@ definitions:
         $ref: '#/definitions/RecordColumnDelimiter'
         description: 'The column delimiter. For example, in a CSV format, a comma (",") is the typical column delimiter.'
     description: '<p>For an SQL-based application, provides additional mapping information when the record format uses delimiters, such as CSV. For example, the following sample records use CSV format, where the records use the <i>''\n''</i> as the row delimiter and a comma (",") as the column delimiter: </p> <p> <code>"name1", "address1"</code> </p> <p> <code>"name2", "address2"</code> </p>'
+  ConfigurationType:
+    type: string
+    enum:
+      - DEFAULT
+      - CUSTOM
+  CheckpointInterval:
+    type: integer
+    minimum: 0
+  MinPauseBetweenCheckpoints:
+    type: integer
+    minimum: 0
   CheckpointConfiguration:
     type: object
     required:
@@ -1834,18 +2142,11 @@ definitions:
         $ref: '#/definitions/MinPauseBetweenCheckpoints'
         description: Describes updates to the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start.
     description: Describes updates to the checkpointing parameters for a Java-based Amazon Kinesis Data Analytics application.
-  CheckpointInterval:
-    type: integer
-    minimum: 0
-  CloudWatchLoggingOption:
-    type: object
-    required:
-      - LogStreamARN
-    properties:
-      LogStreamARN:
-        $ref: '#/definitions/LogStreamARN'
-        description: The ARN of the CloudWatch log to receive application messages.
-    description: 'Provides a description of Amazon CloudWatch logging options, including the log stream Amazon Resource Name (ARN). '
+  LogStreamARN:
+    type: string
+    pattern: 'arn:.*'
+    minLength: 1
+    maxLength: 2048
   CloudWatchLoggingOptionDescription:
     type: object
     required:
@@ -1861,10 +2162,6 @@ definitions:
         $ref: '#/definitions/RoleARN'
         description: <p>The IAM ARN of the role to use to send application messages. </p> <note> <p>Provided for backward compatibility. Applications created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>
     description: Describes the Amazon CloudWatch logging option.
-  CloudWatchLoggingOptionDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/CloudWatchLoggingOptionDescription'
   CloudWatchLoggingOptionUpdate:
     type: object
     required:
@@ -1885,53 +2182,30 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CloudWatchLoggingOption'
-  CodeContent:
-    type: object
-    properties:
-      TextContent:
-        $ref: '#/definitions/TextContent'
-        description: The text-format code for a Java-based Kinesis Data Analytics application.
-      ZipFileContent:
-        $ref: '#/definitions/ZipFileContent'
-        description: The zip-format code for a Java-based Kinesis Data Analytics application.
-      S3ContentLocation:
-        $ref: '#/definitions/S3ContentLocation'
-        description: Information about the Amazon S3 bucket containing the application code.
-    description: 'Specifies either the application code, or the location of the application code, for a Java-based Amazon Kinesis Data Analytics application. '
-  CodeContentDescription:
-    type: object
-    properties:
-      TextContent:
-        $ref: '#/definitions/TextContent'
-        description: The text-format code
-      CodeMD5:
-        $ref: '#/definitions/CodeMD5'
-        description: The checksum that can be used to validate zip-format code.
-      CodeSize:
-        $ref: '#/definitions/CodeSize'
-        description: The size in bytes of the application code. Can be used to validate zip-format code.
-      S3ApplicationCodeLocationDescription:
-        $ref: '#/definitions/S3ApplicationCodeLocationDescription'
-        description: 'The S3 bucket Amazon Resource Name (ARN), file key, and object version of the application code stored in Amazon S3.'
-    description: Describes details about the application code for a Java-based Kinesis Data Analytics application.
-  CodeContentType:
+  TextContent:
     type: string
-    enum:
-      - PLAINTEXT
-      - ZIPFILE
-  CodeContentUpdate:
+    minLength: 0
+    maxLength: 102400
+  ZipFileContent:
+    type: string
+    minLength: 0
+    maxLength: 52428800
+  S3ContentLocation:
     type: object
+    required:
+      - BucketARN
+      - FileKey
     properties:
-      TextContentUpdate:
-        $ref: '#/definitions/TextContent'
-        description: Describes an update to the text code for an application.
-      ZipFileContentUpdate:
-        $ref: '#/definitions/ZipFileContent'
-        description: Describes an update to the zipped code for an application.
-      S3ContentLocationUpdate:
-        $ref: '#/definitions/S3ContentLocationUpdate'
-        description: Describes an update to the location of code for an application.
-    description: Describes an update to the code of a Java-based Kinesis Data Analytics application.
+      BucketARN:
+        $ref: '#/definitions/BucketARN'
+        description: The Amazon Resource Name (ARN) for the S3 bucket containing the application code.
+      FileKey:
+        $ref: '#/definitions/FileKey'
+        description: The file key for the object containing the application code.
+      ObjectVersion:
+        $ref: '#/definitions/ObjectVersion'
+        description: The version of the object containing the application code.
+    description: 'For a Java-based Amazon Kinesis Data Analytics application, provides a description of an Amazon S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data. '
   CodeMD5:
     type: string
     minLength: 128
@@ -1940,11 +2214,60 @@ definitions:
     type: integer
     minimum: 0
     maximum: 52428800
-  ConfigurationType:
+  S3ApplicationCodeLocationDescription:
+    type: object
+    required:
+      - BucketARN
+      - FileKey
+    properties:
+      BucketARN:
+        $ref: '#/definitions/BucketARN'
+        description: The Amazon Resource Name (ARN) for the S3 bucket containing the application code.
+      FileKey:
+        $ref: '#/definitions/FileKey'
+        description: The file key for the object containing the application code.
+      ObjectVersion:
+        $ref: '#/definitions/ObjectVersion'
+        description: The version of the object containing the application code.
+    description: Describes the location of a Java-based Amazon Kinesis Data Analytics application's code stored in an S3 bucket.
+  S3ContentLocationUpdate:
+    type: object
+    properties:
+      BucketARNUpdate:
+        $ref: '#/definitions/BucketARN'
+        description: The new Amazon Resource Name (ARN) for the S3 bucket containing the application code.
+      FileKeyUpdate:
+        $ref: '#/definitions/FileKey'
+        description: The new file key for the object containing the application code.
+      ObjectVersionUpdate:
+        $ref: '#/definitions/ObjectVersion'
+        description: The new version of the object containing the application code.
+    description: Describes an update for the Amazon S3 code content location for a Java-based Amazon Kinesis Data Analytics application.
+  SnapshotDetails:
+    type: object
+    required:
+      - SnapshotName
+      - SnapshotStatus
+      - ApplicationVersionId
+    properties:
+      SnapshotName:
+        $ref: '#/definitions/SnapshotName'
+        description: The identifier for the application snapshot.
+      SnapshotStatus:
+        $ref: '#/definitions/SnapshotStatus'
+        description: The status of the application snapshot.
+      ApplicationVersionId:
+        $ref: '#/definitions/ApplicationVersionId'
+        description: The current application version ID when the snapshot was created.
+      SnapshotCreationTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The timestamp of the application snapshot.
+    description: Provides details about a snapshot of application state.
+  RecordFormatType:
     type: string
     enum:
-      - DEFAULT
-      - CUSTOM
+      - JSON
+      - CSV
   DestinationSchema:
     type: object
     required:
@@ -1954,82 +2277,159 @@ definitions:
         $ref: '#/definitions/RecordFormatType'
         description: Specifies the format of the records on the output stream.
     description: 'Describes the data format when records are written to the destination in an SQL-based Amazon Kinesis Data Analytics application. '
-  EnvironmentProperties:
+  InputStartingPositionConfiguration:
+    type: object
+    properties:
+      InputStartingPosition:
+        $ref: '#/definitions/InputStartingPosition'
+        description: '<p>The starting position on the stream.</p> <ul> <li> <p> <code>NOW</code> - Start reading just after the most recent record in the stream, and start at the request timestamp that the customer issued.</p> </li> <li> <p> <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the stream, which is the oldest record available in the stream. This option is not available for an Amazon Kinesis Data Firehose delivery stream.</p> </li> <li> <p> <code>LAST_STOPPED_POINT</code> - Resume reading from where the application last stopped reading.</p> </li> </ul>'
+    description: Describes the point at which the application reads from the streaming source.
+  S3Configuration:
     type: object
     required:
-      - PropertyGroups
+      - BucketARN
+      - FileKey
     properties:
-      PropertyGroups:
-        $ref: '#/definitions/PropertyGroups'
-        description: Describes the execution property groups.
-    description: Describes execution properties for a Java-based Kinesis Data Analytics application.
-  EnvironmentPropertyDescriptions:
-    type: object
-    properties:
-      PropertyGroupDescriptions:
-        $ref: '#/definitions/PropertyGroups'
-        description: Describes the execution property groups.
-    description: Describes the execution properties for a Java-based Amazon Kinesis Data Analytics application.
-  EnvironmentPropertyUpdates:
+      BucketARN:
+        $ref: '#/definitions/BucketARN'
+        description: The ARN of the S3 bucket that contains the data.
+      FileKey:
+        $ref: '#/definitions/FileKey'
+        description: The name of the object that contains the data.
+    description: 'For an SQL-based Amazon Kinesis Data Analytics application, provides a description of an Amazon S3 data source, including the Amazon Resource Name (ARN) of the S3 bucket and the name of the Amazon S3 object that contains the data.'
+  SourceSchema:
     type: object
     required:
-      - PropertyGroups
+      - RecordFormat
+      - RecordColumns
     properties:
-      PropertyGroups:
-        $ref: '#/definitions/PropertyGroups'
-        description: Describes updates to the execution property groups.
-    description: Describes updates to the execution property groups for a Java-based Amazon Kinesis Data Analytics application.
+      RecordFormat:
+        $ref: '#/definitions/RecordFormat'
+        description: Specifies the format of the records on the streaming source.
+      RecordEncoding:
+        $ref: '#/definitions/RecordEncoding'
+        description: 'Specifies the encoding of the records in the streaming source. For example, UTF-8.'
+      RecordColumns:
+        $ref: '#/definitions/RecordColumns'
+        description: 'A list of <code>RecordColumn</code> objects. '
+    description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream. '
+  ParsedInputRecords:
+    type: array
+    items:
+      $ref: '#/definitions/ParsedInputRecord'
+  ProcessedInputRecords:
+    type: array
+    items:
+      $ref: '#/definitions/ProcessedInputRecord'
+  RawInputRecords:
+    type: array
+    items:
+      $ref: '#/definitions/RawInputRecord'
+  PropertyGroups:
+    type: array
+    items:
+      $ref: '#/definitions/PropertyGroup'
+    maxItems: 50
   FileKey:
     type: string
     minLength: 1
     maxLength: 1024
-  FlinkApplicationConfiguration:
+  MonitoringConfiguration:
+    type: object
+    required:
+      - ConfigurationType
+    properties:
+      ConfigurationType:
+        $ref: '#/definitions/ConfigurationType'
+        description: Describes whether to use the default CloudWatch logging configuration for an application.
+      MetricsLevel:
+        $ref: '#/definitions/MetricsLevel'
+        description: Describes the granularity of the CloudWatch Logs for an application.
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: Describes the verbosity of the CloudWatch Logs for an application.
+    description: 'Describes configuration parameters for Amazon CloudWatch logging for a Java-based Kinesis Data Analytics application. For more information about CloudWatch logging, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/Java/monitoring-overview.html">Monitoring</a>.'
+  ParallelismConfiguration:
+    type: object
+    required:
+      - ConfigurationType
+    properties:
+      ConfigurationType:
+        $ref: '#/definitions/ConfigurationType'
+        description: Describes whether the application uses the default parallelism for the Kinesis Data Analytics service.
+      Parallelism:
+        $ref: '#/definitions/Parallelism'
+        description: Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. The Kinesis Data Analytics service can increase this number automatically if <a>ParallelismConfiguration$AutoScalingEnabled</a> is set to <code>true</code>.
+      ParallelismPerKPU:
+        $ref: '#/definitions/ParallelismPerKPU'
+        description: 'Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application. For more information about KPUs, see <a href="http://aws.amazon.com/kinesis/data-analytics/pricing/">Amazon Kinesis Data Analytics Pricing</a>.'
+      AutoScalingEnabled:
+        $ref: '#/definitions/BooleanObject'
+        description: Describes whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.
+    description: 'Describes parameters for how a Java-based Amazon Kinesis Data Analytics application executes multiple tasks simultaneously. For more information about parallelism, see <a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/parallel.html">Parallel Execution</a> in the <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/">Apache Flink Documentation</a>.'
+  MonitoringConfigurationDescription:
     type: object
     properties:
-      CheckpointConfiguration:
-        $ref: '#/definitions/CheckpointConfiguration'
-        description: 'Describes an application''s checkpointing configuration. Checkpointing is the process of persisting application state for fault tolerance. For more information, see <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/concepts/programming-model.html#checkpoints-for-fault-tolerance"> Checkpoints for Fault Tolerance</a> in the <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/">Apache Flink Documentation</a>. '
-      MonitoringConfiguration:
-        $ref: '#/definitions/MonitoringConfiguration'
-        description: Describes configuration parameters for Amazon CloudWatch logging for an application.
-      ParallelismConfiguration:
-        $ref: '#/definitions/ParallelismConfiguration'
-        description: Describes parameters for how an application executes multiple tasks simultaneously.
-    description: Describes configuration parameters for a Java-based Amazon Kinesis Data Analytics application.
-  FlinkApplicationConfigurationDescription:
+      ConfigurationType:
+        $ref: '#/definitions/ConfigurationType'
+        description: Describes whether to use the default CloudWatch logging configuration for an application.
+      MetricsLevel:
+        $ref: '#/definitions/MetricsLevel'
+        description: Describes the granularity of the CloudWatch Logs for an application.
+      LogLevel:
+        $ref: '#/definitions/LogLevel'
+        description: Describes the verbosity of the CloudWatch Logs for an application.
+    description: Describes configuration parameters for CloudWatch logging for a Java-based Kinesis Data Analytics application.
+  ParallelismConfigurationDescription:
     type: object
     properties:
-      CheckpointConfigurationDescription:
-        $ref: '#/definitions/CheckpointConfigurationDescription'
-        description: Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault tolerance.
-      MonitoringConfigurationDescription:
-        $ref: '#/definitions/MonitoringConfigurationDescription'
-        description: Describes configuration parameters for Amazon CloudWatch logging for an application.
-      ParallelismConfigurationDescription:
-        $ref: '#/definitions/ParallelismConfigurationDescription'
-        description: Describes parameters for how an application executes multiple tasks simultaneously.
-      JobPlanDescription:
-        $ref: '#/definitions/JobPlanDescription'
-        description: 'The job plan for an application. For more information about the job plan, see <a href="https://ci.apache.org/projects/flink/flink-docs-stable/internals/job_scheduling.html">Jobs and Scheduling</a> in the <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/">Apache Flink Documentation</a>. To retrieve the job plan for the application, use the <a>DescribeApplicationRequest$IncludeAdditionalDetails</a> parameter of the <a>DescribeApplication</a> operation.'
-    description: Describes configuration parameters for a Java-based Amazon Kinesis Data Analytics application.
-  FlinkApplicationConfigurationUpdate:
-    type: object
-    properties:
-      CheckpointConfigurationUpdate:
-        $ref: '#/definitions/CheckpointConfigurationUpdate'
-        description: Describes updates to an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault tolerance.
-      MonitoringConfigurationUpdate:
-        $ref: '#/definitions/MonitoringConfigurationUpdate'
-        description: Describes updates to the configuration parameters for Amazon CloudWatch logging for an application.
-      ParallelismConfigurationUpdate:
-        $ref: '#/definitions/ParallelismConfigurationUpdate'
-        description: Describes updates to the parameters for how an application executes multiple tasks simultaneously.
-    description: Describes updates to the configuration parameters for a Java-based Amazon Kinesis Data Analytics application.
-  Id:
+      ConfigurationType:
+        $ref: '#/definitions/ConfigurationType'
+        description: 'Describes whether the application uses the default parallelism for the Kinesis Data Analytics service. '
+      Parallelism:
+        $ref: '#/definitions/Parallelism'
+        description: 'Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. '
+      ParallelismPerKPU:
+        $ref: '#/definitions/ParallelismPerKPU'
+        description: Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application.
+      CurrentParallelism:
+        $ref: '#/definitions/Parallelism'
+        description: Describes the current number of parallel tasks that a Java-based Kinesis Data Analytics application can perform.
+      AutoScalingEnabled:
+        $ref: '#/definitions/BooleanObject'
+        description: Describes whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.
+    description: Describes parameters for how a Java-based Kinesis Data Analytics application executes multiple tasks simultaneously.
+  JobPlanDescription:
     type: string
-    pattern: '[a-zA-Z0-9_.-]+'
-    minLength: 1
-    maxLength: 50
+  MonitoringConfigurationUpdate:
+    type: object
+    properties:
+      ConfigurationTypeUpdate:
+        $ref: '#/definitions/ConfigurationType'
+        description: Describes updates to whether to use the default CloudWatch logging configuration for an application.
+      MetricsLevelUpdate:
+        $ref: '#/definitions/MetricsLevel'
+        description: Describes updates to the granularity of the CloudWatch Logs for an application.
+      LogLevelUpdate:
+        $ref: '#/definitions/LogLevel'
+        description: Describes updates to the verbosity of the CloudWatch Logs for an application.
+    description: Describes updates to configuration parameters for Amazon CloudWatch logging for a Java-based Kinesis Data Analytics application.
+  ParallelismConfigurationUpdate:
+    type: object
+    properties:
+      ConfigurationTypeUpdate:
+        $ref: '#/definitions/ConfigurationType'
+        description: 'Describes updates to whether the application uses the default parallelism for the Kinesis Data Analytics service, or if a custom parallelism is used.'
+      ParallelismUpdate:
+        $ref: '#/definitions/Parallelism'
+        description: Describes updates to the initial number of parallel tasks an application can perform.
+      ParallelismPerKPUUpdate:
+        $ref: '#/definitions/ParallelismPerKPU'
+        description: Describes updates to the number of parallel tasks an application can perform per Kinesis Processing Unit (KPU) used by the application.
+      AutoScalingEnabledUpdate:
+        $ref: '#/definitions/BooleanObject'
+        description: Describes updates to whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.
+    description: Describes updates to parameters for how a Java-based Kinesis Data Analytics application executes multiple tasks simultaneously.
   InAppStreamName:
     type: string
     pattern: '[a-zA-Z][a-zA-Z0-9_]+'
@@ -2044,31 +2444,55 @@ definitions:
     pattern: '[a-zA-Z][a-zA-Z0-9_]+'
     minLength: 1
     maxLength: 32
-  Input:
+  KinesisStreamsInput:
     type: object
     required:
-      - NamePrefix
-      - InputSchema
+      - ResourceARN
     properties:
-      NamePrefix:
-        $ref: '#/definitions/InAppStreamName'
-        description: 'The name prefix to use when creating an in-application stream. Suppose that you specify a prefix "<code>MyInApplicationStream</code>." Kinesis Data Analytics then creates one or more (as per the <code>InputParallelism</code> count you specified) in-application streams with the names "<code>MyInApplicationStream_001</code>," "<code>MyInApplicationStream_002</code>," and so on. '
-      InputProcessingConfiguration:
-        $ref: '#/definitions/InputProcessingConfiguration'
-        description: 'The <a>InputProcessingConfiguration</a> for the input. An input processor transforms records as they are received from the stream, before the application''s SQL code executes. Currently, the only input processing configuration available is <a>InputLambdaProcessor</a>. '
-      KinesisStreamsInput:
-        $ref: '#/definitions/KinesisStreamsInput'
-        description: 'If the streaming source is an Amazon Kinesis data stream, identifies the stream''s Amazon Resource Name (ARN). '
-      KinesisFirehoseInput:
-        $ref: '#/definitions/KinesisFirehoseInput'
-        description: 'If the streaming source is an Amazon Kinesis Data Firehose delivery stream, identifies the delivery stream''s ARN.'
-      InputParallelism:
-        $ref: '#/definitions/InputParallelism'
-        description: 'Describes the number of in-application streams to create. '
-      InputSchema:
-        $ref: '#/definitions/SourceSchema'
-        description: '<p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.</p> <p>Also used to describe the format of the reference data source.</p>'
-    description: 'When you configure the application input for an SQL-based Amazon Kinesis Data Analytics application, you specify the streaming source, the in-application stream name that is created, and the mapping between the two. '
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The ARN of the input Kinesis data stream to read.
+    description: ' Identifies an Amazon Kinesis data stream as the streaming source. You provide the stream''s Amazon Resource Name (ARN).'
+  KinesisFirehoseInput:
+    type: object
+    required:
+      - ResourceARN
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of the delivery stream.
+    description: 'For an SQL-based Amazon Kinesis Data Analytics application, identifies a Kinesis Data Firehose delivery stream as the streaming source. You provide the delivery stream''s Amazon Resource Name (ARN).'
+  InputParallelism:
+    type: object
+    properties:
+      Count:
+        $ref: '#/definitions/InputParallelismCount'
+        description: The number of in-application streams to create.
+    description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes the number of in-application streams to create for a given streaming source. '
+  KinesisStreamsInputDescription:
+    type: object
+    required:
+      - ResourceARN
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of the Kinesis data stream.
+      RoleARN:
+        $ref: '#/definitions/RoleARN'
+        description: <p>The ARN of the IAM role that Kinesis Data Analytics can assume to access the stream.</p> <note> <p>Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>
+    description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes the Kinesis data stream that is configured as the streaming source in the application input configuration. '
+  KinesisFirehoseInputDescription:
+    type: object
+    required:
+      - ResourceARN
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of the delivery stream.
+      RoleARN:
+        $ref: '#/definitions/RoleARN'
+        description: <p>The ARN of the IAM role that Kinesis Data Analytics assumes to access the stream.</p> <note> <p>Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>
+    description: 'Describes the Amazon Kinesis Data Firehose delivery stream that is configured as the streaming source in the application input configuration. '
   InputDescription:
     type: object
     properties:
@@ -2100,10 +2524,6 @@ definitions:
         $ref: '#/definitions/InputStartingPositionConfiguration'
         description: The point at which the application is configured to read from the input stream.
     description: 'Describes the application input configuration for an SQL-based Amazon Kinesis Data Analytics application. '
-  InputDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/InputDescription'
   InputLambdaProcessor:
     type: object
     required:
@@ -2134,13 +2554,6 @@ definitions:
         $ref: '#/definitions/ResourceARN'
         description: The Amazon Resource Name (ARN) of the new AWS Lambda function that is used to preprocess the records in the stream.
     description: 'For an SQL-based Amazon Kinesis Data Analytics application, represents an update to the <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream.'
-  InputParallelism:
-    type: object
-    properties:
-      Count:
-        $ref: '#/definitions/InputParallelismCount'
-        description: The number of in-application streams to create.
-    description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes the number of in-application streams to create for a given streaming source. '
   InputParallelismCount:
     type: integer
     minimum: 1
@@ -2154,22 +2567,6 @@ definitions:
         $ref: '#/definitions/InputParallelismCount'
         description: The number of in-application streams to create for the specified streaming source.
     description: 'For an SQL-based Amazon Kinesis Data Analytics application, provides updates to the parallelism count.'
-  InputProcessingConfiguration:
-    type: object
-    required:
-      - InputLambdaProcessor
-    properties:
-      InputLambdaProcessor:
-        $ref: '#/definitions/InputLambdaProcessor'
-        description: The <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream before being processed by your application code.
-    description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes a processor that is used to preprocess the records in the stream before being processed by your application code. Currently, the only input processor available is <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a>.'
-  InputProcessingConfigurationDescription:
-    type: object
-    properties:
-      InputLambdaProcessorDescription:
-        $ref: '#/definitions/InputLambdaProcessorDescription'
-        description: 'Provides configuration information about the associated <a>InputLambdaProcessorDescription</a> '
-    description: 'For an SQL-based Amazon Kinesis Data Analytics application, provides the configuration information about an input processor. Currently, the only input processor available is <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a>.'
   InputProcessingConfigurationUpdate:
     type: object
     required:
@@ -2179,6 +2576,27 @@ definitions:
         $ref: '#/definitions/InputLambdaProcessorUpdate'
         description: Provides update information for an <a>InputLambdaProcessor</a>.
     description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes updates to an <a>InputProcessingConfiguration</a>.'
+  RecordFormat:
+    type: object
+    required:
+      - RecordFormatType
+    properties:
+      RecordFormatType:
+        $ref: '#/definitions/RecordFormatType'
+        description: The type of record format.
+      MappingParameters:
+        $ref: '#/definitions/MappingParameters'
+        description: 'When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.'
+    description: ' For an SQL-based Amazon Kinesis Data Analytics application, describes the record format and relevant mapping information that should be applied to schematize the records on the stream. '
+  RecordEncoding:
+    type: string
+    pattern: UTF-8
+  RecordColumns:
+    type: array
+    items:
+      $ref: '#/definitions/RecordColumn'
+    minItems: 1
+    maxItems: 1000
   InputSchemaUpdate:
     type: object
     properties:
@@ -2198,13 +2616,24 @@ definitions:
       - NOW
       - TRIM_HORIZON
       - LAST_STOPPED_POINT
-  InputStartingPositionConfiguration:
+  KinesisStreamsInputUpdate:
     type: object
+    required:
+      - ResourceARNUpdate
     properties:
-      InputStartingPosition:
-        $ref: '#/definitions/InputStartingPosition'
-        description: '<p>The starting position on the stream.</p> <ul> <li> <p> <code>NOW</code> - Start reading just after the most recent record in the stream, and start at the request timestamp that the customer issued.</p> </li> <li> <p> <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the stream, which is the oldest record available in the stream. This option is not available for an Amazon Kinesis Data Firehose delivery stream.</p> </li> <li> <p> <code>LAST_STOPPED_POINT</code> - Resume reading from where the application last stopped reading.</p> </li> </ul>'
-    description: Describes the point at which the application reads from the streaming source.
+      ResourceARNUpdate:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of the input Kinesis data stream to read.
+    description: 'When you update the input configuration for an SQL-based Amazon Kinesis Data Analytics application, provides information about an Amazon Kinesis stream as the streaming source.'
+  KinesisFirehoseInputUpdate:
+    type: object
+    required:
+      - ResourceARNUpdate
+    properties:
+      ResourceARNUpdate:
+        $ref: '#/definitions/ResourceARN'
+        description: The Amazon Resource Name (ARN) of the input delivery stream to read.
+    description: 'For an SQL-based Amazon Kinesis Data Analytics application, when updating application input configuration, provides information about a Kinesis Data Firehose delivery stream as the streaming source.'
   InputUpdate:
     type: object
     required:
@@ -2240,6 +2669,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Input'
+  RecordRowPath:
+    type: string
+    minLength: 1
   JSONMappingParameters:
     type: object
     required:
@@ -2249,38 +2681,6 @@ definitions:
         $ref: '#/definitions/RecordRowPath'
         description: The path to the top-level parent that contains the records.
     description: 'For an SQL-based Amazon Kinesis Data Analytics application, provides additional mapping information when JSON is the record format on the streaming source.'
-  JobPlanDescription:
-    type: string
-  KinesisFirehoseInput:
-    type: object
-    required:
-      - ResourceARN
-    properties:
-      ResourceARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the delivery stream.
-    description: 'For an SQL-based Amazon Kinesis Data Analytics application, identifies a Kinesis Data Firehose delivery stream as the streaming source. You provide the delivery stream''s Amazon Resource Name (ARN).'
-  KinesisFirehoseInputDescription:
-    type: object
-    required:
-      - ResourceARN
-    properties:
-      ResourceARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the delivery stream.
-      RoleARN:
-        $ref: '#/definitions/RoleARN'
-        description: <p>The ARN of the IAM role that Kinesis Data Analytics assumes to access the stream.</p> <note> <p>Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>
-    description: 'Describes the Amazon Kinesis Data Firehose delivery stream that is configured as the streaming source in the application input configuration. '
-  KinesisFirehoseInputUpdate:
-    type: object
-    required:
-      - ResourceARNUpdate
-    properties:
-      ResourceARNUpdate:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the input delivery stream to read.
-    description: 'For an SQL-based Amazon Kinesis Data Analytics application, when updating application input configuration, provides information about a Kinesis Data Firehose delivery stream as the streaming source.'
   KinesisFirehoseOutput:
     type: object
     required:
@@ -2311,36 +2711,6 @@ definitions:
         $ref: '#/definitions/ResourceARN'
         description: 'The Amazon Resource Name (ARN) of the delivery stream to write to. '
     description: 'For an SQL-based Amazon Kinesis Data Analytics application, when updating an output configuration using the <a>UpdateApplication</a> operation, provides information about a Kinesis Data Firehose delivery stream that is configured as the destination.'
-  KinesisStreamsInput:
-    type: object
-    required:
-      - ResourceARN
-    properties:
-      ResourceARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The ARN of the input Kinesis data stream to read.
-    description: ' Identifies an Amazon Kinesis data stream as the streaming source. You provide the stream''s Amazon Resource Name (ARN).'
-  KinesisStreamsInputDescription:
-    type: object
-    required:
-      - ResourceARN
-    properties:
-      ResourceARN:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the Kinesis data stream.
-      RoleARN:
-        $ref: '#/definitions/RoleARN'
-        description: <p>The ARN of the IAM role that Kinesis Data Analytics can assume to access the stream.</p> <note> <p>Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>
-    description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes the Kinesis data stream that is configured as the streaming source in the application input configuration. '
-  KinesisStreamsInputUpdate:
-    type: object
-    required:
-      - ResourceARNUpdate
-    properties:
-      ResourceARNUpdate:
-        $ref: '#/definitions/ResourceARN'
-        description: The Amazon Resource Name (ARN) of the input Kinesis data stream to read.
-    description: 'When you update the input configuration for an SQL-based Amazon Kinesis Data Analytics application, provides information about an Amazon Kinesis stream as the streaming source.'
   KinesisStreamsOutput:
     type: object
     required:
@@ -2401,11 +2771,19 @@ definitions:
         $ref: '#/definitions/ResourceARN'
         description: The Amazon Resource Name (ARN) of the destination AWS Lambda function.
     description: 'When you update an SQL-based Amazon Kinesis Data Analytics application''s output configuration using the <a>UpdateApplication</a> operation, provides information about an AWS Lambda function that is configured as the destination.'
-  ListApplicationsInputLimit:
+  ListSnapshotsInputLimit:
     type: integer
     minimum: 1
     maximum: 50
-  ListSnapshotsInputLimit:
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 512
+  SnapshotSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SnapshotDetails'
+  ListApplicationsInputLimit:
     type: integer
     minimum: 1
     maximum: 50
@@ -2416,11 +2794,6 @@ definitions:
       - WARN
       - ERROR
       - DEBUG
-  LogStreamARN:
-    type: string
-    pattern: 'arn:.*'
-    minLength: 1
-    maxLength: 2048
   MappingParameters:
     type: object
     properties:
@@ -2438,78 +2811,8 @@ definitions:
       - TASK
       - OPERATOR
       - PARALLELISM
-  MinPauseBetweenCheckpoints:
-    type: integer
-    minimum: 0
-  MonitoringConfiguration:
-    type: object
-    required:
-      - ConfigurationType
-    properties:
-      ConfigurationType:
-        $ref: '#/definitions/ConfigurationType'
-        description: Describes whether to use the default CloudWatch logging configuration for an application.
-      MetricsLevel:
-        $ref: '#/definitions/MetricsLevel'
-        description: Describes the granularity of the CloudWatch Logs for an application.
-      LogLevel:
-        $ref: '#/definitions/LogLevel'
-        description: Describes the verbosity of the CloudWatch Logs for an application.
-    description: 'Describes configuration parameters for Amazon CloudWatch logging for a Java-based Kinesis Data Analytics application. For more information about CloudWatch logging, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/Java/monitoring-overview.html">Monitoring</a>.'
-  MonitoringConfigurationDescription:
-    type: object
-    properties:
-      ConfigurationType:
-        $ref: '#/definitions/ConfigurationType'
-        description: Describes whether to use the default CloudWatch logging configuration for an application.
-      MetricsLevel:
-        $ref: '#/definitions/MetricsLevel'
-        description: Describes the granularity of the CloudWatch Logs for an application.
-      LogLevel:
-        $ref: '#/definitions/LogLevel'
-        description: Describes the verbosity of the CloudWatch Logs for an application.
-    description: Describes configuration parameters for CloudWatch logging for a Java-based Kinesis Data Analytics application.
-  MonitoringConfigurationUpdate:
-    type: object
-    properties:
-      ConfigurationTypeUpdate:
-        $ref: '#/definitions/ConfigurationType'
-        description: Describes updates to whether to use the default CloudWatch logging configuration for an application.
-      MetricsLevelUpdate:
-        $ref: '#/definitions/MetricsLevel'
-        description: Describes updates to the granularity of the CloudWatch Logs for an application.
-      LogLevelUpdate:
-        $ref: '#/definitions/LogLevel'
-        description: Describes updates to the verbosity of the CloudWatch Logs for an application.
-    description: Describes updates to configuration parameters for Amazon CloudWatch logging for a Java-based Kinesis Data Analytics application.
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 512
   ObjectVersion:
     type: string
-  Output:
-    type: object
-    required:
-      - Name
-      - DestinationSchema
-    properties:
-      Name:
-        $ref: '#/definitions/InAppStreamName'
-        description: The name of the in-application stream.
-      KinesisStreamsOutput:
-        $ref: '#/definitions/KinesisStreamsOutput'
-        description: Identifies an Amazon Kinesis data stream as the destination.
-      KinesisFirehoseOutput:
-        $ref: '#/definitions/KinesisFirehoseOutput'
-        description: Identifies an Amazon Kinesis Data Firehose delivery stream as the destination.
-      LambdaOutput:
-        $ref: '#/definitions/LambdaOutput'
-        description: Identifies an AWS Lambda function as the destination.
-      DestinationSchema:
-        $ref: '#/definitions/DestinationSchema'
-        description: 'Describes the data format when records are written to the destination. '
-    description: '<p> Describes an SQL-based Amazon Kinesis Data Analytics application''s output configuration, in which you identify an in-application stream and a destination where you want the in-application stream data to be written. The destination can be a Kinesis data stream or a Kinesis Data Firehose delivery stream. </p> <p/>'
   OutputDescription:
     type: object
     properties:
@@ -2532,10 +2835,6 @@ definitions:
         $ref: '#/definitions/DestinationSchema'
         description: The data format used for writing data to the destination.
     description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes the application output configuration, which includes the in-application stream name and the destination where the stream data is written. The destination can be a Kinesis data stream or a Kinesis Data Firehose delivery stream. '
-  OutputDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/OutputDescription'
   OutputUpdate:
     type: object
     required:
@@ -2571,78 +2870,28 @@ definitions:
   Parallelism:
     type: integer
     minimum: 1
-  ParallelismConfiguration:
-    type: object
-    required:
-      - ConfigurationType
-    properties:
-      ConfigurationType:
-        $ref: '#/definitions/ConfigurationType'
-        description: Describes whether the application uses the default parallelism for the Kinesis Data Analytics service.
-      Parallelism:
-        $ref: '#/definitions/Parallelism'
-        description: Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. The Kinesis Data Analytics service can increase this number automatically if <a>ParallelismConfiguration$AutoScalingEnabled</a> is set to <code>true</code>.
-      ParallelismPerKPU:
-        $ref: '#/definitions/ParallelismPerKPU'
-        description: 'Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application. For more information about KPUs, see <a href="http://aws.amazon.com/kinesis/data-analytics/pricing/">Amazon Kinesis Data Analytics Pricing</a>.'
-      AutoScalingEnabled:
-        $ref: '#/definitions/BooleanObject'
-        description: Describes whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.
-    description: 'Describes parameters for how a Java-based Amazon Kinesis Data Analytics application executes multiple tasks simultaneously. For more information about parallelism, see <a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/parallel.html">Parallel Execution</a> in the <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/">Apache Flink Documentation</a>.'
-  ParallelismConfigurationDescription:
-    type: object
-    properties:
-      ConfigurationType:
-        $ref: '#/definitions/ConfigurationType'
-        description: 'Describes whether the application uses the default parallelism for the Kinesis Data Analytics service. '
-      Parallelism:
-        $ref: '#/definitions/Parallelism'
-        description: 'Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. '
-      ParallelismPerKPU:
-        $ref: '#/definitions/ParallelismPerKPU'
-        description: Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application.
-      CurrentParallelism:
-        $ref: '#/definitions/Parallelism'
-        description: Describes the current number of parallel tasks that a Java-based Kinesis Data Analytics application can perform.
-      AutoScalingEnabled:
-        $ref: '#/definitions/BooleanObject'
-        description: Describes whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.
-    description: Describes parameters for how a Java-based Kinesis Data Analytics application executes multiple tasks simultaneously.
-  ParallelismConfigurationUpdate:
-    type: object
-    properties:
-      ConfigurationTypeUpdate:
-        $ref: '#/definitions/ConfigurationType'
-        description: 'Describes updates to whether the application uses the default parallelism for the Kinesis Data Analytics service, or if a custom parallelism is used.'
-      ParallelismUpdate:
-        $ref: '#/definitions/Parallelism'
-        description: Describes updates to the initial number of parallel tasks an application can perform.
-      ParallelismPerKPUUpdate:
-        $ref: '#/definitions/ParallelismPerKPU'
-        description: Describes updates to the number of parallel tasks an application can perform per Kinesis Processing Unit (KPU) used by the application.
-      AutoScalingEnabledUpdate:
-        $ref: '#/definitions/BooleanObject'
-        description: Describes updates to whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.
-    description: Describes updates to parameters for how a Java-based Kinesis Data Analytics application executes multiple tasks simultaneously.
   ParallelismPerKPU:
     type: integer
     minimum: 1
+  ParsedInputRecordField:
+    type: string
   ParsedInputRecord:
     type: array
     items:
       $ref: '#/definitions/ParsedInputRecordField'
-  ParsedInputRecordField:
-    type: string
-  ParsedInputRecords:
-    type: array
-    items:
-      $ref: '#/definitions/ParsedInputRecord'
   ProcessedInputRecord:
     type: string
-  ProcessedInputRecords:
+  PropertyMap:
     type: array
+    minItems: 1
+    maxItems: 50
     items:
-      $ref: '#/definitions/ProcessedInputRecord'
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/PropertyKey'
+        value:
+          $ref: '#/definitions/PropertyValue'
   PropertyGroup:
     type: object
     required:
@@ -2656,11 +2905,6 @@ definitions:
         $ref: '#/definitions/PropertyMap'
         description: Describes the value of an application execution property key-value pair.
     description: Property key-value pairs passed into a Java-based Kinesis Data Analytics application.
-  PropertyGroups:
-    type: array
-    items:
-      $ref: '#/definitions/PropertyGroup'
-    maxItems: 50
   PropertyKey:
     type: string
     minLength: 1
@@ -2669,23 +2913,16 @@ definitions:
     type: string
     minLength: 1
     maxLength: 2048
-  PropertyMap:
-    type: array
-    minItems: 1
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/PropertyKey'
-        value:
-          $ref: '#/definitions/PropertyValue'
   RawInputRecord:
     type: string
-  RawInputRecords:
-    type: array
-    items:
-      $ref: '#/definitions/RawInputRecord'
+  RecordColumnName:
+    type: string
+    pattern: '[a-zA-Z_][a-zA-Z0-9_]*'
+  RecordColumnMapping:
+    type: string
+  RecordColumnSqlType:
+    type: string
+    minLength: 1
   RecordColumn:
     type: object
     required:
@@ -2702,212 +2939,6 @@ definitions:
         $ref: '#/definitions/RecordColumnSqlType'
         description: The type of column created in the in-application input stream or reference table.
     description: '<p>For an SQL-based Amazon Kinesis Data Analytics application, describes the mapping of each data element in the streaming source to the corresponding column in the in-application stream.</p> <p>Also used to describe the format of the reference data source.</p>'
-  RecordColumnDelimiter:
-    type: string
-    minLength: 1
-  RecordColumnMapping:
-    type: string
-  RecordColumnName:
-    type: string
-    pattern: '[a-zA-Z_][a-zA-Z0-9_]*'
-  RecordColumnSqlType:
-    type: string
-    minLength: 1
-  RecordColumns:
-    type: array
-    items:
-      $ref: '#/definitions/RecordColumn'
-    minItems: 1
-    maxItems: 1000
-  RecordEncoding:
-    type: string
-    pattern: UTF-8
-  RecordFormat:
-    type: object
-    required:
-      - RecordFormatType
-    properties:
-      RecordFormatType:
-        $ref: '#/definitions/RecordFormatType'
-        description: The type of record format.
-      MappingParameters:
-        $ref: '#/definitions/MappingParameters'
-        description: 'When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.'
-    description: ' For an SQL-based Amazon Kinesis Data Analytics application, describes the record format and relevant mapping information that should be applied to schematize the records on the stream. '
-  RecordFormatType:
-    type: string
-    enum:
-      - JSON
-      - CSV
-  RecordRowDelimiter:
-    type: string
-    minLength: 1
-  RecordRowPath:
-    type: string
-    minLength: 1
-  ReferenceDataSource:
-    type: object
-    required:
-      - TableName
-      - ReferenceSchema
-    properties:
-      TableName:
-        $ref: '#/definitions/InAppTableName'
-        description: The name of the in-application table to create.
-      S3ReferenceDataSource:
-        $ref: '#/definitions/S3ReferenceDataSource'
-        description: 'Identifies the S3 bucket and object that contains the reference data. A Kinesis Data Analytics application loads reference data only once. If the data changes, you call the <a>UpdateApplication</a> operation to trigger reloading of data into your application. '
-      ReferenceSchema:
-        $ref: '#/definitions/SourceSchema'
-        description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.'
-    description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes the reference data source by providing the source information (Amazon S3 bucket name and object key name), the resulting in-application table name that is created, and the necessary schema to map the data elements in the Amazon S3 object to the in-application table.'
-  ReferenceDataSourceDescription:
-    type: object
-    required:
-      - ReferenceId
-      - TableName
-      - S3ReferenceDataSourceDescription
-    properties:
-      ReferenceId:
-        $ref: '#/definitions/Id'
-        description: The ID of the reference data source. This is the ID that Kinesis Data Analytics assigns when you add the reference data source to your application using the <a>CreateApplication</a> or <a>UpdateApplication</a> operation.
-      TableName:
-        $ref: '#/definitions/InAppTableName'
-        description: The in-application table name created by the specific reference data source configuration.
-      S3ReferenceDataSourceDescription:
-        $ref: '#/definitions/S3ReferenceDataSourceDescription'
-        description: 'Provides the Amazon S3 bucket name, the object key name that contains the reference data. '
-      ReferenceSchema:
-        $ref: '#/definitions/SourceSchema'
-        description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.'
-    description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes the reference data source configured for an application.'
-  ReferenceDataSourceDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/ReferenceDataSourceDescription'
-  ReferenceDataSourceUpdate:
-    type: object
-    required:
-      - ReferenceId
-    properties:
-      ReferenceId:
-        $ref: '#/definitions/Id'
-        description: The ID of the reference data source that is being updated. You can use the <a>DescribeApplication</a> operation to get this value.
-      TableNameUpdate:
-        $ref: '#/definitions/InAppTableName'
-        description: The in-application table name that is created by this update.
-      S3ReferenceDataSourceUpdate:
-        $ref: '#/definitions/S3ReferenceDataSourceUpdate'
-        description: 'Describes the S3 bucket name, object key name, and IAM role that Kinesis Data Analytics can assume to read the Amazon S3 object on your behalf and populate the in-application reference table.'
-      ReferenceSchemaUpdate:
-        $ref: '#/definitions/SourceSchema'
-        description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream. '
-    description: 'When you update a reference data source configuration for a SQL-based Amazon Kinesis Data Analytics application, this object provides all the updated values (such as the source bucket name and object key name), the in-application table name that is created, and updated mapping information that maps the data in the Amazon S3 object to the in-application reference table that is created.'
-  ReferenceDataSourceUpdates:
-    type: array
-    items:
-      $ref: '#/definitions/ReferenceDataSourceUpdate'
-  ReferenceDataSources:
-    type: array
-    items:
-      $ref: '#/definitions/ReferenceDataSource'
-  ResourceARN:
-    type: string
-    pattern: 'arn:.*'
-    minLength: 1
-    maxLength: 2048
-  RoleARN:
-    type: string
-    pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
-    minLength: 1
-    maxLength: 2048
-  RunConfiguration:
-    type: object
-    properties:
-      SqlRunConfigurations:
-        $ref: '#/definitions/SqlRunConfigurations'
-        description: Describes the starting parameters for an SQL-based Kinesis Data Analytics application.
-      ApplicationRestoreConfiguration:
-        $ref: '#/definitions/ApplicationRestoreConfiguration'
-        description: Describes the restore behavior of a restarting application.
-    description: Describes the starting parameters for an Amazon Kinesis Data Analytics application.
-  RunConfigurationDescription:
-    type: object
-    properties:
-      ApplicationRestoreConfigurationDescription:
-        $ref: '#/definitions/ApplicationRestoreConfiguration'
-        description: Describes the restore behavior of a restarting application.
-    description: Describes the starting properties for a Kinesis Data Analytics application.
-  RunConfigurationUpdate:
-    type: object
-    properties:
-      ApplicationRestoreConfiguration:
-        $ref: '#/definitions/ApplicationRestoreConfiguration'
-        description: Describes updates to the restore behavior of a restarting application.
-    description: Describes the updates to the starting parameters for a Kinesis Data Analytics application.
-  RuntimeEnvironment:
-    type: string
-    enum:
-      - SQL-1_0
-      - FLINK-1_6
-  S3ApplicationCodeLocationDescription:
-    type: object
-    required:
-      - BucketARN
-      - FileKey
-    properties:
-      BucketARN:
-        $ref: '#/definitions/BucketARN'
-        description: The Amazon Resource Name (ARN) for the S3 bucket containing the application code.
-      FileKey:
-        $ref: '#/definitions/FileKey'
-        description: The file key for the object containing the application code.
-      ObjectVersion:
-        $ref: '#/definitions/ObjectVersion'
-        description: The version of the object containing the application code.
-    description: Describes the location of a Java-based Amazon Kinesis Data Analytics application's code stored in an S3 bucket.
-  S3Configuration:
-    type: object
-    required:
-      - BucketARN
-      - FileKey
-    properties:
-      BucketARN:
-        $ref: '#/definitions/BucketARN'
-        description: The ARN of the S3 bucket that contains the data.
-      FileKey:
-        $ref: '#/definitions/FileKey'
-        description: The name of the object that contains the data.
-    description: 'For an SQL-based Amazon Kinesis Data Analytics application, provides a description of an Amazon S3 data source, including the Amazon Resource Name (ARN) of the S3 bucket and the name of the Amazon S3 object that contains the data.'
-  S3ContentLocation:
-    type: object
-    required:
-      - BucketARN
-      - FileKey
-    properties:
-      BucketARN:
-        $ref: '#/definitions/BucketARN'
-        description: The Amazon Resource Name (ARN) for the S3 bucket containing the application code.
-      FileKey:
-        $ref: '#/definitions/FileKey'
-        description: The file key for the object containing the application code.
-      ObjectVersion:
-        $ref: '#/definitions/ObjectVersion'
-        description: The version of the object containing the application code.
-    description: 'For a Java-based Amazon Kinesis Data Analytics application, provides a description of an Amazon S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data. '
-  S3ContentLocationUpdate:
-    type: object
-    properties:
-      BucketARNUpdate:
-        $ref: '#/definitions/BucketARN'
-        description: The new Amazon Resource Name (ARN) for the S3 bucket containing the application code.
-      FileKeyUpdate:
-        $ref: '#/definitions/FileKey'
-        description: The new file key for the object containing the application code.
-      ObjectVersionUpdate:
-        $ref: '#/definitions/ObjectVersion'
-        description: The new version of the object containing the application code.
-    description: Describes an update for the Amazon S3 code content location for a Java-based Amazon Kinesis Data Analytics application.
   S3ReferenceDataSource:
     type: object
     properties:
@@ -2934,6 +2965,26 @@ definitions:
         $ref: '#/definitions/RoleARN'
         description: <p>The ARN of the IAM role that Kinesis Data Analytics can assume to read the Amazon S3 object on your behalf to populate the in-application reference table. </p> <note> <p>Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>
     description: 'For an SQL-based Amazon Kinesis Data Analytics application, provides the bucket name and object key name that stores the reference data.'
+  ReferenceDataSourceDescription:
+    type: object
+    required:
+      - ReferenceId
+      - TableName
+      - S3ReferenceDataSourceDescription
+    properties:
+      ReferenceId:
+        $ref: '#/definitions/Id'
+        description: The ID of the reference data source. This is the ID that Kinesis Data Analytics assigns when you add the reference data source to your application using the <a>CreateApplication</a> or <a>UpdateApplication</a> operation.
+      TableName:
+        $ref: '#/definitions/InAppTableName'
+        description: The in-application table name created by the specific reference data source configuration.
+      S3ReferenceDataSourceDescription:
+        $ref: '#/definitions/S3ReferenceDataSourceDescription'
+        description: 'Provides the Amazon S3 bucket name, the object key name that contains the reference data. '
+      ReferenceSchema:
+        $ref: '#/definitions/SourceSchema'
+        description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.'
+    description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes the reference data source configured for an application.'
   S3ReferenceDataSourceUpdate:
     type: object
     properties:
@@ -2944,31 +2995,53 @@ definitions:
         $ref: '#/definitions/FileKey'
         description: The object key name.
     description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes the Amazon S3 bucket name and object key name for an in-application reference table. '
-  SnapshotDetails:
+  ReferenceDataSourceUpdate:
     type: object
     required:
-      - SnapshotName
-      - SnapshotStatus
-      - ApplicationVersionId
+      - ReferenceId
     properties:
-      SnapshotName:
-        $ref: '#/definitions/SnapshotName'
-        description: The identifier for the application snapshot.
-      SnapshotStatus:
-        $ref: '#/definitions/SnapshotStatus'
-        description: The status of the application snapshot.
-      ApplicationVersionId:
-        $ref: '#/definitions/ApplicationVersionId'
-        description: The current application version ID when the snapshot was created.
-      SnapshotCreationTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The timestamp of the application snapshot.
-    description: Provides details about a snapshot of application state.
-  SnapshotName:
-    type: string
-    pattern: '[a-zA-Z0-9_.-]+'
-    minLength: 1
-    maxLength: 128
+      ReferenceId:
+        $ref: '#/definitions/Id'
+        description: The ID of the reference data source that is being updated. You can use the <a>DescribeApplication</a> operation to get this value.
+      TableNameUpdate:
+        $ref: '#/definitions/InAppTableName'
+        description: The in-application table name that is created by this update.
+      S3ReferenceDataSourceUpdate:
+        $ref: '#/definitions/S3ReferenceDataSourceUpdate'
+        description: 'Describes the S3 bucket name, object key name, and IAM role that Kinesis Data Analytics can assume to read the Amazon S3 object on your behalf and populate the in-application reference table.'
+      ReferenceSchemaUpdate:
+        $ref: '#/definitions/SourceSchema'
+        description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream. '
+    description: 'When you update a reference data source configuration for a SQL-based Amazon Kinesis Data Analytics application, this object provides all the updated values (such as the source bucket name and object key name), the in-application table name that is created, and updated mapping information that maps the data in the Amazon S3 object to the in-application reference table that is created.'
+  ReferenceDataSourceUpdates:
+    type: array
+    items:
+      $ref: '#/definitions/ReferenceDataSourceUpdate'
+  ReferenceDataSources:
+    type: array
+    items:
+      $ref: '#/definitions/ReferenceDataSource'
+  SqlRunConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/SqlRunConfiguration'
+  RunConfiguration:
+    type: object
+    properties:
+      SqlRunConfigurations:
+        $ref: '#/definitions/SqlRunConfigurations'
+        description: Describes the starting parameters for an SQL-based Kinesis Data Analytics application.
+      ApplicationRestoreConfiguration:
+        $ref: '#/definitions/ApplicationRestoreConfiguration'
+        description: Describes the restore behavior of a restarting application.
+    description: Describes the starting parameters for an Amazon Kinesis Data Analytics application.
+  RunConfigurationUpdate:
+    type: object
+    properties:
+      ApplicationRestoreConfiguration:
+        $ref: '#/definitions/ApplicationRestoreConfiguration'
+        description: Describes updates to the restore behavior of a restarting application.
+    description: Describes the updates to the starting parameters for a Kinesis Data Analytics application.
   SnapshotStatus:
     type: string
     enum:
@@ -2976,65 +3049,6 @@ definitions:
       - READY
       - DELETING
       - FAILED
-  SnapshotSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/SnapshotDetails'
-  SourceSchema:
-    type: object
-    required:
-      - RecordFormat
-      - RecordColumns
-    properties:
-      RecordFormat:
-        $ref: '#/definitions/RecordFormat'
-        description: Specifies the format of the records on the streaming source.
-      RecordEncoding:
-        $ref: '#/definitions/RecordEncoding'
-        description: 'Specifies the encoding of the records in the streaming source. For example, UTF-8.'
-      RecordColumns:
-        $ref: '#/definitions/RecordColumns'
-        description: 'A list of <code>RecordColumn</code> objects. '
-    description: 'For an SQL-based Amazon Kinesis Data Analytics application, describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream. '
-  SqlApplicationConfiguration:
-    type: object
-    properties:
-      Inputs:
-        $ref: '#/definitions/Inputs'
-        description: The array of <a>Input</a> objects describing the input streams used by the application.
-      Outputs:
-        $ref: '#/definitions/Outputs'
-        description: The array of <a>Output</a> objects describing the destination streams used by the application.
-      ReferenceDataSources:
-        $ref: '#/definitions/ReferenceDataSources'
-        description: The array of <a>ReferenceDataSource</a> objects describing the reference data sources used by the application.
-    description: 'Describes the inputs, outputs, and reference data sources for an SQL-based Kinesis Data Analytics application.'
-  SqlApplicationConfigurationDescription:
-    type: object
-    properties:
-      InputDescriptions:
-        $ref: '#/definitions/InputDescriptions'
-        description: The array of <a>InputDescription</a> objects describing the input streams used by the application.
-      OutputDescriptions:
-        $ref: '#/definitions/OutputDescriptions'
-        description: The array of <a>OutputDescription</a> objects describing the destination streams used by the application.
-      ReferenceDataSourceDescriptions:
-        $ref: '#/definitions/ReferenceDataSourceDescriptions'
-        description: The array of <a>ReferenceDataSourceDescription</a> objects describing the reference data sources used by the application.
-    description: 'Describes the inputs, outputs, and reference data sources for an SQL-based Kinesis Data Analytics application.'
-  SqlApplicationConfigurationUpdate:
-    type: object
-    properties:
-      InputUpdates:
-        $ref: '#/definitions/InputUpdates'
-        description: The array of <a>InputUpdate</a> objects describing the new input streams used by the application.
-      OutputUpdates:
-        $ref: '#/definitions/OutputUpdates'
-        description: The array of <a>OutputUpdate</a> objects describing the new destination streams used by the application.
-      ReferenceDataSourceUpdates:
-        $ref: '#/definitions/ReferenceDataSourceUpdates'
-        description: The array of <a>ReferenceDataSourceUpdate</a> objects describing the new reference data sources used by the application.
-    description: 'Describes updates to the input streams, destination streams, and reference data sources for an SQL-based Kinesis Data Analytics application.'
   SqlRunConfiguration:
     type: object
     required:
@@ -3048,18 +3062,3 @@ definitions:
         $ref: '#/definitions/InputStartingPositionConfiguration'
         description: 'The point at which you want the application to start processing records from the streaming source. '
     description: Describes the starting parameters for an SQL-based Kinesis Data Analytics application.
-  SqlRunConfigurations:
-    type: array
-    items:
-      $ref: '#/definitions/SqlRunConfiguration'
-  TextContent:
-    type: string
-    minLength: 0
-    maxLength: 102400
-  Timestamp:
-    type: string
-    format: date-time
-  ZipFileContent:
-    type: string
-    minLength: 0
-    maxLength: 52428800

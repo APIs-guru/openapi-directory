@@ -1161,7 +1161,12 @@ definitions:
     type: integer
   BoxLong:
     type: integer
-  undefined: {}
+  ResourceType:
+    type: string
+    enum:
+      - EC2_INSTANCE
+      - EC2_HOST
+      - EC2_AMI
   ConsumedLicenseSummary:
     type: object
     properties:
@@ -1176,9 +1181,32 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ConsumedLicenseSummary'
+  String:
+    type: string
+  LicenseCountingType:
+    type: string
+    enum:
+      - vCPU
+      - Instance
+      - Core
+      - Socket
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   DateTime:
     type: string
     format: date-time
+  FilterName:
+    type: string
+  FilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/FilterValue'
   Filter:
     type: object
     properties:
@@ -1189,18 +1217,32 @@ definitions:
         $ref: '#/definitions/FilterValues'
         description: One or more filter values. Filter values are case-sensitive.
     description: 'A filter name and value pair that is used to return a more specific list of results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs. The filters supported by a <code>Describe</code> operation are documented with the <code>Describe</code> operation.'
-  FilterName:
-    type: string
   FilterValue:
     type: string
-  FilterValues:
-    type: array
-    items:
-      $ref: '#/definitions/FilterValue'
   Filters:
     type: array
     items:
       $ref: '#/definitions/Filter'
+  ManagedResourceSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/ManagedResourceSummary'
+  OrganizationConfiguration:
+    type: object
+    required:
+      - EnableIntegration
+    properties:
+      EnableIntegration:
+        $ref: '#/definitions/Boolean'
+        description: Flag to activate AWS Organization integration.
+    description: Object containing configuration information for AWS Organizations.
+  InventoryFilterCondition:
+    type: string
+    enum:
+      - EQUALS
+      - NOT_EQUALS
+      - BEGINS_WITH
+      - CONTAINS
   InventoryFilter:
     type: object
     required:
@@ -1217,13 +1259,6 @@ definitions:
         $ref: '#/definitions/String'
         description: Value of the filter.
     description: An inventory filter object.
-  InventoryFilterCondition:
-    type: string
-    enum:
-      - EQUALS
-      - NOT_EQUALS
-      - BEGINS_WITH
-      - CONTAINS
   InventoryFilterList:
     type: array
     items:
@@ -1326,13 +1361,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LicenseConfiguration'
-  LicenseCountingType:
-    type: string
-    enum:
-      - vCPU
-      - Instance
-      - Core
-      - Socket
   LicenseSpecification:
     type: object
     required:
@@ -1346,6 +1374,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LicenseSpecification'
+  ResourceInventoryList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceInventory'
   ManagedResourceSummary:
     type: object
     properties:
@@ -1356,19 +1388,6 @@ definitions:
         $ref: '#/definitions/BoxLong'
         description: Number of resources associated with licenses.
     description: Summary for a resource.
-  ManagedResourceSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/ManagedResourceSummary'
-  OrganizationConfiguration:
-    type: object
-    required:
-      - EnableIntegration
-    properties:
-      EnableIntegration:
-        $ref: '#/definitions/Boolean'
-        description: Flag to activate AWS Organization integration.
-    description: Object containing configuration information for AWS Organizations.
   ResourceInventory:
     type: object
     properties:
@@ -1391,22 +1410,6 @@ definitions:
         $ref: '#/definitions/String'
         description: Unique ID of the account that owns the resource.
     description: A set of attributes that describe a resource.
-  ResourceInventoryList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceInventory'
-  ResourceType:
-    type: string
-    enum:
-      - EC2_INSTANCE
-      - EC2_HOST
-      - EC2_AMI
-  String:
-    type: string
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   Tag:
     type: object
     properties:
@@ -1421,7 +1424,3 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'

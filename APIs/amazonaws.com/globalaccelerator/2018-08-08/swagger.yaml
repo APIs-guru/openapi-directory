@@ -1107,7 +1107,27 @@ definitions:
       ClientAffinity:
         $ref: '#/definitions/ClientAffinity'
         description: '<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the source port and protocol of the user request. This gives you control over whether and how to maintain client affinity to a given endpoint.</p> <p>The default value is <code>NONE</code>.</p>'
-  undefined: {}
+  GenericString:
+    type: string
+    maxLength: 255
+  IpAddressType:
+    type: string
+    enum:
+      - IPV4
+  GenericBoolean:
+    type: boolean
+  IpSets:
+    type: array
+    items:
+      $ref: '#/definitions/IpSet'
+  AcceleratorStatus:
+    type: string
+    enum:
+      - DEPLOYED
+      - IN_PROGRESS
+  Timestamp:
+    type: string
+    format: date-time
   Accelerator:
     type: object
     properties:
@@ -1149,11 +1169,6 @@ definitions:
         $ref: '#/definitions/GenericString'
         description: 'The prefix for the location in the Amazon S3 bucket for the flow logs. If you don’t specify a prefix, the flow logs are stored in the root of the bucket.'
     description: Attributes of an accelerator.
-  AcceleratorStatus:
-    type: string
-    enum:
-      - DEPLOYED
-      - IN_PROGRESS
   Accelerators:
     type: array
     items:
@@ -1163,42 +1178,38 @@ definitions:
     enum:
       - NONE
       - SOURCE_IP
-  EndpointConfiguration:
-    type: object
-    properties:
-      EndpointId:
-        $ref: '#/definitions/GenericString'
-        description: 'An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.'
-      Weight:
-        $ref: '#/definitions/EndpointWeight'
-        description: 'The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>.'
-    description: A complex type for endpoints.
+  IdempotencyToken:
+    type: string
+    maxLength: 255
   EndpointConfigurations:
     type: array
     items:
       $ref: '#/definitions/EndpointConfiguration'
     minItems: 0
     maxItems: 10
-  EndpointDescription:
-    type: object
-    properties:
-      EndpointId:
-        $ref: '#/definitions/GenericString'
-        description: 'An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.'
-      Weight:
-        $ref: '#/definitions/EndpointWeight'
-        description: 'The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>. '
-      HealthState:
-        $ref: '#/definitions/HealthState'
-        description: The health status of the endpoint.
-      HealthReason:
-        $ref: '#/definitions/GenericString'
-        description: '<p>The reason code associated with why the endpoint is not healthy. If the endpoint state is healthy, a reason code is not provided.</p> <p>If the endpoint state is <b>unhealthy</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>Timeout</b>: The health check requests to the endpoint are timing out before returning a status.</p> </li> <li> <p> <b>Failed</b>: The health check failed, for example because the endpoint response was invalid (malformed).</p> </li> </ul> <p>If the endpoint state is <b>initial</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>ProvisioningInProgress</b>: The endpoint is in the process of being provisioned.</p> </li> <li> <p> <b>InitialHealthChecking</b>: Global Accelerator is still setting up the minimum number of health checks for the endpoint that are required to determine its health status.</p> </li> </ul>'
-    description: 'A complex type for an endpoint. Each endpoint group can include one or more endpoints, such as load balancers.'
-  EndpointDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/EndpointDescription'
+  TrafficDialPercentage:
+    type: number
+    format: float
+    minimum: 0
+    maximum: 100
+  HealthCheckPort:
+    type: integer
+    minimum: 1
+    maximum: 65535
+  HealthCheckProtocol:
+    type: string
+    enum:
+      - TCP
+      - HTTP
+      - HTTPS
+  HealthCheckIntervalSeconds:
+    type: integer
+    minimum: 10
+    maximum: 30
+  ThresholdCount:
+    type: integer
+    minimum: 1
+    maximum: 10
   EndpointGroup:
     type: object
     properties:
@@ -1230,68 +1241,17 @@ definitions:
         $ref: '#/definitions/ThresholdCount'
         description: 'The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.'
     description: 'A complex type for the endpoint group. An AWS Region can have only one endpoint group for a specific listener. '
-  EndpointGroups:
+  PortRanges:
     type: array
     items:
-      $ref: '#/definitions/EndpointGroup'
-  EndpointWeight:
-    type: integer
-    minimum: 0
-    maximum: 255
-  GenericBoolean:
-    type: boolean
-  GenericString:
-    type: string
-    maxLength: 255
-  HealthCheckIntervalSeconds:
-    type: integer
-    minimum: 10
-    maximum: 30
-  HealthCheckPort:
-    type: integer
-    minimum: 1
-    maximum: 65535
-  HealthCheckProtocol:
+      $ref: '#/definitions/PortRange'
+    minItems: 1
+    maxItems: 10
+  Protocol:
     type: string
     enum:
       - TCP
-      - HTTP
-      - HTTPS
-  HealthState:
-    type: string
-    enum:
-      - INITIAL
-      - HEALTHY
-      - UNHEALTHY
-  IdempotencyToken:
-    type: string
-    maxLength: 255
-  IpAddress:
-    type: string
-  IpAddressType:
-    type: string
-    enum:
-      - IPV4
-  IpAddresses:
-    type: array
-    items:
-      $ref: '#/definitions/IpAddress'
-    minItems: 0
-    maxItems: 2
-  IpSet:
-    type: object
-    properties:
-      IpFamily:
-        $ref: '#/definitions/GenericString'
-        description: The types of IP addresses included in this IP set.
-      IpAddresses:
-        $ref: '#/definitions/IpAddresses'
-        description: The array of IP addresses in the IP address set. An IP address set can have a maximum of two IP addresses.
-    description: A complex type for the set of IP addresses for an accelerator.
-  IpSets:
-    type: array
-    items:
-      $ref: '#/definitions/IpSet'
+      - UDP
   Listener:
     type: object
     properties:
@@ -1308,14 +1268,76 @@ definitions:
         $ref: '#/definitions/ClientAffinity'
         description: The client properties that Global Accelerator uses to select an endpoint so that you can choose to route traffic from users to their original endpoint. The default value is <code>NONE</code>.
     description: A complex type for a listener.
-  Listeners:
+  EndpointWeight:
+    type: integer
+    minimum: 0
+    maximum: 255
+  EndpointConfiguration:
+    type: object
+    properties:
+      EndpointId:
+        $ref: '#/definitions/GenericString'
+        description: 'An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.'
+      Weight:
+        $ref: '#/definitions/EndpointWeight'
+        description: 'The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>.'
+    description: A complex type for endpoints.
+  HealthState:
+    type: string
+    enum:
+      - INITIAL
+      - HEALTHY
+      - UNHEALTHY
+  EndpointDescription:
+    type: object
+    properties:
+      EndpointId:
+        $ref: '#/definitions/GenericString'
+        description: 'An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.'
+      Weight:
+        $ref: '#/definitions/EndpointWeight'
+        description: 'The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>. '
+      HealthState:
+        $ref: '#/definitions/HealthState'
+        description: The health status of the endpoint.
+      HealthReason:
+        $ref: '#/definitions/GenericString'
+        description: '<p>The reason code associated with why the endpoint is not healthy. If the endpoint state is healthy, a reason code is not provided.</p> <p>If the endpoint state is <b>unhealthy</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>Timeout</b>: The health check requests to the endpoint are timing out before returning a status.</p> </li> <li> <p> <b>Failed</b>: The health check failed, for example because the endpoint response was invalid (malformed).</p> </li> </ul> <p>If the endpoint state is <b>initial</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>ProvisioningInProgress</b>: The endpoint is in the process of being provisioned.</p> </li> <li> <p> <b>InitialHealthChecking</b>: Global Accelerator is still setting up the minimum number of health checks for the endpoint that are required to determine its health status.</p> </li> </ul>'
+    description: 'A complex type for an endpoint. Each endpoint group can include one or more endpoints, such as load balancers.'
+  EndpointDescriptions:
     type: array
     items:
-      $ref: '#/definitions/Listener'
+      $ref: '#/definitions/EndpointDescription'
+  EndpointGroups:
+    type: array
+    items:
+      $ref: '#/definitions/EndpointGroup'
+  IpAddress:
+    type: string
+  IpAddresses:
+    type: array
+    items:
+      $ref: '#/definitions/IpAddress'
+    minItems: 0
+    maxItems: 2
+  IpSet:
+    type: object
+    properties:
+      IpFamily:
+        $ref: '#/definitions/GenericString'
+        description: The types of IP addresses included in this IP set.
+      IpAddresses:
+        $ref: '#/definitions/IpAddresses'
+        description: The array of IP addresses in the IP address set. An IP address set can have a maximum of two IP addresses.
+    description: A complex type for the set of IP addresses for an accelerator.
   MaxResults:
     type: integer
     minimum: 1
     maximum: 100
+  Listeners:
+    type: array
+    items:
+      $ref: '#/definitions/Listener'
   PortNumber:
     type: integer
     minimum: 1
@@ -1330,26 +1352,3 @@ definitions:
         $ref: '#/definitions/PortNumber'
         description: 'The last port in the range of ports, inclusive.'
     description: A complex type for a range of ports for a listener.
-  PortRanges:
-    type: array
-    items:
-      $ref: '#/definitions/PortRange'
-    minItems: 1
-    maxItems: 10
-  Protocol:
-    type: string
-    enum:
-      - TCP
-      - UDP
-  ThresholdCount:
-    type: integer
-    minimum: 1
-    maximum: 10
-  Timestamp:
-    type: string
-    format: date-time
-  TrafficDialPercentage:
-    type: number
-    format: float
-    minimum: 0
-    maximum: 100

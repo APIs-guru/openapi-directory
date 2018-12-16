@@ -7280,10 +7280,20 @@ definitions:
     enum:
       - inbound
       - outbound
-  undefined: {}
   ResourceName:
     type: string
     pattern: '\w[\w\-]*\w'
+  OperationList:
+    type: array
+    items:
+      $ref: '#/definitions/Operation'
+  NonEmptyString:
+    type: string
+    pattern: .*\S.*
+  ResourceNameList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceName'
   DiskMapList:
     type: array
     items:
@@ -7313,6 +7323,22 @@ definitions:
       $ref: '#/definitions/AvailabilityZone'
   Base64:
     type: string
+  BlueprintType:
+    type: string
+    enum:
+      - os
+      - app
+  string:
+    type: string
+  boolean:
+    type: boolean
+  integer:
+    type: integer
+  InstancePlatform:
+    type: string
+    enum:
+      - LINUX_UNIX
+      - WINDOWS
   Blueprint:
     type: object
     properties:
@@ -7357,11 +7383,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Blueprint'
-  BlueprintType:
-    type: string
-    enum:
-      - os
-      - app
+  float:
+    type: number
+    format: float
+  InstancePlatformList:
+    type: array
+    items:
+      $ref: '#/definitions/InstancePlatform'
   Bundle:
     type: object
     properties:
@@ -7403,6 +7431,109 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Bundle'
+  PortInfo:
+    type: object
+    properties:
+      fromPort:
+        $ref: '#/definitions/Port'
+        description: The first port in the range.
+      toPort:
+        $ref: '#/definitions/Port'
+        description: The last port in the range.
+      protocol:
+        $ref: '#/definitions/NetworkProtocol'
+        description: 'The protocol. '
+    description: Describes information about the ports on your virtual private server (or <i>instance</i>).
+  Operation:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the operation.
+      resourceName:
+        $ref: '#/definitions/ResourceName'
+        description: The resource name.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type. '
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: 'The timestamp when the operation was initialized (e.g., <code>1479816991.349</code>).'
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The region and Availability Zone.
+      isTerminal:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the operation is terminal.
+      operationDetails:
+        $ref: '#/definitions/string'
+        description: 'Details about the operation (e.g., <code>Debian-1GB-Ohio-1</code>).'
+      operationType:
+        $ref: '#/definitions/OperationType'
+        description: 'The type of operation. '
+      status:
+        $ref: '#/definitions/OperationStatus'
+        description: 'The status of the operation. '
+      statusChangedAt:
+        $ref: '#/definitions/IsoDate'
+        description: 'The timestamp when the status was changed (e.g., <code>1479816991.349</code>).'
+      errorCode:
+        $ref: '#/definitions/string'
+        description: The error code.
+      errorDetails:
+        $ref: '#/definitions/string'
+        description: The error details.
+    description: Describes the API operation.
+  IsoDate:
+    type: string
+    format: date-time
+  ResourceLocation:
+    type: object
+    properties:
+      availabilityZone:
+        $ref: '#/definitions/string'
+        description: The Availability Zone. Follows the format <code>us-east-2a</code> (case-sensitive).
+      regionName:
+        $ref: '#/definitions/RegionName'
+        description: The AWS Region name.
+    description: Describes the resource location.
+  ResourceType:
+    type: string
+    enum:
+      - Instance
+      - StaticIp
+      - KeyPair
+      - InstanceSnapshot
+      - Domain
+      - PeeredVpc
+      - LoadBalancer
+      - LoadBalancerTlsCertificate
+      - Disk
+      - DiskSnapshot
+      - RelationalDatabase
+      - RelationalDatabaseSnapshot
+      - ExportSnapshotRecord
+      - CloudFormationStackRecord
+  RecordState:
+    type: string
+    enum:
+      - Started
+      - Succeeded
+      - Failed
+  CloudFormationStackRecordSourceInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/CloudFormationStackRecordSourceInfo'
+  DestinationInfo:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/NonEmptyString'
+        description: The ID of the resource created at the destination.
+      service:
+        $ref: '#/definitions/NonEmptyString'
+        description: The destination service of the record.
+    description: Describes the destination of a record.
   CloudFormationStackRecord:
     type: object
     properties:
@@ -7435,6 +7566,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CloudFormationStackRecord'
+  CloudFormationStackRecordSourceType:
+    type: string
+    enum:
+      - ExportSnapshotRecord
   CloudFormationStackRecordSourceInfo:
     type: object
     properties:
@@ -7448,24 +7583,106 @@ definitions:
         $ref: '#/definitions/NonEmptyString'
         description: The Amazon Resource Name (ARN) of the export snapshot record.
     description: 'Describes the source of a CloudFormation stack record (i.e., the export snapshot record).'
-  CloudFormationStackRecordSourceInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/CloudFormationStackRecordSourceInfo'
-  CloudFormationStackRecordSourceType:
+  RegionName:
     type: string
     enum:
-      - ExportSnapshotRecord
-  DestinationInfo:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - ca-central-1
+      - ap-south-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+  InstanceEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceEntry'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  DomainName:
+    type: string
+  DomainEntry:
     type: object
     properties:
       id:
         $ref: '#/definitions/NonEmptyString'
-        description: The ID of the resource created at the destination.
-      service:
+        description: The ID of the domain recordset entry.
+      name:
+        $ref: '#/definitions/DomainName'
+        description: The name of the domain.
+      target:
+        $ref: '#/definitions/string'
+        description: '<p>The target AWS name server (e.g., <code>ns-111.awsdns-22.com.</code>).</p> <p>For Lightsail load balancers, the value looks like <code>ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com</code>. Be sure to also set <code>isAlias</code> to <code>true</code> when setting up an A record for a load balancer.</p>'
+      isAlias:
+        $ref: '#/definitions/boolean'
+        description: 'When <code>true</code>, specifies whether the domain entry is an alias used by the Lightsail load balancer. You can include an alias (A type) record in your request, which points to a load balancer DNS name and routes traffic to your load balancer'
+      type:
+        $ref: '#/definitions/DomainEntryType'
+        description: 'The type of domain entry (e.g., <code>SOA</code> or <code>NS</code>).'
+      options:
+        $ref: '#/definitions/DomainEntryOptions'
+        description: '<p>(Deprecated) The options for the domain entry.</p> <note> <p>In releases prior to November 29, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
+    description: Describes a domain recordset entry.
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/string'
+  KeyPair:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The friendly name of the SSH key pair.
+      arn:
         $ref: '#/definitions/NonEmptyString'
-        description: The destination service of the record.
-    description: Describes the destination of a record.
+        description: 'The Amazon Resource Name (ARN) of the key pair (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).'
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: 'The timestamp when the key pair was created (e.g., <code>1479816991.349</code>).'
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The region name and Availability Zone where the key pair was created.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The resource type (usually <code>KeyPair</code>).
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
+      fingerprint:
+        $ref: '#/definitions/Base64'
+        description: The RSA fingerprint of the key pair.
+    description: Describes the SSH key pair.
+  Port:
+    type: integer
+    minimum: 0
+    maximum: 65535
+  DomainNameList:
+    type: array
+    items:
+      $ref: '#/definitions/DomainName'
+  SensitiveString:
+    type: string
+    format: password
+  DiskState:
+    type: string
+    enum:
+      - pending
+      - error
+      - available
+      - in-use
+      - unknown
   Disk:
     type: object
     properties:
@@ -7552,6 +7769,13 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: 'The new disk name (e.g., <code>my-new-disk</code>).'
     description: Describes a block storage disk mapping.
+  DiskSnapshotState:
+    type: string
+    enum:
+      - pending
+      - completed
+      - error
+      - unknown
   DiskSnapshot:
     type: object
     properties:
@@ -7603,21 +7827,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DiskSnapshot'
-  DiskSnapshotState:
-    type: string
-    enum:
-      - pending
-      - completed
-      - error
-      - unknown
-  DiskState:
-    type: string
-    enum:
-      - pending
-      - error
-      - available
-      - in-use
-      - unknown
+  DomainEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/DomainEntry'
   Domain:
     type: object
     properties:
@@ -7646,35 +7859,7 @@ definitions:
         $ref: '#/definitions/DomainEntryList'
         description: An array of key-value pairs containing information about the domain entries.
     description: Describes a domain where you are storing recordsets in Lightsail.
-  DomainEntry:
-    type: object
-    properties:
-      id:
-        $ref: '#/definitions/NonEmptyString'
-        description: The ID of the domain recordset entry.
-      name:
-        $ref: '#/definitions/DomainName'
-        description: The name of the domain.
-      target:
-        $ref: '#/definitions/string'
-        description: '<p>The target AWS name server (e.g., <code>ns-111.awsdns-22.com.</code>).</p> <p>For Lightsail load balancers, the value looks like <code>ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com</code>. Be sure to also set <code>isAlias</code> to <code>true</code> when setting up an A record for a load balancer.</p>'
-      isAlias:
-        $ref: '#/definitions/boolean'
-        description: 'When <code>true</code>, specifies whether the domain entry is an alias used by the Lightsail load balancer. You can include an alias (A type) record in your request, which points to a load balancer DNS name and routes traffic to your load balancer'
-      type:
-        $ref: '#/definitions/DomainEntryType'
-        description: 'The type of domain entry (e.g., <code>SOA</code> or <code>NS</code>).'
-      options:
-        $ref: '#/definitions/DomainEntryOptions'
-        description: '<p>(Deprecated) The options for the domain entry.</p> <note> <p>In releases prior to November 29, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>'
-    description: Describes a domain recordset entry.
-  DomainEntryList:
-    type: array
-    items:
-      $ref: '#/definitions/DomainEntry'
-  DomainEntryOptionsKeys:
-    type: string
-  string:
+  DomainEntryType:
     type: string
   DomainEntryOptions:
     type: array
@@ -7685,18 +7870,40 @@ definitions:
           $ref: '#/definitions/DomainEntryOptionsKeys'
         value:
           $ref: '#/definitions/string'
-  DomainEntryType:
+  DomainEntryOptionsKeys:
     type: string
   DomainList:
     type: array
     items:
       $ref: '#/definitions/Domain'
-  DomainName:
-    type: string
-  DomainNameList:
-    type: array
-    items:
-      $ref: '#/definitions/DomainName'
+  ExportSnapshotRecordSourceInfo:
+    type: object
+    properties:
+      resourceType:
+        $ref: '#/definitions/ExportSnapshotRecordSourceType'
+        description: 'The Lightsail resource type (e.g., <code>InstanceSnapshot</code> or <code>DiskSnapshot</code>).'
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The date when the source instance or disk snapshot was created.
+      name:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the source instance or disk snapshot.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the source instance or disk snapshot.
+      fromResourceName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the snapshot's source instance or disk.
+      fromResourceArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the snapshot's source instance or disk.
+      instanceSnapshotInfo:
+        $ref: '#/definitions/InstanceSnapshotInfo'
+        description: A list of objects describing an instance snapshot.
+      diskSnapshotInfo:
+        $ref: '#/definitions/DiskSnapshotInfo'
+        description: A list of objects describing a disk snapshot.
+    description: Describes the source of an export snapshot record.
   ExportSnapshotRecord:
     type: object
     properties:
@@ -7729,39 +7936,118 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ExportSnapshotRecord'
-  ExportSnapshotRecordSourceInfo:
-    type: object
-    properties:
-      resourceType:
-        $ref: '#/definitions/ExportSnapshotRecordSourceType'
-        description: 'The Lightsail resource type (e.g., <code>InstanceSnapshot</code> or <code>DiskSnapshot</code>).'
-      createdAt:
-        $ref: '#/definitions/IsoDate'
-        description: The date when the source instance or disk snapshot was created.
-      name:
-        $ref: '#/definitions/NonEmptyString'
-        description: The name of the source instance or disk snapshot.
-      arn:
-        $ref: '#/definitions/NonEmptyString'
-        description: The Amazon Resource Name (ARN) of the source instance or disk snapshot.
-      fromResourceName:
-        $ref: '#/definitions/NonEmptyString'
-        description: The name of the snapshot's source instance or disk.
-      fromResourceArn:
-        $ref: '#/definitions/NonEmptyString'
-        description: The Amazon Resource Name (ARN) of the snapshot's source instance or disk.
-      instanceSnapshotInfo:
-        $ref: '#/definitions/InstanceSnapshotInfo'
-        description: A list of objects describing an instance snapshot.
-      diskSnapshotInfo:
-        $ref: '#/definitions/DiskSnapshotInfo'
-        description: A list of objects describing a disk snapshot.
-    description: Describes the source of an export snapshot record.
   ExportSnapshotRecordSourceType:
     type: string
     enum:
       - InstanceSnapshot
       - DiskSnapshot
+  InstanceSnapshotInfo:
+    type: object
+    properties:
+      fromBundleId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The bundle ID from which the source instance was created (e.g., <code>micro_1_0</code>).'
+      fromBlueprintId:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The blueprint ID from which the source instance (e.g., <code>os_debian_8_3</code>).'
+      fromDiskInfo:
+        $ref: '#/definitions/DiskInfoList'
+        description: A list of objects describing the disks that were attached to the source instance.
+    description: Describes an instance snapshot.
+  InstanceAccessProtocol:
+    type: string
+    enum:
+      - ssh
+      - rdp
+  InstanceAccessDetails:
+    type: object
+    properties:
+      certKey:
+        $ref: '#/definitions/string'
+        description: 'For SSH access, the public key to use when accessing your instance For OpenSSH clients (e.g., command line SSH), you should save this value to <code>tempkey-cert.pub</code>.'
+      expiresAt:
+        $ref: '#/definitions/IsoDate'
+        description: 'For SSH access, the date on which the temporary keys expire.'
+      ipAddress:
+        $ref: '#/definitions/IpAddress'
+        description: The public IP address of the Amazon Lightsail instance.
+      password:
+        $ref: '#/definitions/string'
+        description: '<p>For RDP access, the password for your Amazon Lightsail instance. Password will be an empty string if the password for your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.</p> <note> <p>If you create an instance using any key pair other than the default (<code>LightsailDefaultKeyPair</code>), <code>password</code> will always be an empty string.</p> <p>If you change the Administrator password on the instance, Lightsail will continue to return the original password value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default.</p> </note>'
+      passwordData:
+        $ref: '#/definitions/PasswordData'
+        description: 'For a Windows Server-based instance, an object with the data you can use to retrieve your password. This is only needed if <code>password</code> is empty and the instance is not new (and therefore the password is not ready yet). When you create an instance, it can take up to 15 minutes for the instance to be ready.'
+      privateKey:
+        $ref: '#/definitions/string'
+        description: 'For SSH access, the temporary private key. For OpenSSH clients (e.g., command line SSH), you should save this value to <code>tempkey</code>).'
+      protocol:
+        $ref: '#/definitions/InstanceAccessProtocol'
+        description: The protocol for these Amazon Lightsail instance access details.
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of this Amazon Lightsail instance.
+      username:
+        $ref: '#/definitions/string'
+        description: The user name to use when logging in to the Amazon Lightsail instance.
+    description: The parameters for gaining temporary access to one of your Amazon Lightsail instances.
+  InstanceMetricName:
+    type: string
+    enum:
+      - CPUUtilization
+      - NetworkIn
+      - NetworkOut
+      - StatusCheckFailed
+      - StatusCheckFailed_Instance
+      - StatusCheckFailed_System
+  MetricPeriod:
+    type: integer
+    minimum: 60
+    maximum: 86400
+  timestamp:
+    type: string
+    format: date-time
+  MetricUnit:
+    type: string
+    enum:
+      - Seconds
+      - Microseconds
+      - Milliseconds
+      - Bytes
+      - Kilobytes
+      - Megabytes
+      - Gigabytes
+      - Terabytes
+      - Bits
+      - Kilobits
+      - Megabits
+      - Gigabits
+      - Terabits
+      - Percent
+      - Count
+      - Bytes/Second
+      - Kilobytes/Second
+      - Megabytes/Second
+      - Gigabytes/Second
+      - Terabytes/Second
+      - Bits/Second
+      - Kilobits/Second
+      - Megabits/Second
+      - Gigabits/Second
+      - Terabits/Second
+      - Count/Second
+      - None
+  MetricStatisticList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricStatistic'
+  MetricDatapointList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDatapoint'
+  InstancePortStateList:
+    type: array
+    items:
+      $ref: '#/definitions/InstancePortState'
   Instance:
     type: object
     properties:
@@ -7823,204 +8109,6 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: 'The name of the SSH key being used to connect to the instance (e.g., <code>LightsailDefaultKeyPair</code>).'
     description: Describes an instance (a virtual private server).
-  InstanceAccessDetails:
-    type: object
-    properties:
-      certKey:
-        $ref: '#/definitions/string'
-        description: 'For SSH access, the public key to use when accessing your instance For OpenSSH clients (e.g., command line SSH), you should save this value to <code>tempkey-cert.pub</code>.'
-      expiresAt:
-        $ref: '#/definitions/IsoDate'
-        description: 'For SSH access, the date on which the temporary keys expire.'
-      ipAddress:
-        $ref: '#/definitions/IpAddress'
-        description: The public IP address of the Amazon Lightsail instance.
-      password:
-        $ref: '#/definitions/string'
-        description: '<p>For RDP access, the password for your Amazon Lightsail instance. Password will be an empty string if the password for your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.</p> <note> <p>If you create an instance using any key pair other than the default (<code>LightsailDefaultKeyPair</code>), <code>password</code> will always be an empty string.</p> <p>If you change the Administrator password on the instance, Lightsail will continue to return the original password value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default.</p> </note>'
-      passwordData:
-        $ref: '#/definitions/PasswordData'
-        description: 'For a Windows Server-based instance, an object with the data you can use to retrieve your password. This is only needed if <code>password</code> is empty and the instance is not new (and therefore the password is not ready yet). When you create an instance, it can take up to 15 minutes for the instance to be ready.'
-      privateKey:
-        $ref: '#/definitions/string'
-        description: 'For SSH access, the temporary private key. For OpenSSH clients (e.g., command line SSH), you should save this value to <code>tempkey</code>).'
-      protocol:
-        $ref: '#/definitions/InstanceAccessProtocol'
-        description: The protocol for these Amazon Lightsail instance access details.
-      instanceName:
-        $ref: '#/definitions/ResourceName'
-        description: The name of this Amazon Lightsail instance.
-      username:
-        $ref: '#/definitions/string'
-        description: The user name to use when logging in to the Amazon Lightsail instance.
-    description: The parameters for gaining temporary access to one of your Amazon Lightsail instances.
-  InstanceAccessProtocol:
-    type: string
-    enum:
-      - ssh
-      - rdp
-  InstanceEntry:
-    type: object
-    required:
-      - sourceName
-      - instanceType
-      - portInfoSource
-      - availabilityZone
-    properties:
-      sourceName:
-        $ref: '#/definitions/ResourceName'
-        description: '<p>The name of the export snapshot record, which contains the exported Lightsail instance snapshot that will be used as the source of the new Amazon EC2 instance.</p> <p>Use the <code>get export snapshot records</code> operation to get a list of export snapshot records that you can use to create a CloudFormation stack.</p>'
-      instanceType:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The instance type (e.g., <code>t2.micro</code>) to use for the new Amazon EC2 instance.'
-      portInfoSource:
-        $ref: '#/definitions/PortInfoSourceType'
-        description: '<p>The port configuration to use for the new Amazon EC2 instance.</p> <p>The following configuration options are available:</p> <ul> <li> <p>DEFAULT — Use the default firewall settings from the image.</p> </li> <li> <p>INSTANCE — Use the firewall settings from the source Lightsail instance.</p> </li> <li> <p>NONE — Default to Amazon EC2.</p> </li> </ul>'
-      userData:
-        $ref: '#/definitions/string'
-        description: '<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>.</p> </note>'
-      availabilityZone:
-        $ref: '#/definitions/string'
-        description: The Availability Zone for the new Amazon EC2 instance.
-    description: Describes the Amazon Elastic Compute Cloud instance and related resources to be created using the <code>create cloud formation stack</code> operation.
-  InstanceEntryList:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceEntry'
-  InstanceHardware:
-    type: object
-    properties:
-      cpuCount:
-        $ref: '#/definitions/integer'
-        description: The number of vCPUs the instance has.
-      disks:
-        $ref: '#/definitions/DiskList'
-        description: The disks attached to the instance.
-      ramSizeInGb:
-        $ref: '#/definitions/float'
-        description: 'The amount of RAM in GB on the instance (e.g., <code>1.0</code>).'
-    description: Describes the hardware for the instance.
-  InstanceHealthReason:
-    type: string
-    enum:
-      - Lb.RegistrationInProgress
-      - Lb.InitialHealthChecking
-      - Lb.InternalError
-      - Instance.ResponseCodeMismatch
-      - Instance.Timeout
-      - Instance.FailedHealthChecks
-      - Instance.NotRegistered
-      - Instance.NotInUse
-      - Instance.DeregistrationInProgress
-      - Instance.InvalidState
-      - Instance.IpUnusable
-  InstanceHealthState:
-    type: string
-    enum:
-      - initial
-      - healthy
-      - unhealthy
-      - unused
-      - draining
-      - unavailable
-  InstanceHealthSummary:
-    type: object
-    properties:
-      instanceName:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the Lightsail instance for which you are requesting health check data.
-      instanceHealth:
-        $ref: '#/definitions/InstanceHealthState'
-        description: Describes the overall instance health. Valid values are below.
-      instanceHealthReason:
-        $ref: '#/definitions/InstanceHealthReason'
-        description: '<p>More information about the instance health. If the <code>instanceHealth</code> is <code>healthy</code>, then an <code>instanceHealthReason</code> value is not provided.</p> <p>If <b> <code>instanceHealth</code> </b> is <code>initial</code>, the <b> <code>instanceHealthReason</code> </b> value can be one of the following:</p> <ul> <li> <p> <b> <code>Lb.RegistrationInProgress</code> </b> - The target instance is in the process of being registered with the load balancer.</p> </li> <li> <p> <b> <code>Lb.InitialHealthChecking</code> </b> - The Lightsail load balancer is still sending the target instance the minimum number of health checks required to determine its health status.</p> </li> </ul> <p>If <b> <code>instanceHealth</code> </b> is <code>unhealthy</code>, the <b> <code>instanceHealthReason</code> </b> value can be one of the following:</p> <ul> <li> <p> <b> <code>Instance.ResponseCodeMismatch</code> </b> - The health checks did not return an expected HTTP code.</p> </li> <li> <p> <b> <code>Instance.Timeout</code> </b> - The health check requests timed out.</p> </li> <li> <p> <b> <code>Instance.FailedHealthChecks</code> </b> - The health checks failed because the connection to the target instance timed out, the target instance response was malformed, or the target instance failed the health check for an unknown reason.</p> </li> <li> <p> <b> <code>Lb.InternalError</code> </b> - The health checks failed due to an internal error.</p> </li> </ul> <p>If <b> <code>instanceHealth</code> </b> is <code>unused</code>, the <b> <code>instanceHealthReason</code> </b> value can be one of the following:</p> <ul> <li> <p> <b> <code>Instance.NotRegistered</code> </b> - The target instance is not registered with the target group.</p> </li> <li> <p> <b> <code>Instance.NotInUse</code> </b> - The target group is not used by any load balancer, or the target instance is in an Availability Zone that is not enabled for its load balancer.</p> </li> <li> <p> <b> <code>Instance.IpUnusable</code> </b> - The target IP address is reserved for use by a Lightsail load balancer.</p> </li> <li> <p> <b> <code>Instance.InvalidState</code> </b> - The target is in the stopped or terminated state.</p> </li> </ul> <p>If <b> <code>instanceHealth</code> </b> is <code>draining</code>, the <b> <code>instanceHealthReason</code> </b> value can be one of the following:</p> <ul> <li> <p> <b> <code>Instance.DeregistrationInProgress</code> </b> - The target instance is in the process of being deregistered and the deregistration delay period has not expired.</p> </li> </ul>'
-    description: Describes information about the health of the instance.
-  InstanceHealthSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceHealthSummary'
-  InstanceList:
-    type: array
-    items:
-      $ref: '#/definitions/Instance'
-  InstanceMetricName:
-    type: string
-    enum:
-      - CPUUtilization
-      - NetworkIn
-      - NetworkOut
-      - StatusCheckFailed
-      - StatusCheckFailed_Instance
-      - StatusCheckFailed_System
-  InstanceNetworking:
-    type: object
-    properties:
-      monthlyTransfer:
-        $ref: '#/definitions/MonthlyTransfer'
-        description: The amount of data in GB allocated for monthly data transfers.
-      ports:
-        $ref: '#/definitions/InstancePortInfoList'
-        description: An array of key-value pairs containing information about the ports on the instance.
-    description: Describes monthly data transfer rates and port information for an instance.
-  InstancePlatform:
-    type: string
-    enum:
-      - LINUX_UNIX
-      - WINDOWS
-  InstancePlatformList:
-    type: array
-    items:
-      $ref: '#/definitions/InstancePlatform'
-  InstancePortInfo:
-    type: object
-    properties:
-      fromPort:
-        $ref: '#/definitions/Port'
-        description: The first port in the range.
-      toPort:
-        $ref: '#/definitions/Port'
-        description: The last port in the range.
-      protocol:
-        $ref: '#/definitions/NetworkProtocol'
-        description: '<p>The protocol being used. Can be one of the following.</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn''t require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href="https://en.wikipedia.org/wiki/Transport_layer">Transport layer</a> on Wikipedia.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don''t require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> </ul>'
-      accessFrom:
-        $ref: '#/definitions/string'
-        description: 'The location from which access is allowed (e.g., <code>Anywhere (0.0.0.0/0)</code>).'
-      accessType:
-        $ref: '#/definitions/PortAccessType'
-        description: The type of access (<code>Public</code> or <code>Private</code>).
-      commonName:
-        $ref: '#/definitions/string'
-        description: The common name.
-      accessDirection:
-        $ref: '#/definitions/AccessDirection'
-        description: The access direction (<code>inbound</code> or <code>outbound</code>).
-    description: Describes information about the instance ports.
-  InstancePortInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/InstancePortInfo'
-  InstancePortState:
-    type: object
-    properties:
-      fromPort:
-        $ref: '#/definitions/Port'
-        description: The first port in the range.
-      toPort:
-        $ref: '#/definitions/Port'
-        description: The last port in the range.
-      protocol:
-        $ref: '#/definitions/NetworkProtocol'
-        description: '<p>The protocol being used. Can be one of the following.</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn''t require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href="https://en.wikipedia.org/wiki/Transport_layer">Transport layer</a> on Wikipedia.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don''t require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> </ul>'
-      state:
-        $ref: '#/definitions/PortState'
-        description: Specifies whether the instance port is <code>open</code> or <code>closed</code>.
-    description: Describes the port state.
-  InstancePortStateList:
-    type: array
-    items:
-      $ref: '#/definitions/InstancePortState'
   InstanceSnapshot:
     type: object
     properties:
@@ -8070,29 +8158,10 @@ definitions:
         $ref: '#/definitions/integer'
         description: The size in GB of the SSD.
     description: 'Describes the snapshot of the virtual private server, or <i>instance</i>.'
-  InstanceSnapshotInfo:
-    type: object
-    properties:
-      fromBundleId:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The bundle ID from which the source instance was created (e.g., <code>micro_1_0</code>).'
-      fromBlueprintId:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The blueprint ID from which the source instance (e.g., <code>os_debian_8_3</code>).'
-      fromDiskInfo:
-        $ref: '#/definitions/DiskInfoList'
-        description: A list of objects describing the disks that were attached to the source instance.
-    description: Describes an instance snapshot.
   InstanceSnapshotList:
     type: array
     items:
       $ref: '#/definitions/InstanceSnapshot'
-  InstanceSnapshotState:
-    type: string
-    enum:
-      - pending
-      - error
-      - available
   InstanceState:
     type: object
     properties:
@@ -8103,47 +8172,29 @@ definitions:
         $ref: '#/definitions/string'
         description: 'The state of the instance (e.g., <code>running</code> or <code>pending</code>).'
     description: Describes the virtual private server (or <i>instance</i>) status.
-  IpAddress:
-    type: string
-    pattern: '([0-9]{1,3}\.){3}[0-9]{1,3}'
-  IpV6Address:
-    type: string
-    pattern: '([A-F0-9]{1,4}:){7}[A-F0-9]{1,4}'
-  IsoDate:
-    type: string
-    format: date-time
-  KeyPair:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/ResourceName'
-        description: The friendly name of the SSH key pair.
-      arn:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The Amazon Resource Name (ARN) of the key pair (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).'
-      supportCode:
-        $ref: '#/definitions/string'
-        description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
-      createdAt:
-        $ref: '#/definitions/IsoDate'
-        description: 'The timestamp when the key pair was created (e.g., <code>1479816991.349</code>).'
-      location:
-        $ref: '#/definitions/ResourceLocation'
-        description: The region name and Availability Zone where the key pair was created.
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The resource type (usually <code>KeyPair</code>).
-      tags:
-        $ref: '#/definitions/TagList'
-        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
-      fingerprint:
-        $ref: '#/definitions/Base64'
-        description: The RSA fingerprint of the key pair.
-    description: Describes the SSH key pair.
+  InstanceList:
+    type: array
+    items:
+      $ref: '#/definitions/Instance'
   KeyPairList:
     type: array
     items:
       $ref: '#/definitions/KeyPair'
+  LoadBalancerMetricName:
+    type: string
+    enum:
+      - ClientTLSNegotiationErrorCount
+      - HealthyHostCount
+      - UnhealthyHostCount
+      - HTTPCode_LB_4XX_Count
+      - HTTPCode_LB_5XX_Count
+      - HTTPCode_Instance_2XX_Count
+      - HTTPCode_Instance_3XX_Count
+      - HTTPCode_Instance_4XX_Count
+      - HTTPCode_Instance_5XX_Count
+      - InstanceResponseTime
+      - RejectedConnectionCount
+      - RequestCount
   LoadBalancer:
     type: object
     properties:
@@ -8196,12 +8247,428 @@ definitions:
         $ref: '#/definitions/LoadBalancerConfigurationOptions'
         description: A string to string map of the configuration options for your load balancer. Valid values are listed below.
     description: Describes the Lightsail load balancer.
-  LoadBalancerAttributeName:
+  LoadBalancerTlsCertificateList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerTlsCertificate'
+  LoadBalancerList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancer'
+  RegionList:
+    type: array
+    items:
+      $ref: '#/definitions/Region'
+  RelationalDatabaseBlueprintList:
+    type: array
+    items:
+      $ref: '#/definitions/RelationalDatabaseBlueprint'
+  RelationalDatabaseBundleList:
+    type: array
+    items:
+      $ref: '#/definitions/RelationalDatabaseBundle'
+  RelationalDatabaseEventList:
+    type: array
+    items:
+      $ref: '#/definitions/RelationalDatabaseEvent'
+  LogEventList:
+    type: array
+    items:
+      $ref: '#/definitions/LogEvent'
+  RelationalDatabasePasswordVersion:
     type: string
     enum:
-      - HealthCheckPath
-      - SessionStickinessEnabled
-      - SessionStickiness_LB_CookieDurationSeconds
+      - CURRENT
+      - PREVIOUS
+      - PENDING
+  RelationalDatabaseMetricName:
+    type: string
+    enum:
+      - CPUUtilization
+      - DatabaseConnections
+      - DiskQueueDepth
+      - FreeStorageSpace
+      - NetworkReceiveThroughput
+      - NetworkTransmitThroughput
+  RelationalDatabaseParameterList:
+    type: array
+    items:
+      $ref: '#/definitions/RelationalDatabaseParameter'
+  RelationalDatabase:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The unique name of the database resource in Lightsail.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the database.
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code for the database. Include this code in your email to support when you have questions about a database in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the database was created. Formatted in Unix time.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The Region name and Availability Zone where the database is located.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The Lightsail resource type for the database (for example, <code>RelationalDatabase</code>).'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
+      relationalDatabaseBlueprintId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The blueprint ID for the database. A blueprint describes the major engine version of a database.
+      relationalDatabaseBundleId:
+        $ref: '#/definitions/NonEmptyString'
+        description: The bundle ID for the database. A bundle describes the performance specifications for your database.
+      masterDatabaseName:
+        $ref: '#/definitions/string'
+        description: The name of the master database created when the Lightsail database resource is created.
+      hardware:
+        $ref: '#/definitions/RelationalDatabaseHardware'
+        description: Describes the hardware of the database.
+      state:
+        $ref: '#/definitions/NonEmptyString'
+        description: Describes the current state of the database.
+      secondaryAvailabilityZone:
+        $ref: '#/definitions/string'
+        description: <p>Describes the secondary Availability Zone of a high availability database.</p> <p>The secondary database is used for failover support of a high availability database.</p>
+      backupRetentionEnabled:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether automated backup retention is enabled for the database.
+      pendingModifiedValues:
+        $ref: '#/definitions/PendingModifiedRelationalDatabaseValues'
+        description: Describes pending database value modifications.
+      engine:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The database software (for example, <code>MySQL</code>).'
+      engineVersion:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The database engine version (for example, <code>5.7.23</code>).'
+      latestRestorableTime:
+        $ref: '#/definitions/IsoDate'
+        description: The latest point in time to which the database can be restored. Formatted in Unix time.
+      masterUsername:
+        $ref: '#/definitions/NonEmptyString'
+        description: The master user name of the database.
+      parameterApplyStatus:
+        $ref: '#/definitions/NonEmptyString'
+        description: The status of parameter updates for the database.
+      preferredBackupWindow:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The daily time range during which automated backups are created for the database (for example, <code>16:00-16:30</code>).'
+      preferredMaintenanceWindow:
+        $ref: '#/definitions/NonEmptyString'
+        description: '<p>The weekly time range during which system maintenance can occur on the database.</p> <p>In the format <code>ddd:hh24:mi-ddd:hh24:mi</code>. For example, <code>Tue:17:00-Tue:17:30</code>.</p>'
+      publiclyAccessible:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the database is publicly accessible.
+      masterEndpoint:
+        $ref: '#/definitions/RelationalDatabaseEndpoint'
+        description: The master endpoint for the database.
+      pendingMaintenanceActions:
+        $ref: '#/definitions/PendingMaintenanceActionList'
+        description: Describes the pending maintenance actions for the database.
+    description: Describes a database.
+  RelationalDatabaseSnapshot:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the database snapshot.
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the database snapshot.
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code for the database snapshot. Include this code in your email to support when you have questions about a database snapshot in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: The timestamp when the database snapshot was created.
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The Region name and Availability Zone where the database snapshot is located.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The Lightsail resource type.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
+      engine:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The software of the database snapshot (for example, <code>MySQL</code>)'
+      engineVersion:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The database engine version for the database snapshot (for example, <code>5.7.23</code>).'
+      sizeInGb:
+        $ref: '#/definitions/integer'
+        description: 'The size of the disk in GB (for example, <code>32</code>) for the database snapshot.'
+      state:
+        $ref: '#/definitions/NonEmptyString'
+        description: The state of the database snapshot.
+      fromRelationalDatabaseName:
+        $ref: '#/definitions/NonEmptyString'
+        description: The name of the source database from which the database snapshot was created.
+      fromRelationalDatabaseArn:
+        $ref: '#/definitions/NonEmptyString'
+        description: The Amazon Resource Name (ARN) of the database from which the database snapshot was created.
+      fromRelationalDatabaseBundleId:
+        $ref: '#/definitions/string'
+        description: The bundle ID of the database from which the database snapshot was created.
+      fromRelationalDatabaseBlueprintId:
+        $ref: '#/definitions/string'
+        description: The blueprint ID of the database from which the database snapshot was created. A blueprint describes the major engine version of a database.
+    description: Describes a database snapshot.
+  RelationalDatabaseSnapshotList:
+    type: array
+    items:
+      $ref: '#/definitions/RelationalDatabaseSnapshot'
+  RelationalDatabaseList:
+    type: array
+    items:
+      $ref: '#/definitions/RelationalDatabase'
+  StaticIp:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name of the static IP (e.g., <code>StaticIP-Ohio-EXAMPLE</code>).'
+      arn:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The Amazon Resource Name (ARN) of the static IP (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).'
+      supportCode:
+        $ref: '#/definitions/string'
+        description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+      createdAt:
+        $ref: '#/definitions/IsoDate'
+        description: 'The timestamp when the static IP was created (e.g., <code>1479735304.222</code>).'
+      location:
+        $ref: '#/definitions/ResourceLocation'
+        description: The region and Availability Zone where the static IP was created.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The resource type (usually <code>StaticIp</code>).
+      ipAddress:
+        $ref: '#/definitions/IpAddress'
+        description: The static IP address.
+      attachedTo:
+        $ref: '#/definitions/ResourceName'
+        description: 'The instance where the static IP is attached (e.g., <code>Amazon_Linux-1GB-Ohio-1</code>).'
+      isAttached:
+        $ref: '#/definitions/boolean'
+        description: A Boolean value indicating whether the static IP is attached.
+    description: Describes the static IP.
+  StaticIpList:
+    type: array
+    items:
+      $ref: '#/definitions/StaticIp'
+  IpAddress:
+    type: string
+    pattern: '([0-9]{1,3}\.){3}[0-9]{1,3}'
+  IpV6Address:
+    type: string
+    pattern: '([A-F0-9]{1,4}:){7}[A-F0-9]{1,4}'
+  InstanceHardware:
+    type: object
+    properties:
+      cpuCount:
+        $ref: '#/definitions/integer'
+        description: The number of vCPUs the instance has.
+      disks:
+        $ref: '#/definitions/DiskList'
+        description: The disks attached to the instance.
+      ramSizeInGb:
+        $ref: '#/definitions/float'
+        description: 'The amount of RAM in GB on the instance (e.g., <code>1.0</code>).'
+    description: Describes the hardware for the instance.
+  InstanceNetworking:
+    type: object
+    properties:
+      monthlyTransfer:
+        $ref: '#/definitions/MonthlyTransfer'
+        description: The amount of data in GB allocated for monthly data transfers.
+      ports:
+        $ref: '#/definitions/InstancePortInfoList'
+        description: An array of key-value pairs containing information about the ports on the instance.
+    description: Describes monthly data transfer rates and port information for an instance.
+  PasswordData:
+    type: object
+    properties:
+      ciphertext:
+        $ref: '#/definitions/string'
+        description: '<p>The encrypted password. Ciphertext will be an empty string if access to your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.</p> <note> <p>If you use the default key pair (<code>LightsailDefaultKeyPair</code>), the decrypted password will be available in the password field.</p> <p>If you are using a custom key pair, you need to use your own means of decryption.</p> <p>If you change the Administrator password on the instance, Lightsail will continue to return the original ciphertext value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default.</p> </note>'
+      keyPairName:
+        $ref: '#/definitions/ResourceName'
+        description: '<p>The name of the key pair that you used when creating your instance. If no key pair name was specified when creating the instance, Lightsail uses the default key pair (<code>LightsailDefaultKeyPair</code>).</p> <p>If you are using a custom key pair, you need to use your own means of decrypting your password using the <code>ciphertext</code>. Lightsail creates the ciphertext by encrypting your password with the public key part of this key pair.</p>'
+    description: 'The password data for the Windows Server-based instance, including the ciphertext and the key pair name.'
+  PortInfoSourceType:
+    type: string
+    enum:
+      - DEFAULT
+      - INSTANCE
+      - NONE
+  InstanceEntry:
+    type: object
+    required:
+      - sourceName
+      - instanceType
+      - portInfoSource
+      - availabilityZone
+    properties:
+      sourceName:
+        $ref: '#/definitions/ResourceName'
+        description: '<p>The name of the export snapshot record, which contains the exported Lightsail instance snapshot that will be used as the source of the new Amazon EC2 instance.</p> <p>Use the <code>get export snapshot records</code> operation to get a list of export snapshot records that you can use to create a CloudFormation stack.</p>'
+      instanceType:
+        $ref: '#/definitions/NonEmptyString'
+        description: 'The instance type (e.g., <code>t2.micro</code>) to use for the new Amazon EC2 instance.'
+      portInfoSource:
+        $ref: '#/definitions/PortInfoSourceType'
+        description: '<p>The port configuration to use for the new Amazon EC2 instance.</p> <p>The following configuration options are available:</p> <ul> <li> <p>DEFAULT — Use the default firewall settings from the image.</p> </li> <li> <p>INSTANCE — Use the firewall settings from the source Lightsail instance.</p> </li> <li> <p>NONE — Default to Amazon EC2.</p> </li> </ul>'
+      userData:
+        $ref: '#/definitions/string'
+        description: '<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>.</p> </note>'
+      availabilityZone:
+        $ref: '#/definitions/string'
+        description: The Availability Zone for the new Amazon EC2 instance.
+    description: Describes the Amazon Elastic Compute Cloud instance and related resources to be created using the <code>create cloud formation stack</code> operation.
+  InstanceHealthReason:
+    type: string
+    enum:
+      - Lb.RegistrationInProgress
+      - Lb.InitialHealthChecking
+      - Lb.InternalError
+      - Instance.ResponseCodeMismatch
+      - Instance.Timeout
+      - Instance.FailedHealthChecks
+      - Instance.NotRegistered
+      - Instance.NotInUse
+      - Instance.DeregistrationInProgress
+      - Instance.InvalidState
+      - Instance.IpUnusable
+  InstanceHealthState:
+    type: string
+    enum:
+      - initial
+      - healthy
+      - unhealthy
+      - unused
+      - draining
+      - unavailable
+  InstanceHealthSummary:
+    type: object
+    properties:
+      instanceName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the Lightsail instance for which you are requesting health check data.
+      instanceHealth:
+        $ref: '#/definitions/InstanceHealthState'
+        description: Describes the overall instance health. Valid values are below.
+      instanceHealthReason:
+        $ref: '#/definitions/InstanceHealthReason'
+        description: '<p>More information about the instance health. If the <code>instanceHealth</code> is <code>healthy</code>, then an <code>instanceHealthReason</code> value is not provided.</p> <p>If <b> <code>instanceHealth</code> </b> is <code>initial</code>, the <b> <code>instanceHealthReason</code> </b> value can be one of the following:</p> <ul> <li> <p> <b> <code>Lb.RegistrationInProgress</code> </b> - The target instance is in the process of being registered with the load balancer.</p> </li> <li> <p> <b> <code>Lb.InitialHealthChecking</code> </b> - The Lightsail load balancer is still sending the target instance the minimum number of health checks required to determine its health status.</p> </li> </ul> <p>If <b> <code>instanceHealth</code> </b> is <code>unhealthy</code>, the <b> <code>instanceHealthReason</code> </b> value can be one of the following:</p> <ul> <li> <p> <b> <code>Instance.ResponseCodeMismatch</code> </b> - The health checks did not return an expected HTTP code.</p> </li> <li> <p> <b> <code>Instance.Timeout</code> </b> - The health check requests timed out.</p> </li> <li> <p> <b> <code>Instance.FailedHealthChecks</code> </b> - The health checks failed because the connection to the target instance timed out, the target instance response was malformed, or the target instance failed the health check for an unknown reason.</p> </li> <li> <p> <b> <code>Lb.InternalError</code> </b> - The health checks failed due to an internal error.</p> </li> </ul> <p>If <b> <code>instanceHealth</code> </b> is <code>unused</code>, the <b> <code>instanceHealthReason</code> </b> value can be one of the following:</p> <ul> <li> <p> <b> <code>Instance.NotRegistered</code> </b> - The target instance is not registered with the target group.</p> </li> <li> <p> <b> <code>Instance.NotInUse</code> </b> - The target group is not used by any load balancer, or the target instance is in an Availability Zone that is not enabled for its load balancer.</p> </li> <li> <p> <b> <code>Instance.IpUnusable</code> </b> - The target IP address is reserved for use by a Lightsail load balancer.</p> </li> <li> <p> <b> <code>Instance.InvalidState</code> </b> - The target is in the stopped or terminated state.</p> </li> </ul> <p>If <b> <code>instanceHealth</code> </b> is <code>draining</code>, the <b> <code>instanceHealthReason</code> </b> value can be one of the following:</p> <ul> <li> <p> <b> <code>Instance.DeregistrationInProgress</code> </b> - The target instance is in the process of being deregistered and the deregistration delay period has not expired.</p> </li> </ul>'
+    description: Describes information about the health of the instance.
+  InstanceHealthSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceHealthSummary'
+  MonthlyTransfer:
+    type: object
+    properties:
+      gbPerMonthAllocated:
+        $ref: '#/definitions/integer'
+        description: The amount allocated per month (in GB).
+    description: Describes the monthly data transfer in and out of your virtual private server (or <i>instance</i>).
+  InstancePortInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/InstancePortInfo'
+  NetworkProtocol:
+    type: string
+    enum:
+      - tcp
+      - all
+      - udp
+  PortAccessType:
+    type: string
+    enum:
+      - Public
+      - Private
+  InstancePortInfo:
+    type: object
+    properties:
+      fromPort:
+        $ref: '#/definitions/Port'
+        description: The first port in the range.
+      toPort:
+        $ref: '#/definitions/Port'
+        description: The last port in the range.
+      protocol:
+        $ref: '#/definitions/NetworkProtocol'
+        description: '<p>The protocol being used. Can be one of the following.</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn''t require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href="https://en.wikipedia.org/wiki/Transport_layer">Transport layer</a> on Wikipedia.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don''t require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> </ul>'
+      accessFrom:
+        $ref: '#/definitions/string'
+        description: 'The location from which access is allowed (e.g., <code>Anywhere (0.0.0.0/0)</code>).'
+      accessType:
+        $ref: '#/definitions/PortAccessType'
+        description: The type of access (<code>Public</code> or <code>Private</code>).
+      commonName:
+        $ref: '#/definitions/string'
+        description: The common name.
+      accessDirection:
+        $ref: '#/definitions/AccessDirection'
+        description: The access direction (<code>inbound</code> or <code>outbound</code>).
+    description: Describes information about the instance ports.
+  PortState:
+    type: string
+    enum:
+      - open
+      - closed
+  InstancePortState:
+    type: object
+    properties:
+      fromPort:
+        $ref: '#/definitions/Port'
+        description: The first port in the range.
+      toPort:
+        $ref: '#/definitions/Port'
+        description: The last port in the range.
+      protocol:
+        $ref: '#/definitions/NetworkProtocol'
+        description: '<p>The protocol being used. Can be one of the following.</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn''t require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href="https://en.wikipedia.org/wiki/Transport_layer">Transport layer</a> on Wikipedia.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don''t require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> </ul>'
+      state:
+        $ref: '#/definitions/PortState'
+        description: Specifies whether the instance port is <code>open</code> or <code>closed</code>.
+    description: Describes the port state.
+  InstanceSnapshotState:
+    type: string
+    enum:
+      - pending
+      - error
+      - available
+  LoadBalancerState:
+    type: string
+    enum:
+      - active
+      - provisioning
+      - active_impaired
+      - failed
+      - unknown
+  LoadBalancerProtocol:
+    type: string
+    enum:
+      - HTTP_HTTPS
+      - HTTP
+  PortList:
+    type: array
+    items:
+      $ref: '#/definitions/Port'
+  LoadBalancerTlsCertificateSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerTlsCertificateSummary'
   LoadBalancerConfigurationOptions:
     type: array
     items:
@@ -8211,38 +8678,58 @@ definitions:
           $ref: '#/definitions/LoadBalancerAttributeName'
         value:
           $ref: '#/definitions/string'
-  LoadBalancerList:
+  LoadBalancerAttributeName:
+    type: string
+    enum:
+      - HealthCheckPath
+      - SessionStickinessEnabled
+      - SessionStickiness_LB_CookieDurationSeconds
+  LoadBalancerTlsCertificateStatus:
+    type: string
+    enum:
+      - PENDING_VALIDATION
+      - ISSUED
+      - INACTIVE
+      - EXPIRED
+      - VALIDATION_TIMED_OUT
+      - REVOKED
+      - FAILED
+      - UNKNOWN
+  LoadBalancerTlsCertificateDomainValidationRecordList:
     type: array
     items:
-      $ref: '#/definitions/LoadBalancer'
-  LoadBalancerMetricName:
+      $ref: '#/definitions/LoadBalancerTlsCertificateDomainValidationRecord'
+  LoadBalancerTlsCertificateFailureReason:
     type: string
     enum:
-      - ClientTLSNegotiationErrorCount
-      - HealthyHostCount
-      - UnhealthyHostCount
-      - HTTPCode_LB_4XX_Count
-      - HTTPCode_LB_5XX_Count
-      - HTTPCode_Instance_2XX_Count
-      - HTTPCode_Instance_3XX_Count
-      - HTTPCode_Instance_4XX_Count
-      - HTTPCode_Instance_5XX_Count
-      - InstanceResponseTime
-      - RejectedConnectionCount
-      - RequestCount
-  LoadBalancerProtocol:
+      - NO_AVAILABLE_CONTACTS
+      - ADDITIONAL_VERIFICATION_REQUIRED
+      - DOMAIN_NOT_ALLOWED
+      - INVALID_PUBLIC_DOMAIN
+      - OTHER
+  LoadBalancerTlsCertificateRenewalSummary:
+    type: object
+    properties:
+      renewalStatus:
+        $ref: '#/definitions/LoadBalancerTlsCertificateRenewalStatus'
+        description: The status of Lightsail's managed renewal of the certificate. Valid values are listed below.
+      domainValidationOptions:
+        $ref: '#/definitions/LoadBalancerTlsCertificateDomainValidationOptionList'
+        description: 'Contains information about the validation of each domain name in the certificate, as it pertains to Lightsail''s managed renewal. This is different from the initial validation that occurs as a result of the RequestCertificate request.'
+    description: Contains information about the status of Lightsail's managed renewal for the certificate.
+  LoadBalancerTlsCertificateRevocationReason:
     type: string
     enum:
-      - HTTP_HTTPS
-      - HTTP
-  LoadBalancerState:
-    type: string
-    enum:
-      - active
-      - provisioning
-      - active_impaired
-      - failed
-      - unknown
+      - UNSPECIFIED
+      - KEY_COMPROMISE
+      - CA_COMPROMISE
+      - AFFILIATION_CHANGED
+      - SUPERCEDED
+      - CESSATION_OF_OPERATION
+      - CERTIFICATE_HOLD
+      - REMOVE_FROM_CRL
+      - PRIVILEGE_WITHDRAWN
+      - A_A_COMPROMISE
   LoadBalancerTlsCertificate:
     type: object
     properties:
@@ -8361,22 +8848,6 @@ definitions:
         $ref: '#/definitions/DomainName'
         description: The domain name against which your SSL/TLS certificate was validated.
     description: Describes the validation record of each domain name in the SSL/TLS certificate.
-  LoadBalancerTlsCertificateDomainValidationRecordList:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerTlsCertificateDomainValidationRecord'
-  LoadBalancerTlsCertificateFailureReason:
-    type: string
-    enum:
-      - NO_AVAILABLE_CONTACTS
-      - ADDITIONAL_VERIFICATION_REQUIRED
-      - DOMAIN_NOT_ALLOWED
-      - INVALID_PUBLIC_DOMAIN
-      - OTHER
-  LoadBalancerTlsCertificateList:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerTlsCertificate'
   LoadBalancerTlsCertificateRenewalStatus:
     type: string
     enum:
@@ -8384,40 +8855,6 @@ definitions:
       - PENDING_VALIDATION
       - SUCCESS
       - FAILED
-  LoadBalancerTlsCertificateRenewalSummary:
-    type: object
-    properties:
-      renewalStatus:
-        $ref: '#/definitions/LoadBalancerTlsCertificateRenewalStatus'
-        description: The status of Lightsail's managed renewal of the certificate. Valid values are listed below.
-      domainValidationOptions:
-        $ref: '#/definitions/LoadBalancerTlsCertificateDomainValidationOptionList'
-        description: 'Contains information about the validation of each domain name in the certificate, as it pertains to Lightsail''s managed renewal. This is different from the initial validation that occurs as a result of the RequestCertificate request.'
-    description: Contains information about the status of Lightsail's managed renewal for the certificate.
-  LoadBalancerTlsCertificateRevocationReason:
-    type: string
-    enum:
-      - UNSPECIFIED
-      - KEY_COMPROMISE
-      - CA_COMPROMISE
-      - AFFILIATION_CHANGED
-      - SUPERCEDED
-      - CESSATION_OF_OPERATION
-      - CERTIFICATE_HOLD
-      - REMOVE_FROM_CRL
-      - PRIVILEGE_WITHDRAWN
-      - A_A_COMPROMISE
-  LoadBalancerTlsCertificateStatus:
-    type: string
-    enum:
-      - PENDING_VALIDATION
-      - ISSUED
-      - INACTIVE
-      - EXPIRED
-      - VALIDATION_TIMED_OUT
-      - REVOKED
-      - FAILED
-      - UNKNOWN
   LoadBalancerTlsCertificateSummary:
     type: object
     properties:
@@ -8428,10 +8865,6 @@ definitions:
         $ref: '#/definitions/boolean'
         description: 'When <code>true</code>, the SSL/TLS certificate is attached to the Lightsail load balancer.'
     description: Provides a summary of SSL/TLS certificate metadata.
-  LoadBalancerTlsCertificateSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerTlsCertificateSummary'
   LogEvent:
     type: object
     properties:
@@ -8442,10 +8875,9 @@ definitions:
         $ref: '#/definitions/string'
         description: The message of the database log event.
     description: Describes a database log event.
-  LogEventList:
-    type: array
-    items:
-      $ref: '#/definitions/LogEvent'
+  double:
+    type: number
+    format: double
   MetricDatapoint:
     type: object
     properties:
@@ -8471,14 +8903,6 @@ definitions:
         $ref: '#/definitions/MetricUnit'
         description: 'The unit. '
     description: Describes the metric data point.
-  MetricDatapointList:
-    type: array
-    items:
-      $ref: '#/definitions/MetricDatapoint'
-  MetricPeriod:
-    type: integer
-    minimum: 60
-    maximum: 86400
   MetricStatistic:
     type: string
     enum:
@@ -8487,108 +8911,6 @@ definitions:
       - Sum
       - Average
       - SampleCount
-  MetricStatisticList:
-    type: array
-    items:
-      $ref: '#/definitions/MetricStatistic'
-  MetricUnit:
-    type: string
-    enum:
-      - Seconds
-      - Microseconds
-      - Milliseconds
-      - Bytes
-      - Kilobytes
-      - Megabytes
-      - Gigabytes
-      - Terabytes
-      - Bits
-      - Kilobits
-      - Megabits
-      - Gigabits
-      - Terabits
-      - Percent
-      - Count
-      - Bytes/Second
-      - Kilobytes/Second
-      - Megabytes/Second
-      - Gigabytes/Second
-      - Terabytes/Second
-      - Bits/Second
-      - Kilobits/Second
-      - Megabits/Second
-      - Gigabits/Second
-      - Terabits/Second
-      - Count/Second
-      - None
-  MonthlyTransfer:
-    type: object
-    properties:
-      gbPerMonthAllocated:
-        $ref: '#/definitions/integer'
-        description: The amount allocated per month (in GB).
-    description: Describes the monthly data transfer in and out of your virtual private server (or <i>instance</i>).
-  NetworkProtocol:
-    type: string
-    enum:
-      - tcp
-      - all
-      - udp
-  NonEmptyString:
-    type: string
-    pattern: .*\S.*
-  Operation:
-    type: object
-    properties:
-      id:
-        $ref: '#/definitions/NonEmptyString'
-        description: The ID of the operation.
-      resourceName:
-        $ref: '#/definitions/ResourceName'
-        description: The resource name.
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: 'The resource type. '
-      createdAt:
-        $ref: '#/definitions/IsoDate'
-        description: 'The timestamp when the operation was initialized (e.g., <code>1479816991.349</code>).'
-      location:
-        $ref: '#/definitions/ResourceLocation'
-        description: The region and Availability Zone.
-      isTerminal:
-        $ref: '#/definitions/boolean'
-        description: A Boolean value indicating whether the operation is terminal.
-      operationDetails:
-        $ref: '#/definitions/string'
-        description: 'Details about the operation (e.g., <code>Debian-1GB-Ohio-1</code>).'
-      operationType:
-        $ref: '#/definitions/OperationType'
-        description: 'The type of operation. '
-      status:
-        $ref: '#/definitions/OperationStatus'
-        description: 'The status of the operation. '
-      statusChangedAt:
-        $ref: '#/definitions/IsoDate'
-        description: 'The timestamp when the status was changed (e.g., <code>1479816991.349</code>).'
-      errorCode:
-        $ref: '#/definitions/string'
-        description: The error code.
-      errorDetails:
-        $ref: '#/definitions/string'
-        description: The error details.
-    description: Describes the API operation.
-  OperationList:
-    type: array
-    items:
-      $ref: '#/definitions/Operation'
-  OperationStatus:
-    type: string
-    enum:
-      - NotStarted
-      - Started
-      - Failed
-      - Completed
-      - Succeeded
   OperationType:
     type: string
     enum:
@@ -8636,16 +8958,14 @@ definitions:
       - StartRelationalDatabase
       - RebootRelationalDatabase
       - StopRelationalDatabase
-  PasswordData:
-    type: object
-    properties:
-      ciphertext:
-        $ref: '#/definitions/string'
-        description: '<p>The encrypted password. Ciphertext will be an empty string if access to your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.</p> <note> <p>If you use the default key pair (<code>LightsailDefaultKeyPair</code>), the decrypted password will be available in the password field.</p> <p>If you are using a custom key pair, you need to use your own means of decryption.</p> <p>If you change the Administrator password on the instance, Lightsail will continue to return the original ciphertext value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default.</p> </note>'
-      keyPairName:
-        $ref: '#/definitions/ResourceName'
-        description: '<p>The name of the key pair that you used when creating your instance. If no key pair name was specified when creating the instance, Lightsail uses the default key pair (<code>LightsailDefaultKeyPair</code>).</p> <p>If you are using a custom key pair, you need to use your own means of decrypting your password using the <code>ciphertext</code>. Lightsail creates the ciphertext by encrypting your password with the public key part of this key pair.</p>'
-    description: 'The password data for the Windows Server-based instance, including the ciphertext and the key pair name.'
+  OperationStatus:
+    type: string
+    enum:
+      - NotStarted
+      - Started
+      - Failed
+      - Completed
+      - Succeeded
   PendingMaintenanceAction:
     type: object
     properties:
@@ -8676,53 +8996,10 @@ definitions:
         $ref: '#/definitions/boolean'
         description: A Boolean value indicating whether automated backup retention is enabled.
     description: Describes a pending database value modification.
-  Port:
-    type: integer
-    minimum: 0
-    maximum: 65535
-  PortAccessType:
-    type: string
-    enum:
-      - Public
-      - Private
-  PortInfo:
-    type: object
-    properties:
-      fromPort:
-        $ref: '#/definitions/Port'
-        description: The first port in the range.
-      toPort:
-        $ref: '#/definitions/Port'
-        description: The last port in the range.
-      protocol:
-        $ref: '#/definitions/NetworkProtocol'
-        description: 'The protocol. '
-    description: Describes information about the ports on your virtual private server (or <i>instance</i>).
   PortInfoList:
     type: array
     items:
       $ref: '#/definitions/PortInfo'
-  PortInfoSourceType:
-    type: string
-    enum:
-      - DEFAULT
-      - INSTANCE
-      - NONE
-  PortList:
-    type: array
-    items:
-      $ref: '#/definitions/Port'
-  PortState:
-    type: string
-    enum:
-      - open
-      - closed
-  RecordState:
-    type: string
-    enum:
-      - Started
-      - Succeeded
-      - Failed
   Region:
     type: object
     properties:
@@ -8745,106 +9022,33 @@ definitions:
         $ref: '#/definitions/AvailabilityZoneList'
         description: The Availability Zones for databases. Follows the format <code>us-east-2a</code> (case-sensitive).
     description: Describes the AWS Region.
-  RegionList:
-    type: array
-    items:
-      $ref: '#/definitions/Region'
-  RegionName:
-    type: string
-    enum:
-      - us-east-1
-      - us-east-2
-      - us-west-1
-      - us-west-2
-      - eu-west-1
-      - eu-west-2
-      - eu-west-3
-      - eu-central-1
-      - ca-central-1
-      - ap-south-1
-      - ap-southeast-1
-      - ap-southeast-2
-      - ap-northeast-1
-      - ap-northeast-2
-  RelationalDatabase:
+  RelationalDatabaseHardware:
     type: object
     properties:
-      name:
-        $ref: '#/definitions/ResourceName'
-        description: The unique name of the database resource in Lightsail.
-      arn:
+      cpuCount:
+        $ref: '#/definitions/integer'
+        description: The number of vCPUs for the database.
+      diskSizeInGb:
+        $ref: '#/definitions/integer'
+        description: The size of the disk for the database.
+      ramSizeInGb:
+        $ref: '#/definitions/float'
+        description: The amount of RAM in GB for the database.
+    description: Describes the hardware of a database.
+  RelationalDatabaseEndpoint:
+    type: object
+    properties:
+      port:
+        $ref: '#/definitions/integer'
+        description: Specifies the port that the database is listening on.
+      address:
         $ref: '#/definitions/NonEmptyString'
-        description: The Amazon Resource Name (ARN) of the database.
-      supportCode:
-        $ref: '#/definitions/string'
-        description: The support code for the database. Include this code in your email to support when you have questions about a database in Lightsail. This code enables our support team to look up your Lightsail information more easily.
-      createdAt:
-        $ref: '#/definitions/IsoDate'
-        description: The timestamp when the database was created. Formatted in Unix time.
-      location:
-        $ref: '#/definitions/ResourceLocation'
-        description: The Region name and Availability Zone where the database is located.
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: 'The Lightsail resource type for the database (for example, <code>RelationalDatabase</code>).'
-      tags:
-        $ref: '#/definitions/TagList'
-        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
-      relationalDatabaseBlueprintId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The blueprint ID for the database. A blueprint describes the major engine version of a database.
-      relationalDatabaseBundleId:
-        $ref: '#/definitions/NonEmptyString'
-        description: The bundle ID for the database. A bundle describes the performance specifications for your database.
-      masterDatabaseName:
-        $ref: '#/definitions/string'
-        description: The name of the master database created when the Lightsail database resource is created.
-      hardware:
-        $ref: '#/definitions/RelationalDatabaseHardware'
-        description: Describes the hardware of the database.
-      state:
-        $ref: '#/definitions/NonEmptyString'
-        description: Describes the current state of the database.
-      secondaryAvailabilityZone:
-        $ref: '#/definitions/string'
-        description: <p>Describes the secondary Availability Zone of a high availability database.</p> <p>The secondary database is used for failover support of a high availability database.</p>
-      backupRetentionEnabled:
-        $ref: '#/definitions/boolean'
-        description: A Boolean value indicating whether automated backup retention is enabled for the database.
-      pendingModifiedValues:
-        $ref: '#/definitions/PendingModifiedRelationalDatabaseValues'
-        description: Describes pending database value modifications.
-      engine:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The database software (for example, <code>MySQL</code>).'
-      engineVersion:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The database engine version (for example, <code>5.7.23</code>).'
-      latestRestorableTime:
-        $ref: '#/definitions/IsoDate'
-        description: The latest point in time to which the database can be restored. Formatted in Unix time.
-      masterUsername:
-        $ref: '#/definitions/NonEmptyString'
-        description: The master user name of the database.
-      parameterApplyStatus:
-        $ref: '#/definitions/NonEmptyString'
-        description: The status of parameter updates for the database.
-      preferredBackupWindow:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The daily time range during which automated backups are created for the database (for example, <code>16:00-16:30</code>).'
-      preferredMaintenanceWindow:
-        $ref: '#/definitions/NonEmptyString'
-        description: '<p>The weekly time range during which system maintenance can occur on the database.</p> <p>In the format <code>ddd:hh24:mi-ddd:hh24:mi</code>. For example, <code>Tue:17:00-Tue:17:30</code>.</p>'
-      publiclyAccessible:
-        $ref: '#/definitions/boolean'
-        description: A Boolean value indicating whether the database is publicly accessible.
-      masterEndpoint:
-        $ref: '#/definitions/RelationalDatabaseEndpoint'
-        description: The master endpoint for the database.
-      pendingMaintenanceActions:
-        $ref: '#/definitions/PendingMaintenanceActionList'
-        description: Describes the pending maintenance actions for the database.
-    description: Describes a database.
+        description: Specifies the DNS address of the database.
+    description: Describes an endpoint for a database.
+  RelationalDatabaseEngine:
+    type: string
+    enum:
+      - mysql
   RelationalDatabaseBlueprint:
     type: object
     properties:
@@ -8867,10 +9071,6 @@ definitions:
         $ref: '#/definitions/boolean'
         description: A Boolean value indicating whether the engine version is the default for the database blueprint.
     description: 'Describes a database image, or blueprint. A blueprint describes the major engine version of a database.'
-  RelationalDatabaseBlueprintList:
-    type: array
-    items:
-      $ref: '#/definitions/RelationalDatabaseBlueprint'
   RelationalDatabaseBundle:
     type: object
     properties:
@@ -8902,24 +9102,6 @@ definitions:
         $ref: '#/definitions/boolean'
         description: A Boolean value indicating whether the database bundle is active.
     description: Describes a database bundle. A bundle describes the performance specifications of the database.
-  RelationalDatabaseBundleList:
-    type: array
-    items:
-      $ref: '#/definitions/RelationalDatabaseBundle'
-  RelationalDatabaseEndpoint:
-    type: object
-    properties:
-      port:
-        $ref: '#/definitions/integer'
-        description: Specifies the port that the database is listening on.
-      address:
-        $ref: '#/definitions/NonEmptyString'
-        description: Specifies the DNS address of the database.
-    description: Describes an endpoint for a database.
-  RelationalDatabaseEngine:
-    type: string
-    enum:
-      - mysql
   RelationalDatabaseEvent:
     type: object
     properties:
@@ -8936,36 +9118,6 @@ definitions:
         $ref: '#/definitions/StringList'
         description: The category that the database event belongs to.
     description: Describes an event for a database.
-  RelationalDatabaseEventList:
-    type: array
-    items:
-      $ref: '#/definitions/RelationalDatabaseEvent'
-  RelationalDatabaseHardware:
-    type: object
-    properties:
-      cpuCount:
-        $ref: '#/definitions/integer'
-        description: The number of vCPUs for the database.
-      diskSizeInGb:
-        $ref: '#/definitions/integer'
-        description: The size of the disk for the database.
-      ramSizeInGb:
-        $ref: '#/definitions/float'
-        description: The amount of RAM in GB for the database.
-    description: Describes the hardware of a database.
-  RelationalDatabaseList:
-    type: array
-    items:
-      $ref: '#/definitions/RelationalDatabase'
-  RelationalDatabaseMetricName:
-    type: string
-    enum:
-      - CPUUtilization
-      - DatabaseConnections
-      - DiskQueueDepth
-      - FreeStorageSpace
-      - NetworkReceiveThroughput
-      - NetworkTransmitThroughput
   RelationalDatabaseParameter:
     type: object
     properties:
@@ -8994,146 +9146,14 @@ definitions:
         $ref: '#/definitions/string'
         description: Specifies the value of the parameter.
     description: Describes the parameters of a database.
-  RelationalDatabaseParameterList:
-    type: array
-    items:
-      $ref: '#/definitions/RelationalDatabaseParameter'
-  RelationalDatabasePasswordVersion:
-    type: string
-    enum:
-      - CURRENT
-      - PREVIOUS
-      - PENDING
-  RelationalDatabaseSnapshot:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the database snapshot.
-      arn:
-        $ref: '#/definitions/NonEmptyString'
-        description: The Amazon Resource Name (ARN) of the database snapshot.
-      supportCode:
-        $ref: '#/definitions/string'
-        description: The support code for the database snapshot. Include this code in your email to support when you have questions about a database snapshot in Lightsail. This code enables our support team to look up your Lightsail information more easily.
-      createdAt:
-        $ref: '#/definitions/IsoDate'
-        description: The timestamp when the database snapshot was created.
-      location:
-        $ref: '#/definitions/ResourceLocation'
-        description: The Region name and Availability Zone where the database snapshot is located.
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The Lightsail resource type.
-      tags:
-        $ref: '#/definitions/TagList'
-        description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
-      engine:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The software of the database snapshot (for example, <code>MySQL</code>)'
-      engineVersion:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The database engine version for the database snapshot (for example, <code>5.7.23</code>).'
-      sizeInGb:
-        $ref: '#/definitions/integer'
-        description: 'The size of the disk in GB (for example, <code>32</code>) for the database snapshot.'
-      state:
-        $ref: '#/definitions/NonEmptyString'
-        description: The state of the database snapshot.
-      fromRelationalDatabaseName:
-        $ref: '#/definitions/NonEmptyString'
-        description: The name of the source database from which the database snapshot was created.
-      fromRelationalDatabaseArn:
-        $ref: '#/definitions/NonEmptyString'
-        description: The Amazon Resource Name (ARN) of the database from which the database snapshot was created.
-      fromRelationalDatabaseBundleId:
-        $ref: '#/definitions/string'
-        description: The bundle ID of the database from which the database snapshot was created.
-      fromRelationalDatabaseBlueprintId:
-        $ref: '#/definitions/string'
-        description: The blueprint ID of the database from which the database snapshot was created. A blueprint describes the major engine version of a database.
-    description: Describes a database snapshot.
-  RelationalDatabaseSnapshotList:
-    type: array
-    items:
-      $ref: '#/definitions/RelationalDatabaseSnapshot'
-  ResourceLocation:
-    type: object
-    properties:
-      availabilityZone:
-        $ref: '#/definitions/string'
-        description: The Availability Zone. Follows the format <code>us-east-2a</code> (case-sensitive).
-      regionName:
-        $ref: '#/definitions/RegionName'
-        description: The AWS Region name.
-    description: Describes the resource location.
-  ResourceNameList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceName'
-  ResourceType:
-    type: string
-    enum:
-      - Instance
-      - StaticIp
-      - KeyPair
-      - InstanceSnapshot
-      - Domain
-      - PeeredVpc
-      - LoadBalancer
-      - LoadBalancerTlsCertificate
-      - Disk
-      - DiskSnapshot
-      - RelationalDatabase
-      - RelationalDatabaseSnapshot
-      - ExportSnapshotRecord
-      - CloudFormationStackRecord
-  SensitiveString:
-    type: string
-    format: password
-  StaticIp:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/ResourceName'
-        description: 'The name of the static IP (e.g., <code>StaticIP-Ohio-EXAMPLE</code>).'
-      arn:
-        $ref: '#/definitions/NonEmptyString'
-        description: 'The Amazon Resource Name (ARN) of the static IP (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).'
-      supportCode:
-        $ref: '#/definitions/string'
-        description: The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
-      createdAt:
-        $ref: '#/definitions/IsoDate'
-        description: 'The timestamp when the static IP was created (e.g., <code>1479735304.222</code>).'
-      location:
-        $ref: '#/definitions/ResourceLocation'
-        description: The region and Availability Zone where the static IP was created.
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The resource type (usually <code>StaticIp</code>).
-      ipAddress:
-        $ref: '#/definitions/IpAddress'
-        description: The static IP address.
-      attachedTo:
-        $ref: '#/definitions/ResourceName'
-        description: 'The instance where the static IP is attached (e.g., <code>Amazon_Linux-1GB-Ohio-1</code>).'
-      isAttached:
-        $ref: '#/definitions/boolean'
-        description: A Boolean value indicating whether the static IP is attached.
-    description: Describes the static IP.
-  StaticIpList:
-    type: array
-    items:
-      $ref: '#/definitions/StaticIp'
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/string'
   StringMax256:
     type: string
     minLength: 1
     maxLength: 256
+  TagKey:
+    type: string
+  TagValue:
+    type: string
   Tag:
     type: object
     properties:
@@ -9144,28 +9164,7 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: '<p>The value of the tag.</p> <p>Constraints: Tag values accept a maximum of 256 letters, numbers, spaces in UTF-8, or the following characters: + - = . _ : / @</p>'
     description: '<p>Describes a tag key and optional value assigned to an Amazon Lightsail resource.</p> <p>For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.</p>'
-  TagKey:
-    type: string
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValue:
-    type: string
-  boolean:
-    type: boolean
-  double:
-    type: number
-    format: double
-  float:
-    type: number
-    format: float
-  integer:
-    type: integer
-  timestamp:
-    type: string
-    format: date-time

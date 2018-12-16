@@ -3152,7 +3152,25 @@ definitions:
     type: string
   Boolean:
     type: boolean
-  undefined: {}
+  Description:
+    type: string
+    minLength: 0
+    maxLength: 200
+  Version:
+    type: string
+    pattern: '\$LATEST|[0-9]+'
+    minLength: 1
+    maxLength: 64
+  BotName:
+    type: string
+    pattern: '^([A-Za-z]_?)+$'
+    minLength: 2
+    maxLength: 50
+  Timestamp:
+    type: string
+    format: date-time
+  String:
+    type: string
   BotAliasMetadata:
     type: object
     properties:
@@ -3182,6 +3200,35 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BotAliasMetadata'
+  BotChannelName:
+    type: string
+    pattern: '^([A-Za-z]_?)+$'
+    minLength: 1
+    maxLength: 100
+  ChannelType:
+    type: string
+    enum:
+      - Facebook
+      - Slack
+      - Twilio-Sms
+      - Kik
+  ChannelConfigurationMap:
+    type: array
+    minItems: 1
+    maxItems: 10
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  ChannelStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - CREATED
+      - FAILED
   BotChannelAssociation:
     type: object
     properties:
@@ -3217,11 +3264,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BotChannelAssociation'
-  BotChannelName:
+  Status:
     type: string
-    pattern: '^([A-Za-z]_?)+$'
-    minLength: 1
-    maxLength: 100
+    enum:
+      - BUILDING
+      - READY
+      - READY_BASIC_TESTING
+      - FAILED
+      - NOT_BUILT
   BotMetadata:
     type: object
     properties:
@@ -3248,17 +3298,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BotMetadata'
-  BotName:
-    type: string
-    pattern: '^([A-Za-z]_?)+$'
-    minLength: 2
-    maxLength: 50
   BotVersions:
     type: array
     items:
       $ref: '#/definitions/Version'
     minItems: 1
     maxItems: 5
+  BuiltinIntentSignature:
+    type: string
+  LocaleList:
+    type: array
+    items:
+      $ref: '#/definitions/Locale'
   BuiltinIntentMetadata:
     type: object
     properties:
@@ -3273,8 +3324,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BuiltinIntentMetadata'
-  BuiltinIntentSignature:
-    type: string
   BuiltinIntentSlot:
     type: object
     properties:
@@ -3286,6 +3335,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BuiltinIntentSlot'
+  BuiltinSlotTypeSignature:
+    type: string
   BuiltinSlotTypeMetadata:
     type: object
     properties:
@@ -3300,34 +3351,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BuiltinSlotTypeMetadata'
-  BuiltinSlotTypeSignature:
+  LambdaARN:
     type: string
-  String:
+    pattern: 'arn:aws:lambda:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?'
+    minLength: 20
+    maxLength: 2048
+  MessageVersion:
     type: string
-  ChannelConfigurationMap:
-    type: array
-    minItems: 1
-    maxItems: 10
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  ChannelStatus:
-    type: string
-    enum:
-      - IN_PROGRESS
-      - CREATED
-      - FAILED
-  ChannelType:
-    type: string
-    enum:
-      - Facebook
-      - Slack
-      - Twilio-Sms
-      - Kik
+    minLength: 1
+    maxLength: 5
   CodeHook:
     type: object
     required:
@@ -3353,44 +3385,65 @@ definitions:
       - CustomPayload
   Count:
     type: integer
-  CustomOrBuiltinSlotTypeName:
-    type: string
-    pattern: '^((AMAZON\.)_?|[A-Za-z]_?)+'
-    minLength: 1
-    maxLength: 100
-  Description:
-    type: string
-    minLength: 0
-    maxLength: 200
-  EnumerationValue:
-    type: object
-    required:
-      - value
-    properties:
-      value:
-        $ref: '#/definitions/Value'
-        description: The value of the slot type.
-      synonyms:
-        $ref: '#/definitions/SynonymList'
-        description: Additional values related to the slot type value.
-    description: '<p>Each slot type can have a set of values. Each enumeration value represents a value the slot type can take. </p> <p>For example, a pizza ordering bot could have a slot type that specifies the type of crust that the pizza should have. The slot type could include the values </p> <ul> <li> <p>thick</p> </li> <li> <p>thin</p> </li> <li> <p>stuffed</p> </li> </ul>'
-  EnumerationValues:
+  IntentList:
     type: array
     items:
-      $ref: '#/definitions/EnumerationValue'
-    minItems: 1
-    maxItems: 10000
-  ExportStatus:
+      $ref: '#/definitions/Intent'
+  Prompt:
+    type: object
+    required:
+      - messages
+      - maxAttempts
+    properties:
+      messages:
+        $ref: '#/definitions/MessageList'
+        description: 'An array of objects, each of which provides a message string and its type. You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).'
+      maxAttempts:
+        $ref: '#/definitions/PromptMaxAttempts'
+        description: The number of times to prompt the user for information.
+      responseCard:
+        $ref: '#/definitions/ResponseCard'
+        description: 'A response card. Amazon Lex uses this prompt at runtime, in the <code>PostText</code> API response. It substitutes session attributes and slot values for placeholders in the response card. For more information, see <a>ex-resp-card</a>. '
+    description: 'Obtains information from the user. To define a prompt, provide one or more messages and specify the number of attempts to get information from the user. If you provide more than one message, Amazon Lex chooses one of the messages to use to prompt the user. For more information, see <a>how-it-works</a>.'
+  Statement:
+    type: object
+    required:
+      - messages
+    properties:
+      messages:
+        $ref: '#/definitions/MessageList'
+        description: A collection of message objects.
+      responseCard:
+        $ref: '#/definitions/ResponseCard'
+        description: ' At runtime, if the client is using the <a href="http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html">PostText</a> API, Amazon Lex includes the response card in the response. It substitutes all of the session attributes and slot values for placeholders in the response card. '
+    description: 'A collection of messages that convey information to the user. At runtime, Amazon Lex selects the message to convey. '
+  SessionTTL:
+    type: integer
+    minimum: 60
+    maximum: 86400
+  Locale:
     type: string
     enum:
-      - IN_PROGRESS
-      - READY
-      - FAILED
-  ExportType:
+      - en-US
+      - en-GB
+      - de-DE
+  IntentName:
     type: string
-    enum:
-      - ALEXA_SKILLS_KIT
-      - LEX
+    pattern: '^([A-Za-z]_?)+$'
+    minLength: 1
+    maxLength: 100
+  SlotList:
+    type: array
+    items:
+      $ref: '#/definitions/Slot'
+    minItems: 0
+    maxItems: 100
+  IntentUtteranceList:
+    type: array
+    items:
+      $ref: '#/definitions/Utterance'
+    minItems: 0
+    maxItems: 1500
   FollowUpPrompt:
     type: object
     required:
@@ -3416,21 +3469,125 @@ definitions:
         $ref: '#/definitions/CodeHook'
         description: ' A description of the Lambda function that is run to fulfill the intent. '
     description: '<p> Describes how the intent is fulfilled after the user provides all of the information required for the intent. You can provide a Lambda function to process the intent, or you can return the intent information to the client application. We recommend that you use a Lambda function so that the relevant logic lives in the Cloud and limit the client-side code primarily to presentation. If you need to update the logic, you only update the Lambda function; you don''t need to upgrade your client application. </p> <p>Consider the following examples:</p> <ul> <li> <p>In a pizza ordering application, after the user provides all of the information for placing an order, you use a Lambda function to place an order with a pizzeria. </p> </li> <li> <p>In a gaming application, when a user says "pick up a rock," this information must go back to the client application so that it can perform the operation and update the graphics. In this case, you want Amazon Lex to return the intent data to the client. </p> </li> </ul>'
+  SlotTypeName:
+    type: string
+    pattern: '^([A-Za-z]_?)+$'
+    minLength: 1
+    maxLength: 100
+  EnumerationValues:
+    type: array
+    items:
+      $ref: '#/definitions/EnumerationValue'
+    minItems: 1
+    maxItems: 10000
+  SlotValueSelectionStrategy:
+    type: string
+    enum:
+      - ORIGINAL_VALUE
+      - TOP_RESOLUTION
+  CustomOrBuiltinSlotTypeName:
+    type: string
+    pattern: '^((AMAZON\.)_?|[A-Za-z]_?)+'
+    minLength: 1
+    maxLength: 100
+  NumericalVersion:
+    type: string
+    pattern: '[0-9]+'
+    minLength: 1
+    maxLength: 64
+  UserId:
+    type: string
+    minLength: 2
+    maxLength: 100
+  Value:
+    type: string
+    minLength: 1
+    maxLength: 140
+  SynonymList:
+    type: array
+    items:
+      $ref: '#/definitions/Value'
+  EnumerationValue:
+    type: object
+    required:
+      - value
+    properties:
+      value:
+        $ref: '#/definitions/Value'
+        description: The value of the slot type.
+      synonyms:
+        $ref: '#/definitions/SynonymList'
+        description: Additional values related to the slot type value.
+    description: '<p>Each slot type can have a set of values. Each enumeration value represents a value the slot type can take. </p> <p>For example, a pizza ordering bot could have a slot type that specifies the type of crust that the pizza should have. The slot type could include the values </p> <ul> <li> <p>thick</p> </li> <li> <p>thin</p> </li> <li> <p>stuffed</p> </li> </ul>'
+  ExportStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - READY
+      - FAILED
+  ExportType:
+    type: string
+    enum:
+      - ALEXA_SKILLS_KIT
+      - LEX
   FulfillmentActivityType:
     type: string
     enum:
       - ReturnIntent
       - CodeHook
-  GroupNumber:
+  NextToken:
+    type: string
+  MaxResults:
     type: integer
     minimum: 1
-    maximum: 5
+    maximum: 50
+  Name:
+    type: string
+    pattern: '[a-zA-Z_]+'
+    minLength: 1
+    maxLength: 100
+  ResourceType:
+    type: string
+    enum:
+      - BOT
+      - INTENT
+      - SLOT_TYPE
+  MergeStrategy:
+    type: string
+    enum:
+      - OVERWRITE_LATEST
+      - FAIL_ON_CONFLICT
   ImportStatus:
     type: string
     enum:
       - IN_PROGRESS
       - COMPLETE
       - FAILED
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  IntentMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/IntentMetadata'
+  SlotTypeMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/SlotTypeMetadata'
+  StatusType:
+    type: string
+    enum:
+      - Detected
+      - Missed
+  ListsOfUtterances:
+    type: array
+    items:
+      $ref: '#/definitions/UtteranceList'
+  GroupNumber:
+    type: integer
+    minimum: 1
+    maximum: 5
   Intent:
     type: object
     required:
@@ -3444,10 +3601,6 @@ definitions:
         $ref: '#/definitions/Version'
         description: The version of the intent.
     description: Identifies the specific version of an intent.
-  IntentList:
-    type: array
-    items:
-      $ref: '#/definitions/Intent'
   IntentMetadata:
     type: object
     properties:
@@ -3467,53 +3620,43 @@ definitions:
         $ref: '#/definitions/Version'
         description: The version of the intent.
     description: Provides information about an intent.
-  IntentMetadataList:
-    type: array
-    items:
-      $ref: '#/definitions/IntentMetadata'
-  IntentName:
+  Utterance:
     type: string
-    pattern: '^([A-Za-z]_?)+$'
     minLength: 1
-    maxLength: 100
-  IntentUtteranceList:
-    type: array
-    items:
-      $ref: '#/definitions/Utterance'
-    minItems: 0
-    maxItems: 1500
-  LambdaARN:
-    type: string
-    pattern: 'arn:aws:lambda:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?'
-    minLength: 20
-    maxLength: 2048
+    maxLength: 200
+  UtteranceData:
+    type: object
+    properties:
+      utteranceString:
+        $ref: '#/definitions/UtteranceString'
+        description: The text that was entered by the user or the text representation of an audio clip.
+      count:
+        $ref: '#/definitions/Count'
+        description: The number of times that the utterance was processed.
+      distinctUsers:
+        $ref: '#/definitions/Count'
+        description: The total number of individuals that used the utterance.
+      firstUtteredDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date that the utterance was first recorded.
+      lastUtteredDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date that the utterance was last recorded.
+    description: 'Provides information about a single utterance that was made to your bot. '
   ListOfUtterance:
     type: array
     items:
       $ref: '#/definitions/UtteranceData'
-  ListsOfUtterances:
-    type: array
-    items:
-      $ref: '#/definitions/UtteranceList'
-  Locale:
-    type: string
-    enum:
-      - en-US
-      - en-GB
-      - de-DE
-  LocaleList:
-    type: array
-    items:
-      $ref: '#/definitions/Locale'
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 50
-  MergeStrategy:
-    type: string
-    enum:
-      - OVERWRITE_LATEST
-      - FAIL_ON_CONFLICT
+  UtteranceList:
+    type: object
+    properties:
+      botVersion:
+        $ref: '#/definitions/Version'
+        description: The version of the bot that processed the list.
+      utterances:
+        $ref: '#/definitions/ListOfUtterance'
+        description: One or more <a>UtteranceData</a> objects that contain information about the utterances that have been made to a bot. The maximum number of object is 100.
+    description: Provides a list of utterances that have been made to a specific version of your bot. The list contains a maximum of 100 utterances.
   Message:
     type: object
     required:
@@ -3536,22 +3679,6 @@ definitions:
       $ref: '#/definitions/Message'
     minItems: 1
     maxItems: 15
-  MessageVersion:
-    type: string
-    minLength: 1
-    maxLength: 5
-  Name:
-    type: string
-    pattern: '[a-zA-Z_]+'
-    minLength: 1
-    maxLength: 100
-  NextToken:
-    type: string
-  NumericalVersion:
-    type: string
-    pattern: '[0-9]+'
-    minLength: 1
-    maxLength: 64
   Priority:
     type: integer
     minimum: 0
@@ -3561,40 +3688,30 @@ definitions:
     enum:
       - SAVE
       - BUILD
-  Prompt:
-    type: object
-    required:
-      - messages
-      - maxAttempts
-    properties:
-      messages:
-        $ref: '#/definitions/MessageList'
-        description: 'An array of objects, each of which provides a message string and its type. You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).'
-      maxAttempts:
-        $ref: '#/definitions/PromptMaxAttempts'
-        description: The number of times to prompt the user for information.
-      responseCard:
-        $ref: '#/definitions/ResponseCard'
-        description: 'A response card. Amazon Lex uses this prompt at runtime, in the <code>PostText</code> API response. It substitutes session attributes and slot values for placeholders in the response card. For more information, see <a>ex-resp-card</a>. '
-    description: 'Obtains information from the user. To define a prompt, provide one or more messages and specify the number of attempts to get information from the user. If you provide more than one message, Amazon Lex chooses one of the messages to use to prompt the user. For more information, see <a>how-it-works</a>.'
   PromptMaxAttempts:
     type: integer
     minimum: 1
     maximum: 5
-  ResourceType:
-    type: string
-    enum:
-      - BOT
-      - INTENT
-      - SLOT_TYPE
   ResponseCard:
     type: string
     minLength: 1
     maxLength: 50000
-  SessionTTL:
-    type: integer
-    minimum: 60
-    maximum: 86400
+  SlotName:
+    type: string
+    pattern: '^([A-Za-z](-|_|.)?)+$'
+    minLength: 1
+    maxLength: 100
+  SlotConstraint:
+    type: string
+    enum:
+      - Required
+      - Optional
+  SlotUtteranceList:
+    type: array
+    items:
+      $ref: '#/definitions/Utterance'
+    minItems: 0
+    maxItems: 10
   Slot:
     type: object
     required:
@@ -3629,22 +3746,6 @@ definitions:
         $ref: '#/definitions/ResponseCard'
         description: ' A set of possible responses for the slot type used by text-based clients. A user chooses an option from the response card, instead of using text to reply. '
     description: Identifies the version of a specific slot.
-  SlotConstraint:
-    type: string
-    enum:
-      - Required
-      - Optional
-  SlotList:
-    type: array
-    items:
-      $ref: '#/definitions/Slot'
-    minItems: 0
-    maxItems: 100
-  SlotName:
-    type: string
-    pattern: '^([A-Za-z](-|_|.)?)+$'
-    minLength: 1
-    maxLength: 100
   SlotTypeMetadata:
     type: object
     properties:
@@ -3664,109 +3765,7 @@ definitions:
         $ref: '#/definitions/Version'
         description: The version of the slot type.
     description: Provides information about a slot type..
-  SlotTypeMetadataList:
-    type: array
-    items:
-      $ref: '#/definitions/SlotTypeMetadata'
-  SlotTypeName:
-    type: string
-    pattern: '^([A-Za-z]_?)+$'
-    minLength: 1
-    maxLength: 100
-  SlotUtteranceList:
-    type: array
-    items:
-      $ref: '#/definitions/Utterance'
-    minItems: 0
-    maxItems: 10
-  SlotValueSelectionStrategy:
-    type: string
-    enum:
-      - ORIGINAL_VALUE
-      - TOP_RESOLUTION
-  Statement:
-    type: object
-    required:
-      - messages
-    properties:
-      messages:
-        $ref: '#/definitions/MessageList'
-        description: A collection of message objects.
-      responseCard:
-        $ref: '#/definitions/ResponseCard'
-        description: ' At runtime, if the client is using the <a href="http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html">PostText</a> API, Amazon Lex includes the response card in the response. It substitutes all of the session attributes and slot values for placeholders in the response card. '
-    description: 'A collection of messages that convey information to the user. At runtime, Amazon Lex selects the message to convey. '
-  Status:
-    type: string
-    enum:
-      - BUILDING
-      - READY
-      - READY_BASIC_TESTING
-      - FAILED
-      - NOT_BUILT
-  StatusType:
-    type: string
-    enum:
-      - Detected
-      - Missed
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SynonymList:
-    type: array
-    items:
-      $ref: '#/definitions/Value'
-  Timestamp:
-    type: string
-    format: date-time
-  UserId:
-    type: string
-    minLength: 2
-    maxLength: 100
-  Utterance:
-    type: string
-    minLength: 1
-    maxLength: 200
-  UtteranceData:
-    type: object
-    properties:
-      utteranceString:
-        $ref: '#/definitions/UtteranceString'
-        description: The text that was entered by the user or the text representation of an audio clip.
-      count:
-        $ref: '#/definitions/Count'
-        description: The number of times that the utterance was processed.
-      distinctUsers:
-        $ref: '#/definitions/Count'
-        description: The total number of individuals that used the utterance.
-      firstUtteredDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date that the utterance was first recorded.
-      lastUtteredDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date that the utterance was last recorded.
-    description: 'Provides information about a single utterance that was made to your bot. '
-  UtteranceList:
-    type: object
-    properties:
-      botVersion:
-        $ref: '#/definitions/Version'
-        description: The version of the bot that processed the list.
-      utterances:
-        $ref: '#/definitions/ListOfUtterance'
-        description: One or more <a>UtteranceData</a> objects that contain information about the utterances that have been made to a bot. The maximum number of object is 100.
-    description: Provides a list of utterances that have been made to a specific version of your bot. The list contains a maximum of 100 utterances.
   UtteranceString:
     type: string
     minLength: 1
     maxLength: 2000
-  Value:
-    type: string
-    minLength: 1
-    maxLength: 140
-  Version:
-    type: string
-    pattern: '\$LATEST|[0-9]+'
-    minLength: 1
-    maxLength: 64

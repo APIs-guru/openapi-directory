@@ -2371,7 +2371,31 @@ definitions:
       AutoGrantedValue:
         $ref: '#/definitions/Integer'
         description: The Qualification value to use for automatically granted Qualifications. This parameter is used only if the AutoGranted parameter is true.
-  undefined: {}
+  String:
+    type: string
+  Integer:
+    type: integer
+  EntityId:
+    type: string
+    pattern: '^[A-Z0-9]+$'
+    minLength: 1
+    maxLength: 64
+  Boolean:
+    type: boolean
+  CustomerId:
+    type: string
+    pattern: '^A[A-Z0-9]+$'
+    minLength: 1
+    maxLength: 64
+  AssignmentStatus:
+    type: string
+    enum:
+      - Submitted
+      - Approved
+      - Rejected
+  Timestamp:
+    type: string
+    format: date-time
   Assignment:
     type: object
     properties:
@@ -2416,16 +2440,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Assignment'
-  AssignmentStatus:
-    type: string
-    enum:
-      - Submitted
-      - Approved
-      - Rejected
   AssignmentStatusList:
     type: array
     items:
       $ref: '#/definitions/AssignmentStatus'
+  CurrencyAmount:
+    type: string
+    pattern: '^[0-9]+(\.)?[0-9]{0,2}$'
+    description: A string representing a currency amount.
   BonusPayment:
     type: object
     properties:
@@ -2448,8 +2470,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BonusPayment'
-  Boolean:
-    type: boolean
   Comparator:
     type: string
     enum:
@@ -2467,45 +2487,32 @@ definitions:
     type: string
     minLength: 2
     maxLength: 2
-  CurrencyAmount:
+  IdempotencyToken:
     type: string
-    pattern: '^[0-9]+(\.)?[0-9]{0,2}$'
-    description: A string representing a currency amount.
-  CustomerId:
-    type: string
-    pattern: '^A[A-Z0-9]+$'
     minLength: 1
     maxLength: 64
-  CustomerIdList:
+  Long:
+    type: integer
+  QualificationRequirementList:
     type: array
     items:
-      $ref: '#/definitions/CustomerId'
-  EntityId:
-    type: string
-    pattern: '^[A-Z0-9]+$'
-    minLength: 1
-    maxLength: 64
-  EventType:
-    type: string
-    enum:
-      - AssignmentAccepted
-      - AssignmentAbandoned
-      - AssignmentReturned
-      - AssignmentSubmitted
-      - AssignmentRejected
-      - AssignmentApproved
-      - HITCreated
-      - HITExpired
-      - HITReviewable
-      - HITExtended
-      - HITDisposed
-      - Ping
-  EventTypeList:
+      $ref: '#/definitions/QualificationRequirement'
+  ReviewPolicy:
+    type: object
+    required:
+      - PolicyName
+    properties:
+      PolicyName:
+        $ref: '#/definitions/String'
+        description: ' Name of a Review Policy: SimplePlurality/2011-09-01 or ScoreMyKnownAnswers/2011-09-01 '
+      Parameters:
+        $ref: '#/definitions/PolicyParameterList'
+        description: Name of the parameter from the Review policy.
+    description: ' HIT Review Policy data structures represent HIT review policies, which you specify when you create a HIT. '
+  HITLayoutParameterList:
     type: array
     items:
-      $ref: '#/definitions/EventType'
-  ExceptionMessage:
-    type: string
+      $ref: '#/definitions/HITLayoutParameter'
   HIT:
     type: object
     properties:
@@ -2572,246 +2579,11 @@ definitions:
         $ref: '#/definitions/Integer'
         description: ' The number of assignments for this HIT that have been approved or rejected.'
     description: ' The HIT data structure represents a single HIT, including all the information necessary for a Worker to accept and complete the HIT.'
-  HITAccessActions:
+  QualificationTypeStatus:
     type: string
     enum:
-      - Accept
-      - PreviewAndAccept
-      - DiscoverPreviewAndAccept
-  HITLayoutParameter:
-    type: object
-    required:
-      - Name
-      - Value
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: ' The name of the parameter in the HITLayout. '
-      Value:
-        $ref: '#/definitions/String'
-        description: 'The value substituted for the parameter referenced in the HITLayout. '
-    description: ' The HITLayoutParameter data structure defines parameter values used with a HITLayout. A HITLayout is a reusable Amazon Mechanical Turk project template used to provide Human Intelligence Task (HIT) question data for CreateHIT. '
-  HITLayoutParameterList:
-    type: array
-    items:
-      $ref: '#/definitions/HITLayoutParameter'
-  HITList:
-    type: array
-    items:
-      $ref: '#/definitions/HIT'
-  HITReviewStatus:
-    type: string
-    enum:
-      - NotReviewed
-      - MarkedForReview
-      - ReviewedAppropriate
-      - ReviewedInappropriate
-  HITStatus:
-    type: string
-    enum:
-      - Assignable
-      - Unassignable
-      - Reviewable
-      - Reviewing
-      - Disposed
-  IdempotencyToken:
-    type: string
-    minLength: 1
-    maxLength: 64
-  Integer:
-    type: integer
-  IntegerList:
-    type: array
-    items:
-      $ref: '#/definitions/Integer'
-  Locale:
-    type: object
-    required:
-      - Country
-    properties:
-      Country:
-        $ref: '#/definitions/CountryParameters'
-        description: ' The country of the locale. Must be a valid ISO 3166 country code. For example, the code US refers to the United States of America. '
-      Subdivision:
-        $ref: '#/definitions/CountryParameters'
-        description: 'The state or subdivision of the locale. A valid ISO 3166-2 subdivision code. For example, the code WA refers to the state of Washington.'
-    description: The Locale data structure represents a geographical region or location.
-  LocaleList:
-    type: array
-    items:
-      $ref: '#/definitions/Locale'
-  Long:
-    type: integer
-  NotificationSpecification:
-    type: object
-    required:
-      - Destination
-      - Transport
-      - Version
-      - EventTypes
-    properties:
-      Destination:
-        $ref: '#/definitions/String'
-        description: '<p> The target for notification messages. The Destination’s format is determined by the specified Transport: </p> <ul> <li> <p>When Transport is Email, the Destination is your email address.</p> </li> <li> <p>When Transport is SQS, the Destination is your queue URL.</p> </li> <li> <p>When Transport is SNS, the Destination is the ARN of your topic.</p> </li> </ul>'
-      Transport:
-        $ref: '#/definitions/NotificationTransport'
-        description: ' The method Amazon Mechanical Turk uses to send the notification. Valid Values: Email | SQS | SNS. '
-      Version:
-        $ref: '#/definitions/String'
-        description: The version of the Notification API to use. Valid value is 2006-05-05.
-      EventTypes:
-        $ref: '#/definitions/EventTypeList'
-        description: ' The list of events that should cause notifications to be sent. Valid Values: AssignmentAccepted | AssignmentAbandoned | AssignmentReturned | AssignmentSubmitted | AssignmentRejected | AssignmentApproved | HITCreated | HITExtended | HITDisposed | HITReviewable | HITExpired | Ping. The Ping event is only valid for the SendTestEventNotification operation. '
-    description: The NotificationSpecification data structure describes a HIT event notification for a HIT type.
-  NotificationTransport:
-    type: string
-    enum:
-      - Email
-      - SQS
-      - SNS
-  NotifyWorkersFailureCode:
-    type: string
-    enum:
-      - SoftFailure
-      - HardFailure
-  NotifyWorkersFailureStatus:
-    type: object
-    properties:
-      NotifyWorkersFailureCode:
-        $ref: '#/definitions/NotifyWorkersFailureCode'
-        description: ' Encoded value for the failure type. '
-      NotifyWorkersFailureMessage:
-        $ref: '#/definitions/String'
-        description: ' A message detailing the reason the Worker could not be notified. '
-      WorkerId:
-        $ref: '#/definitions/CustomerId'
-        description: ' The ID of the Worker.'
-    description: ' When MTurk encounters an issue with notifying the Workers you specified, it returns back this object with failure details. '
-  NotifyWorkersFailureStatusList:
-    type: array
-    items:
-      $ref: '#/definitions/NotifyWorkersFailureStatus'
-  PaginationToken:
-    type: string
-    description: 'If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. '
-    minLength: 1
-    maxLength: 255
-  ParameterMapEntry:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/String'
-        description: ' The QuestionID from the HIT that is used to identify which question requires Mechanical Turk to score as part of the ScoreMyKnownAnswers/2011-09-01 Review Policy. '
-      Values:
-        $ref: '#/definitions/StringList'
-        description: ' The list of answers to the question specified in the MapEntry Key element. The Worker must match all values in order for the answer to be scored correctly. '
-    description: ' This data structure is the data type for the AnswerKey parameter of the ScoreMyKnownAnswers/2011-09-01 Review Policy. '
-  ParameterMapEntryList:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterMapEntry'
-  PolicyParameter:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/String'
-        description: ' Name of the parameter from the list of Review Polices. '
-      Values:
-        $ref: '#/definitions/StringList'
-        description: ' The list of values of the Parameter'
-      MapEntries:
-        $ref: '#/definitions/ParameterMapEntryList'
-        description: ' List of ParameterMapEntry objects. '
-    description: ' Name of the parameter from the Review policy. '
-  PolicyParameterList:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyParameter'
-  Qualification:
-    type: object
-    properties:
-      QualificationTypeId:
-        $ref: '#/definitions/EntityId'
-        description: ' The ID of the Qualification type for the Qualification.'
-      WorkerId:
-        $ref: '#/definitions/CustomerId'
-        description: ' The ID of the Worker who possesses the Qualification. '
-      GrantTime:
-        $ref: '#/definitions/Timestamp'
-        description: ' The date and time the Qualification was granted to the Worker. If the Worker''s Qualification was revoked, and then re-granted based on a new Qualification request, GrantTime is the date and time of the last call to the AcceptQualificationRequest operation.'
-      IntegerValue:
-        $ref: '#/definitions/Integer'
-        description: ' The value (score) of the Qualification, if the Qualification has an integer value.'
-      LocaleValue:
-        $ref: '#/definitions/Locale'
-      Status:
-        $ref: '#/definitions/QualificationStatus'
-        description: ' The status of the Qualification. Valid values are Granted | Revoked.'
-    description: 'The Qualification data structure represents a Qualification assigned to a user, including the Qualification type and the value (score).'
-  QualificationList:
-    type: array
-    items:
-      $ref: '#/definitions/Qualification'
-  QualificationRequest:
-    type: object
-    properties:
-      QualificationRequestId:
-        $ref: '#/definitions/String'
-        description: 'The ID of the Qualification request, a unique identifier generated when the request was submitted. '
-      QualificationTypeId:
-        $ref: '#/definitions/EntityId'
-        description: ' The ID of the Qualification type the Worker is requesting, as returned by the CreateQualificationType operation. '
-      WorkerId:
-        $ref: '#/definitions/CustomerId'
-        description: ' The ID of the Worker requesting the Qualification.'
-      Test:
-        $ref: '#/definitions/String'
-        description: ' The contents of the Qualification test that was presented to the Worker, if the type has a test and the Worker has submitted answers. This value is identical to the QuestionForm associated with the Qualification type at the time the Worker requests the Qualification.'
-      Answer:
-        $ref: '#/definitions/String'
-        description: ' The Worker''s answers for the Qualification type''s test contained in a QuestionFormAnswers document, if the type has a test and the Worker has submitted answers. If the Worker does not provide any answers, Answer may be empty. '
-      SubmitTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The date and time the Qualification request had a status of Submitted. This is either the time the Worker submitted answers for a Qualification test, or the time the Worker requested the Qualification if the Qualification type does not have a test. '
-    description: ' The QualificationRequest data structure represents a request a Worker has made for a Qualification. '
-  QualificationRequestList:
-    type: array
-    items:
-      $ref: '#/definitions/QualificationRequest'
-  QualificationRequirement:
-    type: object
-    required:
-      - QualificationTypeId
-      - Comparator
-    properties:
-      QualificationTypeId:
-        $ref: '#/definitions/String'
-        description: ' The ID of the Qualification type for the requirement.'
-      Comparator:
-        $ref: '#/definitions/Comparator'
-        description: 'The kind of comparison to make against a Qualification''s value. You can compare a Qualification''s value to an IntegerValue to see if it is LessThan, LessThanOrEqualTo, GreaterThan, GreaterThanOrEqualTo, EqualTo, or NotEqualTo the IntegerValue. You can compare it to a LocaleValue to see if it is EqualTo, or NotEqualTo the LocaleValue. You can check to see if the value is In or NotIn a set of IntegerValue or LocaleValue values. Lastly, a Qualification requirement can also test if a Qualification Exists or DoesNotExist in the user''s profile, regardless of its value. '
-      IntegerValues:
-        $ref: '#/definitions/IntegerList'
-        description: ' The integer value to compare against the Qualification''s value. IntegerValue must not be present if Comparator is Exists or DoesNotExist. IntegerValue can only be used if the Qualification type has an integer value; it cannot be used with the Worker_Locale QualificationType ID. When performing a set comparison by using the In or the NotIn comparator, you can use up to 15 IntegerValue elements in a QualificationRequirement data structure. '
-      LocaleValues:
-        $ref: '#/definitions/LocaleList'
-        description: ' The locale value to compare against the Qualification''s value. The local value must be a valid ISO 3166 country code or supports ISO 3166-2 subdivisions. LocaleValue can only be used with a Worker_Locale QualificationType ID. LocaleValue can only be used with the EqualTo, NotEqualTo, In, and NotIn comparators. You must only use a single LocaleValue element when using the EqualTo or NotEqualTo comparators. When performing a set comparison by using the In or the NotIn comparator, you can use up to 30 LocaleValue elements in a QualificationRequirement data structure. '
-      RequiredToPreview:
-        $ref: '#/definitions/Boolean'
-        description: ' DEPRECATED: Use the <code>ActionsGuarded</code> field instead. If RequiredToPreview is true, the question data for the HIT will not be shown when a Worker whose Qualifications do not meet this requirement tries to preview the HIT. That is, a Worker''s Qualifications must meet all of the requirements for which RequiredToPreview is true in order to preview the HIT. If a Worker meets all of the requirements where RequiredToPreview is true (or if there are no such requirements), but does not meet all of the requirements for the HIT, the Worker will be allowed to preview the HIT''s question data, but will not be allowed to accept and complete the HIT. The default is false. This should not be used in combination with the <code>ActionsGuarded</code> field. '
-      ActionsGuarded:
-        $ref: '#/definitions/HITAccessActions'
-        description: ' Setting this attribute prevents Workers whose Qualifications do not meet this QualificationRequirement from taking the specified action. Valid arguments include "Accept" (Worker cannot accept the HIT, but can preview the HIT and see it in their search results), "PreviewAndAccept" (Worker cannot accept or preview the HIT, but can see the HIT in their search results), and "DiscoverPreviewAndAccept" (Worker cannot accept, preview, or see the HIT in their search results). It''s possible for you to create a HIT with multiple QualificationRequirements (which can have different values for the ActionGuarded attribute). In this case, the Worker is only permitted to perform an action when they have met all QualificationRequirements guarding the action. The actions in the order of least restrictive to most restrictive are Discover, Preview and Accept. For example, if a Worker meets all QualificationRequirements that are set to DiscoverPreviewAndAccept, but do not meet all requirements that are set with PreviewAndAccept, then the Worker will be able to Discover, i.e. see the HIT in their search result, but will not be able to Preview or Accept the HIT. ActionsGuarded should not be used in combination with the <code>RequiredToPreview</code> field. '
-    description: ' The QualificationRequirement data structure describes a Qualification that a Worker must have before the Worker is allowed to accept a HIT. A requirement may optionally state that a Worker must have the Qualification in order to preview the HIT, or see the HIT in search results. '
-  QualificationRequirementList:
-    type: array
-    items:
-      $ref: '#/definitions/QualificationRequirement'
-  QualificationStatus:
-    type: string
-    enum:
-      - Granted
-      - Revoked
+      - Active
+      - Inactive
   QualificationType:
     type: object
     properties:
@@ -2855,19 +2627,299 @@ definitions:
         $ref: '#/definitions/Integer'
         description: ' The Qualification integer value to use for automatically granted Qualifications, if AutoGranted is true. This is 1 by default. '
     description: ' The QualificationType data structure represents a Qualification type, a description of a property of a Worker that must match the requirements of a HIT for the Worker to be able to accept the HIT. The type also describes how a Worker can obtain a Qualification of that type, such as through a Qualification test. '
-  QualificationTypeList:
+  CustomerIdList:
     type: array
     items:
-      $ref: '#/definitions/QualificationType'
-  QualificationTypeStatus:
+      $ref: '#/definitions/CustomerId'
+  EventType:
     type: string
     enum:
-      - Active
-      - Inactive
+      - AssignmentAccepted
+      - AssignmentAbandoned
+      - AssignmentReturned
+      - AssignmentSubmitted
+      - AssignmentRejected
+      - AssignmentApproved
+      - HITCreated
+      - HITExpired
+      - HITReviewable
+      - HITExtended
+      - HITDisposed
+      - Ping
+  EventTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/EventType'
+  ExceptionMessage:
+    type: string
+  Qualification:
+    type: object
+    properties:
+      QualificationTypeId:
+        $ref: '#/definitions/EntityId'
+        description: ' The ID of the Qualification type for the Qualification.'
+      WorkerId:
+        $ref: '#/definitions/CustomerId'
+        description: ' The ID of the Worker who possesses the Qualification. '
+      GrantTime:
+        $ref: '#/definitions/Timestamp'
+        description: ' The date and time the Qualification was granted to the Worker. If the Worker''s Qualification was revoked, and then re-granted based on a new Qualification request, GrantTime is the date and time of the last call to the AcceptQualificationRequest operation.'
+      IntegerValue:
+        $ref: '#/definitions/Integer'
+        description: ' The value (score) of the Qualification, if the Qualification has an integer value.'
+      LocaleValue:
+        $ref: '#/definitions/Locale'
+      Status:
+        $ref: '#/definitions/QualificationStatus'
+        description: ' The status of the Qualification. Valid values are Granted | Revoked.'
+    description: 'The Qualification data structure represents a Qualification assigned to a user, including the Qualification type and the value (score).'
+  HITStatus:
+    type: string
+    enum:
+      - Assignable
+      - Unassignable
+      - Reviewable
+      - Reviewing
+      - Disposed
+  HITReviewStatus:
+    type: string
+    enum:
+      - NotReviewed
+      - MarkedForReview
+      - ReviewedAppropriate
+      - ReviewedInappropriate
+  HITAccessActions:
+    type: string
+    enum:
+      - Accept
+      - PreviewAndAccept
+      - DiscoverPreviewAndAccept
+  HITLayoutParameter:
+    type: object
+    required:
+      - Name
+      - Value
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: ' The name of the parameter in the HITLayout. '
+      Value:
+        $ref: '#/definitions/String'
+        description: 'The value substituted for the parameter referenced in the HITLayout. '
+    description: ' The HITLayoutParameter data structure defines parameter values used with a HITLayout. A HITLayout is a reusable Amazon Mechanical Turk project template used to provide Human Intelligence Task (HIT) question data for CreateHIT. '
+  HITList:
+    type: array
+    items:
+      $ref: '#/definitions/HIT'
+  IntegerList:
+    type: array
+    items:
+      $ref: '#/definitions/Integer'
+  PaginationToken:
+    type: string
+    description: 'If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. '
+    minLength: 1
+    maxLength: 255
   ResultSize:
     type: integer
     minimum: 1
     maximum: 100
+  QualificationRequestList:
+    type: array
+    items:
+      $ref: '#/definitions/QualificationRequest'
+  QualificationTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/QualificationType'
+  ReviewPolicyLevelList:
+    type: array
+    items:
+      $ref: '#/definitions/ReviewPolicyLevel'
+  ReviewReport:
+    type: object
+    properties:
+      ReviewResults:
+        $ref: '#/definitions/ReviewResultDetailList'
+        description: ' A list of ReviewResults objects for each action specified in the Review Policy. '
+      ReviewActions:
+        $ref: '#/definitions/ReviewActionDetailList'
+        description: ' A list of ReviewAction objects for each action specified in the Review Policy. '
+    description: ' Contains both ReviewResult and ReviewAction elements for a particular HIT. '
+  ReviewableHITStatus:
+    type: string
+    enum:
+      - Reviewable
+      - Reviewing
+  WorkerBlockList:
+    type: array
+    items:
+      $ref: '#/definitions/WorkerBlock'
+  QualificationStatus:
+    type: string
+    enum:
+      - Granted
+      - Revoked
+  QualificationList:
+    type: array
+    items:
+      $ref: '#/definitions/Qualification'
+  Locale:
+    type: object
+    required:
+      - Country
+    properties:
+      Country:
+        $ref: '#/definitions/CountryParameters'
+        description: ' The country of the locale. Must be a valid ISO 3166 country code. For example, the code US refers to the United States of America. '
+      Subdivision:
+        $ref: '#/definitions/CountryParameters'
+        description: 'The state or subdivision of the locale. A valid ISO 3166-2 subdivision code. For example, the code WA refers to the state of Washington.'
+    description: The Locale data structure represents a geographical region or location.
+  LocaleList:
+    type: array
+    items:
+      $ref: '#/definitions/Locale'
+  NotificationTransport:
+    type: string
+    enum:
+      - Email
+      - SQS
+      - SNS
+  NotificationSpecification:
+    type: object
+    required:
+      - Destination
+      - Transport
+      - Version
+      - EventTypes
+    properties:
+      Destination:
+        $ref: '#/definitions/String'
+        description: '<p> The target for notification messages. The Destination’s format is determined by the specified Transport: </p> <ul> <li> <p>When Transport is Email, the Destination is your email address.</p> </li> <li> <p>When Transport is SQS, the Destination is your queue URL.</p> </li> <li> <p>When Transport is SNS, the Destination is the ARN of your topic.</p> </li> </ul>'
+      Transport:
+        $ref: '#/definitions/NotificationTransport'
+        description: ' The method Amazon Mechanical Turk uses to send the notification. Valid Values: Email | SQS | SNS. '
+      Version:
+        $ref: '#/definitions/String'
+        description: The version of the Notification API to use. Valid value is 2006-05-05.
+      EventTypes:
+        $ref: '#/definitions/EventTypeList'
+        description: ' The list of events that should cause notifications to be sent. Valid Values: AssignmentAccepted | AssignmentAbandoned | AssignmentReturned | AssignmentSubmitted | AssignmentRejected | AssignmentApproved | HITCreated | HITExtended | HITDisposed | HITReviewable | HITExpired | Ping. The Ping event is only valid for the SendTestEventNotification operation. '
+    description: The NotificationSpecification data structure describes a HIT event notification for a HIT type.
+  NotifyWorkersFailureCode:
+    type: string
+    enum:
+      - SoftFailure
+      - HardFailure
+  NotifyWorkersFailureStatus:
+    type: object
+    properties:
+      NotifyWorkersFailureCode:
+        $ref: '#/definitions/NotifyWorkersFailureCode'
+        description: ' Encoded value for the failure type. '
+      NotifyWorkersFailureMessage:
+        $ref: '#/definitions/String'
+        description: ' A message detailing the reason the Worker could not be notified. '
+      WorkerId:
+        $ref: '#/definitions/CustomerId'
+        description: ' The ID of the Worker.'
+    description: ' When MTurk encounters an issue with notifying the Workers you specified, it returns back this object with failure details. '
+  NotifyWorkersFailureStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/NotifyWorkersFailureStatus'
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ParameterMapEntry:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/String'
+        description: ' The QuestionID from the HIT that is used to identify which question requires Mechanical Turk to score as part of the ScoreMyKnownAnswers/2011-09-01 Review Policy. '
+      Values:
+        $ref: '#/definitions/StringList'
+        description: ' The list of answers to the question specified in the MapEntry Key element. The Worker must match all values in order for the answer to be scored correctly. '
+    description: ' This data structure is the data type for the AnswerKey parameter of the ScoreMyKnownAnswers/2011-09-01 Review Policy. '
+  ParameterMapEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterMapEntry'
+  PolicyParameter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/String'
+        description: ' Name of the parameter from the list of Review Polices. '
+      Values:
+        $ref: '#/definitions/StringList'
+        description: ' The list of values of the Parameter'
+      MapEntries:
+        $ref: '#/definitions/ParameterMapEntryList'
+        description: ' List of ParameterMapEntry objects. '
+    description: ' Name of the parameter from the Review policy. '
+  PolicyParameterList:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyParameter'
+  QualificationRequest:
+    type: object
+    properties:
+      QualificationRequestId:
+        $ref: '#/definitions/String'
+        description: 'The ID of the Qualification request, a unique identifier generated when the request was submitted. '
+      QualificationTypeId:
+        $ref: '#/definitions/EntityId'
+        description: ' The ID of the Qualification type the Worker is requesting, as returned by the CreateQualificationType operation. '
+      WorkerId:
+        $ref: '#/definitions/CustomerId'
+        description: ' The ID of the Worker requesting the Qualification.'
+      Test:
+        $ref: '#/definitions/String'
+        description: ' The contents of the Qualification test that was presented to the Worker, if the type has a test and the Worker has submitted answers. This value is identical to the QuestionForm associated with the Qualification type at the time the Worker requests the Qualification.'
+      Answer:
+        $ref: '#/definitions/String'
+        description: ' The Worker''s answers for the Qualification type''s test contained in a QuestionFormAnswers document, if the type has a test and the Worker has submitted answers. If the Worker does not provide any answers, Answer may be empty. '
+      SubmitTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time the Qualification request had a status of Submitted. This is either the time the Worker submitted answers for a Qualification test, or the time the Worker requested the Qualification if the Qualification type does not have a test. '
+    description: ' The QualificationRequest data structure represents a request a Worker has made for a Qualification. '
+  QualificationRequirement:
+    type: object
+    required:
+      - QualificationTypeId
+      - Comparator
+    properties:
+      QualificationTypeId:
+        $ref: '#/definitions/String'
+        description: ' The ID of the Qualification type for the requirement.'
+      Comparator:
+        $ref: '#/definitions/Comparator'
+        description: 'The kind of comparison to make against a Qualification''s value. You can compare a Qualification''s value to an IntegerValue to see if it is LessThan, LessThanOrEqualTo, GreaterThan, GreaterThanOrEqualTo, EqualTo, or NotEqualTo the IntegerValue. You can compare it to a LocaleValue to see if it is EqualTo, or NotEqualTo the LocaleValue. You can check to see if the value is In or NotIn a set of IntegerValue or LocaleValue values. Lastly, a Qualification requirement can also test if a Qualification Exists or DoesNotExist in the user''s profile, regardless of its value. '
+      IntegerValues:
+        $ref: '#/definitions/IntegerList'
+        description: ' The integer value to compare against the Qualification''s value. IntegerValue must not be present if Comparator is Exists or DoesNotExist. IntegerValue can only be used if the Qualification type has an integer value; it cannot be used with the Worker_Locale QualificationType ID. When performing a set comparison by using the In or the NotIn comparator, you can use up to 15 IntegerValue elements in a QualificationRequirement data structure. '
+      LocaleValues:
+        $ref: '#/definitions/LocaleList'
+        description: ' The locale value to compare against the Qualification''s value. The local value must be a valid ISO 3166 country code or supports ISO 3166-2 subdivisions. LocaleValue can only be used with a Worker_Locale QualificationType ID. LocaleValue can only be used with the EqualTo, NotEqualTo, In, and NotIn comparators. You must only use a single LocaleValue element when using the EqualTo or NotEqualTo comparators. When performing a set comparison by using the In or the NotIn comparator, you can use up to 30 LocaleValue elements in a QualificationRequirement data structure. '
+      RequiredToPreview:
+        $ref: '#/definitions/Boolean'
+        description: ' DEPRECATED: Use the <code>ActionsGuarded</code> field instead. If RequiredToPreview is true, the question data for the HIT will not be shown when a Worker whose Qualifications do not meet this requirement tries to preview the HIT. That is, a Worker''s Qualifications must meet all of the requirements for which RequiredToPreview is true in order to preview the HIT. If a Worker meets all of the requirements where RequiredToPreview is true (or if there are no such requirements), but does not meet all of the requirements for the HIT, the Worker will be allowed to preview the HIT''s question data, but will not be allowed to accept and complete the HIT. The default is false. This should not be used in combination with the <code>ActionsGuarded</code> field. '
+      ActionsGuarded:
+        $ref: '#/definitions/HITAccessActions'
+        description: ' Setting this attribute prevents Workers whose Qualifications do not meet this QualificationRequirement from taking the specified action. Valid arguments include "Accept" (Worker cannot accept the HIT, but can preview the HIT and see it in their search results), "PreviewAndAccept" (Worker cannot accept or preview the HIT, but can see the HIT in their search results), and "DiscoverPreviewAndAccept" (Worker cannot accept, preview, or see the HIT in their search results). It''s possible for you to create a HIT with multiple QualificationRequirements (which can have different values for the ActionGuarded attribute). In this case, the Worker is only permitted to perform an action when they have met all QualificationRequirements guarding the action. The actions in the order of least restrictive to most restrictive are Discover, Preview and Accept. For example, if a Worker meets all QualificationRequirements that are set to DiscoverPreviewAndAccept, but do not meet all requirements that are set with PreviewAndAccept, then the Worker will be able to Discover, i.e. see the HIT in their search result, but will not be able to Preview or Accept the HIT. ActionsGuarded should not be used in combination with the <code>RequiredToPreview</code> field. '
+    description: ' The QualificationRequirement data structure describes a Qualification that a Worker must have before the Worker is allowed to accept a HIT. A requirement may optionally state that a Worker must have the Qualification in order to preview the HIT, or see the HIT in search results. '
+  TurkErrorCode:
+    type: string
+  ReviewActionStatus:
+    type: string
+    enum:
+      - Intended
+      - Succeeded
+      - Failed
+      - Cancelled
   ReviewActionDetail:
     type: object
     properties:
@@ -2900,44 +2952,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReviewActionDetail'
-  ReviewActionStatus:
-    type: string
-    enum:
-      - Intended
-      - Succeeded
-      - Failed
-      - Cancelled
-  ReviewPolicy:
-    type: object
-    required:
-      - PolicyName
-    properties:
-      PolicyName:
-        $ref: '#/definitions/String'
-        description: ' Name of a Review Policy: SimplePlurality/2011-09-01 or ScoreMyKnownAnswers/2011-09-01 '
-      Parameters:
-        $ref: '#/definitions/PolicyParameterList'
-        description: Name of the parameter from the Review policy.
-    description: ' HIT Review Policy data structures represent HIT review policies, which you specify when you create a HIT. '
   ReviewPolicyLevel:
     type: string
     enum:
       - Assignment
       - HIT
-  ReviewPolicyLevelList:
+  ReviewResultDetailList:
     type: array
     items:
-      $ref: '#/definitions/ReviewPolicyLevel'
-  ReviewReport:
-    type: object
-    properties:
-      ReviewResults:
-        $ref: '#/definitions/ReviewResultDetailList'
-        description: ' A list of ReviewResults objects for each action specified in the Review Policy. '
-      ReviewActions:
-        $ref: '#/definitions/ReviewActionDetailList'
-        description: ' A list of ReviewAction objects for each action specified in the Review Policy. '
-    description: ' Contains both ReviewResult and ReviewAction elements for a particular HIT. '
+      $ref: '#/definitions/ReviewResultDetail'
   ReviewResultDetail:
     type: object
     properties:
@@ -2960,26 +2983,6 @@ definitions:
         $ref: '#/definitions/String'
         description: ' The values of Key provided by the review policies you have selected. '
     description: ' This data structure is returned multiple times for each result specified in the Review Policy. '
-  ReviewResultDetailList:
-    type: array
-    items:
-      $ref: '#/definitions/ReviewResultDetail'
-  ReviewableHITStatus:
-    type: string
-    enum:
-      - Reviewable
-      - Reviewing
-  String:
-    type: string
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  Timestamp:
-    type: string
-    format: date-time
-  TurkErrorCode:
-    type: string
   WorkerBlock:
     type: object
     properties:
@@ -2990,7 +2993,3 @@ definitions:
         $ref: '#/definitions/String'
         description: ' A message explaining the reason the Worker was blocked. '
     description: ' The WorkerBlock data structure represents a Worker who has been blocked. It has two elements: the WorkerId and the Reason for the block. '
-  WorkerBlockList:
-    type: array
-    items:
-      $ref: '#/definitions/WorkerBlock'

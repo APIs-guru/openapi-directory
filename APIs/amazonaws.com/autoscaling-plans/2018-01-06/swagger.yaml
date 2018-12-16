@@ -502,7 +502,13 @@ definitions:
       ScalingInstructions:
         $ref: '#/definitions/ScalingInstructions'
         description: The scaling instructions.
-  undefined: {}
+  XmlString:
+    type: string
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  TagFilters:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
   ApplicationSource:
     type: object
     properties:
@@ -519,6 +525,35 @@ definitions:
       $ref: '#/definitions/ApplicationSource'
   Cooldown:
     type: integer
+  ScalingPlanName:
+    type: string
+    pattern: '[\p{Print}&&[^|:/]]+'
+    minLength: 1
+    maxLength: 128
+  ScalingInstructions:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingInstruction'
+  ScalingPlanVersion:
+    type: integer
+  MetricName:
+    type: string
+  MetricNamespace:
+    type: string
+  MetricDimensions:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDimension'
+  MetricStatistic:
+    type: string
+    enum:
+      - Average
+      - Minimum
+      - Maximum
+      - SampleCount
+      - Sum
+  MetricUnit:
+    type: string
   CustomizedLoadMetricSpecification:
     type: object
     required:
@@ -565,6 +600,12 @@ definitions:
         $ref: '#/definitions/MetricUnit'
         description: 'The unit of the metric. '
     description: '<p>Represents a CloudWatch metric of your choosing that can be used for dynamic scaling as part of a target tracking scaling policy. </p> <p>For information about terminology, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html">Amazon CloudWatch Concepts</a>.</p>'
+  TimestampType:
+    type: string
+    format: date-time
+  MetricScale:
+    type: number
+    format: double
   Datapoint:
     type: object
     properties:
@@ -579,6 +620,22 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Datapoint'
+  MaxResults:
+    type: integer
+  NextToken:
+    type: string
+  ScalingPlanResources:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingPlanResource'
+  ScalingPlanNames:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingPlanName'
+  ScalingPlans:
+    type: array
+    items:
+      $ref: '#/definitions/ScalingPlan'
   DisableDynamicScaling:
     type: boolean
   DisableScaleIn:
@@ -590,6 +647,25 @@ definitions:
       - LoadForecast
       - ScheduledActionMinCapacity
       - ScheduledActionMaxCapacity
+  ServiceNamespace:
+    type: string
+    enum:
+      - autoscaling
+      - ecs
+      - ec2
+      - rds
+      - dynamodb
+  ScalableDimension:
+    type: string
+    enum:
+      - 'autoscaling:autoScalingGroup:DesiredCapacity'
+      - 'ecs:service:DesiredCount'
+      - 'ec2:spot-fleet-request:TargetCapacity'
+      - 'rds:cluster:ReadReplicaCount'
+      - 'dynamodb:table:ReadCapacityUnits'
+      - 'dynamodb:table:WriteCapacityUnits'
+      - 'dynamodb:index:ReadCapacityUnits'
+      - 'dynamodb:index:WriteCapacityUnits'
   LoadMetricType:
     type: string
     enum:
@@ -597,8 +673,10 @@ definitions:
       - ASGTotalNetworkIn
       - ASGTotalNetworkOut
       - ALBTargetGroupRequestCount
-  MaxResults:
-    type: integer
+  MetricDimensionName:
+    type: string
+  MetricDimensionValue:
+    type: string
   MetricDimension:
     type: object
     required:
@@ -612,33 +690,6 @@ definitions:
         $ref: '#/definitions/MetricDimensionValue'
         description: The value of the dimension.
     description: Represents a dimension for a customized metric.
-  MetricDimensionName:
-    type: string
-  MetricDimensionValue:
-    type: string
-  MetricDimensions:
-    type: array
-    items:
-      $ref: '#/definitions/MetricDimension'
-  MetricName:
-    type: string
-  MetricNamespace:
-    type: string
-  MetricScale:
-    type: number
-    format: double
-  MetricStatistic:
-    type: string
-    enum:
-      - Average
-      - Minimum
-      - Maximum
-      - SampleCount
-      - Sum
-  MetricUnit:
-    type: string
-  NextToken:
-    type: string
   PolicyName:
     type: string
     pattern: '\p{Print}+'
@@ -648,6 +699,10 @@ definitions:
     type: string
     enum:
       - TargetTrackingScaling
+  ResourceLabel:
+    type: string
+    minLength: 1
+    maxLength: 1023
   PredefinedLoadMetricSpecification:
     type: object
     required:
@@ -660,6 +715,22 @@ definitions:
         $ref: '#/definitions/ResourceLabel'
         description: '<p>Identifies the resource associated with the metric type. You can''t specify a resource label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target group for an Application Load Balancer attached to the Auto Scaling group.</p> <p>The format is app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;, where:</p> <ul> <li> <p>app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN.</p> </li> <li> <p>targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.</p> </li> </ul>'
     description: 'Represents a predefined metric that can be used for predictive scaling. '
+  ScalingMetricType:
+    type: string
+    enum:
+      - ASGAverageCPUUtilization
+      - ASGAverageNetworkIn
+      - ASGAverageNetworkOut
+      - DynamoDBReadCapacityUtilization
+      - DynamoDBWriteCapacityUtilization
+      - ECSServiceAverageCPUUtilization
+      - ECSServiceAverageMemoryUtilization
+      - ALBRequestCountPerTarget
+      - RDSReaderAverageCPUUtilization
+      - RDSReaderAverageDatabaseConnections
+      - EC2SpotFleetRequestAverageCPUUtilization
+      - EC2SpotFleetRequestAverageNetworkIn
+      - EC2SpotFleetRequestAverageNetworkOut
   PredefinedScalingMetricSpecification:
     type: object
     required:
@@ -690,21 +761,18 @@ definitions:
     minLength: 1
     maxLength: 1600
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  ResourceLabel:
-    type: string
-    minLength: 1
-    maxLength: 1023
-  ScalableDimension:
+  TargetTrackingConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/TargetTrackingConfiguration'
+  ScheduledActionBufferTime:
+    type: integer
+    minimum: 0
+  ScalingPolicyUpdateBehavior:
     type: string
     enum:
-      - 'autoscaling:autoScalingGroup:DesiredCapacity'
-      - 'ecs:service:DesiredCount'
-      - 'ec2:spot-fleet-request:TargetCapacity'
-      - 'rds:cluster:ReadReplicaCount'
-      - 'dynamodb:table:ReadCapacityUnits'
-      - 'dynamodb:table:WriteCapacityUnits'
-      - 'dynamodb:index:ReadCapacityUnits'
-      - 'dynamodb:index:WriteCapacityUnits'
+      - KeepExternalPolicies
+      - ReplaceExternalPolicies
   ScalingInstruction:
     type: object
     required:
@@ -758,26 +826,17 @@ definitions:
         $ref: '#/definitions/DisableDynamicScaling'
         description: '<p>Controls whether dynamic scaling by AWS Auto Scaling is disabled. When dynamic scaling is enabled, AWS Auto Scaling creates target tracking scaling policies based on the specified target tracking configurations. </p> <p>The default is enabled (<code>false</code>). </p>'
     description: '<p>Describes a scaling instruction for a scalable resource.</p> <p>The scaling instruction is used in combination with a scaling plan, which is a set of instructions for configuring dynamic scaling and predictive scaling for the scalable resources in your application. Each scaling instruction applies to one resource.</p> <p>AWS Auto Scaling creates target tracking scaling policies based on the scaling instructions. Target tracking scaling policies adjust the capacity of your scalable resource as required to maintain resource utilization at the target value that you specified. </p> <p>AWS Auto Scaling also configures predictive scaling for your Amazon EC2 Auto Scaling groups using a subset of parameters, including the load metric, the scaling metric, the target value for the scaling metric, the predictive scaling mode (forecast and scale or forecast only), and the desired behavior when the forecast capacity exceeds the maximum capacity of the resource. With predictive scaling, AWS Auto Scaling generates forecasts with traffic predictions for the two days ahead and schedules scaling actions that proactively add and remove resource capacity to match the forecast. </p> <p>For more information, see the <a href="http://docs.aws.amazon.com/autoscaling/plans/userguide/what-is-aws-auto-scaling.html">AWS Auto Scaling User Guide</a>.</p>'
-  ScalingInstructions:
-    type: array
-    items:
-      $ref: '#/definitions/ScalingInstruction'
-  ScalingMetricType:
+  ScalingPlanStatusCode:
     type: string
     enum:
-      - ASGAverageCPUUtilization
-      - ASGAverageNetworkIn
-      - ASGAverageNetworkOut
-      - DynamoDBReadCapacityUtilization
-      - DynamoDBWriteCapacityUtilization
-      - ECSServiceAverageCPUUtilization
-      - ECSServiceAverageMemoryUtilization
-      - ALBRequestCountPerTarget
-      - RDSReaderAverageCPUUtilization
-      - RDSReaderAverageDatabaseConnections
-      - EC2SpotFleetRequestAverageCPUUtilization
-      - EC2SpotFleetRequestAverageNetworkIn
-      - EC2SpotFleetRequestAverageNetworkOut
+      - Active
+      - ActiveWithProblems
+      - CreationInProgress
+      - CreationFailed
+      - DeletionInProgress
+      - DeletionFailed
+      - UpdateInProgress
+      - UpdateFailed
   ScalingPlan:
     type: object
     required:
@@ -812,15 +871,16 @@ definitions:
         $ref: '#/definitions/TimestampType'
         description: The Unix time stamp when the scaling plan was created.
     description: Represents a scaling plan.
-  ScalingPlanName:
-    type: string
-    pattern: '[\p{Print}&&[^|:/]]+'
-    minLength: 1
-    maxLength: 128
-  ScalingPlanNames:
+  ScalingPolicies:
     type: array
     items:
-      $ref: '#/definitions/ScalingPlanName'
+      $ref: '#/definitions/ScalingPolicy'
+  ScalingStatusCode:
+    type: string
+    enum:
+      - Inactive
+      - PartiallyActive
+      - Active
   ScalingPlanResource:
     type: object
     required:
@@ -856,31 +916,6 @@ definitions:
         $ref: '#/definitions/XmlString'
         description: A simple message about the current scaling status of the resource.
     description: Represents a scalable resource.
-  ScalingPlanResources:
-    type: array
-    items:
-      $ref: '#/definitions/ScalingPlanResource'
-  ScalingPlanStatusCode:
-    type: string
-    enum:
-      - Active
-      - ActiveWithProblems
-      - CreationInProgress
-      - CreationFailed
-      - DeletionInProgress
-      - DeletionFailed
-      - UpdateInProgress
-      - UpdateFailed
-  ScalingPlanVersion:
-    type: integer
-  ScalingPlans:
-    type: array
-    items:
-      $ref: '#/definitions/ScalingPlan'
-  ScalingPolicies:
-    type: array
-    items:
-      $ref: '#/definitions/ScalingPolicy'
   ScalingPolicy:
     type: object
     required:
@@ -897,46 +932,6 @@ definitions:
         $ref: '#/definitions/TargetTrackingConfiguration'
         description: 'The target tracking scaling policy. '
     description: Represents a scaling policy.
-  ScalingPolicyUpdateBehavior:
-    type: string
-    enum:
-      - KeepExternalPolicies
-      - ReplaceExternalPolicies
-  ScalingStatusCode:
-    type: string
-    enum:
-      - Inactive
-      - PartiallyActive
-      - Active
-  ScheduledActionBufferTime:
-    type: integer
-    minimum: 0
-  ServiceNamespace:
-    type: string
-    enum:
-      - autoscaling
-      - ecs
-      - ec2
-      - rds
-      - dynamodb
-  TagFilter:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/XmlStringMaxLen128'
-        description: The tag key.
-      Values:
-        $ref: '#/definitions/TagValues'
-        description: The tag values (0 to 20).
-    description: Represents a tag.
-  TagFilters:
-    type: array
-    items:
-      $ref: '#/definitions/TagFilter'
-  TagValues:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen256'
   TargetTrackingConfiguration:
     type: object
     required:
@@ -964,21 +959,25 @@ definitions:
         $ref: '#/definitions/Cooldown'
         description: 'The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. This value is used only if the resource is an Auto Scaling group.'
     description: Describes a target tracking configuration. Used with <a>ScalingInstruction</a> and <a>ScalingPolicy</a>.
-  TargetTrackingConfigurations:
-    type: array
-    items:
-      $ref: '#/definitions/TargetTrackingConfiguration'
-  TimestampType:
-    type: string
-    format: date-time
-  XmlString:
-    type: string
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   XmlStringMaxLen128:
     type: string
     minLength: 1
     maxLength: 128
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  TagValues:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen256'
+  TagFilter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/XmlStringMaxLen128'
+        description: The tag key.
+      Values:
+        $ref: '#/definitions/TagValues'
+        description: The tag values (0 to 20).
+    description: Represents a tag.
   XmlStringMaxLen256:
     type: string
     minLength: 1

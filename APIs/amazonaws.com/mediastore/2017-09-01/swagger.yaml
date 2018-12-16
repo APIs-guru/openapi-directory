@@ -784,25 +784,66 @@ definitions:
       LifecyclePolicy:
         $ref: '#/definitions/LifecyclePolicy'
         description: The object lifecycle policy to apply to the container.
-  undefined: {}
+  Header:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 8192
   AllowedHeaders:
     type: array
     items:
       $ref: '#/definitions/Header'
     minItems: 0
     maxItems: 100
+  MethodName:
+    type: string
+    enum:
+      - PUT
+      - GET
+      - DELETE
+      - HEAD
   AllowedMethods:
     type: array
     items:
       $ref: '#/definitions/MethodName'
     minItems: 1
     maxItems: 4
+  Origin:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 2048
   AllowedOrigins:
     type: array
     items:
       $ref: '#/definitions/Origin'
     minItems: 1
     maxItems: 100
+  Endpoint:
+    type: string
+    minLength: 1
+    maxLength: 255
+  TimeStamp:
+    type: string
+    format: date-time
+  ContainerARN:
+    type: string
+    pattern: 'arn:aws:mediastore:[a-z]+-[a-z]+-\d:\d{12}:container/\w{1,255}'
+    minLength: 1
+    maxLength: 1024
+  ContainerName:
+    type: string
+    pattern: '[\w-]+'
+    minLength: 1
+    maxLength: 255
+  ContainerStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - CREATING
+      - DELETING
+    minLength: 1
+    maxLength: 16
   Container:
     type: object
     properties:
@@ -822,11 +863,6 @@ definitions:
         $ref: '#/definitions/ContainerStatus'
         description: 'The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When the endpoint is available, the status changes to <code>ACTIVE</code>.'
     description: This section describes operations that you can perform on an AWS Elemental MediaStore container.
-  ContainerARN:
-    type: string
-    pattern: 'arn:aws:mediastore:[a-z]+-[a-z]+-\d:\d{12}:container/\w{1,255}'
-    minLength: 1
-    maxLength: 1024
   ContainerList:
     type: array
     items:
@@ -835,31 +871,11 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100
-  ContainerName:
-    type: string
-    pattern: '[\w-]+'
-    minLength: 1
-    maxLength: 255
   ContainerPolicy:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
     minLength: 1
     maxLength: 8192
-  ContainerStatus:
-    type: string
-    enum:
-      - ACTIVE
-      - CREATING
-      - DELETING
-    minLength: 1
-    maxLength: 16
-  CorsPolicy:
-    type: array
-    description: 'The CORS policy of the container. '
-    items:
-      $ref: '#/definitions/CorsRule'
-    minItems: 1
-    maxItems: 100
   CorsRule:
     type: object
     required:
@@ -882,47 +898,30 @@ definitions:
         $ref: '#/definitions/ExposeHeaders'
         description: '<p>One or more headers in the response that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>This element is optional for each rule.</p>'
     description: 'A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.'
-  Endpoint:
-    type: string
-    minLength: 1
-    maxLength: 255
+  CorsPolicy:
+    type: array
+    description: 'The CORS policy of the container. '
+    items:
+      $ref: '#/definitions/CorsRule'
+    minItems: 1
+    maxItems: 100
+  MaxAgeSeconds:
+    type: integer
+    minimum: 0
+    maximum: 2147483647
   ExposeHeaders:
     type: array
     items:
       $ref: '#/definitions/Header'
     minItems: 0
     maxItems: 100
-  Header:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 8192
   LifecyclePolicy:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
     minLength: 0
     maxLength: 8192
-  MaxAgeSeconds:
-    type: integer
-    minimum: 0
-    maximum: 2147483647
-  MethodName:
-    type: string
-    enum:
-      - PUT
-      - GET
-      - DELETE
-      - HEAD
-  Origin:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 2048
   PaginationToken:
     type: string
     pattern: '[0-9A-Za-z=/+]+'
     minLength: 1
     maxLength: 255
-  TimeStamp:
-    type: string
-    format: date-time

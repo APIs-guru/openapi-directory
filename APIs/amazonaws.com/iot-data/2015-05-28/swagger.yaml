@@ -425,23 +425,22 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
         description: The message for the exception.
     description: The payload exceeds the maximum size allowed.
-  undefined: {}
   ErrorMessage:
     type: string
-  JsonDocument:
-    type: string
-  Payload:
-    type: string
-  Qos:
-    type: integer
-    minimum: 0
-    maximum: 1
   ThingName:
     type: string
     pattern: '[a-zA-Z0-9_-]+'
     minLength: 1
     maxLength: 128
-  Topic:
+  JsonDocument:
     type: string
   errorMessage:
     type: string
+  Payload:
+    type: string
+  Topic:
+    type: string
+  Qos:
+    type: integer
+    minimum: 0
+    maximum: 1

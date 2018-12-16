@@ -8353,7 +8353,27 @@ definitions:
         description: '<p>The contents of the signing certificate.</p> <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF)</p> </li> <li> <p>The special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D)</p> </li> </ul>'
   InvalidCertificateException: {}
   DuplicateCertificateException: {}
-  undefined: {}
+  userNameType:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 1
+    maxLength: 64
+  accessKeyIdType:
+    type: string
+    pattern: '[\w]+'
+    minLength: 16
+    maxLength: 128
+  statusType:
+    type: string
+    enum:
+      - Active
+      - Inactive
+  accessKeySecretType:
+    type: string
+    format: password
+  dateType:
+    type: string
+    format: date-time
   AccessKey:
     type: object
     required:
@@ -8378,6 +8398,8 @@ definitions:
         $ref: '#/definitions/dateType'
         description: The date when the access key was created.
     description: '<p>Contains information about an AWS access key.</p> <p> This data type is used as a response element in the <a>CreateAccessKey</a> and <a>ListAccessKeys</a> operations. </p> <note> <p>The <code>SecretAccessKey</code> value is returned only in response to <a>CreateAccessKey</a>. You can get a secret access key only when you first create an access key; you cannot recover the secret access key later. If you lose a secret access key, you must create a new access key.</p> </note>'
+  stringType:
+    type: string
   AccessKeyLastUsed:
     type: object
     required:
@@ -8411,18 +8433,51 @@ definitions:
         $ref: '#/definitions/dateType'
         description: The date when the access key was created.
     description: '<p>Contains information about an AWS access key, without its secret key.</p> <p>This data type is used as a response element in the <a>ListAccessKeys</a> operation.</p>'
+  ActionNameType:
+    type: string
+    minLength: 3
+    maxLength: 128
   ActionNameListType:
     type: array
     items:
       $ref: '#/definitions/ActionNameType'
-  ActionNameType:
+  arnType:
     type: string
-    minLength: 3
+    description: '<p>The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.</p> <p>For more information about ARNs, go to <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>. </p>'
+    minLength: 20
+    maxLength: 2048
+  clientIDType:
+    type: string
+    minLength: 1
+    maxLength: 255
+  instanceProfileNameType:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 1
+    maxLength: 128
+  roleNameType:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 1
+    maxLength: 64
+  groupNameType:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 1
+    maxLength: 128
+  existingUserNameType:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 1
     maxLength: 128
   ArnListType:
     type: array
     items:
       $ref: '#/definitions/arnType'
+  PermissionsBoundaryAttachmentType:
+    type: string
+    enum:
+      - PermissionsBoundaryPolicy
   AttachedPermissionsBoundary:
     type: object
     properties:
@@ -8433,6 +8488,11 @@ definitions:
         $ref: '#/definitions/arnType'
         description: ' The ARN of the policy used to set the permissions boundary for the user or role.'
     description: '<p>Contains information about an attached permissions boundary.</p> <p>An attached permissions boundary is a managed policy that has been attached to a user or role to set the permissions boundary.</p> <p>For more information about permissions boundaries, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
+  policyNameType:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 1
+    maxLength: 128
   AttachedPolicy:
     type: object
     properties:
@@ -8445,8 +8505,37 @@ definitions:
   BootstrapDatum:
     type: string
     format: password
+  passwordType:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 128
+    format: password
   ColumnNumber:
     type: integer
+  ContextKeyNameType:
+    type: string
+    minLength: 5
+    maxLength: 256
+  ContextKeyValueListType:
+    type: array
+    items:
+      $ref: '#/definitions/ContextKeyValueType'
+  ContextKeyTypeEnum:
+    type: string
+    enum:
+      - string
+      - stringList
+      - numeric
+      - numericList
+      - boolean
+      - booleanList
+      - ip
+      - ipList
+      - binary
+      - binaryList
+      - date
+      - dateList
   ContextEntry:
     type: object
     properties:
@@ -8464,166 +8553,22 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ContextEntry'
-  ContextKeyNameType:
-    type: string
-    minLength: 5
-    maxLength: 256
   ContextKeyNamesResultListType:
     type: array
     items:
       $ref: '#/definitions/ContextKeyNameType'
-  ContextKeyTypeEnum:
-    type: string
-    enum:
-      - string
-      - stringList
-      - numeric
-      - numericList
-      - boolean
-      - booleanList
-      - ip
-      - ipList
-      - binary
-      - binaryList
-      - date
-      - dateList
-  ContextKeyValueListType:
-    type: array
-    items:
-      $ref: '#/definitions/ContextKeyValueType'
   ContextKeyValueType:
     type: string
-  DeletionTaskFailureReasonType:
-    type: object
-    properties:
-      Reason:
-        $ref: '#/definitions/ReasonType'
-        description: A short description of the reason that the service-linked role deletion failed.
-      RoleUsageList:
-        $ref: '#/definitions/RoleUsageListType'
-        description: 'A list of objects that contains details about the service-linked role deletion failure, if that information is returned by the service. If the service-linked role has active sessions or if any resources that were used by the role have not been deleted from the linked service, the role can''t be deleted. This parameter includes a list of the resources that are associated with the role and the region in which the resources are being used.'
-    description: <p>The reason that the service-linked role deletion failed.</p> <p>This data type is used as a response element in the <a>GetServiceLinkedRoleDeletionStatus</a> operation.</p>
-  DeletionTaskIdType:
+  accountAliasType:
     type: string
-    minLength: 1
-    maxLength: 1000
-  DeletionTaskStatusType:
-    type: string
-    enum:
-      - SUCCEEDED
-      - IN_PROGRESS
-      - FAILED
-      - NOT_STARTED
-  EntityDetails:
-    type: object
-    required:
-      - EntityInfo
-    properties:
-      EntityInfo:
-        $ref: '#/definitions/EntityInfo'
-        description: "The\_<code>EntityInfo</code> object that contains details about the entity (user or role)."
-      LastAuthenticated:
-        $ref: '#/definitions/dateType'
-        description: "<p>The date and time, in\_<a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the authenticated entity last attempted to access AWS. AWS does not report unauthenticated requests.</p> <p>This field is null if no IAM entities attempted to access the service within the <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>.</p>"
-    description: <p>An object that contains details about when the IAM entities (users or roles) were last used in an attempt to access the specified AWS service.</p> <p>This data type is a response element in the <a>GetServiceLastAccessedDetailsWithEntities</a> operation.</p>
-  EntityInfo:
-    type: object
-    required:
-      - Arn
-      - Name
-      - Type
-      - Id
-    properties:
-      Arn:
-        $ref: '#/definitions/arnType'
-      Name:
-        $ref: '#/definitions/userNameType'
-        description: The name of the entity (user or role).
-      Type:
-        $ref: '#/definitions/policyOwnerEntityType'
-        description: The type of entity (user or role).
-      Id:
-        $ref: '#/definitions/idType'
-        description: The identifier of the entity (user or role).
-      Path:
-        $ref: '#/definitions/pathType'
-        description: 'The path to the entity (user or role). For more information about paths, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide. '
-    description: <p>Contains details about the specified entity (user or role).</p> <p>This data type is an element of the <a>EntityDetails</a> object.</p>
-  EntityType:
-    type: string
-    enum:
-      - User
-      - Role
-      - Group
-      - LocalManagedPolicy
-      - AWSManagedPolicy
-  ErrorDetails:
-    type: object
-    required:
-      - Message
-      - Code
-    properties:
-      Message:
-        $ref: '#/definitions/stringType'
-        description: Detailed information about the reason that the operation failed.
-      Code:
-        $ref: '#/definitions/stringType'
-        description: The error code associated with the operation failure.
-    description: <p>Contains information about the reason that the operation failed.</p> <p>This data type is used as a response element in the <a>GetServiceLastAccessedDetails</a> operation and the <a>GetServiceLastAccessedDetailsWithEntities</a> operation.</p>
-  EvalDecisionSourceType:
-    type: string
+    pattern: '^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$'
     minLength: 3
-    maxLength: 256
-  PolicyEvaluationDecisionType:
+    maxLength: 63
+  pathType:
     type: string
-    enum:
-      - allowed
-      - explicitDeny
-      - implicitDeny
-  EvalDecisionDetailsType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/EvalDecisionSourceType'
-        value:
-          $ref: '#/definitions/PolicyEvaluationDecisionType'
-  EvaluationResult:
-    type: object
-    required:
-      - EvalActionName
-      - EvalDecision
-    properties:
-      EvalActionName:
-        $ref: '#/definitions/ActionNameType'
-        description: The name of the API operation tested on the indicated resource.
-      EvalResourceName:
-        $ref: '#/definitions/ResourceNameType'
-        description: The ARN of the resource that the indicated API operation was tested on.
-      EvalDecision:
-        $ref: '#/definitions/PolicyEvaluationDecisionType'
-        description: The result of the simulation.
-      MatchedStatements:
-        $ref: '#/definitions/StatementListType'
-        description: 'A list of the statements in the input policies that determine the result for this scenario. Remember that even if multiple statements allow the operation on the resource, if only one statement denies that operation, then the explicit deny overrides any allow. Inaddition, the deny statement is the only entry included in the result.'
-      MissingContextValues:
-        $ref: '#/definitions/ContextKeyNamesResultListType'
-        description: 'A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. This list is used when the resource in a simulation is "*", either explicitly, or when the <code>ResourceArns</code> parameter blank. If you include a list of resources, then any missing context values are instead included under the <code>ResourceSpecificResults</code> section. To discover the context keys used by a set of policies, you can call <a>GetContextKeysForCustomPolicy</a> or <a>GetContextKeysForPrincipalPolicy</a>.'
-      OrganizationsDecisionDetail:
-        $ref: '#/definitions/OrganizationsDecisionDetail'
-        description: A structure that details how AWS Organizations and its service control policies affect the results of the simulation. Only applies if the simulated user's account is part of an organization.
-      EvalDecisionDetails:
-        $ref: '#/definitions/EvalDecisionDetailsType'
-        description: 'Additional details about the results of the evaluation decision. When there are both IAM policies and resource policies, this parameter explains how each set of policies contributes to the final evaluation decision. When simulating cross-account access to a resource, both the resource-based policy and the caller''s IAM policy must grant access. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html">How IAM Roles Differ from Resource-based Policies</a> '
-      ResourceSpecificResults:
-        $ref: '#/definitions/ResourceSpecificResultListType'
-        description: The individual results of the simulation of the API operation specified in EvalActionName on each resource.
-    description: <p>Contains the results of a simulation.</p> <p>This data type is used by the return parameter of <code> <a>SimulateCustomPolicy</a> </code> and <code> <a>SimulatePrincipalPolicy</a> </code>.</p>
-  EvaluationResultsListType:
-    type: array
-    items:
-      $ref: '#/definitions/EvaluationResult'
+    pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
+    minLength: 1
+    maxLength: 512
   Group:
     type: object
     required:
@@ -8649,30 +8594,6 @@ definitions:
         $ref: '#/definitions/dateType'
         description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the group was created.'
     description: '<p>Contains information about an IAM group entity.</p> <p>This data type is used as a response element in the following operations:</p> <ul> <li> <p> <a>CreateGroup</a> </p> </li> <li> <p> <a>GetGroup</a> </p> </li> <li> <p> <a>ListGroups</a> </p> </li> </ul>'
-  GroupDetail:
-    type: object
-    properties:
-      Path:
-        $ref: '#/definitions/pathType'
-        description: 'The path to the group. For more information about paths, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide.'
-      GroupName:
-        $ref: '#/definitions/groupNameType'
-        description: The friendly name that identifies the group.
-      GroupId:
-        $ref: '#/definitions/idType'
-        description: 'The stable and unique string identifying the group. For more information about IDs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide.'
-      Arn:
-        $ref: '#/definitions/arnType'
-      CreateDate:
-        $ref: '#/definitions/dateType'
-        description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the group was created.'
-      GroupPolicyList:
-        $ref: '#/definitions/policyDetailListType'
-        description: A list of the inline policies embedded in the group.
-      AttachedManagedPolicies:
-        $ref: '#/definitions/attachedPoliciesListType'
-        description: A list of the managed policies attached to the group.
-    description: '<p>Contains information about an IAM group, including all of the group''s policies.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> operation.</p>'
   InstanceProfile:
     type: object
     required:
@@ -8702,18 +8623,8 @@ definitions:
         $ref: '#/definitions/roleListType'
         description: The role associated with the instance profile.
     description: '<p>Contains information about an instance profile.</p> <p>This data type is used as a response element in the following operations:</p> <ul> <li> <p> <a>CreateInstanceProfile</a> </p> </li> <li> <p> <a>GetInstanceProfile</a> </p> </li> <li> <p> <a>ListInstanceProfiles</a> </p> </li> <li> <p> <a>ListInstanceProfilesForRole</a> </p> </li> </ul>'
-  LineNumber:
-    type: integer
-  ListPoliciesGrantingServiceAccessEntry:
-    type: object
-    properties:
-      ServiceNamespace:
-        $ref: '#/definitions/serviceNamespaceType'
-        description: "<p>The namespace of the service that was accessed.</p> <p>To learn the service namespace of a service, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html\">Actions, Resources, and Condition Keys for AWS Services</a> in the <i>IAM User Guide</i>. Choose the name of the service to view details for that service. In the first paragraph, find the service prefix. For example, <code>(service prefix: a4b)</code>. For more information about service namespaces, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">AWS Service Namespaces</a> in the\_<i>AWS General Reference</i>.</p>"
-      Policies:
-        $ref: '#/definitions/policyGrantingServiceAccessListType'
-        description: "The\_<code>PoliciesGrantingServiceAccess</code> object that contains details about the policy."
-    description: '<p>Contains details about the permissions policies that are attached to the specified identity (user, group, or role).</p> <p>This data type is used as a response element in the <a>ListPoliciesGrantingServiceAccess</a> operation.</p>'
+  booleanType:
+    type: boolean
   LoginProfile:
     type: object
     required:
@@ -8730,127 +8641,31 @@ definitions:
         $ref: '#/definitions/booleanType'
         description: Specifies whether the user is required to set a new password on next sign-in.
     description: <p>Contains the user name and password create date for a user.</p> <p> This data type is used as a response element in the <a>CreateLoginProfile</a> and <a>GetLoginProfile</a> operations. </p>
-  MFADevice:
-    type: object
-    required:
-      - UserName
-      - SerialNumber
-      - EnableDate
-    properties:
-      UserName:
-        $ref: '#/definitions/userNameType'
-        description: The user with whom the MFA device is associated.
-      SerialNumber:
-        $ref: '#/definitions/serialNumberType'
-        description: 'The serial number that uniquely identifies the MFA device. For virtual MFA devices, the serial number is the device ARN.'
-      EnableDate:
-        $ref: '#/definitions/dateType'
-        description: The date when the MFA device was enabled for the user.
-    description: <p>Contains information about an MFA device.</p> <p>This data type is used as a response element in the <a>ListMFADevices</a> operation.</p>
-  ManagedPolicyDetail:
-    type: object
-    properties:
-      PolicyName:
-        $ref: '#/definitions/policyNameType'
-        description: The friendly name (not ARN) identifying the policy.
-      PolicyId:
-        $ref: '#/definitions/idType'
-        description: '<p>The stable and unique string identifying the policy.</p> <p>For more information about IDs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>'
-      Arn:
-        $ref: '#/definitions/arnType'
-      Path:
-        $ref: '#/definitions/policyPathType'
-        description: '<p>The path to the policy.</p> <p>For more information about paths, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>'
-      DefaultVersionId:
-        $ref: '#/definitions/policyVersionIdType'
-        description: '<p>The identifier for the version of the policy that is set as the default (operative) version.</p> <p>For more information about policy versions, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>'
-      AttachmentCount:
-        $ref: '#/definitions/attachmentCountType'
-        description: 'The number of principal entities (users, groups, and roles) that the policy is attached to.'
-      PermissionsBoundaryUsageCount:
-        $ref: '#/definitions/attachmentCountType'
-        description: '<p>The number of entities (users and roles) for which the policy is used as the permissions boundary. </p> <p>For more information about permissions boundaries, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
-      IsAttachable:
-        $ref: '#/definitions/booleanType'
-        description: 'Specifies whether the policy can be attached to an IAM user, group, or role.'
-      Description:
-        $ref: '#/definitions/policyDescriptionType'
-        description: A friendly description of the policy.
-      CreateDate:
-        $ref: '#/definitions/dateType'
-        description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the policy was created.'
-      UpdateDate:
-        $ref: '#/definitions/dateType'
-        description: '<p>The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the policy was last updated.</p> <p>When a policy has only one version, this field contains the date and time when the policy was created. When a policy has more than one version, this field contains the date and time when the most recent policy version was created.</p>'
-      PolicyVersionList:
-        $ref: '#/definitions/policyDocumentVersionListType'
-        description: A list containing information about the versions of the policy.
-    description: '<p>Contains information about a managed policy, including the policy''s ARN, versions, and the number of principal entities (users, groups, and roles) that the policy is attached to.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> operation.</p> <p>For more information about managed policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>'
-  ManagedPolicyDetailListType:
-    type: array
-    items:
-      $ref: '#/definitions/ManagedPolicyDetail'
-  OpenIDConnectProviderListEntry:
-    type: object
-    properties:
-      Arn:
-        $ref: '#/definitions/arnType'
-    description: Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect provider.
-  OpenIDConnectProviderListType:
-    type: array
-    description: Contains a list of IAM OpenID Connect providers.
-    items:
-      $ref: '#/definitions/OpenIDConnectProviderListEntry'
   OpenIDConnectProviderUrlType:
     type: string
     description: Contains a URL that specifies the endpoint for an OpenID Connect provider.
     minLength: 1
     maxLength: 255
-  OrganizationsDecisionDetail:
-    type: object
-    properties:
-      AllowedByOrganizations:
-        $ref: '#/definitions/booleanType'
-        description: Specifies whether the simulated operation is allowed by the AWS Organizations service control policies that impact the simulated user's account.
-    description: Contains information about AWS Organizations's effect on a policy simulation.
-  PasswordPolicy:
-    type: object
-    properties:
-      MinimumPasswordLength:
-        $ref: '#/definitions/minimumPasswordLengthType'
-        description: Minimum length to require for IAM user passwords.
-      RequireSymbols:
-        $ref: '#/definitions/booleanType'
-        description: Specifies whether to require symbols for IAM user passwords.
-      RequireNumbers:
-        $ref: '#/definitions/booleanType'
-        description: Specifies whether to require numbers for IAM user passwords.
-      RequireUppercaseCharacters:
-        $ref: '#/definitions/booleanType'
-        description: Specifies whether to require uppercase characters for IAM user passwords.
-      RequireLowercaseCharacters:
-        $ref: '#/definitions/booleanType'
-        description: Specifies whether to require lowercase characters for IAM user passwords.
-      AllowUsersToChangePassword:
-        $ref: '#/definitions/booleanType'
-        description: Specifies whether IAM users are allowed to change their own password.
-      ExpirePasswords:
-        $ref: '#/definitions/booleanType'
-        description: Indicates whether passwords in the account expire. Returns true if <code>MaxPasswordAge</code> contains a value greater than 0. Returns false if MaxPasswordAge is 0 or not present.
-      MaxPasswordAge:
-        $ref: '#/definitions/maxPasswordAgeType'
-        description: The number of days that an IAM user password is valid.
-      PasswordReusePrevention:
-        $ref: '#/definitions/passwordReusePreventionType'
-        description: Specifies the number of previous passwords that IAM users are prevented from reusing.
-      HardExpiry:
-        $ref: '#/definitions/booleanObjectType'
-        description: Specifies whether IAM users are prevented from setting a new password after their password has expired.
-    description: <p>Contains information about the account password policy.</p> <p> This data type is used as a response element in the <a>GetAccountPasswordPolicy</a> operation. </p>
-  PermissionsBoundaryAttachmentType:
+  clientIDListType:
+    type: array
+    items:
+      $ref: '#/definitions/clientIDType'
+  thumbprintListType:
+    type: array
+    description: Contains a list of thumbprints of identity provider server certificates.
+    items:
+      $ref: '#/definitions/thumbprintType'
+  policyPathType:
     type: string
-    enum:
-      - PermissionsBoundaryPolicy
+    pattern: '((/[A-Za-z0-9\.,\+@=_-]+)*)/'
+  policyDocumentType:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 131072
+  policyDescriptionType:
+    type: string
+    maxLength: 1000
   Policy:
     type: object
     properties:
@@ -8887,97 +8702,6 @@ definitions:
         $ref: '#/definitions/dateType'
         description: '<p>The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the policy was last updated.</p> <p>When a policy has only one version, this field contains the date and time when the policy was created. When a policy has more than one version, this field contains the date and time when the most recent policy version was created.</p>'
     description: '<p>Contains information about a managed policy.</p> <p>This data type is used as a response element in the <a>CreatePolicy</a>, <a>GetPolicy</a>, and <a>ListPolicies</a> operations. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>'
-  PolicyDetail:
-    type: object
-    properties:
-      PolicyName:
-        $ref: '#/definitions/policyNameType'
-        description: The name of the policy.
-      PolicyDocument:
-        $ref: '#/definitions/policyDocumentType'
-        description: The policy document.
-    description: '<p>Contains information about an IAM policy, including the policy document.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> operation.</p>'
-  PolicyGrantingServiceAccess:
-    type: object
-    required:
-      - PolicyName
-      - PolicyType
-    properties:
-      PolicyName:
-        $ref: '#/definitions/policyNameType'
-        description: The policy name.
-      PolicyType:
-        $ref: '#/definitions/policyType'
-        description: 'The policy type. For more information about these policy types, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.'
-      PolicyArn:
-        $ref: '#/definitions/arnType'
-      EntityType:
-        $ref: '#/definitions/policyOwnerEntityType'
-        description: '<p>The type of entity (user or role) that used the policy to access the service to which the inline policy is attached.</p> <p>This field is null for managed policies. For more information about these policy types, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>'
-      EntityName:
-        $ref: '#/definitions/entityNameType'
-        description: '<p>The name of the entity (user or role) to which the inline policy is attached.</p> <p>This field is null for managed policies. For more information about these policy types, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>'
-    description: '<p>Contains details about the permissions policies that are attached to the specified identity (user, group, or role).</p> <p>This data type is an element of the <a>ListPoliciesGrantingServiceAccessEntry</a> object.</p>'
-  PolicyGroup:
-    type: object
-    properties:
-      GroupName:
-        $ref: '#/definitions/groupNameType'
-        description: 'The name (friendly name, not ARN) identifying the group.'
-      GroupId:
-        $ref: '#/definitions/idType'
-        description: 'The stable and unique string identifying the group. For more information about IDs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.'
-    description: '<p>Contains information about a group that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> operation. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>'
-  PolicyGroupListType:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyGroup'
-  PolicyIdentifierType:
-    type: string
-  PolicyRole:
-    type: object
-    properties:
-      RoleName:
-        $ref: '#/definitions/roleNameType'
-        description: 'The name (friendly name, not ARN) identifying the role.'
-      RoleId:
-        $ref: '#/definitions/idType'
-        description: 'The stable and unique string identifying the role. For more information about IDs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.'
-    description: '<p>Contains information about a role that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> operation. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>'
-  PolicyRoleListType:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyRole'
-  PolicySourceType:
-    type: string
-    enum:
-      - user
-      - group
-      - role
-      - aws-managed
-      - user-managed
-      - resource
-      - none
-  PolicyUsageType:
-    type: string
-    enum:
-      - PermissionsPolicy
-      - PermissionsBoundary
-    description: '<p>The policy usage type that indicates whether the policy is used as a permissions policy or as the permissions boundary for an entity.</p> <p>For more information about permissions boundaries, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
-  PolicyUser:
-    type: object
-    properties:
-      UserName:
-        $ref: '#/definitions/userNameType'
-        description: 'The name (friendly name, not ARN) identifying the user.'
-      UserId:
-        $ref: '#/definitions/idType'
-        description: 'The stable and unique string identifying the user. For more information about IDs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.'
-    description: '<p>Contains information about a user that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> operation. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>'
-  PolicyUserListType:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyUser'
   PolicyVersion:
     type: object
     properties:
@@ -8994,75 +8718,19 @@ definitions:
         $ref: '#/definitions/dateType'
         description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the policy version was created.'
     description: '<p>Contains information about a version of a managed policy.</p> <p>This data type is used as a response element in the <a>CreatePolicyVersion</a>, <a>GetPolicyVersion</a>, <a>ListPolicyVersions</a>, and <a>GetAccountAuthorizationDetails</a> operations. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>'
-  Position:
-    type: object
-    properties:
-      Line:
-        $ref: '#/definitions/LineNumber'
-        description: The line containing the specified position in the document.
-      Column:
-        $ref: '#/definitions/ColumnNumber'
-        description: The column in the line containing the specified position in the document.
-    description: <p>Contains the row and column of a location of a <code>Statement</code> element in a policy document.</p> <p>This data type is used as a member of the <code> <a>Statement</a> </code> type.</p>
-  ReasonType:
+  roleDescriptionType:
     type: string
+    pattern: '[\p{L}\p{M}\p{Z}\p{S}\p{N}\p{P}]*'
     maxLength: 1000
-  RegionNameType:
-    type: string
-    minLength: 1
-    maxLength: 100
-  ReportContentType:
-    type: string
-  ReportFormatType:
-    type: string
-    enum:
-      - text/csv
-  ReportStateDescriptionType:
-    type: string
-  ReportStateType:
-    type: string
-    enum:
-      - STARTED
-      - INPROGRESS
-      - COMPLETE
-  ResourceHandlingOptionType:
-    type: string
-    minLength: 1
-    maxLength: 64
-  ResourceNameListType:
+  roleMaxSessionDurationType:
+    type: integer
+    minimum: 3600
+    maximum: 43200
+  tagListType:
     type: array
     items:
-      $ref: '#/definitions/ResourceNameType'
-  ResourceNameType:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  ResourceSpecificResult:
-    type: object
-    required:
-      - EvalResourceName
-      - EvalResourceDecision
-    properties:
-      EvalResourceName:
-        $ref: '#/definitions/ResourceNameType'
-        description: 'The name of the simulated resource, in Amazon Resource Name (ARN) format.'
-      EvalResourceDecision:
-        $ref: '#/definitions/PolicyEvaluationDecisionType'
-        description: The result of the simulation of the simulated API operation on the resource specified in <code>EvalResourceName</code>.
-      MatchedStatements:
-        $ref: '#/definitions/StatementListType'
-        description: 'A list of the statements in the input policies that determine the result for this part of the simulation. Remember that even if multiple statements allow the operation on the resource, if <i>any</i> statement denies that operation, then the explicit deny overrides any allow. In addition, the deny statement is the only entry included in the result.'
-      MissingContextValues:
-        $ref: '#/definitions/ContextKeyNamesResultListType'
-        description: 'A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. This list is used when a list of ARNs is included in the <code>ResourceArns</code> parameter instead of "*". If you do not specify individual resources, by setting <code>ResourceArns</code> to "*" or by not including the <code>ResourceArns</code> parameter, then any missing context values are instead included under the <code>EvaluationResults</code> section. To discover the context keys used by a set of policies, you can call <a>GetContextKeysForCustomPolicy</a> or <a>GetContextKeysForPrincipalPolicy</a>.'
-      EvalDecisionDetails:
-        $ref: '#/definitions/EvalDecisionDetailsType'
-        description: 'Additional details about the results of the evaluation decision. When there are both IAM policies and resource policies, this parameter explains how each set of policies contributes to the final evaluation decision. When simulating cross-account access to a resource, both the resource-based policy and the caller''s IAM policy must grant access.'
-    description: <p>Contains the result of the simulation of a single API operation call on a single resource.</p> <p>This data type is used by a member of the <a>EvaluationResult</a> data type.</p>
-  ResourceSpecificResultListType:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceSpecificResult'
+      $ref: '#/definitions/Tag'
+    maxItems: 50
   Role:
     type: object
     required:
@@ -9103,6 +8771,852 @@ definitions:
         $ref: '#/definitions/tagListType'
         description: 'A list of tags that are attached to the specified role. For more information about tagging, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM Identities</a> in the <i>IAM User Guide</i>.'
     description: Contains information about an IAM role. This structure is returned as a response element in several API operations that interact with roles.
+  SAMLMetadataDocumentType:
+    type: string
+    minLength: 1000
+    maxLength: 10000000
+  SAMLProviderNameType:
+    type: string
+    pattern: '[\w._-]+'
+    minLength: 1
+    maxLength: 128
+  customSuffixType:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 1
+    maxLength: 64
+  serviceName:
+    type: string
+  ServiceSpecificCredential:
+    type: object
+    required:
+      - CreateDate
+      - ServiceName
+      - ServiceUserName
+      - ServicePassword
+      - ServiceSpecificCredentialId
+      - UserName
+      - Status
+    properties:
+      CreateDate:
+        $ref: '#/definitions/dateType'
+        description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the service-specific credential were created.'
+      ServiceName:
+        $ref: '#/definitions/serviceName'
+        description: The name of the service associated with the service-specific credential.
+      ServiceUserName:
+        $ref: '#/definitions/serviceUserName'
+        description: 'The generated user name for the service-specific credential. This value is generated by combining the IAM user''s name combined with the ID number of the AWS account, as in <code>jane-at-123456789012</code>, for example. This value cannot be configured by the user.'
+      ServicePassword:
+        $ref: '#/definitions/servicePassword'
+        description: The generated password for the service-specific credential.
+      ServiceSpecificCredentialId:
+        $ref: '#/definitions/serviceSpecificCredentialId'
+        description: The unique identifier for the service-specific credential.
+      UserName:
+        $ref: '#/definitions/userNameType'
+        description: The name of the IAM user associated with the service-specific credential.
+      Status:
+        $ref: '#/definitions/statusType'
+        description: 'The status of the service-specific credential. <code>Active</code> means that the key is valid for API calls, while <code>Inactive</code> means it is not.'
+    description: Contains the details of a service-specific credential.
+  User:
+    type: object
+    required:
+      - Path
+      - UserName
+      - UserId
+      - Arn
+      - CreateDate
+    properties:
+      Path:
+        $ref: '#/definitions/pathType'
+        description: 'The path to the user. For more information about paths, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide.'
+      UserName:
+        $ref: '#/definitions/userNameType'
+        description: The friendly name identifying the user.
+      UserId:
+        $ref: '#/definitions/idType'
+        description: 'The stable and unique string identifying the user. For more information about IDs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide.'
+      Arn:
+        $ref: '#/definitions/arnType'
+        description: 'The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and how to use ARNs in policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide. '
+      CreateDate:
+        $ref: '#/definitions/dateType'
+        description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the user was created.'
+      PasswordLastUsed:
+        $ref: '#/definitions/dateType'
+        description: '<p>The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the user''s password was last used to sign in to an AWS website. For a list of AWS websites that capture a user''s last sign-in time, see the <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html">Credential Reports</a> topic in the <i>Using IAM</i> guide. If a password is used more than once in a five-minute span, only the first use is returned in this field. If the field is null (no value), then it indicates that they never signed in with a password. This can be because:</p> <ul> <li> <p>The user never had a password.</p> </li> <li> <p>A password exists but has not been used since IAM started tracking this information on October 20, 2014.</p> </li> </ul> <p>A null valuedoes not mean that the user <i>never</i> had a password. Also, if the user does not currently have a password, but had one in the past, then this field contains the date and time the most recent password was used.</p> <p>This value is returned only in the <a>GetUser</a> and <a>ListUsers</a> operations. </p>'
+      PermissionsBoundary:
+        $ref: '#/definitions/AttachedPermissionsBoundary'
+        description: '<p>The ARN of the policy used to set the permissions boundary for the user.</p> <p>For more information about permissions boundaries, see <a href="IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
+      Tags:
+        $ref: '#/definitions/tagListType'
+        description: 'A list of tags that are associated with the specified user. For more information about tagging, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM Identities</a> in the <i>IAM User Guide</i>.'
+    description: '<p>Contains information about an IAM user entity.</p> <p>This data type is used as a response element in the following operations:</p> <ul> <li> <p> <a>CreateUser</a> </p> </li> <li> <p> <a>GetUser</a> </p> </li> <li> <p> <a>ListUsers</a> </p> </li> </ul>'
+  virtualMFADeviceName:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 1
+  VirtualMFADevice:
+    type: object
+    required:
+      - SerialNumber
+    properties:
+      SerialNumber:
+        $ref: '#/definitions/serialNumberType'
+        description: The serial number associated with <code>VirtualMFADevice</code>.
+      Base32StringSeed:
+        $ref: '#/definitions/BootstrapDatum'
+        description: ' The base32 seed defined as specified in <a href="https://tools.ietf.org/html/rfc3548.txt">RFC3548</a>. The <code>Base32StringSeed</code> is base64-encoded. '
+      QRCodePNG:
+        $ref: '#/definitions/BootstrapDatum'
+        description: ' A QR code PNG image that encodes <code>otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String</code> where <code>$virtualMFADeviceName</code> is one of the create call arguments. <code>AccountName</code> is the user name if set (otherwise, the account ID otherwise), and <code>Base32String</code> is the seed in base32 format. The <code>Base32String</code> value is base64-encoded. '
+      User:
+        $ref: '#/definitions/User'
+        description: The IAM user associated with this virtual MFA device.
+      EnableDate:
+        $ref: '#/definitions/dateType'
+        description: The date and time on which the virtual MFA device was enabled.
+    description: Contains information about a virtual MFA device.
+  serialNumberType:
+    type: string
+    pattern: '[\w+=/:,.@-]+'
+    minLength: 9
+    maxLength: 256
+  policyVersionIdType:
+    type: string
+    pattern: 'v[1-9][0-9]*(\.[A-Za-z0-9-]*)?'
+  publicKeyIdType:
+    type: string
+    pattern: '[\w]+'
+    minLength: 20
+    maxLength: 128
+  serverCertificateNameType:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 1
+    maxLength: 128
+  DeletionTaskIdType:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  serviceSpecificCredentialId:
+    type: string
+    pattern: '[\w]+'
+    minLength: 20
+    maxLength: 128
+  certificateIdType:
+    type: string
+    pattern: '[\w]+'
+    minLength: 24
+    maxLength: 128
+  ReasonType:
+    type: string
+    maxLength: 1000
+  RoleUsageListType:
+    type: array
+    items:
+      $ref: '#/definitions/RoleUsageType'
+  DeletionTaskFailureReasonType:
+    type: object
+    properties:
+      Reason:
+        $ref: '#/definitions/ReasonType'
+        description: A short description of the reason that the service-linked role deletion failed.
+      RoleUsageList:
+        $ref: '#/definitions/RoleUsageListType'
+        description: 'A list of objects that contains details about the service-linked role deletion failure, if that information is returned by the service. If the service-linked role has active sessions or if any resources that were used by the role have not been deleted from the linked service, the role can''t be deleted. This parameter includes a list of the resources that are associated with the role and the region in which the resources are being used.'
+    description: <p>The reason that the service-linked role deletion failed.</p> <p>This data type is used as a response element in the <a>GetServiceLinkedRoleDeletionStatus</a> operation.</p>
+  DeletionTaskStatusType:
+    type: string
+    enum:
+      - SUCCEEDED
+      - IN_PROGRESS
+      - FAILED
+      - NOT_STARTED
+  authenticationCodeType:
+    type: string
+    pattern: '[\d]+'
+    minLength: 6
+    maxLength: 6
+  EntityInfo:
+    type: object
+    required:
+      - Arn
+      - Name
+      - Type
+      - Id
+    properties:
+      Arn:
+        $ref: '#/definitions/arnType'
+      Name:
+        $ref: '#/definitions/userNameType'
+        description: The name of the entity (user or role).
+      Type:
+        $ref: '#/definitions/policyOwnerEntityType'
+        description: The type of entity (user or role).
+      Id:
+        $ref: '#/definitions/idType'
+        description: The identifier of the entity (user or role).
+      Path:
+        $ref: '#/definitions/pathType'
+        description: 'The path to the entity (user or role). For more information about paths, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide. '
+    description: <p>Contains details about the specified entity (user or role).</p> <p>This data type is an element of the <a>EntityDetails</a> object.</p>
+  EntityDetails:
+    type: object
+    required:
+      - EntityInfo
+    properties:
+      EntityInfo:
+        $ref: '#/definitions/EntityInfo'
+        description: "The\_<code>EntityInfo</code> object that contains details about the entity (user or role)."
+      LastAuthenticated:
+        $ref: '#/definitions/dateType'
+        description: "<p>The date and time, in\_<a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the authenticated entity last attempted to access AWS. AWS does not report unauthenticated requests.</p> <p>This field is null if no IAM entities attempted to access the service within the <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>.</p>"
+    description: <p>An object that contains details about when the IAM entities (users or roles) were last used in an attempt to access the specified AWS service.</p> <p>This data type is a response element in the <a>GetServiceLastAccessedDetailsWithEntities</a> operation.</p>
+  policyOwnerEntityType:
+    type: string
+    enum:
+      - USER
+      - ROLE
+      - GROUP
+  idType:
+    type: string
+    pattern: '[\w]+'
+    minLength: 16
+    maxLength: 128
+  EntityType:
+    type: string
+    enum:
+      - User
+      - Role
+      - Group
+      - LocalManagedPolicy
+      - AWSManagedPolicy
+  ErrorDetails:
+    type: object
+    required:
+      - Message
+      - Code
+    properties:
+      Message:
+        $ref: '#/definitions/stringType'
+        description: Detailed information about the reason that the operation failed.
+      Code:
+        $ref: '#/definitions/stringType'
+        description: The error code associated with the operation failure.
+    description: <p>Contains information about the reason that the operation failed.</p> <p>This data type is used as a response element in the <a>GetServiceLastAccessedDetails</a> operation and the <a>GetServiceLastAccessedDetailsWithEntities</a> operation.</p>
+  EvalDecisionSourceType:
+    type: string
+    minLength: 3
+    maxLength: 256
+  PolicyEvaluationDecisionType:
+    type: string
+    enum:
+      - allowed
+      - explicitDeny
+      - implicitDeny
+  EvalDecisionDetailsType:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/EvalDecisionSourceType'
+        value:
+          $ref: '#/definitions/PolicyEvaluationDecisionType'
+  ResourceNameType:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  StatementListType:
+    type: array
+    items:
+      $ref: '#/definitions/Statement'
+  OrganizationsDecisionDetail:
+    type: object
+    properties:
+      AllowedByOrganizations:
+        $ref: '#/definitions/booleanType'
+        description: Specifies whether the simulated operation is allowed by the AWS Organizations service control policies that impact the simulated user's account.
+    description: Contains information about AWS Organizations's effect on a policy simulation.
+  ResourceSpecificResultListType:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceSpecificResult'
+  EvaluationResult:
+    type: object
+    required:
+      - EvalActionName
+      - EvalDecision
+    properties:
+      EvalActionName:
+        $ref: '#/definitions/ActionNameType'
+        description: The name of the API operation tested on the indicated resource.
+      EvalResourceName:
+        $ref: '#/definitions/ResourceNameType'
+        description: The ARN of the resource that the indicated API operation was tested on.
+      EvalDecision:
+        $ref: '#/definitions/PolicyEvaluationDecisionType'
+        description: The result of the simulation.
+      MatchedStatements:
+        $ref: '#/definitions/StatementListType'
+        description: 'A list of the statements in the input policies that determine the result for this scenario. Remember that even if multiple statements allow the operation on the resource, if only one statement denies that operation, then the explicit deny overrides any allow. Inaddition, the deny statement is the only entry included in the result.'
+      MissingContextValues:
+        $ref: '#/definitions/ContextKeyNamesResultListType'
+        description: 'A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. This list is used when the resource in a simulation is "*", either explicitly, or when the <code>ResourceArns</code> parameter blank. If you include a list of resources, then any missing context values are instead included under the <code>ResourceSpecificResults</code> section. To discover the context keys used by a set of policies, you can call <a>GetContextKeysForCustomPolicy</a> or <a>GetContextKeysForPrincipalPolicy</a>.'
+      OrganizationsDecisionDetail:
+        $ref: '#/definitions/OrganizationsDecisionDetail'
+        description: A structure that details how AWS Organizations and its service control policies affect the results of the simulation. Only applies if the simulated user's account is part of an organization.
+      EvalDecisionDetails:
+        $ref: '#/definitions/EvalDecisionDetailsType'
+        description: 'Additional details about the results of the evaluation decision. When there are both IAM policies and resource policies, this parameter explains how each set of policies contributes to the final evaluation decision. When simulating cross-account access to a resource, both the resource-based policy and the caller''s IAM policy must grant access. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html">How IAM Roles Differ from Resource-based Policies</a> '
+      ResourceSpecificResults:
+        $ref: '#/definitions/ResourceSpecificResultListType'
+        description: The individual results of the simulation of the API operation specified in EvalActionName on each resource.
+    description: <p>Contains the results of a simulation.</p> <p>This data type is used by the return parameter of <code> <a>SimulateCustomPolicy</a> </code> and <code> <a>SimulatePrincipalPolicy</a> </code>.</p>
+  EvaluationResultsListType:
+    type: array
+    items:
+      $ref: '#/definitions/EvaluationResult'
+  ReportStateType:
+    type: string
+    enum:
+      - STARTED
+      - INPROGRESS
+      - COMPLETE
+  ReportStateDescriptionType:
+    type: string
+  jobIDType:
+    type: string
+    minLength: 36
+    maxLength: 36
+  entityListType:
+    type: array
+    items:
+      $ref: '#/definitions/EntityType'
+  maxItemsType:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  markerType:
+    type: string
+    pattern: '[\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 320
+  userDetailListType:
+    type: array
+    items:
+      $ref: '#/definitions/UserDetail'
+  groupDetailListType:
+    type: array
+    items:
+      $ref: '#/definitions/GroupDetail'
+  roleDetailListType:
+    type: array
+    items:
+      $ref: '#/definitions/RoleDetail'
+  ManagedPolicyDetailListType:
+    type: array
+    items:
+      $ref: '#/definitions/ManagedPolicyDetail'
+  PasswordPolicy:
+    type: object
+    properties:
+      MinimumPasswordLength:
+        $ref: '#/definitions/minimumPasswordLengthType'
+        description: Minimum length to require for IAM user passwords.
+      RequireSymbols:
+        $ref: '#/definitions/booleanType'
+        description: Specifies whether to require symbols for IAM user passwords.
+      RequireNumbers:
+        $ref: '#/definitions/booleanType'
+        description: Specifies whether to require numbers for IAM user passwords.
+      RequireUppercaseCharacters:
+        $ref: '#/definitions/booleanType'
+        description: Specifies whether to require uppercase characters for IAM user passwords.
+      RequireLowercaseCharacters:
+        $ref: '#/definitions/booleanType'
+        description: Specifies whether to require lowercase characters for IAM user passwords.
+      AllowUsersToChangePassword:
+        $ref: '#/definitions/booleanType'
+        description: Specifies whether IAM users are allowed to change their own password.
+      ExpirePasswords:
+        $ref: '#/definitions/booleanType'
+        description: Indicates whether passwords in the account expire. Returns true if <code>MaxPasswordAge</code> contains a value greater than 0. Returns false if MaxPasswordAge is 0 or not present.
+      MaxPasswordAge:
+        $ref: '#/definitions/maxPasswordAgeType'
+        description: The number of days that an IAM user password is valid.
+      PasswordReusePrevention:
+        $ref: '#/definitions/passwordReusePreventionType'
+        description: Specifies the number of previous passwords that IAM users are prevented from reusing.
+      HardExpiry:
+        $ref: '#/definitions/booleanObjectType'
+        description: Specifies whether IAM users are prevented from setting a new password after their password has expired.
+    description: <p>Contains information about the account password policy.</p> <p> This data type is used as a response element in the <a>GetAccountPasswordPolicy</a> operation. </p>
+  summaryMapType:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/summaryKeyType'
+        value:
+          $ref: '#/definitions/summaryValueType'
+  SimulationPolicyListType:
+    type: array
+    items:
+      $ref: '#/definitions/policyDocumentType'
+  ReportContentType:
+    type: string
+  ReportFormatType:
+    type: string
+    enum:
+      - text/csv
+  userListType:
+    type: array
+    description: <p>Contains a list of users.</p> <p>This data type is used as a response element in the <a>GetGroup</a> and <a>ListUsers</a> operations. </p>
+    items:
+      $ref: '#/definitions/User'
+  encodingType:
+    type: string
+    enum:
+      - SSH
+      - PEM
+  SSHPublicKey:
+    type: object
+    required:
+      - UserName
+      - SSHPublicKeyId
+      - Fingerprint
+      - SSHPublicKeyBody
+      - Status
+    properties:
+      UserName:
+        $ref: '#/definitions/userNameType'
+        description: The name of the IAM user associated with the SSH public key.
+      SSHPublicKeyId:
+        $ref: '#/definitions/publicKeyIdType'
+        description: The unique identifier for the SSH public key.
+      Fingerprint:
+        $ref: '#/definitions/publicKeyFingerprintType'
+        description: The MD5 message digest of the SSH public key.
+      SSHPublicKeyBody:
+        $ref: '#/definitions/publicKeyMaterialType'
+        description: The SSH public key.
+      Status:
+        $ref: '#/definitions/statusType'
+        description: The status of the SSH public key. <code>Active</code> means that the key can be used for authentication with an AWS CodeCommit repository. <code>Inactive</code> means that the key cannot be used.
+      UploadDate:
+        $ref: '#/definitions/dateType'
+        description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the SSH public key was uploaded.'
+    description: <p>Contains information about an SSH public key.</p> <p>This data type is used as a response element in the <a>GetSSHPublicKey</a> and <a>UploadSSHPublicKey</a> operations. </p>
+  ServerCertificate:
+    type: object
+    required:
+      - ServerCertificateMetadata
+      - CertificateBody
+    properties:
+      ServerCertificateMetadata:
+        $ref: '#/definitions/ServerCertificateMetadata'
+        description: 'The meta information of the server certificate, such as its name, path, ID, and ARN.'
+      CertificateBody:
+        $ref: '#/definitions/certificateBodyType'
+        description: The contents of the public key certificate.
+      CertificateChain:
+        $ref: '#/definitions/certificateChainType'
+        description: The contents of the public key certificate chain.
+    description: <p>Contains information about a server certificate.</p> <p> This data type is used as a response element in the <a>GetServerCertificate</a> operation. </p>
+  jobStatusType:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - COMPLETED
+      - FAILED
+  ServicesLastAccessed:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceLastAccessed'
+  serviceNamespaceType:
+    type: string
+    pattern: '[\w-]*'
+    minLength: 1
+    maxLength: 64
+  entityDetailsListType:
+    type: array
+    items:
+      $ref: '#/definitions/EntityDetails'
+  policyDetailListType:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyDetail'
+  attachedPoliciesListType:
+    type: array
+    items:
+      $ref: '#/definitions/AttachedPolicy'
+  GroupDetail:
+    type: object
+    properties:
+      Path:
+        $ref: '#/definitions/pathType'
+        description: 'The path to the group. For more information about paths, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide.'
+      GroupName:
+        $ref: '#/definitions/groupNameType'
+        description: The friendly name that identifies the group.
+      GroupId:
+        $ref: '#/definitions/idType'
+        description: 'The stable and unique string identifying the group. For more information about IDs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide.'
+      Arn:
+        $ref: '#/definitions/arnType'
+      CreateDate:
+        $ref: '#/definitions/dateType'
+        description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the group was created.'
+      GroupPolicyList:
+        $ref: '#/definitions/policyDetailListType'
+        description: A list of the inline policies embedded in the group.
+      AttachedManagedPolicies:
+        $ref: '#/definitions/attachedPoliciesListType'
+        description: A list of the managed policies attached to the group.
+    description: '<p>Contains information about an IAM group, including all of the group''s policies.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> operation.</p>'
+  roleListType:
+    type: array
+    description: <p>Contains a list of IAM roles.</p> <p>This data type is used as a response element in the <a>ListRoles</a> operation.</p>
+    items:
+      $ref: '#/definitions/Role'
+  LineNumber:
+    type: integer
+  accessKeyMetadataListType:
+    type: array
+    description: <p>Contains a list of access key metadata.</p> <p>This data type is used as a response element in the <a>ListAccessKeys</a> operation.</p>
+    items:
+      $ref: '#/definitions/AccessKeyMetadata'
+  accountAliasListType:
+    type: array
+    items:
+      $ref: '#/definitions/accountAliasType'
+  PolicyUsageType:
+    type: string
+    enum:
+      - PermissionsPolicy
+      - PermissionsBoundary
+    description: '<p>The policy usage type that indicates whether the policy is used as a permissions policy or as the permissions boundary for an entity.</p> <p>For more information about permissions boundaries, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
+  PolicyGroupListType:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyGroup'
+  PolicyUserListType:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyUser'
+  PolicyRoleListType:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyRole'
+  policyNameListType:
+    type: array
+    description: <p>Contains a list of policy names.</p> <p>This data type is used as a response element in the <a>ListPolicies</a> operation.</p>
+    items:
+      $ref: '#/definitions/policyNameType'
+  groupListType:
+    type: array
+    description: <p>Contains a list of IAM groups.</p> <p>This data type is used as a response element in the <a>ListGroups</a> operation.</p>
+    items:
+      $ref: '#/definitions/Group'
+  pathPrefixType:
+    type: string
+    pattern: '\u002F[\u0021-\u007F]*'
+    minLength: 1
+    maxLength: 512
+  instanceProfileListType:
+    type: array
+    description: Contains a list of instance profiles.
+    items:
+      $ref: '#/definitions/InstanceProfile'
+  mfaDeviceListType:
+    type: array
+    description: <p>Contains a list of MFA devices.</p> <p>This data type is used as a response element in the <a>ListMFADevices</a> and <a>ListVirtualMFADevices</a> operations. </p>
+    items:
+      $ref: '#/definitions/MFADevice'
+  OpenIDConnectProviderListType:
+    type: array
+    description: Contains a list of IAM OpenID Connect providers.
+    items:
+      $ref: '#/definitions/OpenIDConnectProviderListEntry'
+  policyGrantingServiceAccessListType:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyGrantingServiceAccess'
+  ListPoliciesGrantingServiceAccessEntry:
+    type: object
+    properties:
+      ServiceNamespace:
+        $ref: '#/definitions/serviceNamespaceType'
+        description: "<p>The namespace of the service that was accessed.</p> <p>To learn the service namespace of a service, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html\">Actions, Resources, and Condition Keys for AWS Services</a> in the <i>IAM User Guide</i>. Choose the name of the service to view details for that service. In the first paragraph, find the service prefix. For example, <code>(service prefix: a4b)</code>. For more information about service namespaces, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">AWS Service Namespaces</a> in the\_<i>AWS General Reference</i>.</p>"
+      Policies:
+        $ref: '#/definitions/policyGrantingServiceAccessListType'
+        description: "The\_<code>PoliciesGrantingServiceAccess</code> object that contains details about the policy."
+    description: '<p>Contains details about the permissions policies that are attached to the specified identity (user, group, or role).</p> <p>This data type is used as a response element in the <a>ListPoliciesGrantingServiceAccess</a> operation.</p>'
+  serviceNamespaceListType:
+    type: array
+    items:
+      $ref: '#/definitions/serviceNamespaceType'
+    minItems: 1
+    maxItems: 200
+  listPolicyGrantingServiceAccessResponseListType:
+    type: array
+    items:
+      $ref: '#/definitions/ListPoliciesGrantingServiceAccessEntry'
+  policyScopeType:
+    type: string
+    enum:
+      - All
+      - AWS
+      - Local
+  policyListType:
+    type: array
+    items:
+      $ref: '#/definitions/Policy'
+  policyDocumentVersionListType:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyVersion'
+  SAMLProviderListType:
+    type: array
+    items:
+      $ref: '#/definitions/SAMLProviderListEntry'
+  SSHPublicKeyListType:
+    type: array
+    items:
+      $ref: '#/definitions/SSHPublicKeyMetadata'
+  serverCertificateMetadataListType:
+    type: array
+    items:
+      $ref: '#/definitions/ServerCertificateMetadata'
+  ServiceSpecificCredentialsListType:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceSpecificCredentialMetadata'
+  certificateListType:
+    type: array
+    description: <p>Contains a list of signing certificates.</p> <p>This data type is used as a response element in the <a>ListSigningCertificates</a> operation.</p>
+    items:
+      $ref: '#/definitions/SigningCertificate'
+  assignmentStatusType:
+    type: string
+    enum:
+      - Assigned
+      - Unassigned
+      - Any
+  virtualMFADeviceListType:
+    type: array
+    items:
+      $ref: '#/definitions/VirtualMFADevice'
+  MFADevice:
+    type: object
+    required:
+      - UserName
+      - SerialNumber
+      - EnableDate
+    properties:
+      UserName:
+        $ref: '#/definitions/userNameType'
+        description: The user with whom the MFA device is associated.
+      SerialNumber:
+        $ref: '#/definitions/serialNumberType'
+        description: 'The serial number that uniquely identifies the MFA device. For virtual MFA devices, the serial number is the device ARN.'
+      EnableDate:
+        $ref: '#/definitions/dateType'
+        description: The date when the MFA device was enabled for the user.
+    description: <p>Contains information about an MFA device.</p> <p>This data type is used as a response element in the <a>ListMFADevices</a> operation.</p>
+  attachmentCountType:
+    type: integer
+  ManagedPolicyDetail:
+    type: object
+    properties:
+      PolicyName:
+        $ref: '#/definitions/policyNameType'
+        description: The friendly name (not ARN) identifying the policy.
+      PolicyId:
+        $ref: '#/definitions/idType'
+        description: '<p>The stable and unique string identifying the policy.</p> <p>For more information about IDs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>'
+      Arn:
+        $ref: '#/definitions/arnType'
+      Path:
+        $ref: '#/definitions/policyPathType'
+        description: '<p>The path to the policy.</p> <p>For more information about paths, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>'
+      DefaultVersionId:
+        $ref: '#/definitions/policyVersionIdType'
+        description: '<p>The identifier for the version of the policy that is set as the default (operative) version.</p> <p>For more information about policy versions, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>'
+      AttachmentCount:
+        $ref: '#/definitions/attachmentCountType'
+        description: 'The number of principal entities (users, groups, and roles) that the policy is attached to.'
+      PermissionsBoundaryUsageCount:
+        $ref: '#/definitions/attachmentCountType'
+        description: '<p>The number of entities (users and roles) for which the policy is used as the permissions boundary. </p> <p>For more information about permissions boundaries, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
+      IsAttachable:
+        $ref: '#/definitions/booleanType'
+        description: 'Specifies whether the policy can be attached to an IAM user, group, or role.'
+      Description:
+        $ref: '#/definitions/policyDescriptionType'
+        description: A friendly description of the policy.
+      CreateDate:
+        $ref: '#/definitions/dateType'
+        description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the policy was created.'
+      UpdateDate:
+        $ref: '#/definitions/dateType'
+        description: '<p>The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the policy was last updated.</p> <p>When a policy has only one version, this field contains the date and time when the policy was created. When a policy has more than one version, this field contains the date and time when the most recent policy version was created.</p>'
+      PolicyVersionList:
+        $ref: '#/definitions/policyDocumentVersionListType'
+        description: A list containing information about the versions of the policy.
+    description: '<p>Contains information about a managed policy, including the policy''s ARN, versions, and the number of principal entities (users, groups, and roles) that the policy is attached to.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> operation.</p> <p>For more information about managed policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>'
+  OpenIDConnectProviderListEntry:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/arnType'
+    description: Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect provider.
+  minimumPasswordLengthType:
+    type: integer
+    minimum: 6
+    maximum: 128
+  maxPasswordAgeType:
+    type: integer
+    minimum: 1
+    maximum: 1095
+  passwordReusePreventionType:
+    type: integer
+    minimum: 1
+    maximum: 24
+  booleanObjectType:
+    type: boolean
+  PolicyDetail:
+    type: object
+    properties:
+      PolicyName:
+        $ref: '#/definitions/policyNameType'
+        description: The name of the policy.
+      PolicyDocument:
+        $ref: '#/definitions/policyDocumentType'
+        description: The policy document.
+    description: '<p>Contains information about an IAM policy, including the policy document.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> operation.</p>'
+  policyType:
+    type: string
+    enum:
+      - INLINE
+      - MANAGED
+  entityNameType:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 1
+    maxLength: 128
+  PolicyGrantingServiceAccess:
+    type: object
+    required:
+      - PolicyName
+      - PolicyType
+    properties:
+      PolicyName:
+        $ref: '#/definitions/policyNameType'
+        description: The policy name.
+      PolicyType:
+        $ref: '#/definitions/policyType'
+        description: 'The policy type. For more information about these policy types, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.'
+      PolicyArn:
+        $ref: '#/definitions/arnType'
+      EntityType:
+        $ref: '#/definitions/policyOwnerEntityType'
+        description: '<p>The type of entity (user or role) that used the policy to access the service to which the inline policy is attached.</p> <p>This field is null for managed policies. For more information about these policy types, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>'
+      EntityName:
+        $ref: '#/definitions/entityNameType'
+        description: '<p>The name of the entity (user or role) to which the inline policy is attached.</p> <p>This field is null for managed policies. For more information about these policy types, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>IAM User Guide</i>.</p>'
+    description: '<p>Contains details about the permissions policies that are attached to the specified identity (user, group, or role).</p> <p>This data type is an element of the <a>ListPoliciesGrantingServiceAccessEntry</a> object.</p>'
+  PolicyGroup:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/groupNameType'
+        description: 'The name (friendly name, not ARN) identifying the group.'
+      GroupId:
+        $ref: '#/definitions/idType'
+        description: 'The stable and unique string identifying the group. For more information about IDs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.'
+    description: '<p>Contains information about a group that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> operation. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>'
+  PolicyIdentifierType:
+    type: string
+  PolicyRole:
+    type: object
+    properties:
+      RoleName:
+        $ref: '#/definitions/roleNameType'
+        description: 'The name (friendly name, not ARN) identifying the role.'
+      RoleId:
+        $ref: '#/definitions/idType'
+        description: 'The stable and unique string identifying the role. For more information about IDs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.'
+    description: '<p>Contains information about a role that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> operation. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>'
+  PolicySourceType:
+    type: string
+    enum:
+      - user
+      - group
+      - role
+      - aws-managed
+      - user-managed
+      - resource
+      - none
+  PolicyUser:
+    type: object
+    properties:
+      UserName:
+        $ref: '#/definitions/userNameType'
+        description: 'The name (friendly name, not ARN) identifying the user.'
+      UserId:
+        $ref: '#/definitions/idType'
+        description: 'The stable and unique string identifying the user. For more information about IDs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.'
+    description: '<p>Contains information about a user that a managed policy is attached to.</p> <p>This data type is used as a response element in the <a>ListEntitiesForPolicy</a> operation. </p> <p>For more information about managed policies, refer to <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>'
+  Position:
+    type: object
+    properties:
+      Line:
+        $ref: '#/definitions/LineNumber'
+        description: The line containing the specified position in the document.
+      Column:
+        $ref: '#/definitions/ColumnNumber'
+        description: The column in the line containing the specified position in the document.
+    description: <p>Contains the row and column of a location of a <code>Statement</code> element in a policy document.</p> <p>This data type is used as a member of the <code> <a>Statement</a> </code> type.</p>
+  RegionNameType:
+    type: string
+    minLength: 1
+    maxLength: 100
+  ResourceHandlingOptionType:
+    type: string
+    minLength: 1
+    maxLength: 64
+  ResourceNameListType:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceNameType'
+  ResourceSpecificResult:
+    type: object
+    required:
+      - EvalResourceName
+      - EvalResourceDecision
+    properties:
+      EvalResourceName:
+        $ref: '#/definitions/ResourceNameType'
+        description: 'The name of the simulated resource, in Amazon Resource Name (ARN) format.'
+      EvalResourceDecision:
+        $ref: '#/definitions/PolicyEvaluationDecisionType'
+        description: The result of the simulation of the simulated API operation on the resource specified in <code>EvalResourceName</code>.
+      MatchedStatements:
+        $ref: '#/definitions/StatementListType'
+        description: 'A list of the statements in the input policies that determine the result for this part of the simulation. Remember that even if multiple statements allow the operation on the resource, if <i>any</i> statement denies that operation, then the explicit deny overrides any allow. In addition, the deny statement is the only entry included in the result.'
+      MissingContextValues:
+        $ref: '#/definitions/ContextKeyNamesResultListType'
+        description: 'A list of context keys that are required by the included input policies but that were not provided by one of the input parameters. This list is used when a list of ARNs is included in the <code>ResourceArns</code> parameter instead of "*". If you do not specify individual resources, by setting <code>ResourceArns</code> to "*" or by not including the <code>ResourceArns</code> parameter, then any missing context values are instead included under the <code>EvaluationResults</code> section. To discover the context keys used by a set of policies, you can call <a>GetContextKeysForCustomPolicy</a> or <a>GetContextKeysForPrincipalPolicy</a>.'
+      EvalDecisionDetails:
+        $ref: '#/definitions/EvalDecisionDetailsType'
+        description: 'Additional details about the results of the evaluation decision. When there are both IAM policies and resource policies, this parameter explains how each set of policies contributes to the final evaluation decision. When simulating cross-account access to a resource, both the resource-based policy and the caller''s IAM policy must grant access.'
+    description: <p>Contains the result of the simulation of a single API operation call on a single resource.</p> <p>This data type is used by a member of the <a>EvaluationResult</a> data type.</p>
   RoleDetail:
     type: object
     properties:
@@ -9139,10 +9653,6 @@ definitions:
         $ref: '#/definitions/tagListType'
         description: 'A list of tags that are attached to the specified role. For more information about tagging, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM Identities</a> in the <i>IAM User Guide</i>.'
     description: '<p>Contains information about an IAM role, including all of the role''s policies.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> operation.</p>'
-  RoleUsageListType:
-    type: array
-    items:
-      $ref: '#/definitions/RoleUsageType'
   RoleUsageType:
     type: object
     properties:
@@ -9153,10 +9663,6 @@ definitions:
         $ref: '#/definitions/ArnListType'
         description: The name of the resource that is using the service-linked role.
     description: '<p>An object that contains details about how a service-linked role is used, if that information is returned by the service.</p> <p>This data type is used as a response element in the <a>GetServiceLinkedRoleDeletionStatus</a> operation.</p>'
-  SAMLMetadataDocumentType:
-    type: string
-    minLength: 1000
-    maxLength: 10000000
   SAMLProviderListEntry:
     type: object
     properties:
@@ -9170,47 +9676,16 @@ definitions:
         $ref: '#/definitions/dateType'
         description: The date and time when the SAML provider was created.
     description: Contains the list of SAML providers for this account.
-  SAMLProviderListType:
-    type: array
-    items:
-      $ref: '#/definitions/SAMLProviderListEntry'
-  SAMLProviderNameType:
+  publicKeyFingerprintType:
     type: string
-    pattern: '[\w._-]+'
+    pattern: '[:\w]+'
+    minLength: 48
+    maxLength: 48
+  publicKeyMaterialType:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
     minLength: 1
-    maxLength: 128
-  SSHPublicKey:
-    type: object
-    required:
-      - UserName
-      - SSHPublicKeyId
-      - Fingerprint
-      - SSHPublicKeyBody
-      - Status
-    properties:
-      UserName:
-        $ref: '#/definitions/userNameType'
-        description: The name of the IAM user associated with the SSH public key.
-      SSHPublicKeyId:
-        $ref: '#/definitions/publicKeyIdType'
-        description: The unique identifier for the SSH public key.
-      Fingerprint:
-        $ref: '#/definitions/publicKeyFingerprintType'
-        description: The MD5 message digest of the SSH public key.
-      SSHPublicKeyBody:
-        $ref: '#/definitions/publicKeyMaterialType'
-        description: The SSH public key.
-      Status:
-        $ref: '#/definitions/statusType'
-        description: The status of the SSH public key. <code>Active</code> means that the key can be used for authentication with an AWS CodeCommit repository. <code>Inactive</code> means that the key cannot be used.
-      UploadDate:
-        $ref: '#/definitions/dateType'
-        description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the SSH public key was uploaded.'
-    description: <p>Contains information about an SSH public key.</p> <p>This data type is used as a response element in the <a>GetSSHPublicKey</a> and <a>UploadSSHPublicKey</a> operations. </p>
-  SSHPublicKeyListType:
-    type: array
-    items:
-      $ref: '#/definitions/SSHPublicKeyMetadata'
+    maxLength: 16384
   SSHPublicKeyMetadata:
     type: object
     required:
@@ -9232,22 +9707,6 @@ definitions:
         $ref: '#/definitions/dateType'
         description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the SSH public key was uploaded.'
     description: '<p>Contains information about an SSH public key, without the key''s body or fingerprint.</p> <p>This data type is used as a response element in the <a>ListSSHPublicKeys</a> operation.</p>'
-  ServerCertificate:
-    type: object
-    required:
-      - ServerCertificateMetadata
-      - CertificateBody
-    properties:
-      ServerCertificateMetadata:
-        $ref: '#/definitions/ServerCertificateMetadata'
-        description: 'The meta information of the server certificate, such as its name, path, ID, and ARN.'
-      CertificateBody:
-        $ref: '#/definitions/certificateBodyType'
-        description: The contents of the public key certificate.
-      CertificateChain:
-        $ref: '#/definitions/certificateChainType'
-        description: The contents of the public key certificate chain.
-    description: <p>Contains information about a server certificate.</p> <p> This data type is used as a response element in the <a>GetServerCertificate</a> operation. </p>
   ServerCertificateMetadata:
     type: object
     required:
@@ -9275,6 +9734,20 @@ definitions:
         $ref: '#/definitions/dateType'
         description: The date on which the certificate is set to expire.
     description: '<p>Contains information about a server certificate without its certificate body, certificate chain, and private key.</p> <p> This data type is used as a response element in the <a>UploadServerCertificate</a> and <a>ListServerCertificates</a> operations. </p>'
+  certificateBodyType:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 16384
+  certificateChainType:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 2097152
+  serviceNameType:
+    type: string
+  integerType:
+    type: integer
   ServiceLastAccessed:
     type: object
     required:
@@ -9297,39 +9770,14 @@ definitions:
         $ref: '#/definitions/integerType'
         description: '<p>The total number of authenticated entities that have attempted to access the service.</p> <p>This field is null if no IAM entities attempted to access the service within the <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period">reporting period</a>.</p>'
     description: <p>Contains details about the most recent attempt to access the service.</p> <p>This data type is used as a response element in the <a>GetServiceLastAccessedDetails</a> operation.</p>
-  ServiceSpecificCredential:
-    type: object
-    required:
-      - CreateDate
-      - ServiceName
-      - ServiceUserName
-      - ServicePassword
-      - ServiceSpecificCredentialId
-      - UserName
-      - Status
-    properties:
-      CreateDate:
-        $ref: '#/definitions/dateType'
-        description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the service-specific credential were created.'
-      ServiceName:
-        $ref: '#/definitions/serviceName'
-        description: The name of the service associated with the service-specific credential.
-      ServiceUserName:
-        $ref: '#/definitions/serviceUserName'
-        description: 'The generated user name for the service-specific credential. This value is generated by combining the IAM user''s name combined with the ID number of the AWS account, as in <code>jane-at-123456789012</code>, for example. This value cannot be configured by the user.'
-      ServicePassword:
-        $ref: '#/definitions/servicePassword'
-        description: The generated password for the service-specific credential.
-      ServiceSpecificCredentialId:
-        $ref: '#/definitions/serviceSpecificCredentialId'
-        description: The unique identifier for the service-specific credential.
-      UserName:
-        $ref: '#/definitions/userNameType'
-        description: The name of the IAM user associated with the service-specific credential.
-      Status:
-        $ref: '#/definitions/statusType'
-        description: 'The status of the service-specific credential. <code>Active</code> means that the key is valid for API calls, while <code>Inactive</code> means it is not.'
-    description: Contains the details of a service-specific credential.
+  serviceUserName:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 17
+    maxLength: 200
+  servicePassword:
+    type: string
+    format: password
   ServiceSpecificCredentialMetadata:
     type: object
     required:
@@ -9359,14 +9807,6 @@ definitions:
         $ref: '#/definitions/serviceName'
         description: The name of the service associated with the service-specific credential.
     description: Contains additional details about a service-specific credential.
-  ServiceSpecificCredentialsListType:
-    type: array
-    items:
-      $ref: '#/definitions/ServiceSpecificCredentialMetadata'
-  ServicesLastAccessed:
-    type: array
-    items:
-      $ref: '#/definitions/ServiceLastAccessed'
   SigningCertificate:
     type: object
     required:
@@ -9391,10 +9831,6 @@ definitions:
         $ref: '#/definitions/dateType'
         description: The date when the signing certificate was uploaded.
     description: <p>Contains information about an X.509 signing certificate.</p> <p>This data type is used as a response element in the <a>UploadSigningCertificate</a> and <a>ListSigningCertificates</a> operations. </p>
-  SimulationPolicyListType:
-    type: array
-    items:
-      $ref: '#/definitions/policyDocumentType'
   Statement:
     type: object
     properties:
@@ -9411,10 +9847,16 @@ definitions:
         $ref: '#/definitions/Position'
         description: The row and column of the end of a <code>Statement</code> in an IAM policy.
     description: <p>Contains a reference to a <code>Statement</code> element in a policy document that determines the result of the simulation.</p> <p>This data type is used by the <code>MatchedStatements</code> member of the <code> <a>EvaluationResult</a> </code> type.</p>
-  StatementListType:
-    type: array
-    items:
-      $ref: '#/definitions/Statement'
+  tagKeyType:
+    type: string
+    pattern: '[\p{L}\p{Z}\p{N}_.:/=+\-@]+'
+    minLength: 1
+    maxLength: 128
+  tagValueType:
+    type: string
+    pattern: '[\p{L}\p{Z}\p{N}_.:/=+\-@]*'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -9428,40 +9870,21 @@ definitions:
         $ref: '#/definitions/tagValueType'
         description: '<p>The value associated with this tag. For example, tags with a key name of <code>Department</code> could have values such as <code>Human Resources</code>, <code>Accounting</code>, and <code>Support</code>. Tags with a key name of <code>Cost Center</code> might have values that consist of the number associated with the different cost centers in your company. Typically, many resources have tags with the same key name but with different values.</p> <note> <p>AWS always interprets the tag <code>Value</code> as a single string. If you need to store an array, you can store comma-separated values in the string. However, you must interpret the value in your code.</p> </note>'
     description: 'A structure that represents user-provided metadata that can be associated with a resource such as an IAM user or role. For more information about tagging, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM Identities</a> in the <i>IAM User Guide</i>.'
-  User:
-    type: object
-    required:
-      - Path
-      - UserName
-      - UserId
-      - Arn
-      - CreateDate
-    properties:
-      Path:
-        $ref: '#/definitions/pathType'
-        description: 'The path to the user. For more information about paths, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide.'
-      UserName:
-        $ref: '#/definitions/userNameType'
-        description: The friendly name identifying the user.
-      UserId:
-        $ref: '#/definitions/idType'
-        description: 'The stable and unique string identifying the user. For more information about IDs, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide.'
-      Arn:
-        $ref: '#/definitions/arnType'
-        description: 'The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and how to use ARNs in policies, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>Using IAM</i> guide. '
-      CreateDate:
-        $ref: '#/definitions/dateType'
-        description: 'The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the user was created.'
-      PasswordLastUsed:
-        $ref: '#/definitions/dateType'
-        description: '<p>The date and time, in <a href="http://www.iso.org/iso/iso8601">ISO 8601 date-time format</a>, when the user''s password was last used to sign in to an AWS website. For a list of AWS websites that capture a user''s last sign-in time, see the <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html">Credential Reports</a> topic in the <i>Using IAM</i> guide. If a password is used more than once in a five-minute span, only the first use is returned in this field. If the field is null (no value), then it indicates that they never signed in with a password. This can be because:</p> <ul> <li> <p>The user never had a password.</p> </li> <li> <p>A password exists but has not been used since IAM started tracking this information on October 20, 2014.</p> </li> </ul> <p>A null valuedoes not mean that the user <i>never</i> had a password. Also, if the user does not currently have a password, but had one in the past, then this field contains the date and time the most recent password was used.</p> <p>This value is returned only in the <a>GetUser</a> and <a>ListUsers</a> operations. </p>'
-      PermissionsBoundary:
-        $ref: '#/definitions/AttachedPermissionsBoundary'
-        description: '<p>The ARN of the policy used to set the permissions boundary for the user.</p> <p>For more information about permissions boundaries, see <a href="IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM Identities </a> in the <i>IAM User Guide</i>.</p>'
-      Tags:
-        $ref: '#/definitions/tagListType'
-        description: 'A list of tags that are associated with the specified user. For more information about tagging, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM Identities</a> in the <i>IAM User Guide</i>.'
-    description: '<p>Contains information about an IAM user entity.</p> <p>This data type is used as a response element in the following operations:</p> <ul> <li> <p> <a>CreateUser</a> </p> </li> <li> <p> <a>GetUser</a> </p> </li> <li> <p> <a>ListUsers</a> </p> </li> </ul>'
+  tagKeyListType:
+    type: array
+    items:
+      $ref: '#/definitions/tagKeyType'
+    maxItems: 50
+  privateKeyType:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 16384
+    format: password
+  groupNameListType:
+    type: array
+    items:
+      $ref: '#/definitions/groupNameType'
   UserDetail:
     type: object
     properties:
@@ -9495,374 +9918,6 @@ definitions:
         $ref: '#/definitions/tagListType'
         description: 'A list of tags that are associated with the specified user. For more information about tagging, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM Identities</a> in the <i>IAM User Guide</i>.'
     description: '<p>Contains information about an IAM user, including all the user''s policies and all the IAM groups the user is in.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> operation.</p>'
-  VirtualMFADevice:
-    type: object
-    required:
-      - SerialNumber
-    properties:
-      SerialNumber:
-        $ref: '#/definitions/serialNumberType'
-        description: The serial number associated with <code>VirtualMFADevice</code>.
-      Base32StringSeed:
-        $ref: '#/definitions/BootstrapDatum'
-        description: ' The base32 seed defined as specified in <a href="https://tools.ietf.org/html/rfc3548.txt">RFC3548</a>. The <code>Base32StringSeed</code> is base64-encoded. '
-      QRCodePNG:
-        $ref: '#/definitions/BootstrapDatum'
-        description: ' A QR code PNG image that encodes <code>otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String</code> where <code>$virtualMFADeviceName</code> is one of the create call arguments. <code>AccountName</code> is the user name if set (otherwise, the account ID otherwise), and <code>Base32String</code> is the seed in base32 format. The <code>Base32String</code> value is base64-encoded. '
-      User:
-        $ref: '#/definitions/User'
-        description: The IAM user associated with this virtual MFA device.
-      EnableDate:
-        $ref: '#/definitions/dateType'
-        description: The date and time on which the virtual MFA device was enabled.
-    description: Contains information about a virtual MFA device.
-  accessKeyIdType:
-    type: string
-    pattern: '[\w]+'
-    minLength: 16
-    maxLength: 128
-  accessKeyMetadataListType:
-    type: array
-    description: <p>Contains a list of access key metadata.</p> <p>This data type is used as a response element in the <a>ListAccessKeys</a> operation.</p>
-    items:
-      $ref: '#/definitions/AccessKeyMetadata'
-  accessKeySecretType:
-    type: string
-    format: password
-  accountAliasListType:
-    type: array
-    items:
-      $ref: '#/definitions/accountAliasType'
-  accountAliasType:
-    type: string
-    pattern: '^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$'
-    minLength: 3
-    maxLength: 63
-  arnType:
-    type: string
-    description: '<p>The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.</p> <p>For more information about ARNs, go to <a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>. </p>'
-    minLength: 20
-    maxLength: 2048
-  assignmentStatusType:
-    type: string
-    enum:
-      - Assigned
-      - Unassigned
-      - Any
-  attachedPoliciesListType:
-    type: array
-    items:
-      $ref: '#/definitions/AttachedPolicy'
-  attachmentCountType:
-    type: integer
-  authenticationCodeType:
-    type: string
-    pattern: '[\d]+'
-    minLength: 6
-    maxLength: 6
-  booleanObjectType:
-    type: boolean
-  booleanType:
-    type: boolean
-  certificateBodyType:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 16384
-  certificateChainType:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 2097152
-  certificateIdType:
-    type: string
-    pattern: '[\w]+'
-    minLength: 24
-    maxLength: 128
-  certificateListType:
-    type: array
-    description: <p>Contains a list of signing certificates.</p> <p>This data type is used as a response element in the <a>ListSigningCertificates</a> operation.</p>
-    items:
-      $ref: '#/definitions/SigningCertificate'
-  clientIDListType:
-    type: array
-    items:
-      $ref: '#/definitions/clientIDType'
-  clientIDType:
-    type: string
-    minLength: 1
-    maxLength: 255
-  customSuffixType:
-    type: string
-    pattern: '[\w+=,.@-]+'
-    minLength: 1
-    maxLength: 64
-  dateType:
-    type: string
-    format: date-time
-  encodingType:
-    type: string
-    enum:
-      - SSH
-      - PEM
-  entityDetailsListType:
-    type: array
-    items:
-      $ref: '#/definitions/EntityDetails'
-  entityListType:
-    type: array
-    items:
-      $ref: '#/definitions/EntityType'
-  entityNameType:
-    type: string
-    pattern: '[\w+=,.@-]+'
-    minLength: 1
-    maxLength: 128
-  existingUserNameType:
-    type: string
-    pattern: '[\w+=,.@-]+'
-    minLength: 1
-    maxLength: 128
-  groupDetailListType:
-    type: array
-    items:
-      $ref: '#/definitions/GroupDetail'
-  groupListType:
-    type: array
-    description: <p>Contains a list of IAM groups.</p> <p>This data type is used as a response element in the <a>ListGroups</a> operation.</p>
-    items:
-      $ref: '#/definitions/Group'
-  groupNameListType:
-    type: array
-    items:
-      $ref: '#/definitions/groupNameType'
-  groupNameType:
-    type: string
-    pattern: '[\w+=,.@-]+'
-    minLength: 1
-    maxLength: 128
-  idType:
-    type: string
-    pattern: '[\w]+'
-    minLength: 16
-    maxLength: 128
-  instanceProfileListType:
-    type: array
-    description: Contains a list of instance profiles.
-    items:
-      $ref: '#/definitions/InstanceProfile'
-  instanceProfileNameType:
-    type: string
-    pattern: '[\w+=,.@-]+'
-    minLength: 1
-    maxLength: 128
-  integerType:
-    type: integer
-  jobIDType:
-    type: string
-    minLength: 36
-    maxLength: 36
-  jobStatusType:
-    type: string
-    enum:
-      - IN_PROGRESS
-      - COMPLETED
-      - FAILED
-  listPolicyGrantingServiceAccessResponseListType:
-    type: array
-    items:
-      $ref: '#/definitions/ListPoliciesGrantingServiceAccessEntry'
-  markerType:
-    type: string
-    pattern: '[\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 320
-  maxItemsType:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  maxPasswordAgeType:
-    type: integer
-    minimum: 1
-    maximum: 1095
-  mfaDeviceListType:
-    type: array
-    description: <p>Contains a list of MFA devices.</p> <p>This data type is used as a response element in the <a>ListMFADevices</a> and <a>ListVirtualMFADevices</a> operations. </p>
-    items:
-      $ref: '#/definitions/MFADevice'
-  minimumPasswordLengthType:
-    type: integer
-    minimum: 6
-    maximum: 128
-  passwordReusePreventionType:
-    type: integer
-    minimum: 1
-    maximum: 24
-  passwordType:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 128
-    format: password
-  pathPrefixType:
-    type: string
-    pattern: '\u002F[\u0021-\u007F]*'
-    minLength: 1
-    maxLength: 512
-  pathType:
-    type: string
-    pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
-    minLength: 1
-    maxLength: 512
-  policyDescriptionType:
-    type: string
-    maxLength: 1000
-  policyDetailListType:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyDetail'
-  policyDocumentType:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 131072
-  policyDocumentVersionListType:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyVersion'
-  policyGrantingServiceAccessListType:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyGrantingServiceAccess'
-  policyListType:
-    type: array
-    items:
-      $ref: '#/definitions/Policy'
-  policyNameListType:
-    type: array
-    description: <p>Contains a list of policy names.</p> <p>This data type is used as a response element in the <a>ListPolicies</a> operation.</p>
-    items:
-      $ref: '#/definitions/policyNameType'
-  policyNameType:
-    type: string
-    pattern: '[\w+=,.@-]+'
-    minLength: 1
-    maxLength: 128
-  policyOwnerEntityType:
-    type: string
-    enum:
-      - USER
-      - ROLE
-      - GROUP
-  policyPathType:
-    type: string
-    pattern: '((/[A-Za-z0-9\.,\+@=_-]+)*)/'
-  policyScopeType:
-    type: string
-    enum:
-      - All
-      - AWS
-      - Local
-  policyType:
-    type: string
-    enum:
-      - INLINE
-      - MANAGED
-  policyVersionIdType:
-    type: string
-    pattern: 'v[1-9][0-9]*(\.[A-Za-z0-9-]*)?'
-  privateKeyType:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 16384
-    format: password
-  publicKeyFingerprintType:
-    type: string
-    pattern: '[:\w]+'
-    minLength: 48
-    maxLength: 48
-  publicKeyIdType:
-    type: string
-    pattern: '[\w]+'
-    minLength: 20
-    maxLength: 128
-  publicKeyMaterialType:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 16384
-  roleDescriptionType:
-    type: string
-    pattern: '[\p{L}\p{M}\p{Z}\p{S}\p{N}\p{P}]*'
-    maxLength: 1000
-  roleDetailListType:
-    type: array
-    items:
-      $ref: '#/definitions/RoleDetail'
-  roleListType:
-    type: array
-    description: <p>Contains a list of IAM roles.</p> <p>This data type is used as a response element in the <a>ListRoles</a> operation.</p>
-    items:
-      $ref: '#/definitions/Role'
-  roleMaxSessionDurationType:
-    type: integer
-    minimum: 3600
-    maximum: 43200
-  roleNameType:
-    type: string
-    pattern: '[\w+=,.@-]+'
-    minLength: 1
-    maxLength: 64
-  serialNumberType:
-    type: string
-    pattern: '[\w+=/:,.@-]+'
-    minLength: 9
-    maxLength: 256
-  serverCertificateMetadataListType:
-    type: array
-    items:
-      $ref: '#/definitions/ServerCertificateMetadata'
-  serverCertificateNameType:
-    type: string
-    pattern: '[\w+=,.@-]+'
-    minLength: 1
-    maxLength: 128
-  serviceName:
-    type: string
-  serviceNameType:
-    type: string
-  serviceNamespaceListType:
-    type: array
-    items:
-      $ref: '#/definitions/serviceNamespaceType'
-    minItems: 1
-    maxItems: 200
-  serviceNamespaceType:
-    type: string
-    pattern: '[\w-]*'
-    minLength: 1
-    maxLength: 64
-  servicePassword:
-    type: string
-    format: password
-  serviceSpecificCredentialId:
-    type: string
-    pattern: '[\w]+'
-    minLength: 20
-    maxLength: 128
-  serviceUserName:
-    type: string
-    pattern: '[\w+=,.@-]+'
-    minLength: 17
-    maxLength: 200
-  statusType:
-    type: string
-    enum:
-      - Active
-      - Inactive
-  stringType:
-    type: string
   summaryKeyType:
     type: string
     enum:
@@ -9893,64 +9948,8 @@ definitions:
       - VersionsPerPolicyQuota
   summaryValueType:
     type: integer
-  summaryMapType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/summaryKeyType'
-        value:
-          $ref: '#/definitions/summaryValueType'
-  tagKeyListType:
-    type: array
-    items:
-      $ref: '#/definitions/tagKeyType'
-    maxItems: 50
-  tagKeyType:
-    type: string
-    pattern: '[\p{L}\p{Z}\p{N}_.:/=+\-@]+'
-    minLength: 1
-    maxLength: 128
-  tagListType:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    maxItems: 50
-  tagValueType:
-    type: string
-    pattern: '[\p{L}\p{Z}\p{N}_.:/=+\-@]*'
-    minLength: 0
-    maxLength: 256
-  thumbprintListType:
-    type: array
-    description: Contains a list of thumbprints of identity provider server certificates.
-    items:
-      $ref: '#/definitions/thumbprintType'
   thumbprintType:
     type: string
     description: <p>Contains a thumbprint for an identity provider's server certificate.</p> <p>The identity provider's server certificate thumbprint is the hex-encoded SHA-1 hash value of the self-signed X.509 certificate used by the domain where the OpenID Connect provider makes its keys available. It is always a 40-character string.</p>
     minLength: 40
     maxLength: 40
-  userDetailListType:
-    type: array
-    items:
-      $ref: '#/definitions/UserDetail'
-  userListType:
-    type: array
-    description: <p>Contains a list of users.</p> <p>This data type is used as a response element in the <a>GetGroup</a> and <a>ListUsers</a> operations. </p>
-    items:
-      $ref: '#/definitions/User'
-  userNameType:
-    type: string
-    pattern: '[\w+=,.@-]+'
-    minLength: 1
-    maxLength: 64
-  virtualMFADeviceListType:
-    type: array
-    items:
-      $ref: '#/definitions/VirtualMFADevice'
-  virtualMFADeviceName:
-    type: string
-    pattern: '[\w+=,.@-]+'
-    minLength: 1

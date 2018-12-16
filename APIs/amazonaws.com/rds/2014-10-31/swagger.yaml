@@ -8028,7 +8028,14 @@ definitions:
       DBSnapshotIdentifier:
         $ref: '#/definitions/String'
         description: ' The user-supplied instance identifier of the DB Snapshot created immediately before the DB instance is stopped. '
-  undefined: {}
+  AccountQuotaList:
+    type: array
+    items:
+      $ref: '#/definitions/AccountQuota'
+  String:
+    type: string
+  Long:
+    type: integer
   AccountQuota:
     type: object
     properties:
@@ -8042,19 +8049,89 @@ definitions:
         $ref: '#/definitions/Long'
         description: The maximum allowed value for the quota.
     description: 'Describes a quota for an AWS account, for example, the number of DB instances allowed.'
-  AccountQuotaList:
+  EventSubscription:
+    type: object
+    properties:
+      CustomerAwsId:
+        $ref: '#/definitions/String'
+        description: The AWS customer account associated with the RDS event notification subscription.
+      CustSubscriptionId:
+        $ref: '#/definitions/String'
+        description: The RDS event notification subscription Id.
+      SnsTopicArn:
+        $ref: '#/definitions/String'
+        description: The topic ARN of the RDS event notification subscription.
+      Status:
+        $ref: '#/definitions/String'
+        description: '<p>The status of the RDS event notification subscription.</p> <p>Constraints:</p> <p>Can be one of the following: creating | modifying | deleting | active | no-permission | topic-not-exist</p> <p>The status "no-permission" indicates that RDS no longer has permission to post to the SNS topic. The status "topic-not-exist" indicates that the topic was deleted after the subscription was created.</p>'
+      SubscriptionCreationTime:
+        $ref: '#/definitions/String'
+        description: The time the RDS event notification subscription was created.
+      SourceType:
+        $ref: '#/definitions/String'
+        description: The source type for the RDS event notification subscription.
+      SourceIdsList:
+        $ref: '#/definitions/SourceIdsList'
+        description: A list of source IDs for the RDS event notification subscription.
+      EventCategoriesList:
+        $ref: '#/definitions/EventCategoriesList'
+        description: A list of event categories for the RDS event notification subscription.
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: A Boolean value indicating if the subscription is enabled. True indicates the subscription is enabled.
+      EventSubscriptionArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the event subscription.
+    description: Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.
+  TagList:
     type: array
+    description: 'A list of tags. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
     items:
-      $ref: '#/definitions/AccountQuota'
+      $ref: '#/definitions/Tag'
   ApplyMethod:
     type: string
     enum:
       - immediate
       - pending-reboot
+  ResourcePendingMaintenanceActions:
+    type: object
+    properties:
+      ResourceIdentifier:
+        $ref: '#/definitions/String'
+        description: The ARN of the resource that has pending maintenance actions.
+      PendingMaintenanceActionDetails:
+        $ref: '#/definitions/PendingMaintenanceActionDetails'
+        description: A list that provides details about the pending maintenance actions for the resource.
+    description: Describes the pending maintenance actions for a resource.
   AttributeValueList:
     type: array
     items:
       $ref: '#/definitions/String'
+  DBSecurityGroup:
+    type: object
+    properties:
+      OwnerId:
+        $ref: '#/definitions/String'
+        description: Provides the AWS ID of the owner of a specific DB security group.
+      DBSecurityGroupName:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the DB security group.
+      DBSecurityGroupDescription:
+        $ref: '#/definitions/String'
+        description: Provides the description of the DB security group.
+      VpcId:
+        $ref: '#/definitions/String'
+        description: Provides the VpcId of the DB security group.
+      EC2SecurityGroups:
+        $ref: '#/definitions/EC2SecurityGroupList'
+        description: ' Contains a list of <a>EC2SecurityGroup</a> elements. '
+      IPRanges:
+        $ref: '#/definitions/IPRangeList'
+        description: ' Contains a list of <a>IPRange</a> elements. '
+      DBSecurityGroupArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the DB security group.
+    description: <p>Contains the details for an Amazon RDS DB security group. </p> <p>This data type is used as a response element in the <a>DescribeDBSecurityGroups</a> action. </p>
   AvailabilityZone:
     type: object
     properties:
@@ -8087,9 +8164,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AvailableProcessorFeature'
-  Boolean:
-    type: boolean
+  TStamp:
+    type: string
+    format: date-time
   BooleanOptional:
+    type: boolean
+  Boolean:
     type: boolean
   Certificate:
     type: object
@@ -8127,6 +8207,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The description of the character set.
     description: ' This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. '
+  LogTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   CloudwatchLogsExportConfiguration:
     type: object
     properties:
@@ -8137,6 +8221,246 @@ definitions:
         $ref: '#/definitions/LogTypeList'
         description: The list of log types to disable.
     description: '<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p> <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine which logs will be exported (or not exported) to CloudWatch Logs. The values within these arrays depend on the DB engine being used. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon RDS User Guide</i>.</p>'
+  DBClusterParameterGroup:
+    type: object
+    properties:
+      DBClusterParameterGroupName:
+        $ref: '#/definitions/String'
+        description: Provides the name of the DB cluster parameter group.
+      DBParameterGroupFamily:
+        $ref: '#/definitions/String'
+        description: Provides the name of the DB parameter group family that this DB cluster parameter group is compatible with.
+      Description:
+        $ref: '#/definitions/String'
+        description: Provides the customer-specified description for this DB cluster parameter group.
+      DBClusterParameterGroupArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the DB cluster parameter group.
+    description: <p>Contains the details of an Amazon RDS DB cluster parameter group. </p> <p>This data type is used as a response element in the <a>DescribeDBClusterParameterGroups</a> action. </p>
+  DBClusterSnapshot:
+    type: object
+    properties:
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZones'
+        description: Provides the list of EC2 Availability Zones that instances in the DB cluster snapshot can be restored in.
+      DBClusterSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the identifier for the DB cluster snapshot.
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the DB cluster identifier of the DB cluster that this DB cluster snapshot was created from.
+      SnapshotCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: 'Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC).'
+      Engine:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the database engine.
+      AllocatedStorage:
+        $ref: '#/definitions/Integer'
+        description: Specifies the allocated storage size in gibibytes (GiB).
+      Status:
+        $ref: '#/definitions/String'
+        description: Specifies the status of this DB cluster snapshot.
+      Port:
+        $ref: '#/definitions/Integer'
+        description: Specifies the port that the DB cluster was listening on at the time of the snapshot.
+      VpcId:
+        $ref: '#/definitions/String'
+        description: Provides the VPC ID associated with the DB cluster snapshot.
+      ClusterCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: 'Specifies the time when the DB cluster was created, in Universal Coordinated Time (UTC).'
+      MasterUsername:
+        $ref: '#/definitions/String'
+        description: Provides the master username for the DB cluster snapshot.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: Provides the version of the database engine for this DB cluster snapshot.
+      LicenseModel:
+        $ref: '#/definitions/String'
+        description: Provides the license model information for this DB cluster snapshot.
+      SnapshotType:
+        $ref: '#/definitions/String'
+        description: Provides the type of the DB cluster snapshot.
+      PercentProgress:
+        $ref: '#/definitions/Integer'
+        description: Specifies the percentage of the estimated data that has been transferred.
+      StorageEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the DB cluster snapshot is encrypted.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: 'If <code>StorageEncrypted</code> is true, the AWS KMS key identifier for the encrypted DB cluster snapshot.'
+      DBClusterSnapshotArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the DB cluster snapshot.
+      SourceDBClusterSnapshotArn:
+        $ref: '#/definitions/String'
+        description: 'If the DB cluster snapshot was copied from a source DB cluster snapshot, the Amazon Resource Name (ARN) for the source DB cluster snapshot, otherwise, a null value.'
+      IAMDatabaseAuthenticationEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.'
+    description: <p>Contains the details for an Amazon RDS DB cluster snapshot </p> <p>This data type is used as a response element in the <a>DescribeDBClusterSnapshots</a> action. </p>
+  DBParameterGroup:
+    type: object
+    properties:
+      DBParameterGroupName:
+        $ref: '#/definitions/String'
+        description: Provides the name of the DB parameter group.
+      DBParameterGroupFamily:
+        $ref: '#/definitions/String'
+        description: Provides the name of the DB parameter group family that this DB parameter group is compatible with.
+      Description:
+        $ref: '#/definitions/String'
+        description: Provides the customer-specified description for this DB parameter group.
+      DBParameterGroupArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the DB parameter group.
+    description: <p>Contains the details of an Amazon RDS DB parameter group. </p> <p>This data type is used as a response element in the <a>DescribeDBParameterGroups</a> action. </p>
+  DBSnapshot:
+    type: object
+    properties:
+      DBSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the identifier for the DB snapshot.
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the DB instance identifier of the DB instance this DB snapshot was created from.
+      SnapshotCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: 'Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC).'
+      Engine:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the database engine.
+      AllocatedStorage:
+        $ref: '#/definitions/Integer'
+        description: Specifies the allocated storage size in gibibytes (GiB).
+      Status:
+        $ref: '#/definitions/String'
+        description: Specifies the status of this DB snapshot.
+      Port:
+        $ref: '#/definitions/Integer'
+        description: Specifies the port that the database engine was listening on at the time of the snapshot.
+      AvailabilityZone:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot.
+      VpcId:
+        $ref: '#/definitions/String'
+        description: Provides the VPC ID associated with the DB snapshot.
+      InstanceCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: 'Specifies the time when the snapshot was taken, in Universal Coordinated Time (UTC).'
+      MasterUsername:
+        $ref: '#/definitions/String'
+        description: Provides the master username for the DB snapshot.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: Specifies the version of the database engine.
+      LicenseModel:
+        $ref: '#/definitions/String'
+        description: License model information for the restored DB instance.
+      SnapshotType:
+        $ref: '#/definitions/String'
+        description: Provides the type of the DB snapshot.
+      Iops:
+        $ref: '#/definitions/IntegerOptional'
+        description: Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.
+      OptionGroupName:
+        $ref: '#/definitions/String'
+        description: Provides the option group name for the DB snapshot.
+      PercentProgress:
+        $ref: '#/definitions/Integer'
+        description: The percentage of the estimated data that has been transferred.
+      SourceRegion:
+        $ref: '#/definitions/String'
+        description: The AWS Region that the DB snapshot was created in or copied from.
+      SourceDBSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: The DB snapshot Amazon Resource Name (ARN) that the DB snapshot was copied from. It only has value in case of cross-customer or cross-region copy.
+      StorageType:
+        $ref: '#/definitions/String'
+        description: Specifies the storage type associated with DB snapshot.
+      TdeCredentialArn:
+        $ref: '#/definitions/String'
+        description: The ARN from the key store with which to associate the instance for TDE encryption.
+      Encrypted:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the DB snapshot is encrypted.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: ' If <code>Encrypted</code> is true, the AWS KMS key identifier for the encrypted DB snapshot. '
+      DBSnapshotArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the DB snapshot.
+      Timezone:
+        $ref: '#/definitions/String'
+        description: 'The time zone of the DB snapshot. In most cases, the <code>Timezone</code> element is empty. <code>Timezone</code> content appears only for snapshots taken from Microsoft SQL Server DB instances that were created with a time zone specified. '
+      IAMDatabaseAuthenticationEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.'
+      ProcessorFeatures:
+        $ref: '#/definitions/ProcessorFeatureList'
+        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.
+      DbiResourceId:
+        $ref: '#/definitions/String'
+        description: 'The identifier for the source DB instance, which can''t be changed and which is unique to an AWS Region.'
+    description: <p>Contains the details of an Amazon RDS DB snapshot. </p> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action. </p>
+  OptionGroup:
+    type: object
+    properties:
+      OptionGroupName:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the option group.
+      OptionGroupDescription:
+        $ref: '#/definitions/String'
+        description: Provides a description of the option group.
+      EngineName:
+        $ref: '#/definitions/String'
+        description: Indicates the name of the engine that this option group can be applied to.
+      MajorEngineVersion:
+        $ref: '#/definitions/String'
+        description: Indicates the major engine version associated with this option group.
+      Options:
+        $ref: '#/definitions/OptionsList'
+        description: Indicates what options are available in the option group.
+      AllowsVpcAndNonVpcInstanceMemberships:
+        $ref: '#/definitions/Boolean'
+        description: 'Indicates whether this option group can be applied to both VPC and non-VPC instances. The value <code>true</code> indicates the option group can be applied to both VPC and non-VPC instances. '
+      VpcId:
+        $ref: '#/definitions/String'
+        description: 'If <b>AllowsVpcAndNonVpcInstanceMemberships</b> is <code>false</code>, this field is blank. If <b>AllowsVpcAndNonVpcInstanceMemberships</b> is <code>true</code> and this field is blank, then this option group can be applied to both VPC and non-VPC instances. If this field contains a value, then this option group can only be applied to instances that are in the VPC indicated by this field. '
+      OptionGroupArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the option group.
+    description: <p/>
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  IntegerOptional:
+    type: integer
+  VpcSecurityGroupIdList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  LongOptional:
+    type: integer
+  ScalingConfiguration:
+    type: object
+    properties:
+      MinCapacity:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The minimum capacity for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p> <p>Valid capacity values are <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, <code>32</code>, <code>64</code>, <code>128</code>, and <code>256</code>.</p> <p>The minimum capacity must be less than or equal to the maximum capacity.</p>'
+      MaxCapacity:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The maximum capacity for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p> <p>Valid capacity values are <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, <code>32</code>, <code>64</code>, <code>128</code>, and <code>256</code>.</p> <p>The maximum capacity must be greater than or equal to the minimum capacity.</p>'
+      AutoPause:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>A value that specifies whether to allow or disallow automatic pause for an Aurora DB cluster in <code>serverless</code> DB engine mode. A DB cluster can be paused only when it''s idle (it has no connections).</p> <note> <p>If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot. In this case, the DB cluster is restored when there is a request to connect to it. </p> </note>'
+      SecondsUntilAutoPause:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The time, in seconds, before an Aurora DB cluster in <code>serverless</code> mode is paused.'
+    description: '<p>Contains the scaling configuration of an Aurora Serverless DB cluster.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>'
   DBCluster:
     type: object
     properties:
@@ -8275,227 +8599,14 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: '<note> <p>HTTP endpoint functionality is in beta for Aurora Serverless and is subject to change.</p> </note> <p>Value that is <code>true</code> if the HTTP endpoint for an Aurora Serverless DB cluster is enabled and <code>false</code> otherwise.</p> <p>When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless DB cluster. You can also query your database from inside the RDS console with the query editor.</p> <p>For more information about Aurora Serverless, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>'
     description: '<p>Contains the details of an Amazon Aurora DB cluster. </p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a>, <a>StopDBCluster</a>, and <a>StartDBCluster</a> actions. </p>'
-  DBClusterBacktrackList:
+  DBSecurityGroupNameList:
     type: array
     items:
-      $ref: '#/definitions/DBClusterBacktrack'
-  DBClusterEndpointList:
+      $ref: '#/definitions/String'
+  ProcessorFeatureList:
     type: array
     items:
-      $ref: '#/definitions/DBClusterEndpoint'
-  DBClusterList:
-    type: array
-    items:
-      $ref: '#/definitions/DBCluster'
-  DBClusterMember:
-    type: object
-    properties:
-      DBInstanceIdentifier:
-        $ref: '#/definitions/String'
-        description: Specifies the instance identifier for this member of the DB cluster.
-      IsClusterWriter:
-        $ref: '#/definitions/Boolean'
-        description: Value that is <code>true</code> if the cluster member is the primary instance for the DB cluster and <code>false</code> otherwise.
-      DBClusterParameterGroupStatus:
-        $ref: '#/definitions/String'
-        description: Specifies the status of the DB cluster parameter group for this member of the DB cluster.
-      PromotionTier:
-        $ref: '#/definitions/IntegerOptional'
-        description: 'A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance"> Fault Tolerance for an Aurora DB Cluster</a> in the <i>Amazon Aurora User Guide</i>. '
-    description: Contains information about an instance that is part of a DB cluster.
-  DBClusterMemberList:
-    type: array
-    items:
-      $ref: '#/definitions/DBClusterMember'
-  DBClusterOptionGroupMemberships:
-    type: array
-    items:
-      $ref: '#/definitions/DBClusterOptionGroupStatus'
-  DBClusterOptionGroupStatus:
-    type: object
-    properties:
-      DBClusterOptionGroupName:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the DB cluster option group.
-      Status:
-        $ref: '#/definitions/String'
-        description: Specifies the status of the DB cluster option group.
-    description: Contains status information for a DB cluster option group.
-  DBClusterParameterGroup:
-    type: object
-    properties:
-      DBClusterParameterGroupName:
-        $ref: '#/definitions/String'
-        description: Provides the name of the DB cluster parameter group.
-      DBParameterGroupFamily:
-        $ref: '#/definitions/String'
-        description: Provides the name of the DB parameter group family that this DB cluster parameter group is compatible with.
-      Description:
-        $ref: '#/definitions/String'
-        description: Provides the customer-specified description for this DB cluster parameter group.
-      DBClusterParameterGroupArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) for the DB cluster parameter group.
-    description: <p>Contains the details of an Amazon RDS DB cluster parameter group. </p> <p>This data type is used as a response element in the <a>DescribeDBClusterParameterGroups</a> action. </p>
-  DBClusterParameterGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/DBClusterParameterGroup'
-  DBClusterRole:
-    type: object
-    properties:
-      RoleArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.
-      Status:
-        $ref: '#/definitions/String'
-        description: '<p>Describes the state of association between the IAM role and the DB cluster. The Status property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - the IAM role ARN is associated with the DB cluster and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - the IAM role ARN is being associated with the DB cluster.</p> </li> <li> <p> <code>INVALID</code> - the IAM role ARN is associated with the DB cluster, but the DB cluster is unable to assume the IAM role in order to access other AWS services on your behalf.</p> </li> </ul>'
-      FeatureName:
-        $ref: '#/definitions/String'
-    description: Describes an AWS Identity and Access Management (IAM) role that is associated with a DB cluster.
-  DBClusterRoles:
-    type: array
-    items:
-      $ref: '#/definitions/DBClusterRole'
-  DBClusterSnapshot:
-    type: object
-    properties:
-      AvailabilityZones:
-        $ref: '#/definitions/AvailabilityZones'
-        description: Provides the list of EC2 Availability Zones that instances in the DB cluster snapshot can be restored in.
-      DBClusterSnapshotIdentifier:
-        $ref: '#/definitions/String'
-        description: Specifies the identifier for the DB cluster snapshot.
-      DBClusterIdentifier:
-        $ref: '#/definitions/String'
-        description: Specifies the DB cluster identifier of the DB cluster that this DB cluster snapshot was created from.
-      SnapshotCreateTime:
-        $ref: '#/definitions/TStamp'
-        description: 'Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC).'
-      Engine:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the database engine.
-      AllocatedStorage:
-        $ref: '#/definitions/Integer'
-        description: Specifies the allocated storage size in gibibytes (GiB).
-      Status:
-        $ref: '#/definitions/String'
-        description: Specifies the status of this DB cluster snapshot.
-      Port:
-        $ref: '#/definitions/Integer'
-        description: Specifies the port that the DB cluster was listening on at the time of the snapshot.
-      VpcId:
-        $ref: '#/definitions/String'
-        description: Provides the VPC ID associated with the DB cluster snapshot.
-      ClusterCreateTime:
-        $ref: '#/definitions/TStamp'
-        description: 'Specifies the time when the DB cluster was created, in Universal Coordinated Time (UTC).'
-      MasterUsername:
-        $ref: '#/definitions/String'
-        description: Provides the master username for the DB cluster snapshot.
-      EngineVersion:
-        $ref: '#/definitions/String'
-        description: Provides the version of the database engine for this DB cluster snapshot.
-      LicenseModel:
-        $ref: '#/definitions/String'
-        description: Provides the license model information for this DB cluster snapshot.
-      SnapshotType:
-        $ref: '#/definitions/String'
-        description: Provides the type of the DB cluster snapshot.
-      PercentProgress:
-        $ref: '#/definitions/Integer'
-        description: Specifies the percentage of the estimated data that has been transferred.
-      StorageEncrypted:
-        $ref: '#/definitions/Boolean'
-        description: Specifies whether the DB cluster snapshot is encrypted.
-      KmsKeyId:
-        $ref: '#/definitions/String'
-        description: 'If <code>StorageEncrypted</code> is true, the AWS KMS key identifier for the encrypted DB cluster snapshot.'
-      DBClusterSnapshotArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) for the DB cluster snapshot.
-      SourceDBClusterSnapshotArn:
-        $ref: '#/definitions/String'
-        description: 'If the DB cluster snapshot was copied from a source DB cluster snapshot, the Amazon Resource Name (ARN) for the source DB cluster snapshot, otherwise, a null value.'
-      IAMDatabaseAuthenticationEnabled:
-        $ref: '#/definitions/Boolean'
-        description: 'True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.'
-    description: <p>Contains the details for an Amazon RDS DB cluster snapshot </p> <p>This data type is used as a response element in the <a>DescribeDBClusterSnapshots</a> action. </p>
-  DBClusterSnapshotAttribute:
-    type: object
-    properties:
-      AttributeName:
-        $ref: '#/definitions/String'
-        description: '<p>The name of the manual DB cluster snapshot attribute.</p> <p>The attribute named <code>restore</code> refers to the list of AWS accounts that have permission to copy or restore the manual DB cluster snapshot. For more information, see the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>'
-      AttributeValues:
-        $ref: '#/definitions/AttributeValueList'
-        description: '<p>The value(s) for the manual DB cluster snapshot attribute.</p> <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this element returns a list of IDs of the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If a value of <code>all</code> is in the list, then the manual DB cluster snapshot is public and available for any AWS account to copy or restore.</p>'
-    description: '<p>Contains the name and values of a manual DB cluster snapshot attribute.</p> <p>Manual DB cluster snapshot attributes are used to authorize other AWS accounts to restore a manual DB cluster snapshot. For more information, see the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>'
-  DBClusterSnapshotAttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/DBClusterSnapshotAttribute'
-  DBClusterSnapshotAttributesResult:
-    type: object
-    properties:
-      DBClusterSnapshotIdentifier:
-        $ref: '#/definitions/String'
-        description: The identifier of the manual DB cluster snapshot that the attributes apply to.
-      DBClusterSnapshotAttributes:
-        $ref: '#/definitions/DBClusterSnapshotAttributeList'
-        description: The list of attributes and values for the manual DB cluster snapshot.
-    description: '<p>Contains the results of a successful call to the <a>DescribeDBClusterSnapshotAttributes</a> API action.</p> <p>Manual DB cluster snapshot attributes are used to authorize other AWS accounts to copy or restore a manual DB cluster snapshot. For more information, see the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>'
-  DBClusterSnapshotList:
-    type: array
-    items:
-      $ref: '#/definitions/DBClusterSnapshot'
-  DBEngineVersion:
-    type: object
-    properties:
-      Engine:
-        $ref: '#/definitions/String'
-        description: The name of the database engine.
-      EngineVersion:
-        $ref: '#/definitions/String'
-        description: The version number of the database engine.
-      DBParameterGroupFamily:
-        $ref: '#/definitions/String'
-        description: The name of the DB parameter group family for the database engine.
-      DBEngineDescription:
-        $ref: '#/definitions/String'
-        description: The description of the database engine.
-      DBEngineVersionDescription:
-        $ref: '#/definitions/String'
-        description: The description of the database engine version.
-      DefaultCharacterSet:
-        $ref: '#/definitions/CharacterSet'
-        description: ' The default character set for new instances of this engine version, if the <code>CharacterSetName</code> parameter of the CreateDBInstance API is not specified. '
-      SupportedCharacterSets:
-        $ref: '#/definitions/SupportedCharacterSetsList'
-        description: ' A list of the character sets supported by this engine for the <code>CharacterSetName</code> parameter of the <code>CreateDBInstance</code> action. '
-      ValidUpgradeTarget:
-        $ref: '#/definitions/ValidUpgradeTargetList'
-        description: A list of engine versions that this database engine version can be upgraded to.
-      SupportedTimezones:
-        $ref: '#/definitions/SupportedTimezonesList'
-        description: 'A list of the time zones supported by this engine for the <code>Timezone</code> parameter of the <code>CreateDBInstance</code> action. '
-      ExportableLogTypes:
-        $ref: '#/definitions/LogTypeList'
-        description: The types of logs that the database engine has available for export to CloudWatch Logs.
-      SupportsLogExportsToCloudwatchLogs:
-        $ref: '#/definitions/Boolean'
-        description: A value that indicates whether the engine version supports exporting the log types specified by ExportableLogTypes to CloudWatch Logs.
-      SupportsReadReplica:
-        $ref: '#/definitions/Boolean'
-        description: Indicates whether the database engine version supports read replicas.
-      SupportedEngineModes:
-        $ref: '#/definitions/EngineModeList'
-        description: A list of the supported DB engine modes.
-    description: ' This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. '
-  DBEngineVersionList:
-    type: array
-    items:
-      $ref: '#/definitions/DBEngineVersion'
+      $ref: '#/definitions/ProcessorFeature'
   DBInstance:
     type: object
     properties:
@@ -8668,6 +8779,361 @@ definitions:
         $ref: '#/definitions/Endpoint'
         description: Specifies the listener connection endpoint for SQL Server Always On.
     description: <p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action. </p>
+  SubnetIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  DBSubnetGroup:
+    type: object
+    properties:
+      DBSubnetGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the DB subnet group.
+      DBSubnetGroupDescription:
+        $ref: '#/definitions/String'
+        description: Provides the description of the DB subnet group.
+      VpcId:
+        $ref: '#/definitions/String'
+        description: Provides the VpcId of the DB subnet group.
+      SubnetGroupStatus:
+        $ref: '#/definitions/String'
+        description: Provides the status of the DB subnet group.
+      Subnets:
+        $ref: '#/definitions/SubnetList'
+        description: ' Contains a list of <a>Subnet</a> elements. '
+      DBSubnetGroupArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the DB subnet group.
+    description: <p>Contains the details of an Amazon RDS DB subnet group. </p> <p>This data type is used as a response element in the <a>DescribeDBSubnetGroups</a> action. </p>
+  EventCategoriesList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  SourceIdsList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  GlobalCluster:
+    type: object
+    properties:
+      GlobalClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: ' Contains a user-supplied global database cluster identifier. This identifier is the unique key that identifies a global database cluster. '
+      GlobalClusterResourceId:
+        $ref: '#/definitions/String'
+        description: ' The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed. '
+      GlobalClusterArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the global database cluster.
+      Status:
+        $ref: '#/definitions/String'
+        description: Specifies the current state of this global database cluster.
+      Engine:
+        $ref: '#/definitions/String'
+        description: ' The Aurora database engine used by the global database cluster. '
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: Indicates the database engine version.
+      DatabaseName:
+        $ref: '#/definitions/String'
+        description: ' The default database name within the new global database cluster. '
+      StorageEncrypted:
+        $ref: '#/definitions/BooleanOptional'
+        description: ' The storage encryption setting for the global database cluster. '
+      DeletionProtection:
+        $ref: '#/definitions/BooleanOptional'
+        description: ' The deletion protection setting for the new global database cluster. '
+      GlobalClusterMembers:
+        $ref: '#/definitions/GlobalClusterMemberList'
+        description: ' The list of cluster IDs for secondary clusters within the global database cluster. Currently limited to 1 item. '
+    description: A data type representing an Aurora global database.
+  DBClusterOptionGroupMemberships:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterOptionGroupStatus'
+  ReadReplicaIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  DBClusterMemberList:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterMember'
+  VpcSecurityGroupMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/VpcSecurityGroupMembership'
+  DBClusterRoles:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterRole'
+  ScalingConfigurationInfo:
+    type: object
+    properties:
+      MinCapacity:
+        $ref: '#/definitions/IntegerOptional'
+        description: The maximum capacity for the Aurora DB cluster in <code>serverless</code> DB engine mode.
+      MaxCapacity:
+        $ref: '#/definitions/IntegerOptional'
+        description: The maximum capacity for an Aurora DB cluster in <code>serverless</code> DB engine mode.
+      AutoPause:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'A value that indicates whether automatic pause is allowed for the Aurora DB cluster in <code>serverless</code> DB engine mode. '
+      SecondsUntilAutoPause:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The remaining amount of time, in seconds, before the Aurora DB cluster in <code>serverless</code> mode is paused. A DB cluster can be paused only when it''s idle (it has no connections).'
+    description: '<p>Shows the scaling configuration for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>'
+  DBClusterBacktrackList:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterBacktrack'
+  DBClusterEndpointList:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterEndpoint'
+  DBClusterList:
+    type: array
+    items:
+      $ref: '#/definitions/DBCluster'
+  DBClusterMember:
+    type: object
+    properties:
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the instance identifier for this member of the DB cluster.
+      IsClusterWriter:
+        $ref: '#/definitions/Boolean'
+        description: Value that is <code>true</code> if the cluster member is the primary instance for the DB cluster and <code>false</code> otherwise.
+      DBClusterParameterGroupStatus:
+        $ref: '#/definitions/String'
+        description: Specifies the status of the DB cluster parameter group for this member of the DB cluster.
+      PromotionTier:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance"> Fault Tolerance for an Aurora DB Cluster</a> in the <i>Amazon Aurora User Guide</i>. '
+    description: Contains information about an instance that is part of a DB cluster.
+  DBClusterOptionGroupStatus:
+    type: object
+    properties:
+      DBClusterOptionGroupName:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the DB cluster option group.
+      Status:
+        $ref: '#/definitions/String'
+        description: Specifies the status of the DB cluster option group.
+    description: Contains status information for a DB cluster option group.
+  ParametersList:
+    type: array
+    items:
+      $ref: '#/definitions/Parameter'
+  DBClusterParameterGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterParameterGroup'
+  DBClusterRole:
+    type: object
+    properties:
+      RoleArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.
+      Status:
+        $ref: '#/definitions/String'
+        description: '<p>Describes the state of association between the IAM role and the DB cluster. The Status property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - the IAM role ARN is associated with the DB cluster and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - the IAM role ARN is being associated with the DB cluster.</p> </li> <li> <p> <code>INVALID</code> - the IAM role ARN is associated with the DB cluster, but the DB cluster is unable to assume the IAM role in order to access other AWS services on your behalf.</p> </li> </ul>'
+      FeatureName:
+        $ref: '#/definitions/String'
+    description: Describes an AWS Identity and Access Management (IAM) role that is associated with a DB cluster.
+  Integer:
+    type: integer
+  DBClusterSnapshotAttribute:
+    type: object
+    properties:
+      AttributeName:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the manual DB cluster snapshot attribute.</p> <p>The attribute named <code>restore</code> refers to the list of AWS accounts that have permission to copy or restore the manual DB cluster snapshot. For more information, see the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>'
+      AttributeValues:
+        $ref: '#/definitions/AttributeValueList'
+        description: '<p>The value(s) for the manual DB cluster snapshot attribute.</p> <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this element returns a list of IDs of the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If a value of <code>all</code> is in the list, then the manual DB cluster snapshot is public and available for any AWS account to copy or restore.</p>'
+    description: '<p>Contains the name and values of a manual DB cluster snapshot attribute.</p> <p>Manual DB cluster snapshot attributes are used to authorize other AWS accounts to restore a manual DB cluster snapshot. For more information, see the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>'
+  DBClusterSnapshotAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterSnapshotAttribute'
+  DBClusterSnapshotAttributesResult:
+    type: object
+    properties:
+      DBClusterSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: The identifier of the manual DB cluster snapshot that the attributes apply to.
+      DBClusterSnapshotAttributes:
+        $ref: '#/definitions/DBClusterSnapshotAttributeList'
+        description: The list of attributes and values for the manual DB cluster snapshot.
+    description: '<p>Contains the results of a successful call to the <a>DescribeDBClusterSnapshotAttributes</a> API action.</p> <p>Manual DB cluster snapshot attributes are used to authorize other AWS accounts to copy or restore a manual DB cluster snapshot. For more information, see the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>'
+  DBClusterSnapshotList:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterSnapshot'
+  SupportedCharacterSetsList:
+    type: array
+    items:
+      $ref: '#/definitions/CharacterSet'
+  ValidUpgradeTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/UpgradeTarget'
+  SupportedTimezonesList:
+    type: array
+    items:
+      $ref: '#/definitions/Timezone'
+  EngineModeList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  DBEngineVersion:
+    type: object
+    properties:
+      Engine:
+        $ref: '#/definitions/String'
+        description: The name of the database engine.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: The version number of the database engine.
+      DBParameterGroupFamily:
+        $ref: '#/definitions/String'
+        description: The name of the DB parameter group family for the database engine.
+      DBEngineDescription:
+        $ref: '#/definitions/String'
+        description: The description of the database engine.
+      DBEngineVersionDescription:
+        $ref: '#/definitions/String'
+        description: The description of the database engine version.
+      DefaultCharacterSet:
+        $ref: '#/definitions/CharacterSet'
+        description: ' The default character set for new instances of this engine version, if the <code>CharacterSetName</code> parameter of the CreateDBInstance API is not specified. '
+      SupportedCharacterSets:
+        $ref: '#/definitions/SupportedCharacterSetsList'
+        description: ' A list of the character sets supported by this engine for the <code>CharacterSetName</code> parameter of the <code>CreateDBInstance</code> action. '
+      ValidUpgradeTarget:
+        $ref: '#/definitions/ValidUpgradeTargetList'
+        description: A list of engine versions that this database engine version can be upgraded to.
+      SupportedTimezones:
+        $ref: '#/definitions/SupportedTimezonesList'
+        description: 'A list of the time zones supported by this engine for the <code>Timezone</code> parameter of the <code>CreateDBInstance</code> action. '
+      ExportableLogTypes:
+        $ref: '#/definitions/LogTypeList'
+        description: The types of logs that the database engine has available for export to CloudWatch Logs.
+      SupportsLogExportsToCloudwatchLogs:
+        $ref: '#/definitions/Boolean'
+        description: A value that indicates whether the engine version supports exporting the log types specified by ExportableLogTypes to CloudWatch Logs.
+      SupportsReadReplica:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the database engine version supports read replicas.
+      SupportedEngineModes:
+        $ref: '#/definitions/EngineModeList'
+        description: A list of the supported DB engine modes.
+    description: ' This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. '
+  DBEngineVersionList:
+    type: array
+    items:
+      $ref: '#/definitions/DBEngineVersion'
+  Endpoint:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/String'
+        description: Specifies the DNS address of the DB instance.
+      Port:
+        $ref: '#/definitions/Integer'
+        description: Specifies the port that the database engine is listening on.
+      HostedZoneId:
+        $ref: '#/definitions/String'
+        description: Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
+    description: '<p>This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:</p> <ul> <li> <p> <a>CreateDBInstance</a> </p> </li> <li> <p> <a>DescribeDBInstances</a> </p> </li> <li> <p> <a>DeleteDBInstance</a> </p> </li> </ul> <p>For the data structure that represents Amazon Aurora DB cluster endpoints, see <a>DBClusterEndpoint</a>.</p>'
+  DBSecurityGroupMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/DBSecurityGroupMembership'
+  DBParameterGroupStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/DBParameterGroupStatus'
+  PendingModifiedValues:
+    type: object
+    properties:
+      DBInstanceClass:
+        $ref: '#/definitions/String'
+        description: ' Contains the new <code>DBInstanceClass</code> for the DB instance that will be applied or is currently being applied. '
+      AllocatedStorage:
+        $ref: '#/definitions/IntegerOptional'
+        description: ' Contains the new <code>AllocatedStorage</code> size for the DB instance that will be applied or is currently being applied. '
+      MasterUserPassword:
+        $ref: '#/definitions/String'
+        description: Contains the pending or currently-in-progress change of the master credentials for the DB instance.
+      Port:
+        $ref: '#/definitions/IntegerOptional'
+        description: Specifies the pending port for the DB instance.
+      BackupRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: Specifies the pending number of days for which automated backups are retained.
+      MultiAZ:
+        $ref: '#/definitions/BooleanOptional'
+        description: Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: Indicates the database engine version.
+      LicenseModel:
+        $ref: '#/definitions/String'
+        description: '<p>The license model for the DB instance.</p> <p>Valid values: <code>license-included</code> | <code>bring-your-own-license</code> | <code>general-public-license</code> </p>'
+      Iops:
+        $ref: '#/definitions/IntegerOptional'
+        description: Specifies the new Provisioned IOPS value for the DB instance that will be applied or is currently being applied.
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: ' Contains the new <code>DBInstanceIdentifier</code> for the DB instance that will be applied or is currently being applied. '
+      StorageType:
+        $ref: '#/definitions/String'
+        description: Specifies the storage type to be associated with the DB instance.
+      CACertificateIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the identifier of the CA certificate for the DB instance.
+      DBSubnetGroupName:
+        $ref: '#/definitions/String'
+        description: 'The new DB subnet group for the DB instance. '
+      PendingCloudwatchLogsExports:
+        $ref: '#/definitions/PendingCloudwatchLogsExports'
+      ProcessorFeatures:
+        $ref: '#/definitions/ProcessorFeatureList'
+        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+    description: ' This data type is used as a response element in the <a>ModifyDBInstance</a> action. '
+  ReadReplicaDBInstanceIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ReadReplicaDBClusterIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  OptionGroupMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/OptionGroupMembership'
+  DBInstanceStatusInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/DBInstanceStatusInfo'
+  DomainMembershipList:
+    type: array
+    description: List of Active Directory Domain membership records associated with a DB instance.
+    items:
+      $ref: '#/definitions/DomainMembership'
+  RestoreWindow:
+    type: object
+    properties:
+      EarliestTime:
+        $ref: '#/definitions/TStamp'
+        description: The earliest time you can restore an instance to.
+      LatestTime:
+        $ref: '#/definitions/TStamp'
+        description: The latest time you can restore an instance to.
+    description: 'Earliest and latest time an instance can be restored to:'
   DBInstanceAutomatedBackup:
     type: object
     properties:
@@ -8765,26 +9231,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'Details of the error if there is an error for the instance. If the instance is not in an error state, this value is blank.'
     description: Provides a list of status information for a DB instance.
-  DBInstanceStatusInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/DBInstanceStatusInfo'
-  DBParameterGroup:
-    type: object
-    properties:
-      DBParameterGroupName:
-        $ref: '#/definitions/String'
-        description: Provides the name of the DB parameter group.
-      DBParameterGroupFamily:
-        $ref: '#/definitions/String'
-        description: Provides the name of the DB parameter group family that this DB parameter group is compatible with.
-      Description:
-        $ref: '#/definitions/String'
-        description: Provides the customer-specified description for this DB parameter group.
-      DBParameterGroupArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) for the DB parameter group.
-    description: <p>Contains the details of an Amazon RDS DB parameter group. </p> <p>This data type is used as a response element in the <a>DescribeDBParameterGroups</a> action. </p>
   DBParameterGroupList:
     type: array
     items:
@@ -8799,35 +9245,14 @@ definitions:
         $ref: '#/definitions/String'
         description: The status of parameter updates.
     description: '<p>The status of the DB parameter group.</p> <p>This data type is used as a response element in the following actions:</p> <ul> <li> <p> <a>CreateDBInstance</a> </p> </li> <li> <p> <a>CreateDBInstanceReadReplica</a> </p> </li> <li> <p> <a>DeleteDBInstance</a> </p> </li> <li> <p> <a>ModifyDBInstance</a> </p> </li> <li> <p> <a>RebootDBInstance</a> </p> </li> <li> <p> <a>RestoreDBInstanceFromDBSnapshot</a> </p> </li> </ul>'
-  DBParameterGroupStatusList:
+  EC2SecurityGroupList:
     type: array
     items:
-      $ref: '#/definitions/DBParameterGroupStatus'
-  DBSecurityGroup:
-    type: object
-    properties:
-      OwnerId:
-        $ref: '#/definitions/String'
-        description: Provides the AWS ID of the owner of a specific DB security group.
-      DBSecurityGroupName:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the DB security group.
-      DBSecurityGroupDescription:
-        $ref: '#/definitions/String'
-        description: Provides the description of the DB security group.
-      VpcId:
-        $ref: '#/definitions/String'
-        description: Provides the VpcId of the DB security group.
-      EC2SecurityGroups:
-        $ref: '#/definitions/EC2SecurityGroupList'
-        description: ' Contains a list of <a>EC2SecurityGroup</a> elements. '
-      IPRanges:
-        $ref: '#/definitions/IPRangeList'
-        description: ' Contains a list of <a>IPRange</a> elements. '
-      DBSecurityGroupArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) for the DB security group.
-    description: <p>Contains the details for an Amazon RDS DB security group. </p> <p>This data type is used as a response element in the <a>DescribeDBSecurityGroups</a> action. </p>
+      $ref: '#/definitions/EC2SecurityGroup'
+  IPRangeList:
+    type: array
+    items:
+      $ref: '#/definitions/IPRange'
   DBSecurityGroupMembership:
     type: object
     properties:
@@ -8838,106 +9263,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The status of the DB security group.
     description: '<p>This data type is used as a response element in the following actions:</p> <ul> <li> <p> <a>ModifyDBInstance</a> </p> </li> <li> <p> <a>RebootDBInstance</a> </p> </li> <li> <p> <a>RestoreDBInstanceFromDBSnapshot</a> </p> </li> <li> <p> <a>RestoreDBInstanceToPointInTime</a> </p> </li> </ul>'
-  DBSecurityGroupMembershipList:
-    type: array
-    items:
-      $ref: '#/definitions/DBSecurityGroupMembership'
-  DBSecurityGroupNameList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   DBSecurityGroups:
     type: array
     items:
       $ref: '#/definitions/DBSecurityGroup'
-  DBSnapshot:
-    type: object
-    properties:
-      DBSnapshotIdentifier:
-        $ref: '#/definitions/String'
-        description: Specifies the identifier for the DB snapshot.
-      DBInstanceIdentifier:
-        $ref: '#/definitions/String'
-        description: Specifies the DB instance identifier of the DB instance this DB snapshot was created from.
-      SnapshotCreateTime:
-        $ref: '#/definitions/TStamp'
-        description: 'Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC).'
-      Engine:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the database engine.
-      AllocatedStorage:
-        $ref: '#/definitions/Integer'
-        description: Specifies the allocated storage size in gibibytes (GiB).
-      Status:
-        $ref: '#/definitions/String'
-        description: Specifies the status of this DB snapshot.
-      Port:
-        $ref: '#/definitions/Integer'
-        description: Specifies the port that the database engine was listening on at the time of the snapshot.
-      AvailabilityZone:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot.
-      VpcId:
-        $ref: '#/definitions/String'
-        description: Provides the VPC ID associated with the DB snapshot.
-      InstanceCreateTime:
-        $ref: '#/definitions/TStamp'
-        description: 'Specifies the time when the snapshot was taken, in Universal Coordinated Time (UTC).'
-      MasterUsername:
-        $ref: '#/definitions/String'
-        description: Provides the master username for the DB snapshot.
-      EngineVersion:
-        $ref: '#/definitions/String'
-        description: Specifies the version of the database engine.
-      LicenseModel:
-        $ref: '#/definitions/String'
-        description: License model information for the restored DB instance.
-      SnapshotType:
-        $ref: '#/definitions/String'
-        description: Provides the type of the DB snapshot.
-      Iops:
-        $ref: '#/definitions/IntegerOptional'
-        description: Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.
-      OptionGroupName:
-        $ref: '#/definitions/String'
-        description: Provides the option group name for the DB snapshot.
-      PercentProgress:
-        $ref: '#/definitions/Integer'
-        description: The percentage of the estimated data that has been transferred.
-      SourceRegion:
-        $ref: '#/definitions/String'
-        description: The AWS Region that the DB snapshot was created in or copied from.
-      SourceDBSnapshotIdentifier:
-        $ref: '#/definitions/String'
-        description: The DB snapshot Amazon Resource Name (ARN) that the DB snapshot was copied from. It only has value in case of cross-customer or cross-region copy.
-      StorageType:
-        $ref: '#/definitions/String'
-        description: Specifies the storage type associated with DB snapshot.
-      TdeCredentialArn:
-        $ref: '#/definitions/String'
-        description: The ARN from the key store with which to associate the instance for TDE encryption.
-      Encrypted:
-        $ref: '#/definitions/Boolean'
-        description: Specifies whether the DB snapshot is encrypted.
-      KmsKeyId:
-        $ref: '#/definitions/String'
-        description: ' If <code>Encrypted</code> is true, the AWS KMS key identifier for the encrypted DB snapshot. '
-      DBSnapshotArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) for the DB snapshot.
-      Timezone:
-        $ref: '#/definitions/String'
-        description: 'The time zone of the DB snapshot. In most cases, the <code>Timezone</code> element is empty. <code>Timezone</code> content appears only for snapshots taken from Microsoft SQL Server DB instances that were created with a time zone specified. '
-      IAMDatabaseAuthenticationEnabled:
-        $ref: '#/definitions/Boolean'
-        description: 'True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.'
-      ProcessorFeatures:
-        $ref: '#/definitions/ProcessorFeatureList'
-        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance when the DB snapshot was created.
-      DbiResourceId:
-        $ref: '#/definitions/String'
-        description: 'The identifier for the source DB instance, which can''t be changed and which is unique to an AWS Region.'
-    description: <p>Contains the details of an Amazon RDS DB snapshot. </p> <p>This data type is used as a response element in the <a>DescribeDBSnapshots</a> action. </p>
   DBSnapshotAttribute:
     type: object
     properties:
@@ -8966,32 +9295,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DBSnapshot'
-  DBSubnetGroup:
-    type: object
-    properties:
-      DBSubnetGroupName:
-        $ref: '#/definitions/String'
-        description: The name of the DB subnet group.
-      DBSubnetGroupDescription:
-        $ref: '#/definitions/String'
-        description: Provides the description of the DB subnet group.
-      VpcId:
-        $ref: '#/definitions/String'
-        description: Provides the VpcId of the DB subnet group.
-      SubnetGroupStatus:
-        $ref: '#/definitions/String'
-        description: Provides the status of the DB subnet group.
-      Subnets:
-        $ref: '#/definitions/SubnetList'
-        description: ' Contains a list of <a>Subnet</a> elements. '
-      DBSubnetGroupArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) for the DB subnet group.
-    description: <p>Contains the details of an Amazon RDS DB subnet group. </p> <p>This data type is used as a response element in the <a>DescribeDBSubnetGroups</a> action. </p>
+  SubnetList:
+    type: array
+    items:
+      $ref: '#/definitions/Subnet'
   DBSubnetGroups:
     type: array
     items:
       $ref: '#/definitions/DBSubnetGroup'
+  FilterList:
+    type: array
+    items:
+      $ref: '#/definitions/Filter'
   DescribeDBLogFilesDetails:
     type: object
     properties:
@@ -9009,6 +9324,38 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DescribeDBLogFilesDetails'
+  EngineDefaults:
+    type: object
+    properties:
+      DBParameterGroupFamily:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the DB parameter group family that the engine default parameters apply to.
+      Marker:
+        $ref: '#/definitions/String'
+        description: ' An optional pagination token provided by a previous EngineDefaults request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code> . '
+      Parameters:
+        $ref: '#/definitions/ParametersList'
+        description: Contains a list of engine default parameters.
+    description: ' Contains the result of a successful invocation of the <a>DescribeEngineDefaultParameters</a> action. '
+  SourceType:
+    type: string
+    enum:
+      - db-instance
+      - db-parameter-group
+      - db-security-group
+      - db-snapshot
+      - db-cluster
+      - db-cluster-snapshot
+  ValidDBInstanceModificationsMessage:
+    type: object
+    properties:
+      Storage:
+        $ref: '#/definitions/ValidStorageOptionsList'
+        description: 'Valid storage options for your DB instance. '
+      ValidProcessorFeatures:
+        $ref: '#/definitions/AvailableProcessorFeatureList'
+        description: 'Valid processor features for your DB instance. '
+    description: 'Information about valid modifications that you can make to your DB instance. Contains the result of a successful call to the <a>DescribeValidDBInstanceModifications</a> action. You can use this information when you call <a>ModifyDBInstance</a>. '
   DomainMembership:
     type: object
     properties:
@@ -9025,11 +9372,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The name of the IAM role to be used when making API calls to the Directory Service.
     description: An Active Directory Domain membership record associated with the DB instance.
-  DomainMembershipList:
-    type: array
-    description: List of Active Directory Domain membership records associated with a DB instance.
-    items:
-      $ref: '#/definitions/DomainMembership'
   Double:
     type: number
     format: double
@@ -9066,40 +9408,6 @@ definitions:
         $ref: '#/definitions/String'
         description: ' Specifies the AWS ID of the owner of the EC2 security group specified in the <code>EC2SecurityGroupName</code> field. '
     description: '<p>This data type is used as a response element in the following actions:</p> <ul> <li> <p> <a>AuthorizeDBSecurityGroupIngress</a> </p> </li> <li> <p> <a>DescribeDBSecurityGroups</a> </p> </li> <li> <p> <a>RevokeDBSecurityGroupIngress</a> </p> </li> </ul>'
-  EC2SecurityGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/EC2SecurityGroup'
-  Endpoint:
-    type: object
-    properties:
-      Address:
-        $ref: '#/definitions/String'
-        description: Specifies the DNS address of the DB instance.
-      Port:
-        $ref: '#/definitions/Integer'
-        description: Specifies the port that the database engine is listening on.
-      HostedZoneId:
-        $ref: '#/definitions/String'
-        description: Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
-    description: '<p>This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:</p> <ul> <li> <p> <a>CreateDBInstance</a> </p> </li> <li> <p> <a>DescribeDBInstances</a> </p> </li> <li> <p> <a>DeleteDBInstance</a> </p> </li> </ul> <p>For the data structure that represents Amazon Aurora DB cluster endpoints, see <a>DBClusterEndpoint</a>.</p>'
-  EngineDefaults:
-    type: object
-    properties:
-      DBParameterGroupFamily:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the DB parameter group family that the engine default parameters apply to.
-      Marker:
-        $ref: '#/definitions/String'
-        description: ' An optional pagination token provided by a previous EngineDefaults request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code> . '
-      Parameters:
-        $ref: '#/definitions/ParametersList'
-        description: Contains a list of engine default parameters.
-    description: ' Contains the result of a successful invocation of the <a>DescribeEngineDefaultParameters</a> action. '
-  EngineModeList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   Event:
     type: object
     properties:
@@ -9122,10 +9430,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) for the event.
     description: ' This data type is used as a response element in the <a>DescribeEvents</a> action. '
-  EventCategoriesList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   EventCategoriesMap:
     type: object
     properties:
@@ -9144,44 +9448,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Event'
-  EventSubscription:
-    type: object
-    properties:
-      CustomerAwsId:
-        $ref: '#/definitions/String'
-        description: The AWS customer account associated with the RDS event notification subscription.
-      CustSubscriptionId:
-        $ref: '#/definitions/String'
-        description: The RDS event notification subscription Id.
-      SnsTopicArn:
-        $ref: '#/definitions/String'
-        description: The topic ARN of the RDS event notification subscription.
-      Status:
-        $ref: '#/definitions/String'
-        description: '<p>The status of the RDS event notification subscription.</p> <p>Constraints:</p> <p>Can be one of the following: creating | modifying | deleting | active | no-permission | topic-not-exist</p> <p>The status "no-permission" indicates that RDS no longer has permission to post to the SNS topic. The status "topic-not-exist" indicates that the topic was deleted after the subscription was created.</p>'
-      SubscriptionCreationTime:
-        $ref: '#/definitions/String'
-        description: The time the RDS event notification subscription was created.
-      SourceType:
-        $ref: '#/definitions/String'
-        description: The source type for the RDS event notification subscription.
-      SourceIdsList:
-        $ref: '#/definitions/SourceIdsList'
-        description: A list of source IDs for the RDS event notification subscription.
-      EventCategoriesList:
-        $ref: '#/definitions/EventCategoriesList'
-        description: A list of event categories for the RDS event notification subscription.
-      Enabled:
-        $ref: '#/definitions/Boolean'
-        description: A Boolean value indicating if the subscription is enabled. True indicates the subscription is enabled.
-      EventSubscriptionArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) for the event subscription.
-    description: Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.
   EventSubscriptionsList:
     type: array
     items:
       $ref: '#/definitions/EventSubscription'
+  FilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   Filter:
     type: object
     required:
@@ -9195,52 +9469,18 @@ definitions:
         $ref: '#/definitions/FilterValueList'
         description: One or more filter values. Filter values are case-sensitive.
     description: '<p>A filter name and value pair that is used to return a more specific list of results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as IDs. The filters supported by a describe operation are documented with the describe operation.</p> <note> <p>Currently, wildcards are not supported in filters.</p> </note> <p>The following actions can be filtered:</p> <ul> <li> <p> <a>DescribeDBClusterBacktracks</a> </p> </li> <li> <p> <a>DescribeDBClusterEndpoints</a> </p> </li> <li> <p> <a>DescribeDBClusters</a> </p> </li> <li> <p> <a>DescribeDBInstances</a> </p> </li> <li> <p> <a>DescribePendingMaintenanceActions</a> </p> </li> </ul>'
-  FilterList:
+  GlobalClusterMemberList:
     type: array
     items:
-      $ref: '#/definitions/Filter'
-  FilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  GlobalCluster:
-    type: object
-    properties:
-      GlobalClusterIdentifier:
-        $ref: '#/definitions/String'
-        description: ' Contains a user-supplied global database cluster identifier. This identifier is the unique key that identifies a global database cluster. '
-      GlobalClusterResourceId:
-        $ref: '#/definitions/String'
-        description: ' The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed. '
-      GlobalClusterArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) for the global database cluster.
-      Status:
-        $ref: '#/definitions/String'
-        description: Specifies the current state of this global database cluster.
-      Engine:
-        $ref: '#/definitions/String'
-        description: ' The Aurora database engine used by the global database cluster. '
-      EngineVersion:
-        $ref: '#/definitions/String'
-        description: Indicates the database engine version.
-      DatabaseName:
-        $ref: '#/definitions/String'
-        description: ' The default database name within the new global database cluster. '
-      StorageEncrypted:
-        $ref: '#/definitions/BooleanOptional'
-        description: ' The storage encryption setting for the global database cluster. '
-      DeletionProtection:
-        $ref: '#/definitions/BooleanOptional'
-        description: ' The deletion protection setting for the new global database cluster. '
-      GlobalClusterMembers:
-        $ref: '#/definitions/GlobalClusterMemberList'
-        description: ' The list of cluster IDs for secondary clusters within the global database cluster. Currently limited to 1 item. '
-    description: A data type representing an Aurora global database.
+      $ref: '#/definitions/GlobalClusterMember'
   GlobalClusterList:
     type: array
     items:
       $ref: '#/definitions/GlobalCluster'
+  ReadersArnList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   GlobalClusterMember:
     type: object
     properties:
@@ -9254,10 +9494,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: ' Specifies whether the Aurora cluster is the primary cluster (that is, has read-write capability) for the Aurora global database with which it is associated. '
     description: ' A data structure with information about any primary and secondary clusters associated with an Aurora global database. '
-  GlobalClusterMemberList:
-    type: array
-    items:
-      $ref: '#/definitions/GlobalClusterMember'
   IPRange:
     type: object
     properties:
@@ -9268,26 +9504,10 @@ definitions:
         $ref: '#/definitions/String'
         description: Specifies the IP range.
     description: ' This data type is used as a response element in the <a>DescribeDBSecurityGroups</a> action. '
-  IPRangeList:
-    type: array
-    items:
-      $ref: '#/definitions/IPRange'
-  Integer:
-    type: integer
-  IntegerOptional:
-    type: integer
   KeyList:
     type: array
     items:
       $ref: '#/definitions/String'
-  LogTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  Long:
-    type: integer
-  LongOptional:
-    type: integer
   MinimumEngineVersionPerAllowedValue:
     type: object
     properties:
@@ -9302,6 +9522,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/MinimumEngineVersionPerAllowedValue'
+  OptionConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/OptionConfiguration'
+  OptionNamesList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  OptionSettingConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/OptionSetting'
   Option:
     type: object
     properties:
@@ -9333,6 +9565,10 @@ definitions:
         $ref: '#/definitions/VpcSecurityGroupMembershipList'
         description: 'If the option requires access to a port, then this VPC security group allows access to the port.'
     description: Option details.
+  OptionSettingsList:
+    type: array
+    items:
+      $ref: '#/definitions/OptionSetting'
   OptionConfiguration:
     type: object
     required:
@@ -9357,38 +9593,10 @@ definitions:
         $ref: '#/definitions/OptionSettingsList'
         description: The option settings to include in an option group.
     description: A list of all available options
-  OptionConfigurationList:
+  OptionsList:
     type: array
     items:
-      $ref: '#/definitions/OptionConfiguration'
-  OptionGroup:
-    type: object
-    properties:
-      OptionGroupName:
-        $ref: '#/definitions/String'
-        description: Specifies the name of the option group.
-      OptionGroupDescription:
-        $ref: '#/definitions/String'
-        description: Provides a description of the option group.
-      EngineName:
-        $ref: '#/definitions/String'
-        description: Indicates the name of the engine that this option group can be applied to.
-      MajorEngineVersion:
-        $ref: '#/definitions/String'
-        description: Indicates the major engine version associated with this option group.
-      Options:
-        $ref: '#/definitions/OptionsList'
-        description: Indicates what options are available in the option group.
-      AllowsVpcAndNonVpcInstanceMemberships:
-        $ref: '#/definitions/Boolean'
-        description: 'Indicates whether this option group can be applied to both VPC and non-VPC instances. The value <code>true</code> indicates the option group can be applied to both VPC and non-VPC instances. '
-      VpcId:
-        $ref: '#/definitions/String'
-        description: 'If <b>AllowsVpcAndNonVpcInstanceMemberships</b> is <code>false</code>, this field is blank. If <b>AllowsVpcAndNonVpcInstanceMemberships</b> is <code>true</code> and this field is blank, then this option group can be applied to both VPC and non-VPC instances. If this field contains a value, then this option group can only be applied to instances that are in the VPC indicated by this field. '
-      OptionGroupArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) for the option group.
-    description: <p/>
+      $ref: '#/definitions/Option'
   OptionGroupMembership:
     type: object
     properties:
@@ -9399,10 +9607,22 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The status of the DB instance''s option group membership. Valid values are: <code>in-sync</code>, <code>pending-apply</code>, <code>pending-removal</code>, <code>pending-maintenance-apply</code>, <code>pending-maintenance-removal</code>, <code>applying</code>, <code>removing</code>, and <code>failed</code>. '
     description: Provides information on the option groups the DB instance is a member of.
-  OptionGroupMembershipList:
+  OptionsDependedOn:
     type: array
     items:
-      $ref: '#/definitions/OptionGroupMembership'
+      $ref: '#/definitions/String'
+  OptionsConflictsWith:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  OptionGroupOptionSettingsList:
+    type: array
+    items:
+      $ref: '#/definitions/OptionGroupOptionSetting'
+  OptionGroupOptionVersionsList:
+    type: array
+    items:
+      $ref: '#/definitions/OptionVersion'
   OptionGroupOption:
     type: object
     properties:
@@ -9483,14 +9703,16 @@ definitions:
         $ref: '#/definitions/MinimumEngineVersionPerAllowedValueList'
         description: The minimum DB engine version required for the corresponding allowed value for this option setting.
     description: Option group option settings are used to display settings available for each option with their default values and other information. These values are used with the DescribeOptionGroupOptions action.
-  OptionGroupOptionSettingsList:
-    type: array
-    items:
-      $ref: '#/definitions/OptionGroupOptionSetting'
-  OptionGroupOptionVersionsList:
-    type: array
-    items:
-      $ref: '#/definitions/OptionVersion'
+  OptionVersion:
+    type: object
+    properties:
+      Version:
+        $ref: '#/definitions/String'
+        description: The version of the option.
+      IsDefault:
+        $ref: '#/definitions/Boolean'
+        description: 'True if the version is the default version of the option, and otherwise false.'
+    description: The version for an option. Option group option versions are returned by the <a>DescribeOptionGroupOptions</a> action.
   OptionGroupOptionsList:
     type: array
     description: List of available option group options.
@@ -9500,10 +9722,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/OptionGroup'
-  OptionNamesList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   OptionSetting:
     type: object
     properties:
@@ -9535,36 +9753,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Indicates if the option setting is part of a collection.
     description: 'Option settings are the actual settings being applied or configured for that option. It is used when you modify an option group or describe option groups. For example, the NATIVE_NETWORK_ENCRYPTION option has a setting called SQLNET.ENCRYPTION_SERVER that can have several different values.'
-  OptionSettingConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/OptionSetting'
-  OptionSettingsList:
-    type: array
-    items:
-      $ref: '#/definitions/OptionSetting'
-  OptionVersion:
-    type: object
-    properties:
-      Version:
-        $ref: '#/definitions/String'
-        description: The version of the option.
-      IsDefault:
-        $ref: '#/definitions/Boolean'
-        description: 'True if the version is the default version of the option, and otherwise false.'
-    description: The version for an option. Option group option versions are returned by the <a>DescribeOptionGroupOptions</a> action.
-  OptionsConflictsWith:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  OptionsDependedOn:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  OptionsList:
-    type: array
-    items:
-      $ref: '#/definitions/Option'
   OrderableDBInstanceOption:
     type: object
     properties:
@@ -9676,10 +9864,6 @@ definitions:
         $ref: '#/definitions/EngineModeList'
         description: The valid DB engine modes.
     description: <p> This data type is used as a request parameter in the <a>ModifyDBParameterGroup</a> and <a>ResetDBParameterGroup</a> actions. </p> <p>This data type is used as a response element in the <a>DescribeEngineDefaultParameters</a> and <a>DescribeDBParameters</a> actions.</p>
-  ParametersList:
-    type: array
-    items:
-      $ref: '#/definitions/Parameter'
   PendingCloudwatchLogsExports:
     type: object
     properties:
@@ -9720,54 +9904,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ResourcePendingMaintenanceActions'
-  PendingModifiedValues:
-    type: object
-    properties:
-      DBInstanceClass:
-        $ref: '#/definitions/String'
-        description: ' Contains the new <code>DBInstanceClass</code> for the DB instance that will be applied or is currently being applied. '
-      AllocatedStorage:
-        $ref: '#/definitions/IntegerOptional'
-        description: ' Contains the new <code>AllocatedStorage</code> size for the DB instance that will be applied or is currently being applied. '
-      MasterUserPassword:
-        $ref: '#/definitions/String'
-        description: Contains the pending or currently-in-progress change of the master credentials for the DB instance.
-      Port:
-        $ref: '#/definitions/IntegerOptional'
-        description: Specifies the pending port for the DB instance.
-      BackupRetentionPeriod:
-        $ref: '#/definitions/IntegerOptional'
-        description: Specifies the pending number of days for which automated backups are retained.
-      MultiAZ:
-        $ref: '#/definitions/BooleanOptional'
-        description: Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
-      EngineVersion:
-        $ref: '#/definitions/String'
-        description: Indicates the database engine version.
-      LicenseModel:
-        $ref: '#/definitions/String'
-        description: '<p>The license model for the DB instance.</p> <p>Valid values: <code>license-included</code> | <code>bring-your-own-license</code> | <code>general-public-license</code> </p>'
-      Iops:
-        $ref: '#/definitions/IntegerOptional'
-        description: Specifies the new Provisioned IOPS value for the DB instance that will be applied or is currently being applied.
-      DBInstanceIdentifier:
-        $ref: '#/definitions/String'
-        description: ' Contains the new <code>DBInstanceIdentifier</code> for the DB instance that will be applied or is currently being applied. '
-      StorageType:
-        $ref: '#/definitions/String'
-        description: Specifies the storage type to be associated with the DB instance.
-      CACertificateIdentifier:
-        $ref: '#/definitions/String'
-        description: Specifies the identifier of the CA certificate for the DB instance.
-      DBSubnetGroupName:
-        $ref: '#/definitions/String'
-        description: 'The new DB subnet group for the DB instance. '
-      PendingCloudwatchLogsExports:
-        $ref: '#/definitions/PendingCloudwatchLogsExports'
-      ProcessorFeatures:
-        $ref: '#/definitions/ProcessorFeatureList'
-        description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
-    description: ' This data type is used as a response element in the <a>ModifyDBInstance</a> action. '
   ProcessorFeature:
     type: object
     properties:
@@ -9778,57 +9914,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The value of a processor feature name.
     description: '<p>Contains the processor features of a DB instance class.</p> <p>To specify the number of CPU cores, use the <code>coreCount</code> feature name for the <code>Name</code> parameter. To specify the number of threads per core, use the <code>threadsPerCore</code> feature name for the <code>Name</code> parameter.</p> <p>You can set the processor features of the DB instance class for a DB instance when you call one of the following actions:</p> <ul> <li> <p> <a>CreateDBInstance</a> </p> </li> <li> <p> <a>ModifyDBInstance</a> </p> </li> <li> <p> <a>RestoreDBInstanceFromDBSnapshot</a> </p> </li> <li> <p> <a>RestoreDBInstanceFromS3</a> </p> </li> <li> <p> <a>RestoreDBInstanceToPointInTime</a> </p> </li> </ul> <p>You can view the valid processor values for a particular instance class by calling the <a>DescribeOrderableDBInstanceOptions</a> action and specifying the instance class for the <code>DBInstanceClass</code> parameter.</p> <p>In addition, you can use the following actions for DB instance class processor information:</p> <ul> <li> <p> <a>DescribeDBInstances</a> </p> </li> <li> <p> <a>DescribeDBSnapshots</a> </p> </li> <li> <p> <a>DescribeValidDBInstanceModifications</a> </p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor">Configuring the Processor of the DB Instance Class</a> in the <i>Amazon RDS User Guide. </i> </p>'
-  ProcessorFeatureList:
-    type: array
-    items:
-      $ref: '#/definitions/ProcessorFeature'
-  Range:
-    type: object
-    properties:
-      From:
-        $ref: '#/definitions/Integer'
-        description: The minimum value in the range.
-      To:
-        $ref: '#/definitions/Integer'
-        description: The maximum value in the range.
-      Step:
-        $ref: '#/definitions/IntegerOptional'
-        description: 'The step value for the range. For example, if you have a range of 5,000 to 10,000, with a step value of 1,000, the valid values start at 5,000 and step up by 1,000. Even though 7,500 is within the range, it isn''t a valid value for the range. The valid values are 5,000, 6,000, 7,000, 8,000... '
-    description: A range of integer values.
-  RangeList:
-    type: array
-    items:
-      $ref: '#/definitions/Range'
-  ReadReplicaDBClusterIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ReadReplicaDBInstanceIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ReadReplicaIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ReadersArnList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  RecurringCharge:
-    type: object
-    properties:
-      RecurringChargeAmount:
-        $ref: '#/definitions/Double'
-        description: The amount of the recurring charge.
-      RecurringChargeFrequency:
-        $ref: '#/definitions/String'
-        description: The frequency of the recurring charge.
-    description: ' This data type is used as a response element in the <a>DescribeReservedDBInstances</a> and <a>DescribeReservedDBInstancesOfferings</a> actions. '
-  RecurringChargeList:
-    type: array
-    items:
-      $ref: '#/definitions/RecurringCharge'
   ReservedDBInstance:
     type: object
     properties:
@@ -9878,6 +9963,37 @@ definitions:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) for the reserved DB instance.
     description: ' This data type is used as a response element in the <a>DescribeReservedDBInstances</a> and <a>PurchaseReservedDBInstancesOffering</a> actions. '
+  Range:
+    type: object
+    properties:
+      From:
+        $ref: '#/definitions/Integer'
+        description: The minimum value in the range.
+      To:
+        $ref: '#/definitions/Integer'
+        description: The maximum value in the range.
+      Step:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The step value for the range. For example, if you have a range of 5,000 to 10,000, with a step value of 1,000, the valid values start at 5,000 and step up by 1,000. Even though 7,500 is within the range, it isn''t a valid value for the range. The valid values are 5,000, 6,000, 7,000, 8,000... '
+    description: A range of integer values.
+  RangeList:
+    type: array
+    items:
+      $ref: '#/definitions/Range'
+  RecurringCharge:
+    type: object
+    properties:
+      RecurringChargeAmount:
+        $ref: '#/definitions/Double'
+        description: The amount of the recurring charge.
+      RecurringChargeFrequency:
+        $ref: '#/definitions/String'
+        description: The frequency of the recurring charge.
+    description: ' This data type is used as a response element in the <a>DescribeReservedDBInstances</a> and <a>DescribeReservedDBInstancesOfferings</a> actions. '
+  RecurringChargeList:
+    type: array
+    items:
+      $ref: '#/definitions/RecurringCharge'
   ReservedDBInstanceList:
     type: array
     items:
@@ -9920,62 +10036,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReservedDBInstancesOffering'
-  ResourcePendingMaintenanceActions:
-    type: object
-    properties:
-      ResourceIdentifier:
-        $ref: '#/definitions/String'
-        description: The ARN of the resource that has pending maintenance actions.
-      PendingMaintenanceActionDetails:
-        $ref: '#/definitions/PendingMaintenanceActionDetails'
-        description: A list that provides details about the pending maintenance actions for the resource.
-    description: Describes the pending maintenance actions for a resource.
-  RestoreWindow:
-    type: object
-    properties:
-      EarliestTime:
-        $ref: '#/definitions/TStamp'
-        description: The earliest time you can restore an instance to.
-      LatestTime:
-        $ref: '#/definitions/TStamp'
-        description: The latest time you can restore an instance to.
-    description: 'Earliest and latest time an instance can be restored to:'
-  ScalingConfiguration:
-    type: object
-    properties:
-      MinCapacity:
-        $ref: '#/definitions/IntegerOptional'
-        description: '<p>The minimum capacity for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p> <p>Valid capacity values are <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, <code>32</code>, <code>64</code>, <code>128</code>, and <code>256</code>.</p> <p>The minimum capacity must be less than or equal to the maximum capacity.</p>'
-      MaxCapacity:
-        $ref: '#/definitions/IntegerOptional'
-        description: '<p>The maximum capacity for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p> <p>Valid capacity values are <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, <code>32</code>, <code>64</code>, <code>128</code>, and <code>256</code>.</p> <p>The maximum capacity must be greater than or equal to the minimum capacity.</p>'
-      AutoPause:
-        $ref: '#/definitions/BooleanOptional'
-        description: '<p>A value that specifies whether to allow or disallow automatic pause for an Aurora DB cluster in <code>serverless</code> DB engine mode. A DB cluster can be paused only when it''s idle (it has no connections).</p> <note> <p>If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot. In this case, the DB cluster is restored when there is a request to connect to it. </p> </note>'
-      SecondsUntilAutoPause:
-        $ref: '#/definitions/IntegerOptional'
-        description: 'The time, in seconds, before an Aurora DB cluster in <code>serverless</code> mode is paused.'
-    description: '<p>Contains the scaling configuration of an Aurora Serverless DB cluster.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>'
-  ScalingConfigurationInfo:
-    type: object
-    properties:
-      MinCapacity:
-        $ref: '#/definitions/IntegerOptional'
-        description: The maximum capacity for the Aurora DB cluster in <code>serverless</code> DB engine mode.
-      MaxCapacity:
-        $ref: '#/definitions/IntegerOptional'
-        description: The maximum capacity for an Aurora DB cluster in <code>serverless</code> DB engine mode.
-      AutoPause:
-        $ref: '#/definitions/BooleanOptional'
-        description: 'A value that indicates whether automatic pause is allowed for the Aurora DB cluster in <code>serverless</code> DB engine mode. '
-      SecondsUntilAutoPause:
-        $ref: '#/definitions/IntegerOptional'
-        description: 'The remaining amount of time, in seconds, before the Aurora DB cluster in <code>serverless</code> mode is paused. A DB cluster can be paused only when it''s idle (it has no connections).'
-    description: '<p>Shows the scaling configuration for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>'
-  SourceIdsList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   SourceRegion:
     type: object
     properties:
@@ -9993,21 +10053,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SourceRegion'
-  SourceType:
-    type: string
-    enum:
-      - db-instance
-      - db-parameter-group
-      - db-security-group
-      - db-snapshot
-      - db-cluster
-      - db-cluster-snapshot
-  String:
-    type: string
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   Subnet:
     type: object
     properties:
@@ -10020,25 +10065,13 @@ definitions:
         $ref: '#/definitions/String'
         description: Specifies the status of the subnet.
     description: ' This data type is used as a response element in the <a>DescribeDBSubnetGroups</a> action. '
-  SubnetIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SubnetList:
-    type: array
-    items:
-      $ref: '#/definitions/Subnet'
-  SupportedCharacterSetsList:
-    type: array
-    items:
-      $ref: '#/definitions/CharacterSet'
-  SupportedTimezonesList:
-    type: array
-    items:
-      $ref: '#/definitions/Timezone'
-  TStamp:
-    type: string
-    format: date-time
+  Timezone:
+    type: object
+    properties:
+      TimezoneName:
+        $ref: '#/definitions/String'
+        description: The name of the time zone.
+    description: 'A time zone associated with a <a>DBInstance</a> or a <a>DBSnapshot</a>. This data type is an element in the response to the <a>DescribeDBInstances</a>, the <a>DescribeDBSnapshots</a>, and the <a>DescribeDBEngineVersions</a> actions. '
   Tag:
     type: object
     properties:
@@ -10049,18 +10082,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can''t be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
     description: Metadata assigned to an Amazon RDS resource consisting of a key-value pair.
-  TagList:
-    type: array
-    description: 'A list of tags. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
-    items:
-      $ref: '#/definitions/Tag'
-  Timezone:
-    type: object
-    properties:
-      TimezoneName:
-        $ref: '#/definitions/String'
-        description: The name of the time zone.
-    description: 'A time zone associated with a <a>DBInstance</a> or a <a>DBSnapshot</a>. This data type is an element in the response to the <a>DescribeDBInstances</a>, the <a>DescribeDBSnapshots</a>, and the <a>DescribeDBEngineVersions</a> actions. '
   UpgradeTarget:
     type: object
     properties:
@@ -10080,16 +10101,10 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: A value that indicates whether a database engine is upgraded to a major version.
     description: The version of the database engine that a DB instance can be upgraded to.
-  ValidDBInstanceModificationsMessage:
-    type: object
-    properties:
-      Storage:
-        $ref: '#/definitions/ValidStorageOptionsList'
-        description: 'Valid storage options for your DB instance. '
-      ValidProcessorFeatures:
-        $ref: '#/definitions/AvailableProcessorFeatureList'
-        description: 'Valid processor features for your DB instance. '
-    description: 'Information about valid modifications that you can make to your DB instance. Contains the result of a successful call to the <a>DescribeValidDBInstanceModifications</a> action. You can use this information when you call <a>ModifyDBInstance</a>. '
+  ValidStorageOptionsList:
+    type: array
+    items:
+      $ref: '#/definitions/ValidStorageOptions'
   ValidStorageOptions:
     type: object
     properties:
@@ -10106,18 +10121,6 @@ definitions:
         $ref: '#/definitions/DoubleRangeList'
         description: 'The valid range of Provisioned IOPS to gibibytes of storage multiplier. For example, 3-10, which means that provisioned IOPS can be between 3 and 10 times storage. '
     description: 'Information about valid modifications that you can make to your DB instance. Contains the result of a successful call to the <a>DescribeValidDBInstanceModifications</a> action. '
-  ValidStorageOptionsList:
-    type: array
-    items:
-      $ref: '#/definitions/ValidStorageOptions'
-  ValidUpgradeTargetList:
-    type: array
-    items:
-      $ref: '#/definitions/UpgradeTarget'
-  VpcSecurityGroupIdList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   VpcSecurityGroupMembership:
     type: object
     properties:
@@ -10128,7 +10131,3 @@ definitions:
         $ref: '#/definitions/String'
         description: The status of the VPC security group.
     description: This data type is used as a response element for queries on VPC security group membership.
-  VpcSecurityGroupMembershipList:
-    type: array
-    items:
-      $ref: '#/definitions/VpcSecurityGroupMembership'

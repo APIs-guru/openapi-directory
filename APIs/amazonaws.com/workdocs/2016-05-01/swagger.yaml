@@ -2637,759 +2637,26 @@ definitions:
         description: Boolean value to determine whether the user is granted Poweruser privileges.
   IllegalUserStateException: {}
   DeactivatingLastSystemUserException: {}
-  undefined: {}
-  Activity:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/ActivityType'
-        description: The activity type.
-      TimeStamp:
-        $ref: '#/definitions/TimestampType'
-        description: The timestamp when the action was performed.
-      IsIndirectActivity:
-        $ref: '#/definitions/BooleanType'
-        description: 'Indicates whether an activity is indirect or direct. An indirect activity results from a direct activity performed on a parent resource. For example, sharing a parent folder (the direct activity) shares all of the subfolders and documents within the parent folder (the indirect activity).'
-      OrganizationId:
-        $ref: '#/definitions/IdType'
-        description: The ID of the organization.
-      Initiator:
-        $ref: '#/definitions/UserMetadata'
-        description: The user who performed the action.
-      Participants:
-        $ref: '#/definitions/Participants'
-        description: 'The list of users or groups impacted by this action. This is an optional field and is filled for the following sharing activities: DOCUMENT_SHARED, DOCUMENT_SHARED, DOCUMENT_UNSHARED, FOLDER_SHARED, FOLDER_UNSHARED.'
-      ResourceMetadata:
-        $ref: '#/definitions/ResourceMetadata'
-        description: The metadata of the resource involved in the user action.
-      OriginalParent:
-        $ref: '#/definitions/ResourceMetadata'
-        description: The original parent of the resource. This is an optional field and is filled for move activities.
-      CommentMetadata:
-        $ref: '#/definitions/CommentMetadata'
-        description: Metadata of the commenting activity. This is an optional field and is filled for commenting activities.
-    description: Describes the activity information.
-  ActivityNamesFilterType:
-    type: string
-    pattern: '[\w,]+'
-    minLength: 1
-    maxLength: 1024
-  ActivityType:
-    type: string
-    enum:
-      - DOCUMENT_CHECKED_IN
-      - DOCUMENT_CHECKED_OUT
-      - DOCUMENT_RENAMED
-      - DOCUMENT_VERSION_UPLOADED
-      - DOCUMENT_VERSION_DELETED
-      - DOCUMENT_VERSION_VIEWED
-      - DOCUMENT_VERSION_DOWNLOADED
-      - DOCUMENT_RECYCLED
-      - DOCUMENT_RESTORED
-      - DOCUMENT_REVERTED
-      - DOCUMENT_SHARED
-      - DOCUMENT_UNSHARED
-      - DOCUMENT_SHARE_PERMISSION_CHANGED
-      - DOCUMENT_SHAREABLE_LINK_CREATED
-      - DOCUMENT_SHAREABLE_LINK_REMOVED
-      - DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED
-      - DOCUMENT_MOVED
-      - DOCUMENT_COMMENT_ADDED
-      - DOCUMENT_COMMENT_DELETED
-      - DOCUMENT_ANNOTATION_ADDED
-      - DOCUMENT_ANNOTATION_DELETED
-      - FOLDER_CREATED
-      - FOLDER_DELETED
-      - FOLDER_RENAMED
-      - FOLDER_RECYCLED
-      - FOLDER_RESTORED
-      - FOLDER_SHARED
-      - FOLDER_UNSHARED
-      - FOLDER_SHARE_PERMISSION_CHANGED
-      - FOLDER_SHAREABLE_LINK_CREATED
-      - FOLDER_SHAREABLE_LINK_REMOVED
-      - FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED
-      - FOLDER_MOVED
   AuthenticationHeaderType:
     type: string
     minLength: 1
     maxLength: 8199
     format: password
-  BooleanEnumType:
-    type: string
-    enum:
-      - 'TRUE'
-      - 'FALSE'
-  BooleanType:
-    type: boolean
-  Comment:
-    type: object
-    required:
-      - CommentId
-    properties:
-      CommentId:
-        $ref: '#/definitions/CommentIdType'
-        description: The ID of the comment.
-      ParentId:
-        $ref: '#/definitions/CommentIdType'
-        description: The ID of the parent comment.
-      ThreadId:
-        $ref: '#/definitions/CommentIdType'
-        description: The ID of the root comment in the thread.
-      Text:
-        $ref: '#/definitions/CommentTextType'
-        description: The text of the comment.
-      Contributor:
-        $ref: '#/definitions/User'
-        description: The details of the user who made the comment.
-      CreatedTimestamp:
-        $ref: '#/definitions/TimestampType'
-        description: The time that the comment was created.
-      Status:
-        $ref: '#/definitions/CommentStatusType'
-        description: The status of the comment.
-      Visibility:
-        $ref: '#/definitions/CommentVisibilityType'
-        description: 'The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.'
-      RecipientId:
-        $ref: '#/definitions/IdType'
-        description: 'If the comment is a reply to another user''s comment, this field contains the user ID of the user being replied to.'
-    description: Describes a comment.
-  CommentIdType:
-    type: string
-    pattern: '[\w+-.@]+'
-    minLength: 1
-    maxLength: 128
-  CommentList:
-    type: array
-    items:
-      $ref: '#/definitions/Comment'
-  CommentMetadata:
-    type: object
-    properties:
-      CommentId:
-        $ref: '#/definitions/CommentIdType'
-        description: The ID of the comment.
-      Contributor:
-        $ref: '#/definitions/User'
-        description: The user who made the comment.
-      CreatedTimestamp:
-        $ref: '#/definitions/TimestampType'
-        description: The timestamp that the comment was created.
-      CommentStatus:
-        $ref: '#/definitions/CommentStatusType'
-        description: The status of the comment.
-      RecipientId:
-        $ref: '#/definitions/IdType'
-        description: The ID of the user being replied to.
-    description: Describes the metadata of a comment.
-  CommentStatusType:
-    type: string
-    enum:
-      - DRAFT
-      - PUBLISHED
-      - DELETED
-  CommentTextType:
-    type: string
-    minLength: 1
-    maxLength: 2048
-    format: password
-  CommentVisibilityType:
-    type: string
-    enum:
-      - PUBLIC
-      - PRIVATE
-  CustomMetadataKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/CustomMetadataKeyType'
-    maxItems: 8
-  CustomMetadataKeyType:
-    type: string
-    pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
-    minLength: 1
-    maxLength: 56
-  CustomMetadataValueType:
-    type: string
-    pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
-    minLength: 1
-    maxLength: 256
-  CustomMetadataMap:
-    type: array
-    minItems: 1
-    maxItems: 8
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/CustomMetadataKeyType'
-        value:
-          $ref: '#/definitions/CustomMetadataValueType'
-  DocumentContentType:
-    type: string
-    minLength: 1
-    maxLength: 128
-  DocumentMetadata:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/ResourceIdType'
-        description: The ID of the document.
-      CreatorId:
-        $ref: '#/definitions/IdType'
-        description: The ID of the creator.
-      ParentFolderId:
-        $ref: '#/definitions/ResourceIdType'
-        description: The ID of the parent folder.
-      CreatedTimestamp:
-        $ref: '#/definitions/TimestampType'
-        description: The time when the document was created.
-      ModifiedTimestamp:
-        $ref: '#/definitions/TimestampType'
-        description: The time when the document was updated.
-      LatestVersionMetadata:
-        $ref: '#/definitions/DocumentVersionMetadata'
-        description: The latest version of the document.
-      ResourceState:
-        $ref: '#/definitions/ResourceStateType'
-        description: The resource state.
-      Labels:
-        $ref: '#/definitions/SharedLabels'
-        description: List of labels on the document.
-    description: Describes the document.
-  DocumentMetadataList:
-    type: array
-    items:
-      $ref: '#/definitions/DocumentMetadata'
-  DocumentSourceType:
-    type: string
-    enum:
-      - ORIGINAL
-      - WITH_COMMENTS
-  UrlType:
-    type: string
-    minLength: 1
-    maxLength: 1024
-    format: password
-  DocumentSourceUrlMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DocumentSourceType'
-        value:
-          $ref: '#/definitions/UrlType'
-  DocumentStatusType:
-    type: string
-    enum:
-      - INITIALIZED
-      - ACTIVE
-  DocumentThumbnailType:
-    type: string
-    enum:
-      - SMALL
-      - SMALL_HQ
-      - LARGE
-  DocumentThumbnailUrlMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DocumentThumbnailType'
-        value:
-          $ref: '#/definitions/UrlType'
-  DocumentVersionIdType:
-    type: string
-    pattern: '[\w+-.@]+'
-    minLength: 1
-    maxLength: 128
-  DocumentVersionMetadata:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/DocumentVersionIdType'
-        description: The ID of the version.
-      Name:
-        $ref: '#/definitions/ResourceNameType'
-        description: The name of the version.
-      ContentType:
-        $ref: '#/definitions/DocumentContentType'
-        description: The content type of the document.
-      Size:
-        $ref: '#/definitions/SizeType'
-        description: 'The size of the document, in bytes.'
-      Signature:
-        $ref: '#/definitions/HashType'
-        description: The signature of the document.
-      Status:
-        $ref: '#/definitions/DocumentStatusType'
-        description: The status of the document.
-      CreatedTimestamp:
-        $ref: '#/definitions/TimestampType'
-        description: The timestamp when the document was first uploaded.
-      ModifiedTimestamp:
-        $ref: '#/definitions/TimestampType'
-        description: The timestamp when the document was last uploaded.
-      ContentCreatedTimestamp:
-        $ref: '#/definitions/TimestampType'
-        description: The timestamp when the content of the document was originally created.
-      ContentModifiedTimestamp:
-        $ref: '#/definitions/TimestampType'
-        description: The timestamp when the content of the document was modified.
-      CreatorId:
-        $ref: '#/definitions/IdType'
-        description: The ID of the creator.
-      Thumbnail:
-        $ref: '#/definitions/DocumentThumbnailUrlMap'
-        description: The thumbnail of the document.
-      Source:
-        $ref: '#/definitions/DocumentSourceUrlMap'
-        description: The source of the document.
-    description: Describes a version of a document.
-  DocumentVersionMetadataList:
-    type: array
-    items:
-      $ref: '#/definitions/DocumentVersionMetadata'
-  DocumentVersionStatus:
-    type: string
-    enum:
-      - ACTIVE
-  EmailAddressType:
-    type: string
-    pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
-    minLength: 1
-    maxLength: 256
-  FieldNamesType:
-    type: string
-    pattern: '[\w,]+'
-    minLength: 1
-    maxLength: 256
-  FolderContentType:
-    type: string
-    enum:
-      - ALL
-      - DOCUMENT
-      - FOLDER
-  FolderMetadata:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/ResourceIdType'
-        description: The ID of the folder.
-      Name:
-        $ref: '#/definitions/ResourceNameType'
-        description: The name of the folder.
-      CreatorId:
-        $ref: '#/definitions/IdType'
-        description: The ID of the creator.
-      ParentFolderId:
-        $ref: '#/definitions/ResourceIdType'
-        description: The ID of the parent folder.
-      CreatedTimestamp:
-        $ref: '#/definitions/TimestampType'
-        description: The time when the folder was created.
-      ModifiedTimestamp:
-        $ref: '#/definitions/TimestampType'
-        description: The time when the folder was updated.
-      ResourceState:
-        $ref: '#/definitions/ResourceStateType'
-        description: The resource state of the folder.
-      Signature:
-        $ref: '#/definitions/HashType'
-        description: The unique identifier created from the subfolders and documents of the folder.
-      Labels:
-        $ref: '#/definitions/SharedLabels'
-        description: List of labels on the folder.
-      Size:
-        $ref: '#/definitions/SizeType'
-        description: The size of the folder metadata.
-      LatestVersionSize:
-        $ref: '#/definitions/SizeType'
-        description: The size of the latest version of the folder metadata.
-    description: Describes a folder.
-  FolderMetadataList:
-    type: array
-    items:
-      $ref: '#/definitions/FolderMetadata'
-  GroupMetadata:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/IdType'
-        description: The ID of the user group.
-      Name:
-        $ref: '#/definitions/GroupNameType'
-        description: The name of the group.
-    description: Describes the metadata of a user group.
-  GroupMetadataList:
-    type: array
-    items:
-      $ref: '#/definitions/GroupMetadata'
-  GroupNameType:
-    type: string
-  HashType:
-    type: string
-    pattern: '[&\w+-.@]+'
-    minLength: 0
-    maxLength: 128
-  HeaderNameType:
-    type: string
-    pattern: '[\w-]+'
-    minLength: 1
-    maxLength: 256
-  HeaderValueType:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  IdType:
-    type: string
-    pattern: '[&\w+-.@]+'
-    minLength: 1
-    maxLength: 256
-  LimitType:
-    type: integer
-    minimum: 1
-    maximum: 999
-  LocaleType:
-    type: string
-    enum:
-      - en
-      - fr
-      - ko
-      - de
-      - es
-      - ja
-      - ru
-      - zh_CN
-      - zh_TW
-      - pt_BR
-      - default
-  MarkerType:
-    type: string
-    pattern: '[\u0000-\u00FF]+'
-    minLength: 1
-    maxLength: 2048
-  MessageType:
-    type: string
-    minLength: 0
-    maxLength: 2048
-    format: password
-  NotificationOptions:
-    type: object
-    properties:
-      SendEmail:
-        $ref: '#/definitions/BooleanType'
-        description: Boolean value to indicate an email notification should be sent to the receipients.
-      EmailMessage:
-        $ref: '#/definitions/MessageType'
-        description: Text value to be included in the email body.
-    description: Set of options which defines notification preferences of given action.
-  OrderType:
-    type: string
-    enum:
-      - ASCENDING
-      - DESCENDING
-  OrganizationUserList:
-    type: array
-    items:
-      $ref: '#/definitions/User'
-  PageMarkerType:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  Participants:
-    type: object
-    properties:
-      Users:
-        $ref: '#/definitions/UserMetadataList'
-        description: The list of users.
-      Groups:
-        $ref: '#/definitions/GroupMetadataList'
-        description: The list of user groups.
-    description: Describes the users or user groups.
-  PasswordType:
-    type: string
-    pattern: '[\u0020-\u00FF]+'
-    minLength: 4
-    maxLength: 32
-    format: password
-  PermissionInfo:
-    type: object
-    properties:
-      Role:
-        $ref: '#/definitions/RoleType'
-        description: The role of the user.
-      Type:
-        $ref: '#/definitions/RolePermissionType'
-        description: The type of permissions.
-    description: Describes the permissions.
-  PermissionInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/PermissionInfo'
-  PositiveIntegerType:
-    type: integer
-    minimum: 1
-  PositiveSizeType:
-    type: integer
-    minimum: 0
-  Principal:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/IdType'
-        description: The ID of the resource.
-      Type:
-        $ref: '#/definitions/PrincipalType'
-        description: The type of resource.
-      Roles:
-        $ref: '#/definitions/PermissionInfoList'
-        description: The permission information for the resource.
-    description: Describes a resource.
-  PrincipalList:
-    type: array
-    items:
-      $ref: '#/definitions/Principal'
-  PrincipalType:
-    type: string
-    enum:
-      - USER
-      - GROUP
-      - INVITE
-      - ANONYMOUS
-      - ORGANIZATION
-  ResourceCollectionType:
-    type: string
-    enum:
-      - SHARED_WITH_ME
   ResourceIdType:
     type: string
     pattern: '[\w+-.@]+'
     minLength: 1
     maxLength: 128
-  ResourceMetadata:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/ResourceType'
-        description: The type of resource.
-      Name:
-        $ref: '#/definitions/ResourceNameType'
-        description: The name of the resource.
-      OriginalName:
-        $ref: '#/definitions/ResourceNameType'
-        description: The original name of the resource before a rename operation.
-      Id:
-        $ref: '#/definitions/ResourceIdType'
-        description: The ID of the resource.
-      VersionId:
-        $ref: '#/definitions/DocumentVersionIdType'
-        description: The version ID of the resource. This is an optional field and is filled for action on document version.
-      Owner:
-        $ref: '#/definitions/UserMetadata'
-        description: The owner of the resource.
-      ParentId:
-        $ref: '#/definitions/ResourceIdType'
-        description: The parent ID of the resource before a rename operation.
-    description: Describes the metadata of a resource.
-  ResourceNameType:
+  DocumentVersionIdType:
     type: string
-    pattern: '[\u0020-\u202D\u202F-\uFFFF]+'
+    pattern: '[\w+-.@]+'
     minLength: 1
-    maxLength: 255
-  ResourcePath:
-    type: object
-    properties:
-      Components:
-        $ref: '#/definitions/ResourcePathComponentList'
-        description: The components of the resource path.
-    description: Describes the path information of a resource.
-  ResourcePathComponent:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/IdType'
-        description: The ID of the resource path.
-      Name:
-        $ref: '#/definitions/ResourceNameType'
-        description: The name of the resource path.
-    description: Describes the resource path.
-  ResourcePathComponentList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourcePathComponent'
-  ResourceSortType:
+    maxLength: 128
+  IdType:
     type: string
-    enum:
-      - DATE
-      - NAME
-  ResourceStateType:
-    type: string
-    enum:
-      - ACTIVE
-      - RESTORING
-      - RECYCLING
-      - RECYCLED
-  ResourceType:
-    type: string
-    enum:
-      - FOLDER
-      - DOCUMENT
-  RolePermissionType:
-    type: string
-    enum:
-      - DIRECT
-      - INHERITED
-  RoleType:
-    type: string
-    enum:
-      - VIEWER
-      - CONTRIBUTOR
-      - OWNER
-      - COOWNER
-  SearchQueryType:
-    type: string
-    pattern: '[\u0020-\uFFFF]+'
-    minLength: 1
-    maxLength: 512
-    format: password
-  SharePrincipal:
-    type: object
-    required:
-      - Id
-      - Type
-      - Role
-    properties:
-      Id:
-        $ref: '#/definitions/IdType'
-        description: The ID of the recipient.
-      Type:
-        $ref: '#/definitions/PrincipalType'
-        description: The type of the recipient.
-      Role:
-        $ref: '#/definitions/RoleType'
-        description: The role of the recipient.
-    description: 'Describes the recipient type and ID, if available.'
-  SharePrincipalList:
-    type: array
-    items:
-      $ref: '#/definitions/SharePrincipal'
-  ShareResult:
-    type: object
-    properties:
-      PrincipalId:
-        $ref: '#/definitions/IdType'
-        description: The ID of the principal.
-      InviteePrincipalId:
-        $ref: '#/definitions/IdType'
-        description: The ID of the invited user.
-      Role:
-        $ref: '#/definitions/RoleType'
-        description: The role.
-      Status:
-        $ref: '#/definitions/ShareStatusType'
-        description: The status.
-      ShareId:
-        $ref: '#/definitions/ResourceIdType'
-        description: The ID of the resource that was shared.
-      StatusMessage:
-        $ref: '#/definitions/MessageType'
-        description: The status message.
-    description: Describes the share results of a resource.
-  ShareResultsList:
-    type: array
-    items:
-      $ref: '#/definitions/ShareResult'
-  ShareStatusType:
-    type: string
-    enum:
-      - SUCCESS
-      - FAILURE
-  SharedLabel:
-    type: string
-    pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
-    minLength: 1
-    maxLength: 32
-  SharedLabels:
-    type: array
-    items:
-      $ref: '#/definitions/SharedLabel'
-    maxItems: 20
-  SignedHeaderMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/HeaderNameType'
-        value:
-          $ref: '#/definitions/HeaderValueType'
-  SizeType:
-    type: integer
-  StorageRuleType:
-    type: object
-    properties:
-      StorageAllocatedInBytes:
-        $ref: '#/definitions/PositiveSizeType'
-        description: 'The amount of storage allocated, in bytes.'
-      StorageType:
-        $ref: '#/definitions/StorageType'
-        description: The type of storage.
-    description: Describes the storage for a user.
-  StorageType:
-    type: string
-    enum:
-      - UNLIMITED
-      - QUOTA
-  Subscription:
-    type: object
-    properties:
-      SubscriptionId:
-        $ref: '#/definitions/IdType'
-        description: The ID of the subscription.
-      EndPoint:
-        $ref: '#/definitions/SubscriptionEndPointType'
-        description: The endpoint of the subscription.
-      Protocol:
-        $ref: '#/definitions/SubscriptionProtocolType'
-        description: The protocol of the subscription.
-    description: Describes a subscription.
-  SubscriptionEndPointType:
-    type: string
+    pattern: '[&\w+-.@]+'
     minLength: 1
     maxLength: 256
-  SubscriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/Subscription'
-    maxItems: 256
-  SubscriptionProtocolType:
-    type: string
-    enum:
-      - HTTPS
-  SubscriptionType:
-    type: string
-    enum:
-      - ALL
-  TimeZoneIdType:
-    type: string
-    minLength: 1
-    maxLength: 256
-  TimestampType:
-    type: string
-    format: date-time
-  UploadMetadata:
-    type: object
-    properties:
-      UploadUrl:
-        $ref: '#/definitions/UrlType'
-        description: The URL of the upload.
-      SignedHeaders:
-        $ref: '#/definitions/SignedHeaderMap'
-        description: The signed headers.
-    description: Describes the upload.
   User:
     type: object
     properties:
@@ -3439,24 +2706,47 @@ definitions:
         $ref: '#/definitions/UserStorageMetadata'
         description: The storage for the user.
     description: Describes a user.
-  UserActivities:
-    type: array
-    items:
-      $ref: '#/definitions/Activity'
-  UserAttributeValueType:
-    type: string
-    minLength: 1
-    maxLength: 64
-  UserFilterType:
+  ActivityType:
     type: string
     enum:
-      - ALL
-      - ACTIVE_PENDING
-  UserIdsType:
+      - DOCUMENT_CHECKED_IN
+      - DOCUMENT_CHECKED_OUT
+      - DOCUMENT_RENAMED
+      - DOCUMENT_VERSION_UPLOADED
+      - DOCUMENT_VERSION_DELETED
+      - DOCUMENT_VERSION_VIEWED
+      - DOCUMENT_VERSION_DOWNLOADED
+      - DOCUMENT_RECYCLED
+      - DOCUMENT_RESTORED
+      - DOCUMENT_REVERTED
+      - DOCUMENT_SHARED
+      - DOCUMENT_UNSHARED
+      - DOCUMENT_SHARE_PERMISSION_CHANGED
+      - DOCUMENT_SHAREABLE_LINK_CREATED
+      - DOCUMENT_SHAREABLE_LINK_REMOVED
+      - DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED
+      - DOCUMENT_MOVED
+      - DOCUMENT_COMMENT_ADDED
+      - DOCUMENT_COMMENT_DELETED
+      - DOCUMENT_ANNOTATION_ADDED
+      - DOCUMENT_ANNOTATION_DELETED
+      - FOLDER_CREATED
+      - FOLDER_DELETED
+      - FOLDER_RENAMED
+      - FOLDER_RECYCLED
+      - FOLDER_RESTORED
+      - FOLDER_SHARED
+      - FOLDER_UNSHARED
+      - FOLDER_SHARE_PERMISSION_CHANGED
+      - FOLDER_SHAREABLE_LINK_CREATED
+      - FOLDER_SHAREABLE_LINK_REMOVED
+      - FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED
+      - FOLDER_MOVED
+  TimestampType:
     type: string
-    pattern: '[&\w+-.@, ]+'
-    minLength: 1
-    maxLength: 2000
+    format: date-time
+  BooleanType:
+    type: boolean
   UserMetadata:
     type: object
     properties:
@@ -3476,10 +2766,391 @@ definitions:
         $ref: '#/definitions/EmailAddressType'
         description: The email address of the user.
     description: Describes the metadata of the user.
-  UserMetadataList:
+  Participants:
+    type: object
+    properties:
+      Users:
+        $ref: '#/definitions/UserMetadataList'
+        description: The list of users.
+      Groups:
+        $ref: '#/definitions/GroupMetadataList'
+        description: The list of user groups.
+    description: Describes the users or user groups.
+  ResourceMetadata:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/ResourceType'
+        description: The type of resource.
+      Name:
+        $ref: '#/definitions/ResourceNameType'
+        description: The name of the resource.
+      OriginalName:
+        $ref: '#/definitions/ResourceNameType'
+        description: The original name of the resource before a rename operation.
+      Id:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the resource.
+      VersionId:
+        $ref: '#/definitions/DocumentVersionIdType'
+        description: The version ID of the resource. This is an optional field and is filled for action on document version.
+      Owner:
+        $ref: '#/definitions/UserMetadata'
+        description: The owner of the resource.
+      ParentId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The parent ID of the resource before a rename operation.
+    description: Describes the metadata of a resource.
+  CommentMetadata:
+    type: object
+    properties:
+      CommentId:
+        $ref: '#/definitions/CommentIdType'
+        description: The ID of the comment.
+      Contributor:
+        $ref: '#/definitions/User'
+        description: The user who made the comment.
+      CreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The timestamp that the comment was created.
+      CommentStatus:
+        $ref: '#/definitions/CommentStatusType'
+        description: The status of the comment.
+      RecipientId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the user being replied to.
+    description: Describes the metadata of a comment.
+  Activity:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/ActivityType'
+        description: The activity type.
+      TimeStamp:
+        $ref: '#/definitions/TimestampType'
+        description: The timestamp when the action was performed.
+      IsIndirectActivity:
+        $ref: '#/definitions/BooleanType'
+        description: 'Indicates whether an activity is indirect or direct. An indirect activity results from a direct activity performed on a parent resource. For example, sharing a parent folder (the direct activity) shares all of the subfolders and documents within the parent folder (the indirect activity).'
+      OrganizationId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the organization.
+      Initiator:
+        $ref: '#/definitions/UserMetadata'
+        description: The user who performed the action.
+      Participants:
+        $ref: '#/definitions/Participants'
+        description: 'The list of users or groups impacted by this action. This is an optional field and is filled for the following sharing activities: DOCUMENT_SHARED, DOCUMENT_SHARED, DOCUMENT_UNSHARED, FOLDER_SHARED, FOLDER_UNSHARED.'
+      ResourceMetadata:
+        $ref: '#/definitions/ResourceMetadata'
+        description: The metadata of the resource involved in the user action.
+      OriginalParent:
+        $ref: '#/definitions/ResourceMetadata'
+        description: The original parent of the resource. This is an optional field and is filled for move activities.
+      CommentMetadata:
+        $ref: '#/definitions/CommentMetadata'
+        description: Metadata of the commenting activity. This is an optional field and is filled for commenting activities.
+    description: Describes the activity information.
+  ActivityNamesFilterType:
+    type: string
+    pattern: '[\w,]+'
+    minLength: 1
+    maxLength: 1024
+  SharePrincipalList:
     type: array
     items:
-      $ref: '#/definitions/UserMetadata'
+      $ref: '#/definitions/SharePrincipal'
+  NotificationOptions:
+    type: object
+    properties:
+      SendEmail:
+        $ref: '#/definitions/BooleanType'
+        description: Boolean value to indicate an email notification should be sent to the receipients.
+      EmailMessage:
+        $ref: '#/definitions/MessageType'
+        description: Text value to be included in the email body.
+    description: Set of options which defines notification preferences of given action.
+  ShareResultsList:
+    type: array
+    items:
+      $ref: '#/definitions/ShareResult'
+  BooleanEnumType:
+    type: string
+    enum:
+      - 'TRUE'
+      - 'FALSE'
+  CommentIdType:
+    type: string
+    pattern: '[\w+-.@]+'
+    minLength: 1
+    maxLength: 128
+  CommentTextType:
+    type: string
+    minLength: 1
+    maxLength: 2048
+    format: password
+  CommentStatusType:
+    type: string
+    enum:
+      - DRAFT
+      - PUBLISHED
+      - DELETED
+  CommentVisibilityType:
+    type: string
+    enum:
+      - PUBLIC
+      - PRIVATE
+  Comment:
+    type: object
+    required:
+      - CommentId
+    properties:
+      CommentId:
+        $ref: '#/definitions/CommentIdType'
+        description: The ID of the comment.
+      ParentId:
+        $ref: '#/definitions/CommentIdType'
+        description: The ID of the parent comment.
+      ThreadId:
+        $ref: '#/definitions/CommentIdType'
+        description: The ID of the root comment in the thread.
+      Text:
+        $ref: '#/definitions/CommentTextType'
+        description: The text of the comment.
+      Contributor:
+        $ref: '#/definitions/User'
+        description: The details of the user who made the comment.
+      CreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time that the comment was created.
+      Status:
+        $ref: '#/definitions/CommentStatusType'
+        description: The status of the comment.
+      Visibility:
+        $ref: '#/definitions/CommentVisibilityType'
+        description: 'The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.'
+      RecipientId:
+        $ref: '#/definitions/IdType'
+        description: 'If the comment is a reply to another user''s comment, this field contains the user ID of the user being replied to.'
+    description: Describes a comment.
+  CommentList:
+    type: array
+    items:
+      $ref: '#/definitions/Comment'
+  CustomMetadataMap:
+    type: array
+    minItems: 1
+    maxItems: 8
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/CustomMetadataKeyType'
+        value:
+          $ref: '#/definitions/CustomMetadataValueType'
+  ResourceNameType:
+    type: string
+    pattern: '[\u0020-\u202D\u202F-\uFFFF]+'
+    minLength: 1
+    maxLength: 255
+  FolderMetadata:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the folder.
+      Name:
+        $ref: '#/definitions/ResourceNameType'
+        description: The name of the folder.
+      CreatorId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the creator.
+      ParentFolderId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the parent folder.
+      CreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time when the folder was created.
+      ModifiedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time when the folder was updated.
+      ResourceState:
+        $ref: '#/definitions/ResourceStateType'
+        description: The resource state of the folder.
+      Signature:
+        $ref: '#/definitions/HashType'
+        description: The unique identifier created from the subfolders and documents of the folder.
+      Labels:
+        $ref: '#/definitions/SharedLabels'
+        description: List of labels on the folder.
+      Size:
+        $ref: '#/definitions/SizeType'
+        description: The size of the folder metadata.
+      LatestVersionSize:
+        $ref: '#/definitions/SizeType'
+        description: The size of the latest version of the folder metadata.
+    description: Describes a folder.
+  SharedLabels:
+    type: array
+    items:
+      $ref: '#/definitions/SharedLabel'
+    maxItems: 20
+  SubscriptionEndPointType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  SubscriptionProtocolType:
+    type: string
+    enum:
+      - HTTPS
+  SubscriptionType:
+    type: string
+    enum:
+      - ALL
+  Subscription:
+    type: object
+    properties:
+      SubscriptionId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the subscription.
+      EndPoint:
+        $ref: '#/definitions/SubscriptionEndPointType'
+        description: The endpoint of the subscription.
+      Protocol:
+        $ref: '#/definitions/SubscriptionProtocolType'
+        description: The protocol of the subscription.
+    description: Describes a subscription.
+  UsernameType:
+    type: string
+    pattern: '[\w\-+.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z]+)?'
+    minLength: 1
+    maxLength: 256
+  EmailAddressType:
+    type: string
+    pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    minLength: 1
+    maxLength: 256
+  UserAttributeValueType:
+    type: string
+    minLength: 1
+    maxLength: 64
+  PasswordType:
+    type: string
+    pattern: '[\u0020-\u00FF]+'
+    minLength: 4
+    maxLength: 32
+    format: password
+  TimeZoneIdType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  StorageRuleType:
+    type: object
+    properties:
+      StorageAllocatedInBytes:
+        $ref: '#/definitions/PositiveSizeType'
+        description: 'The amount of storage allocated, in bytes.'
+      StorageType:
+        $ref: '#/definitions/StorageType'
+        description: The type of storage.
+    description: Describes the storage for a user.
+  CustomMetadataKeyType:
+    type: string
+    pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
+    minLength: 1
+    maxLength: 56
+  CustomMetadataKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/CustomMetadataKeyType'
+    maxItems: 8
+  CustomMetadataValueType:
+    type: string
+    pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
+    minLength: 1
+    maxLength: 256
+  LimitType:
+    type: integer
+    minimum: 1
+    maximum: 999
+  MarkerType:
+    type: string
+    pattern: '[\u0000-\u00FF]+'
+    minLength: 1
+    maxLength: 2048
+  UserActivities:
+    type: array
+    items:
+      $ref: '#/definitions/Activity'
+  PageMarkerType:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  FieldNamesType:
+    type: string
+    pattern: '[\w,]+'
+    minLength: 1
+    maxLength: 256
+  DocumentVersionMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentVersionMetadata'
+  ResourceSortType:
+    type: string
+    enum:
+      - DATE
+      - NAME
+  OrderType:
+    type: string
+    enum:
+      - ASCENDING
+      - DESCENDING
+  FolderContentType:
+    type: string
+    enum:
+      - ALL
+      - DOCUMENT
+      - FOLDER
+  FolderMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/FolderMetadata'
+  DocumentMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentMetadata'
+  SearchQueryType:
+    type: string
+    pattern: '[\u0020-\uFFFF]+'
+    minLength: 1
+    maxLength: 512
+    format: password
+  PositiveIntegerType:
+    type: integer
+    minimum: 1
+  GroupMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupMetadata'
+  SubscriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/Subscription'
+    maxItems: 256
+  PrincipalList:
+    type: array
+    items:
+      $ref: '#/definitions/Principal'
+  UserIdsType:
+    type: string
+    pattern: '[&\w+-.@, ]+'
+    minLength: 1
+    maxLength: 2000
+  UserFilterType:
+    type: string
+    enum:
+      - ALL
+      - ACTIVE_PENDING
   UserSortType:
     type: string
     enum:
@@ -3488,6 +3159,347 @@ definitions:
       - STORAGE_LIMIT
       - USER_STATUS
       - STORAGE_USED
+  OrganizationUserList:
+    type: array
+    items:
+      $ref: '#/definitions/User'
+  SizeType:
+    type: integer
+  DocumentContentType:
+    type: string
+    minLength: 1
+    maxLength: 128
+  DocumentVersionMetadata:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/DocumentVersionIdType'
+        description: The ID of the version.
+      Name:
+        $ref: '#/definitions/ResourceNameType'
+        description: The name of the version.
+      ContentType:
+        $ref: '#/definitions/DocumentContentType'
+        description: The content type of the document.
+      Size:
+        $ref: '#/definitions/SizeType'
+        description: 'The size of the document, in bytes.'
+      Signature:
+        $ref: '#/definitions/HashType'
+        description: The signature of the document.
+      Status:
+        $ref: '#/definitions/DocumentStatusType'
+        description: The status of the document.
+      CreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The timestamp when the document was first uploaded.
+      ModifiedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The timestamp when the document was last uploaded.
+      ContentCreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The timestamp when the content of the document was originally created.
+      ContentModifiedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The timestamp when the content of the document was modified.
+      CreatorId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the creator.
+      Thumbnail:
+        $ref: '#/definitions/DocumentThumbnailUrlMap'
+        description: The thumbnail of the document.
+      Source:
+        $ref: '#/definitions/DocumentSourceUrlMap'
+        description: The source of the document.
+    description: Describes a version of a document.
+  ResourceStateType:
+    type: string
+    enum:
+      - ACTIVE
+      - RESTORING
+      - RECYCLING
+      - RECYCLED
+  DocumentMetadata:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the document.
+      CreatorId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the creator.
+      ParentFolderId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the parent folder.
+      CreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time when the document was created.
+      ModifiedTimestamp:
+        $ref: '#/definitions/TimestampType'
+        description: The time when the document was updated.
+      LatestVersionMetadata:
+        $ref: '#/definitions/DocumentVersionMetadata'
+        description: The latest version of the document.
+      ResourceState:
+        $ref: '#/definitions/ResourceStateType'
+        description: The resource state.
+      Labels:
+        $ref: '#/definitions/SharedLabels'
+        description: List of labels on the document.
+    description: Describes the document.
+  DocumentSourceType:
+    type: string
+    enum:
+      - ORIGINAL
+      - WITH_COMMENTS
+  UrlType:
+    type: string
+    minLength: 1
+    maxLength: 1024
+    format: password
+  DocumentSourceUrlMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DocumentSourceType'
+        value:
+          $ref: '#/definitions/UrlType'
+  DocumentStatusType:
+    type: string
+    enum:
+      - INITIALIZED
+      - ACTIVE
+  DocumentThumbnailType:
+    type: string
+    enum:
+      - SMALL
+      - SMALL_HQ
+      - LARGE
+  DocumentThumbnailUrlMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DocumentThumbnailType'
+        value:
+          $ref: '#/definitions/UrlType'
+  HashType:
+    type: string
+    pattern: '[&\w+-.@]+'
+    minLength: 0
+    maxLength: 128
+  DocumentVersionStatus:
+    type: string
+    enum:
+      - ACTIVE
+  ResourcePath:
+    type: object
+    properties:
+      Components:
+        $ref: '#/definitions/ResourcePathComponentList'
+        description: The components of the resource path.
+    description: Describes the path information of a resource.
+  ResourceCollectionType:
+    type: string
+    enum:
+      - SHARED_WITH_ME
+  GroupNameType:
+    type: string
+  GroupMetadata:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/IdType'
+        description: The ID of the user group.
+      Name:
+        $ref: '#/definitions/GroupNameType'
+        description: The name of the group.
+    description: Describes the metadata of a user group.
+  HeaderNameType:
+    type: string
+    pattern: '[\w-]+'
+    minLength: 1
+    maxLength: 256
+  HeaderValueType:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  UploadMetadata:
+    type: object
+    properties:
+      UploadUrl:
+        $ref: '#/definitions/UrlType'
+        description: The URL of the upload.
+      SignedHeaders:
+        $ref: '#/definitions/SignedHeaderMap'
+        description: The signed headers.
+    description: Describes the upload.
+  LocaleType:
+    type: string
+    enum:
+      - en
+      - fr
+      - ko
+      - de
+      - es
+      - ja
+      - ru
+      - zh_CN
+      - zh_TW
+      - pt_BR
+      - default
+  MessageType:
+    type: string
+    minLength: 0
+    maxLength: 2048
+    format: password
+  UserMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/UserMetadata'
+  RoleType:
+    type: string
+    enum:
+      - VIEWER
+      - CONTRIBUTOR
+      - OWNER
+      - COOWNER
+  RolePermissionType:
+    type: string
+    enum:
+      - DIRECT
+      - INHERITED
+  PermissionInfo:
+    type: object
+    properties:
+      Role:
+        $ref: '#/definitions/RoleType'
+        description: The role of the user.
+      Type:
+        $ref: '#/definitions/RolePermissionType'
+        description: The type of permissions.
+    description: Describes the permissions.
+  PermissionInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/PermissionInfo'
+  PositiveSizeType:
+    type: integer
+    minimum: 0
+  PrincipalType:
+    type: string
+    enum:
+      - USER
+      - GROUP
+      - INVITE
+      - ANONYMOUS
+      - ORGANIZATION
+  Principal:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/IdType'
+        description: The ID of the resource.
+      Type:
+        $ref: '#/definitions/PrincipalType'
+        description: The type of resource.
+      Roles:
+        $ref: '#/definitions/PermissionInfoList'
+        description: The permission information for the resource.
+    description: Describes a resource.
+  ResourceType:
+    type: string
+    enum:
+      - FOLDER
+      - DOCUMENT
+  ResourcePathComponentList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourcePathComponent'
+  ResourcePathComponent:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/IdType'
+        description: The ID of the resource path.
+      Name:
+        $ref: '#/definitions/ResourceNameType'
+        description: The name of the resource path.
+    description: Describes the resource path.
+  SharePrincipal:
+    type: object
+    required:
+      - Id
+      - Type
+      - Role
+    properties:
+      Id:
+        $ref: '#/definitions/IdType'
+        description: The ID of the recipient.
+      Type:
+        $ref: '#/definitions/PrincipalType'
+        description: The type of the recipient.
+      Role:
+        $ref: '#/definitions/RoleType'
+        description: The role of the recipient.
+    description: 'Describes the recipient type and ID, if available.'
+  ShareStatusType:
+    type: string
+    enum:
+      - SUCCESS
+      - FAILURE
+  ShareResult:
+    type: object
+    properties:
+      PrincipalId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the principal.
+      InviteePrincipalId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the invited user.
+      Role:
+        $ref: '#/definitions/RoleType'
+        description: The role.
+      Status:
+        $ref: '#/definitions/ShareStatusType'
+        description: The status.
+      ShareId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the resource that was shared.
+      StatusMessage:
+        $ref: '#/definitions/MessageType'
+        description: The status message.
+    description: Describes the share results of a resource.
+  SharedLabel:
+    type: string
+    pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
+    minLength: 1
+    maxLength: 32
+  SignedHeaderMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/HeaderNameType'
+        value:
+          $ref: '#/definitions/HeaderValueType'
+  StorageType:
+    type: string
+    enum:
+      - UNLIMITED
+      - QUOTA
+  UserType:
+    type: string
+    enum:
+      - USER
+      - ADMIN
+      - POWERUSER
+      - MINIMALUSER
+      - WORKSPACESUSER
   UserStatusType:
     type: string
     enum:
@@ -3504,16 +3516,3 @@ definitions:
         $ref: '#/definitions/StorageRuleType'
         description: The storage for a user.
     description: Describes the storage for a user.
-  UserType:
-    type: string
-    enum:
-      - USER
-      - ADMIN
-      - POWERUSER
-      - MINIMALUSER
-      - WORKSPACESUSER
-  UsernameType:
-    type: string
-    pattern: '[\w\-+.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z]+)?'
-    minLength: 1
-    maxLength: 256

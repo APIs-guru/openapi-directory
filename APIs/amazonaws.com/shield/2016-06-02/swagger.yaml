@@ -1035,7 +1035,45 @@ definitions:
       AutoRenew:
         $ref: '#/definitions/AutoRenew'
         description: 'When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.'
-  undefined: {}
+  LogBucket:
+    type: string
+    pattern: '^([a-z]|(\d(?!\d{0,2}\.\d{1,3}\.\d{1,3}\.\d{1,3})))([a-z\d]|(\.(?!(\.|-)))|(-(?!\.))){1,61}[a-z\d]$'
+    minLength: 3
+    maxLength: 63
+  RoleArn:
+    type: string
+    pattern: '^arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+    minLength: 1
+    maxLength: 2048
+  AttackId:
+    type: string
+    pattern: '[a-zA-Z0-9\\-]*'
+    minLength: 1
+    maxLength: 128
+  ResourceArn:
+    type: string
+    pattern: '^arn:aws.*'
+    minLength: 1
+    maxLength: 2048
+  SubResourceSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/SubResourceSummary'
+  AttackTimestamp:
+    type: string
+    format: date-time
+  SummarizedCounterList:
+    type: array
+    items:
+      $ref: '#/definitions/SummarizedCounter'
+  AttackProperties:
+    type: array
+    items:
+      $ref: '#/definitions/AttackProperty'
+  MitigationList:
+    type: array
+    items:
+      $ref: '#/definitions/Mitigation'
   AttackDetail:
     type: object
     properties:
@@ -1064,20 +1102,11 @@ definitions:
         $ref: '#/definitions/MitigationList'
         description: List of mitigation actions taken for the attack.
     description: The details of a DDoS attack.
-  AttackId:
-    type: string
-    pattern: '[a-zA-Z0-9\\-]*'
-    minLength: 1
-    maxLength: 128
   AttackLayer:
     type: string
     enum:
       - NETWORK
       - APPLICATION
-  AttackProperties:
-    type: array
-    items:
-      $ref: '#/definitions/AttackProperty'
   AttackProperty:
     type: object
     properties:
@@ -1106,10 +1135,19 @@ definitions:
       - SOURCE_COUNTRY
       - SOURCE_IP_ADDRESS
       - SOURCE_USER_AGENT
-  AttackSummaries:
+  TopContributors:
     type: array
     items:
-      $ref: '#/definitions/AttackSummary'
+      $ref: '#/definitions/Contributor'
+  Unit:
+    type: string
+    enum:
+      - BITS
+      - BYTES
+      - PACKETS
+      - REQUESTS
+  Long:
+    type: integer
   AttackSummary:
     type: object
     properties:
@@ -1129,9 +1167,16 @@ definitions:
         $ref: '#/definitions/AttackVectorDescriptionList'
         description: The list of attacks for a specified time period.
     description: Summarizes all DDoS attacks for a specified time period.
-  AttackTimestamp:
+  AttackSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/AttackSummary'
+  String:
     type: string
-    format: date-time
+  AttackVectorDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/AttackVectorDescription'
   AttackVectorDescription:
     type: object
     required:
@@ -1141,10 +1186,6 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The attack type. Valid values:</p> <ul> <li> <p>UDP_TRAFFIC</p> </li> <li> <p>UDP_FRAGMENT</p> </li> <li> <p>GENERIC_UDP_REFLECTION</p> </li> <li> <p>DNS_REFLECTION</p> </li> <li> <p>NTP_REFLECTION</p> </li> <li> <p>CHARGEN_REFLECTION</p> </li> <li> <p>SSDP_REFLECTION</p> </li> <li> <p>PORT_MAPPER</p> </li> <li> <p>RIP_REFLECTION</p> </li> <li> <p>SNMP_REFLECTION</p> </li> <li> <p>MSSQL_REFLECTION</p> </li> <li> <p>NET_BIOS_REFLECTION</p> </li> <li> <p>SYN_FLOOD</p> </li> <li> <p>ACK_FLOOD</p> </li> <li> <p>REQUEST_FLOOD</p> </li> </ul>'
     description: Describes the attack.
-  AttackVectorDescriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/AttackVectorDescription'
   AutoRenew:
     type: string
     enum:
@@ -1160,6 +1201,60 @@ definitions:
         $ref: '#/definitions/Long'
         description: 'The contribution of this contributor expressed in <a>Protection</a> units. For example <code>10,000</code>.'
     description: A contributor to the attack and their contribution.
+  ProtectionName:
+    type: string
+    pattern: '[ a-zA-Z0-9_\\.\\-]*'
+    minLength: 1
+    maxLength: 128
+  ProtectionId:
+    type: string
+    pattern: '[a-zA-Z0-9\\-]*'
+    minLength: 1
+    maxLength: 36
+  LogBucketList:
+    type: array
+    items:
+      $ref: '#/definitions/LogBucket'
+    minItems: 0
+    maxItems: 10
+  EmergencyContactList:
+    type: array
+    items:
+      $ref: '#/definitions/EmergencyContact'
+    minItems: 0
+    maxItems: 10
+  Protection:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ProtectionId'
+        description: The unique identifier (ID) of the protection.
+      Name:
+        $ref: '#/definitions/ProtectionName'
+        description: 'The friendly name of the protection. For example, <code>My CloudFront distributions</code>.'
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The ARN (Amazon Resource Name) of the AWS resource that is protected.
+    description: An object that represents a resource that is under DDoS protection.
+  Subscription:
+    type: object
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The start time of the subscription, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time your subscription will end.
+      TimeCommitmentInSeconds:
+        $ref: '#/definitions/DurationInSeconds'
+        description: 'The length, in seconds, of the AWS Shield Advanced subscription for the account.'
+      AutoRenew:
+        $ref: '#/definitions/AutoRenew'
+        description: '<p>If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period.</p> <p>When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.</p>'
+      Limits:
+        $ref: '#/definitions/Limits'
+        description: Specifies how many protections of a given type you can create.
+    description: Information about the AWS Shield Advanced subscription for an account.
   Double:
     type: number
     format: double
@@ -1180,12 +1275,11 @@ definitions:
         $ref: '#/definitions/EmailAddress'
         description: An email address that the DRT can use to contact you during a suspected attack.
     description: Contact information that the DRT can use to contact you during a suspected attack.
-  EmergencyContactList:
-    type: array
-    items:
-      $ref: '#/definitions/EmergencyContact'
-    minItems: 0
-    maxItems: 10
+  SubscriptionState:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
   Integer:
     type: integer
   Limit:
@@ -1202,23 +1296,33 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Limit'
-  LogBucket:
-    type: string
-    pattern: '^([a-z]|(\d(?!\d{0,2}\.\d{1,3}\.\d{1,3}\.\d{1,3})))([a-z\d]|(\.(?!(\.|-)))|(-(?!\.))){1,61}[a-z\d]$'
-    minLength: 3
-    maxLength: 63
-  LogBucketList:
+  ResourceArnFilterList:
     type: array
     items:
-      $ref: '#/definitions/LogBucket'
-    minItems: 0
-    maxItems: 10
-  Long:
-    type: integer
+      $ref: '#/definitions/ResourceArn'
+  TimeRange:
+    type: object
+    properties:
+      FromInclusive:
+        $ref: '#/definitions/AttackTimestamp'
+        description: 'The start time, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
+      ToExclusive:
+        $ref: '#/definitions/AttackTimestamp'
+        description: 'The end time, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
+    description: The time range.
+  Token:
+    type: string
+    pattern: ^.*$
+    minLength: 1
+    maxLength: 4096
   MaxResults:
     type: integer
     minimum: 0
     maximum: 10000
+  Protections:
+    type: array
+    items:
+      $ref: '#/definitions/Protection'
   Mitigation:
     type: object
     properties:
@@ -1226,53 +1330,15 @@ definitions:
         $ref: '#/definitions/String'
         description: The name of the mitigation taken for this attack.
     description: The mitigation applied to a DDoS attack.
-  MitigationList:
+  SubResourceType:
+    type: string
+    enum:
+      - IP
+      - URL
+  SummarizedAttackVectorList:
     type: array
     items:
-      $ref: '#/definitions/Mitigation'
-  Protection:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/ProtectionId'
-        description: The unique identifier (ID) of the protection.
-      Name:
-        $ref: '#/definitions/ProtectionName'
-        description: 'The friendly name of the protection. For example, <code>My CloudFront distributions</code>.'
-      ResourceArn:
-        $ref: '#/definitions/ResourceArn'
-        description: The ARN (Amazon Resource Name) of the AWS resource that is protected.
-    description: An object that represents a resource that is under DDoS protection.
-  ProtectionId:
-    type: string
-    pattern: '[a-zA-Z0-9\\-]*'
-    minLength: 1
-    maxLength: 36
-  ProtectionName:
-    type: string
-    pattern: '[ a-zA-Z0-9_\\.\\-]*'
-    minLength: 1
-    maxLength: 128
-  Protections:
-    type: array
-    items:
-      $ref: '#/definitions/Protection'
-  ResourceArn:
-    type: string
-    pattern: '^arn:aws.*'
-    minLength: 1
-    maxLength: 2048
-  ResourceArnFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceArn'
-  RoleArn:
-    type: string
-    pattern: '^arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
-    minLength: 1
-    maxLength: 2048
-  String:
-    type: string
+      $ref: '#/definitions/SummarizedAttackVector'
   SubResourceSummary:
     type: object
     properties:
@@ -1289,39 +1355,9 @@ definitions:
         $ref: '#/definitions/SummarizedCounterList'
         description: The counters that describe the details of the attack.
     description: The attack information for the specified SubResource.
-  SubResourceSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/SubResourceSummary'
-  SubResourceType:
+  Timestamp:
     type: string
-    enum:
-      - IP
-      - URL
-  Subscription:
-    type: object
-    properties:
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The start time of the subscription, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time your subscription will end.
-      TimeCommitmentInSeconds:
-        $ref: '#/definitions/DurationInSeconds'
-        description: 'The length, in seconds, of the AWS Shield Advanced subscription for the account.'
-      AutoRenew:
-        $ref: '#/definitions/AutoRenew'
-        description: '<p>If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period.</p> <p>When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.</p>'
-      Limits:
-        $ref: '#/definitions/Limits'
-        description: Specifies how many protections of a given type you can create.
-    description: Information about the AWS Shield Advanced subscription for an account.
-  SubscriptionState:
-    type: string
-    enum:
-      - ACTIVE
-      - INACTIVE
+    format: date-time
   SummarizedAttackVector:
     type: object
     required:
@@ -1334,10 +1370,6 @@ definitions:
         $ref: '#/definitions/SummarizedCounterList'
         description: The list of counters that describe the details of the attack.
     description: A summary of information about the attack.
-  SummarizedAttackVectorList:
-    type: array
-    items:
-      $ref: '#/definitions/SummarizedAttackVector'
   SummarizedCounter:
     type: object
     properties:
@@ -1360,36 +1392,3 @@ definitions:
         $ref: '#/definitions/String'
         description: The unit of the counters.
     description: The counter that describes a DDoS attack.
-  SummarizedCounterList:
-    type: array
-    items:
-      $ref: '#/definitions/SummarizedCounter'
-  TimeRange:
-    type: object
-    properties:
-      FromInclusive:
-        $ref: '#/definitions/AttackTimestamp'
-        description: 'The start time, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
-      ToExclusive:
-        $ref: '#/definitions/AttackTimestamp'
-        description: 'The end time, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
-    description: The time range.
-  Timestamp:
-    type: string
-    format: date-time
-  Token:
-    type: string
-    pattern: ^.*$
-    minLength: 1
-    maxLength: 4096
-  TopContributors:
-    type: array
-    items:
-      $ref: '#/definitions/Contributor'
-  Unit:
-    type: string
-    enum:
-      - BITS
-      - BYTES
-      - PACKETS
-      - REQUESTS

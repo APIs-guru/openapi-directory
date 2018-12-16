@@ -2709,7 +2709,14 @@ definitions:
   Account:
     type: string
     pattern: '[0-9]{12}'
-  undefined: {}
+  AccountGateStatus:
+    type: string
+    enum:
+      - SUCCEEDED
+      - FAILED
+      - SKIPPED
+  AccountGateStatusReason:
+    type: string
   AccountGateResult:
     type: object
     properties:
@@ -2720,14 +2727,10 @@ definitions:
         $ref: '#/definitions/AccountGateStatusReason'
         description: The reason for the account gate status assigned to this account and region for the stack set operation.
     description: '<p>Structure that contains the results of the account gate function which AWS CloudFormation invokes, if present, before proceeding with a stack set operation in an account and region.</p> <p>For each account and region, AWS CloudFormation lets you specify a Lamdba function that encapsulates any requirements that must be met before CloudFormation can proceed with a stack set operation in that account and region. CloudFormation invokes the function each time a stack set operation is requested for that account and region; if the function returns <code>FAILED</code>, CloudFormation cancels the operation in that account and region, and sets the stack set operation result status for that account and region to <code>FAILED</code>. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-account-gating.html">Configuring a target account gate</a>.</p>'
-  AccountGateStatus:
+  LimitName:
     type: string
-    enum:
-      - SUCCEEDED
-      - FAILED
-      - SKIPPED
-  AccountGateStatusReason:
-    type: string
+  LimitValue:
+    type: integer
   AccountLimit:
     type: object
     properties:
@@ -2760,20 +2763,56 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100
-  Capabilities:
-    type: array
-    items:
-      $ref: '#/definitions/Capability'
-  CapabilitiesReason:
+  StackName:
     type: string
+  ClientRequestToken:
+    type: string
+    pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
+    minLength: 1
+    maxLength: 128
   Capability:
     type: string
     enum:
       - CAPABILITY_IAM
       - CAPABILITY_NAMED_IAM
       - CAPABILITY_AUTO_EXPAND
+  Capabilities:
+    type: array
+    items:
+      $ref: '#/definitions/Capability'
+  CapabilitiesReason:
+    type: string
   CausingEntity:
     type: string
+  ChangeType:
+    type: string
+    enum:
+      - Resource
+  ResourceChange:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/ChangeAction'
+        description: 'The action that AWS CloudFormation takes on the resource, such as <code>Add</code> (adds a new resource), <code>Modify</code> (changes a resource), or <code>Remove</code> (deletes a resource).'
+      LogicalResourceId:
+        $ref: '#/definitions/LogicalResourceId'
+        description: 'The resource''s logical ID, which is defined in the stack''s template.'
+      PhysicalResourceId:
+        $ref: '#/definitions/PhysicalResourceId'
+        description: The resource's physical ID (resource name). Resources that you are adding don't have physical IDs because they haven't been created.
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The type of AWS CloudFormation resource, such as <code>AWS::S3::Bucket</code>.'
+      Replacement:
+        $ref: '#/definitions/Replacement'
+        description: '<p>For the <code>Modify</code> action, indicates whether AWS CloudFormation will replace the resource by creating a new one and deleting the old one. This value depends on the value of the <code>RequiresRecreation</code> property in the <code>ResourceTargetDefinition</code> structure. For example, if the <code>RequiresRecreation</code> field is <code>Always</code> and the <code>Evaluation</code> field is <code>Static</code>, <code>Replacement</code> is <code>True</code>. If the <code>RequiresRecreation</code> field is <code>Always</code> and the <code>Evaluation</code> field is <code>Dynamic</code>, <code>Replacement</code> is <code>Conditionally</code>.</p> <p>If you have multiple changes with different <code>RequiresRecreation</code> values, the <code>Replacement</code> value depends on the change with the most impact. A <code>RequiresRecreation</code> value of <code>Always</code> has the most impact, followed by <code>Conditionally</code>, and then <code>Never</code>.</p>'
+      Scope:
+        $ref: '#/definitions/Scope'
+        description: 'For the <code>Modify</code> action, indicates which resource attribute is triggering this update, such as a change in the resource attribute''s <code>Metadata</code>, <code>Properties</code>, or <code>Tags</code>.'
+      Details:
+        $ref: '#/definitions/ResourceChangeDetails'
+        description: 'For the <code>Modify</code> action, a list of <code>ResourceChangeDetail</code> structures that describes the changes that AWS CloudFormation will make to the resource. '
+    description: The <code>ResourceChange</code> structure describes the resource and the action that AWS CloudFormation will perform on it if you execute this change set.
   Change:
     type: object
     properties:
@@ -2814,10 +2853,6 @@ definitions:
       - FAILED
   ChangeSetStatusReason:
     type: string
-  ChangeSetSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/ChangeSetSummary'
   ChangeSetSummary:
     type: object
     properties:
@@ -2849,6 +2884,28 @@ definitions:
         $ref: '#/definitions/Description'
         description: Descriptive information about the change set.
     description: 'The <code>ChangeSetSummary</code> structure describes a change set, its status, and the stack with which it''s associated.'
+  ChangeSetSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ChangeSetSummary'
+  StackId:
+    type: string
+  ExecutionStatus:
+    type: string
+    enum:
+      - UNAVAILABLE
+      - AVAILABLE
+      - EXECUTE_IN_PROGRESS
+      - EXECUTE_COMPLETE
+      - EXECUTE_FAILED
+      - OBSOLETE
+  CreationTime:
+    type: string
+    format: date-time
+  Description:
+    type: string
+    minLength: 1
+    maxLength: 1024
   ChangeSetType:
     type: string
     enum:
@@ -2862,43 +2919,371 @@ definitions:
       - ResourceAttribute
       - DirectModification
       - Automatic
-  ChangeType:
-    type: string
-    enum:
-      - Resource
   Changes:
     type: array
     items:
       $ref: '#/definitions/Change'
-  ClientRequestToken:
-    type: string
-    pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
-    minLength: 1
-    maxLength: 128
   ClientToken:
     type: string
     minLength: 1
     maxLength: 128
-  CreationTime:
+  StackNameOrId:
     type: string
-    format: date-time
-  DeletionTime:
+    pattern: '([a-zA-Z][-a-zA-Z0-9]*)|(arn:\b(aws|aws-us-gov|aws-cn)\b:[-a-zA-Z0-9:/._+]*)'
+    minLength: 1
+  RoleARN:
     type: string
-    format: date-time
-  Description:
+    minLength: 20
+    maxLength: 2048
+  ResourcesToSkip:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceToSkip'
+  TemplateBody:
+    type: string
+    minLength: 1
+  TemplateURL:
     type: string
     minLength: 1
     maxLength: 1024
+  UsePreviousTemplate:
+    type: boolean
+  Parameters:
+    type: array
+    items:
+      $ref: '#/definitions/Parameter'
+  ResourceTypes:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceType'
+  RollbackConfiguration:
+    type: object
+    properties:
+      RollbackTriggers:
+        $ref: '#/definitions/RollbackTriggers'
+        description: '<p>The triggers to monitor during stack creation or update actions. </p> <p>By default, AWS CloudFormation saves the rollback triggers specified for a stack and applies them to any subsequent update operations for the stack, unless you specify otherwise. If you do specify rollback triggers for this parameter, those triggers replace any list of triggers previously specified for the stack. This means:</p> <ul> <li> <p>To use the rollback triggers previously specified for this stack, if any, don''t specify this parameter.</p> </li> <li> <p>To specify new or updated rollback triggers, you must specify <i>all</i> the triggers that you want used for this stack, even triggers you''ve specifed before (for example, when creating the stack or during a previous stack update). Any triggers that you don''t include in the updated list of triggers are no longer applied to the stack.</p> </li> <li> <p>To remove all currently specified triggers, specify an empty list for this parameter.</p> </li> </ul> <p>If a specified trigger is missing, the entire stack operation fails and is rolled back. </p>'
+      MonitoringTimeInMinutes:
+        $ref: '#/definitions/MonitoringTimeInMinutes'
+        description: '<p>The amount of time, in minutes, during which CloudFormation should monitor all the rollback triggers after the stack creation or update operation deploys all necessary resources.</p> <p>The default is 0 minutes.</p> <p>If you specify a monitoring period but do not specify any rollback triggers, CloudFormation still waits the specified period of time before cleaning up old resources after update operations. You can use this monitoring period to perform any manual stack validation desired, and manually cancel the stack creation or update (using <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CancelUpdateStack.html">CancelUpdateStack</a>, for example) as necessary.</p> <p>If you specify 0 for this parameter, CloudFormation still monitors the specified rollback triggers during stack creation and update operations. Then, for update operations, it begins disposing of old resources immediately once the operation completes.</p>'
+    description: '<p>Structure containing the rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.</p> <p>Rollback triggers enable you to have AWS CloudFormation monitor the state of your application during stack creation and updating, and to roll back that operation if the application breaches the threshold of any of the alarms you''ve specified. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-rollback-triggers.html">Monitor and Roll Back Stack Operations</a>.</p>'
+  NotificationARNs:
+    type: array
+    items:
+      $ref: '#/definitions/NotificationARN'
+    maxItems: 5
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    maxItems: 50
+  DisableRollback:
+    type: boolean
+  TimeoutMinutes:
+    type: integer
+    minimum: 1
+  OnFailure:
+    type: string
+    enum:
+      - DO_NOTHING
+      - ROLLBACK
+      - DELETE
+  StackPolicyBody:
+    type: string
+    minLength: 1
+    maxLength: 16384
+  StackPolicyURL:
+    type: string
+    minLength: 1
+    maxLength: 1350
+  EnableTerminationProtection:
+    type: boolean
+  StackSetName:
+    type: string
+  RegionList:
+    type: array
+    items:
+      $ref: '#/definitions/Region'
+  StackSetOperationPreferences:
+    type: object
+    properties:
+      RegionOrder:
+        $ref: '#/definitions/RegionList'
+        description: The order of the regions in where you want to perform the stack operation.
+      FailureToleranceCount:
+        $ref: '#/definitions/FailureToleranceCount'
+        description: '<p>The number of accounts, per region, for which this operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn''t attempt the operation in any subsequent regions.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code> (but not both).</p>'
+      FailureTolerancePercentage:
+        $ref: '#/definitions/FailureTolerancePercentage'
+        description: '<p>The percentage of accounts, per region, for which this stack operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn''t attempt the operation in any subsequent regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds <i>down</i> to the next whole number.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code>, but not both.</p>'
+      MaxConcurrentCount:
+        $ref: '#/definitions/MaxConcurrentCount'
+        description: '<p>The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of <code>FailureToleranceCount</code>—<code>MaxConcurrentCount</code> is at most one more than the <code>FailureToleranceCount</code> .</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>'
+      MaxConcurrentPercentage:
+        $ref: '#/definitions/MaxConcurrentPercentage'
+        description: '<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, CloudFormation sets the number as one instead.</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>'
+    description: '<p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>'
+  ExecutionRoleName:
+    type: string
+    pattern: '[a-zA-Z_0-9+=,.@-]+'
+    minLength: 1
+    maxLength: 64
+  StackSetId:
+    type: string
+  RetainResources:
+    type: array
+    items:
+      $ref: '#/definitions/LogicalResourceId'
+  RetainStacks:
+    type: boolean
+  DeletionTime:
+    type: string
+    format: date-time
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  StackDriftDetectionId:
+    type: string
+    minLength: 1
+    maxLength: 36
+  StackDriftStatus:
+    type: string
+    enum:
+      - DRIFTED
+      - IN_SYNC
+      - UNKNOWN
+      - NOT_CHECKED
+  StackDriftDetectionStatus:
+    type: string
+    enum:
+      - DETECTION_IN_PROGRESS
+      - DETECTION_FAILED
+      - DETECTION_COMPLETE
+  StackDriftDetectionStatusReason:
+    type: string
+  Timestamp:
+    type: string
+    format: date-time
+  StackEvents:
+    type: array
+    items:
+      $ref: '#/definitions/StackEvent'
+  Region:
+    type: string
+  StackInstance:
+    type: object
+    properties:
+      StackSetId:
+        $ref: '#/definitions/StackSetId'
+        description: The name or unique ID of the stack set that the stack instance is associated with.
+      Region:
+        $ref: '#/definitions/Region'
+        description: The name of the AWS region that the stack instance is associated with.
+      Account:
+        $ref: '#/definitions/Account'
+        description: The name of the AWS account that the stack instance is associated with.
+      StackId:
+        $ref: '#/definitions/StackId'
+        description: The ID of the stack instance.
+      ParameterOverrides:
+        $ref: '#/definitions/Parameters'
+        description: A list of parameters from the stack set template whose values have been overridden in this stack instance.
+      Status:
+        $ref: '#/definitions/StackInstanceStatus'
+        description: '<p>The status of the stack instance, in terms of its synchronization with its associated stack set.</p> <ul> <li> <p> <code>INOPERABLE</code>: A <code>DeleteStackInstances</code> operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further <code>UpdateStackSet</code> operations. You might need to perform a <code>DeleteStackInstances</code> operation, with <code>RetainStacks</code> set to <code>true</code>, to delete the stack instance, and then delete the stack manually.</p> </li> <li> <p> <code>OUTDATED</code>: The stack isn''t currently up to date with the stack set because:</p> <ul> <li> <p>The associated stack failed during a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation. </p> </li> <li> <p>The stack was part of a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation that failed or was stopped before the stack was created or updated. </p> </li> </ul> </li> <li> <p> <code>CURRENT</code>: The stack is currently up to date with the stack set.</p> </li> </ul>'
+      StatusReason:
+        $ref: '#/definitions/Reason'
+        description: The explanation for the specific status code that is assigned to this stack instance.
+    description: 'An AWS CloudFormation stack, in a specific account and region, that''s part of a stack set operation. A stack instance is a reference to an attempted or actual stack in a given account within a given region. A stack instance can exist without a stack—for example, if the stack couldn''t be created for some reason. A stack instance is associated with only one stack set. Each stack instance contains the ID of its associated stack set, as well as the ID of the actual stack and the stack status.'
+  StackResourceDriftStatusFilters:
+    type: array
+    items:
+      $ref: '#/definitions/StackResourceDriftStatus'
+    minItems: 1
+    maxItems: 4
+  StackResourceDrifts:
+    type: array
+    items:
+      $ref: '#/definitions/StackResourceDrift'
+  LogicalResourceId:
+    type: string
+  StackResourceDetail:
+    type: object
+    required:
+      - LogicalResourceId
+      - ResourceType
+      - LastUpdatedTimestamp
+      - ResourceStatus
+    properties:
+      StackName:
+        $ref: '#/definitions/StackName'
+        description: The name associated with the stack.
+      StackId:
+        $ref: '#/definitions/StackId'
+        description: Unique identifier of the stack.
+      LogicalResourceId:
+        $ref: '#/definitions/LogicalResourceId'
+        description: The logical name of the resource specified in the template.
+      PhysicalResourceId:
+        $ref: '#/definitions/PhysicalResourceId'
+        description: The name or unique identifier that corresponds to a physical instance ID of a resource supported by AWS CloudFormation.
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'Type of resource. ((For more information, go to <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html"> AWS Resource Types Reference</a> in the AWS CloudFormation User Guide.)'
+      LastUpdatedTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: Time the status was updated.
+      ResourceStatus:
+        $ref: '#/definitions/ResourceStatus'
+        description: Current status of the resource.
+      ResourceStatusReason:
+        $ref: '#/definitions/ResourceStatusReason'
+        description: Success/failure message associated with the resource.
+      Description:
+        $ref: '#/definitions/Description'
+        description: User defined description associated with the resource.
+      Metadata:
+        $ref: '#/definitions/Metadata'
+        description: 'The content of the <code>Metadata</code> attribute declared for the resource. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-metadata.html">Metadata Attribute</a> in the AWS CloudFormation User Guide.'
+      DriftInformation:
+        $ref: '#/definitions/StackResourceDriftInformation'
+        description: 'Information about whether the resource''s actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.'
+    description: Contains detailed information about the specified stack resource.
+  PhysicalResourceId:
+    type: string
+  StackResources:
+    type: array
+    items:
+      $ref: '#/definitions/StackResource'
+  StackSetOperation:
+    type: object
+    properties:
+      OperationId:
+        $ref: '#/definitions/ClientRequestToken'
+        description: The unique ID of a stack set operation.
+      StackSetId:
+        $ref: '#/definitions/StackSetId'
+        description: The ID of the stack set.
+      Action:
+        $ref: '#/definitions/StackSetOperationAction'
+        description: 'The type of stack set operation: <code>CREATE</code>, <code>UPDATE</code>, or <code>DELETE</code>. Create and delete operations affect only the specified stack set instances that are associated with the specified stack set. Update operations affect both the stack set itself, as well as <i>all</i> associated stack set instances.'
+      Status:
+        $ref: '#/definitions/StackSetOperationStatus'
+        description: '<p>The status of the operation. </p> <ul> <li> <p> <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that you''ve set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in any remaining regions.</p> </li> <li> <p> <code>RUNNING</code>: The operation is currently being performed.</p> </li> <li> <p> <code>STOPPED</code>: The user has cancelled the operation.</p> </li> <li> <p> <code>STOPPING</code>: The operation is in the process of stopping, at user request. </p> </li> <li> <p> <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.</p> </li> </ul>'
+      OperationPreferences:
+        $ref: '#/definitions/StackSetOperationPreferences'
+        description: The preferences for how AWS CloudFormation performs this stack set operation.
+      RetainStacks:
+        $ref: '#/definitions/RetainStacksNullable'
+        description: 'For stack set operations of action type <code>DELETE</code>, specifies whether to remove the stack instances from the specified stack set, but doesn''t delete the stacks. You can''t reassociate a retained stack, or add an existing, saved stack to a new stack set.'
+      AdministrationRoleARN:
+        $ref: '#/definitions/RoleARN'
+        description: '<p>The Amazon Resource Number (ARN) of the IAM role used to perform this stack set operation. </p> <p>Use customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html">Define Permissions for Multiple Administrators</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
+      ExecutionRoleName:
+        $ref: '#/definitions/ExecutionRoleName'
+        description: <p>The name of the IAM execution role used to create or update the stack set.</p> <p>Use customized execution roles to control which stack resources users and groups can include in their stack sets. </p>
+      CreationTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time at which the operation was initiated. Note that the creation times for the stack set operation might differ from the creation time of the individual stacks themselves. This is because AWS CloudFormation needs to perform preparatory work for the operation, such as dispatching the work to the requested regions, before actually creating the first stacks.'
+      EndTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time at which the stack set operation ended, across all accounts and regions specified. Note that this doesn''t necessarily mean that the stack set operation was successful, or even attempted, in each account or region.'
+    description: 'The structure that contains information about a stack set operation. '
+  StackSet:
+    type: object
+    properties:
+      StackSetName:
+        $ref: '#/definitions/StackSetName'
+        description: The name that's associated with the stack set.
+      StackSetId:
+        $ref: '#/definitions/StackSetId'
+        description: The ID of the stack set.
+      Description:
+        $ref: '#/definitions/Description'
+        description: A description of the stack set that you specify when the stack set is created or updated.
+      Status:
+        $ref: '#/definitions/StackSetStatus'
+        description: The status of the stack set.
+      TemplateBody:
+        $ref: '#/definitions/TemplateBody'
+        description: The structure that contains the body of the template that was used to create or update the stack set.
+      Parameters:
+        $ref: '#/definitions/Parameters'
+        description: A list of input parameters for a stack set.
+      Capabilities:
+        $ref: '#/definitions/Capabilities'
+        description: 'The capabilities that are allowed in the stack set. Some stack set templates might include resources that can affect permissions in your AWS account—for example, by creating new AWS Identity and Access Management (IAM) users. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities">Acknowledging IAM Resources in AWS CloudFormation Templates.</a> '
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A list of tags that specify information about the stack set. A maximum number of 50 tags can be specified.
+      StackSetARN:
+        $ref: '#/definitions/StackSetARN'
+        description: The Amazon Resource Number (ARN) of the stack set.
+      AdministrationRoleARN:
+        $ref: '#/definitions/RoleARN'
+        description: '<p>The Amazon Resource Number (ARN) of the IAM role used to create or update the stack set.</p> <p>Use customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html">Prerequisites: Granting Permissions for Stack Set Operations</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
+      ExecutionRoleName:
+        $ref: '#/definitions/ExecutionRoleName'
+        description: <p>The name of the IAM execution role used to create or update the stack set. </p> <p>Use customized execution roles to control which stack resources users and groups can include in their stack sets. </p>
+    description: 'A structure that contains information about a stack set. A stack set enables you to provision stacks into AWS accounts and across regions by using a single CloudFormation template. In the stack set, you specify the template to use, as well as any parameters and capabilities that the template requires. '
+  Stacks:
+    type: array
+    items:
+      $ref: '#/definitions/Stack'
+  LogicalResourceIds:
+    type: array
+    items:
+      $ref: '#/definitions/LogicalResourceId'
+    minItems: 1
+    maxItems: 200
+  StackResourceDrift:
+    type: object
+    required:
+      - StackId
+      - LogicalResourceId
+      - ResourceType
+      - StackResourceDriftStatus
+      - Timestamp
+    properties:
+      StackId:
+        $ref: '#/definitions/StackId'
+        description: The ID of the stack.
+      LogicalResourceId:
+        $ref: '#/definitions/LogicalResourceId'
+        description: The logical name of the resource specified in the template.
+      PhysicalResourceId:
+        $ref: '#/definitions/PhysicalResourceId'
+        description: 'The name or unique identifier that corresponds to a physical instance ID of a resource supported by AWS CloudFormation. '
+      PhysicalResourceIdContext:
+        $ref: '#/definitions/PhysicalResourceIdContext'
+        description: Context information that enables AWS CloudFormation to uniquely identify a resource. AWS CloudFormation uses context key-value pairs in cases where a resource's logical and physical IDs are not enough to uniquely identify that resource. Each context key-value pair specifies a unique resource that contains the targeted resource.
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of the resource.
+      ExpectedProperties:
+        $ref: '#/definitions/Properties'
+        description: '<p>A JSON structure containing the expected property values of the stack resource, as defined in the stack template and any values specified as template parameters. </p> <p>For resources whose <code>StackResourceDriftStatus</code> is <code>DELETED</code>, this structure will not be present. </p>'
+      ActualProperties:
+        $ref: '#/definitions/Properties'
+        description: '<p>A JSON structure containing the actual property values of the stack resource.</p> <p>For resources whose <code>StackResourceDriftStatus</code> is <code>DELETED</code>, this structure will not be present. </p>'
+      PropertyDifferences:
+        $ref: '#/definitions/PropertyDifferences'
+        description: 'A collection of the resource properties whose actual values differ from their expected values. These will be present only for resources whose <code>StackResourceDriftStatus</code> is <code>MODIFIED</code>. '
+      StackResourceDriftStatus:
+        $ref: '#/definitions/StackResourceDriftStatus'
+        description: '<p>Status of the resource''s actual configuration compared to its expected configuration</p> <ul> <li> <p> <code>DELETED</code>: The resource differs from its expected template configuration because the resource has been deleted.</p> </li> <li> <p> <code>MODIFIED</code>: One or more resource properties differ from their expected values (as defined in the stack template and any values specified as template parameters).</p> </li> <li> <p> <code>IN_SYNC</code>: The resources''s actual configuration matches its expected template configuration.</p> </li> <li> <p> <code>NOT_CHECKED</code>: AWS CloudFormation does not currently return this value.</p> </li> </ul>'
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: Time at which AWS CloudFormation performed drift detection on the stack resource.
+    description: '<p>Contains the drift information for a resource that has been checked for drift. This includes actual and expected property values for resources in which AWS CloudFormation has detected drift. Only resource properties explicitly defined in the stack template are checked for drift. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Resources that do not currently support drift detection cannot be checked. For a list of resources that support drift detection, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p> <p>Use <a>DetectStackResourceDrift</a> to detect drift on individual resources, or <a>DetectStackDrift</a> to detect drift on all resources in a given stack that support drift detection.</p>'
   DifferenceType:
     type: string
     enum:
       - ADD
       - REMOVE
       - NOT_EQUAL
-  DisableRollback:
-    type: boolean
-  EnableTerminationProtection:
-    type: boolean
+  Url:
+    type: string
   EvaluationType:
     type: string
     enum:
@@ -2906,20 +3291,10 @@ definitions:
       - Dynamic
   EventId:
     type: string
-  ExecutionRoleName:
+  ExportName:
     type: string
-    pattern: '[a-zA-Z_0-9+=,.@-]+'
-    minLength: 1
-    maxLength: 64
-  ExecutionStatus:
+  ExportValue:
     type: string
-    enum:
-      - UNAVAILABLE
-      - AVAILABLE
-      - EXECUTE_IN_PROGRESS
-      - EXECUTE_COMPLETE
-      - EXECUTE_FAILED
-      - OBSOLETE
   Export:
     type: object
     properties:
@@ -2933,10 +3308,6 @@ definitions:
         $ref: '#/definitions/ExportValue'
         description: 'The value of the exported output, such as a resource physical ID. This value is defined in the <code>Export</code> field in the associated stack''s <code>Outputs</code> section.'
     description: The <code>Export</code> structure describes the exported output values for a stack.
-  ExportName:
-    type: string
-  ExportValue:
-    type: string
   Exports:
     type: array
     items:
@@ -2948,6 +3319,30 @@ definitions:
     type: integer
     minimum: 0
     maximum: 100
+  TemplateStage:
+    type: string
+    enum:
+      - Original
+      - Processed
+  StageList:
+    type: array
+    items:
+      $ref: '#/definitions/TemplateStage'
+  StackSetNameOrId:
+    type: string
+    pattern: '[a-zA-Z][-a-zA-Z0-9]*(?::[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12})?'
+  ParameterDeclarations:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterDeclaration'
+  Version:
+    type: string
+  Metadata:
+    type: string
+  TransformsList:
+    type: array
+    items:
+      $ref: '#/definitions/TransformName'
   Imports:
     type: array
     items:
@@ -2957,18 +3352,43 @@ definitions:
   LastUpdatedTime:
     type: string
     format: date-time
-  LimitName:
-    type: string
-  LimitValue:
+  MaxResults:
     type: integer
-  LogicalResourceId:
-    type: string
-  LogicalResourceIds:
+    minimum: 1
+    maximum: 100
+  StackInstanceSummaries:
     type: array
     items:
-      $ref: '#/definitions/LogicalResourceId'
-    minItems: 1
-    maxItems: 200
+      $ref: '#/definitions/StackInstanceSummary'
+  StackResourceSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/StackResourceSummary'
+  StackSetOperationResultSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/StackSetOperationResultSummary'
+  StackSetOperationSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/StackSetOperationSummary'
+  StackSetStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - DELETED
+  StackSetSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/StackSetSummary'
+  StackStatusFilter:
+    type: array
+    items:
+      $ref: '#/definitions/StackStatus'
+  StackSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/StackSummary'
   MaxConcurrentCount:
     type: integer
     minimum: 1
@@ -2976,35 +3396,18 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  Metadata:
-    type: string
   MonitoringTimeInMinutes:
     type: integer
     minimum: 0
     maximum: 180
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 1024
   NoEcho:
     type: boolean
   NotificationARN:
     type: string
-  NotificationARNs:
-    type: array
-    items:
-      $ref: '#/definitions/NotificationARN'
-    maxItems: 5
-  OnFailure:
+  OutputKey:
     type: string
-    enum:
-      - DO_NOTHING
-      - ROLLBACK
-      - DELETE
+  OutputValue:
+    type: string
   Output:
     type: object
     properties:
@@ -3021,14 +3424,16 @@ definitions:
         $ref: '#/definitions/ExportName'
         description: The name of the export associated with the output.
     description: The Output data type.
-  OutputKey:
-    type: string
-  OutputValue:
-    type: string
   Outputs:
     type: array
     items:
       $ref: '#/definitions/Output'
+  ParameterKey:
+    type: string
+  ParameterValue:
+    type: string
+  UsePreviousValue:
+    type: boolean
   Parameter:
     type: object
     properties:
@@ -3052,6 +3457,8 @@ definitions:
         $ref: '#/definitions/AllowedValues'
         description: A list of values that are permitted for a parameter.
     description: 'A set of criteria that AWS CloudFormation uses to validate parameter values. Although other constraints might be defined in the stack template, AWS CloudFormation returns only the <code>AllowedValues</code> property.'
+  ParameterType:
+    type: string
   ParameterDeclaration:
     type: object
     properties:
@@ -3074,27 +3481,6 @@ definitions:
         $ref: '#/definitions/ParameterConstraints'
         description: The criteria that AWS CloudFormation uses to validate parameter values.
     description: The ParameterDeclaration data type.
-  ParameterDeclarations:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterDeclaration'
-  ParameterKey:
-    type: string
-  ParameterType:
-    type: string
-  ParameterValue:
-    type: string
-  Parameters:
-    type: array
-    items:
-      $ref: '#/definitions/Parameter'
-  PhysicalResourceId:
-    type: string
-  PhysicalResourceIdContext:
-    type: array
-    items:
-      $ref: '#/definitions/PhysicalResourceIdContextKeyValuePair'
-    maxItems: 5
   PhysicalResourceIdContextKeyValuePair:
     type: object
     required:
@@ -3108,7 +3494,18 @@ definitions:
         $ref: '#/definitions/Value'
         description: The resource context value.
     description: Context information that enables AWS CloudFormation to uniquely identify a resource. AWS CloudFormation uses context key-value pairs in cases where a resource's logical and physical IDs are not enough to uniquely identify that resource. Each context key-value pair specifies a resource that contains the targeted resource.
+  PhysicalResourceIdContext:
+    type: array
+    items:
+      $ref: '#/definitions/PhysicalResourceIdContextKeyValuePair'
+    maxItems: 5
+  Value:
+    type: string
   Properties:
+    type: string
+  PropertyPath:
+    type: string
+  PropertyValue:
     type: string
   PropertyDifference:
     type: object
@@ -3137,18 +3534,8 @@ definitions:
       $ref: '#/definitions/PropertyDifference'
   PropertyName:
     type: string
-  PropertyPath:
-    type: string
-  PropertyValue:
-    type: string
   Reason:
     type: string
-  Region:
-    type: string
-  RegionList:
-    type: array
-    items:
-      $ref: '#/definitions/Region'
   Replacement:
     type: string
     enum:
@@ -3170,31 +3557,31 @@ definitions:
       - UpdatePolicy
       - DeletionPolicy
       - Tags
-  ResourceChange:
+  ResourceType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  Scope:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceAttribute'
+  ResourceChangeDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceChangeDetail'
+  ResourceTargetDefinition:
     type: object
     properties:
-      Action:
-        $ref: '#/definitions/ChangeAction'
-        description: 'The action that AWS CloudFormation takes on the resource, such as <code>Add</code> (adds a new resource), <code>Modify</code> (changes a resource), or <code>Remove</code> (deletes a resource).'
-      LogicalResourceId:
-        $ref: '#/definitions/LogicalResourceId'
-        description: 'The resource''s logical ID, which is defined in the stack''s template.'
-      PhysicalResourceId:
-        $ref: '#/definitions/PhysicalResourceId'
-        description: The resource's physical ID (resource name). Resources that you are adding don't have physical IDs because they haven't been created.
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: 'The type of AWS CloudFormation resource, such as <code>AWS::S3::Bucket</code>.'
-      Replacement:
-        $ref: '#/definitions/Replacement'
-        description: '<p>For the <code>Modify</code> action, indicates whether AWS CloudFormation will replace the resource by creating a new one and deleting the old one. This value depends on the value of the <code>RequiresRecreation</code> property in the <code>ResourceTargetDefinition</code> structure. For example, if the <code>RequiresRecreation</code> field is <code>Always</code> and the <code>Evaluation</code> field is <code>Static</code>, <code>Replacement</code> is <code>True</code>. If the <code>RequiresRecreation</code> field is <code>Always</code> and the <code>Evaluation</code> field is <code>Dynamic</code>, <code>Replacement</code> is <code>Conditionally</code>.</p> <p>If you have multiple changes with different <code>RequiresRecreation</code> values, the <code>Replacement</code> value depends on the change with the most impact. A <code>RequiresRecreation</code> value of <code>Always</code> has the most impact, followed by <code>Conditionally</code>, and then <code>Never</code>.</p>'
-      Scope:
-        $ref: '#/definitions/Scope'
-        description: 'For the <code>Modify</code> action, indicates which resource attribute is triggering this update, such as a change in the resource attribute''s <code>Metadata</code>, <code>Properties</code>, or <code>Tags</code>.'
-      Details:
-        $ref: '#/definitions/ResourceChangeDetails'
-        description: 'For the <code>Modify</code> action, a list of <code>ResourceChangeDetail</code> structures that describes the changes that AWS CloudFormation will make to the resource. '
-    description: The <code>ResourceChange</code> structure describes the resource and the action that AWS CloudFormation will perform on it if you execute this change set.
+      Attribute:
+        $ref: '#/definitions/ResourceAttribute'
+        description: 'Indicates which resource attribute is triggering this update, such as a change in the resource attribute''s <code>Metadata</code>, <code>Properties</code>, or <code>Tags</code>.'
+      Name:
+        $ref: '#/definitions/PropertyName'
+        description: 'If the <code>Attribute</code> value is <code>Properties</code>, the name of the property. For all other attributes, the value is null.'
+      RequiresRecreation:
+        $ref: '#/definitions/RequiresRecreation'
+        description: 'If the <code>Attribute</code> value is <code>Properties</code>, indicates whether a change to this property causes the resource to be recreated. The value can be <code>Never</code>, <code>Always</code>, or <code>Conditionally</code>. To determine the conditions for a <code>Conditionally</code> recreation, see the update behavior for that <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">property</a> in the AWS CloudFormation User Guide.'
+    description: 'The field that AWS CloudFormation will change, such as the name of a resource''s property, and whether the resource will be recreated.'
   ResourceChangeDetail:
     type: object
     properties:
@@ -3211,10 +3598,6 @@ definitions:
         $ref: '#/definitions/CausingEntity'
         description: '<p>The identity of the entity that triggered this change. This entity is a member of the group that is specified by the <code>ChangeSource</code> field. For example, if you modified the value of the <code>KeyPairName</code> parameter, the <code>CausingEntity</code> is the name of the parameter (<code>KeyPairName</code>).</p> <p>If the <code>ChangeSource</code> value is <code>DirectModification</code>, no value is given for <code>CausingEntity</code>.</p>'
     description: 'For a resource with <code>Modify</code> as the action, the <code>ResourceChange</code> structure describes the changes AWS CloudFormation will make to that resource.'
-  ResourceChangeDetails:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceChangeDetail'
   ResourceProperties:
     type: string
   ResourceSignalStatus:
@@ -3241,56 +3624,18 @@ definitions:
       - UPDATE_COMPLETE
   ResourceStatusReason:
     type: string
-  ResourceTargetDefinition:
-    type: object
-    properties:
-      Attribute:
-        $ref: '#/definitions/ResourceAttribute'
-        description: 'Indicates which resource attribute is triggering this update, such as a change in the resource attribute''s <code>Metadata</code>, <code>Properties</code>, or <code>Tags</code>.'
-      Name:
-        $ref: '#/definitions/PropertyName'
-        description: 'If the <code>Attribute</code> value is <code>Properties</code>, the name of the property. For all other attributes, the value is null.'
-      RequiresRecreation:
-        $ref: '#/definitions/RequiresRecreation'
-        description: 'If the <code>Attribute</code> value is <code>Properties</code>, indicates whether a change to this property causes the resource to be recreated. The value can be <code>Never</code>, <code>Always</code>, or <code>Conditionally</code>. To determine the conditions for a <code>Conditionally</code> recreation, see the update behavior for that <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">property</a> in the AWS CloudFormation User Guide.'
-    description: 'The field that AWS CloudFormation will change, such as the name of a resource''s property, and whether the resource will be recreated.'
   ResourceToSkip:
     type: string
     pattern: '[a-zA-Z0-9]+|[a-zA-Z][-a-zA-Z0-9]*\.[a-zA-Z0-9]+'
-  ResourceType:
-    type: string
-    minLength: 1
-    maxLength: 256
-  ResourceTypes:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceType'
-  ResourcesToSkip:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceToSkip'
-  RetainResources:
-    type: array
-    items:
-      $ref: '#/definitions/LogicalResourceId'
-  RetainStacks:
-    type: boolean
   RetainStacksNullable:
     type: boolean
-  RoleARN:
+  RollbackTriggers:
+    type: array
+    items:
+      $ref: '#/definitions/RollbackTrigger'
+    maxItems: 5
+  Type:
     type: string
-    minLength: 20
-    maxLength: 2048
-  RollbackConfiguration:
-    type: object
-    properties:
-      RollbackTriggers:
-        $ref: '#/definitions/RollbackTriggers'
-        description: '<p>The triggers to monitor during stack creation or update actions. </p> <p>By default, AWS CloudFormation saves the rollback triggers specified for a stack and applies them to any subsequent update operations for the stack, unless you specify otherwise. If you do specify rollback triggers for this parameter, those triggers replace any list of triggers previously specified for the stack. This means:</p> <ul> <li> <p>To use the rollback triggers previously specified for this stack, if any, don''t specify this parameter.</p> </li> <li> <p>To specify new or updated rollback triggers, you must specify <i>all</i> the triggers that you want used for this stack, even triggers you''ve specifed before (for example, when creating the stack or during a previous stack update). Any triggers that you don''t include in the updated list of triggers are no longer applied to the stack.</p> </li> <li> <p>To remove all currently specified triggers, specify an empty list for this parameter.</p> </li> </ul> <p>If a specified trigger is missing, the entire stack operation fails and is rolled back. </p>'
-      MonitoringTimeInMinutes:
-        $ref: '#/definitions/MonitoringTimeInMinutes'
-        description: '<p>The amount of time, in minutes, during which CloudFormation should monitor all the rollback triggers after the stack creation or update operation deploys all necessary resources.</p> <p>The default is 0 minutes.</p> <p>If you specify a monitoring period but do not specify any rollback triggers, CloudFormation still waits the specified period of time before cleaning up old resources after update operations. You can use this monitoring period to perform any manual stack validation desired, and manually cancel the stack creation or update (using <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CancelUpdateStack.html">CancelUpdateStack</a>, for example) as necessary.</p> <p>If you specify 0 for this parameter, CloudFormation still monitors the specified rollback triggers during stack creation and update operations. Then, for update operations, it begins disposing of old resources immediately once the operation completes.</p>'
-    description: '<p>Structure containing the rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.</p> <p>Rollback triggers enable you to have AWS CloudFormation monitor the state of your application during stack creation and updating, and to roll back that operation if the application breaches the threshold of any of the alarms you''ve specified. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-rollback-triggers.html">Monitor and Roll Back Stack Operations</a>.</p>'
   RollbackTrigger:
     type: object
     required:
@@ -3304,15 +3649,40 @@ definitions:
         $ref: '#/definitions/Type'
         description: 'The resource type of the rollback trigger. Currently, <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html">AWS::CloudWatch::Alarm</a> is the only supported resource type.'
     description: 'A rollback trigger AWS CloudFormation monitors during creation and updating of stacks. If any of the alarms you specify goes to ALARM state during the stack operation or within the specified monitoring period afterwards, CloudFormation rolls back the entire stack operation. '
-  RollbackTriggers:
-    type: array
-    items:
-      $ref: '#/definitions/RollbackTrigger'
-    maxItems: 5
-  Scope:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceAttribute'
+  StackStatus:
+    type: string
+    enum:
+      - CREATE_IN_PROGRESS
+      - CREATE_FAILED
+      - CREATE_COMPLETE
+      - ROLLBACK_IN_PROGRESS
+      - ROLLBACK_FAILED
+      - ROLLBACK_COMPLETE
+      - DELETE_IN_PROGRESS
+      - DELETE_FAILED
+      - DELETE_COMPLETE
+      - UPDATE_IN_PROGRESS
+      - UPDATE_COMPLETE_CLEANUP_IN_PROGRESS
+      - UPDATE_COMPLETE
+      - UPDATE_ROLLBACK_IN_PROGRESS
+      - UPDATE_ROLLBACK_FAILED
+      - UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS
+      - UPDATE_ROLLBACK_COMPLETE
+      - REVIEW_IN_PROGRESS
+  StackStatusReason:
+    type: string
+  StackDriftInformation:
+    type: object
+    required:
+      - StackDriftStatus
+    properties:
+      StackDriftStatus:
+        $ref: '#/definitions/StackDriftStatus'
+        description: '<p>Status of the stack''s actual configuration compared to its expected template configuration. </p> <ul> <li> <p> <code>DRIFTED</code>: The stack differs from its expected template configuration. A stack is considered to have drifted if one or more of its resources have drifted.</p> </li> <li> <p> <code>NOT_CHECKED</code>: AWS CloudFormation has not checked if the stack differs from its expected template configuration.</p> </li> <li> <p> <code>IN_SYNC</code>: The stack''s actual configuration matches its expected template configuration.</p> </li> <li> <p> <code>UNKNOWN</code>: This value is reserved for future use.</p> </li> </ul>'
+      LastCheckTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: 'Most recent time when a drift detection operation was initiated on the stack, or any of its individual resources that support drift detection.'
+    description: 'Contains information about whether the stack''s actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted.'
   Stack:
     type: object
     required:
@@ -3387,30 +3757,6 @@ definitions:
         $ref: '#/definitions/StackDriftInformation'
         description: 'Information on whether a stack''s actual configuration differs, or has <i>drifted</i>, from it''s expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.'
     description: The Stack data type.
-  StackDriftDetectionId:
-    type: string
-    minLength: 1
-    maxLength: 36
-  StackDriftDetectionStatus:
-    type: string
-    enum:
-      - DETECTION_IN_PROGRESS
-      - DETECTION_FAILED
-      - DETECTION_COMPLETE
-  StackDriftDetectionStatusReason:
-    type: string
-  StackDriftInformation:
-    type: object
-    required:
-      - StackDriftStatus
-    properties:
-      StackDriftStatus:
-        $ref: '#/definitions/StackDriftStatus'
-        description: '<p>Status of the stack''s actual configuration compared to its expected template configuration. </p> <ul> <li> <p> <code>DRIFTED</code>: The stack differs from its expected template configuration. A stack is considered to have drifted if one or more of its resources have drifted.</p> </li> <li> <p> <code>NOT_CHECKED</code>: AWS CloudFormation has not checked if the stack differs from its expected template configuration.</p> </li> <li> <p> <code>IN_SYNC</code>: The stack''s actual configuration matches its expected template configuration.</p> </li> <li> <p> <code>UNKNOWN</code>: This value is reserved for future use.</p> </li> </ul>'
-      LastCheckTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: 'Most recent time when a drift detection operation was initiated on the stack, or any of its individual resources that support drift detection.'
-    description: 'Contains information about whether the stack''s actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted.'
   StackDriftInformationSummary:
     type: object
     required:
@@ -3423,13 +3769,6 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: 'Most recent time when a drift detection operation was initiated on the stack, or any of its individual resources that support drift detection.'
     description: 'Contains information about whether the stack''s actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted.'
-  StackDriftStatus:
-    type: string
-    enum:
-      - DRIFTED
-      - IN_SYNC
-      - UNKNOWN
-      - NOT_CHECKED
   StackEvent:
     type: object
     required:
@@ -3472,47 +3811,12 @@ definitions:
         $ref: '#/definitions/ClientRequestToken'
         description: '<p>The token passed to the operation that generated this event.</p> <p>All events triggered by a given stack operation are assigned the same client request token, which you can use to track operations. For example, if you execute a <code>CreateStack</code> operation with the token <code>token1</code>, then all the <code>StackEvents</code> generated by that operation will have <code>ClientRequestToken</code> set as <code>token1</code>.</p> <p>In the console, stack operations display the client request token on the Events tab. Stack operations that are initiated from the console use the token format <i>Console-StackOperation-ID</i>, which helps you easily identify the stack operation . For example, if you create a stack using the console, each stack event would be assigned the same token in the following format: <code>Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002</code>. </p>'
     description: The StackEvent data type.
-  StackEvents:
-    type: array
-    items:
-      $ref: '#/definitions/StackEvent'
-  StackId:
-    type: string
-  StackInstance:
-    type: object
-    properties:
-      StackSetId:
-        $ref: '#/definitions/StackSetId'
-        description: The name or unique ID of the stack set that the stack instance is associated with.
-      Region:
-        $ref: '#/definitions/Region'
-        description: The name of the AWS region that the stack instance is associated with.
-      Account:
-        $ref: '#/definitions/Account'
-        description: The name of the AWS account that the stack instance is associated with.
-      StackId:
-        $ref: '#/definitions/StackId'
-        description: The ID of the stack instance.
-      ParameterOverrides:
-        $ref: '#/definitions/Parameters'
-        description: A list of parameters from the stack set template whose values have been overridden in this stack instance.
-      Status:
-        $ref: '#/definitions/StackInstanceStatus'
-        description: '<p>The status of the stack instance, in terms of its synchronization with its associated stack set.</p> <ul> <li> <p> <code>INOPERABLE</code>: A <code>DeleteStackInstances</code> operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further <code>UpdateStackSet</code> operations. You might need to perform a <code>DeleteStackInstances</code> operation, with <code>RetainStacks</code> set to <code>true</code>, to delete the stack instance, and then delete the stack manually.</p> </li> <li> <p> <code>OUTDATED</code>: The stack isn''t currently up to date with the stack set because:</p> <ul> <li> <p>The associated stack failed during a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation. </p> </li> <li> <p>The stack was part of a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation that failed or was stopped before the stack was created or updated. </p> </li> </ul> </li> <li> <p> <code>CURRENT</code>: The stack is currently up to date with the stack set.</p> </li> </ul>'
-      StatusReason:
-        $ref: '#/definitions/Reason'
-        description: The explanation for the specific status code that is assigned to this stack instance.
-    description: 'An AWS CloudFormation stack, in a specific account and region, that''s part of a stack set operation. A stack instance is a reference to an attempted or actual stack in a given account within a given region. A stack instance can exist without a stack—for example, if the stack couldn''t be created for some reason. A stack instance is associated with only one stack set. Each stack instance contains the ID of its associated stack set, as well as the ID of the actual stack and the stack status.'
   StackInstanceStatus:
     type: string
     enum:
       - CURRENT
       - OUTDATED
       - INOPERABLE
-  StackInstanceSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/StackInstanceSummary'
   StackInstanceSummary:
     type: object
     properties:
@@ -3535,16 +3839,6 @@ definitions:
         $ref: '#/definitions/Reason'
         description: The explanation for the specific status code assigned to this stack instance.
     description: The structure that contains summary information about a stack instance.
-  StackName:
-    type: string
-  StackNameOrId:
-    type: string
-    pattern: '([a-zA-Z][-a-zA-Z0-9]*)|(arn:\b(aws|aws-us-gov|aws-cn)\b:[-a-zA-Z0-9:/._+]*)'
-    minLength: 1
-  StackPolicyBody:
-    type: string
-    minLength: 1
-    maxLength: 16384
   StackPolicyDuringUpdateBody:
     type: string
     minLength: 1
@@ -3553,10 +3847,18 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1350
-  StackPolicyURL:
-    type: string
-    minLength: 1
-    maxLength: 1350
+  StackResourceDriftInformation:
+    type: object
+    required:
+      - StackResourceDriftStatus
+    properties:
+      StackResourceDriftStatus:
+        $ref: '#/definitions/StackResourceDriftStatus'
+        description: '<p>Status of the resource''s actual configuration compared to its expected configuration</p> <ul> <li> <p> <code>DELETED</code>: The resource differs from its expected configuration in that it has been deleted.</p> </li> <li> <p> <code>MODIFIED</code>: The resource differs from its expected configuration.</p> </li> <li> <p> <code>NOT_CHECKED</code>: AWS CloudFormation has not checked if the resource differs from its expected configuration.</p> <p>Any resources that do not currently support drift detection have a status of <code>NOT_CHECKED</code>. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>. </p> </li> <li> <p> <code>IN_SYNC</code>: The resources''s actual configuration matches its expected configuration.</p> </li> </ul>'
+      LastCheckTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: When AWS CloudFormation last checked if the resource had drifted from its expected configuration.
+    description: 'Contains information about whether the resource''s actual configuration differs, or has <i>drifted</i>, from its expected configuration.'
   StackResource:
     type: object
     required:
@@ -3596,100 +3898,13 @@ definitions:
         $ref: '#/definitions/StackResourceDriftInformation'
         description: 'Information about whether the resource''s actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.'
     description: The StackResource data type.
-  StackResourceDetail:
-    type: object
-    required:
-      - LogicalResourceId
-      - ResourceType
-      - LastUpdatedTimestamp
-      - ResourceStatus
-    properties:
-      StackName:
-        $ref: '#/definitions/StackName'
-        description: The name associated with the stack.
-      StackId:
-        $ref: '#/definitions/StackId'
-        description: Unique identifier of the stack.
-      LogicalResourceId:
-        $ref: '#/definitions/LogicalResourceId'
-        description: The logical name of the resource specified in the template.
-      PhysicalResourceId:
-        $ref: '#/definitions/PhysicalResourceId'
-        description: The name or unique identifier that corresponds to a physical instance ID of a resource supported by AWS CloudFormation.
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: 'Type of resource. ((For more information, go to <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html"> AWS Resource Types Reference</a> in the AWS CloudFormation User Guide.)'
-      LastUpdatedTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: Time the status was updated.
-      ResourceStatus:
-        $ref: '#/definitions/ResourceStatus'
-        description: Current status of the resource.
-      ResourceStatusReason:
-        $ref: '#/definitions/ResourceStatusReason'
-        description: Success/failure message associated with the resource.
-      Description:
-        $ref: '#/definitions/Description'
-        description: User defined description associated with the resource.
-      Metadata:
-        $ref: '#/definitions/Metadata'
-        description: 'The content of the <code>Metadata</code> attribute declared for the resource. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-metadata.html">Metadata Attribute</a> in the AWS CloudFormation User Guide.'
-      DriftInformation:
-        $ref: '#/definitions/StackResourceDriftInformation'
-        description: 'Information about whether the resource''s actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.'
-    description: Contains detailed information about the specified stack resource.
-  StackResourceDrift:
-    type: object
-    required:
-      - StackId
-      - LogicalResourceId
-      - ResourceType
-      - StackResourceDriftStatus
-      - Timestamp
-    properties:
-      StackId:
-        $ref: '#/definitions/StackId'
-        description: The ID of the stack.
-      LogicalResourceId:
-        $ref: '#/definitions/LogicalResourceId'
-        description: The logical name of the resource specified in the template.
-      PhysicalResourceId:
-        $ref: '#/definitions/PhysicalResourceId'
-        description: 'The name or unique identifier that corresponds to a physical instance ID of a resource supported by AWS CloudFormation. '
-      PhysicalResourceIdContext:
-        $ref: '#/definitions/PhysicalResourceIdContext'
-        description: Context information that enables AWS CloudFormation to uniquely identify a resource. AWS CloudFormation uses context key-value pairs in cases where a resource's logical and physical IDs are not enough to uniquely identify that resource. Each context key-value pair specifies a unique resource that contains the targeted resource.
-      ResourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The type of the resource.
-      ExpectedProperties:
-        $ref: '#/definitions/Properties'
-        description: '<p>A JSON structure containing the expected property values of the stack resource, as defined in the stack template and any values specified as template parameters. </p> <p>For resources whose <code>StackResourceDriftStatus</code> is <code>DELETED</code>, this structure will not be present. </p>'
-      ActualProperties:
-        $ref: '#/definitions/Properties'
-        description: '<p>A JSON structure containing the actual property values of the stack resource.</p> <p>For resources whose <code>StackResourceDriftStatus</code> is <code>DELETED</code>, this structure will not be present. </p>'
-      PropertyDifferences:
-        $ref: '#/definitions/PropertyDifferences'
-        description: 'A collection of the resource properties whose actual values differ from their expected values. These will be present only for resources whose <code>StackResourceDriftStatus</code> is <code>MODIFIED</code>. '
-      StackResourceDriftStatus:
-        $ref: '#/definitions/StackResourceDriftStatus'
-        description: '<p>Status of the resource''s actual configuration compared to its expected configuration</p> <ul> <li> <p> <code>DELETED</code>: The resource differs from its expected template configuration because the resource has been deleted.</p> </li> <li> <p> <code>MODIFIED</code>: One or more resource properties differ from their expected values (as defined in the stack template and any values specified as template parameters).</p> </li> <li> <p> <code>IN_SYNC</code>: The resources''s actual configuration matches its expected template configuration.</p> </li> <li> <p> <code>NOT_CHECKED</code>: AWS CloudFormation does not currently return this value.</p> </li> </ul>'
-      Timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: Time at which AWS CloudFormation performed drift detection on the stack resource.
-    description: '<p>Contains the drift information for a resource that has been checked for drift. This includes actual and expected property values for resources in which AWS CloudFormation has detected drift. Only resource properties explicitly defined in the stack template are checked for drift. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Resources that do not currently support drift detection cannot be checked. For a list of resources that support drift detection, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p> <p>Use <a>DetectStackResourceDrift</a> to detect drift on individual resources, or <a>DetectStackDrift</a> to detect drift on all resources in a given stack that support drift detection.</p>'
-  StackResourceDriftInformation:
-    type: object
-    required:
-      - StackResourceDriftStatus
-    properties:
-      StackResourceDriftStatus:
-        $ref: '#/definitions/StackResourceDriftStatus'
-        description: '<p>Status of the resource''s actual configuration compared to its expected configuration</p> <ul> <li> <p> <code>DELETED</code>: The resource differs from its expected configuration in that it has been deleted.</p> </li> <li> <p> <code>MODIFIED</code>: The resource differs from its expected configuration.</p> </li> <li> <p> <code>NOT_CHECKED</code>: AWS CloudFormation has not checked if the resource differs from its expected configuration.</p> <p>Any resources that do not currently support drift detection have a status of <code>NOT_CHECKED</code>. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>. </p> </li> <li> <p> <code>IN_SYNC</code>: The resources''s actual configuration matches its expected configuration.</p> </li> </ul>'
-      LastCheckTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: When AWS CloudFormation last checked if the resource had drifted from its expected configuration.
-    description: 'Contains information about whether the resource''s actual configuration differs, or has <i>drifted</i>, from its expected configuration.'
+  StackResourceDriftStatus:
+    type: string
+    enum:
+      - IN_SYNC
+      - MODIFIED
+      - DELETED
+      - NOT_CHECKED
   StackResourceDriftInformationSummary:
     type: object
     required:
@@ -3702,27 +3917,6 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: When AWS CloudFormation last checked if the resource had drifted from its expected configuration.
     description: 'Summarizes information about whether the resource''s actual configuration differs, or has <i>drifted</i>, from its expected configuration.'
-  StackResourceDriftStatus:
-    type: string
-    enum:
-      - IN_SYNC
-      - MODIFIED
-      - DELETED
-      - NOT_CHECKED
-  StackResourceDriftStatusFilters:
-    type: array
-    items:
-      $ref: '#/definitions/StackResourceDriftStatus'
-    minItems: 1
-    maxItems: 4
-  StackResourceDrifts:
-    type: array
-    items:
-      $ref: '#/definitions/StackResourceDrift'
-  StackResourceSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/StackResourceSummary'
   StackResourceSummary:
     type: object
     required:
@@ -3753,115 +3947,22 @@ definitions:
         $ref: '#/definitions/StackResourceDriftInformationSummary'
         description: 'Information about whether the resource''s actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.'
     description: Contains high-level information about the specified stack resource.
-  StackResources:
-    type: array
-    items:
-      $ref: '#/definitions/StackResource'
-  StackSet:
-    type: object
-    properties:
-      StackSetName:
-        $ref: '#/definitions/StackSetName'
-        description: The name that's associated with the stack set.
-      StackSetId:
-        $ref: '#/definitions/StackSetId'
-        description: The ID of the stack set.
-      Description:
-        $ref: '#/definitions/Description'
-        description: A description of the stack set that you specify when the stack set is created or updated.
-      Status:
-        $ref: '#/definitions/StackSetStatus'
-        description: The status of the stack set.
-      TemplateBody:
-        $ref: '#/definitions/TemplateBody'
-        description: The structure that contains the body of the template that was used to create or update the stack set.
-      Parameters:
-        $ref: '#/definitions/Parameters'
-        description: A list of input parameters for a stack set.
-      Capabilities:
-        $ref: '#/definitions/Capabilities'
-        description: 'The capabilities that are allowed in the stack set. Some stack set templates might include resources that can affect permissions in your AWS account—for example, by creating new AWS Identity and Access Management (IAM) users. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities">Acknowledging IAM Resources in AWS CloudFormation Templates.</a> '
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: A list of tags that specify information about the stack set. A maximum number of 50 tags can be specified.
-      StackSetARN:
-        $ref: '#/definitions/StackSetARN'
-        description: The Amazon Resource Number (ARN) of the stack set.
-      AdministrationRoleARN:
-        $ref: '#/definitions/RoleARN'
-        description: '<p>The Amazon Resource Number (ARN) of the IAM role used to create or update the stack set.</p> <p>Use customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html">Prerequisites: Granting Permissions for Stack Set Operations</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
-      ExecutionRoleName:
-        $ref: '#/definitions/ExecutionRoleName'
-        description: <p>The name of the IAM execution role used to create or update the stack set. </p> <p>Use customized execution roles to control which stack resources users and groups can include in their stack sets. </p>
-    description: 'A structure that contains information about a stack set. A stack set enables you to provision stacks into AWS accounts and across regions by using a single CloudFormation template. In the stack set, you specify the template to use, as well as any parameters and capabilities that the template requires. '
   StackSetARN:
     type: string
-  StackSetId:
-    type: string
-  StackSetName:
-    type: string
-  StackSetNameOrId:
-    type: string
-    pattern: '[a-zA-Z][-a-zA-Z0-9]*(?::[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12})?'
-  StackSetOperation:
-    type: object
-    properties:
-      OperationId:
-        $ref: '#/definitions/ClientRequestToken'
-        description: The unique ID of a stack set operation.
-      StackSetId:
-        $ref: '#/definitions/StackSetId'
-        description: The ID of the stack set.
-      Action:
-        $ref: '#/definitions/StackSetOperationAction'
-        description: 'The type of stack set operation: <code>CREATE</code>, <code>UPDATE</code>, or <code>DELETE</code>. Create and delete operations affect only the specified stack set instances that are associated with the specified stack set. Update operations affect both the stack set itself, as well as <i>all</i> associated stack set instances.'
-      Status:
-        $ref: '#/definitions/StackSetOperationStatus'
-        description: '<p>The status of the operation. </p> <ul> <li> <p> <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that you''ve set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in any remaining regions.</p> </li> <li> <p> <code>RUNNING</code>: The operation is currently being performed.</p> </li> <li> <p> <code>STOPPED</code>: The user has cancelled the operation.</p> </li> <li> <p> <code>STOPPING</code>: The operation is in the process of stopping, at user request. </p> </li> <li> <p> <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.</p> </li> </ul>'
-      OperationPreferences:
-        $ref: '#/definitions/StackSetOperationPreferences'
-        description: The preferences for how AWS CloudFormation performs this stack set operation.
-      RetainStacks:
-        $ref: '#/definitions/RetainStacksNullable'
-        description: 'For stack set operations of action type <code>DELETE</code>, specifies whether to remove the stack instances from the specified stack set, but doesn''t delete the stacks. You can''t reassociate a retained stack, or add an existing, saved stack to a new stack set.'
-      AdministrationRoleARN:
-        $ref: '#/definitions/RoleARN'
-        description: '<p>The Amazon Resource Number (ARN) of the IAM role used to perform this stack set operation. </p> <p>Use customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html">Define Permissions for Multiple Administrators</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
-      ExecutionRoleName:
-        $ref: '#/definitions/ExecutionRoleName'
-        description: <p>The name of the IAM execution role used to create or update the stack set.</p> <p>Use customized execution roles to control which stack resources users and groups can include in their stack sets. </p>
-      CreationTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: 'The time at which the operation was initiated. Note that the creation times for the stack set operation might differ from the creation time of the individual stacks themselves. This is because AWS CloudFormation needs to perform preparatory work for the operation, such as dispatching the work to the requested regions, before actually creating the first stacks.'
-      EndTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: 'The time at which the stack set operation ended, across all accounts and regions specified. Note that this doesn''t necessarily mean that the stack set operation was successful, or even attempted, in each account or region.'
-    description: 'The structure that contains information about a stack set operation. '
   StackSetOperationAction:
     type: string
     enum:
       - CREATE
       - UPDATE
       - DELETE
-  StackSetOperationPreferences:
-    type: object
-    properties:
-      RegionOrder:
-        $ref: '#/definitions/RegionList'
-        description: The order of the regions in where you want to perform the stack operation.
-      FailureToleranceCount:
-        $ref: '#/definitions/FailureToleranceCount'
-        description: '<p>The number of accounts, per region, for which this operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn''t attempt the operation in any subsequent regions.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code> (but not both).</p>'
-      FailureTolerancePercentage:
-        $ref: '#/definitions/FailureTolerancePercentage'
-        description: '<p>The percentage of accounts, per region, for which this stack operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn''t attempt the operation in any subsequent regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds <i>down</i> to the next whole number.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code>, but not both.</p>'
-      MaxConcurrentCount:
-        $ref: '#/definitions/MaxConcurrentCount'
-        description: '<p>The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of <code>FailureToleranceCount</code>—<code>MaxConcurrentCount</code> is at most one more than the <code>FailureToleranceCount</code> .</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>'
-      MaxConcurrentPercentage:
-        $ref: '#/definitions/MaxConcurrentPercentage'
-        description: '<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, CloudFormation sets the number as one instead.</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>'
-    description: '<p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.</p>'
+  StackSetOperationStatus:
+    type: string
+    enum:
+      - RUNNING
+      - SUCCEEDED
+      - FAILED
+      - STOPPING
+      - STOPPED
   StackSetOperationResultStatus:
     type: string
     enum:
@@ -3870,10 +3971,6 @@ definitions:
       - SUCCEEDED
       - FAILED
       - CANCELLED
-  StackSetOperationResultSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/StackSetOperationResultSummary'
   StackSetOperationResultSummary:
     type: object
     properties:
@@ -3893,18 +3990,6 @@ definitions:
         $ref: '#/definitions/AccountGateResult'
         description: 'The results of the account gate function AWS CloudFormation invokes, if present, before proceeding with stack set operations in an account'
     description: The structure that contains information about a specified operation's results for a given account in a given region.
-  StackSetOperationStatus:
-    type: string
-    enum:
-      - RUNNING
-      - SUCCEEDED
-      - FAILED
-      - STOPPING
-      - STOPPED
-  StackSetOperationSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/StackSetOperationSummary'
   StackSetOperationSummary:
     type: object
     properties:
@@ -3924,15 +4009,6 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: 'The time at which the stack set operation ended, across all accounts and regions specified. Note that this doesn''t necessarily mean that the stack set operation was successful, or even attempted, in each account or region.'
     description: The structures that contain summary information about the specified operation.
-  StackSetStatus:
-    type: string
-    enum:
-      - ACTIVE
-      - DELETED
-  StackSetSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/StackSetSummary'
   StackSetSummary:
     type: object
     properties:
@@ -3949,36 +4025,6 @@ definitions:
         $ref: '#/definitions/StackSetStatus'
         description: The status of the stack set.
     description: The structures that contain summary information about the specified stack set.
-  StackStatus:
-    type: string
-    enum:
-      - CREATE_IN_PROGRESS
-      - CREATE_FAILED
-      - CREATE_COMPLETE
-      - ROLLBACK_IN_PROGRESS
-      - ROLLBACK_FAILED
-      - ROLLBACK_COMPLETE
-      - DELETE_IN_PROGRESS
-      - DELETE_FAILED
-      - DELETE_COMPLETE
-      - UPDATE_IN_PROGRESS
-      - UPDATE_COMPLETE_CLEANUP_IN_PROGRESS
-      - UPDATE_COMPLETE
-      - UPDATE_ROLLBACK_IN_PROGRESS
-      - UPDATE_ROLLBACK_FAILED
-      - UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS
-      - UPDATE_ROLLBACK_COMPLETE
-      - REVIEW_IN_PROGRESS
-  StackStatusFilter:
-    type: array
-    items:
-      $ref: '#/definitions/StackStatus'
-  StackStatusReason:
-    type: string
-  StackSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/StackSummary'
   StackSummary:
     type: object
     required:
@@ -4020,14 +4066,16 @@ definitions:
         $ref: '#/definitions/StackDriftInformationSummary'
         description: 'Summarizes information on whether a stack''s actual configuration differs, or has <i>drifted</i>, from it''s expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.'
     description: The StackSummary Data Type
-  Stacks:
-    type: array
-    items:
-      $ref: '#/definitions/Stack'
-  StageList:
-    type: array
-    items:
-      $ref: '#/definitions/TemplateStage'
+  TemplateDescription:
+    type: string
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 1
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -4041,24 +4089,6 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: ' <i>Required</i>. A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.'
     description: The Tag type enables you to specify a key-value pair that can be used to store information about an AWS CloudFormation stack.
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagValue:
-    type: string
-    minLength: 1
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    maxItems: 50
-  TemplateBody:
-    type: string
-    minLength: 1
-  TemplateDescription:
-    type: string
   TemplateParameter:
     type: object
     properties:
@@ -4079,36 +4109,5 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TemplateParameter'
-  TemplateStage:
-    type: string
-    enum:
-      - Original
-      - Processed
-  TemplateURL:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  TimeoutMinutes:
-    type: integer
-    minimum: 1
-  Timestamp:
-    type: string
-    format: date-time
   TransformName:
-    type: string
-  TransformsList:
-    type: array
-    items:
-      $ref: '#/definitions/TransformName'
-  Type:
-    type: string
-  Url:
-    type: string
-  UsePreviousTemplate:
-    type: boolean
-  UsePreviousValue:
-    type: boolean
-  Value:
-    type: string
-  Version:
     type: string

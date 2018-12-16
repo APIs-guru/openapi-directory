@@ -375,13 +375,24 @@ definitions:
   AttributesString:
     type: string
     format: password
-  undefined: {}
+  ErrorMessage:
+    type: string
+  String:
+    type: string
   BlobStream:
     type: string
   BotAlias:
     type: string
   BotName:
     type: string
+  ButtonTextStringWithLength:
+    type: string
+    minLength: 1
+    maxLength: 15
+  ButtonValueStringWithLength:
+    type: string
+    minLength: 1
+    maxLength: 1000
   Button:
     type: object
     required:
@@ -395,14 +406,6 @@ definitions:
         $ref: '#/definitions/ButtonValueStringWithLength'
         description: 'The value sent to Amazon Lex when a user chooses the button. For example, consider button text "NYC." When the user chooses the button, the value sent can be "New York City."'
     description: 'Represents an option to be shown on the client platform (Facebook, Slack, etc.)'
-  ButtonTextStringWithLength:
-    type: string
-    minLength: 1
-    maxLength: 15
-  ButtonValueStringWithLength:
-    type: string
-    minLength: 1
-    maxLength: 1000
   ContentType:
     type: string
     enum:
@@ -416,8 +419,20 @@ definitions:
       - Fulfilled
       - ReadyForFulfillment
       - Failed
-  ErrorMessage:
+  StringWithLength:
     type: string
+    minLength: 1
+    maxLength: 80
+  StringUrlWithLength:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  listOfButtons:
+    type: array
+    items:
+      $ref: '#/definitions/Button'
+    minItems: 0
+    maxItems: 5
   GenericAttachment:
     type: object
     properties:
@@ -448,6 +463,25 @@ definitions:
       - CustomPayload
       - SSML
       - Composite
+  UserId:
+    type: string
+    pattern: '[0-9a-zA-Z._:-]+'
+    minLength: 2
+    maxLength: 100
+  Text:
+    type: string
+    minLength: 1
+    maxLength: 1024
+    format: password
+  StringMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
   ResponseCard:
     type: object
     properties:
@@ -461,44 +495,9 @@ definitions:
         $ref: '#/definitions/genericAttachmentList'
         description: An array of attachment objects representing options.
     description: 'If you configure a response card when creating your bots, Amazon Lex substitutes the session attributes and slot values that are available, and then returns it. The response card can also come from a Lambda function ( <code>dialogCodeHook</code> and <code>fulfillmentActivity</code> on an intent).'
-  String:
-    type: string
-  StringMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  StringUrlWithLength:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  StringWithLength:
-    type: string
-    minLength: 1
-    maxLength: 80
-  Text:
-    type: string
-    minLength: 1
-    maxLength: 1024
-    format: password
-  UserId:
-    type: string
-    pattern: '[0-9a-zA-Z._:-]+'
-    minLength: 2
-    maxLength: 100
   genericAttachmentList:
     type: array
     items:
       $ref: '#/definitions/GenericAttachment'
     minItems: 0
     maxItems: 10
-  listOfButtons:
-    type: array
-    items:
-      $ref: '#/definitions/Button'
-    minItems: 0
-    maxItems: 5

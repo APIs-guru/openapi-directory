@@ -849,7 +849,12 @@ definitions:
   APIVersion:
     type: string
     description: Specifies the version of the client tool.
-  undefined: {}
+  Description:
+    type: string
+    description: The associated description for this object.
+  URL:
+    type: string
+    description: The URL for a given Artifact.
   Artifact:
     type: object
     properties:
@@ -863,9 +868,42 @@ definitions:
     description: A collection of artifacts.
     items:
       $ref: '#/definitions/Artifact'
+  ErrorMessage:
+    type: string
+    description: The human-readable description of a particular error.
+  JobId:
+    type: string
+    description: A unique identifier which refers to a particular job.
+  Success:
+    type: boolean
+    description: Specifies whether (true) or not (false) AWS Import/Export updated your job.
   Carrier:
     type: string
     description: Name of the shipping company. This value is included when the LocationCode is "Returned".
+  JobType:
+    type: string
+    enum:
+      - Import
+      - Export
+    description: Specifies whether the job to initiate is an import or export job.
+  Manifest:
+    type: string
+    description: The UTF-8 encoded text of the manifest file.
+  ManifestAddendum:
+    type: string
+    description: For internal use only.
+  ValidateOnly:
+    type: boolean
+    description: Validate the manifest and parameter values in the request but do not actually create a job.
+  Signature:
+    type: string
+    description: 'An encrypted code used to authenticate the request and response, for example, "DV+TpDfx1/TdSE9ktyK9k/bDTVI=". Only use this value is you want to create the signature file yourself. Generally you should use the SignatureFileContents value.'
+  SignatureFileContents:
+    type: string
+    description: The actual text of the SIGNATURE file to be written to disk.
+  WarningMessage:
+    type: string
+    description: 'An optional message notifying you of non-fatal issues with the job, such as use of an incompatible Amazon S3 bucket name.'
   CreationDate:
     type: string
     description: 'Timestamp of the CreateJob request in ISO8601 date format. For example "2010-03-28T20:27:35Z".'
@@ -873,17 +911,66 @@ definitions:
   CurrentManifest:
     type: string
     description: 'The last manifest submitted, which will be used to process the job.'
-  Description:
-    type: string
-    description: The associated description for this object.
   ErrorCount:
     type: integer
     description: Number of errors. We return this value when the ProgressCode is Success or SuccessWithErrors.
-  ErrorMessage:
-    type: string
-    description: The human-readable description of a particular error.
   GenericString:
     type: string
+  JobIdList:
+    type: array
+    items:
+      $ref: '#/definitions/GenericString'
+  name:
+    type: string
+    description: Specifies the name of the person responsible for shipping this package.
+  company:
+    type: string
+    description: Specifies the name of the company that will ship this package.
+  phoneNumber:
+    type: string
+    description: Specifies the phone number of the person responsible for shipping this package.
+  country:
+    type: string
+    description: Specifies the name of your country for the return address.
+  stateOrProvince:
+    type: string
+    description: Specifies the name of your state or your province for the return address.
+  city:
+    type: string
+    description: Specifies the name of your city for the return address.
+  postalCode:
+    type: string
+    description: Specifies the postal code for the return address.
+  street1:
+    type: string
+    description: 'Specifies the first part of the street address for the return address, for example 1234 Main Street.'
+  street2:
+    type: string
+    description: 'Specifies the optional second part of the street address for the return address, for example Suite 100.'
+  street3:
+    type: string
+    description: 'Specifies the optional third part of the street address for the return address, for example c/o Jane Doe.'
+  LocationCode:
+    type: string
+    description: 'A token representing the location of the storage device, such as "AtAWS".'
+  LocationMessage:
+    type: string
+    description: A more human readable form of the physical location of the storage device.
+  ProgressCode:
+    type: string
+    description: 'A token representing the state of the job, such as "Started".'
+  ProgressMessage:
+    type: string
+    description: A more human readable form of the job status.
+  TrackingNumber:
+    type: string
+    description: The shipping tracking number assigned by AWS Import/Export to the storage device when it's returned to you. We return this value when the LocationCode is "Returned".
+  LogBucket:
+    type: string
+    description: Amazon S3 bucket for user logs.
+  LogKey:
+    type: string
+    description: The key where the user logs were stored.
   IsCanceled:
     type: boolean
     description: Indicates whether the job was canceled.
@@ -902,102 +989,14 @@ definitions:
       JobType:
         $ref: '#/definitions/JobType'
     description: Representation of a job returned by the ListJobs operation.
-  JobId:
-    type: string
-    description: A unique identifier which refers to a particular job.
-  JobIdList:
-    type: array
-    items:
-      $ref: '#/definitions/GenericString'
-  JobType:
-    type: string
-    enum:
-      - Import
-      - Export
-    description: Specifies whether the job to initiate is an import or export job.
   JobsList:
     type: array
     description: A list container for Jobs returned by the ListJobs operation.
     items:
       $ref: '#/definitions/Job'
-  LocationCode:
-    type: string
-    description: 'A token representing the location of the storage device, such as "AtAWS".'
-  LocationMessage:
-    type: string
-    description: A more human readable form of the physical location of the storage device.
-  LogBucket:
-    type: string
-    description: Amazon S3 bucket for user logs.
-  LogKey:
-    type: string
-    description: The key where the user logs were stored.
-  Manifest:
-    type: string
-    description: The UTF-8 encoded text of the manifest file.
-  ManifestAddendum:
-    type: string
-    description: For internal use only.
-  Marker:
-    type: string
-    description: Specifies the JOBID to start after when listing the jobs created with your account. AWS Import/Export lists your jobs in reverse chronological order. See MaxJobs.
   MaxJobs:
     type: integer
     description: 'Sets the maximum number of jobs returned in the response. If there are additional jobs that were not returned because MaxJobs was exceeded, the response contains &lt;IsTruncated&gt;true&lt;/IsTruncated&gt;. To return the additional jobs, see Marker.'
-  ProgressCode:
+  Marker:
     type: string
-    description: 'A token representing the state of the job, such as "Started".'
-  ProgressMessage:
-    type: string
-    description: A more human readable form of the job status.
-  Signature:
-    type: string
-    description: 'An encrypted code used to authenticate the request and response, for example, "DV+TpDfx1/TdSE9ktyK9k/bDTVI=". Only use this value is you want to create the signature file yourself. Generally you should use the SignatureFileContents value.'
-  SignatureFileContents:
-    type: string
-    description: The actual text of the SIGNATURE file to be written to disk.
-  Success:
-    type: boolean
-    description: Specifies whether (true) or not (false) AWS Import/Export updated your job.
-  TrackingNumber:
-    type: string
-    description: The shipping tracking number assigned by AWS Import/Export to the storage device when it's returned to you. We return this value when the LocationCode is "Returned".
-  URL:
-    type: string
-    description: The URL for a given Artifact.
-  ValidateOnly:
-    type: boolean
-    description: Validate the manifest and parameter values in the request but do not actually create a job.
-  WarningMessage:
-    type: string
-    description: 'An optional message notifying you of non-fatal issues with the job, such as use of an incompatible Amazon S3 bucket name.'
-  city:
-    type: string
-    description: Specifies the name of your city for the return address.
-  company:
-    type: string
-    description: Specifies the name of the company that will ship this package.
-  country:
-    type: string
-    description: Specifies the name of your country for the return address.
-  name:
-    type: string
-    description: Specifies the name of the person responsible for shipping this package.
-  phoneNumber:
-    type: string
-    description: Specifies the phone number of the person responsible for shipping this package.
-  postalCode:
-    type: string
-    description: Specifies the postal code for the return address.
-  stateOrProvince:
-    type: string
-    description: Specifies the name of your state or your province for the return address.
-  street1:
-    type: string
-    description: 'Specifies the first part of the street address for the return address, for example 1234 Main Street.'
-  street2:
-    type: string
-    description: 'Specifies the optional second part of the street address for the return address, for example Suite 100.'
-  street3:
-    type: string
-    description: 'Specifies the optional third part of the street address for the return address, for example c/o Jane Doe.'
+    description: Specifies the JOBID to start after when listing the jobs created with your account. AWS Import/Export lists your jobs in reverse chronological order. See MaxJobs.

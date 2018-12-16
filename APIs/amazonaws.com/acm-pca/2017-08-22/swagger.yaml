@@ -1200,7 +1200,38 @@ definitions:
       Status:
         $ref: '#/definitions/CertificateAuthorityStatus'
         description: Status of your private CA.
-  undefined: {}
+  CountryCodeString:
+    type: string
+    pattern: '[A-Za-z]{2}'
+  String64:
+    type: string
+    minLength: 0
+    maxLength: 64
+  DistinguishedNameQualifierString:
+    type: string
+    pattern: '[a-zA-Z0-9''()+-.?:/= ]*'
+    minLength: 0
+    maxLength: 64
+  String128:
+    type: string
+    minLength: 0
+    maxLength: 128
+  String40:
+    type: string
+    minLength: 0
+    maxLength: 40
+  String16:
+    type: string
+    minLength: 0
+    maxLength: 16
+  String5:
+    type: string
+    minLength: 0
+    maxLength: 5
+  String3:
+    type: string
+    minLength: 0
+    maxLength: 3
   ASN1Subject:
     type: object
     properties:
@@ -1270,10 +1301,6 @@ definitions:
       - FAILED
   Boolean:
     type: boolean
-  CertificateAuthorities:
-    type: array
-    items:
-      $ref: '#/definitions/CertificateAuthority'
   CertificateAuthority:
     type: object
     properties:
@@ -1314,6 +1341,35 @@ definitions:
         $ref: '#/definitions/TStamp'
         description: 'The period during which a deleted CA can be restored. For more information, see the <code>PermanentDeletionTimeInDays</code> parameter of the <a>DeleteCertificateAuthorityRequest</a> operation. '
     description: 'Contains information about your private certificate authority (CA). Your private CA can issue and revoke X.509 digital certificates. Digital certificates verify that the entity named in the certificate <b>Subject</b> field owns or controls the public key contained in the <b>Subject Public Key Info</b> field. Call the <a>CreateCertificateAuthority</a> operation to create your private CA. You must then call the <a>GetCertificateAuthorityCertificate</a> operation to retrieve a private CA certificate signing request (CSR). Take the CSR to your on-premises CA and sign it with the root CA certificate or a subordinate certificate. Call the <a>ImportCertificateAuthorityCertificate</a> operation to import the signed certificate into AWS Certificate Manager (ACM). '
+  CertificateAuthorities:
+    type: array
+    items:
+      $ref: '#/definitions/CertificateAuthority'
+  TStamp:
+    type: string
+    format: date-time
+  CertificateAuthorityType:
+    type: string
+    enum:
+      - SUBORDINATE
+  String:
+    type: string
+  CertificateAuthorityStatus:
+    type: string
+    enum:
+      - CREATING
+      - PENDING_CERTIFICATE
+      - ACTIVE
+      - DELETED
+      - DISABLED
+      - EXPIRED
+      - FAILED
+  FailureReason:
+    type: string
+    enum:
+      - REQUEST_TIMED_OUT
+      - UNSUPPORTED_ALGORITHM
+      - OTHER
   CertificateAuthorityConfiguration:
     type: object
     required:
@@ -1331,20 +1387,29 @@ definitions:
         $ref: '#/definitions/ASN1Subject'
         description: Structure that contains X.500 distinguished name information for your private CA.
     description: 'Contains configuration information for your private certificate authority (CA). This includes information about the class of public key algorithm and the key pair that your private CA creates when it issues a certificate, the signature algorithm it uses used when issuing certificates, and its X.500 distinguished name. You must specify this information when you call the <a>CreateCertificateAuthority</a> operation. '
-  CertificateAuthorityStatus:
+  RevocationConfiguration:
+    type: object
+    properties:
+      CrlConfiguration:
+        $ref: '#/definitions/CrlConfiguration'
+        description: 'Configuration of the certificate revocation list (CRL), if any, maintained by your private CA.'
+    description: 'Certificate revocation information used by the <a>CreateCertificateAuthority</a> and <a>UpdateCertificateAuthority</a> operations. Your private certificate authority (CA) can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates revoked by your CA. For more information, see <a>RevokeCertificate</a>.'
+  KeyAlgorithm:
     type: string
     enum:
-      - CREATING
-      - PENDING_CERTIFICATE
-      - ACTIVE
-      - DELETED
-      - DISABLED
-      - EXPIRED
-      - FAILED
-  CertificateAuthorityType:
+      - RSA_2048
+      - RSA_4096
+      - EC_prime256v1
+      - EC_secp384r1
+  SigningAlgorithm:
     type: string
     enum:
-      - SUBORDINATE
+      - SHA256WITHECDSA
+      - SHA384WITHECDSA
+      - SHA512WITHECDSA
+      - SHA256WITHRSA
+      - SHA384WITHRSA
+      - SHA512WITHRSA
   CertificateBody:
     type: string
   CertificateBodyBlob:
@@ -1357,9 +1422,23 @@ definitions:
     type: string
     minLength: 0
     maxLength: 2097152
-  CountryCodeString:
+  IdempotencyToken:
     type: string
-    pattern: '[A-Za-z]{2}'
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]*'
+    minLength: 1
+    maxLength: 36
+  Integer1To5000:
+    type: integer
+    minimum: 1
+    maximum: 5000
+  String253:
+    type: string
+    minLength: 0
+    maxLength: 253
+  String3To255:
+    type: string
+    minLength: 3
+    maxLength: 255
   CrlConfiguration:
     type: object
     required:
@@ -1384,140 +1463,10 @@ definitions:
     maxLength: 32768
   CsrBody:
     type: string
-  DistinguishedNameQualifierString:
-    type: string
-    pattern: '[a-zA-Z0-9''()+-.?:/= ]*'
-    minLength: 0
-    maxLength: 64
-  FailureReason:
-    type: string
-    enum:
-      - REQUEST_TIMED_OUT
-      - UNSUPPORTED_ALGORITHM
-      - OTHER
-  IdempotencyToken:
-    type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]*'
-    minLength: 1
-    maxLength: 36
-  Integer1To5000:
-    type: integer
-    minimum: 1
-    maximum: 5000
-  KeyAlgorithm:
-    type: string
-    enum:
-      - RSA_2048
-      - RSA_4096
-      - EC_prime256v1
-      - EC_secp384r1
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 500
   PermanentDeletionTimeInDays:
     type: integer
     minimum: 7
     maximum: 30
-  PositiveLong:
-    type: integer
-    minimum: 1
-  RevocationConfiguration:
-    type: object
-    properties:
-      CrlConfiguration:
-        $ref: '#/definitions/CrlConfiguration'
-        description: 'Configuration of the certificate revocation list (CRL), if any, maintained by your private CA.'
-    description: 'Certificate revocation information used by the <a>CreateCertificateAuthority</a> and <a>UpdateCertificateAuthority</a> operations. Your private certificate authority (CA) can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates revoked by your CA. For more information, see <a>RevokeCertificate</a>.'
-  RevocationReason:
-    type: string
-    enum:
-      - UNSPECIFIED
-      - KEY_COMPROMISE
-      - CERTIFICATE_AUTHORITY_COMPROMISE
-      - AFFILIATION_CHANGED
-      - SUPERSEDED
-      - CESSATION_OF_OPERATION
-      - PRIVILEGE_WITHDRAWN
-      - A_A_COMPROMISE
-  SigningAlgorithm:
-    type: string
-    enum:
-      - SHA256WITHECDSA
-      - SHA384WITHECDSA
-      - SHA512WITHECDSA
-      - SHA256WITHRSA
-      - SHA384WITHRSA
-      - SHA512WITHRSA
-  String:
-    type: string
-  String128:
-    type: string
-    minLength: 0
-    maxLength: 128
-  String16:
-    type: string
-    minLength: 0
-    maxLength: 16
-  String253:
-    type: string
-    minLength: 0
-    maxLength: 253
-  String3:
-    type: string
-    minLength: 0
-    maxLength: 3
-  String3To255:
-    type: string
-    minLength: 3
-    maxLength: 255
-  String40:
-    type: string
-    minLength: 0
-    maxLength: 40
-  String5:
-    type: string
-    minLength: 0
-    maxLength: 5
-  String64:
-    type: string
-    minLength: 0
-    maxLength: 64
-  TStamp:
-    type: string
-    format: date-time
-  Tag:
-    type: object
-    required:
-      - Key
-    properties:
-      Key:
-        $ref: '#/definitions/TagKey'
-        description: Key (name) of the tag.
-      Value:
-        $ref: '#/definitions/TagValue'
-        description: Value of the tag.
-    description: 'Tags are labels that you can use to identify and organize your private CAs. Each tag consists of a key and an optional value. You can associate up to 50 tags with a private CA. To add one or more tags to a private CA, call the <a>TagCertificateAuthority</a> operation. To remove a tag, call the <a>UntagCertificateAuthority</a> operation. '
-  TagKey:
-    type: string
-    pattern: '[\p{L}\p{Z}\p{N}_.:\/=+\-@]*'
-    minLength: 1
-    maxLength: 128
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-    maxItems: 50
-  TagValue:
-    type: string
-    pattern: '[\p{L}\p{Z}\p{N}_.:\/=+\-@]*'
-    minLength: 0
-    maxLength: 256
   Validity:
     type: object
     required:
@@ -1531,6 +1480,56 @@ definitions:
         $ref: '#/definitions/ValidityPeriodType'
         description: 'Specifies whether the <code>Value</code> parameter represents days, months, or years.'
     description: 'Length of time for which the certificate issued by your private certificate authority (CA), or by the private CA itself, is valid in days, months, or years. You can issue a certificate by calling the <a>IssueCertificate</a> operation.'
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 500
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+    maxItems: 50
+  PositiveLong:
+    type: integer
+    minimum: 1
+  RevocationReason:
+    type: string
+    enum:
+      - UNSPECIFIED
+      - KEY_COMPROMISE
+      - CERTIFICATE_AUTHORITY_COMPROMISE
+      - AFFILIATION_CHANGED
+      - SUPERSEDED
+      - CESSATION_OF_OPERATION
+      - PRIVILEGE_WITHDRAWN
+      - A_A_COMPROMISE
+  TagKey:
+    type: string
+    pattern: '[\p{L}\p{Z}\p{N}_.:\/=+\-@]*'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '[\p{L}\p{Z}\p{N}_.:\/=+\-@]*'
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - Key
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: Key (name) of the tag.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: Value of the tag.
+    description: 'Tags are labels that you can use to identify and organize your private CAs. Each tag consists of a key and an optional value. You can associate up to 50 tags with a private CA. To add one or more tags to a private CA, call the <a>TagCertificateAuthority</a> operation. To remove a tag, call the <a>UntagCertificateAuthority</a> operation. '
   ValidityPeriodType:
     type: string
     enum:

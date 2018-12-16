@@ -516,10 +516,33 @@ definitions:
   AWSAccountId:
     type: string
     pattern: '[0-9]{12}'
-  undefined: {}
+  ExceptionMessage:
+    type: string
+    maxLength: 10000
+  ResourceType:
+    type: string
+    description: Resource type that caused the exception
+    maxLength: 1000
+  S3ResourcesClassification:
+    type: array
+    items:
+      $ref: '#/definitions/S3ResourceClassification'
+  FailedS3Resources:
+    type: array
+    items:
+      $ref: '#/definitions/FailedS3Resource'
   BucketName:
     type: string
     maxLength: 500
+  S3OneTimeClassificationType:
+    type: string
+    enum:
+      - FULL
+      - NONE
+  S3ContinuousClassificationType:
+    type: string
+    enum:
+      - FULL
   ClassificationType:
     type: object
     required:
@@ -543,13 +566,26 @@ definitions:
         $ref: '#/definitions/S3ContinuousClassificationType'
         description: 'A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie begins performing continuous classification after a bucket is successfully associated with Amazon Macie. '
     description: 'The classification type that Amazon Macie applies to the associated S3 resources. At least one of the classification types (oneTime or continuous) must be specified. '
+  S3Resources:
+    type: array
+    items:
+      $ref: '#/definitions/S3Resource'
   ErrorCode:
     type: string
     description: Error code for the exception
     maxLength: 10
-  ExceptionMessage:
-    type: string
-    maxLength: 10000
+  S3Resource:
+    type: object
+    required:
+      - bucketName
+    properties:
+      bucketName:
+        $ref: '#/definitions/BucketName'
+        description: The name of the S3 bucket.
+      prefix:
+        $ref: '#/definitions/Prefix'
+        description: 'The prefix of the S3 bucket. '
+    description: 'Contains information about the S3 resource. This data type is used as a request parameter in the DisassociateS3Resources action and can be used as a response parameter in the AssociateS3Resources and UpdateS3Resources actions. '
   FailedS3Resource:
     type: object
     properties:
@@ -563,17 +599,20 @@ definitions:
         $ref: '#/definitions/ExceptionMessage'
         description: The error message of a failed item.
     description: Includes details about the failed S3 resources.
-  FailedS3Resources:
-    type: array
-    items:
-      $ref: '#/definitions/FailedS3Resource'
   FieldName:
     type: string
     description: Field that has invalid input
     maxLength: 1000
+  NextToken:
+    type: string
+    maxLength: 500
   MaxResults:
     type: integer
     maximum: 250
+  MemberAccounts:
+    type: array
+    items:
+      $ref: '#/definitions/MemberAccount'
   MemberAccount:
     type: object
     properties:
@@ -581,41 +620,9 @@ definitions:
         $ref: '#/definitions/AWSAccountId'
         description: The AWS account ID of the Amazon Macie member account.
     description: Contains information about the Amazon Macie member account.
-  MemberAccounts:
-    type: array
-    items:
-      $ref: '#/definitions/MemberAccount'
-  NextToken:
-    type: string
-    maxLength: 500
   Prefix:
     type: string
     maxLength: 10000
-  ResourceType:
-    type: string
-    description: Resource type that caused the exception
-    maxLength: 1000
-  S3ContinuousClassificationType:
-    type: string
-    enum:
-      - FULL
-  S3OneTimeClassificationType:
-    type: string
-    enum:
-      - FULL
-      - NONE
-  S3Resource:
-    type: object
-    required:
-      - bucketName
-    properties:
-      bucketName:
-        $ref: '#/definitions/BucketName'
-        description: The name of the S3 bucket.
-      prefix:
-        $ref: '#/definitions/Prefix'
-        description: 'The prefix of the S3 bucket. '
-    description: 'Contains information about the S3 resource. This data type is used as a request parameter in the DisassociateS3Resources action and can be used as a response parameter in the AssociateS3Resources and UpdateS3Resources actions. '
   S3ResourceClassification:
     type: object
     required:
@@ -648,14 +655,6 @@ definitions:
         $ref: '#/definitions/ClassificationTypeUpdate'
         description: 'The classification type that you want to update for the resource associated with Amazon Macie. '
     description: 'The S3 resources whose classification types you want to update. This data type is used as a request parameter in the UpdateS3Resources action. '
-  S3Resources:
-    type: array
-    items:
-      $ref: '#/definitions/S3Resource'
-  S3ResourcesClassification:
-    type: array
-    items:
-      $ref: '#/definitions/S3ResourceClassification'
   S3ResourcesClassificationUpdate:
     type: array
     items:

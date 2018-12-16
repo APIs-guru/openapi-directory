@@ -2663,38 +2663,6 @@ definitions:
       SubnetMappings:
         $ref: '#/definitions/SubnetMappings'
         description: <p>The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>You cannot specify Elastic IP addresses for your subnets.</p>
-  undefined: {}
-  Action:
-    type: object
-    required:
-      - Type
-    properties:
-      Type:
-        $ref: '#/definitions/ActionTypeEnum'
-        description: 'The type of action. Each rule must include exactly one of the following types of actions: <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>.'
-      TargetGroupArn:
-        $ref: '#/definitions/TargetGroupArn'
-        description: The Amazon Resource Name (ARN) of the target group. Specify only when <code>Type</code> is <code>forward</code>.
-      AuthenticateOidcConfig:
-        $ref: '#/definitions/AuthenticateOidcActionConfig'
-        description: '[HTTPS listener] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when <code>Type</code> is <code>authenticate-oidc</code>.'
-      AuthenticateCognitoConfig:
-        $ref: '#/definitions/AuthenticateCognitoActionConfig'
-        description: '[HTTPS listener] Information for using Amazon Cognito to authenticate users. Specify only when <code>Type</code> is <code>authenticate-cognito</code>.'
-      Order:
-        $ref: '#/definitions/ActionOrder'
-        description: The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. The final action to be performed must be a <code>forward</code> or a <code>fixed-response</code> action.
-      RedirectConfig:
-        $ref: '#/definitions/RedirectActionConfig'
-        description: '[Application Load Balancer] Information for creating a redirect action. Specify only when <code>Type</code> is <code>redirect</code>.'
-      FixedResponseConfig:
-        $ref: '#/definitions/FixedResponseActionConfig'
-        description: '[Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when <code>Type</code> is <code>fixed-response</code>.'
-    description: Information about an action.
-  ActionOrder:
-    type: integer
-    minimum: 1
-    maximum: 50000
   ActionTypeEnum:
     type: string
     enum:
@@ -2703,100 +2671,8 @@ definitions:
       - authenticate-cognito
       - redirect
       - fixed-response
-  Actions:
-    type: array
-    items:
-      $ref: '#/definitions/Action'
-  AllocationId:
+  TargetGroupArn:
     type: string
-  AuthenticateCognitoActionAuthenticationRequestParamName:
-    type: string
-  AuthenticateCognitoActionAuthenticationRequestParamValue:
-    type: string
-  AuthenticateCognitoActionAuthenticationRequestExtraParams:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AuthenticateCognitoActionAuthenticationRequestParamName'
-        value:
-          $ref: '#/definitions/AuthenticateCognitoActionAuthenticationRequestParamValue'
-  AuthenticateCognitoActionConditionalBehaviorEnum:
-    type: string
-    enum:
-      - deny
-      - allow
-      - authenticate
-  AuthenticateCognitoActionConfig:
-    type: object
-    required:
-      - UserPoolArn
-      - UserPoolClientId
-      - UserPoolDomain
-    properties:
-      UserPoolArn:
-        $ref: '#/definitions/AuthenticateCognitoActionUserPoolArn'
-        description: The Amazon Resource Name (ARN) of the Amazon Cognito user pool.
-      UserPoolClientId:
-        $ref: '#/definitions/AuthenticateCognitoActionUserPoolClientId'
-        description: The ID of the Amazon Cognito user pool client.
-      UserPoolDomain:
-        $ref: '#/definitions/AuthenticateCognitoActionUserPoolDomain'
-        description: The domain prefix or fully-qualified domain name of the Amazon Cognito user pool.
-      SessionCookieName:
-        $ref: '#/definitions/AuthenticateCognitoActionSessionCookieName'
-        description: The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.
-      Scope:
-        $ref: '#/definitions/AuthenticateCognitoActionScope'
-        description: '<p>The set of user claims to be requested from the IdP. The default is <code>openid</code>.</p> <p>To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.</p>'
-      SessionTimeout:
-        $ref: '#/definitions/AuthenticateCognitoActionSessionTimeout'
-        description: 'The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).'
-      AuthenticationRequestExtraParams:
-        $ref: '#/definitions/AuthenticateCognitoActionAuthenticationRequestExtraParams'
-        description: The query parameters (up to 10) to include in the redirect request to the authorization endpoint.
-      OnUnauthenticatedRequest:
-        $ref: '#/definitions/AuthenticateCognitoActionConditionalBehaviorEnum'
-        description: '<p>The behavior if the user is not authenticated. The following are possible values:</p> <ul> <li> <p>deny<code/> - Return an HTTP 401 Unauthorized error.</p> </li> <li> <p>allow<code/> - Allow the request to be forwarded to the target.</p> </li> <li> <p>authenticate<code/> - Redirect the request to the IdP authorization endpoint. This is the default value.</p> </li> </ul>'
-    description: Request parameters to use when integrating with Amazon Cognito to authenticate users.
-  AuthenticateCognitoActionScope:
-    type: string
-  AuthenticateCognitoActionSessionCookieName:
-    type: string
-  AuthenticateCognitoActionSessionTimeout:
-    type: integer
-  AuthenticateCognitoActionUserPoolArn:
-    type: string
-  AuthenticateCognitoActionUserPoolClientId:
-    type: string
-  AuthenticateCognitoActionUserPoolDomain:
-    type: string
-  AuthenticateOidcActionAuthenticationRequestParamName:
-    type: string
-  AuthenticateOidcActionAuthenticationRequestParamValue:
-    type: string
-  AuthenticateOidcActionAuthenticationRequestExtraParams:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AuthenticateOidcActionAuthenticationRequestParamName'
-        value:
-          $ref: '#/definitions/AuthenticateOidcActionAuthenticationRequestParamValue'
-  AuthenticateOidcActionAuthorizationEndpoint:
-    type: string
-  AuthenticateOidcActionClientId:
-    type: string
-  AuthenticateOidcActionClientSecret:
-    type: string
-  AuthenticateOidcActionConditionalBehaviorEnum:
-    type: string
-    enum:
-      - deny
-      - allow
-      - authenticate
   AuthenticateOidcActionConfig:
     type: object
     required:
@@ -2841,18 +2717,205 @@ definitions:
         $ref: '#/definitions/AuthenticateOidcActionConditionalBehaviorEnum'
         description: '<p>The behavior if the user is not authenticated. The following are possible values:</p> <ul> <li> <p>deny<code/> - Return an HTTP 401 Unauthorized error.</p> </li> <li> <p>allow<code/> - Allow the request to be forwarded to the target.</p> </li> <li> <p>authenticate<code/> - Redirect the request to the IdP authorization endpoint. This is the default value.</p> </li> </ul>'
     description: Request parameters when using an identity provider (IdP) that is compliant with OpenID Connect (OIDC) to authenticate users.
+  AuthenticateCognitoActionConfig:
+    type: object
+    required:
+      - UserPoolArn
+      - UserPoolClientId
+      - UserPoolDomain
+    properties:
+      UserPoolArn:
+        $ref: '#/definitions/AuthenticateCognitoActionUserPoolArn'
+        description: The Amazon Resource Name (ARN) of the Amazon Cognito user pool.
+      UserPoolClientId:
+        $ref: '#/definitions/AuthenticateCognitoActionUserPoolClientId'
+        description: The ID of the Amazon Cognito user pool client.
+      UserPoolDomain:
+        $ref: '#/definitions/AuthenticateCognitoActionUserPoolDomain'
+        description: The domain prefix or fully-qualified domain name of the Amazon Cognito user pool.
+      SessionCookieName:
+        $ref: '#/definitions/AuthenticateCognitoActionSessionCookieName'
+        description: The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.
+      Scope:
+        $ref: '#/definitions/AuthenticateCognitoActionScope'
+        description: '<p>The set of user claims to be requested from the IdP. The default is <code>openid</code>.</p> <p>To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.</p>'
+      SessionTimeout:
+        $ref: '#/definitions/AuthenticateCognitoActionSessionTimeout'
+        description: 'The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).'
+      AuthenticationRequestExtraParams:
+        $ref: '#/definitions/AuthenticateCognitoActionAuthenticationRequestExtraParams'
+        description: The query parameters (up to 10) to include in the redirect request to the authorization endpoint.
+      OnUnauthenticatedRequest:
+        $ref: '#/definitions/AuthenticateCognitoActionConditionalBehaviorEnum'
+        description: '<p>The behavior if the user is not authenticated. The following are possible values:</p> <ul> <li> <p>deny<code/> - Return an HTTP 401 Unauthorized error.</p> </li> <li> <p>allow<code/> - Allow the request to be forwarded to the target.</p> </li> <li> <p>authenticate<code/> - Redirect the request to the IdP authorization endpoint. This is the default value.</p> </li> </ul>'
+    description: Request parameters to use when integrating with Amazon Cognito to authenticate users.
+  ActionOrder:
+    type: integer
+    minimum: 1
+    maximum: 50000
+  RedirectActionConfig:
+    type: object
+    required:
+      - StatusCode
+    properties:
+      Protocol:
+        $ref: '#/definitions/RedirectActionProtocol'
+        description: 'The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You cannot redirect HTTPS to HTTP.'
+      Port:
+        $ref: '#/definitions/RedirectActionPort'
+        description: 'The port. You can specify a value from 1 to 65535 or #{port}.'
+      Host:
+        $ref: '#/definitions/RedirectActionHost'
+        description: 'The hostname. This component is not percent-encoded. The hostname can contain #{host}.'
+      Path:
+        $ref: '#/definitions/RedirectActionPath'
+        description: 'The absolute path, starting with the leading "/". This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}.'
+      Query:
+        $ref: '#/definitions/RedirectActionQuery'
+        description: 'The query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading "?", as it is automatically added. You can specify any of the reserved keywords.'
+      StatusCode:
+        $ref: '#/definitions/RedirectActionStatusCodeEnum'
+        description: The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary (HTTP 302).
+    description: '<p>Information about a redirect action.</p> <p>A URI consists of the following components: protocol://hostname:port/path?query. You must modify at least one of the following components to avoid a redirect loop: protocol, hostname, port, or path. Any components that you do not modify retain their original values.</p> <p>You can reuse URI components using the following reserved keywords:</p> <ul> <li> <p>#{protocol}</p> </li> <li> <p>#{host}</p> </li> <li> <p>#{port}</p> </li> <li> <p>#{path} (the leading "/" is removed)</p> </li> <li> <p>#{query}</p> </li> </ul> <p>For example, you can change the path to "/new/#{path}", the hostname to "example.#{host}", or the query to "#{query}&amp;value=xyz".</p>'
+  FixedResponseActionConfig:
+    type: object
+    required:
+      - StatusCode
+    properties:
+      MessageBody:
+        $ref: '#/definitions/FixedResponseActionMessage'
+        description: The message.
+      StatusCode:
+        $ref: '#/definitions/FixedResponseActionStatusCode'
+        description: 'The HTTP response code (2XX, 4XX, or 5XX).'
+      ContentType:
+        $ref: '#/definitions/FixedResponseActionContentType'
+        description: '<p>The content type.</p> <p>Valid Values: text/plain | text/css | text/html | application/javascript | application/json</p>'
+    description: Information about an action that returns a custom HTTP response.
+  Action:
+    type: object
+    required:
+      - Type
+    properties:
+      Type:
+        $ref: '#/definitions/ActionTypeEnum'
+        description: 'The type of action. Each rule must include exactly one of the following types of actions: <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>.'
+      TargetGroupArn:
+        $ref: '#/definitions/TargetGroupArn'
+        description: The Amazon Resource Name (ARN) of the target group. Specify only when <code>Type</code> is <code>forward</code>.
+      AuthenticateOidcConfig:
+        $ref: '#/definitions/AuthenticateOidcActionConfig'
+        description: '[HTTPS listener] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when <code>Type</code> is <code>authenticate-oidc</code>.'
+      AuthenticateCognitoConfig:
+        $ref: '#/definitions/AuthenticateCognitoActionConfig'
+        description: '[HTTPS listener] Information for using Amazon Cognito to authenticate users. Specify only when <code>Type</code> is <code>authenticate-cognito</code>.'
+      Order:
+        $ref: '#/definitions/ActionOrder'
+        description: The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. The final action to be performed must be a <code>forward</code> or a <code>fixed-response</code> action.
+      RedirectConfig:
+        $ref: '#/definitions/RedirectActionConfig'
+        description: '[Application Load Balancer] Information for creating a redirect action. Specify only when <code>Type</code> is <code>redirect</code>.'
+      FixedResponseConfig:
+        $ref: '#/definitions/FixedResponseActionConfig'
+        description: '[Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when <code>Type</code> is <code>fixed-response</code>.'
+    description: Information about an action.
+  Actions:
+    type: array
+    items:
+      $ref: '#/definitions/Action'
+  ListenerArn:
+    type: string
+  CertificateList:
+    type: array
+    items:
+      $ref: '#/definitions/Certificate'
+  ResourceArns:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceArn'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+  AllocationId:
+    type: string
+  AuthenticateCognitoActionAuthenticationRequestParamName:
+    type: string
+  AuthenticateCognitoActionAuthenticationRequestParamValue:
+    type: string
+  AuthenticateCognitoActionAuthenticationRequestExtraParams:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AuthenticateCognitoActionAuthenticationRequestParamName'
+        value:
+          $ref: '#/definitions/AuthenticateCognitoActionAuthenticationRequestParamValue'
+  AuthenticateCognitoActionConditionalBehaviorEnum:
+    type: string
+    enum:
+      - deny
+      - allow
+      - authenticate
+  AuthenticateCognitoActionUserPoolArn:
+    type: string
+  AuthenticateCognitoActionUserPoolClientId:
+    type: string
+  AuthenticateCognitoActionUserPoolDomain:
+    type: string
+  AuthenticateCognitoActionSessionCookieName:
+    type: string
+  AuthenticateCognitoActionScope:
+    type: string
+  AuthenticateCognitoActionSessionTimeout:
+    type: integer
+  AuthenticateOidcActionAuthenticationRequestParamName:
+    type: string
+  AuthenticateOidcActionAuthenticationRequestParamValue:
+    type: string
+  AuthenticateOidcActionAuthenticationRequestExtraParams:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AuthenticateOidcActionAuthenticationRequestParamName'
+        value:
+          $ref: '#/definitions/AuthenticateOidcActionAuthenticationRequestParamValue'
+  AuthenticateOidcActionAuthorizationEndpoint:
+    type: string
+  AuthenticateOidcActionClientId:
+    type: string
+  AuthenticateOidcActionClientSecret:
+    type: string
+  AuthenticateOidcActionConditionalBehaviorEnum:
+    type: string
+    enum:
+      - deny
+      - allow
+      - authenticate
   AuthenticateOidcActionIssuer:
     type: string
-  AuthenticateOidcActionScope:
-    type: string
-  AuthenticateOidcActionSessionCookieName:
-    type: string
-  AuthenticateOidcActionSessionTimeout:
-    type: integer
   AuthenticateOidcActionTokenEndpoint:
     type: string
   AuthenticateOidcActionUserInfoEndpoint:
     type: string
+  AuthenticateOidcActionSessionCookieName:
+    type: string
+  AuthenticateOidcActionScope:
+    type: string
+  AuthenticateOidcActionSessionTimeout:
+    type: integer
+  ZoneName:
+    type: string
+  SubnetId:
+    type: string
+  LoadBalancerAddresses:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerAddress'
   AvailabilityZone:
     type: object
     properties:
@@ -2872,6 +2935,10 @@ definitions:
       $ref: '#/definitions/AvailabilityZone'
   CanonicalHostedZoneId:
     type: string
+  CertificateArn:
+    type: string
+  Default:
+    type: boolean
   Certificate:
     type: object
     properties:
@@ -2882,12 +2949,10 @@ definitions:
         $ref: '#/definitions/Default'
         description: Indicates whether the certificate is the default certificate. Do not set <code>IsDefault</code> when specifying a certificate as an input parameter.
     description: Information about an SSL server certificate.
-  CertificateArn:
+  CipherName:
     type: string
-  CertificateList:
-    type: array
-    items:
-      $ref: '#/definitions/Certificate'
+  CipherPriority:
+    type: integer
   Cipher:
     type: object
     properties:
@@ -2898,10 +2963,6 @@ definitions:
         $ref: '#/definitions/CipherPriority'
         description: The priority of the cipher.
     description: Information about a cipher used in a policy.
-  CipherName:
-    type: string
-  CipherPriority:
-    type: integer
   Ciphers:
     type: array
     items:
@@ -2909,34 +2970,184 @@ definitions:
   ConditionFieldName:
     type: string
     maxLength: 64
+  LoadBalancerArn:
+    type: string
+  ProtocolEnum:
+    type: string
+    enum:
+      - HTTP
+      - HTTPS
+      - TCP
+  Port:
+    type: integer
+    minimum: 1
+    maximum: 65535
+  SslPolicyName:
+    type: string
+  Listeners:
+    type: array
+    items:
+      $ref: '#/definitions/Listener'
+  LoadBalancerName:
+    type: string
+  Subnets:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+  SubnetMappings:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetMapping'
+  SecurityGroups:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+  LoadBalancerSchemeEnum:
+    type: string
+    enum:
+      - internet-facing
+      - internal
+  LoadBalancerTypeEnum:
+    type: string
+    enum:
+      - application
+      - network
+  IpAddressType:
+    type: string
+    enum:
+      - ipv4
+      - dualstack
+  LoadBalancers:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancer'
+  RuleConditionList:
+    type: array
+    items:
+      $ref: '#/definitions/RuleCondition'
+  RulePriority:
+    type: integer
+    minimum: 1
+    maximum: 50000
+  Rules:
+    type: array
+    items:
+      $ref: '#/definitions/Rule'
+  TargetGroupName:
+    type: string
+  VpcId:
+    type: string
+  HealthCheckPort:
+    type: string
+  HealthCheckEnabled:
+    type: boolean
+  Path:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  HealthCheckIntervalSeconds:
+    type: integer
+    minimum: 5
+    maximum: 300
+  HealthCheckTimeoutSeconds:
+    type: integer
+    minimum: 2
+    maximum: 120
+  HealthCheckThresholdCount:
+    type: integer
+    minimum: 2
+    maximum: 10
+  Matcher:
+    type: object
+    required:
+      - HttpCode
+    properties:
+      HttpCode:
+        $ref: '#/definitions/HttpCode'
+        description: '<p>The HTTP codes.</p> <p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is 200–399.</p>'
+    description: Information to use when checking for a successful response from a target.
+  TargetTypeEnum:
+    type: string
+    enum:
+      - instance
+      - ip
+      - lambda
+  TargetGroups:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGroup'
   CreatedTime:
     type: string
     format: date-time
   DNSName:
     type: string
-  Default:
-    type: boolean
+  RuleArn:
+    type: string
+  TargetDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/TargetDescription'
+  Marker:
+    type: string
+  PageSize:
+    type: integer
+    minimum: 1
+    maximum: 400
+  Limits:
+    type: array
+    items:
+      $ref: '#/definitions/Limit'
+  ListenerArns:
+    type: array
+    items:
+      $ref: '#/definitions/ListenerArn'
+  LoadBalancerAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerAttribute'
+    maxItems: 20
+  LoadBalancerArns:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerArn'
+  LoadBalancerNames:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerName'
+  RuleArns:
+    type: array
+    items:
+      $ref: '#/definitions/RuleArn'
+  SslPolicyNames:
+    type: array
+    items:
+      $ref: '#/definitions/SslPolicyName'
+  SslPolicies:
+    type: array
+    items:
+      $ref: '#/definitions/SslPolicy'
+  TagDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/TagDescription'
+  TargetGroupAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGroupAttribute'
+  TargetGroupArns:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGroupArn'
+  TargetGroupNames:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGroupName'
+  TargetHealthDescriptions:
+    type: array
+    items:
+      $ref: '#/definitions/TargetHealthDescription'
   Description:
     type: string
-  FixedResponseActionConfig:
-    type: object
-    required:
-      - StatusCode
-    properties:
-      MessageBody:
-        $ref: '#/definitions/FixedResponseActionMessage'
-        description: The message.
-      StatusCode:
-        $ref: '#/definitions/FixedResponseActionStatusCode'
-        description: 'The HTTP response code (2XX, 4XX, or 5XX).'
-      ContentType:
-        $ref: '#/definitions/FixedResponseActionContentType'
-        description: '<p>The content type.</p> <p>Valid Values: text/plain | text/css | text/html | application/javascript | application/json</p>'
-    description: Information about an action that returns a custom HTTP response.
-  FixedResponseActionContentType:
-    type: string
-    minLength: 0
-    maxLength: 32
   FixedResponseActionMessage:
     type: string
     minLength: 0
@@ -2944,33 +3155,20 @@ definitions:
   FixedResponseActionStatusCode:
     type: string
     pattern: ^(2|4|5)\d\d$
-  HealthCheckEnabled:
-    type: boolean
-  HealthCheckIntervalSeconds:
-    type: integer
-    minimum: 5
-    maximum: 300
-  HealthCheckPort:
+  FixedResponseActionContentType:
     type: string
-  HealthCheckThresholdCount:
-    type: integer
-    minimum: 2
-    maximum: 10
-  HealthCheckTimeoutSeconds:
-    type: integer
-    minimum: 2
-    maximum: 120
+    minLength: 0
+    maxLength: 32
   HttpCode:
     type: string
   IpAddress:
     type: string
-  IpAddressType:
-    type: string
-    enum:
-      - ipv4
-      - dualstack
   IsDefault:
     type: boolean
+  Name:
+    type: string
+  Max:
+    type: string
   Limit:
     type: object
     properties:
@@ -2981,10 +3179,8 @@ definitions:
         $ref: '#/definitions/Max'
         description: The maximum value of the limit.
     description: Information about an Elastic Load Balancing resource limit for your AWS account.
-  Limits:
-    type: array
-    items:
-      $ref: '#/definitions/Limit'
+  StringValue:
+    type: string
   ListOfString:
     type: array
     items:
@@ -3014,16 +3210,16 @@ definitions:
         $ref: '#/definitions/Actions'
         description: The default actions for the listener.
     description: Information about a listener.
-  ListenerArn:
-    type: string
-  ListenerArns:
-    type: array
-    items:
-      $ref: '#/definitions/ListenerArn'
-  Listeners:
-    type: array
-    items:
-      $ref: '#/definitions/Listener'
+  LoadBalancerState:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/LoadBalancerStateEnum'
+        description: 'The state code. The initial state of the load balancer is <code>provisioning</code>. After the load balancer is fully set up and ready to route traffic, its state is <code>active</code>. If the load balancer could not be set up, its state is <code>failed</code>.'
+      Reason:
+        $ref: '#/definitions/StateReason'
+        description: A description of the state.
+    description: Information about the state of the load balancer.
   LoadBalancer:
     type: object
     properties:
@@ -3074,16 +3270,13 @@ definitions:
         $ref: '#/definitions/AllocationId'
         description: '[Network Load Balancers] The allocation ID of the Elastic IP address.'
     description: Information about a static IP address for a load balancer.
-  LoadBalancerAddresses:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerAddress'
-  LoadBalancerArn:
+  LoadBalancerAttributeKey:
     type: string
-  LoadBalancerArns:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerArn'
+    pattern: '^[a-zA-Z0-9._]+$'
+    maxLength: 256
+  LoadBalancerAttributeValue:
+    type: string
+    maxLength: 1024
   LoadBalancerAttribute:
     type: object
     properties:
@@ -3094,39 +3287,6 @@ definitions:
         $ref: '#/definitions/LoadBalancerAttributeValue'
         description: The value of the attribute.
     description: Information about a load balancer attribute.
-  LoadBalancerAttributeKey:
-    type: string
-    pattern: '^[a-zA-Z0-9._]+$'
-    maxLength: 256
-  LoadBalancerAttributeValue:
-    type: string
-    maxLength: 1024
-  LoadBalancerAttributes:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerAttribute'
-    maxItems: 20
-  LoadBalancerName:
-    type: string
-  LoadBalancerNames:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerName'
-  LoadBalancerSchemeEnum:
-    type: string
-    enum:
-      - internet-facing
-      - internal
-  LoadBalancerState:
-    type: object
-    properties:
-      Code:
-        $ref: '#/definitions/LoadBalancerStateEnum'
-        description: 'The state code. The initial state of the load balancer is <code>provisioning</code>. After the load balancer is fully set up and ready to route traffic, its state is <code>active</code>. If the load balancer could not be set up, its state is <code>failed</code>.'
-      Reason:
-        $ref: '#/definitions/StateReason'
-        description: A description of the state.
-    description: Information about the state of the load balancer.
   LoadBalancerStateEnum:
     type: string
     enum:
@@ -3134,72 +3294,13 @@ definitions:
       - provisioning
       - active_impaired
       - failed
-  LoadBalancerTypeEnum:
+  StateReason:
     type: string
-    enum:
-      - application
-      - network
-  LoadBalancers:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancer'
-  Marker:
+  RedirectActionProtocol:
     type: string
-  Matcher:
-    type: object
-    required:
-      - HttpCode
-    properties:
-      HttpCode:
-        $ref: '#/definitions/HttpCode'
-        description: '<p>The HTTP codes.</p> <p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is 200–399.</p>'
-    description: Information to use when checking for a successful response from a target.
-  Max:
+    pattern: '^(HTTPS?|#\{protocol\})$'
+  RedirectActionPort:
     type: string
-  Name:
-    type: string
-  PageSize:
-    type: integer
-    minimum: 1
-    maximum: 400
-  Path:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  Port:
-    type: integer
-    minimum: 1
-    maximum: 65535
-  ProtocolEnum:
-    type: string
-    enum:
-      - HTTP
-      - HTTPS
-      - TCP
-  RedirectActionConfig:
-    type: object
-    required:
-      - StatusCode
-    properties:
-      Protocol:
-        $ref: '#/definitions/RedirectActionProtocol'
-        description: 'The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You cannot redirect HTTPS to HTTP.'
-      Port:
-        $ref: '#/definitions/RedirectActionPort'
-        description: 'The port. You can specify a value from 1 to 65535 or #{port}.'
-      Host:
-        $ref: '#/definitions/RedirectActionHost'
-        description: 'The hostname. This component is not percent-encoded. The hostname can contain #{host}.'
-      Path:
-        $ref: '#/definitions/RedirectActionPath'
-        description: 'The absolute path, starting with the leading "/". This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}.'
-      Query:
-        $ref: '#/definitions/RedirectActionQuery'
-        description: 'The query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading "?", as it is automatically added. You can specify any of the reserved keywords.'
-      StatusCode:
-        $ref: '#/definitions/RedirectActionStatusCodeEnum'
-        description: The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary (HTTP 302).
-    description: '<p>Information about a redirect action.</p> <p>A URI consists of the following components: protocol://hostname:port/path?query. You must modify at least one of the following components to avoid a redirect loop: protocol, hostname, port, or path. Any components that you do not modify retain their original values.</p> <p>You can reuse URI components using the following reserved keywords:</p> <ul> <li> <p>#{protocol}</p> </li> <li> <p>#{host}</p> </li> <li> <p>#{port}</p> </li> <li> <p>#{path} (the leading "/" is removed)</p> </li> <li> <p>#{query}</p> </li> </ul> <p>For example, you can change the path to "/new/#{path}", the hostname to "example.#{host}", or the query to "#{query}&amp;value=xyz".</p>'
   RedirectActionHost:
     type: string
     minLength: 1
@@ -3208,11 +3309,6 @@ definitions:
     type: string
     minLength: 1
     maxLength: 128
-  RedirectActionPort:
-    type: string
-  RedirectActionProtocol:
-    type: string
-    pattern: '^(HTTPS?|#\{protocol\})$'
   RedirectActionQuery:
     type: string
     minLength: 0
@@ -3222,12 +3318,14 @@ definitions:
     enum:
       - HTTP_301
       - HTTP_302
-  ResourceArn:
-    type: string
-  ResourceArns:
+  TagKeys:
     type: array
     items:
-      $ref: '#/definitions/ResourceArn'
+      $ref: '#/definitions/TagKey'
+  ResourceArn:
+    type: string
+  String:
+    type: string
   Rule:
     type: object
     properties:
@@ -3247,12 +3345,6 @@ definitions:
         $ref: '#/definitions/IsDefault'
         description: Indicates whether this is the default rule.
     description: Information about a rule.
-  RuleArn:
-    type: string
-  RuleArns:
-    type: array
-    items:
-      $ref: '#/definitions/RuleArn'
   RuleCondition:
     type: object
     properties:
@@ -3263,18 +3355,6 @@ definitions:
         $ref: '#/definitions/ListOfString'
         description: '<p>The condition value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ " '' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>'
     description: Information about a condition for a rule.
-  RuleConditionList:
-    type: array
-    items:
-      $ref: '#/definitions/RuleCondition'
-  RulePriority:
-    type: integer
-    minimum: 1
-    maximum: 50000
-  RulePriorityList:
-    type: array
-    items:
-      $ref: '#/definitions/RulePriorityPair'
   RulePriorityPair:
     type: object
     properties:
@@ -3285,20 +3365,12 @@ definitions:
         $ref: '#/definitions/RulePriority'
         description: The rule priority.
     description: Information about the priorities for the rules for a listener.
-  Rules:
+  RulePriorityList:
     type: array
     items:
-      $ref: '#/definitions/Rule'
+      $ref: '#/definitions/RulePriorityPair'
   SecurityGroupId:
     type: string
-  SecurityGroups:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityGroupId'
-  SslPolicies:
-    type: array
-    items:
-      $ref: '#/definitions/SslPolicy'
   SslPolicy:
     type: object
     properties:
@@ -3312,25 +3384,11 @@ definitions:
         $ref: '#/definitions/SslPolicyName'
         description: The name of the policy.
     description: Information about a policy used for SSL negotiation.
-  SslPolicyName:
-    type: string
-  SslPolicyNames:
-    type: array
-    items:
-      $ref: '#/definitions/SslPolicyName'
-  SslProtocol:
-    type: string
   SslProtocols:
     type: array
     items:
       $ref: '#/definitions/SslProtocol'
-  StateReason:
-    type: string
-  String:
-    type: string
-  StringValue:
-    type: string
-  SubnetId:
+  SslProtocol:
     type: string
   SubnetMapping:
     type: object
@@ -3342,14 +3400,16 @@ definitions:
         $ref: '#/definitions/AllocationId'
         description: '[Network Load Balancers] The allocation ID of the Elastic IP address.'
     description: Information about a subnet mapping.
-  SubnetMappings:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetMapping'
-  Subnets:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetId'
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -3372,29 +3432,8 @@ definitions:
         $ref: '#/definitions/TagList'
         description: Information about the tags.
     description: The tags associated with a resource.
-  TagDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/TagDescription'
-  TagKey:
+  TargetId:
     type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeys:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
   TargetDescription:
     type: object
     required:
@@ -3410,10 +3449,6 @@ definitions:
         $ref: '#/definitions/ZoneName'
         description: '<p>An Availability Zone or <code>all</code>. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer.</p> <p>This parameter is not supported if the target type of the target group is <code>instance</code>.</p> <p>If the target type is <code>ip</code> and the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside the VPC, this parameter is required.</p> <p>With an Application Load Balancer, if the target type is <code>ip</code> and the IP address is outside the VPC for the target group, the only supported value is <code>all</code>.</p> <p>If the target type is <code>lambda</code>, this parameter is optional and the only supported value is <code>all</code>.</p>'
     description: Information about a target.
-  TargetDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/TargetDescription'
   TargetGroup:
     type: object
     properties:
@@ -3466,12 +3501,12 @@ definitions:
         $ref: '#/definitions/TargetTypeEnum'
         description: The type of target that you must specify when registering targets with this target group. The possible values are <code>instance</code> (targets are specified by instance ID) or <code>ip</code> (targets are specified by IP address).
     description: Information about a target group.
-  TargetGroupArn:
+  TargetGroupAttributeKey:
     type: string
-  TargetGroupArns:
-    type: array
-    items:
-      $ref: '#/definitions/TargetGroupArn'
+    pattern: '^[a-zA-Z0-9._]+$'
+    maxLength: 256
+  TargetGroupAttributeValue:
+    type: string
   TargetGroupAttribute:
     type: object
     properties:
@@ -3482,26 +3517,30 @@ definitions:
         $ref: '#/definitions/TargetGroupAttributeValue'
         description: The value of the attribute.
     description: Information about a target group attribute.
-  TargetGroupAttributeKey:
+  TargetHealthStateEnum:
     type: string
-    pattern: '^[a-zA-Z0-9._]+$'
-    maxLength: 256
-  TargetGroupAttributeValue:
+    enum:
+      - initial
+      - healthy
+      - unhealthy
+      - unused
+      - draining
+      - unavailable
+  TargetHealthReasonEnum:
     type: string
-  TargetGroupAttributes:
-    type: array
-    items:
-      $ref: '#/definitions/TargetGroupAttribute'
-  TargetGroupName:
-    type: string
-  TargetGroupNames:
-    type: array
-    items:
-      $ref: '#/definitions/TargetGroupName'
-  TargetGroups:
-    type: array
-    items:
-      $ref: '#/definitions/TargetGroup'
+    enum:
+      - Elb.RegistrationInProgress
+      - Elb.InitialHealthChecking
+      - Target.ResponseCodeMismatch
+      - Target.Timeout
+      - Target.FailedHealthChecks
+      - Target.NotRegistered
+      - Target.NotInUse
+      - Target.DeregistrationInProgress
+      - Target.InvalidState
+      - Target.IpUnusable
+      - Target.HealthCheckDisabled
+      - Elb.InternalError
   TargetHealth:
     type: object
     properties:
@@ -3528,43 +3567,3 @@ definitions:
         $ref: '#/definitions/TargetHealth'
         description: The health information for the target.
     description: Information about the health of a target.
-  TargetHealthDescriptions:
-    type: array
-    items:
-      $ref: '#/definitions/TargetHealthDescription'
-  TargetHealthReasonEnum:
-    type: string
-    enum:
-      - Elb.RegistrationInProgress
-      - Elb.InitialHealthChecking
-      - Target.ResponseCodeMismatch
-      - Target.Timeout
-      - Target.FailedHealthChecks
-      - Target.NotRegistered
-      - Target.NotInUse
-      - Target.DeregistrationInProgress
-      - Target.InvalidState
-      - Target.IpUnusable
-      - Target.HealthCheckDisabled
-      - Elb.InternalError
-  TargetHealthStateEnum:
-    type: string
-    enum:
-      - initial
-      - healthy
-      - unhealthy
-      - unused
-      - draining
-      - unavailable
-  TargetId:
-    type: string
-  TargetTypeEnum:
-    type: string
-    enum:
-      - instance
-      - ip
-      - lambda
-  VpcId:
-    type: string
-  ZoneName:
-    type: string

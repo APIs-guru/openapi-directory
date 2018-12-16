@@ -1882,9 +1882,43 @@ definitions:
       ScalingType:
         $ref: '#/definitions/ScalingType'
         description: The scaling type. Uniform scaling creates shards of equal size.
-  undefined: {}
+  StreamName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 128
+  TagMap:
+    type: array
+    minItems: 1
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
   BooleanObject:
     type: boolean
+  ConsumerName:
+    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 128
+  ConsumerARN:
+    type: string
+    pattern: '^(arn):aws.*:kinesis:.*:\d{12}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+'
+    minLength: 1
+    maxLength: 2048
+  ConsumerStatus:
+    type: string
+    enum:
+      - CREATING
+      - DELETING
+      - ACTIVE
+  Timestamp:
+    type: string
+    format: date-time
   Consumer:
     type: object
     required:
@@ -1906,15 +1940,15 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: <p/>
     description: An object that represents the details of the consumer you registered.
-  ConsumerARN:
-    type: string
-    pattern: '^(arn):aws.*:kinesis:.*:\d{12}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+'
-    minLength: 1
-    maxLength: 2048
   ConsumerCountObject:
     type: integer
     minimum: 0
     maximum: 1000000
+  StreamARN:
+    type: string
+    pattern: 'arn:aws.*:kinesis:.*:\d{12}:stream/.*'
+    minLength: 1
+    maxLength: 2048
   ConsumerDescription:
     type: object
     required:
@@ -1944,280 +1978,31 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Consumer'
-  ConsumerName:
-    type: string
-    pattern: '[a-zA-Z0-9_.-]+'
-    minLength: 1
-    maxLength: 128
-  ConsumerStatus:
-    type: string
-    enum:
-      - CREATING
-      - DELETING
-      - ACTIVE
-  Data:
-    type: string
-    minLength: 0
-    maxLength: 1048576
-  DescribeStreamInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 10000
-  EncryptionType:
-    type: string
-    enum:
-      - NONE
-      - KMS
-  EnhancedMetrics:
-    type: object
-    properties:
-      ShardLevelMetrics:
-        $ref: '#/definitions/MetricsNameList'
-        description: '<p>List of shard-level metrics.</p> <p>The following are the valid shard-level metrics. The value "<code>ALL</code>" enhances every metric.</p> <ul> <li> <p> <code>IncomingBytes</code> </p> </li> <li> <p> <code>IncomingRecords</code> </p> </li> <li> <p> <code>OutgoingBytes</code> </p> </li> <li> <p> <code>OutgoingRecords</code> </p> </li> <li> <p> <code>WriteProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>ReadProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>IteratorAgeMilliseconds</code> </p> </li> <li> <p> <code>ALL</code> </p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html">Monitoring the Amazon Kinesis Data Streams Service with Amazon CloudWatch</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>'
-    description: Represents enhanced metrics types.
-  EnhancedMonitoringList:
-    type: array
-    items:
-      $ref: '#/definitions/EnhancedMetrics'
-  ErrorCode:
-    type: string
-  ErrorMessage:
-    type: string
-  GetRecordsInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 10000
-  HashKey:
-    type: string
-    pattern: '0|([1-9]\d{0,38})'
-  HashKeyRange:
-    type: object
-    required:
-      - StartingHashKey
-      - EndingHashKey
-    properties:
-      StartingHashKey:
-        $ref: '#/definitions/HashKey'
-        description: The starting hash key of the hash key range.
-      EndingHashKey:
-        $ref: '#/definitions/HashKey'
-        description: The ending hash key of the hash key range.
-    description: 'The range of possible hash key values for the shard, which is a set of ordered contiguous positive integers.'
-  InternalFailureException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ErrorMessage'
-  KeyId:
-    type: string
-    minLength: 1
-    maxLength: 2048
-  ListShardsInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 10000
-  ListStreamConsumersInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 10000
-  ListStreamsInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 10000
-  ListTagsForStreamInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 50
-  MetricsName:
-    type: string
-    enum:
-      - IncomingBytes
-      - IncomingRecords
-      - OutgoingBytes
-      - OutgoingRecords
-      - WriteProvisionedThroughputExceeded
-      - ReadProvisionedThroughputExceeded
-      - IteratorAgeMilliseconds
-      - ALL
-  MetricsNameList:
-    type: array
-    items:
-      $ref: '#/definitions/MetricsName'
-    minItems: 1
-    maxItems: 7
-  MillisBehindLatest:
-    type: integer
-    minimum: 0
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 1048576
-  PartitionKey:
-    type: string
-    minLength: 1
-    maxLength: 256
   PositiveIntegerObject:
     type: integer
     minimum: 1
     maximum: 100000
-  PutRecordsRequestEntry:
-    type: object
-    required:
-      - Data
-      - PartitionKey
-    properties:
-      Data:
-        $ref: '#/definitions/Data'
-        description: 'The data blob to put into the record, which is base64-encoded when the blob is serialized. When the data blob (the payload before base64-encoding) is added to the partition key size, the total size must not exceed the maximum record size (1 MB).'
-      ExplicitHashKey:
-        $ref: '#/definitions/HashKey'
-        description: The hash value used to determine explicitly the shard that the data record is assigned to by overriding the partition key hash.
-      PartitionKey:
-        $ref: '#/definitions/PartitionKey'
-        description: 'Determines which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 characters for each key. Amazon Kinesis Data Streams uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream.'
-    description: Represents the output for <code>PutRecords</code>.
-  PutRecordsRequestEntryList:
-    type: array
-    items:
-      $ref: '#/definitions/PutRecordsRequestEntry'
-    minItems: 1
-    maxItems: 500
-  PutRecordsResultEntry:
-    type: object
-    properties:
-      SequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-        description: The sequence number for an individual record result.
-      ShardId:
-        $ref: '#/definitions/ShardId'
-        description: The shard ID for an individual record result.
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-        description: The error code for an individual record result. <code>ErrorCodes</code> can be either <code>ProvisionedThroughputExceededException</code> or <code>InternalFailure</code>.
-      ErrorMessage:
-        $ref: '#/definitions/ErrorMessage'
-        description: 'The error message for an individual record result. An <code>ErrorCode</code> value of <code>ProvisionedThroughputExceededException</code> has an error message that includes the account ID, stream name, and shard ID. An <code>ErrorCode</code> value of <code>InternalFailure</code> has the error message <code>"Internal Service Failure"</code>.'
-    description: Represents the result of an individual record from a <code>PutRecords</code> request. A record that is successfully added to a stream includes <code>SequenceNumber</code> and <code>ShardId</code> in the result. A record that fails to be added to the stream includes <code>ErrorCode</code> and <code>ErrorMessage</code> in the result.
-  PutRecordsResultEntryList:
-    type: array
-    items:
-      $ref: '#/definitions/PutRecordsResultEntry'
-    minItems: 1
-    maxItems: 500
-  Record:
-    type: object
-    required:
-      - SequenceNumber
-      - Data
-      - PartitionKey
-    properties:
-      SequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-        description: The unique identifier of the record within its shard.
-      ApproximateArrivalTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The approximate time that the record was inserted into the stream.
-      Data:
-        $ref: '#/definitions/Data'
-        description: 'The data blob. The data in the blob is both opaque and immutable to Kinesis Data Streams, which does not inspect, interpret, or change the data in the blob in any way. When the data blob (the payload before base64-encoding) is added to the partition key size, the total size must not exceed the maximum record size (1 MB).'
-      PartitionKey:
-        $ref: '#/definitions/PartitionKey'
-        description: Identifies which shard in the stream the data record is assigned to.
-      EncryptionType:
-        $ref: '#/definitions/EncryptionType'
-        description: '<p>The encryption type used on the record. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Do not encrypt the records in the stream.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records in the stream using a customer-managed AWS KMS key.</p> </li> </ul>'
-    description: 'The unit of data of the Kinesis data stream, which is composed of a sequence number, a partition key, and a data blob.'
-  RecordList:
-    type: array
-    items:
-      $ref: '#/definitions/Record'
+  Data:
+    type: string
+    minLength: 0
+    maxLength: 1048576
   RetentionPeriodHours:
     type: integer
     minimum: 1
     maximum: 168
-  ScalingType:
-    type: string
-    enum:
-      - UNIFORM_SCALING
-  SequenceNumber:
-    type: string
-    pattern: '0|([1-9]\d{0,128})'
-  SequenceNumberRange:
-    type: object
-    required:
-      - StartingSequenceNumber
-    properties:
-      StartingSequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-        description: The starting sequence number for the range.
-      EndingSequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-        description: The ending sequence number for the range. Shards that are in the OPEN state have an ending sequence number of <code>null</code>.
-    description: The range of possible sequence numbers for the shard.
-  Shard:
-    type: object
-    required:
-      - ShardId
-      - HashKeyRange
-      - SequenceNumberRange
-    properties:
-      ShardId:
-        $ref: '#/definitions/ShardId'
-        description: The unique identifier of the shard within the stream.
-      ParentShardId:
-        $ref: '#/definitions/ShardId'
-        description: The shard ID of the shard's parent.
-      AdjacentParentShardId:
-        $ref: '#/definitions/ShardId'
-        description: The shard ID of the shard adjacent to the shard's parent.
-      HashKeyRange:
-        $ref: '#/definitions/HashKeyRange'
-        description: 'The range of possible hash key values for the shard, which is a set of ordered contiguous positive integers.'
-      SequenceNumberRange:
-        $ref: '#/definitions/SequenceNumberRange'
-        description: The range of possible sequence numbers for the shard.
-    description: A uniquely identified group of data records in a Kinesis data stream.
   ShardCountObject:
     type: integer
     minimum: 0
     maximum: 1000000
+  DescribeStreamInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
   ShardId:
     type: string
     pattern: '[a-zA-Z0-9_.-]+'
     minLength: 1
     maxLength: 128
-  ShardIterator:
-    type: string
-    minLength: 1
-    maxLength: 512
-  ShardIteratorType:
-    type: string
-    enum:
-      - AT_SEQUENCE_NUMBER
-      - AFTER_SEQUENCE_NUMBER
-      - TRIM_HORIZON
-      - LATEST
-      - AT_TIMESTAMP
-  ShardList:
-    type: array
-    items:
-      $ref: '#/definitions/Shard'
-  StartingPosition:
-    type: object
-    required:
-      - Type
-    properties:
-      Type:
-        $ref: '#/definitions/ShardIteratorType'
-      SequenceNumber:
-        $ref: '#/definitions/SequenceNumber'
-      Timestamp:
-        $ref: '#/definitions/Timestamp'
-  StreamARN:
-    type: string
-    pattern: 'arn:aws.*:kinesis:.*:\d{12}:stream/.*'
-    minLength: 1
-    maxLength: 2048
   StreamDescription:
     type: object
     required:
@@ -2303,15 +2088,258 @@ definitions:
         $ref: '#/definitions/ConsumerCountObject'
         description: The number of enhanced fan-out consumers registered with the stream.
     description: 'Represents the output for <a>DescribeStreamSummary</a> '
-  StreamName:
+  MetricsNameList:
+    type: array
+    items:
+      $ref: '#/definitions/MetricsName'
+    minItems: 1
+    maxItems: 7
+  EncryptionType:
     type: string
-    pattern: '[a-zA-Z0-9_.-]+'
+    enum:
+      - NONE
+      - KMS
+  EnhancedMetrics:
+    type: object
+    properties:
+      ShardLevelMetrics:
+        $ref: '#/definitions/MetricsNameList'
+        description: '<p>List of shard-level metrics.</p> <p>The following are the valid shard-level metrics. The value "<code>ALL</code>" enhances every metric.</p> <ul> <li> <p> <code>IncomingBytes</code> </p> </li> <li> <p> <code>IncomingRecords</code> </p> </li> <li> <p> <code>OutgoingBytes</code> </p> </li> <li> <p> <code>OutgoingRecords</code> </p> </li> <li> <p> <code>WriteProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>ReadProvisionedThroughputExceeded</code> </p> </li> <li> <p> <code>IteratorAgeMilliseconds</code> </p> </li> <li> <p> <code>ALL</code> </p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html">Monitoring the Amazon Kinesis Data Streams Service with Amazon CloudWatch</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>'
+    description: Represents enhanced metrics types.
+  EnhancedMonitoringList:
+    type: array
+    items:
+      $ref: '#/definitions/EnhancedMetrics'
+  ErrorCode:
+    type: string
+  ErrorMessage:
+    type: string
+  ShardIterator:
+    type: string
     minLength: 1
-    maxLength: 128
+    maxLength: 512
+  GetRecordsInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  RecordList:
+    type: array
+    items:
+      $ref: '#/definitions/Record'
+  MillisBehindLatest:
+    type: integer
+    minimum: 0
+  ShardIteratorType:
+    type: string
+    enum:
+      - AT_SEQUENCE_NUMBER
+      - AFTER_SEQUENCE_NUMBER
+      - TRIM_HORIZON
+      - LATEST
+      - AT_TIMESTAMP
+  SequenceNumber:
+    type: string
+    pattern: '0|([1-9]\d{0,128})'
+  HashKey:
+    type: string
+    pattern: '0|([1-9]\d{0,38})'
+  HashKeyRange:
+    type: object
+    required:
+      - StartingHashKey
+      - EndingHashKey
+    properties:
+      StartingHashKey:
+        $ref: '#/definitions/HashKey'
+        description: The starting hash key of the hash key range.
+      EndingHashKey:
+        $ref: '#/definitions/HashKey'
+        description: The ending hash key of the hash key range.
+    description: 'The range of possible hash key values for the shard, which is a set of ordered contiguous positive integers.'
+  InternalFailureException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+  KeyId:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 1048576
+  ListShardsInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  ShardList:
+    type: array
+    items:
+      $ref: '#/definitions/Shard'
+  ListStreamConsumersInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  ListStreamsInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
   StreamNameList:
     type: array
     items:
       $ref: '#/definitions/StreamName'
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  ListTagsForStreamInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 50
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+  MetricsName:
+    type: string
+    enum:
+      - IncomingBytes
+      - IncomingRecords
+      - OutgoingBytes
+      - OutgoingRecords
+      - WriteProvisionedThroughputExceeded
+      - ReadProvisionedThroughputExceeded
+      - IteratorAgeMilliseconds
+      - ALL
+  PartitionKey:
+    type: string
+    minLength: 1
+    maxLength: 256
+  PutRecordsRequestEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/PutRecordsRequestEntry'
+    minItems: 1
+    maxItems: 500
+  PutRecordsResultEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/PutRecordsResultEntry'
+    minItems: 1
+    maxItems: 500
+  PutRecordsRequestEntry:
+    type: object
+    required:
+      - Data
+      - PartitionKey
+    properties:
+      Data:
+        $ref: '#/definitions/Data'
+        description: 'The data blob to put into the record, which is base64-encoded when the blob is serialized. When the data blob (the payload before base64-encoding) is added to the partition key size, the total size must not exceed the maximum record size (1 MB).'
+      ExplicitHashKey:
+        $ref: '#/definitions/HashKey'
+        description: The hash value used to determine explicitly the shard that the data record is assigned to by overriding the partition key hash.
+      PartitionKey:
+        $ref: '#/definitions/PartitionKey'
+        description: 'Determines which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 characters for each key. Amazon Kinesis Data Streams uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream.'
+    description: Represents the output for <code>PutRecords</code>.
+  PutRecordsResultEntry:
+    type: object
+    properties:
+      SequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: The sequence number for an individual record result.
+      ShardId:
+        $ref: '#/definitions/ShardId'
+        description: The shard ID for an individual record result.
+      ErrorCode:
+        $ref: '#/definitions/ErrorCode'
+        description: The error code for an individual record result. <code>ErrorCodes</code> can be either <code>ProvisionedThroughputExceededException</code> or <code>InternalFailure</code>.
+      ErrorMessage:
+        $ref: '#/definitions/ErrorMessage'
+        description: 'The error message for an individual record result. An <code>ErrorCode</code> value of <code>ProvisionedThroughputExceededException</code> has an error message that includes the account ID, stream name, and shard ID. An <code>ErrorCode</code> value of <code>InternalFailure</code> has the error message <code>"Internal Service Failure"</code>.'
+    description: Represents the result of an individual record from a <code>PutRecords</code> request. A record that is successfully added to a stream includes <code>SequenceNumber</code> and <code>ShardId</code> in the result. A record that fails to be added to the stream includes <code>ErrorCode</code> and <code>ErrorMessage</code> in the result.
+  Record:
+    type: object
+    required:
+      - SequenceNumber
+      - Data
+      - PartitionKey
+    properties:
+      SequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: The unique identifier of the record within its shard.
+      ApproximateArrivalTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The approximate time that the record was inserted into the stream.
+      Data:
+        $ref: '#/definitions/Data'
+        description: 'The data blob. The data in the blob is both opaque and immutable to Kinesis Data Streams, which does not inspect, interpret, or change the data in the blob in any way. When the data blob (the payload before base64-encoding) is added to the partition key size, the total size must not exceed the maximum record size (1 MB).'
+      PartitionKey:
+        $ref: '#/definitions/PartitionKey'
+        description: Identifies which shard in the stream the data record is assigned to.
+      EncryptionType:
+        $ref: '#/definitions/EncryptionType'
+        description: '<p>The encryption type used on the record. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Do not encrypt the records in the stream.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records in the stream using a customer-managed AWS KMS key.</p> </li> </ul>'
+    description: 'The unit of data of the Kinesis data stream, which is composed of a sequence number, a partition key, and a data blob.'
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  ScalingType:
+    type: string
+    enum:
+      - UNIFORM_SCALING
+  SequenceNumberRange:
+    type: object
+    required:
+      - StartingSequenceNumber
+    properties:
+      StartingSequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: The starting sequence number for the range.
+      EndingSequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+        description: The ending sequence number for the range. Shards that are in the OPEN state have an ending sequence number of <code>null</code>.
+    description: The range of possible sequence numbers for the shard.
+  Shard:
+    type: object
+    required:
+      - ShardId
+      - HashKeyRange
+      - SequenceNumberRange
+    properties:
+      ShardId:
+        $ref: '#/definitions/ShardId'
+        description: The unique identifier of the shard within the stream.
+      ParentShardId:
+        $ref: '#/definitions/ShardId'
+        description: The shard ID of the shard's parent.
+      AdjacentParentShardId:
+        $ref: '#/definitions/ShardId'
+        description: The shard ID of the shard adjacent to the shard's parent.
+      HashKeyRange:
+        $ref: '#/definitions/HashKeyRange'
+        description: 'The range of possible hash key values for the shard, which is a set of ordered contiguous positive integers.'
+      SequenceNumberRange:
+        $ref: '#/definitions/SequenceNumberRange'
+        description: The range of possible sequence numbers for the shard.
+    description: A uniquely identified group of data records in a Kinesis data stream.
+  StartingPosition:
+    type: object
+    required:
+      - Type
+    properties:
+      Type:
+        $ref: '#/definitions/ShardIteratorType'
+      SequenceNumber:
+        $ref: '#/definitions/SequenceNumber'
+      Timestamp:
+        $ref: '#/definitions/Timestamp'
   StreamStatus:
     type: string
     enum:
@@ -2366,6 +2394,10 @@ definitions:
       EventStream:
         $ref: '#/definitions/SubscribeToShardEventStream'
         description: The event stream that your consumer can use to read records from the shard.
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -2378,36 +2410,3 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: 'An optional string, typically used to describe or define the tag. Maximum length: 256 characters. Valid characters: Unicode letters, digits, white space, _ . / = + - % @'
     description: 'Metadata assigned to the stream, consisting of a key-value pair.'
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-    minItems: 1
-    maxItems: 50
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 0
-  TagValue:
-    type: string
-    minLength: 0
-    maxLength: 256
-  TagMap:
-    type: array
-    minItems: 1
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-  Timestamp:
-    type: string
-    format: date-time

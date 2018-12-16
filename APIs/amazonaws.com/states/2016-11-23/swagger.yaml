@@ -1276,7 +1276,16 @@ definitions:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role of the state machine.
   MissingRequiredParameter: {}
-  undefined: {}
+  SensitiveError:
+    type: string
+    minLength: 0
+    maxLength: 256
+    format: password
+  SensitiveCause:
+    type: string
+    minLength: 0
+    maxLength: 32768
+    format: password
   ActivityFailedEventDetails:
     type: object
     properties:
@@ -1287,10 +1296,6 @@ definitions:
         $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about an activity that failed during an execution.
-  ActivityList:
-    type: array
-    items:
-      $ref: '#/definitions/ActivityListItem'
   ActivityListItem:
     type: object
     required:
@@ -1308,6 +1313,21 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The date the activity is created.
     description: Contains details about an activity.
+  ActivityList:
+    type: array
+    items:
+      $ref: '#/definitions/ActivityListItem'
+  Arn:
+    type: string
+    minLength: 1
+    maxLength: 256
+  Name:
+    type: string
+    minLength: 1
+    maxLength: 80
+  Timestamp:
+    type: string
+    format: date-time
   ActivityScheduleFailedEventDetails:
     type: object
     properties:
@@ -1318,6 +1338,12 @@ definitions:
         $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about an activity schedule failure that occurred during an execution.
+  SensitiveData:
+    type: string
+    maxLength: 32768
+    format: password
+  TimeoutInSeconds:
+    type: integer
   ActivityScheduledEventDetails:
     type: object
     required:
@@ -1336,6 +1362,9 @@ definitions:
         $ref: '#/definitions/TimeoutInSeconds'
         description: The maximum allowed duration between two heartbeats for the activity task.
     description: Contains details about an activity scheduled during an execution.
+  Identity:
+    type: string
+    maxLength: 256
   ActivityStartedEventDetails:
     type: object
     properties:
@@ -1360,10 +1389,6 @@ definitions:
         $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the timeout.
     description: Contains details about an activity timeout that occurred during an execution.
-  Arn:
-    type: string
-    minLength: 1
-    maxLength: 256
   ConnectorParameters:
     type: string
     minLength: 0
@@ -1374,6 +1399,19 @@ definitions:
     minLength: 1
     maxLength: 1048576
     format: password
+  ExecutionStatus:
+    type: string
+    enum:
+      - RUNNING
+      - SUCCEEDED
+      - FAILED
+      - TIMED_OUT
+      - ABORTED
+  StateMachineStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - DELETING
   EventId:
     type: integer
   ExecutionAbortedEventDetails:
@@ -1396,10 +1434,6 @@ definitions:
         $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about an execution failure event.
-  ExecutionList:
-    type: array
-    items:
-      $ref: '#/definitions/ExecutionListItem'
   ExecutionListItem:
     type: object
     required:
@@ -1428,6 +1462,10 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: 'If the execution already ended, the date the execution stopped.'
     description: Contains details about an execution.
+  ExecutionList:
+    type: array
+    items:
+      $ref: '#/definitions/ExecutionListItem'
   ExecutionStartedEventDetails:
     type: object
     properties:
@@ -1438,14 +1476,6 @@ definitions:
         $ref: '#/definitions/Arn'
         description: The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda tasks.
     description: Contains details about the start of the execution.
-  ExecutionStatus:
-    type: string
-    enum:
-      - RUNNING
-      - SUCCEEDED
-      - FAILED
-      - TIMED_OUT
-      - ABORTED
   ExecutionSucceededEventDetails:
     type: object
     properties:
@@ -1463,83 +1493,20 @@ definitions:
         $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the timeout.
     description: Contains details about the execution timeout that occurred during the execution.
-  HistoryEvent:
-    type: object
-    required:
-      - timestamp
-      - type
-      - id
-    properties:
-      timestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time the event occurred.
-      type:
-        $ref: '#/definitions/HistoryEventType'
-        description: The type of the event.
-      id:
-        $ref: '#/definitions/EventId'
-        description: 'The id of the event. Events are numbered sequentially, starting at one.'
-      previousEventId:
-        $ref: '#/definitions/EventId'
-        description: The id of the previous event.
-      activityFailedEventDetails:
-        $ref: '#/definitions/ActivityFailedEventDetails'
-      activityScheduleFailedEventDetails:
-        $ref: '#/definitions/ActivityScheduleFailedEventDetails'
-        description: Contains details about an activity schedule event that failed during an execution.
-      activityScheduledEventDetails:
-        $ref: '#/definitions/ActivityScheduledEventDetails'
-      activityStartedEventDetails:
-        $ref: '#/definitions/ActivityStartedEventDetails'
-      activitySucceededEventDetails:
-        $ref: '#/definitions/ActivitySucceededEventDetails'
-      activityTimedOutEventDetails:
-        $ref: '#/definitions/ActivityTimedOutEventDetails'
-      taskFailedEventDetails:
-        $ref: '#/definitions/TaskFailedEventDetails'
-      taskScheduledEventDetails:
-        $ref: '#/definitions/TaskScheduledEventDetails'
-      taskStartFailedEventDetails:
-        $ref: '#/definitions/TaskStartFailedEventDetails'
-      taskStartedEventDetails:
-        $ref: '#/definitions/TaskStartedEventDetails'
-      taskSubmitFailedEventDetails:
-        $ref: '#/definitions/TaskSubmitFailedEventDetails'
-      taskSubmittedEventDetails:
-        $ref: '#/definitions/TaskSubmittedEventDetails'
-      taskSucceededEventDetails:
-        $ref: '#/definitions/TaskSucceededEventDetails'
-      taskTimedOutEventDetails:
-        $ref: '#/definitions/TaskTimedOutEventDetails'
-      executionFailedEventDetails:
-        $ref: '#/definitions/ExecutionFailedEventDetails'
-      executionStartedEventDetails:
-        $ref: '#/definitions/ExecutionStartedEventDetails'
-      executionSucceededEventDetails:
-        $ref: '#/definitions/ExecutionSucceededEventDetails'
-      executionAbortedEventDetails:
-        $ref: '#/definitions/ExecutionAbortedEventDetails'
-      executionTimedOutEventDetails:
-        $ref: '#/definitions/ExecutionTimedOutEventDetails'
-      lambdaFunctionFailedEventDetails:
-        $ref: '#/definitions/LambdaFunctionFailedEventDetails'
-      lambdaFunctionScheduleFailedEventDetails:
-        $ref: '#/definitions/LambdaFunctionScheduleFailedEventDetails'
-      lambdaFunctionScheduledEventDetails:
-        $ref: '#/definitions/LambdaFunctionScheduledEventDetails'
-      lambdaFunctionStartFailedEventDetails:
-        $ref: '#/definitions/LambdaFunctionStartFailedEventDetails'
-        description: Contains details about a lambda function that failed to start during an execution.
-      lambdaFunctionSucceededEventDetails:
-        $ref: '#/definitions/LambdaFunctionSucceededEventDetails'
-        description: Contains details about a lambda function that terminated successfully during an execution.
-      lambdaFunctionTimedOutEventDetails:
-        $ref: '#/definitions/LambdaFunctionTimedOutEventDetails'
-      stateEnteredEventDetails:
-        $ref: '#/definitions/StateEnteredEventDetails'
-      stateExitedEventDetails:
-        $ref: '#/definitions/StateExitedEventDetails'
-    description: Contains details about the events of an execution.
+  TaskToken:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  PageSize:
+    type: integer
+    minimum: 0
+    maximum: 1000
+  ReverseOrder:
+    type: boolean
+  PageToken:
+    type: string
+    minLength: 1
+    maxLength: 1024
   HistoryEventList:
     type: array
     description: Contains details about the events that occurred during an execution.
@@ -1593,149 +1560,6 @@ definitions:
       - WaitStateAborted
       - WaitStateEntered
       - WaitStateExited
-  Identity:
-    type: string
-    maxLength: 256
-  LambdaFunctionFailedEventDetails:
-    type: object
-    properties:
-      error:
-        $ref: '#/definitions/SensitiveError'
-        description: The error code of the failure.
-      cause:
-        $ref: '#/definitions/SensitiveCause'
-        description: A more detailed explanation of the cause of the failure.
-    description: Contains details about a lambda function that failed during an execution.
-  LambdaFunctionScheduleFailedEventDetails:
-    type: object
-    properties:
-      error:
-        $ref: '#/definitions/SensitiveError'
-        description: The error code of the failure.
-      cause:
-        $ref: '#/definitions/SensitiveCause'
-        description: A more detailed explanation of the cause of the failure.
-    description: Contains details about a failed lambda function schedule event that occurred during an execution.
-  LambdaFunctionScheduledEventDetails:
-    type: object
-    required:
-      - resource
-    properties:
-      resource:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) of the scheduled lambda function.
-      input:
-        $ref: '#/definitions/SensitiveData'
-        description: The JSON data input to the lambda function.
-      timeoutInSeconds:
-        $ref: '#/definitions/TimeoutInSeconds'
-        description: The maximum allowed duration of the lambda function.
-    description: Contains details about a lambda function scheduled during an execution.
-  LambdaFunctionStartFailedEventDetails:
-    type: object
-    properties:
-      error:
-        $ref: '#/definitions/SensitiveError'
-        description: The error code of the failure.
-      cause:
-        $ref: '#/definitions/SensitiveCause'
-        description: A more detailed explanation of the cause of the failure.
-    description: Contains details about a lambda function that failed to start during an execution.
-  LambdaFunctionSucceededEventDetails:
-    type: object
-    properties:
-      output:
-        $ref: '#/definitions/SensitiveData'
-        description: The JSON data output by the lambda function.
-    description: Contains details about a lambda function that successfully terminated during an execution.
-  LambdaFunctionTimedOutEventDetails:
-    type: object
-    properties:
-      error:
-        $ref: '#/definitions/SensitiveError'
-        description: The error code of the failure.
-      cause:
-        $ref: '#/definitions/SensitiveCause'
-        description: A more detailed explanation of the cause of the timeout.
-    description: Contains details about a lambda function timeout that occurred during an execution.
-  Name:
-    type: string
-    minLength: 1
-    maxLength: 80
-  PageSize:
-    type: integer
-    minimum: 0
-    maximum: 1000
-  PageToken:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  ReverseOrder:
-    type: boolean
-  SensitiveCause:
-    type: string
-    minLength: 0
-    maxLength: 32768
-    format: password
-  SensitiveData:
-    type: string
-    maxLength: 32768
-    format: password
-  SensitiveError:
-    type: string
-    minLength: 0
-    maxLength: 256
-    format: password
-  StateEnteredEventDetails:
-    type: object
-    required:
-      - name
-    properties:
-      name:
-        $ref: '#/definitions/Name'
-        description: The name of the state.
-      input:
-        $ref: '#/definitions/SensitiveData'
-        description: The string that contains the JSON input data for the state.
-    description: Contains details about a state entered during an execution.
-  StateExitedEventDetails:
-    type: object
-    required:
-      - name
-    properties:
-      name:
-        $ref: '#/definitions/Name'
-        description: '<p>The name of the state.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
-      output:
-        $ref: '#/definitions/SensitiveData'
-        description: The JSON output data of the state.
-    description: Contains details about an exit from a state during an execution.
-  StateMachineList:
-    type: array
-    items:
-      $ref: '#/definitions/StateMachineListItem'
-  StateMachineListItem:
-    type: object
-    required:
-      - stateMachineArn
-      - name
-      - creationDate
-    properties:
-      stateMachineArn:
-        $ref: '#/definitions/Arn'
-        description: The Amazon Resource Name (ARN) that identifies the state machine.
-      name:
-        $ref: '#/definitions/Name'
-        description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
-      creationDate:
-        $ref: '#/definitions/Timestamp'
-        description: The date the state machine is created.
-    description: Contains details about the state machine.
-  StateMachineStatus:
-    type: string
-    enum:
-      - ACTIVE
-      - DELETING
   TaskFailedEventDetails:
     type: object
     required:
@@ -1880,12 +1704,187 @@ definitions:
         $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
     description: Contains details about a connected service timeout that occured during an execution.
-  TaskToken:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  TimeoutInSeconds:
-    type: integer
-  Timestamp:
-    type: string
-    format: date-time
+  LambdaFunctionFailedEventDetails:
+    type: object
+    properties:
+      error:
+        $ref: '#/definitions/SensitiveError'
+        description: The error code of the failure.
+      cause:
+        $ref: '#/definitions/SensitiveCause'
+        description: A more detailed explanation of the cause of the failure.
+    description: Contains details about a lambda function that failed during an execution.
+  LambdaFunctionScheduleFailedEventDetails:
+    type: object
+    properties:
+      error:
+        $ref: '#/definitions/SensitiveError'
+        description: The error code of the failure.
+      cause:
+        $ref: '#/definitions/SensitiveCause'
+        description: A more detailed explanation of the cause of the failure.
+    description: Contains details about a failed lambda function schedule event that occurred during an execution.
+  LambdaFunctionScheduledEventDetails:
+    type: object
+    required:
+      - resource
+    properties:
+      resource:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) of the scheduled lambda function.
+      input:
+        $ref: '#/definitions/SensitiveData'
+        description: The JSON data input to the lambda function.
+      timeoutInSeconds:
+        $ref: '#/definitions/TimeoutInSeconds'
+        description: The maximum allowed duration of the lambda function.
+    description: Contains details about a lambda function scheduled during an execution.
+  LambdaFunctionStartFailedEventDetails:
+    type: object
+    properties:
+      error:
+        $ref: '#/definitions/SensitiveError'
+        description: The error code of the failure.
+      cause:
+        $ref: '#/definitions/SensitiveCause'
+        description: A more detailed explanation of the cause of the failure.
+    description: Contains details about a lambda function that failed to start during an execution.
+  LambdaFunctionSucceededEventDetails:
+    type: object
+    properties:
+      output:
+        $ref: '#/definitions/SensitiveData'
+        description: The JSON data output by the lambda function.
+    description: Contains details about a lambda function that successfully terminated during an execution.
+  LambdaFunctionTimedOutEventDetails:
+    type: object
+    properties:
+      error:
+        $ref: '#/definitions/SensitiveError'
+        description: The error code of the failure.
+      cause:
+        $ref: '#/definitions/SensitiveCause'
+        description: A more detailed explanation of the cause of the timeout.
+    description: Contains details about a lambda function timeout that occurred during an execution.
+  StateEnteredEventDetails:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the state.
+      input:
+        $ref: '#/definitions/SensitiveData'
+        description: The string that contains the JSON input data for the state.
+    description: Contains details about a state entered during an execution.
+  StateExitedEventDetails:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the state.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+      output:
+        $ref: '#/definitions/SensitiveData'
+        description: The JSON output data of the state.
+    description: Contains details about an exit from a state during an execution.
+  HistoryEvent:
+    type: object
+    required:
+      - timestamp
+      - type
+      - id
+    properties:
+      timestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time the event occurred.
+      type:
+        $ref: '#/definitions/HistoryEventType'
+        description: The type of the event.
+      id:
+        $ref: '#/definitions/EventId'
+        description: 'The id of the event. Events are numbered sequentially, starting at one.'
+      previousEventId:
+        $ref: '#/definitions/EventId'
+        description: The id of the previous event.
+      activityFailedEventDetails:
+        $ref: '#/definitions/ActivityFailedEventDetails'
+      activityScheduleFailedEventDetails:
+        $ref: '#/definitions/ActivityScheduleFailedEventDetails'
+        description: Contains details about an activity schedule event that failed during an execution.
+      activityScheduledEventDetails:
+        $ref: '#/definitions/ActivityScheduledEventDetails'
+      activityStartedEventDetails:
+        $ref: '#/definitions/ActivityStartedEventDetails'
+      activitySucceededEventDetails:
+        $ref: '#/definitions/ActivitySucceededEventDetails'
+      activityTimedOutEventDetails:
+        $ref: '#/definitions/ActivityTimedOutEventDetails'
+      taskFailedEventDetails:
+        $ref: '#/definitions/TaskFailedEventDetails'
+      taskScheduledEventDetails:
+        $ref: '#/definitions/TaskScheduledEventDetails'
+      taskStartFailedEventDetails:
+        $ref: '#/definitions/TaskStartFailedEventDetails'
+      taskStartedEventDetails:
+        $ref: '#/definitions/TaskStartedEventDetails'
+      taskSubmitFailedEventDetails:
+        $ref: '#/definitions/TaskSubmitFailedEventDetails'
+      taskSubmittedEventDetails:
+        $ref: '#/definitions/TaskSubmittedEventDetails'
+      taskSucceededEventDetails:
+        $ref: '#/definitions/TaskSucceededEventDetails'
+      taskTimedOutEventDetails:
+        $ref: '#/definitions/TaskTimedOutEventDetails'
+      executionFailedEventDetails:
+        $ref: '#/definitions/ExecutionFailedEventDetails'
+      executionStartedEventDetails:
+        $ref: '#/definitions/ExecutionStartedEventDetails'
+      executionSucceededEventDetails:
+        $ref: '#/definitions/ExecutionSucceededEventDetails'
+      executionAbortedEventDetails:
+        $ref: '#/definitions/ExecutionAbortedEventDetails'
+      executionTimedOutEventDetails:
+        $ref: '#/definitions/ExecutionTimedOutEventDetails'
+      lambdaFunctionFailedEventDetails:
+        $ref: '#/definitions/LambdaFunctionFailedEventDetails'
+      lambdaFunctionScheduleFailedEventDetails:
+        $ref: '#/definitions/LambdaFunctionScheduleFailedEventDetails'
+      lambdaFunctionScheduledEventDetails:
+        $ref: '#/definitions/LambdaFunctionScheduledEventDetails'
+      lambdaFunctionStartFailedEventDetails:
+        $ref: '#/definitions/LambdaFunctionStartFailedEventDetails'
+        description: Contains details about a lambda function that failed to start during an execution.
+      lambdaFunctionSucceededEventDetails:
+        $ref: '#/definitions/LambdaFunctionSucceededEventDetails'
+        description: Contains details about a lambda function that terminated successfully during an execution.
+      lambdaFunctionTimedOutEventDetails:
+        $ref: '#/definitions/LambdaFunctionTimedOutEventDetails'
+      stateEnteredEventDetails:
+        $ref: '#/definitions/StateEnteredEventDetails'
+      stateExitedEventDetails:
+        $ref: '#/definitions/StateExitedEventDetails'
+    description: Contains details about the events of an execution.
+  StateMachineList:
+    type: array
+    items:
+      $ref: '#/definitions/StateMachineListItem'
+  StateMachineListItem:
+    type: object
+    required:
+      - stateMachineArn
+      - name
+      - creationDate
+    properties:
+      stateMachineArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) that identifies the state machine.
+      name:
+        $ref: '#/definitions/Name'
+        description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>'
+      creationDate:
+        $ref: '#/definitions/Timestamp'
+        description: The date the state machine is created.
+    description: Contains details about the state machine.

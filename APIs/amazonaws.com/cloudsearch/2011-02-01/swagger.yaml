@@ -1363,7 +1363,32 @@ definitions:
         $ref: '#/definitions/DomainName'
       Synonyms:
         $ref: '#/definitions/SynonymsDocument'
-  undefined: {}
+  PolicyDocument:
+    type: string
+    description: '<p>An IAM access policy as described in <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html" target="_blank">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p> <p>Example: <code>{"Statement": [{"Effect":"Allow", "Action": "*", "Resource": "arn:aws:cs:us-east-1:1234567890:search/movies", "Condition": { "IpAddress": { "aws:SourceIp": ["203.0.113.1/32"] } }}, {"Effect":"Allow", "Action": "*", "Resource": "arn:aws:cs:us-east-1:1234567890:documents/movies", "Condition": { "IpAddress": { "aws:SourceIp": ["203.0.113.1/32"] } }} ] }</code></p>'
+  OptionStatus:
+    type: object
+    required:
+      - CreationDate
+      - UpdateDate
+      - State
+    properties:
+      CreationDate:
+        $ref: '#/definitions/UpdateTimestamp'
+        description: A timestamp for when this option was created.
+      UpdateDate:
+        $ref: '#/definitions/UpdateTimestamp'
+        description: A timestamp for when this option was last updated.
+      UpdateVersion:
+        $ref: '#/definitions/UIntValue'
+        description: A unique integer that indicates when this option was last updated.
+      State:
+        $ref: '#/definitions/OptionState'
+        description: '<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option''s latest value will not be visible in searches until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li> <code>Processing</code>: the option''s latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option''s latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>'
+      PendingDeletion:
+        $ref: '#/definitions/Boolean'
+        description: Indicates that the option will be deleted once processing is complete.
+    description: 'The status of an option, including when it was last updated and whether it is actively in use for searches.'
   AccessPoliciesStatus:
     type: object
     required:
@@ -1378,6 +1403,8 @@ definitions:
   Arn:
     type: string
     description: 'An Amazon Resource Name (ARN). See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
+  MultiAZ:
+    type: boolean
   AvailabilityOptionsStatus:
     type: object
     required:
@@ -1390,39 +1417,20 @@ definitions:
       Status:
         $ref: '#/definitions/OptionStatus'
     description: The status and configuration of the domain's availability options.
+  ErrorCode:
+    type: string
+    description: A machine-parsable string error or warning code.
+  ErrorMessage:
+    type: string
+    description: A human-readable string error or warning message.
   Boolean:
     type: boolean
-  DefaultSearchFieldStatus:
-    type: object
-    required:
-      - Options
-      - Status
-    properties:
-      Options:
-        $ref: '#/definitions/FieldName'
-        description: 'The name of the <code>IndexField</code> to use as the default search field. The default is an empty string, which automatically searches all text fields.'
-      Status:
-        $ref: '#/definitions/OptionStatus'
-    description: The value of the <code>DefaultSearchField</code> configured for this search domain and its current status.
-  DocumentCount:
-    type: integer
-    minimum: 0
-  DomainId:
-    type: string
-    description: An internally generated unique identifier for a domain.
-    minLength: 1
-    maxLength: 64
   DomainName:
     type: string
     pattern: '[a-z][a-z0-9\-]+'
     description: 'A string that represents the name of a domain. Domain names must be unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). Uppercase letters and underscores are not allowed.'
     minLength: 3
     maxLength: 28
-  DomainNameList:
-    type: array
-    description: A list of domain names.
-    items:
-      $ref: '#/definitions/DomainName'
   DomainStatus:
     type: object
     required:
@@ -1465,32 +1473,24 @@ definitions:
         $ref: '#/definitions/InstanceCount'
         description: The number of search instances that are available to process search requests.
     description: The current status of the search domain.
-  DomainStatusList:
-    type: array
-    description: The current status of all of your search domains.
-    items:
-      $ref: '#/definitions/DomainStatus'
-  ErrorCode:
-    type: string
-    description: A machine-parsable string error or warning code.
-  ErrorMessage:
-    type: string
-    description: A human-readable string error or warning message.
   FieldName:
     type: string
     pattern: '[a-z][a-z0-9_]*'
     description: 'A string that represents the name of an index field. Field names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names "body", "docid", and "text_relevance" are reserved and cannot be specified as field or rank expression names.'
     minLength: 1
     maxLength: 64
-  FieldNameList:
-    type: array
-    items:
-      $ref: '#/definitions/FieldName'
-  FieldValue:
-    type: string
-    description: The value of a field or source document attribute.
-    minLength: 0
-    maxLength: 1024
+  DefaultSearchFieldStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/FieldName'
+        description: 'The name of the <code>IndexField</code> to use as the default search field. The default is an empty string, which automatically searches all text fields.'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The value of the <code>DefaultSearchField</code> configured for this search domain and its current status.
   IndexField:
     type: object
     required:
@@ -1527,10 +1527,115 @@ definitions:
       Status:
         $ref: '#/definitions/OptionStatus'
     description: The value of an <code>IndexField</code> and its current status.
+  NamedRankExpression:
+    type: object
+    required:
+      - RankName
+      - RankExpression
+    properties:
+      RankName:
+        $ref: '#/definitions/FieldName'
+        description: 'The name of a rank expression. Rank expression names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names "body", "docid", and "text_relevance" are reserved and cannot be specified as field or rank expression names.'
+      RankExpression:
+        $ref: '#/definitions/RankExpression'
+        description: '<p>The expression to evaluate for ranking or thresholding while processing a search request. The <code>RankExpression</code> syntax is based on JavaScript expressions and supports:</p> <ul> <li>Integer, floating point, hex and octal literals</li> <li>Shortcut evaluation of logical operators such that an expression <code>a || b</code> evaluates to the value <code>a</code>, if <code>a</code> is true, without evaluating <code>b</code> at all</li> <li>JavaScript order of precedence for operators</li> <li>Arithmetic operators: <code>+ - * / %</code> </li> <li>Boolean operators (including the ternary operator)</li> <li>Bitwise operators</li> <li>Comparison operators</li> <li>Common mathematic functions: <code>abs ceil erf exp floor lgamma ln log2 log10 max min sqrt pow</code> </li> <li>Trigonometric library functions: <code>acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan</code> </li> <li>Random generation of a number between 0 and 1: <code>rand</code> </li> <li>Current time in epoch: <code>time</code> </li> <li>The <code>min max</code> functions that operate on a variable argument list</li> </ul> <p>Intermediate results are calculated as double precision floating point values. The final return value of a <code>RankExpression</code> is automatically converted from floating point to a 32-bit unsigned integer by rounding to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t), 4294967295. Mathematical errors such as dividing by 0 will fail during evaluation and return a value of 0.</p> <p>The source data for a <code>RankExpression</code> can be the name of an <code>IndexField</code> of type uint, another <code>RankExpression</code> or the reserved name <i>text_relevance</i>. The text_relevance source is defined to return an integer from 0 to 1000 (inclusive) to indicate how relevant a document is to the search request, taking into account repetition of search terms in the document and proximity of search terms to each other in each matching <code>IndexField</code> in the document.</p> <p>For more information about using rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.</p>'
+    description: 'A named expression that can be evaluated at search time and used for ranking or thresholding in a search query. '
+  RankExpressionStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/NamedRankExpression'
+        description: The expression that is evaluated for ranking or thresholding while processing a search request.
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The value of a <code>RankExpression</code> and its current status.
+  DomainNameList:
+    type: array
+    description: A list of domain names.
+    items:
+      $ref: '#/definitions/DomainName'
+  DomainStatusList:
+    type: array
+    description: The current status of all of your search domains.
+    items:
+      $ref: '#/definitions/DomainStatus'
+  FieldNameList:
+    type: array
+    items:
+      $ref: '#/definitions/FieldName'
   IndexFieldStatusList:
     type: array
     items:
       $ref: '#/definitions/IndexFieldStatus'
+  RankExpressionStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/RankExpressionStatus'
+  StemmingOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/StemsDocument'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The stemming options configured for this search domain and the current status of those options.
+  StopwordOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/StopwordsDocument'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The stopword options configured for this search domain and the current status of those options.
+  SynonymOptionsStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/SynonymsDocument'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The synonym options configured for this search domain and the current status of those options.
+  DocumentCount:
+    type: integer
+    minimum: 0
+  DomainId:
+    type: string
+    description: An internally generated unique identifier for a domain.
+    minLength: 1
+    maxLength: 64
+  ServiceEndpoint:
+    type: object
+    properties:
+      Arn:
+        $ref: '#/definitions/Arn'
+      Endpoint:
+        $ref: '#/definitions/ServiceUrl'
+    description: 'The endpoint to which service requests can be submitted, including the actual URL prefix for sending requests and the Amazon Resource Name (ARN) so the endpoint can be referenced in other API calls such as <a>UpdateServiceAccessPolicies</a>.'
+  SearchInstanceType:
+    type: string
+  PartitionCount:
+    type: integer
+    minimum: 1
+  InstanceCount:
+    type: integer
+    minimum: 1
+  FieldValue:
+    type: string
+    description: The value of a field or source document attribute.
+    minLength: 0
+    maxLength: 1024
   IndexFieldType:
     type: string
     enum:
@@ -1538,13 +1643,13 @@ definitions:
       - literal
       - text
     description: The type of <code>IndexField</code>.
-  InstanceCount:
-    type: integer
-    minimum: 1
-  Language:
-    type: string
-    pattern: '[a-zA-Z]{2,8}(?:-[a-zA-Z]{2,8})*'
-    description: 'An <a href="http://tools.ietf.org/html/rfc4646">IETF RFC 4646</a> language code. Only the primary language is considered. English (en) is currently the only supported language.'
+  UIntOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/UIntValue'
+        description: The default value for an unsigned integer field. Optional.
+    description: Options that define a <code>uint</code> field in the search index.
   LiteralOptions:
     type: object
     properties:
@@ -1561,21 +1666,35 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Specifies whether values of this field can be returned in search results and used for ranking. Default: False.'
     description: Options that define a literal field in the search index.
-  MultiAZ:
-    type: boolean
-  NamedRankExpression:
+  TextOptions:
     type: object
-    required:
-      - RankName
-      - RankExpression
     properties:
-      RankName:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: The default value for a text field. Optional.
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies whether facets are enabled for this field. Default: False.'
+      ResultEnabled:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies whether values of this field can be returned in search results and used for ranking. Default: False.'
+      TextProcessor:
         $ref: '#/definitions/FieldName'
-        description: 'The name of a rank expression. Rank expression names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Uppercase letters and hyphens are not allowed. The names "body", "docid", and "text_relevance" are reserved and cannot be specified as field or rank expression names.'
-      RankExpression:
-        $ref: '#/definitions/RankExpression'
-        description: '<p>The expression to evaluate for ranking or thresholding while processing a search request. The <code>RankExpression</code> syntax is based on JavaScript expressions and supports:</p> <ul> <li>Integer, floating point, hex and octal literals</li> <li>Shortcut evaluation of logical operators such that an expression <code>a || b</code> evaluates to the value <code>a</code>, if <code>a</code> is true, without evaluating <code>b</code> at all</li> <li>JavaScript order of precedence for operators</li> <li>Arithmetic operators: <code>+ - * / %</code> </li> <li>Boolean operators (including the ternary operator)</li> <li>Bitwise operators</li> <li>Comparison operators</li> <li>Common mathematic functions: <code>abs ceil erf exp floor lgamma ln log2 log10 max min sqrt pow</code> </li> <li>Trigonometric library functions: <code>acosh acos asinh asin atanh atan cosh cos sinh sin tanh tan</code> </li> <li>Random generation of a number between 0 and 1: <code>rand</code> </li> <li>Current time in epoch: <code>time</code> </li> <li>The <code>min max</code> functions that operate on a variable argument list</li> </ul> <p>Intermediate results are calculated as double precision floating point values. The final return value of a <code>RankExpression</code> is automatically converted from floating point to a 32-bit unsigned integer by rounding to the nearest integer, with a natural floor of 0 and a ceiling of max(uint32_t), 4294967295. Mathematical errors such as dividing by 0 will fail during evaluation and return a value of 0.</p> <p>The source data for a <code>RankExpression</code> can be the name of an <code>IndexField</code> of type uint, another <code>RankExpression</code> or the reserved name <i>text_relevance</i>. The text_relevance source is defined to return an integer from 0 to 1000 (inclusive) to indicate how relevant a document is to the search request, taking into account repetition of search terms in the document and proximity of search terms to each other in each matching <code>IndexField</code> in the document.</p> <p>For more information about using rank expressions to customize ranking, see the Amazon CloudSearch Developer Guide.</p>'
-    description: 'A named expression that can be evaluated at search time and used for ranking or thresholding in a search query. '
+        description: '<p>The text processor to apply to this field. Optional. Possible values:</p> <ul> <li> <code>cs_text_no_stemming</code>: turns off stemming for the field.</li> </ul> <p>Default: none</p>'
+    description: Options that define a text field in the search index.
+  SourceAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/SourceAttribute'
+  Language:
+    type: string
+    pattern: '[a-zA-Z]{2,8}(?:-[a-zA-Z]{2,8})*'
+    description: 'An <a href="http://tools.ietf.org/html/rfc4646">IETF RFC 4646</a> language code. Only the primary language is considered. English (en) is currently the only supported language.'
+  RankExpression:
+    type: string
+    description: The current status of the rank expression.
+    minLength: 1
+    maxLength: 10240
   OptionState:
     type: string
     enum:
@@ -1583,69 +1702,65 @@ definitions:
       - Processing
       - Active
     description: The state of processing a change to an option.
-  OptionStatus:
-    type: object
-    required:
-      - CreationDate
-      - UpdateDate
-      - State
-    properties:
-      CreationDate:
-        $ref: '#/definitions/UpdateTimestamp'
-        description: A timestamp for when this option was created.
-      UpdateDate:
-        $ref: '#/definitions/UpdateTimestamp'
-        description: A timestamp for when this option was last updated.
-      UpdateVersion:
-        $ref: '#/definitions/UIntValue'
-        description: A unique integer that indicates when this option was last updated.
-      State:
-        $ref: '#/definitions/OptionState'
-        description: '<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option''s latest value will not be visible in searches until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li> <code>Processing</code>: the option''s latest value is not yet visible in all searches but is in the process of being activated. </li> <li> <code>Active</code>: the option''s latest value is completely visible. Any warnings or messages generated during processing are provided in <code>Diagnostics</code>.</li> </ul>'
-      PendingDeletion:
-        $ref: '#/definitions/Boolean'
-        description: Indicates that the option will be deleted once processing is complete.
-    description: 'The status of an option, including when it was last updated and whether it is actively in use for searches.'
-  PartitionCount:
+  UpdateTimestamp:
+    type: string
+    format: date-time
+  UIntValue:
     type: integer
-    minimum: 1
-  PolicyDocument:
-    type: string
-    description: '<p>An IAM access policy as described in <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?AccessPolicyLanguage.html" target="_blank">The Access Policy Language</a> in <i>Using AWS Identity and Access Management</i>. The maximum size of an access policy document is 100 KB.</p> <p>Example: <code>{"Statement": [{"Effect":"Allow", "Action": "*", "Resource": "arn:aws:cs:us-east-1:1234567890:search/movies", "Condition": { "IpAddress": { "aws:SourceIp": ["203.0.113.1/32"] } }}, {"Effect":"Allow", "Action": "*", "Resource": "arn:aws:cs:us-east-1:1234567890:documents/movies", "Condition": { "IpAddress": { "aws:SourceIp": ["203.0.113.1/32"] } }} ] }</code></p>'
-  RankExpression:
-    type: string
-    description: The current status of the rank expression.
-    minLength: 1
-    maxLength: 10240
-  RankExpressionStatus:
-    type: object
-    required:
-      - Options
-      - Status
-    properties:
-      Options:
-        $ref: '#/definitions/NamedRankExpression'
-        description: The expression that is evaluated for ranking or thresholding while processing a search request.
-      Status:
-        $ref: '#/definitions/OptionStatus'
-    description: The value of a <code>RankExpression</code> and its current status.
-  RankExpressionStatusList:
-    type: array
-    items:
-      $ref: '#/definitions/RankExpressionStatus'
-  SearchInstanceType:
-    type: string
-  ServiceEndpoint:
-    type: object
-    properties:
-      Arn:
-        $ref: '#/definitions/Arn'
-      Endpoint:
-        $ref: '#/definitions/ServiceUrl'
-    description: 'The endpoint to which service requests can be submitted, including the actual URL prefix for sending requests and the Amazon Resource Name (ARN) so the endpoint can be referenced in other API calls such as <a>UpdateServiceAccessPolicies</a>.'
+    minimum: 0
   ServiceUrl:
     type: string
     description: The URL (including /version/pathPrefix) to which service requests can be submitted.
+  SourceDataFunction:
+    type: string
+    enum:
+      - Copy
+      - TrimTitle
+      - Map
+  SourceData:
+    type: object
+    required:
+      - SourceName
+    properties:
+      SourceName:
+        $ref: '#/definitions/FieldName'
+        description: The name of the document source field to add to this <code>IndexField</code>.
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: The default value to use if the source attribute is not specified in a document. Optional.
+    description: The source attribute name and an optional default value to use if a document doesn't have an attribute of that name.
+  SourceDataTrimTitle:
+    type: object
+    required:
+      - SourceName
+    properties:
+      SourceName:
+        $ref: '#/definitions/FieldName'
+        description: The name of the document source field to add to this <code>IndexField</code>.
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: The default value to use if the source attribute is not specified in a document. Optional.
+      Separator:
+        $ref: '#/definitions/String'
+        description: The separator that follows the text to trim.
+      Language:
+        $ref: '#/definitions/Language'
+    description: Specifies how to trim common words from the beginning of a field to enable title sorting by that field.
+  SourceDataMap:
+    type: object
+    required:
+      - SourceName
+    properties:
+      SourceName:
+        $ref: '#/definitions/FieldName'
+        description: The name of the document source field to add to this <code>IndexField</code>.
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: The default value to use if the source attribute is not specified in a document. Optional.
+      Cases:
+        $ref: '#/definitions/StringCaseMap'
+        description: A map that translates source field values to custom values.
+    description: Specifies how to map source attribute values to custom values when populating an <code>IndexField</code>.
   SourceAttribute:
     type: object
     required:
@@ -1664,90 +1779,6 @@ definitions:
         $ref: '#/definitions/SourceDataMap'
         description: Maps source document attribute values to new values when populating the <code>IndexField</code>.
     description: 'Identifies the source data for an index field. An optional data transformation can be applied to the source data when populating the index field. By default, the value of the source attribute is copied to the index field.'
-  SourceAttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/SourceAttribute'
-  SourceData:
-    type: object
-    required:
-      - SourceName
-    properties:
-      SourceName:
-        $ref: '#/definitions/FieldName'
-        description: The name of the document source field to add to this <code>IndexField</code>.
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: The default value to use if the source attribute is not specified in a document. Optional.
-    description: The source attribute name and an optional default value to use if a document doesn't have an attribute of that name.
-  SourceDataFunction:
-    type: string
-    enum:
-      - Copy
-      - TrimTitle
-      - Map
-  SourceDataMap:
-    type: object
-    required:
-      - SourceName
-    properties:
-      SourceName:
-        $ref: '#/definitions/FieldName'
-        description: The name of the document source field to add to this <code>IndexField</code>.
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: The default value to use if the source attribute is not specified in a document. Optional.
-      Cases:
-        $ref: '#/definitions/StringCaseMap'
-        description: A map that translates source field values to custom values.
-    description: Specifies how to map source attribute values to custom values when populating an <code>IndexField</code>.
-  SourceDataTrimTitle:
-    type: object
-    required:
-      - SourceName
-    properties:
-      SourceName:
-        $ref: '#/definitions/FieldName'
-        description: The name of the document source field to add to this <code>IndexField</code>.
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: The default value to use if the source attribute is not specified in a document. Optional.
-      Separator:
-        $ref: '#/definitions/String'
-        description: The separator that follows the text to trim.
-      Language:
-        $ref: '#/definitions/Language'
-    description: Specifies how to trim common words from the beginning of a field to enable title sorting by that field.
-  StemmingOptionsStatus:
-    type: object
-    required:
-      - Options
-      - Status
-    properties:
-      Options:
-        $ref: '#/definitions/StemsDocument'
-      Status:
-        $ref: '#/definitions/OptionStatus'
-    description: The stemming options configured for this search domain and the current status of those options.
-  StemsDocument:
-    type: string
-    description: 'Maps terms to their stems, serialized as a JSON document. The document has a single object with one property "stems" whose value is an object mapping terms to their stems. The maximum size of a stemming document is 500 KB. Example: <code>{ "stems": {"people": "person", "walking": "walk"} }</code>'
-  StopwordOptionsStatus:
-    type: object
-    required:
-      - Options
-      - Status
-    properties:
-      Options:
-        $ref: '#/definitions/StopwordsDocument'
-      Status:
-        $ref: '#/definitions/OptionStatus'
-    description: The stopword options configured for this search domain and the current status of those options.
-  StopwordsDocument:
-    type: string
-    description: 'Lists stopwords serialized as a JSON document. The document has a single object with one property "stopwords" whose value is an array of strings. The maximum size of a stopwords document is 10 KB. Example: <code>{ "stopwords": ["a", "an", "the", "of"] }</code>'
-  String:
-    type: string
   StringCaseMap:
     type: array
     items:
@@ -1757,46 +1788,14 @@ definitions:
           $ref: '#/definitions/FieldValue'
         value:
           $ref: '#/definitions/FieldValue'
-  SynonymOptionsStatus:
-    type: object
-    required:
-      - Options
-      - Status
-    properties:
-      Options:
-        $ref: '#/definitions/SynonymsDocument'
-      Status:
-        $ref: '#/definitions/OptionStatus'
-    description: The synonym options configured for this search domain and the current status of those options.
+  String:
+    type: string
+  StemsDocument:
+    type: string
+    description: 'Maps terms to their stems, serialized as a JSON document. The document has a single object with one property "stems" whose value is an object mapping terms to their stems. The maximum size of a stemming document is 500 KB. Example: <code>{ "stems": {"people": "person", "walking": "walk"} }</code>'
+  StopwordsDocument:
+    type: string
+    description: 'Lists stopwords serialized as a JSON document. The document has a single object with one property "stopwords" whose value is an array of strings. The maximum size of a stopwords document is 10 KB. Example: <code>{ "stopwords": ["a", "an", "the", "of"] }</code>'
   SynonymsDocument:
     type: string
     description: 'Maps terms to their synonyms, serialized as a JSON document. The document has a single object with one property "synonyms" whose value is an object mapping terms to their synonyms. Each synonym is a simple string or an array of strings. The maximum size of a stopwords document is 100 KB. Example: <code>{ "synonyms": {"cat": ["feline", "kitten"], "puppy": "dog"} }</code>'
-  TextOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: The default value for a text field. Optional.
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: 'Specifies whether facets are enabled for this field. Default: False.'
-      ResultEnabled:
-        $ref: '#/definitions/Boolean'
-        description: 'Specifies whether values of this field can be returned in search results and used for ranking. Default: False.'
-      TextProcessor:
-        $ref: '#/definitions/FieldName'
-        description: '<p>The text processor to apply to this field. Optional. Possible values:</p> <ul> <li> <code>cs_text_no_stemming</code>: turns off stemming for the field.</li> </ul> <p>Default: none</p>'
-    description: Options that define a text field in the search index.
-  UIntOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/UIntValue'
-        description: The default value for an unsigned integer field. Optional.
-    description: Options that define a <code>uint</code> field in the search index.
-  UIntValue:
-    type: integer
-    minimum: 0
-  UpdateTimestamp:
-    type: string
-    format: date-time

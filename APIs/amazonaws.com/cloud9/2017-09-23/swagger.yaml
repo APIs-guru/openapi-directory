@@ -959,7 +959,9 @@ definitions:
   AutomaticStopTimeMinutes:
     type: integer
     maximum: 20160
-  undefined: {}
+  EnvironmentId:
+    type: string
+    pattern: '^[a-zA-Z0-9]{8,32}$'
   BoundedEnvironmentIdList:
     type: array
     items:
@@ -969,6 +971,82 @@ definitions:
   ClientRequestToken:
     type: string
     pattern: '[\x20-\x7E]{10,128}'
+  EnvironmentName:
+    type: string
+    minLength: 1
+    maxLength: 60
+  EnvironmentDescription:
+    type: string
+    maxLength: 200
+  InstanceType:
+    type: string
+    pattern: '^[a-z][1-9][.][a-z0-9]+$'
+    minLength: 5
+    maxLength: 20
+  SubnetId:
+    type: string
+    minLength: 5
+    maxLength: 30
+  UserArn:
+    type: string
+    pattern: 'arn:aws:(iam|sts)::\d+:\S+'
+  MemberPermissions:
+    type: string
+    enum:
+      - read-write
+      - read-only
+  EnvironmentMember:
+    type: object
+    properties:
+      permissions:
+        $ref: '#/definitions/Permissions'
+        description: '<p>The type of environment member permissions associated with this environment member. Available values include:</p> <ul> <li> <p> <code>owner</code>: Owns the environment.</p> </li> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
+      userId:
+        $ref: '#/definitions/String'
+        description: The user ID in AWS Identity and Access Management (AWS IAM) of the environment member.
+      userArn:
+        $ref: '#/definitions/UserArn'
+        description: The Amazon Resource Name (ARN) of the environment member.
+      environmentId:
+        $ref: '#/definitions/EnvironmentId'
+        description: The ID of the environment for the environment member.
+      lastAccess:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time, expressed in epoch time format, when the environment member last opened the environment.'
+    description: Information about an environment member for an AWS Cloud9 development environment.
+  PermissionsList:
+    type: array
+    items:
+      $ref: '#/definitions/Permissions'
+  String:
+    type: string
+  MaxResults:
+    type: integer
+    minimum: 0
+    maximum: 25
+  EnvironmentMembersList:
+    type: array
+    items:
+      $ref: '#/definitions/EnvironmentMember'
+  EnvironmentStatus:
+    type: string
+    enum:
+      - error
+      - creating
+      - connecting
+      - ready
+      - stopping
+      - stopped
+      - deleting
+  EnvironmentList:
+    type: array
+    items:
+      $ref: '#/definitions/Environment'
+  EnvironmentType:
+    type: string
+    enum:
+      - ssh
+      - ec2
   Environment:
     type: object
     properties:
@@ -991,95 +1069,16 @@ definitions:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the environment owner.
     description: Information about an AWS Cloud9 development environment.
-  EnvironmentDescription:
-    type: string
-    maxLength: 200
-  EnvironmentId:
-    type: string
-    pattern: '^[a-zA-Z0-9]{8,32}$'
   EnvironmentIdList:
     type: array
     items:
       $ref: '#/definitions/EnvironmentId'
-  EnvironmentList:
-    type: array
-    items:
-      $ref: '#/definitions/Environment'
-  EnvironmentMember:
-    type: object
-    properties:
-      permissions:
-        $ref: '#/definitions/Permissions'
-        description: '<p>The type of environment member permissions associated with this environment member. Available values include:</p> <ul> <li> <p> <code>owner</code>: Owns the environment.</p> </li> <li> <p> <code>read-only</code>: Has read-only access to the environment.</p> </li> <li> <p> <code>read-write</code>: Has read-write access to the environment.</p> </li> </ul>'
-      userId:
-        $ref: '#/definitions/String'
-        description: The user ID in AWS Identity and Access Management (AWS IAM) of the environment member.
-      userArn:
-        $ref: '#/definitions/UserArn'
-        description: The Amazon Resource Name (ARN) of the environment member.
-      environmentId:
-        $ref: '#/definitions/EnvironmentId'
-        description: The ID of the environment for the environment member.
-      lastAccess:
-        $ref: '#/definitions/Timestamp'
-        description: 'The time, expressed in epoch time format, when the environment member last opened the environment.'
-    description: Information about an environment member for an AWS Cloud9 development environment.
-  EnvironmentMembersList:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentMember'
-  EnvironmentName:
-    type: string
-    minLength: 1
-    maxLength: 60
-  EnvironmentStatus:
-    type: string
-    enum:
-      - error
-      - creating
-      - connecting
-      - ready
-      - stopping
-      - stopped
-      - deleting
-  EnvironmentType:
-    type: string
-    enum:
-      - ssh
-      - ec2
-  InstanceType:
-    type: string
-    pattern: '^[a-z][1-9][.][a-z0-9]+$'
-    minLength: 5
-    maxLength: 20
-  MaxResults:
-    type: integer
-    minimum: 0
-    maximum: 25
-  MemberPermissions:
-    type: string
-    enum:
-      - read-write
-      - read-only
   Permissions:
     type: string
     enum:
       - owner
       - read-write
       - read-only
-  PermissionsList:
-    type: array
-    items:
-      $ref: '#/definitions/Permissions'
-  String:
-    type: string
-  SubnetId:
-    type: string
-    minLength: 5
-    maxLength: 30
   Timestamp:
     type: string
     format: date-time
-  UserArn:
-    type: string
-    pattern: 'arn:aws:(iam|sts)::\d+:\S+'

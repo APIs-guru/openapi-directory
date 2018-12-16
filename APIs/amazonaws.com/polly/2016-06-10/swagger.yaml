@@ -723,14 +723,10 @@ definitions:
   DateTime:
     type: string
     format: date-time
-  undefined: {}
-  Gender:
+  LexiconName:
     type: string
-    enum:
-      - Female
-      - Male
-  IncludeAdditionalLanguageCodes:
-    type: boolean
+    pattern: '[0-9A-Za-z]{1,20}'
+    format: password
   LanguageCode:
     type: string
     enum:
@@ -762,17 +758,19 @@ definitions:
       - ru-RU
       - sv-SE
       - tr-TR
-  LanguageCodeList:
+  IncludeAdditionalLanguageCodes:
+    type: boolean
+  NextToken:
+    type: string
+  VoiceList:
     type: array
     items:
-      $ref: '#/definitions/LanguageCode'
-  LanguageName:
+      $ref: '#/definitions/Voice'
+  Gender:
     type: string
-  LastModified:
-    type: string
-    format: date-time
-  LexemesCount:
-    type: integer
+    enum:
+      - Female
+      - Male
   Lexicon:
     type: object
     properties:
@@ -783,8 +781,6 @@ definitions:
         $ref: '#/definitions/LexiconName'
         description: Name of the lexicon.
     description: 'Provides lexicon name and lexicon content in string format. For more information, see <a href="https://www.w3.org/TR/pronunciation-lexicon/">Pronunciation Lexicon Specification (PLS) Version 1.0</a>.'
-  LexiconArn:
-    type: string
   LexiconAttributes:
     type: object
     properties:
@@ -807,73 +803,10 @@ definitions:
         $ref: '#/definitions/Size'
         description: 'Total size of the lexicon, in characters.'
     description: 'Contains metadata describing the lexicon such as the number of lexemes, language code, and so on. For more information, see <a href="http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html">Managing Lexicons</a>.'
-  LexiconContent:
+  TaskId:
     type: string
-  LexiconDescription:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/LexiconName'
-        description: Name of the lexicon.
-      Attributes:
-        $ref: '#/definitions/LexiconAttributes'
-        description: Provides lexicon metadata.
-    description: Describes the content of the lexicon.
-  LexiconDescriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/LexiconDescription'
-  LexiconName:
-    type: string
-    pattern: '[0-9A-Za-z]{1,20}'
-    format: password
-  LexiconNameList:
-    type: array
-    items:
-      $ref: '#/definitions/LexiconName'
-    maxItems: 5
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  NextToken:
-    type: string
-  OutputFormat:
-    type: string
-    enum:
-      - json
-      - mp3
-      - ogg_vorbis
-      - pcm
-  OutputS3BucketName:
-    type: string
-    pattern: '^[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9]$'
-  OutputS3KeyPrefix:
-    type: string
-    pattern: '^[0-9a-zA-Z\/\!\-_\.\*\''\(\)]{0,800}$'
-  OutputUri:
-    type: string
-  RequestCharacters:
-    type: integer
-  SampleRate:
-    type: string
-  Size:
-    type: integer
-  SnsTopicArn:
-    type: string
-    pattern: '^arn:aws(-(cn|iso(-b)?|us-gov))?:sns:.*:\w{12}:.+$'
-  SpeechMarkType:
-    type: string
-    enum:
-      - sentence
-      - ssml
-      - viseme
-      - word
-  SpeechMarkTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/SpeechMarkType'
-    maxItems: 4
+    minLength: 1
+    maxLength: 128
   SynthesisTask:
     type: object
     properties:
@@ -920,14 +853,46 @@ definitions:
         $ref: '#/definitions/LanguageCode'
         description: '<p>Optional language code for a synthesis task. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p> <p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>'
     description: SynthesisTask object that provides information about a speech synthesis task.
-  SynthesisTasks:
+  LanguageCodeList:
     type: array
     items:
-      $ref: '#/definitions/SynthesisTask'
-  TaskId:
+      $ref: '#/definitions/LanguageCode'
+  LanguageName:
     type: string
-    minLength: 1
-    maxLength: 128
+  LastModified:
+    type: string
+    format: date-time
+  LexemesCount:
+    type: integer
+  LexiconContent:
+    type: string
+  LexiconArn:
+    type: string
+  Size:
+    type: integer
+  LexiconDescription:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/LexiconName'
+        description: Name of the lexicon.
+      Attributes:
+        $ref: '#/definitions/LexiconAttributes'
+        description: Provides lexicon metadata.
+    description: Describes the content of the lexicon.
+  LexiconDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/LexiconDescription'
+  LexiconNameList:
+    type: array
+    items:
+      $ref: '#/definitions/LexiconName'
+    maxItems: 5
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
   TaskStatus:
     type: string
     enum:
@@ -935,8 +900,44 @@ definitions:
       - inProgress
       - completed
       - failed
-  TaskStatusReason:
+  SynthesisTasks:
+    type: array
+    items:
+      $ref: '#/definitions/SynthesisTask'
+  OutputFormat:
     type: string
+    enum:
+      - json
+      - mp3
+      - ogg_vorbis
+      - pcm
+  OutputS3BucketName:
+    type: string
+    pattern: '^[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9]$'
+  OutputS3KeyPrefix:
+    type: string
+    pattern: '^[0-9a-zA-Z\/\!\-_\.\*\''\(\)]{0,800}$'
+  OutputUri:
+    type: string
+  RequestCharacters:
+    type: integer
+  SampleRate:
+    type: string
+  SnsTopicArn:
+    type: string
+    pattern: '^arn:aws(-(cn|iso(-b)?|us-gov))?:sns:.*:\w{12}:.+$'
+  SpeechMarkType:
+    type: string
+    enum:
+      - sentence
+      - ssml
+      - viseme
+      - word
+  SpeechMarkTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/SpeechMarkType'
+    maxItems: 4
   Text:
     type: string
   TextType:
@@ -944,28 +945,6 @@ definitions:
     enum:
       - ssml
       - text
-  Voice:
-    type: object
-    properties:
-      Gender:
-        $ref: '#/definitions/Gender'
-        description: Gender of the voice.
-      Id:
-        $ref: '#/definitions/VoiceId'
-        description: Amazon Polly assigned voice ID. This is the ID that you specify when calling the <code>SynthesizeSpeech</code> operation.
-      LanguageCode:
-        $ref: '#/definitions/LanguageCode'
-        description: Language code of the voice.
-      LanguageName:
-        $ref: '#/definitions/LanguageName'
-        description: Human readable name of the language in English.
-      Name:
-        $ref: '#/definitions/VoiceName'
-        description: 'Name of the voice (for example, Salli, Kendra, etc.). This provides a human readable voice name that you might display in your application.'
-      AdditionalLanguageCodes:
-        $ref: '#/definitions/LanguageCodeList'
-        description: '<p>Additional codes for languages available for the specified voice in addition to its default language. </p> <p>For example, the default language for Aditi is Indian English (en-IN) because it was first used for that language. Since Aditi is bilingual and fluent in both Indian English and Hindi, this parameter would show the code <code>hi-IN</code>.</p>'
-    description: Description of the voice.
   VoiceId:
     type: string
     enum:
@@ -1026,9 +1005,29 @@ definitions:
       - Bianca
       - Lucia
       - Mia
-  VoiceList:
-    type: array
-    items:
-      $ref: '#/definitions/Voice'
+  TaskStatusReason:
+    type: string
   VoiceName:
     type: string
+  Voice:
+    type: object
+    properties:
+      Gender:
+        $ref: '#/definitions/Gender'
+        description: Gender of the voice.
+      Id:
+        $ref: '#/definitions/VoiceId'
+        description: Amazon Polly assigned voice ID. This is the ID that you specify when calling the <code>SynthesizeSpeech</code> operation.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: Language code of the voice.
+      LanguageName:
+        $ref: '#/definitions/LanguageName'
+        description: Human readable name of the language in English.
+      Name:
+        $ref: '#/definitions/VoiceName'
+        description: 'Name of the voice (for example, Salli, Kendra, etc.). This provides a human readable voice name that you might display in your application.'
+      AdditionalLanguageCodes:
+        $ref: '#/definitions/LanguageCodeList'
+        description: '<p>Additional codes for languages available for the specified voice in addition to its default language. </p> <p>For example, the default language for Aditi is Indian English (en-IN) because it was first used for that language. Since Aditi is bilingual and fluent in both Indian English and Hindi, this parameter would show the code <code>hi-IN</code>.</p>'
+    description: Description of the voice.

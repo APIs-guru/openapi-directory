@@ -546,7 +546,8 @@ definitions:
         $ref: '#/definitions/String'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   InvalidRequestException: {}
-  undefined: {}
+  String:
+    type: string
   Certificate:
     type: object
     properties:
@@ -554,6 +555,29 @@ definitions:
         $ref: '#/definitions/String'
         description: The base64 encoded certificate data required to communicate with your cluster. Add this to the <code>certificate-authority-data</code> section of the <code>kubeconfig</code> file for your cluster.
     description: An object representing the <code>certificate-authority-data</code> for your cluster.
+  Timestamp:
+    type: string
+    format: date-time
+  VpcConfigResponse:
+    type: object
+    properties:
+      subnetIds:
+        $ref: '#/definitions/StringList'
+        description: The subnets associated with your cluster.
+      securityGroupIds:
+        $ref: '#/definitions/StringList'
+        description: The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your worker nodes and the Kubernetes control plane.
+      vpcId:
+        $ref: '#/definitions/String'
+        description: The VPC associated with your cluster.
+    description: An object representing an Amazon EKS cluster VPC configuration response.
+  ClusterStatus:
+    type: string
+    enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - FAILED
   Cluster:
     type: object
     properties:
@@ -596,13 +620,40 @@ definitions:
     pattern: '^[0-9A-Za-z][A-Za-z0-9\-_]*'
     minLength: 1
     maxLength: 100
-  ClusterStatus:
-    type: string
-    enum:
-      - CREATING
-      - ACTIVE
-      - DELETING
-      - FAILED
+  VpcConfigRequest:
+    type: object
+    required:
+      - subnetIds
+    properties:
+      subnetIds:
+        $ref: '#/definitions/StringList'
+        description: Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
+      securityGroupIds:
+        $ref: '#/definitions/StringList'
+        description: 'Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you do not specify a security group, the default security group for your VPC is used.'
+    description: An object representing an Amazon EKS cluster VPC configuration request.
+  Update:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/String'
+        description: A UUID that is used to track the update.
+      status:
+        $ref: '#/definitions/UpdateStatus'
+        description: The current status of the update.
+      type:
+        $ref: '#/definitions/UpdateType'
+        description: The type of the update.
+      params:
+        $ref: '#/definitions/UpdateParams'
+        description: A key-value map that contains the parameters associated with the update.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The Unix epoch timestamp in seconds for when the update was created.
+      errors:
+        $ref: '#/definitions/ErrorDetails'
+        description: Any errors associated with a <code>Failed</code> update.
+    description: An object representing an asynchronous update.
   ErrorCode:
     type: string
     enum:
@@ -614,6 +665,10 @@ definitions:
       - OperationNotPermitted
       - VpcIdNotFound
       - Unknown
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   ErrorDetail:
     type: object
     properties:
@@ -639,56 +694,6 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100
-  String:
-    type: string
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  Timestamp:
-    type: string
-    format: date-time
-  Update:
-    type: object
-    properties:
-      id:
-        $ref: '#/definitions/String'
-        description: A UUID that is used to track the update.
-      status:
-        $ref: '#/definitions/UpdateStatus'
-        description: The current status of the update.
-      type:
-        $ref: '#/definitions/UpdateType'
-        description: The type of the update.
-      params:
-        $ref: '#/definitions/UpdateParams'
-        description: A key-value map that contains the parameters associated with the update.
-      createdAt:
-        $ref: '#/definitions/Timestamp'
-        description: The Unix epoch timestamp in seconds for when the update was created.
-      errors:
-        $ref: '#/definitions/ErrorDetails'
-        description: Any errors associated with a <code>Failed</code> update.
-    description: An object representing an asynchronous update.
-  UpdateParam:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/UpdateParamType'
-        description: The keys associated with an update request.
-      value:
-        $ref: '#/definitions/String'
-        description: The value of the keys submitted as part of an update request.
-    description: An object representing the details of an update request.
-  UpdateParamType:
-    type: string
-    enum:
-      - Version
-      - PlatformVersion
-  UpdateParams:
-    type: array
-    items:
-      $ref: '#/definitions/UpdateParam'
   UpdateStatus:
     type: string
     enum:
@@ -700,28 +705,22 @@ definitions:
     type: string
     enum:
       - VersionUpdate
-  VpcConfigRequest:
-    type: object
-    required:
-      - subnetIds
-    properties:
-      subnetIds:
-        $ref: '#/definitions/StringList'
-        description: Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
-      securityGroupIds:
-        $ref: '#/definitions/StringList'
-        description: 'Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you do not specify a security group, the default security group for your VPC is used.'
-    description: An object representing an Amazon EKS cluster VPC configuration request.
-  VpcConfigResponse:
+  UpdateParams:
+    type: array
+    items:
+      $ref: '#/definitions/UpdateParam'
+  UpdateParamType:
+    type: string
+    enum:
+      - Version
+      - PlatformVersion
+  UpdateParam:
     type: object
     properties:
-      subnetIds:
-        $ref: '#/definitions/StringList'
-        description: The subnets associated with your cluster.
-      securityGroupIds:
-        $ref: '#/definitions/StringList'
-        description: The security groups associated with the cross-account elastic network interfaces that are used to allow communication between your worker nodes and the Kubernetes control plane.
-      vpcId:
+      type:
+        $ref: '#/definitions/UpdateParamType'
+        description: The keys associated with an update request.
+      value:
         $ref: '#/definitions/String'
-        description: The VPC associated with your cluster.
-    description: An object representing an Amazon EKS cluster VPC configuration response.
+        description: The value of the keys submitted as part of an update request.
+    description: An object representing the details of an update request.

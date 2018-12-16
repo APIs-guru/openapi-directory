@@ -3381,10 +3381,19 @@ definitions:
         $ref: '#/definitions/OnPremisesTagSet'
         description: Information about an on-premises instance tag set. The deployment group will include only on-premises instances identified by all the tag groups.
     description: Represents the input of an UpdateDeploymentGroup operation.
-  undefined: {}
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  InstanceNameList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceName'
   AdditionalDeploymentStatusInfo:
     type: string
     description: 'AdditionalDeploymentStatusInfo is deprecated, use DeploymentStatusMessageList instead.'
+  AlarmName:
+    type: string
   Alarm:
     type: object
     properties:
@@ -3392,6 +3401,12 @@ definitions:
         $ref: '#/definitions/AlarmName'
         description: The name of the alarm. Maximum length is 255 characters. Each alarm name can be used only once in a list of alarms.
     description: Information about an alarm.
+  Boolean:
+    type: boolean
+  AlarmList:
+    type: array
+    items:
+      $ref: '#/definitions/Alarm'
   AlarmConfiguration:
     type: object
     properties:
@@ -3405,11 +3420,9 @@ definitions:
         $ref: '#/definitions/AlarmList'
         description: A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
     description: Information about alarms associated with the deployment group.
-  AlarmList:
-    type: array
-    items:
-      $ref: '#/definitions/Alarm'
-  AlarmName:
+  RawStringContent:
+    type: string
+  RawStringSha256:
     type: string
   AppSpecContent:
     type: object
@@ -3423,6 +3436,21 @@ definitions:
     description: ' A revision for an AWS Lambda or Amazon ECS deployment that is a YAML-formatted or JSON-formatted string. For AWS Lambda and Amazon ECS deployments, the revision is the same as the AppSpec file. This method replaces the deprecated <code>RawString</code> data type. '
   ApplicationId:
     type: string
+  ApplicationName:
+    type: string
+    minLength: 1
+    maxLength: 100
+  Timestamp:
+    type: string
+    format: date-time
+  GitHubAccountTokenName:
+    type: string
+  ComputePlatform:
+    type: string
+    enum:
+      - Server
+      - Lambda
+      - ECS
   ApplicationInfo:
     type: object
     properties:
@@ -3445,10 +3473,6 @@ definitions:
         $ref: '#/definitions/ComputePlatform'
         description: The destination platform type for deployment of the application (<code>Lambda</code> or <code>Server</code>).
     description: Information about an application.
-  ApplicationName:
-    type: string
-    minLength: 1
-    maxLength: 100
   ApplicationRevisionSortBy:
     type: string
     enum:
@@ -3463,6 +3487,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ApplicationName'
+  AutoRollbackEventsList:
+    type: array
+    items:
+      $ref: '#/definitions/AutoRollbackEvent'
   AutoRollbackConfiguration:
     type: object
     properties:
@@ -3479,10 +3507,10 @@ definitions:
       - DEPLOYMENT_FAILURE
       - DEPLOYMENT_STOP_ON_ALARM
       - DEPLOYMENT_STOP_ON_REQUEST
-  AutoRollbackEventsList:
-    type: array
-    items:
-      $ref: '#/definitions/AutoRollbackEvent'
+  AutoScalingGroupName:
+    type: string
+  AutoScalingGroupHook:
+    type: string
   AutoScalingGroup:
     type: object
     properties:
@@ -3493,18 +3521,89 @@ definitions:
         $ref: '#/definitions/AutoScalingGroupHook'
         description: An Auto Scaling lifecycle event hook name.
     description: Information about an Auto Scaling group.
-  AutoScalingGroupHook:
-    type: string
   AutoScalingGroupList:
     type: array
     items:
       $ref: '#/definitions/AutoScalingGroup'
-  AutoScalingGroupName:
-    type: string
   AutoScalingGroupNameList:
     type: array
     items:
       $ref: '#/definitions/AutoScalingGroupName'
+  RevisionLocationList:
+    type: array
+    items:
+      $ref: '#/definitions/RevisionLocation'
+  ErrorMessage:
+    type: string
+  RevisionInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/RevisionInfo'
+  DeploymentGroupsList:
+    type: array
+    items:
+      $ref: '#/definitions/DeploymentGroupName'
+  DeploymentGroupInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/DeploymentGroupInfo'
+  DeploymentId:
+    type: string
+  InstancesList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceId'
+  InstanceSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceSummary'
+  TargetIdList:
+    type: array
+    items:
+      $ref: '#/definitions/TargetId'
+  DeploymentTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/DeploymentTarget'
+  DeploymentsList:
+    type: array
+    items:
+      $ref: '#/definitions/DeploymentId'
+  DeploymentsInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/DeploymentInfo'
+  InstanceInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceInfo'
+  BlueInstanceTerminationOption:
+    type: object
+    properties:
+      action:
+        $ref: '#/definitions/InstanceAction'
+        description: '<p>The action to take on instances in the original environment after a successful blue/green deployment.</p> <ul> <li> <p>TERMINATE: Instances are terminated after a specified wait time.</p> </li> <li> <p>KEEP_ALIVE: Instances are left running after they are deregistered from the load balancer and removed from the deployment group.</p> </li> </ul>'
+      terminationWaitTimeInMinutes:
+        $ref: '#/definitions/Duration'
+        description: The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment. The maximum setting is 2880 minutes (2 days).
+    description: Information about whether instances in the original environment are terminated when a blue/green deployment is successful.
+  DeploymentReadyOption:
+    type: object
+    properties:
+      actionOnTimeout:
+        $ref: '#/definitions/DeploymentReadyAction'
+        description: '<p>Information about when to reroute traffic from an original environment to a replacement environment in a blue/green deployment.</p> <ul> <li> <p>CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately after the new application revision is installed on the instances in the replacement environment.</p> </li> <li> <p>STOP_DEPLOYMENT: Do not register new instances with a load balancer unless traffic rerouting is started using <a>ContinueDeployment</a>. If traffic rerouting is not started before the end of the specified wait period, the deployment status is changed to Stopped.</p> </li> </ul>'
+      waitTimeInMinutes:
+        $ref: '#/definitions/Duration'
+        description: The number of minutes to wait before the status of a blue/green deployment changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for actionOnTimeout
+    description: Information about how traffic is rerouted to instances in a replacement environment in a blue/green deployment.
+  GreenFleetProvisioningOption:
+    type: object
+    properties:
+      action:
+        $ref: '#/definitions/GreenFleetProvisioningAction'
+        description: '<p>The method used to add instances to a replacement environment.</p> <ul> <li> <p>DISCOVER_EXISTING: Use instances that already exist or will be created manually.</p> </li> <li> <p>COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling group to define and create instances in a new Auto Scaling group.</p> </li> </ul>'
+    description: Information about the instances that belong to the replacement environment in a blue/green deployment.
   BlueGreenDeploymentConfiguration:
     type: object
     properties:
@@ -3518,18 +3617,13 @@ definitions:
         $ref: '#/definitions/GreenFleetProvisioningOption'
         description: Information about how instances are provisioned for a replacement environment in a blue/green deployment.
     description: Information about blue/green deployment options for a deployment group.
-  BlueInstanceTerminationOption:
-    type: object
-    properties:
-      action:
-        $ref: '#/definitions/InstanceAction'
-        description: '<p>The action to take on instances in the original environment after a successful blue/green deployment.</p> <ul> <li> <p>TERMINATE: Instances are terminated after a specified wait time.</p> </li> <li> <p>KEEP_ALIVE: Instances are left running after they are deregistered from the load balancer and removed from the deployment group.</p> </li> </ul>'
-      terminationWaitTimeInMinutes:
-        $ref: '#/definitions/Duration'
-        description: The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment. The maximum setting is 2880 minutes (2 days).
-    description: Information about whether instances in the original environment are terminated when a blue/green deployment is successful.
-  Boolean:
-    type: boolean
+  InstanceAction:
+    type: string
+    enum:
+      - TERMINATE
+      - KEEP_ALIVE
+  Duration:
+    type: integer
   BundleType:
     type: string
     enum:
@@ -3540,14 +3634,141 @@ definitions:
       - JSON
   CommitId:
     type: string
-  ComputePlatform:
+  DeploymentWaitType:
     type: string
     enum:
-      - Server
-      - Lambda
-      - ECS
+      - READY_WAIT
+      - TERMINATION_WAIT
+  DeploymentConfigName:
+    type: string
+    minLength: 1
+    maxLength: 100
+  MinimumHealthyHosts:
+    type: object
+    properties:
+      value:
+        $ref: '#/definitions/MinimumHealthyHostsValue'
+        description: The minimum healthy instance value.
+      type:
+        $ref: '#/definitions/MinimumHealthyHostsType'
+        description: '<p>The minimum healthy instance type:</p> <ul> <li> <p>HOST_COUNT: The minimum number of healthy instance as an absolute value.</p> </li> <li> <p>FLEET_PERCENT: The minimum number of healthy instance as a percentage of the total number of instance in the deployment.</p> </li> </ul> <p>In an example of nine instance, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment will be successful if six or more instances are deployed to successfully; otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instance at a time. The deployment will be successful if four or more instance are deployed to successfully; otherwise, the deployment fails.</p> <note> <p>In a call to the get deployment configuration operation, CodeDeployDefault.OneAtATime will return a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy will try to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment still succeeds.</p> </note> <p>For more information, see <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html">AWS CodeDeploy Instance Health</a> in the <i>AWS CodeDeploy User Guide</i>.</p>'
+    description: Information about minimum healthy instance.
+  TrafficRoutingConfig:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/TrafficRoutingType'
+        description: The type of traffic shifting (<code>TimeBasedCanary</code> or <code>TimeBasedLinear</code>) used by a deployment configuration .
+      timeBasedCanary:
+        $ref: '#/definitions/TimeBasedCanary'
+        description: A configuration that shifts traffic from one version of a Lambda function to another in two increments. The original and target Lambda function versions are specified in the deployment's AppSpec file.
+      timeBasedLinear:
+        $ref: '#/definitions/TimeBasedLinear'
+        description: 'A configuration that shifts traffic from one version of a Lambda function to another in equal increments, with an equal number of minutes between each increment. The original and target Lambda function versions are specified in the deployment''s AppSpec file.'
+    description: The configuration that specifies how traffic is shifted from one version of a Lambda function to another version during an AWS Lambda deployment.
   DeploymentConfigId:
     type: string
+  DeploymentGroupName:
+    type: string
+    minLength: 1
+    maxLength: 100
+  EC2TagFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/EC2TagFilter'
+  TagFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
+  Role:
+    type: string
+  TriggerConfigList:
+    type: array
+    items:
+      $ref: '#/definitions/TriggerConfig'
+  DeploymentStyle:
+    type: object
+    properties:
+      deploymentType:
+        $ref: '#/definitions/DeploymentType'
+        description: Indicates whether to run an in-place deployment or a blue/green deployment.
+      deploymentOption:
+        $ref: '#/definitions/DeploymentOption'
+        description: Indicates whether to route deployment traffic behind a load balancer.
+    description: 'Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.'
+  LoadBalancerInfo:
+    type: object
+    properties:
+      elbInfoList:
+        $ref: '#/definitions/ELBInfoList'
+        description: '<p>An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.</p> <note> <p> Adding more than one load balancer to the array is not supported. </p> </note>'
+      targetGroupInfoList:
+        $ref: '#/definitions/TargetGroupInfoList'
+        description: '<p>An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.</p> <note> <p> Adding more than one target group to the array is not supported. </p> </note>'
+      targetGroupPairInfoList:
+        $ref: '#/definitions/TargetGroupPairInfoList'
+        description: ' The target group pair information. This is an array of <code>TargeGroupPairInfo</code> objects with a maximum size of one. '
+    description: Information about the Elastic Load Balancing load balancer or target group used in a deployment.
+  EC2TagSet:
+    type: object
+    properties:
+      ec2TagSetList:
+        $ref: '#/definitions/EC2TagSetList'
+        description: 'A list containing other lists of EC2 instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.'
+    description: Information about groups of EC2 instance tags.
+  ECSServiceList:
+    type: array
+    items:
+      $ref: '#/definitions/ECSService'
+  OnPremisesTagSet:
+    type: object
+    properties:
+      onPremisesTagSetList:
+        $ref: '#/definitions/OnPremisesTagSetList'
+        description: 'A list containing other lists of on-premises instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.'
+    description: Information about groups of on-premises instance tags.
+  DeploymentGroupId:
+    type: string
+  RevisionLocation:
+    type: object
+    properties:
+      revisionType:
+        $ref: '#/definitions/RevisionLocationType'
+        description: '<p>The type of application revision:</p> <ul> <li> <p>S3: An application revision stored in Amazon S3.</p> </li> <li> <p>GitHub: An application revision stored in GitHub (EC2/On-premises deployments only)</p> </li> <li> <p>String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments only)</p> </li> </ul>'
+      s3Location:
+        $ref: '#/definitions/S3Location'
+        description: 'Information about the location of a revision stored in Amazon S3. '
+      gitHubLocation:
+        $ref: '#/definitions/GitHubLocation'
+        description: Information about the location of application artifacts stored in GitHub.
+      string:
+        $ref: '#/definitions/RawString'
+        description: Information about the location of an AWS Lambda deployment revision stored as a RawString.
+      appSpecContent:
+        $ref: '#/definitions/AppSpecContent'
+        description: ' The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The content is formatted as JSON or YAML and stored as a RawString. '
+    description: Information about the location of an application revision.
+  Description:
+    type: string
+  TargetInstances:
+    type: object
+    properties:
+      tagFilters:
+        $ref: '#/definitions/EC2TagFilterList'
+        description: 'The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment. Cannot be used in the same call as ec2TagSet.'
+      autoScalingGroups:
+        $ref: '#/definitions/AutoScalingGroupNameList'
+        description: The names of one or more Auto Scaling groups to identify a replacement environment for a blue/green deployment.
+      ec2TagSet:
+        $ref: '#/definitions/EC2TagSet'
+        description: Information about the groups of EC2 instance tags that an instance must be identified by in order for it to be included in the replacement environment for a blue/green deployment. Cannot be used in the same call as tagFilters.
+    description: Information about the instances to be used in the replacement environment in a blue/green deployment.
+  FileExistsBehavior:
+    type: string
+    enum:
+      - DISALLOW
+      - OVERWRITE
+      - RETAIN
   DeploymentConfigInfo:
     type: object
     properties:
@@ -3570,10 +3791,6 @@ definitions:
         $ref: '#/definitions/TrafficRoutingConfig'
         description: The configuration specifying how the deployment traffic will be routed. Only deployments with a Lambda compute platform can specify this.
     description: Information about a deployment configuration.
-  DeploymentConfigName:
-    type: string
-    minLength: 1
-    maxLength: 100
   DeploymentConfigsList:
     type: array
     items:
@@ -3584,8 +3801,22 @@ definitions:
       - user
       - autoscaling
       - codeDeployRollback
-  DeploymentGroupId:
-    type: string
+  LastDeploymentInfo:
+    type: object
+    properties:
+      deploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: ' The unique ID of a deployment. '
+      status:
+        $ref: '#/definitions/DeploymentStatus'
+        description: The status of the most recent deployment.
+      endTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp indicating when the most recent deployment to the deployment group completed.
+      createTime:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp indicating when the most recent deployment to the deployment group started.
+    description: Information about the most recent attempted or successful deployment to a deployment group.
   DeploymentGroupInfo:
     type: object
     properties:
@@ -3653,20 +3884,65 @@ definitions:
         $ref: '#/definitions/ECSServiceList'
         description: ' The target ECS services in the deployment group. This only applies to deployment groups that use the Amazon ECS compute platform. A target ECS service is specified as an Amazon ECS cluster and service name pair using the format <code>&lt;clustername&gt;:&lt;servicename&gt;</code>. '
     description: Information about a deployment group.
-  DeploymentGroupInfoList:
+  DeploymentStatus:
+    type: string
+    enum:
+      - Created
+      - Queued
+      - InProgress
+      - Succeeded
+      - Failed
+      - Stopped
+      - Ready
+  ErrorInformation:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/ErrorCode'
+        description: '<p>For information about additional error codes, see <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html">Error Codes for AWS CodeDeploy</a> in the <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide">AWS CodeDeploy User Guide</a>.</p> <p>The error code:</p> <ul> <li> <p>APPLICATION_MISSING: The application was missing. This error code will most likely be raised if the application is deleted after the deployment is created but before it is started.</p> </li> <li> <p>DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code will most likely be raised if the deployment group is deleted after the deployment is created but before it is started.</p> </li> <li> <p>HEALTH_CONSTRAINTS: The deployment failed on too many instances to be successfully deployed within the instance health constraints specified.</p> </li> <li> <p>HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed within the instance health constraints specified.</p> </li> <li> <p>IAM_ROLE_MISSING: The service role cannot be accessed.</p> </li> <li> <p>IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.</p> </li> <li> <p>INTERNAL_ERROR: There was an internal error.</p> </li> <li> <p>NO_EC2_SUBSCRIPTION: The calling account is not subscribed to the Amazon EC2 service.</p> </li> <li> <p>NO_INSTANCES: No instance were specified, or no instance can be found.</p> </li> <li> <p>OVER_MAX_INSTANCES: The maximum number of instance was exceeded.</p> </li> <li> <p>THROTTLED: The operation was throttled because the calling account exceeded the throttling limits of one or more AWS services.</p> </li> <li> <p>TIMEOUT: The deployment has timed out.</p> </li> <li> <p>REVISION_MISSING: The revision ID was missing. This error code will most likely be raised if the revision is deleted after the deployment is created but before it is started.</p> </li> </ul>'
+      message:
+        $ref: '#/definitions/ErrorMessage'
+        description: An accompanying error message.
+    description: Information about a deployment error.
+  DeploymentOverview:
+    type: object
+    properties:
+      Pending:
+        $ref: '#/definitions/InstanceCount'
+        description: The number of instances in the deployment in a pending state.
+      InProgress:
+        $ref: '#/definitions/InstanceCount'
+        description: The number of instances in which the deployment is in progress.
+      Succeeded:
+        $ref: '#/definitions/InstanceCount'
+        description: The number of instances in the deployment to which revisions have been successfully deployed.
+      Failed:
+        $ref: '#/definitions/InstanceCount'
+        description: The number of instances in the deployment in a failed state.
+      Skipped:
+        $ref: '#/definitions/InstanceCount'
+        description: The number of instances in the deployment in a skipped state.
+      Ready:
+        $ref: '#/definitions/InstanceCount'
+        description: The number of instances in a replacement environment ready to receive traffic in a blue/green deployment.
+    description: Information about the deployment status of the instances in the deployment.
+  RollbackInfo:
+    type: object
+    properties:
+      rollbackDeploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: The ID of the deployment rollback.
+      rollbackTriggeringDeploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: The deployment ID of the deployment that was underway and triggered a rollback deployment because it failed or was stopped.
+      rollbackMessage:
+        $ref: '#/definitions/Description'
+        description: 'Information describing the status of a deployment rollback; for example, whether the deployment can''t be rolled back, is in progress, failed, or succeeded. '
+    description: Information about a deployment rollback.
+  DeploymentStatusMessageList:
     type: array
     items:
-      $ref: '#/definitions/DeploymentGroupInfo'
-  DeploymentGroupName:
-    type: string
-    minLength: 1
-    maxLength: 100
-  DeploymentGroupsList:
-    type: array
-    items:
-      $ref: '#/definitions/DeploymentGroupName'
-  DeploymentId:
-    type: string
+      $ref: '#/definitions/ErrorMessage'
   DeploymentInfo:
     type: object
     properties:
@@ -3757,187 +4033,75 @@ definitions:
     enum:
       - WITH_TRAFFIC_CONTROL
       - WITHOUT_TRAFFIC_CONTROL
-  DeploymentOverview:
-    type: object
-    properties:
-      Pending:
-        $ref: '#/definitions/InstanceCount'
-        description: The number of instances in the deployment in a pending state.
-      InProgress:
-        $ref: '#/definitions/InstanceCount'
-        description: The number of instances in which the deployment is in progress.
-      Succeeded:
-        $ref: '#/definitions/InstanceCount'
-        description: The number of instances in the deployment to which revisions have been successfully deployed.
-      Failed:
-        $ref: '#/definitions/InstanceCount'
-        description: The number of instances in the deployment in a failed state.
-      Skipped:
-        $ref: '#/definitions/InstanceCount'
-        description: The number of instances in the deployment in a skipped state.
-      Ready:
-        $ref: '#/definitions/InstanceCount'
-        description: The number of instances in a replacement environment ready to receive traffic in a blue/green deployment.
-    description: Information about the deployment status of the instances in the deployment.
+  InstanceCount:
+    type: integer
   DeploymentReadyAction:
     type: string
     enum:
       - CONTINUE_DEPLOYMENT
       - STOP_DEPLOYMENT
-  DeploymentReadyOption:
-    type: object
-    properties:
-      actionOnTimeout:
-        $ref: '#/definitions/DeploymentReadyAction'
-        description: '<p>Information about when to reroute traffic from an original environment to a replacement environment in a blue/green deployment.</p> <ul> <li> <p>CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately after the new application revision is installed on the instances in the replacement environment.</p> </li> <li> <p>STOP_DEPLOYMENT: Do not register new instances with a load balancer unless traffic rerouting is started using <a>ContinueDeployment</a>. If traffic rerouting is not started before the end of the specified wait period, the deployment status is changed to Stopped.</p> </li> </ul>'
-      waitTimeInMinutes:
-        $ref: '#/definitions/Duration'
-        description: The number of minutes to wait before the status of a blue/green deployment changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for actionOnTimeout
-    description: Information about how traffic is rerouted to instances in a replacement environment in a blue/green deployment.
-  DeploymentStatus:
-    type: string
-    enum:
-      - Created
-      - Queued
-      - InProgress
-      - Succeeded
-      - Failed
-      - Stopped
-      - Ready
   DeploymentStatusList:
     type: array
     items:
       $ref: '#/definitions/DeploymentStatus'
-  DeploymentStatusMessageList:
-    type: array
-    items:
-      $ref: '#/definitions/ErrorMessage'
-  DeploymentStyle:
-    type: object
-    properties:
-      deploymentType:
-        $ref: '#/definitions/DeploymentType'
-        description: Indicates whether to run an in-place deployment or a blue/green deployment.
-      deploymentOption:
-        $ref: '#/definitions/DeploymentOption'
-        description: Indicates whether to route deployment traffic behind a load balancer.
-    description: 'Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.'
-  DeploymentTarget:
-    type: object
-    properties:
-      deploymentTargetType:
-        $ref: '#/definitions/DeploymentTargetType'
-        description: ' The deployment type which is specific to the deployment''s compute platform. '
-      instanceTarget:
-        $ref: '#/definitions/InstanceTarget'
-        description: ' Information about the target for a deployment that uses the EC2/On-premises compute platform. '
-      lambdaTarget:
-        $ref: '#/definitions/LambdaTarget'
-        description: ' Information about the target for a deployment that uses the AWS Lambda compute platform. '
-      ecsTarget:
-        $ref: '#/definitions/ECSTarget'
-        description: ' Information about the target for a deployment that uses the Amazon ECS compute platform. '
-    description: ' Information about the deployment target. '
-  DeploymentTargetList:
-    type: array
-    items:
-      $ref: '#/definitions/DeploymentTarget'
+  DeploymentType:
+    type: string
+    enum:
+      - IN_PLACE
+      - BLUE_GREEN
   DeploymentTargetType:
     type: string
     enum:
       - InstanceTarget
       - LambdaTarget
       - ECSTarget
-  DeploymentType:
-    type: string
-    enum:
-      - IN_PLACE
-      - BLUE_GREEN
-  DeploymentWaitType:
-    type: string
-    enum:
-      - READY_WAIT
-      - TERMINATION_WAIT
-  DeploymentsInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/DeploymentInfo'
-  DeploymentsList:
-    type: array
-    items:
-      $ref: '#/definitions/DeploymentId'
-  Description:
-    type: string
-  Diagnostics:
+  InstanceTarget:
     type: object
     properties:
-      errorCode:
-        $ref: '#/definitions/LifecycleErrorCode'
-        description: '<p>The associated error code:</p> <ul> <li> <p>Success: The specified script ran.</p> </li> <li> <p>ScriptMissing: The specified script was not found in the specified location.</p> </li> <li> <p>ScriptNotExecutable: The specified script is not a recognized executable file type.</p> </li> <li> <p>ScriptTimedOut: The specified script did not finish running in the specified time period.</p> </li> <li> <p>ScriptFailed: The specified script failed to run as expected.</p> </li> <li> <p>UnknownError: The specified script did not run for an unknown reason.</p> </li> </ul>'
-      scriptName:
-        $ref: '#/definitions/ScriptName'
-        description: The name of the script.
-      message:
-        $ref: '#/definitions/LifecycleMessage'
-        description: The message associated with the error.
-      logTail:
-        $ref: '#/definitions/LogTail'
-        description: '<p>The last portion of the diagnostic log.</p> <p>If available, AWS CodeDeploy returns up to the last 4 KB of the diagnostic log.</p>'
-    description: Diagnostic information about executable scripts that are part of a deployment.
-  Duration:
-    type: integer
-  EC2TagFilter:
+      deploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: ' The unique ID of a deployment. '
+      targetId:
+        $ref: '#/definitions/TargetId'
+        description: ' The unique ID of a deployment target that has a type of <code>instanceTarget</code>. '
+      targetArn:
+        $ref: '#/definitions/TargetArn'
+        description: ' The ARN of the target. '
+      status:
+        $ref: '#/definitions/TargetStatus'
+        description: ' The status an EC2/On-premises deployment''s target instance. '
+      lastUpdatedAt:
+        $ref: '#/definitions/Time'
+        description: ' The date and time when the target instance was updated by a deployment. '
+      lifecycleEvents:
+        $ref: '#/definitions/LifecycleEventList'
+        description: ' The lifecycle events of the deployment to this target instance. '
+      instanceLabel:
+        $ref: '#/definitions/TargetLabel'
+        description: ' A label that identifies whether the instance is an original target (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). '
+    description: ' A target Amazon EC2 or on-premises instance during a deployment that uses the EC2/On-premises compute platform. '
+  LambdaTarget:
     type: object
     properties:
-      Key:
-        $ref: '#/definitions/Key'
-        description: The tag filter key.
-      Value:
-        $ref: '#/definitions/Value'
-        description: The tag filter value.
-      Type:
-        $ref: '#/definitions/EC2TagFilterType'
-        description: '<p>The tag filter type:</p> <ul> <li> <p>KEY_ONLY: Key only.</p> </li> <li> <p>VALUE_ONLY: Value only.</p> </li> <li> <p>KEY_AND_VALUE: Key and value.</p> </li> </ul>'
-    description: Information about an EC2 tag filter.
-  EC2TagFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/EC2TagFilter'
-  EC2TagFilterType:
-    type: string
-    enum:
-      - KEY_ONLY
-      - VALUE_ONLY
-      - KEY_AND_VALUE
-  EC2TagSet:
-    type: object
-    properties:
-      ec2TagSetList:
-        $ref: '#/definitions/EC2TagSetList'
-        description: 'A list containing other lists of EC2 instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.'
-    description: Information about groups of EC2 instance tags.
-  EC2TagSetList:
-    type: array
-    items:
-      $ref: '#/definitions/EC2TagFilterList'
-  ECSClusterName:
-    type: string
-  ECSService:
-    type: object
-    properties:
-      serviceName:
-        $ref: '#/definitions/ECSServiceName'
-        description: ' The name of the target ECS service. '
-      clusterName:
-        $ref: '#/definitions/ECSClusterName'
-        description: ' The name of the cluster that the ECS service is associated with. '
-    description: ' Contains the service and cluster names used to identify an Amazon ECS deployment''s target. '
-  ECSServiceList:
-    type: array
-    items:
-      $ref: '#/definitions/ECSService'
-  ECSServiceName:
-    type: string
+      deploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: ' The unique ID of a deployment. '
+      targetId:
+        $ref: '#/definitions/TargetId'
+        description: ' The unique ID of a deployment target that has a type of <code>lambdaTarget</code>. '
+      targetArn:
+        $ref: '#/definitions/TargetArn'
+        description: ' The ARN of the target. '
+      status:
+        $ref: '#/definitions/TargetStatus'
+        description: ' The status an AWS Lambda deployment''s target Lambda function. '
+      lastUpdatedAt:
+        $ref: '#/definitions/Time'
+        description: ' The date and time when the target Lambda function was updated by a deployment. '
+      lifecycleEvents:
+        $ref: '#/definitions/LifecycleEventList'
+        description: ' The lifecycle events of the deployment to this target Lambda function. '
+    description: ' Information about the target AWS Lambda function during an AWS Lambda deployment. '
   ECSTarget:
     type: object
     properties:
@@ -3963,6 +4127,142 @@ definitions:
         $ref: '#/definitions/ECSTaskSetList'
         description: ' The <code>ECSTaskSet</code> objects associated with the ECS target. '
     description: ' Information about the target of an Amazon ECS deployment. '
+  DeploymentTarget:
+    type: object
+    properties:
+      deploymentTargetType:
+        $ref: '#/definitions/DeploymentTargetType'
+        description: ' The deployment type which is specific to the deployment''s compute platform. '
+      instanceTarget:
+        $ref: '#/definitions/InstanceTarget'
+        description: ' Information about the target for a deployment that uses the EC2/On-premises compute platform. '
+      lambdaTarget:
+        $ref: '#/definitions/LambdaTarget'
+        description: ' Information about the target for a deployment that uses the AWS Lambda compute platform. '
+      ecsTarget:
+        $ref: '#/definitions/ECSTarget'
+        description: ' Information about the target for a deployment that uses the Amazon ECS compute platform. '
+    description: ' Information about the deployment target. '
+  InstanceName:
+    type: string
+  LifecycleErrorCode:
+    type: string
+    enum:
+      - Success
+      - ScriptMissing
+      - ScriptNotExecutable
+      - ScriptTimedOut
+      - ScriptFailed
+      - UnknownError
+  ScriptName:
+    type: string
+  LifecycleMessage:
+    type: string
+  LogTail:
+    type: string
+  Diagnostics:
+    type: object
+    properties:
+      errorCode:
+        $ref: '#/definitions/LifecycleErrorCode'
+        description: '<p>The associated error code:</p> <ul> <li> <p>Success: The specified script ran.</p> </li> <li> <p>ScriptMissing: The specified script was not found in the specified location.</p> </li> <li> <p>ScriptNotExecutable: The specified script is not a recognized executable file type.</p> </li> <li> <p>ScriptTimedOut: The specified script did not finish running in the specified time period.</p> </li> <li> <p>ScriptFailed: The specified script failed to run as expected.</p> </li> <li> <p>UnknownError: The specified script did not run for an unknown reason.</p> </li> </ul>'
+      scriptName:
+        $ref: '#/definitions/ScriptName'
+        description: The name of the script.
+      message:
+        $ref: '#/definitions/LifecycleMessage'
+        description: The message associated with the error.
+      logTail:
+        $ref: '#/definitions/LogTail'
+        description: '<p>The last portion of the diagnostic log.</p> <p>If available, AWS CodeDeploy returns up to the last 4 KB of the diagnostic log.</p>'
+    description: Diagnostic information about executable scripts that are part of a deployment.
+  Key:
+    type: string
+  Value:
+    type: string
+  EC2TagFilterType:
+    type: string
+    enum:
+      - KEY_ONLY
+      - VALUE_ONLY
+      - KEY_AND_VALUE
+  EC2TagFilter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/Key'
+        description: The tag filter key.
+      Value:
+        $ref: '#/definitions/Value'
+        description: The tag filter value.
+      Type:
+        $ref: '#/definitions/EC2TagFilterType'
+        description: '<p>The tag filter type:</p> <ul> <li> <p>KEY_ONLY: Key only.</p> </li> <li> <p>VALUE_ONLY: Value only.</p> </li> <li> <p>KEY_AND_VALUE: Key and value.</p> </li> </ul>'
+    description: Information about an EC2 tag filter.
+  EC2TagSetList:
+    type: array
+    items:
+      $ref: '#/definitions/EC2TagFilterList'
+  ECSClusterName:
+    type: string
+  ECSServiceName:
+    type: string
+  ECSService:
+    type: object
+    properties:
+      serviceName:
+        $ref: '#/definitions/ECSServiceName'
+        description: ' The name of the target ECS service. '
+      clusterName:
+        $ref: '#/definitions/ECSClusterName'
+        description: ' The name of the cluster that the ECS service is associated with. '
+    description: ' Contains the service and cluster names used to identify an Amazon ECS deployment''s target. '
+  TargetId:
+    type: string
+  TargetArn:
+    type: string
+  Time:
+    type: string
+    format: date-time
+  LifecycleEventList:
+    type: array
+    items:
+      $ref: '#/definitions/LifecycleEvent'
+  TargetStatus:
+    type: string
+    enum:
+      - Pending
+      - InProgress
+      - Succeeded
+      - Failed
+      - Skipped
+      - Unknown
+      - Ready
+  ECSTaskSetList:
+    type: array
+    items:
+      $ref: '#/definitions/ECSTaskSet'
+  ECSTaskSetIdentifier:
+    type: string
+  ECSTaskSetCount:
+    type: integer
+  ECSTaskSetStatus:
+    type: string
+  TrafficWeight:
+    type: number
+    format: double
+  TargetGroupInfo:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/TargetGroupName'
+        description: 'For blue/green deployments, the name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes. '
+    description: 'Information about a target group in Elastic Load Balancing to use in a deployment. Instances are registered as targets in a target group, and traffic is routed to the target group.'
+  TargetLabel:
+    type: string
+    enum:
+      - Blue
+      - Green
   ECSTaskSet:
     type: object
     properties:
@@ -3991,15 +4291,7 @@ definitions:
         $ref: '#/definitions/TargetLabel'
         description: ' A label that identifies whether the ECS task set is an original target (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). '
     description: ' A set of Amazon ECS tasks. A task set runs a specified number of instances of a task definition simultaneously inside an Amazon ECS service. Information about a set of Amazon ECS tasks in an AWS CodeDeploy deployment. An Amazon ECS task set includes details such as the desired number of tasks, how many tasks are running, and whether the task set serves production traffic or not. '
-  ECSTaskSetCount:
-    type: integer
-  ECSTaskSetIdentifier:
-    type: string
-  ECSTaskSetList:
-    type: array
-    items:
-      $ref: '#/definitions/ECSTaskSet'
-  ECSTaskSetStatus:
+  ELBName:
     type: string
   ELBInfo:
     type: object
@@ -4012,8 +4304,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ELBInfo'
-  ELBName:
-    type: string
   ETag:
     type: string
   ErrorCode:
@@ -4049,24 +4339,6 @@ definitions:
       - INVALID_ECS_SERVICE
       - ECS_UPDATE_ERROR
       - INVALID_REVISION
-  ErrorInformation:
-    type: object
-    properties:
-      code:
-        $ref: '#/definitions/ErrorCode'
-        description: '<p>For information about additional error codes, see <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html">Error Codes for AWS CodeDeploy</a> in the <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide">AWS CodeDeploy User Guide</a>.</p> <p>The error code:</p> <ul> <li> <p>APPLICATION_MISSING: The application was missing. This error code will most likely be raised if the application is deleted after the deployment is created but before it is started.</p> </li> <li> <p>DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code will most likely be raised if the deployment group is deleted after the deployment is created but before it is started.</p> </li> <li> <p>HEALTH_CONSTRAINTS: The deployment failed on too many instances to be successfully deployed within the instance health constraints specified.</p> </li> <li> <p>HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed within the instance health constraints specified.</p> </li> <li> <p>IAM_ROLE_MISSING: The service role cannot be accessed.</p> </li> <li> <p>IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.</p> </li> <li> <p>INTERNAL_ERROR: There was an internal error.</p> </li> <li> <p>NO_EC2_SUBSCRIPTION: The calling account is not subscribed to the Amazon EC2 service.</p> </li> <li> <p>NO_INSTANCES: No instance were specified, or no instance can be found.</p> </li> <li> <p>OVER_MAX_INSTANCES: The maximum number of instance was exceeded.</p> </li> <li> <p>THROTTLED: The operation was throttled because the calling account exceeded the throttling limits of one or more AWS services.</p> </li> <li> <p>TIMEOUT: The deployment has timed out.</p> </li> <li> <p>REVISION_MISSING: The revision ID was missing. This error code will most likely be raised if the revision is deleted after the deployment is created but before it is started.</p> </li> </ul>'
-      message:
-        $ref: '#/definitions/ErrorMessage'
-        description: An accompanying error message.
-    description: Information about a deployment error.
-  ErrorMessage:
-    type: string
-  FileExistsBehavior:
-    type: string
-    enum:
-      - DISALLOW
-      - OVERWRITE
-      - RETAIN
   FilterValue:
     type: string
   FilterValueList:
@@ -4092,49 +4364,30 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: When the revision was registered with AWS CodeDeploy.
     description: Information about an application revision.
-  GitHubAccountTokenName:
-    type: string
-  GitHubAccountTokenNameList:
-    type: array
-    items:
-      $ref: '#/definitions/GitHubAccountTokenName'
-  GitHubLocation:
-    type: object
-    properties:
-      repository:
-        $ref: '#/definitions/Repository'
-        description: <p>The GitHub account and repository pair that stores a reference to the commit that represents the bundled artifacts for the application revision. </p> <p>Specified as account/repository.</p>
-      commitId:
-        $ref: '#/definitions/CommitId'
-        description: The SHA1 commit ID of the GitHub commit that represents the bundled artifacts for the application revision.
-    description: Information about the location of application artifacts stored in GitHub.
-  GreenFleetProvisioningAction:
-    type: string
-    enum:
-      - DISCOVER_EXISTING
-      - COPY_AUTO_SCALING_GROUP
-  GreenFleetProvisioningOption:
-    type: object
-    properties:
-      action:
-        $ref: '#/definitions/GreenFleetProvisioningAction'
-        description: '<p>The method used to add instances to a replacement environment.</p> <ul> <li> <p>DISCOVER_EXISTING: Use instances that already exist or will be created manually.</p> </li> <li> <p>COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling group to define and create instances in a new Auto Scaling group.</p> </li> </ul>'
-    description: Information about the instances that belong to the replacement environment in a blue/green deployment.
-  IamSessionArn:
-    type: string
-  IamUserArn:
-    type: string
-  InstanceAction:
-    type: string
-    enum:
-      - TERMINATE
-      - KEEP_ALIVE
-  InstanceArn:
-    type: string
-  InstanceCount:
-    type: integer
   InstanceId:
     type: string
+  InstanceSummary:
+    type: object
+    properties:
+      deploymentId:
+        $ref: '#/definitions/DeploymentId'
+        description: ' The unique ID of a deployment. '
+      instanceId:
+        $ref: '#/definitions/InstanceId'
+        description: The instance ID.
+      status:
+        $ref: '#/definitions/InstanceStatus'
+        description: '<p>The deployment status for this instance:</p> <ul> <li> <p>Pending: The deployment is pending for this instance.</p> </li> <li> <p>In Progress: The deployment is in progress for this instance.</p> </li> <li> <p>Succeeded: The deployment has succeeded for this instance.</p> </li> <li> <p>Failed: The deployment has failed for this instance.</p> </li> <li> <p>Skipped: The deployment has been skipped for this instance.</p> </li> <li> <p>Unknown: The deployment status is unknown for this instance.</p> </li> </ul>'
+      lastUpdatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: A timestamp indicating when the instance information was last updated.
+      lifecycleEvents:
+        $ref: '#/definitions/LifecycleEventList'
+        description: A list of lifecycle events for this instance.
+      instanceType:
+        $ref: '#/definitions/InstanceType'
+        description: '<p>Information about which environment an instance belongs to in a blue/green deployment.</p> <ul> <li> <p>BLUE: The instance is part of the original environment.</p> </li> <li> <p>GREEN: The instance is part of the replacement environment.</p> </li> </ul>'
+    description: 'Information about an instance in a deployment.InstanceSummary is deprecated, use DeploymentTarget instead.'
   InstanceInfo:
     type: object
     properties:
@@ -4160,16 +4413,33 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags currently associated with the on-premises instance.
     description: Information about an on-premises instance.
-  InstanceInfoList:
+  GitHubAccountTokenNameList:
     type: array
     items:
-      $ref: '#/definitions/InstanceInfo'
-  InstanceName:
+      $ref: '#/definitions/GitHubAccountTokenName'
+  Repository:
     type: string
-  InstanceNameList:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceName'
+  GitHubLocation:
+    type: object
+    properties:
+      repository:
+        $ref: '#/definitions/Repository'
+        description: <p>The GitHub account and repository pair that stores a reference to the commit that represents the bundled artifacts for the application revision. </p> <p>Specified as account/repository.</p>
+      commitId:
+        $ref: '#/definitions/CommitId'
+        description: The SHA1 commit ID of the GitHub commit that represents the bundled artifacts for the application revision.
+    description: Information about the location of application artifacts stored in GitHub.
+  GreenFleetProvisioningAction:
+    type: string
+    enum:
+      - DISCOVER_EXISTING
+      - COPY_AUTO_SCALING_GROUP
+  IamSessionArn:
+    type: string
+  IamUserArn:
+    type: string
+  InstanceArn:
+    type: string
   InstanceStatus:
     type: string
     enum:
@@ -4185,57 +4455,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InstanceStatus'
-  InstanceSummary:
-    type: object
-    properties:
-      deploymentId:
-        $ref: '#/definitions/DeploymentId'
-        description: ' The unique ID of a deployment. '
-      instanceId:
-        $ref: '#/definitions/InstanceId'
-        description: The instance ID.
-      status:
-        $ref: '#/definitions/InstanceStatus'
-        description: '<p>The deployment status for this instance:</p> <ul> <li> <p>Pending: The deployment is pending for this instance.</p> </li> <li> <p>In Progress: The deployment is in progress for this instance.</p> </li> <li> <p>Succeeded: The deployment has succeeded for this instance.</p> </li> <li> <p>Failed: The deployment has failed for this instance.</p> </li> <li> <p>Skipped: The deployment has been skipped for this instance.</p> </li> <li> <p>Unknown: The deployment status is unknown for this instance.</p> </li> </ul>'
-      lastUpdatedAt:
-        $ref: '#/definitions/Timestamp'
-        description: A timestamp indicating when the instance information was last updated.
-      lifecycleEvents:
-        $ref: '#/definitions/LifecycleEventList'
-        description: A list of lifecycle events for this instance.
-      instanceType:
-        $ref: '#/definitions/InstanceType'
-        description: '<p>Information about which environment an instance belongs to in a blue/green deployment.</p> <ul> <li> <p>BLUE: The instance is part of the original environment.</p> </li> <li> <p>GREEN: The instance is part of the replacement environment.</p> </li> </ul>'
-    description: 'Information about an instance in a deployment.InstanceSummary is deprecated, use DeploymentTarget instead.'
-  InstanceSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceSummary'
-  InstanceTarget:
-    type: object
-    properties:
-      deploymentId:
-        $ref: '#/definitions/DeploymentId'
-        description: ' The unique ID of a deployment. '
-      targetId:
-        $ref: '#/definitions/TargetId'
-        description: ' The unique ID of a deployment target that has a type of <code>instanceTarget</code>. '
-      targetArn:
-        $ref: '#/definitions/TargetArn'
-        description: ' The ARN of the target. '
-      status:
-        $ref: '#/definitions/TargetStatus'
-        description: ' The status an EC2/On-premises deployment''s target instance. '
-      lastUpdatedAt:
-        $ref: '#/definitions/Time'
-        description: ' The date and time when the target instance was updated by a deployment. '
-      lifecycleEvents:
-        $ref: '#/definitions/LifecycleEventList'
-        description: ' The lifecycle events of the deployment to this target instance. '
-      instanceLabel:
-        $ref: '#/definitions/TargetLabel'
-        description: ' A label that identifies whether the instance is an original target (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). '
-    description: ' A target Amazon EC2 or on-premises instance during a deployment that uses the EC2/On-premises compute platform. '
   InstanceType:
     type: string
     enum:
@@ -4245,59 +4464,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InstanceType'
-  InstancesList:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceId'
-  Key:
+  LifecycleEventName:
     type: string
-  LambdaTarget:
-    type: object
-    properties:
-      deploymentId:
-        $ref: '#/definitions/DeploymentId'
-        description: ' The unique ID of a deployment. '
-      targetId:
-        $ref: '#/definitions/TargetId'
-        description: ' The unique ID of a deployment target that has a type of <code>lambdaTarget</code>. '
-      targetArn:
-        $ref: '#/definitions/TargetArn'
-        description: ' The ARN of the target. '
-      status:
-        $ref: '#/definitions/TargetStatus'
-        description: ' The status an AWS Lambda deployment''s target Lambda function. '
-      lastUpdatedAt:
-        $ref: '#/definitions/Time'
-        description: ' The date and time when the target Lambda function was updated by a deployment. '
-      lifecycleEvents:
-        $ref: '#/definitions/LifecycleEventList'
-        description: ' The lifecycle events of the deployment to this target Lambda function. '
-    description: ' Information about the target AWS Lambda function during an AWS Lambda deployment. '
-  LastDeploymentInfo:
-    type: object
-    properties:
-      deploymentId:
-        $ref: '#/definitions/DeploymentId'
-        description: ' The unique ID of a deployment. '
-      status:
-        $ref: '#/definitions/DeploymentStatus'
-        description: The status of the most recent deployment.
-      endTime:
-        $ref: '#/definitions/Timestamp'
-        description: A timestamp indicating when the most recent deployment to the deployment group completed.
-      createTime:
-        $ref: '#/definitions/Timestamp'
-        description: A timestamp indicating when the most recent deployment to the deployment group started.
-    description: Information about the most recent attempted or successful deployment to a deployment group.
-  LifecycleErrorCode:
+  LifecycleEventStatus:
     type: string
     enum:
-      - Success
-      - ScriptMissing
-      - ScriptNotExecutable
-      - ScriptTimedOut
-      - ScriptFailed
-      - UnknownError
+      - Pending
+      - InProgress
+      - Succeeded
+      - Failed
+      - Skipped
+      - Unknown
   LifecycleEvent:
     type: object
     properties:
@@ -4319,22 +4496,14 @@ definitions:
     description: Information about a deployment lifecycle event.
   LifecycleEventHookExecutionId:
     type: string
-  LifecycleEventList:
-    type: array
-    items:
-      $ref: '#/definitions/LifecycleEvent'
-  LifecycleEventName:
-    type: string
-  LifecycleEventStatus:
+  SortOrder:
     type: string
     enum:
-      - Pending
-      - InProgress
-      - Succeeded
-      - Failed
-      - Skipped
-      - Unknown
-  LifecycleMessage:
+      - ascending
+      - descending
+  S3Bucket:
+    type: string
+  S3Key:
     type: string
   ListStateFilterAction:
     type: string
@@ -4342,57 +4511,57 @@ definitions:
       - include
       - exclude
       - ignore
+  NextToken:
+    type: string
+  TargetFilters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TargetFilterName'
+        value:
+          $ref: '#/definitions/FilterValueList'
+  TimeRange:
+    type: object
+    properties:
+      start:
+        $ref: '#/definitions/Timestamp'
+        description: <p>The start time of the time range.</p> <note> <p>Specify null to leave the start time open-ended.</p> </note>
+      end:
+        $ref: '#/definitions/Timestamp'
+        description: <p>The end time of the time range.</p> <note> <p>Specify null to leave the end time open-ended.</p> </note>
+    description: Information about a time range.
+  RegistrationStatus:
+    type: string
+    enum:
+      - Registered
+      - Deregistered
   ListenerArn:
     type: string
   ListenerArnList:
     type: array
     items:
       $ref: '#/definitions/ListenerArn'
-  LoadBalancerInfo:
-    type: object
-    properties:
-      elbInfoList:
-        $ref: '#/definitions/ELBInfoList'
-        description: '<p>An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.</p> <note> <p> Adding more than one load balancer to the array is not supported. </p> </note>'
-      targetGroupInfoList:
-        $ref: '#/definitions/TargetGroupInfoList'
-        description: '<p>An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.</p> <note> <p> Adding more than one target group to the array is not supported. </p> </note>'
-      targetGroupPairInfoList:
-        $ref: '#/definitions/TargetGroupPairInfoList'
-        description: ' The target group pair information. This is an array of <code>TargeGroupPairInfo</code> objects with a maximum size of one. '
-    description: Information about the Elastic Load Balancing load balancer or target group used in a deployment.
-  LogTail:
-    type: string
+  TargetGroupInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGroupInfo'
+  TargetGroupPairInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/TargetGroupPairInfo'
   Message:
     type: string
-  MinimumHealthyHosts:
-    type: object
-    properties:
-      value:
-        $ref: '#/definitions/MinimumHealthyHostsValue'
-        description: The minimum healthy instance value.
-      type:
-        $ref: '#/definitions/MinimumHealthyHostsType'
-        description: '<p>The minimum healthy instance type:</p> <ul> <li> <p>HOST_COUNT: The minimum number of healthy instance as an absolute value.</p> </li> <li> <p>FLEET_PERCENT: The minimum number of healthy instance as a percentage of the total number of instance in the deployment.</p> </li> </ul> <p>In an example of nine instance, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment will be successful if six or more instances are deployed to successfully; otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instance at a time. The deployment will be successful if four or more instance are deployed to successfully; otherwise, the deployment fails.</p> <note> <p>In a call to the get deployment configuration operation, CodeDeployDefault.OneAtATime will return a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy will try to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment still succeeds.</p> </note> <p>For more information, see <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html">AWS CodeDeploy Instance Health</a> in the <i>AWS CodeDeploy User Guide</i>.</p>'
-    description: Information about minimum healthy instance.
+  MinimumHealthyHostsValue:
+    type: integer
   MinimumHealthyHostsType:
     type: string
     enum:
       - HOST_COUNT
       - FLEET_PERCENT
-  MinimumHealthyHostsValue:
-    type: integer
-  NextToken:
-    type: string
   NullableBoolean:
     type: boolean
-  OnPremisesTagSet:
-    type: object
-    properties:
-      onPremisesTagSetList:
-        $ref: '#/definitions/OnPremisesTagSetList'
-        description: 'A list containing other lists of on-premises instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.'
-    description: Information about groups of on-premises instance tags.
   OnPremisesTagSetList:
     type: array
     items:
@@ -4409,17 +4578,6 @@ definitions:
         $ref: '#/definitions/RawStringSha256'
         description: The SHA256 hash value of the revision content.
     description: 'A revision for an AWS Lambda deployment that is a YAML-formatted or JSON-formatted string. For AWS Lambda deployments, the revision is the same as the AppSpec file.RawString and String revision type are deprecated, use AppSpecContent type instead.'
-  RawStringContent:
-    type: string
-  RawStringSha256:
-    type: string
-  RegistrationStatus:
-    type: string
-    enum:
-      - Registered
-      - Deregistered
-  Repository:
-    type: string
   RevisionInfo:
     type: object
     properties:
@@ -4430,33 +4588,6 @@ definitions:
         $ref: '#/definitions/GenericRevisionInfo'
         description: 'Information about an application revision, including usage details and associated deployment groups.'
     description: Information about an application revision.
-  RevisionInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/RevisionInfo'
-  RevisionLocation:
-    type: object
-    properties:
-      revisionType:
-        $ref: '#/definitions/RevisionLocationType'
-        description: '<p>The type of application revision:</p> <ul> <li> <p>S3: An application revision stored in Amazon S3.</p> </li> <li> <p>GitHub: An application revision stored in GitHub (EC2/On-premises deployments only)</p> </li> <li> <p>String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments only)</p> </li> </ul>'
-      s3Location:
-        $ref: '#/definitions/S3Location'
-        description: 'Information about the location of a revision stored in Amazon S3. '
-      gitHubLocation:
-        $ref: '#/definitions/GitHubLocation'
-        description: Information about the location of application artifacts stored in GitHub.
-      string:
-        $ref: '#/definitions/RawString'
-        description: Information about the location of an AWS Lambda deployment revision stored as a RawString.
-      appSpecContent:
-        $ref: '#/definitions/AppSpecContent'
-        description: ' The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The content is formatted as JSON or YAML and stored as a RawString. '
-    description: Information about the location of an application revision.
-  RevisionLocationList:
-    type: array
-    items:
-      $ref: '#/definitions/RevisionLocation'
   RevisionLocationType:
     type: string
     enum:
@@ -4464,25 +4595,6 @@ definitions:
       - GitHub
       - String
       - AppSpecContent
-  Role:
-    type: string
-  RollbackInfo:
-    type: object
-    properties:
-      rollbackDeploymentId:
-        $ref: '#/definitions/DeploymentId'
-        description: The ID of the deployment rollback.
-      rollbackTriggeringDeploymentId:
-        $ref: '#/definitions/DeploymentId'
-        description: The deployment ID of the deployment that was underway and triggered a rollback deployment because it failed or was stopped.
-      rollbackMessage:
-        $ref: '#/definitions/Description'
-        description: 'Information describing the status of a deployment rollback; for example, whether the deployment can''t be rolled back, is in progress, failed, or succeeded. '
-    description: Information about a deployment rollback.
-  S3Bucket:
-    type: string
-  S3Key:
-    type: string
   S3Location:
     type: object
     properties:
@@ -4502,13 +4614,8 @@ definitions:
         $ref: '#/definitions/ETag'
         description: '<p>The ETag of the Amazon S3 object that represents the bundled artifacts for the application revision.</p> <p>If the ETag is not specified as an input parameter, ETag validation of the object will be skipped.</p>'
     description: Information about the location of application artifacts stored in Amazon S3.
-  ScriptName:
+  VersionId:
     type: string
-  SortOrder:
-    type: string
-    enum:
-      - ascending
-      - descending
   StopStatus:
     type: string
     enum:
@@ -4524,6 +4631,12 @@ definitions:
         $ref: '#/definitions/Value'
         description: The tag's value.
     description: Information about a tag.
+  TagFilterType:
+    type: string
+    enum:
+      - KEY_ONLY
+      - VALUE_ONLY
+      - KEY_AND_VALUE
   TagFilter:
     type: object
     properties:
@@ -4537,49 +4650,20 @@ definitions:
         $ref: '#/definitions/TagFilterType'
         description: '<p>The on-premises instance tag filter type:</p> <ul> <li> <p>KEY_ONLY: Key only.</p> </li> <li> <p>VALUE_ONLY: Value only.</p> </li> <li> <p>KEY_AND_VALUE: Key and value.</p> </li> </ul>'
     description: Information about an on-premises instance tag filter.
-  TagFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/TagFilter'
-  TagFilterType:
-    type: string
-    enum:
-      - KEY_ONLY
-      - VALUE_ONLY
-      - KEY_AND_VALUE
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TargetArn:
-    type: string
   TargetFilterName:
     type: string
     enum:
       - TargetStatus
       - ServerInstanceLabel
-  TargetFilters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TargetFilterName'
-        value:
-          $ref: '#/definitions/FilterValueList'
-  TargetGroupInfo:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/TargetGroupName'
-        description: 'For blue/green deployments, the name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes. '
-    description: 'Information about a target group in Elastic Load Balancing to use in a deployment. Instances are registered as targets in a target group, and traffic is routed to the target group.'
-  TargetGroupInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/TargetGroupInfo'
   TargetGroupName:
     type: string
+  TrafficRoute:
+    type: object
+    properties:
+      listenerArns:
+        $ref: '#/definitions/ListenerArnList'
+        description: ' The ARN of one listener. The listener identifies the route between a target group and a load balancer. This is an array of strings with a maximum size of one. '
+    description: ' Information about a listener. The listener contains the path used to route traffic that is received from the load balancer to a target group. '
   TargetGroupPairInfo:
     type: object
     properties:
@@ -4593,47 +4677,8 @@ definitions:
         $ref: '#/definitions/TrafficRoute'
         description: ' An optional path used by a load balancer to route test traffic after an Amazon ECS deployment. Validation can happen while test traffic is served during a deployment. '
     description: ' Information about two target groups and how traffic routes during an Amazon ECS deployment. An optional test traffic route can be specified. '
-  TargetGroupPairInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/TargetGroupPairInfo'
-  TargetId:
-    type: string
-  TargetIdList:
-    type: array
-    items:
-      $ref: '#/definitions/TargetId'
-  TargetInstances:
-    type: object
-    properties:
-      tagFilters:
-        $ref: '#/definitions/EC2TagFilterList'
-        description: 'The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment. Cannot be used in the same call as ec2TagSet.'
-      autoScalingGroups:
-        $ref: '#/definitions/AutoScalingGroupNameList'
-        description: The names of one or more Auto Scaling groups to identify a replacement environment for a blue/green deployment.
-      ec2TagSet:
-        $ref: '#/definitions/EC2TagSet'
-        description: Information about the groups of EC2 instance tags that an instance must be identified by in order for it to be included in the replacement environment for a blue/green deployment. Cannot be used in the same call as tagFilters.
-    description: Information about the instances to be used in the replacement environment in a blue/green deployment.
-  TargetLabel:
-    type: string
-    enum:
-      - Blue
-      - Green
-  TargetStatus:
-    type: string
-    enum:
-      - Pending
-      - InProgress
-      - Succeeded
-      - Failed
-      - Skipped
-      - Unknown
-      - Ready
-  Time:
-    type: string
-    format: date-time
+  WaitTimeInMins:
+    type: integer
   TimeBasedCanary:
     type: object
     properties:
@@ -4654,48 +4699,20 @@ definitions:
         $ref: '#/definitions/WaitTimeInMins'
         description: The number of minutes between each incremental traffic shift of a <code>TimeBasedLinear</code> deployment.
     description: 'A configuration that shifts traffic from one version of a Lambda function to another in equal increments, with an equal number of minutes between each increment. The original and target Lambda function versions are specified in the deployment''s AppSpec file.'
-  TimeRange:
-    type: object
-    properties:
-      start:
-        $ref: '#/definitions/Timestamp'
-        description: <p>The start time of the time range.</p> <note> <p>Specify null to leave the start time open-ended.</p> </note>
-      end:
-        $ref: '#/definitions/Timestamp'
-        description: <p>The end time of the time range.</p> <note> <p>Specify null to leave the end time open-ended.</p> </note>
-    description: Information about a time range.
-  Timestamp:
-    type: string
-    format: date-time
-  TrafficRoute:
-    type: object
-    properties:
-      listenerArns:
-        $ref: '#/definitions/ListenerArnList'
-        description: ' The ARN of one listener. The listener identifies the route between a target group and a load balancer. This is an array of strings with a maximum size of one. '
-    description: ' Information about a listener. The listener contains the path used to route traffic that is received from the load balancer to a target group. '
-  TrafficRoutingConfig:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/TrafficRoutingType'
-        description: The type of traffic shifting (<code>TimeBasedCanary</code> or <code>TimeBasedLinear</code>) used by a deployment configuration .
-      timeBasedCanary:
-        $ref: '#/definitions/TimeBasedCanary'
-        description: A configuration that shifts traffic from one version of a Lambda function to another in two increments. The original and target Lambda function versions are specified in the deployment's AppSpec file.
-      timeBasedLinear:
-        $ref: '#/definitions/TimeBasedLinear'
-        description: 'A configuration that shifts traffic from one version of a Lambda function to another in equal increments, with an equal number of minutes between each increment. The original and target Lambda function versions are specified in the deployment''s AppSpec file.'
-    description: The configuration that specifies how traffic is shifted from one version of a Lambda function to another version during an AWS Lambda deployment.
   TrafficRoutingType:
     type: string
     enum:
       - TimeBasedCanary
       - TimeBasedLinear
       - AllAtOnce
-  TrafficWeight:
-    type: number
-    format: double
+  TriggerName:
+    type: string
+  TriggerTargetArn:
+    type: string
+  TriggerEventTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/TriggerEventType'
   TriggerConfig:
     type: object
     properties:
@@ -4709,10 +4726,6 @@ definitions:
         $ref: '#/definitions/TriggerEventTypeList'
         description: The event type or types for which notifications are triggered.
     description: Information about notification triggers for the deployment group.
-  TriggerConfigList:
-    type: array
-    items:
-      $ref: '#/definitions/TriggerConfig'
   TriggerEventType:
     type: string
     enum:
@@ -4726,17 +4739,3 @@ definitions:
       - InstanceSuccess
       - InstanceFailure
       - InstanceReady
-  TriggerEventTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/TriggerEventType'
-  TriggerName:
-    type: string
-  TriggerTargetArn:
-    type: string
-  Value:
-    type: string
-  VersionId:
-    type: string
-  WaitTimeInMins:
-    type: integer

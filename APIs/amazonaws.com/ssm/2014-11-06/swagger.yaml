@@ -7770,7 +7770,6 @@ definitions:
   AccountId:
     type: string
     pattern: '\(\?i\)all\|[0-9]\{12\}'
-  undefined: {}
   AccountIdList:
     type: array
     items:
@@ -7782,6 +7781,37 @@ definitions:
       $ref: '#/definitions/Account'
     minItems: 1
     maxItems: 50
+  ActivationId:
+    type: string
+    pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+  ActivationDescription:
+    type: string
+    minLength: 0
+    maxLength: 256
+  DefaultInstanceName:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
+  IamRole:
+    type: string
+    maxLength: 64
+  RegistrationLimit:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  RegistrationsCount:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  ExpirationDate:
+    type: string
+    format: date-time
+  Boolean:
+    type: boolean
+  CreatedDate:
+    type: string
+    format: date-time
   Activation:
     type: object
     properties:
@@ -7817,17 +7847,24 @@ definitions:
     type: string
     minLength: 20
     maxLength: 250
-  ActivationDescription:
-    type: string
-    minLength: 0
-    maxLength: 256
-  ActivationId:
-    type: string
-    pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
   ActivationList:
     type: array
     items:
       $ref: '#/definitions/Activation'
+  ResourceTypeForTagging:
+    type: string
+    enum:
+      - Document
+      - ManagedInstance
+      - MaintenanceWindow
+      - Parameter
+      - PatchBaseline
+  ResourceId:
+    type: string
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   AgentErrorCode:
     type: string
     maxLength: 10
@@ -7841,6 +7878,50 @@ definitions:
     type: integer
     minimum: 0
     maximum: 100
+  DocumentName:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
+  InstanceId:
+    type: string
+    pattern: '(^i-(\w{8}|\w{17})$)|(^mi-\w{17}$)'
+  AssociationId:
+    type: string
+    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+  AssociationVersion:
+    type: string
+    pattern: '([$]LATEST)|([1-9][0-9]*)'
+  DocumentVersion:
+    type: string
+    pattern: '([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)'
+  Targets:
+    type: array
+    items:
+      $ref: '#/definitions/Target'
+    minItems: 0
+    maxItems: 5
+  DateTime:
+    type: string
+    format: date-time
+  AssociationOverview:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/StatusName'
+        description: 'The status of the association. Status can be: Pending, Success, or Failed.'
+      DetailedStatus:
+        $ref: '#/definitions/StatusName'
+        description: A detailed status of the association.
+      AssociationStatusAggregatedCount:
+        $ref: '#/definitions/AssociationStatusAggregatedCount'
+        description: 'Returns the number of targets for the association status. For example, if you created an association with two instances, and one of them was successful, this would return the count of instances by status.'
+    description: Information about the association.
+  ScheduleExpression:
+    type: string
+    minLength: 1
+    maxLength: 256
+  AssociationName:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
   Association:
     type: object
     properties:
@@ -7883,6 +7964,52 @@ definitions:
       - MEDIUM
       - LOW
       - UNSPECIFIED
+  AssociationStatus:
+    type: object
+    required:
+      - Date
+      - Name
+      - Message
+    properties:
+      Date:
+        $ref: '#/definitions/DateTime'
+        description: The date when the status changed.
+      Name:
+        $ref: '#/definitions/AssociationStatusName'
+        description: The status.
+      Message:
+        $ref: '#/definitions/StatusMessage'
+        description: The reason for the status.
+      AdditionalInfo:
+        $ref: '#/definitions/StatusAdditionalInfo'
+        description: A user-defined string.
+    description: Describes an association status.
+  Parameters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ParameterName'
+        value:
+          $ref: '#/definitions/ParameterValueList'
+  InstanceAssociationOutputLocation:
+    type: object
+    properties:
+      S3Location:
+        $ref: '#/definitions/S3OutputLocation'
+        description: An Amazon S3 bucket where you want to store the results of this request.
+    description: An Amazon S3 bucket where you want to store the results of this request.
+  MaxErrors:
+    type: string
+    pattern: '^([1-9][0-9]*|[0]|[1-9][0-9]%|[0-9]%|100%)$'
+    minLength: 1
+    maxLength: 7
+  MaxConcurrency:
+    type: string
+    pattern: '^([1-9][0-9]*|[1-9][0-9]%|[1-9]%|100%)$'
+    minLength: 1
+    maxLength: 7
   AssociationDescription:
     type: object
     properties:
@@ -7948,6 +8075,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AssociationDescription'
+  AssociationExecutionId:
+    type: string
+    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+  StatusName:
+    type: string
+  ResourceCountByStatus:
+    type: string
   AssociationExecution:
     type: object
     properties:
@@ -7976,6 +8110,21 @@ definitions:
         $ref: '#/definitions/ResourceCountByStatus'
         description: An aggregate status of the resources in the execution based on the status type.
     description: Includes information about the specified association.
+  AssociationExecutionFilterKey:
+    type: string
+    enum:
+      - ExecutionId
+      - Status
+      - CreatedTime
+  AssociationExecutionFilterValue:
+    type: string
+    minLength: 1
+  AssociationFilterOperatorType:
+    type: string
+    enum:
+      - EQUAL
+      - LESS_THAN
+      - GREATER_THAN
   AssociationExecutionFilter:
     type: object
     required:
@@ -7993,23 +8142,29 @@ definitions:
         $ref: '#/definitions/AssociationFilterOperatorType'
         description: The filter type specified in the request.
     description: Filters used in the request.
-  AssociationExecutionFilterKey:
-    type: string
-    enum:
-      - ExecutionId
-      - Status
-      - CreatedTime
   AssociationExecutionFilterList:
     type: array
     items:
       $ref: '#/definitions/AssociationExecutionFilter'
     minItems: 1
-  AssociationExecutionFilterValue:
+  AssociationResourceId:
     type: string
     minLength: 1
-  AssociationExecutionId:
+    maxLength: 100
+  AssociationResourceType:
     type: string
-    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+    minLength: 1
+    maxLength: 50
+  OutputSource:
+    type: object
+    properties:
+      OutputSourceId:
+        $ref: '#/definitions/OutputSourceId'
+        description: 'The ID of the output source, for example the URL of an Amazon S3 bucket.'
+      OutputSourceType:
+        $ref: '#/definitions/OutputSourceType'
+        description: 'The type of source where the association execution details are stored, for example, Amazon S3.'
+    description: Information about the source where the association execution details are stored.
   AssociationExecutionTarget:
     type: object
     properties:
@@ -8041,6 +8196,15 @@ definitions:
         $ref: '#/definitions/OutputSource'
         description: The location where the association details are saved.
     description: Includes information about the specified association execution.
+  AssociationExecutionTargetsFilterKey:
+    type: string
+    enum:
+      - Status
+      - ResourceId
+      - ResourceType
+  AssociationExecutionTargetsFilterValue:
+    type: string
+    minLength: 1
   AssociationExecutionTargetsFilter:
     type: object
     required:
@@ -8054,20 +8218,11 @@ definitions:
         $ref: '#/definitions/AssociationExecutionTargetsFilterValue'
         description: The value specified for the key.
     description: Filters for the association execution.
-  AssociationExecutionTargetsFilterKey:
-    type: string
-    enum:
-      - Status
-      - ResourceId
-      - ResourceType
   AssociationExecutionTargetsFilterList:
     type: array
     items:
       $ref: '#/definitions/AssociationExecutionTargetsFilter'
     minItems: 1
-  AssociationExecutionTargetsFilterValue:
-    type: string
-    minLength: 1
   AssociationExecutionTargetsList:
     type: array
     items:
@@ -8076,6 +8231,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AssociationExecution'
+  AssociationFilterKey:
+    type: string
+    enum:
+      - InstanceId
+      - Name
+      - AssociationId
+      - AssociationStatusName
+      - LastExecutedBefore
+      - LastExecutedAfter
+      - AssociationName
+  AssociationFilterValue:
+    type: string
+    minLength: 1
   AssociationFilter:
     type: object
     required:
@@ -8089,33 +8257,11 @@ definitions:
         $ref: '#/definitions/AssociationFilterValue'
         description: The filter value.
     description: Describes a filter.
-  AssociationFilterKey:
-    type: string
-    enum:
-      - InstanceId
-      - Name
-      - AssociationId
-      - AssociationStatusName
-      - LastExecutedBefore
-      - LastExecutedAfter
-      - AssociationName
   AssociationFilterList:
     type: array
     items:
       $ref: '#/definitions/AssociationFilter'
     minItems: 1
-  AssociationFilterOperatorType:
-    type: string
-    enum:
-      - EQUAL
-      - LESS_THAN
-      - GREATER_THAN
-  AssociationFilterValue:
-    type: string
-    minLength: 1
-  AssociationId:
-    type: string
-    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
   AssociationIdList:
     type: array
     items:
@@ -8126,54 +8272,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Association'
-  AssociationName:
-    type: string
-    pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
-  AssociationOverview:
-    type: object
-    properties:
-      Status:
-        $ref: '#/definitions/StatusName'
-        description: 'The status of the association. Status can be: Pending, Success, or Failed.'
-      DetailedStatus:
-        $ref: '#/definitions/StatusName'
-        description: A detailed status of the association.
-      AssociationStatusAggregatedCount:
-        $ref: '#/definitions/AssociationStatusAggregatedCount'
-        description: 'Returns the number of targets for the association status. For example, if you created an association with two instances, and one of them was successful, this would return the count of instances by status.'
-    description: Information about the association.
-  AssociationResourceId:
-    type: string
-    minLength: 1
-    maxLength: 100
-  AssociationResourceType:
-    type: string
-    minLength: 1
-    maxLength: 50
-  AssociationStatus:
-    type: object
-    required:
-      - Date
-      - Name
-      - Message
-    properties:
-      Date:
-        $ref: '#/definitions/DateTime'
-        description: The date when the status changed.
-      Name:
-        $ref: '#/definitions/AssociationStatusName'
-        description: The status.
-      Message:
-        $ref: '#/definitions/StatusMessage'
-        description: The reason for the status.
-      AdditionalInfo:
-        $ref: '#/definitions/StatusAdditionalInfo'
-        description: A user-defined string.
-    description: Describes an association status.
-  StatusName:
-    type: string
-  InstanceCount:
-    type: integer
   AssociationStatusAggregatedCount:
     type: array
     items:
@@ -8189,9 +8287,15 @@ definitions:
       - Pending
       - Success
       - Failed
-  AssociationVersion:
+  StatusMessage:
     type: string
-    pattern: '([$]LATEST)|([1-9][0-9]*)'
+    minLength: 1
+    maxLength: 1024
+  StatusAdditionalInfo:
+    type: string
+    maxLength: 1024
+  InstanceCount:
+    type: integer
   AssociationVersionInfo:
     type: object
     properties:
@@ -8240,6 +8344,20 @@ definitions:
     items:
       $ref: '#/definitions/AssociationVersionInfo'
     minItems: 1
+  AttachmentName:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
+  ContentLength:
+    type: integer
+  AttachmentHash:
+    type: string
+    maxLength: 256
+  AttachmentHashType:
+    type: string
+    enum:
+      - Sha256
+  AttachmentUrl:
+    type: string
   AttachmentContent:
     type: object
     properties:
@@ -8263,13 +8381,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AttachmentContent'
-  AttachmentHash:
-    type: string
-    maxLength: 256
-  AttachmentHashType:
-    type: string
-    enum:
-      - Sha256
   AttachmentInformation:
     type: object
     properties:
@@ -8280,11 +8391,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AttachmentInformation'
-  AttachmentName:
+  AttachmentsSourceKey:
     type: string
-    pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
-  AttachmentUrl:
-    type: string
+    enum:
+      - SourceUrl
+  AttachmentsSourceValues:
+    type: array
+    items:
+      $ref: '#/definitions/AttachmentsSourceValue'
+    minItems: 1
+    maxItems: 1
   AttachmentsSource:
     type: object
     properties:
@@ -8295,10 +8411,6 @@ definitions:
         $ref: '#/definitions/AttachmentsSourceValues'
         description: 'The URL of the location of a document attachment, such as the URL of an Amazon S3 bucket.'
     description: A key and value pair that identifies the location of an attachment to a document.
-  AttachmentsSourceKey:
-    type: string
-    enum:
-      - SourceUrl
   AttachmentsSourceList:
     type: array
     items:
@@ -8309,12 +8421,6 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1024
-  AttachmentsSourceValues:
-    type: array
-    items:
-      $ref: '#/definitions/AttachmentsSourceValue'
-    minItems: 1
-    maxItems: 1
   AttributeName:
     type: string
     minLength: 1
@@ -8326,6 +8432,88 @@ definitions:
   AutomationActionName:
     type: string
     pattern: '^aws:[a-zA-Z]{3,25}$'
+  AutomationExecutionId:
+    type: string
+    minLength: 36
+    maxLength: 36
+  AutomationExecutionStatus:
+    type: string
+    enum:
+      - Pending
+      - InProgress
+      - Waiting
+      - Success
+      - TimedOut
+      - Cancelling
+      - Cancelled
+      - Failed
+  StepExecutionList:
+    type: array
+    items:
+      $ref: '#/definitions/StepExecution'
+  AutomationParameterMap:
+    type: array
+    minItems: 1
+    maxItems: 200
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AutomationParameterKey'
+        value:
+          $ref: '#/definitions/AutomationParameterValueList'
+  String:
+    type: string
+  ExecutionMode:
+    type: string
+    enum:
+      - Auto
+      - Interactive
+  AutomationParameterKey:
+    type: string
+    minLength: 1
+    maxLength: 30
+  TargetMaps:
+    type: array
+    items:
+      $ref: '#/definitions/TargetMap'
+    minItems: 0
+    maxItems: 300
+  ResolvedTargets:
+    type: object
+    properties:
+      ParameterValues:
+        $ref: '#/definitions/TargetParameterList'
+        description: A list of parameter values sent to targets that resolved during the Automation execution.
+      Truncated:
+        $ref: '#/definitions/Boolean'
+        description: A boolean value indicating whether the resolved target list is truncated.
+    description: Information about targets that resolved during the Automation execution.
+  TargetLocations:
+    type: array
+    items:
+      $ref: '#/definitions/TargetLocation'
+    minItems: 1
+    maxItems: 100
+  ProgressCounters:
+    type: object
+    properties:
+      TotalSteps:
+        $ref: '#/definitions/Integer'
+        description: The total number of steps executed in all specified AWS Regions and accounts for the current Automation execution.
+      SuccessSteps:
+        $ref: '#/definitions/Integer'
+        description: The total number of steps that successfully completed in all specified AWS Regions and accounts for the current Automation execution.
+      FailedSteps:
+        $ref: '#/definitions/Integer'
+        description: The total number of steps that failed to execute in all specified AWS Regions and accounts for the current Automation execution.
+      CancelledSteps:
+        $ref: '#/definitions/Integer'
+        description: The total number of steps that the system cancelled in all specified AWS Regions and accounts for the current Automation execution.
+      TimedOutSteps:
+        $ref: '#/definitions/Integer'
+        description: The total number of steps that timed out in all specified AWS Regions and accounts for the current Automation execution.
+    description: An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and multi-account Automation execution.
   AutomationExecution:
     type: object
     properties:
@@ -8405,6 +8593,23 @@ definitions:
         $ref: '#/definitions/ProgressCounters'
         description: An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and multi-account Automation execution.
     description: Detailed information about the current state of an individual Automation execution.
+  AutomationExecutionFilterKey:
+    type: string
+    enum:
+      - DocumentNamePrefix
+      - ExecutionStatus
+      - ExecutionId
+      - ParentExecutionId
+      - CurrentAction
+      - StartTimeBefore
+      - StartTimeAfter
+      - AutomationType
+  AutomationExecutionFilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/AutomationExecutionFilterValue'
+    minItems: 1
+    maxItems: 10
   AutomationExecutionFilter:
     type: object
     required:
@@ -8418,17 +8623,6 @@ definitions:
         $ref: '#/definitions/AutomationExecutionFilterValueList'
         description: The values used to limit the execution information associated with the filter's key.
     description: A filter used to match specific automation executions. This is used to limit the scope of Automation execution information returned.
-  AutomationExecutionFilterKey:
-    type: string
-    enum:
-      - DocumentNamePrefix
-      - ExecutionStatus
-      - ExecutionId
-      - ParentExecutionId
-      - CurrentAction
-      - StartTimeBefore
-      - StartTimeAfter
-      - AutomationType
   AutomationExecutionFilterList:
     type: array
     items:
@@ -8439,16 +8633,11 @@ definitions:
     type: string
     minLength: 1
     maxLength: 150
-  AutomationExecutionFilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/AutomationExecutionFilterValue'
-    minItems: 1
-    maxItems: 10
-  AutomationExecutionId:
+  AutomationType:
     type: string
-    minLength: 36
-    maxLength: 36
+    enum:
+      - CrossAccount
+      - Local
   AutomationExecutionMetadata:
     type: object
     properties:
@@ -8523,47 +8712,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AutomationExecutionMetadata'
-  AutomationExecutionStatus:
-    type: string
-    enum:
-      - Pending
-      - InProgress
-      - Waiting
-      - Success
-      - TimedOut
-      - Cancelling
-      - Cancelled
-      - Failed
-  AutomationParameterKey:
-    type: string
-    minLength: 1
-    maxLength: 30
   AutomationParameterValueList:
     type: array
     items:
       $ref: '#/definitions/AutomationParameterValue'
     minItems: 0
     maxItems: 10
-  AutomationParameterMap:
-    type: array
-    minItems: 1
-    maxItems: 200
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AutomationParameterKey'
-        value:
-          $ref: '#/definitions/AutomationParameterValueList'
   AutomationParameterValue:
     type: string
     minLength: 1
     maxLength: 512
-  AutomationType:
-    type: string
-    enum:
-      - CrossAccount
-      - Local
   BaselineDescription:
     type: string
     minLength: 1
@@ -8580,8 +8738,21 @@ definitions:
     maxLength: 128
   BatchErrorMessage:
     type: string
-  Boolean:
-    type: boolean
+  CommandId:
+    type: string
+    minLength: 36
+    maxLength: 36
+  InstanceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceId'
+    minItems: 0
+    maxItems: 50
+  MaintenanceWindowExecutionId:
+    type: string
+    pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
+    minLength: 36
+    maxLength: 36
   ClientToken:
     type: string
     minLength: 1
@@ -8591,6 +8762,8 @@ definitions:
     pattern: '[\.\-_/#A-Za-z0-9]+'
     minLength: 1
     maxLength: 512
+  CloudWatchOutputEnabled:
+    type: boolean
   CloudWatchOutputConfig:
     type: object
     properties:
@@ -8601,8 +8774,57 @@ definitions:
         $ref: '#/definitions/CloudWatchOutputEnabled'
         description: Enables Systems Manager to send command output to CloudWatch Logs.
     description: Configuration options for sending command output to CloudWatch Logs.
-  CloudWatchOutputEnabled:
-    type: boolean
+  Comment:
+    type: string
+    maxLength: 100
+  CommandStatus:
+    type: string
+    enum:
+      - Pending
+      - InProgress
+      - Success
+      - Cancelled
+      - Failed
+      - TimedOut
+      - Cancelling
+  StatusDetails:
+    type: string
+    minLength: 0
+    maxLength: 100
+  S3Region:
+    type: string
+    minLength: 3
+    maxLength: 20
+  S3BucketName:
+    type: string
+    minLength: 3
+    maxLength: 63
+  S3KeyPrefix:
+    type: string
+    maxLength: 500
+  TargetCount:
+    type: integer
+  CompletedCount:
+    type: integer
+  ErrorCount:
+    type: integer
+  DeliveryTimedOutCount:
+    type: integer
+  ServiceRole:
+    type: string
+  NotificationConfig:
+    type: object
+    properties:
+      NotificationArn:
+        $ref: '#/definitions/NotificationArn'
+        description: An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
+      NotificationEvents:
+        $ref: '#/definitions/NotificationEventList'
+        description: 'The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html">Configuring Amazon SNS Notifications for Run Command</a> in the <i>AWS Systems Manager User Guide</i>.'
+      NotificationType:
+        $ref: '#/definitions/NotificationType'
+        description: 'Command: Receive notification when the status of a command changes. Invocation: For commands sent to multiple instances, receive notification on a per-instance basis when the status of a command changes. '
+    description: Configurations for sending notifications.
   Command:
     type: object
     properties:
@@ -8676,6 +8898,18 @@ definitions:
         $ref: '#/definitions/CloudWatchOutputConfig'
         description: CloudWatch Logs information where you want Systems Manager to send the command output.
     description: Describes a command request.
+  CommandFilterKey:
+    type: string
+    enum:
+      - InvokedAfter
+      - InvokedBefore
+      - Status
+      - ExecutionStage
+      - DocumentName
+  CommandFilterValue:
+    type: string
+    minLength: 1
+    maxLength: 128
   CommandFilter:
     type: object
     required:
@@ -8689,28 +8923,35 @@ definitions:
         $ref: '#/definitions/CommandFilterValue'
         description: '<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p> <b>InvokedAfter</b>: Specify a timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions occurring July 7, 2018, and later.</p> </li> <li> <p> <b>InvokedBefore</b>: Specify a timestamp to limit your results. For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions from before July 7, 2018.</p> </li> <li> <p> <b>Status</b>: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:</p> <ul> <li> <p> <code>Pending</code> </p> </li> <li> <p> <code>InProgress</code> </p> </li> <li> <p> <code>Success</code> </p> </li> <li> <p> <code>Cancelled</code> </p> </li> <li> <p> <code>Failed</code> </p> </li> <li> <p> <code>TimedOut</code> </p> </li> <li> <p> <code>Cancelling</code> </p> </li> </ul> </li> <li> <p> <b>DocumentName</b>: Specify name of the SSM document for which you want to see command execution results. For example, specify <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to perform security patching operations on instances. </p> </li> <li> <p> <b>ExecutionStage</b>: Specify one of the following values:</p> <ul> <li> <p> <code>Executing</code>: Returns a list of command executions that are currently still running.</p> </li> <li> <p> <code>Complete</code>: Returns a list of command executions that have already completed. </p> </li> </ul> </li> </ul>'
     description: Describes a command filter.
-  CommandFilterKey:
-    type: string
-    enum:
-      - InvokedAfter
-      - InvokedBefore
-      - Status
-      - ExecutionStage
-      - DocumentName
   CommandFilterList:
     type: array
     items:
       $ref: '#/definitions/CommandFilter'
     minItems: 1
     maxItems: 5
-  CommandFilterValue:
+  InstanceTagName:
     type: string
-    minLength: 1
-    maxLength: 128
-  CommandId:
+    maxLength: 255
+  CommandInvocationStatus:
     type: string
-    minLength: 36
-    maxLength: 36
+    enum:
+      - Pending
+      - InProgress
+      - Delayed
+      - Success
+      - Cancelled
+      - TimedOut
+      - Failed
+      - Cancelling
+  InvocationTraceOutput:
+    type: string
+    maxLength: 2500
+  Url:
+    type: string
+  CommandPluginList:
+    type: array
+    items:
+      $ref: '#/definitions/CommandPlugin'
   CommandInvocation:
     type: object
     properties:
@@ -8766,17 +9007,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CommandInvocation'
-  CommandInvocationStatus:
-    type: string
-    enum:
-      - Pending
-      - InProgress
-      - Delayed
-      - Success
-      - Cancelled
-      - TimedOut
-      - Failed
-      - Cancelling
   CommandList:
     type: array
     items:
@@ -8785,6 +9015,23 @@ definitions:
     type: integer
     minimum: 1
     maximum: 50
+  CommandPluginName:
+    type: string
+    minLength: 4
+  CommandPluginStatus:
+    type: string
+    enum:
+      - Pending
+      - InProgress
+      - Success
+      - TimedOut
+      - Cancelled
+      - Failed
+  ResponseCode:
+    type: integer
+  CommandPluginOutput:
+    type: string
+    maxLength: 2500
   CommandPlugin:
     type: object
     properties:
@@ -8825,43 +9072,12 @@ definitions:
         $ref: '#/definitions/S3KeyPrefix'
         description: '<p>The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:</p> <p> test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript </p> <p>test_folder is the name of the Amazon S3 bucket;</p> <p> ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;</p> <p>i-1234567876543 is the instance ID;</p> <p>awsrunShellScript is the name of the plugin.</p>'
     description: Describes plugin details.
-  CommandPluginList:
-    type: array
-    items:
-      $ref: '#/definitions/CommandPlugin'
-  CommandPluginName:
-    type: string
-    minLength: 4
-  CommandPluginOutput:
-    type: string
-    maxLength: 2500
-  CommandPluginStatus:
-    type: string
-    enum:
-      - Pending
-      - InProgress
-      - Success
-      - TimedOut
-      - Cancelled
-      - Failed
-  CommandStatus:
-    type: string
-    enum:
-      - Pending
-      - InProgress
-      - Success
-      - Cancelled
-      - Failed
-      - TimedOut
-      - Cancelling
-  Comment:
-    type: string
-    maxLength: 100
-  CompletedCount:
-    type: integer
   ComplianceExecutionId:
     type: string
     maxLength: 100
+  ComplianceExecutionType:
+    type: string
+    maxLength: 50
   ComplianceExecutionSummary:
     type: object
     required:
@@ -8877,11 +9093,51 @@ definitions:
         $ref: '#/definitions/ComplianceExecutionType'
         description: 'The type of execution. For example, <code>Command</code> is a valid execution type.'
     description: 'A summary of the call execution that includes an execution ID, the type of execution (for example, <code>Command</code>), and the date/time of the execution using a datetime object that is saved in the following format: yyyy-MM-dd''T''HH:mm:ss''Z''.'
-  ComplianceExecutionType:
-    type: string
-    maxLength: 50
   ComplianceFilterValue:
     type: string
+  ComplianceTypeName:
+    type: string
+    pattern: '[A-Za-z0-9_\-]\w+|Custom:[a-zA-Z0-9_\-]\w+'
+    minLength: 1
+    maxLength: 100
+  ComplianceResourceType:
+    type: string
+    minLength: 1
+    maxLength: 50
+  ComplianceResourceId:
+    type: string
+    minLength: 1
+    maxLength: 100
+  ComplianceItemId:
+    type: string
+    minLength: 1
+    maxLength: 100
+  ComplianceItemTitle:
+    type: string
+    maxLength: 500
+  ComplianceStatus:
+    type: string
+    enum:
+      - COMPLIANT
+      - NON_COMPLIANT
+  ComplianceSeverity:
+    type: string
+    enum:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - INFORMATIONAL
+      - UNSPECIFIED
+  ComplianceItemDetails:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeName'
+        value:
+          $ref: '#/definitions/AttributeValue'
   ComplianceItem:
     type: object
     properties:
@@ -8916,15 +9172,6 @@ definitions:
   ComplianceItemContentHash:
     type: string
     maxLength: 256
-  ComplianceItemDetails:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeValue'
   ComplianceItemEntry:
     type: object
     required:
@@ -8953,17 +9200,10 @@ definitions:
       $ref: '#/definitions/ComplianceItemEntry'
     minItems: 0
     maxItems: 10000
-  ComplianceItemId:
-    type: string
-    minLength: 1
-    maxLength: 100
   ComplianceItemList:
     type: array
     items:
       $ref: '#/definitions/ComplianceItem'
-  ComplianceItemTitle:
-    type: string
-    maxLength: 500
   ComplianceQueryOperatorType:
     type: string
     enum:
@@ -8972,38 +9212,26 @@ definitions:
       - BEGIN_WITH
       - LESS_THAN
       - GREATER_THAN
-  ComplianceResourceId:
-    type: string
-    minLength: 1
-    maxLength: 100
   ComplianceResourceIdList:
     type: array
     items:
       $ref: '#/definitions/ComplianceResourceId'
     minItems: 1
-  ComplianceResourceType:
-    type: string
-    minLength: 1
-    maxLength: 50
   ComplianceResourceTypeList:
     type: array
     items:
       $ref: '#/definitions/ComplianceResourceType'
     minItems: 1
-  ComplianceSeverity:
+  ComplianceStringFilterKey:
     type: string
-    enum:
-      - CRITICAL
-      - HIGH
-      - MEDIUM
-      - LOW
-      - INFORMATIONAL
-      - UNSPECIFIED
-  ComplianceStatus:
-    type: string
-    enum:
-      - COMPLIANT
-      - NON_COMPLIANT
+    minLength: 1
+    maxLength: 200
+  ComplianceStringFilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/ComplianceFilterValue'
+    minItems: 1
+    maxItems: 20
   ComplianceStringFilter:
     type: object
     properties:
@@ -9017,22 +9245,32 @@ definitions:
         $ref: '#/definitions/ComplianceQueryOperatorType'
         description: 'The type of comparison that should be performed for the value: Equal, NotEqual, BeginWith, LessThan, or GreaterThan.'
     description: One or more filters. Use a filter to return a more specific list of results.
-  ComplianceStringFilterKey:
-    type: string
-    minLength: 1
-    maxLength: 200
   ComplianceStringFilterList:
     type: array
     items:
       $ref: '#/definitions/ComplianceStringFilter'
-  ComplianceStringFilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/ComplianceFilterValue'
-    minItems: 1
-    maxItems: 20
   ComplianceSummaryCount:
     type: integer
+  CompliantSummary:
+    type: object
+    properties:
+      CompliantCount:
+        $ref: '#/definitions/ComplianceSummaryCount'
+        description: The total number of resources that are compliant.
+      SeveritySummary:
+        $ref: '#/definitions/SeveritySummary'
+        description: A summary of the compliance severity by compliance type.
+    description: A summary of resources that are compliant. The summary is organized according to the resource count for each compliance type.
+  NonCompliantSummary:
+    type: object
+    properties:
+      NonCompliantCount:
+        $ref: '#/definitions/ComplianceSummaryCount'
+        description: The total number of compliance items that are not compliant.
+      SeveritySummary:
+        $ref: '#/definitions/SeveritySummary'
+        description: A summary of the non-compliance severity by compliance type
+    description: A summary of resources that are not compliant. The summary is organized according to resource type.
   ComplianceSummaryItem:
     type: object
     properties:
@@ -9050,21 +9288,28 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ComplianceSummaryItem'
-  ComplianceTypeName:
-    type: string
-    pattern: '[A-Za-z0-9_\-]\w+|Custom:[a-zA-Z0-9_\-]\w+'
-    minLength: 1
-    maxLength: 100
-  CompliantSummary:
+  SeveritySummary:
     type: object
     properties:
-      CompliantCount:
+      CriticalCount:
         $ref: '#/definitions/ComplianceSummaryCount'
-        description: The total number of resources that are compliant.
-      SeveritySummary:
-        $ref: '#/definitions/SeveritySummary'
-        description: A summary of the compliance severity by compliance type.
-    description: A summary of resources that are compliant. The summary is organized according to the resource count for each compliance type.
+        description: The total number of resources or compliance items that have a severity level of critical. Critical severity is determined by the organization that published the compliance items.
+      HighCount:
+        $ref: '#/definitions/ComplianceSummaryCount'
+        description: The total number of resources or compliance items that have a severity level of high. High severity is determined by the organization that published the compliance items.
+      MediumCount:
+        $ref: '#/definitions/ComplianceSummaryCount'
+        description: The total number of resources or compliance items that have a severity level of medium. Medium severity is determined by the organization that published the compliance items.
+      LowCount:
+        $ref: '#/definitions/ComplianceSummaryCount'
+        description: The total number of resources or compliance items that have a severity level of low. Low severity is determined by the organization that published the compliance items.
+      InformationalCount:
+        $ref: '#/definitions/ComplianceSummaryCount'
+        description: The total number of resources or compliance items that have a severity level of informational. Informational severity is determined by the organization that published the compliance items.
+      UnspecifiedCount:
+        $ref: '#/definitions/ComplianceSummaryCount'
+        description: The total number of resources or compliance items that have a severity level of unspecified. Unspecified severity is determined by the organization that published the compliance items.
+    description: The number of managed instances found for each patch severity level defined in the request filter.
   ComputerName:
     type: string
     minLength: 1
@@ -9074,8 +9319,6 @@ definitions:
     enum:
       - Connected
       - NotConnected
-  ContentLength:
-    type: integer
   CreateAssociationBatchRequestEntries:
     type: array
     items:
@@ -9120,62 +9363,33 @@ definitions:
         $ref: '#/definitions/AssociationComplianceSeverity'
         description: The severity level to assign to the association.
     description: Describes the association of a Systems Manager SSM document and an instance.
-  CreatedDate:
-    type: string
-    format: date-time
-  DateTime:
-    type: string
-    format: date-time
-  DefaultBaseline:
-    type: boolean
-  DefaultInstanceName:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  DeliveryTimedOutCount:
-    type: integer
-  DescribeActivationsFilter:
-    type: object
-    properties:
-      FilterKey:
-        $ref: '#/definitions/DescribeActivationsFilterKeys'
-        description: The name of the filter.
-      FilterValues:
-        $ref: '#/definitions/StringList'
-        description: The filter values.
-    description: Filter for the DescribeActivation API.
-  DescribeActivationsFilterKeys:
-    type: string
-    enum:
-      - ActivationIds
-      - DefaultInstanceName
-      - IamRole
-  DescribeActivationsFilterList:
+  FailedCreateAssociationList:
     type: array
     items:
-      $ref: '#/definitions/DescribeActivationsFilter'
-  DescriptionInDocument:
-    type: string
-  DocumentARN:
-    type: string
-    pattern: '^[a-zA-Z0-9_\-.:/]{3,128}$'
+      $ref: '#/definitions/FailedCreateAssociation'
   DocumentContent:
     type: string
     minLength: 1
-  DocumentDefaultVersionDescription:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/DocumentName'
-        description: The name of the document.
-      DefaultVersion:
-        $ref: '#/definitions/DocumentVersion'
-        description: The default version of the document.
-      DefaultVersionName:
-        $ref: '#/definitions/DocumentVersionName'
-        description: The default version of the artifact associated with the document.
-    description: A default version of a document.
+  DocumentVersionName:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-.]{1,128}$'
+  DocumentType:
+    type: string
+    enum:
+      - Command
+      - Policy
+      - Automation
+      - Session
+      - Package
+  DocumentFormat:
+    type: string
+    enum:
+      - YAML
+      - JSON
+  TargetType:
+    type: string
+    pattern: '^\/[\w\.\-\:\/]*$'
+    maxLength: 200
   DocumentDescription:
     type: object
     properties:
@@ -9243,6 +9457,452 @@ definitions:
         $ref: '#/definitions/AttachmentInformationList'
         description: 'Details about the document attachments, including names, locations, sizes, etc.'
     description: 'Describes a Systems Manager document. '
+  MaintenanceWindowName:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
+    minLength: 3
+    maxLength: 128
+  MaintenanceWindowDescription:
+    type: string
+    minLength: 1
+    maxLength: 128
+    format: password
+  MaintenanceWindowStringDateTime:
+    type: string
+  MaintenanceWindowSchedule:
+    type: string
+    minLength: 1
+    maxLength: 256
+  MaintenanceWindowTimezone:
+    type: string
+  MaintenanceWindowDurationHours:
+    type: integer
+    minimum: 1
+    maximum: 24
+  MaintenanceWindowCutoff:
+    type: integer
+    minimum: 0
+    maximum: 23
+  MaintenanceWindowAllowUnassociatedTargets:
+    type: boolean
+  MaintenanceWindowId:
+    type: string
+    pattern: '^mw-[0-9a-f]{17}$'
+    minLength: 20
+    maxLength: 20
+  OperatingSystem:
+    type: string
+    enum:
+      - WINDOWS
+      - AMAZON_LINUX
+      - AMAZON_LINUX_2
+      - UBUNTU
+      - REDHAT_ENTERPRISE_LINUX
+      - SUSE
+      - CENTOS
+  PatchFilterGroup:
+    type: object
+    required:
+      - PatchFilters
+    properties:
+      PatchFilters:
+        $ref: '#/definitions/PatchFilterList'
+        description: The set of patch filters that make up the group.
+    description: 'A set of patch filters, typically used for approval rules.'
+  PatchRuleGroup:
+    type: object
+    required:
+      - PatchRules
+    properties:
+      PatchRules:
+        $ref: '#/definitions/PatchRuleList'
+        description: The rules that make up the rule group.
+    description: A set of rules defining the approval rules for a patch baseline.
+  PatchIdList:
+    type: array
+    items:
+      $ref: '#/definitions/PatchId'
+    minItems: 0
+    maxItems: 50
+  PatchComplianceLevel:
+    type: string
+    enum:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - INFORMATIONAL
+      - UNSPECIFIED
+  PatchAction:
+    type: string
+    enum:
+      - ALLOW_AS_DEPENDENCY
+      - BLOCK
+  PatchSourceList:
+    type: array
+    items:
+      $ref: '#/definitions/PatchSource'
+    minItems: 0
+    maxItems: 20
+  ResourceDataSyncName:
+    type: string
+    minLength: 1
+    maxLength: 64
+  ResourceDataSyncS3Destination:
+    type: object
+    required:
+      - BucketName
+      - SyncFormat
+      - Region
+    properties:
+      BucketName:
+        $ref: '#/definitions/ResourceDataSyncS3BucketName'
+        description: The name of the Amazon S3 bucket where the aggregated data is stored.
+      Prefix:
+        $ref: '#/definitions/ResourceDataSyncS3Prefix'
+        description: An Amazon S3 prefix for the bucket.
+      SyncFormat:
+        $ref: '#/definitions/ResourceDataSyncS3Format'
+        description: 'A supported sync format. The following format is currently supported: JsonSerDe'
+      Region:
+        $ref: '#/definitions/ResourceDataSyncS3Region'
+        description: The AWS Region with the Amazon S3 bucket targeted by the Resource Data Sync.
+      AWSKMSKeyARN:
+        $ref: '#/definitions/ResourceDataSyncAWSKMSKeyARN'
+        description: The ARN of an encryption key for a destination in Amazon S3. Must belong to the same region as the destination Amazon S3 bucket.
+    description: Information about the target Amazon S3 bucket for the Resource Data Sync.
+  DefaultBaseline:
+    type: boolean
+  InventoryItemTypeName:
+    type: string
+    pattern: '^(AWS|Custom):.*$'
+    minLength: 1
+    maxLength: 100
+  InventorySchemaDeleteOption:
+    type: string
+    enum:
+      - DisableSchema
+      - DeleteSchema
+  DryRun:
+    type: boolean
+  InventoryDeletionId:
+    type: string
+  InventoryDeletionSummary:
+    type: object
+    properties:
+      TotalCount:
+        $ref: '#/definitions/TotalCount'
+        description: The total number of items to delete. This count does not change during the delete operation.
+      RemainingCount:
+        $ref: '#/definitions/RemainingCount'
+        description: Remaining number of items to delete.
+      SummaryItems:
+        $ref: '#/definitions/InventoryDeletionSummaryItems'
+        description: A list of counts and versions for deleted items.
+    description: Information about the delete operation.
+  PSParameterName:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  ParameterNameList:
+    type: array
+    items:
+      $ref: '#/definitions/PSParameterName'
+    minItems: 1
+    maxItems: 10
+  ManagedInstanceId:
+    type: string
+    pattern: '^mi-[0-9a-f]{17}$'
+  PatchGroup:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 256
+  MaintenanceWindowTargetId:
+    type: string
+    pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
+    minLength: 36
+    maxLength: 36
+  MaintenanceWindowTaskId:
+    type: string
+    pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
+    minLength: 36
+    maxLength: 36
+  DescribeActivationsFilterKeys:
+    type: string
+    enum:
+      - ActivationIds
+      - DefaultInstanceName
+      - IamRole
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  DescribeActivationsFilter:
+    type: object
+    properties:
+      FilterKey:
+        $ref: '#/definitions/DescribeActivationsFilterKeys'
+        description: The name of the filter.
+      FilterValues:
+        $ref: '#/definitions/StringList'
+        description: The filter values.
+    description: Filter for the DescribeActivation API.
+  DescribeActivationsFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/DescribeActivationsFilter'
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 50
+  NextToken:
+    type: string
+  StepExecutionFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/StepExecutionFilter'
+    minItems: 1
+    maxItems: 6
+  PatchOrchestratorFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/PatchOrchestratorFilter'
+    minItems: 0
+    maxItems: 5
+  PatchBaselineMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  PatchList:
+    type: array
+    items:
+      $ref: '#/definitions/Patch'
+  DocumentPermissionType:
+    type: string
+    enum:
+      - Share
+  DocumentARN:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-.:/]{3,128}$'
+  EffectiveInstanceAssociationMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 5
+  InstanceAssociationList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceAssociation'
+  EffectivePatchList:
+    type: array
+    items:
+      $ref: '#/definitions/EffectivePatch'
+  InstanceAssociationStatusInfos:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceAssociationStatusInfo'
+  InstanceInformationFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceInformationFilter'
+    minItems: 0
+  InstanceInformationStringFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceInformationStringFilter'
+    minItems: 0
+  MaxResultsEC2Compatible:
+    type: integer
+    minimum: 5
+    maximum: 50
+  InstanceInformationList:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceInformation'
+  InstancePatchStateFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/InstancePatchStateFilter'
+    minItems: 0
+    maxItems: 4
+  PatchComplianceMaxResults:
+    type: integer
+    minimum: 10
+    maximum: 100
+  InstancePatchStatesList:
+    type: array
+    items:
+      $ref: '#/definitions/InstancePatchState'
+    minItems: 1
+    maxItems: 5
+  InstancePatchStateList:
+    type: array
+    items:
+      $ref: '#/definitions/InstancePatchState'
+  PatchComplianceDataList:
+    type: array
+    items:
+      $ref: '#/definitions/PatchComplianceData'
+  InventoryDeletionsList:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryDeletionStatusItem'
+  MaintenanceWindowExecutionTaskId:
+    type: string
+    pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
+    minLength: 36
+    maxLength: 36
+  MaintenanceWindowFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceWindowFilter'
+    minItems: 0
+    maxItems: 5
+  MaintenanceWindowMaxResults:
+    type: integer
+    minimum: 10
+    maximum: 100
+  MaintenanceWindowExecutionTaskInvocationIdentityList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceWindowExecutionTaskInvocationIdentity'
+  MaintenanceWindowExecutionTaskIdentityList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceWindowExecutionTaskIdentity'
+  MaintenanceWindowExecutionList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceWindowExecution'
+  MaintenanceWindowResourceType:
+    type: string
+    enum:
+      - INSTANCE
+  MaintenanceWindowSearchMaxResults:
+    type: integer
+    minimum: 1
+  ScheduledWindowExecutionList:
+    type: array
+    items:
+      $ref: '#/definitions/ScheduledWindowExecution'
+  MaintenanceWindowTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceWindowTarget'
+  MaintenanceWindowTaskList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceWindowTask'
+  MaintenanceWindowsForTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceWindowIdentityForTarget'
+  MaintenanceWindowIdentityList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceWindowIdentity'
+  ParametersFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/ParametersFilter'
+  ParameterStringFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterStringFilter'
+  ParameterMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterMetadata'
+  PatchBaselineIdentityList:
+    type: array
+    items:
+      $ref: '#/definitions/PatchBaselineIdentity'
+  Integer:
+    type: integer
+  InstancesCount:
+    type: integer
+  PatchGroupPatchBaselineMappingList:
+    type: array
+    items:
+      $ref: '#/definitions/PatchGroupPatchBaselineMapping'
+  SessionState:
+    type: string
+    enum:
+      - Active
+      - History
+  SessionMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 200
+  SessionFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/SessionFilter'
+    minItems: 1
+    maxItems: 5
+  SessionList:
+    type: array
+    items:
+      $ref: '#/definitions/Session'
+  DescriptionInDocument:
+    type: string
+  DocumentDefaultVersionDescription:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/DocumentName'
+        description: The name of the document.
+      DefaultVersion:
+        $ref: '#/definitions/DocumentVersion'
+        description: The default version of the document.
+      DefaultVersionName:
+        $ref: '#/definitions/DocumentVersionName'
+        description: The default version of the artifact associated with the document.
+    description: A default version of a document.
+  DocumentSha1:
+    type: string
+  DocumentHash:
+    type: string
+    maxLength: 256
+  DocumentHashType:
+    type: string
+    enum:
+      - Sha256
+      - Sha1
+  DocumentOwner:
+    type: string
+  DocumentStatus:
+    type: string
+    enum:
+      - Creating
+      - Active
+      - Updating
+      - Deleting
+      - Failed
+    description: The status of a document.
+  DocumentStatusInformation:
+    type: string
+  DocumentParameterList:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentParameter'
+  PlatformTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/PlatformType'
+  DocumentSchemaVersion:
+    type: string
+    pattern: '([0-9]+)\.([0-9]+)'
+  DocumentFilterKey:
+    type: string
+    enum:
+      - Name
+      - Owner
+      - PlatformTypes
+      - DocumentType
+  DocumentFilterValue:
+    type: string
+    minLength: 1
   DocumentFilter:
     type: object
     required:
@@ -9256,34 +9916,11 @@ definitions:
         $ref: '#/definitions/DocumentFilterValue'
         description: The value of the filter.
     description: Describes a filter.
-  DocumentFilterKey:
-    type: string
-    enum:
-      - Name
-      - Owner
-      - PlatformTypes
-      - DocumentType
   DocumentFilterList:
     type: array
     items:
       $ref: '#/definitions/DocumentFilter'
     minItems: 1
-  DocumentFilterValue:
-    type: string
-    minLength: 1
-  DocumentFormat:
-    type: string
-    enum:
-      - YAML
-      - JSON
-  DocumentHash:
-    type: string
-    maxLength: 256
-  DocumentHashType:
-    type: string
-    enum:
-      - Sha256
-      - Sha1
   DocumentIdentifier:
     type: object
     properties:
@@ -9322,6 +9959,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DocumentIdentifier'
+  DocumentKeyValuesFilterKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  DocumentKeyValuesFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentKeyValuesFilterValue'
   DocumentKeyValuesFilter:
     type: object
     properties:
@@ -9332,10 +9977,6 @@ definitions:
         $ref: '#/definitions/DocumentKeyValuesFilterValues'
         description: The value for the filter key.
     description: '<p>One or more filters. Use a filter to return a more specific list of documents.</p> <p>For keys, you can specify one or more tags that have been applied to a document. </p> <p>Other valid values include Owner, Name, PlatformTypes, and DocumentType.</p> <p>Note that only one Owner can be specified in a request. For example: <code>Key=Owner,Values=Self</code>.</p> <p>If you use Name as a key, you can use a name prefix to return a list of documents. For example, in the AWS CLI, to return a list of all documents that begin with <code>Te</code>, run the following command:</p> <p> <code>aws ssm list-documents --filters Key=Name,Values=Te</code> </p> <p>If you specify more than two keys, only documents that are identified by all the tags are returned in the results. If you specify more than two values for a key, documents that are identified by any of the values are returned in the results.</p> <p>To specify a custom key and value pair, use the format <code>Key=tag:[tagName],Values=[valueName]</code>.</p> <p>For example, if you created a Key called region and are using the AWS CLI to call the <code>list-documents</code> command: </p> <p> <code>aws ssm list-documents --filters Key=tag:region,Values=east,west Key=Owner,Values=Self</code> </p>'
-  DocumentKeyValuesFilterKey:
-    type: string
-    minLength: 1
-    maxLength: 128
   DocumentKeyValuesFilterList:
     type: array
     items:
@@ -9346,14 +9987,16 @@ definitions:
     type: string
     minLength: 1
     maxLength: 256
-  DocumentKeyValuesFilterValues:
-    type: array
-    items:
-      $ref: '#/definitions/DocumentKeyValuesFilterValue'
-  DocumentName:
+  DocumentParameterName:
     type: string
-    pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
-  DocumentOwner:
+  DocumentParameterType:
+    type: string
+    enum:
+      - String
+      - StringList
+  DocumentParameterDescrption:
+    type: string
+  DocumentParameterDefaultValue:
     type: string
   DocumentParameter:
     type: object
@@ -9371,52 +10014,6 @@ definitions:
         $ref: '#/definitions/DocumentParameterDefaultValue'
         description: 'If specified, the default values for the parameters. Parameters without a default value are required. Parameters with a default value are optional.'
     description: 'Parameters specified in a System Manager document that execute on the server when the command is run. '
-  DocumentParameterDefaultValue:
-    type: string
-  DocumentParameterDescrption:
-    type: string
-  DocumentParameterList:
-    type: array
-    items:
-      $ref: '#/definitions/DocumentParameter'
-  DocumentParameterName:
-    type: string
-  DocumentParameterType:
-    type: string
-    enum:
-      - String
-      - StringList
-  DocumentPermissionType:
-    type: string
-    enum:
-      - Share
-  DocumentSchemaVersion:
-    type: string
-    pattern: '([0-9]+)\.([0-9]+)'
-  DocumentSha1:
-    type: string
-  DocumentStatus:
-    type: string
-    enum:
-      - Creating
-      - Active
-      - Updating
-      - Deleting
-      - Failed
-    description: The status of a document.
-  DocumentStatusInformation:
-    type: string
-  DocumentType:
-    type: string
-    enum:
-      - Command
-      - Policy
-      - Automation
-      - Session
-      - Package
-  DocumentVersion:
-    type: string
-    pattern: '([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)'
   DocumentVersionInfo:
     type: object
     properties:
@@ -9450,18 +10047,65 @@ definitions:
     items:
       $ref: '#/definitions/DocumentVersionInfo'
     minItems: 1
-  DocumentVersionName:
-    type: string
-    pattern: '^[a-zA-Z0-9_\-.]{1,128}$'
   DocumentVersionNumber:
     type: string
     pattern: '(^[1-9][0-9]*$)'
-  DryRun:
-    type: boolean
-  EffectiveInstanceAssociationMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 5
+  Patch:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/PatchId'
+        description: The ID of the patch (this is different than the Microsoft Knowledge Base ID).
+      ReleaseDate:
+        $ref: '#/definitions/DateTime'
+        description: The date the patch was released.
+      Title:
+        $ref: '#/definitions/PatchTitle'
+        description: The title of the patch.
+      Description:
+        $ref: '#/definitions/PatchDescription'
+        description: The description of the patch.
+      ContentUrl:
+        $ref: '#/definitions/PatchContentUrl'
+        description: The URL where more information can be obtained about the patch.
+      Vendor:
+        $ref: '#/definitions/PatchVendor'
+        description: The name of the vendor providing the patch.
+      ProductFamily:
+        $ref: '#/definitions/PatchProductFamily'
+        description: 'The product family the patch is applicable for (for example, Windows).'
+      Product:
+        $ref: '#/definitions/PatchProduct'
+        description: 'The specific product the patch is applicable for (for example, WindowsServer2016).'
+      Classification:
+        $ref: '#/definitions/PatchClassification'
+        description: 'The classification of the patch (for example, SecurityUpdates, Updates, CriticalUpdates).'
+      MsrcSeverity:
+        $ref: '#/definitions/PatchMsrcSeverity'
+        description: 'The severity of the patch (for example Critical, Important, Moderate).'
+      KbNumber:
+        $ref: '#/definitions/PatchKbNumber'
+        description: The Microsoft Knowledge Base ID of the patch.
+      MsrcNumber:
+        $ref: '#/definitions/PatchMsrcNumber'
+        description: The ID of the MSRC bulletin the patch is related to.
+      Language:
+        $ref: '#/definitions/PatchLanguage'
+        description: The language of the patch if it's language-specific.
+    description: Represents metadata about a patch.
+  PatchStatus:
+    type: object
+    properties:
+      DeploymentStatus:
+        $ref: '#/definitions/PatchDeploymentStatus'
+        description: 'The approval status of a patch (APPROVED, PENDING_APPROVAL, EXPLICIT_APPROVED, EXPLICIT_REJECTED).'
+      ComplianceLevel:
+        $ref: '#/definitions/PatchComplianceLevel'
+        description: The compliance severity level for a patch.
+      ApprovalDate:
+        $ref: '#/definitions/DateTime'
+        description: The date the patch was approved (or will be approved if the status is PENDING_APPROVAL).
+    description: Information about the approval status of a patch.
   EffectivePatch:
     type: object
     properties:
@@ -9472,24 +10116,16 @@ definitions:
         $ref: '#/definitions/PatchStatus'
         description: 'The status of the patch in a patch baseline. This includes information about whether the patch is currently approved, due to be approved by a rule, explicitly approved, or explicitly rejected and the date the patch was or will be approved.'
     description: 'The EffectivePatch structure defines metadata about a patch along with the approval state of the patch in a particular patch baseline. The approval state includes information about whether the patch is currently approved, due to be approved by a rule, explicitly approved, or explicitly rejected and the date the patch was or will be approved.'
-  EffectivePatchList:
-    type: array
-    items:
-      $ref: '#/definitions/EffectivePatch'
-  ErrorCount:
-    type: integer
-  ExecutionMode:
-    type: string
-    enum:
-      - Auto
-      - Interactive
   ExecutionRoleName:
     type: string
     minLength: 1
     maxLength: 64
-  ExpirationDate:
+  Fault:
     type: string
-    format: date-time
+    enum:
+      - Client
+      - Server
+      - Unknown
   FailedCreateAssociation:
     type: object
     properties:
@@ -9503,10 +10139,6 @@ definitions:
         $ref: '#/definitions/Fault'
         description: The source of the failure.
     description: Describes a failed association.
-  FailedCreateAssociationList:
-    type: array
-    items:
-      $ref: '#/definitions/FailedCreateAssociation'
   FailureDetails:
     type: object
     properties:
@@ -9520,27 +10152,210 @@ definitions:
         $ref: '#/definitions/AutomationParameterMap'
         description: Detailed information about the Automation step failure.
     description: Information about an Automation failure.
-  Fault:
+  StringDateTime:
     type: string
-    enum:
-      - Client
-      - Server
-      - Unknown
+    pattern: '^([\-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d(?!:))?)?(\17[0-5]\d([\.,]\d)?)?([zZ]|([\-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$'
+  StandardOutputContent:
+    type: string
+    maxLength: 24000
+  StandardErrorContent:
+    type: string
+    maxLength: 8000
+  SessionTarget:
+    type: string
+    minLength: 1
+    maxLength: 50
+  SnapshotId:
+    type: string
+    pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+    minLength: 36
+    maxLength: 36
+  SnapshotDownloadUrl:
+    type: string
+  Product:
+    type: string
+  InventoryFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryFilter'
+    minItems: 1
+    maxItems: 5
+  InventoryAggregatorList:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryAggregator'
+    minItems: 1
+    maxItems: 10
+  ResultAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/ResultAttribute'
+    minItems: 1
+    maxItems: 1
+  InventoryResultEntityList:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryResultEntity'
   GetInventorySchemaMaxResults:
     type: integer
     minimum: 50
     maximum: 200
+  InventoryItemTypeNameFilter:
+    type: string
+    minLength: 0
+    maxLength: 100
+  IsSubTypeSchema:
+    type: boolean
+  InventoryItemSchemaResultList:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryItemSchema'
+  MaintenanceWindowExecutionTaskIdList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceWindowExecutionTaskId'
+  MaintenanceWindowExecutionStatus:
+    type: string
+    enum:
+      - PENDING
+      - IN_PROGRESS
+      - SUCCESS
+      - FAILED
+      - TIMED_OUT
+      - CANCELLING
+      - CANCELLED
+      - SKIPPED_OVERLAPPING
+  MaintenanceWindowExecutionStatusDetails:
+    type: string
+    minLength: 0
+    maxLength: 250
+  MaintenanceWindowExecutionTaskInvocationId:
+    type: string
+    pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
+    minLength: 36
+    maxLength: 36
+  MaintenanceWindowExecutionTaskExecutionId:
+    type: string
+  MaintenanceWindowTaskType:
+    type: string
+    enum:
+      - RUN_COMMAND
+      - AUTOMATION
+      - STEP_FUNCTIONS
+      - LAMBDA
+  MaintenanceWindowExecutionTaskInvocationParameters:
+    type: string
+    format: password
+  OwnerInformation:
+    type: string
+    minLength: 1
+    maxLength: 128
+    format: password
+  MaintenanceWindowTaskTargetId:
+    type: string
+    maxLength: 36
+  MaintenanceWindowTaskArn:
+    type: string
+    minLength: 1
+    maxLength: 1600
+  MaintenanceWindowTaskParametersList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceWindowTaskParameters'
+  MaintenanceWindowTaskPriority:
+    type: integer
+    minimum: 0
+  MaintenanceWindowEnabled:
+    type: boolean
+  MaintenanceWindowTaskParameters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/MaintenanceWindowTaskParameterName'
+        value:
+          $ref: '#/definitions/MaintenanceWindowTaskParameterValueExpression'
+  MaintenanceWindowTaskInvocationParameters:
+    type: object
+    properties:
+      RunCommand:
+        $ref: '#/definitions/MaintenanceWindowRunCommandParameters'
+        description: The parameters for a RUN_COMMAND task type.
+      Automation:
+        $ref: '#/definitions/MaintenanceWindowAutomationParameters'
+        description: The parameters for an AUTOMATION task type.
+      StepFunctions:
+        $ref: '#/definitions/MaintenanceWindowStepFunctionsParameters'
+        description: The parameters for a STEP_FUNCTION task type.
+      Lambda:
+        $ref: '#/definitions/MaintenanceWindowLambdaParameters'
+        description: The parameters for a LAMBDA task type.
+    description: The parameters for task execution.
+  LoggingInfo:
+    type: object
+    required:
+      - S3BucketName
+      - S3Region
+    properties:
+      S3BucketName:
+        $ref: '#/definitions/S3BucketName'
+        description: The name of an Amazon S3 bucket where execution logs are stored .
+      S3KeyPrefix:
+        $ref: '#/definitions/S3KeyPrefix'
+        description: '(Optional) The Amazon S3 bucket subfolder. '
+      S3Region:
+        $ref: '#/definitions/S3Region'
+        description: The region where the Amazon S3 bucket is located.
+    description: '<p>Information about an Amazon S3 bucket to write instance-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+  ParameterHistoryList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterHistory'
+  Parameter:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/PSParameterName'
+        description: The name of the parameter.
+      Type:
+        $ref: '#/definitions/ParameterType'
+        description: 'The type of parameter. Valid values include the following: String, String list, Secure string.'
+      Value:
+        $ref: '#/definitions/PSParameterValue'
+        description: The parameter value.
+      Version:
+        $ref: '#/definitions/PSParameterVersion'
+        description: The parameter version.
+      Selector:
+        $ref: '#/definitions/PSParameterSelector'
+        description: '<p>Either the version number or the label used to retrieve the parameter value. Specify selectors by using one of the following formats:</p> <p>parameter_name:version</p> <p>parameter_name:label</p>'
+      SourceResult:
+        $ref: '#/definitions/String'
+        description: Applies to parameters that reference information in other AWS services. SourceResult is the raw result or response from the source.
+      LastModifiedDate:
+        $ref: '#/definitions/DateTime'
+        description: Date the parameter was last changed or updated and the parameter version was created.
+      ARN:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the parameter.
+    description: An Amazon EC2 Systems Manager parameter in Parameter Store.
   GetParametersByPathMaxResults:
     type: integer
     minimum: 1
     maximum: 10
+  ParameterList:
+    type: array
+    items:
+      $ref: '#/definitions/Parameter'
+  PatchGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/PatchGroup'
   IPAddress:
     type: string
     minLength: 1
     maxLength: 46
-  IamRole:
-    type: string
-    maxLength: 64
   IdempotencyToken:
     type: string
     pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
@@ -9551,6 +10366,15 @@ definitions:
     pattern: '^https://.+$|^s3://([^/]+)/(.*?([^/]+))$'
     minLength: 1
     maxLength: 256
+  InstanceAssociationStatusAggregatedCount:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/StatusName'
+        value:
+          $ref: '#/definitions/InstanceCount'
   InstanceAggregatedAssociationOverview:
     type: object
     properties:
@@ -9581,17 +10405,26 @@ definitions:
     type: string
     minLength: 1
     maxLength: 512
-  InstanceAssociationList:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceAssociation'
-  InstanceAssociationOutputLocation:
+  S3OutputLocation:
     type: object
     properties:
-      S3Location:
-        $ref: '#/definitions/S3OutputLocation'
-        description: An Amazon S3 bucket where you want to store the results of this request.
+      OutputS3Region:
+        $ref: '#/definitions/S3Region'
+        description: '(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.'
+      OutputS3BucketName:
+        $ref: '#/definitions/S3BucketName'
+        description: The name of the Amazon S3 bucket.
+      OutputS3KeyPrefix:
+        $ref: '#/definitions/S3KeyPrefix'
+        description: The Amazon S3 bucket subfolder.
     description: An Amazon S3 bucket where you want to store the results of this request.
+  S3OutputUrl:
+    type: object
+    properties:
+      OutputUrl:
+        $ref: '#/definitions/Url'
+        description: A URL for an Amazon S3 bucket where you want to store the results of this request.
+    description: A URL for the Amazon S3 bucket where you want to store the results of this request.
   InstanceAssociationOutputUrl:
     type: object
     properties:
@@ -9599,15 +10432,6 @@ definitions:
         $ref: '#/definitions/S3OutputUrl'
         description: The URL of Amazon S3 bucket where you want to store the results of this request.
     description: The URL of Amazon S3 bucket where you want to store the results of this request.
-  InstanceAssociationStatusAggregatedCount:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/StatusName'
-        value:
-          $ref: '#/definitions/InstanceCount'
   InstanceAssociationStatusInfo:
     type: object
     properties:
@@ -9648,19 +10472,26 @@ definitions:
         $ref: '#/definitions/AssociationName'
         description: The name of the association applied to the instance.
     description: Status information about the instance association.
-  InstanceAssociationStatusInfos:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceAssociationStatusInfo'
-  InstanceId:
+  PingStatus:
     type: string
-    pattern: '(^i-(\w{8}|\w{17})$)|(^mi-\w{17}$)'
-  InstanceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceId'
-    minItems: 0
-    maxItems: 50
+    enum:
+      - Online
+      - ConnectionLost
+      - Inactive
+  Version:
+    type: string
+    pattern: '^[0-9]{1,6}(\.[0-9]{1,6}){2,3}$'
+  PlatformType:
+    type: string
+    enum:
+      - Windows
+      - Linux
+  ResourceType:
+    type: string
+    enum:
+      - ManagedInstance
+      - Document
+      - EC2Instance
   InstanceInformation:
     type: object
     properties:
@@ -9722,6 +10553,23 @@ definitions:
         $ref: '#/definitions/InstanceAggregatedAssociationOverview'
         description: Information about the association.
     description: 'Describes a filter for a specific list of instances. '
+  InstanceInformationFilterKey:
+    type: string
+    enum:
+      - InstanceIds
+      - AgentVersion
+      - PingStatus
+      - PlatformTypes
+      - ActivationIds
+      - IamRole
+      - ResourceType
+      - AssociationStatus
+  InstanceInformationFilterValueSet:
+    type: array
+    items:
+      $ref: '#/definitions/InstanceInformationFilterValue'
+    minItems: 1
+    maxItems: 100
   InstanceInformationFilter:
     type: object
     required:
@@ -9735,35 +10583,12 @@ definitions:
         $ref: '#/definitions/InstanceInformationFilterValueSet'
         description: The filter values.
     description: <p>Describes a filter for a specific list of instances. You can filter instances information by using tags. You specify tags by using a key-value mapping.</p> <p>Use this action instead of the <a>DescribeInstanceInformationRequest$InstanceInformationFilterList</a> method. The <code>InstanceInformationFilterList</code> method is a legacy method and does not support tags. </p>
-  InstanceInformationFilterKey:
-    type: string
-    enum:
-      - InstanceIds
-      - AgentVersion
-      - PingStatus
-      - PlatformTypes
-      - ActivationIds
-      - IamRole
-      - ResourceType
-      - AssociationStatus
-  InstanceInformationFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceInformationFilter'
-    minItems: 0
   InstanceInformationFilterValue:
     type: string
     minLength: 1
-  InstanceInformationFilterValueSet:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceInformationFilterValue'
-    minItems: 1
-    maxItems: 100
-  InstanceInformationList:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceInformation'
+  InstanceInformationStringFilterKey:
+    type: string
+    minLength: 1
   InstanceInformationStringFilter:
     type: object
     required:
@@ -9777,14 +10602,23 @@ definitions:
         $ref: '#/definitions/InstanceInformationFilterValueSet'
         description: The filter values.
     description: The filters to describe or get information about your managed instances.
-  InstanceInformationStringFilterKey:
+  PatchInstalledCount:
+    type: integer
+  PatchInstalledOtherCount:
+    type: integer
+  PatchInstalledRejectedCount:
+    type: integer
+  PatchMissingCount:
+    type: integer
+  PatchFailedCount:
+    type: integer
+  PatchNotApplicableCount:
+    type: integer
+  PatchOperationType:
     type: string
-    minLength: 1
-  InstanceInformationStringFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/InstanceInformationStringFilter'
-    minItems: 0
+    enum:
+      - Scan
+      - Install
   InstancePatchState:
     type: object
     required:
@@ -9841,6 +10675,23 @@ definitions:
         $ref: '#/definitions/PatchOperationType'
         description: 'The type of patching operation that was performed: SCAN (assess patch compliance state) or INSTALL (install missing patches).'
     description: 'Defines the high-level patch compliance state for a managed instance, providing information about the number of installed, missing, not applicable, and failed patches along with metadata about the operation when this information was gathered for the instance.'
+  InstancePatchStateFilterKey:
+    type: string
+    minLength: 1
+    maxLength: 200
+  InstancePatchStateFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/InstancePatchStateFilterValue'
+    minItems: 1
+    maxItems: 1
+  InstancePatchStateOperatorType:
+    type: string
+    enum:
+      - Equal
+      - NotEqual
+      - LessThan
+      - GreaterThan
   InstancePatchStateFilter:
     type: object
     required:
@@ -9858,48 +10709,18 @@ definitions:
         $ref: '#/definitions/InstancePatchStateOperatorType'
         description: 'The type of comparison that should be performed for the value: Equal, NotEqual, LessThan or GreaterThan.'
     description: Defines a filter used in DescribeInstancePatchStatesForPatchGroup used to scope down the information returned by the API.
-  InstancePatchStateFilterKey:
-    type: string
-    minLength: 1
-    maxLength: 200
-  InstancePatchStateFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/InstancePatchStateFilter'
-    minItems: 0
-    maxItems: 4
   InstancePatchStateFilterValue:
     type: string
-  InstancePatchStateFilterValues:
-    type: array
-    items:
-      $ref: '#/definitions/InstancePatchStateFilterValue'
-    minItems: 1
-    maxItems: 1
-  InstancePatchStateList:
-    type: array
-    items:
-      $ref: '#/definitions/InstancePatchState'
-  InstancePatchStateOperatorType:
+  InventoryAggregatorExpression:
     type: string
-    enum:
-      - Equal
-      - NotEqual
-      - LessThan
-      - GreaterThan
-  InstancePatchStatesList:
+    minLength: 1
+    maxLength: 1000
+  InventoryGroupList:
     type: array
     items:
-      $ref: '#/definitions/InstancePatchState'
+      $ref: '#/definitions/InventoryGroup'
     minItems: 1
-    maxItems: 5
-  InstanceTagName:
-    type: string
-    maxLength: 255
-  InstancesCount:
-    type: integer
-  Integer:
-    type: integer
+    maxItems: 10
   InventoryAggregator:
     type: object
     properties:
@@ -9913,23 +10734,11 @@ definitions:
         $ref: '#/definitions/InventoryGroupList'
         description: A user-defined set of one or more filters on which to aggregate inventory data. Groups return a count of resources that match and don't match the specified criteria.
     description: Specifies the inventory type and attribute for the aggregation execution.
-  InventoryAggregatorExpression:
-    type: string
-    minLength: 1
-    maxLength: 1000
-  InventoryAggregatorList:
-    type: array
-    items:
-      $ref: '#/definitions/InventoryAggregator'
-    minItems: 1
-    maxItems: 10
   InventoryAttributeDataType:
     type: string
     enum:
       - string
       - number
-  InventoryDeletionId:
-    type: string
   InventoryDeletionLastStatusMessage:
     type: string
   InventoryDeletionLastStatusUpdateTime:
@@ -9968,19 +10777,19 @@ definitions:
         $ref: '#/definitions/InventoryDeletionLastStatusUpdateTime'
         description: The UTC timestamp of when the last status report.
     description: Status information returned by the <code>DeleteInventory</code> action.
-  InventoryDeletionSummary:
-    type: object
-    properties:
-      TotalCount:
-        $ref: '#/definitions/TotalCount'
-        description: The total number of items to delete. This count does not change during the delete operation.
-      RemainingCount:
-        $ref: '#/definitions/RemainingCount'
-        description: Remaining number of items to delete.
-      SummaryItems:
-        $ref: '#/definitions/InventoryDeletionSummaryItems'
-        description: A list of counts and versions for deleted items.
-    description: Information about the delete operation.
+  TotalCount:
+    type: integer
+  RemainingCount:
+    type: integer
+  InventoryDeletionSummaryItems:
+    type: array
+    items:
+      $ref: '#/definitions/InventoryDeletionSummaryItem'
+  InventoryItemSchemaVersion:
+    type: string
+    pattern: '^([0-9]{1,6})(\.[0-9]{1,6})$'
+  ResourceCount:
+    type: integer
   InventoryDeletionSummaryItem:
     type: object
     properties:
@@ -9994,14 +10803,25 @@ definitions:
         $ref: '#/definitions/RemainingCount'
         description: The remaining number of items to delete.
     description: 'Either a count, remaining count, or a version number in a delete inventory summary.'
-  InventoryDeletionSummaryItems:
+  InventoryFilterKey:
+    type: string
+    minLength: 1
+    maxLength: 200
+  InventoryFilterValueList:
     type: array
     items:
-      $ref: '#/definitions/InventoryDeletionSummaryItem'
-  InventoryDeletionsList:
-    type: array
-    items:
-      $ref: '#/definitions/InventoryDeletionStatusItem'
+      $ref: '#/definitions/InventoryFilterValue'
+    minItems: 1
+    maxItems: 40
+  InventoryQueryOperatorType:
+    type: string
+    enum:
+      - Equal
+      - NotEqual
+      - BeginWith
+      - LessThan
+      - GreaterThan
+      - Exists
   InventoryFilter:
     type: object
     required:
@@ -10018,24 +10838,12 @@ definitions:
         $ref: '#/definitions/InventoryQueryOperatorType'
         description: 'The type of filter. Valid values include the following: "Equal"|"NotEqual"|"BeginWith"|"LessThan"|"GreaterThan"'
     description: One or more filters. Use a filter to return a more specific list of results.
-  InventoryFilterKey:
+  InventoryFilterValue:
+    type: string
+  InventoryGroupName:
     type: string
     minLength: 1
     maxLength: 200
-  InventoryFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/InventoryFilter'
-    minItems: 1
-    maxItems: 5
-  InventoryFilterValue:
-    type: string
-  InventoryFilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/InventoryFilterValue'
-    minItems: 1
-    maxItems: 40
   InventoryGroup:
     type: object
     required:
@@ -10049,16 +10857,29 @@ definitions:
         $ref: '#/definitions/InventoryFilterList'
         description: 'Filters define the criteria for the group. The <code>matchingCount</code> field displays the number of resources that match the criteria. The <code>notMatchingCount</code> field displays the number of resources that don''t match the criteria. '
     description: A user-defined set of one or more filters on which to aggregate inventory data. Groups return a count of resources that match and don't match the specified criteria.
-  InventoryGroupList:
+  InventoryItemCaptureTime:
+    type: string
+    pattern: '^(20)[0-9][0-9]-(0[1-9]|1[012])-([12][0-9]|3[01]|0[1-9])(T)(2[0-3]|[0-1][0-9])(:[0-5][0-9])(:[0-5][0-9])(Z)$'
+  InventoryItemContentHash:
+    type: string
+    maxLength: 256
+  InventoryItemEntryList:
     type: array
     items:
-      $ref: '#/definitions/InventoryGroup'
-    minItems: 1
-    maxItems: 10
-  InventoryGroupName:
-    type: string
-    minLength: 1
-    maxLength: 200
+      $ref: '#/definitions/InventoryItemEntry'
+    minItems: 0
+    maxItems: 10000
+  InventoryItemContentContext:
+    type: array
+    minItems: 0
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeName'
+        value:
+          $ref: '#/definitions/AttributeValue'
   InventoryItem:
     type: object
     required:
@@ -10085,6 +10906,8 @@ definitions:
         $ref: '#/definitions/InventoryItemContentContext'
         description: 'A map of associated properties for a specified inventory type. For example, with this attribute, you can specify the <code>ExecutionId</code>, <code>ExecutionType</code>, <code>ComplianceType</code> properties of the <code>AWS:ComplianceItem</code> type.'
     description: Information collected from managed instances based on your inventory policy document
+  InventoryItemAttributeName:
+    type: string
   InventoryItemAttribute:
     type: object
     required:
@@ -10104,25 +10927,6 @@ definitions:
       $ref: '#/definitions/InventoryItemAttribute'
     minItems: 1
     maxItems: 50
-  InventoryItemAttributeName:
-    type: string
-  InventoryItemCaptureTime:
-    type: string
-    pattern: '^(20)[0-9][0-9]-(0[1-9]|1[012])-([12][0-9]|3[01]|0[1-9])(T)(2[0-3]|[0-1][0-9])(:[0-5][0-9])(:[0-5][0-9])(Z)$'
-  InventoryItemContentContext:
-    type: array
-    minItems: 0
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeValue'
-  InventoryItemContentHash:
-    type: string
-    maxLength: 256
   InventoryItemEntry:
     type: array
     minItems: 0
@@ -10134,18 +10938,14 @@ definitions:
           $ref: '#/definitions/AttributeName'
         value:
           $ref: '#/definitions/AttributeValue'
-  InventoryItemEntryList:
-    type: array
-    items:
-      $ref: '#/definitions/InventoryItemEntry'
-    minItems: 0
-    maxItems: 10000
   InventoryItemList:
     type: array
     items:
       $ref: '#/definitions/InventoryItem'
     minItems: 1
     maxItems: 30
+  InventoryTypeDisplayName:
+    type: string
   InventoryItemSchema:
     type: object
     required:
@@ -10165,31 +10965,17 @@ definitions:
         $ref: '#/definitions/InventoryTypeDisplayName'
         description: The alias name of the inventory type. The alias name is used for display purposes.
     description: The inventory item schema definition. Users can use this to compose inventory query filters.
-  InventoryItemSchemaResultList:
+  InventoryResultEntityId:
+    type: string
+  InventoryResultItemMap:
     type: array
     items:
-      $ref: '#/definitions/InventoryItemSchema'
-  InventoryItemSchemaVersion:
-    type: string
-    pattern: '^([0-9]{1,6})(\.[0-9]{1,6})$'
-  InventoryItemTypeName:
-    type: string
-    pattern: '^(AWS|Custom):.*$'
-    minLength: 1
-    maxLength: 100
-  InventoryItemTypeNameFilter:
-    type: string
-    minLength: 0
-    maxLength: 100
-  InventoryQueryOperatorType:
-    type: string
-    enum:
-      - Equal
-      - NotEqual
-      - BeginWith
-      - LessThan
-      - GreaterThan
-      - Exists
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/InventoryResultItemKey'
+        value:
+          $ref: '#/definitions/InventoryResultItem'
   InventoryResultEntity:
     type: object
     properties:
@@ -10200,12 +10986,6 @@ definitions:
         $ref: '#/definitions/InventoryResultItemMap'
         description: The data section in the inventory result entity JSON.
     description: Inventory query results.
-  InventoryResultEntityId:
-    type: string
-  InventoryResultEntityList:
-    type: array
-    items:
-      $ref: '#/definitions/InventoryResultEntity'
   InventoryResultItem:
     type: object
     required:
@@ -10231,31 +11011,23 @@ definitions:
     description: The inventory result item.
   InventoryResultItemKey:
     type: string
-  InventoryResultItemMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/InventoryResultItemKey'
-        value:
-          $ref: '#/definitions/InventoryResultItem'
-  InventorySchemaDeleteOption:
+  TagKey:
     type: string
-    enum:
-      - DisableSchema
-      - DeleteSchema
-  InventoryTypeDisplayName:
-    type: string
-  InvocationTraceOutput:
-    type: string
-    maxLength: 2500
-  IsSubTypeSchema:
-    type: boolean
+    pattern: '^\(\?!^\(\?i\)aws:\)\(\?=^[\p\{L\}\p\{Z\}\p\{N\}_.:/=\+\-@]*$\).*$'
+    minLength: 1
+    maxLength: 128
   KeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
+  PSParameterVersion:
+    type: integer
+  ParameterLabelList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterLabel'
+    minItems: 1
+    maxItems: 10
   LastResourceDataSyncMessage:
     type: string
   LastResourceDataSyncStatus:
@@ -10270,26 +11042,16 @@ definitions:
   LastSuccessfulResourceDataSyncTime:
     type: string
     format: date-time
-  LoggingInfo:
-    type: object
-    required:
-      - S3BucketName
-      - S3Region
-    properties:
-      S3BucketName:
-        $ref: '#/definitions/S3BucketName'
-        description: The name of an Amazon S3 bucket where execution logs are stored .
-      S3KeyPrefix:
-        $ref: '#/definitions/S3KeyPrefix'
-        description: '(Optional) The Amazon S3 bucket subfolder. '
-      S3Region:
-        $ref: '#/definitions/S3Region'
-        description: The region where the Amazon S3 bucket is located.
-    description: '<p>Information about an Amazon S3 bucket to write instance-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
+  ResourceComplianceSummaryItemList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceComplianceSummaryItem'
+  ResourceDataSyncItemList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceDataSyncItem'
   Long:
     type: integer
-  MaintenanceWindowAllowUnassociatedTargets:
-    type: boolean
   MaintenanceWindowAutomationParameters:
     type: object
     properties:
@@ -10300,21 +11062,6 @@ definitions:
         $ref: '#/definitions/AutomationParameterMap'
         description: '<p>The parameters for the AUTOMATION task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For AUTOMATION task types, Systems Manager ignores any values specified for these parameters.</p> </note>'
     description: The parameters for an AUTOMATION task type.
-  MaintenanceWindowCutoff:
-    type: integer
-    minimum: 0
-    maximum: 23
-  MaintenanceWindowDescription:
-    type: string
-    minLength: 1
-    maxLength: 128
-    format: password
-  MaintenanceWindowDurationHours:
-    type: integer
-    minimum: 1
-    maximum: 24
-  MaintenanceWindowEnabled:
-    type: boolean
   MaintenanceWindowExecution:
     type: object
     properties:
@@ -10337,41 +11084,6 @@ definitions:
         $ref: '#/definitions/DateTime'
         description: The time the execution finished.
     description: 'Describes the information about an execution of a Maintenance Window. '
-  MaintenanceWindowExecutionId:
-    type: string
-    pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
-    minLength: 36
-    maxLength: 36
-  MaintenanceWindowExecutionList:
-    type: array
-    items:
-      $ref: '#/definitions/MaintenanceWindowExecution'
-  MaintenanceWindowExecutionStatus:
-    type: string
-    enum:
-      - PENDING
-      - IN_PROGRESS
-      - SUCCESS
-      - FAILED
-      - TIMED_OUT
-      - CANCELLING
-      - CANCELLED
-      - SKIPPED_OVERLAPPING
-  MaintenanceWindowExecutionStatusDetails:
-    type: string
-    minLength: 0
-    maxLength: 250
-  MaintenanceWindowExecutionTaskExecutionId:
-    type: string
-  MaintenanceWindowExecutionTaskId:
-    type: string
-    pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
-    minLength: 36
-    maxLength: 36
-  MaintenanceWindowExecutionTaskIdList:
-    type: array
-    items:
-      $ref: '#/definitions/MaintenanceWindowExecutionTaskId'
   MaintenanceWindowExecutionTaskIdentity:
     type: object
     properties:
@@ -10400,15 +11112,6 @@ definitions:
         $ref: '#/definitions/MaintenanceWindowTaskType'
         description: The type of executed task.
     description: Information about a task execution performed as part of a Maintenance Window execution.
-  MaintenanceWindowExecutionTaskIdentityList:
-    type: array
-    items:
-      $ref: '#/definitions/MaintenanceWindowExecutionTaskIdentity'
-  MaintenanceWindowExecutionTaskInvocationId:
-    type: string
-    pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
-    minLength: 36
-    maxLength: 36
   MaintenanceWindowExecutionTaskInvocationIdentity:
     type: object
     properties:
@@ -10449,13 +11152,14 @@ definitions:
         $ref: '#/definitions/MaintenanceWindowTaskTargetId'
         description: The ID of the target definition in this Maintenance Window the invocation was performed for.
     description: Describes the information about a task invocation for a particular target as part of a task execution performed as part of a Maintenance Window execution.
-  MaintenanceWindowExecutionTaskInvocationIdentityList:
+  MaintenanceWindowFilterKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  MaintenanceWindowFilterValues:
     type: array
     items:
-      $ref: '#/definitions/MaintenanceWindowExecutionTaskInvocationIdentity'
-  MaintenanceWindowExecutionTaskInvocationParameters:
-    type: string
-    format: password
+      $ref: '#/definitions/MaintenanceWindowFilterValue'
   MaintenanceWindowFilter:
     type: object
     properties:
@@ -10466,29 +11170,10 @@ definitions:
         $ref: '#/definitions/MaintenanceWindowFilterValues'
         description: The filter values.
     description: Filter used in the request. Supported filter keys are Name and Enabled.
-  MaintenanceWindowFilterKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  MaintenanceWindowFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/MaintenanceWindowFilter'
-    minItems: 0
-    maxItems: 5
   MaintenanceWindowFilterValue:
     type: string
     minLength: 1
     maxLength: 256
-  MaintenanceWindowFilterValues:
-    type: array
-    items:
-      $ref: '#/definitions/MaintenanceWindowFilterValue'
-  MaintenanceWindowId:
-    type: string
-    pattern: '^mw-[0-9a-f]{17}$'
-    minLength: 20
-    maxLength: 20
   MaintenanceWindowIdentity:
     type: object
     properties:
@@ -10536,14 +11221,18 @@ definitions:
         $ref: '#/definitions/MaintenanceWindowName'
         description: The name of the Maintenance Window.
     description: The Maintenance Window to which the specified target belongs.
-  MaintenanceWindowIdentityList:
-    type: array
-    items:
-      $ref: '#/definitions/MaintenanceWindowIdentity'
   MaintenanceWindowLambdaClientContext:
     type: string
     minLength: 1
     maxLength: 8000
+  MaintenanceWindowLambdaQualifier:
+    type: string
+    minLength: 1
+    maxLength: 128
+  MaintenanceWindowLambdaPayload:
+    type: string
+    maxLength: 4096
+    format: password
   MaintenanceWindowLambdaParameters:
     type: object
     properties:
@@ -10557,27 +11246,10 @@ definitions:
         $ref: '#/definitions/MaintenanceWindowLambdaPayload'
         description: JSON to provide to your Lambda function as input.
     description: '<p>The parameters for a LAMBDA task type.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Lambda tasks, Systems Manager ignores any values specified for TaskParameters and LoggingInfo.</p> </note>'
-  MaintenanceWindowLambdaPayload:
-    type: string
-    maxLength: 4096
-    format: password
-  MaintenanceWindowLambdaQualifier:
-    type: string
-    minLength: 1
-    maxLength: 128
-  MaintenanceWindowMaxResults:
+  TimeoutSeconds:
     type: integer
-    minimum: 10
-    maximum: 100
-  MaintenanceWindowName:
-    type: string
-    pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
-    minLength: 3
-    maxLength: 128
-  MaintenanceWindowResourceType:
-    type: string
-    enum:
-      - INSTANCE
+    minimum: 30
+    maximum: 2592000
   MaintenanceWindowRunCommandParameters:
     type: object
     properties:
@@ -10609,13 +11281,6 @@ definitions:
         $ref: '#/definitions/TimeoutSeconds'
         description: 'If this time is reached and the command has not already started executing, it doesn''t run.'
     description: '<p>The parameters for a RUN_COMMAND task type.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Run Command tasks, Systems Manager uses specified values for <code>TaskParameters</code> and <code>LoggingInfo</code> only if no values are specified for <code>TaskInvocationParameters</code>. </p> </note>'
-  MaintenanceWindowSchedule:
-    type: string
-    minLength: 1
-    maxLength: 256
-  MaintenanceWindowSearchMaxResults:
-    type: integer
-    minimum: 1
   MaintenanceWindowStepFunctionsInput:
     type: string
     maxLength: 4096
@@ -10634,8 +11299,6 @@ definitions:
         $ref: '#/definitions/MaintenanceWindowStepFunctionsName'
         description: The name of the STEP_FUNCTION task.
     description: '<p>The parameters for a STEP_FUNCTION task.</p> <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p> <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs, instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information about how Systems Manager handles these options for the supported Maintenance Window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> <p>For Step Functions tasks, Systems Manager ignores any values specified for <code>TaskParameters</code> and <code>LoggingInfo</code>.</p> </note>'
-  MaintenanceWindowStringDateTime:
-    type: string
   MaintenanceWindowTarget:
     type: object
     properties:
@@ -10661,15 +11324,6 @@ definitions:
         $ref: '#/definitions/MaintenanceWindowDescription'
         description: A description of the target.
     description: The target registered with the Maintenance Window.
-  MaintenanceWindowTargetId:
-    type: string
-    pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
-    minLength: 36
-    maxLength: 36
-  MaintenanceWindowTargetList:
-    type: array
-    items:
-      $ref: '#/definitions/MaintenanceWindowTarget'
   MaintenanceWindowTask:
     type: object
     properties:
@@ -10713,35 +11367,6 @@ definitions:
         $ref: '#/definitions/MaintenanceWindowDescription'
         description: A description of the task.
     description: Information about a task defined for a Maintenance Window.
-  MaintenanceWindowTaskArn:
-    type: string
-    minLength: 1
-    maxLength: 1600
-  MaintenanceWindowTaskId:
-    type: string
-    pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
-    minLength: 36
-    maxLength: 36
-  MaintenanceWindowTaskInvocationParameters:
-    type: object
-    properties:
-      RunCommand:
-        $ref: '#/definitions/MaintenanceWindowRunCommandParameters'
-        description: The parameters for a RUN_COMMAND task type.
-      Automation:
-        $ref: '#/definitions/MaintenanceWindowAutomationParameters'
-        description: The parameters for an AUTOMATION task type.
-      StepFunctions:
-        $ref: '#/definitions/MaintenanceWindowStepFunctionsParameters'
-        description: The parameters for a STEP_FUNCTION task type.
-      Lambda:
-        $ref: '#/definitions/MaintenanceWindowLambdaParameters'
-        description: The parameters for a LAMBDA task type.
-    description: The parameters for task execution.
-  MaintenanceWindowTaskList:
-    type: array
-    items:
-      $ref: '#/definitions/MaintenanceWindowTask'
   MaintenanceWindowTaskParameterName:
     type: string
     minLength: 1
@@ -10751,6 +11376,10 @@ definitions:
     minLength: 1
     maxLength: 255
     format: password
+  MaintenanceWindowTaskParameterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/MaintenanceWindowTaskParameterValue'
   MaintenanceWindowTaskParameterValueExpression:
     type: object
     properties:
@@ -10758,77 +11387,6 @@ definitions:
         $ref: '#/definitions/MaintenanceWindowTaskParameterValueList'
         description: 'This field contains an array of 0 or more strings, each 1 to 255 characters in length.'
     description: Defines the values for a task parameter.
-  MaintenanceWindowTaskParameterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/MaintenanceWindowTaskParameterValue'
-  MaintenanceWindowTaskParameters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/MaintenanceWindowTaskParameterName'
-        value:
-          $ref: '#/definitions/MaintenanceWindowTaskParameterValueExpression'
-  MaintenanceWindowTaskParametersList:
-    type: array
-    items:
-      $ref: '#/definitions/MaintenanceWindowTaskParameters'
-  MaintenanceWindowTaskPriority:
-    type: integer
-    minimum: 0
-  MaintenanceWindowTaskTargetId:
-    type: string
-    maxLength: 36
-  MaintenanceWindowTaskType:
-    type: string
-    enum:
-      - RUN_COMMAND
-      - AUTOMATION
-      - STEP_FUNCTIONS
-      - LAMBDA
-  MaintenanceWindowTimezone:
-    type: string
-  MaintenanceWindowsForTargetList:
-    type: array
-    items:
-      $ref: '#/definitions/MaintenanceWindowIdentityForTarget'
-  ManagedInstanceId:
-    type: string
-    pattern: '^mi-[0-9a-f]{17}$'
-  MaxConcurrency:
-    type: string
-    pattern: '^([1-9][0-9]*|[1-9][0-9]%|[1-9]%|100%)$'
-    minLength: 1
-    maxLength: 7
-  MaxErrors:
-    type: string
-    pattern: '^([1-9][0-9]*|[0]|[1-9][0-9]%|[0-9]%|100%)$'
-    minLength: 1
-    maxLength: 7
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 50
-  MaxResultsEC2Compatible:
-    type: integer
-    minimum: 5
-    maximum: 50
-  NextToken:
-    type: string
-  NonCompliantSummary:
-    type: object
-    properties:
-      NonCompliantCount:
-        $ref: '#/definitions/ComplianceSummaryCount'
-        description: The total number of compliance items that are not compliant.
-      SeveritySummary:
-        $ref: '#/definitions/SeveritySummary'
-        description: A summary of the non-compliance severity by compliance type
-    description: A summary of resources that are not compliant. The summary is organized according to resource type.
-  String:
-    type: string
   NormalStringMap:
     type: array
     items:
@@ -10840,28 +11398,6 @@ definitions:
           $ref: '#/definitions/String'
   NotificationArn:
     type: string
-  NotificationConfig:
-    type: object
-    properties:
-      NotificationArn:
-        $ref: '#/definitions/NotificationArn'
-        description: An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
-      NotificationEvents:
-        $ref: '#/definitions/NotificationEventList'
-        description: 'The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html">Configuring Amazon SNS Notifications for Run Command</a> in the <i>AWS Systems Manager User Guide</i>.'
-      NotificationType:
-        $ref: '#/definitions/NotificationType'
-        description: 'Command: Receive notification when the status of a command changes. Invocation: For commands sent to multiple instances, receive notification on a per-instance basis when the status of a command changes. '
-    description: Configurations for sending notifications.
-  NotificationEvent:
-    type: string
-    enum:
-      - All
-      - InProgress
-      - Success
-      - TimedOut
-      - Cancelled
-      - Failed
   NotificationEventList:
     type: array
     items:
@@ -10871,41 +11407,21 @@ definitions:
     enum:
       - Command
       - Invocation
-  OperatingSystem:
+  NotificationEvent:
     type: string
     enum:
-      - WINDOWS
-      - AMAZON_LINUX
-      - AMAZON_LINUX_2
-      - UBUNTU
-      - REDHAT_ENTERPRISE_LINUX
-      - SUSE
-      - CENTOS
-  OutputSource:
-    type: object
-    properties:
-      OutputSourceId:
-        $ref: '#/definitions/OutputSourceId'
-        description: 'The ID of the output source, for example the URL of an Amazon S3 bucket.'
-      OutputSourceType:
-        $ref: '#/definitions/OutputSourceType'
-        description: 'The type of source where the association execution details are stored, for example, Amazon S3.'
-    description: Information about the source where the association execution details are stored.
+      - All
+      - InProgress
+      - Success
+      - TimedOut
+      - Cancelled
+      - Failed
   OutputSourceId:
     type: string
     minLength: 36
     maxLength: 36
   OutputSourceType:
     type: string
-  OwnerInformation:
-    type: string
-    minLength: 1
-    maxLength: 128
-    format: password
-  PSParameterName:
-    type: string
-    minLength: 1
-    maxLength: 2048
   PSParameterSelector:
     type: string
     minLength: 0
@@ -10914,40 +11430,21 @@ definitions:
     type: string
     minLength: 1
     maxLength: 4096
-  PSParameterVersion:
-    type: integer
-  Parameter:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/PSParameterName'
-        description: The name of the parameter.
-      Type:
-        $ref: '#/definitions/ParameterType'
-        description: 'The type of parameter. Valid values include the following: String, String list, Secure string.'
-      Value:
-        $ref: '#/definitions/PSParameterValue'
-        description: The parameter value.
-      Version:
-        $ref: '#/definitions/PSParameterVersion'
-        description: The parameter version.
-      Selector:
-        $ref: '#/definitions/PSParameterSelector'
-        description: '<p>Either the version number or the label used to retrieve the parameter value. Specify selectors by using one of the following formats:</p> <p>parameter_name:version</p> <p>parameter_name:label</p>'
-      SourceResult:
-        $ref: '#/definitions/String'
-        description: Applies to parameters that reference information in other AWS services. SourceResult is the raw result or response from the source.
-      LastModifiedDate:
-        $ref: '#/definitions/DateTime'
-        description: Date the parameter was last changed or updated and the parameter version was created.
-      ARN:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the parameter.
-    description: An Amazon EC2 Systems Manager parameter in Parameter Store.
+  ParameterType:
+    type: string
+    enum:
+      - String
+      - StringList
+      - SecureString
   ParameterDescription:
     type: string
     minLength: 0
     maxLength: 1024
+  ParameterKeyId:
+    type: string
+    pattern: '^([a-zA-Z0-9:/_-]+)$'
+    minLength: 1
+    maxLength: 256
   ParameterHistory:
     type: object
     properties:
@@ -10982,29 +11479,10 @@ definitions:
         $ref: '#/definitions/ParameterLabelList'
         description: Labels assigned to the parameter version.
     description: Information about parameter usage.
-  ParameterHistoryList:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterHistory'
-  ParameterKeyId:
-    type: string
-    pattern: '^([a-zA-Z0-9:/_-]+)$'
-    minLength: 1
-    maxLength: 256
   ParameterLabel:
     type: string
     minLength: 1
     maxLength: 100
-  ParameterLabelList:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterLabel'
-    minItems: 1
-    maxItems: 10
-  ParameterList:
-    type: array
-    items:
-      $ref: '#/definitions/Parameter'
   ParameterMetadata:
     type: object
     properties:
@@ -11033,18 +11511,23 @@ definitions:
         $ref: '#/definitions/PSParameterVersion'
         description: The parameter version.
     description: Metada includes information like the ARN of the last user and the date/time the parameter was last used.
-  ParameterMetadataList:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterMetadata'
   ParameterName:
     type: string
-  ParameterNameList:
+  ParameterStringFilterKey:
+    type: string
+    pattern: 'tag:.+|Name|Type|KeyId|Path|Label'
+    minLength: 1
+    maxLength: 132
+  ParameterStringQueryOption:
+    type: string
+    minLength: 1
+    maxLength: 10
+  ParameterStringFilterValueList:
     type: array
     items:
-      $ref: '#/definitions/PSParameterName'
+      $ref: '#/definitions/ParameterStringFilterValue'
     minItems: 1
-    maxItems: 10
+    maxItems: 50
   ParameterStringFilter:
     type: object
     required:
@@ -11060,50 +11543,28 @@ definitions:
         $ref: '#/definitions/ParameterStringFilterValueList'
         description: The value you want to search for.
     description: <p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>The <code>Name</code> field can't be used with the <a>GetParametersByPath</a> API action.</p> </note>
-  ParameterStringFilterKey:
-    type: string
-    pattern: 'tag:.+|Name|Type|KeyId|Path|Label'
-    minLength: 1
-    maxLength: 132
-  ParameterStringFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterStringFilter'
   ParameterStringFilterValue:
     type: string
     minLength: 1
     maxLength: 1024
-  ParameterStringFilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterStringFilterValue'
-    minItems: 1
-    maxItems: 50
-  ParameterStringQueryOption:
-    type: string
-    minLength: 1
-    maxLength: 10
-  ParameterType:
-    type: string
-    enum:
-      - String
-      - StringList
-      - SecureString
   ParameterValue:
     type: string
   ParameterValueList:
     type: array
     items:
       $ref: '#/definitions/ParameterValue'
-  Parameters:
+  ParametersFilterKey:
+    type: string
+    enum:
+      - Name
+      - Type
+      - KeyId
+  ParametersFilterValueList:
     type: array
     items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ParameterName'
-        value:
-          $ref: '#/definitions/ParameterValueList'
+      $ref: '#/definitions/ParametersFilterValue'
+    minItems: 1
+    maxItems: 50
   ParametersFilter:
     type: object
     required:
@@ -11117,74 +11578,36 @@ definitions:
         $ref: '#/definitions/ParametersFilterValueList'
         description: The filter values.
     description: 'This data type is deprecated. Instead, use <a>ParameterStringFilter</a>.'
-  ParametersFilterKey:
-    type: string
-    enum:
-      - Name
-      - Type
-      - KeyId
-  ParametersFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/ParametersFilter'
   ParametersFilterValue:
     type: string
     minLength: 1
     maxLength: 1024
-  ParametersFilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/ParametersFilterValue'
-    minItems: 1
-    maxItems: 50
-  Patch:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/PatchId'
-        description: The ID of the patch (this is different than the Microsoft Knowledge Base ID).
-      ReleaseDate:
-        $ref: '#/definitions/DateTime'
-        description: The date the patch was released.
-      Title:
-        $ref: '#/definitions/PatchTitle'
-        description: The title of the patch.
-      Description:
-        $ref: '#/definitions/PatchDescription'
-        description: The description of the patch.
-      ContentUrl:
-        $ref: '#/definitions/PatchContentUrl'
-        description: The URL where more information can be obtained about the patch.
-      Vendor:
-        $ref: '#/definitions/PatchVendor'
-        description: The name of the vendor providing the patch.
-      ProductFamily:
-        $ref: '#/definitions/PatchProductFamily'
-        description: 'The product family the patch is applicable for (for example, Windows).'
-      Product:
-        $ref: '#/definitions/PatchProduct'
-        description: 'The specific product the patch is applicable for (for example, WindowsServer2016).'
-      Classification:
-        $ref: '#/definitions/PatchClassification'
-        description: 'The classification of the patch (for example, SecurityUpdates, Updates, CriticalUpdates).'
-      MsrcSeverity:
-        $ref: '#/definitions/PatchMsrcSeverity'
-        description: 'The severity of the patch (for example Critical, Important, Moderate).'
-      KbNumber:
-        $ref: '#/definitions/PatchKbNumber'
-        description: The Microsoft Knowledge Base ID of the patch.
-      MsrcNumber:
-        $ref: '#/definitions/PatchMsrcNumber'
-        description: The ID of the MSRC bulletin the patch is related to.
-      Language:
-        $ref: '#/definitions/PatchLanguage'
-        description: The language of the patch if it's language-specific.
-    description: Represents metadata about a patch.
-  PatchAction:
+  PatchId:
     type: string
-    enum:
-      - ALLOW_AS_DEPENDENCY
-      - BLOCK
+    minLength: 1
+    maxLength: 100
+  PatchTitle:
+    type: string
+  PatchDescription:
+    type: string
+  PatchContentUrl:
+    type: string
+  PatchVendor:
+    type: string
+  PatchProductFamily:
+    type: string
+  PatchProduct:
+    type: string
+  PatchClassification:
+    type: string
+  PatchMsrcSeverity:
+    type: string
+  PatchKbNumber:
+    type: string
+  PatchMsrcNumber:
+    type: string
+  PatchLanguage:
+    type: string
   PatchBaselineIdentity:
     type: object
     properties:
@@ -11204,16 +11627,17 @@ definitions:
         $ref: '#/definitions/DefaultBaseline'
         description: 'Whether this is the default baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.'
     description: Defines the basic information about a patch baseline.
-  PatchBaselineIdentityList:
-    type: array
-    items:
-      $ref: '#/definitions/PatchBaselineIdentity'
-  PatchBaselineMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  PatchClassification:
+  PatchSeverity:
     type: string
+  PatchComplianceDataState:
+    type: string
+    enum:
+      - INSTALLED
+      - INSTALLED_OTHER
+      - INSTALLED_REJECTED
+      - MISSING
+      - NOT_APPLICABLE
+      - FAILED
   PatchComplianceData:
     type: object
     required:
@@ -11243,34 +11667,6 @@ definitions:
         $ref: '#/definitions/DateTime'
         description: The date/time the patch was installed on the instance. Note that not all operating systems provide this level of information.
     description: Information about the state of a patch on a particular instance as it relates to the patch baseline used to patch the instance.
-  PatchComplianceDataList:
-    type: array
-    items:
-      $ref: '#/definitions/PatchComplianceData'
-  PatchComplianceDataState:
-    type: string
-    enum:
-      - INSTALLED
-      - INSTALLED_OTHER
-      - INSTALLED_REJECTED
-      - MISSING
-      - NOT_APPLICABLE
-      - FAILED
-  PatchComplianceLevel:
-    type: string
-    enum:
-      - CRITICAL
-      - HIGH
-      - MEDIUM
-      - LOW
-      - INFORMATIONAL
-      - UNSPECIFIED
-  PatchComplianceMaxResults:
-    type: integer
-    minimum: 10
-    maximum: 100
-  PatchContentUrl:
-    type: string
   PatchDeploymentStatus:
     type: string
     enum:
@@ -11278,10 +11674,22 @@ definitions:
       - PENDING_APPROVAL
       - EXPLICIT_APPROVED
       - EXPLICIT_REJECTED
-  PatchDescription:
+  PatchFilterKey:
     type: string
-  PatchFailedCount:
-    type: integer
+    enum:
+      - PRODUCT
+      - CLASSIFICATION
+      - MSRC_SEVERITY
+      - PATCH_ID
+      - SECTION
+      - PRIORITY
+      - SEVERITY
+  PatchFilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/PatchFilterValue'
+    minItems: 1
+    maxItems: 20
   PatchFilter:
     type: object
     required:
@@ -11295,25 +11703,6 @@ definitions:
         $ref: '#/definitions/PatchFilterValueList'
         description: <p>The value for the filter key.</p> <p>See <a>PatchFilter</a> for lists of valid values for each key based on operating system type.</p>
     description: '<p>Defines a patch filter.</p> <p>A patch filter consists of key/value pairs, but not all keys are valid for all operating system types. For example, the key <code>PRODUCT</code> is valid for all supported operating system types. The key <code>MSRC_SEVERITY</code>, however, is valid only for Windows operating systems, and the key <code>SECTION</code> is valid only for Ubuntu operating systems.</p> <p>Refer to the following sections for information about which keys may be used with each major operating system, and which values are valid for each key.</p> <p> <b>Windows Operating Systems</b> </p> <p>The supported keys for Windows operating systems are <code>PRODUCT</code>, <code>CLASSIFICATION</code>, and <code>MSRC_SEVERITY</code>. See the following lists for valid values for each of these keys.</p> <p> <i>Supported key:</i> <code>PRODUCT</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Windows7</code> </p> </li> <li> <p> <code>Windows8</code> </p> </li> <li> <p> <code>Windows8.1</code> </p> </li> <li> <p> <code>Windows8Embedded</code> </p> </li> <li> <p> <code>Windows10</code> </p> </li> <li> <p> <code>Windows10LTSB</code> </p> </li> <li> <p> <code>WindowsServer2008</code> </p> </li> <li> <p> <code>WindowsServer2008R2</code> </p> </li> <li> <p> <code>WindowsServer2012</code> </p> </li> <li> <p> <code>WindowsServer2012R2</code> </p> </li> <li> <p> <code>WindowsServer2016</code> </p> </li> <li> <p> <code>*</code> </p> <p> <i>Use a wildcard character (*) to target all supported operating system versions.</i> </p> </li> </ul> <p> <i>Supported key:</i> <code>CLASSIFICATION</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>CriticalUpdates</code> </p> </li> <li> <p> <code>DefinitionUpdates</code> </p> </li> <li> <p> <code>Drivers</code> </p> </li> <li> <p> <code>FeaturePacks</code> </p> </li> <li> <p> <code>SecurityUpdates</code> </p> </li> <li> <p> <code>ServicePacks</code> </p> </li> <li> <p> <code>Tools</code> </p> </li> <li> <p> <code>UpdateRollups</code> </p> </li> <li> <p> <code>Updates</code> </p> </li> <li> <p> <code>Upgrades</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>MSRC_SEVERITY</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Critical</code> </p> </li> <li> <p> <code>Important</code> </p> </li> <li> <p> <code>Moderate</code> </p> </li> <li> <p> <code>Low</code> </p> </li> <li> <p> <code>Unspecified</code> </p> </li> </ul> <p> <b>Ubuntu Operating Systems</b> </p> <p>The supported keys for Ubuntu operating systems are <code>PRODUCT</code>, <code>PRIORITY</code>, and <code>SECTION</code>. See the following lists for valid values for each of these keys.</p> <p> <i>Supported key:</i> <code>PRODUCT</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Ubuntu14.04</code> </p> </li> <li> <p> <code>Ubuntu16.04</code> </p> </li> <li> <p> <code>*</code> </p> <p> <i>Use a wildcard character (*) to target all supported operating system versions.</i> </p> </li> </ul> <p> <i>Supported key:</i> <code>PRIORITY</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Required</code> </p> </li> <li> <p> <code>Important</code> </p> </li> <li> <p> <code>Standard</code> </p> </li> <li> <p> <code>Optional</code> </p> </li> <li> <p> <code>Extra</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>SECTION</code> </p> <p>Only the length of the key value is validated. Minimum length is 1. Maximum length is 64.</p> <p> <b>Amazon Linux Operating Systems</b> </p> <p>The supported keys for Amazon Linux operating systems are <code>PRODUCT</code>, <code>CLASSIFICATION</code>, and <code>SEVERITY</code>. See the following lists for valid values for each of these keys.</p> <p> <i>Supported key:</i> <code>PRODUCT</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>AmazonLinux2012.03</code> </p> </li> <li> <p> <code>AmazonLinux2012.09</code> </p> </li> <li> <p> <code>AmazonLinux2013.03</code> </p> </li> <li> <p> <code>AmazonLinux2013.09</code> </p> </li> <li> <p> <code>AmazonLinux2014.03</code> </p> </li> <li> <p> <code>AmazonLinux2014.09</code> </p> </li> <li> <p> <code>AmazonLinux2015.03</code> </p> </li> <li> <p> <code>AmazonLinux2015.09</code> </p> </li> <li> <p> <code>AmazonLinux2016.03</code> </p> </li> <li> <p> <code>AmazonLinux2016.09</code> </p> </li> <li> <p> <code>AmazonLinux2017.03</code> </p> </li> <li> <p> <code>AmazonLinux2017.09</code> </p> </li> <li> <p> <code>*</code> </p> <p> <i>Use a wildcard character (*) to target all supported operating system versions.</i> </p> </li> </ul> <p> <i>Supported key:</i> <code>CLASSIFICATION</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Security</code> </p> </li> <li> <p> <code>Bugfix</code> </p> </li> <li> <p> <code>Enhancement</code> </p> </li> <li> <p> <code>Recommended</code> </p> </li> <li> <p> <code>Newpackage</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>SEVERITY</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Critical</code> </p> </li> <li> <p> <code>Important</code> </p> </li> <li> <p> <code>Medium</code> </p> </li> <li> <p> <code>Low</code> </p> </li> </ul> <p> <b>Amazon Linux 2 Operating Systems</b> </p> <p>The supported keys for Amazon Linux 2 operating systems are <code>PRODUCT</code>, <code>CLASSIFICATION</code>, and <code>SEVERITY</code>. See the following lists for valid values for each of these keys.</p> <p> <i>Supported key:</i> <code>PRODUCT</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>AmazonLinux2</code> </p> </li> <li> <p> <code>AmazonLinux2.0</code> </p> </li> <li> <p> <code>*</code> </p> <p> <i>Use a wildcard character (*) to target all supported operating system versions.</i> </p> </li> </ul> <p> <i>Supported key:</i> <code>CLASSIFICATION</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Security</code> </p> </li> <li> <p> <code>Bugfix</code> </p> </li> <li> <p> <code>Enhancement</code> </p> </li> <li> <p> <code>Recommended</code> </p> </li> <li> <p> <code>Newpackage</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>SEVERITY</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Critical</code> </p> </li> <li> <p> <code>Important</code> </p> </li> <li> <p> <code>Medium</code> </p> </li> <li> <p> <code>Low</code> </p> </li> </ul> <p> <b>RedHat Enterprise Linux (RHEL) Operating Systems</b> </p> <p>The supported keys for RedHat Enterprise Linux operating systems are <code>PRODUCT</code>, <code>CLASSIFICATION</code>, and <code>SEVERITY</code>. See the following lists for valid values for each of these keys.</p> <p> <i>Supported key:</i> <code>PRODUCT</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>RedhatEnterpriseLinux6.5</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux6.6</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux6.7</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux6.8</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux6.9</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux7.0</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux7.1</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux7.2</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux7.3</code> </p> </li> <li> <p> <code>RedhatEnterpriseLinux7.4</code> </p> </li> <li> <p> <code>*</code> </p> <p> <i>Use a wildcard character (*) to target all supported operating system versions.</i> </p> </li> </ul> <p> <i>Supported key:</i> <code>CLASSIFICATION</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Security</code> </p> </li> <li> <p> <code>Bugfix</code> </p> </li> <li> <p> <code>Enhancement</code> </p> </li> <li> <p> <code>Recommended</code> </p> </li> <li> <p> <code>Newpackage</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>SEVERITY</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Critical</code> </p> </li> <li> <p> <code>Important</code> </p> </li> <li> <p> <code>Medium</code> </p> </li> <li> <p> <code>Low</code> </p> </li> </ul> <p> <b>SUSE Linux Enterprise Server (SLES) Operating Systems</b> </p> <p>The supported keys for SLES operating systems are <code>PRODUCT</code>, <code>CLASSIFICATION</code>, and <code>SEVERITY</code>. See the following lists for valid values for each of these keys.</p> <p> <i>Supported key:</i> <code>PRODUCT</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Suse12.0</code> </p> </li> <li> <p> <code>Suse12.1</code> </p> </li> <li> <p> <code>Suse12.2</code> </p> </li> <li> <p> <code>Suse12.3</code> </p> </li> <li> <p> <code>Suse12.4</code> </p> </li> <li> <p> <code>Suse12.5</code> </p> </li> <li> <p> <code>Suse12.6</code> </p> </li> <li> <p> <code>Suse12.7</code> </p> </li> <li> <p> <code>Suse12.8</code> </p> </li> <li> <p> <code>Suse12.9</code> </p> </li> <li> <p> <code>*</code> </p> <p> <i>Use a wildcard character (*) to target all supported operating system versions.</i> </p> </li> </ul> <p> <i>Supported key:</i> <code>CLASSIFICATION</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Security</code> </p> </li> <li> <p> <code>Recommended</code> </p> </li> <li> <p> <code>Optional</code> </p> </li> <li> <p> <code>Feature</code> </p> </li> <li> <p> <code>Document</code> </p> </li> <li> <p> <code>Yast</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>SEVERITY</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Critical</code> </p> </li> <li> <p> <code>Important</code> </p> </li> <li> <p> <code>Moderate</code> </p> </li> <li> <p> <code>Low</code> </p> </li> </ul> <p> <b>CentOS Operating Systems</b> </p> <p>The supported keys for CentOS operating systems are <code>PRODUCT</code>, <code>CLASSIFICATION</code>, and <code>SEVERITY</code>. See the following lists for valid values for each of these keys.</p> <p> <i>Supported key:</i> <code>PRODUCT</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>CentOS6.5</code> </p> </li> <li> <p> <code>CentOS6.6</code> </p> </li> <li> <p> <code>CentOS6.7</code> </p> </li> <li> <p> <code>CentOS6.8</code> </p> </li> <li> <p> <code>CentOS6.9</code> </p> </li> <li> <p> <code>CentOS7.0</code> </p> </li> <li> <p> <code>CentOS7.1</code> </p> </li> <li> <p> <code>CentOS7.2</code> </p> </li> <li> <p> <code>CentOS7.3</code> </p> </li> <li> <p> <code>CentOS7.4</code> </p> </li> <li> <p> <code>*</code> </p> <p> <i>Use a wildcard character (*) to target all supported operating system versions.</i> </p> </li> </ul> <p> <i>Supported key:</i> <code>CLASSIFICATION</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Security</code> </p> </li> <li> <p> <code>Bugfix</code> </p> </li> <li> <p> <code>Enhancement</code> </p> </li> <li> <p> <code>Recommended</code> </p> </li> <li> <p> <code>Newpackage</code> </p> </li> </ul> <p> <i>Supported key:</i> <code>SEVERITY</code> </p> <p> <i>Supported values:</i> </p> <ul> <li> <p> <code>Critical</code> </p> </li> <li> <p> <code>Important</code> </p> </li> <li> <p> <code>Medium</code> </p> </li> <li> <p> <code>Low</code> </p> </li> </ul>'
-  PatchFilterGroup:
-    type: object
-    required:
-      - PatchFilters
-    properties:
-      PatchFilters:
-        $ref: '#/definitions/PatchFilterList'
-        description: The set of patch filters that make up the group.
-    description: 'A set of patch filters, typically used for approval rules.'
-  PatchFilterKey:
-    type: string
-    enum:
-      - PRODUCT
-      - CLASSIFICATION
-      - MSRC_SEVERITY
-      - PATCH_ID
-      - SECTION
-      - PRIORITY
-      - SEVERITY
   PatchFilterList:
     type: array
     items:
@@ -11324,21 +11713,6 @@ definitions:
     type: string
     minLength: 1
     maxLength: 64
-  PatchFilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/PatchFilterValue'
-    minItems: 1
-    maxItems: 20
-  PatchGroup:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 256
-  PatchGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/PatchGroup'
   PatchGroupPatchBaselineMapping:
     type: object
     properties:
@@ -11349,47 +11723,14 @@ definitions:
         $ref: '#/definitions/PatchBaselineIdentity'
         description: The patch baseline the patch group is registered with.
     description: The mapping between a patch group and the patch baseline the patch group is registered with.
-  PatchGroupPatchBaselineMappingList:
-    type: array
-    items:
-      $ref: '#/definitions/PatchGroupPatchBaselineMapping'
-  PatchId:
+  PatchOrchestratorFilterKey:
     type: string
     minLength: 1
-    maxLength: 100
-  PatchIdList:
+    maxLength: 128
+  PatchOrchestratorFilterValues:
     type: array
     items:
-      $ref: '#/definitions/PatchId'
-    minItems: 0
-    maxItems: 50
-  PatchInstalledCount:
-    type: integer
-  PatchInstalledOtherCount:
-    type: integer
-  PatchInstalledRejectedCount:
-    type: integer
-  PatchKbNumber:
-    type: string
-  PatchLanguage:
-    type: string
-  PatchList:
-    type: array
-    items:
-      $ref: '#/definitions/Patch'
-  PatchMissingCount:
-    type: integer
-  PatchMsrcNumber:
-    type: string
-  PatchMsrcSeverity:
-    type: string
-  PatchNotApplicableCount:
-    type: integer
-  PatchOperationType:
-    type: string
-    enum:
-      - Scan
-      - Install
+      $ref: '#/definitions/PatchOrchestratorFilterValue'
   PatchOrchestratorFilter:
     type: object
     properties:
@@ -11400,28 +11741,10 @@ definitions:
         $ref: '#/definitions/PatchOrchestratorFilterValues'
         description: The value for the filter.
     description: Defines a filter used in Patch Manager APIs.
-  PatchOrchestratorFilterKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  PatchOrchestratorFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/PatchOrchestratorFilter'
-    minItems: 0
-    maxItems: 5
   PatchOrchestratorFilterValue:
     type: string
     minLength: 1
     maxLength: 256
-  PatchOrchestratorFilterValues:
-    type: array
-    items:
-      $ref: '#/definitions/PatchOrchestratorFilterValue'
-  PatchProduct:
-    type: string
-  PatchProductFamily:
-    type: string
   PatchRule:
     type: object
     required:
@@ -11441,23 +11764,26 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'For instances identified by the approval rule filters, enables a patch baseline to apply non-security updates available in the specified repository. The default value is ''false''. Applies to Linux instances only.'
     description: Defines an approval rule for a patch baseline.
-  PatchRuleGroup:
-    type: object
-    required:
-      - PatchRules
-    properties:
-      PatchRules:
-        $ref: '#/definitions/PatchRuleList'
-        description: The rules that make up the rule group.
-    description: A set of rules defining the approval rules for a patch baseline.
   PatchRuleList:
     type: array
     items:
       $ref: '#/definitions/PatchRule'
     minItems: 0
     maxItems: 10
-  PatchSeverity:
+  PatchSourceName:
     type: string
+    pattern: '^[a-zA-Z0-9_\-.]{3,50}$'
+  PatchSourceProductList:
+    type: array
+    items:
+      $ref: '#/definitions/PatchSourceProduct'
+    minItems: 1
+    maxItems: 20
+  PatchSourceConfiguration:
+    type: string
+    minLength: 1
+    maxLength: 512
+    format: password
   PatchSource:
     type: object
     required:
@@ -11475,83 +11801,10 @@ definitions:
         $ref: '#/definitions/PatchSourceConfiguration'
         description: '<p>The value of the yum repo configuration. For example:</p> <p> <code>cachedir=/var/cache/yum/$basesearch</code> </p> <p> <code>$releasever</code> </p> <p> <code>keepcache=0</code> </p> <p> <code>debuglevel=2</code> </p>'
     description: 'Information about the patches to use to update the instances, including target operating systems and source repository. Applies to Linux instances only.'
-  PatchSourceConfiguration:
-    type: string
-    minLength: 1
-    maxLength: 512
-    format: password
-  PatchSourceList:
-    type: array
-    items:
-      $ref: '#/definitions/PatchSource'
-    minItems: 0
-    maxItems: 20
-  PatchSourceName:
-    type: string
-    pattern: '^[a-zA-Z0-9_\-.]{3,50}$'
   PatchSourceProduct:
     type: string
     minLength: 1
     maxLength: 128
-  PatchSourceProductList:
-    type: array
-    items:
-      $ref: '#/definitions/PatchSourceProduct'
-    minItems: 1
-    maxItems: 20
-  PatchStatus:
-    type: object
-    properties:
-      DeploymentStatus:
-        $ref: '#/definitions/PatchDeploymentStatus'
-        description: 'The approval status of a patch (APPROVED, PENDING_APPROVAL, EXPLICIT_APPROVED, EXPLICIT_REJECTED).'
-      ComplianceLevel:
-        $ref: '#/definitions/PatchComplianceLevel'
-        description: The compliance severity level for a patch.
-      ApprovalDate:
-        $ref: '#/definitions/DateTime'
-        description: The date the patch was approved (or will be approved if the status is PENDING_APPROVAL).
-    description: Information about the approval status of a patch.
-  PatchTitle:
-    type: string
-  PatchVendor:
-    type: string
-  PingStatus:
-    type: string
-    enum:
-      - Online
-      - ConnectionLost
-      - Inactive
-  PlatformType:
-    type: string
-    enum:
-      - Windows
-      - Linux
-  PlatformTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformType'
-  Product:
-    type: string
-  ProgressCounters:
-    type: object
-    properties:
-      TotalSteps:
-        $ref: '#/definitions/Integer'
-        description: The total number of steps executed in all specified AWS Regions and accounts for the current Automation execution.
-      SuccessSteps:
-        $ref: '#/definitions/Integer'
-        description: The total number of steps that successfully completed in all specified AWS Regions and accounts for the current Automation execution.
-      FailedSteps:
-        $ref: '#/definitions/Integer'
-        description: The total number of steps that failed to execute in all specified AWS Regions and accounts for the current Automation execution.
-      CancelledSteps:
-        $ref: '#/definitions/Integer'
-        description: The total number of steps that the system cancelled in all specified AWS Regions and accounts for the current Automation execution.
-      TimedOutSteps:
-        $ref: '#/definitions/Integer'
-        description: The total number of steps that timed out in all specified AWS Regions and accounts for the current Automation execution.
-    description: An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and multi-account Automation execution.
   PutInventoryMessage:
     type: string
   Region:
@@ -11562,26 +11815,10 @@ definitions:
       $ref: '#/definitions/Region'
     minItems: 1
     maxItems: 50
-  RegistrationLimit:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  RegistrationsCount:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  RemainingCount:
-    type: integer
-  ResolvedTargets:
-    type: object
-    properties:
-      ParameterValues:
-        $ref: '#/definitions/TargetParameterList'
-        description: A list of parameter values sent to targets that resolved during the Automation execution.
-      Truncated:
-        $ref: '#/definitions/Boolean'
-        description: A boolean value indicating whether the resolved target list is truncated.
-    description: Information about targets that resolved during the Automation execution.
+  TargetParameterList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterValue'
   ResourceComplianceSummaryItem:
     type: object
     properties:
@@ -11610,14 +11847,6 @@ definitions:
         $ref: '#/definitions/NonCompliantSummary'
         description: A list of items that aren't compliant for the resource.
     description: 'Compliance summary information for a specific resource. '
-  ResourceComplianceSummaryItemList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceComplianceSummaryItem'
-  ResourceCount:
-    type: integer
-  ResourceCountByStatus:
-    type: string
   ResourceDataSyncAWSKMSKeyARN:
     type: string
     pattern: 'arn:.*'
@@ -11651,71 +11880,22 @@ definitions:
         $ref: '#/definitions/LastResourceDataSyncMessage'
         description: The status message details reported by the last sync.
     description: 'Information about a Resource Data Sync configuration, including its current status and last successful sync.'
-  ResourceDataSyncItemList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceDataSyncItem'
-  ResourceDataSyncName:
-    type: string
-    minLength: 1
-    maxLength: 64
   ResourceDataSyncS3BucketName:
     type: string
     minLength: 1
     maxLength: 2048
-  ResourceDataSyncS3Destination:
-    type: object
-    required:
-      - BucketName
-      - SyncFormat
-      - Region
-    properties:
-      BucketName:
-        $ref: '#/definitions/ResourceDataSyncS3BucketName'
-        description: The name of the Amazon S3 bucket where the aggregated data is stored.
-      Prefix:
-        $ref: '#/definitions/ResourceDataSyncS3Prefix'
-        description: An Amazon S3 prefix for the bucket.
-      SyncFormat:
-        $ref: '#/definitions/ResourceDataSyncS3Format'
-        description: 'A supported sync format. The following format is currently supported: JsonSerDe'
-      Region:
-        $ref: '#/definitions/ResourceDataSyncS3Region'
-        description: The AWS Region with the Amazon S3 bucket targeted by the Resource Data Sync.
-      AWSKMSKeyARN:
-        $ref: '#/definitions/ResourceDataSyncAWSKMSKeyARN'
-        description: The ARN of an encryption key for a destination in Amazon S3. Must belong to the same region as the destination Amazon S3 bucket.
-    description: Information about the target Amazon S3 bucket for the Resource Data Sync.
-  ResourceDataSyncS3Format:
-    type: string
-    enum:
-      - JsonSerDe
   ResourceDataSyncS3Prefix:
     type: string
     minLength: 1
     maxLength: 256
+  ResourceDataSyncS3Format:
+    type: string
+    enum:
+      - JsonSerDe
   ResourceDataSyncS3Region:
     type: string
     minLength: 1
     maxLength: 64
-  ResourceId:
-    type: string
-  ResourceType:
-    type: string
-    enum:
-      - ManagedInstance
-      - Document
-      - EC2Instance
-  ResourceTypeForTagging:
-    type: string
-    enum:
-      - Document
-      - ManagedInstance
-      - MaintenanceWindow
-      - Parameter
-      - PatchBaseline
-  ResponseCode:
-    type: integer
   ResultAttribute:
     type: object
     required:
@@ -11725,47 +11905,16 @@ definitions:
         $ref: '#/definitions/InventoryItemTypeName'
         description: 'Name of the inventory item type. Valid value: AWS:InstanceInformation. Default Value: AWS:InstanceInformation.'
     description: The inventory item result attribute.
-  ResultAttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/ResultAttribute'
-    minItems: 1
-    maxItems: 1
-  S3BucketName:
-    type: string
-    minLength: 3
-    maxLength: 63
-  S3KeyPrefix:
-    type: string
-    maxLength: 500
-  S3OutputLocation:
-    type: object
-    properties:
-      OutputS3Region:
-        $ref: '#/definitions/S3Region'
-        description: '(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.'
-      OutputS3BucketName:
-        $ref: '#/definitions/S3BucketName'
-        description: The name of the Amazon S3 bucket.
-      OutputS3KeyPrefix:
-        $ref: '#/definitions/S3KeyPrefix'
-        description: The Amazon S3 bucket subfolder.
-    description: An Amazon S3 bucket where you want to store the results of this request.
-  S3OutputUrl:
-    type: object
-    properties:
-      OutputUrl:
-        $ref: '#/definitions/Url'
-        description: A URL for an Amazon S3 bucket where you want to store the results of this request.
-    description: A URL for the Amazon S3 bucket where you want to store the results of this request.
-  S3Region:
-    type: string
-    minLength: 3
-    maxLength: 20
-  ScheduleExpression:
+  SessionId:
     type: string
     minLength: 1
-    maxLength: 256
+    maxLength: 96
+  TokenValue:
+    type: string
+    minLength: 0
+    maxLength: 300
+  StreamUrl:
+    type: string
   ScheduledWindowExecution:
     type: object
     properties:
@@ -11779,12 +11928,41 @@ definitions:
         $ref: '#/definitions/MaintenanceWindowStringDateTime'
         description: 'The time, in ISO-8601 Extended format, that the Maintenance Window is scheduled to be run.'
     description: Information about a scheduled execution for a Maintenance Window.
-  ScheduledWindowExecutionList:
-    type: array
-    items:
-      $ref: '#/definitions/ScheduledWindowExecution'
-  ServiceRole:
+  SignalType:
     type: string
+    enum:
+      - Approve
+      - Reject
+      - StartStep
+      - StopStep
+      - Resume
+  SessionStatus:
+    type: string
+    enum:
+      - Connected
+      - Connecting
+      - Disconnected
+      - Terminated
+      - Terminating
+      - Failed
+  SessionOwner:
+    type: string
+    minLength: 1
+    maxLength: 256
+  SessionDetails:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  SessionManagerOutputUrl:
+    type: object
+    properties:
+      S3OutputUrl:
+        $ref: '#/definitions/SessionManagerS3OutputUrl'
+        description: Reserved for future use.
+      CloudWatchOutputUrl:
+        $ref: '#/definitions/SessionManagerCloudWatchOutputUrl'
+        description: Reserved for future use.
+    description: Reserved for future use.
   Session:
     type: object
     properties:
@@ -11816,10 +11994,18 @@ definitions:
         $ref: '#/definitions/SessionManagerOutputUrl'
         description: Reserved for future use.
     description: Information about a Session Manager connection to an instance.
-  SessionDetails:
+  SessionFilterKey:
+    type: string
+    enum:
+      - InvokedAfter
+      - InvokedBefore
+      - Target
+      - Owner
+      - Status
+  SessionFilterValue:
     type: string
     minLength: 1
-    maxLength: 1024
+    maxLength: 200
   SessionFilter:
     type: object
     required:
@@ -11833,46 +12019,14 @@ definitions:
         $ref: '#/definitions/SessionFilterValue'
         description: '<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p>InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.</p> </li> <li> <p>InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.</p> </li> <li> <p>Target: Specify an instance to which session connections have been made.</p> </li> <li> <p>Owner: Specify an AWS user account to see a list of sessions started by that user.</p> </li> <li> <p>Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:</p> <ul> <li> <p>Connected</p> </li> <li> <p>Connecting</p> </li> <li> <p>Disconnected</p> </li> <li> <p>Terminated</p> </li> <li> <p>Terminating</p> </li> <li> <p>Failed</p> </li> </ul> </li> </ul>'
     description: Describes a filter for Session Manager information.
-  SessionFilterKey:
-    type: string
-    enum:
-      - InvokedAfter
-      - InvokedBefore
-      - Target
-      - Owner
-      - Status
-  SessionFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/SessionFilter'
-    minItems: 1
-    maxItems: 5
-  SessionFilterValue:
-    type: string
-    minLength: 1
-    maxLength: 200
-  SessionId:
-    type: string
-    minLength: 1
-    maxLength: 96
-  SessionList:
-    type: array
-    items:
-      $ref: '#/definitions/Session'
   SessionManagerCloudWatchOutputUrl:
     type: string
     minLength: 1
     maxLength: 2083
-  SessionManagerOutputUrl:
-    type: object
-    properties:
-      S3OutputUrl:
-        $ref: '#/definitions/SessionManagerS3OutputUrl'
-        description: Reserved for future use.
-      CloudWatchOutputUrl:
-        $ref: '#/definitions/SessionManagerCloudWatchOutputUrl'
-        description: Reserved for future use.
-    description: Reserved for future use.
+  SessionManagerS3OutputUrl:
+    type: string
+    minLength: 1
+    maxLength: 2083
   SessionManagerParameterName:
     type: string
     minLength: 1
@@ -11894,90 +12048,29 @@ definitions:
           $ref: '#/definitions/SessionManagerParameterName'
         value:
           $ref: '#/definitions/SessionManagerParameterValueList'
-  SessionManagerS3OutputUrl:
-    type: string
-    minLength: 1
-    maxLength: 2083
-  SessionMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 200
-  SessionOwner:
-    type: string
-    minLength: 1
-    maxLength: 256
-  SessionState:
-    type: string
-    enum:
-      - Active
-      - History
-  SessionStatus:
-    type: string
-    enum:
-      - Connected
-      - Connecting
-      - Disconnected
-      - Terminated
-      - Terminating
-      - Failed
-  SessionTarget:
-    type: string
-    minLength: 1
-    maxLength: 50
-  SeveritySummary:
+  ValidNextStepList:
+    type: array
+    items:
+      $ref: '#/definitions/ValidNextStep'
+  TargetLocation:
     type: object
     properties:
-      CriticalCount:
-        $ref: '#/definitions/ComplianceSummaryCount'
-        description: The total number of resources or compliance items that have a severity level of critical. Critical severity is determined by the organization that published the compliance items.
-      HighCount:
-        $ref: '#/definitions/ComplianceSummaryCount'
-        description: The total number of resources or compliance items that have a severity level of high. High severity is determined by the organization that published the compliance items.
-      MediumCount:
-        $ref: '#/definitions/ComplianceSummaryCount'
-        description: The total number of resources or compliance items that have a severity level of medium. Medium severity is determined by the organization that published the compliance items.
-      LowCount:
-        $ref: '#/definitions/ComplianceSummaryCount'
-        description: The total number of resources or compliance items that have a severity level of low. Low severity is determined by the organization that published the compliance items.
-      InformationalCount:
-        $ref: '#/definitions/ComplianceSummaryCount'
-        description: The total number of resources or compliance items that have a severity level of informational. Informational severity is determined by the organization that published the compliance items.
-      UnspecifiedCount:
-        $ref: '#/definitions/ComplianceSummaryCount'
-        description: The total number of resources or compliance items that have a severity level of unspecified. Unspecified severity is determined by the organization that published the compliance items.
-    description: The number of managed instances found for each patch severity level defined in the request filter.
-  SignalType:
-    type: string
-    enum:
-      - Approve
-      - Reject
-      - StartStep
-      - StopStep
-      - Resume
-  SnapshotDownloadUrl:
-    type: string
-  SnapshotId:
-    type: string
-    pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
-    minLength: 36
-    maxLength: 36
-  StandardErrorContent:
-    type: string
-    maxLength: 8000
-  StandardOutputContent:
-    type: string
-    maxLength: 24000
-  StatusAdditionalInfo:
-    type: string
-    maxLength: 1024
-  StatusDetails:
-    type: string
-    minLength: 0
-    maxLength: 100
-  StatusMessage:
-    type: string
-    minLength: 1
-    maxLength: 1024
+      Accounts:
+        $ref: '#/definitions/Accounts'
+        description: The AWS accounts targeted by the current Automation execution.
+      Regions:
+        $ref: '#/definitions/Regions'
+        description: The AWS Regions targeted by the current Automation execution.
+      TargetLocationMaxConcurrency:
+        $ref: '#/definitions/MaxConcurrency'
+        description: 'The maxium number of AWS accounts and AWS regions allowed to run the Automation concurrently '
+      TargetLocationMaxErrors:
+        $ref: '#/definitions/MaxErrors'
+        description: 'The maxium number of errors allowed before the system stops queueing additional Automation executions for the currently executing Automation. '
+      ExecutionRoleName:
+        $ref: '#/definitions/ExecutionRoleName'
+        description: The Automation execution role used by the currently executing Automation.
+    description: The combination of AWS Regions and accounts targeted by the current Automation execution.
   StepExecution:
     type: object
     properties:
@@ -12048,6 +12141,21 @@ definitions:
         $ref: '#/definitions/TargetLocation'
         description: The combination of AWS Regions and accounts targeted by the current Automation execution.
     description: Detailed information about an the execution state of an Automation step.
+  StepExecutionFilterKey:
+    type: string
+    enum:
+      - StartTimeBefore
+      - StartTimeAfter
+      - StepExecutionStatus
+      - StepExecutionId
+      - StepName
+      - Action
+  StepExecutionFilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/StepExecutionFilterValue'
+    minItems: 1
+    maxItems: 10
   StepExecutionFilter:
     type: object
     required:
@@ -12061,49 +12169,20 @@ definitions:
         $ref: '#/definitions/StepExecutionFilterValueList'
         description: The values of the filter key.
     description: A filter to limit the amount of step execution information returned by the call.
-  StepExecutionFilterKey:
-    type: string
-    enum:
-      - StartTimeBefore
-      - StartTimeAfter
-      - StepExecutionStatus
-      - StepExecutionId
-      - StepName
-      - Action
-  StepExecutionFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/StepExecutionFilter'
-    minItems: 1
-    maxItems: 6
   StepExecutionFilterValue:
     type: string
     minLength: 1
     maxLength: 150
-  StepExecutionFilterValueList:
-    type: array
-    items:
-      $ref: '#/definitions/StepExecutionFilterValue'
-    minItems: 1
-    maxItems: 10
-  StepExecutionList:
-    type: array
-    items:
-      $ref: '#/definitions/StepExecution'
   StopType:
     type: string
     enum:
       - Complete
       - Cancel
-  StreamUrl:
+  TagValue:
     type: string
-  StringDateTime:
-    type: string
-    pattern: '^([\-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d(?!:))?)?(\17[0-5]\d([\.,]\d)?)?([zZ]|([\-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$'
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -12117,20 +12196,17 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value of the tag.
     description: 'Metadata that you assign to your AWS resources. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. In Systems Manager, you can apply tags to documents, managed instances, Maintenance Windows, Parameter Store parameters, and patch baselines.'
-  TagKey:
+  TargetKey:
     type: string
-    pattern: '^\(\?!^\(\?i\)aws:\)\(\?=^[\p\{L\}\p\{Z\}\p\{N\}_.:/=\+\-@]*$\).*$'
+    pattern: '^[\p{L}\p{Z}\p{N}_.:/=\-@]*$'
     minLength: 1
     maxLength: 128
-  TagList:
+  TargetValues:
     type: array
     items:
-      $ref: '#/definitions/Tag'
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 256
+      $ref: '#/definitions/TargetValue'
+    minItems: 0
+    maxItems: 50
   Target:
     type: object
     properties:
@@ -12141,38 +12217,6 @@ definitions:
         $ref: '#/definitions/TargetValues'
         description: 'User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to execute a command on instances that include Amazon EC2 tags of ServerRole,WebServer. For more information about how to send commands that target instances using Key,Value parameters, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html">Sending Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.'
     description: '<p>An array of search criteria that targets instances using a Key,Value combination that you specify. <code>Targets</code> is required if you don''t provide one or more instance IDs in the call.</p> <p/>'
-  TargetCount:
-    type: integer
-  TargetKey:
-    type: string
-    pattern: '^[\p{L}\p{Z}\p{N}_.:/=\-@]*$'
-    minLength: 1
-    maxLength: 128
-  TargetLocation:
-    type: object
-    properties:
-      Accounts:
-        $ref: '#/definitions/Accounts'
-        description: The AWS accounts targeted by the current Automation execution.
-      Regions:
-        $ref: '#/definitions/Regions'
-        description: The AWS Regions targeted by the current Automation execution.
-      TargetLocationMaxConcurrency:
-        $ref: '#/definitions/MaxConcurrency'
-        description: 'The maxium number of AWS accounts and AWS regions allowed to run the Automation concurrently '
-      TargetLocationMaxErrors:
-        $ref: '#/definitions/MaxErrors'
-        description: 'The maxium number of errors allowed before the system stops queueing additional Automation executions for the currently executing Automation. '
-      ExecutionRoleName:
-        $ref: '#/definitions/ExecutionRoleName'
-        description: The Automation execution role used by the currently executing Automation.
-    description: The combination of AWS Regions and accounts targeted by the current Automation execution.
-  TargetLocations:
-    type: array
-    items:
-      $ref: '#/definitions/TargetLocation'
-    minItems: 1
-    maxItems: 100
   TargetMapKey:
     type: string
     minLength: 1
@@ -12198,54 +12242,9 @@ definitions:
     type: string
     minLength: 1
     maxLength: 50
-  TargetMaps:
-    type: array
-    items:
-      $ref: '#/definitions/TargetMap'
-    minItems: 0
-    maxItems: 300
-  TargetParameterList:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterValue'
-  TargetType:
-    type: string
-    pattern: '^\/[\w\.\-\:\/]*$'
-    maxLength: 200
   TargetValue:
-    type: string
-  TargetValues:
-    type: array
-    items:
-      $ref: '#/definitions/TargetValue'
-    minItems: 0
-    maxItems: 50
-  Targets:
-    type: array
-    items:
-      $ref: '#/definitions/Target'
-    minItems: 0
-    maxItems: 5
-  TimeoutSeconds:
-    type: integer
-    minimum: 30
-    maximum: 2592000
-  TokenValue:
-    type: string
-    minLength: 0
-    maxLength: 300
-  TotalCount:
-    type: integer
-  Url:
     type: string
   ValidNextStep:
     type: string
     minLength: 1
     maxLength: 65535
-  ValidNextStepList:
-    type: array
-    items:
-      $ref: '#/definitions/ValidNextStep'
-  Version:
-    type: string
-    pattern: '^[0-9]{1,6}(\.[0-9]{1,6}){2,3}$'

@@ -9853,7 +9853,11 @@ definitions:
     type: string
     enum:
       - CANCEL
-  undefined: {}
+  AbortCriteriaList:
+    type: array
+    items:
+      $ref: '#/definitions/AbortCriteria'
+    minItems: 1
   AbortConfig:
     type: object
     required:
@@ -9863,6 +9867,20 @@ definitions:
         $ref: '#/definitions/AbortCriteriaList'
         description: The list of abort criteria to define rules to abort the job.
     description: Details of abort criteria to abort the job.
+  JobExecutionFailureType:
+    type: string
+    enum:
+      - FAILED
+      - REJECTED
+      - TIMED_OUT
+      - ALL
+  AbortThresholdPercentage:
+    type: number
+    format: double
+    maximum: 100
+  MinimumNumberOfExecutedThings:
+    type: integer
+    minimum: 1
   AbortCriteria:
     type: object
     required:
@@ -9884,15 +9902,300 @@ definitions:
         $ref: '#/definitions/MinimumNumberOfExecutedThings'
         description: Minimum number of executed things before evaluating an abort rule.
     description: Details of abort criteria to define rules to abort the job.
-  AbortCriteriaList:
-    type: array
-    items:
-      $ref: '#/definitions/AbortCriteria'
-    minItems: 1
-  AbortThresholdPercentage:
-    type: number
-    format: double
-    maximum: 100
+  CertificateId:
+    type: string
+    pattern: '(0x)?[a-fA-F0-9]+'
+    minLength: 64
+    maxLength: 64
+  SetAsActive:
+    type: boolean
+  DynamoDBAction:
+    type: object
+    required:
+      - tableName
+      - roleArn
+      - hashKeyField
+      - hashKeyValue
+    properties:
+      tableName:
+        $ref: '#/definitions/TableName'
+        description: The name of the DynamoDB table.
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access to the DynamoDB table.
+      operation:
+        $ref: '#/definitions/DynamoOperation'
+        description: 'The type of operation to be performed. This follows the substitution template, so it can be <code>${operation}</code>, but the substitution must result in one of the following: <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code>.'
+      hashKeyField:
+        $ref: '#/definitions/HashKeyField'
+        description: The hash key name.
+      hashKeyValue:
+        $ref: '#/definitions/HashKeyValue'
+        description: The hash key value.
+      hashKeyType:
+        $ref: '#/definitions/DynamoKeyType'
+        description: The hash key type. Valid values are "STRING" or "NUMBER"
+      rangeKeyField:
+        $ref: '#/definitions/RangeKeyField'
+        description: The range key name.
+      rangeKeyValue:
+        $ref: '#/definitions/RangeKeyValue'
+        description: The range key value.
+      rangeKeyType:
+        $ref: '#/definitions/DynamoKeyType'
+        description: The range key type. Valid values are "STRING" or "NUMBER"
+      payloadField:
+        $ref: '#/definitions/PayloadField'
+        description: The action payload. This name can be customized.
+    description: '<p>Describes an action to write to a DynamoDB table.</p> <p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p> <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p> <p>You can specify any valid expression in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p> <p> <code>"hashKeyValue": "${topic(3)}"</code> </p> <p>The following field uses the timestamp:</p> <p> <code>"rangeKeyValue": "${timestamp()}"</code> </p>'
+  DynamoDBv2Action:
+    type: object
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access to the DynamoDB table.
+      putItem:
+        $ref: '#/definitions/PutItemInput'
+        description: '<p>Specifies the DynamoDB table to which the message data will be written. For example:</p> <p> <code>{ "dynamoDBv2": { "roleArn": "aws:iam:12341251:my-role" "putItem": { "tableName": "my-table" } } }</code> </p> <p>Each attribute in the message payload will be written to a separate column in the DynamoDB database.</p>'
+    description: <p>Describes an action to write to a DynamoDB table.</p> <p>This DynamoDB action writes each attribute in the message payload into it's own column in the DynamoDB table.</p>
+  LambdaAction:
+    type: object
+    required:
+      - functionArn
+    properties:
+      functionArn:
+        $ref: '#/definitions/FunctionArn'
+        description: The ARN of the Lambda function.
+    description: Describes an action to invoke a Lambda function.
+  SnsAction:
+    type: object
+    required:
+      - targetArn
+      - roleArn
+    properties:
+      targetArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the SNS topic.
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access.
+      messageFormat:
+        $ref: '#/definitions/MessageFormat'
+        description: '(Optional) The message format of the message to publish. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see <a href="http://docs.aws.amazon.com/sns/latest/dg/json-formats.html">http://docs.aws.amazon.com/sns/latest/dg/json-formats.html</a> refer to their official documentation.'
+    description: Describes an action to publish to an Amazon SNS topic.
+  SqsAction:
+    type: object
+    required:
+      - roleArn
+      - queueUrl
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access.
+      queueUrl:
+        $ref: '#/definitions/QueueUrl'
+        description: The URL of the Amazon SQS queue.
+      useBase64:
+        $ref: '#/definitions/UseBase64'
+        description: Specifies whether to use Base64 encoding.
+    description: Describes an action to publish data to an Amazon SQS queue.
+  KinesisAction:
+    type: object
+    required:
+      - roleArn
+      - streamName
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access to the Amazon Kinesis stream.
+      streamName:
+        $ref: '#/definitions/StreamName'
+        description: The name of the Amazon Kinesis stream.
+      partitionKey:
+        $ref: '#/definitions/PartitionKey'
+        description: The partition key.
+    description: Describes an action to write data to an Amazon Kinesis stream.
+  RepublishAction:
+    type: object
+    required:
+      - roleArn
+      - topic
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access.
+      topic:
+        $ref: '#/definitions/TopicPattern'
+        description: The name of the MQTT topic.
+    description: Describes an action to republish to another topic.
+  S3Action:
+    type: object
+    required:
+      - roleArn
+      - bucketName
+      - key
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access.
+      bucketName:
+        $ref: '#/definitions/BucketName'
+        description: The Amazon S3 bucket.
+      key:
+        $ref: '#/definitions/Key'
+        description: The object key.
+      cannedAcl:
+        $ref: '#/definitions/CannedAccessControlList'
+        description: 'The Amazon S3 canned ACL that controls access to the object identified by the object key. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl">S3 canned ACLs</a>.'
+    description: Describes an action to write data to an Amazon S3 bucket.
+  FirehoseAction:
+    type: object
+    required:
+      - roleArn
+      - deliveryStreamName
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The IAM role that grants access to the Amazon Kinesis Firehose stream.
+      deliveryStreamName:
+        $ref: '#/definitions/DeliveryStreamName'
+        description: The delivery stream name.
+      separator:
+        $ref: '#/definitions/FirehoseSeparator'
+        description: 'A character separator that will be used to separate records written to the Firehose stream. Valid values are: ''\n'' (newline), ''\t'' (tab), ''\r\n'' (Windows newline), '','' (comma).'
+    description: Describes an action that writes data to an Amazon Kinesis Firehose stream.
+  CloudwatchMetricAction:
+    type: object
+    required:
+      - roleArn
+      - metricNamespace
+      - metricName
+      - metricValue
+      - metricUnit
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The IAM role that allows access to the CloudWatch metric.
+      metricNamespace:
+        $ref: '#/definitions/String'
+        description: The CloudWatch metric namespace name.
+      metricName:
+        $ref: '#/definitions/String'
+        description: The CloudWatch metric name.
+      metricValue:
+        $ref: '#/definitions/String'
+        description: The CloudWatch metric value.
+      metricUnit:
+        $ref: '#/definitions/String'
+        description: 'The <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit">metric unit</a> supported by CloudWatch.'
+      metricTimestamp:
+        $ref: '#/definitions/String'
+        description: 'An optional <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp">Unix timestamp</a>.'
+    description: Describes an action that captures a CloudWatch metric.
+  CloudwatchAlarmAction:
+    type: object
+    required:
+      - roleArn
+      - alarmName
+      - stateReason
+      - stateValue
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The IAM role that allows access to the CloudWatch alarm.
+      alarmName:
+        $ref: '#/definitions/AlarmName'
+        description: The CloudWatch alarm name.
+      stateReason:
+        $ref: '#/definitions/StateReason'
+        description: The reason for the alarm change.
+      stateValue:
+        $ref: '#/definitions/StateValue'
+        description: 'The value of the alarm state. Acceptable values are: OK, ALARM, INSUFFICIENT_DATA.'
+    description: Describes an action that updates a CloudWatch alarm.
+  ElasticsearchAction:
+    type: object
+    required:
+      - roleArn
+      - endpoint
+      - index
+      - type
+      - id
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The IAM role ARN that has access to Elasticsearch.
+      endpoint:
+        $ref: '#/definitions/ElasticsearchEndpoint'
+        description: The endpoint of your Elasticsearch domain.
+      index:
+        $ref: '#/definitions/ElasticsearchIndex'
+        description: The Elasticsearch index where you want to store your data.
+      type:
+        $ref: '#/definitions/ElasticsearchType'
+        description: The type of document you are storing.
+      id:
+        $ref: '#/definitions/ElasticsearchId'
+        description: The unique identifier for the document you are storing.
+    description: Describes an action that writes data to an Amazon Elasticsearch Service domain.
+  SalesforceAction:
+    type: object
+    required:
+      - token
+      - url
+    properties:
+      token:
+        $ref: '#/definitions/SalesforceToken'
+        description: The token used to authenticate access to the Salesforce IoT Cloud Input Stream. The token is available from the Salesforce IoT Cloud platform after creation of the Input Stream.
+      url:
+        $ref: '#/definitions/SalesforceEndpoint'
+        description: The URL exposed by the Salesforce IoT Cloud Input Stream. The URL is available from the Salesforce IoT Cloud platform after creation of the Input Stream.
+    description: Describes an action to write a message to a Salesforce IoT Cloud Input Stream.
+  IotAnalyticsAction:
+    type: object
+    properties:
+      channelArn:
+        $ref: '#/definitions/AwsArn'
+        description: (deprecated) The ARN of the IoT Analytics channel to which message data will be sent.
+      channelName:
+        $ref: '#/definitions/ChannelName'
+        description: The name of the IoT Analytics channel to which message data will be sent.
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: 'The ARN of the role which has a policy that grants IoT Analytics permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).'
+    description: Sends messge data to an AWS IoT Analytics channel.
+  IotEventsAction:
+    type: object
+    required:
+      - inputName
+      - roleArn
+    properties:
+      inputName:
+        $ref: '#/definitions/InputName'
+        description: The name of the AWS IoT Events input.
+      messageId:
+        $ref: '#/definitions/MessageId'
+        description: '[Optional] Use this to ensure that only one input (message) with a given messageId will be processed by an AWS IoT Events detector.'
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: 'The ARN of the role that grants AWS IoT permission to send an input to an AWS IoT Events detector. ("Action":"iotevents:BatchPutMessage").'
+    description: Sends an input to an AWS IoT Events detector.
+  StepFunctionsAction:
+    type: object
+    required:
+      - stateMachineName
+      - roleArn
+    properties:
+      executionNamePrefix:
+        $ref: '#/definitions/ExecutionNamePrefix'
+        description: (Optional) A name will be given to the state machine execution consisting of this prefix followed by a UUID. Step Functions automatically creates a unique name for each state machine execution if one is not provided.
+      stateMachineName:
+        $ref: '#/definitions/StateMachineName'
+        description: The name of the Step Functions state machine whose execution will be started.
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: 'The ARN of the role that grants IoT permission to start execution of a state machine ("Action":"states:StartExecution").'
+    description: Starts execution of a Step Functions state machine.
   Action:
     type: object
     properties:
@@ -9958,6 +10261,52 @@ definitions:
       - SUBSCRIBE
       - RECEIVE
       - CONNECT
+  ViolationId:
+    type: string
+    pattern: '[a-zA-Z0-9\-]+'
+    minLength: 1
+    maxLength: 128
+  ThingName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  SecurityProfileName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  Behavior:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        $ref: '#/definitions/BehaviorName'
+        description: The name you have given to the behavior.
+      metric:
+        $ref: '#/definitions/BehaviorMetric'
+        description: What is measured by the behavior.
+      criteria:
+        $ref: '#/definitions/BehaviorCriteria'
+        description: The criteria that determine if a device is behaving normally in regard to the <code>metric</code>.
+    description: A Device Defender security profile behavior.
+  MetricValue:
+    type: object
+    properties:
+      count:
+        $ref: '#/definitions/UnsignedLong'
+        description: 'If the <code>comparisonOperator</code> calls for a numeric value, use this to specify that numeric value to be compared with the <code>metric</code>.'
+      cidrs:
+        $ref: '#/definitions/Cidrs'
+        description: 'If the <code>comparisonOperator</code> calls for a set of CIDRs, use this to specify that set to be compared with the <code>metric</code>.'
+      ports:
+        $ref: '#/definitions/Ports'
+        description: 'If the <code>comparisonOperator</code> calls for a set of ports, use this to specify that set to be compared with the <code>metric</code>.'
+    description: The value to be compared with the <code>metric</code>.
+  Timestamp:
+    type: string
+    format: date-time
   ActiveViolation:
     type: object
     properties:
@@ -9987,6 +10336,24 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ActiveViolation'
+  BillingGroupName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  BillingGroupArn:
+    type: string
+  ThingArn:
+    type: string
+  ThingGroupName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  ThingGroupArn:
+    type: string
+  OverrideDynamicGroups:
+    type: boolean
   AttributeKey:
     type: string
   Value:
@@ -10002,6 +10369,12 @@ definitions:
           $ref: '#/definitions/Value'
   AlarmName:
     type: string
+  AlertTargetArn:
+    type: string
+  RoleArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
   AlertTarget:
     type: object
     required:
@@ -10015,8 +10388,6 @@ definitions:
         $ref: '#/definitions/RoleArn'
         description: The ARN of the role that grants permission to send alerts to the notification target.
     description: A structure containing the alert target ARN and the role ARN.
-  AlertTargetArn:
-    type: string
   AlertTargetType:
     type: string
     enum:
@@ -10033,6 +10404,10 @@ definitions:
           $ref: '#/definitions/AlertTarget'
   AllowAutoRegistration:
     type: boolean
+  Policies:
+    type: array
+    items:
+      $ref: '#/definitions/Policy'
   Allowed:
     type: object
     properties:
@@ -10044,10 +10419,52 @@ definitions:
     type: integer
   AscendingOrder:
     type: boolean
+  JobTargets:
+    type: array
+    items:
+      $ref: '#/definitions/TargetArn'
+    minItems: 1
+  JobId:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 64
+  Comment:
+    type: string
+    pattern: '[^\p{C}]+'
+    maxLength: 2028
+  JobArn:
+    type: string
+  JobDescription:
+    type: string
+    pattern: '[^\p{C}]+'
+    maxLength: 2028
+  PolicyName:
+    type: string
+    pattern: '[\w+=,.@-]+'
+    minLength: 1
+    maxLength: 128
+  PolicyTarget:
+    type: string
+  Principal:
+    type: string
+  SecurityProfileTargetArn:
+    type: string
   AttributeName:
     type: string
     pattern: '[a-zA-Z0-9_.,@/:#-]+'
     maxLength: 128
+  Attributes:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeName'
+        value:
+          $ref: '#/definitions/AttributeValue'
+  Flag:
+    type: boolean
   AttributePayload:
     type: object
     properties:
@@ -10062,15 +10479,6 @@ definitions:
     type: string
     pattern: '[a-zA-Z0-9_.,@/:#-]*'
     maxLength: 800
-  Attributes:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AttributeName'
-        value:
-          $ref: '#/definitions/AttributeValue'
   AttributesMap:
     type: array
     items:
@@ -10080,6 +10488,8 @@ definitions:
           $ref: '#/definitions/AttributeKey'
         value:
           $ref: '#/definitions/Value'
+  Enabled:
+    type: boolean
   AuditCheckConfiguration:
     type: object
     properties:
@@ -10099,6 +10509,26 @@ definitions:
           $ref: '#/definitions/AuditCheckName'
         value:
           $ref: '#/definitions/AuditCheckConfiguration'
+  AuditCheckRunStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - WAITING_FOR_DATA_COLLECTION
+      - CANCELED
+      - COMPLETED_COMPLIANT
+      - COMPLETED_NON_COMPLIANT
+      - FAILED
+  CheckCompliant:
+    type: boolean
+  TotalResourcesCount:
+    type: integer
+  NonCompliantResourcesCount:
+    type: integer
+  ErrorCode:
+    type: string
+  ErrorMessage:
+    type: string
+    maxLength: 2048
   AuditCheckDetails:
     type: object
     properties:
@@ -10121,15 +10551,6 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
         description: The message associated with any error encountered when performing this check during this audit.
     description: Information about the audit check.
-  AuditCheckRunStatus:
-    type: string
-    enum:
-      - IN_PROGRESS
-      - WAITING_FOR_DATA_COLLECTION
-      - CANCELED
-      - COMPLETED_COMPLIANT
-      - COMPLETED_NON_COMPLIANT
-      - FAILED
   AuditDetails:
     type: array
     items:
@@ -10139,6 +10560,39 @@ definitions:
           $ref: '#/definitions/AuditCheckName'
         value:
           $ref: '#/definitions/AuditCheckDetails'
+  AuditTaskId:
+    type: string
+    pattern: '[a-zA-Z0-9\-]+'
+    minLength: 1
+    maxLength: 40
+  AuditFindingSeverity:
+    type: string
+    enum:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+  NonCompliantResource:
+    type: object
+    properties:
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of the non-compliant resource.
+      resourceIdentifier:
+        $ref: '#/definitions/ResourceIdentifier'
+        description: Information identifying the non-compliant resource.
+      additionalInfo:
+        $ref: '#/definitions/StringMap'
+        description: Additional information about the non-compliant resource.
+    description: Information about the resource that was non-compliant with the audit check.
+  RelatedResources:
+    type: array
+    items:
+      $ref: '#/definitions/RelatedResource'
+  ReasonForNonCompliance:
+    type: string
+  ReasonForNonComplianceCode:
+    type: string
   AuditFinding:
     type: object
     properties:
@@ -10170,13 +10624,6 @@ definitions:
         $ref: '#/definitions/ReasonForNonComplianceCode'
         description: A code which indicates the reason that the resource was non-compliant.
     description: The findings (results) of the audit.
-  AuditFindingSeverity:
-    type: string
-    enum:
-      - CRITICAL
-      - HIGH
-      - MEDIUM
-      - LOW
   AuditFindings:
     type: array
     items:
@@ -10188,6 +10635,8 @@ definitions:
       - WEEKLY
       - BIWEEKLY
       - MONTHLY
+  TargetArn:
+    type: string
   AuditNotificationTarget:
     type: object
     properties:
@@ -10214,11 +10663,18 @@ definitions:
           $ref: '#/definitions/AuditNotificationType'
         value:
           $ref: '#/definitions/AuditNotificationTarget'
-  AuditTaskId:
+  AuditTaskStatus:
     type: string
-    pattern: '[a-zA-Z0-9\-]+'
-    minLength: 1
-    maxLength: 40
+    enum:
+      - IN_PROGRESS
+      - COMPLETED
+      - FAILED
+      - CANCELED
+  AuditTaskType:
+    type: string
+    enum:
+      - ON_DEMAND_AUDIT_TASK
+      - SCHEDULED_AUDIT_TASK
   AuditTaskMetadata:
     type: object
     properties:
@@ -10236,24 +10692,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AuditTaskMetadata'
-  AuditTaskStatus:
-    type: string
-    enum:
-      - IN_PROGRESS
-      - COMPLETED
-      - FAILED
-      - CANCELED
-  AuditTaskType:
-    type: string
-    enum:
-      - ON_DEMAND_AUDIT_TASK
-      - SCHEDULED_AUDIT_TASK
   AuthDecision:
     type: string
     enum:
       - ALLOWED
       - EXPLICIT_DENY
       - IMPLICIT_DENY
+  Resources:
+    type: array
+    items:
+      $ref: '#/definitions/Resource'
   AuthInfo:
     type: object
     properties:
@@ -10270,6 +10718,20 @@ definitions:
       $ref: '#/definitions/AuthInfo'
     minItems: 1
     maxItems: 10
+  Denied:
+    type: object
+    properties:
+      implicitDeny:
+        $ref: '#/definitions/ImplicitDeny'
+        description: Information that implicitly denies the authorization. When a policy doesn't explicitly deny or allow an action on a resource it is considered an implicit deny.
+      explicitDeny:
+        $ref: '#/definitions/ExplicitDeny'
+        description: 'Information that explicitly denies the authorization. '
+    description: Contains information that denied the authorization.
+  MissingContextValues:
+    type: array
+    items:
+      $ref: '#/definitions/MissingContextValue'
   AuthResult:
     type: object
     properties:
@@ -10295,6 +10757,35 @@ definitions:
       $ref: '#/definitions/AuthResult'
   AuthorizerArn:
     type: string
+  AuthorizerName:
+    type: string
+    pattern: '[\w=,@-]+'
+    minLength: 1
+    maxLength: 128
+  AuthorizerFunctionArn:
+    type: string
+  TokenKeyName:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 128
+  PublicKeyMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/KeyName'
+        value:
+          $ref: '#/definitions/KeyValue'
+  AuthorizerStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
+  DateType:
+    type: string
+    format: date-time
   AuthorizerDescription:
     type: object
     properties:
@@ -10323,18 +10814,6 @@ definitions:
         $ref: '#/definitions/DateType'
         description: The UNIX timestamp of when the authorizer was last updated.
     description: The authorizer description.
-  AuthorizerFunctionArn:
-    type: string
-  AuthorizerName:
-    type: string
-    pattern: '[\w=,@-]+'
-    minLength: 1
-    maxLength: 128
-  AuthorizerStatus:
-    type: string
-    enum:
-      - ACTIVE
-      - INACTIVE
   AuthorizerSummary:
     type: object
     properties:
@@ -10367,6 +10846,10 @@ definitions:
     type: string
   AwsIotSqlVersion:
     type: string
+  MaximumPerMinute:
+    type: integer
+    minimum: 1
+    maximum: 1000
   AwsJobExecutionsRolloutConfig:
     type: object
     properties:
@@ -10374,21 +10857,13 @@ definitions:
         $ref: '#/definitions/MaximumPerMinute'
         description: The maximum number of OTA update job executions started per minute.
     description: Configuration for the rollout of OTA updates.
-  Behavior:
-    type: object
-    required:
-      - name
-    properties:
-      name:
-        $ref: '#/definitions/BehaviorName'
-        description: The name you have given to the behavior.
-      metric:
-        $ref: '#/definitions/BehaviorMetric'
-        description: What is measured by the behavior.
-      criteria:
-        $ref: '#/definitions/BehaviorCriteria'
-        description: The criteria that determine if a device is behaving normally in regard to the <code>metric</code>.
-    description: A Device Defender security profile behavior.
+  BehaviorName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  BehaviorMetric:
+    type: string
   BehaviorCriteria:
     type: object
     properties:
@@ -10402,20 +10877,24 @@ definitions:
         $ref: '#/definitions/DurationSeconds'
         description: 'Use this to specify the period of time over which the behavior is evaluated, for those criteria which have a time dimension (for example, <code>NUM_MESSAGES_SENT</code>).'
     description: The criteria by which the behavior is determined to be normal.
-  BehaviorMetric:
+  ComparisonOperator:
     type: string
-  BehaviorName:
-    type: string
-    pattern: '[a-zA-Z0-9:_-]+'
-    minLength: 1
-    maxLength: 128
+    enum:
+      - less-than
+      - less-than-equals
+      - greater-than
+      - greater-than-equals
+      - in-cidr-set
+      - not-in-cidr-set
+      - in-port-set
+      - not-in-port-set
+  DurationSeconds:
+    type: integer
   Behaviors:
     type: array
     items:
       $ref: '#/definitions/Behavior'
     maxItems: 100
-  BillingGroupArn:
-    type: string
   BillingGroupDescription:
     type: string
     pattern: '[\p{Graph}\x20]*'
@@ -10425,6 +10904,9 @@ definitions:
     pattern: '[a-zA-Z0-9\-]+'
     minLength: 1
     maxLength: 128
+  CreationDate:
+    type: string
+    format: date-time
   BillingGroupMetadata:
     type: object
     properties:
@@ -10432,11 +10914,16 @@ definitions:
         $ref: '#/definitions/CreationDate'
         description: The date the billing group was created.
     description: Additional information about the billing group.
-  BillingGroupName:
-    type: string
-    pattern: '[a-zA-Z0-9:_-]+'
-    minLength: 1
-    maxLength: 128
+  GroupNameAndArn:
+    type: object
+    properties:
+      groupName:
+        $ref: '#/definitions/ThingGroupName'
+        description: The group name.
+      groupArn:
+        $ref: '#/definitions/ThingGroupArn'
+        description: The group ARN.
+    description: The name and ARN of a group.
   BillingGroupNameAndArnList:
     type: array
     items:
@@ -10452,6 +10939,13 @@ definitions:
     type: boolean
   BucketName:
     type: string
+  CertificateArn:
+    type: string
+  CACertificateStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
   CACertificate:
     type: object
     properties:
@@ -10468,6 +10962,26 @@ definitions:
         $ref: '#/definitions/DateType'
         description: The date the CA certificate was created.
     description: A CA certificate.
+  CertificatePem:
+    type: string
+    description: The PEM of a certificate.
+    minLength: 1
+    maxLength: 65536
+  CustomerVersion:
+    type: integer
+    minimum: 1
+  GenerationId:
+    type: string
+  CertificateValidity:
+    type: object
+    properties:
+      notBefore:
+        $ref: '#/definitions/DateType'
+        description: The certificate is not valid before this date.
+      notAfter:
+        $ref: '#/definitions/DateType'
+        description: The certificate is not valid after this date.
+    description: When the certificate is valid.
   CACertificateDescription:
     type: object
     properties:
@@ -10505,15 +11019,27 @@ definitions:
         $ref: '#/definitions/CertificateValidity'
         description: When the CA certificate is valid.
     description: Describes a CA certificate.
-  CACertificateStatus:
-    type: string
-    enum:
-      - ACTIVE
-      - INACTIVE
   CACertificates:
     type: array
     items:
       $ref: '#/definitions/CACertificate'
+  ForceFlag:
+    type: boolean
+  ExpectedVersion:
+    type: integer
+  DetailsMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DetailsKey'
+        value:
+          $ref: '#/definitions/DetailsValue'
+  ReasonCode:
+    type: string
+    pattern: '[\p{Upper}\p{Digit}_]+'
+    maxLength: 128
   CanceledChecksCount:
     type: integer
   CanceledThings:
@@ -10529,6 +11055,15 @@ definitions:
       - bucket-owner-read
       - bucket-owner-full-control
       - log-delivery-write
+  CertificateStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
+      - REVOKED
+      - PENDING_TRANSFER
+      - REGISTER_INACTIVE
+      - PENDING_ACTIVATION
   Certificate:
     type: object
     properties:
@@ -10545,8 +11080,25 @@ definitions:
         $ref: '#/definitions/DateType'
         description: The date and time the certificate was created.
     description: Information about a certificate.
-  CertificateArn:
-    type: string
+  TransferData:
+    type: object
+    properties:
+      transferMessage:
+        $ref: '#/definitions/Message'
+        description: The transfer message.
+      rejectReason:
+        $ref: '#/definitions/Message'
+        description: The reason why the transfer was rejected.
+      transferDate:
+        $ref: '#/definitions/DateType'
+        description: The date the transfer took place.
+      acceptDate:
+        $ref: '#/definitions/DateType'
+        description: The date the transfer was accepted.
+      rejectDate:
+        $ref: '#/definitions/DateType'
+        description: The date the transfer was rejected.
+    description: Data used to transfer a certificate to an AWS account.
   CertificateDescription:
     type: object
     properties:
@@ -10590,50 +11142,19 @@ definitions:
         $ref: '#/definitions/CertificateValidity'
         description: When the certificate is valid.
     description: Describes a certificate.
-  CertificateId:
-    type: string
-    pattern: '(0x)?[a-fA-F0-9]+'
-    minLength: 64
-    maxLength: 64
   CertificateName:
     type: string
   CertificatePathOnDevice:
     type: string
-  CertificatePem:
-    type: string
-    description: The PEM of a certificate.
-    minLength: 1
-    maxLength: 65536
   CertificateSigningRequest:
     type: string
     minLength: 1
-  CertificateStatus:
-    type: string
-    enum:
-      - ACTIVE
-      - INACTIVE
-      - REVOKED
-      - PENDING_TRANSFER
-      - REGISTER_INACTIVE
-      - PENDING_ACTIVATION
-  CertificateValidity:
-    type: object
-    properties:
-      notBefore:
-        $ref: '#/definitions/DateType'
-        description: The certificate is not valid before this date.
-      notAfter:
-        $ref: '#/definitions/DateType'
-        description: The certificate is not valid after this date.
-    description: When the certificate is valid.
   Certificates:
     type: array
     items:
       $ref: '#/definitions/Certificate'
   ChannelName:
     type: string
-  CheckCompliant:
-    type: boolean
   Cidr:
     type: string
     pattern: '[a-fA-F0-9:\.\/]+'
@@ -10645,127 +11166,29 @@ definitions:
       $ref: '#/definitions/Cidr'
   ClientId:
     type: string
-  CloudwatchAlarmAction:
-    type: object
-    required:
-      - roleArn
-      - alarmName
-      - stateReason
-      - stateValue
-    properties:
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: The IAM role that allows access to the CloudWatch alarm.
-      alarmName:
-        $ref: '#/definitions/AlarmName'
-        description: The CloudWatch alarm name.
-      stateReason:
-        $ref: '#/definitions/StateReason'
-        description: The reason for the alarm change.
-      stateValue:
-        $ref: '#/definitions/StateValue'
-        description: 'The value of the alarm state. Acceptable values are: OK, ALARM, INSUFFICIENT_DATA.'
-    description: Describes an action that updates a CloudWatch alarm.
-  CloudwatchMetricAction:
-    type: object
-    required:
-      - roleArn
-      - metricNamespace
-      - metricName
-      - metricValue
-      - metricUnit
-    properties:
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: The IAM role that allows access to the CloudWatch metric.
-      metricNamespace:
-        $ref: '#/definitions/String'
-        description: The CloudWatch metric namespace name.
-      metricName:
-        $ref: '#/definitions/String'
-        description: The CloudWatch metric name.
-      metricValue:
-        $ref: '#/definitions/String'
-        description: The CloudWatch metric value.
-      metricUnit:
-        $ref: '#/definitions/String'
-        description: 'The <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit">metric unit</a> supported by CloudWatch.'
-      metricTimestamp:
-        $ref: '#/definitions/String'
-        description: 'An optional <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp">Unix timestamp</a>.'
-    description: Describes an action that captures a CloudWatch metric.
+  StateReason:
+    type: string
+  StateValue:
+    type: string
+  String:
+    type: string
   Code:
     type: string
-  CodeSigning:
+  SigningJobId:
+    type: string
+  StartSigningJobParameter:
     type: object
     properties:
-      awsSignerJobId:
-        $ref: '#/definitions/SigningJobId'
-        description: The ID of the AWSSignerJob which was created to sign the file.
-      startSigningJobParameter:
-        $ref: '#/definitions/StartSigningJobParameter'
-        description: Describes the code-signing job.
-      customCodeSigning:
-        $ref: '#/definitions/CustomCodeSigning'
-        description: A custom method for code signing a file.
-    description: Describes the method to use when code signing a file.
-  CodeSigningCertificateChain:
-    type: object
-    properties:
-      certificateName:
-        $ref: '#/definitions/CertificateName'
-        description: The name of the certificate.
-      inlineDocument:
-        $ref: '#/definitions/InlineDocument'
-        description: A base64 encoded binary representation of the code signing certificate chain.
-    description: Describes the certificate chain being used when code signing a file.
-  CodeSigningSignature:
-    type: object
-    properties:
-      inlineDocument:
-        $ref: '#/definitions/Signature'
-        description: A base64 encoded binary representation of the code signing signature.
-    description: Describes the signature for a file.
-  CognitoIdentityPoolId:
-    type: string
-  Comment:
-    type: string
-    pattern: '[^\p{C}]+'
-    maxLength: 2028
-  ComparisonOperator:
-    type: string
-    enum:
-      - less-than
-      - less-than-equals
-      - greater-than
-      - greater-than-equals
-      - in-cidr-set
-      - not-in-cidr-set
-      - in-port-set
-      - not-in-port-set
-  CompliantChecksCount:
-    type: integer
-  Configuration:
-    type: object
-    properties:
-      Enabled:
-        $ref: '#/definitions/Enabled'
-        description: True to enable the configuration.
-    description: Configuration.
-  ConnectivityTimestamp:
-    type: integer
-  Count:
-    type: integer
-  CreatedAtDate:
-    type: string
-    format: date-time
-  CreationDate:
-    type: string
-    format: date-time
-  CredentialDurationSeconds:
-    type: integer
-    minimum: 900
-    maximum: 3600
+      signingProfileParameter:
+        $ref: '#/definitions/SigningProfileParameter'
+        description: Describes the code-signing profile.
+      signingProfileName:
+        $ref: '#/definitions/SigningProfileName'
+        description: The code-signing profile name.
+      destination:
+        $ref: '#/definitions/Destination'
+        description: The location to write the code-signed file.
+    description: Information required to start a signing job.
   CustomCodeSigning:
     type: object
     properties:
@@ -10782,12 +11205,184 @@ definitions:
         $ref: '#/definitions/SignatureAlgorithm'
         description: The signature algorithm used to code sign the file.
     description: Describes a custom method used to code sign a file.
-  CustomerVersion:
-    type: integer
-    minimum: 1
-  DateType:
+  CodeSigning:
+    type: object
+    properties:
+      awsSignerJobId:
+        $ref: '#/definitions/SigningJobId'
+        description: The ID of the AWSSignerJob which was created to sign the file.
+      startSigningJobParameter:
+        $ref: '#/definitions/StartSigningJobParameter'
+        description: Describes the code-signing job.
+      customCodeSigning:
+        $ref: '#/definitions/CustomCodeSigning'
+        description: A custom method for code signing a file.
+    description: Describes the method to use when code signing a file.
+  InlineDocument:
     type: string
-    format: date-time
+  CodeSigningCertificateChain:
+    type: object
+    properties:
+      certificateName:
+        $ref: '#/definitions/CertificateName'
+        description: The name of the certificate.
+      inlineDocument:
+        $ref: '#/definitions/InlineDocument'
+        description: A base64 encoded binary representation of the code signing certificate chain.
+    description: Describes the certificate chain being used when code signing a file.
+  Signature:
+    type: string
+  CodeSigningSignature:
+    type: object
+    properties:
+      inlineDocument:
+        $ref: '#/definitions/Signature'
+        description: A base64 encoded binary representation of the code signing signature.
+    description: Describes the signature for a file.
+  CognitoIdentityPoolId:
+    type: string
+  CompliantChecksCount:
+    type: integer
+  Configuration:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/Enabled'
+        description: True to enable the configuration.
+    description: Configuration.
+  ConnectivityTimestamp:
+    type: integer
+  Count:
+    type: integer
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  ThingGroupProperties:
+    type: object
+    properties:
+      thingGroupDescription:
+        $ref: '#/definitions/ThingGroupDescription'
+        description: The thing group description.
+      attributePayload:
+        $ref: '#/definitions/AttributePayload'
+        description: The thing group attributes in JSON format.
+    description: Thing group properties.
+  IndexName:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  QueryString:
+    type: string
+    minLength: 1
+  QueryVersion:
+    type: string
+  ThingGroupId:
+    type: string
+    pattern: '[a-zA-Z0-9\-]+'
+    minLength: 1
+    maxLength: 128
+  JobDocumentSource:
+    type: string
+    minLength: 1
+    maxLength: 1350
+  JobDocument:
+    type: string
+    maxLength: 32768
+  PresignedUrlConfig:
+    type: object
+    properties:
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.
+      expiresInSec:
+        $ref: '#/definitions/ExpiresInSec'
+        description: 'How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the default value is 3600 seconds. Pre-signed URLs are generated when Jobs receives an MQTT request for the job document.'
+    description: Configuration for pre-signed S3 URLs.
+  TargetSelection:
+    type: string
+    enum:
+      - CONTINUOUS
+      - SNAPSHOT
+  JobExecutionsRolloutConfig:
+    type: object
+    properties:
+      maximumPerMinute:
+        $ref: '#/definitions/MaxJobExecutionsPerMin'
+        description: 'The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.'
+      exponentialRate:
+        $ref: '#/definitions/ExponentialRolloutRate'
+        description: The rate of increase for a job rollout. This parameter allows you to define an exponential rate for a job rollout.
+    description: Allows you to create a staged rollout of a job.
+  TimeoutConfig:
+    type: object
+    properties:
+      inProgressTimeoutInMinutes:
+        $ref: '#/definitions/InProgressTimeoutInMinutes'
+        description: 'Specifies the amount of time, in minutes, this device has to finish execution of this job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress timer can''t be updated and will apply to all job executions for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and switch to the terminal <code>TIMED_OUT</code> status.'
+    description: 'Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.'
+  KeyPair:
+    type: object
+    properties:
+      PublicKey:
+        $ref: '#/definitions/PublicKey'
+        description: The public key.
+      PrivateKey:
+        $ref: '#/definitions/PrivateKey'
+        description: The private key.
+    description: Describes a key pair.
+  OTAUpdateId:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 128
+  OTAUpdateDescription:
+    type: string
+    pattern: '[^\p{C}]+'
+    maxLength: 2028
+  Targets:
+    type: array
+    items:
+      $ref: '#/definitions/Target'
+    minItems: 1
+  OTAUpdateFiles:
+    type: array
+    items:
+      $ref: '#/definitions/OTAUpdateFile'
+    minItems: 1
+    maxItems: 50
+  OTAUpdateArn:
+    type: string
+  OTAUpdateStatus:
+    type: string
+    enum:
+      - CREATE_PENDING
+      - CREATE_IN_PROGRESS
+      - CREATE_COMPLETE
+      - CREATE_FAILED
+  PolicyDocument:
+    type: string
+  PolicyArn:
+    type: string
+  PolicyVersionId:
+    type: string
+    pattern: '[0-9]+'
+  SetAsDefault:
+    type: boolean
+  IsDefaultVersion:
+    type: boolean
+  RoleAlias:
+    type: string
+    pattern: '[\w=,@-]+'
+    minLength: 1
+    maxLength: 128
+  CredentialDurationSeconds:
+    type: integer
+    minimum: 900
+    maximum: 3600
+  RoleAliasArn:
+    type: string
   DayOfMonth:
     type: string
     pattern: '^([1-9]|[12][0-9]|3[01])$|^LAST$'
@@ -10801,205 +11396,183 @@ definitions:
       - THU
       - FRI
       - SAT
-  DeleteScheduledAudits:
-    type: boolean
-  DeleteStream:
-    type: boolean
-  DeliveryStreamName:
+  TargetAuditCheckNames:
+    type: array
+    items:
+      $ref: '#/definitions/AuditCheckName'
+  ScheduledAuditName:
     type: string
-  Denied:
-    type: object
-    properties:
-      implicitDeny:
-        $ref: '#/definitions/ImplicitDeny'
-        description: Information that implicitly denies the authorization. When a policy doesn't explicitly deny or allow an action on a resource it is considered an implicit deny.
-      explicitDeny:
-        $ref: '#/definitions/ExplicitDeny'
-        description: 'Information that explicitly denies the authorization. '
-    description: Contains information that denied the authorization.
-  DeprecationDate:
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 128
+  ScheduledAuditArn:
     type: string
-    format: date-time
-  Description:
+  SecurityProfileDescription:
     type: string
-  Destination:
-    type: object
-    properties:
-      s3Destination:
-        $ref: '#/definitions/S3Destination'
-        description: Describes the location in S3 of the updated firmware.
-    description: Describes the location of the updated firmware.
-  DetailsKey:
+    pattern: '[\p{Graph}\x20]*'
+    maxLength: 1000
+  SecurityProfileArn:
+    type: string
+  StreamId:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 128
+  StreamDescription:
+    type: string
+    pattern: '[^\p{C}]+'
+    maxLength: 2028
+  StreamFiles:
+    type: array
+    items:
+      $ref: '#/definitions/StreamFile'
+    minItems: 1
+    maxItems: 50
+  StreamArn:
+    type: string
+  StreamVersion:
+    type: integer
+    minimum: 0
+    maximum: 65535
+  ThingTypeName:
     type: string
     pattern: '[a-zA-Z0-9:_-]+'
     minLength: 1
     maxLength: 128
-  DetailsValue:
+  ThingId:
     type: string
-    pattern: '[^\p\{C\}]*\+'
+  ThingTypeProperties:
+    type: object
+    properties:
+      thingTypeDescription:
+        $ref: '#/definitions/ThingTypeDescription'
+        description: The description of the thing type.
+      searchableAttributes:
+        $ref: '#/definitions/SearchableAttributes'
+        description: A list of searchable thing attribute names.
+    description: 'The ThingTypeProperties contains information about the thing type including: a thing type description, and a list of searchable thing attribute names.'
+  ThingTypeArn:
+    type: string
+  ThingTypeId:
+    type: string
+  RuleName:
+    type: string
+    pattern: '^[a-zA-Z0-9_]+$'
     minLength: 1
-    maxLength: 1024
-  DetailsMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DetailsKey'
-        value:
-          $ref: '#/definitions/DetailsValue'
-  DisableAllLogs:
+    maxLength: 128
+  TopicRulePayload:
+    type: object
+    required:
+      - sql
+      - actions
+    properties:
+      sql:
+        $ref: '#/definitions/SQL'
+        description: 'The SQL statement used to query the topic. For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.'
+      description:
+        $ref: '#/definitions/Description'
+        description: The description of the rule.
+      actions:
+        $ref: '#/definitions/ActionList'
+        description: The actions associated with the rule.
+      ruleDisabled:
+        $ref: '#/definitions/IsDisabled'
+        description: Specifies whether the rule is disabled.
+      awsIotSqlVersion:
+        $ref: '#/definitions/AwsIotSqlVersion'
+        description: The version of the SQL rules engine to use when evaluating the rule.
+      errorAction:
+        $ref: '#/definitions/Action'
+        description: The action to take when an error occurs.
+    description: Describes a rule.
+  CreatedAtDate:
+    type: string
+    format: date-time
+  HashAlgorithm:
+    type: string
+  SignatureAlgorithm:
+    type: string
+  DeleteScheduledAudits:
     type: boolean
-  DurationSeconds:
+  OptionalVersion:
     type: integer
-  DynamicGroupStatus:
-    type: string
-    enum:
-      - ACTIVE
-      - BUILDING
-      - REBUILDING
-  DynamoDBAction:
-    type: object
-    required:
-      - tableName
-      - roleArn
-      - hashKeyField
-      - hashKeyValue
-    properties:
-      tableName:
-        $ref: '#/definitions/TableName'
-        description: The name of the DynamoDB table.
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: The ARN of the IAM role that grants access to the DynamoDB table.
-      operation:
-        $ref: '#/definitions/DynamoOperation'
-        description: 'The type of operation to be performed. This follows the substitution template, so it can be <code>${operation}</code>, but the substitution must result in one of the following: <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code>.'
-      hashKeyField:
-        $ref: '#/definitions/HashKeyField'
-        description: The hash key name.
-      hashKeyValue:
-        $ref: '#/definitions/HashKeyValue'
-        description: The hash key value.
-      hashKeyType:
-        $ref: '#/definitions/DynamoKeyType'
-        description: The hash key type. Valid values are "STRING" or "NUMBER"
-      rangeKeyField:
-        $ref: '#/definitions/RangeKeyField'
-        description: The range key name.
-      rangeKeyValue:
-        $ref: '#/definitions/RangeKeyValue'
-        description: The range key value.
-      rangeKeyType:
-        $ref: '#/definitions/DynamoKeyType'
-        description: The range key type. Valid values are "STRING" or "NUMBER"
-      payloadField:
-        $ref: '#/definitions/PayloadField'
-        description: The action payload. This name can be customized.
-    description: '<p>Describes an action to write to a DynamoDB table.</p> <p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p> <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p> <p>You can specify any valid expression in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p> <p> <code>"hashKeyValue": "${topic(3)}"</code> </p> <p>The following field uses the timestamp:</p> <p> <code>"rangeKeyValue": "${timestamp()}"</code> </p>'
-  DynamoDBv2Action:
-    type: object
-    properties:
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: The ARN of the IAM role that grants access to the DynamoDB table.
-      putItem:
-        $ref: '#/definitions/PutItemInput'
-        description: '<p>Specifies the DynamoDB table to which the message data will be written. For example:</p> <p> <code>{ "dynamoDBv2": { "roleArn": "aws:iam:12341251:my-role" "putItem": { "tableName": "my-table" } } }</code> </p> <p>Each attribute in the message payload will be written to a separate column in the DynamoDB database.</p>'
-    description: <p>Describes an action to write to a DynamoDB table.</p> <p>This DynamoDB action writes each attribute in the message payload into it's own column in the DynamoDB table.</p>
-  DynamoKeyType:
-    type: string
-    enum:
-      - STRING
-      - NUMBER
-  DynamoOperation:
-    type: string
-  EffectivePolicies:
-    type: array
-    items:
-      $ref: '#/definitions/EffectivePolicy'
-  EffectivePolicy:
-    type: object
-    properties:
-      policyName:
-        $ref: '#/definitions/PolicyName'
-        description: The policy name.
-      policyArn:
-        $ref: '#/definitions/PolicyArn'
-        description: The policy ARN.
-      policyDocument:
-        $ref: '#/definitions/PolicyDocument'
-        description: The IAM policy document.
-    description: The policy that has the effect on the authorization results.
-  ElasticsearchAction:
-    type: object
-    required:
-      - roleArn
-      - endpoint
-      - index
-      - type
-      - id
-    properties:
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: The IAM role ARN that has access to Elasticsearch.
-      endpoint:
-        $ref: '#/definitions/ElasticsearchEndpoint'
-        description: The endpoint of your Elasticsearch domain.
-      index:
-        $ref: '#/definitions/ElasticsearchIndex'
-        description: The Elasticsearch index where you want to store your data.
-      type:
-        $ref: '#/definitions/ElasticsearchType'
-        description: The type of document you are storing.
-      id:
-        $ref: '#/definitions/ElasticsearchId'
-        description: The unique identifier for the document you are storing.
-    description: Describes an action that writes data to an Amazon Elasticsearch Service domain.
-  ElasticsearchEndpoint:
-    type: string
-    pattern: 'https?://.*'
-  ElasticsearchId:
-    type: string
-  ElasticsearchIndex:
-    type: string
-  ElasticsearchType:
-    type: string
-  Enabled:
+  ForceDelete:
     type: boolean
-  EndpointAddress:
+  ExecutionNumber:
+    type: integer
+  DeleteStream:
+    type: boolean
+  ForceDeleteAWSJob:
+    type: boolean
+  LogTargetType:
     type: string
+    enum:
+      - DEFAULT
+      - THING_GROUP
+  LogTargetName:
+    type: string
+  DeliveryStreamName:
+    type: string
+  ImplicitDeny:
+    type: object
+    properties:
+      policies:
+        $ref: '#/definitions/Policies'
+        description: 'Policies that don''t contain a matching allow or deny statement for the specified action on the specified resource. '
+    description: Information that implicitly denies authorization. When policy doesn't explicitly deny or allow an action on a resource it is considered an implicit deny.
+  ExplicitDeny:
+    type: object
+    properties:
+      policies:
+        $ref: '#/definitions/Policies'
+        description: The policies that denied the authorization.
+    description: Information that explicitly denies authorization.
+  UndoDeprecate:
+    type: boolean
+  DeprecationDate:
+    type: string
+    format: date-time
+  TaskStatistics:
+    type: object
+    properties:
+      totalChecks:
+        $ref: '#/definitions/TotalChecksCount'
+        description: The number of checks in this audit.
+      inProgressChecks:
+        $ref: '#/definitions/InProgressChecksCount'
+        description: The number of checks in progress.
+      waitingForDataCollectionChecks:
+        $ref: '#/definitions/WaitingForDataCollectionChecksCount'
+        description: The number of checks waiting for data collection.
+      compliantChecks:
+        $ref: '#/definitions/CompliantChecksCount'
+        description: The number of checks that found compliant resources.
+      nonCompliantChecks:
+        $ref: '#/definitions/NonCompliantChecksCount'
+        description: The number of checks that found non-compliant resources.
+      failedChecks:
+        $ref: '#/definitions/FailedChecksCount'
+        description: 'The number of checks '
+      canceledChecks:
+        $ref: '#/definitions/CanceledChecksCount'
+        description: The number of checks that did not run because the audit was canceled.
+    description: Statistics for the checks performed during the audit.
+  Version:
+    type: integer
+  RegistrationConfig:
+    type: object
+    properties:
+      templateBody:
+        $ref: '#/definitions/TemplateBody'
+        description: The template body.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The ARN of the role.
+    description: The registration configuration.
   EndpointType:
     type: string
-  ErrorCode:
+  EndpointAddress:
     type: string
-  ErrorInfo:
-    type: object
-    properties:
-      code:
-        $ref: '#/definitions/Code'
-        description: The error code.
-      message:
-        $ref: '#/definitions/OTAUpdateErrorMessage'
-        description: The error message.
-    description: Error information.
-  ErrorMessage:
-    type: string
-    maxLength: 2048
-  EventType:
-    type: string
-    enum:
-      - THING
-      - THING_GROUP
-      - THING_TYPE
-      - THING_GROUP_MEMBERSHIP
-      - THING_GROUP_HIERARCHY
-      - THING_TYPE_ASSOCIATION
-      - JOB
-      - JOB_EXECUTION
-      - POLICY
-      - CERTIFICATE
-      - CA_CERTIFICATE
   EventConfigurations:
     type: array
     items:
@@ -11009,189 +11582,54 @@ definitions:
           $ref: '#/definitions/EventType'
         value:
           $ref: '#/definitions/Configuration'
-  ExecutionNamePrefix:
+  LastModifiedDate:
     type: string
-  ExecutionNumber:
-    type: integer
-  ExpectedVersion:
-    type: integer
-  ExpiresInSec:
-    type: integer
-    minimum: 60
-    maximum: 3600
-  ExplicitDeny:
-    type: object
-    properties:
-      policies:
-        $ref: '#/definitions/Policies'
-        description: The policies that denied the authorization.
-    description: Information that explicitly denies authorization.
-  ExponentialRolloutRate:
-    type: object
-    required:
-      - baseRatePerMinute
-      - incrementFactor
-      - rateIncreaseCriteria
-    properties:
-      baseRatePerMinute:
-        $ref: '#/definitions/RolloutRatePerMinute'
-        description: 'The minimum number of things that will be notified of a pending job, per minute at the start of job rollout. This parameter allows you to define the initial rate of rollout.'
-      incrementFactor:
-        $ref: '#/definitions/IncrementFactor'
-        description: The exponential factor to increase the rate of rollout for a job.
-      rateIncreaseCriteria:
-        $ref: '#/definitions/RateIncreaseCriteria'
-        description: '<p>The criteria to initiate the increase in rate of rollout for a job.</p> <p>AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>'
-    description: Allows you to create an exponential rate of rollout for a job.
-  FailedChecksCount:
-    type: integer
-  FailedThings:
-    type: integer
-  FileId:
-    type: integer
-    minimum: 0
-    maximum: 255
-  FileLocation:
-    type: object
-    properties:
-      stream:
-        $ref: '#/definitions/Stream'
-        description: The stream that contains the OTA update.
-      s3Location:
-        $ref: '#/definitions/S3Location'
-        description: The location of the updated firmware in S3.
-    description: The location of the OTA update.
-  FileName:
-    type: string
-  FirehoseAction:
-    type: object
-    required:
-      - roleArn
-      - deliveryStreamName
-    properties:
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: The IAM role that grants access to the Amazon Kinesis Firehose stream.
-      deliveryStreamName:
-        $ref: '#/definitions/DeliveryStreamName'
-        description: The delivery stream name.
-      separator:
-        $ref: '#/definitions/FirehoseSeparator'
-        description: 'A character separator that will be used to separate records written to the Firehose stream. Valid values are: ''\n'' (newline), ''\t'' (tab), ''\r\n'' (Windows newline), '','' (comma).'
-    description: Describes an action that writes data to an Amazon Kinesis Firehose stream.
-  FirehoseSeparator:
-    type: string
-    pattern: '([\n\t])|(\r\n)|(,)'
-  Flag:
-    type: boolean
-  ForceDelete:
-    type: boolean
-  ForceDeleteAWSJob:
-    type: boolean
-  ForceFlag:
-    type: boolean
-  Forced:
-    type: boolean
-  FunctionArn:
-    type: string
-  GEMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 10000
-  GenerationId:
-    type: string
-  GroupNameAndArn:
-    type: object
-    properties:
-      groupName:
-        $ref: '#/definitions/ThingGroupName'
-        description: The group name.
-      groupArn:
-        $ref: '#/definitions/ThingGroupArn'
-        description: The group ARN.
-    description: The name and ARN of a group.
-  HashAlgorithm:
-    type: string
-  HashKeyField:
-    type: string
-  HashKeyValue:
-    type: string
-  ImplicitDeny:
-    type: object
-    properties:
-      policies:
-        $ref: '#/definitions/Policies'
-        description: 'Policies that don''t contain a matching allow or deny statement for the specified action on the specified resource. '
-    description: Information that implicitly denies authorization. When policy doesn't explicitly deny or allow an action on a resource it is considered an implicit deny.
-  InProgressChecksCount:
-    type: integer
-  InProgressThings:
-    type: integer
-  InProgressTimeoutInMinutes:
-    type: integer
-  IncrementFactor:
-    type: number
-    format: double
-    minimum: 1
-    maximum: 5
-  IndexName:
-    type: string
-    pattern: '[a-zA-Z0-9:_-]+'
-    minLength: 1
-    maxLength: 128
-  IndexNamesList:
-    type: array
-    items:
-      $ref: '#/definitions/IndexName'
-  IndexSchema:
-    type: string
+    format: date-time
   IndexStatus:
     type: string
     enum:
       - ACTIVE
       - BUILDING
       - REBUILDING
-  InlineDocument:
+  IndexSchema:
     type: string
-  InputName:
-    type: string
-    minLength: 1
-    maxLength: 128
-  IotAnalyticsAction:
+  JobExecution:
     type: object
     properties:
-      channelArn:
-        $ref: '#/definitions/AwsArn'
-        description: (deprecated) The ARN of the IoT Analytics channel to which message data will be sent.
-      channelName:
-        $ref: '#/definitions/ChannelName'
-        description: The name of the IoT Analytics channel to which message data will be sent.
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: 'The ARN of the role which has a policy that grants IoT Analytics permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).'
-    description: Sends messge data to an AWS IoT Analytics channel.
-  IotEventsAction:
-    type: object
-    required:
-      - inputName
-      - roleArn
-    properties:
-      inputName:
-        $ref: '#/definitions/InputName'
-        description: The name of the AWS IoT Events input.
-      messageId:
-        $ref: '#/definitions/MessageId'
-        description: '[Optional] Use this to ensure that only one input (message) with a given messageId will be processed by an AWS IoT Events detector.'
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: 'The ARN of the role that grants AWS IoT permission to send an input to an AWS IoT Events detector. ("Action":"iotevents:BatchPutMessage").'
-    description: Sends an input to an AWS IoT Events detector.
-  IsAuthenticated:
-    type: boolean
-  IsDefaultVersion:
-    type: boolean
-  IsDisabled:
-    type: boolean
+      jobId:
+        $ref: '#/definitions/JobId'
+        description: The unique identifier you assigned to the job when it was created.
+      status:
+        $ref: '#/definitions/JobExecutionStatus'
+        description: 'The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED, TIMED_OUT, CANCELED, or REJECTED).'
+      forceCanceled:
+        $ref: '#/definitions/Forced'
+        description: Will be <code>true</code> if the job execution was canceled with the optional <code>force</code> parameter set to <code>true</code>.
+      statusDetails:
+        $ref: '#/definitions/JobExecutionStatusDetails'
+        description: A collection of name/value pairs that describe the status of the job execution.
+      thingArn:
+        $ref: '#/definitions/ThingArn'
+        description: The ARN of the thing on which the job execution is running.
+      queuedAt:
+        $ref: '#/definitions/DateType'
+        description: 'The time, in milliseconds since the epoch, when the job execution was queued.'
+      startedAt:
+        $ref: '#/definitions/DateType'
+        description: 'The time, in milliseconds since the epoch, when the job execution started.'
+      lastUpdatedAt:
+        $ref: '#/definitions/DateType'
+        description: 'The time, in milliseconds since the epoch, when the job execution was last updated.'
+      executionNumber:
+        $ref: '#/definitions/ExecutionNumber'
+        description: 'A string (consisting of the digits "0" through "9") which identifies this particular job execution on this particular device. It can be used in commands which return or update job execution information. '
+      versionNumber:
+        $ref: '#/definitions/VersionNumber'
+        description: The version of the job execution. Job execution versions are incremented each time they are updated by a device.
+      approximateSecondsBeforeTimedOut:
+        $ref: '#/definitions/ApproximateSecondsBeforeTimedOut'
+        description: The estimated number of seconds that remain before the job execution status will be changed to <code>TIMED_OUT</code>. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The actual job execution timeout can occur up to 60 seconds later than the estimated duration. This value will not be included if the job execution has reached a terminal status.
+    description: The job execution object represents the execution of a job on a particular device.
   Job:
     type: object
     properties:
@@ -11247,63 +11685,491 @@ definitions:
         $ref: '#/definitions/TimeoutConfig'
         description: 'Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.'
     description: The <code>Job</code> object contains details about a job.
-  JobArn:
-    type: string
-  JobDescription:
-    type: string
-    pattern: '[^\p{C}]+'
-    maxLength: 2028
-  JobDocument:
-    type: string
-    maxLength: 32768
-  JobDocumentSource:
-    type: string
-    minLength: 1
-    maxLength: 1350
-  JobExecution:
+  RoleAliasDescription:
     type: object
     properties:
-      jobId:
-        $ref: '#/definitions/JobId'
-        description: The unique identifier you assigned to the job when it was created.
-      status:
-        $ref: '#/definitions/JobExecutionStatus'
-        description: 'The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED, TIMED_OUT, CANCELED, or REJECTED).'
-      forceCanceled:
-        $ref: '#/definitions/Forced'
-        description: Will be <code>true</code> if the job execution was canceled with the optional <code>force</code> parameter set to <code>true</code>.
-      statusDetails:
-        $ref: '#/definitions/JobExecutionStatusDetails'
-        description: A collection of name/value pairs that describe the status of the job execution.
-      thingArn:
-        $ref: '#/definitions/ThingArn'
-        description: The ARN of the thing on which the job execution is running.
-      queuedAt:
+      roleAlias:
+        $ref: '#/definitions/RoleAlias'
+        description: The role alias.
+      roleAliasArn:
+        $ref: '#/definitions/RoleAliasArn'
+        description: The ARN of the role alias.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: The role ARN.
+      owner:
+        $ref: '#/definitions/AwsAccountId'
+        description: The role alias owner.
+      credentialDurationSeconds:
+        $ref: '#/definitions/CredentialDurationSeconds'
+        description: The number of seconds for which the credential is valid.
+      creationDate:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job execution was queued.'
-      startedAt:
+        description: The UNIX timestamp of when the role alias was created.
+      lastModifiedDate:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job execution started.'
+        description: The UNIX timestamp of when the role alias was last modified.
+    description: Role alias description.
+  StreamInfo:
+    type: object
+    properties:
+      streamId:
+        $ref: '#/definitions/StreamId'
+        description: The stream ID.
+      streamArn:
+        $ref: '#/definitions/StreamArn'
+        description: The stream ARN.
+      streamVersion:
+        $ref: '#/definitions/StreamVersion'
+        description: The stream version.
+      description:
+        $ref: '#/definitions/StreamDescription'
+        description: The description of the stream.
+      files:
+        $ref: '#/definitions/StreamFiles'
+        description: The files to stream.
+      createdAt:
+        $ref: '#/definitions/DateType'
+        description: The date when the stream was created.
       lastUpdatedAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job execution was last updated.'
-      executionNumber:
-        $ref: '#/definitions/ExecutionNumber'
-        description: 'A string (consisting of the digits "0" through "9") which identifies this particular job execution on this particular device. It can be used in commands which return or update job execution information. '
-      versionNumber:
-        $ref: '#/definitions/VersionNumber'
-        description: The version of the job execution. Job execution versions are incremented each time they are updated by a device.
-      approximateSecondsBeforeTimedOut:
-        $ref: '#/definitions/ApproximateSecondsBeforeTimedOut'
-        description: The estimated number of seconds that remain before the job execution status will be changed to <code>TIMED_OUT</code>. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The actual job execution timeout can occur up to 60 seconds later than the estimated duration. This value will not be included if the job execution has reached a terminal status.
-    description: The job execution object represents the execution of a job on a particular device.
-  JobExecutionFailureType:
+        description: The date when the stream was last updated.
+      roleArn:
+        $ref: '#/definitions/RoleArn'
+        description: An IAM role AWS IoT assumes to access your S3 files.
+    description: Information about a stream.
+  ThingGroupMetadata:
+    type: object
+    properties:
+      parentGroupName:
+        $ref: '#/definitions/ThingGroupName'
+        description: The parent thing group name.
+      rootToParentThingGroups:
+        $ref: '#/definitions/ThingGroupNameAndArnList'
+        description: The root parent thing group.
+      creationDate:
+        $ref: '#/definitions/CreationDate'
+        description: The UNIX timestamp of when the thing group was created.
+    description: Thing group metadata.
+  DynamicGroupStatus:
     type: string
     enum:
-      - FAILED
-      - REJECTED
-      - TIMED_OUT
-      - ALL
+      - ACTIVE
+      - BUILDING
+      - REBUILDING
+  TaskId:
+    type: string
+    maxLength: 40
+  TemplateBody:
+    type: string
+  RegistryS3BucketName:
+    type: string
+    pattern: '[a-zA-Z0-9._-]+'
+    minLength: 3
+    maxLength: 256
+  RegistryS3KeyName:
+    type: string
+    pattern: '[a-zA-Z0-9!_.*''()-\/]+'
+    minLength: 1
+    maxLength: 1024
+  Status:
+    type: string
+    enum:
+      - InProgress
+      - Completed
+      - Failed
+      - Cancelled
+      - Cancelling
+  Percentage:
+    type: integer
+    minimum: 0
+    maximum: 100
+  ThingTypeMetadata:
+    type: object
+    properties:
+      deprecationDate:
+        $ref: '#/definitions/DeprecationDate'
+        description: The date and time when the thing type was deprecated.
+      creationDate:
+        $ref: '#/definitions/CreationDate'
+        description: The date and time when the thing type was created.
+    description: 'The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when time was deprecated.'
+  Description:
+    type: string
+  S3Destination:
+    type: object
+    properties:
+      bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The S3 bucket that contains the updated firmware.
+      prefix:
+        $ref: '#/definitions/Prefix'
+        description: The S3 prefix.
+    description: Describes the location of updated firmware in S3.
+  Destination:
+    type: object
+    properties:
+      s3Destination:
+        $ref: '#/definitions/S3Destination'
+        description: Describes the location in S3 of the updated firmware.
+    description: Describes the location of the updated firmware.
+  DetailsKey:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  DetailsValue:
+    type: string
+    pattern: '[^\p\{C\}]*\+'
+    minLength: 1
+    maxLength: 1024
+  DisableAllLogs:
+    type: boolean
+  TableName:
+    type: string
+  DynamoOperation:
+    type: string
+  HashKeyField:
+    type: string
+  HashKeyValue:
+    type: string
+  DynamoKeyType:
+    type: string
+    enum:
+      - STRING
+      - NUMBER
+  RangeKeyField:
+    type: string
+  RangeKeyValue:
+    type: string
+  PayloadField:
+    type: string
+  PutItemInput:
+    type: object
+    required:
+      - tableName
+    properties:
+      tableName:
+        $ref: '#/definitions/TableName'
+        description: The table where the message data will be written
+    description: The input for the DynamoActionVS action that specifies the DynamoDB table to which the message data will be written.
+  EffectivePolicy:
+    type: object
+    properties:
+      policyName:
+        $ref: '#/definitions/PolicyName'
+        description: The policy name.
+      policyArn:
+        $ref: '#/definitions/PolicyArn'
+        description: The policy ARN.
+      policyDocument:
+        $ref: '#/definitions/PolicyDocument'
+        description: The IAM policy document.
+    description: The policy that has the effect on the authorization results.
+  EffectivePolicies:
+    type: array
+    items:
+      $ref: '#/definitions/EffectivePolicy'
+  ElasticsearchEndpoint:
+    type: string
+    pattern: 'https?://.*'
+  ElasticsearchIndex:
+    type: string
+  ElasticsearchType:
+    type: string
+  ElasticsearchId:
+    type: string
+  OTAUpdateErrorMessage:
+    type: string
+  ErrorInfo:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/Code'
+        description: The error code.
+      message:
+        $ref: '#/definitions/OTAUpdateErrorMessage'
+        description: The error message.
+    description: Error information.
+  EventType:
+    type: string
+    enum:
+      - THING
+      - THING_GROUP
+      - THING_TYPE
+      - THING_GROUP_MEMBERSHIP
+      - THING_GROUP_HIERARCHY
+      - THING_TYPE_ASSOCIATION
+      - JOB
+      - JOB_EXECUTION
+      - POLICY
+      - CERTIFICATE
+      - CA_CERTIFICATE
+  ExecutionNamePrefix:
+    type: string
+  ExpiresInSec:
+    type: integer
+    minimum: 60
+    maximum: 3600
+  RolloutRatePerMinute:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  IncrementFactor:
+    type: number
+    format: double
+    minimum: 1
+    maximum: 5
+  RateIncreaseCriteria:
+    type: object
+    properties:
+      numberOfNotifiedThings:
+        $ref: '#/definitions/NumberOfThings'
+        description: The threshold for number of notified things that will initiate the increase in rate of rollout.
+      numberOfSucceededThings:
+        $ref: '#/definitions/NumberOfThings'
+        description: The threshold for number of succeeded things that will initiate the increase in rate of rollout.
+    description: Allows you to define a criteria to initiate the increase in rate of rollout for a job.
+  ExponentialRolloutRate:
+    type: object
+    required:
+      - baseRatePerMinute
+      - incrementFactor
+      - rateIncreaseCriteria
+    properties:
+      baseRatePerMinute:
+        $ref: '#/definitions/RolloutRatePerMinute'
+        description: 'The minimum number of things that will be notified of a pending job, per minute at the start of job rollout. This parameter allows you to define the initial rate of rollout.'
+      incrementFactor:
+        $ref: '#/definitions/IncrementFactor'
+        description: The exponential factor to increase the rate of rollout for a job.
+      rateIncreaseCriteria:
+        $ref: '#/definitions/RateIncreaseCriteria'
+        description: '<p>The criteria to initiate the increase in rate of rollout for a job.</p> <p>AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>'
+    description: Allows you to create an exponential rate of rollout for a job.
+  FailedChecksCount:
+    type: integer
+  FailedThings:
+    type: integer
+  FileId:
+    type: integer
+    minimum: 0
+    maximum: 255
+  Stream:
+    type: object
+    properties:
+      streamId:
+        $ref: '#/definitions/StreamId'
+        description: The stream ID.
+      fileId:
+        $ref: '#/definitions/FileId'
+        description: The ID of a file associated with a stream.
+    description: Describes a group of files that can be streamed.
+  S3Location:
+    type: object
+    properties:
+      bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The S3 bucket.
+      key:
+        $ref: '#/definitions/S3Key'
+        description: The S3 key.
+      version:
+        $ref: '#/definitions/S3Version'
+        description: The S3 bucket version.
+    description: The S3 location.
+  FileLocation:
+    type: object
+    properties:
+      stream:
+        $ref: '#/definitions/Stream'
+        description: The stream that contains the OTA update.
+      s3Location:
+        $ref: '#/definitions/S3Location'
+        description: The location of the updated firmware in S3.
+    description: The location of the OTA update.
+  FileName:
+    type: string
+  FirehoseSeparator:
+    type: string
+    pattern: '([\n\t])|(\r\n)|(,)'
+  Forced:
+    type: boolean
+  FunctionArn:
+    type: string
+  GEMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  ThingIndexingConfiguration:
+    type: object
+    required:
+      - thingIndexingMode
+    properties:
+      thingIndexingMode:
+        $ref: '#/definitions/ThingIndexingMode'
+        description: '<p>Thing indexing mode. Valid values are:</p> <ul> <li> <p>REGISTRY – Your thing index will contain only registry data.</p> </li> <li> <p>REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.</p> </li> <li> <p>OFF - Thing indexing is disabled.</p> </li> </ul>'
+      thingConnectivityIndexingMode:
+        $ref: '#/definitions/ThingConnectivityIndexingMode'
+        description: '<p>Thing connectivity indexing mode. Valid values are: </p> <ul> <li> <p>STATUS – Your thing index will contain connectivity status. In order to enable thing connectivity indexing, thingIndexMode must not be set to OFF.</p> </li> <li> <p>OFF - Thing connectivity status indexing is disabled.</p> </li> </ul>'
+    description: 'The thing indexing configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html">Managing Thing Indexing</a>.'
+  ThingGroupIndexingConfiguration:
+    type: object
+    required:
+      - thingGroupIndexingMode
+    properties:
+      thingGroupIndexingMode:
+        $ref: '#/definitions/ThingGroupIndexingMode'
+        description: Thing group indexing mode.
+    description: Thing group indexing configuration.
+  LogLevel:
+    type: string
+    enum:
+      - DEBUG
+      - INFO
+      - ERROR
+      - WARN
+      - DISABLED
+  OTAUpdateInfo:
+    type: object
+    properties:
+      otaUpdateId:
+        $ref: '#/definitions/OTAUpdateId'
+        description: The OTA update ID.
+      otaUpdateArn:
+        $ref: '#/definitions/OTAUpdateArn'
+        description: The OTA update ARN.
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The date when the OTA update was created.
+      lastModifiedDate:
+        $ref: '#/definitions/DateType'
+        description: The date when the OTA update was last updated.
+      description:
+        $ref: '#/definitions/OTAUpdateDescription'
+        description: A description of the OTA update.
+      targets:
+        $ref: '#/definitions/Targets'
+        description: The targets of the OTA update.
+      awsJobExecutionsRolloutConfig:
+        $ref: '#/definitions/AwsJobExecutionsRolloutConfig'
+        description: Configuration for the rollout of OTA updates.
+      targetSelection:
+        $ref: '#/definitions/TargetSelection'
+        description: 'Specifies whether the OTA update will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the OTA update (SNAPSHOT). If continuous, the OTA update may also be run on a thing when a change is detected in a target. For example, an OTA update will run on a thing when the thing is added to a target group, even after the OTA update was completed by all things originally in the group. '
+      otaUpdateFiles:
+        $ref: '#/definitions/OTAUpdateFiles'
+        description: A list of files associated with the OTA update.
+      otaUpdateStatus:
+        $ref: '#/definitions/OTAUpdateStatus'
+        description: The status of the OTA update.
+      awsIotJobId:
+        $ref: '#/definitions/AwsIotJobId'
+        description: The AWS IoT job ID associated with the OTA update.
+      awsIotJobArn:
+        $ref: '#/definitions/AwsIotJobArn'
+        description: The AWS IoT job ARN associated with the OTA update.
+      errorInfo:
+        $ref: '#/definitions/ErrorInfo'
+        description: Error information associated with the OTA update.
+      additionalParameters:
+        $ref: '#/definitions/AdditionalParameterMap'
+        description: A collection of name/value pairs
+    description: Information about an OTA update.
+  RegistrationCode:
+    type: string
+    pattern: '(0x)?[a-fA-F0-9]+'
+    minLength: 64
+    maxLength: 64
+  RuleArn:
+    type: string
+  TopicRule:
+    type: object
+    properties:
+      ruleName:
+        $ref: '#/definitions/RuleName'
+        description: The name of the rule.
+      sql:
+        $ref: '#/definitions/SQL'
+        description: 'The SQL statement used to query the topic. When using a SQL query with multiple lines, be sure to escape the newline characters.'
+      description:
+        $ref: '#/definitions/Description'
+        description: The description of the rule.
+      createdAt:
+        $ref: '#/definitions/CreatedAtDate'
+        description: The date and time the rule was created.
+      actions:
+        $ref: '#/definitions/ActionList'
+        description: The actions associated with the rule.
+      ruleDisabled:
+        $ref: '#/definitions/IsDisabled'
+        description: Specifies whether the rule is disabled.
+      awsIotSqlVersion:
+        $ref: '#/definitions/AwsIotSqlVersion'
+        description: The version of the SQL rules engine to use when evaluating the rule.
+      errorAction:
+        $ref: '#/definitions/Action'
+        description: The action to perform when an error occurs.
+    description: Describes a rule.
+  InProgressChecksCount:
+    type: integer
+  InProgressThings:
+    type: integer
+  InProgressTimeoutInMinutes:
+    type: integer
+  IndexNamesList:
+    type: array
+    items:
+      $ref: '#/definitions/IndexName'
+  InputName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  MessageId:
+    type: string
+    maxLength: 128
+  IsAuthenticated:
+    type: boolean
+  IsDisabled:
+    type: boolean
+  JobStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - CANCELED
+      - COMPLETED
+      - DELETION_IN_PROGRESS
+  JobProcessDetails:
+    type: object
+    properties:
+      processingTargets:
+        $ref: '#/definitions/ProcessingTargetNameList'
+        description: The target devices to which the job execution is being rolled out. This value will be null after the job execution has finished rolling out to all the target devices.
+      numberOfCanceledThings:
+        $ref: '#/definitions/CanceledThings'
+        description: The number of things that cancelled the job.
+      numberOfSucceededThings:
+        $ref: '#/definitions/SucceededThings'
+        description: The number of things which successfully completed the job.
+      numberOfFailedThings:
+        $ref: '#/definitions/FailedThings'
+        description: The number of things that failed executing the job.
+      numberOfRejectedThings:
+        $ref: '#/definitions/RejectedThings'
+        description: The number of things that rejected the job.
+      numberOfQueuedThings:
+        $ref: '#/definitions/QueuedThings'
+        description: The number of things that are awaiting execution of the job.
+      numberOfInProgressThings:
+        $ref: '#/definitions/InProgressThings'
+        description: The number of things currently executing the job.
+      numberOfRemovedThings:
+        $ref: '#/definitions/RemovedThings'
+        description: The number of things that are no longer scheduled to execute the job because they have been deleted or have been removed from the group that was a target of the job.
+      numberOfTimedOutThings:
+        $ref: '#/definitions/TimedOutThings'
+        description: The number of things whose job execution status is <code>TIMED_OUT</code>.
+    description: The job process details.
   JobExecutionStatus:
     type: string
     enum:
@@ -11322,6 +12188,8 @@ definitions:
         $ref: '#/definitions/DetailsMap'
         description: The job execution status.
     description: Details of the job execution status.
+  VersionNumber:
+    type: integer
   JobExecutionSummary:
     type: object
     properties:
@@ -11369,59 +12237,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/JobExecutionSummaryForThing'
-  JobExecutionsRolloutConfig:
-    type: object
-    properties:
-      maximumPerMinute:
-        $ref: '#/definitions/MaxJobExecutionsPerMin'
-        description: 'The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.'
-      exponentialRate:
-        $ref: '#/definitions/ExponentialRolloutRate'
-        description: The rate of increase for a job rollout. This parameter allows you to define an exponential rate for a job rollout.
-    description: Allows you to create a staged rollout of a job.
-  JobId:
-    type: string
-    pattern: '[a-zA-Z0-9_-]+'
-    minLength: 1
-    maxLength: 64
-  JobProcessDetails:
-    type: object
-    properties:
-      processingTargets:
-        $ref: '#/definitions/ProcessingTargetNameList'
-        description: The target devices to which the job execution is being rolled out. This value will be null after the job execution has finished rolling out to all the target devices.
-      numberOfCanceledThings:
-        $ref: '#/definitions/CanceledThings'
-        description: The number of things that cancelled the job.
-      numberOfSucceededThings:
-        $ref: '#/definitions/SucceededThings'
-        description: The number of things which successfully completed the job.
-      numberOfFailedThings:
-        $ref: '#/definitions/FailedThings'
-        description: The number of things that failed executing the job.
-      numberOfRejectedThings:
-        $ref: '#/definitions/RejectedThings'
-        description: The number of things that rejected the job.
-      numberOfQueuedThings:
-        $ref: '#/definitions/QueuedThings'
-        description: The number of things that are awaiting execution of the job.
-      numberOfInProgressThings:
-        $ref: '#/definitions/InProgressThings'
-        description: The number of things currently executing the job.
-      numberOfRemovedThings:
-        $ref: '#/definitions/RemovedThings'
-        description: The number of things that are no longer scheduled to execute the job because they have been deleted or have been removed from the group that was a target of the job.
-      numberOfTimedOutThings:
-        $ref: '#/definitions/TimedOutThings'
-        description: The number of things whose job execution status is <code>TIMED_OUT</code>.
-    description: The job process details.
-  JobStatus:
-    type: string
-    enum:
-      - IN_PROGRESS
-      - CANCELED
-      - COMPLETED
-      - DELETION_IN_PROGRESS
+  MaxJobExecutionsPerMin:
+    type: integer
+    minimum: 1
+  ProcessingTargetNameList:
+    type: array
+    items:
+      $ref: '#/definitions/ProcessingTargetName'
+  SucceededThings:
+    type: integer
+  RejectedThings:
+    type: integer
+  QueuedThings:
+    type: integer
+  RemovedThings:
+    type: integer
+  TimedOutThings:
+    type: integer
   JobSummary:
     type: object
     properties:
@@ -11454,11 +12286,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/JobSummary'
-  JobTargets:
-    type: array
-    items:
-      $ref: '#/definitions/TargetArn'
-    minItems: 1
   JsonDocument:
     type: string
   Key:
@@ -11468,595 +12295,39 @@ definitions:
     pattern: '[a-zA-Z0-9:_-]+'
     minLength: 1
     maxLength: 128
-  KeyPair:
-    type: object
-    properties:
-      PublicKey:
-        $ref: '#/definitions/PublicKey'
-        description: The public key.
-      PrivateKey:
-        $ref: '#/definitions/PrivateKey'
-        description: The private key.
-    description: Describes a key pair.
-  KeyValue:
+  PublicKey:
     type: string
-    maxLength: 5120
-  KinesisAction:
-    type: object
-    required:
-      - roleArn
-      - streamName
-    properties:
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: The ARN of the IAM role that grants access to the Amazon Kinesis stream.
-      streamName:
-        $ref: '#/definitions/StreamName'
-        description: The name of the Amazon Kinesis stream.
-      partitionKey:
-        $ref: '#/definitions/PartitionKey'
-        description: The partition key.
-    description: Describes an action to write data to an Amazon Kinesis stream.
-  LambdaAction:
-    type: object
-    required:
-      - functionArn
-    properties:
-      functionArn:
-        $ref: '#/definitions/FunctionArn'
-        description: The ARN of the Lambda function.
-    description: Describes an action to invoke a Lambda function.
-  LaserMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 250
-  LastModifiedDate:
-    type: string
-    format: date-time
-  LogLevel:
-    type: string
-    enum:
-      - DEBUG
-      - INFO
-      - ERROR
-      - WARN
-      - DISABLED
-  LogTarget:
-    type: object
-    required:
-      - targetType
-    properties:
-      targetType:
-        $ref: '#/definitions/LogTargetType'
-        description: The target type.
-      targetName:
-        $ref: '#/definitions/LogTargetName'
-        description: The target name.
-    description: A log target.
-  LogTargetConfiguration:
-    type: object
-    properties:
-      logTarget:
-        $ref: '#/definitions/LogTarget'
-        description: A log target
-      logLevel:
-        $ref: '#/definitions/LogLevel'
-        description: The logging level.
-    description: The target configuration.
-  LogTargetConfigurations:
-    type: array
-    items:
-      $ref: '#/definitions/LogTargetConfiguration'
-  LogTargetName:
-    type: string
-  LogTargetType:
-    type: string
-    enum:
-      - DEFAULT
-      - THING_GROUP
-  LoggingOptionsPayload:
-    type: object
-    required:
-      - roleArn
-    properties:
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: The ARN of the IAM role that grants access.
-      logLevel:
-        $ref: '#/definitions/LogLevel'
-        description: The log level.
-    description: Describes the logging options payload.
-  Marker:
-    type: string
-    pattern: '[A-Za-z0-9+/]+={0,2}'
-  MaxJobExecutionsPerMin:
-    type: integer
-    minimum: 1
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 250
-  MaximumPerMinute:
-    type: integer
-    minimum: 1
-    maximum: 1000
-  Message:
-    type: string
-    maxLength: 128
-  MessageFormat:
-    type: string
-    enum:
-      - RAW
-      - JSON
-  MessageId:
-    type: string
-    maxLength: 128
-  MetricValue:
-    type: object
-    properties:
-      count:
-        $ref: '#/definitions/UnsignedLong'
-        description: 'If the <code>comparisonOperator</code> calls for a numeric value, use this to specify that numeric value to be compared with the <code>metric</code>.'
-      cidrs:
-        $ref: '#/definitions/Cidrs'
-        description: 'If the <code>comparisonOperator</code> calls for a set of CIDRs, use this to specify that set to be compared with the <code>metric</code>.'
-      ports:
-        $ref: '#/definitions/Ports'
-        description: 'If the <code>comparisonOperator</code> calls for a set of ports, use this to specify that set to be compared with the <code>metric</code>.'
-    description: The value to be compared with the <code>metric</code>.
-  MinimumNumberOfExecutedThings:
-    type: integer
-    minimum: 1
-  MissingContextValue:
-    type: string
-  MissingContextValues:
-    type: array
-    items:
-      $ref: '#/definitions/MissingContextValue'
-  NextToken:
-    type: string
-  NonCompliantChecksCount:
-    type: integer
-  NonCompliantResource:
-    type: object
-    properties:
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The type of the non-compliant resource.
-      resourceIdentifier:
-        $ref: '#/definitions/ResourceIdentifier'
-        description: Information identifying the non-compliant resource.
-      additionalInfo:
-        $ref: '#/definitions/StringMap'
-        description: Additional information about the non-compliant resource.
-    description: Information about the resource that was non-compliant with the audit check.
-  NonCompliantResourcesCount:
-    type: integer
-  NumberOfThings:
-    type: integer
-    minimum: 1
-  OTAUpdateArn:
-    type: string
-  OTAUpdateDescription:
-    type: string
-    pattern: '[^\p{C}]+'
-    maxLength: 2028
-  OTAUpdateErrorMessage:
-    type: string
-  OTAUpdateFile:
-    type: object
-    properties:
-      fileName:
-        $ref: '#/definitions/FileName'
-        description: The name of the file.
-      fileVersion:
-        $ref: '#/definitions/OTAUpdateFileVersion'
-        description: The file version.
-      fileLocation:
-        $ref: '#/definitions/FileLocation'
-        description: The location of the updated firmware.
-      codeSigning:
-        $ref: '#/definitions/CodeSigning'
-        description: The code signing method of the file.
-      attributes:
-        $ref: '#/definitions/AttributesMap'
-        description: A list of name/attribute pairs.
-    description: Describes a file to be associated with an OTA update.
-  OTAUpdateFileVersion:
-    type: string
-  OTAUpdateFiles:
-    type: array
-    items:
-      $ref: '#/definitions/OTAUpdateFile'
-    minItems: 1
-    maxItems: 50
-  OTAUpdateId:
-    type: string
-    pattern: '[a-zA-Z0-9_-]+'
     minLength: 1
-    maxLength: 128
-  OTAUpdateInfo:
-    type: object
-    properties:
-      otaUpdateId:
-        $ref: '#/definitions/OTAUpdateId'
-        description: The OTA update ID.
-      otaUpdateArn:
-        $ref: '#/definitions/OTAUpdateArn'
-        description: The OTA update ARN.
-      creationDate:
-        $ref: '#/definitions/DateType'
-        description: The date when the OTA update was created.
-      lastModifiedDate:
-        $ref: '#/definitions/DateType'
-        description: The date when the OTA update was last updated.
-      description:
-        $ref: '#/definitions/OTAUpdateDescription'
-        description: A description of the OTA update.
-      targets:
-        $ref: '#/definitions/Targets'
-        description: The targets of the OTA update.
-      awsJobExecutionsRolloutConfig:
-        $ref: '#/definitions/AwsJobExecutionsRolloutConfig'
-        description: Configuration for the rollout of OTA updates.
-      targetSelection:
-        $ref: '#/definitions/TargetSelection'
-        description: 'Specifies whether the OTA update will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the OTA update (SNAPSHOT). If continuous, the OTA update may also be run on a thing when a change is detected in a target. For example, an OTA update will run on a thing when the thing is added to a target group, even after the OTA update was completed by all things originally in the group. '
-      otaUpdateFiles:
-        $ref: '#/definitions/OTAUpdateFiles'
-        description: A list of files associated with the OTA update.
-      otaUpdateStatus:
-        $ref: '#/definitions/OTAUpdateStatus'
-        description: The status of the OTA update.
-      awsIotJobId:
-        $ref: '#/definitions/AwsIotJobId'
-        description: The AWS IoT job ID associated with the OTA update.
-      awsIotJobArn:
-        $ref: '#/definitions/AwsIotJobArn'
-        description: The AWS IoT job ARN associated with the OTA update.
-      errorInfo:
-        $ref: '#/definitions/ErrorInfo'
-        description: Error information associated with the OTA update.
-      additionalParameters:
-        $ref: '#/definitions/AdditionalParameterMap'
-        description: A collection of name/value pairs
-    description: Information about an OTA update.
-  OTAUpdateStatus:
-    type: string
-    enum:
-      - CREATE_PENDING
-      - CREATE_IN_PROGRESS
-      - CREATE_COMPLETE
-      - CREATE_FAILED
-  OTAUpdateSummary:
-    type: object
-    properties:
-      otaUpdateId:
-        $ref: '#/definitions/OTAUpdateId'
-        description: The OTA update ID.
-      otaUpdateArn:
-        $ref: '#/definitions/OTAUpdateArn'
-        description: The OTA update ARN.
-      creationDate:
-        $ref: '#/definitions/DateType'
-        description: The date when the OTA update was created.
-    description: An OTA update summary.
-  OTAUpdatesSummary:
-    type: array
-    items:
-      $ref: '#/definitions/OTAUpdateSummary'
-  OptionalVersion:
-    type: integer
-  OutgoingCertificate:
-    type: object
-    properties:
-      certificateArn:
-        $ref: '#/definitions/CertificateArn'
-        description: The certificate ARN.
-      certificateId:
-        $ref: '#/definitions/CertificateId'
-        description: The certificate ID.
-      transferredTo:
-        $ref: '#/definitions/AwsAccountId'
-        description: The AWS account to which the transfer was made.
-      transferDate:
-        $ref: '#/definitions/DateType'
-        description: The date the transfer was initiated.
-      transferMessage:
-        $ref: '#/definitions/Message'
-        description: The transfer message.
-      creationDate:
-        $ref: '#/definitions/DateType'
-        description: The certificate creation date.
-    description: A certificate that has been transferred but not yet accepted.
-  OutgoingCertificates:
-    type: array
-    items:
-      $ref: '#/definitions/OutgoingCertificate'
-  OverrideDynamicGroups:
-    type: boolean
-  PageSize:
-    type: integer
-    minimum: 1
-    maximum: 250
-  Parameter:
-    type: string
-  Parameters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Parameter'
-        value:
-          $ref: '#/definitions/Value'
-  PartitionKey:
-    type: string
-  PayloadField:
-    type: string
-  Percentage:
-    type: integer
-    minimum: 0
-    maximum: 100
-  Platform:
-    type: string
-  Policies:
-    type: array
-    items:
-      $ref: '#/definitions/Policy'
-  Policy:
-    type: object
-    properties:
-      policyName:
-        $ref: '#/definitions/PolicyName'
-        description: The policy name.
-      policyArn:
-        $ref: '#/definitions/PolicyArn'
-        description: The policy ARN.
-    description: Describes an AWS IoT policy.
-  PolicyArn:
-    type: string
-  PolicyDocument:
-    type: string
-  PolicyDocuments:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyDocument'
-  PolicyName:
-    type: string
-    pattern: '[\w+=,.@-]+'
-    minLength: 1
-    maxLength: 128
-  PolicyNames:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyName'
-  PolicyTarget:
-    type: string
-  PolicyTargets:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyTarget'
-  PolicyVersion:
-    type: object
-    properties:
-      versionId:
-        $ref: '#/definitions/PolicyVersionId'
-        description: The policy version ID.
-      isDefaultVersion:
-        $ref: '#/definitions/IsDefaultVersion'
-        description: Specifies whether the policy version is the default.
-      createDate:
-        $ref: '#/definitions/DateType'
-        description: The date and time the policy was created.
-    description: Describes a policy version.
-  PolicyVersionId:
-    type: string
-    pattern: '[0-9]+'
-  PolicyVersionIdentifier:
-    type: object
-    properties:
-      policyName:
-        $ref: '#/definitions/PolicyName'
-        description: The name of the policy.
-      policyVersionId:
-        $ref: '#/definitions/PolicyVersionId'
-        description: The ID of the version of the policy associated with the resource.
-    description: Information about the version of the policy associated with the resource.
-  PolicyVersions:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyVersion'
-  Port:
-    type: integer
-    minimum: 0
-    maximum: 65535
-  Ports:
-    type: array
-    items:
-      $ref: '#/definitions/Port'
-  Prefix:
-    type: string
-  PresignedUrlConfig:
-    type: object
-    properties:
-      roleArn:
-        $ref: '#/definitions/RoleArn'
-        description: The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.
-      expiresInSec:
-        $ref: '#/definitions/ExpiresInSec'
-        description: 'How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the default value is 3600 seconds. Pre-signed URLs are generated when Jobs receives an MQTT request for the job document.'
-    description: Configuration for pre-signed S3 URLs.
-  Principal:
-    type: string
-  PrincipalArn:
-    type: string
-  PrincipalId:
-    type: string
-    pattern: '[a-zA-Z0-9]+'
-    minLength: 1
-    maxLength: 128
-  Principals:
-    type: array
-    items:
-      $ref: '#/definitions/PrincipalArn'
   PrivateKey:
     type: string
     minLength: 1
     format: password
-  ProcessingTargetName:
+  KeyValue:
     type: string
-  ProcessingTargetNameList:
-    type: array
-    items:
-      $ref: '#/definitions/ProcessingTargetName'
-  PublicKey:
+    maxLength: 5120
+  StreamName:
     type: string
-    minLength: 1
-  PublicKeyMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/KeyName'
-        value:
-          $ref: '#/definitions/KeyValue'
-  PutItemInput:
-    type: object
-    required:
-      - tableName
-    properties:
-      tableName:
-        $ref: '#/definitions/TableName'
-        description: The table where the message data will be written
-    description: The input for the DynamoActionVS action that specifies the DynamoDB table to which the message data will be written.
-  QueryMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 500
-  QueryString:
+  PartitionKey:
     type: string
-    minLength: 1
-  QueryVersion:
-    type: string
-  QueueUrl:
-    type: string
-  QueuedThings:
-    type: integer
-  RangeKeyField:
-    type: string
-  RangeKeyValue:
-    type: string
-  RateIncreaseCriteria:
-    type: object
-    properties:
-      numberOfNotifiedThings:
-        $ref: '#/definitions/NumberOfThings'
-        description: The threshold for number of notified things that will initiate the increase in rate of rollout.
-      numberOfSucceededThings:
-        $ref: '#/definitions/NumberOfThings'
-        description: The threshold for number of succeeded things that will initiate the increase in rate of rollout.
-    description: Allows you to define a criteria to initiate the increase in rate of rollout for a job.
-  ReasonCode:
-    type: string
-    pattern: '[\p{Upper}\p{Digit}_]+'
-    maxLength: 128
-  ReasonForNonCompliance:
-    type: string
-  ReasonForNonComplianceCode:
-    type: string
-  Recursive:
-    type: boolean
-  RecursiveWithoutDefault:
-    type: boolean
-  RegistrationCode:
-    type: string
-    pattern: '(0x)?[a-fA-F0-9]+'
-    minLength: 64
-    maxLength: 64
-  RegistrationConfig:
-    type: object
-    properties:
-      templateBody:
-        $ref: '#/definitions/TemplateBody'
-        description: The template body.
-      roleArn:
-        $ref: '#/definitions/RoleArn'
-        description: The ARN of the role.
-    description: The registration configuration.
-  RegistryMaxResults:
+  LaserMaxResults:
     type: integer
     minimum: 1
     maximum: 250
-  RegistryS3BucketName:
+  NextToken:
     type: string
-    pattern: '[a-zA-Z0-9._-]+'
-    minLength: 3
-    maxLength: 256
-  RegistryS3KeyName:
-    type: string
-    pattern: '[a-zA-Z0-9!_.*''()-\/]+'
-    minLength: 1
-    maxLength: 1024
-  RejectedThings:
+  MaxResults:
     type: integer
-  RelatedResource:
-    type: object
-    properties:
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The type of resource.
-      resourceIdentifier:
-        $ref: '#/definitions/ResourceIdentifier'
-        description: Information identifying the resource.
-      additionalInfo:
-        $ref: '#/definitions/StringMap'
-        description: Additional information about the resource.
-    description: Information about a related resource.
-  RelatedResources:
-    type: array
-    items:
-      $ref: '#/definitions/RelatedResource'
-  RemoveAutoRegistration:
+    minimum: 1
+    maximum: 250
+  Recursive:
     type: boolean
-  RemoveThingType:
-    type: boolean
-  RemovedThings:
+  Marker:
+    type: string
+    pattern: '[A-Za-z0-9+/]+={0,2}'
+  PageSize:
     type: integer
-  ReportType:
-    type: string
-    enum:
-      - ERRORS
-      - RESULTS
-  RepublishAction:
-    type: object
-    required:
-      - roleArn
-      - topic
-    properties:
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: The ARN of the IAM role that grants access.
-      topic:
-        $ref: '#/definitions/TopicPattern'
-        description: The name of the MQTT topic.
-    description: Describes an action to republish to another topic.
-  Resource:
-    type: string
-  ResourceArn:
-    type: string
-  ResourceLogicalId:
-    type: string
-  ResourceArns:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ResourceLogicalId'
-        value:
-          $ref: '#/definitions/ResourceArn'
+    minimum: 1
+    maximum: 250
   ResourceIdentifier:
     type: object
     properties:
@@ -12079,6 +12350,162 @@ definitions:
         $ref: '#/definitions/AwsAccountId'
         description: The account with which the resource is associated.
     description: Information identifying the non-compliant resource.
+  RegistryMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 250
+  QueryMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 500
+  OTAUpdatesSummary:
+    type: array
+    items:
+      $ref: '#/definitions/OTAUpdateSummary'
+  OutgoingCertificates:
+    type: array
+    items:
+      $ref: '#/definitions/OutgoingCertificate'
+  Principals:
+    type: array
+    items:
+      $ref: '#/definitions/PrincipalArn'
+  PolicyVersions:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyVersion'
+  ThingNameList:
+    type: array
+    items:
+      $ref: '#/definitions/ThingName'
+  RoleAliases:
+    type: array
+    items:
+      $ref: '#/definitions/RoleAlias'
+  ScheduledAuditMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/ScheduledAuditMetadata'
+  SecurityProfileTargetMappings:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityProfileTargetMapping'
+  SecurityProfileIdentifiers:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityProfileIdentifier'
+  StreamsSummary:
+    type: array
+    items:
+      $ref: '#/definitions/StreamSummary'
+  ResourceArn:
+    type: string
+  PolicyTargets:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyTarget'
+  SecurityProfileTargets:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityProfileTarget'
+  ThingGroupNameAndArnList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupNameAndArn'
+  RecursiveWithoutDefault:
+    type: boolean
+  ReportType:
+    type: string
+    enum:
+      - ERRORS
+      - RESULTS
+  S3FileUrlList:
+    type: array
+    items:
+      $ref: '#/definitions/S3FileUrl'
+  TaskIdList:
+    type: array
+    items:
+      $ref: '#/definitions/TaskId'
+  ThingTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/ThingTypeDefinition'
+  ThingAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/ThingAttribute'
+  Topic:
+    type: string
+  TopicRuleList:
+    type: array
+    items:
+      $ref: '#/definitions/TopicRuleListItem'
+  SkyfallMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 250
+  LogTargetConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/LogTargetConfiguration'
+  ViolationEvents:
+    type: array
+    items:
+      $ref: '#/definitions/ViolationEvent'
+  LogTarget:
+    type: object
+    required:
+      - targetType
+    properties:
+      targetType:
+        $ref: '#/definitions/LogTargetType'
+        description: The target type.
+      targetName:
+        $ref: '#/definitions/LogTargetName'
+        description: The target name.
+    description: A log target.
+  LogTargetConfiguration:
+    type: object
+    properties:
+      logTarget:
+        $ref: '#/definitions/LogTarget'
+        description: A log target
+      logLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The logging level.
+    description: The target configuration.
+  LoggingOptionsPayload:
+    type: object
+    required:
+      - roleArn
+    properties:
+      roleArn:
+        $ref: '#/definitions/AwsArn'
+        description: The ARN of the IAM role that grants access.
+      logLevel:
+        $ref: '#/definitions/LogLevel'
+        description: The log level.
+    description: Describes the logging options payload.
+  Message:
+    type: string
+    maxLength: 128
+  MessageFormat:
+    type: string
+    enum:
+      - RAW
+      - JSON
+  UnsignedLong:
+    type: integer
+    minimum: 0
+  Ports:
+    type: array
+    items:
+      $ref: '#/definitions/Port'
+  MissingContextValue:
+    type: string
+  NonCompliantChecksCount:
+    type: integer
   ResourceType:
     type: string
     enum:
@@ -12088,143 +12515,199 @@ definitions:
       - COGNITO_IDENTITY_POOL
       - CLIENT_ID
       - ACCOUNT_SETTINGS
-  Resources:
+  StringMap:
     type: array
     items:
-      $ref: '#/definitions/Resource'
-  RoleAlias:
-    type: string
-    pattern: '[\w=,@-]+'
-    minLength: 1
-    maxLength: 128
-  RoleAliasArn:
-    type: string
-  RoleAliasDescription:
-    type: object
-    properties:
-      roleAlias:
-        $ref: '#/definitions/RoleAlias'
-        description: The role alias.
-      roleAliasArn:
-        $ref: '#/definitions/RoleAliasArn'
-        description: The ARN of the role alias.
-      roleArn:
-        $ref: '#/definitions/RoleArn'
-        description: The role ARN.
-      owner:
-        $ref: '#/definitions/AwsAccountId'
-        description: The role alias owner.
-      credentialDurationSeconds:
-        $ref: '#/definitions/CredentialDurationSeconds'
-        description: The number of seconds for which the credential is valid.
-      creationDate:
-        $ref: '#/definitions/DateType'
-        description: The UNIX timestamp of when the role alias was created.
-      lastModifiedDate:
-        $ref: '#/definitions/DateType'
-        description: The UNIX timestamp of when the role alias was last modified.
-    description: Role alias description.
-  RoleAliases:
-    type: array
-    items:
-      $ref: '#/definitions/RoleAlias'
-  RoleArn:
-    type: string
-    minLength: 20
-    maxLength: 2048
-  RolloutRatePerMinute:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  NumberOfThings:
     type: integer
     minimum: 1
-    maximum: 1000
-  RuleArn:
+  OTAUpdateFileVersion:
     type: string
-  RuleName:
+  OTAUpdateFile:
+    type: object
+    properties:
+      fileName:
+        $ref: '#/definitions/FileName'
+        description: The name of the file.
+      fileVersion:
+        $ref: '#/definitions/OTAUpdateFileVersion'
+        description: The file version.
+      fileLocation:
+        $ref: '#/definitions/FileLocation'
+        description: The location of the updated firmware.
+      codeSigning:
+        $ref: '#/definitions/CodeSigning'
+        description: The code signing method of the file.
+      attributes:
+        $ref: '#/definitions/AttributesMap'
+        description: A list of name/attribute pairs.
+    description: Describes a file to be associated with an OTA update.
+  OTAUpdateSummary:
+    type: object
+    properties:
+      otaUpdateId:
+        $ref: '#/definitions/OTAUpdateId'
+        description: The OTA update ID.
+      otaUpdateArn:
+        $ref: '#/definitions/OTAUpdateArn'
+        description: The OTA update ARN.
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The date when the OTA update was created.
+    description: An OTA update summary.
+  OutgoingCertificate:
+    type: object
+    properties:
+      certificateArn:
+        $ref: '#/definitions/CertificateArn'
+        description: The certificate ARN.
+      certificateId:
+        $ref: '#/definitions/CertificateId'
+        description: The certificate ID.
+      transferredTo:
+        $ref: '#/definitions/AwsAccountId'
+        description: The AWS account to which the transfer was made.
+      transferDate:
+        $ref: '#/definitions/DateType'
+        description: The date the transfer was initiated.
+      transferMessage:
+        $ref: '#/definitions/Message'
+        description: The transfer message.
+      creationDate:
+        $ref: '#/definitions/DateType'
+        description: The certificate creation date.
+    description: A certificate that has been transferred but not yet accepted.
+  Parameter:
     type: string
-    pattern: '^[a-zA-Z0-9_]+$'
+  Parameters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Parameter'
+        value:
+          $ref: '#/definitions/Value'
+  Platform:
+    type: string
+  Policy:
+    type: object
+    properties:
+      policyName:
+        $ref: '#/definitions/PolicyName'
+        description: The policy name.
+      policyArn:
+        $ref: '#/definitions/PolicyArn'
+        description: The policy ARN.
+    description: Describes an AWS IoT policy.
+  PolicyDocuments:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyDocument'
+  PolicyNames:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyName'
+  PolicyVersion:
+    type: object
+    properties:
+      versionId:
+        $ref: '#/definitions/PolicyVersionId'
+        description: The policy version ID.
+      isDefaultVersion:
+        $ref: '#/definitions/IsDefaultVersion'
+        description: Specifies whether the policy version is the default.
+      createDate:
+        $ref: '#/definitions/DateType'
+        description: The date and time the policy was created.
+    description: Describes a policy version.
+  PolicyVersionIdentifier:
+    type: object
+    properties:
+      policyName:
+        $ref: '#/definitions/PolicyName'
+        description: The name of the policy.
+      policyVersionId:
+        $ref: '#/definitions/PolicyVersionId'
+        description: The ID of the version of the policy associated with the resource.
+    description: Information about the version of the policy associated with the resource.
+  Port:
+    type: integer
+    minimum: 0
+    maximum: 65535
+  Prefix:
+    type: string
+  PrincipalArn:
+    type: string
+  PrincipalId:
+    type: string
+    pattern: '[a-zA-Z0-9]+'
     minLength: 1
     maxLength: 128
-  S3Action:
+  ProcessingTargetName:
+    type: string
+  QueueUrl:
+    type: string
+  SetAsActiveFlag:
+    type: boolean
+  ResourceArns:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ResourceLogicalId'
+        value:
+          $ref: '#/definitions/ResourceArn'
+  RelatedResource:
     type: object
-    required:
-      - roleArn
-      - bucketName
-      - key
     properties:
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: The ARN of the IAM role that grants access.
-      bucketName:
-        $ref: '#/definitions/BucketName'
-        description: The Amazon S3 bucket.
-      key:
-        $ref: '#/definitions/Key'
-        description: The object key.
-      cannedAcl:
-        $ref: '#/definitions/CannedAccessControlList'
-        description: 'The Amazon S3 canned ACL that controls access to the object identified by the object key. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl">S3 canned ACLs</a>.'
-    description: Describes an action to write data to an Amazon S3 bucket.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of resource.
+      resourceIdentifier:
+        $ref: '#/definitions/ResourceIdentifier'
+        description: Information identifying the resource.
+      additionalInfo:
+        $ref: '#/definitions/StringMap'
+        description: Additional information about the resource.
+    description: Information about a related resource.
+  RemoveAutoRegistration:
+    type: boolean
+  RemoveThingType:
+    type: boolean
+  TopicPattern:
+    type: string
+  Resource:
+    type: string
+  ResourceLogicalId:
+    type: string
   S3Bucket:
     type: string
     minLength: 1
-  S3Destination:
-    type: object
-    properties:
-      bucket:
-        $ref: '#/definitions/S3Bucket'
-        description: The S3 bucket that contains the updated firmware.
-      prefix:
-        $ref: '#/definitions/Prefix'
-        description: The S3 prefix.
-    description: Describes the location of updated firmware in S3.
   S3FileUrl:
     type: string
     maxLength: 65535
-  S3FileUrlList:
-    type: array
-    items:
-      $ref: '#/definitions/S3FileUrl'
   S3Key:
     type: string
     minLength: 1
-  S3Location:
-    type: object
-    properties:
-      bucket:
-        $ref: '#/definitions/S3Bucket'
-        description: The S3 bucket.
-      key:
-        $ref: '#/definitions/S3Key'
-        description: The S3 key.
-      version:
-        $ref: '#/definitions/S3Version'
-        description: The S3 bucket version.
-    description: The S3 location.
   S3Version:
     type: string
   SQL:
     type: string
-  SalesforceAction:
-    type: object
-    required:
-      - token
-      - url
-    properties:
-      token:
-        $ref: '#/definitions/SalesforceToken'
-        description: The token used to authenticate access to the Salesforce IoT Cloud Input Stream. The token is available from the Salesforce IoT Cloud platform after creation of the Input Stream.
-      url:
-        $ref: '#/definitions/SalesforceEndpoint'
-        description: The URL exposed by the Salesforce IoT Cloud Input Stream. The URL is available from the Salesforce IoT Cloud platform after creation of the Input Stream.
-    description: Describes an action to write a message to a Salesforce IoT Cloud Input Stream.
+  SalesforceToken:
+    type: string
+    minLength: 40
   SalesforceEndpoint:
     type: string
     pattern: 'https://ingestion-[a-zA-Z0-9]{1,12}\.[a-zA-Z0-9]+\.((sfdc-matrix\.net)|(sfdcnow\.com))/streams/\w{1,20}/\w{1,20}/event'
     maxLength: 2000
-  SalesforceToken:
-    type: string
-    minLength: 40
-  ScheduledAuditArn:
-    type: string
   ScheduledAuditMetadata:
     type: object
     properties:
@@ -12244,27 +12727,20 @@ definitions:
         $ref: '#/definitions/DayOfWeek'
         description: The day of the week on which the scheduled audit is run (if the <code>frequency</code> is "WEEKLY" or "BIWEEKLY").
     description: Information about the scheduled audit.
-  ScheduledAuditMetadataList:
+  ThingDocumentList:
     type: array
     items:
-      $ref: '#/definitions/ScheduledAuditMetadata'
-  ScheduledAuditName:
-    type: string
-    pattern: '[a-zA-Z0-9_-]+'
-    minLength: 1
-    maxLength: 128
+      $ref: '#/definitions/ThingDocument'
+  ThingGroupDocumentList:
+    type: array
+    items:
+      $ref: '#/definitions/ThingGroupDocument'
   SearchableAttributes:
     type: array
     items:
       $ref: '#/definitions/AttributeName'
   Seconds:
     type: integer
-  SecurityProfileArn:
-    type: string
-  SecurityProfileDescription:
-    type: string
-    pattern: '[\p{Graph}\x20]*'
-    maxLength: 1000
   SecurityProfileIdentifier:
     type: object
     required:
@@ -12278,15 +12754,6 @@ definitions:
         $ref: '#/definitions/SecurityProfileArn'
         description: The ARN of the security profile.
     description: Identifying information for a Device Defender security profile.
-  SecurityProfileIdentifiers:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityProfileIdentifier'
-  SecurityProfileName:
-    type: string
-    pattern: '[a-zA-Z0-9:_-]+'
-    minLength: 1
-    maxLength: 128
   SecurityProfileTarget:
     type: object
     required:
@@ -12296,8 +12763,6 @@ definitions:
         $ref: '#/definitions/SecurityProfileTargetArn'
         description: The ARN of the security profile.
     description: A target to which an alert is sent when a security profile behavior is violated.
-  SecurityProfileTargetArn:
-    type: string
   SecurityProfileTargetMapping:
     type: object
     properties:
@@ -12308,26 +12773,6 @@ definitions:
         $ref: '#/definitions/SecurityProfileTarget'
         description: Information about the target (thing group) associated with the security profile.
     description: Information about a security profile and the target associated with it.
-  SecurityProfileTargetMappings:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityProfileTargetMapping'
-  SecurityProfileTargets:
-    type: array
-    items:
-      $ref: '#/definitions/SecurityProfileTarget'
-  SetAsActive:
-    type: boolean
-  SetAsActiveFlag:
-    type: boolean
-  SetAsDefault:
-    type: boolean
-  Signature:
-    type: string
-  SignatureAlgorithm:
-    type: string
-  SigningJobId:
-    type: string
   SigningProfileName:
     type: string
   SigningProfileParameter:
@@ -12343,101 +12788,10 @@ definitions:
         $ref: '#/definitions/CertificatePathOnDevice'
         description: The location of the code-signing certificate on your device.
     description: Describes the code-signing profile.
-  SkyfallMaxResults:
-    type: integer
-    minimum: 1
-    maximum: 250
-  SnsAction:
-    type: object
-    required:
-      - targetArn
-      - roleArn
-    properties:
-      targetArn:
-        $ref: '#/definitions/AwsArn'
-        description: The ARN of the SNS topic.
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: The ARN of the IAM role that grants access.
-      messageFormat:
-        $ref: '#/definitions/MessageFormat'
-        description: '(Optional) The message format of the message to publish. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see <a href="http://docs.aws.amazon.com/sns/latest/dg/json-formats.html">http://docs.aws.amazon.com/sns/latest/dg/json-formats.html</a> refer to their official documentation.'
-    description: Describes an action to publish to an Amazon SNS topic.
-  SqsAction:
-    type: object
-    required:
-      - roleArn
-      - queueUrl
-    properties:
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: The ARN of the IAM role that grants access.
-      queueUrl:
-        $ref: '#/definitions/QueueUrl'
-        description: The URL of the Amazon SQS queue.
-      useBase64:
-        $ref: '#/definitions/UseBase64'
-        description: Specifies whether to use Base64 encoding.
-    description: Describes an action to publish data to an Amazon SQS queue.
-  StartSigningJobParameter:
-    type: object
-    properties:
-      signingProfileParameter:
-        $ref: '#/definitions/SigningProfileParameter'
-        description: Describes the code-signing profile.
-      signingProfileName:
-        $ref: '#/definitions/SigningProfileName'
-        description: The code-signing profile name.
-      destination:
-        $ref: '#/definitions/Destination'
-        description: The location to write the code-signed file.
-    description: Information required to start a signing job.
+  UseBase64:
+    type: boolean
   StateMachineName:
     type: string
-  StateReason:
-    type: string
-  StateValue:
-    type: string
-  Status:
-    type: string
-    enum:
-      - InProgress
-      - Completed
-      - Failed
-      - Cancelled
-      - Cancelling
-  StepFunctionsAction:
-    type: object
-    required:
-      - stateMachineName
-      - roleArn
-    properties:
-      executionNamePrefix:
-        $ref: '#/definitions/ExecutionNamePrefix'
-        description: (Optional) A name will be given to the state machine execution consisting of this prefix followed by a UUID. Step Functions automatically creates a unique name for each state machine execution if one is not provided.
-      stateMachineName:
-        $ref: '#/definitions/StateMachineName'
-        description: The name of the Step Functions state machine whose execution will be started.
-      roleArn:
-        $ref: '#/definitions/AwsArn'
-        description: 'The ARN of the role that grants IoT permission to start execution of a state machine ("Action":"states:StartExecution").'
-    description: Starts execution of a Step Functions state machine.
-  Stream:
-    type: object
-    properties:
-      streamId:
-        $ref: '#/definitions/StreamId'
-        description: The stream ID.
-      fileId:
-        $ref: '#/definitions/FileId'
-        description: The ID of a file associated with a stream.
-    description: Describes a group of files that can be streamed.
-  StreamArn:
-    type: string
-  StreamDescription:
-    type: string
-    pattern: '[^\p{C}]+'
-    maxLength: 2028
   StreamFile:
     type: object
     properties:
@@ -12448,47 +12802,6 @@ definitions:
         $ref: '#/definitions/S3Location'
         description: The location of the file in S3.
     description: Represents a file to stream.
-  StreamFiles:
-    type: array
-    items:
-      $ref: '#/definitions/StreamFile'
-    minItems: 1
-    maxItems: 50
-  StreamId:
-    type: string
-    pattern: '[a-zA-Z0-9_-]+'
-    minLength: 1
-    maxLength: 128
-  StreamInfo:
-    type: object
-    properties:
-      streamId:
-        $ref: '#/definitions/StreamId'
-        description: The stream ID.
-      streamArn:
-        $ref: '#/definitions/StreamArn'
-        description: The stream ARN.
-      streamVersion:
-        $ref: '#/definitions/StreamVersion'
-        description: The stream version.
-      description:
-        $ref: '#/definitions/StreamDescription'
-        description: The description of the stream.
-      files:
-        $ref: '#/definitions/StreamFiles'
-        description: The files to stream.
-      createdAt:
-        $ref: '#/definitions/DateType'
-        description: The date when the stream was created.
-      lastUpdatedAt:
-        $ref: '#/definitions/DateType'
-        description: The date when the stream was last updated.
-      roleArn:
-        $ref: '#/definitions/RoleArn'
-        description: An IAM role AWS IoT assumes to access your S3 files.
-    description: Information about a stream.
-  StreamName:
-    type: string
   StreamSummary:
     type: object
     properties:
@@ -12505,28 +12818,9 @@ definitions:
         $ref: '#/definitions/StreamDescription'
         description: A description of the stream.
     description: A summary of a stream.
-  StreamVersion:
-    type: integer
-    minimum: 0
-    maximum: 65535
-  StreamsSummary:
-    type: array
-    items:
-      $ref: '#/definitions/StreamSummary'
-  String:
+  TagKey:
     type: string
-  StringMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  SucceededThings:
-    type: integer
-  TableName:
+  TagValue:
     type: string
   Tag:
     type: object
@@ -12538,72 +12832,25 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The tag's value.
     description: A set of key/value pairs that are used to manage the resource.
-  TagKey:
-    type: string
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValue:
-    type: string
   Target:
     type: string
-  TargetArn:
+  TotalChecksCount:
+    type: integer
+  WaitingForDataCollectionChecksCount:
+    type: integer
+  Token:
     type: string
-  TargetAuditCheckNames:
-    type: array
-    items:
-      $ref: '#/definitions/AuditCheckName'
-  TargetSelection:
+    minLength: 1
+    maxLength: 6144
+  TokenSignature:
     type: string
-    enum:
-      - CONTINUOUS
-      - SNAPSHOT
-  Targets:
-    type: array
-    items:
-      $ref: '#/definitions/Target'
-    minItems: 1
-  TaskId:
-    type: string
-    maxLength: 40
-  TaskIdList:
-    type: array
-    items:
-      $ref: '#/definitions/TaskId'
-  TaskStatistics:
-    type: object
-    properties:
-      totalChecks:
-        $ref: '#/definitions/TotalChecksCount'
-        description: The number of checks in this audit.
-      inProgressChecks:
-        $ref: '#/definitions/InProgressChecksCount'
-        description: The number of checks in progress.
-      waitingForDataCollectionChecks:
-        $ref: '#/definitions/WaitingForDataCollectionChecksCount'
-        description: The number of checks waiting for data collection.
-      compliantChecks:
-        $ref: '#/definitions/CompliantChecksCount'
-        description: The number of checks that found compliant resources.
-      nonCompliantChecks:
-        $ref: '#/definitions/NonCompliantChecksCount'
-        description: The number of checks that found non-compliant resources.
-      failedChecks:
-        $ref: '#/definitions/FailedChecksCount'
-        description: 'The number of checks '
-      canceledChecks:
-        $ref: '#/definitions/CanceledChecksCount'
-        description: The number of checks that did not run because the audit was canceled.
-    description: Statistics for the checks performed during the audit.
-  TemplateBody:
-    type: string
-  ThingArn:
-    type: string
+    pattern: '[A-Za-z0-9+/]+={0,2}'
+    minLength: 1
+    maxLength: 2560
   ThingAttribute:
     type: object
     properties:
@@ -12623,10 +12870,6 @@ definitions:
         $ref: '#/definitions/Version'
         description: The version of the thing record in the registry.
     description: 'The properties of the thing, including thing name, thing type name, and a list of thing attributes.'
-  ThingAttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/ThingAttribute'
   ThingConnectivity:
     type: object
     properties:
@@ -12642,6 +12885,10 @@ definitions:
     enum:
       - 'OFF'
       - STATUS
+  ThingGroupNameList:
+    type: array
+    items:
+      $ref: '#/definitions/ThingGroupName'
   ThingDocument:
     type: object
     properties:
@@ -12667,12 +12914,6 @@ definitions:
         $ref: '#/definitions/ThingConnectivity'
         description: Indicates whether or not the thing is connected to the AWS IoT service.
     description: The thing search index document.
-  ThingDocumentList:
-    type: array
-    items:
-      $ref: '#/definitions/ThingDocument'
-  ThingGroupArn:
-    type: string
   ThingGroupDescription:
     type: string
     pattern: '[\p{Graph}\x20]*'
@@ -12696,24 +12937,6 @@ definitions:
         $ref: '#/definitions/ThingGroupNameList'
         description: Parent group names.
     description: The thing group search index document.
-  ThingGroupDocumentList:
-    type: array
-    items:
-      $ref: '#/definitions/ThingGroupDocument'
-  ThingGroupId:
-    type: string
-    pattern: '[a-zA-Z0-9\-]+'
-    minLength: 1
-    maxLength: 128
-  ThingGroupIndexingConfiguration:
-    type: object
-    required:
-      - thingGroupIndexingMode
-    properties:
-      thingGroupIndexingMode:
-        $ref: '#/definitions/ThingGroupIndexingMode'
-        description: Thing group indexing mode.
-    description: Thing group indexing configuration.
   ThingGroupIndexingMode:
     type: string
     enum:
@@ -12723,73 +12946,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ThingGroupName'
-  ThingGroupMetadata:
-    type: object
-    properties:
-      parentGroupName:
-        $ref: '#/definitions/ThingGroupName'
-        description: The parent thing group name.
-      rootToParentThingGroups:
-        $ref: '#/definitions/ThingGroupNameAndArnList'
-        description: The root parent thing group.
-      creationDate:
-        $ref: '#/definitions/CreationDate'
-        description: The UNIX timestamp of when the thing group was created.
-    description: Thing group metadata.
-  ThingGroupName:
-    type: string
-    pattern: '[a-zA-Z0-9:_-]+'
-    minLength: 1
-    maxLength: 128
-  ThingGroupNameAndArnList:
-    type: array
-    items:
-      $ref: '#/definitions/GroupNameAndArn'
-  ThingGroupNameList:
-    type: array
-    items:
-      $ref: '#/definitions/ThingGroupName'
-  ThingGroupProperties:
-    type: object
-    properties:
-      thingGroupDescription:
-        $ref: '#/definitions/ThingGroupDescription'
-        description: The thing group description.
-      attributePayload:
-        $ref: '#/definitions/AttributePayload'
-        description: The thing group attributes in JSON format.
-    description: Thing group properties.
-  ThingId:
-    type: string
-  ThingIndexingConfiguration:
-    type: object
-    required:
-      - thingIndexingMode
-    properties:
-      thingIndexingMode:
-        $ref: '#/definitions/ThingIndexingMode'
-        description: '<p>Thing indexing mode. Valid values are:</p> <ul> <li> <p>REGISTRY – Your thing index will contain only registry data.</p> </li> <li> <p>REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.</p> </li> <li> <p>OFF - Thing indexing is disabled.</p> </li> </ul>'
-      thingConnectivityIndexingMode:
-        $ref: '#/definitions/ThingConnectivityIndexingMode'
-        description: '<p>Thing connectivity indexing mode. Valid values are: </p> <ul> <li> <p>STATUS – Your thing index will contain connectivity status. In order to enable thing connectivity indexing, thingIndexMode must not be set to OFF.</p> </li> <li> <p>OFF - Thing connectivity status indexing is disabled.</p> </li> </ul>'
-    description: 'The thing indexing configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html">Managing Thing Indexing</a>.'
   ThingIndexingMode:
     type: string
     enum:
       - 'OFF'
       - REGISTRY
       - REGISTRY_AND_SHADOW
-  ThingName:
-    type: string
-    pattern: '[a-zA-Z0-9:_-]+'
-    minLength: 1
-    maxLength: 128
-  ThingNameList:
-    type: array
-    items:
-      $ref: '#/definitions/ThingName'
-  ThingTypeArn:
-    type: string
   ThingTypeDefinition:
     type: object
     properties:
@@ -12810,99 +12972,6 @@ definitions:
     type: string
     pattern: '[\p{Graph}\x20]*'
     maxLength: 2028
-  ThingTypeId:
-    type: string
-  ThingTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/ThingTypeDefinition'
-  ThingTypeMetadata:
-    type: object
-    properties:
-      deprecationDate:
-        $ref: '#/definitions/DeprecationDate'
-        description: The date and time when the thing type was deprecated.
-      creationDate:
-        $ref: '#/definitions/CreationDate'
-        description: The date and time when the thing type was created.
-    description: 'The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when time was deprecated.'
-  ThingTypeName:
-    type: string
-    pattern: '[a-zA-Z0-9:_-]+'
-    minLength: 1
-    maxLength: 128
-  ThingTypeProperties:
-    type: object
-    properties:
-      thingTypeDescription:
-        $ref: '#/definitions/ThingTypeDescription'
-        description: The description of the thing type.
-      searchableAttributes:
-        $ref: '#/definitions/SearchableAttributes'
-        description: A list of searchable thing attribute names.
-    description: 'The ThingTypeProperties contains information about the thing type including: a thing type description, and a list of searchable thing attribute names.'
-  TimedOutThings:
-    type: integer
-  TimeoutConfig:
-    type: object
-    properties:
-      inProgressTimeoutInMinutes:
-        $ref: '#/definitions/InProgressTimeoutInMinutes'
-        description: 'Specifies the amount of time, in minutes, this device has to finish execution of this job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress timer can''t be updated and will apply to all job executions for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and switch to the terminal <code>TIMED_OUT</code> status.'
-    description: 'Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.'
-  Timestamp:
-    type: string
-    format: date-time
-  Token:
-    type: string
-    minLength: 1
-    maxLength: 6144
-  TokenKeyName:
-    type: string
-    pattern: '[a-zA-Z0-9_-]+'
-    minLength: 1
-    maxLength: 128
-  TokenSignature:
-    type: string
-    pattern: '[A-Za-z0-9+/]+={0,2}'
-    minLength: 1
-    maxLength: 2560
-  Topic:
-    type: string
-  TopicPattern:
-    type: string
-  TopicRule:
-    type: object
-    properties:
-      ruleName:
-        $ref: '#/definitions/RuleName'
-        description: The name of the rule.
-      sql:
-        $ref: '#/definitions/SQL'
-        description: 'The SQL statement used to query the topic. When using a SQL query with multiple lines, be sure to escape the newline characters.'
-      description:
-        $ref: '#/definitions/Description'
-        description: The description of the rule.
-      createdAt:
-        $ref: '#/definitions/CreatedAtDate'
-        description: The date and time the rule was created.
-      actions:
-        $ref: '#/definitions/ActionList'
-        description: The actions associated with the rule.
-      ruleDisabled:
-        $ref: '#/definitions/IsDisabled'
-        description: Specifies whether the rule is disabled.
-      awsIotSqlVersion:
-        $ref: '#/definitions/AwsIotSqlVersion'
-        description: The version of the SQL rules engine to use when evaluating the rule.
-      errorAction:
-        $ref: '#/definitions/Action'
-        description: The action to perform when an error occurs.
-    description: Describes a rule.
-  TopicRuleList:
-    type: array
-    items:
-      $ref: '#/definitions/TopicRuleListItem'
   TopicRuleListItem:
     type: object
     properties:
@@ -12922,63 +12991,12 @@ definitions:
         $ref: '#/definitions/IsDisabled'
         description: Specifies whether the rule is disabled.
     description: Describes a rule.
-  TopicRulePayload:
-    type: object
-    required:
-      - sql
-      - actions
-    properties:
-      sql:
-        $ref: '#/definitions/SQL'
-        description: 'The SQL statement used to query the topic. For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.'
-      description:
-        $ref: '#/definitions/Description'
-        description: The description of the rule.
-      actions:
-        $ref: '#/definitions/ActionList'
-        description: The actions associated with the rule.
-      ruleDisabled:
-        $ref: '#/definitions/IsDisabled'
-        description: Specifies whether the rule is disabled.
-      awsIotSqlVersion:
-        $ref: '#/definitions/AwsIotSqlVersion'
-        description: The version of the SQL rules engine to use when evaluating the rule.
-      errorAction:
-        $ref: '#/definitions/Action'
-        description: The action to take when an error occurs.
-    description: Describes a rule.
-  TotalChecksCount:
-    type: integer
-  TotalResourcesCount:
-    type: integer
-  TransferData:
-    type: object
-    properties:
-      transferMessage:
-        $ref: '#/definitions/Message'
-        description: The transfer message.
-      rejectReason:
-        $ref: '#/definitions/Message'
-        description: The reason why the transfer was rejected.
-      transferDate:
-        $ref: '#/definitions/DateType'
-        description: The date the transfer took place.
-      acceptDate:
-        $ref: '#/definitions/DateType'
-        description: The date the transfer was accepted.
-      rejectDate:
-        $ref: '#/definitions/DateType'
-        description: The date the transfer was rejected.
-    description: Data used to transfer a certificate to an AWS account.
-  UndoDeprecate:
-    type: boolean
-  UnsignedLong:
-    type: integer
-    minimum: 0
-  UseBase64:
-    type: boolean
   Valid:
     type: boolean
+  ValidationErrors:
+    type: array
+    items:
+      $ref: '#/definitions/ValidationError'
   ValidationError:
     type: object
     properties:
@@ -12986,14 +13004,12 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
         description: The description of an error found in the behaviors.
     description: Information about an error found in a behavior specification.
-  ValidationErrors:
-    type: array
-    items:
-      $ref: '#/definitions/ValidationError'
-  Version:
-    type: integer
-  VersionNumber:
-    type: integer
+  ViolationEventType:
+    type: string
+    enum:
+      - in-alarm
+      - alarm-cleared
+      - alarm-invalidated
   ViolationEvent:
     type: object
     properties:
@@ -13019,20 +13035,3 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The time the violation event occurred.
     description: Information about a Device Defender security profile behavior violation.
-  ViolationEventType:
-    type: string
-    enum:
-      - in-alarm
-      - alarm-cleared
-      - alarm-invalidated
-  ViolationEvents:
-    type: array
-    items:
-      $ref: '#/definitions/ViolationEvent'
-  ViolationId:
-    type: string
-    pattern: '[a-zA-Z0-9\-]+'
-    minLength: 1
-    maxLength: 128
-  WaitingForDataCollectionChecksCount:
-    type: integer

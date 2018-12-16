@@ -419,25 +419,26 @@ definitions:
     description: Contains input to the ResolveCustomer operation.
   InvalidTokenException: {}
   ExpiredTokenException: {}
-  undefined: {}
+  UsageRecordList:
+    type: array
+    items:
+      $ref: '#/definitions/UsageRecord'
+    minItems: 0
+    maxItems: 25
+  ProductCode:
+    type: string
+    minLength: 1
+    maxLength: 255
+  UsageRecordResultList:
+    type: array
+    items:
+      $ref: '#/definitions/UsageRecordResult'
   Boolean:
     type: boolean
   CustomerIdentifier:
     type: string
     minLength: 1
     maxLength: 255
-  NonEmptyString:
-    type: string
-    pattern: \S+
-  Nonce:
-    type: string
-    maxLength: 255
-  ProductCode:
-    type: string
-    minLength: 1
-    maxLength: 255
-  String:
-    type: string
   Timestamp:
     type: string
     format: date-time
@@ -449,6 +450,17 @@ definitions:
     type: integer
     minimum: 0
     maximum: 1000000
+  String:
+    type: string
+  NonEmptyString:
+    type: string
+    pattern: \S+
+  Nonce:
+    type: string
+    maxLength: 255
+  VersionInteger:
+    type: integer
+    minimum: 1
   UsageRecord:
     type: object
     required:
@@ -470,12 +482,12 @@ definitions:
         $ref: '#/definitions/UsageQuantity'
         description: The quantity of usage consumed by the customer for the given dimension and time.
     description: '<p>A UsageRecord indicates a quantity of usage for a given product, customer, dimension and time.</p> <p>Multiple requests with the same UsageRecords as input will be deduplicated to prevent double charges.</p>'
-  UsageRecordList:
-    type: array
-    items:
-      $ref: '#/definitions/UsageRecord'
-    minItems: 0
-    maxItems: 25
+  UsageRecordResultStatus:
+    type: string
+    enum:
+      - Success
+      - CustomerNotSubscribed
+      - DuplicateRecord
   UsageRecordResult:
     type: object
     properties:
@@ -489,16 +501,3 @@ definitions:
         $ref: '#/definitions/UsageRecordResultStatus'
         description: '<p>The UsageRecordResult Status indicates the status of an individual UsageRecord processed by BatchMeterUsage.</p> <ul> <li> <p> <i>Success</i>- The UsageRecord was accepted and honored by BatchMeterUsage.</p> </li> <li> <p> <i>CustomerNotSubscribed</i>- The CustomerIdentifier specified is not subscribed to your product. The UsageRecord was not honored. Future UsageRecords for this customer will fail until the customer subscribes to your product.</p> </li> <li> <p> <i>DuplicateRecord</i>- Indicates that the UsageRecord was invalid and not honored. A previously metered UsageRecord had the same customer, dimension, and time, but a different quantity.</p> </li> </ul>'
     description: A UsageRecordResult indicates the status of a given UsageRecord processed by BatchMeterUsage.
-  UsageRecordResultList:
-    type: array
-    items:
-      $ref: '#/definitions/UsageRecordResult'
-  UsageRecordResultStatus:
-    type: string
-    enum:
-      - Success
-      - CustomerNotSubscribed
-      - DuplicateRecord
-  VersionInteger:
-    type: integer
-    minimum: 1

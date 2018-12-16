@@ -1203,10 +1203,53 @@ definitions:
     type: string
     minLength: 20
     maxLength: 1600
-  undefined: {}
+  IdentityProviderDetails:
+    type: object
+    properties:
+      Url:
+        $ref: '#/definitions/Url'
+        description: The <code>IdentityProviderDetail</code> parameter contains the location of the service endpoint used to authenticate users.
+      InvocationRole:
+        $ref: '#/definitions/Role'
+        description: The <code>Role</code> parameter provides the type of <code>InvocationRole</code> used to authenticate the user account.
+    description: Returns information related to the type of user authentication that is in use for a server's users. A server can only have one method of authentication.
+  IdentityProviderType:
+    type: string
+    enum:
+      - SERVICE_MANAGED
+      - API_GATEWAY
+    description: 'Returns information related to the type of user authentication that is in use for a server''s users. For <code>SERVICE_MANAGED</code> authentication, the Secure Shell (SSH) public keys are stored with a user on an SFTP server instance. For <code>API_GATEWAY</code> authentication, your custom authentication method is implemented by using an API call. A server can only have one method of authentication.'
+  Role:
+    type: string
+    pattern: 'arn:.*role/.*'
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+    maxItems: 50
+  ServerId:
+    type: string
+    pattern: '^s-([0-9a-f]{17})$'
+  HomeDirectory:
+    type: string
+    pattern: ^$|/.*
+    maxLength: 1024
+  Policy:
+    type: string
+  SshPublicKeyBody:
+    type: string
+    pattern: '^ssh-rsa\s+[A-Za-z0-9+/]+[=]{0,3}(\s+.+)?\s*$'
+    maxLength: 2048
+  UserName:
+    type: string
+    pattern: '^[a-z0-9]{3,32}$'
   DateImported:
     type: string
     format: date-time
+  SshPublicKeyId:
+    type: string
+    pattern: '^key-[0-9a-f]{17}$'
   DescribedServer:
     type: object
     required:
@@ -1264,26 +1307,41 @@ definitions:
         $ref: '#/definitions/UserName'
         description: This property is the name of the user that was requested to be described. User names are used for authentication purposes. This is the string that will be used by your user when they log in to your SFTP server.
     description: Returns properties of the user that you wish to describe.
-  HomeDirectory:
-    type: string
-    pattern: ^$|/.*
-    maxLength: 1024
-  IdentityProviderDetails:
-    type: object
-    properties:
-      Url:
-        $ref: '#/definitions/Url'
-        description: The <code>IdentityProviderDetail</code> parameter contains the location of the service endpoint used to authenticate users.
-      InvocationRole:
-        $ref: '#/definitions/Role'
-        description: The <code>Role</code> parameter provides the type of <code>InvocationRole</code> used to authenticate the user account.
-    description: Returns information related to the type of user authentication that is in use for a server's users. A server can only have one method of authentication.
-  IdentityProviderType:
+  State:
     type: string
     enum:
-      - SERVICE_MANAGED
-      - API_GATEWAY
-    description: 'Returns information related to the type of user authentication that is in use for a server''s users. For <code>SERVICE_MANAGED</code> authentication, the Secure Shell (SSH) public keys are stored with a user on an SFTP server instance. For <code>API_GATEWAY</code> authentication, your custom authentication method is implemented by using an API call. A server can only have one method of authentication.'
+      - OFFLINE
+      - ONLINE
+      - STARTING
+      - STOPPING
+      - START_FAILED
+      - STOP_FAILED
+    description: '<p>Describes the condition of the SFTP server with respect to its ability to perform file operations. There are six possible states: <code>OFFLINE</code>, <code>ONLINE</code>, <code>STARTING</code>, <code>STOPPING</code>, <code>START_FAILED</code>, and <code>STOP_FAILED</code>.</p> <p> <code>OFFLINE</code> indicates that the SFTP server exists, but that it is not available for file operations. <code>ONLINE</code> indicates that the SFTP server is available to perform file operations. <code>STARTING</code> indicates that the SFTP server''s was instantiated, but the server is not yet available to perform file operations. Under normal conditions, it can take a couple of minutes for an SFTP server to be completely operational. Both <code>START_FAILED</code> and <code>STOP_FAILED</code> are error conditions.</p>'
+  UserCount:
+    type: integer
+  SshPublicKeys:
+    type: array
+    items:
+      $ref: '#/definitions/SshPublicKey'
+    maxItems: 5
+  Url:
+    type: string
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 1000
+  NextToken:
+    type: string
+    minLength: 1
+    maxLength: 256
+  ListedServers:
+    type: array
+    items:
+      $ref: '#/definitions/ListedServer'
+  ListedUsers:
+    type: array
+    items:
+      $ref: '#/definitions/ListedUser'
   ListedServer:
     type: object
     required:
@@ -1308,10 +1366,8 @@ definitions:
         $ref: '#/definitions/UserCount'
         description: This property is a numeric value that indicates the number of users that are assigned to the SFTP server you specified with the <code>ServerId</code>.
     description: Returns properties of the server that was specified.
-  ListedServers:
-    type: array
-    items:
-      $ref: '#/definitions/ListedServer'
+  SshPublicKeyCount:
+    type: integer
   ListedUser:
     type: object
     required:
@@ -1333,31 +1389,11 @@ definitions:
         $ref: '#/definitions/UserName'
         description: The name of the user whose ARN was specified. User names are used for authentication purposes.
     description: Returns properties of the user that you specify.
-  ListedUsers:
-    type: array
-    items:
-      $ref: '#/definitions/ListedUser'
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 1000
   Message:
     type: string
-  NextToken:
-    type: string
-    minLength: 1
-    maxLength: 256
   NullableRole:
     type: string
     pattern: '^$|arn:.*role/.*'
-  Policy:
-    type: string
-  Role:
-    type: string
-    pattern: 'arn:.*role/.*'
-  ServerId:
-    type: string
-    pattern: '^s-([0-9a-f]{17})$'
   SshPublicKey:
     type: object
     required:
@@ -1375,32 +1411,12 @@ definitions:
         $ref: '#/definitions/SshPublicKeyId'
         description: The <code>SshPublicKeyId</code> parameter contains the identifier of the public key.
     description: 'Provides information about the public Secure Shell (SSH) key that is associated with a user account for a specific server (as identified by <code>ServerId</code>). The information returned includes the date the key was imported, the public key contents, and the public key ID. A user can store more than one SSH public key associated with their user name on a specific SFTP server.'
-  SshPublicKeyBody:
-    type: string
-    pattern: '^ssh-rsa\s+[A-Za-z0-9+/]+[=]{0,3}(\s+.+)?\s*$'
-    maxLength: 2048
-  SshPublicKeyCount:
-    type: integer
-  SshPublicKeyId:
-    type: string
-    pattern: '^key-[0-9a-f]{17}$'
-  SshPublicKeys:
-    type: array
-    items:
-      $ref: '#/definitions/SshPublicKey'
-    maxItems: 5
-  State:
-    type: string
-    enum:
-      - OFFLINE
-      - ONLINE
-      - STARTING
-      - STOPPING
-      - START_FAILED
-      - STOP_FAILED
-    description: '<p>Describes the condition of the SFTP server with respect to its ability to perform file operations. There are six possible states: <code>OFFLINE</code>, <code>ONLINE</code>, <code>STARTING</code>, <code>STOPPING</code>, <code>START_FAILED</code>, and <code>STOP_FAILED</code>.</p> <p> <code>OFFLINE</code> indicates that the SFTP server exists, but that it is not available for file operations. <code>ONLINE</code> indicates that the SFTP server is available to perform file operations. <code>STARTING</code> indicates that the SFTP server''s was instantiated, but the server is not yet available to perform file operations. Under normal conditions, it can take a couple of minutes for an SFTP server to be completely operational. Both <code>START_FAILED</code> and <code>STOP_FAILED</code> are error conditions.</p>'
   StatusCode:
     type: integer
+  TagKey:
+    type: string
+  TagValue:
+    type: string
   Tag:
     type: object
     required:
@@ -1414,28 +1430,11 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: This property contains one or more values that you assigned to the key name you create.
     description: 'Creates a key-value pair for a specific resource. Tags are metadata that you can use to search for and group a resource for various purposes. You can apply tags to servers, users, and roles. A tag key can take more than one value. For example, to group servers for accounting purposes, you might create a tag called <code>Group</code> and assign the values <code>Research</code> and <code>Accounting</code> to that group.'
-  TagKey:
-    type: string
   TagKeys:
     type: array
     items:
       $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 50
-  TagValue:
-    type: string
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-    maxItems: 50
-  Url:
-    type: string
-  UserCount:
-    type: integer
-  UserName:
-    type: string
-    pattern: '^[a-z0-9]{3,32}$'
   UserPassword:
     type: string

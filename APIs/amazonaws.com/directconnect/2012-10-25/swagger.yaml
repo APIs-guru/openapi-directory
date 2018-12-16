@@ -2492,8 +2492,87 @@ definitions:
     enum:
       - ipv4
       - ipv6
-  undefined: {}
+  Bandwidth:
+    type: string
+  ConnectionName:
+    type: string
+  OwnerAccount:
+    type: string
+  InterconnectId:
+    type: string
+  VLAN:
+    type: integer
+  ConnectionId:
+    type: string
+  NewPrivateVirtualInterfaceAllocation:
+    type: object
+    required:
+      - virtualInterfaceName
+      - vlan
+      - asn
+    properties:
+      virtualInterfaceName:
+        $ref: '#/definitions/VirtualInterfaceName'
+        description: The name of the virtual interface assigned by the customer network.
+      vlan:
+        $ref: '#/definitions/VLAN'
+        description: The ID of the VLAN.
+      asn:
+        $ref: '#/definitions/ASN'
+        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+      mtu:
+        $ref: '#/definitions/MTU'
+        description: 'The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.'
+      authKey:
+        $ref: '#/definitions/BGPAuthKey'
+        description: The authentication key for BGP configuration.
+      amazonAddress:
+        $ref: '#/definitions/AmazonAddress'
+        description: The IP address assigned to the Amazon interface.
+      addressFamily:
+        $ref: '#/definitions/AddressFamily'
+        description: The address family for the BGP peer.
+      customerAddress:
+        $ref: '#/definitions/CustomerAddress'
+        description: The IP address assigned to the customer interface.
+    description: Information about a private virtual interface to be provisioned on a connection.
+  NewPublicVirtualInterfaceAllocation:
+    type: object
+    required:
+      - virtualInterfaceName
+      - vlan
+      - asn
+    properties:
+      virtualInterfaceName:
+        $ref: '#/definitions/VirtualInterfaceName'
+        description: The name of the virtual interface assigned by the customer network.
+      vlan:
+        $ref: '#/definitions/VLAN'
+        description: The ID of the VLAN.
+      asn:
+        $ref: '#/definitions/ASN'
+        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+      authKey:
+        $ref: '#/definitions/BGPAuthKey'
+        description: The authentication key for BGP configuration.
+      amazonAddress:
+        $ref: '#/definitions/AmazonAddress'
+        description: The IP address assigned to the Amazon interface.
+      customerAddress:
+        $ref: '#/definitions/CustomerAddress'
+        description: The IP address assigned to the customer interface.
+      addressFamily:
+        $ref: '#/definitions/AddressFamily'
+        description: The address family for the BGP peer.
+      routeFilterPrefixes:
+        $ref: '#/definitions/RouteFilterPrefixList'
+        description: The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.
+    description: Information about a public virtual interface to be provisioned on a connection.
   AmazonAddress:
+    type: string
+  LagId:
+    type: string
+  VirtualInterfaceId:
     type: string
   AwsDevice:
     type: string
@@ -2501,6 +2580,23 @@ definitions:
     type: string
   BGPAuthKey:
     type: string
+  BGPPeerId:
+    type: string
+  CustomerAddress:
+    type: string
+  BGPPeerState:
+    type: string
+    enum:
+      - verifying
+      - pending
+      - available
+      - deleting
+      - deleted
+  BGPStatus:
+    type: string
+    enum:
+      - up
+      - down
   BGPPeer:
     type: object
     properties:
@@ -2532,38 +2628,13 @@ definitions:
         $ref: '#/definitions/AwsDeviceV2'
         description: The Direct Connect endpoint on which the BGP peer terminates.
     description: Information about a BGP peer.
-  BGPPeerId:
-    type: string
   BGPPeerList:
     type: array
     items:
       $ref: '#/definitions/BGPPeer'
-  BGPPeerState:
-    type: string
-    enum:
-      - verifying
-      - pending
-      - available
-      - deleting
-      - deleted
-  BGPStatus:
-    type: string
-    enum:
-      - up
-      - down
-  Bandwidth:
-    type: string
   BooleanFlag:
     type: boolean
   CIDR:
-    type: string
-  ConnectionId:
-    type: string
-  ConnectionList:
-    type: array
-    items:
-      $ref: '#/definitions/Connection'
-  ConnectionName:
     type: string
   ConnectionState:
     type: string
@@ -2576,32 +2647,63 @@ definitions:
       - deleting
       - deleted
       - rejected
+  VirtualGatewayId:
+    type: string
+  DirectConnectGatewayId:
+    type: string
+  VirtualInterfaceState:
+    type: string
+    enum:
+      - confirming
+      - verifying
+      - pending
+      - available
+      - down
+      - deleting
+      - deleted
+      - rejected
+  Region:
+    type: string
+  LocationCode:
+    type: string
+  PartnerName:
+    type: string
+  LoaIssueTime:
+    type: string
+    format: date-time
+  JumboFrameCapable:
+    type: boolean
+  HasLogicalRedundancy:
+    type: string
+    enum:
+      - unknown
+      - 'yes'
+      - 'no'
+  ConnectionList:
+    type: array
+    items:
+      $ref: '#/definitions/Connection'
   Count:
     type: integer
-  CustomerAddress:
-    type: string
-  DirectConnectGateway:
+  NewBGPPeer:
     type: object
     properties:
-      directConnectGatewayId:
-        $ref: '#/definitions/DirectConnectGatewayId'
-        description: The ID of the Direct Connect gateway.
-      directConnectGatewayName:
-        $ref: '#/definitions/DirectConnectGatewayName'
-        description: The name of the Direct Connect gateway.
-      amazonSideAsn:
-        $ref: '#/definitions/LongAsn'
-        description: The autonomous system number (ASN) for the Amazon side of the connection.
-      ownerAccount:
-        $ref: '#/definitions/OwnerAccount'
-        description: The ID of the AWS account that owns the Direct Connect gateway.
-      directConnectGatewayState:
-        $ref: '#/definitions/DirectConnectGatewayState'
-        description: '<p>The state of the Direct Connect gateway. The following are the possible values:</p> <ul> <li> <p> <code>pending</code>: The initial state after calling <a>CreateDirectConnectGateway</a>.</p> </li> <li> <p> <code>available</code>: The Direct Connect gateway is ready for use.</p> </li> <li> <p> <code>deleting</code>: The initial state after calling <a>DeleteDirectConnectGateway</a>.</p> </li> <li> <p> <code>deleted</code>: The Direct Connect gateway is deleted and cannot pass traffic.</p> </li> </ul>'
-      stateChangeError:
-        $ref: '#/definitions/StateChangeError'
-        description: The error message if the state of an object failed to advance.
-    description: 'Information about a Direct Connect gateway, which enables you to connect virtual interfaces and virtual private gateways.'
+      asn:
+        $ref: '#/definitions/ASN'
+        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+      authKey:
+        $ref: '#/definitions/BGPAuthKey'
+        description: The authentication key for BGP configuration.
+      addressFamily:
+        $ref: '#/definitions/AddressFamily'
+        description: The address family for the BGP peer.
+      amazonAddress:
+        $ref: '#/definitions/AmazonAddress'
+        description: The IP address assigned to the Amazon interface.
+      customerAddress:
+        $ref: '#/definitions/CustomerAddress'
+        description: The IP address assigned to the customer interface.
+    description: Information about a new BGP peer.
   DirectConnectGatewayAssociation:
     type: object
     properties:
@@ -2624,159 +2726,36 @@ definitions:
         $ref: '#/definitions/StateChangeError'
         description: The error message if the state of an object failed to advance.
     description: Information about an association between a Direct Connect gateway and a virtual private gateway.
-  DirectConnectGatewayAssociationList:
-    type: array
-    items:
-      $ref: '#/definitions/DirectConnectGatewayAssociation'
-  DirectConnectGatewayAssociationState:
+  DirectConnectGatewayName:
     type: string
-    enum:
-      - associating
-      - associated
-      - disassociating
-      - disassociated
-  DirectConnectGatewayAttachment:
+  LongAsn:
+    type: integer
+  DirectConnectGateway:
     type: object
     properties:
       directConnectGatewayId:
         $ref: '#/definitions/DirectConnectGatewayId'
         description: The ID of the Direct Connect gateway.
-      virtualInterfaceId:
-        $ref: '#/definitions/VirtualInterfaceId'
-        description: The ID of the virtual interface.
-      virtualInterfaceRegion:
-        $ref: '#/definitions/VirtualInterfaceRegion'
-        description: The AWS Region where the virtual interface is located.
-      virtualInterfaceOwnerAccount:
+      directConnectGatewayName:
+        $ref: '#/definitions/DirectConnectGatewayName'
+        description: The name of the Direct Connect gateway.
+      amazonSideAsn:
+        $ref: '#/definitions/LongAsn'
+        description: The autonomous system number (ASN) for the Amazon side of the connection.
+      ownerAccount:
         $ref: '#/definitions/OwnerAccount'
-        description: The ID of the AWS account that owns the virtual interface.
-      attachmentState:
-        $ref: '#/definitions/DirectConnectGatewayAttachmentState'
-        description: '<p>The state of the attachment. The following are the possible values:</p> <ul> <li> <p> <code>attaching</code>: The initial state after a virtual interface is created using the Direct Connect gateway.</p> </li> <li> <p> <code>attached</code>: The Direct Connect gateway and virtual interface are attached and ready to pass traffic.</p> </li> <li> <p> <code>detaching</code>: The initial state after calling <a>DeleteVirtualInterface</a>.</p> </li> <li> <p> <code>detached</code>: The virtual interface is detached from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual interface is stopped.</p> </li> </ul>'
+        description: The ID of the AWS account that owns the Direct Connect gateway.
+      directConnectGatewayState:
+        $ref: '#/definitions/DirectConnectGatewayState'
+        description: '<p>The state of the Direct Connect gateway. The following are the possible values:</p> <ul> <li> <p> <code>pending</code>: The initial state after calling <a>CreateDirectConnectGateway</a>.</p> </li> <li> <p> <code>available</code>: The Direct Connect gateway is ready for use.</p> </li> <li> <p> <code>deleting</code>: The initial state after calling <a>DeleteDirectConnectGateway</a>.</p> </li> <li> <p> <code>deleted</code>: The Direct Connect gateway is deleted and cannot pass traffic.</p> </li> </ul>'
       stateChangeError:
         $ref: '#/definitions/StateChangeError'
         description: The error message if the state of an object failed to advance.
-    description: Information about an attachment between a Direct Connect gateway and a virtual interface.
-  DirectConnectGatewayAttachmentList:
-    type: array
-    items:
-      $ref: '#/definitions/DirectConnectGatewayAttachment'
-  DirectConnectGatewayAttachmentState:
-    type: string
-    enum:
-      - attaching
-      - attached
-      - detaching
-      - detached
-  DirectConnectGatewayId:
-    type: string
-  DirectConnectGatewayList:
-    type: array
-    items:
-      $ref: '#/definitions/DirectConnectGateway'
-  DirectConnectGatewayName:
-    type: string
-  DirectConnectGatewayState:
-    type: string
-    enum:
-      - pending
-      - available
-      - deleting
-      - deleted
-  HasLogicalRedundancy:
-    type: string
-    enum:
-      - unknown
-      - 'yes'
-      - 'no'
-  InterconnectId:
-    type: string
-  InterconnectList:
-    type: array
-    items:
-      $ref: '#/definitions/Interconnect'
+    description: 'Information about a Direct Connect gateway, which enables you to connect virtual interfaces and virtual private gateways.'
   InterconnectName:
     type: string
-  InterconnectState:
-    type: string
-    enum:
-      - requested
-      - pending
-      - available
-      - down
-      - deleting
-      - deleted
-  JumboFrameCapable:
-    type: boolean
-  LagId:
-    type: string
-  LagList:
-    type: array
-    items:
-      $ref: '#/definitions/Lag'
   LagName:
     type: string
-  LagState:
-    type: string
-    enum:
-      - requested
-      - pending
-      - available
-      - down
-      - deleting
-      - deleted
-  LoaContent:
-    type: string
-  LoaContentType:
-    type: string
-    enum:
-      - application/pdf
-  LoaIssueTime:
-    type: string
-    format: date-time
-  Location:
-    type: object
-    properties:
-      locationCode:
-        $ref: '#/definitions/LocationCode'
-        description: The code for the location.
-      region:
-        $ref: '#/definitions/Region'
-        description: The AWS Region for the location.
-    description: Information about an AWS Direct Connect location.
-  LocationCode:
-    type: string
-  LocationList:
-    type: array
-    items:
-      $ref: '#/definitions/Location'
-  LocationName:
-    type: string
-  LongAsn:
-    type: integer
-  MTU:
-    type: integer
-  MaxResultSetSize:
-    type: integer
-  NewBGPPeer:
-    type: object
-    properties:
-      asn:
-        $ref: '#/definitions/ASN'
-        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-      authKey:
-        $ref: '#/definitions/BGPAuthKey'
-        description: The authentication key for BGP configuration.
-      addressFamily:
-        $ref: '#/definitions/AddressFamily'
-        description: The address family for the BGP peer.
-      amazonAddress:
-        $ref: '#/definitions/AmazonAddress'
-        description: The IP address assigned to the Amazon interface.
-      customerAddress:
-        $ref: '#/definitions/CustomerAddress'
-        description: The IP address assigned to the customer interface.
-    description: Information about a new BGP peer.
   NewPrivateVirtualInterface:
     type: object
     required:
@@ -2815,38 +2794,6 @@ definitions:
         $ref: '#/definitions/DirectConnectGatewayId'
         description: The ID of the Direct Connect gateway.
     description: Information about a private virtual interface.
-  NewPrivateVirtualInterfaceAllocation:
-    type: object
-    required:
-      - virtualInterfaceName
-      - vlan
-      - asn
-    properties:
-      virtualInterfaceName:
-        $ref: '#/definitions/VirtualInterfaceName'
-        description: The name of the virtual interface assigned by the customer network.
-      vlan:
-        $ref: '#/definitions/VLAN'
-        description: The ID of the VLAN.
-      asn:
-        $ref: '#/definitions/ASN'
-        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-      mtu:
-        $ref: '#/definitions/MTU'
-        description: 'The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.'
-      authKey:
-        $ref: '#/definitions/BGPAuthKey'
-        description: The authentication key for BGP configuration.
-      amazonAddress:
-        $ref: '#/definitions/AmazonAddress'
-        description: The IP address assigned to the Amazon interface.
-      addressFamily:
-        $ref: '#/definitions/AddressFamily'
-        description: The address family for the BGP peer.
-      customerAddress:
-        $ref: '#/definitions/CustomerAddress'
-        description: The IP address assigned to the customer interface.
-    description: Information about a private virtual interface to be provisioned on a connection.
   NewPublicVirtualInterface:
     type: object
     required:
@@ -2879,54 +2826,144 @@ definitions:
         $ref: '#/definitions/RouteFilterPrefixList'
         description: The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.
     description: Information about a public virtual interface.
-  NewPublicVirtualInterfaceAllocation:
-    type: object
-    required:
-      - virtualInterfaceName
-      - vlan
-      - asn
-    properties:
-      virtualInterfaceName:
-        $ref: '#/definitions/VirtualInterfaceName'
-        description: The name of the virtual interface assigned by the customer network.
-      vlan:
-        $ref: '#/definitions/VLAN'
-        description: The ID of the VLAN.
-      asn:
-        $ref: '#/definitions/ASN'
-        description: The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-      authKey:
-        $ref: '#/definitions/BGPAuthKey'
-        description: The authentication key for BGP configuration.
-      amazonAddress:
-        $ref: '#/definitions/AmazonAddress'
-        description: The IP address assigned to the Amazon interface.
-      customerAddress:
-        $ref: '#/definitions/CustomerAddress'
-        description: The IP address assigned to the customer interface.
-      addressFamily:
-        $ref: '#/definitions/AddressFamily'
-        description: The address family for the BGP peer.
-      routeFilterPrefixes:
-        $ref: '#/definitions/RouteFilterPrefixList'
-        description: The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.
-    description: Information about a public virtual interface to be provisioned on a connection.
-  OwnerAccount:
+  InterconnectState:
     type: string
-  PaginationToken:
-    type: string
-  PartnerName:
-    type: string
+    enum:
+      - requested
+      - pending
+      - available
+      - down
+      - deleting
+      - deleted
   ProviderName:
     type: string
-  Region:
+  LoaContentType:
     type: string
-  ResourceArn:
+    enum:
+      - application/pdf
+  MaxResultSetSize:
+    type: integer
+  PaginationToken:
     type: string
+  DirectConnectGatewayAssociationList:
+    type: array
+    items:
+      $ref: '#/definitions/DirectConnectGatewayAssociation'
+  DirectConnectGatewayAttachmentList:
+    type: array
+    items:
+      $ref: '#/definitions/DirectConnectGatewayAttachment'
+  DirectConnectGatewayList:
+    type: array
+    items:
+      $ref: '#/definitions/DirectConnectGateway'
   ResourceArnList:
     type: array
     items:
       $ref: '#/definitions/ResourceArn'
+  ResourceTagList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceTag'
+  DirectConnectGatewayState:
+    type: string
+    enum:
+      - pending
+      - available
+      - deleting
+      - deleted
+  StateChangeError:
+    type: string
+  VirtualGatewayRegion:
+    type: string
+  DirectConnectGatewayAssociationState:
+    type: string
+    enum:
+      - associating
+      - associated
+      - disassociating
+      - disassociated
+  VirtualInterfaceRegion:
+    type: string
+  DirectConnectGatewayAttachmentState:
+    type: string
+    enum:
+      - attaching
+      - attached
+      - detaching
+      - detached
+  DirectConnectGatewayAttachment:
+    type: object
+    properties:
+      directConnectGatewayId:
+        $ref: '#/definitions/DirectConnectGatewayId'
+        description: The ID of the Direct Connect gateway.
+      virtualInterfaceId:
+        $ref: '#/definitions/VirtualInterfaceId'
+        description: The ID of the virtual interface.
+      virtualInterfaceRegion:
+        $ref: '#/definitions/VirtualInterfaceRegion'
+        description: The AWS Region where the virtual interface is located.
+      virtualInterfaceOwnerAccount:
+        $ref: '#/definitions/OwnerAccount'
+        description: The ID of the AWS account that owns the virtual interface.
+      attachmentState:
+        $ref: '#/definitions/DirectConnectGatewayAttachmentState'
+        description: '<p>The state of the attachment. The following are the possible values:</p> <ul> <li> <p> <code>attaching</code>: The initial state after a virtual interface is created using the Direct Connect gateway.</p> </li> <li> <p> <code>attached</code>: The Direct Connect gateway and virtual interface are attached and ready to pass traffic.</p> </li> <li> <p> <code>detaching</code>: The initial state after calling <a>DeleteVirtualInterface</a>.</p> </li> <li> <p> <code>detached</code>: The virtual interface is detached from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual interface is stopped.</p> </li> </ul>'
+      stateChangeError:
+        $ref: '#/definitions/StateChangeError'
+        description: The error message if the state of an object failed to advance.
+    description: Information about an attachment between a Direct Connect gateway and a virtual interface.
+  InterconnectList:
+    type: array
+    items:
+      $ref: '#/definitions/Interconnect'
+  LagState:
+    type: string
+    enum:
+      - requested
+      - pending
+      - available
+      - down
+      - deleting
+      - deleted
+  LagList:
+    type: array
+    items:
+      $ref: '#/definitions/Lag'
+  LoaContent:
+    type: string
+  Location:
+    type: object
+    properties:
+      locationCode:
+        $ref: '#/definitions/LocationCode'
+        description: The code for the location.
+      region:
+        $ref: '#/definitions/Region'
+        description: The AWS Region for the location.
+    description: Information about an AWS Direct Connect location.
+  LocationList:
+    type: array
+    items:
+      $ref: '#/definitions/Location'
+  LocationName:
+    type: string
+  MTU:
+    type: integer
+  VirtualInterfaceName:
+    type: string
+  RouteFilterPrefixList:
+    type: array
+    items:
+      $ref: '#/definitions/RouteFilterPrefix'
+  ResourceArn:
+    type: string
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 1
   ResourceTag:
     type: object
     properties:
@@ -2937,10 +2974,6 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags.
     description: Information about a tag associated with an AWS Direct Connect resource.
-  ResourceTagList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceTag'
   RouteFilterPrefix:
     type: object
     properties:
@@ -2948,14 +2981,18 @@ definitions:
         $ref: '#/definitions/CIDR'
         description: The CIDR block for the advertised route. Separate multiple routes using commas. An IPv6 CIDR must use /64 or shorter.
     description: Information about a route filter prefix that a customer can advertise through Border Gateway Protocol (BGP) over a public virtual interface.
-  RouteFilterPrefixList:
-    type: array
-    items:
-      $ref: '#/definitions/RouteFilterPrefix'
   RouterConfig:
     type: string
-  StateChangeError:
+  TagKey:
     type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -2968,27 +3005,12 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value.
     description: Information about a tag.
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-  TagValue:
+  VirtualGatewayState:
     type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  VLAN:
-    type: integer
   VirtualGateway:
     type: object
     properties:
@@ -2999,36 +3021,13 @@ definitions:
         $ref: '#/definitions/VirtualGatewayState'
         description: '<p>The state of the virtual private gateway. The following are the possible values:</p> <ul> <li> <p> <code>pending</code>: Initial state after creating the virtual private gateway.</p> </li> <li> <p> <code>available</code>: Ready for use by a private virtual interface.</p> </li> <li> <p> <code>deleting</code>: Initial state after deleting the virtual private gateway.</p> </li> <li> <p> <code>deleted</code>: The virtual private gateway is deleted. The private virtual interface is unable to send traffic over this gateway.</p> </li> </ul>'
     description: Information about a virtual private gateway for a private virtual interface.
-  VirtualGatewayId:
-    type: string
   VirtualGatewayList:
     type: array
     items:
       $ref: '#/definitions/VirtualGateway'
-  VirtualGatewayRegion:
-    type: string
-  VirtualGatewayState:
-    type: string
-  VirtualInterfaceId:
+  VirtualInterfaceType:
     type: string
   VirtualInterfaceList:
     type: array
     items:
       $ref: '#/definitions/VirtualInterface'
-  VirtualInterfaceName:
-    type: string
-  VirtualInterfaceRegion:
-    type: string
-  VirtualInterfaceState:
-    type: string
-    enum:
-      - confirming
-      - verifying
-      - pending
-      - available
-      - down
-      - deleting
-      - deleted
-      - rejected
-  VirtualInterfaceType:
-    type: string

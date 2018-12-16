@@ -703,13 +703,38 @@ definitions:
       FunctionZip:
         $ref: '#/definitions/Blob'
         description: 'A .zip file containing your packaged source code. For more information about creating a .zip file, go to <a href="http://docs.aws.amazon.com/lambda/latest/dg/walkthrough-custom-events.html">AWS LambdaL How it Works</a> in the AWS Lambda Developer Guide. '
-  undefined: {}
+  String:
+    type: string
+  FunctionName:
+    type: string
+    pattern: '[a-zA-Z0-9-_]+'
+    minLength: 1
+    maxLength: 64
+  RoleArn:
+    type: string
+    pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+  Integer:
+    type: integer
+  Map:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
   Blob:
     type: string
   Description:
     type: string
     minLength: 0
     maxLength: 256
+  Timestamp:
+    type: string
+    format: date-time
+  Boolean:
+    type: boolean
   EventSourceList:
     type: array
     items:
@@ -727,60 +752,34 @@ definitions:
         $ref: '#/definitions/String'
         description: The presigned URL you can use to download the function's .zip file that you previously uploaded. The URL is valid for up to 10 minutes.
     description: The object for the Lambda function location.
-  FunctionList:
-    type: array
-    items:
-      $ref: '#/definitions/FunctionConfiguration'
-  FunctionName:
-    type: string
-    pattern: '[a-zA-Z0-9-_]+'
-    minLength: 1
-    maxLength: 64
-  Handler:
-    type: string
-    pattern: '[a-zA-Z0-9./\-_]+'
-  HttpStatus:
-    type: integer
-  Integer:
-    type: integer
-  Long:
-    type: integer
-  String:
-    type: string
-  Map:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  MaxListItems:
-    type: integer
-    minimum: 1
-    maximum: 10000
-  MemorySize:
-    type: integer
-    minimum: 128
-    maximum: 1024
-  Mode:
-    type: string
-    enum:
-      - event
-  RoleArn:
-    type: string
-    pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
   Runtime:
     type: string
     enum:
       - nodejs
+  Handler:
+    type: string
+    pattern: '[a-zA-Z0-9./\-_]+'
+  Mode:
+    type: string
+    enum:
+      - event
+  Long:
+    type: integer
   Timeout:
     type: integer
     minimum: 1
     maximum: 60
-  Timestamp:
-    type: string
-    format: date-time
-  Boolean:
-    type: boolean
+  MemorySize:
+    type: integer
+    minimum: 128
+    maximum: 1024
+  FunctionList:
+    type: array
+    items:
+      $ref: '#/definitions/FunctionConfiguration'
+  HttpStatus:
+    type: integer
+  MaxListItems:
+    type: integer
+    minimum: 1
+    maximum: 10000

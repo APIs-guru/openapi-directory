@@ -3033,7 +3033,12 @@ definitions:
     enum:
       - ENABLED
       - DISABLED
-  undefined: {}
+  String:
+    type: string
+  AttachmentDetails:
+    type: array
+    items:
+      $ref: '#/definitions/KeyValuePair'
   Attachment:
     type: object
     properties:
@@ -3050,10 +3055,16 @@ definitions:
         $ref: '#/definitions/AttachmentDetails'
         description: 'Details of the attachment. For elastic network interfaces, this includes the network interface ID, the MAC address, the subnet ID, and the private IPv4 address.'
     description: An object representing a container instance or task attachment.
-  AttachmentDetails:
-    type: array
-    items:
-      $ref: '#/definitions/KeyValuePair'
+  KeyValuePair:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/String'
+        description: 'The name of the key-value pair. For environment variables, this is the name of the environment variable.'
+      value:
+        $ref: '#/definitions/String'
+        description: 'The value of the key-value pair. For environment variables, this is the value of the environment variable.'
+    description: A key-value pair object.
   AttachmentStateChange:
     type: object
     required:
@@ -3075,6 +3086,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Attachment'
+  TargetType:
+    type: string
+    enum:
+      - container-instance
   Attribute:
     type: object
     required:
@@ -3097,6 +3112,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Attribute'
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   AwsVpcConfiguration:
     type: object
     required:
@@ -3118,6 +3137,18 @@ definitions:
     type: boolean
   BoxedInteger:
     type: integer
+  Integer:
+    type: integer
+  Statistics:
+    type: array
+    items:
+      $ref: '#/definitions/KeyValuePair'
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 50
   Cluster:
     type: object
     properties:
@@ -3176,6 +3207,20 @@ definitions:
     enum:
       - CONNECTED
       - DISCONNECTED
+  NetworkBindings:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkBinding'
+  NetworkInterfaces:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkInterface'
+  HealthStatus:
+    type: string
+    enum:
+      - HEALTHY
+      - UNHEALTHY
+      - UNKNOWN
   Container:
     type: object
     properties:
@@ -3207,6 +3252,108 @@ definitions:
         $ref: '#/definitions/HealthStatus'
         description: 'The health status of the container. If health checks are not configured for this container in its task definition, then it reports the health status as <code>UNKNOWN</code>.'
     description: A Docker container that is part of a task.
+  RepositoryCredentials:
+    type: object
+    required:
+      - credentialsParameter
+    properties:
+      credentialsParameter:
+        $ref: '#/definitions/String'
+        description: '<p>The Amazon Resource Name (ARN) of the secret containing the private repository credentials.</p> <note> <p>When you are using the Amazon ECS API, AWS CLI, or AWS SDK, if the secret exists in the same Region as the task that you are launching then you can use either the full ARN or the name of the secret. When you are using the AWS Management Console, you must specify the full ARN of the secret.</p> </note>'
+    description: The repository credentials for private registry authentication.
+  PortMappingList:
+    type: array
+    items:
+      $ref: '#/definitions/PortMapping'
+  EnvironmentVariables:
+    type: array
+    items:
+      $ref: '#/definitions/KeyValuePair'
+  MountPointList:
+    type: array
+    items:
+      $ref: '#/definitions/MountPoint'
+  VolumeFromList:
+    type: array
+    items:
+      $ref: '#/definitions/VolumeFrom'
+  LinuxParameters:
+    type: object
+    properties:
+      capabilities:
+        $ref: '#/definitions/KernelCapabilities'
+        description: '<p>The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.</p> <note> <p>If you are using tasks that use the Fargate launch type, <code>capabilities</code> is supported but the <code>add</code> parameter is not supported.</p> </note>'
+      devices:
+        $ref: '#/definitions/DevicesList'
+        description: '<p>Any host devices to expose to the container. This parameter maps to <code>Devices</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--device</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <note> <p>If you are using tasks that use the Fargate launch type, the <code>devices</code> parameter is not supported.</p> </note>'
+      initProcessEnabled:
+        $ref: '#/definitions/BoxedBoolean'
+        description: 'Run an <code>init</code> process inside the container that forwards signals and reaps processes. This parameter maps to the <code>--init</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. This parameter requires version 1.25 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format ''{{.Server.APIVersion}}''</code> '
+      sharedMemorySize:
+        $ref: '#/definitions/BoxedInteger'
+        description: '<p>The value for the size (in MiB) of the <code>/dev/shm</code> volume. This parameter maps to the <code>--shm-size</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <note> <p>If you are using tasks that use the Fargate launch type, the <code>sharedMemorySize</code> parameter is not supported.</p> </note>'
+      tmpfs:
+        $ref: '#/definitions/TmpfsList'
+        description: '<p>The container path, mount options, and size (in MiB) of the tmpfs mount. This parameter maps to the <code>--tmpfs</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <note> <p>If you are using tasks that use the Fargate launch type, the <code>tmpfs</code> parameter is not supported.</p> </note>'
+    description: 'Linux-specific options that are applied to the container, such as Linux <a>KernelCapabilities</a>.'
+  SecretList:
+    type: array
+    items:
+      $ref: '#/definitions/Secret'
+  HostEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/HostEntry'
+  DockerLabelsMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  UlimitList:
+    type: array
+    items:
+      $ref: '#/definitions/Ulimit'
+  LogConfiguration:
+    type: object
+    required:
+      - logDriver
+    properties:
+      logDriver:
+        $ref: '#/definitions/LogDriver'
+        description: '<p>The log driver to use for the container. The valid values listed for this parameter are log drivers that the Amazon ECS container agent can communicate with by default. If you are using the Fargate launch type, the only supported value is <code>awslogs</code>. For more information about using the <code>awslogs</code> driver, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html">Using the awslogs Log Driver</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <note> <p>If you have a custom driver that is not listed above that you would like to work with the Amazon ECS container agent, you can fork the Amazon ECS container agent project that is <a href="https://github.com/aws/amazon-ecs-agent">available on GitHub</a> and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, Amazon Web Services does not currently support running modified copies of this software.</p> </note> <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format ''{{.Server.APIVersion}}''</code> </p>'
+      options:
+        $ref: '#/definitions/LogConfigurationOptionsMap'
+        description: 'The configuration options to send to the log driver. This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format ''{{.Server.APIVersion}}''</code> '
+    description: Log configuration options to send to a custom log driver for the container.
+  HealthCheck:
+    type: object
+    required:
+      - command
+    properties:
+      command:
+        $ref: '#/definitions/StringList'
+        description: '<p>A string array representing the command that the container runs to determine if it is healthy. The string array must start with <code>CMD</code> to execute the command arguments directly, or <code>CMD-SHELL</code> to run the command with the container''s default shell. For example:</p> <p> <code>[ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]</code> </p> <p>An exit code of 0 indicates success, and non-zero exit code indicates failure. For more information, see <code>HealthCheck</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a>.</p>'
+      interval:
+        $ref: '#/definitions/BoxedInteger'
+        description: The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.
+      timeout:
+        $ref: '#/definitions/BoxedInteger'
+        description: The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5.
+      retries:
+        $ref: '#/definitions/BoxedInteger'
+        description: The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is 3.
+      startPeriod:
+        $ref: '#/definitions/BoxedInteger'
+        description: '<p>The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The <code>startPeriod</code> is disabled by default.</p> <note> <p>If a health check succeeds within the <code>startPeriod</code>, then the container is considered healthy and any subsequent failures count toward the maximum number of retries.</p> </note>'
+    description: '<p>An object representing a container health check. Health check parameters that are specified in a container definition override any Docker health checks that exist in the container image (such as those specified in a parent image or from the image''s Dockerfile).</p> <p>The following are notes about container health check support:</p> <ul> <li> <p>Container health checks require version 1.17.0 or greater of the Amazon ECS container agent. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html">Updating the Amazon ECS Container Agent</a>.</p> </li> <li> <p>Container health checks are supported for Fargate tasks if you are using platform version 1.1.0 or greater. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform Versions</a>.</p> </li> <li> <p>Container health checks are not supported for tasks that are part of a service that is configured to use a Classic Load Balancer.</p> </li> </ul>'
+  SystemControls:
+    type: array
+    items:
+      $ref: '#/definitions/SystemControl'
   ContainerDefinition:
     type: object
     properties:
@@ -3314,6 +3461,28 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ContainerDefinition'
+  Long:
+    type: integer
+  VersionInfo:
+    type: object
+    properties:
+      agentVersion:
+        $ref: '#/definitions/String'
+        description: The version number of the Amazon ECS container agent.
+      agentHash:
+        $ref: '#/definitions/String'
+        description: 'The Git commit hash for the Amazon ECS container agent build on the <a href="https://github.com/aws/amazon-ecs-agent/commits/master">amazon-ecs-agent </a> GitHub repository.'
+      dockerVersion:
+        $ref: '#/definitions/String'
+        description: The Docker version running on the container instance.
+    description: The Docker and Amazon ECS container agent version information about a container instance.
+  Resources:
+    type: array
+    items:
+      $ref: '#/definitions/Resource'
+  Timestamp:
+    type: string
+    format: date-time
   ContainerInstance:
     type: object
     properties:
@@ -3433,43 +3602,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Container'
-  Deployment:
-    type: object
-    properties:
-      id:
-        $ref: '#/definitions/String'
-        description: The ID of the deployment.
-      status:
-        $ref: '#/definitions/String'
-        description: '<p>The status of the deployment. The following describes each state:</p> <dl> <dt>PRIMARY</dt> <dd> <p>The most recent deployment of a service.</p> </dd> <dt>ACTIVE</dt> <dd> <p>A service deployment that still has running tasks, but are in the process of being replaced with a new <code>PRIMARY</code> deployment.</p> </dd> <dt>INACTIVE</dt> <dd> <p>A deployment that has been completely replaced.</p> </dd> </dl>'
-      taskDefinition:
-        $ref: '#/definitions/String'
-        description: The most recent task definition that was specified for the tasks in the service to use.
-      desiredCount:
-        $ref: '#/definitions/Integer'
-        description: The most recent desired count of tasks that was specified for the service to deploy or maintain.
-      pendingCount:
-        $ref: '#/definitions/Integer'
-        description: The number of tasks in the deployment that are in the <code>PENDING</code> status.
-      runningCount:
-        $ref: '#/definitions/Integer'
-        description: The number of tasks in the deployment that are in the <code>RUNNING</code> status.
-      createdAt:
-        $ref: '#/definitions/Timestamp'
-        description: The Unix timestamp for when the service deployment was created.
-      updatedAt:
-        $ref: '#/definitions/Timestamp'
-        description: The Unix timestamp for when the service deployment was last updated.
-      launchType:
-        $ref: '#/definitions/LaunchType'
-        description: 'The launch type the tasks in the service are using. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
-      platformVersion:
-        $ref: '#/definitions/String'
-        description: 'The platform version on which your tasks in the service are running. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the <code>LATEST</code> platform version is used by default. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
-      networkConfiguration:
-        $ref: '#/definitions/NetworkConfiguration'
-        description: The VPC subnet and security group configuration for tasks that receive their own elastic network interface by using the <code>awsvpc</code> networking mode.
-    description: The details of an Amazon ECS service deployment. This is used when a service uses the <code>CODE_DEPLOY</code> deployment controller type.
+  LoadBalancers:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancer'
+  ServiceRegistries:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceRegistry'
+  LaunchType:
+    type: string
+    enum:
+      - EC2
+      - FARGATE
   DeploymentConfiguration:
     type: object
     properties:
@@ -3480,6 +3625,26 @@ definitions:
         $ref: '#/definitions/BoxedInteger'
         description: '<p>If a service is using the rolling update (<code>ECS</code>) deployment type, the <b>minimum healthy percent</b> represents a lower limit on the number of tasks in a service that must remain in the <code>RUNNING</code> state during a deployment, as a percentage of the desired number of tasks (rounded up to the nearest integer), and while any container instances are in the <code>DRAINING</code> state if the service contains tasks using the EC2 launch type. This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a desired number of four tasks and a minimum healthy percent of 50%, the scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state; tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and they are reported as healthy by the load balancer. The default value for minimum healthy percent is 100%.</p> <p>If a service is using the blue/green (<code>CODE_DEPLOY</code>) deployment type and tasks that use the EC2 launch type, the <b>minimum healthy percent</b> value is set to the default value and is used to define the lower limit on the number of the tasks in the service that remain in the <code>RUNNING</code> state while the container instances are in the <code>DRAINING</code> state. If the tasks in the service use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.</p>'
     description: Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.
+  PlacementConstraints:
+    type: array
+    items:
+      $ref: '#/definitions/PlacementConstraint'
+  PlacementStrategies:
+    type: array
+    items:
+      $ref: '#/definitions/PlacementStrategy'
+  NetworkConfiguration:
+    type: object
+    properties:
+      awsvpcConfiguration:
+        $ref: '#/definitions/AwsVpcConfiguration'
+        description: <p>The VPC subnets and security groups associated with a task.</p> <note> <p>All specified subnets and security groups must be from the same VPC.</p> </note>
+    description: An object representing the network configuration for a task or service.
+  SchedulingStrategy:
+    type: string
+    enum:
+      - REPLICA
+      - DAEMON
   DeploymentController:
     type: object
     required:
@@ -3489,471 +3654,11 @@ definitions:
         $ref: '#/definitions/DeploymentControllerType'
         description: '<p>The deployment controller type to use.</p> <p>There are two deployment controller types available:</p> <dl> <dt>ECS</dt> <dd> <p>The rolling update (<code>ECS</code>) deployment type involves replacing the current running version of the container with the latest version. The number of containers Amazon ECS adds or removes from the service during a rolling update is controlled by adjusting the minimum and maximum number of healthy tasks allowed during a service deployment, as specified in the <a>DeploymentConfiguration</a>.</p> </dd> <dt>CODE_DEPLOY</dt> <dd> <p>The blue/green (<code>CODE_DEPLOY</code>) deployment type uses the blue/green deployment model powered by AWS CodeDeploy, which allows you to verify a new deployment of a service before sending production traffic to it. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html">Amazon ECS Deployment Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> </dd> </dl>'
     description: 'The deployment controller to use for the service. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html">Amazon ECS Deployment Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
-  DeploymentControllerType:
-    type: string
-    enum:
-      - ECS
-      - CODE_DEPLOY
-  Deployments:
-    type: array
-    items:
-      $ref: '#/definitions/Deployment'
-  DesiredStatus:
-    type: string
-    enum:
-      - RUNNING
-      - PENDING
-      - STOPPED
-  Device:
-    type: object
-    required:
-      - hostPath
-    properties:
-      hostPath:
-        $ref: '#/definitions/String'
-        description: The path for the device on the host container instance.
-      containerPath:
-        $ref: '#/definitions/String'
-        description: The path inside the container at which to expose the host device.
-      permissions:
-        $ref: '#/definitions/DeviceCgroupPermissions'
-        description: 'The explicit permissions to provide to the container for the device. By default, the container has permissions for <code>read</code>, <code>write</code>, and <code>mknod</code> for the device.'
-    description: An object representing a container instance host device.
-  DeviceCgroupPermission:
-    type: string
-    enum:
-      - read
-      - write
-      - mknod
-  DeviceCgroupPermissions:
-    type: array
-    items:
-      $ref: '#/definitions/DeviceCgroupPermission'
-  DevicesList:
-    type: array
-    items:
-      $ref: '#/definitions/Device'
-  String:
-    type: string
-  DockerLabelsMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  DockerVolumeConfiguration:
-    type: object
-    properties:
-      scope:
-        $ref: '#/definitions/Scope'
-        description: The scope for the Docker volume that determines its lifecycle. Docker volumes that are scoped to a <code>task</code> are automatically provisioned when the task starts and destroyed when the task stops. Docker volumes that are scoped as <code>shared</code> persist after the task stops.
-      autoprovision:
-        $ref: '#/definitions/BoxedBoolean'
-        description: '<p>If this value is <code>true</code>, the Docker volume is created if it does not already exist.</p> <note> <p>This field is only used if the <code>scope</code> is <code>shared</code>.</p> </note>'
-      driver:
-        $ref: '#/definitions/String'
-        description: 'The Docker volume driver to use. The driver value must match the driver name provided by Docker because it is used for task placement. If the driver was installed using the Docker plugin CLI, use <code>docker plugin ls</code> to retrieve the driver name from your container instance. If the driver was installed using another method, use Docker plugin discovery to retrieve the driver name. For more information, see <a href="https://docs.docker.com/engine/extend/plugin_api/#plugin-discovery">Docker plugin discovery</a>. This parameter maps to <code>Driver</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate">Create a volume</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>xxdriver</code> option to <a href="https://docs.docker.com/engine/reference/commandline/volume_create/"> <code>docker volume create</code> </a>.'
-      driverOpts:
-        $ref: '#/definitions/StringMap'
-        description: 'A map of Docker driver-specific options passed through. This parameter maps to <code>DriverOpts</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate">Create a volume</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>xxopt</code> option to <a href="https://docs.docker.com/engine/reference/commandline/volume_create/"> <code>docker volume create</code> </a>.'
-      labels:
-        $ref: '#/definitions/StringMap'
-        description: 'Custom metadata to add to your Docker volume. This parameter maps to <code>Labels</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate">Create a volume</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>xxlabel</code> option to <a href="https://docs.docker.com/engine/reference/commandline/volume_create/"> <code>docker volume create</code> </a>.'
-    description: 'This parameter is specified when you are using Docker volumes. Docker volumes are only supported when you are using the EC2 launch type. Windows containers only support the use of the <code>local</code> driver. To use bind mounts, specify a <code>host</code> instead.'
-  Double:
-    type: number
-    format: double
-  EnvironmentVariables:
-    type: array
-    items:
-      $ref: '#/definitions/KeyValuePair'
-  Failure:
-    type: object
-    properties:
-      arn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the failed resource.
-      reason:
-        $ref: '#/definitions/String'
-        description: The reason for the failure.
-    description: A failed resource.
-  Failures:
-    type: array
-    items:
-      $ref: '#/definitions/Failure'
-  HealthCheck:
-    type: object
-    required:
-      - command
-    properties:
-      command:
-        $ref: '#/definitions/StringList'
-        description: '<p>A string array representing the command that the container runs to determine if it is healthy. The string array must start with <code>CMD</code> to execute the command arguments directly, or <code>CMD-SHELL</code> to run the command with the container''s default shell. For example:</p> <p> <code>[ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]</code> </p> <p>An exit code of 0 indicates success, and non-zero exit code indicates failure. For more information, see <code>HealthCheck</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a>.</p>'
-      interval:
-        $ref: '#/definitions/BoxedInteger'
-        description: The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.
-      timeout:
-        $ref: '#/definitions/BoxedInteger'
-        description: The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5.
-      retries:
-        $ref: '#/definitions/BoxedInteger'
-        description: The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is 3.
-      startPeriod:
-        $ref: '#/definitions/BoxedInteger'
-        description: '<p>The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The <code>startPeriod</code> is disabled by default.</p> <note> <p>If a health check succeeds within the <code>startPeriod</code>, then the container is considered healthy and any subsequent failures count toward the maximum number of retries.</p> </note>'
-    description: '<p>An object representing a container health check. Health check parameters that are specified in a container definition override any Docker health checks that exist in the container image (such as those specified in a parent image or from the image''s Dockerfile).</p> <p>The following are notes about container health check support:</p> <ul> <li> <p>Container health checks require version 1.17.0 or greater of the Amazon ECS container agent. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html">Updating the Amazon ECS Container Agent</a>.</p> </li> <li> <p>Container health checks are supported for Fargate tasks if you are using platform version 1.1.0 or greater. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform Versions</a>.</p> </li> <li> <p>Container health checks are not supported for tasks that are part of a service that is configured to use a Classic Load Balancer.</p> </li> </ul>'
-  HealthStatus:
-    type: string
-    enum:
-      - HEALTHY
-      - UNHEALTHY
-      - UNKNOWN
-  HostEntry:
-    type: object
-    required:
-      - hostname
-      - ipAddress
-    properties:
-      hostname:
-        $ref: '#/definitions/String'
-        description: The hostname to use in the <code>/etc/hosts</code> entry.
-      ipAddress:
-        $ref: '#/definitions/String'
-        description: The IP address to use in the <code>/etc/hosts</code> entry.
-    description: 'Hostnames and IP address entries that are added to the <code>/etc/hosts</code> file of a container via the <code>extraHosts</code> parameter of its <a>ContainerDefinition</a>. '
-  HostEntryList:
-    type: array
-    items:
-      $ref: '#/definitions/HostEntry'
-  HostVolumeProperties:
-    type: object
-    properties:
-      sourcePath:
-        $ref: '#/definitions/String'
-        description: '<p>When the <code>host</code> parameter is used, specify a <code>sourcePath</code> to declare the path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If the <code>host</code> parameter contains a <code>sourcePath</code> file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the <code>sourcePath</code> value does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.</p> <p>If you are using the Fargate launch type, the <code>sourcePath</code> parameter is not supported.</p>'
-    description: Details on a container instance bind mount host volume.
-  Integer:
-    type: integer
-  IpcMode:
-    type: string
-    enum:
-      - host
-      - task
-      - none
-  KernelCapabilities:
-    type: object
-    properties:
-      add:
-        $ref: '#/definitions/StringList'
-        description: '<p>The Linux capabilities for the container that have been added to the default configuration provided by Docker. This parameter maps to <code>CapAdd</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--cap-add</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <note> <p>If you are using tasks that use the Fargate launch type, the <code>add</code> parameter is not supported.</p> </note> <p>Valid values: <code>"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM"</code> </p>'
-      drop:
-        $ref: '#/definitions/StringList'
-        description: '<p>The Linux capabilities for the container that have been removed from the default configuration provided by Docker. This parameter maps to <code>CapDrop</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--cap-drop</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <p>Valid values: <code>"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM"</code> </p>'
-    description: 'The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker. For more information on the default capabilities and the non-default available capabilities, see <a href="https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities">Runtime privilege and Linux capabilities</a> in the <i>Docker run reference</i>. For more detailed information on these Linux capabilities, see the <a href="http://man7.org/linux/man-pages/man7/capabilities.7.html">capabilities(7)</a> Linux manual page.'
-  KeyValuePair:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/String'
-        description: 'The name of the key-value pair. For environment variables, this is the name of the environment variable.'
-      value:
-        $ref: '#/definitions/String'
-        description: 'The value of the key-value pair. For environment variables, this is the value of the environment variable.'
-    description: A key-value pair object.
-  LaunchType:
-    type: string
-    enum:
-      - EC2
-      - FARGATE
-  LinuxParameters:
-    type: object
-    properties:
-      capabilities:
-        $ref: '#/definitions/KernelCapabilities'
-        description: '<p>The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.</p> <note> <p>If you are using tasks that use the Fargate launch type, <code>capabilities</code> is supported but the <code>add</code> parameter is not supported.</p> </note>'
-      devices:
-        $ref: '#/definitions/DevicesList'
-        description: '<p>Any host devices to expose to the container. This parameter maps to <code>Devices</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--device</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <note> <p>If you are using tasks that use the Fargate launch type, the <code>devices</code> parameter is not supported.</p> </note>'
-      initProcessEnabled:
-        $ref: '#/definitions/BoxedBoolean'
-        description: 'Run an <code>init</code> process inside the container that forwards signals and reaps processes. This parameter maps to the <code>--init</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. This parameter requires version 1.25 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format ''{{.Server.APIVersion}}''</code> '
-      sharedMemorySize:
-        $ref: '#/definitions/BoxedInteger'
-        description: '<p>The value for the size (in MiB) of the <code>/dev/shm</code> volume. This parameter maps to the <code>--shm-size</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <note> <p>If you are using tasks that use the Fargate launch type, the <code>sharedMemorySize</code> parameter is not supported.</p> </note>'
-      tmpfs:
-        $ref: '#/definitions/TmpfsList'
-        description: '<p>The container path, mount options, and size (in MiB) of the tmpfs mount. This parameter maps to the <code>--tmpfs</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <note> <p>If you are using tasks that use the Fargate launch type, the <code>tmpfs</code> parameter is not supported.</p> </note>'
-    description: 'Linux-specific options that are applied to the container, such as Linux <a>KernelCapabilities</a>.'
-  LoadBalancer:
-    type: object
-    properties:
-      targetGroupArn:
-        $ref: '#/definitions/String'
-        description: '<p>The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service. For services using the <code>ECS</code> deployment controller, you are limited to one target group. For services using the <code>CODE_DEPLOY</code> deployment controller, you are required to define two target groups for the load balancer.</p> <important> <p>If your service''s task definition uses the <code>awsvpc</code> network mode (which is required for the Fargate launch type), you must choose <code>ip</code> as the target type, not <code>instance</code>, because tasks that use the <code>awsvpc</code> network mode are associated with an elastic network interface, not an Amazon EC2 instance.</p> </important>'
-      loadBalancerName:
-        $ref: '#/definitions/String'
-        description: The name of a load balancer.
-      containerName:
-        $ref: '#/definitions/String'
-        description: The name of the container (as it appears in a container definition) to associate with the load balancer.
-      containerPort:
-        $ref: '#/definitions/BoxedInteger'
-        description: The port on the container to associate with the load balancer. This port must correspond to a <code>containerPort</code> in the service's task definition. Your container instances must allow ingress traffic on the <code>hostPort</code> of the port mapping.
-    description: '<p>Details on a load balancer that is used with a service.</p> <p>If the service is using the <code>ECS</code> deployment controller, you are limited to one load balancer or target group.</p> <p>If the service is using the <code>CODE_DEPLOY</code> deployment controller, the service is required to use either an Application Load Balancer or Network Load Balancer. When you are creating an AWS CodeDeploy deployment group, you specify two target groups (referred to as a <code>targetGroupPair</code>). Each target group binds to a separate task set in the deployment. The load balancer can also have up to two listeners, a required listener for production traffic and an optional listener that allows you to test new revisions of the service before routing production traffic to it.</p> <p>Services with tasks that use the <code>awsvpc</code> network mode (for example, those with the Fargate launch type) only support Application Load Balancers and Network Load Balancers. Classic Load Balancers are not supported. Also, when you create any target groups for these services, you must choose <code>ip</code> as the target type, not <code>instance</code>. Tasks that use the <code>awsvpc</code> network mode are associated with an elastic network interface, not an Amazon EC2 instance.</p>'
-  LoadBalancers:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancer'
-  LogConfiguration:
-    type: object
-    required:
-      - logDriver
-    properties:
-      logDriver:
-        $ref: '#/definitions/LogDriver'
-        description: '<p>The log driver to use for the container. The valid values listed for this parameter are log drivers that the Amazon ECS container agent can communicate with by default. If you are using the Fargate launch type, the only supported value is <code>awslogs</code>. For more information about using the <code>awslogs</code> driver, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html">Using the awslogs Log Driver</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <note> <p>If you have a custom driver that is not listed above that you would like to work with the Amazon ECS container agent, you can fork the Amazon ECS container agent project that is <a href="https://github.com/aws/amazon-ecs-agent">available on GitHub</a> and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, Amazon Web Services does not currently support running modified copies of this software.</p> </note> <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format ''{{.Server.APIVersion}}''</code> </p>'
-      options:
-        $ref: '#/definitions/LogConfigurationOptionsMap'
-        description: 'The configuration options to send to the log driver. This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format ''{{.Server.APIVersion}}''</code> '
-    description: Log configuration options to send to a custom log driver for the container.
-  LogConfigurationOptionsMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  LogDriver:
-    type: string
-    enum:
-      - json-file
-      - syslog
-      - journald
-      - gelf
-      - fluentd
-      - awslogs
-      - splunk
-  Long:
-    type: integer
-  MountPoint:
-    type: object
-    properties:
-      sourceVolume:
-        $ref: '#/definitions/String'
-        description: The name of the volume to mount. Must be a volume name referenced in the <code>name</code> parameter of task definition <code>volume</code>.
-      containerPath:
-        $ref: '#/definitions/String'
-        description: The path on the container to mount the host volume at.
-      readOnly:
-        $ref: '#/definitions/BoxedBoolean'
-        description: 'If this value is <code>true</code>, the container has read-only access to the volume. If this value is <code>false</code>, then the container can write to the volume. The default value is <code>false</code>.'
-    description: Details on a volume mount point that is used in a container definition.
-  MountPointList:
-    type: array
-    items:
-      $ref: '#/definitions/MountPoint'
-  NetworkBinding:
-    type: object
-    properties:
-      bindIP:
-        $ref: '#/definitions/String'
-        description: The IP address that the container is bound to on the container instance.
-      containerPort:
-        $ref: '#/definitions/BoxedInteger'
-        description: The port number on the container that is used with the network binding.
-      hostPort:
-        $ref: '#/definitions/BoxedInteger'
-        description: The port number on the host that is used with the network binding.
-      protocol:
-        $ref: '#/definitions/TransportProtocol'
-        description: The protocol used for the network binding.
-    description: 'Details on the network bindings between a container and its host container instance. After a task reaches the <code>RUNNING</code> status, manual and automatic host and container port assignments are visible in the <code>networkBindings</code> section of <a>DescribeTasks</a> API responses.'
-  NetworkBindings:
-    type: array
-    items:
-      $ref: '#/definitions/NetworkBinding'
-  NetworkConfiguration:
-    type: object
-    properties:
-      awsvpcConfiguration:
-        $ref: '#/definitions/AwsVpcConfiguration'
-        description: <p>The VPC subnets and security groups associated with a task.</p> <note> <p>All specified subnets and security groups must be from the same VPC.</p> </note>
-    description: An object representing the network configuration for a task or service.
-  NetworkInterface:
-    type: object
-    properties:
-      attachmentId:
-        $ref: '#/definitions/String'
-        description: The attachment ID for the network interface.
-      privateIpv4Address:
-        $ref: '#/definitions/String'
-        description: The private IPv4 address for the network interface.
-      ipv6Address:
-        $ref: '#/definitions/String'
-        description: The private IPv6 address for the network interface.
-    description: An object representing the elastic network interface for tasks that use the <code>awsvpc</code> network mode.
-  NetworkInterfaces:
-    type: array
-    items:
-      $ref: '#/definitions/NetworkInterface'
-  NetworkMode:
-    type: string
-    enum:
-      - bridge
-      - host
-      - awsvpc
-      - none
-  PidMode:
-    type: string
-    enum:
-      - host
-      - task
-  PlacementConstraint:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/PlacementConstraintType'
-        description: The type of constraint. Use <code>distinctInstance</code> to ensure that each task in a particular group is running on a different container instance. Use <code>memberOf</code> to restrict the selection to a group of valid candidates. The value <code>distinctInstance</code> is not supported in task definitions.
-      expression:
-        $ref: '#/definitions/String'
-        description: 'A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is <code>distinctInstance</code>. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster Query Language</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
-    description: 'An object representing a constraint on task placement. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html">Task Placement Constraints</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
-  PlacementConstraintType:
-    type: string
-    enum:
-      - distinctInstance
-      - memberOf
-  PlacementConstraints:
-    type: array
-    items:
-      $ref: '#/definitions/PlacementConstraint'
-  PlacementStrategies:
-    type: array
-    items:
-      $ref: '#/definitions/PlacementStrategy'
-  PlacementStrategy:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/PlacementStrategyType'
-        description: 'The type of placement strategy. The <code>random</code> placement strategy randomly places tasks on available candidates. The <code>spread</code> placement strategy spreads placement across available candidates evenly based on the <code>field</code> parameter. The <code>binpack</code> strategy places tasks on available candidates that have the least available amount of the resource that is specified with the <code>field</code> parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task).'
-      field:
-        $ref: '#/definitions/String'
-        description: 'The field to apply the placement strategy against. For the <code>spread</code> placement strategy, valid values are <code>instanceId</code> (or <code>host</code>, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as <code>attribute:ecs.availability-zone</code>. For the <code>binpack</code> placement strategy, valid values are <code>cpu</code> and <code>memory</code>. For the <code>random</code> placement strategy, this field is not used.'
-    description: 'The task placement strategy for a task or service. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html">Task Placement Strategies</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
-  PlacementStrategyType:
-    type: string
-    enum:
-      - random
-      - spread
-      - binpack
-  PortMapping:
-    type: object
-    properties:
-      containerPort:
-        $ref: '#/definitions/BoxedInteger'
-        description: '<p>The port number on the container that is bound to the user-specified or automatically assigned host port.</p> <p>If you are using containers in a task with the <code>awsvpc</code> or <code>host</code> network mode, exposed ports should be specified using <code>containerPort</code>.</p> <p>If you are using containers in a task with the <code>bridge</code> network mode and you specify a container port and not a host port, your container automatically receives a host port in the ephemeral port range. For more information, see <code>hostPort</code>. Port mappings that are automatically assigned in this way do not count toward the 100 reserved ports limit of a container instance.</p>'
-      hostPort:
-        $ref: '#/definitions/BoxedInteger'
-        description: '<p>The port number on the container instance to reserve for your container.</p> <p>If you are using containers in a task with the <code>awsvpc</code> or <code>host</code> network mode, the <code>hostPort</code> can either be left blank or set to the same value as the <code>containerPort</code>.</p> <p>If you are using containers in a task with the <code>bridge</code> network mode, you can specify a non-reserved host port for your container port mapping, or you can omit the <code>hostPort</code> (or set it to <code>0</code>) while specifying a <code>containerPort</code> and your container automatically receives a port in the ephemeral port range for your container instance operating system and Docker version.</p> <p>The default ephemeral port range for Docker version 1.6.0 and later is listed on the instance under <code>/proc/sys/net/ipv4/ip_local_port_range</code>. If this kernel parameter is unavailable, the default ephemeral port range from 49153 through 65535 is used. Do not attempt to specify a host port in the ephemeral port range as these are reserved for automatic assignment. In general, ports below 32768 are outside of the ephemeral port range.</p> <note> <p>The default ephemeral port range from 49153 through 65535 is always used for Docker versions before 1.6.0.</p> </note> <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the Amazon ECS container agent ports 51678 and 51679. Any host port that was previously specified in a running task is also reserved while the task is running (after a task stops, the host port is released). The current reserved ports are displayed in the <code>remainingResources</code> of <a>DescribeContainerInstances</a> output. A container instance may have up to 100 reserved ports at a time, including the default reserved ports. Aautomatically assigned ports do not count toward the 100 reserved ports limit.</p>'
-      protocol:
-        $ref: '#/definitions/TransportProtocol'
-        description: The protocol used for the port mapping. Valid values are <code>tcp</code> and <code>udp</code>. The default is <code>tcp</code>.
-    description: '<p>Port mappings allow containers to access ports on the host container instance to send or receive traffic. Port mappings are specified as part of the container definition.</p> <p>If you are using containers in a task with the <code>awsvpc</code> or <code>host</code> network mode, exposed ports should be specified using <code>containerPort</code>. The <code>hostPort</code> can be left blank or it must be the same value as the <code>containerPort</code>.</p> <p>After a task reaches the <code>RUNNING</code> status, manual and automatic host and container port assignments are visible in the <code>networkBindings</code> section of <a>DescribeTasks</a> API responses.</p>'
-  PortMappingList:
-    type: array
-    items:
-      $ref: '#/definitions/PortMapping'
   PropagateTags:
     type: string
     enum:
       - TASK_DEFINITION
       - SERVICE
-  RepositoryCredentials:
-    type: object
-    required:
-      - credentialsParameter
-    properties:
-      credentialsParameter:
-        $ref: '#/definitions/String'
-        description: '<p>The Amazon Resource Name (ARN) of the secret containing the private repository credentials.</p> <note> <p>When you are using the Amazon ECS API, AWS CLI, or AWS SDK, if the secret exists in the same Region as the task that you are launching then you can use either the full ARN or the name of the secret. When you are using the AWS Management Console, you must specify the full ARN of the secret.</p> </note>'
-    description: The repository credentials for private registry authentication.
-  RequiresAttributes:
-    type: array
-    items:
-      $ref: '#/definitions/Attribute'
-  Resource:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/String'
-        description: 'The name of the resource, such as <code>CPU</code>, <code>MEMORY</code>, <code>PORTS</code>, <code>PORTS_UDP</code>, or a user-defined resource.'
-      type:
-        $ref: '#/definitions/String'
-        description: 'The type of the resource, such as <code>INTEGER</code>, <code>DOUBLE</code>, <code>LONG</code>, or <code>STRINGSET</code>.'
-      doubleValue:
-        $ref: '#/definitions/Double'
-        description: 'When the <code>doubleValue</code> type is set, the value of the resource must be a double precision floating-point type.'
-      longValue:
-        $ref: '#/definitions/Long'
-        description: 'When the <code>longValue</code> type is set, the value of the resource must be an extended precision floating-point type.'
-      integerValue:
-        $ref: '#/definitions/Integer'
-        description: 'When the <code>integerValue</code> type is set, the value of the resource must be an integer.'
-      stringSetValue:
-        $ref: '#/definitions/StringList'
-        description: 'When the <code>stringSetValue</code> type is set, the value of the resource must be a string type.'
-    description: Describes the resources available for a container instance.
-  Resources:
-    type: array
-    items:
-      $ref: '#/definitions/Resource'
-  Scale:
-    type: object
-    properties:
-      value:
-        $ref: '#/definitions/Double'
-        description: 'The value, specified as a percent total of a service''s <code>desiredCount</code>, to scale the task set.'
-      unit:
-        $ref: '#/definitions/ScaleUnit'
-        description: The unit of measure for the scale value.
-    description: A floating-point percentage of the desired number of tasks to place and keep running in the service. This is used when a service uses the <code>CODE_DEPLOY</code> deployment controller type.
-  ScaleUnit:
-    type: string
-    enum:
-      - PERCENT
-  SchedulingStrategy:
-    type: string
-    enum:
-      - REPLICA
-      - DAEMON
-  Scope:
-    type: string
-    enum:
-      - task
-      - shared
-  Secret:
-    type: object
-    required:
-      - name
-      - valueFrom
-    properties:
-      name:
-        $ref: '#/definitions/String'
-        description: The value to set as the environment variable on the container.
-      valueFrom:
-        $ref: '#/definitions/String'
-        description: 'The secret to expose to the container. Supported values are either the full ARN or the name of the parameter in the AWS Systems Manager Parameter Store. '
-    description: An object representing the secret to expose to your container.
-  SecretList:
-    type: array
-    items:
-      $ref: '#/definitions/Secret'
   Service:
     type: object
     properties:
@@ -4042,6 +3747,511 @@ definitions:
         $ref: '#/definitions/PropagateTags'
         description: 'Specifies whether to propagate the tags from the task definition or the service to the task. If no value is specified, the tags are not propagated.'
     description: Details on a service within a cluster
+  SettingName:
+    type: string
+    enum:
+      - serviceLongArnFormat
+      - taskLongArnFormat
+      - containerInstanceLongArnFormat
+  Setting:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/SettingName'
+        description: The account resource name.
+      value:
+        $ref: '#/definitions/String'
+        description: 'The current account setting for the resource name. If <code>enabled</code>, then the resource will receive the new Amazon Resource Name (ARN) and resource identifier (ID) format. If <code>disabled</code>, then the resource will receive the old Amazon Resource Name (ARN) and resource identifier (ID) format.'
+      principalArn:
+        $ref: '#/definitions/String'
+        description: 'The ARN of the principal, which can be an IAM user, IAM role, or the root user. If this field is omitted, the authenticated user is assumed.'
+    description: The current account setting for a resource.
+  Deployment:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/String'
+        description: The ID of the deployment.
+      status:
+        $ref: '#/definitions/String'
+        description: '<p>The status of the deployment. The following describes each state:</p> <dl> <dt>PRIMARY</dt> <dd> <p>The most recent deployment of a service.</p> </dd> <dt>ACTIVE</dt> <dd> <p>A service deployment that still has running tasks, but are in the process of being replaced with a new <code>PRIMARY</code> deployment.</p> </dd> <dt>INACTIVE</dt> <dd> <p>A deployment that has been completely replaced.</p> </dd> </dl>'
+      taskDefinition:
+        $ref: '#/definitions/String'
+        description: The most recent task definition that was specified for the tasks in the service to use.
+      desiredCount:
+        $ref: '#/definitions/Integer'
+        description: The most recent desired count of tasks that was specified for the service to deploy or maintain.
+      pendingCount:
+        $ref: '#/definitions/Integer'
+        description: The number of tasks in the deployment that are in the <code>PENDING</code> status.
+      runningCount:
+        $ref: '#/definitions/Integer'
+        description: The number of tasks in the deployment that are in the <code>RUNNING</code> status.
+      createdAt:
+        $ref: '#/definitions/Timestamp'
+        description: The Unix timestamp for when the service deployment was created.
+      updatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: The Unix timestamp for when the service deployment was last updated.
+      launchType:
+        $ref: '#/definitions/LaunchType'
+        description: 'The launch type the tasks in the service are using. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+      platformVersion:
+        $ref: '#/definitions/String'
+        description: 'The platform version on which your tasks in the service are running. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the <code>LATEST</code> platform version is used by default. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+      networkConfiguration:
+        $ref: '#/definitions/NetworkConfiguration'
+        description: The VPC subnet and security group configuration for tasks that receive their own elastic network interface by using the <code>awsvpc</code> networking mode.
+    description: The details of an Amazon ECS service deployment. This is used when a service uses the <code>CODE_DEPLOY</code> deployment controller type.
+  DeploymentControllerType:
+    type: string
+    enum:
+      - ECS
+      - CODE_DEPLOY
+  Deployments:
+    type: array
+    items:
+      $ref: '#/definitions/Deployment'
+  TaskDefinition:
+    type: object
+    properties:
+      taskDefinitionArn:
+        $ref: '#/definitions/String'
+        description: The full Amazon Resource Name (ARN) of the task definition.
+      containerDefinitions:
+        $ref: '#/definitions/ContainerDefinitions'
+        description: 'A list of container definitions in JSON format that describe the different containers that make up your task. For more information about container definition parameters and defaults, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html">Amazon ECS Task Definitions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+      family:
+        $ref: '#/definitions/String'
+        description: 'The family of your task definition, used as the definition name.'
+      taskRoleArn:
+        $ref: '#/definitions/String'
+        description: '<p>The ARN of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.</p> <p>IAM roles for tasks on Windows require that the <code>-EnableTaskIAMRole</code> option is set when you launch the Amazon ECS-optimized Windows AMI. Your containers must also run some configuration code in order to take advantage of the feature. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html">Windows IAM Roles for Tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
+      executionRoleArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.
+      networkMode:
+        $ref: '#/definitions/NetworkMode'
+        description: '<p>The Docker networking mode to use for the containers in the task. The valid values are <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>. The default Docker network mode is <code>bridge</code>. If you are using the Fargate launch type, the <code>awsvpc</code> network mode is required. If you are using the EC2 launch type, any network mode can be used. If the network mode is set to <code>none</code>, you cannot specify port mappings in your container definitions, and the tasks containers do not have external connectivity. The <code>host</code> and <code>awsvpc</code> network modes offer the highest networking performance for containers because they use the EC2 network stack instead of the virtualized network stack provided by the <code>bridge</code> mode.</p> <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container ports are mapped directly to the corresponding host port (for the <code>host</code> network mode) or the attached elastic network interface port (for the <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port mappings. </p> <p>If the network mode is <code>awsvpc</code>, the task is allocated an elastic network interface, and you must specify a <a>NetworkConfiguration</a> value when you create a service or run a task with the task definition. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html">Task Networking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <note> <p>Currently, only Amazon ECS-optimized AMIs, other Amazon Linux variants with the <code>ecs-init</code> package, or AWS Fargate infrastructure support the <code>awsvpc</code> network mode. </p> </note> <p>If the network mode is <code>host</code>, you cannot run multiple instantiations of the same task on a single container instance when port mappings are used.</p> <p>Docker for Windows uses different network modes than Docker for Linux. When you register a task definition with Windows containers, you must not specify a network mode. If you use the console to register a task definition with Windows containers, you must choose the <code>&lt;default&gt;</code> network mode object. </p> <p>For more information, see <a href="https://docs.docker.com/engine/reference/run/#network-settings">Network settings</a> in the <i>Docker run reference</i>.</p>'
+      revision:
+        $ref: '#/definitions/Integer'
+        description: 'The revision of the task in a particular family. The revision is a version number of a task definition in a family. When you register a task definition for the first time, the revision is <code>1</code>. Each time that you register a new revision of a task definition in the same family, the revision value always increases by one, even if you have deregistered previous revisions in this family.'
+      volumes:
+        $ref: '#/definitions/VolumeList'
+        description: '<p>The list of volumes in a task.</p> <p>If you are using the Fargate launch type, the <code>host</code> and <code>sourcePath</code> parameters are not supported.</p> <p>For more information about volume definition parameters and defaults, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html">Amazon ECS Task Definitions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
+      status:
+        $ref: '#/definitions/TaskDefinitionStatus'
+        description: The status of the task definition.
+      requiresAttributes:
+        $ref: '#/definitions/RequiresAttributes'
+        description: The container instance attributes required by your task. This field is not valid if you are using the Fargate launch type for your task.
+      placementConstraints:
+        $ref: '#/definitions/TaskDefinitionPlacementConstraints'
+        description: An array of placement constraint objects to use for tasks. This field is not valid if you are using the Fargate launch type for your task.
+      compatibilities:
+        $ref: '#/definitions/CompatibilityList'
+        description: 'The launch type to use with your task. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+      requiresCompatibilities:
+        $ref: '#/definitions/CompatibilityList'
+        description: The launch type that the task is using.
+      cpu:
+        $ref: '#/definitions/String'
+        description: '<p>The number of <code>cpu</code> units used by the task. If you are using the EC2 launch type, this field is optional and any value can be used. If you are using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the <code>memory</code> parameter:</p> <ul> <li> <p>256 (.25 vCPU) - Available <code>memory</code> values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)</p> </li> <li> <p>512 (.5 vCPU) - Available <code>memory</code> values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)</p> </li> <li> <p>1024 (1 vCPU) - Available <code>memory</code> values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)</p> </li> <li> <p>2048 (2 vCPU) - Available <code>memory</code> values: Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)</p> </li> <li> <p>4096 (4 vCPU) - Available <code>memory</code> values: Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)</p> </li> </ul>'
+      memory:
+        $ref: '#/definitions/String'
+        description: '<p>The amount (in MiB) of memory used by the task. If using the EC2 launch type, this field is optional and any value can be used. If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the <code>cpu</code> parameter:</p> <ul> <li> <p>512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available <code>cpu</code> values: 256 (.25 vCPU)</p> </li> <li> <p>1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available <code>cpu</code> values: 512 (.5 vCPU)</p> </li> <li> <p>2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available <code>cpu</code> values: 1024 (1 vCPU)</p> </li> <li> <p>Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 2048 (2 vCPU)</p> </li> <li> <p>Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 4096 (4 vCPU)</p> </li> </ul>'
+      pidMode:
+        $ref: '#/definitions/PidMode'
+        description: '<p>The process namespace to use for the containers in the task. The valid values are <code>host</code> or <code>task</code>. If <code>host</code> is specified, then all containers within the tasks that specified the <code>host</code> PID mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If <code>task</code> is specified, all containers within the specified task share the same process namespace. If no value is specified, the default is a private namespace. For more information, see <a href="https://docs.docker.com/engine/reference/run/#pid-settings---pid">PID settings</a> in the <i>Docker run reference</i>.</p> <p>If the <code>host</code> PID mode is used, be aware that there is a heightened risk of undesired process namespace expose. For more information, see <a href="https://docs.docker.com/engine/security/security/">Docker security</a>.</p> <note> <p>This parameter is not supported for Windows containers or tasks using the Fargate launch type.</p> </note>'
+      ipcMode:
+        $ref: '#/definitions/IpcMode'
+        description: '<p>The IPC resource namespace to use for the containers in the task. The valid values are <code>host</code>, <code>task</code>, or <code>none</code>. If <code>host</code> is specified, then all containers within the tasks that specified the <code>host</code> IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If <code>task</code> is specified, all containers within the specified task share the same IPC resources. If <code>none</code> is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see <a href="https://docs.docker.com/engine/reference/run/#ipc-settings---ipc">IPC settings</a> in the <i>Docker run reference</i>.</p> <p>If the <code>host</code> IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see <a href="https://docs.docker.com/engine/security/security/">Docker security</a>.</p> <p>If you are setting namespaced kernel parameters using <code>systemControls</code> for the containers in the task, the following will apply to your IPC resource namespace. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html">System Controls</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <ul> <li> <p>For tasks that use the <code>host</code> IPC mode, IPC namespace related <code>systemControls</code> are not supported.</p> </li> <li> <p>For tasks that use the <code>task</code> IPC mode, IPC namespace related <code>systemControls</code> will apply to all containers within a task.</p> </li> </ul> <note> <p>This parameter is not supported for Windows containers or tasks using the Fargate launch type.</p> </note>'
+    description: Details of a task definition.
+  Failures:
+    type: array
+    items:
+      $ref: '#/definitions/Failure'
+  ServiceFieldList:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceField'
+  Services:
+    type: array
+    items:
+      $ref: '#/definitions/Service'
+  TaskDefinitionFieldList:
+    type: array
+    items:
+      $ref: '#/definitions/TaskDefinitionField'
+  TaskFieldList:
+    type: array
+    items:
+      $ref: '#/definitions/TaskField'
+  Tasks:
+    type: array
+    items:
+      $ref: '#/definitions/Task'
+  DesiredStatus:
+    type: string
+    enum:
+      - RUNNING
+      - PENDING
+      - STOPPED
+  DeviceCgroupPermissions:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceCgroupPermission'
+  Device:
+    type: object
+    required:
+      - hostPath
+    properties:
+      hostPath:
+        $ref: '#/definitions/String'
+        description: The path for the device on the host container instance.
+      containerPath:
+        $ref: '#/definitions/String'
+        description: The path inside the container at which to expose the host device.
+      permissions:
+        $ref: '#/definitions/DeviceCgroupPermissions'
+        description: 'The explicit permissions to provide to the container for the device. By default, the container has permissions for <code>read</code>, <code>write</code>, and <code>mknod</code> for the device.'
+    description: An object representing a container instance host device.
+  DeviceCgroupPermission:
+    type: string
+    enum:
+      - read
+      - write
+      - mknod
+  DevicesList:
+    type: array
+    items:
+      $ref: '#/definitions/Device'
+  Scope:
+    type: string
+    enum:
+      - task
+      - shared
+  StringMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  DockerVolumeConfiguration:
+    type: object
+    properties:
+      scope:
+        $ref: '#/definitions/Scope'
+        description: The scope for the Docker volume that determines its lifecycle. Docker volumes that are scoped to a <code>task</code> are automatically provisioned when the task starts and destroyed when the task stops. Docker volumes that are scoped as <code>shared</code> persist after the task stops.
+      autoprovision:
+        $ref: '#/definitions/BoxedBoolean'
+        description: '<p>If this value is <code>true</code>, the Docker volume is created if it does not already exist.</p> <note> <p>This field is only used if the <code>scope</code> is <code>shared</code>.</p> </note>'
+      driver:
+        $ref: '#/definitions/String'
+        description: 'The Docker volume driver to use. The driver value must match the driver name provided by Docker because it is used for task placement. If the driver was installed using the Docker plugin CLI, use <code>docker plugin ls</code> to retrieve the driver name from your container instance. If the driver was installed using another method, use Docker plugin discovery to retrieve the driver name. For more information, see <a href="https://docs.docker.com/engine/extend/plugin_api/#plugin-discovery">Docker plugin discovery</a>. This parameter maps to <code>Driver</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate">Create a volume</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>xxdriver</code> option to <a href="https://docs.docker.com/engine/reference/commandline/volume_create/"> <code>docker volume create</code> </a>.'
+      driverOpts:
+        $ref: '#/definitions/StringMap'
+        description: 'A map of Docker driver-specific options passed through. This parameter maps to <code>DriverOpts</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate">Create a volume</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>xxopt</code> option to <a href="https://docs.docker.com/engine/reference/commandline/volume_create/"> <code>docker volume create</code> </a>.'
+      labels:
+        $ref: '#/definitions/StringMap'
+        description: 'Custom metadata to add to your Docker volume. This parameter maps to <code>Labels</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/VolumeCreate">Create a volume</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>xxlabel</code> option to <a href="https://docs.docker.com/engine/reference/commandline/volume_create/"> <code>docker volume create</code> </a>.'
+    description: 'This parameter is specified when you are using Docker volumes. Docker volumes are only supported when you are using the EC2 launch type. Windows containers only support the use of the <code>local</code> driver. To use bind mounts, specify a <code>host</code> instead.'
+  Double:
+    type: number
+    format: double
+  Failure:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the failed resource.
+      reason:
+        $ref: '#/definitions/String'
+        description: The reason for the failure.
+    description: A failed resource.
+  HostEntry:
+    type: object
+    required:
+      - hostname
+      - ipAddress
+    properties:
+      hostname:
+        $ref: '#/definitions/String'
+        description: The hostname to use in the <code>/etc/hosts</code> entry.
+      ipAddress:
+        $ref: '#/definitions/String'
+        description: The IP address to use in the <code>/etc/hosts</code> entry.
+    description: 'Hostnames and IP address entries that are added to the <code>/etc/hosts</code> file of a container via the <code>extraHosts</code> parameter of its <a>ContainerDefinition</a>. '
+  HostVolumeProperties:
+    type: object
+    properties:
+      sourcePath:
+        $ref: '#/definitions/String'
+        description: '<p>When the <code>host</code> parameter is used, specify a <code>sourcePath</code> to declare the path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If the <code>host</code> parameter contains a <code>sourcePath</code> file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the <code>sourcePath</code> value does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.</p> <p>If you are using the Fargate launch type, the <code>sourcePath</code> parameter is not supported.</p>'
+    description: Details on a container instance bind mount host volume.
+  IpcMode:
+    type: string
+    enum:
+      - host
+      - task
+      - none
+  KernelCapabilities:
+    type: object
+    properties:
+      add:
+        $ref: '#/definitions/StringList'
+        description: '<p>The Linux capabilities for the container that have been added to the default configuration provided by Docker. This parameter maps to <code>CapAdd</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--cap-add</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <note> <p>If you are using tasks that use the Fargate launch type, the <code>add</code> parameter is not supported.</p> </note> <p>Valid values: <code>"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM"</code> </p>'
+      drop:
+        $ref: '#/definitions/StringList'
+        description: '<p>The Linux capabilities for the container that have been removed from the default configuration provided by Docker. This parameter maps to <code>CapDrop</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--cap-drop</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <p>Valid values: <code>"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM"</code> </p>'
+    description: 'The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker. For more information on the default capabilities and the non-default available capabilities, see <a href="https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities">Runtime privilege and Linux capabilities</a> in the <i>Docker run reference</i>. For more detailed information on these Linux capabilities, see the <a href="http://man7.org/linux/man-pages/man7/capabilities.7.html">capabilities(7)</a> Linux manual page.'
+  TmpfsList:
+    type: array
+    items:
+      $ref: '#/definitions/Tmpfs'
+  Settings:
+    type: array
+    items:
+      $ref: '#/definitions/Setting'
+  TaskDefinitionFamilyStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
+      - ALL
+  TaskDefinitionStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
+  SortOrder:
+    type: string
+    enum:
+      - ASC
+      - DESC
+  LoadBalancer:
+    type: object
+    properties:
+      targetGroupArn:
+        $ref: '#/definitions/String'
+        description: '<p>The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service. For services using the <code>ECS</code> deployment controller, you are limited to one target group. For services using the <code>CODE_DEPLOY</code> deployment controller, you are required to define two target groups for the load balancer.</p> <important> <p>If your service''s task definition uses the <code>awsvpc</code> network mode (which is required for the Fargate launch type), you must choose <code>ip</code> as the target type, not <code>instance</code>, because tasks that use the <code>awsvpc</code> network mode are associated with an elastic network interface, not an Amazon EC2 instance.</p> </important>'
+      loadBalancerName:
+        $ref: '#/definitions/String'
+        description: The name of a load balancer.
+      containerName:
+        $ref: '#/definitions/String'
+        description: The name of the container (as it appears in a container definition) to associate with the load balancer.
+      containerPort:
+        $ref: '#/definitions/BoxedInteger'
+        description: The port on the container to associate with the load balancer. This port must correspond to a <code>containerPort</code> in the service's task definition. Your container instances must allow ingress traffic on the <code>hostPort</code> of the port mapping.
+    description: '<p>Details on a load balancer that is used with a service.</p> <p>If the service is using the <code>ECS</code> deployment controller, you are limited to one load balancer or target group.</p> <p>If the service is using the <code>CODE_DEPLOY</code> deployment controller, the service is required to use either an Application Load Balancer or Network Load Balancer. When you are creating an AWS CodeDeploy deployment group, you specify two target groups (referred to as a <code>targetGroupPair</code>). Each target group binds to a separate task set in the deployment. The load balancer can also have up to two listeners, a required listener for production traffic and an optional listener that allows you to test new revisions of the service before routing production traffic to it.</p> <p>Services with tasks that use the <code>awsvpc</code> network mode (for example, those with the Fargate launch type) only support Application Load Balancers and Network Load Balancers. Classic Load Balancers are not supported. Also, when you create any target groups for these services, you must choose <code>ip</code> as the target type, not <code>instance</code>. Tasks that use the <code>awsvpc</code> network mode are associated with an elastic network interface, not an Amazon EC2 instance.</p>'
+  LogDriver:
+    type: string
+    enum:
+      - json-file
+      - syslog
+      - journald
+      - gelf
+      - fluentd
+      - awslogs
+      - splunk
+  LogConfigurationOptionsMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  MountPoint:
+    type: object
+    properties:
+      sourceVolume:
+        $ref: '#/definitions/String'
+        description: The name of the volume to mount. Must be a volume name referenced in the <code>name</code> parameter of task definition <code>volume</code>.
+      containerPath:
+        $ref: '#/definitions/String'
+        description: The path on the container to mount the host volume at.
+      readOnly:
+        $ref: '#/definitions/BoxedBoolean'
+        description: 'If this value is <code>true</code>, the container has read-only access to the volume. If this value is <code>false</code>, then the container can write to the volume. The default value is <code>false</code>.'
+    description: Details on a volume mount point that is used in a container definition.
+  TransportProtocol:
+    type: string
+    enum:
+      - tcp
+      - udp
+  NetworkBinding:
+    type: object
+    properties:
+      bindIP:
+        $ref: '#/definitions/String'
+        description: The IP address that the container is bound to on the container instance.
+      containerPort:
+        $ref: '#/definitions/BoxedInteger'
+        description: The port number on the container that is used with the network binding.
+      hostPort:
+        $ref: '#/definitions/BoxedInteger'
+        description: The port number on the host that is used with the network binding.
+      protocol:
+        $ref: '#/definitions/TransportProtocol'
+        description: The protocol used for the network binding.
+    description: 'Details on the network bindings between a container and its host container instance. After a task reaches the <code>RUNNING</code> status, manual and automatic host and container port assignments are visible in the <code>networkBindings</code> section of <a>DescribeTasks</a> API responses.'
+  NetworkInterface:
+    type: object
+    properties:
+      attachmentId:
+        $ref: '#/definitions/String'
+        description: The attachment ID for the network interface.
+      privateIpv4Address:
+        $ref: '#/definitions/String'
+        description: The private IPv4 address for the network interface.
+      ipv6Address:
+        $ref: '#/definitions/String'
+        description: The private IPv6 address for the network interface.
+    description: An object representing the elastic network interface for tasks that use the <code>awsvpc</code> network mode.
+  NetworkMode:
+    type: string
+    enum:
+      - bridge
+      - host
+      - awsvpc
+      - none
+  PidMode:
+    type: string
+    enum:
+      - host
+      - task
+  PlacementConstraintType:
+    type: string
+    enum:
+      - distinctInstance
+      - memberOf
+  PlacementConstraint:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/PlacementConstraintType'
+        description: The type of constraint. Use <code>distinctInstance</code> to ensure that each task in a particular group is running on a different container instance. Use <code>memberOf</code> to restrict the selection to a group of valid candidates. The value <code>distinctInstance</code> is not supported in task definitions.
+      expression:
+        $ref: '#/definitions/String'
+        description: 'A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is <code>distinctInstance</code>. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster Query Language</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+    description: 'An object representing a constraint on task placement. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html">Task Placement Constraints</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+  PlacementStrategy:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/PlacementStrategyType'
+        description: 'The type of placement strategy. The <code>random</code> placement strategy randomly places tasks on available candidates. The <code>spread</code> placement strategy spreads placement across available candidates evenly based on the <code>field</code> parameter. The <code>binpack</code> strategy places tasks on available candidates that have the least available amount of the resource that is specified with the <code>field</code> parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task).'
+      field:
+        $ref: '#/definitions/String'
+        description: 'The field to apply the placement strategy against. For the <code>spread</code> placement strategy, valid values are <code>instanceId</code> (or <code>host</code>, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as <code>attribute:ecs.availability-zone</code>. For the <code>binpack</code> placement strategy, valid values are <code>cpu</code> and <code>memory</code>. For the <code>random</code> placement strategy, this field is not used.'
+    description: 'The task placement strategy for a task or service. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html">Task Placement Strategies</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+  PlacementStrategyType:
+    type: string
+    enum:
+      - random
+      - spread
+      - binpack
+  PortMapping:
+    type: object
+    properties:
+      containerPort:
+        $ref: '#/definitions/BoxedInteger'
+        description: '<p>The port number on the container that is bound to the user-specified or automatically assigned host port.</p> <p>If you are using containers in a task with the <code>awsvpc</code> or <code>host</code> network mode, exposed ports should be specified using <code>containerPort</code>.</p> <p>If you are using containers in a task with the <code>bridge</code> network mode and you specify a container port and not a host port, your container automatically receives a host port in the ephemeral port range. For more information, see <code>hostPort</code>. Port mappings that are automatically assigned in this way do not count toward the 100 reserved ports limit of a container instance.</p>'
+      hostPort:
+        $ref: '#/definitions/BoxedInteger'
+        description: '<p>The port number on the container instance to reserve for your container.</p> <p>If you are using containers in a task with the <code>awsvpc</code> or <code>host</code> network mode, the <code>hostPort</code> can either be left blank or set to the same value as the <code>containerPort</code>.</p> <p>If you are using containers in a task with the <code>bridge</code> network mode, you can specify a non-reserved host port for your container port mapping, or you can omit the <code>hostPort</code> (or set it to <code>0</code>) while specifying a <code>containerPort</code> and your container automatically receives a port in the ephemeral port range for your container instance operating system and Docker version.</p> <p>The default ephemeral port range for Docker version 1.6.0 and later is listed on the instance under <code>/proc/sys/net/ipv4/ip_local_port_range</code>. If this kernel parameter is unavailable, the default ephemeral port range from 49153 through 65535 is used. Do not attempt to specify a host port in the ephemeral port range as these are reserved for automatic assignment. In general, ports below 32768 are outside of the ephemeral port range.</p> <note> <p>The default ephemeral port range from 49153 through 65535 is always used for Docker versions before 1.6.0.</p> </note> <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the Amazon ECS container agent ports 51678 and 51679. Any host port that was previously specified in a running task is also reserved while the task is running (after a task stops, the host port is released). The current reserved ports are displayed in the <code>remainingResources</code> of <a>DescribeContainerInstances</a> output. A container instance may have up to 100 reserved ports at a time, including the default reserved ports. Aautomatically assigned ports do not count toward the 100 reserved ports limit.</p>'
+      protocol:
+        $ref: '#/definitions/TransportProtocol'
+        description: The protocol used for the port mapping. Valid values are <code>tcp</code> and <code>udp</code>. The default is <code>tcp</code>.
+    description: '<p>Port mappings allow containers to access ports on the host container instance to send or receive traffic. Port mappings are specified as part of the container definition.</p> <p>If you are using containers in a task with the <code>awsvpc</code> or <code>host</code> network mode, exposed ports should be specified using <code>containerPort</code>. The <code>hostPort</code> can be left blank or it must be the same value as the <code>containerPort</code>.</p> <p>After a task reaches the <code>RUNNING</code> status, manual and automatic host and container port assignments are visible in the <code>networkBindings</code> section of <a>DescribeTasks</a> API responses.</p>'
+  VolumeList:
+    type: array
+    items:
+      $ref: '#/definitions/Volume'
+  TaskDefinitionPlacementConstraints:
+    type: array
+    items:
+      $ref: '#/definitions/TaskDefinitionPlacementConstraint'
+  RequiresAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/Attribute'
+  Resource:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/String'
+        description: 'The name of the resource, such as <code>CPU</code>, <code>MEMORY</code>, <code>PORTS</code>, <code>PORTS_UDP</code>, or a user-defined resource.'
+      type:
+        $ref: '#/definitions/String'
+        description: 'The type of the resource, such as <code>INTEGER</code>, <code>DOUBLE</code>, <code>LONG</code>, or <code>STRINGSET</code>.'
+      doubleValue:
+        $ref: '#/definitions/Double'
+        description: 'When the <code>doubleValue</code> type is set, the value of the resource must be a double precision floating-point type.'
+      longValue:
+        $ref: '#/definitions/Long'
+        description: 'When the <code>longValue</code> type is set, the value of the resource must be an extended precision floating-point type.'
+      integerValue:
+        $ref: '#/definitions/Integer'
+        description: 'When the <code>integerValue</code> type is set, the value of the resource must be an integer.'
+      stringSetValue:
+        $ref: '#/definitions/StringList'
+        description: 'When the <code>stringSetValue</code> type is set, the value of the resource must be a string type.'
+    description: Describes the resources available for a container instance.
+  TaskOverride:
+    type: object
+    properties:
+      containerOverrides:
+        $ref: '#/definitions/ContainerOverrides'
+        description: One or more container overrides sent to a task.
+      taskRoleArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
+      executionRoleArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.
+    description: The overrides associated with a task.
+  ScaleUnit:
+    type: string
+    enum:
+      - PERCENT
+  Scale:
+    type: object
+    properties:
+      value:
+        $ref: '#/definitions/Double'
+        description: 'The value, specified as a percent total of a service''s <code>desiredCount</code>, to scale the task set.'
+      unit:
+        $ref: '#/definitions/ScaleUnit'
+        description: The unit of measure for the scale value.
+    description: A floating-point percentage of the desired number of tasks to place and keep running in the service. This is used when a service uses the <code>CODE_DEPLOY</code> deployment controller type.
+  Secret:
+    type: object
+    required:
+      - name
+      - valueFrom
+    properties:
+      name:
+        $ref: '#/definitions/String'
+        description: The value to set as the environment variable on the container.
+      valueFrom:
+        $ref: '#/definitions/String'
+        description: 'The secret to expose to the container. Supported values are either the full ARN or the name of the parameter in the AWS Systems Manager Parameter Store. '
+    description: An object representing the secret to expose to your container.
+  TaskSets:
+    type: array
+    items:
+      $ref: '#/definitions/TaskSet'
+  ServiceEvents:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceEvent'
   ServiceEvent:
     type: object
     properties:
@@ -4055,22 +4265,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The event message.
     description: Details on an event associated with a service.
-  ServiceEvents:
-    type: array
-    items:
-      $ref: '#/definitions/ServiceEvent'
   ServiceField:
     type: string
     enum:
       - TAGS
-  ServiceFieldList:
-    type: array
-    items:
-      $ref: '#/definitions/ServiceField'
-  ServiceRegistries:
-    type: array
-    items:
-      $ref: '#/definitions/ServiceRegistry'
   ServiceRegistry:
     type: object
     properties:
@@ -4087,108 +4285,11 @@ definitions:
         $ref: '#/definitions/BoxedInteger'
         description: 'The port value, already specified in the task definition, to be used for your service discovery service. If the task definition your service task specifies uses the <code>bridge</code> or <code>host</code> network mode, you must specify a <code>containerName</code> and <code>containerPort</code> combination from the task definition. If the task definition your service task specifies uses the <code>awsvpc</code> network mode and a type SRV DNS record is used, you must specify either a <code>containerName</code> and <code>containerPort</code> combination or a <code>port</code> value, but not both.'
     description: Details of the service registry.
-  Services:
-    type: array
-    items:
-      $ref: '#/definitions/Service'
-  Setting:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/SettingName'
-        description: The account resource name.
-      value:
-        $ref: '#/definitions/String'
-        description: 'The current account setting for the resource name. If <code>enabled</code>, then the resource will receive the new Amazon Resource Name (ARN) and resource identifier (ID) format. If <code>disabled</code>, then the resource will receive the old Amazon Resource Name (ARN) and resource identifier (ID) format.'
-      principalArn:
-        $ref: '#/definitions/String'
-        description: 'The ARN of the principal, which can be an IAM user, IAM role, or the root user. If this field is omitted, the authenticated user is assumed.'
-    description: The current account setting for a resource.
-  SettingName:
-    type: string
-    enum:
-      - serviceLongArnFormat
-      - taskLongArnFormat
-      - containerInstanceLongArnFormat
-  Settings:
-    type: array
-    items:
-      $ref: '#/definitions/Setting'
-  SortOrder:
-    type: string
-    enum:
-      - ASC
-      - DESC
   StabilityStatus:
     type: string
     enum:
       - STEADY_STATE
       - STABILIZING
-  Statistics:
-    type: array
-    items:
-      $ref: '#/definitions/KeyValuePair'
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  StringMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  SystemControl:
-    type: object
-    properties:
-      namespace:
-        $ref: '#/definitions/String'
-        description: The namespaced kernel parameter for which to set a <code>value</code>.
-      value:
-        $ref: '#/definitions/String'
-        description: The value for the namespaced kernel parameter specified in <code>namespace</code>.
-    description: '<p>A list of namespaced kernel parameters to set in the container. This parameter maps to <code>Sysctls</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--sysctl</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <p>It is not recommended that you specify network-related <code>systemControls</code> parameters for multiple containers in a single task that also uses either the <code>awsvpc</code> or <code>host</code> network mode for the following reasons:</p> <ul> <li> <p>For tasks that use the <code>awsvpc</code> network mode, if you set <code>systemControls</code> for any container, it applies to all containers in the task. If you set different <code>systemControls</code> for multiple containers in a single task, the container that is started last determines which <code>systemControls</code> take effect.</p> </li> <li> <p>For tasks that use the <code>host</code> network mode, the <code>systemControls</code> parameter applies to the container instance''s kernel parameter as well as that of all containers of any tasks running on that container instance.</p> </li> </ul>'
-  SystemControls:
-    type: array
-    items:
-      $ref: '#/definitions/SystemControl'
-  Tag:
-    type: object
-    properties:
-      key:
-        $ref: '#/definitions/TagKey'
-        description: One part of a key-value pair that make up a tag. A <code>key</code> is a general label that acts like a category for more specific tag values.
-      value:
-        $ref: '#/definitions/TagValue'
-        description: The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a descriptor within a tag category (key).
-    description: 'The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeys:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 0
-    maxItems: 50
-  TargetType:
-    type: string
-    enum:
-      - container-instance
   Task:
     type: object
     properties:
@@ -4280,75 +4381,54 @@ definitions:
         $ref: '#/definitions/Tags'
         description: 'The metadata that you apply to the task to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
     description: Details on a task in a cluster.
-  TaskDefinition:
+  SystemControl:
     type: object
     properties:
-      taskDefinitionArn:
+      namespace:
         $ref: '#/definitions/String'
-        description: The full Amazon Resource Name (ARN) of the task definition.
-      containerDefinitions:
-        $ref: '#/definitions/ContainerDefinitions'
-        description: 'A list of container definitions in JSON format that describe the different containers that make up your task. For more information about container definition parameters and defaults, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html">Amazon ECS Task Definitions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
-      family:
+        description: The namespaced kernel parameter for which to set a <code>value</code>.
+      value:
         $ref: '#/definitions/String'
-        description: 'The family of your task definition, used as the definition name.'
-      taskRoleArn:
-        $ref: '#/definitions/String'
-        description: '<p>The ARN of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.</p> <p>IAM roles for tasks on Windows require that the <code>-EnableTaskIAMRole</code> option is set when you launch the Amazon ECS-optimized Windows AMI. Your containers must also run some configuration code in order to take advantage of the feature. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html">Windows IAM Roles for Tasks</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
-      executionRoleArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.
-      networkMode:
-        $ref: '#/definitions/NetworkMode'
-        description: '<p>The Docker networking mode to use for the containers in the task. The valid values are <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>. The default Docker network mode is <code>bridge</code>. If you are using the Fargate launch type, the <code>awsvpc</code> network mode is required. If you are using the EC2 launch type, any network mode can be used. If the network mode is set to <code>none</code>, you cannot specify port mappings in your container definitions, and the tasks containers do not have external connectivity. The <code>host</code> and <code>awsvpc</code> network modes offer the highest networking performance for containers because they use the EC2 network stack instead of the virtualized network stack provided by the <code>bridge</code> mode.</p> <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container ports are mapped directly to the corresponding host port (for the <code>host</code> network mode) or the attached elastic network interface port (for the <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port mappings. </p> <p>If the network mode is <code>awsvpc</code>, the task is allocated an elastic network interface, and you must specify a <a>NetworkConfiguration</a> value when you create a service or run a task with the task definition. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html">Task Networking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <note> <p>Currently, only Amazon ECS-optimized AMIs, other Amazon Linux variants with the <code>ecs-init</code> package, or AWS Fargate infrastructure support the <code>awsvpc</code> network mode. </p> </note> <p>If the network mode is <code>host</code>, you cannot run multiple instantiations of the same task on a single container instance when port mappings are used.</p> <p>Docker for Windows uses different network modes than Docker for Linux. When you register a task definition with Windows containers, you must not specify a network mode. If you use the console to register a task definition with Windows containers, you must choose the <code>&lt;default&gt;</code> network mode object. </p> <p>For more information, see <a href="https://docs.docker.com/engine/reference/run/#network-settings">Network settings</a> in the <i>Docker run reference</i>.</p>'
-      revision:
-        $ref: '#/definitions/Integer'
-        description: 'The revision of the task in a particular family. The revision is a version number of a task definition in a family. When you register a task definition for the first time, the revision is <code>1</code>. Each time that you register a new revision of a task definition in the same family, the revision value always increases by one, even if you have deregistered previous revisions in this family.'
-      volumes:
-        $ref: '#/definitions/VolumeList'
-        description: '<p>The list of volumes in a task.</p> <p>If you are using the Fargate launch type, the <code>host</code> and <code>sourcePath</code> parameters are not supported.</p> <p>For more information about volume definition parameters and defaults, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html">Amazon ECS Task Definitions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
-      status:
-        $ref: '#/definitions/TaskDefinitionStatus'
-        description: The status of the task definition.
-      requiresAttributes:
-        $ref: '#/definitions/RequiresAttributes'
-        description: The container instance attributes required by your task. This field is not valid if you are using the Fargate launch type for your task.
-      placementConstraints:
-        $ref: '#/definitions/TaskDefinitionPlacementConstraints'
-        description: An array of placement constraint objects to use for tasks. This field is not valid if you are using the Fargate launch type for your task.
-      compatibilities:
-        $ref: '#/definitions/CompatibilityList'
-        description: 'The launch type to use with your task. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html">Amazon ECS Launch Types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
-      requiresCompatibilities:
-        $ref: '#/definitions/CompatibilityList'
-        description: The launch type that the task is using.
-      cpu:
-        $ref: '#/definitions/String'
-        description: '<p>The number of <code>cpu</code> units used by the task. If you are using the EC2 launch type, this field is optional and any value can be used. If you are using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the <code>memory</code> parameter:</p> <ul> <li> <p>256 (.25 vCPU) - Available <code>memory</code> values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)</p> </li> <li> <p>512 (.5 vCPU) - Available <code>memory</code> values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)</p> </li> <li> <p>1024 (1 vCPU) - Available <code>memory</code> values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)</p> </li> <li> <p>2048 (2 vCPU) - Available <code>memory</code> values: Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)</p> </li> <li> <p>4096 (4 vCPU) - Available <code>memory</code> values: Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)</p> </li> </ul>'
-      memory:
-        $ref: '#/definitions/String'
-        description: '<p>The amount (in MiB) of memory used by the task. If using the EC2 launch type, this field is optional and any value can be used. If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the <code>cpu</code> parameter:</p> <ul> <li> <p>512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available <code>cpu</code> values: 256 (.25 vCPU)</p> </li> <li> <p>1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available <code>cpu</code> values: 512 (.5 vCPU)</p> </li> <li> <p>2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available <code>cpu</code> values: 1024 (1 vCPU)</p> </li> <li> <p>Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 2048 (2 vCPU)</p> </li> <li> <p>Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 4096 (4 vCPU)</p> </li> </ul>'
-      pidMode:
-        $ref: '#/definitions/PidMode'
-        description: '<p>The process namespace to use for the containers in the task. The valid values are <code>host</code> or <code>task</code>. If <code>host</code> is specified, then all containers within the tasks that specified the <code>host</code> PID mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If <code>task</code> is specified, all containers within the specified task share the same process namespace. If no value is specified, the default is a private namespace. For more information, see <a href="https://docs.docker.com/engine/reference/run/#pid-settings---pid">PID settings</a> in the <i>Docker run reference</i>.</p> <p>If the <code>host</code> PID mode is used, be aware that there is a heightened risk of undesired process namespace expose. For more information, see <a href="https://docs.docker.com/engine/security/security/">Docker security</a>.</p> <note> <p>This parameter is not supported for Windows containers or tasks using the Fargate launch type.</p> </note>'
-      ipcMode:
-        $ref: '#/definitions/IpcMode'
-        description: '<p>The IPC resource namespace to use for the containers in the task. The valid values are <code>host</code>, <code>task</code>, or <code>none</code>. If <code>host</code> is specified, then all containers within the tasks that specified the <code>host</code> IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If <code>task</code> is specified, all containers within the specified task share the same IPC resources. If <code>none</code> is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see <a href="https://docs.docker.com/engine/reference/run/#ipc-settings---ipc">IPC settings</a> in the <i>Docker run reference</i>.</p> <p>If the <code>host</code> IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see <a href="https://docs.docker.com/engine/security/security/">Docker security</a>.</p> <p>If you are setting namespaced kernel parameters using <code>systemControls</code> for the containers in the task, the following will apply to your IPC resource namespace. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html">System Controls</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <ul> <li> <p>For tasks that use the <code>host</code> IPC mode, IPC namespace related <code>systemControls</code> are not supported.</p> </li> <li> <p>For tasks that use the <code>task</code> IPC mode, IPC namespace related <code>systemControls</code> will apply to all containers within a task.</p> </li> </ul> <note> <p>This parameter is not supported for Windows containers or tasks using the Fargate launch type.</p> </note>'
-    description: Details of a task definition.
-  TaskDefinitionFamilyStatus:
+        description: The value for the namespaced kernel parameter specified in <code>namespace</code>.
+    description: '<p>A list of namespaced kernel parameters to set in the container. This parameter maps to <code>Sysctls</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--sysctl</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <p>It is not recommended that you specify network-related <code>systemControls</code> parameters for multiple containers in a single task that also uses either the <code>awsvpc</code> or <code>host</code> network mode for the following reasons:</p> <ul> <li> <p>For tasks that use the <code>awsvpc</code> network mode, if you set <code>systemControls</code> for any container, it applies to all containers in the task. If you set different <code>systemControls</code> for multiple containers in a single task, the container that is started last determines which <code>systemControls</code> take effect.</p> </li> <li> <p>For tasks that use the <code>host</code> network mode, the <code>systemControls</code> parameter applies to the container instance''s kernel parameter as well as that of all containers of any tasks running on that container instance.</p> </li> </ul>'
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: One part of a key-value pair that make up a tag. A <code>key</code> is a general label that acts like a category for more specific tag values.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a descriptor within a tag category (key).
+    description: 'The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+  TagKeys:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  TaskStopCode:
     type: string
     enum:
-      - ACTIVE
-      - INACTIVE
-      - ALL
+      - TaskFailedToStart
+      - EssentialContainerExited
+      - UserInitiated
   TaskDefinitionField:
     type: string
     enum:
       - TAGS
-  TaskDefinitionFieldList:
-    type: array
-    items:
-      $ref: '#/definitions/TaskDefinitionField'
+  TaskDefinitionPlacementConstraintType:
+    type: string
+    enum:
+      - memberOf
   TaskDefinitionPlacementConstraint:
     type: object
     properties:
@@ -4359,40 +4439,10 @@ definitions:
         $ref: '#/definitions/String'
         description: 'A cluster query language expression to apply to the constraint. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster Query Language</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
     description: '<p>An object representing a constraint on task placement in the task definition.</p> <p>If you are using the Fargate launch type, task placement constraints are not supported.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html">Task Placement Constraints</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
-  TaskDefinitionPlacementConstraintType:
-    type: string
-    enum:
-      - memberOf
-  TaskDefinitionPlacementConstraints:
-    type: array
-    items:
-      $ref: '#/definitions/TaskDefinitionPlacementConstraint'
-  TaskDefinitionStatus:
-    type: string
-    enum:
-      - ACTIVE
-      - INACTIVE
   TaskField:
     type: string
     enum:
       - TAGS
-  TaskFieldList:
-    type: array
-    items:
-      $ref: '#/definitions/TaskField'
-  TaskOverride:
-    type: object
-    properties:
-      containerOverrides:
-        $ref: '#/definitions/ContainerOverrides'
-        description: One or more container overrides sent to a task.
-      taskRoleArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
-      executionRoleArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.
-    description: The overrides associated with a task.
   TaskSet:
     type: object
     properties:
@@ -4451,23 +4501,6 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The Unix timestamp for when the task set stability status was retrieved.
     description: 'Information about a set of Amazon ECS tasks in an AWS CodeDeploy deployment. An Amazon ECS task set includes details such as the desired number of tasks, how many tasks are running, and whether the task set serves production traffic.'
-  TaskSets:
-    type: array
-    items:
-      $ref: '#/definitions/TaskSet'
-  TaskStopCode:
-    type: string
-    enum:
-      - TaskFailedToStart
-      - EssentialContainerExited
-      - UserInitiated
-  Tasks:
-    type: array
-    items:
-      $ref: '#/definitions/Task'
-  Timestamp:
-    type: string
-    format: date-time
   Tmpfs:
     type: object
     required:
@@ -4484,36 +4517,6 @@ definitions:
         $ref: '#/definitions/StringList'
         description: '<p>The list of tmpfs volume mount options.</p> <p>Valid values: <code>"defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" | "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" | "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" | "nr_inodes" | "nr_blocks" | "mpol"</code> </p>'
     description: 'The container path, mount options, and size of the tmpfs mount.'
-  TmpfsList:
-    type: array
-    items:
-      $ref: '#/definitions/Tmpfs'
-  TransportProtocol:
-    type: string
-    enum:
-      - tcp
-      - udp
-  Ulimit:
-    type: object
-    required:
-      - name
-      - softLimit
-      - hardLimit
-    properties:
-      name:
-        $ref: '#/definitions/UlimitName'
-        description: The <code>type</code> of the <code>ulimit</code>.
-      softLimit:
-        $ref: '#/definitions/Integer'
-        description: The soft limit for the ulimit type.
-      hardLimit:
-        $ref: '#/definitions/Integer'
-        description: The hard limit for the ulimit type.
-    description: The <code>ulimit</code> settings to pass to the container.
-  UlimitList:
-    type: array
-    items:
-      $ref: '#/definitions/Ulimit'
   UlimitName:
     type: string
     enum:
@@ -4532,19 +4535,23 @@ definitions:
       - rttime
       - sigpending
       - stack
-  VersionInfo:
+  Ulimit:
     type: object
+    required:
+      - name
+      - softLimit
+      - hardLimit
     properties:
-      agentVersion:
-        $ref: '#/definitions/String'
-        description: The version number of the Amazon ECS container agent.
-      agentHash:
-        $ref: '#/definitions/String'
-        description: 'The Git commit hash for the Amazon ECS container agent build on the <a href="https://github.com/aws/amazon-ecs-agent/commits/master">amazon-ecs-agent </a> GitHub repository.'
-      dockerVersion:
-        $ref: '#/definitions/String'
-        description: The Docker version running on the container instance.
-    description: The Docker and Amazon ECS container agent version information about a container instance.
+      name:
+        $ref: '#/definitions/UlimitName'
+        description: The <code>type</code> of the <code>ulimit</code>.
+      softLimit:
+        $ref: '#/definitions/Integer'
+        description: The soft limit for the ulimit type.
+      hardLimit:
+        $ref: '#/definitions/Integer'
+        description: The hard limit for the ulimit type.
+    description: The <code>ulimit</code> settings to pass to the container.
   Volume:
     type: object
     properties:
@@ -4568,11 +4575,3 @@ definitions:
         $ref: '#/definitions/BoxedBoolean'
         description: 'If this value is <code>true</code>, the container has read-only access to the volume. If this value is <code>false</code>, then the container can write to the volume. The default value is <code>false</code>.'
     description: Details on a data volume from another container in the same task definition.
-  VolumeFromList:
-    type: array
-    items:
-      $ref: '#/definitions/VolumeFrom'
-  VolumeList:
-    type: array
-    items:
-      $ref: '#/definitions/Volume'

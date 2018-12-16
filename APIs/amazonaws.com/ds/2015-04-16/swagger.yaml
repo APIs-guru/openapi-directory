@@ -3392,11 +3392,57 @@ definitions:
         $ref: '#/definitions/TrustId'
         description: The unique Trust ID of the trust relationship to verify.
     description: Initiates the verification of an existing trust relationship between an AWS Managed Microsoft AD directory and an external domain.
-  undefined: {}
+  DirectoryId:
+    type: string
+    pattern: '^d-[0-9a-f]{10}$'
+  SharedDirectory:
+    type: object
+    properties:
+      OwnerAccountId:
+        $ref: '#/definitions/CustomerId'
+        description: 'Identifier of the directory owner account, which contains the directory that has been shared to the consumer account.'
+      OwnerDirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: 'Identifier of the directory in the directory owner account. '
+      ShareMethod:
+        $ref: '#/definitions/ShareMethod'
+        description: The method used when sharing a directory to determine whether the directory should be shared within your AWS organization (<code>ORGANIZATIONS</code>) or with any AWS account by sending a shared directory request (<code>HANDSHAKE</code>).
+      SharedAccountId:
+        $ref: '#/definitions/CustomerId'
+        description: Identifier of the directory consumer account that has access to the shared directory (<code>OwnerDirectoryId</code>) in the directory owner account.
+      SharedDirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account.
+      ShareStatus:
+        $ref: '#/definitions/ShareStatus'
+        description: Current directory status of the shared AWS Managed Microsoft AD directory.
+      ShareNotes:
+        $ref: '#/definitions/Notes'
+        description: A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.
+      CreatedDateTime:
+        $ref: '#/definitions/CreatedDateTime'
+        description: The date and time that the shared directory was created.
+      LastUpdatedDateTime:
+        $ref: '#/definitions/LastUpdatedDateTime'
+        description: The date and time that the shared directory was last updated.
+    description: Details about the shared directory in the directory owner account for which the share request in the directory consumer account has been accepted.
   AccessUrl:
     type: string
     minLength: 1
     maxLength: 128
+  IpRoutes:
+    type: array
+    items:
+      $ref: '#/definitions/IpRoute'
+  UpdateSecurityGroupForDirectoryControllers:
+    type: boolean
+  ResourceId:
+    type: string
+    pattern: '^[d]-[0-9a-f]{10}$'
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   AddedDateTime:
     type: string
     format: date-time
@@ -3405,6 +3451,11 @@ definitions:
     pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*'
     minLength: 1
     maxLength: 62
+  AttributeName:
+    type: string
+    minLength: 1
+  AttributeValue:
+    type: string
   Attribute:
     type: object
     properties:
@@ -3415,11 +3466,6 @@ definitions:
         $ref: '#/definitions/AttributeValue'
         description: The value of the attribute.
     description: Represents a named directory attribute.
-  AttributeName:
-    type: string
-    minLength: 1
-  AttributeValue:
-    type: string
   Attributes:
     type: array
     items:
@@ -3430,6 +3476,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AvailabilityZone'
+  SchemaExtensionId:
+    type: string
+    pattern: '^e-[0-9a-f]{10}$'
   CidrIp:
     type: string
     pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([1-9]|[1-2][0-9]|3[0-2]))$'
@@ -3439,6 +3488,15 @@ definitions:
       $ref: '#/definitions/CidrIp'
   CloudOnlyDirectoriesLimitReached:
     type: boolean
+  SID:
+    type: string
+    pattern: '[&\w+-.@]+'
+    minLength: 1
+    maxLength: 256
+  ComputerName:
+    type: string
+    minLength: 1
+    maxLength: 15
   Computer:
     type: object
     properties:
@@ -3452,16 +3510,23 @@ definitions:
         $ref: '#/definitions/Attributes'
         description: An array of <a>Attribute</a> objects containing the LDAP attributes that belong to the computer account.
     description: Contains information about a computer account in a directory.
-  ComputerName:
-    type: string
-    minLength: 1
-    maxLength: 15
   ComputerPassword:
     type: string
     pattern: '[\u0020-\u00FF]+'
     minLength: 8
     maxLength: 64
     format: password
+  RemoteDomainName:
+    type: string
+    pattern: '^([a-zA-Z0-9]+[\\.-])+([a-zA-Z0-9])+[.]?$'
+  DnsIpAddrs:
+    type: array
+    items:
+      $ref: '#/definitions/IpAddr'
+  ReplicationScope:
+    type: string
+    enum:
+      - Domain
   ConditionalForwarder:
     type: object
     properties:
@@ -3479,36 +3544,27 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ConditionalForwarder'
+  DirectoryName:
+    type: string
+    pattern: '^([a-zA-Z0-9]+[\\.-])+([a-zA-Z0-9])+$'
+  DirectoryShortName:
+    type: string
+    pattern: '^[^\\/:*?\"\<\>|.]+[^\\/:*?\"<>|]*$'
   ConnectPassword:
     type: string
     minLength: 1
     maxLength: 128
     format: password
-  ConnectedDirectoriesLimitReached:
-    type: boolean
-  CreateSnapshotBeforeSchemaExtension:
-    type: boolean
-  CreatedDateTime:
-    type: string
-    format: date-time
-  CustomerId:
-    type: string
-    pattern: '^(\d{12})$'
-  CustomerUserName:
-    type: string
-    pattern: '^(?!.*\\|.*"|.*\/|.*\[|.*\]|.*:|.*;|.*\||.*=|.*,|.*\+|.*\*|.*\?|.*<|.*>|.*@).*$'
-    minLength: 1
-    maxLength: 64
-  DeleteAssociatedConditionalForwarder:
-    type: boolean
   Description:
     type: string
     pattern: '^([a-zA-Z0-9_])[\\a-zA-Z0-9_@#%*+=:?./!\s-]*$'
     minLength: 0
     maxLength: 128
-  DesiredNumberOfDomainControllers:
-    type: integer
-    minimum: 2
+  DirectorySize:
+    type: string
+    enum:
+      - Small
+      - Large
   DirectoryConnectSettings:
     type: object
     required:
@@ -3530,6 +3586,170 @@ definitions:
         $ref: '#/definitions/UserName'
         description: '<p>The user name of an account in the on-premises directory that is used to connect to the directory. This account must have the following permissions:</p> <ul> <li> <p>Read users and groups</p> </li> <li> <p>Create computer objects</p> </li> <li> <p>Join computers to the domain</p> </li> </ul>'
     description: Contains information for the <a>ConnectDirectory</a> operation when an AD Connector directory is being created.
+  ConnectedDirectoriesLimitReached:
+    type: boolean
+  OrganizationalUnitDN:
+    type: string
+    minLength: 1
+    maxLength: 2000
+  Password:
+    type: string
+    pattern: '(?=^.{8,64}$)((?=.*\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])|(?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s]))^.*'
+    format: password
+  DirectoryVpcSettings:
+    type: object
+    required:
+      - VpcId
+      - SubnetIds
+    properties:
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: The identifier of the VPC in which to create the directory.
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. AWS Directory Service creates a directory server and a DNS server in each of these subnets.
+    description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
+  LogGroupName:
+    type: string
+    pattern: '[-._/#A-Za-z0-9]+'
+    minLength: 1
+    maxLength: 512
+  DirectoryEdition:
+    type: string
+    enum:
+      - Enterprise
+      - Standard
+  CreateSnapshotBeforeSchemaExtension:
+    type: boolean
+  SnapshotName:
+    type: string
+    pattern: '^([a-zA-Z0-9_])[\\a-zA-Z0-9_@#%*+=:?./!\s-]*$'
+    minLength: 0
+    maxLength: 128
+  SnapshotId:
+    type: string
+    pattern: '^s-[0-9a-f]{10}$'
+  TrustPassword:
+    type: string
+    pattern: (.|\s)*\S(.|\s)*
+    minLength: 1
+    maxLength: 128
+    format: password
+  TrustDirection:
+    type: string
+    enum:
+      - 'One-Way: Outgoing'
+      - 'One-Way: Incoming'
+      - Two-Way
+  TrustType:
+    type: string
+    enum:
+      - Forest
+      - External
+  SelectiveAuth:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+  TrustId:
+    type: string
+    pattern: '^t-[0-9a-f]{10}$'
+  CreatedDateTime:
+    type: string
+    format: date-time
+  CustomerId:
+    type: string
+    pattern: '^(\d{12})$'
+  CustomerUserName:
+    type: string
+    pattern: '^(?!.*\\|.*"|.*\/|.*\[|.*\]|.*:|.*;|.*\||.*=|.*,|.*\+|.*\*|.*\?|.*<|.*>|.*@).*$'
+    minLength: 1
+    maxLength: 64
+  DeleteAssociatedConditionalForwarder:
+    type: boolean
+  TopicName:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 256
+  RemoteDomainNames:
+    type: array
+    items:
+      $ref: '#/definitions/RemoteDomainName'
+  DirectoryIds:
+    type: array
+    description: A list of directory identifiers.
+    items:
+      $ref: '#/definitions/DirectoryId'
+  NextToken:
+    type: string
+  Limit:
+    type: integer
+    minimum: 0
+  DirectoryDescriptions:
+    type: array
+    description: A list of directory descriptions.
+    items:
+      $ref: '#/definitions/DirectoryDescription'
+  DomainControllerIds:
+    type: array
+    items:
+      $ref: '#/definitions/DomainControllerId'
+  DomainControllers:
+    type: array
+    items:
+      $ref: '#/definitions/DomainController'
+  TopicNames:
+    type: array
+    items:
+      $ref: '#/definitions/TopicName'
+  EventTopics:
+    type: array
+    items:
+      $ref: '#/definitions/EventTopic'
+  SharedDirectories:
+    type: array
+    items:
+      $ref: '#/definitions/SharedDirectory'
+  SnapshotIds:
+    type: array
+    description: A list of directory snapshot identifiers.
+    items:
+      $ref: '#/definitions/SnapshotId'
+  Snapshots:
+    type: array
+    description: A list of descriptions of directory snapshots.
+    items:
+      $ref: '#/definitions/Snapshot'
+  TrustIds:
+    type: array
+    items:
+      $ref: '#/definitions/TrustId'
+  Trusts:
+    type: array
+    items:
+      $ref: '#/definitions/Trust'
+  DesiredNumberOfDomainControllers:
+    type: integer
+    minimum: 2
+  VpcId:
+    type: string
+    pattern: '^(vpc-[0-9a-f]{8}|vpc-[0-9a-f]{17})$'
+  SubnetIds:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+  UserName:
+    type: string
+    pattern: '[a-zA-Z0-9._-]+'
+    minLength: 1
+  SecurityGroupId:
+    type: string
+    pattern: '^(sg-[0-9a-f]{8}|sg-[0-9a-f]{17})$'
+  IpAddrs:
+    type: array
+    items:
+      $ref: '#/definitions/IpAddr'
   DirectoryConnectSettingsDescription:
     type: object
     properties:
@@ -3552,6 +3772,130 @@ definitions:
         $ref: '#/definitions/IpAddrs'
         description: The IP addresses of the AD Connector servers.
     description: Contains information about an AD Connector directory.
+  DirectoryStage:
+    type: string
+    enum:
+      - Requested
+      - Creating
+      - Created
+      - Active
+      - Inoperable
+      - Impaired
+      - Restoring
+      - RestoreFailed
+      - Deleting
+      - Deleted
+      - Failed
+  ShareStatus:
+    type: string
+    enum:
+      - Shared
+      - PendingAcceptance
+      - Rejected
+      - Rejecting
+      - RejectFailed
+      - Sharing
+      - ShareFailed
+      - Deleted
+      - Deleting
+  ShareMethod:
+    type: string
+    enum:
+      - ORGANIZATIONS
+      - HANDSHAKE
+  Notes:
+    type: string
+    maxLength: 1024
+    format: password
+  LaunchTime:
+    type: string
+    format: date-time
+  LastUpdatedDateTime:
+    type: string
+    format: date-time
+  DirectoryType:
+    type: string
+    enum:
+      - SimpleAD
+      - ADConnector
+      - MicrosoftAD
+      - SharedMicrosoftAD
+  DirectoryVpcSettingsDescription:
+    type: object
+    properties:
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: The identifier of the VPC that the directory is in.
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: The identifiers of the subnets for the directory servers.
+      SecurityGroupId:
+        $ref: '#/definitions/SecurityGroupId'
+        description: The domain controller security group identifier for the directory.
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZones'
+        description: The list of Availability Zones that the directory is in.
+    description: Contains information about the directory.
+  RadiusSettings:
+    type: object
+    properties:
+      RadiusServers:
+        $ref: '#/definitions/Servers'
+        description: 'An array of strings that contains the IP addresses of the RADIUS server endpoints, or the IP addresses of your RADIUS server load balancer.'
+      RadiusPort:
+        $ref: '#/definitions/PortNumber'
+        description: The port that your RADIUS server is using for communications. Your on-premises network must allow inbound traffic over this port from the AWS Directory Service servers.
+      RadiusTimeout:
+        $ref: '#/definitions/RadiusTimeout'
+        description: 'The amount of time, in seconds, to wait for the RADIUS server to respond.'
+      RadiusRetries:
+        $ref: '#/definitions/RadiusRetries'
+        description: The maximum number of times that communication with the RADIUS server is attempted.
+      SharedSecret:
+        $ref: '#/definitions/RadiusSharedSecret'
+        description: Required for enabling RADIUS on the directory.
+      AuthenticationProtocol:
+        $ref: '#/definitions/RadiusAuthenticationProtocol'
+        description: The protocol specified for your RADIUS endpoints.
+      DisplayLabel:
+        $ref: '#/definitions/RadiusDisplayLabel'
+        description: Not currently used.
+      UseSameUsername:
+        $ref: '#/definitions/UseSameUsername'
+        description: Not currently used.
+    description: Contains information about a Remote Authentication Dial In User Service (RADIUS) server.
+  RadiusStatus:
+    type: string
+    enum:
+      - Creating
+      - Completed
+      - Failed
+  StageReason:
+    type: string
+  SsoEnabled:
+    type: boolean
+  OwnerDirectoryDescription:
+    type: object
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the AWS Managed Microsoft AD directory in the directory owner account.
+      AccountId:
+        $ref: '#/definitions/CustomerId'
+        description: Identifier of the directory owner account.
+      DnsIpAddrs:
+        $ref: '#/definitions/DnsIpAddrs'
+        description: IP address of the directory’s domain controllers.
+      VpcSettings:
+        $ref: '#/definitions/DirectoryVpcSettingsDescription'
+        description: Information about the VPC settings for the directory.
+      RadiusSettings:
+        $ref: '#/definitions/RadiusSettings'
+        description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
+      RadiusStatus:
+        $ref: '#/definitions/RadiusStatus'
+        description: Information about the status of the RADIUS server.
+    description: Describes the directory owner account details that have been shared to the directory consumer account.
   DirectoryDescription:
     type: object
     properties:
@@ -3628,24 +3972,6 @@ definitions:
         $ref: '#/definitions/OwnerDirectoryDescription'
         description: Describes the AWS Managed Microsoft AD directory in the directory owner account.
     description: Contains information about an AWS Directory Service directory.
-  DirectoryDescriptions:
-    type: array
-    description: A list of directory descriptions.
-    items:
-      $ref: '#/definitions/DirectoryDescription'
-  DirectoryEdition:
-    type: string
-    enum:
-      - Enterprise
-      - Standard
-  DirectoryId:
-    type: string
-    pattern: '^d-[0-9a-f]{10}$'
-  DirectoryIds:
-    type: array
-    description: A list of directory identifiers.
-    items:
-      $ref: '#/definitions/DirectoryId'
   DirectoryLimits:
     type: object
     properties:
@@ -3677,71 +4003,27 @@ definitions:
         $ref: '#/definitions/ConnectedDirectoriesLimitReached'
         description: Indicates if the connected directory limit has been reached.
     description: Contains directory limit information for a region.
-  DirectoryName:
+  IpAddr:
     type: string
-    pattern: '^([a-zA-Z0-9]+[\\.-])+([a-zA-Z0-9])+$'
-  DirectoryShortName:
+    pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+  DomainControllerId:
     type: string
-    pattern: '^[^\\/:*?\"\<\>|.]+[^\\/:*?\"<>|]*$'
-  DirectorySize:
+    pattern: '^dc-[0-9a-f]{10}$'
+  SubnetId:
     type: string
-    enum:
-      - Small
-      - Large
-  DirectoryStage:
+    pattern: '^(subnet-[0-9a-f]{8}|subnet-[0-9a-f]{17})$'
+  DomainControllerStatus:
     type: string
     enum:
-      - Requested
       - Creating
-      - Created
       - Active
-      - Inoperable
       - Impaired
       - Restoring
-      - RestoreFailed
       - Deleting
       - Deleted
       - Failed
-  DirectoryType:
+  DomainControllerStatusReason:
     type: string
-    enum:
-      - SimpleAD
-      - ADConnector
-      - MicrosoftAD
-      - SharedMicrosoftAD
-  DirectoryVpcSettings:
-    type: object
-    required:
-      - VpcId
-      - SubnetIds
-    properties:
-      VpcId:
-        $ref: '#/definitions/VpcId'
-        description: The identifier of the VPC in which to create the directory.
-      SubnetIds:
-        $ref: '#/definitions/SubnetIds'
-        description: The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. AWS Directory Service creates a directory server and a DNS server in each of these subnets.
-    description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
-  DirectoryVpcSettingsDescription:
-    type: object
-    properties:
-      VpcId:
-        $ref: '#/definitions/VpcId'
-        description: The identifier of the VPC that the directory is in.
-      SubnetIds:
-        $ref: '#/definitions/SubnetIds'
-        description: The identifiers of the subnets for the directory servers.
-      SecurityGroupId:
-        $ref: '#/definitions/SecurityGroupId'
-        description: The domain controller security group identifier for the directory.
-      AvailabilityZones:
-        $ref: '#/definitions/AvailabilityZones'
-        description: The list of Availability Zones that the directory is in.
-    description: Contains information about the directory.
-  DnsIpAddrs:
-    type: array
-    items:
-      $ref: '#/definitions/IpAddr'
   DomainController:
     type: object
     properties:
@@ -3776,32 +4058,18 @@ definitions:
         $ref: '#/definitions/LastUpdatedDateTime'
         description: The date and time that the status was last updated.
     description: Contains information about the domain controllers for a specified directory.
-  DomainControllerId:
-    type: string
-    pattern: '^dc-[0-9a-f]{10}$'
-  DomainControllerIds:
-    type: array
-    items:
-      $ref: '#/definitions/DomainControllerId'
-  DomainControllerStatus:
-    type: string
-    enum:
-      - Creating
-      - Active
-      - Impaired
-      - Restoring
-      - Deleting
-      - Deleted
-      - Failed
-  DomainControllerStatusReason:
-    type: string
-  DomainControllers:
-    type: array
-    items:
-      $ref: '#/definitions/DomainController'
   EndDateTime:
     type: string
     format: date-time
+  TopicArn:
+    type: string
+  TopicStatus:
+    type: string
+    enum:
+      - Registered
+      - Topic not found
+      - Failed
+      - Deleted
   EventTopic:
     type: object
     properties:
@@ -3821,17 +4089,19 @@ definitions:
         $ref: '#/definitions/TopicStatus'
         description: The topic registration status.
     description: Information about SNS topic and AWS Directory Service directory associations.
-  EventTopics:
-    type: array
-    items:
-      $ref: '#/definitions/EventTopic'
-  IpAddr:
-    type: string
-    pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-  IpAddrs:
-    type: array
-    items:
-      $ref: '#/definitions/IpAddr'
+  SnapshotLimits:
+    type: object
+    properties:
+      ManualSnapshotsLimit:
+        $ref: '#/definitions/Limit'
+        description: The maximum number of manual snapshots allowed.
+      ManualSnapshotsCurrentCount:
+        $ref: '#/definitions/Limit'
+        description: The current number of manual snapshots of the directory.
+      ManualSnapshotsLimitReached:
+        $ref: '#/definitions/ManualSnapshotsLimitReached'
+        description: Indicates if the manual snapshot limit has been reached.
+    description: Contains manual snapshot limit information for a directory.
   IpRoute:
     type: object
     properties:
@@ -3842,6 +4112,17 @@ definitions:
         $ref: '#/definitions/Description'
         description: Description of the address block.
     description: 'IP address block. This is often the address block of the DNS server used for your on-premises domain. '
+  IpRouteStatusMsg:
+    type: string
+    enum:
+      - Adding
+      - Added
+      - Removing
+      - Removed
+      - AddFailed
+      - RemoveFailed
+  IpRouteStatusReason:
+    type: string
   IpRouteInfo:
     type: object
     properties:
@@ -3864,43 +4145,25 @@ definitions:
         $ref: '#/definitions/Description'
         description: Description of the <a>IpRouteInfo</a>.
     description: Information about one or more IP address blocks.
-  IpRouteStatusMsg:
-    type: string
-    enum:
-      - Adding
-      - Added
-      - Removing
-      - Removed
-      - AddFailed
-      - RemoveFailed
-  IpRouteStatusReason:
-    type: string
-  IpRoutes:
-    type: array
-    items:
-      $ref: '#/definitions/IpRoute'
   IpRoutesInfo:
     type: array
     items:
       $ref: '#/definitions/IpRouteInfo'
-  LastUpdatedDateTime:
-    type: string
-    format: date-time
-  LaunchTime:
-    type: string
-    format: date-time
   LdifContent:
     type: string
     minLength: 1
     maxLength: 500000
-  Limit:
-    type: integer
-    minimum: 0
-  LogGroupName:
+  LogSubscriptions:
+    type: array
+    items:
+      $ref: '#/definitions/LogSubscription'
+  SchemaExtensionsInfo:
+    type: array
+    items:
+      $ref: '#/definitions/SchemaExtensionInfo'
+  SubscriptionCreatedDateTime:
     type: string
-    pattern: '[-._/#A-Za-z0-9]+'
-    minLength: 1
-    maxLength: 512
+    format: date-time
   LogSubscription:
     type: object
     properties:
@@ -3914,48 +4177,8 @@ definitions:
         $ref: '#/definitions/SubscriptionCreatedDateTime'
         description: The date and time that the log subscription was created.
     description: 'Represents a log subscription, which tracks real-time data from a chosen log group to a specified destination.'
-  LogSubscriptions:
-    type: array
-    items:
-      $ref: '#/definitions/LogSubscription'
   ManualSnapshotsLimitReached:
     type: boolean
-  NextToken:
-    type: string
-  Notes:
-    type: string
-    maxLength: 1024
-    format: password
-  OrganizationalUnitDN:
-    type: string
-    minLength: 1
-    maxLength: 2000
-  OwnerDirectoryDescription:
-    type: object
-    properties:
-      DirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: Identifier of the AWS Managed Microsoft AD directory in the directory owner account.
-      AccountId:
-        $ref: '#/definitions/CustomerId'
-        description: Identifier of the directory owner account.
-      DnsIpAddrs:
-        $ref: '#/definitions/DnsIpAddrs'
-        description: IP address of the directory’s domain controllers.
-      VpcSettings:
-        $ref: '#/definitions/DirectoryVpcSettingsDescription'
-        description: Information about the VPC settings for the directory.
-      RadiusSettings:
-        $ref: '#/definitions/RadiusSettings'
-        description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
-      RadiusStatus:
-        $ref: '#/definitions/RadiusStatus'
-        description: Information about the status of the RADIUS server.
-    description: Describes the directory owner account details that have been shared to the directory consumer account.
-  Password:
-    type: string
-    pattern: '(?=^.{8,64}$)((?=.*\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])|(?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s]))^.*'
-    format: password
   PortNumber:
     type: integer
     minimum: 1025
@@ -3975,75 +4198,51 @@ definitions:
     type: integer
     minimum: 0
     maximum: 10
-  RadiusSettings:
-    type: object
-    properties:
-      RadiusServers:
-        $ref: '#/definitions/Servers'
-        description: 'An array of strings that contains the IP addresses of the RADIUS server endpoints, or the IP addresses of your RADIUS server load balancer.'
-      RadiusPort:
-        $ref: '#/definitions/PortNumber'
-        description: The port that your RADIUS server is using for communications. Your on-premises network must allow inbound traffic over this port from the AWS Directory Service servers.
-      RadiusTimeout:
-        $ref: '#/definitions/RadiusTimeout'
-        description: 'The amount of time, in seconds, to wait for the RADIUS server to respond.'
-      RadiusRetries:
-        $ref: '#/definitions/RadiusRetries'
-        description: The maximum number of times that communication with the RADIUS server is attempted.
-      SharedSecret:
-        $ref: '#/definitions/RadiusSharedSecret'
-        description: Required for enabling RADIUS on the directory.
-      AuthenticationProtocol:
-        $ref: '#/definitions/RadiusAuthenticationProtocol'
-        description: The protocol specified for your RADIUS endpoints.
-      DisplayLabel:
-        $ref: '#/definitions/RadiusDisplayLabel'
-        description: Not currently used.
-      UseSameUsername:
-        $ref: '#/definitions/UseSameUsername'
-        description: Not currently used.
-    description: Contains information about a Remote Authentication Dial In User Service (RADIUS) server.
+  Servers:
+    type: array
+    items:
+      $ref: '#/definitions/Server'
+  RadiusTimeout:
+    type: integer
+    minimum: 1
+    maximum: 20
   RadiusSharedSecret:
     type: string
     minLength: 8
     maxLength: 512
     format: password
-  RadiusStatus:
-    type: string
-    enum:
-      - Creating
-      - Completed
-      - Failed
-  RadiusTimeout:
-    type: integer
-    minimum: 1
-    maximum: 20
-  RemoteDomainName:
-    type: string
-    pattern: '^([a-zA-Z0-9]+[\\.-])+([a-zA-Z0-9])+[.]?$'
-  RemoteDomainNames:
+  UseSameUsername:
+    type: boolean
+  TagKeys:
     type: array
     items:
-      $ref: '#/definitions/RemoteDomainName'
-  ReplicationScope:
-    type: string
-    enum:
-      - Domain
+      $ref: '#/definitions/TagKey'
   RequestId:
     type: string
     pattern: '^([A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12})$'
     description: The AWS request identifier.
-  ResourceId:
+  UserPassword:
     type: string
-    pattern: '^[d]-[0-9a-f]{10}$'
-  SID:
-    type: string
-    pattern: '[&\w+-.@]+'
     minLength: 1
-    maxLength: 256
-  SchemaExtensionId:
+    maxLength: 127
+    format: password
+  SchemaExtensionStatus:
     type: string
-    pattern: '^e-[0-9a-f]{10}$'
+    enum:
+      - Initializing
+      - CreatingSnapshot
+      - UpdatingSchema
+      - Replicating
+      - CancelInProgress
+      - RollbackInProgress
+      - Cancelled
+      - Failed
+      - Completed
+  SchemaExtensionStatusReason:
+    type: string
+  StartDateTime:
+    type: string
+    format: date-time
   SchemaExtensionInfo:
     type: object
     properties:
@@ -4069,57 +4268,10 @@ definitions:
         $ref: '#/definitions/EndDateTime'
         description: The date and time that the schema extension was completed.
     description: Information about a schema extension.
-  SchemaExtensionStatus:
-    type: string
-    enum:
-      - Initializing
-      - CreatingSnapshot
-      - UpdatingSchema
-      - Replicating
-      - CancelInProgress
-      - RollbackInProgress
-      - Cancelled
-      - Failed
-      - Completed
-  SchemaExtensionStatusReason:
-    type: string
-  SchemaExtensionsInfo:
-    type: array
-    items:
-      $ref: '#/definitions/SchemaExtensionInfo'
-  SecurityGroupId:
-    type: string
-    pattern: '^(sg-[0-9a-f]{8}|sg-[0-9a-f]{17})$'
-  SelectiveAuth:
-    type: string
-    enum:
-      - Enabled
-      - Disabled
   Server:
     type: string
     minLength: 1
     maxLength: 256
-  Servers:
-    type: array
-    items:
-      $ref: '#/definitions/Server'
-  ShareMethod:
-    type: string
-    enum:
-      - ORGANIZATIONS
-      - HANDSHAKE
-  ShareStatus:
-    type: string
-    enum:
-      - Shared
-      - PendingAcceptance
-      - Rejected
-      - Rejecting
-      - RejectFailed
-      - Sharing
-      - ShareFailed
-      - Deleted
-      - Deleting
   ShareTarget:
     type: object
     required:
@@ -4133,41 +4285,28 @@ definitions:
         $ref: '#/definitions/TargetType'
         description: Type of identifier to be used in the <code>Id</code> field.
     description: Identifier that contains details about the directory consumer account.
-  SharedDirectories:
-    type: array
-    items:
-      $ref: '#/definitions/SharedDirectory'
-  SharedDirectory:
-    type: object
-    properties:
-      OwnerAccountId:
-        $ref: '#/definitions/CustomerId'
-        description: 'Identifier of the directory owner account, which contains the directory that has been shared to the consumer account.'
-      OwnerDirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: 'Identifier of the directory in the directory owner account. '
-      ShareMethod:
-        $ref: '#/definitions/ShareMethod'
-        description: The method used when sharing a directory to determine whether the directory should be shared within your AWS organization (<code>ORGANIZATIONS</code>) or with any AWS account by sending a shared directory request (<code>HANDSHAKE</code>).
-      SharedAccountId:
-        $ref: '#/definitions/CustomerId'
-        description: Identifier of the directory consumer account that has access to the shared directory (<code>OwnerDirectoryId</code>) in the directory owner account.
-      SharedDirectoryId:
-        $ref: '#/definitions/DirectoryId'
-        description: Identifier of the shared directory in the directory consumer account. This identifier is different for each directory owner account.
-      ShareStatus:
-        $ref: '#/definitions/ShareStatus'
-        description: Current directory status of the shared AWS Managed Microsoft AD directory.
-      ShareNotes:
-        $ref: '#/definitions/Notes'
-        description: A directory share request that is sent by the directory owner to the directory consumer. The request includes a typed message to help the directory consumer administrator determine whether to approve or reject the share invitation.
-      CreatedDateTime:
-        $ref: '#/definitions/CreatedDateTime'
-        description: The date and time that the shared directory was created.
-      LastUpdatedDateTime:
-        $ref: '#/definitions/LastUpdatedDateTime'
-        description: The date and time that the shared directory was last updated.
-    description: Details about the shared directory in the directory owner account for which the share request in the directory consumer account has been accepted.
+  TargetId:
+    type: string
+    minLength: 1
+    maxLength: 64
+  TargetType:
+    type: string
+    enum:
+      - ACCOUNT
+  SnapshotType:
+    type: string
+    enum:
+      - Auto
+      - Manual
+  SnapshotStatus:
+    type: string
+    enum:
+      - Creating
+      - Completed
+      - Failed
+  StartTime:
+    type: string
+    format: date-time
   Snapshot:
     type: object
     properties:
@@ -4190,71 +4329,19 @@ definitions:
         $ref: '#/definitions/StartTime'
         description: The date and time that the snapshot was taken.
     description: Describes a directory snapshot.
-  SnapshotId:
-    type: string
-    pattern: '^s-[0-9a-f]{10}$'
-  SnapshotIds:
-    type: array
-    description: A list of directory snapshot identifiers.
-    items:
-      $ref: '#/definitions/SnapshotId'
-  SnapshotLimits:
-    type: object
-    properties:
-      ManualSnapshotsLimit:
-        $ref: '#/definitions/Limit'
-        description: The maximum number of manual snapshots allowed.
-      ManualSnapshotsCurrentCount:
-        $ref: '#/definitions/Limit'
-        description: The current number of manual snapshots of the directory.
-      ManualSnapshotsLimitReached:
-        $ref: '#/definitions/ManualSnapshotsLimitReached'
-        description: Indicates if the manual snapshot limit has been reached.
-    description: Contains manual snapshot limit information for a directory.
-  SnapshotName:
-    type: string
-    pattern: '^([a-zA-Z0-9_])[\\a-zA-Z0-9_@#%*+=:?./!\s-]*$'
-    minLength: 0
-    maxLength: 128
-  SnapshotStatus:
-    type: string
-    enum:
-      - Creating
-      - Completed
-      - Failed
-  SnapshotType:
-    type: string
-    enum:
-      - Auto
-      - Manual
-  Snapshots:
-    type: array
-    description: A list of descriptions of directory snapshots.
-    items:
-      $ref: '#/definitions/Snapshot'
-  SsoEnabled:
-    type: boolean
-  StageReason:
-    type: string
-  StartDateTime:
-    type: string
-    format: date-time
-  StartTime:
-    type: string
-    format: date-time
   StateLastUpdatedDateTime:
     type: string
     format: date-time
-  SubnetId:
+  TagKey:
     type: string
-    pattern: '^(subnet-[0-9a-f]{8}|subnet-[0-9a-f]{17})$'
-  SubnetIds:
-    type: array
-    items:
-      $ref: '#/definitions/SubnetId'
-  SubscriptionCreatedDateTime:
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
     type: string
-    format: date-time
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -4268,50 +4355,22 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: 'The optional value of the tag. The string value can be Unicode characters. The string can contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
     description: Metadata assigned to a directory consisting of a key-value pair.
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeys:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TargetId:
-    type: string
-    minLength: 1
-    maxLength: 64
-  TargetType:
+  TrustState:
     type: string
     enum:
-      - ACCOUNT
-  TopicArn:
-    type: string
-  TopicName:
-    type: string
-    pattern: '[a-zA-Z0-9_-]+'
-    minLength: 1
-    maxLength: 256
-  TopicNames:
-    type: array
-    items:
-      $ref: '#/definitions/TopicName'
-  TopicStatus:
-    type: string
-    enum:
-      - Registered
-      - Topic not found
-      - Failed
+      - Creating
+      - Created
+      - Verifying
+      - VerifyFailed
+      - Verified
+      - Updating
+      - UpdateFailed
+      - Updated
+      - Deleting
       - Deleted
+      - Failed
+  TrustStateReason:
+    type: string
   Trust:
     type: object
     properties:
@@ -4349,50 +4408,6 @@ definitions:
         $ref: '#/definitions/SelectiveAuth'
         description: Current state of selective authentication for the trust.
     description: Describes a trust relationship between an AWS Managed Microsoft AD directory and an external domain.
-  TrustDirection:
-    type: string
-    enum:
-      - 'One-Way: Outgoing'
-      - 'One-Way: Incoming'
-      - Two-Way
-  TrustId:
-    type: string
-    pattern: '^t-[0-9a-f]{10}$'
-  TrustIds:
-    type: array
-    items:
-      $ref: '#/definitions/TrustId'
-  TrustPassword:
-    type: string
-    pattern: (.|\s)*\S(.|\s)*
-    minLength: 1
-    maxLength: 128
-    format: password
-  TrustState:
-    type: string
-    enum:
-      - Creating
-      - Created
-      - Verifying
-      - VerifyFailed
-      - Verified
-      - Updating
-      - UpdateFailed
-      - Updated
-      - Deleting
-      - Deleted
-      - Failed
-  TrustStateReason:
-    type: string
-  TrustType:
-    type: string
-    enum:
-      - Forest
-      - External
-  Trusts:
-    type: array
-    items:
-      $ref: '#/definitions/Trust'
   UnshareTarget:
     type: object
     required:
@@ -4406,19 +4421,3 @@ definitions:
         $ref: '#/definitions/TargetType'
         description: Type of identifier to be used in the <i>Id</i> field.
     description: Identifier that contains details about the directory consumer account with whom the directory is being unshared.
-  UpdateSecurityGroupForDirectoryControllers:
-    type: boolean
-  UseSameUsername:
-    type: boolean
-  UserName:
-    type: string
-    pattern: '[a-zA-Z0-9._-]+'
-    minLength: 1
-  UserPassword:
-    type: string
-    minLength: 1
-    maxLength: 127
-    format: password
-  VpcId:
-    type: string
-    pattern: '^(vpc-[0-9a-f]{8}|vpc-[0-9a-f]{17})$'

@@ -5224,7 +5224,36 @@ definitions:
     description: A request to update an <a>XssMatchSet</a>.
   Action:
     type: string
-  undefined: {}
+  RulePriority:
+    type: integer
+  ResourceId:
+    type: string
+    minLength: 1
+    maxLength: 128
+  WafAction:
+    type: object
+    required:
+      - Type
+    properties:
+      Type:
+        $ref: '#/definitions/WafActionType'
+        description: '<p>Specifies how you want AWS WAF to respond to requests that match the settings in a <code>Rule</code>. Valid settings include the following:</p> <ul> <li> <p> <code>ALLOW</code>: AWS WAF allows requests</p> </li> <li> <p> <code>BLOCK</code>: AWS WAF blocks requests</p> </li> <li> <p> <code>COUNT</code>: AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can''t specify <code>COUNT</code> for the default action for a <code>WebACL</code>.</p> </li> </ul>'
+    description: 'For the action that is associated with a rule in a <code>WebACL</code>, specifies the action that you want AWS WAF to perform when a web request matches all of the conditions in a rule. For the default action in a <code>WebACL</code>, specifies the action that you want AWS WAF to take when a web request doesn''t match all of the conditions in any of the rules in a <code>WebACL</code>. '
+  WafOverrideAction:
+    type: object
+    required:
+      - Type
+    properties:
+      Type:
+        $ref: '#/definitions/WafOverrideActionType'
+        description: ' <code>COUNT</code> overrides the action specified by the individual rule within a <code>RuleGroup</code> . If set to <code>NONE</code>, the rule''s action will take place.'
+    description: 'The action to take if any rule within the <code>RuleGroup</code> matches a request. '
+  WafRuleType:
+    type: string
+    enum:
+      - REGULAR
+      - RATE_BASED
+      - GROUP
   ActivatedRule:
     type: object
     required:
@@ -5251,6 +5280,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ActivatedRule'
+  ResourceArn:
+    type: string
+    minLength: 1
+    maxLength: 1224
+  ResourceName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  ByteMatchTuples:
+    type: array
+    items:
+      $ref: '#/definitions/ByteMatchTuple'
   ByteMatchSet:
     type: object
     required:
@@ -5267,10 +5308,6 @@ definitions:
         $ref: '#/definitions/ByteMatchTuples'
         description: 'Specifies the bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to search for in web requests, the location in requests that you want AWS WAF to search, and other settings.'
     description: '<p>In a <a>GetByteMatchSet</a> request, <code>ByteMatchSet</code> is a complex type that contains the <code>ByteMatchSetId</code> and <code>Name</code> of a <code>ByteMatchSet</code>, and the values that you specified when you updated the <code>ByteMatchSet</code>. </p> <p>A complex type that contains <code>ByteMatchTuple</code> objects, which specify the parts of web requests that you want AWS WAF to inspect and the values that you want AWS WAF to search for. If a <code>ByteMatchSet</code> contains more than one <code>ByteMatchTuple</code> object, a request needs to match the settings in only one <code>ByteMatchTuple</code> to be considered a match.</p>'
-  ByteMatchSetSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/ByteMatchSetSummary'
   ByteMatchSetSummary:
     type: object
     required:
@@ -5284,26 +5321,15 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: A friendly name or description of the <a>ByteMatchSet</a>. You can't change <code>Name</code> after you create a <code>ByteMatchSet</code>.
     description: Returned by <a>ListByteMatchSets</a>. Each <code>ByteMatchSetSummary</code> object includes the <code>Name</code> and <code>ByteMatchSetId</code> for one <a>ByteMatchSet</a>.
-  ByteMatchSetUpdate:
-    type: object
-    required:
-      - Action
-      - ByteMatchTuple
-    properties:
-      Action:
-        $ref: '#/definitions/ChangeAction'
-        description: Specifies whether to insert or delete a <a>ByteMatchTuple</a>.
-      ByteMatchTuple:
-        $ref: '#/definitions/ByteMatchTuple'
-        description: 'Information about the part of a web request that you want AWS WAF to inspect and the value that you want AWS WAF to search for. If you specify <code>DELETE</code> for the value of <code>Action</code>, the <code>ByteMatchTuple</code> values must exactly match the values in the <code>ByteMatchTuple</code> that you want to delete from the <code>ByteMatchSet</code>.'
-    description: 'In an <a>UpdateByteMatchSet</a> request, <code>ByteMatchSetUpdate</code> specifies whether to insert or delete a <a>ByteMatchTuple</a> and includes the settings for the <code>ByteMatchTuple</code>.'
-  ByteMatchSetUpdates:
+  ByteMatchSetSummaries:
     type: array
     items:
-      $ref: '#/definitions/ByteMatchSetUpdate'
-    minItems: 1
-  ByteMatchTargetString:
+      $ref: '#/definitions/ByteMatchSetSummary'
+  ChangeAction:
     type: string
+    enum:
+      - INSERT
+      - DELETE
   ByteMatchTuple:
     type: object
     required:
@@ -5325,15 +5351,55 @@ definitions:
         $ref: '#/definitions/PositionalConstraint'
         description: '<p>Within the portion of a web request that you want to search (for example, in the query string, if any), specify where you want AWS WAF to search. Valid values include the following:</p> <p> <b>CONTAINS</b> </p> <p>The specified part of the web request must include the value of <code>TargetString</code>, but the location doesn''t matter.</p> <p> <b>CONTAINS_WORD</b> </p> <p>The specified part of the web request must include the value of <code>TargetString</code>, and <code>TargetString</code> must contain only alphanumeric characters or underscore (A-Z, a-z, 0-9, or _). In addition, <code>TargetString</code> must be a word, which means one of the following:</p> <ul> <li> <p> <code>TargetString</code> exactly matches the value of the specified part of the web request, such as the value of a header.</p> </li> <li> <p> <code>TargetString</code> is at the beginning of the specified part of the web request and is followed by a character other than an alphanumeric character or underscore (_), for example, <code>BadBot;</code>.</p> </li> <li> <p> <code>TargetString</code> is at the end of the specified part of the web request and is preceded by a character other than an alphanumeric character or underscore (_), for example, <code>;BadBot</code>.</p> </li> <li> <p> <code>TargetString</code> is in the middle of the specified part of the web request and is preceded and followed by characters other than alphanumeric characters or underscore (_), for example, <code>-BadBot;</code>.</p> </li> </ul> <p> <b>EXACTLY</b> </p> <p>The value of the specified part of the web request must exactly match the value of <code>TargetString</code>.</p> <p> <b>STARTS_WITH</b> </p> <p>The value of <code>TargetString</code> must appear at the beginning of the specified part of the web request.</p> <p> <b>ENDS_WITH</b> </p> <p>The value of <code>TargetString</code> must appear at the end of the specified part of the web request.</p>'
     description: 'The bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to search for in web requests, the location in requests that you want AWS WAF to search, and other settings.'
-  ByteMatchTuples:
+  ByteMatchSetUpdate:
+    type: object
+    required:
+      - Action
+      - ByteMatchTuple
+    properties:
+      Action:
+        $ref: '#/definitions/ChangeAction'
+        description: Specifies whether to insert or delete a <a>ByteMatchTuple</a>.
+      ByteMatchTuple:
+        $ref: '#/definitions/ByteMatchTuple'
+        description: 'Information about the part of a web request that you want AWS WAF to inspect and the value that you want AWS WAF to search for. If you specify <code>DELETE</code> for the value of <code>Action</code>, the <code>ByteMatchTuple</code> values must exactly match the values in the <code>ByteMatchTuple</code> that you want to delete from the <code>ByteMatchSet</code>.'
+    description: 'In an <a>UpdateByteMatchSet</a> request, <code>ByteMatchSetUpdate</code> specifies whether to insert or delete a <a>ByteMatchTuple</a> and includes the settings for the <code>ByteMatchTuple</code>.'
+  ByteMatchSetUpdates:
     type: array
     items:
-      $ref: '#/definitions/ByteMatchTuple'
-  ChangeAction:
+      $ref: '#/definitions/ByteMatchSetUpdate'
+    minItems: 1
+  ByteMatchTargetString:
+    type: string
+  FieldToMatch:
+    type: object
+    required:
+      - Type
+    properties:
+      Type:
+        $ref: '#/definitions/MatchFieldType'
+        description: '<p>The part of the web request that you want AWS WAF to search for a specified string. Parts of a request that you can search include the following:</p> <ul> <li> <p> <code>HEADER</code>: A specified request header, for example, the value of the <code>User-Agent</code> or <code>Referer</code> header. If you choose <code>HEADER</code> for the type, specify the name of the header in <code>Data</code>.</p> </li> <li> <p> <code>METHOD</code>: The HTTP method, which indicated the type of operation that the request is asking the origin to perform. Amazon CloudFront supports the following methods: <code>DELETE</code>, <code>GET</code>, <code>HEAD</code>, <code>OPTIONS</code>, <code>PATCH</code>, <code>POST</code>, and <code>PUT</code>.</p> </li> <li> <p> <code>QUERY_STRING</code>: A query string, which is the part of a URL that appears after a <code>?</code> character, if any.</p> </li> <li> <p> <code>URI</code>: The part of a web request that identifies a resource, for example, <code>/images/daily-ad.jpg</code>.</p> </li> <li> <p> <code>BODY</code>: The part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. The request body immediately follows the request headers. Note that only the first <code>8192</code> bytes of the request body are forwarded to AWS WAF for inspection. To allow or block requests based on the length of the body, you can create a size constraint set. For more information, see <a>CreateSizeConstraintSet</a>. </p> </li> <li> <p> <code>SINGLE_QUERY_ARG</code>: The parameter in the query string that you will inspect, such as <i>UserName</i> or <i>SalesRegion</i>. The maximum length for <code>SINGLE_QUERY_ARG</code> is 30 characters.</p> </li> <li> <p> <code>ALL_QUERY_ARGS</code>: Similar to <code>SINGLE_QUERY_ARG</code>, but rather than inspecting a single parameter, AWS WAF will inspect all parameters within the query for the value or regex pattern that you specify in <code>TargetString</code>.</p> </li> </ul>'
+      Data:
+        $ref: '#/definitions/MatchFieldData'
+        description: '<p>When the value of <code>Type</code> is <code>HEADER</code>, enter the name of the header that you want AWS WAF to search, for example, <code>User-Agent</code> or <code>Referer</code>. The name of the header is not case sensitive.</p> <p>When the value of <code>Type</code> is <code>SINGLE_QUERY_ARG</code>, enter the name of the parameter that you want AWS WAF to search, for example, <code>UserName</code> or <code>SalesRegion</code>. The parameter name is not case sensitive.</p> <p>If the value of <code>Type</code> is any other value, omit <code>Data</code>.</p>'
+    description: Specifies where in a web request to look for <code>TargetString</code>.
+  TextTransformation:
     type: string
     enum:
-      - INSERT
-      - DELETE
+      - NONE
+      - COMPRESS_WHITE_SPACE
+      - HTML_ENTITY_DECODE
+      - LOWERCASE
+      - CMD_LINE
+      - URL_DECODE
+  PositionalConstraint:
+    type: string
+    enum:
+      - EXACTLY
+      - STARTS_WITH
+      - ENDS_WITH
+      - CONTAINS
+      - CONTAINS_WORD
   ChangeToken:
     type: string
     minLength: 1
@@ -5354,31 +5420,224 @@ definitions:
       - GT
   Country:
     type: string
-  FieldToMatch:
+  GeoMatchSet:
     type: object
     required:
-      - Type
+      - GeoMatchSetId
+      - GeoMatchConstraints
     properties:
-      Type:
-        $ref: '#/definitions/MatchFieldType'
-        description: '<p>The part of the web request that you want AWS WAF to search for a specified string. Parts of a request that you can search include the following:</p> <ul> <li> <p> <code>HEADER</code>: A specified request header, for example, the value of the <code>User-Agent</code> or <code>Referer</code> header. If you choose <code>HEADER</code> for the type, specify the name of the header in <code>Data</code>.</p> </li> <li> <p> <code>METHOD</code>: The HTTP method, which indicated the type of operation that the request is asking the origin to perform. Amazon CloudFront supports the following methods: <code>DELETE</code>, <code>GET</code>, <code>HEAD</code>, <code>OPTIONS</code>, <code>PATCH</code>, <code>POST</code>, and <code>PUT</code>.</p> </li> <li> <p> <code>QUERY_STRING</code>: A query string, which is the part of a URL that appears after a <code>?</code> character, if any.</p> </li> <li> <p> <code>URI</code>: The part of a web request that identifies a resource, for example, <code>/images/daily-ad.jpg</code>.</p> </li> <li> <p> <code>BODY</code>: The part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. The request body immediately follows the request headers. Note that only the first <code>8192</code> bytes of the request body are forwarded to AWS WAF for inspection. To allow or block requests based on the length of the body, you can create a size constraint set. For more information, see <a>CreateSizeConstraintSet</a>. </p> </li> <li> <p> <code>SINGLE_QUERY_ARG</code>: The parameter in the query string that you will inspect, such as <i>UserName</i> or <i>SalesRegion</i>. The maximum length for <code>SINGLE_QUERY_ARG</code> is 30 characters.</p> </li> <li> <p> <code>ALL_QUERY_ARGS</code>: Similar to <code>SINGLE_QUERY_ARG</code>, but rather than inspecting a single parameter, AWS WAF will inspect all parameters within the query for the value or regex pattern that you specify in <code>TargetString</code>.</p> </li> </ul>'
-      Data:
-        $ref: '#/definitions/MatchFieldData'
-        description: '<p>When the value of <code>Type</code> is <code>HEADER</code>, enter the name of the header that you want AWS WAF to search, for example, <code>User-Agent</code> or <code>Referer</code>. The name of the header is not case sensitive.</p> <p>When the value of <code>Type</code> is <code>SINGLE_QUERY_ARG</code>, enter the name of the parameter that you want AWS WAF to search, for example, <code>UserName</code> or <code>SalesRegion</code>. The parameter name is not case sensitive.</p> <p>If the value of <code>Type</code> is any other value, omit <code>Data</code>.</p>'
-    description: Specifies where in a web request to look for <code>TargetString</code>.
-  GeoMatchConstraint:
+      GeoMatchSetId:
+        $ref: '#/definitions/ResourceId'
+        description: '<p>The <code>GeoMatchSetId</code> for an <code>GeoMatchSet</code>. You use <code>GeoMatchSetId</code> to get information about a <code>GeoMatchSet</code> (see <a>GeoMatchSet</a>), update a <code>GeoMatchSet</code> (see <a>UpdateGeoMatchSet</a>), insert a <code>GeoMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>GeoMatchSet</code> from AWS WAF (see <a>DeleteGeoMatchSet</a>).</p> <p> <code>GeoMatchSetId</code> is returned by <a>CreateGeoMatchSet</a> and by <a>ListGeoMatchSets</a>.</p>'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: A friendly name or description of the <a>GeoMatchSet</a>. You can't change the name of an <code>GeoMatchSet</code> after you create it.
+      GeoMatchConstraints:
+        $ref: '#/definitions/GeoMatchConstraints'
+        description: 'An array of <a>GeoMatchConstraint</a> objects, which contain the country that you want AWS WAF to search for.'
+    description: Contains one or more countries that AWS WAF will search for.
+  IPSet:
     type: object
     required:
-      - Type
-      - Value
+      - IPSetId
+      - IPSetDescriptors
     properties:
-      Type:
-        $ref: '#/definitions/GeoMatchConstraintType'
-        description: The type of geographical area you want AWS WAF to search for. Currently <code>Country</code> is the only valid value.
-      Value:
-        $ref: '#/definitions/GeoMatchConstraintValue'
-        description: The country that you want AWS WAF to search for.
-    description: The country from which web requests originate that you want AWS WAF to search for.
+      IPSetId:
+        $ref: '#/definitions/ResourceId'
+        description: '<p>The <code>IPSetId</code> for an <code>IPSet</code>. You use <code>IPSetId</code> to get information about an <code>IPSet</code> (see <a>GetIPSet</a>), update an <code>IPSet</code> (see <a>UpdateIPSet</a>), insert an <code>IPSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete an <code>IPSet</code> from AWS WAF (see <a>DeleteIPSet</a>).</p> <p> <code>IPSetId</code> is returned by <a>CreateIPSet</a> and by <a>ListIPSets</a>.</p>'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: A friendly name or description of the <a>IPSet</a>. You can't change the name of an <code>IPSet</code> after you create it.
+      IPSetDescriptors:
+        $ref: '#/definitions/IPSetDescriptors'
+        description: 'The IP address type (<code>IPV4</code> or <code>IPV6</code>) and the IP address range (in CIDR notation) that web requests originate from. If the <code>WebACL</code> is associated with a CloudFront distribution and the viewer did not use an HTTP proxy or a load balancer to send the request, this is the value of the c-ip field in the CloudFront access logs.'
+    description: '<p>Contains one or more IP addresses or blocks of IP addresses specified in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports IPv4 address ranges: /8 and any range between /16 through /32. AWS WAF supports IPv6 address ranges: /16, /24, /32, /48, /56, /64, and /128.</p> <p>To specify an individual IP address, you specify the four-part IP address followed by a <code>/32</code>, for example, 192.0.2.0/31. To block a range of IP addresses, you can specify /8 or any range between /16 through /32 (for IPv4) or /16, /24, /32, /48, /56, /64, or /128 (for IPv6). For more information about CIDR notation, see the Wikipedia entry <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>. </p>'
+  MetricName:
+    type: string
+  RateKey:
+    type: string
+    enum:
+      - IP
+  RateLimit:
+    type: integer
+    minimum: 2000
+    maximum: 2000000000
+  RateBasedRule:
+    type: object
+    required:
+      - RuleId
+      - MatchPredicates
+      - RateKey
+      - RateLimit
+    properties:
+      RuleId:
+        $ref: '#/definitions/ResourceId'
+        description: 'A unique identifier for a <code>RateBasedRule</code>. You use <code>RuleId</code> to get more information about a <code>RateBasedRule</code> (see <a>GetRateBasedRule</a>), update a <code>RateBasedRule</code> (see <a>UpdateRateBasedRule</a>), insert a <code>RateBasedRule</code> into a <code>WebACL</code> or delete one from a <code>WebACL</code> (see <a>UpdateWebACL</a>), or delete a <code>RateBasedRule</code> from AWS WAF (see <a>DeleteRateBasedRule</a>).'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: A friendly name or description for a <code>RateBasedRule</code>. You can't change the name of a <code>RateBasedRule</code> after you create it.
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: 'A friendly name or description for the metrics for a <code>RateBasedRule</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change the name of the metric after you create the <code>RateBasedRule</code>.'
+      MatchPredicates:
+        $ref: '#/definitions/Predicates'
+        description: 'The <code>Predicates</code> object contains one <code>Predicate</code> element for each <a>ByteMatchSet</a>, <a>IPSet</a>, or <a>SqlInjectionMatchSet</a> object that you want to include in a <code>RateBasedRule</code>.'
+      RateKey:
+        $ref: '#/definitions/RateKey'
+        description: The field that AWS WAF uses to determine if requests are likely arriving from single source and thus subject to rate monitoring. The only valid value for <code>RateKey</code> is <code>IP</code>. <code>IP</code> indicates that requests arriving from the same IP address are subject to the <code>RateLimit</code> that is specified in the <code>RateBasedRule</code>.
+      RateLimit:
+        $ref: '#/definitions/RateLimit'
+        description: 'The maximum number of requests, which have an identical value in the field specified by the <code>RateKey</code>, allowed in a five-minute period. If the number of requests exceeds the <code>RateLimit</code> and the other predicates specified in the rule are also met, AWS WAF triggers the action that is specified for this rule.'
+    description: '<p>A <code>RateBasedRule</code> is identical to a regular <a>Rule</a>, with one addition: a <code>RateBasedRule</code> counts the number of requests that arrive from a specified IP address every five minutes. For example, based on recent requests that you''ve seen from an attacker, you might create a <code>RateBasedRule</code> that includes the following conditions: </p> <ul> <li> <p>The requests come from 192.0.2.44.</p> </li> <li> <p>They contain the value <code>BadBot</code> in the <code>User-Agent</code> header.</p> </li> </ul> <p>In the rule, you also define the rate limit as 15,000.</p> <p>Requests that meet both of these conditions and exceed 15,000 requests every five minutes trigger the rule''s action (block or count), which is defined in the web ACL.</p>'
+  RegexMatchSet:
+    type: object
+    properties:
+      RegexMatchSetId:
+        $ref: '#/definitions/ResourceId'
+        description: '<p>The <code>RegexMatchSetId</code> for a <code>RegexMatchSet</code>. You use <code>RegexMatchSetId</code> to get information about a <code>RegexMatchSet</code> (see <a>GetRegexMatchSet</a>), update a <code>RegexMatchSet</code> (see <a>UpdateRegexMatchSet</a>), insert a <code>RegexMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>RegexMatchSet</code> from AWS WAF (see <a>DeleteRegexMatchSet</a>).</p> <p> <code>RegexMatchSetId</code> is returned by <a>CreateRegexMatchSet</a> and by <a>ListRegexMatchSets</a>.</p>'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: A friendly name or description of the <a>RegexMatchSet</a>. You can't change <code>Name</code> after you create a <code>RegexMatchSet</code>.
+      RegexMatchTuples:
+        $ref: '#/definitions/RegexMatchTuples'
+        description: '<p>Contains an array of <a>RegexMatchTuple</a> objects. Each <code>RegexMatchTuple</code> object contains: </p> <ul> <li> <p>The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the <code>User-Agent</code> header. </p> </li> <li> <p>The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see <a>RegexPatternSet</a>.</p> </li> <li> <p>Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.</p> </li> </ul>'
+    description: '<p>In a <a>GetRegexMatchSet</a> request, <code>RegexMatchSet</code> is a complex type that contains the <code>RegexMatchSetId</code> and <code>Name</code> of a <code>RegexMatchSet</code>, and the values that you specified when you updated the <code>RegexMatchSet</code>.</p> <p> The values are contained in a <code>RegexMatchTuple</code> object, which specify the parts of web requests that you want AWS WAF to inspect and the values that you want AWS WAF to search for. If a <code>RegexMatchSet</code> contains more than one <code>RegexMatchTuple</code> object, a request needs to match the settings in only one <code>ByteMatchTuple</code> to be considered a match.</p>'
+  RegexPatternSet:
+    type: object
+    required:
+      - RegexPatternSetId
+      - RegexPatternStrings
+    properties:
+      RegexPatternSetId:
+        $ref: '#/definitions/ResourceId'
+        description: '<p>The identifier for the <code>RegexPatternSet</code>. You use <code>RegexPatternSetId</code> to get information about a <code>RegexPatternSet</code>, update a <code>RegexPatternSet</code>, remove a <code>RegexPatternSet</code> from a <code>RegexMatchSet</code>, and delete a <code>RegexPatternSet</code> from AWS WAF.</p> <p> <code>RegexMatchSetId</code> is returned by <a>CreateRegexPatternSet</a> and by <a>ListRegexPatternSets</a>.</p>'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: A friendly name or description of the <a>RegexPatternSet</a>. You can't change <code>Name</code> after you create a <code>RegexPatternSet</code>.
+      RegexPatternStrings:
+        $ref: '#/definitions/RegexPatternStrings'
+        description: 'Specifies the regular expression (regex) patterns that you want AWS WAF to search for, such as <code>B[a@]dB[o0]t</code>.'
+    description: 'The <code>RegexPatternSet</code> specifies the regular expression (regex) pattern that you want AWS WAF to search for, such as <code>B[a@]dB[o0]t</code>. You can then configure AWS WAF to reject those requests.'
+  RuleGroup:
+    type: object
+    required:
+      - RuleGroupId
+    properties:
+      RuleGroupId:
+        $ref: '#/definitions/ResourceId'
+        description: '<p>A unique identifier for a <code>RuleGroup</code>. You use <code>RuleGroupId</code> to get more information about a <code>RuleGroup</code> (see <a>GetRuleGroup</a>), update a <code>RuleGroup</code> (see <a>UpdateRuleGroup</a>), insert a <code>RuleGroup</code> into a <code>WebACL</code> or delete a one from a <code>WebACL</code> (see <a>UpdateWebACL</a>), or delete a <code>RuleGroup</code> from AWS WAF (see <a>DeleteRuleGroup</a>).</p> <p> <code>RuleGroupId</code> is returned by <a>CreateRuleGroup</a> and by <a>ListRuleGroups</a>.</p>'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: The friendly name or description for the <code>RuleGroup</code>. You can't change the name of a <code>RuleGroup</code> after you create it.
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: 'A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change the name of the metric after you create the <code>RuleGroup</code>.'
+    description: '<p>A collection of predefined rules that you can add to a web ACL.</p> <p>Rule groups are subject to the following limits:</p> <ul> <li> <p>Three rule groups per account. You can request an increase to this limit by contacting customer support.</p> </li> <li> <p>One rule group per web ACL.</p> </li> <li> <p>Ten rules per rule group.</p> </li> </ul>'
+  Rule:
+    type: object
+    required:
+      - RuleId
+      - Predicates
+    properties:
+      RuleId:
+        $ref: '#/definitions/ResourceId'
+        description: '<p>A unique identifier for a <code>Rule</code>. You use <code>RuleId</code> to get more information about a <code>Rule</code> (see <a>GetRule</a>), update a <code>Rule</code> (see <a>UpdateRule</a>), insert a <code>Rule</code> into a <code>WebACL</code> or delete a one from a <code>WebACL</code> (see <a>UpdateWebACL</a>), or delete a <code>Rule</code> from AWS WAF (see <a>DeleteRule</a>).</p> <p> <code>RuleId</code> is returned by <a>CreateRule</a> and by <a>ListRules</a>.</p>'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: The friendly name or description for the <code>Rule</code>. You can't change the name of a <code>Rule</code> after you create it.
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: 'A friendly name or description for the metrics for this <code>Rule</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change <code>MetricName</code> after you create the <code>Rule</code>.'
+      Predicates:
+        $ref: '#/definitions/Predicates'
+        description: 'The <code>Predicates</code> object contains one <code>Predicate</code> element for each <a>ByteMatchSet</a>, <a>IPSet</a>, or <a>SqlInjectionMatchSet</a> object that you want to include in a <code>Rule</code>.'
+    description: '<p>A combination of <a>ByteMatchSet</a>, <a>IPSet</a>, and/or <a>SqlInjectionMatchSet</a> objects that identify the web requests that you want to allow, block, or count. For example, you might create a <code>Rule</code> that includes the following predicates:</p> <ul> <li> <p>An <code>IPSet</code> that causes AWS WAF to search for web requests that originate from the IP address <code>192.0.2.44</code> </p> </li> <li> <p>A <code>ByteMatchSet</code> that causes AWS WAF to search for web requests for which the value of the <code>User-Agent</code> header is <code>BadBot</code>.</p> </li> </ul> <p>To match the settings in this <code>Rule</code>, a request must originate from <code>192.0.2.44</code> AND include a <code>User-Agent</code> header for which the value is <code>BadBot</code>.</p>'
+  SizeConstraintSet:
+    type: object
+    required:
+      - SizeConstraintSetId
+      - SizeConstraints
+    properties:
+      SizeConstraintSetId:
+        $ref: '#/definitions/ResourceId'
+        description: '<p>A unique identifier for a <code>SizeConstraintSet</code>. You use <code>SizeConstraintSetId</code> to get information about a <code>SizeConstraintSet</code> (see <a>GetSizeConstraintSet</a>), update a <code>SizeConstraintSet</code> (see <a>UpdateSizeConstraintSet</a>), insert a <code>SizeConstraintSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>SizeConstraintSet</code> from AWS WAF (see <a>DeleteSizeConstraintSet</a>).</p> <p> <code>SizeConstraintSetId</code> is returned by <a>CreateSizeConstraintSet</a> and by <a>ListSizeConstraintSets</a>.</p>'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name, if any, of the <code>SizeConstraintSet</code>.'
+      SizeConstraints:
+        $ref: '#/definitions/SizeConstraints'
+        description: Specifies the parts of web requests that you want to inspect the size of.
+    description: 'A complex type that contains <code>SizeConstraint</code> objects, which specify the parts of web requests that you want AWS WAF to inspect the size of. If a <code>SizeConstraintSet</code> contains more than one <code>SizeConstraint</code> object, a request only needs to match one constraint to be considered a match.'
+  SqlInjectionMatchSet:
+    type: object
+    required:
+      - SqlInjectionMatchSetId
+      - SqlInjectionMatchTuples
+    properties:
+      SqlInjectionMatchSetId:
+        $ref: '#/definitions/ResourceId'
+        description: '<p>A unique identifier for a <code>SqlInjectionMatchSet</code>. You use <code>SqlInjectionMatchSetId</code> to get information about a <code>SqlInjectionMatchSet</code> (see <a>GetSqlInjectionMatchSet</a>), update a <code>SqlInjectionMatchSet</code> (see <a>UpdateSqlInjectionMatchSet</a>), insert a <code>SqlInjectionMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>SqlInjectionMatchSet</code> from AWS WAF (see <a>DeleteSqlInjectionMatchSet</a>).</p> <p> <code>SqlInjectionMatchSetId</code> is returned by <a>CreateSqlInjectionMatchSet</a> and by <a>ListSqlInjectionMatchSets</a>.</p>'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name, if any, of the <code>SqlInjectionMatchSet</code>.'
+      SqlInjectionMatchTuples:
+        $ref: '#/definitions/SqlInjectionMatchTuples'
+        description: Specifies the parts of web requests that you want to inspect for snippets of malicious SQL code.
+    description: 'A complex type that contains <code>SqlInjectionMatchTuple</code> objects, which specify the parts of web requests that you want AWS WAF to inspect for snippets of malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header. If a <code>SqlInjectionMatchSet</code> contains more than one <code>SqlInjectionMatchTuple</code> object, a request needs to include snippets of SQL code in only one of the specified parts of the request to be considered a match.'
+  WebACL:
+    type: object
+    required:
+      - WebACLId
+      - DefaultAction
+      - Rules
+    properties:
+      WebACLId:
+        $ref: '#/definitions/ResourceId'
+        description: '<p>A unique identifier for a <code>WebACL</code>. You use <code>WebACLId</code> to get information about a <code>WebACL</code> (see <a>GetWebACL</a>), update a <code>WebACL</code> (see <a>UpdateWebACL</a>), and delete a <code>WebACL</code> from AWS WAF (see <a>DeleteWebACL</a>).</p> <p> <code>WebACLId</code> is returned by <a>CreateWebACL</a> and by <a>ListWebACLs</a>.</p>'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: A friendly name or description of the <code>WebACL</code>. You can't change the name of a <code>WebACL</code> after you create it.
+      MetricName:
+        $ref: '#/definitions/MetricName'
+        description: 'A friendly name or description for the metrics for this <code>WebACL</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change <code>MetricName</code> after you create the <code>WebACL</code>.'
+      DefaultAction:
+        $ref: '#/definitions/WafAction'
+        description: The action to perform if none of the <code>Rules</code> contained in the <code>WebACL</code> match. The action is specified by the <a>WafAction</a> object.
+      Rules:
+        $ref: '#/definitions/ActivatedRules'
+        description: 'An array that contains the action for each <code>Rule</code> in a <code>WebACL</code>, the priority of the <code>Rule</code>, and the ID of the <code>Rule</code>.'
+      WebACLArn:
+        $ref: '#/definitions/ResourceArn'
+        description: Tha Amazon Resource Name (ARN) of the web ACL.
+    description: 'Contains the <code>Rules</code> that identify the requests that you want to allow, block, or count. In a <code>WebACL</code>, you also specify a default action (<code>ALLOW</code> or <code>BLOCK</code>), and the action for each <code>Rule</code> that you add to a <code>WebACL</code>, for example, block requests from specified IP addresses or block requests from specified referrers. You also associate the <code>WebACL</code> with a CloudFront distribution to identify the requests that you want AWS WAF to filter. If you add more than one <code>Rule</code> to a <code>WebACL</code>, a request needs to match only one of the specifications to be allowed, blocked, or counted. For more information, see <a>UpdateWebACL</a>.'
+  XssMatchSet:
+    type: object
+    required:
+      - XssMatchSetId
+      - XssMatchTuples
+    properties:
+      XssMatchSetId:
+        $ref: '#/definitions/ResourceId'
+        description: '<p>A unique identifier for an <code>XssMatchSet</code>. You use <code>XssMatchSetId</code> to get information about an <code>XssMatchSet</code> (see <a>GetXssMatchSet</a>), update an <code>XssMatchSet</code> (see <a>UpdateXssMatchSet</a>), insert an <code>XssMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete an <code>XssMatchSet</code> from AWS WAF (see <a>DeleteXssMatchSet</a>).</p> <p> <code>XssMatchSetId</code> is returned by <a>CreateXssMatchSet</a> and by <a>ListXssMatchSets</a>.</p>'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: 'The name, if any, of the <code>XssMatchSet</code>.'
+      XssMatchTuples:
+        $ref: '#/definitions/XssMatchTuples'
+        description: Specifies the parts of web requests that you want to inspect for cross-site scripting attacks.
+    description: 'A complex type that contains <code>XssMatchTuple</code> objects, which specify the parts of web requests that you want AWS WAF to inspect for cross-site scripting attacks and, if you want AWS WAF to inspect a header, the name of the header. If a <code>XssMatchSet</code> contains more than one <code>XssMatchTuple</code> object, a request needs to include cross-site scripting attacks in only one of the specified parts of the request to be considered a match.'
+  MatchFieldType:
+    type: string
+    enum:
+      - URI
+      - QUERY_STRING
+      - HEADER
+      - METHOD
+      - BODY
+      - SINGLE_QUERY_ARG
+      - ALL_QUERY_ARGS
+  MatchFieldData:
+    type: string
   GeoMatchConstraintType:
     type: string
     enum:
@@ -5635,30 +5894,23 @@ definitions:
       - YE
       - ZM
       - ZW
+  GeoMatchConstraint:
+    type: object
+    required:
+      - Type
+      - Value
+    properties:
+      Type:
+        $ref: '#/definitions/GeoMatchConstraintType'
+        description: The type of geographical area you want AWS WAF to search for. Currently <code>Country</code> is the only valid value.
+      Value:
+        $ref: '#/definitions/GeoMatchConstraintValue'
+        description: The country that you want AWS WAF to search for.
+    description: The country from which web requests originate that you want AWS WAF to search for.
   GeoMatchConstraints:
     type: array
     items:
       $ref: '#/definitions/GeoMatchConstraint'
-  GeoMatchSet:
-    type: object
-    required:
-      - GeoMatchSetId
-      - GeoMatchConstraints
-    properties:
-      GeoMatchSetId:
-        $ref: '#/definitions/ResourceId'
-        description: '<p>The <code>GeoMatchSetId</code> for an <code>GeoMatchSet</code>. You use <code>GeoMatchSetId</code> to get information about a <code>GeoMatchSet</code> (see <a>GeoMatchSet</a>), update a <code>GeoMatchSet</code> (see <a>UpdateGeoMatchSet</a>), insert a <code>GeoMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>GeoMatchSet</code> from AWS WAF (see <a>DeleteGeoMatchSet</a>).</p> <p> <code>GeoMatchSetId</code> is returned by <a>CreateGeoMatchSet</a> and by <a>ListGeoMatchSets</a>.</p>'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: A friendly name or description of the <a>GeoMatchSet</a>. You can't change the name of an <code>GeoMatchSet</code> after you create it.
-      GeoMatchConstraints:
-        $ref: '#/definitions/GeoMatchConstraints'
-        description: 'An array of <a>GeoMatchConstraint</a> objects, which contain the country that you want AWS WAF to search for.'
-    description: Contains one or more countries that AWS WAF will search for.
-  GeoMatchSetSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/GeoMatchSetSummary'
   GeoMatchSetSummary:
     type: object
     required:
@@ -5672,6 +5924,10 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: A friendly name or description of the <a>GeoMatchSet</a>. You can't change the name of an <code>GeoMatchSet</code> after you create it.
     description: Contains the identifier and the name of the <code>GeoMatchSet</code>.
+  GeoMatchSetSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/GeoMatchSetSummary'
   GeoMatchSetUpdate:
     type: object
     required:
@@ -5690,10 +5946,72 @@ definitions:
     items:
       $ref: '#/definitions/GeoMatchSetUpdate'
     minItems: 1
+  LoggingConfiguration:
+    type: object
+    required:
+      - ResourceArn
+      - LogDestinationConfigs
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the web ACL that you want to associate with <code>LogDestinationConfigs</code>.
+      LogDestinationConfigs:
+        $ref: '#/definitions/LogDestinationConfigs'
+        description: An array of Amazon Kinesis Data Firehose ARNs.
+      RedactedFields:
+        $ref: '#/definitions/RedactedFields'
+        description: 'The parts of the request that you want redacted from the logs. For example, if you redact the cookie field, the cookie field in the firehose will be <code>xxx</code>. '
+    description: 'The Amazon Kinesis Data Firehose, <code>RedactedFields</code> information, and the web ACL Amazon Resource Name (ARN).'
+  PolicyString:
+    type: string
+    minLength: 1
+  NextMarker:
+    type: string
+    minLength: 1
+  ManagedKeys:
+    type: array
+    items:
+      $ref: '#/definitions/ManagedKey'
   GetSampledRequestsMaxItems:
     type: integer
     minimum: 1
     maximum: 500
+  TimeWindow:
+    type: object
+    required:
+      - StartTime
+      - EndTime
+    properties:
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The beginning of the time range from which you want <code>GetSampledRequests</code> to return a sample of the requests that your AWS resource received. Specify the date and time in the following format: <code>"2016-09-27T14:50Z"</code>. You can specify any time range in the previous three hours.'
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The end of the time range from which you want <code>GetSampledRequests</code> to return a sample of the requests that your AWS resource received. Specify the date and time in the following format: <code>"2016-09-27T14:50Z"</code>. You can specify any time range in the previous three hours.'
+    description: '<p>In a <a>GetSampledRequests</a> request, the <code>StartTime</code> and <code>EndTime</code> objects specify the time range for which you want AWS WAF to return a sample of web requests.</p> <p>In a <a>GetSampledRequests</a> response, the <code>StartTime</code> and <code>EndTime</code> objects specify the time range for which AWS WAF actually returned a sample of web requests. AWS WAF gets the specified number of requests from among the first 5,000 requests that your AWS resource receives during the specified time period. If your resource receives more than 5,000 requests during that period, AWS WAF stops sampling after the 5,000th request. In that case, <code>EndTime</code> is the time that AWS WAF received the 5,000th request. </p>'
+  SampledHTTPRequests:
+    type: array
+    items:
+      $ref: '#/definitions/SampledHTTPRequest'
+  PopulationSize:
+    type: integer
+  WebACLSummary:
+    type: object
+    required:
+      - WebACLId
+      - Name
+    properties:
+      WebACLId:
+        $ref: '#/definitions/ResourceId'
+        description: '<p>A unique identifier for a <code>WebACL</code>. You use <code>WebACLId</code> to get information about a <code>WebACL</code> (see <a>GetWebACL</a>), update a <code>WebACL</code> (see <a>UpdateWebACL</a>), and delete a <code>WebACL</code> from AWS WAF (see <a>DeleteWebACL</a>).</p> <p> <code>WebACLId</code> is returned by <a>CreateWebACL</a> and by <a>ListWebACLs</a>.</p>'
+      Name:
+        $ref: '#/definitions/ResourceName'
+        description: A friendly name or description of the <a>WebACL</a>. You can't change the name of a <code>WebACL</code> after you create it.
+    description: Contains the identifier and the name or description of the <a>WebACL</a>.
+  HeaderName:
+    type: string
+  HeaderValue:
+    type: string
   HTTPHeader:
     type: object
     properties:
@@ -5709,6 +6027,12 @@ definitions:
     items:
       $ref: '#/definitions/HTTPHeader'
   HTTPMethod:
+    type: string
+  IPString:
+    type: string
+  URIString:
+    type: string
+  HTTPVersion:
     type: string
   HTTPRequest:
     type: object
@@ -5732,28 +6056,17 @@ definitions:
         $ref: '#/definitions/HTTPHeaders'
         description: 'A complex type that contains two values for each header in the sampled web request: the name of the header and the value of the header.'
     description: 'The response from a <a>GetSampledRequests</a> request includes an <code>HTTPRequest</code> complex type that appears as <code>Request</code> in the response syntax. <code>HTTPRequest</code> contains information about one of the web requests that were returned by <code>GetSampledRequests</code>. '
-  HTTPVersion:
+  IPSetDescriptors:
+    type: array
+    items:
+      $ref: '#/definitions/IPSetDescriptor'
+  IPSetDescriptorType:
     type: string
-  HeaderName:
+    enum:
+      - IPV4
+      - IPV6
+  IPSetDescriptorValue:
     type: string
-  HeaderValue:
-    type: string
-  IPSet:
-    type: object
-    required:
-      - IPSetId
-      - IPSetDescriptors
-    properties:
-      IPSetId:
-        $ref: '#/definitions/ResourceId'
-        description: '<p>The <code>IPSetId</code> for an <code>IPSet</code>. You use <code>IPSetId</code> to get information about an <code>IPSet</code> (see <a>GetIPSet</a>), update an <code>IPSet</code> (see <a>UpdateIPSet</a>), insert an <code>IPSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete an <code>IPSet</code> from AWS WAF (see <a>DeleteIPSet</a>).</p> <p> <code>IPSetId</code> is returned by <a>CreateIPSet</a> and by <a>ListIPSets</a>.</p>'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: A friendly name or description of the <a>IPSet</a>. You can't change the name of an <code>IPSet</code> after you create it.
-      IPSetDescriptors:
-        $ref: '#/definitions/IPSetDescriptors'
-        description: 'The IP address type (<code>IPV4</code> or <code>IPV6</code>) and the IP address range (in CIDR notation) that web requests originate from. If the <code>WebACL</code> is associated with a CloudFront distribution and the viewer did not use an HTTP proxy or a load balancer to send the request, this is the value of the c-ip field in the CloudFront access logs.'
-    description: '<p>Contains one or more IP addresses or blocks of IP addresses specified in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports IPv4 address ranges: /8 and any range between /16 through /32. AWS WAF supports IPv6 address ranges: /16, /24, /32, /48, /56, /64, and /128.</p> <p>To specify an individual IP address, you specify the four-part IP address followed by a <code>/32</code>, for example, 192.0.2.0/31. To block a range of IP addresses, you can specify /8 or any range between /16 through /32 (for IPv4) or /16, /24, /32, /48, /56, /64, or /128 (for IPv6). For more information about CIDR notation, see the Wikipedia entry <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>. </p>'
   IPSetDescriptor:
     type: object
     required:
@@ -5767,21 +6080,6 @@ definitions:
         $ref: '#/definitions/IPSetDescriptorValue'
         description: '<p>Specify an IPv4 address by using CIDR notation. For example:</p> <ul> <li> <p>To configure AWS WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p> </li> <li> <p>To configure AWS WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify <code>192.0.2.0/24</code>.</p> </li> </ul> <p>For more information about CIDR notation, see the Wikipedia entry <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>.</p> <p>Specify an IPv6 address by using CIDR notation. For example:</p> <ul> <li> <p>To configure AWS WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p> </li> <li> <p>To configure AWS WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p> </li> </ul>'
     description: Specifies the IP address type (<code>IPV4</code> or <code>IPV6</code>) and the IP address range (in CIDR format) that web requests originate from.
-  IPSetDescriptorType:
-    type: string
-    enum:
-      - IPV4
-      - IPV6
-  IPSetDescriptorValue:
-    type: string
-  IPSetDescriptors:
-    type: array
-    items:
-      $ref: '#/definitions/IPSetDescriptor'
-  IPSetSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/IPSetSummary'
   IPSetSummary:
     type: object
     required:
@@ -5795,6 +6093,10 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: A friendly name or description of the <a>IPSet</a>. You can't change the name of an <code>IPSet</code> after you create it.
     description: Contains the identifier and the name of the <code>IPSet</code>.
+  IPSetSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/IPSetSummary'
   IPSetUpdate:
     type: object
     required:
@@ -5813,76 +6115,83 @@ definitions:
     items:
       $ref: '#/definitions/IPSetUpdate'
     minItems: 1
-  IPString:
+  PaginationLimit:
+    type: integer
+    minimum: 0
+    maximum: 100
+  LoggingConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/LoggingConfiguration'
+  RuleSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/RuleSummary'
+  RegexMatchSetSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/RegexMatchSetSummary'
+  RegexPatternSetSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/RegexPatternSetSummary'
+  ResourceType:
     type: string
+    enum:
+      - APPLICATION_LOAD_BALANCER
+      - API_GATEWAY
+  ResourceArns:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceArn'
+  RuleGroupSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/RuleGroupSummary'
+  SizeConstraintSetSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SizeConstraintSetSummary'
+  SqlInjectionMatchSetSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SqlInjectionMatchSetSummary'
+  SubscribedRuleGroupSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SubscribedRuleGroupSummary'
+  WebACLSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/WebACLSummary'
+  XssMatchSetSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/XssMatchSetSummary'
   LogDestinationConfigs:
     type: array
     items:
       $ref: '#/definitions/ResourceArn'
     minItems: 1
     maxItems: 1
-  LoggingConfiguration:
-    type: object
-    required:
-      - ResourceArn
-      - LogDestinationConfigs
-    properties:
-      ResourceArn:
-        $ref: '#/definitions/ResourceArn'
-        description: The Amazon Resource Name (ARN) of the web ACL that you want to associate with <code>LogDestinationConfigs</code>.
-      LogDestinationConfigs:
-        $ref: '#/definitions/LogDestinationConfigs'
-        description: An array of Amazon Kinesis Data Firehose ARNs.
-      RedactedFields:
-        $ref: '#/definitions/RedactedFields'
-        description: 'The parts of the request that you want redacted from the logs. For example, if you redact the cookie field, the cookie field in the firehose will be <code>xxx</code>. '
-    description: 'The Amazon Kinesis Data Firehose, <code>RedactedFields</code> information, and the web ACL Amazon Resource Name (ARN).'
-  LoggingConfigurations:
+  RedactedFields:
     type: array
     items:
-      $ref: '#/definitions/LoggingConfiguration'
+      $ref: '#/definitions/FieldToMatch'
   ManagedKey:
-    type: string
-  ManagedKeys:
-    type: array
-    items:
-      $ref: '#/definitions/ManagedKey'
-  MatchFieldData:
-    type: string
-  MatchFieldType:
-    type: string
-    enum:
-      - URI
-      - QUERY_STRING
-      - HEADER
-      - METHOD
-      - BODY
-      - SINGLE_QUERY_ARG
-      - ALL_QUERY_ARGS
-  MetricName:
     type: string
   Negated:
     type: boolean
-  NextMarker:
-    type: string
-    minLength: 1
-  PaginationLimit:
-    type: integer
-    minimum: 0
-    maximum: 100
-  PolicyString:
-    type: string
-    minLength: 1
-  PopulationSize:
-    type: integer
-  PositionalConstraint:
+  PredicateType:
     type: string
     enum:
-      - EXACTLY
-      - STARTS_WITH
-      - ENDS_WITH
-      - CONTAINS
-      - CONTAINS_WORD
+      - IPMatch
+      - ByteMatch
+      - SqlInjectionMatch
+      - GeoMatch
+      - SizeConstraint
+      - XssMatch
+      - RegexMatch
   Predicate:
     type: object
     required:
@@ -5900,76 +6209,14 @@ definitions:
         $ref: '#/definitions/ResourceId'
         description: 'A unique identifier for a predicate in a <code>Rule</code>, such as <code>ByteMatchSetId</code> or <code>IPSetId</code>. The ID is returned by the corresponding <code>Create</code> or <code>List</code> command.'
     description: 'Specifies the <a>ByteMatchSet</a>, <a>IPSet</a>, <a>SqlInjectionMatchSet</a>, <a>XssMatchSet</a>, <a>RegexMatchSet</a>, <a>GeoMatchSet</a>, and <a>SizeConstraintSet</a> objects that you want to add to a <code>Rule</code> and, for each object, indicates whether you want to negate the settings, for example, requests that do NOT originate from the IP address 192.0.2.44. '
-  PredicateType:
-    type: string
-    enum:
-      - IPMatch
-      - ByteMatch
-      - SqlInjectionMatch
-      - GeoMatch
-      - SizeConstraint
-      - XssMatch
-      - RegexMatch
   Predicates:
     type: array
     items:
       $ref: '#/definitions/Predicate'
-  RateBasedRule:
-    type: object
-    required:
-      - RuleId
-      - MatchPredicates
-      - RateKey
-      - RateLimit
-    properties:
-      RuleId:
-        $ref: '#/definitions/ResourceId'
-        description: 'A unique identifier for a <code>RateBasedRule</code>. You use <code>RuleId</code> to get more information about a <code>RateBasedRule</code> (see <a>GetRateBasedRule</a>), update a <code>RateBasedRule</code> (see <a>UpdateRateBasedRule</a>), insert a <code>RateBasedRule</code> into a <code>WebACL</code> or delete one from a <code>WebACL</code> (see <a>UpdateWebACL</a>), or delete a <code>RateBasedRule</code> from AWS WAF (see <a>DeleteRateBasedRule</a>).'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: A friendly name or description for a <code>RateBasedRule</code>. You can't change the name of a <code>RateBasedRule</code> after you create it.
-      MetricName:
-        $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for a <code>RateBasedRule</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change the name of the metric after you create the <code>RateBasedRule</code>.'
-      MatchPredicates:
-        $ref: '#/definitions/Predicates'
-        description: 'The <code>Predicates</code> object contains one <code>Predicate</code> element for each <a>ByteMatchSet</a>, <a>IPSet</a>, or <a>SqlInjectionMatchSet</a> object that you want to include in a <code>RateBasedRule</code>.'
-      RateKey:
-        $ref: '#/definitions/RateKey'
-        description: The field that AWS WAF uses to determine if requests are likely arriving from single source and thus subject to rate monitoring. The only valid value for <code>RateKey</code> is <code>IP</code>. <code>IP</code> indicates that requests arriving from the same IP address are subject to the <code>RateLimit</code> that is specified in the <code>RateBasedRule</code>.
-      RateLimit:
-        $ref: '#/definitions/RateLimit'
-        description: 'The maximum number of requests, which have an identical value in the field specified by the <code>RateKey</code>, allowed in a five-minute period. If the number of requests exceeds the <code>RateLimit</code> and the other predicates specified in the rule are also met, AWS WAF triggers the action that is specified for this rule.'
-    description: '<p>A <code>RateBasedRule</code> is identical to a regular <a>Rule</a>, with one addition: a <code>RateBasedRule</code> counts the number of requests that arrive from a specified IP address every five minutes. For example, based on recent requests that you''ve seen from an attacker, you might create a <code>RateBasedRule</code> that includes the following conditions: </p> <ul> <li> <p>The requests come from 192.0.2.44.</p> </li> <li> <p>They contain the value <code>BadBot</code> in the <code>User-Agent</code> header.</p> </li> </ul> <p>In the rule, you also define the rate limit as 15,000.</p> <p>Requests that meet both of these conditions and exceed 15,000 requests every five minutes trigger the rule''s action (block or count), which is defined in the web ACL.</p>'
-  RateKey:
-    type: string
-    enum:
-      - IP
-  RateLimit:
-    type: integer
-    minimum: 2000
-    maximum: 2000000000
-  RedactedFields:
+  RegexMatchTuples:
     type: array
     items:
-      $ref: '#/definitions/FieldToMatch'
-  RegexMatchSet:
-    type: object
-    properties:
-      RegexMatchSetId:
-        $ref: '#/definitions/ResourceId'
-        description: '<p>The <code>RegexMatchSetId</code> for a <code>RegexMatchSet</code>. You use <code>RegexMatchSetId</code> to get information about a <code>RegexMatchSet</code> (see <a>GetRegexMatchSet</a>), update a <code>RegexMatchSet</code> (see <a>UpdateRegexMatchSet</a>), insert a <code>RegexMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>RegexMatchSet</code> from AWS WAF (see <a>DeleteRegexMatchSet</a>).</p> <p> <code>RegexMatchSetId</code> is returned by <a>CreateRegexMatchSet</a> and by <a>ListRegexMatchSets</a>.</p>'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: A friendly name or description of the <a>RegexMatchSet</a>. You can't change <code>Name</code> after you create a <code>RegexMatchSet</code>.
-      RegexMatchTuples:
-        $ref: '#/definitions/RegexMatchTuples'
-        description: '<p>Contains an array of <a>RegexMatchTuple</a> objects. Each <code>RegexMatchTuple</code> object contains: </p> <ul> <li> <p>The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the <code>User-Agent</code> header. </p> </li> <li> <p>The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see <a>RegexPatternSet</a>.</p> </li> <li> <p>Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.</p> </li> </ul>'
-    description: '<p>In a <a>GetRegexMatchSet</a> request, <code>RegexMatchSet</code> is a complex type that contains the <code>RegexMatchSetId</code> and <code>Name</code> of a <code>RegexMatchSet</code>, and the values that you specified when you updated the <code>RegexMatchSet</code>.</p> <p> The values are contained in a <code>RegexMatchTuple</code> object, which specify the parts of web requests that you want AWS WAF to inspect and the values that you want AWS WAF to search for. If a <code>RegexMatchSet</code> contains more than one <code>RegexMatchTuple</code> object, a request needs to match the settings in only one <code>ByteMatchTuple</code> to be considered a match.</p>'
-  RegexMatchSetSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/RegexMatchSetSummary'
+      $ref: '#/definitions/RegexMatchTuple'
   RegexMatchSetSummary:
     type: object
     required:
@@ -5983,6 +6230,23 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: A friendly name or description of the <a>RegexMatchSet</a>. You can't change <code>Name</code> after you create a <code>RegexMatchSet</code>.
     description: Returned by <a>ListRegexMatchSets</a>. Each <code>RegexMatchSetSummary</code> object includes the <code>Name</code> and <code>RegexMatchSetId</code> for one <a>RegexMatchSet</a>.
+  RegexMatchTuple:
+    type: object
+    required:
+      - FieldToMatch
+      - TextTransformation
+      - RegexPatternSetId
+    properties:
+      FieldToMatch:
+        $ref: '#/definitions/FieldToMatch'
+        description: Specifies where in a web request to look for the <code>RegexPatternSet</code>.
+      TextTransformation:
+        $ref: '#/definitions/TextTransformation'
+        description: '<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass AWS WAF. If you specify a transformation, AWS WAF performs the transformation on <code>RegexPatternSet</code> before inspecting a request for a match.</p> <p>You can only specify a single type of TextTransformation.</p> <p> <b>CMD_LINE</b> </p> <p>When you''re concerned that attackers are injecting an operating system commandline command and using unusual formatting to disguise some or all of the command, use this option to perform the following transformations:</p> <ul> <li> <p>Delete the following characters: \ " '' ^</p> </li> <li> <p>Delete spaces before the following characters: / (</p> </li> <li> <p>Replace the following characters with a space: , ;</p> </li> <li> <p>Replace multiple spaces with one space</p> </li> <li> <p>Convert uppercase letters (A-Z) to lowercase (a-z)</p> </li> </ul> <p> <b>COMPRESS_WHITE_SPACE</b> </p> <p>Use this option to replace the following characters with a space character (decimal 32):</p> <ul> <li> <p>\f, formfeed, decimal 12</p> </li> <li> <p>\t, tab, decimal 9</p> </li> <li> <p>\n, newline, decimal 10</p> </li> <li> <p>\r, carriage return, decimal 13</p> </li> <li> <p>\v, vertical tab, decimal 11</p> </li> <li> <p>non-breaking space, decimal 160</p> </li> </ul> <p> <code>COMPRESS_WHITE_SPACE</code> also replaces multiple spaces with one space.</p> <p> <b>HTML_ENTITY_DECODE</b> </p> <p>Use this option to replace HTML-encoded characters with unencoded characters. <code>HTML_ENTITY_DECODE</code> performs the following operations:</p> <ul> <li> <p>Replaces <code>(ampersand)quot;</code> with <code>"</code> </p> </li> <li> <p>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal 160</p> </li> <li> <p>Replaces <code>(ampersand)lt;</code> with a "less than" symbol</p> </li> <li> <p>Replaces <code>(ampersand)gt;</code> with <code>&gt;</code> </p> </li> <li> <p>Replaces characters that are represented in hexadecimal format, <code>(ampersand)#xhhhh;</code>, with the corresponding characters</p> </li> <li> <p>Replaces characters that are represented in decimal format, <code>(ampersand)#nnnn;</code>, with the corresponding characters</p> </li> </ul> <p> <b>LOWERCASE</b> </p> <p>Use this option to convert uppercase letters (A-Z) to lowercase (a-z).</p> <p> <b>URL_DECODE</b> </p> <p>Use this option to decode a URL-encoded value.</p> <p> <b>NONE</b> </p> <p>Specify <code>NONE</code> if you don''t want to perform any text transformations.</p>'
+      RegexPatternSetId:
+        $ref: '#/definitions/ResourceId'
+        description: '<p>The <code>RegexPatternSetId</code> for a <code>RegexPatternSet</code>. You use <code>RegexPatternSetId</code> to get information about a <code>RegexPatternSet</code> (see <a>GetRegexPatternSet</a>), update a <code>RegexPatternSet</code> (see <a>UpdateRegexPatternSet</a>), insert a <code>RegexPatternSet</code> into a <code>RegexMatchSet</code> or delete one from a <code>RegexMatchSet</code> (see <a>UpdateRegexMatchSet</a>), and delete an <code>RegexPatternSet</code> from AWS WAF (see <a>DeleteRegexPatternSet</a>).</p> <p> <code>RegexPatternSetId</code> is returned by <a>CreateRegexPatternSet</a> and by <a>ListRegexPatternSets</a>.</p>'
+    description: '<p>The regular expression pattern that you want AWS WAF to search for in web requests, the location in requests that you want AWS WAF to search, and other settings. Each <code>RegexMatchTuple</code> object contains: </p> <ul> <li> <p>The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the <code>User-Agent</code> header. </p> </li> <li> <p>The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see <a>RegexPatternSet</a>. </p> </li> <li> <p>Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.</p> </li> </ul>'
   RegexMatchSetUpdate:
     type: object
     required:
@@ -6001,47 +6265,11 @@ definitions:
     items:
       $ref: '#/definitions/RegexMatchSetUpdate'
     minItems: 1
-  RegexMatchTuple:
-    type: object
-    required:
-      - FieldToMatch
-      - TextTransformation
-      - RegexPatternSetId
-    properties:
-      FieldToMatch:
-        $ref: '#/definitions/FieldToMatch'
-        description: Specifies where in a web request to look for the <code>RegexPatternSet</code>.
-      TextTransformation:
-        $ref: '#/definitions/TextTransformation'
-        description: '<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass AWS WAF. If you specify a transformation, AWS WAF performs the transformation on <code>RegexPatternSet</code> before inspecting a request for a match.</p> <p>You can only specify a single type of TextTransformation.</p> <p> <b>CMD_LINE</b> </p> <p>When you''re concerned that attackers are injecting an operating system commandline command and using unusual formatting to disguise some or all of the command, use this option to perform the following transformations:</p> <ul> <li> <p>Delete the following characters: \ " '' ^</p> </li> <li> <p>Delete spaces before the following characters: / (</p> </li> <li> <p>Replace the following characters with a space: , ;</p> </li> <li> <p>Replace multiple spaces with one space</p> </li> <li> <p>Convert uppercase letters (A-Z) to lowercase (a-z)</p> </li> </ul> <p> <b>COMPRESS_WHITE_SPACE</b> </p> <p>Use this option to replace the following characters with a space character (decimal 32):</p> <ul> <li> <p>\f, formfeed, decimal 12</p> </li> <li> <p>\t, tab, decimal 9</p> </li> <li> <p>\n, newline, decimal 10</p> </li> <li> <p>\r, carriage return, decimal 13</p> </li> <li> <p>\v, vertical tab, decimal 11</p> </li> <li> <p>non-breaking space, decimal 160</p> </li> </ul> <p> <code>COMPRESS_WHITE_SPACE</code> also replaces multiple spaces with one space.</p> <p> <b>HTML_ENTITY_DECODE</b> </p> <p>Use this option to replace HTML-encoded characters with unencoded characters. <code>HTML_ENTITY_DECODE</code> performs the following operations:</p> <ul> <li> <p>Replaces <code>(ampersand)quot;</code> with <code>"</code> </p> </li> <li> <p>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal 160</p> </li> <li> <p>Replaces <code>(ampersand)lt;</code> with a "less than" symbol</p> </li> <li> <p>Replaces <code>(ampersand)gt;</code> with <code>&gt;</code> </p> </li> <li> <p>Replaces characters that are represented in hexadecimal format, <code>(ampersand)#xhhhh;</code>, with the corresponding characters</p> </li> <li> <p>Replaces characters that are represented in decimal format, <code>(ampersand)#nnnn;</code>, with the corresponding characters</p> </li> </ul> <p> <b>LOWERCASE</b> </p> <p>Use this option to convert uppercase letters (A-Z) to lowercase (a-z).</p> <p> <b>URL_DECODE</b> </p> <p>Use this option to decode a URL-encoded value.</p> <p> <b>NONE</b> </p> <p>Specify <code>NONE</code> if you don''t want to perform any text transformations.</p>'
-      RegexPatternSetId:
-        $ref: '#/definitions/ResourceId'
-        description: '<p>The <code>RegexPatternSetId</code> for a <code>RegexPatternSet</code>. You use <code>RegexPatternSetId</code> to get information about a <code>RegexPatternSet</code> (see <a>GetRegexPatternSet</a>), update a <code>RegexPatternSet</code> (see <a>UpdateRegexPatternSet</a>), insert a <code>RegexPatternSet</code> into a <code>RegexMatchSet</code> or delete one from a <code>RegexMatchSet</code> (see <a>UpdateRegexMatchSet</a>), and delete an <code>RegexPatternSet</code> from AWS WAF (see <a>DeleteRegexPatternSet</a>).</p> <p> <code>RegexPatternSetId</code> is returned by <a>CreateRegexPatternSet</a> and by <a>ListRegexPatternSets</a>.</p>'
-    description: '<p>The regular expression pattern that you want AWS WAF to search for in web requests, the location in requests that you want AWS WAF to search, and other settings. Each <code>RegexMatchTuple</code> object contains: </p> <ul> <li> <p>The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the <code>User-Agent</code> header. </p> </li> <li> <p>The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see <a>RegexPatternSet</a>. </p> </li> <li> <p>Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.</p> </li> </ul>'
-  RegexMatchTuples:
+  RegexPatternStrings:
     type: array
     items:
-      $ref: '#/definitions/RegexMatchTuple'
-  RegexPatternSet:
-    type: object
-    required:
-      - RegexPatternSetId
-      - RegexPatternStrings
-    properties:
-      RegexPatternSetId:
-        $ref: '#/definitions/ResourceId'
-        description: '<p>The identifier for the <code>RegexPatternSet</code>. You use <code>RegexPatternSetId</code> to get information about a <code>RegexPatternSet</code>, update a <code>RegexPatternSet</code>, remove a <code>RegexPatternSet</code> from a <code>RegexMatchSet</code>, and delete a <code>RegexPatternSet</code> from AWS WAF.</p> <p> <code>RegexMatchSetId</code> is returned by <a>CreateRegexPatternSet</a> and by <a>ListRegexPatternSets</a>.</p>'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: A friendly name or description of the <a>RegexPatternSet</a>. You can't change <code>Name</code> after you create a <code>RegexPatternSet</code>.
-      RegexPatternStrings:
-        $ref: '#/definitions/RegexPatternStrings'
-        description: 'Specifies the regular expression (regex) patterns that you want AWS WAF to search for, such as <code>B[a@]dB[o0]t</code>.'
-    description: 'The <code>RegexPatternSet</code> specifies the regular expression (regex) pattern that you want AWS WAF to search for, such as <code>B[a@]dB[o0]t</code>. You can then configure AWS WAF to reject those requests.'
-  RegexPatternSetSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/RegexPatternSetSummary'
+      $ref: '#/definitions/RegexPatternString'
+    maxItems: 10
   RegexPatternSetSummary:
     type: object
     required:
@@ -6055,6 +6283,9 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: A friendly name or description of the <a>RegexPatternSet</a>. You can't change <code>Name</code> after you create a <code>RegexPatternSet</code>.
     description: Returned by <a>ListRegexPatternSets</a>. Each <code>RegexPatternSetSummary</code> object includes the <code>Name</code> and <code>RegexPatternSetId</code> for one <a>RegexPatternSet</a>.
+  RegexPatternString:
+    type: string
+    minLength: 1
   RegexPatternSetUpdate:
     type: object
     required:
@@ -6073,73 +6304,6 @@ definitions:
     items:
       $ref: '#/definitions/RegexPatternSetUpdate'
     minItems: 1
-  RegexPatternString:
-    type: string
-    minLength: 1
-  RegexPatternStrings:
-    type: array
-    items:
-      $ref: '#/definitions/RegexPatternString'
-    maxItems: 10
-  ResourceArn:
-    type: string
-    minLength: 1
-    maxLength: 1224
-  ResourceArns:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceArn'
-  ResourceId:
-    type: string
-    minLength: 1
-    maxLength: 128
-  ResourceName:
-    type: string
-    minLength: 1
-    maxLength: 128
-  ResourceType:
-    type: string
-    enum:
-      - APPLICATION_LOAD_BALANCER
-      - API_GATEWAY
-  Rule:
-    type: object
-    required:
-      - RuleId
-      - Predicates
-    properties:
-      RuleId:
-        $ref: '#/definitions/ResourceId'
-        description: '<p>A unique identifier for a <code>Rule</code>. You use <code>RuleId</code> to get more information about a <code>Rule</code> (see <a>GetRule</a>), update a <code>Rule</code> (see <a>UpdateRule</a>), insert a <code>Rule</code> into a <code>WebACL</code> or delete a one from a <code>WebACL</code> (see <a>UpdateWebACL</a>), or delete a <code>Rule</code> from AWS WAF (see <a>DeleteRule</a>).</p> <p> <code>RuleId</code> is returned by <a>CreateRule</a> and by <a>ListRules</a>.</p>'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: The friendly name or description for the <code>Rule</code>. You can't change the name of a <code>Rule</code> after you create it.
-      MetricName:
-        $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for this <code>Rule</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change <code>MetricName</code> after you create the <code>Rule</code>.'
-      Predicates:
-        $ref: '#/definitions/Predicates'
-        description: 'The <code>Predicates</code> object contains one <code>Predicate</code> element for each <a>ByteMatchSet</a>, <a>IPSet</a>, or <a>SqlInjectionMatchSet</a> object that you want to include in a <code>Rule</code>.'
-    description: '<p>A combination of <a>ByteMatchSet</a>, <a>IPSet</a>, and/or <a>SqlInjectionMatchSet</a> objects that identify the web requests that you want to allow, block, or count. For example, you might create a <code>Rule</code> that includes the following predicates:</p> <ul> <li> <p>An <code>IPSet</code> that causes AWS WAF to search for web requests that originate from the IP address <code>192.0.2.44</code> </p> </li> <li> <p>A <code>ByteMatchSet</code> that causes AWS WAF to search for web requests for which the value of the <code>User-Agent</code> header is <code>BadBot</code>.</p> </li> </ul> <p>To match the settings in this <code>Rule</code>, a request must originate from <code>192.0.2.44</code> AND include a <code>User-Agent</code> header for which the value is <code>BadBot</code>.</p>'
-  RuleGroup:
-    type: object
-    required:
-      - RuleGroupId
-    properties:
-      RuleGroupId:
-        $ref: '#/definitions/ResourceId'
-        description: '<p>A unique identifier for a <code>RuleGroup</code>. You use <code>RuleGroupId</code> to get more information about a <code>RuleGroup</code> (see <a>GetRuleGroup</a>), update a <code>RuleGroup</code> (see <a>UpdateRuleGroup</a>), insert a <code>RuleGroup</code> into a <code>WebACL</code> or delete a one from a <code>WebACL</code> (see <a>UpdateWebACL</a>), or delete a <code>RuleGroup</code> from AWS WAF (see <a>DeleteRuleGroup</a>).</p> <p> <code>RuleGroupId</code> is returned by <a>CreateRuleGroup</a> and by <a>ListRuleGroups</a>.</p>'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: The friendly name or description for the <code>RuleGroup</code>. You can't change the name of a <code>RuleGroup</code> after you create it.
-      MetricName:
-        $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change the name of the metric after you create the <code>RuleGroup</code>.'
-    description: '<p>A collection of predefined rules that you can add to a web ACL.</p> <p>Rule groups are subject to the following limits:</p> <ul> <li> <p>Three rule groups per account. You can request an increase to this limit by contacting customer support.</p> </li> <li> <p>One rule group per web ACL.</p> </li> <li> <p>Ten rules per rule group.</p> </li> </ul>'
-  RuleGroupSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/RuleGroupSummary'
   RuleGroupSummary:
     type: object
     required:
@@ -6171,12 +6335,6 @@ definitions:
     items:
       $ref: '#/definitions/RuleGroupUpdate'
     minItems: 1
-  RulePriority:
-    type: integer
-  RuleSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/RuleSummary'
   RuleSummary:
     type: object
     required:
@@ -6210,6 +6368,9 @@ definitions:
   SampleWeight:
     type: integer
     minimum: 0
+  Timestamp:
+    type: string
+    format: date-time
   SampledHTTPRequest:
     type: object
     required:
@@ -6232,10 +6393,6 @@ definitions:
         $ref: '#/definitions/ResourceId'
         description: This value is returned if the <code>GetSampledRequests</code> request specifies the ID of a <code>RuleGroup</code> rather than the ID of an individual rule. <code>RuleWithinRuleGroup</code> is the rule within the specified <code>RuleGroup</code> that matched the request listed in the response.
     description: The response from a <a>GetSampledRequests</a> request includes a <code>SampledHTTPRequests</code> complex type that appears as <code>SampledRequests</code> in the response syntax. <code>SampledHTTPRequests</code> contains one <code>SampledHTTPRequest</code> object for each web request that is returned by <code>GetSampledRequests</code>.
-  SampledHTTPRequests:
-    type: array
-    items:
-      $ref: '#/definitions/SampledHTTPRequest'
   Size:
     type: integer
     minimum: 0
@@ -6261,26 +6418,10 @@ definitions:
         $ref: '#/definitions/Size'
         description: '<p>The size in bytes that you want AWS WAF to compare against the size of the specified <code>FieldToMatch</code>. AWS WAF uses this in combination with <code>ComparisonOperator</code> and <code>FieldToMatch</code> to build an expression in the form of "<code>Size</code> <code>ComparisonOperator</code> size in bytes of <code>FieldToMatch</code>". If that expression is true, the <code>SizeConstraint</code> is considered to match.</p> <p>Valid values for size are 0 - 21474836480 bytes (0 - 20 GB).</p> <p>If you specify <code>URI</code> for the value of <code>Type</code>, the / in the URI counts as one character. For example, the URI <code>/logo.jpg</code> is nine characters long.</p>'
     description: 'Specifies a constraint on the size of a part of the web request. AWS WAF uses the <code>Size</code>, <code>ComparisonOperator</code>, and <code>FieldToMatch</code> to build an expression in the form of "<code>Size</code> <code>ComparisonOperator</code> size in bytes of <code>FieldToMatch</code>". If that expression is true, the <code>SizeConstraint</code> is considered to match.'
-  SizeConstraintSet:
-    type: object
-    required:
-      - SizeConstraintSetId
-      - SizeConstraints
-    properties:
-      SizeConstraintSetId:
-        $ref: '#/definitions/ResourceId'
-        description: '<p>A unique identifier for a <code>SizeConstraintSet</code>. You use <code>SizeConstraintSetId</code> to get information about a <code>SizeConstraintSet</code> (see <a>GetSizeConstraintSet</a>), update a <code>SizeConstraintSet</code> (see <a>UpdateSizeConstraintSet</a>), insert a <code>SizeConstraintSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>SizeConstraintSet</code> from AWS WAF (see <a>DeleteSizeConstraintSet</a>).</p> <p> <code>SizeConstraintSetId</code> is returned by <a>CreateSizeConstraintSet</a> and by <a>ListSizeConstraintSets</a>.</p>'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: 'The name, if any, of the <code>SizeConstraintSet</code>.'
-      SizeConstraints:
-        $ref: '#/definitions/SizeConstraints'
-        description: Specifies the parts of web requests that you want to inspect the size of.
-    description: 'A complex type that contains <code>SizeConstraint</code> objects, which specify the parts of web requests that you want AWS WAF to inspect the size of. If a <code>SizeConstraintSet</code> contains more than one <code>SizeConstraint</code> object, a request only needs to match one constraint to be considered a match.'
-  SizeConstraintSetSummaries:
+  SizeConstraints:
     type: array
     items:
-      $ref: '#/definitions/SizeConstraintSetSummary'
+      $ref: '#/definitions/SizeConstraint'
   SizeConstraintSetSummary:
     type: object
     required:
@@ -6312,30 +6453,10 @@ definitions:
     items:
       $ref: '#/definitions/SizeConstraintSetUpdate'
     minItems: 1
-  SizeConstraints:
+  SqlInjectionMatchTuples:
     type: array
     items:
-      $ref: '#/definitions/SizeConstraint'
-  SqlInjectionMatchSet:
-    type: object
-    required:
-      - SqlInjectionMatchSetId
-      - SqlInjectionMatchTuples
-    properties:
-      SqlInjectionMatchSetId:
-        $ref: '#/definitions/ResourceId'
-        description: '<p>A unique identifier for a <code>SqlInjectionMatchSet</code>. You use <code>SqlInjectionMatchSetId</code> to get information about a <code>SqlInjectionMatchSet</code> (see <a>GetSqlInjectionMatchSet</a>), update a <code>SqlInjectionMatchSet</code> (see <a>UpdateSqlInjectionMatchSet</a>), insert a <code>SqlInjectionMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete a <code>SqlInjectionMatchSet</code> from AWS WAF (see <a>DeleteSqlInjectionMatchSet</a>).</p> <p> <code>SqlInjectionMatchSetId</code> is returned by <a>CreateSqlInjectionMatchSet</a> and by <a>ListSqlInjectionMatchSets</a>.</p>'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: 'The name, if any, of the <code>SqlInjectionMatchSet</code>.'
-      SqlInjectionMatchTuples:
-        $ref: '#/definitions/SqlInjectionMatchTuples'
-        description: Specifies the parts of web requests that you want to inspect for snippets of malicious SQL code.
-    description: 'A complex type that contains <code>SqlInjectionMatchTuple</code> objects, which specify the parts of web requests that you want AWS WAF to inspect for snippets of malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header. If a <code>SqlInjectionMatchSet</code> contains more than one <code>SqlInjectionMatchTuple</code> object, a request needs to include snippets of SQL code in only one of the specified parts of the request to be considered a match.'
-  SqlInjectionMatchSetSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/SqlInjectionMatchSetSummary'
+      $ref: '#/definitions/SqlInjectionMatchTuple'
   SqlInjectionMatchSetSummary:
     type: object
     required:
@@ -6349,6 +6470,19 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: 'The name of the <code>SqlInjectionMatchSet</code>, if any, specified by <code>Id</code>.'
     description: The <code>Id</code> and <code>Name</code> of a <code>SqlInjectionMatchSet</code>.
+  SqlInjectionMatchTuple:
+    type: object
+    required:
+      - FieldToMatch
+      - TextTransformation
+    properties:
+      FieldToMatch:
+        $ref: '#/definitions/FieldToMatch'
+        description: Specifies where in a web request to look for snippets of malicious SQL code.
+      TextTransformation:
+        $ref: '#/definitions/TextTransformation'
+        description: '<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass AWS WAF. If you specify a transformation, AWS WAF performs the transformation on <code>FieldToMatch</code> before inspecting a request for a match.</p> <p>You can only specify a single type of TextTransformation.</p> <p> <b>CMD_LINE</b> </p> <p>When you''re concerned that attackers are injecting an operating system command line command and using unusual formatting to disguise some or all of the command, use this option to perform the following transformations:</p> <ul> <li> <p>Delete the following characters: \ " '' ^</p> </li> <li> <p>Delete spaces before the following characters: / (</p> </li> <li> <p>Replace the following characters with a space: , ;</p> </li> <li> <p>Replace multiple spaces with one space</p> </li> <li> <p>Convert uppercase letters (A-Z) to lowercase (a-z)</p> </li> </ul> <p> <b>COMPRESS_WHITE_SPACE</b> </p> <p>Use this option to replace the following characters with a space character (decimal 32):</p> <ul> <li> <p>\f, formfeed, decimal 12</p> </li> <li> <p>\t, tab, decimal 9</p> </li> <li> <p>\n, newline, decimal 10</p> </li> <li> <p>\r, carriage return, decimal 13</p> </li> <li> <p>\v, vertical tab, decimal 11</p> </li> <li> <p>non-breaking space, decimal 160</p> </li> </ul> <p> <code>COMPRESS_WHITE_SPACE</code> also replaces multiple spaces with one space.</p> <p> <b>HTML_ENTITY_DECODE</b> </p> <p>Use this option to replace HTML-encoded characters with unencoded characters. <code>HTML_ENTITY_DECODE</code> performs the following operations:</p> <ul> <li> <p>Replaces <code>(ampersand)quot;</code> with <code>"</code> </p> </li> <li> <p>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal 160</p> </li> <li> <p>Replaces <code>(ampersand)lt;</code> with a "less than" symbol</p> </li> <li> <p>Replaces <code>(ampersand)gt;</code> with <code>&gt;</code> </p> </li> <li> <p>Replaces characters that are represented in hexadecimal format, <code>(ampersand)#xhhhh;</code>, with the corresponding characters</p> </li> <li> <p>Replaces characters that are represented in decimal format, <code>(ampersand)#nnnn;</code>, with the corresponding characters</p> </li> </ul> <p> <b>LOWERCASE</b> </p> <p>Use this option to convert uppercase letters (A-Z) to lowercase (a-z).</p> <p> <b>URL_DECODE</b> </p> <p>Use this option to decode a URL-encoded value.</p> <p> <b>NONE</b> </p> <p>Specify <code>NONE</code> if you don''t want to perform any text transformations.</p>'
+    description: 'Specifies the part of a web request that you want AWS WAF to inspect for snippets of malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header.'
   SqlInjectionMatchSetUpdate:
     type: object
     required:
@@ -6367,27 +6501,6 @@ definitions:
     items:
       $ref: '#/definitions/SqlInjectionMatchSetUpdate'
     minItems: 1
-  SqlInjectionMatchTuple:
-    type: object
-    required:
-      - FieldToMatch
-      - TextTransformation
-    properties:
-      FieldToMatch:
-        $ref: '#/definitions/FieldToMatch'
-        description: Specifies where in a web request to look for snippets of malicious SQL code.
-      TextTransformation:
-        $ref: '#/definitions/TextTransformation'
-        description: '<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass AWS WAF. If you specify a transformation, AWS WAF performs the transformation on <code>FieldToMatch</code> before inspecting a request for a match.</p> <p>You can only specify a single type of TextTransformation.</p> <p> <b>CMD_LINE</b> </p> <p>When you''re concerned that attackers are injecting an operating system command line command and using unusual formatting to disguise some or all of the command, use this option to perform the following transformations:</p> <ul> <li> <p>Delete the following characters: \ " '' ^</p> </li> <li> <p>Delete spaces before the following characters: / (</p> </li> <li> <p>Replace the following characters with a space: , ;</p> </li> <li> <p>Replace multiple spaces with one space</p> </li> <li> <p>Convert uppercase letters (A-Z) to lowercase (a-z)</p> </li> </ul> <p> <b>COMPRESS_WHITE_SPACE</b> </p> <p>Use this option to replace the following characters with a space character (decimal 32):</p> <ul> <li> <p>\f, formfeed, decimal 12</p> </li> <li> <p>\t, tab, decimal 9</p> </li> <li> <p>\n, newline, decimal 10</p> </li> <li> <p>\r, carriage return, decimal 13</p> </li> <li> <p>\v, vertical tab, decimal 11</p> </li> <li> <p>non-breaking space, decimal 160</p> </li> </ul> <p> <code>COMPRESS_WHITE_SPACE</code> also replaces multiple spaces with one space.</p> <p> <b>HTML_ENTITY_DECODE</b> </p> <p>Use this option to replace HTML-encoded characters with unencoded characters. <code>HTML_ENTITY_DECODE</code> performs the following operations:</p> <ul> <li> <p>Replaces <code>(ampersand)quot;</code> with <code>"</code> </p> </li> <li> <p>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal 160</p> </li> <li> <p>Replaces <code>(ampersand)lt;</code> with a "less than" symbol</p> </li> <li> <p>Replaces <code>(ampersand)gt;</code> with <code>&gt;</code> </p> </li> <li> <p>Replaces characters that are represented in hexadecimal format, <code>(ampersand)#xhhhh;</code>, with the corresponding characters</p> </li> <li> <p>Replaces characters that are represented in decimal format, <code>(ampersand)#nnnn;</code>, with the corresponding characters</p> </li> </ul> <p> <b>LOWERCASE</b> </p> <p>Use this option to convert uppercase letters (A-Z) to lowercase (a-z).</p> <p> <b>URL_DECODE</b> </p> <p>Use this option to decode a URL-encoded value.</p> <p> <b>NONE</b> </p> <p>Specify <code>NONE</code> if you don''t want to perform any text transformations.</p>'
-    description: 'Specifies the part of a web request that you want AWS WAF to inspect for snippets of malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header.'
-  SqlInjectionMatchTuples:
-    type: array
-    items:
-      $ref: '#/definitions/SqlInjectionMatchTuple'
-  SubscribedRuleGroupSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/SubscribedRuleGroupSummary'
   SubscribedRuleGroupSummary:
     type: object
     required:
@@ -6405,111 +6518,26 @@ definitions:
         $ref: '#/definitions/MetricName'
         description: 'A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change the name of the metric after you create the <code>RuleGroup</code>.'
     description: A summary of the rule groups you are subscribed to.
-  TextTransformation:
-    type: string
-    enum:
-      - NONE
-      - COMPRESS_WHITE_SPACE
-      - HTML_ENTITY_DECODE
-      - LOWERCASE
-      - CMD_LINE
-      - URL_DECODE
-  TimeWindow:
-    type: object
-    required:
-      - StartTime
-      - EndTime
-    properties:
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The beginning of the time range from which you want <code>GetSampledRequests</code> to return a sample of the requests that your AWS resource received. Specify the date and time in the following format: <code>"2016-09-27T14:50Z"</code>. You can specify any time range in the previous three hours.'
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: 'The end of the time range from which you want <code>GetSampledRequests</code> to return a sample of the requests that your AWS resource received. Specify the date and time in the following format: <code>"2016-09-27T14:50Z"</code>. You can specify any time range in the previous three hours.'
-    description: '<p>In a <a>GetSampledRequests</a> request, the <code>StartTime</code> and <code>EndTime</code> objects specify the time range for which you want AWS WAF to return a sample of web requests.</p> <p>In a <a>GetSampledRequests</a> response, the <code>StartTime</code> and <code>EndTime</code> objects specify the time range for which AWS WAF actually returned a sample of web requests. AWS WAF gets the specified number of requests from among the first 5,000 requests that your AWS resource receives during the specified time period. If your resource receives more than 5,000 requests during that period, AWS WAF stops sampling after the 5,000th request. In that case, <code>EndTime</code> is the time that AWS WAF received the 5,000th request. </p>'
-  Timestamp:
-    type: string
-    format: date-time
-  URIString:
-    type: string
-  WafAction:
-    type: object
-    required:
-      - Type
-    properties:
-      Type:
-        $ref: '#/definitions/WafActionType'
-        description: '<p>Specifies how you want AWS WAF to respond to requests that match the settings in a <code>Rule</code>. Valid settings include the following:</p> <ul> <li> <p> <code>ALLOW</code>: AWS WAF allows requests</p> </li> <li> <p> <code>BLOCK</code>: AWS WAF blocks requests</p> </li> <li> <p> <code>COUNT</code>: AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can''t specify <code>COUNT</code> for the default action for a <code>WebACL</code>.</p> </li> </ul>'
-    description: 'For the action that is associated with a rule in a <code>WebACL</code>, specifies the action that you want AWS WAF to perform when a web request matches all of the conditions in a rule. For the default action in a <code>WebACL</code>, specifies the action that you want AWS WAF to take when a web request doesn''t match all of the conditions in any of the rules in a <code>WebACL</code>. '
+  WebACLUpdates:
+    type: array
+    items:
+      $ref: '#/definitions/WebACLUpdate'
+  XssMatchSetUpdates:
+    type: array
+    items:
+      $ref: '#/definitions/XssMatchSetUpdate'
+    minItems: 1
   WafActionType:
     type: string
     enum:
       - BLOCK
       - ALLOW
       - COUNT
-  WafOverrideAction:
-    type: object
-    required:
-      - Type
-    properties:
-      Type:
-        $ref: '#/definitions/WafOverrideActionType'
-        description: ' <code>COUNT</code> overrides the action specified by the individual rule within a <code>RuleGroup</code> . If set to <code>NONE</code>, the rule''s action will take place.'
-    description: 'The action to take if any rule within the <code>RuleGroup</code> matches a request. '
   WafOverrideActionType:
     type: string
     enum:
       - NONE
       - COUNT
-  WafRuleType:
-    type: string
-    enum:
-      - REGULAR
-      - RATE_BASED
-      - GROUP
-  WebACL:
-    type: object
-    required:
-      - WebACLId
-      - DefaultAction
-      - Rules
-    properties:
-      WebACLId:
-        $ref: '#/definitions/ResourceId'
-        description: '<p>A unique identifier for a <code>WebACL</code>. You use <code>WebACLId</code> to get information about a <code>WebACL</code> (see <a>GetWebACL</a>), update a <code>WebACL</code> (see <a>UpdateWebACL</a>), and delete a <code>WebACL</code> from AWS WAF (see <a>DeleteWebACL</a>).</p> <p> <code>WebACLId</code> is returned by <a>CreateWebACL</a> and by <a>ListWebACLs</a>.</p>'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: A friendly name or description of the <code>WebACL</code>. You can't change the name of a <code>WebACL</code> after you create it.
-      MetricName:
-        $ref: '#/definitions/MetricName'
-        description: 'A friendly name or description for the metrics for this <code>WebACL</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can''t contain whitespace. You can''t change <code>MetricName</code> after you create the <code>WebACL</code>.'
-      DefaultAction:
-        $ref: '#/definitions/WafAction'
-        description: The action to perform if none of the <code>Rules</code> contained in the <code>WebACL</code> match. The action is specified by the <a>WafAction</a> object.
-      Rules:
-        $ref: '#/definitions/ActivatedRules'
-        description: 'An array that contains the action for each <code>Rule</code> in a <code>WebACL</code>, the priority of the <code>Rule</code>, and the ID of the <code>Rule</code>.'
-      WebACLArn:
-        $ref: '#/definitions/ResourceArn'
-        description: Tha Amazon Resource Name (ARN) of the web ACL.
-    description: 'Contains the <code>Rules</code> that identify the requests that you want to allow, block, or count. In a <code>WebACL</code>, you also specify a default action (<code>ALLOW</code> or <code>BLOCK</code>), and the action for each <code>Rule</code> that you add to a <code>WebACL</code>, for example, block requests from specified IP addresses or block requests from specified referrers. You also associate the <code>WebACL</code> with a CloudFront distribution to identify the requests that you want AWS WAF to filter. If you add more than one <code>Rule</code> to a <code>WebACL</code>, a request needs to match only one of the specifications to be allowed, blocked, or counted. For more information, see <a>UpdateWebACL</a>.'
-  WebACLSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/WebACLSummary'
-  WebACLSummary:
-    type: object
-    required:
-      - WebACLId
-      - Name
-    properties:
-      WebACLId:
-        $ref: '#/definitions/ResourceId'
-        description: '<p>A unique identifier for a <code>WebACL</code>. You use <code>WebACLId</code> to get information about a <code>WebACL</code> (see <a>GetWebACL</a>), update a <code>WebACL</code> (see <a>UpdateWebACL</a>), and delete a <code>WebACL</code> from AWS WAF (see <a>DeleteWebACL</a>).</p> <p> <code>WebACLId</code> is returned by <a>CreateWebACL</a> and by <a>ListWebACLs</a>.</p>'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: A friendly name or description of the <a>WebACL</a>. You can't change the name of a <code>WebACL</code> after you create it.
-    description: Contains the identifier and the name or description of the <a>WebACL</a>.
   WebACLUpdate:
     type: object
     required:
@@ -6523,30 +6551,10 @@ definitions:
         $ref: '#/definitions/ActivatedRule'
         description: 'The <code>ActivatedRule</code> object in an <a>UpdateWebACL</a> request specifies a <code>Rule</code> that you want to insert or delete, the priority of the <code>Rule</code> in the <code>WebACL</code>, and the action that you want AWS WAF to take when a web request matches the <code>Rule</code> (<code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>).'
     description: Specifies whether to insert a <code>Rule</code> into or delete a <code>Rule</code> from a <code>WebACL</code>.
-  WebACLUpdates:
+  XssMatchTuples:
     type: array
     items:
-      $ref: '#/definitions/WebACLUpdate'
-  XssMatchSet:
-    type: object
-    required:
-      - XssMatchSetId
-      - XssMatchTuples
-    properties:
-      XssMatchSetId:
-        $ref: '#/definitions/ResourceId'
-        description: '<p>A unique identifier for an <code>XssMatchSet</code>. You use <code>XssMatchSetId</code> to get information about an <code>XssMatchSet</code> (see <a>GetXssMatchSet</a>), update an <code>XssMatchSet</code> (see <a>UpdateXssMatchSet</a>), insert an <code>XssMatchSet</code> into a <code>Rule</code> or delete one from a <code>Rule</code> (see <a>UpdateRule</a>), and delete an <code>XssMatchSet</code> from AWS WAF (see <a>DeleteXssMatchSet</a>).</p> <p> <code>XssMatchSetId</code> is returned by <a>CreateXssMatchSet</a> and by <a>ListXssMatchSets</a>.</p>'
-      Name:
-        $ref: '#/definitions/ResourceName'
-        description: 'The name, if any, of the <code>XssMatchSet</code>.'
-      XssMatchTuples:
-        $ref: '#/definitions/XssMatchTuples'
-        description: Specifies the parts of web requests that you want to inspect for cross-site scripting attacks.
-    description: 'A complex type that contains <code>XssMatchTuple</code> objects, which specify the parts of web requests that you want AWS WAF to inspect for cross-site scripting attacks and, if you want AWS WAF to inspect a header, the name of the header. If a <code>XssMatchSet</code> contains more than one <code>XssMatchTuple</code> object, a request needs to include cross-site scripting attacks in only one of the specified parts of the request to be considered a match.'
-  XssMatchSetSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/XssMatchSetSummary'
+      $ref: '#/definitions/XssMatchTuple'
   XssMatchSetSummary:
     type: object
     required:
@@ -6560,24 +6568,6 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: 'The name of the <code>XssMatchSet</code>, if any, specified by <code>Id</code>.'
     description: The <code>Id</code> and <code>Name</code> of an <code>XssMatchSet</code>.
-  XssMatchSetUpdate:
-    type: object
-    required:
-      - Action
-      - XssMatchTuple
-    properties:
-      Action:
-        $ref: '#/definitions/ChangeAction'
-        description: Specify <code>INSERT</code> to add a <a>XssMatchSetUpdate</a> to an <a>XssMatchSet</a>. Use <code>DELETE</code> to remove a <code>XssMatchSetUpdate</code> from an <code>XssMatchSet</code>.
-      XssMatchTuple:
-        $ref: '#/definitions/XssMatchTuple'
-        description: 'Specifies the part of a web request that you want AWS WAF to inspect for cross-site scripting attacks and, if you want AWS WAF to inspect a header, the name of the header.'
-    description: Specifies the part of a web request that you want to inspect for cross-site scripting attacks and indicates whether you want to add the specification to an <a>XssMatchSet</a> or delete it from an <code>XssMatchSet</code>.
-  XssMatchSetUpdates:
-    type: array
-    items:
-      $ref: '#/definitions/XssMatchSetUpdate'
-    minItems: 1
   XssMatchTuple:
     type: object
     required:
@@ -6591,7 +6581,16 @@ definitions:
         $ref: '#/definitions/TextTransformation'
         description: '<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass AWS WAF. If you specify a transformation, AWS WAF performs the transformation on <code>FieldToMatch</code> before inspecting a request for a match.</p> <p>You can only specify a single type of TextTransformation.</p> <p> <b>CMD_LINE</b> </p> <p>When you''re concerned that attackers are injecting an operating system command line command and using unusual formatting to disguise some or all of the command, use this option to perform the following transformations:</p> <ul> <li> <p>Delete the following characters: \ " '' ^</p> </li> <li> <p>Delete spaces before the following characters: / (</p> </li> <li> <p>Replace the following characters with a space: , ;</p> </li> <li> <p>Replace multiple spaces with one space</p> </li> <li> <p>Convert uppercase letters (A-Z) to lowercase (a-z)</p> </li> </ul> <p> <b>COMPRESS_WHITE_SPACE</b> </p> <p>Use this option to replace the following characters with a space character (decimal 32):</p> <ul> <li> <p>\f, formfeed, decimal 12</p> </li> <li> <p>\t, tab, decimal 9</p> </li> <li> <p>\n, newline, decimal 10</p> </li> <li> <p>\r, carriage return, decimal 13</p> </li> <li> <p>\v, vertical tab, decimal 11</p> </li> <li> <p>non-breaking space, decimal 160</p> </li> </ul> <p> <code>COMPRESS_WHITE_SPACE</code> also replaces multiple spaces with one space.</p> <p> <b>HTML_ENTITY_DECODE</b> </p> <p>Use this option to replace HTML-encoded characters with unencoded characters. <code>HTML_ENTITY_DECODE</code> performs the following operations:</p> <ul> <li> <p>Replaces <code>(ampersand)quot;</code> with <code>"</code> </p> </li> <li> <p>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal 160</p> </li> <li> <p>Replaces <code>(ampersand)lt;</code> with a "less than" symbol</p> </li> <li> <p>Replaces <code>(ampersand)gt;</code> with <code>&gt;</code> </p> </li> <li> <p>Replaces characters that are represented in hexadecimal format, <code>(ampersand)#xhhhh;</code>, with the corresponding characters</p> </li> <li> <p>Replaces characters that are represented in decimal format, <code>(ampersand)#nnnn;</code>, with the corresponding characters</p> </li> </ul> <p> <b>LOWERCASE</b> </p> <p>Use this option to convert uppercase letters (A-Z) to lowercase (a-z).</p> <p> <b>URL_DECODE</b> </p> <p>Use this option to decode a URL-encoded value.</p> <p> <b>NONE</b> </p> <p>Specify <code>NONE</code> if you don''t want to perform any text transformations.</p>'
     description: 'Specifies the part of a web request that you want AWS WAF to inspect for cross-site scripting attacks and, if you want AWS WAF to inspect a header, the name of the header.'
-  XssMatchTuples:
-    type: array
-    items:
-      $ref: '#/definitions/XssMatchTuple'
+  XssMatchSetUpdate:
+    type: object
+    required:
+      - Action
+      - XssMatchTuple
+    properties:
+      Action:
+        $ref: '#/definitions/ChangeAction'
+        description: Specify <code>INSERT</code> to add a <a>XssMatchSetUpdate</a> to an <a>XssMatchSet</a>. Use <code>DELETE</code> to remove a <code>XssMatchSetUpdate</code> from an <code>XssMatchSet</code>.
+      XssMatchTuple:
+        $ref: '#/definitions/XssMatchTuple'
+        description: 'Specifies the part of a web request that you want AWS WAF to inspect for cross-site scripting attacks and, if you want AWS WAF to inspect a header, the name of the header.'
+    description: Specifies the part of a web request that you want to inspect for cross-site scripting attacks and indicates whether you want to add the specification to an <a>XssMatchSet</a> or delete it from an <code>XssMatchSet</code>.

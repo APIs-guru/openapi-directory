@@ -672,7 +672,8 @@ definitions:
       BoxUsage:
         $ref: '#/definitions/Float'
     description: Too many attributes requested.
-  undefined: {}
+  String:
+    type: string
   Attribute:
     type: object
     required:
@@ -692,6 +693,9 @@ definitions:
         $ref: '#/definitions/String'
         description: ''
     description: ''
+  Float:
+    type: number
+    format: float
   AttributeList:
     type: array
     items:
@@ -702,6 +706,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+    xml:
+      wrapped: false
+  DeletableItemList:
+    type: array
+    items:
+      $ref: '#/definitions/DeletableItem'
+    xml:
+      wrapped: false
+  ReplaceableItemList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplaceableItem'
     xml:
       wrapped: false
   Boolean:
@@ -733,23 +749,29 @@ definitions:
         $ref: '#/definitions/String'
       Attributes:
         $ref: '#/definitions/DeletableAttributeList'
-  DeletableItemList:
-    type: array
-    items:
-      $ref: '#/definitions/DeletableItem'
-    xml:
-      wrapped: false
+  UpdateCondition:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the attribute involved in the condition.
+      Value:
+        $ref: '#/definitions/String'
+        description: The value of an attribute. This value can only be specified when the <code>Exists</code> parameter is equal to <code>true</code>.
+      Exists:
+        $ref: '#/definitions/Boolean'
+        description: A value specifying whether or not the specified attribute must exist with the specified value in order for the update condition to be satisfied. Specify <code>true</code> if the attribute must exist for the update condition to be satisfied. Specify <code>false</code> if the attribute should not exist in order for the update condition to be satisfied.
+    description: ' Specifies the conditions under which data should be updated. If an update condition is specified for a request, the data will only be updated if the condition is satisfied. For example, if an attribute with a specific name and value exists, or if a specific attribute doesn''t exist. '
+  Integer:
+    type: integer
+  Long:
+    type: integer
   DomainNameList:
     type: array
     items:
       $ref: '#/definitions/String'
     xml:
       wrapped: false
-  Float:
-    type: number
-    format: float
-  Integer:
-    type: integer
   Item:
     type: object
     required:
@@ -772,8 +794,12 @@ definitions:
       $ref: '#/definitions/Item'
     xml:
       wrapped: false
-  Long:
-    type: integer
+  ReplaceableAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplaceableAttribute'
+    xml:
+      wrapped: false
   ReplaceableAttribute:
     type: object
     required:
@@ -790,12 +816,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: A flag specifying whether or not to replace the attribute/value pair or to add a new attribute/value pair. The default setting is <code>false</code>.
     description: ''
-  ReplaceableAttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/ReplaceableAttribute'
-    xml:
-      wrapped: false
   ReplaceableItem:
     type: object
     required:
@@ -809,24 +829,3 @@ definitions:
         $ref: '#/definitions/ReplaceableAttributeList'
         description: The list of attributes for a replaceable item.
     description: ''
-  ReplaceableItemList:
-    type: array
-    items:
-      $ref: '#/definitions/ReplaceableItem'
-    xml:
-      wrapped: false
-  String:
-    type: string
-  UpdateCondition:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the attribute involved in the condition.
-      Value:
-        $ref: '#/definitions/String'
-        description: The value of an attribute. This value can only be specified when the <code>Exists</code> parameter is equal to <code>true</code>.
-      Exists:
-        $ref: '#/definitions/Boolean'
-        description: A value specifying whether or not the specified attribute must exist with the specified value in order for the update condition to be satisfied. Specify <code>true</code> if the attribute must exist for the update condition to be satisfied. Specify <code>false</code> if the attribute should not exist in order for the update condition to be satisfied.
-    description: ' Specifies the conditions under which data should be updated. If an update condition is specified for a request, the data will only be updated if the condition is satisfied. For example, if an attribute with a specific name and value exists, or if a specific attribute doesn''t exist. '

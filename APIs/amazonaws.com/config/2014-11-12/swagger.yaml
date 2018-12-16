@@ -2670,7 +2670,18 @@ definitions:
     description: The input for the <a>StopConfigurationRecorder</a> action.
   ARN:
     type: string
-  undefined: {}
+  AccountAggregationSourceAccountList:
+    type: array
+    items:
+      $ref: '#/definitions/AccountId'
+    minItems: 1
+  Boolean:
+    type: boolean
+  AggregatorRegionList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+    minItems: 1
   AccountAggregationSource:
     type: object
     required:
@@ -2686,20 +2697,33 @@ definitions:
         $ref: '#/definitions/AggregatorRegionList'
         description: The source regions being aggregated.
     description: A collection of accounts and regions.
-  AccountAggregationSourceAccountList:
-    type: array
-    items:
-      $ref: '#/definitions/AccountId'
-    minItems: 1
+  AccountId:
+    type: string
+    pattern: '\d{12}'
   AccountAggregationSourceList:
     type: array
     items:
       $ref: '#/definitions/AccountAggregationSource'
     minItems: 0
     maxItems: 1
-  AccountId:
+  ConfigRuleName:
     type: string
-    pattern: '\d{12}'
+    minLength: 1
+    maxLength: 64
+  Compliance:
+    type: object
+    properties:
+      ComplianceType:
+        $ref: '#/definitions/ComplianceType'
+        description: '<p>Indicates whether an AWS resource or AWS Config rule is compliant.</p> <p>A resource is compliant if it complies with all of the AWS Config rules that evaluate it. A resource is noncompliant if it does not comply with one or more of these rules.</p> <p>A rule is compliant if all of the resources that the rule evaluates comply with it. A rule is noncompliant if any of these resources do not comply.</p> <p>AWS Config returns the <code>INSUFFICIENT_DATA</code> value when no evaluation results are available for the AWS resource or AWS Config rule.</p> <p>For the <code>Compliance</code> data type, AWS Config supports only <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>INSUFFICIENT_DATA</code> values. AWS Config does not support the <code>NOT_APPLICABLE</code> value for the <code>Compliance</code> data type.</p>'
+      ComplianceContributorCount:
+        $ref: '#/definitions/ComplianceContributorCount'
+        description: 'The number of AWS resources or AWS Config rules that cause a result of <code>NON_COMPLIANT</code>, up to a maximum number.'
+    description: Indicates whether an AWS resource or AWS Config rule is compliant and provides the number of contributors that affect the compliance.
+  AwsRegion:
+    type: string
+    minLength: 1
+    maxLength: 64
   AggregateComplianceByConfigRule:
     type: object
     properties:
@@ -2720,6 +2744,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AggregateComplianceByConfigRule'
+  StringWithCharLimit256:
+    type: string
+    minLength: 1
+    maxLength: 256
+  ComplianceSummary:
+    type: object
+    properties:
+      CompliantResourceCount:
+        $ref: '#/definitions/ComplianceContributorCount'
+        description: 'The number of AWS Config rules or AWS resources that are compliant, up to a maximum of 25 for rules and 100 for resources.'
+      NonCompliantResourceCount:
+        $ref: '#/definitions/ComplianceContributorCount'
+        description: 'The number of AWS Config rules or AWS resources that are noncompliant, up to a maximum of 25 for rules and 100 for resources.'
+      ComplianceSummaryTimestamp:
+        $ref: '#/definitions/Date'
+        description: The time that AWS Config created the compliance summary.
+    description: The number of AWS Config rules or AWS resources that are compliant and noncompliant.
   AggregateComplianceCount:
     type: object
     properties:
@@ -2734,6 +2775,26 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AggregateComplianceCount'
+  EvaluationResultIdentifier:
+    type: object
+    properties:
+      EvaluationResultQualifier:
+        $ref: '#/definitions/EvaluationResultQualifier'
+        description: 'Identifies an AWS Config rule used to evaluate an AWS resource, and provides the type and ID of the evaluated resource.'
+      OrderingTimestamp:
+        $ref: '#/definitions/Date'
+        description: 'The time of the event that triggered the evaluation of your AWS resources. The time can indicate when AWS Config delivered a configuration item change notification, or it can indicate when AWS Config delivered the configuration snapshot, depending on which event triggered the evaluation.'
+    description: Uniquely identifies an evaluation result.
+  ComplianceType:
+    type: string
+    enum:
+      - COMPLIANT
+      - NON_COMPLIANT
+      - NOT_APPLICABLE
+      - INSUFFICIENT_DATA
+  Date:
+    type: string
+    format: date-time
   AggregateEvaluationResult:
     type: object
     properties:
@@ -2763,6 +2824,79 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AggregateEvaluationResult'
+  ResourceId:
+    type: string
+    minLength: 1
+    maxLength: 768
+  ResourceType:
+    type: string
+    enum:
+      - 'AWS::EC2::CustomerGateway'
+      - 'AWS::EC2::EIP'
+      - 'AWS::EC2::Host'
+      - 'AWS::EC2::Instance'
+      - 'AWS::EC2::InternetGateway'
+      - 'AWS::EC2::NetworkAcl'
+      - 'AWS::EC2::NetworkInterface'
+      - 'AWS::EC2::RouteTable'
+      - 'AWS::EC2::SecurityGroup'
+      - 'AWS::EC2::Subnet'
+      - 'AWS::CloudTrail::Trail'
+      - 'AWS::EC2::Volume'
+      - 'AWS::EC2::VPC'
+      - 'AWS::EC2::VPNConnection'
+      - 'AWS::EC2::VPNGateway'
+      - 'AWS::IAM::Group'
+      - 'AWS::IAM::Policy'
+      - 'AWS::IAM::Role'
+      - 'AWS::IAM::User'
+      - 'AWS::ACM::Certificate'
+      - 'AWS::RDS::DBInstance'
+      - 'AWS::RDS::DBSubnetGroup'
+      - 'AWS::RDS::DBSecurityGroup'
+      - 'AWS::RDS::DBSnapshot'
+      - 'AWS::RDS::EventSubscription'
+      - 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+      - 'AWS::S3::Bucket'
+      - 'AWS::SSM::ManagedInstanceInventory'
+      - 'AWS::Redshift::Cluster'
+      - 'AWS::Redshift::ClusterSnapshot'
+      - 'AWS::Redshift::ClusterParameterGroup'
+      - 'AWS::Redshift::ClusterSecurityGroup'
+      - 'AWS::Redshift::ClusterSubnetGroup'
+      - 'AWS::Redshift::EventSubscription'
+      - 'AWS::CloudWatch::Alarm'
+      - 'AWS::CloudFormation::Stack'
+      - 'AWS::DynamoDB::Table'
+      - 'AWS::AutoScaling::AutoScalingGroup'
+      - 'AWS::AutoScaling::LaunchConfiguration'
+      - 'AWS::AutoScaling::ScalingPolicy'
+      - 'AWS::AutoScaling::ScheduledAction'
+      - 'AWS::CodeBuild::Project'
+      - 'AWS::WAF::RateBasedRule'
+      - 'AWS::WAF::Rule'
+      - 'AWS::WAF::WebACL'
+      - 'AWS::WAFRegional::RateBasedRule'
+      - 'AWS::WAFRegional::Rule'
+      - 'AWS::WAFRegional::WebACL'
+      - 'AWS::CloudFront::Distribution'
+      - 'AWS::CloudFront::StreamingDistribution'
+      - 'AWS::WAF::RuleGroup'
+      - 'AWS::WAFRegional::RuleGroup'
+      - 'AWS::Lambda::Function'
+      - 'AWS::ElasticBeanstalk::Application'
+      - 'AWS::ElasticBeanstalk::ApplicationVersion'
+      - 'AWS::ElasticBeanstalk::Environment'
+      - 'AWS::ElasticLoadBalancing::LoadBalancer'
+      - 'AWS::XRay::EncryptionConfig'
+      - 'AWS::SSM::AssociationCompliance'
+      - 'AWS::SSM::PatchCompliance'
+      - 'AWS::Shield::Protection'
+      - 'AWS::ShieldRegional::Protection'
+      - 'AWS::Config::ResourceCompliance'
+      - 'AWS::CodePipeline::Pipeline'
+  ResourceName:
+    type: string
   AggregateResourceIdentifier:
     type: object
     required:
@@ -2787,6 +2921,19 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: The name of the AWS resource.
     description: 'The details that identify a resource that is collected by AWS Config aggregator, including the resource type, ID, (if available) the custom resource name, the source account, and source region.'
+  String:
+    type: string
+  AggregatedSourceType:
+    type: string
+    enum:
+      - ACCOUNT
+      - ORGANIZATION
+  AggregatedSourceStatusType:
+    type: string
+    enum:
+      - FAILED
+      - SUCCEEDED
+      - OUTDATED
   AggregatedSourceStatus:
     type: object
     properties:
@@ -2816,22 +2963,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AggregatedSourceStatus'
-  AggregatedSourceStatusType:
-    type: string
-    enum:
-      - FAILED
-      - SUCCEEDED
-      - OUTDATED
   AggregatedSourceStatusTypeList:
     type: array
     items:
       $ref: '#/definitions/AggregatedSourceStatusType'
     minItems: 1
-  AggregatedSourceType:
-    type: string
-    enum:
-      - ACCOUNT
-      - ORGANIZATION
   AggregationAuthorization:
     type: object
     properties:
@@ -2852,19 +2988,39 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AggregationAuthorization'
-  AggregatorRegionList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-    minItems: 1
   AllSupported:
     type: boolean
   AvailabilityZone:
     type: string
-  AwsRegion:
+  Version:
     type: string
-    minLength: 1
-    maxLength: 64
+  ConfigurationItemCaptureTime:
+    type: string
+    format: date-time
+  ConfigurationItemStatus:
+    type: string
+    enum:
+      - OK
+      - ResourceDiscovered
+      - ResourceNotRecorded
+      - ResourceDeleted
+      - ResourceDeletedNotRecorded
+  ConfigurationStateId:
+    type: string
+  ResourceCreationTime:
+    type: string
+    format: date-time
+  Configuration:
+    type: string
+  SupplementaryConfiguration:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/SupplementaryConfigurationName'
+        value:
+          $ref: '#/definitions/SupplementaryConfigurationValue'
   BaseConfigurationItem:
     type: object
     properties:
@@ -2919,8 +3075,27 @@ definitions:
     type: string
     minLength: 1
     maxLength: 768
-  Boolean:
-    type: boolean
+  ConfigurationAggregatorName:
+    type: string
+    pattern: '[\w\-]+'
+    minLength: 1
+    maxLength: 256
+  ResourceIdentifiersList:
+    type: array
+    items:
+      $ref: '#/definitions/AggregateResourceIdentifier'
+    minItems: 1
+    maxItems: 100
+  UnprocessedResourceIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/AggregateResourceIdentifier'
+  ResourceKeys:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceKey'
+    minItems: 1
+    maxItems: 100
   ChannelName:
     type: string
     minLength: 1
@@ -2930,16 +3105,20 @@ definitions:
     enum:
       - Reverse
       - Forward
-  Compliance:
+  ComplianceContributorCount:
     type: object
     properties:
-      ComplianceType:
-        $ref: '#/definitions/ComplianceType'
-        description: '<p>Indicates whether an AWS resource or AWS Config rule is compliant.</p> <p>A resource is compliant if it complies with all of the AWS Config rules that evaluate it. A resource is noncompliant if it does not comply with one or more of these rules.</p> <p>A rule is compliant if all of the resources that the rule evaluates comply with it. A rule is noncompliant if any of these resources do not comply.</p> <p>AWS Config returns the <code>INSUFFICIENT_DATA</code> value when no evaluation results are available for the AWS resource or AWS Config rule.</p> <p>For the <code>Compliance</code> data type, AWS Config supports only <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>INSUFFICIENT_DATA</code> values. AWS Config does not support the <code>NOT_APPLICABLE</code> value for the <code>Compliance</code> data type.</p>'
-      ComplianceContributorCount:
-        $ref: '#/definitions/ComplianceContributorCount'
-        description: 'The number of AWS resources or AWS Config rules that cause a result of <code>NON_COMPLIANT</code>, up to a maximum number.'
-    description: Indicates whether an AWS resource or AWS Config rule is compliant and provides the number of contributors that affect the compliance.
+      CappedCount:
+        $ref: '#/definitions/Integer'
+        description: The number of AWS resources or AWS Config rules responsible for the current compliance of the item.
+      CapExceeded:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the maximum count is reached.
+    description: 'The number of AWS resources or AWS Config rules responsible for the current compliance of the item, up to a maximum number.'
+  StringWithCharLimit64:
+    type: string
+    minLength: 1
+    maxLength: 64
   ComplianceByConfigRule:
     type: object
     properties:
@@ -2971,39 +3150,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ComplianceByResource'
-  ComplianceContributorCount:
-    type: object
-    properties:
-      CappedCount:
-        $ref: '#/definitions/Integer'
-        description: The number of AWS resources or AWS Config rules responsible for the current compliance of the item.
-      CapExceeded:
-        $ref: '#/definitions/Boolean'
-        description: Indicates whether the maximum count is reached.
-    description: 'The number of AWS resources or AWS Config rules responsible for the current compliance of the item, up to a maximum number.'
+  Integer:
+    type: integer
   ComplianceResourceTypes:
     type: array
     items:
       $ref: '#/definitions/StringWithCharLimit256'
     minItems: 0
     maxItems: 100
-  ComplianceSummariesByResourceType:
-    type: array
-    items:
-      $ref: '#/definitions/ComplianceSummaryByResourceType'
-  ComplianceSummary:
-    type: object
-    properties:
-      CompliantResourceCount:
-        $ref: '#/definitions/ComplianceContributorCount'
-        description: 'The number of AWS Config rules or AWS resources that are compliant, up to a maximum of 25 for rules and 100 for resources.'
-      NonCompliantResourceCount:
-        $ref: '#/definitions/ComplianceContributorCount'
-        description: 'The number of AWS Config rules or AWS resources that are noncompliant, up to a maximum of 25 for rules and 100 for resources.'
-      ComplianceSummaryTimestamp:
-        $ref: '#/definitions/Date'
-        description: The time that AWS Config created the compliance summary.
-    description: The number of AWS Config rules or AWS resources that are compliant and noncompliant.
   ComplianceSummaryByResourceType:
     type: object
     properties:
@@ -3014,19 +3168,22 @@ definitions:
         $ref: '#/definitions/ComplianceSummary'
         description: 'The number of AWS resources that are compliant or noncompliant, up to a maximum of 100 for each.'
     description: 'The number of AWS resources of a specific type that are compliant or noncompliant, up to a maximum of 100 for each.'
-  ComplianceType:
-    type: string
-    enum:
-      - COMPLIANT
-      - NON_COMPLIANT
-      - NOT_APPLICABLE
-      - INSUFFICIENT_DATA
+  ComplianceSummariesByResourceType:
+    type: array
+    items:
+      $ref: '#/definitions/ComplianceSummaryByResourceType'
   ComplianceTypes:
     type: array
     items:
       $ref: '#/definitions/ComplianceType'
     minItems: 0
     maxItems: 3
+  DeliveryStatus:
+    type: string
+    enum:
+      - Success
+      - Failure
+      - Not_Applicable
   ConfigExportDeliveryInfo:
     type: object
     properties:
@@ -3049,6 +3206,61 @@ definitions:
         $ref: '#/definitions/Date'
         description: The time that the next delivery occurs.
     description: Provides status of the delivery of the snapshot or the configuration history to the specified Amazon S3 bucket. Also provides the status of notifications about the Amazon S3 delivery to the specified Amazon SNS topic.
+  EmptiableStringWithCharLimit256:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Scope:
+    type: object
+    properties:
+      ComplianceResourceTypes:
+        $ref: '#/definitions/ComplianceResourceTypes'
+        description: The resource types of only those AWS resources that you want to trigger an evaluation for the rule. You can only specify one type if you also specify a resource ID for <code>ComplianceResourceId</code>.
+      TagKey:
+        $ref: '#/definitions/StringWithCharLimit128'
+        description: The tag key that is applied to only those AWS resources that you want to trigger an evaluation for the rule.
+      TagValue:
+        $ref: '#/definitions/StringWithCharLimit256'
+        description: 'The tag value applied to only those AWS resources that you want to trigger an evaluation for the rule. If you specify a value for <code>TagValue</code>, you must also specify a value for <code>TagKey</code>.'
+      ComplianceResourceId:
+        $ref: '#/definitions/BaseResourceId'
+        description: 'The ID of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for <code>ComplianceResourceTypes</code>.'
+    description: 'Defines which resources trigger an evaluation for an AWS Config rule. The scope can include one or more resource types, a combination of a tag key and value, or a combination of one resource type and one resource ID. Specify a scope to constrain which resources trigger an evaluation for a rule. Otherwise, evaluations for the rule are triggered when any resource in your recording group changes in configuration.'
+  Source:
+    type: object
+    required:
+      - Owner
+      - SourceIdentifier
+    properties:
+      Owner:
+        $ref: '#/definitions/Owner'
+        description: Indicates whether AWS or the customer owns and manages the AWS Config rule.
+      SourceIdentifier:
+        $ref: '#/definitions/StringWithCharLimit256'
+        description: '<p>For AWS Config managed rules, a predefined identifier from a list. For example, <code>IAM_PASSWORD_POLICY</code> is a managed rule. To reference a managed rule, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html">Using AWS Managed Config Rules</a>.</p> <p>For custom rules, the identifier is the Amazon Resource Name (ARN) of the rule''s AWS Lambda function, such as <code>arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name</code>.</p>'
+      SourceDetails:
+        $ref: '#/definitions/SourceDetails'
+        description: Provides the source and type of the event that causes AWS Config to evaluate your AWS resources.
+    description: 'Provides the AWS Config rule owner (AWS or customer), the rule identifier, and the events that trigger the evaluation of your AWS resources.'
+  StringWithCharLimit1024:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  MaximumExecutionFrequency:
+    type: string
+    enum:
+      - One_Hour
+      - Three_Hours
+      - Six_Hours
+      - Twelve_Hours
+      - TwentyFour_Hours
+  ConfigRuleState:
+    type: string
+    enum:
+      - ACTIVE
+      - DELETING
+      - DELETING_RESULTS
+      - EVALUATING
   ConfigRule:
     type: object
     required:
@@ -3157,23 +3369,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ConfigRuleEvaluationStatus'
-  ConfigRuleName:
-    type: string
-    minLength: 1
-    maxLength: 64
   ConfigRuleNames:
     type: array
     items:
       $ref: '#/definitions/StringWithCharLimit64'
     minItems: 0
     maxItems: 25
-  ConfigRuleState:
-    type: string
-    enum:
-      - ACTIVE
-      - DELETING
-      - DELETING_RESULTS
-      - EVALUATING
   ConfigRules:
     type: array
     items:
@@ -3201,8 +3402,24 @@ definitions:
         $ref: '#/definitions/Date'
         description: The time from the last status change.
     description: A list that contains the status of the delivery of the configuration stream notification to the Amazon SNS topic.
-  Configuration:
+  ConfigurationAggregatorArn:
     type: string
+    pattern: 'arn:aws[a-z\-]*:config:[a-z\-\d]+:\d+:config-aggregator/config-aggregator-[a-z\d]+'
+  OrganizationAggregationSource:
+    type: object
+    required:
+      - RoleArn
+    properties:
+      RoleArn:
+        $ref: '#/definitions/String'
+        description: ARN of the IAM role used to retreive AWS Organization details associated with the aggregator account.
+      AwsRegions:
+        $ref: '#/definitions/AggregatorRegionList'
+        description: The source regions being aggregated.
+      AllAwsRegions:
+        $ref: '#/definitions/Boolean'
+        description: 'If true, aggregate existing AWS Config regions and future regions.'
+    description: This object contains regions to setup the aggregator and an IAM role to retrieve organization details.
   ConfigurationAggregator:
     type: object
     properties:
@@ -3225,24 +3442,35 @@ definitions:
         $ref: '#/definitions/Date'
         description: The time of the last update.
     description: 'The details about the configuration aggregator, including information about source accounts, regions, and metadata of the aggregator. '
-  ConfigurationAggregatorArn:
-    type: string
-    pattern: 'arn:aws[a-z\-]*:config:[a-z\-\d]+:\d+:config-aggregator/config-aggregator-[a-z\d]+'
   ConfigurationAggregatorList:
     type: array
     items:
       $ref: '#/definitions/ConfigurationAggregator'
-  ConfigurationAggregatorName:
-    type: string
-    pattern: '[\w\-]+'
-    minLength: 1
-    maxLength: 256
   ConfigurationAggregatorNameList:
     type: array
     items:
       $ref: '#/definitions/ConfigurationAggregatorName'
     minItems: 0
     maxItems: 10
+  ConfigurationItemMD5Hash:
+    type: string
+  Tags:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Name'
+        value:
+          $ref: '#/definitions/Value'
+  RelatedEventList:
+    type: array
+    items:
+      $ref: '#/definitions/RelatedEvent'
+  RelationshipList:
+    type: array
+    items:
+      $ref: '#/definitions/Relationship'
   ConfigurationItem:
     type: object
     properties:
@@ -3301,23 +3529,27 @@ definitions:
         $ref: '#/definitions/SupplementaryConfiguration'
         description: Configuration attributes that AWS Config returns for certain resource types to supplement the information returned for the <code>configuration</code> parameter.
     description: A list that contains detailed configurations of a specified resource.
-  ConfigurationItemCaptureTime:
-    type: string
-    format: date-time
   ConfigurationItemList:
     type: array
     items:
       $ref: '#/definitions/ConfigurationItem'
-  ConfigurationItemMD5Hash:
+  RecorderName:
     type: string
-  ConfigurationItemStatus:
-    type: string
-    enum:
-      - OK
-      - ResourceDiscovered
-      - ResourceNotRecorded
-      - ResourceDeleted
-      - ResourceDeletedNotRecorded
+    minLength: 1
+    maxLength: 256
+  RecordingGroup:
+    type: object
+    properties:
+      allSupported:
+        $ref: '#/definitions/AllSupported'
+        description: '<p>Specifies whether AWS Config records configuration changes for every supported type of regional resource.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of regional resource, it starts recording resources of that type automatically.</p> <p>If you set this option to <code>true</code>, you cannot enumerate a list of <code>resourceTypes</code>.</p>'
+      includeGlobalResourceTypes:
+        $ref: '#/definitions/IncludeGlobalResourceTypes'
+        description: '<p>Specifies whether AWS Config includes all supported types of global resources (for example, IAM resources) with the resources that it records.</p> <p>Before you can set this option to <code>true</code>, you must set the <code>allSupported</code> option to <code>true</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of global resource, it starts recording resources of that type automatically.</p> <p>The configuration details for any global resource are the same in all regions. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources.</p>'
+      resourceTypes:
+        $ref: '#/definitions/ResourceTypeList'
+        description: '<p>A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, <code>AWS::EC2::Instance</code> or <code>AWS::CloudTrail::Trail</code>).</p> <p>Before you can set this option to <code>true</code>, you must set the <code>allSupported</code> option to <code>false</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>resourceType Value</b> column in <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported AWS Resource Types</a>.</p>'
+    description: '<p>Specifies the types of AWS resource for which AWS Config records configuration changes.</p> <p>In the recording group, you specify whether all supported types or specific types of resources are recorded.</p> <p>By default, AWS Config records configuration changes for all supported types of regional resources that AWS Config discovers in the region in which it is running. Regional resources are tied to a region and can be used only in that region. Examples of regional resources are EC2 instances and EBS volumes.</p> <p>You can also have AWS Config record configuration changes for supported types of global resources (for example, IAM resources). Global resources are not tied to an individual region and can be used in all regions.</p> <important> <p>The configuration details for any global resource are the same in all regions. If you customize AWS Config in multiple regions to record global resources, it will create multiple configuration items each time a global resource changes: one configuration item for each region. These configuration items will contain identical data. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources, unless you want the configuration items to be available in multiple regions.</p> </important> <p>If you don''t want AWS Config to record all resources, you can specify which types of resources it will record with the <code>resourceTypes</code> parameter.</p> <p>For a list of supported resource types, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported Resource Types</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/select-resources.html">Selecting Which Resources AWS Config Records</a>.</p>'
   ConfigurationRecorder:
     type: object
     properties:
@@ -3339,6 +3571,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RecorderName'
+  RecorderStatus:
+    type: string
+    enum:
+      - Pending
+      - Success
+      - Failure
   ConfigurationRecorderStatus:
     type: object
     properties:
@@ -3371,11 +3609,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ConfigurationRecorderStatus'
-  ConfigurationStateId:
+  RetentionConfigurationName:
     type: string
-  Date:
-    type: string
-    format: date-time
+    pattern: '[\w\-]+'
+    minLength: 1
+    maxLength: 256
   DeliveryChannel:
     type: object
     properties:
@@ -3423,16 +3661,38 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DeliveryChannelStatus'
-  DeliveryStatus:
+  GroupByAPILimit:
+    type: integer
+    minimum: 0
+    maximum: 1000
+  NextToken:
     type: string
-    enum:
-      - Success
-      - Failure
-      - Not_Applicable
+  Limit:
+    type: integer
+    minimum: 0
+    maximum: 100
+  RuleLimit:
+    type: integer
+    minimum: 0
+    maximum: 50
   DescribePendingAggregationRequestsLimit:
     type: integer
     minimum: 0
     maximum: 20
+  PendingAggregationRequestList:
+    type: array
+    items:
+      $ref: '#/definitions/PendingAggregationRequest'
+  RetentionConfigurationNameList:
+    type: array
+    items:
+      $ref: '#/definitions/RetentionConfigurationName'
+    minItems: 0
+    maxItems: 1
+  RetentionConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/RetentionConfiguration'
   DiscoveredResourceIdentifierList:
     type: array
     items:
@@ -3440,10 +3700,9 @@ definitions:
   EarlierTime:
     type: string
     format: date-time
-  EmptiableStringWithCharLimit256:
+  OrderingTimestamp:
     type: string
-    minLength: 0
-    maxLength: 256
+    format: date-time
   Evaluation:
     type: object
     required:
@@ -3490,16 +3749,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'An encrypted token that associates an evaluation with an AWS Config rule. The token identifies the rule, the AWS resource being evaluated, and the event that triggered the evaluation.'
     description: 'The details of an AWS Config evaluation. Provides the AWS resource that was evaluated, the compliance of the resource, related time stamps, and supplementary information.'
-  EvaluationResultIdentifier:
-    type: object
-    properties:
-      EvaluationResultQualifier:
-        $ref: '#/definitions/EvaluationResultQualifier'
-        description: 'Identifies an AWS Config rule used to evaluate an AWS resource, and provides the type and ID of the evaluated resource.'
-      OrderingTimestamp:
-        $ref: '#/definitions/Date'
-        description: 'The time of the event that triggered the evaluation of your AWS resources. The time can indicate when AWS Config delivered a configuration item change notification, or it can indicate when AWS Config delivered the configuration snapshot, depending on which event triggered the evaluation.'
-    description: Uniquely identifies an evaluation result.
   EvaluationResultQualifier:
     type: object
     properties:
@@ -3527,163 +3776,6 @@ definitions:
     type: string
     enum:
       - aws.config
-  GroupByAPILimit:
-    type: integer
-    minimum: 0
-    maximum: 1000
-  GroupedResourceCount:
-    type: object
-    required:
-      - GroupName
-      - ResourceCount
-    properties:
-      GroupName:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: 'The name of the group that can be region, account ID, or resource type. For example, region1, region2 if the region was chosen as <code>GroupByKey</code>.'
-      ResourceCount:
-        $ref: '#/definitions/Long'
-        description: The number of resources in the group.
-    description: The count of resources that are grouped by the group name.
-  GroupedResourceCountList:
-    type: array
-    items:
-      $ref: '#/definitions/GroupedResourceCount'
-  IncludeGlobalResourceTypes:
-    type: boolean
-  Integer:
-    type: integer
-  LaterTime:
-    type: string
-    format: date-time
-  Limit:
-    type: integer
-    minimum: 0
-    maximum: 100
-  Long:
-    type: integer
-  MaximumExecutionFrequency:
-    type: string
-    enum:
-      - One_Hour
-      - Three_Hours
-      - Six_Hours
-      - Twelve_Hours
-      - TwentyFour_Hours
-  MessageType:
-    type: string
-    enum:
-      - ConfigurationItemChangeNotification
-      - ConfigurationSnapshotDeliveryCompleted
-      - ScheduledNotification
-      - OversizedConfigurationItemChangeNotification
-  Name:
-    type: string
-  NextToken:
-    type: string
-  OrderingTimestamp:
-    type: string
-    format: date-time
-  OrganizationAggregationSource:
-    type: object
-    required:
-      - RoleArn
-    properties:
-      RoleArn:
-        $ref: '#/definitions/String'
-        description: ARN of the IAM role used to retreive AWS Organization details associated with the aggregator account.
-      AwsRegions:
-        $ref: '#/definitions/AggregatorRegionList'
-        description: The source regions being aggregated.
-      AllAwsRegions:
-        $ref: '#/definitions/Boolean'
-        description: 'If true, aggregate existing AWS Config regions and future regions.'
-    description: This object contains regions to setup the aggregator and an IAM role to retrieve organization details.
-  Owner:
-    type: string
-    enum:
-      - CUSTOM_LAMBDA
-      - AWS
-  PendingAggregationRequest:
-    type: object
-    properties:
-      RequesterAccountId:
-        $ref: '#/definitions/AccountId'
-        description: The 12-digit account ID of the account requesting to aggregate data.
-      RequesterAwsRegion:
-        $ref: '#/definitions/AwsRegion'
-        description: 'The region requesting to aggregate data. '
-    description: An object that represents the account ID and region of an aggregator account that is requesting authorization but is not yet authorized.
-  PendingAggregationRequestList:
-    type: array
-    items:
-      $ref: '#/definitions/PendingAggregationRequest'
-  RecorderName:
-    type: string
-    minLength: 1
-    maxLength: 256
-  RecorderStatus:
-    type: string
-    enum:
-      - Pending
-      - Success
-      - Failure
-  RecordingGroup:
-    type: object
-    properties:
-      allSupported:
-        $ref: '#/definitions/AllSupported'
-        description: '<p>Specifies whether AWS Config records configuration changes for every supported type of regional resource.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of regional resource, it starts recording resources of that type automatically.</p> <p>If you set this option to <code>true</code>, you cannot enumerate a list of <code>resourceTypes</code>.</p>'
-      includeGlobalResourceTypes:
-        $ref: '#/definitions/IncludeGlobalResourceTypes'
-        description: '<p>Specifies whether AWS Config includes all supported types of global resources (for example, IAM resources) with the resources that it records.</p> <p>Before you can set this option to <code>true</code>, you must set the <code>allSupported</code> option to <code>true</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of global resource, it starts recording resources of that type automatically.</p> <p>The configuration details for any global resource are the same in all regions. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources.</p>'
-      resourceTypes:
-        $ref: '#/definitions/ResourceTypeList'
-        description: '<p>A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, <code>AWS::EC2::Instance</code> or <code>AWS::CloudTrail::Trail</code>).</p> <p>Before you can set this option to <code>true</code>, you must set the <code>allSupported</code> option to <code>false</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>resourceType Value</b> column in <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported AWS Resource Types</a>.</p>'
-    description: '<p>Specifies the types of AWS resource for which AWS Config records configuration changes.</p> <p>In the recording group, you specify whether all supported types or specific types of resources are recorded.</p> <p>By default, AWS Config records configuration changes for all supported types of regional resources that AWS Config discovers in the region in which it is running. Regional resources are tied to a region and can be used only in that region. Examples of regional resources are EC2 instances and EBS volumes.</p> <p>You can also have AWS Config record configuration changes for supported types of global resources (for example, IAM resources). Global resources are not tied to an individual region and can be used in all regions.</p> <important> <p>The configuration details for any global resource are the same in all regions. If you customize AWS Config in multiple regions to record global resources, it will create multiple configuration items each time a global resource changes: one configuration item for each region. These configuration items will contain identical data. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources, unless you want the configuration items to be available in multiple regions.</p> </important> <p>If you don''t want AWS Config to record all resources, you can specify which types of resources it will record with the <code>resourceTypes</code> parameter.</p> <p>For a list of supported resource types, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported Resource Types</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/select-resources.html">Selecting Which Resources AWS Config Records</a>.</p>'
-  ReevaluateConfigRuleNames:
-    type: array
-    items:
-      $ref: '#/definitions/StringWithCharLimit64'
-    minItems: 1
-    maxItems: 25
-  RelatedEvent:
-    type: string
-  RelatedEventList:
-    type: array
-    items:
-      $ref: '#/definitions/RelatedEvent'
-  Relationship:
-    type: object
-    properties:
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The resource type of the related resource.
-      resourceId:
-        $ref: '#/definitions/ResourceId'
-        description: 'The ID of the related resource (for example, <code>sg-xxxxxx</code>).'
-      resourceName:
-        $ref: '#/definitions/ResourceName'
-        description: 'The custom name of the related resource, if available.'
-      relationshipName:
-        $ref: '#/definitions/RelationshipName'
-        description: The type of relationship with the related resource.
-    description: The relationship of the related resource to the main resource.
-  RelationshipList:
-    type: array
-    items:
-      $ref: '#/definitions/Relationship'
-  RelationshipName:
-    type: string
-  ResourceCount:
-    type: object
-    properties:
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: 'The resource type (for example, <code>"AWS::EC2::Instance"</code>).'
-      count:
-        $ref: '#/definitions/Long'
-        description: The number of resources.
-    description: An object that contains the resource type and the number of resources.
   ResourceCountFilters:
     type: object
     properties:
@@ -3703,16 +3795,40 @@ definitions:
       - RESOURCE_TYPE
       - ACCOUNT_ID
       - AWS_REGION
+  Long:
+    type: integer
+  GroupedResourceCountList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupedResourceCount'
+  ResourceTypes:
+    type: array
+    items:
+      $ref: '#/definitions/StringWithCharLimit256'
+    minItems: 0
+    maxItems: 20
   ResourceCounts:
     type: array
     items:
       $ref: '#/definitions/ResourceCount'
-  ResourceCreationTime:
+  LaterTime:
     type: string
     format: date-time
-  ResourceDeletionTime:
-    type: string
-    format: date-time
+  GroupedResourceCount:
+    type: object
+    required:
+      - GroupName
+      - ResourceCount
+    properties:
+      GroupName:
+        $ref: '#/definitions/StringWithCharLimit256'
+        description: 'The name of the group that can be region, account ID, or resource type. For example, region1, region2 if the region was chosen as <code>GroupByKey</code>.'
+      ResourceCount:
+        $ref: '#/definitions/Long'
+        description: The number of resources in the group.
+    description: The count of resources that are grouped by the group name.
+  IncludeGlobalResourceTypes:
+    type: boolean
   ResourceFilters:
     type: object
     properties:
@@ -3729,14 +3845,98 @@ definitions:
         $ref: '#/definitions/AwsRegion'
         description: The source region.
     description: 'Filters the results by resource account ID, region, resource ID, and resource name.'
-  ResourceId:
-    type: string
-    minLength: 1
-    maxLength: 768
   ResourceIdList:
     type: array
     items:
       $ref: '#/definitions/ResourceId'
+  ResourceIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceIdentifier'
+  MessageType:
+    type: string
+    enum:
+      - ConfigurationItemChangeNotification
+      - ConfigurationSnapshotDeliveryCompleted
+      - ScheduledNotification
+      - OversizedConfigurationItemChangeNotification
+  Name:
+    type: string
+  Owner:
+    type: string
+    enum:
+      - CUSTOM_LAMBDA
+      - AWS
+  PendingAggregationRequest:
+    type: object
+    properties:
+      RequesterAccountId:
+        $ref: '#/definitions/AccountId'
+        description: The 12-digit account ID of the account requesting to aggregate data.
+      RequesterAwsRegion:
+        $ref: '#/definitions/AwsRegion'
+        description: 'The region requesting to aggregate data. '
+    description: An object that represents the account ID and region of an aggregator account that is requesting authorization but is not yet authorized.
+  RetentionPeriodInDays:
+    type: integer
+    minimum: 30
+    maximum: 2557
+  RetentionConfiguration:
+    type: object
+    required:
+      - Name
+      - RetentionPeriodInDays
+    properties:
+      Name:
+        $ref: '#/definitions/RetentionConfigurationName'
+        description: The name of the retention configuration object.
+      RetentionPeriodInDays:
+        $ref: '#/definitions/RetentionPeriodInDays'
+        description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
+    description: An object with the name of the retention configuration and the retention period in days. The object stores the configuration for data retention in AWS Config.
+  ResourceTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceType'
+  ReevaluateConfigRuleNames:
+    type: array
+    items:
+      $ref: '#/definitions/StringWithCharLimit64'
+    minItems: 1
+    maxItems: 25
+  RelatedEvent:
+    type: string
+  RelationshipName:
+    type: string
+  Relationship:
+    type: object
+    properties:
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The resource type of the related resource.
+      resourceId:
+        $ref: '#/definitions/ResourceId'
+        description: 'The ID of the related resource (for example, <code>sg-xxxxxx</code>).'
+      resourceName:
+        $ref: '#/definitions/ResourceName'
+        description: 'The custom name of the related resource, if available.'
+      relationshipName:
+        $ref: '#/definitions/RelationshipName'
+        description: The type of relationship with the related resource.
+    description: The relationship of the related resource to the main resource.
+  ResourceCount:
+    type: object
+    properties:
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The resource type (for example, <code>"AWS::EC2::Instance"</code>).'
+      count:
+        $ref: '#/definitions/Long'
+        description: The number of resources.
+    description: An object that contains the resource type and the number of resources.
+  ResourceDeletionTime:
+    type: string
+    format: date-time
   ResourceIdentifier:
     type: object
     properties:
@@ -3753,16 +3953,6 @@ definitions:
         $ref: '#/definitions/ResourceDeletionTime'
         description: The time that the resource was deleted.
     description: 'The details that identify a resource that is discovered by AWS Config, including the resource type, ID, and (if available) the custom resource name.'
-  ResourceIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceIdentifier'
-  ResourceIdentifiersList:
-    type: array
-    items:
-      $ref: '#/definitions/AggregateResourceIdentifier'
-    minItems: 1
-    maxItems: 100
   ResourceKey:
     type: object
     required:
@@ -3776,159 +3966,16 @@ definitions:
         $ref: '#/definitions/ResourceId'
         description: 'The ID of the resource (for example., sg-xxxxxx). '
     description: 'The details that identify a resource within AWS Config, including the resource type and resource ID.'
-  ResourceKeys:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceKey'
-    minItems: 1
-    maxItems: 100
-  ResourceName:
+  StringWithCharLimit128:
     type: string
-  ResourceType:
-    type: string
-    enum:
-      - 'AWS::EC2::CustomerGateway'
-      - 'AWS::EC2::EIP'
-      - 'AWS::EC2::Host'
-      - 'AWS::EC2::Instance'
-      - 'AWS::EC2::InternetGateway'
-      - 'AWS::EC2::NetworkAcl'
-      - 'AWS::EC2::NetworkInterface'
-      - 'AWS::EC2::RouteTable'
-      - 'AWS::EC2::SecurityGroup'
-      - 'AWS::EC2::Subnet'
-      - 'AWS::CloudTrail::Trail'
-      - 'AWS::EC2::Volume'
-      - 'AWS::EC2::VPC'
-      - 'AWS::EC2::VPNConnection'
-      - 'AWS::EC2::VPNGateway'
-      - 'AWS::IAM::Group'
-      - 'AWS::IAM::Policy'
-      - 'AWS::IAM::Role'
-      - 'AWS::IAM::User'
-      - 'AWS::ACM::Certificate'
-      - 'AWS::RDS::DBInstance'
-      - 'AWS::RDS::DBSubnetGroup'
-      - 'AWS::RDS::DBSecurityGroup'
-      - 'AWS::RDS::DBSnapshot'
-      - 'AWS::RDS::EventSubscription'
-      - 'AWS::ElasticLoadBalancingV2::LoadBalancer'
-      - 'AWS::S3::Bucket'
-      - 'AWS::SSM::ManagedInstanceInventory'
-      - 'AWS::Redshift::Cluster'
-      - 'AWS::Redshift::ClusterSnapshot'
-      - 'AWS::Redshift::ClusterParameterGroup'
-      - 'AWS::Redshift::ClusterSecurityGroup'
-      - 'AWS::Redshift::ClusterSubnetGroup'
-      - 'AWS::Redshift::EventSubscription'
-      - 'AWS::CloudWatch::Alarm'
-      - 'AWS::CloudFormation::Stack'
-      - 'AWS::DynamoDB::Table'
-      - 'AWS::AutoScaling::AutoScalingGroup'
-      - 'AWS::AutoScaling::LaunchConfiguration'
-      - 'AWS::AutoScaling::ScalingPolicy'
-      - 'AWS::AutoScaling::ScheduledAction'
-      - 'AWS::CodeBuild::Project'
-      - 'AWS::WAF::RateBasedRule'
-      - 'AWS::WAF::Rule'
-      - 'AWS::WAF::WebACL'
-      - 'AWS::WAFRegional::RateBasedRule'
-      - 'AWS::WAFRegional::Rule'
-      - 'AWS::WAFRegional::WebACL'
-      - 'AWS::CloudFront::Distribution'
-      - 'AWS::CloudFront::StreamingDistribution'
-      - 'AWS::WAF::RuleGroup'
-      - 'AWS::WAFRegional::RuleGroup'
-      - 'AWS::Lambda::Function'
-      - 'AWS::ElasticBeanstalk::Application'
-      - 'AWS::ElasticBeanstalk::ApplicationVersion'
-      - 'AWS::ElasticBeanstalk::Environment'
-      - 'AWS::ElasticLoadBalancing::LoadBalancer'
-      - 'AWS::XRay::EncryptionConfig'
-      - 'AWS::SSM::AssociationCompliance'
-      - 'AWS::SSM::PatchCompliance'
-      - 'AWS::Shield::Protection'
-      - 'AWS::ShieldRegional::Protection'
-      - 'AWS::Config::ResourceCompliance'
-      - 'AWS::CodePipeline::Pipeline'
-  ResourceTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceType'
-  ResourceTypes:
-    type: array
-    items:
-      $ref: '#/definitions/StringWithCharLimit256'
-    minItems: 0
-    maxItems: 20
-  RetentionConfiguration:
-    type: object
-    required:
-      - Name
-      - RetentionPeriodInDays
-    properties:
-      Name:
-        $ref: '#/definitions/RetentionConfigurationName'
-        description: The name of the retention configuration object.
-      RetentionPeriodInDays:
-        $ref: '#/definitions/RetentionPeriodInDays'
-        description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
-    description: An object with the name of the retention configuration and the retention period in days. The object stores the configuration for data retention in AWS Config.
-  RetentionConfigurationList:
-    type: array
-    items:
-      $ref: '#/definitions/RetentionConfiguration'
-  RetentionConfigurationName:
-    type: string
-    pattern: '[\w\-]+'
     minLength: 1
-    maxLength: 256
-  RetentionConfigurationNameList:
+    maxLength: 128
+  SourceDetails:
     type: array
     items:
-      $ref: '#/definitions/RetentionConfigurationName'
+      $ref: '#/definitions/SourceDetail'
     minItems: 0
-    maxItems: 1
-  RetentionPeriodInDays:
-    type: integer
-    minimum: 30
-    maximum: 2557
-  RuleLimit:
-    type: integer
-    minimum: 0
-    maximum: 50
-  Scope:
-    type: object
-    properties:
-      ComplianceResourceTypes:
-        $ref: '#/definitions/ComplianceResourceTypes'
-        description: The resource types of only those AWS resources that you want to trigger an evaluation for the rule. You can only specify one type if you also specify a resource ID for <code>ComplianceResourceId</code>.
-      TagKey:
-        $ref: '#/definitions/StringWithCharLimit128'
-        description: The tag key that is applied to only those AWS resources that you want to trigger an evaluation for the rule.
-      TagValue:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: 'The tag value applied to only those AWS resources that you want to trigger an evaluation for the rule. If you specify a value for <code>TagValue</code>, you must also specify a value for <code>TagKey</code>.'
-      ComplianceResourceId:
-        $ref: '#/definitions/BaseResourceId'
-        description: 'The ID of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for <code>ComplianceResourceTypes</code>.'
-    description: 'Defines which resources trigger an evaluation for an AWS Config rule. The scope can include one or more resource types, a combination of a tag key and value, or a combination of one resource type and one resource ID. Specify a scope to constrain which resources trigger an evaluation for a rule. Otherwise, evaluations for the rule are triggered when any resource in your recording group changes in configuration.'
-  Source:
-    type: object
-    required:
-      - Owner
-      - SourceIdentifier
-    properties:
-      Owner:
-        $ref: '#/definitions/Owner'
-        description: Indicates whether AWS or the customer owns and manages the AWS Config rule.
-      SourceIdentifier:
-        $ref: '#/definitions/StringWithCharLimit256'
-        description: '<p>For AWS Config managed rules, a predefined identifier from a list. For example, <code>IAM_PASSWORD_POLICY</code> is a managed rule. To reference a managed rule, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html">Using AWS Managed Config Rules</a>.</p> <p>For custom rules, the identifier is the Amazon Resource Name (ARN) of the rule''s AWS Lambda function, such as <code>arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name</code>.</p>'
-      SourceDetails:
-        $ref: '#/definitions/SourceDetails'
-        description: Provides the source and type of the event that causes AWS Config to evaluate your AWS resources.
-    description: 'Provides the AWS Config rule owner (AWS or customer), the rule identifier, and the events that trigger the evaluation of your AWS resources.'
+    maxItems: 25
   SourceDetail:
     type: object
     properties:
@@ -3942,57 +3989,9 @@ definitions:
         $ref: '#/definitions/MaximumExecutionFrequency'
         description: '<p>The frequency at which you want AWS Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for <code>MaximumExecutionFrequency</code>, then <code>MessageType</code> must use the <code>ScheduledNotification</code> value.</p> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> <p>Based on the valid value you choose, AWS Config runs evaluations once for each valid value. For example, if you choose <code>Three_Hours</code>, AWS Config runs evaluations once every three hours. In this case, <code>Three_Hours</code> is the frequency of this rule. </p> </note>'
     description: 'Provides the source and the message types that trigger AWS Config to evaluate your AWS resources against a rule. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic. You can specify the parameter values for <code>SourceDetail</code> only for custom rules. '
-  SourceDetails:
-    type: array
-    items:
-      $ref: '#/definitions/SourceDetail'
-    minItems: 0
-    maxItems: 25
-  String:
-    type: string
-  StringWithCharLimit1024:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  StringWithCharLimit128:
-    type: string
-    minLength: 1
-    maxLength: 128
-  StringWithCharLimit256:
-    type: string
-    minLength: 1
-    maxLength: 256
-  StringWithCharLimit64:
-    type: string
-    minLength: 1
-    maxLength: 64
   SupplementaryConfigurationName:
     type: string
   SupplementaryConfigurationValue:
     type: string
-  SupplementaryConfiguration:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/SupplementaryConfigurationName'
-        value:
-          $ref: '#/definitions/SupplementaryConfigurationValue'
   Value:
-    type: string
-  Tags:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Name'
-        value:
-          $ref: '#/definitions/Value'
-  UnprocessedResourceIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/AggregateResourceIdentifier'
-  Version:
     type: string

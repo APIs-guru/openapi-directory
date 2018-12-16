@@ -1394,7 +1394,8 @@ definitions:
         $ref: '#/definitions/ExceptionMessage'
         description: A message returned when an LambdaThrottledException is thrown
     description: 'AWS Lambda throttled your account, please contact AWS Support'
-  undefined: {}
+  ExceptionMessage:
+    type: string
   ApplicationArn:
     type: string
     pattern: 'arn:aws:sns:[-0-9a-z]+:\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+'
@@ -1409,6 +1410,11 @@ definitions:
     maxLength: 2048
   Boolean:
     type: boolean
+  IdentityPoolId:
+    type: string
+    pattern: '[\w-]+:[0-9a-f-]+'
+    minLength: 1
+    maxLength: 55
   BulkPublishStatus:
     type: string
     enum:
@@ -1420,6 +1426,15 @@ definitions:
     type: string
   CognitoEventType:
     type: string
+  StreamName:
+    type: string
+    minLength: 1
+    maxLength: 128
+  StreamingStatus:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
   CognitoStreams:
     type: object
     properties:
@@ -1433,6 +1448,23 @@ definitions:
         $ref: '#/definitions/StreamingStatus'
         description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
     description: Configuration options for configure Cognito streams.
+  String:
+    type: string
+  IdentityId:
+    type: string
+    pattern: '[\w-]+:[0-9a-f-]+'
+    minLength: 1
+    maxLength: 55
+  DatasetName:
+    type: string
+    pattern: '[a-zA-Z0-9_.:-]+'
+    minLength: 1
+    maxLength: 128
+  Date:
+    type: string
+    format: date-time
+  Long:
+    type: integer
   Dataset:
     type: object
     properties:
@@ -1462,42 +1494,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Dataset'
-  DatasetName:
-    type: string
-    pattern: '[a-zA-Z0-9_.:-]+'
-    minLength: 1
-    maxLength: 128
-  Date:
-    type: string
-    format: date-time
-  DeviceId:
-    type: string
-    minLength: 1
-    maxLength: 256
-  LambdaFunctionArn:
-    type: string
-  Events:
-    type: array
-    maxItems: 1
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/CognitoEventType'
-        value:
-          $ref: '#/definitions/LambdaFunctionArn'
-  ExceptionMessage:
-    type: string
-  IdentityId:
-    type: string
-    pattern: '[\w-]+:[0-9a-f-]+'
-    minLength: 1
-    maxLength: 55
-  IdentityPoolId:
-    type: string
-    pattern: '[\w-]+:[0-9a-f-]+'
-    minLength: 1
-    maxLength: 55
   IdentityPoolUsage:
     type: object
     properties:
@@ -1514,10 +1510,6 @@ definitions:
         $ref: '#/definitions/Date'
         description: Date on which the identity pool was last modified.
     description: Usage information for the identity pool.
-  IdentityPoolUsageList:
-    type: array
-    items:
-      $ref: '#/definitions/IdentityPoolUsage'
   IdentityUsage:
     type: object
     properties:
@@ -1537,12 +1529,46 @@ definitions:
         $ref: '#/definitions/Long'
         description: Total data storage for this identity.
     description: Usage information for the identity.
+  DeviceId:
+    type: string
+    minLength: 1
+    maxLength: 256
+  LambdaFunctionArn:
+    type: string
+  Events:
+    type: array
+    maxItems: 1
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/CognitoEventType'
+        value:
+          $ref: '#/definitions/LambdaFunctionArn'
+  PushSync:
+    type: object
+    properties:
+      ApplicationArns:
+        $ref: '#/definitions/ApplicationArnList'
+        description: List of SNS platform application ARNs that could be used by clients.
+      RoleArn:
+        $ref: '#/definitions/AssumeRoleArn'
+        description: A role configured to allow Cognito to call SNS on behalf of the developer.
+    description: Configuration options to be applied to the identity pool.
+  IdentityPoolUsageList:
+    type: array
+    items:
+      $ref: '#/definitions/IdentityPoolUsage'
   Integer:
     type: integer
   IntegerString:
     type: integer
-  Long:
-    type: integer
+  SyncSessionToken:
+    type: string
+  RecordList:
+    type: array
+    items:
+      $ref: '#/definitions/Record'
   MergedDatasetNameList:
     type: array
     items:
@@ -1559,18 +1585,15 @@ definitions:
       - APNS_SANDBOX
       - GCM
       - ADM
-  PushSync:
-    type: object
-    properties:
-      ApplicationArns:
-        $ref: '#/definitions/ApplicationArnList'
-        description: List of SNS platform application ARNs that could be used by clients.
-      RoleArn:
-        $ref: '#/definitions/AssumeRoleArn'
-        description: A role configured to allow Cognito to call SNS on behalf of the developer.
-    description: Configuration options to be applied to the identity pool.
   PushToken:
     type: string
+  RecordKey:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  RecordValue:
+    type: string
+    maxLength: 1048575
   Record:
     type: object
     properties:
@@ -1593,14 +1616,6 @@ definitions:
         $ref: '#/definitions/Date'
         description: The last modified date of the client device.
     description: The basic data structure of a dataset.
-  RecordKey:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  RecordList:
-    type: array
-    items:
-      $ref: '#/definitions/Record'
   RecordPatch:
     type: object
     required:
@@ -1628,19 +1643,3 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/RecordPatch'
-  RecordValue:
-    type: string
-    maxLength: 1048575
-  StreamName:
-    type: string
-    minLength: 1
-    maxLength: 128
-  StreamingStatus:
-    type: string
-    enum:
-      - ENABLED
-      - DISABLED
-  String:
-    type: string
-  SyncSessionToken:
-    type: string

@@ -1101,7 +1101,12 @@ definitions:
       SamplingRuleUpdate:
         $ref: '#/definitions/SamplingRuleUpdate'
         description: The rule and fields to change.
-  undefined: {}
+  String:
+    type: string
+  AliasNames:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   Alias:
     type: object
     properties:
@@ -1119,12 +1124,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Alias'
-  AliasNames:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   AnnotationKey:
     type: string
+  NullableDouble:
+    type: number
+    format: double
+  NullableBoolean:
+    type: boolean
   AnnotationValue:
     type: object
     properties:
@@ -1176,6 +1182,8 @@ definitions:
         $ref: '#/definitions/String'
         description: The name of a corresponding availability zone.
     description: A list of availability zones corresponding to the segments in a trace.
+  NullableInteger:
+    type: integer
   BackendConnectionErrors:
     type: object
     properties:
@@ -1198,6 +1206,18 @@ definitions:
         $ref: '#/definitions/NullableInteger'
         description: <p/>
     description: <p/>
+  TraceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/TraceId'
+  TraceList:
+    type: array
+    items:
+      $ref: '#/definitions/Trace'
+  UnprocessedTraceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/TraceId'
   Boolean:
     type: boolean
   BorrowCount:
@@ -1207,228 +1227,14 @@ definitions:
     type: string
     minLength: 24
     maxLength: 24
-  Double:
-    type: number
-    format: double
-  EC2InstanceId:
-    type: string
-    maxLength: 20
-  Edge:
-    type: object
-    properties:
-      ReferenceId:
-        $ref: '#/definitions/NullableInteger'
-        description: Identifier of the edge. Unique within a service map.
-      StartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The start time of the first segment on the edge.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The end time of the last segment on the edge.
-      SummaryStatistics:
-        $ref: '#/definitions/EdgeStatistics'
-        description: Response statistics for segments on the edge.
-      ResponseTimeHistogram:
-        $ref: '#/definitions/Histogram'
-        description: A histogram that maps the spread of client response times on an edge.
-      Aliases:
-        $ref: '#/definitions/AliasList'
-        description: Aliases for the edge.
-    description: Information about a connection between two services.
-  EdgeList:
-    type: array
-    items:
-      $ref: '#/definitions/Edge'
-  EdgeStatistics:
-    type: object
-    properties:
-      OkCount:
-        $ref: '#/definitions/NullableLong'
-        description: The number of requests that completed with a 2xx Success status code.
-      ErrorStatistics:
-        $ref: '#/definitions/ErrorStatistics'
-        description: Information about requests that failed with a 4xx Client Error status code.
-      FaultStatistics:
-        $ref: '#/definitions/FaultStatistics'
-        description: Information about requests that failed with a 5xx Server Error status code.
-      TotalCount:
-        $ref: '#/definitions/NullableLong'
-        description: The total number of completed requests.
-      TotalResponseTime:
-        $ref: '#/definitions/NullableDouble'
-        description: The aggregate response time of completed requests.
-    description: Response statistics for an edge.
-  EncryptionConfig:
-    type: object
-    properties:
-      KeyId:
-        $ref: '#/definitions/String'
-        description: 'The ID of the customer master key (CMK) used for encryption, if applicable.'
-      Status:
-        $ref: '#/definitions/EncryptionStatus'
-        description: 'The encryption status. While the status is <code>UPDATING</code>, X-Ray may encrypt data with a combination of the new and old settings.'
-      Type:
-        $ref: '#/definitions/EncryptionType'
-        description: The type of encryption. Set to <code>KMS</code> for encryption with CMKs. Set to <code>NONE</code> for default encryption.
-    description: A configuration document that specifies encryption configuration settings.
-  EncryptionKeyId:
+  GroupName:
     type: string
     minLength: 1
-    maxLength: 3000
-  EncryptionStatus:
-    type: string
-    enum:
-      - UPDATING
-      - ACTIVE
-  EncryptionType:
-    type: string
-    enum:
-      - NONE
-      - KMS
-  ErrorRootCause:
-    type: object
-    properties:
-      Services:
-        $ref: '#/definitions/ErrorRootCauseServices'
-        description: 'A list of services corresponding to an error. A service identifies a segment and it contains a name, account ID, type, and inferred flag.'
-    description: The root cause of a trace summary error.
-  ErrorRootCauseEntity:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the entity.
-      Exceptions:
-        $ref: '#/definitions/RootCauseExceptions'
-        description: The types and messages of the exceptions.
-      Remote:
-        $ref: '#/definitions/NullableBoolean'
-        description: A flag that denotes a remote subsegment.
-    description: A collection of segments and corresponding subsegments associated to a trace summary error.
-  ErrorRootCauseEntityPath:
-    type: array
-    items:
-      $ref: '#/definitions/ErrorRootCauseEntity'
-  ErrorRootCauseService:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The service name.
-      Names:
-        $ref: '#/definitions/ServiceNames'
-        description: A collection of associated service names.
-      Type:
-        $ref: '#/definitions/String'
-        description: The type associated to the service.
-      AccountId:
-        $ref: '#/definitions/String'
-        description: The account ID associated to the service.
-      EntityPath:
-        $ref: '#/definitions/ErrorRootCauseEntityPath'
-        description: 'The path of root cause entities found on the service. '
-      Inferred:
-        $ref: '#/definitions/NullableBoolean'
-        description: A Boolean value indicating if the service is inferred from the trace.
-    description: A collection of fields identifying the services in a trace summary error.
-  ErrorRootCauseServices:
-    type: array
-    items:
-      $ref: '#/definitions/ErrorRootCauseService'
-  ErrorRootCauses:
-    type: array
-    items:
-      $ref: '#/definitions/ErrorRootCause'
-  ErrorStatistics:
-    type: object
-    properties:
-      ThrottleCount:
-        $ref: '#/definitions/NullableLong'
-        description: The number of requests that failed with a 419 throttling status code.
-      OtherCount:
-        $ref: '#/definitions/NullableLong'
-        description: The number of requests that failed with untracked 4xx Client Error status codes.
-      TotalCount:
-        $ref: '#/definitions/NullableLong'
-        description: The total number of requests that failed with a 4xx Client Error status code.
-    description: Information about requests that failed with a 4xx Client Error status code.
-  FaultRootCause:
-    type: object
-    properties:
-      Services:
-        $ref: '#/definitions/FaultRootCauseServices'
-        description: 'A list of corresponding services. A service identifies a segment and it contains a name, account ID, type, and inferred flag.'
-    description: The root cause information for a trace summary fault.
-  FaultRootCauseEntity:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the entity.
-      Exceptions:
-        $ref: '#/definitions/RootCauseExceptions'
-        description: The types and messages of the exceptions.
-      Remote:
-        $ref: '#/definitions/NullableBoolean'
-        description: A flag that denotes a remote subsegment.
-    description: A collection of segments and corresponding subsegments associated to a trace summary fault error.
-  FaultRootCauseEntityPath:
-    type: array
-    items:
-      $ref: '#/definitions/FaultRootCauseEntity'
-  FaultRootCauseService:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The service name.
-      Names:
-        $ref: '#/definitions/ServiceNames'
-        description: A collection of associated service names.
-      Type:
-        $ref: '#/definitions/String'
-        description: The type associated to the service.
-      AccountId:
-        $ref: '#/definitions/String'
-        description: The account ID associated to the service.
-      EntityPath:
-        $ref: '#/definitions/FaultRootCauseEntityPath'
-        description: 'The path of root cause entities found on the service. '
-      Inferred:
-        $ref: '#/definitions/NullableBoolean'
-        description: A Boolean value indicating if the service is inferred from the trace.
-    description: A collection of fields identifying the services in a trace summary fault.
-  FaultRootCauseServices:
-    type: array
-    items:
-      $ref: '#/definitions/FaultRootCauseService'
-  FaultRootCauses:
-    type: array
-    items:
-      $ref: '#/definitions/FaultRootCause'
-  FaultStatistics:
-    type: object
-    properties:
-      OtherCount:
-        $ref: '#/definitions/NullableLong'
-        description: The number of requests that failed with untracked 5xx Server Error status codes.
-      TotalCount:
-        $ref: '#/definitions/NullableLong'
-        description: The total number of requests that failed with a 5xx Server Error status code.
-    description: Information about requests that failed with a 5xx Server Error status code.
+    maxLength: 32
   FilterExpression:
     type: string
     minLength: 1
     maxLength: 2000
-  FixedRate:
-    type: number
-    format: double
-    minimum: 0
-    maximum: 1
-  GetGroupsNextToken:
-    type: string
-    minLength: 1
-    maxLength: 100
   Group:
     type: object
     properties:
@@ -1442,186 +1248,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The filter expression defining the parameters to include traces.
     description: Details and metadata for a group.
-  GroupARN:
-    type: string
-    minLength: 1
-    maxLength: 400
-  GroupName:
-    type: string
-    minLength: 1
-    maxLength: 32
-  GroupSummary:
-    type: object
-    properties:
-      GroupName:
-        $ref: '#/definitions/String'
-        description: The unique case-sensitive name of the group.
-      GroupARN:
-        $ref: '#/definitions/String'
-        description: The ARN of the group generated based on the GroupName.
-      FilterExpression:
-        $ref: '#/definitions/String'
-        description: The filter expression defining the parameters to include traces.
-    description: Details for a group without metadata.
-  GroupSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/GroupSummary'
-  HTTPMethod:
-    type: string
-    maxLength: 10
-  Histogram:
-    type: array
-    items:
-      $ref: '#/definitions/HistogramEntry'
-  HistogramEntry:
-    type: object
-    properties:
-      Value:
-        $ref: '#/definitions/Double'
-        description: The value of the entry.
-      Count:
-        $ref: '#/definitions/Integer'
-        description: The prevalence of the entry.
-    description: 'An entry in a histogram for a statistic. A histogram maps the range of observed values on the X axis, and the prevalence of each value on the Y axis.'
-  Host:
-    type: string
-    maxLength: 64
-  Hostname:
-    type: string
-    maxLength: 255
-  Http:
-    type: object
-    properties:
-      HttpURL:
-        $ref: '#/definitions/String'
-        description: The request URL.
-      HttpStatus:
-        $ref: '#/definitions/NullableInteger'
-        description: The response status.
-      HttpMethod:
-        $ref: '#/definitions/String'
-        description: The request method.
-      UserAgent:
-        $ref: '#/definitions/String'
-        description: The request's user agent string.
-      ClientIp:
-        $ref: '#/definitions/String'
-        description: The IP address of the requestor.
-    description: Information about an HTTP request.
-  InstanceIdDetail:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/String'
-        description: The ID of a corresponding EC2 instance.
-    description: 'A list of EC2 instance IDs corresponding to the segments in a trace. '
-  Integer:
-    type: integer
-  NullableBoolean:
-    type: boolean
-  NullableDouble:
-    type: number
-    format: double
-  NullableInteger:
-    type: integer
-  NullableLong:
-    type: integer
-  Priority:
-    type: integer
-    minimum: 1
-    maximum: 9999
-  RequestCount:
-    type: integer
-    minimum: 0
-  ReservoirSize:
-    type: integer
-    minimum: 0
-  ResourceARN:
-    type: string
-    maxLength: 500
-  ResourceARNDetail:
-    type: object
-    properties:
-      ARN:
-        $ref: '#/definitions/String'
-        description: The ARN of a corresponding resource.
-    description: A list of resources ARNs corresponding to the segments in a trace.
-  ResponseTimeRootCause:
-    type: object
-    properties:
-      Services:
-        $ref: '#/definitions/ResponseTimeRootCauseServices'
-        description: 'A list of corresponding services. A service identifies a segment and contains a name, account ID, type, and inferred flag.'
-    description: The root cause information for a response time warning.
-  ResponseTimeRootCauseEntity:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the entity.
-      Coverage:
-        $ref: '#/definitions/NullableDouble'
-        description: The types and messages of the exceptions.
-      Remote:
-        $ref: '#/definitions/NullableBoolean'
-        description: A flag that denotes a remote subsegment.
-    description: A collection of segments and corresponding subsegments associated to a response time warning.
-  ResponseTimeRootCauseEntityPath:
-    type: array
-    items:
-      $ref: '#/definitions/ResponseTimeRootCauseEntity'
-  ResponseTimeRootCauseService:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The service name.
-      Names:
-        $ref: '#/definitions/ServiceNames'
-        description: A collection of associated service names.
-      Type:
-        $ref: '#/definitions/String'
-        description: The type associated to the service.
-      AccountId:
-        $ref: '#/definitions/String'
-        description: The account ID associated to the service.
-      EntityPath:
-        $ref: '#/definitions/ResponseTimeRootCauseEntityPath'
-        description: 'The path of root cause entities found on the service. '
-      Inferred:
-        $ref: '#/definitions/NullableBoolean'
-        description: A Boolean value indicating if the service is inferred from the trace.
-    description: A collection of fields identifying the service in a response time warning.
-  ResponseTimeRootCauseServices:
-    type: array
-    items:
-      $ref: '#/definitions/ResponseTimeRootCauseService'
-  ResponseTimeRootCauses:
-    type: array
-    items:
-      $ref: '#/definitions/ResponseTimeRootCause'
-  RootCauseException:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name of the exception.
-      Message:
-        $ref: '#/definitions/String'
-        description: The message of the exception.
-    description: The exception associated with a root cause.
-  RootCauseExceptions:
-    type: array
-    items:
-      $ref: '#/definitions/RootCauseException'
-  RuleName:
-    type: string
-    minLength: 1
-    maxLength: 32
-  SampledCount:
-    type: integer
-    minimum: 0
   SamplingRule:
     type: object
     required:
@@ -1689,10 +1315,453 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: When the rule was last modified.
     description: A <a>SamplingRule</a> and its metadata.
+  GroupARN:
+    type: string
+    minLength: 1
+    maxLength: 400
+  Double:
+    type: number
+    format: double
+  EC2InstanceId:
+    type: string
+    maxLength: 20
+  Timestamp:
+    type: string
+    format: date-time
+  EdgeStatistics:
+    type: object
+    properties:
+      OkCount:
+        $ref: '#/definitions/NullableLong'
+        description: The number of requests that completed with a 2xx Success status code.
+      ErrorStatistics:
+        $ref: '#/definitions/ErrorStatistics'
+        description: Information about requests that failed with a 4xx Client Error status code.
+      FaultStatistics:
+        $ref: '#/definitions/FaultStatistics'
+        description: Information about requests that failed with a 5xx Server Error status code.
+      TotalCount:
+        $ref: '#/definitions/NullableLong'
+        description: The total number of completed requests.
+      TotalResponseTime:
+        $ref: '#/definitions/NullableDouble'
+        description: The aggregate response time of completed requests.
+    description: Response statistics for an edge.
+  Histogram:
+    type: array
+    items:
+      $ref: '#/definitions/HistogramEntry'
+  Edge:
+    type: object
+    properties:
+      ReferenceId:
+        $ref: '#/definitions/NullableInteger'
+        description: Identifier of the edge. Unique within a service map.
+      StartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The start time of the first segment on the edge.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The end time of the last segment on the edge.
+      SummaryStatistics:
+        $ref: '#/definitions/EdgeStatistics'
+        description: Response statistics for segments on the edge.
+      ResponseTimeHistogram:
+        $ref: '#/definitions/Histogram'
+        description: A histogram that maps the spread of client response times on an edge.
+      Aliases:
+        $ref: '#/definitions/AliasList'
+        description: Aliases for the edge.
+    description: Information about a connection between two services.
+  EdgeList:
+    type: array
+    items:
+      $ref: '#/definitions/Edge'
+  NullableLong:
+    type: integer
+  ErrorStatistics:
+    type: object
+    properties:
+      ThrottleCount:
+        $ref: '#/definitions/NullableLong'
+        description: The number of requests that failed with a 419 throttling status code.
+      OtherCount:
+        $ref: '#/definitions/NullableLong'
+        description: The number of requests that failed with untracked 4xx Client Error status codes.
+      TotalCount:
+        $ref: '#/definitions/NullableLong'
+        description: The total number of requests that failed with a 4xx Client Error status code.
+    description: Information about requests that failed with a 4xx Client Error status code.
+  FaultStatistics:
+    type: object
+    properties:
+      OtherCount:
+        $ref: '#/definitions/NullableLong'
+        description: The number of requests that failed with untracked 5xx Server Error status codes.
+      TotalCount:
+        $ref: '#/definitions/NullableLong'
+        description: The total number of requests that failed with a 5xx Server Error status code.
+    description: Information about requests that failed with a 5xx Server Error status code.
+  EncryptionStatus:
+    type: string
+    enum:
+      - UPDATING
+      - ACTIVE
+  EncryptionType:
+    type: string
+    enum:
+      - NONE
+      - KMS
+  EncryptionConfig:
+    type: object
+    properties:
+      KeyId:
+        $ref: '#/definitions/String'
+        description: 'The ID of the customer master key (CMK) used for encryption, if applicable.'
+      Status:
+        $ref: '#/definitions/EncryptionStatus'
+        description: 'The encryption status. While the status is <code>UPDATING</code>, X-Ray may encrypt data with a combination of the new and old settings.'
+      Type:
+        $ref: '#/definitions/EncryptionType'
+        description: The type of encryption. Set to <code>KMS</code> for encryption with CMKs. Set to <code>NONE</code> for default encryption.
+    description: A configuration document that specifies encryption configuration settings.
+  EncryptionKeyId:
+    type: string
+    minLength: 1
+    maxLength: 3000
+  ErrorRootCauseServices:
+    type: array
+    items:
+      $ref: '#/definitions/ErrorRootCauseService'
+  ErrorRootCause:
+    type: object
+    properties:
+      Services:
+        $ref: '#/definitions/ErrorRootCauseServices'
+        description: 'A list of services corresponding to an error. A service identifies a segment and it contains a name, account ID, type, and inferred flag.'
+    description: The root cause of a trace summary error.
+  RootCauseExceptions:
+    type: array
+    items:
+      $ref: '#/definitions/RootCauseException'
+  ErrorRootCauseEntity:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the entity.
+      Exceptions:
+        $ref: '#/definitions/RootCauseExceptions'
+        description: The types and messages of the exceptions.
+      Remote:
+        $ref: '#/definitions/NullableBoolean'
+        description: A flag that denotes a remote subsegment.
+    description: A collection of segments and corresponding subsegments associated to a trace summary error.
+  ErrorRootCauseEntityPath:
+    type: array
+    items:
+      $ref: '#/definitions/ErrorRootCauseEntity'
+  ServiceNames:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ErrorRootCauseService:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The service name.
+      Names:
+        $ref: '#/definitions/ServiceNames'
+        description: A collection of associated service names.
+      Type:
+        $ref: '#/definitions/String'
+        description: The type associated to the service.
+      AccountId:
+        $ref: '#/definitions/String'
+        description: The account ID associated to the service.
+      EntityPath:
+        $ref: '#/definitions/ErrorRootCauseEntityPath'
+        description: 'The path of root cause entities found on the service. '
+      Inferred:
+        $ref: '#/definitions/NullableBoolean'
+        description: A Boolean value indicating if the service is inferred from the trace.
+    description: A collection of fields identifying the services in a trace summary error.
+  ErrorRootCauses:
+    type: array
+    items:
+      $ref: '#/definitions/ErrorRootCause'
+  FaultRootCauseServices:
+    type: array
+    items:
+      $ref: '#/definitions/FaultRootCauseService'
+  FaultRootCause:
+    type: object
+    properties:
+      Services:
+        $ref: '#/definitions/FaultRootCauseServices'
+        description: 'A list of corresponding services. A service identifies a segment and it contains a name, account ID, type, and inferred flag.'
+    description: The root cause information for a trace summary fault.
+  FaultRootCauseEntity:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the entity.
+      Exceptions:
+        $ref: '#/definitions/RootCauseExceptions'
+        description: The types and messages of the exceptions.
+      Remote:
+        $ref: '#/definitions/NullableBoolean'
+        description: A flag that denotes a remote subsegment.
+    description: A collection of segments and corresponding subsegments associated to a trace summary fault error.
+  FaultRootCauseEntityPath:
+    type: array
+    items:
+      $ref: '#/definitions/FaultRootCauseEntity'
+  FaultRootCauseService:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The service name.
+      Names:
+        $ref: '#/definitions/ServiceNames'
+        description: A collection of associated service names.
+      Type:
+        $ref: '#/definitions/String'
+        description: The type associated to the service.
+      AccountId:
+        $ref: '#/definitions/String'
+        description: The account ID associated to the service.
+      EntityPath:
+        $ref: '#/definitions/FaultRootCauseEntityPath'
+        description: 'The path of root cause entities found on the service. '
+      Inferred:
+        $ref: '#/definitions/NullableBoolean'
+        description: A Boolean value indicating if the service is inferred from the trace.
+    description: A collection of fields identifying the services in a trace summary fault.
+  FaultRootCauses:
+    type: array
+    items:
+      $ref: '#/definitions/FaultRootCause'
+  FixedRate:
+    type: number
+    format: double
+    minimum: 0
+    maximum: 1
+  GetGroupsNextToken:
+    type: string
+    minLength: 1
+    maxLength: 100
+  GroupSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupSummary'
   SamplingRuleRecordList:
     type: array
     items:
       $ref: '#/definitions/SamplingRuleRecord'
+  SamplingStatisticSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/SamplingStatisticSummary'
+  SamplingStatisticsDocumentList:
+    type: array
+    items:
+      $ref: '#/definitions/SamplingStatisticsDocument'
+    maxItems: 25
+  SamplingTargetDocumentList:
+    type: array
+    items:
+      $ref: '#/definitions/SamplingTargetDocument'
+  UnprocessedStatisticsList:
+    type: array
+    items:
+      $ref: '#/definitions/UnprocessedStatistics'
+  ServiceList:
+    type: array
+    items:
+      $ref: '#/definitions/Service'
+  TraceSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/TraceSummary'
+  GroupSummary:
+    type: object
+    properties:
+      GroupName:
+        $ref: '#/definitions/String'
+        description: The unique case-sensitive name of the group.
+      GroupARN:
+        $ref: '#/definitions/String'
+        description: The ARN of the group generated based on the GroupName.
+      FilterExpression:
+        $ref: '#/definitions/String'
+        description: The filter expression defining the parameters to include traces.
+    description: Details for a group without metadata.
+  HTTPMethod:
+    type: string
+    maxLength: 10
+  HistogramEntry:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/Double'
+        description: The value of the entry.
+      Count:
+        $ref: '#/definitions/Integer'
+        description: The prevalence of the entry.
+    description: 'An entry in a histogram for a statistic. A histogram maps the range of observed values on the X axis, and the prevalence of each value on the Y axis.'
+  Integer:
+    type: integer
+  Host:
+    type: string
+    maxLength: 64
+  Hostname:
+    type: string
+    maxLength: 255
+  Http:
+    type: object
+    properties:
+      HttpURL:
+        $ref: '#/definitions/String'
+        description: The request URL.
+      HttpStatus:
+        $ref: '#/definitions/NullableInteger'
+        description: The response status.
+      HttpMethod:
+        $ref: '#/definitions/String'
+        description: The request method.
+      UserAgent:
+        $ref: '#/definitions/String'
+        description: The request's user agent string.
+      ClientIp:
+        $ref: '#/definitions/String'
+        description: The IP address of the requestor.
+    description: Information about an HTTP request.
+  InstanceIdDetail:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/String'
+        description: The ID of a corresponding EC2 instance.
+    description: 'A list of EC2 instance IDs corresponding to the segments in a trace. '
+  Priority:
+    type: integer
+    minimum: 1
+    maximum: 9999
+  TelemetryRecordList:
+    type: array
+    items:
+      $ref: '#/definitions/TelemetryRecord'
+  ResourceARN:
+    type: string
+    maxLength: 500
+  TraceSegmentDocumentList:
+    type: array
+    items:
+      $ref: '#/definitions/TraceSegmentDocument'
+  UnprocessedTraceSegmentList:
+    type: array
+    items:
+      $ref: '#/definitions/UnprocessedTraceSegment'
+  RequestCount:
+    type: integer
+    minimum: 0
+  ReservoirSize:
+    type: integer
+    minimum: 0
+  ResourceARNDetail:
+    type: object
+    properties:
+      ARN:
+        $ref: '#/definitions/String'
+        description: The ARN of a corresponding resource.
+    description: A list of resources ARNs corresponding to the segments in a trace.
+  ResponseTimeRootCauseServices:
+    type: array
+    items:
+      $ref: '#/definitions/ResponseTimeRootCauseService'
+  ResponseTimeRootCause:
+    type: object
+    properties:
+      Services:
+        $ref: '#/definitions/ResponseTimeRootCauseServices'
+        description: 'A list of corresponding services. A service identifies a segment and contains a name, account ID, type, and inferred flag.'
+    description: The root cause information for a response time warning.
+  ResponseTimeRootCauseEntity:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the entity.
+      Coverage:
+        $ref: '#/definitions/NullableDouble'
+        description: The types and messages of the exceptions.
+      Remote:
+        $ref: '#/definitions/NullableBoolean'
+        description: A flag that denotes a remote subsegment.
+    description: A collection of segments and corresponding subsegments associated to a response time warning.
+  ResponseTimeRootCauseEntityPath:
+    type: array
+    items:
+      $ref: '#/definitions/ResponseTimeRootCauseEntity'
+  ResponseTimeRootCauseService:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The service name.
+      Names:
+        $ref: '#/definitions/ServiceNames'
+        description: A collection of associated service names.
+      Type:
+        $ref: '#/definitions/String'
+        description: The type associated to the service.
+      AccountId:
+        $ref: '#/definitions/String'
+        description: The account ID associated to the service.
+      EntityPath:
+        $ref: '#/definitions/ResponseTimeRootCauseEntityPath'
+        description: 'The path of root cause entities found on the service. '
+      Inferred:
+        $ref: '#/definitions/NullableBoolean'
+        description: A Boolean value indicating if the service is inferred from the trace.
+    description: A collection of fields identifying the service in a response time warning.
+  ResponseTimeRootCauses:
+    type: array
+    items:
+      $ref: '#/definitions/ResponseTimeRootCause'
+  RootCauseException:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the exception.
+      Message:
+        $ref: '#/definitions/String'
+        description: The message of the exception.
+    description: The exception associated with a root cause.
+  RuleName:
+    type: string
+    minLength: 1
+    maxLength: 32
+  SampledCount:
+    type: integer
+    minimum: 0
+  ServiceName:
+    type: string
+    maxLength: 64
+  ServiceType:
+    type: string
+    maxLength: 64
+  URLPath:
+    type: string
+    maxLength: 128
+  Version:
+    type: integer
+    minimum: 1
   SamplingRuleUpdate:
     type: object
     properties:
@@ -1752,10 +1821,6 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The number of requests recorded.
     description: Aggregated request sampling data for a sampling rule across all services for a 10 second window.
-  SamplingStatisticSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/SamplingStatisticSummary'
   SamplingStatisticsDocument:
     type: object
     required:
@@ -1784,11 +1849,6 @@ definitions:
         $ref: '#/definitions/BorrowCount'
         description: The number of requests recorded with borrowed reservoir quota.
     description: Request sampling results for a single rule from a service. Results are for the last 10 seconds unless the service has been assigned a longer reporting interval after a previous call to <a>GetSamplingTargets</a>.
-  SamplingStatisticsDocumentList:
-    type: array
-    items:
-      $ref: '#/definitions/SamplingStatisticsDocument'
-    maxItems: 25
   SamplingTargetDocument:
     type: object
     properties:
@@ -1808,10 +1868,11 @@ definitions:
         $ref: '#/definitions/NullableInteger'
         description: The number of seconds for the service to wait before getting sampling targets again.
     description: 'Temporary changes to a sampling rule configuration. To meet the global sampling target for a rule, X-Ray calculates a new reservoir for each service based on the recent sampling results of all services that called <a>GetSamplingTargets</a>.'
-  SamplingTargetDocumentList:
-    type: array
-    items:
-      $ref: '#/definitions/SamplingTargetDocument'
+  SegmentId:
+    type: string
+  SegmentDocument:
+    type: string
+    minLength: 1
   Segment:
     type: object
     properties:
@@ -1822,15 +1883,29 @@ definitions:
         $ref: '#/definitions/SegmentDocument'
         description: The segment document.
     description: '<p>A segment from a trace that has been ingested by the X-Ray service. The segment can be compiled from documents uploaded with <a>PutTraceSegments</a>, or an <code>inferred</code> segment for a downstream service, generated from a subsegment sent by the service that called it.</p> <p>For the full segment document schema, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html">AWS X-Ray Segment Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p>'
-  SegmentDocument:
-    type: string
-    minLength: 1
-  SegmentId:
-    type: string
   SegmentList:
     type: array
     items:
       $ref: '#/definitions/Segment'
+  ServiceStatistics:
+    type: object
+    properties:
+      OkCount:
+        $ref: '#/definitions/NullableLong'
+        description: The number of requests that completed with a 2xx Success status code.
+      ErrorStatistics:
+        $ref: '#/definitions/ErrorStatistics'
+        description: Information about requests that failed with a 4xx Client Error status code.
+      FaultStatistics:
+        $ref: '#/definitions/FaultStatistics'
+        description: Information about requests that failed with a 5xx Server Error status code.
+      TotalCount:
+        $ref: '#/definitions/NullableLong'
+        description: The total number of completed requests.
+      TotalResponseTime:
+        $ref: '#/definitions/NullableDouble'
+        description: The aggregate response time of completed requests.
+    description: Response statistics for a service.
   Service:
     type: object
     properties:
@@ -1894,41 +1969,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ServiceId'
-  ServiceList:
-    type: array
-    items:
-      $ref: '#/definitions/Service'
-  ServiceName:
-    type: string
-    maxLength: 64
-  ServiceNames:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ServiceStatistics:
-    type: object
-    properties:
-      OkCount:
-        $ref: '#/definitions/NullableLong'
-        description: The number of requests that completed with a 2xx Success status code.
-      ErrorStatistics:
-        $ref: '#/definitions/ErrorStatistics'
-        description: Information about requests that failed with a 4xx Client Error status code.
-      FaultStatistics:
-        $ref: '#/definitions/FaultStatistics'
-        description: Information about requests that failed with a 5xx Server Error status code.
-      TotalCount:
-        $ref: '#/definitions/NullableLong'
-        description: The total number of completed requests.
-      TotalResponseTime:
-        $ref: '#/definitions/NullableDouble'
-        description: The aggregate response time of completed requests.
-    description: Response statistics for a service.
-  ServiceType:
-    type: string
-    maxLength: 64
-  String:
-    type: string
   TelemetryRecord:
     type: object
     required:
@@ -1953,13 +1993,10 @@ definitions:
         $ref: '#/definitions/BackendConnectionErrors'
         description: <p/>
     description: <p/>
-  TelemetryRecordList:
-    type: array
-    items:
-      $ref: '#/definitions/TelemetryRecord'
-  Timestamp:
+  TraceId:
     type: string
-    format: date-time
+    minLength: 1
+    maxLength: 35
   Trace:
     type: object
     properties:
@@ -1977,32 +2014,20 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AvailabilityZoneDetail'
-  TraceId:
-    type: string
-    minLength: 1
-    maxLength: 35
-  TraceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/TraceId'
   TraceInstanceIds:
     type: array
     items:
       $ref: '#/definitions/InstanceIdDetail'
-  TraceList:
-    type: array
-    items:
-      $ref: '#/definitions/Trace'
   TraceResourceARNs:
     type: array
     items:
       $ref: '#/definitions/ResourceARNDetail'
   TraceSegmentDocument:
     type: string
-  TraceSegmentDocumentList:
+  TraceUsers:
     type: array
     items:
-      $ref: '#/definitions/TraceSegmentDocument'
+      $ref: '#/definitions/TraceUser'
   TraceSummary:
     type: object
     properties:
@@ -2064,10 +2089,6 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The revision number of a trace.
     description: Metadata generated from the segment documents in a trace.
-  TraceSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/TraceSummary'
   TraceUser:
     type: object
     properties:
@@ -2078,13 +2099,6 @@ definitions:
         $ref: '#/definitions/ServiceIds'
         description: Services that the user's request hit.
     description: Information about a user recorded in segment documents.
-  TraceUsers:
-    type: array
-    items:
-      $ref: '#/definitions/TraceUser'
-  URLPath:
-    type: string
-    maxLength: 128
   UnprocessedStatistics:
     type: object
     properties:
@@ -2098,14 +2112,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The error message.
     description: Sampling statistics from a call to <a>GetSamplingTargets</a> that X-Ray could not process.
-  UnprocessedStatisticsList:
-    type: array
-    items:
-      $ref: '#/definitions/UnprocessedStatistics'
-  UnprocessedTraceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/TraceId'
   UnprocessedTraceSegment:
     type: object
     properties:
@@ -2119,10 +2125,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The error message.
     description: Information about a segment that failed processing.
-  UnprocessedTraceSegmentList:
-    type: array
-    items:
-      $ref: '#/definitions/UnprocessedTraceSegment'
   ValueWithServiceIds:
     type: object
     properties:
@@ -2133,6 +2135,3 @@ definitions:
         $ref: '#/definitions/ServiceIds'
         description: Services to which the annotation applies.
     description: Information about a segment annotation.
-  Version:
-    type: integer
-    minimum: 1

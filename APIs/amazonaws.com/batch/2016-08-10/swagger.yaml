@@ -1219,7 +1219,6 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/Integer'
-  undefined: {}
   ArrayProperties:
     type: object
     properties:
@@ -1250,6 +1249,10 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The job index within the array that is associated with this job. This parameter is returned for children of array jobs.
     description: An object representing the array properties of a job.
+  NetworkInterfaceList:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkInterface'
   AttemptContainerDetail:
     type: object
     properties:
@@ -1272,6 +1275,8 @@ definitions:
         $ref: '#/definitions/NetworkInterfaceList'
         description: The network interfaces associated with the job attempt.
     description: An object representing the details of a container that is part of a job attempt.
+  Long:
+    type: integer
   AttemptDetail:
     type: object
     properties:
@@ -1318,62 +1323,6 @@ definitions:
     enum:
       - EC2
       - SPOT
-  ComputeEnvironmentDetail:
-    type: object
-    required:
-      - computeEnvironmentName
-      - computeEnvironmentArn
-      - ecsClusterArn
-    properties:
-      computeEnvironmentName:
-        $ref: '#/definitions/String'
-        description: 'The name of the compute environment. '
-      computeEnvironmentArn:
-        $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the compute environment. '
-      ecsClusterArn:
-        $ref: '#/definitions/String'
-        description: 'The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment. '
-      type:
-        $ref: '#/definitions/CEType'
-        description: The type of the compute environment.
-      state:
-        $ref: '#/definitions/CEState'
-        description: '<p>The state of the compute environment. The valid values are <code>ENABLED</code> or <code>DISABLED</code>. </p> <p>If the state is <code>ENABLED</code>, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand.</p> <p>If the state is <code>DISABLED</code>, then the AWS Batch scheduler does not attempt to place jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state continue to progress normally. Managed compute environments in the <code>DISABLED</code> state do not scale out. However, they scale in to <code>minvCpus</code> value after instances become idle.</p>'
-      status:
-        $ref: '#/definitions/CEStatus'
-        description: 'The current status of the compute environment (for example, <code>CREATING</code> or <code>VALID</code>).'
-      statusReason:
-        $ref: '#/definitions/String'
-        description: 'A short, human-readable string to provide additional details about the current status of the compute environment.'
-      computeResources:
-        $ref: '#/definitions/ComputeResource'
-        description: 'The compute resources defined for the compute environment. '
-      serviceRole:
-        $ref: '#/definitions/String'
-        description: The service role associated with the compute environment that allows AWS Batch to make calls to AWS API operations on your behalf.
-    description: An object representing an AWS Batch compute environment.
-  ComputeEnvironmentDetailList:
-    type: array
-    items:
-      $ref: '#/definitions/ComputeEnvironmentDetail'
-  ComputeEnvironmentOrder:
-    type: object
-    required:
-      - order
-      - computeEnvironment
-    properties:
-      order:
-        $ref: '#/definitions/Integer'
-        description: The order of the compute environment.
-      computeEnvironment:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the compute environment.
-    description: 'The order in which compute environments are tried for job placement within a queue. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.'
-  ComputeEnvironmentOrders:
-    type: array
-    items:
-      $ref: '#/definitions/ComputeEnvironmentOrder'
   ComputeResource:
     type: object
     required:
@@ -1430,6 +1379,88 @@ definitions:
         $ref: '#/definitions/LaunchTemplateSpecification'
         description: 'The launch template to use for your compute resources. Any other compute resource parameters that you specify in a <a>CreateComputeEnvironment</a> API operation override the same parameters in the launch template. You must specify either the launch template ID or launch template name in the request, but not both. '
     description: An object representing an AWS Batch compute resource.
+  ComputeEnvironmentDetail:
+    type: object
+    required:
+      - computeEnvironmentName
+      - computeEnvironmentArn
+      - ecsClusterArn
+    properties:
+      computeEnvironmentName:
+        $ref: '#/definitions/String'
+        description: 'The name of the compute environment. '
+      computeEnvironmentArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the compute environment. '
+      ecsClusterArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment. '
+      type:
+        $ref: '#/definitions/CEType'
+        description: The type of the compute environment.
+      state:
+        $ref: '#/definitions/CEState'
+        description: '<p>The state of the compute environment. The valid values are <code>ENABLED</code> or <code>DISABLED</code>. </p> <p>If the state is <code>ENABLED</code>, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand.</p> <p>If the state is <code>DISABLED</code>, then the AWS Batch scheduler does not attempt to place jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state continue to progress normally. Managed compute environments in the <code>DISABLED</code> state do not scale out. However, they scale in to <code>minvCpus</code> value after instances become idle.</p>'
+      status:
+        $ref: '#/definitions/CEStatus'
+        description: 'The current status of the compute environment (for example, <code>CREATING</code> or <code>VALID</code>).'
+      statusReason:
+        $ref: '#/definitions/String'
+        description: 'A short, human-readable string to provide additional details about the current status of the compute environment.'
+      computeResources:
+        $ref: '#/definitions/ComputeResource'
+        description: 'The compute resources defined for the compute environment. '
+      serviceRole:
+        $ref: '#/definitions/String'
+        description: The service role associated with the compute environment that allows AWS Batch to make calls to AWS API operations on your behalf.
+    description: An object representing an AWS Batch compute environment.
+  ComputeEnvironmentDetailList:
+    type: array
+    items:
+      $ref: '#/definitions/ComputeEnvironmentDetail'
+  ComputeEnvironmentOrder:
+    type: object
+    required:
+      - order
+      - computeEnvironment
+    properties:
+      order:
+        $ref: '#/definitions/Integer'
+        description: The order of the compute environment.
+      computeEnvironment:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the compute environment.
+    description: 'The order in which compute environments are tried for job placement within a queue. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.'
+  ComputeEnvironmentOrders:
+    type: array
+    items:
+      $ref: '#/definitions/ComputeEnvironmentOrder'
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  TagsMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  LaunchTemplateSpecification:
+    type: object
+    properties:
+      launchTemplateId:
+        $ref: '#/definitions/String'
+        description: The ID of the launch template.
+      launchTemplateName:
+        $ref: '#/definitions/String'
+        description: The name of the launch template.
+      version:
+        $ref: '#/definitions/String'
+        description: '<p>The version number of the launch template.</p> <p>Default: The default version of the launch template.</p>'
+    description: 'An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both. '
   ComputeResourceUpdate:
     type: object
     properties:
@@ -1443,6 +1474,22 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The desired number of EC2 vCPUS in the compute environment.
     description: An object representing the attributes of a compute environment that can be updated.
+  Volumes:
+    type: array
+    items:
+      $ref: '#/definitions/Volume'
+  EnvironmentVariables:
+    type: array
+    items:
+      $ref: '#/definitions/KeyValuePair'
+  MountPoints:
+    type: array
+    items:
+      $ref: '#/definitions/MountPoint'
+  Ulimits:
+    type: array
+    items:
+      $ref: '#/definitions/Ulimit'
   ContainerDetail:
     type: object
     properties:
@@ -1576,10 +1623,33 @@ definitions:
         $ref: '#/definitions/String'
         description: A short (255 max characters) human-readable string to provide additional details about a running or stopped container.
     description: An object representing summary details of a container within a job.
-  EnvironmentVariables:
+  JQState:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+  JobDefinitionList:
     type: array
     items:
-      $ref: '#/definitions/KeyValuePair'
+      $ref: '#/definitions/JobDefinition'
+  JobQueueDetailList:
+    type: array
+    items:
+      $ref: '#/definitions/JobQueueDetail'
+  JobDetailList:
+    type: array
+    items:
+      $ref: '#/definitions/JobDetail'
+  KeyValuePair:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/String'
+        description: 'The name of the key-value pair. For environment variables, this is the name of the environment variable.'
+      value:
+        $ref: '#/definitions/String'
+        description: 'The value of the key-value pair. For environment variables, this is the value of the environment variable.'
+    description: A key-value pair object.
   Host:
     type: object
     properties:
@@ -1587,11 +1657,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If the <code>host</code> parameter contains a <code>sourcePath</code> file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the <code>sourcePath</code> value does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.'
     description: 'The contents of the <code>host</code> parameter determine whether your data volume persists on the host container instance and where it is stored. If the host parameter is empty, then the Docker daemon assigns a host path for your data volume, but the data is not guaranteed to persist after the containers associated with it stop running.'
-  JQState:
-    type: string
-    enum:
-      - ENABLED
-      - DISABLED
   JQStatus:
     type: string
     enum:
@@ -1601,6 +1666,46 @@ definitions:
       - DELETED
       - VALID
       - INVALID
+  ParametersMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  RetryStrategy:
+    type: object
+    properties:
+      attempts:
+        $ref: '#/definitions/Integer'
+        description: 'The number of times to move a job to the <code>RUNNABLE</code> status. You may specify between 1 and 10 attempts. If the value of <code>attempts</code> is greater than one, the job is retried on failure the same number of attempts as the value.'
+    description: The retry strategy associated with a job.
+  JobTimeout:
+    type: object
+    properties:
+      attemptDurationSeconds:
+        $ref: '#/definitions/Integer'
+        description: The time duration in seconds (measured from the job attempt's <code>startedAt</code> timestamp) after which AWS Batch terminates your jobs if they have not finished.
+    description: An object representing a job timeout configuration.
+  NodeProperties:
+    type: object
+    required:
+      - numNodes
+      - mainNode
+      - nodeRangeProperties
+    properties:
+      numNodes:
+        $ref: '#/definitions/Integer'
+        description: The number of nodes associated with a multi-node parallel job.
+      mainNode:
+        $ref: '#/definitions/Integer'
+        description: Specifies the node index for the main node of a multi-node parallel job.
+      nodeRangeProperties:
+        $ref: '#/definitions/NodeRangeProperties'
+        description: A list of node ranges and their properties associated with a multi-node parallel job.
+    description: An object representing the node properties of a multi-node parallel job.
   JobDefinition:
     type: object
     required:
@@ -1640,10 +1745,6 @@ definitions:
         $ref: '#/definitions/NodeProperties'
         description: An object with various properties specific to multi-node parallel jobs.
     description: An object representing an AWS Batch job definition.
-  JobDefinitionList:
-    type: array
-    items:
-      $ref: '#/definitions/JobDefinition'
   JobDefinitionType:
     type: string
     enum:
@@ -1663,6 +1764,26 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/JobDependency'
+  JobStatus:
+    type: string
+    enum:
+      - SUBMITTED
+      - PENDING
+      - RUNNABLE
+      - STARTING
+      - RUNNING
+      - SUCCEEDED
+      - FAILED
+  NodeDetails:
+    type: object
+    properties:
+      nodeIndex:
+        $ref: '#/definitions/Integer'
+        description: The node index for the node. Node index numbering begins at zero. This index is also available on the node with the <code>AWS_BATCH_JOB_NODE_INDEX</code> environment variable.
+      isMainNode:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the current node is the main node for a multi-node parallel job.
+    description: An object representing the details of a multi-node parallel job node.
   JobDetail:
     type: object
     required:
@@ -1728,10 +1849,6 @@ definitions:
         $ref: '#/definitions/JobTimeout'
         description: 'The timeout configuration for the job. '
     description: An object representing an AWS Batch job.
-  JobDetailList:
-    type: array
-    items:
-      $ref: '#/definitions/JobDetail'
   JobQueueDetail:
     type: object
     required:
@@ -1763,20 +1880,19 @@ definitions:
         $ref: '#/definitions/ComputeEnvironmentOrders'
         description: The compute environments that are attached to the job queue and the order in which job placement is preferred. Compute environments are selected for job placement in ascending order.
     description: An object representing the details of an AWS Batch job queue.
-  JobQueueDetailList:
-    type: array
-    items:
-      $ref: '#/definitions/JobQueueDetail'
-  JobStatus:
-    type: string
-    enum:
-      - SUBMITTED
-      - PENDING
-      - RUNNABLE
-      - STARTING
-      - RUNNING
-      - SUCCEEDED
-      - FAILED
+  NodePropertiesSummary:
+    type: object
+    properties:
+      isMainNode:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the current node is the main node for a multi-node parallel job.
+      numNodes:
+        $ref: '#/definitions/Integer'
+        description: The number of nodes associated with a multi-node parallel job.
+      nodeIndex:
+        $ref: '#/definitions/Integer'
+        description: The node index for the node. Node index numbering begins at zero. This index is also available on the node with the <code>AWS_BATCH_JOB_NODE_INDEX</code> environment variable.
+    description: An object representing the properties of a node that is associated with a multi-node parallel job.
   JobSummary:
     type: object
     required:
@@ -1818,38 +1934,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/JobSummary'
-  JobTimeout:
-    type: object
-    properties:
-      attemptDurationSeconds:
-        $ref: '#/definitions/Integer'
-        description: The time duration in seconds (measured from the job attempt's <code>startedAt</code> timestamp) after which AWS Batch terminates your jobs if they have not finished.
-    description: An object representing a job timeout configuration.
-  KeyValuePair:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/String'
-        description: 'The name of the key-value pair. For environment variables, this is the name of the environment variable.'
-      value:
-        $ref: '#/definitions/String'
-        description: 'The value of the key-value pair. For environment variables, this is the value of the environment variable.'
-    description: A key-value pair object.
-  LaunchTemplateSpecification:
-    type: object
-    properties:
-      launchTemplateId:
-        $ref: '#/definitions/String'
-        description: The ID of the launch template.
-      launchTemplateName:
-        $ref: '#/definitions/String'
-        description: The name of the launch template.
-      version:
-        $ref: '#/definitions/String'
-        description: '<p>The version number of the launch template.</p> <p>Default: The default version of the launch template.</p>'
-    description: 'An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both. '
-  Long:
-    type: integer
   MountPoint:
     type: object
     properties:
@@ -1863,10 +1947,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The name of the volume to mount.
     description: Details on a Docker volume mount point that is used in a job's container properties.
-  MountPoints:
-    type: array
-    items:
-      $ref: '#/definitions/MountPoint'
   NetworkInterface:
     type: object
     properties:
@@ -1880,20 +1960,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The private IPv4 address for the network interface.
     description: An object representing the elastic network interface for a multi-node parallel job node.
-  NetworkInterfaceList:
+  NodePropertyOverrides:
     type: array
     items:
-      $ref: '#/definitions/NetworkInterface'
-  NodeDetails:
-    type: object
-    properties:
-      nodeIndex:
-        $ref: '#/definitions/Integer'
-        description: The node index for the node. Node index numbering begins at zero. This index is also available on the node with the <code>AWS_BATCH_JOB_NODE_INDEX</code> environment variable.
-      isMainNode:
-        $ref: '#/definitions/Boolean'
-        description: Specifies whether the current node is the main node for a multi-node parallel job.
-    description: An object representing the details of a multi-node parallel job node.
+      $ref: '#/definitions/NodePropertyOverride'
   NodeOverrides:
     type: object
     properties:
@@ -1901,36 +1971,10 @@ definitions:
         $ref: '#/definitions/NodePropertyOverrides'
         description: The node property overrides for the job.
     description: Object representing any node overrides to a job definition that is used in a <a>SubmitJob</a> API operation.
-  NodeProperties:
-    type: object
-    required:
-      - numNodes
-      - mainNode
-      - nodeRangeProperties
-    properties:
-      numNodes:
-        $ref: '#/definitions/Integer'
-        description: The number of nodes associated with a multi-node parallel job.
-      mainNode:
-        $ref: '#/definitions/Integer'
-        description: Specifies the node index for the main node of a multi-node parallel job.
-      nodeRangeProperties:
-        $ref: '#/definitions/NodeRangeProperties'
-        description: A list of node ranges and their properties associated with a multi-node parallel job.
-    description: An object representing the node properties of a multi-node parallel job.
-  NodePropertiesSummary:
-    type: object
-    properties:
-      isMainNode:
-        $ref: '#/definitions/Boolean'
-        description: Specifies whether the current node is the main node for a multi-node parallel job.
-      numNodes:
-        $ref: '#/definitions/Integer'
-        description: The number of nodes associated with a multi-node parallel job.
-      nodeIndex:
-        $ref: '#/definitions/Integer'
-        description: The node index for the node. Node index numbering begins at zero. This index is also available on the node with the <code>AWS_BATCH_JOB_NODE_INDEX</code> environment variable.
-    description: An object representing the properties of a node that is associated with a multi-node parallel job.
+  NodeRangeProperties:
+    type: array
+    items:
+      $ref: '#/definitions/NodeRangeProperty'
   NodePropertyOverride:
     type: object
     required:
@@ -1943,14 +1987,6 @@ definitions:
         $ref: '#/definitions/ContainerOverrides'
         description: The overrides that should be sent to a node range.
     description: Object representing any node overrides to a job definition that is used in a <a>SubmitJob</a> API operation.
-  NodePropertyOverrides:
-    type: array
-    items:
-      $ref: '#/definitions/NodePropertyOverride'
-  NodeRangeProperties:
-    type: array
-    items:
-      $ref: '#/definitions/NodeRangeProperty'
   NodeRangeProperty:
     type: object
     required:
@@ -1963,35 +1999,6 @@ definitions:
         $ref: '#/definitions/ContainerProperties'
         description: The container details for the node range.
     description: An object representing the properties of the node range for a multi-node parallel job.
-  ParametersMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
-  RetryStrategy:
-    type: object
-    properties:
-      attempts:
-        $ref: '#/definitions/Integer'
-        description: 'The number of times to move a job to the <code>RUNNABLE</code> status. You may specify between 1 and 10 attempts. If the value of <code>attempts</code> is greater than one, the job is retried on failure the same number of attempts as the value.'
-    description: The retry strategy associated with a job.
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  TagsMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
   Ulimit:
     type: object
     required:
@@ -2009,10 +2016,6 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The soft limit for the <code>ulimit</code> type.
     description: The <code>ulimit</code> settings to pass to the container.
-  Ulimits:
-    type: array
-    items:
-      $ref: '#/definitions/Ulimit'
   Volume:
     type: object
     properties:
@@ -2023,7 +2026,3 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This name is referenced in the <code>sourceVolume</code> parameter of container definition <code>mountPoints</code>.'
     description: A data volume used in a job's container properties.
-  Volumes:
-    type: array
-    items:
-      $ref: '#/definitions/Volume'

@@ -1850,7 +1850,14 @@ definitions:
     description: 'The layer part size is not valid, or the first byte specified is not consecutive to the last byte of a previous layer part upload.'
   Arn:
     type: string
-  undefined: {}
+  Base64:
+    type: string
+    pattern: ^\S+$
+  ExpirationTimestamp:
+    type: string
+    format: date-time
+  ProxyEndpoint:
+    type: string
   AuthorizationData:
     type: object
     properties:
@@ -1868,22 +1875,104 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AuthorizationData'
-  Base64:
+  RegistryId:
     type: string
-    pattern: ^\S+$
-  BatchedOperationLayerDigest:
+    pattern: '[0-9]{12}'
+  RepositoryName:
     type: string
-    minLength: 0
-    maxLength: 1000
+    pattern: '(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*'
+    minLength: 2
+    maxLength: 256
   BatchedOperationLayerDigestList:
     type: array
     items:
       $ref: '#/definitions/BatchedOperationLayerDigest'
     minItems: 1
     maxItems: 100
+  LayerList:
+    type: array
+    items:
+      $ref: '#/definitions/Layer'
+  LayerFailureList:
+    type: array
+    items:
+      $ref: '#/definitions/LayerFailure'
+  ImageIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/ImageIdentifier'
+    minItems: 1
+    maxItems: 100
+  ImageFailureList:
+    type: array
+    items:
+      $ref: '#/definitions/ImageFailure'
+  MediaTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/MediaType'
+    minItems: 1
+    maxItems: 100
+  ImageList:
+    type: array
+    items:
+      $ref: '#/definitions/Image'
+  BatchedOperationLayerDigest:
+    type: string
+    minLength: 0
+    maxLength: 1000
+  UploadId:
+    type: string
+    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+  LayerDigestList:
+    type: array
+    items:
+      $ref: '#/definitions/LayerDigest'
+    minItems: 1
+    maxItems: 100
+  LayerDigest:
+    type: string
+    pattern: '[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+'
+  Repository:
+    type: object
+    properties:
+      repositoryArn:
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.'
+      registryId:
+        $ref: '#/definitions/RegistryId'
+        description: The AWS account ID associated with the registry that contains the repository.
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository.
+      repositoryUri:
+        $ref: '#/definitions/Url'
+        description: The URI for the repository. You can use this URI for Docker <code>push</code> or <code>pull</code> operations.
+      createdAt:
+        $ref: '#/definitions/CreationTimestamp'
+        description: 'The date and time, in JavaScript date format, when the repository was created.'
+    description: An object representing a repository.
   CreationTimestamp:
     type: string
     format: date-time
+  LifecyclePolicyText:
+    type: string
+    minLength: 100
+    maxLength: 10240
+  EvaluationTimestamp:
+    type: string
+    format: date-time
+  RepositoryPolicyText:
+    type: string
+    minLength: 0
+    maxLength: 10240
+  ForceFlag:
+    type: boolean
+  TagStatus:
+    type: string
+    enum:
+      - TAGGED
+      - UNTAGGED
   DescribeImagesFilter:
     type: object
     properties:
@@ -1891,22 +1980,73 @@ definitions:
         $ref: '#/definitions/TagStatus'
         description: The tag status with which to filter your <a>DescribeImages</a> results. You can filter results based on whether they are <code>TAGGED</code> or <code>UNTAGGED</code>.
     description: An object representing a filter on a <a>DescribeImages</a> operation.
-  EvaluationTimestamp:
+  NextToken:
     type: string
-    format: date-time
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  ImageDetailList:
+    type: array
+    items:
+      $ref: '#/definitions/ImageDetail'
+  RepositoryNameList:
+    type: array
+    items:
+      $ref: '#/definitions/RepositoryName'
+    minItems: 1
+    maxItems: 100
+  RepositoryList:
+    type: array
+    items:
+      $ref: '#/definitions/Repository'
   ExceptionMessage:
     type: string
-  ExpirationTimestamp:
-    type: string
-    format: date-time
-  ForceFlag:
-    type: boolean
   GetAuthorizationTokenRegistryIdList:
     type: array
     items:
       $ref: '#/definitions/RegistryId'
     minItems: 1
     maxItems: 10
+  Url:
+    type: string
+  LifecyclePolicyPreviewFilter:
+    type: object
+    properties:
+      tagStatus:
+        $ref: '#/definitions/TagStatus'
+        description: The tag status of the image.
+    description: The filter for the lifecycle policy preview.
+  LifecyclePolicyPreviewStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - COMPLETE
+      - EXPIRED
+      - FAILED
+  LifecyclePolicyPreviewResultList:
+    type: array
+    items:
+      $ref: '#/definitions/LifecyclePolicyPreviewResult'
+  LifecyclePolicyPreviewSummary:
+    type: object
+    properties:
+      expiringImageTotalCount:
+        $ref: '#/definitions/ImageCount'
+        description: The number of expiring images.
+    description: The summary of the lifecycle policy preview request.
+  ImageIdentifier:
+    type: object
+    properties:
+      imageDigest:
+        $ref: '#/definitions/ImageDigest'
+        description: The <code>sha256</code> digest of the image manifest.
+      imageTag:
+        $ref: '#/definitions/ImageTag'
+        description: The tag used for the image.
+    description: An object with identifying information for an Amazon ECR image.
+  ImageManifest:
+    type: string
   Image:
     type: object
     properties:
@@ -1930,6 +2070,17 @@ definitions:
   ImageCount:
     type: integer
     minimum: 0
+  ImageDigest:
+    type: string
+  ImageTagList:
+    type: array
+    items:
+      $ref: '#/definitions/ImageTag'
+  ImageSizeInBytes:
+    type: integer
+  PushTimestamp:
+    type: string
+    format: date-time
   ImageDetail:
     type: object
     properties:
@@ -1952,11 +2103,15 @@ definitions:
         $ref: '#/definitions/PushTimestamp'
         description: 'The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository. '
     description: An object that describes an image returned by a <a>DescribeImages</a> operation.
-  ImageDetailList:
-    type: array
-    items:
-      $ref: '#/definitions/ImageDetail'
-  ImageDigest:
+  ImageFailureCode:
+    type: string
+    enum:
+      - InvalidImageDigest
+      - InvalidImageTag
+      - ImageTagDoesNotMatchDigest
+      - ImageNotFound
+      - MissingDigestAndTag
+  ImageFailureReason:
     type: string
   ImageFailure:
     type: object
@@ -1971,50 +2126,20 @@ definitions:
         $ref: '#/definitions/ImageFailureReason'
         description: The reason for the failure.
     description: An object representing an Amazon ECR image failure.
-  ImageFailureCode:
-    type: string
-    enum:
-      - InvalidImageDigest
-      - InvalidImageTag
-      - ImageTagDoesNotMatchDigest
-      - ImageNotFound
-      - MissingDigestAndTag
-  ImageFailureList:
-    type: array
-    items:
-      $ref: '#/definitions/ImageFailure'
-  ImageFailureReason:
-    type: string
-  ImageIdentifier:
-    type: object
-    properties:
-      imageDigest:
-        $ref: '#/definitions/ImageDigest'
-        description: The <code>sha256</code> digest of the image manifest.
-      imageTag:
-        $ref: '#/definitions/ImageTag'
-        description: The tag used for the image.
-    description: An object with identifying information for an Amazon ECR image.
-  ImageIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/ImageIdentifier'
-    minItems: 1
-    maxItems: 100
-  ImageList:
-    type: array
-    items:
-      $ref: '#/definitions/Image'
-  ImageManifest:
-    type: string
-  ImageSizeInBytes:
-    type: integer
   ImageTag:
     type: string
-  ImageTagList:
-    type: array
-    items:
-      $ref: '#/definitions/ImageTag'
+  PartSize:
+    type: integer
+    minimum: 0
+  LayerAvailability:
+    type: string
+    enum:
+      - AVAILABLE
+      - UNAVAILABLE
+  LayerSizeInBytes:
+    type: integer
+  MediaType:
+    type: string
   Layer:
     type: object
     properties:
@@ -2031,20 +2156,13 @@ definitions:
         $ref: '#/definitions/MediaType'
         description: 'The media type of the layer, such as <code>application/vnd.docker.image.rootfs.diff.tar.gzip</code> or <code>application/vnd.oci.image.layer.v1.tar+gzip</code>.'
     description: An object representing an Amazon ECR image layer.
-  LayerAvailability:
+  LayerFailureCode:
     type: string
     enum:
-      - AVAILABLE
-      - UNAVAILABLE
-  LayerDigest:
+      - InvalidLayerDigest
+      - MissingLayerDigest
+  LayerFailureReason:
     type: string
-    pattern: '[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+'
-  LayerDigestList:
-    type: array
-    items:
-      $ref: '#/definitions/LayerDigest'
-    minItems: 1
-    maxItems: 100
   LayerFailure:
     type: object
     properties:
@@ -2058,32 +2176,18 @@ definitions:
         $ref: '#/definitions/LayerFailureReason'
         description: The reason for the failure.
     description: An object representing an Amazon ECR image layer failure.
-  LayerFailureCode:
-    type: string
-    enum:
-      - InvalidLayerDigest
-      - MissingLayerDigest
-  LayerFailureList:
-    type: array
-    items:
-      $ref: '#/definitions/LayerFailure'
-  LayerFailureReason:
-    type: string
-  LayerList:
-    type: array
-    items:
-      $ref: '#/definitions/Layer'
   LayerPartBlob:
     type: string
-  LayerSizeInBytes:
-    type: integer
-  LifecyclePolicyPreviewFilter:
+  LifecyclePolicyRuleAction:
     type: object
     properties:
-      tagStatus:
-        $ref: '#/definitions/TagStatus'
-        description: The tag status of the image.
-    description: The filter for the lifecycle policy preview.
+      type:
+        $ref: '#/definitions/ImageActionType'
+        description: The type of action to be taken.
+    description: The type of action to be taken.
+  LifecyclePolicyRulePriority:
+    type: integer
+    minimum: 1
   LifecyclePolicyPreviewResult:
     type: object
     properties:
@@ -2103,38 +2207,6 @@ definitions:
         $ref: '#/definitions/LifecyclePolicyRulePriority'
         description: The priority of the applied rule.
     description: The result of the lifecycle policy preview.
-  LifecyclePolicyPreviewResultList:
-    type: array
-    items:
-      $ref: '#/definitions/LifecyclePolicyPreviewResult'
-  LifecyclePolicyPreviewStatus:
-    type: string
-    enum:
-      - IN_PROGRESS
-      - COMPLETE
-      - EXPIRED
-      - FAILED
-  LifecyclePolicyPreviewSummary:
-    type: object
-    properties:
-      expiringImageTotalCount:
-        $ref: '#/definitions/ImageCount'
-        description: The number of expiring images.
-    description: The summary of the lifecycle policy preview request.
-  LifecyclePolicyRuleAction:
-    type: object
-    properties:
-      type:
-        $ref: '#/definitions/ImageActionType'
-        description: The type of action to be taken.
-    description: The type of action to be taken.
-  LifecyclePolicyRulePriority:
-    type: integer
-    minimum: 1
-  LifecyclePolicyText:
-    type: string
-    minLength: 100
-    maxLength: 10240
   ListImagesFilter:
     type: object
     properties:
@@ -2142,76 +2214,3 @@ definitions:
         $ref: '#/definitions/TagStatus'
         description: The tag status with which to filter your <a>ListImages</a> results. You can filter results based on whether they are <code>TAGGED</code> or <code>UNTAGGED</code>.
     description: An object representing a filter on a <a>ListImages</a> operation.
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  MediaType:
-    type: string
-  MediaTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/MediaType'
-    minItems: 1
-    maxItems: 100
-  NextToken:
-    type: string
-  PartSize:
-    type: integer
-    minimum: 0
-  ProxyEndpoint:
-    type: string
-  PushTimestamp:
-    type: string
-    format: date-time
-  RegistryId:
-    type: string
-    pattern: '[0-9]{12}'
-  Repository:
-    type: object
-    properties:
-      repositoryArn:
-        $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.'
-      registryId:
-        $ref: '#/definitions/RegistryId'
-        description: The AWS account ID associated with the registry that contains the repository.
-      repositoryName:
-        $ref: '#/definitions/RepositoryName'
-        description: The name of the repository.
-      repositoryUri:
-        $ref: '#/definitions/Url'
-        description: The URI for the repository. You can use this URI for Docker <code>push</code> or <code>pull</code> operations.
-      createdAt:
-        $ref: '#/definitions/CreationTimestamp'
-        description: 'The date and time, in JavaScript date format, when the repository was created.'
-    description: An object representing a repository.
-  RepositoryList:
-    type: array
-    items:
-      $ref: '#/definitions/Repository'
-  RepositoryName:
-    type: string
-    pattern: '(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*'
-    minLength: 2
-    maxLength: 256
-  RepositoryNameList:
-    type: array
-    items:
-      $ref: '#/definitions/RepositoryName'
-    minItems: 1
-    maxItems: 100
-  RepositoryPolicyText:
-    type: string
-    minLength: 0
-    maxLength: 10240
-  TagStatus:
-    type: string
-    enum:
-      - TAGGED
-      - UNTAGGED
-  UploadId:
-    type: string
-    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
-  Url:
-    type: string

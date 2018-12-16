@@ -3275,7 +3275,14 @@ definitions:
     description: The request to update a streaming distribution.
     xml:
       namespace: 'http://cloudfront.amazonaws.com/doc/2018-11-05/'
-  undefined: {}
+  boolean:
+    type: boolean
+  integer:
+    type: integer
+  SignerList:
+    type: array
+    items:
+      $ref: '#/definitions/Signer'
   ActiveTrustedSigners:
     type: object
     required:
@@ -3292,6 +3299,8 @@ definitions:
         $ref: '#/definitions/SignerList'
         description: '<p>A complex type that contains one <code>Signer</code> complex type for each trusted signer that is specified in the <code>TrustedSigners</code> complex type.</p> <p>For more information, see <a>ActiveTrustedSigners</a>. </p>'
     description: '<p>A complex type that lists the AWS accounts, if any, that you included in the <code>TrustedSigners</code> complex type for this distribution. These are the accounts that you want to allow to create signed URLs for private content.</p> <p>The <code>Signer</code> complex type lists the AWS account number of the trusted signer or <code>self</code> if the signer is the AWS account that created the distribution. The <code>Signer</code> element also includes the IDs of any active CloudFront key pairs that are associated with the trusted signer''s AWS account. If no <code>KeyPairId</code> element appears for a <code>Signer</code>, that signer can''t create signed URLs. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+  string:
+    type: string
   AliasList:
     type: array
     items:
@@ -3308,6 +3317,23 @@ definitions:
         $ref: '#/definitions/AliasList'
         description: 'A complex type that contains the CNAME aliases, if any, that you want to associate with this distribution.'
     description: 'A complex type that contains information about CNAMEs (alternate domain names), if any, for this distribution. '
+  MethodsList:
+    type: array
+    items:
+      $ref: '#/definitions/Method'
+  CachedMethods:
+    type: object
+    required:
+      - Quantity
+      - Items
+    properties:
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: 'The number of HTTP methods for which you want CloudFront to cache responses. Valid values are <code>2</code> (for caching responses to <code>GET</code> and <code>HEAD</code> requests) and <code>3</code> (for caching responses to <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> requests).'
+      Items:
+        $ref: '#/definitions/MethodsList'
+        description: A complex type that contains the HTTP methods that you want CloudFront to cache responses to.
+    description: '<p>A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:</p> <ul> <li> <p>CloudFront caches responses to <code>GET</code> and <code>HEAD</code> requests.</p> </li> <li> <p>CloudFront caches responses to <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> requests.</p> </li> </ul> <p>If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly. </p>'
   AllowedMethods:
     type: object
     required:
@@ -3327,6 +3353,61 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/string'
+  ForwardedValues:
+    type: object
+    required:
+      - QueryString
+      - Cookies
+    properties:
+      QueryString:
+        $ref: '#/definitions/boolean'
+        description: '<p>Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior and cache based on the query string parameters. CloudFront behavior depends on the value of <code>QueryString</code> and on the values that you specify for <code>QueryStringCacheKeys</code>, if any:</p> <p>If you specify true for <code>QueryString</code> and you don''t specify any values for <code>QueryStringCacheKeys</code>, CloudFront forwards all query string parameters to the origin and caches based on all query string parameters. Depending on how many query string parameters and values you have, this can adversely affect performance because CloudFront must forward more requests to the origin.</p> <p>If you specify true for <code>QueryString</code> and you specify one or more values for <code>QueryStringCacheKeys</code>, CloudFront forwards all query string parameters to the origin, but it only caches based on the query string parameters that you specify.</p> <p>If you specify false for <code>QueryString</code>, CloudFront doesn''t forward any query string parameters to the origin, and doesn''t cache based on query string parameters.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html">Configuring CloudFront to Cache Based on Query String Parameters</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+      Cookies:
+        $ref: '#/definitions/CookiePreference'
+        description: 'A complex type that specifies whether you want CloudFront to forward cookies to the origin and, if so, which ones. For more information about forwarding cookies to the origin, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html">How CloudFront Forwards, Caches, and Logs Cookies</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+      Headers:
+        $ref: '#/definitions/Headers'
+        description: 'A complex type that specifies the <code>Headers</code>, if any, that you want CloudFront to base caching on for this cache behavior. '
+      QueryStringCacheKeys:
+        $ref: '#/definitions/QueryStringCacheKeys'
+        description: A complex type that contains information about the query string parameters that you want CloudFront to use for caching for this cache behavior.
+    description: A complex type that specifies how CloudFront handles query strings and cookies.
+  TrustedSigners:
+    type: object
+    required:
+      - Enabled
+      - Quantity
+    properties:
+      Enabled:
+        $ref: '#/definitions/boolean'
+        description: Specifies whether you want to require viewers to use signed URLs to access the files specified by <code>PathPattern</code> and <code>TargetOriginId</code>.
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: The number of trusted signers for this cache behavior.
+      Items:
+        $ref: '#/definitions/AwsAccountNumberList'
+        description: ' <b>Optional</b>: A complex type that contains trusted signers for this cache behavior. If <code>Quantity</code> is <code>0</code>, you can omit <code>Items</code>.'
+    description: '<p>A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content.</p> <p>If you want to require signed URLs in requests for objects in the target origin that match the <code>PathPattern</code> for this cache behavior, specify <code>true</code> for <code>Enabled</code>, and specify the applicable values for <code>Quantity</code> and <code>Items</code>. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon Amazon CloudFront Developer Guide</i>.</p> <p>If you don''t want to require signed URLs in requests for objects that match <code>PathPattern</code>, specify <code>false</code> for <code>Enabled</code> and <code>0</code> for <code>Quantity</code>. Omit <code>Items</code>.</p> <p>To add, change, or remove one or more trusted signers, change <code>Enabled</code> to <code>true</code> (if it''s currently <code>false</code>), change <code>Quantity</code> as applicable, and specify all of the trusted signers that you want to include in the updated distribution.</p> <p>For more information about updating the distribution configuration, see <a>DistributionConfig</a> .</p>'
+  ViewerProtocolPolicy:
+    type: string
+    enum:
+      - allow-all
+      - https-only
+      - redirect-to-https
+  long:
+    type: integer
+  LambdaFunctionAssociations:
+    type: object
+    required:
+      - Quantity
+    properties:
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: The number of Lambda function associations for this cache behavior.
+      Items:
+        $ref: '#/definitions/LambdaFunctionAssociationList'
+        description: ' <b>Optional</b>: A complex type that contains <code>LambdaFunctionAssociation</code> items for this cache behavior. If <code>Quantity</code> is <code>0</code>, you can omit <code>Items</code>.'
+    description: '<p>A complex type that specifies a list of Lambda functions associations for a cache behavior.</p> <p>If you want to invoke one or more Lambda functions triggered by requests that match the <code>PathPattern</code> of the cache behavior, specify the applicable values for <code>Quantity</code> and <code>Items</code>. Note that there can be up to 4 <code>LambdaFunctionAssociation</code> items in this list (one for each possible value of <code>EventType</code>) and each <code>EventType</code> can be associated with the Lambda function only once.</p> <p>If you don''t want to invoke any Lambda functions for the requests that match <code>PathPattern</code>, specify <code>0</code> for <code>Quantity</code> and omit <code>Items</code>. </p>'
   CacheBehavior:
     type: object
     required:
@@ -3392,25 +3473,25 @@ definitions:
         $ref: '#/definitions/CacheBehaviorList'
         description: 'Optional: A complex type that contains cache behaviors for this distribution. If <code>Quantity</code> is <code>0</code>, you can omit <code>Items</code>.'
     description: 'A complex type that contains zero or more <code>CacheBehavior</code> elements. '
-  CachedMethods:
-    type: object
-    required:
-      - Quantity
-      - Items
-    properties:
-      Quantity:
-        $ref: '#/definitions/integer'
-        description: 'The number of HTTP methods for which you want CloudFront to cache responses. Valid values are <code>2</code> (for caching responses to <code>GET</code> and <code>HEAD</code> requests) and <code>3</code> (for caching responses to <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> requests).'
-      Items:
-        $ref: '#/definitions/MethodsList'
-        description: A complex type that contains the HTTP methods that you want CloudFront to cache responses to.
-    description: '<p>A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:</p> <ul> <li> <p>CloudFront caches responses to <code>GET</code> and <code>HEAD</code> requests.</p> </li> <li> <p>CloudFront caches responses to <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> requests.</p> </li> </ul> <p>If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly. </p>'
   CertificateSource:
     type: string
     enum:
       - cloudfront
       - iam
       - acm
+  CloudFrontOriginAccessIdentityConfig:
+    type: object
+    required:
+      - CallerReference
+      - Comment
+    properties:
+      CallerReference:
+        $ref: '#/definitions/string'
+        description: '<p>A unique value (for example, a date-time stamp) that ensures that the request can''t be replayed.</p> <p>If the value of <code>CallerReference</code> is new (regardless of the content of the <code>CloudFrontOriginAccessIdentityConfig</code> object), a new origin access identity is created.</p> <p>If the <code>CallerReference</code> is a value already sent in a previous identity request, and the content of the <code>CloudFrontOriginAccessIdentityConfig</code> is identical to the original request (ignoring white space), the response includes the same information returned to the original request. </p> <p>If the <code>CallerReference</code> is a value you already sent in a previous request to create an identity, but the content of the <code>CloudFrontOriginAccessIdentityConfig</code> is different from the original request, CloudFront returns a <code>CloudFrontOriginAccessIdentityAlreadyExists</code> error. </p>'
+      Comment:
+        $ref: '#/definitions/string'
+        description: 'Any comments you want to include about the origin access identity. '
+    description: 'Origin access identity configuration. Send a <code>GET</code> request to the <code>/<i>CloudFront API version</i>/CloudFront/identity ID/config</code> resource. '
   CloudFrontOriginAccessIdentity:
     type: object
     required:
@@ -3427,19 +3508,10 @@ definitions:
         $ref: '#/definitions/CloudFrontOriginAccessIdentityConfig'
         description: 'The current configuration information for the identity. '
     description: CloudFront origin access identity.
-  CloudFrontOriginAccessIdentityConfig:
-    type: object
-    required:
-      - CallerReference
-      - Comment
-    properties:
-      CallerReference:
-        $ref: '#/definitions/string'
-        description: '<p>A unique value (for example, a date-time stamp) that ensures that the request can''t be replayed.</p> <p>If the value of <code>CallerReference</code> is new (regardless of the content of the <code>CloudFrontOriginAccessIdentityConfig</code> object), a new origin access identity is created.</p> <p>If the <code>CallerReference</code> is a value already sent in a previous identity request, and the content of the <code>CloudFrontOriginAccessIdentityConfig</code> is identical to the original request (ignoring white space), the response includes the same information returned to the original request. </p> <p>If the <code>CallerReference</code> is a value you already sent in a previous request to create an identity, but the content of the <code>CloudFrontOriginAccessIdentityConfig</code> is different from the original request, CloudFront returns a <code>CloudFrontOriginAccessIdentityAlreadyExists</code> error. </p>'
-      Comment:
-        $ref: '#/definitions/string'
-        description: 'Any comments you want to include about the origin access identity. '
-    description: 'Origin access identity configuration. Send a <code>GET</code> request to the <code>/<i>CloudFront API version</i>/CloudFront/identity ID/config</code> resource. '
+  CloudFrontOriginAccessIdentitySummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/CloudFrontOriginAccessIdentitySummary'
   CloudFrontOriginAccessIdentityList:
     type: object
     required:
@@ -3484,10 +3556,10 @@ definitions:
         $ref: '#/definitions/string'
         description: 'The comment for this origin access identity, as originally specified when created.'
     description: Summary of the information about a CloudFront origin access identity.
-  CloudFrontOriginAccessIdentitySummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/CloudFrontOriginAccessIdentitySummary'
+  Format:
+    type: string
+    enum:
+      - URLEncoded
   ContentTypeProfile:
     type: object
     required:
@@ -3504,6 +3576,18 @@ definitions:
         $ref: '#/definitions/string'
         description: 'The content type for a field-level encryption content type-profile mapping. '
     description: 'A field-level encryption content type profile. '
+  ContentTypeProfiles:
+    type: object
+    required:
+      - Quantity
+    properties:
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: 'The number of field-level encryption content type-profile mappings. '
+      Items:
+        $ref: '#/definitions/ContentTypeProfileList'
+        description: 'Items in a field-level encryption content type-profile mapping. '
+    description: 'Field-level encryption content type-profile. '
   ContentTypeProfileConfig:
     type: object
     required:
@@ -3520,18 +3604,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ContentTypeProfile'
-  ContentTypeProfiles:
-    type: object
-    required:
-      - Quantity
-    properties:
-      Quantity:
-        $ref: '#/definitions/integer'
-        description: 'The number of field-level encryption content type-profile mappings. '
-      Items:
-        $ref: '#/definitions/ContentTypeProfileList'
-        description: 'Items in a field-level encryption content type-profile mapping. '
-    description: 'Field-level encryption content type-profile. '
   CookieNameList:
     type: array
     items:
@@ -3548,6 +3620,12 @@ definitions:
         $ref: '#/definitions/CookieNameList'
         description: A complex type that contains one <code>Name</code> element for each cookie that you want CloudFront to forward to the origin for this cache behavior.
     description: 'A complex type that specifies whether you want CloudFront to forward cookies to the origin and, if so, which ones. For more information about forwarding cookies to the origin, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html">How CloudFront Forwards, Caches, and Logs Cookies</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+  ItemSelection:
+    type: string
+    enum:
+      - none
+      - whitelist
+      - all
   CookiePreference:
     type: object
     required:
@@ -3560,6 +3638,339 @@ definitions:
         $ref: '#/definitions/CookieNames'
         description: '<p>Required if you specify <code>whitelist</code> for the value of <code>Forward:</code>. A complex type that specifies how many different cookies you want CloudFront to forward to the origin for this cache behavior and, if you want to forward selected cookies, the names of those cookies.</p> <p>If you specify <code>all</code> or none for the value of <code>Forward</code>, omit <code>WhitelistedNames</code>. If you change the value of <code>Forward</code> from <code>whitelist</code> to all or none and you don''t delete the <code>WhitelistedNames</code> element and its child elements, CloudFront deletes them automatically.</p> <p>For the current limit on the number of cookie names that you can whitelist for each cache behavior, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront">Amazon CloudFront Limits</a> in the <i>AWS General Reference</i>.</p>'
     description: 'A complex type that specifies whether you want CloudFront to forward cookies to the origin and, if so, which ones. For more information about forwarding cookies to the origin, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html">How CloudFront Forwards, Caches, and Logs Cookies</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+  DistributionConfig:
+    type: object
+    required:
+      - CallerReference
+      - Origins
+      - DefaultCacheBehavior
+      - Comment
+      - Enabled
+    properties:
+      CallerReference:
+        $ref: '#/definitions/string'
+        description: '<p>A unique value (for example, a date-time stamp) that ensures that the request can''t be replayed.</p> <p>If the value of <code>CallerReference</code> is new (regardless of the content of the <code>DistributionConfig</code> object), CloudFront creates a new distribution.</p> <p>If <code>CallerReference</code> is a value that you already sent in a previous request to create a distribution, CloudFront returns a <code>DistributionAlreadyExists</code> error.</p>'
+      Aliases:
+        $ref: '#/definitions/Aliases'
+        description: 'A complex type that contains information about CNAMEs (alternate domain names), if any, for this distribution.'
+      DefaultRootObject:
+        $ref: '#/definitions/string'
+        description: '<p>The object that you want CloudFront to request from your origin (for example, <code>index.html</code>) when a viewer requests the root URL for your distribution (<code>http://www.example.com</code>) instead of an object in your distribution (<code>http://www.example.com/product-description.html</code>). Specifying a default root object avoids exposing the contents of your distribution.</p> <p>Specify only the object name, for example, <code>index.html</code>. Don''t add a <code>/</code> before the object name.</p> <p>If you don''t want to specify a default root object when you create a distribution, include an empty <code>DefaultRootObject</code> element.</p> <p>To delete the default root object from an existing distribution, update the distribution configuration and include an empty <code>DefaultRootObject</code> element.</p> <p>To replace the default root object, update the distribution configuration and specify the new object.</p> <p>For more information about the default root object, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html">Creating a Default Root Object</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+      Origins:
+        $ref: '#/definitions/Origins'
+        description: 'A complex type that contains information about origins for this distribution. '
+      OriginGroups:
+        $ref: '#/definitions/OriginGroups'
+        description: ' A complex type that contains information about origin groups for this distribution.'
+      DefaultCacheBehavior:
+        $ref: '#/definitions/DefaultCacheBehavior'
+        description: A complex type that describes the default cache behavior if you don't specify a <code>CacheBehavior</code> element or if files don't match any of the values of <code>PathPattern</code> in <code>CacheBehavior</code> elements. You must create exactly one default cache behavior.
+      CacheBehaviors:
+        $ref: '#/definitions/CacheBehaviors'
+        description: 'A complex type that contains zero or more <code>CacheBehavior</code> elements. '
+      CustomErrorResponses:
+        $ref: '#/definitions/CustomErrorResponses'
+        description: '<p>A complex type that controls the following:</p> <ul> <li> <p>Whether CloudFront replaces HTTP status codes in the 4xx and 5xx range with custom error messages before returning the response to the viewer.</p> </li> <li> <p>How long CloudFront caches HTTP status codes in the 4xx and 5xx range.</p> </li> </ul> <p>For more information about custom error pages, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html">Customizing Error Responses</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+      Comment:
+        $ref: '#/definitions/string'
+        description: '<p>Any comments you want to include about the distribution.</p> <p>If you don''t want to specify a comment, include an empty <code>Comment</code> element.</p> <p>To delete an existing comment, update the distribution configuration and include an empty <code>Comment</code> element.</p> <p>To add or change a comment, update the distribution configuration and specify the new comment.</p>'
+      Logging:
+        $ref: '#/definitions/LoggingConfig'
+        description: '<p>A complex type that controls whether access logs are written for the distribution.</p> <p>For more information about logging, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html">Access Logs</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+      PriceClass:
+        $ref: '#/definitions/PriceClass'
+        description: '<p>The price class that corresponds with the maximum price that you want to pay for CloudFront service. If you specify <code>PriceClass_All</code>, CloudFront responds to requests for your objects from all CloudFront edge locations.</p> <p>If you specify a price class other than <code>PriceClass_All</code>, CloudFront serves your objects from the CloudFront edge location that has the lowest latency among the edge locations in your price class. Viewers who are in or near regions that are excluded from your specified price class may encounter slower performance.</p> <p>For more information about price classes, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html">Choosing the Price Class for a CloudFront Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>. For information about CloudFront pricing, including how price classes (such as Price Class 100) map to CloudFront regions, see <a href="https://aws.amazon.com/cloudfront/pricing/">Amazon CloudFront Pricing</a>. For price class information, scroll down to see the table at the bottom of the page.</p>'
+      Enabled:
+        $ref: '#/definitions/boolean'
+        description: 'From this field, you can enable or disable the selected distribution.'
+      ViewerCertificate:
+        $ref: '#/definitions/ViewerCertificate'
+        description: <p/>
+      Restrictions:
+        $ref: '#/definitions/Restrictions'
+        description: <p/>
+      WebACLId:
+        $ref: '#/definitions/string'
+        description: '<p>A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution.</p> <p>AWS WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about AWS WAF, see the <a href="http://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html">AWS WAF Developer Guide</a>. </p>'
+      HttpVersion:
+        $ref: '#/definitions/HttpVersion'
+        description: '<p>(Optional) Specify the maximum HTTP version that you want viewers to use to communicate with CloudFront. The default value for new web distributions is http2. Viewers that don''t support HTTP/2 automatically use an earlier HTTP version.</p> <p>For viewers and CloudFront to use HTTP/2, viewers must support TLS 1.2 or later, and must support Server Name Identification (SNI).</p> <p>In general, configuring CloudFront to communicate with viewers using HTTP/2 reduces latency. You can improve performance by optimizing for HTTP/2. For more information, do an Internet search for "http/2 optimization." </p>'
+      IsIPV6Enabled:
+        $ref: '#/definitions/boolean'
+        description: '<p>If you want CloudFront to respond to IPv6 DNS requests with an IPv6 address for your distribution, specify <code>true</code>. If you specify <code>false</code>, CloudFront responds to IPv6 DNS requests with the DNS response code <code>NOERROR</code> and with no IP addresses. This allows viewers to submit a second request, for an IPv4 address for your distribution. </p> <p>In general, you should enable IPv6 if you have users on IPv6 networks who want to access your content. However, if you''re using signed URLs or signed cookies to restrict access to your content, and if you''re using a custom policy that includes the <code>IpAddress</code> parameter to restrict the IP addresses that can access your content, don''t enable IPv6. If you want to restrict access to some content by IP address and not restrict access to other content (or restrict access but not by IP address), you can create two distributions. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html">Creating a Signed URL Using a Custom Policy</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you''re using an Amazon Route 53 alias resource record set to route traffic to your CloudFront distribution, you need to create a second alias resource record set when both of the following are true:</p> <ul> <li> <p>You enable IPv6 for the distribution</p> </li> <li> <p>You''re using alternate domain names in the URLs for your objects</p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html">Routing Traffic to an Amazon CloudFront Web Distribution by Using Your Domain Name</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>If you created a CNAME resource record set, either with Amazon Route 53 or with another DNS service, you don''t need to make any changes. A CNAME record will route traffic to your distribution regardless of the IP address format of the viewer request.</p>'
+    description: A distribution configuration.
+  Distribution:
+    type: object
+    required:
+      - Id
+      - ARN
+      - Status
+      - LastModifiedTime
+      - InProgressInvalidationBatches
+      - DomainName
+      - ActiveTrustedSigners
+      - DistributionConfig
+    properties:
+      Id:
+        $ref: '#/definitions/string'
+        description: 'The identifier for the distribution. For example: <code>EDFDVBD632BHDS5</code>. '
+      ARN:
+        $ref: '#/definitions/string'
+        description: 'The ARN (Amazon Resource Name) for the distribution. For example: <code>arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5</code>, where <code>123456789012</code> is your AWS account ID.'
+      Status:
+        $ref: '#/definitions/string'
+        description: 'This response element indicates the current status of the distribution. When the status is <code>Deployed</code>, the distribution''s information is fully propagated to all CloudFront edge locations. '
+      LastModifiedTime:
+        $ref: '#/definitions/timestamp'
+        description: 'The date and time the distribution was last modified. '
+      InProgressInvalidationBatches:
+        $ref: '#/definitions/integer'
+        description: 'The number of invalidation batches currently in progress. '
+      DomainName:
+        $ref: '#/definitions/string'
+        description: 'The domain name corresponding to the distribution, for example, <code>d111111abcdef8.cloudfront.net</code>. '
+      ActiveTrustedSigners:
+        $ref: '#/definitions/ActiveTrustedSigners'
+        description: 'CloudFront automatically adds this element to the response only if you''ve set up the distribution to serve private content with signed URLs. The element lists the key pair IDs that CloudFront is aware of for each trusted signer. The <code>Signer</code> child element lists the AWS account number of the trusted signer (or an empty <code>Self</code> element if the signer is you). The <code>Signer</code> element also includes the IDs of any active key pairs associated with the trusted signer''s AWS account. If no <code>KeyPairId</code> element appears for a <code>Signer</code>, that signer can''t create working signed URLs.'
+      DistributionConfig:
+        $ref: '#/definitions/DistributionConfig'
+        description: The current configuration information for the distribution. Send a <code>GET</code> request to the <code>/<i>CloudFront API version</i>/distribution ID/config</code> resource.
+    description: The distribution's information.
+  DistributionConfigWithTags:
+    type: object
+    required:
+      - DistributionConfig
+      - Tags
+    properties:
+      DistributionConfig:
+        $ref: '#/definitions/DistributionConfig'
+        description: A distribution configuration.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A complex type that contains zero or more <code>Tag</code> elements.
+    description: A distribution Configuration and a list of tags to be associated with the distribution.
+  FieldLevelEncryptionConfig:
+    type: object
+    required:
+      - CallerReference
+    properties:
+      CallerReference:
+        $ref: '#/definitions/string'
+        description: A unique number that ensures the request can't be replayed.
+      Comment:
+        $ref: '#/definitions/string'
+        description: An optional comment about the configuration.
+      QueryArgProfileConfig:
+        $ref: '#/definitions/QueryArgProfileConfig'
+        description: A complex data type that specifies when to forward content if a profile isn't found and the profile that can be provided as a query argument in a request.
+      ContentTypeProfileConfig:
+        $ref: '#/definitions/ContentTypeProfileConfig'
+        description: A complex data type that specifies when to forward content if a content type isn't recognized and profiles to use as by default in a request if a query argument doesn't specify a profile to use.
+    description: 'A complex data type that includes the profile configurations specified for field-level encryption. '
+  FieldLevelEncryption:
+    type: object
+    required:
+      - Id
+      - LastModifiedTime
+      - FieldLevelEncryptionConfig
+    properties:
+      Id:
+        $ref: '#/definitions/string'
+        description: The configuration ID for a field-level encryption configuration which includes a set of profiles that specify certain selected data fields to be encrypted by specific public keys.
+      LastModifiedTime:
+        $ref: '#/definitions/timestamp'
+        description: 'The last time the field-level encryption configuration was changed. '
+      FieldLevelEncryptionConfig:
+        $ref: '#/definitions/FieldLevelEncryptionConfig'
+        description: 'A complex data type that includes the profile configurations specified for field-level encryption. '
+    description: 'A complex data type that includes the profile configurations and other options specified for field-level encryption. '
+  FieldLevelEncryptionProfileConfig:
+    type: object
+    required:
+      - Name
+      - CallerReference
+      - EncryptionEntities
+    properties:
+      Name:
+        $ref: '#/definitions/string'
+        description: Profile name for the field-level encryption profile.
+      CallerReference:
+        $ref: '#/definitions/string'
+        description: A unique number that ensures that the request can't be replayed.
+      Comment:
+        $ref: '#/definitions/string'
+        description: An optional comment for the field-level encryption profile.
+      EncryptionEntities:
+        $ref: '#/definitions/EncryptionEntities'
+        description: 'A complex data type of encryption entities for the field-level encryption profile that include the public key ID, provider, and field patterns for specifying which fields to encrypt with this key.'
+    description: A complex data type of profiles for the field-level encryption.
+  FieldLevelEncryptionProfile:
+    type: object
+    required:
+      - Id
+      - LastModifiedTime
+      - FieldLevelEncryptionProfileConfig
+    properties:
+      Id:
+        $ref: '#/definitions/string'
+        description: The ID for a field-level encryption profile configuration which includes a set of profiles that specify certain selected data fields to be encrypted by specific public keys.
+      LastModifiedTime:
+        $ref: '#/definitions/timestamp'
+        description: The last time the field-level encryption profile was updated.
+      FieldLevelEncryptionProfileConfig:
+        $ref: '#/definitions/FieldLevelEncryptionProfileConfig'
+        description: A complex data type that includes the profile name and the encryption entities for the field-level encryption profile.
+    description: A complex data type for field-level encryption profiles.
+  InvalidationBatch:
+    type: object
+    required:
+      - Paths
+      - CallerReference
+    properties:
+      Paths:
+        $ref: '#/definitions/Paths'
+        description: 'A complex type that contains information about the objects that you want to invalidate. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects">Specifying the Objects to Invalidate</a> in the <i>Amazon CloudFront Developer Guide</i>. '
+      CallerReference:
+        $ref: '#/definitions/string'
+        description: '<p>A value that you specify to uniquely identify an invalidation request. CloudFront uses the value to prevent you from accidentally resubmitting an identical request. Whenever you create a new invalidation request, you must specify a new value for <code>CallerReference</code> and change other values in the request as applicable. One way to ensure that the value of <code>CallerReference</code> is unique is to use a <code>timestamp</code>, for example, <code>20120301090000</code>.</p> <p>If you make a second invalidation request with the same value for <code>CallerReference</code>, and if the rest of the request is the same, CloudFront doesn''t create a new invalidation request. Instead, CloudFront returns information about the invalidation request that you previously created with the same <code>CallerReference</code>.</p> <p>If <code>CallerReference</code> is a value you already sent in a previous invalidation batch request but the content of any <code>Path</code> is different from the original request, CloudFront returns an <code>InvalidationBatchAlreadyExists</code> error.</p>'
+    description: An invalidation batch.
+  Invalidation:
+    type: object
+    required:
+      - Id
+      - Status
+      - CreateTime
+      - InvalidationBatch
+    properties:
+      Id:
+        $ref: '#/definitions/string'
+        description: 'The identifier for the invalidation request. For example: <code>IDFDVBD632BHDS5</code>.'
+      Status:
+        $ref: '#/definitions/string'
+        description: 'The status of the invalidation request. When the invalidation batch is finished, the status is <code>Completed</code>.'
+      CreateTime:
+        $ref: '#/definitions/timestamp'
+        description: 'The date and time the invalidation request was first made. '
+      InvalidationBatch:
+        $ref: '#/definitions/InvalidationBatch'
+        description: 'The current invalidation information for the batch request. '
+    description: 'An invalidation. '
+  PublicKeyConfig:
+    type: object
+    required:
+      - CallerReference
+      - Name
+      - EncodedKey
+    properties:
+      CallerReference:
+        $ref: '#/definitions/string'
+        description: A unique number that ensures that the request can't be replayed.
+      Name:
+        $ref: '#/definitions/string'
+        description: The name for a public key you add to CloudFront to use with features like field-level encryption.
+      EncodedKey:
+        $ref: '#/definitions/string'
+        description: The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
+      Comment:
+        $ref: '#/definitions/string'
+        description: An optional comment about a public key.
+    description: Information about a public key you add to CloudFront to use with features like field-level encryption.
+  PublicKey:
+    type: object
+    required:
+      - Id
+      - CreatedTime
+      - PublicKeyConfig
+    properties:
+      Id:
+        $ref: '#/definitions/string'
+        description: A unique ID assigned to a public key you've added to CloudFront.
+      CreatedTime:
+        $ref: '#/definitions/timestamp'
+        description: A time you added a public key to CloudFront.
+      PublicKeyConfig:
+        $ref: '#/definitions/PublicKeyConfig'
+        description: A complex data type for a public key you add to CloudFront to use with features like field-level encryption.
+    description: A complex data type of public keys you add to CloudFront to use with features like field-level encryption.
+  StreamingDistributionConfig:
+    type: object
+    required:
+      - CallerReference
+      - S3Origin
+      - Comment
+      - TrustedSigners
+      - Enabled
+    properties:
+      CallerReference:
+        $ref: '#/definitions/string'
+        description: '<p>A unique value (for example, a date-time stamp) that ensures that the request can''t be replayed.</p> <p>If the value of <code>CallerReference</code> is new (regardless of the content of the <code>StreamingDistributionConfig</code> object), CloudFront creates a new distribution.</p> <p>If <code>CallerReference</code> is a value that you already sent in a previous request to create a distribution, CloudFront returns a <code>DistributionAlreadyExists</code> error.</p>'
+      S3Origin:
+        $ref: '#/definitions/S3Origin'
+        description: 'A complex type that contains information about the Amazon S3 bucket from which you want CloudFront to get your media files for distribution. '
+      Aliases:
+        $ref: '#/definitions/Aliases'
+        description: 'A complex type that contains information about CNAMEs (alternate domain names), if any, for this streaming distribution. '
+      Comment:
+        $ref: '#/definitions/string'
+        description: 'Any comments you want to include about the streaming distribution. '
+      Logging:
+        $ref: '#/definitions/StreamingLoggingConfig'
+        description: 'A complex type that controls whether access logs are written for the streaming distribution. '
+      TrustedSigners:
+        $ref: '#/definitions/TrustedSigners'
+        description: 'A complex type that specifies any AWS accounts that you want to permit to create signed URLs for private content. If you want the distribution to use signed URLs, include this element; if you want the distribution to use public URLs, remove this element. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>. '
+      PriceClass:
+        $ref: '#/definitions/PriceClass'
+        description: 'A complex type that contains information about price class for this streaming distribution. '
+      Enabled:
+        $ref: '#/definitions/boolean'
+        description: Whether the streaming distribution is enabled to accept user requests for content.
+    description: The RTMP distribution's configuration information.
+  StreamingDistribution:
+    type: object
+    required:
+      - Id
+      - ARN
+      - Status
+      - DomainName
+      - ActiveTrustedSigners
+      - StreamingDistributionConfig
+    properties:
+      Id:
+        $ref: '#/definitions/string'
+        description: 'The identifier for the RTMP distribution. For example: <code>EGTXBD79EXAMPLE</code>.'
+      ARN:
+        $ref: '#/definitions/string'
+        description: 'The ARN (Amazon Resource Name) for the distribution. For example: <code>arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5</code>, where <code>123456789012</code> is your AWS account ID.'
+      Status:
+        $ref: '#/definitions/string'
+        description: 'The current status of the RTMP distribution. When the status is <code>Deployed</code>, the distribution''s information is propagated to all CloudFront edge locations.'
+      LastModifiedTime:
+        $ref: '#/definitions/timestamp'
+        description: 'The date and time that the distribution was last modified. '
+      DomainName:
+        $ref: '#/definitions/string'
+        description: 'The domain name that corresponds to the streaming distribution, for example, <code>s5c39gqb8ow64r.cloudfront.net</code>. '
+      ActiveTrustedSigners:
+        $ref: '#/definitions/ActiveTrustedSigners'
+        description: '<p>A complex type that lists the AWS accounts, if any, that you included in the <code>TrustedSigners</code> complex type for this distribution. These are the accounts that you want to allow to create signed URLs for private content.</p> <p>The <code>Signer</code> complex type lists the AWS account number of the trusted signer or <code>self</code> if the signer is the AWS account that created the distribution. The <code>Signer</code> element also includes the IDs of any active CloudFront key pairs that are associated with the trusted signer''s AWS account. If no <code>KeyPairId</code> element appears for a <code>Signer</code>, that signer can''t create signed URLs.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>. </p>'
+      StreamingDistributionConfig:
+        $ref: '#/definitions/StreamingDistributionConfig'
+        description: The current configuration information for the RTMP distribution.
+    description: 'A streaming distribution. '
+  StreamingDistributionConfigWithTags:
+    type: object
+    required:
+      - StreamingDistributionConfig
+      - Tags
+    properties:
+      StreamingDistributionConfig:
+        $ref: '#/definitions/StreamingDistributionConfig'
+        description: A streaming distribution Configuration.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A complex type that contains zero or more <code>Tag</code> elements.
+    description: A streaming distribution Configuration and a list of tags to be associated with the streaming distribution.
   CustomErrorResponse:
     type: object
     required:
@@ -3594,6 +4005,10 @@ definitions:
         $ref: '#/definitions/CustomErrorResponseList'
         description: 'A complex type that contains a <code>CustomErrorResponse</code> element for each HTTP status code for which you want to specify a custom error page and/or a caching duration. '
     description: '<p>A complex type that controls:</p> <ul> <li> <p>Whether CloudFront replaces HTTP status codes in the 4xx and 5xx range with custom error messages before returning the response to the viewer.</p> </li> <li> <p>How long CloudFront caches HTTP status codes in the 4xx and 5xx range.</p> </li> </ul> <p>For more information about custom error pages, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html">Customizing Error Responses</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+  OriginCustomHeadersList:
+    type: array
+    items:
+      $ref: '#/definitions/OriginCustomHeader'
   CustomHeaders:
     type: object
     required:
@@ -3606,6 +4021,25 @@ definitions:
         $ref: '#/definitions/OriginCustomHeadersList'
         description: ' <b>Optional</b>: A list that contains one <code>OriginCustomHeader</code> element for each custom header that you want CloudFront to forward to the origin. If Quantity is <code>0</code>, omit <code>Items</code>.'
     description: 'A complex type that contains the list of Custom Headers for each origin. '
+  OriginProtocolPolicy:
+    type: string
+    enum:
+      - http-only
+      - match-viewer
+      - https-only
+  OriginSslProtocols:
+    type: object
+    required:
+      - Quantity
+      - Items
+    properties:
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: 'The number of SSL/TLS protocols that you want to allow CloudFront to use when establishing an HTTPS connection with this origin. '
+      Items:
+        $ref: '#/definitions/SslProtocolsList'
+        description: A list that contains allowed SSL/TLS protocols for this distribution.
+    description: 'A complex type that contains information about the SSL/TLS protocols that CloudFront can use when establishing an HTTPS connection with your origin. '
   CustomOriginConfig:
     type: object
     required:
@@ -3676,117 +4110,110 @@ definitions:
         $ref: '#/definitions/string'
         description: The value of <code>ID</code> for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for a cache behavior or for the default cache behavior in your distribution.
     description: A complex type that describes the default cache behavior if you don't specify a <code>CacheBehavior</code> element or if files don't match any of the values of <code>PathPattern</code> in <code>CacheBehavior</code> elements. You must create exactly one default cache behavior.
-  Distribution:
+  timestamp:
+    type: string
+    format: date-time
+  Origins:
     type: object
     required:
-      - Id
-      - ARN
-      - Status
-      - LastModifiedTime
-      - InProgressInvalidationBatches
-      - DomainName
-      - ActiveTrustedSigners
-      - DistributionConfig
+      - Quantity
+      - Items
     properties:
-      Id:
-        $ref: '#/definitions/string'
-        description: 'The identifier for the distribution. For example: <code>EDFDVBD632BHDS5</code>. '
-      ARN:
-        $ref: '#/definitions/string'
-        description: 'The ARN (Amazon Resource Name) for the distribution. For example: <code>arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5</code>, where <code>123456789012</code> is your AWS account ID.'
-      Status:
-        $ref: '#/definitions/string'
-        description: 'This response element indicates the current status of the distribution. When the status is <code>Deployed</code>, the distribution''s information is fully propagated to all CloudFront edge locations. '
-      LastModifiedTime:
-        $ref: '#/definitions/timestamp'
-        description: 'The date and time the distribution was last modified. '
-      InProgressInvalidationBatches:
+      Quantity:
         $ref: '#/definitions/integer'
-        description: 'The number of invalidation batches currently in progress. '
-      DomainName:
-        $ref: '#/definitions/string'
-        description: 'The domain name corresponding to the distribution, for example, <code>d111111abcdef8.cloudfront.net</code>. '
-      ActiveTrustedSigners:
-        $ref: '#/definitions/ActiveTrustedSigners'
-        description: 'CloudFront automatically adds this element to the response only if you''ve set up the distribution to serve private content with signed URLs. The element lists the key pair IDs that CloudFront is aware of for each trusted signer. The <code>Signer</code> child element lists the AWS account number of the trusted signer (or an empty <code>Self</code> element if the signer is you). The <code>Signer</code> element also includes the IDs of any active key pairs associated with the trusted signer''s AWS account. If no <code>KeyPairId</code> element appears for a <code>Signer</code>, that signer can''t create working signed URLs.'
-      DistributionConfig:
-        $ref: '#/definitions/DistributionConfig'
-        description: The current configuration information for the distribution. Send a <code>GET</code> request to the <code>/<i>CloudFront API version</i>/distribution ID/config</code> resource.
-    description: The distribution's information.
-  DistributionConfig:
+        description: The number of origins or origin groups for this distribution.
+      Items:
+        $ref: '#/definitions/OriginList'
+        description: A complex type that contains origins or origin groups for this distribution.
+    description: 'A complex type that contains information about origins and origin groups for this distribution. '
+  OriginGroups:
     type: object
     required:
-      - CallerReference
-      - Origins
-      - DefaultCacheBehavior
-      - Comment
-      - Enabled
+      - Quantity
     properties:
-      CallerReference:
-        $ref: '#/definitions/string'
-        description: '<p>A unique value (for example, a date-time stamp) that ensures that the request can''t be replayed.</p> <p>If the value of <code>CallerReference</code> is new (regardless of the content of the <code>DistributionConfig</code> object), CloudFront creates a new distribution.</p> <p>If <code>CallerReference</code> is a value that you already sent in a previous request to create a distribution, CloudFront returns a <code>DistributionAlreadyExists</code> error.</p>'
-      Aliases:
-        $ref: '#/definitions/Aliases'
-        description: 'A complex type that contains information about CNAMEs (alternate domain names), if any, for this distribution.'
-      DefaultRootObject:
-        $ref: '#/definitions/string'
-        description: '<p>The object that you want CloudFront to request from your origin (for example, <code>index.html</code>) when a viewer requests the root URL for your distribution (<code>http://www.example.com</code>) instead of an object in your distribution (<code>http://www.example.com/product-description.html</code>). Specifying a default root object avoids exposing the contents of your distribution.</p> <p>Specify only the object name, for example, <code>index.html</code>. Don''t add a <code>/</code> before the object name.</p> <p>If you don''t want to specify a default root object when you create a distribution, include an empty <code>DefaultRootObject</code> element.</p> <p>To delete the default root object from an existing distribution, update the distribution configuration and include an empty <code>DefaultRootObject</code> element.</p> <p>To replace the default root object, update the distribution configuration and specify the new object.</p> <p>For more information about the default root object, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html">Creating a Default Root Object</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
-      Origins:
-        $ref: '#/definitions/Origins'
-        description: 'A complex type that contains information about origins for this distribution. '
-      OriginGroups:
-        $ref: '#/definitions/OriginGroups'
-        description: ' A complex type that contains information about origin groups for this distribution.'
-      DefaultCacheBehavior:
-        $ref: '#/definitions/DefaultCacheBehavior'
-        description: A complex type that describes the default cache behavior if you don't specify a <code>CacheBehavior</code> element or if files don't match any of the values of <code>PathPattern</code> in <code>CacheBehavior</code> elements. You must create exactly one default cache behavior.
-      CacheBehaviors:
-        $ref: '#/definitions/CacheBehaviors'
-        description: 'A complex type that contains zero or more <code>CacheBehavior</code> elements. '
-      CustomErrorResponses:
-        $ref: '#/definitions/CustomErrorResponses'
-        description: '<p>A complex type that controls the following:</p> <ul> <li> <p>Whether CloudFront replaces HTTP status codes in the 4xx and 5xx range with custom error messages before returning the response to the viewer.</p> </li> <li> <p>How long CloudFront caches HTTP status codes in the 4xx and 5xx range.</p> </li> </ul> <p>For more information about custom error pages, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html">Customizing Error Responses</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
-      Comment:
-        $ref: '#/definitions/string'
-        description: '<p>Any comments you want to include about the distribution.</p> <p>If you don''t want to specify a comment, include an empty <code>Comment</code> element.</p> <p>To delete an existing comment, update the distribution configuration and include an empty <code>Comment</code> element.</p> <p>To add or change a comment, update the distribution configuration and specify the new comment.</p>'
-      Logging:
-        $ref: '#/definitions/LoggingConfig'
-        description: '<p>A complex type that controls whether access logs are written for the distribution.</p> <p>For more information about logging, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html">Access Logs</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
-      PriceClass:
-        $ref: '#/definitions/PriceClass'
-        description: '<p>The price class that corresponds with the maximum price that you want to pay for CloudFront service. If you specify <code>PriceClass_All</code>, CloudFront responds to requests for your objects from all CloudFront edge locations.</p> <p>If you specify a price class other than <code>PriceClass_All</code>, CloudFront serves your objects from the CloudFront edge location that has the lowest latency among the edge locations in your price class. Viewers who are in or near regions that are excluded from your specified price class may encounter slower performance.</p> <p>For more information about price classes, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html">Choosing the Price Class for a CloudFront Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>. For information about CloudFront pricing, including how price classes (such as Price Class 100) map to CloudFront regions, see <a href="https://aws.amazon.com/cloudfront/pricing/">Amazon CloudFront Pricing</a>. For price class information, scroll down to see the table at the bottom of the page.</p>'
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: The number of origin groups.
+      Items:
+        $ref: '#/definitions/OriginGroupList'
+        description: The items (origin groups) in a distribution.
+    description: A complex data type for the origin groups specified for a distribution.
+  LoggingConfig:
+    type: object
+    required:
+      - Enabled
+      - IncludeCookies
+      - Bucket
+      - Prefix
+    properties:
       Enabled:
         $ref: '#/definitions/boolean'
-        description: 'From this field, you can enable or disable the selected distribution.'
-      ViewerCertificate:
-        $ref: '#/definitions/ViewerCertificate'
-        description: <p/>
-      Restrictions:
-        $ref: '#/definitions/Restrictions'
-        description: <p/>
-      WebACLId:
-        $ref: '#/definitions/string'
-        description: '<p>A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution.</p> <p>AWS WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about AWS WAF, see the <a href="http://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html">AWS WAF Developer Guide</a>. </p>'
-      HttpVersion:
-        $ref: '#/definitions/HttpVersion'
-        description: '<p>(Optional) Specify the maximum HTTP version that you want viewers to use to communicate with CloudFront. The default value for new web distributions is http2. Viewers that don''t support HTTP/2 automatically use an earlier HTTP version.</p> <p>For viewers and CloudFront to use HTTP/2, viewers must support TLS 1.2 or later, and must support Server Name Identification (SNI).</p> <p>In general, configuring CloudFront to communicate with viewers using HTTP/2 reduces latency. You can improve performance by optimizing for HTTP/2. For more information, do an Internet search for "http/2 optimization." </p>'
-      IsIPV6Enabled:
+        description: 'Specifies whether you want CloudFront to save access logs to an Amazon S3 bucket. If you don''t want to enable logging when you create a distribution or if you want to disable logging for an existing distribution, specify <code>false</code> for <code>Enabled</code>, and specify empty <code>Bucket</code> and <code>Prefix</code> elements. If you specify <code>false</code> for <code>Enabled</code> but you specify values for <code>Bucket</code>, <code>prefix</code>, and <code>IncludeCookies</code>, the values are automatically deleted.'
+      IncludeCookies:
         $ref: '#/definitions/boolean'
-        description: '<p>If you want CloudFront to respond to IPv6 DNS requests with an IPv6 address for your distribution, specify <code>true</code>. If you specify <code>false</code>, CloudFront responds to IPv6 DNS requests with the DNS response code <code>NOERROR</code> and with no IP addresses. This allows viewers to submit a second request, for an IPv4 address for your distribution. </p> <p>In general, you should enable IPv6 if you have users on IPv6 networks who want to access your content. However, if you''re using signed URLs or signed cookies to restrict access to your content, and if you''re using a custom policy that includes the <code>IpAddress</code> parameter to restrict the IP addresses that can access your content, don''t enable IPv6. If you want to restrict access to some content by IP address and not restrict access to other content (or restrict access but not by IP address), you can create two distributions. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html">Creating a Signed URL Using a Custom Policy</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you''re using an Amazon Route 53 alias resource record set to route traffic to your CloudFront distribution, you need to create a second alias resource record set when both of the following are true:</p> <ul> <li> <p>You enable IPv6 for the distribution</p> </li> <li> <p>You''re using alternate domain names in the URLs for your objects</p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html">Routing Traffic to an Amazon CloudFront Web Distribution by Using Your Domain Name</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>If you created a CNAME resource record set, either with Amazon Route 53 or with another DNS service, you don''t need to make any changes. A CNAME record will route traffic to your distribution regardless of the IP address format of the viewer request.</p>'
-    description: A distribution configuration.
-  DistributionConfigWithTags:
+        description: 'Specifies whether you want CloudFront to include cookies in access logs, specify <code>true</code> for <code>IncludeCookies</code>. If you choose to include cookies in logs, CloudFront logs all cookies regardless of how you configure the cache behaviors for this distribution. If you don''t want to include cookies when you create a distribution or if you want to disable include cookies for an existing distribution, specify <code>false</code> for <code>IncludeCookies</code>.'
+      Bucket:
+        $ref: '#/definitions/string'
+        description: 'The Amazon S3 bucket to store the access logs in, for example, <code>myawslogbucket.s3.amazonaws.com</code>.'
+      Prefix:
+        $ref: '#/definitions/string'
+        description: 'An optional string that you want CloudFront to prefix to the access log <code>filenames</code> for this distribution, for example, <code>myprefix/</code>. If you want to enable logging, but you don''t want to specify a prefix, you still must include an empty <code>Prefix</code> element in the <code>Logging</code> element.'
+    description: A complex type that controls whether access logs are written for the distribution.
+  PriceClass:
+    type: string
+    enum:
+      - PriceClass_100
+      - PriceClass_200
+      - PriceClass_All
+  ViewerCertificate:
+    type: object
+    properties:
+      CloudFrontDefaultCertificate:
+        $ref: '#/definitions/boolean'
+        description: 'For information about how and when to use <code>CloudFrontDefaultCertificate</code>, see <a>ViewerCertificate</a>.'
+      IAMCertificateId:
+        $ref: '#/definitions/string'
+        description: 'For information about how and when to use <code>IAMCertificateId</code>, see <a>ViewerCertificate</a>.'
+      ACMCertificateArn:
+        $ref: '#/definitions/string'
+        description: 'For information about how and when to use <code>ACMCertificateArn</code>, see <a>ViewerCertificate</a>.'
+      SSLSupportMethod:
+        $ref: '#/definitions/SSLSupportMethod'
+        description: '<p>If you specify a value for <a>ViewerCertificate$ACMCertificateArn</a> or for <a>ViewerCertificate$IAMCertificateId</a>, you must also specify how you want CloudFront to serve HTTPS requests: using a method that works for all clients or one that works for most clients:</p> <ul> <li> <p> <code>vip</code>: CloudFront uses dedicated IP addresses for your content and can respond to HTTPS requests from any viewer. However, you will incur additional monthly charges.</p> </li> <li> <p> <code>sni-only</code>: CloudFront can respond to HTTPS requests from viewers that support Server Name Indication (SNI). All modern browsers support SNI, but some browsers still in use don''t support SNI. If some of your users'' browsers don''t support SNI, we recommend that you do one of the following:</p> <ul> <li> <p>Use the <code>vip</code> option (dedicated IP addresses) instead of <code>sni-only</code>.</p> </li> <li> <p>Use the CloudFront SSL/TLS certificate instead of a custom certificate. This requires that you use the CloudFront domain name of your distribution in the URLs for your objects, for example, <code>https://d111111abcdef8.cloudfront.net/logo.png</code>.</p> </li> <li> <p>If you can control which browser your users use, upgrade the browser to one that supports SNI.</p> </li> <li> <p>Use HTTP instead of HTTPS.</p> </li> </ul> </li> </ul> <p>Don''t specify a value for <code>SSLSupportMethod</code> if you specified <code>&lt;CloudFrontDefaultCertificate&gt;true&lt;CloudFrontDefaultCertificate&gt;</code>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS.html">Using Alternate Domain Names and HTTPS</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+      MinimumProtocolVersion:
+        $ref: '#/definitions/MinimumProtocolVersion'
+        description: '<p>Specify the security policy that you want CloudFront to use for HTTPS connections. A security policy determines two settings:</p> <ul> <li> <p>The minimum SSL/TLS protocol that CloudFront uses to communicate with viewers</p> </li> <li> <p>The cipher that CloudFront uses to encrypt the content that it returns to viewers</p> </li> </ul> <note> <p>On the CloudFront console, this setting is called <b>Security policy</b>.</p> </note> <p>We recommend that you specify <code>TLSv1.1_2016</code> unless your users are using browsers or devices that do not support TLSv1.1 or later.</p> <p>When both of the following are true, you must specify <code>TLSv1</code> or later for the security policy: </p> <ul> <li> <p>You''re using a custom certificate: you specified a value for <code>ACMCertificateArn</code> or for <code>IAMCertificateId</code> </p> </li> <li> <p>You''re using SNI: you specified <code>sni-only</code> for <code>SSLSupportMethod</code> </p> </li> </ul> <p>If you specify <code>true</code> for <code>CloudFrontDefaultCertificate</code>, CloudFront automatically sets the security policy to <code>TLSv1</code> regardless of the value that you specify for <code>MinimumProtocolVersion</code>.</p> <p>For information about the relationship between the security policy that you choose and the protocols and ciphers that CloudFront uses to communicate with viewers, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html#secure-connections-supported-ciphers"> Supported SSL/TLS Protocols and Ciphers for Communication Between Viewers and CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+      Certificate:
+        $ref: '#/definitions/string'
+        description: '<p>This field has been deprecated. Use one of the following fields instead:</p> <ul> <li> <p> <a>ViewerCertificate$ACMCertificateArn</a> </p> </li> <li> <p> <a>ViewerCertificate$IAMCertificateId</a> </p> </li> <li> <p> <a>ViewerCertificate$CloudFrontDefaultCertificate</a> </p> </li> </ul>'
+      CertificateSource:
+        $ref: '#/definitions/CertificateSource'
+        description: '<p>This field has been deprecated. Use one of the following fields instead:</p> <ul> <li> <p> <a>ViewerCertificate$ACMCertificateArn</a> </p> </li> <li> <p> <a>ViewerCertificate$IAMCertificateId</a> </p> </li> <li> <p> <a>ViewerCertificate$CloudFrontDefaultCertificate</a> </p> </li> </ul>'
+    description: '<p>A complex type that specifies the following:</p> <ul> <li> <p>Whether you want viewers to use HTTP or HTTPS to request your objects.</p> </li> <li> <p>If you want viewers to use HTTPS, whether you''re using an alternate domain name such as <code>example.com</code> or the CloudFront domain name for your distribution, such as <code>d111111abcdef8.cloudfront.net</code>.</p> </li> <li> <p>If you''re using an alternate domain name, whether AWS Certificate Manager (ACM) provided the certificate, or you purchased a certificate from a third-party certificate authority and imported it into ACM or uploaded it to the IAM certificate store.</p> </li> </ul> <p>You must specify only one of the following values: </p> <ul> <li> <p> <a>ViewerCertificate$ACMCertificateArn</a> </p> </li> <li> <p> <a>ViewerCertificate$IAMCertificateId</a> </p> </li> <li> <p> <a>ViewerCertificate$CloudFrontDefaultCertificate</a> </p> </li> </ul> <p>Don''t specify <code>false</code> for <code>CloudFrontDefaultCertificate</code>.</p> <p> <b>If you want viewers to use HTTP instead of HTTPS to request your objects</b>: Specify the following value:</p> <p> <code>&lt;CloudFrontDefaultCertificate&gt;true&lt;CloudFrontDefaultCertificate&gt;</code> </p> <p>In addition, specify <code>allow-all</code> for <code>ViewerProtocolPolicy</code> for all of your cache behaviors.</p> <p> <b>If you want viewers to use HTTPS to request your objects</b>: Choose the type of certificate that you want to use based on whether you''re using an alternate domain name for your objects or the CloudFront domain name:</p> <ul> <li> <p> <b>If you''re using an alternate domain name, such as example.com</b>: Specify one of the following values, depending on whether ACM provided your certificate or you purchased your certificate from third-party certificate authority:</p> <ul> <li> <p> <code>&lt;ACMCertificateArn&gt;<i>ARN for ACM SSL/TLS certificate</i>&lt;ACMCertificateArn&gt;</code> where <code> <i>ARN for ACM SSL/TLS certificate</i> </code> is the ARN for the ACM SSL/TLS certificate that you want to use for this distribution.</p> </li> <li> <p> <code>&lt;IAMCertificateId&gt;<i>IAM certificate ID</i>&lt;IAMCertificateId&gt;</code> where <code> <i>IAM certificate ID</i> </code> is the ID that IAM returned when you added the certificate to the IAM certificate store.</p> </li> </ul> <p>If you specify <code>ACMCertificateArn</code> or <code>IAMCertificateId</code>, you must also specify a value for <code>SSLSupportMethod</code>.</p> <p>If you choose to use an ACM certificate or a certificate in the IAM certificate store, we recommend that you use only an alternate domain name in your object URLs (<code>https://example.com/logo.jpg</code>). If you use the domain name that is associated with your CloudFront distribution (such as <code>https://d111111abcdef8.cloudfront.net/logo.jpg</code>) and the viewer supports <code>SNI</code>, then CloudFront behaves normally. However, if the browser does not support SNI, the user''s experience depends on the value that you choose for <code>SSLSupportMethod</code>:</p> <ul> <li> <p> <code>vip</code>: The viewer displays a warning because there is a mismatch between the CloudFront domain name and the domain name in your SSL/TLS certificate.</p> </li> <li> <p> <code>sni-only</code>: CloudFront drops the connection with the browser without returning the object.</p> </li> </ul> </li> <li> <p> <b>If you''re using the CloudFront domain name for your distribution, such as <code>d111111abcdef8.cloudfront.net</code> </b>: Specify the following value:</p> <p> <code>&lt;CloudFrontDefaultCertificate&gt;true&lt;CloudFrontDefaultCertificate&gt; </code> </p> </li> </ul> <p>If you want viewers to use HTTPS, you must also specify one of the following values in your cache behaviors:</p> <ul> <li> <p> <code> &lt;ViewerProtocolPolicy&gt;https-only&lt;ViewerProtocolPolicy&gt;</code> </p> </li> <li> <p> <code>&lt;ViewerProtocolPolicy&gt;redirect-to-https&lt;ViewerProtocolPolicy&gt;</code> </p> </li> </ul> <p>You can also optionally require that CloudFront use HTTPS to communicate with your origin by specifying one of the following values for the applicable origins:</p> <ul> <li> <p> <code>&lt;OriginProtocolPolicy&gt;https-only&lt;OriginProtocolPolicy&gt; </code> </p> </li> <li> <p> <code>&lt;OriginProtocolPolicy&gt;match-viewer&lt;OriginProtocolPolicy&gt; </code> </p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS">Using Alternate Domain Names and HTTPS</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+  Restrictions:
     type: object
     required:
-      - DistributionConfig
-      - Tags
+      - GeoRestriction
     properties:
-      DistributionConfig:
-        $ref: '#/definitions/DistributionConfig'
-        description: A distribution configuration.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: A complex type that contains zero or more <code>Tag</code> elements.
-    description: A distribution Configuration and a list of tags to be associated with the distribution.
+      GeoRestriction:
+        $ref: '#/definitions/GeoRestriction'
+    description: A complex type that identifies ways in which you want to restrict distribution of your content.
+  HttpVersion:
+    type: string
+    enum:
+      - http1.1
+      - http2
+  Tags:
+    type: object
+    properties:
+      Items:
+        $ref: '#/definitions/TagList'
+        description: ' A complex type that contains <code>Tag</code> elements.'
+    description: ' A complex type that contains zero or more <code>Tag</code> elements.'
+  DistributionSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/DistributionSummary'
   DistributionList:
     type: object
     required:
@@ -3894,10 +4321,10 @@ definitions:
         $ref: '#/definitions/boolean'
         description: Whether CloudFront responds to IPv6 DNS requests with an IPv6 address for your distribution.
     description: A summary of the information about a CloudFront distribution.
-  DistributionSummaryList:
+  EncryptionEntityList:
     type: array
     items:
-      $ref: '#/definitions/DistributionSummary'
+      $ref: '#/definitions/EncryptionEntity'
   EncryptionEntities:
     type: object
     required:
@@ -3910,6 +4337,18 @@ definitions:
         $ref: '#/definitions/EncryptionEntityList'
         description: 'An array of field patterns in a field-level encryption content type-profile mapping. '
     description: 'Complex data type for field-level encryption profiles that includes all of the encryption entities. '
+  FieldPatterns:
+    type: object
+    required:
+      - Quantity
+    properties:
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: The number of field-level encryption field patterns.
+      Items:
+        $ref: '#/definitions/FieldPatternList'
+        description: An array of the field-level encryption field patterns.
+    description: A complex data type that includes the field patterns to match for field-level encryption.
   EncryptionEntity:
     type: object
     required:
@@ -3927,10 +4366,6 @@ definitions:
         $ref: '#/definitions/FieldPatterns'
         description: 'Field patterns in a field-level encryption content type profile specify the fields that you want to be encrypted. You can provide the full field name, or any beginning characters followed by a wildcard (*). You can''t overlap field patterns. For example, you can''t have both ABC* and AB*. Note that field patterns are case-sensitive. '
     description: 'Complex data type for field-level encryption profiles that includes the encryption key and field pattern specifications. '
-  EncryptionEntityList:
-    type: array
-    items:
-      $ref: '#/definitions/EncryptionEntity'
   EventType:
     type: string
     enum:
@@ -3938,41 +4373,22 @@ definitions:
       - viewer-response
       - origin-request
       - origin-response
-  FieldLevelEncryption:
+  QueryArgProfileConfig:
     type: object
     required:
-      - Id
-      - LastModifiedTime
-      - FieldLevelEncryptionConfig
+      - ForwardWhenQueryArgProfileIsUnknown
     properties:
-      Id:
-        $ref: '#/definitions/string'
-        description: The configuration ID for a field-level encryption configuration which includes a set of profiles that specify certain selected data fields to be encrypted by specific public keys.
-      LastModifiedTime:
-        $ref: '#/definitions/timestamp'
-        description: 'The last time the field-level encryption configuration was changed. '
-      FieldLevelEncryptionConfig:
-        $ref: '#/definitions/FieldLevelEncryptionConfig'
-        description: 'A complex data type that includes the profile configurations specified for field-level encryption. '
-    description: 'A complex data type that includes the profile configurations and other options specified for field-level encryption. '
-  FieldLevelEncryptionConfig:
-    type: object
-    required:
-      - CallerReference
-    properties:
-      CallerReference:
-        $ref: '#/definitions/string'
-        description: A unique number that ensures the request can't be replayed.
-      Comment:
-        $ref: '#/definitions/string'
-        description: An optional comment about the configuration.
-      QueryArgProfileConfig:
-        $ref: '#/definitions/QueryArgProfileConfig'
-        description: A complex data type that specifies when to forward content if a profile isn't found and the profile that can be provided as a query argument in a request.
-      ContentTypeProfileConfig:
-        $ref: '#/definitions/ContentTypeProfileConfig'
-        description: A complex data type that specifies when to forward content if a content type isn't recognized and profiles to use as by default in a request if a query argument doesn't specify a profile to use.
-    description: 'A complex data type that includes the profile configurations specified for field-level encryption. '
+      ForwardWhenQueryArgProfileIsUnknown:
+        $ref: '#/definitions/boolean'
+        description: 'Flag to set if you want a request to be forwarded to the origin even if the profile specified by the field-level encryption query argument, fle-profile, is unknown.'
+      QueryArgProfiles:
+        $ref: '#/definitions/QueryArgProfiles'
+        description: Profiles specified for query argument-profile mapping for field-level encryption.
+    description: Configuration for query argument-profile mapping for field-level encryption.
+  FieldLevelEncryptionSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/FieldLevelEncryptionSummary'
   FieldLevelEncryptionList:
     type: object
     required:
@@ -3992,43 +4408,10 @@ definitions:
         $ref: '#/definitions/FieldLevelEncryptionSummaryList'
         description: An array of field-level encryption items.
     description: List of field-level encrpytion configurations.
-  FieldLevelEncryptionProfile:
-    type: object
-    required:
-      - Id
-      - LastModifiedTime
-      - FieldLevelEncryptionProfileConfig
-    properties:
-      Id:
-        $ref: '#/definitions/string'
-        description: The ID for a field-level encryption profile configuration which includes a set of profiles that specify certain selected data fields to be encrypted by specific public keys.
-      LastModifiedTime:
-        $ref: '#/definitions/timestamp'
-        description: The last time the field-level encryption profile was updated.
-      FieldLevelEncryptionProfileConfig:
-        $ref: '#/definitions/FieldLevelEncryptionProfileConfig'
-        description: A complex data type that includes the profile name and the encryption entities for the field-level encryption profile.
-    description: A complex data type for field-level encryption profiles.
-  FieldLevelEncryptionProfileConfig:
-    type: object
-    required:
-      - Name
-      - CallerReference
-      - EncryptionEntities
-    properties:
-      Name:
-        $ref: '#/definitions/string'
-        description: Profile name for the field-level encryption profile.
-      CallerReference:
-        $ref: '#/definitions/string'
-        description: A unique number that ensures that the request can't be replayed.
-      Comment:
-        $ref: '#/definitions/string'
-        description: An optional comment for the field-level encryption profile.
-      EncryptionEntities:
-        $ref: '#/definitions/EncryptionEntities'
-        description: 'A complex data type of encryption entities for the field-level encryption profile that include the public key ID, provider, and field patterns for specifying which fields to encrypt with this key.'
-    description: A complex data type of profiles for the field-level encryption.
+  FieldLevelEncryptionProfileSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/FieldLevelEncryptionProfileSummary'
   FieldLevelEncryptionProfileList:
     type: object
     required:
@@ -4072,10 +4455,6 @@ definitions:
         $ref: '#/definitions/string'
         description: An optional comment for the field-level encryption profile summary.
     description: The field-level encryption profile summary.
-  FieldLevelEncryptionProfileSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/FieldLevelEncryptionProfileSummary'
   FieldLevelEncryptionSummary:
     type: object
     required:
@@ -4098,49 +4477,43 @@ definitions:
         $ref: '#/definitions/ContentTypeProfileConfig'
         description: ' A summary of a content type-profile mapping. '
     description: A summary of a field-level encryption item.
-  FieldLevelEncryptionSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/FieldLevelEncryptionSummary'
   FieldPatternList:
     type: array
     items:
       $ref: '#/definitions/string'
-  FieldPatterns:
+  Headers:
     type: object
     required:
       - Quantity
     properties:
       Quantity:
         $ref: '#/definitions/integer'
-        description: The number of field-level encryption field patterns.
+        description: '<p>The number of different headers that you want CloudFront to base caching on for this cache behavior. You can configure each cache behavior in a web distribution to do one of the following:</p> <ul> <li> <p> <b>Forward all headers to your origin</b>: Specify <code>1</code> for <code>Quantity</code> and <code>*</code> for <code>Name</code>.</p> <important> <p>CloudFront doesn''t cache the objects that are associated with this cache behavior. Instead, CloudFront sends every request to the origin. </p> </important> </li> <li> <p> <b>Forward a whitelist of headers you specify</b>: Specify the number of headers that you want CloudFront to base caching on. Then specify the header names in <code>Name</code> elements. CloudFront caches your objects based on the values in the specified headers.</p> </li> <li> <p> <b>Forward only the default headers</b>: Specify <code>0</code> for <code>Quantity</code> and omit <code>Items</code>. In this configuration, CloudFront doesn''t cache based on the values in the request headers.</p> </li> </ul> <p>Regardless of which option you choose, CloudFront forwards headers to your origin based on whether the origin is an S3 bucket or a custom origin. See the following documentation:</p> <ul> <li> <p> <b>S3 bucket</b>: See <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorS3Origin.html#request-s3-removed-headers">HTTP Request Headers That CloudFront Removes or Updates</a> </p> </li> <li> <p> <b>Custom origin</b>: See <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">HTTP Request Headers and CloudFront Behavior</a> </p> </li> </ul>'
       Items:
-        $ref: '#/definitions/FieldPatternList'
-        description: An array of the field-level encryption field patterns.
-    description: A complex data type that includes the field patterns to match for field-level encryption.
-  Format:
-    type: string
-    enum:
-      - URLEncoded
-  ForwardedValues:
+        $ref: '#/definitions/HeaderList'
+        description: 'A list that contains one <code>Name</code> element for each header that you want CloudFront to use for caching in this cache behavior. If <code>Quantity</code> is <code>0</code>, omit <code>Items</code>.'
+    description: '<p>A complex type that specifies the request headers, if any, that you want CloudFront to base caching on for this cache behavior. </p> <p>For the headers that you specify, CloudFront caches separate versions of a specified object based on the header values in viewer requests. For example, suppose viewer requests for <code>logo.jpg</code> contain a custom <code>product</code> header that has a value of either <code>acme</code> or <code>apex</code>, and you configure CloudFront to cache your content based on values in the <code>product</code> header. CloudFront forwards the <code>product</code> header to the origin and caches the response from the origin once for each header value. For more information about caching based on header values, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html">How CloudFront Forwards and Caches Headers</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+  QueryStringCacheKeys:
     type: object
     required:
-      - QueryString
-      - Cookies
+      - Quantity
     properties:
-      QueryString:
-        $ref: '#/definitions/boolean'
-        description: '<p>Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior and cache based on the query string parameters. CloudFront behavior depends on the value of <code>QueryString</code> and on the values that you specify for <code>QueryStringCacheKeys</code>, if any:</p> <p>If you specify true for <code>QueryString</code> and you don''t specify any values for <code>QueryStringCacheKeys</code>, CloudFront forwards all query string parameters to the origin and caches based on all query string parameters. Depending on how many query string parameters and values you have, this can adversely affect performance because CloudFront must forward more requests to the origin.</p> <p>If you specify true for <code>QueryString</code> and you specify one or more values for <code>QueryStringCacheKeys</code>, CloudFront forwards all query string parameters to the origin, but it only caches based on the query string parameters that you specify.</p> <p>If you specify false for <code>QueryString</code>, CloudFront doesn''t forward any query string parameters to the origin, and doesn''t cache based on query string parameters.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html">Configuring CloudFront to Cache Based on Query String Parameters</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
-      Cookies:
-        $ref: '#/definitions/CookiePreference'
-        description: 'A complex type that specifies whether you want CloudFront to forward cookies to the origin and, if so, which ones. For more information about forwarding cookies to the origin, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html">How CloudFront Forwards, Caches, and Logs Cookies</a> in the <i>Amazon CloudFront Developer Guide</i>.'
-      Headers:
-        $ref: '#/definitions/Headers'
-        description: 'A complex type that specifies the <code>Headers</code>, if any, that you want CloudFront to base caching on for this cache behavior. '
-      QueryStringCacheKeys:
-        $ref: '#/definitions/QueryStringCacheKeys'
-        description: A complex type that contains information about the query string parameters that you want CloudFront to use for caching for this cache behavior.
-    description: A complex type that specifies how CloudFront handles query strings and cookies.
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: The number of <code>whitelisted</code> query string parameters for this cache behavior.
+      Items:
+        $ref: '#/definitions/QueryStringCacheKeysList'
+        description: '(Optional) A list that contains the query string parameters that you want CloudFront to use as a basis for caching for this cache behavior. If <code>Quantity</code> is 0, you can omit <code>Items</code>. '
+  GeoRestrictionType:
+    type: string
+    enum:
+      - blacklist
+      - whitelist
+      - none
+  LocationList:
+    type: array
+    items:
+      $ref: '#/definitions/string'
   GeoRestriction:
     type: object
     required:
@@ -4157,67 +4530,26 @@ definitions:
         $ref: '#/definitions/LocationList'
         description: '<p> A complex type that contains a <code>Location</code> element for each country in which you want CloudFront either to distribute your content (<code>whitelist</code>) or not distribute your content (<code>blacklist</code>).</p> <p>The <code>Location</code> element is a two-letter, uppercase country code for a country that you want to include in your <code>blacklist</code> or <code>whitelist</code>. Include one <code>Location</code> element for each country.</p> <p>CloudFront and <code>MaxMind</code> both use <code>ISO 3166</code> country codes. For the current list of countries and the corresponding codes, see <code>ISO 3166-1-alpha-2</code> code on the <i>International Organization for Standardization</i> website. You can also refer to the country list on the CloudFront console, which includes both country names and codes.</p>'
     description: 'A complex type that controls the countries in which your content is distributed. CloudFront determines the location of your users using <code>MaxMind</code> GeoIP databases. '
-  GeoRestrictionType:
-    type: string
-    enum:
-      - blacklist
-      - whitelist
-      - none
   HeaderList:
     type: array
     items:
       $ref: '#/definitions/string'
-  Headers:
+  Paths:
     type: object
     required:
       - Quantity
     properties:
       Quantity:
         $ref: '#/definitions/integer'
-        description: '<p>The number of different headers that you want CloudFront to base caching on for this cache behavior. You can configure each cache behavior in a web distribution to do one of the following:</p> <ul> <li> <p> <b>Forward all headers to your origin</b>: Specify <code>1</code> for <code>Quantity</code> and <code>*</code> for <code>Name</code>.</p> <important> <p>CloudFront doesn''t cache the objects that are associated with this cache behavior. Instead, CloudFront sends every request to the origin. </p> </important> </li> <li> <p> <b>Forward a whitelist of headers you specify</b>: Specify the number of headers that you want CloudFront to base caching on. Then specify the header names in <code>Name</code> elements. CloudFront caches your objects based on the values in the specified headers.</p> </li> <li> <p> <b>Forward only the default headers</b>: Specify <code>0</code> for <code>Quantity</code> and omit <code>Items</code>. In this configuration, CloudFront doesn''t cache based on the values in the request headers.</p> </li> </ul> <p>Regardless of which option you choose, CloudFront forwards headers to your origin based on whether the origin is an S3 bucket or a custom origin. See the following documentation:</p> <ul> <li> <p> <b>S3 bucket</b>: See <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorS3Origin.html#request-s3-removed-headers">HTTP Request Headers That CloudFront Removes or Updates</a> </p> </li> <li> <p> <b>Custom origin</b>: See <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">HTTP Request Headers and CloudFront Behavior</a> </p> </li> </ul>'
+        description: The number of objects that you want to invalidate.
       Items:
-        $ref: '#/definitions/HeaderList'
-        description: 'A list that contains one <code>Name</code> element for each header that you want CloudFront to use for caching in this cache behavior. If <code>Quantity</code> is <code>0</code>, omit <code>Items</code>.'
-    description: '<p>A complex type that specifies the request headers, if any, that you want CloudFront to base caching on for this cache behavior. </p> <p>For the headers that you specify, CloudFront caches separate versions of a specified object based on the header values in viewer requests. For example, suppose viewer requests for <code>logo.jpg</code> contain a custom <code>product</code> header that has a value of either <code>acme</code> or <code>apex</code>, and you configure CloudFront to cache your content based on values in the <code>product</code> header. CloudFront forwards the <code>product</code> header to the origin and caches the response from the origin once for each header value. For more information about caching based on header values, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html">How CloudFront Forwards and Caches Headers</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
-  HttpVersion:
-    type: string
-    enum:
-      - http1.1
-      - http2
-  Invalidation:
-    type: object
-    required:
-      - Id
-      - Status
-      - CreateTime
-      - InvalidationBatch
-    properties:
-      Id:
-        $ref: '#/definitions/string'
-        description: 'The identifier for the invalidation request. For example: <code>IDFDVBD632BHDS5</code>.'
-      Status:
-        $ref: '#/definitions/string'
-        description: 'The status of the invalidation request. When the invalidation batch is finished, the status is <code>Completed</code>.'
-      CreateTime:
-        $ref: '#/definitions/timestamp'
-        description: 'The date and time the invalidation request was first made. '
-      InvalidationBatch:
-        $ref: '#/definitions/InvalidationBatch'
-        description: 'The current invalidation information for the batch request. '
-    description: 'An invalidation. '
-  InvalidationBatch:
-    type: object
-    required:
-      - Paths
-      - CallerReference
-    properties:
-      Paths:
-        $ref: '#/definitions/Paths'
-        description: 'A complex type that contains information about the objects that you want to invalidate. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects">Specifying the Objects to Invalidate</a> in the <i>Amazon CloudFront Developer Guide</i>. '
-      CallerReference:
-        $ref: '#/definitions/string'
-        description: '<p>A value that you specify to uniquely identify an invalidation request. CloudFront uses the value to prevent you from accidentally resubmitting an identical request. Whenever you create a new invalidation request, you must specify a new value for <code>CallerReference</code> and change other values in the request as applicable. One way to ensure that the value of <code>CallerReference</code> is unique is to use a <code>timestamp</code>, for example, <code>20120301090000</code>.</p> <p>If you make a second invalidation request with the same value for <code>CallerReference</code>, and if the rest of the request is the same, CloudFront doesn''t create a new invalidation request. Instead, CloudFront returns information about the invalidation request that you previously created with the same <code>CallerReference</code>.</p> <p>If <code>CallerReference</code> is a value you already sent in a previous invalidation batch request but the content of any <code>Path</code> is different from the original request, CloudFront returns an <code>InvalidationBatchAlreadyExists</code> error.</p>'
-    description: An invalidation batch.
+        $ref: '#/definitions/PathList'
+        description: A complex type that contains a list of the paths that you want to invalidate.
+    description: 'A complex type that contains information about the objects that you want to invalidate. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects">Specifying the Objects to Invalidate</a> in the <i>Amazon CloudFront Developer Guide</i>. '
+  InvalidationSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/InvalidationSummary'
   InvalidationList:
     type: object
     required:
@@ -4262,16 +4594,6 @@ definitions:
         $ref: '#/definitions/string'
         description: The status of an invalidation request.
     description: A summary of an invalidation request.
-  InvalidationSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/InvalidationSummary'
-  ItemSelection:
-    type: string
-    enum:
-      - none
-      - whitelist
-      - all
   KeyPairIdList:
     type: array
     items:
@@ -4310,43 +4632,55 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LambdaFunctionAssociation'
-  LambdaFunctionAssociations:
+  PublicKeyList:
     type: object
     required:
+      - MaxItems
       - Quantity
     properties:
+      NextMarker:
+        $ref: '#/definitions/string'
+        description: 'If there are more elements to be listed, this element is present and contains the value that you can use for the <code>Marker</code> request parameter to continue listing your public keys where you left off.'
+      MaxItems:
+        $ref: '#/definitions/integer'
+        description: 'The maximum number of public keys you want in the response body. '
       Quantity:
         $ref: '#/definitions/integer'
-        description: The number of Lambda function associations for this cache behavior.
+        description: The number of public keys you added to CloudFront to use with features like field-level encryption.
       Items:
-        $ref: '#/definitions/LambdaFunctionAssociationList'
-        description: ' <b>Optional</b>: A complex type that contains <code>LambdaFunctionAssociation</code> items for this cache behavior. If <code>Quantity</code> is <code>0</code>, you can omit <code>Items</code>.'
-    description: '<p>A complex type that specifies a list of Lambda functions associations for a cache behavior.</p> <p>If you want to invoke one or more Lambda functions triggered by requests that match the <code>PathPattern</code> of the cache behavior, specify the applicable values for <code>Quantity</code> and <code>Items</code>. Note that there can be up to 4 <code>LambdaFunctionAssociation</code> items in this list (one for each possible value of <code>EventType</code>) and each <code>EventType</code> can be associated with the Lambda function only once.</p> <p>If you don''t want to invoke any Lambda functions for the requests that match <code>PathPattern</code>, specify <code>0</code> for <code>Quantity</code> and omit <code>Items</code>. </p>'
-  LocationList:
-    type: array
-    items:
-      $ref: '#/definitions/string'
-  LoggingConfig:
+        $ref: '#/definitions/PublicKeySummaryList'
+        description: An array of information about a public key you add to CloudFront to use with features like field-level encryption.
+    description: A list of public keys you've added to CloudFront to use with features like field-level encryption.
+  StreamingDistributionList:
     type: object
     required:
-      - Enabled
-      - IncludeCookies
-      - Bucket
-      - Prefix
+      - Marker
+      - MaxItems
+      - IsTruncated
+      - Quantity
     properties:
-      Enabled:
-        $ref: '#/definitions/boolean'
-        description: 'Specifies whether you want CloudFront to save access logs to an Amazon S3 bucket. If you don''t want to enable logging when you create a distribution or if you want to disable logging for an existing distribution, specify <code>false</code> for <code>Enabled</code>, and specify empty <code>Bucket</code> and <code>Prefix</code> elements. If you specify <code>false</code> for <code>Enabled</code> but you specify values for <code>Bucket</code>, <code>prefix</code>, and <code>IncludeCookies</code>, the values are automatically deleted.'
-      IncludeCookies:
-        $ref: '#/definitions/boolean'
-        description: 'Specifies whether you want CloudFront to include cookies in access logs, specify <code>true</code> for <code>IncludeCookies</code>. If you choose to include cookies in logs, CloudFront logs all cookies regardless of how you configure the cache behaviors for this distribution. If you don''t want to include cookies when you create a distribution or if you want to disable include cookies for an existing distribution, specify <code>false</code> for <code>IncludeCookies</code>.'
-      Bucket:
+      Marker:
         $ref: '#/definitions/string'
-        description: 'The Amazon S3 bucket to store the access logs in, for example, <code>myawslogbucket.s3.amazonaws.com</code>.'
-      Prefix:
+        description: 'The value you provided for the <code>Marker</code> request parameter. '
+      NextMarker:
         $ref: '#/definitions/string'
-        description: 'An optional string that you want CloudFront to prefix to the access log <code>filenames</code> for this distribution, for example, <code>myprefix/</code>. If you want to enable logging, but you don''t want to specify a prefix, you still must include an empty <code>Prefix</code> element in the <code>Logging</code> element.'
-    description: A complex type that controls whether access logs are written for the distribution.
+        description: 'If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value you can use for the <code>Marker</code> request parameter to continue listing your RTMP distributions where they left off. '
+      MaxItems:
+        $ref: '#/definitions/integer'
+        description: 'The value you provided for the <code>MaxItems</code> request parameter. '
+      IsTruncated:
+        $ref: '#/definitions/boolean'
+        description: 'A flag that indicates whether more streaming distributions remain to be listed. If your results were truncated, you can make a follow-up pagination request using the <code>Marker</code> request parameter to retrieve more distributions in the list. '
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: 'The number of streaming distributions that were created by the current AWS account. '
+      Items:
+        $ref: '#/definitions/StreamingDistributionSummaryList'
+        description: A complex type that contains one <code>StreamingDistributionSummary</code> element for each distribution that was created by the current AWS account.
+    description: 'A streaming distribution list. '
+  ResourceARN:
+    type: string
+    pattern: 'arn:aws:cloudfront::[0-9]+:.*'
   Method:
     type: string
     enum:
@@ -4357,10 +4691,6 @@ definitions:
       - PATCH
       - OPTIONS
       - DELETE
-  MethodsList:
-    type: array
-    items:
-      $ref: '#/definitions/Method'
   MinimumProtocolVersion:
     type: string
     enum:
@@ -4369,6 +4699,15 @@ definitions:
       - TLSv1_2016
       - TLSv1.1_2016
       - TLSv1.2_2018
+  S3OriginConfig:
+    type: object
+    required:
+      - OriginAccessIdentity
+    properties:
+      OriginAccessIdentity:
+        $ref: '#/definitions/string'
+        description: '<p>The CloudFront origin access identity to associate with the origin. Use an origin access identity to configure the origin so that viewers can <i>only</i> access objects in an Amazon S3 bucket through CloudFront. The format of the value is:</p> <p>origin-access-identity/cloudfront/<i>ID-of-origin-access-identity</i> </p> <p>where <code> <i>ID-of-origin-access-identity</i> </code> is the value that CloudFront returned in the <code>ID</code> element when you created the origin access identity.</p> <p>If you want viewers to be able to access objects using either the CloudFront URL or the Amazon S3 URL, specify an empty <code>OriginAccessIdentity</code> element.</p> <p>To delete the origin access identity from an existing distribution, update the distribution configuration and include an empty <code>OriginAccessIdentity</code> element.</p> <p>To replace the origin access identity, update the distribution configuration and specify the new origin access identity.</p> <p>For more information about the origin access identity, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+    description: 'A complex type that contains information about the Amazon S3 origin. If the origin is a custom origin, use the <code>CustomOriginConfig</code> element instead.'
   Origin:
     type: object
     required:
@@ -4407,10 +4746,28 @@ definitions:
         $ref: '#/definitions/string'
         description: The value for the header that you specified in the <code>HeaderName</code> field.
     description: 'A complex type that contains <code>HeaderName</code> and <code>HeaderValue</code> elements, if any, for this distribution. '
-  OriginCustomHeadersList:
-    type: array
-    items:
-      $ref: '#/definitions/OriginCustomHeader'
+  OriginGroupFailoverCriteria:
+    type: object
+    required:
+      - StatusCodes
+    properties:
+      StatusCodes:
+        $ref: '#/definitions/StatusCodes'
+        description: 'The status codes that, when returned from the primary origin, will trigger CloudFront to failover to the second origin.'
+    description: 'A complex data type that includes information about the failover criteria for an origin group, including the status codes for which CloudFront will failover from the primary origin to the second origin.'
+  OriginGroupMembers:
+    type: object
+    required:
+      - Quantity
+      - Items
+    properties:
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: The number of origins in an origin group.
+      Items:
+        $ref: '#/definitions/OriginGroupMemberList'
+        description: Items (origins) in an origin group.
+    description: A complex data type for the origins included in an origin group.
   OriginGroup:
     type: object
     required:
@@ -4428,15 +4785,19 @@ definitions:
         $ref: '#/definitions/OriginGroupMembers'
         description: A complex type that contains information about the origins in an origin group.
     description: 'An origin group includes two origins (a primary origin and a second origin to failover to) and a failover criteria that you specify. You create an origin group to support origin failover in CloudFront. When you create or update a distribution, you can specifiy the origin group instead of a single origin, and CloudFront will failover from the primary origin to the second origin under the failover conditions that you''ve chosen.'
-  OriginGroupFailoverCriteria:
+  StatusCodes:
     type: object
     required:
-      - StatusCodes
+      - Quantity
+      - Items
     properties:
-      StatusCodes:
-        $ref: '#/definitions/StatusCodes'
-        description: 'The status codes that, when returned from the primary origin, will trigger CloudFront to failover to the second origin.'
-    description: 'A complex data type that includes information about the failover criteria for an origin group, including the status codes for which CloudFront will failover from the primary origin to the second origin.'
+      Quantity:
+        $ref: '#/definitions/integer'
+        description: The number of status codes.
+      Items:
+        $ref: '#/definitions/StatusCodeList'
+        description: The items (status codes) for an origin group.
+    description: 'A complex data type for the status codes that you specify that, when returned by a primary origin, trigger CloudFront to failover to a second origin.'
   OriginGroupList:
     type: array
     description: List of origin groups for a distribution.
@@ -4458,146 +4819,23 @@ definitions:
       $ref: '#/definitions/OriginGroupMember'
     minItems: 2
     maxItems: 2
-  OriginGroupMembers:
-    type: object
-    required:
-      - Quantity
-      - Items
-    properties:
-      Quantity:
-        $ref: '#/definitions/integer'
-        description: The number of origins in an origin group.
-      Items:
-        $ref: '#/definitions/OriginGroupMemberList'
-        description: Items (origins) in an origin group.
-    description: A complex data type for the origins included in an origin group.
-  OriginGroups:
-    type: object
-    required:
-      - Quantity
-    properties:
-      Quantity:
-        $ref: '#/definitions/integer'
-        description: The number of origin groups.
-      Items:
-        $ref: '#/definitions/OriginGroupList'
-        description: The items (origin groups) in a distribution.
-    description: A complex data type for the origin groups specified for a distribution.
   OriginList:
     type: array
     items:
       $ref: '#/definitions/Origin'
     minItems: 1
-  OriginProtocolPolicy:
-    type: string
-    enum:
-      - http-only
-      - match-viewer
-      - https-only
-  OriginSslProtocols:
-    type: object
-    required:
-      - Quantity
-      - Items
-    properties:
-      Quantity:
-        $ref: '#/definitions/integer'
-        description: 'The number of SSL/TLS protocols that you want to allow CloudFront to use when establishing an HTTPS connection with this origin. '
-      Items:
-        $ref: '#/definitions/SslProtocolsList'
-        description: A list that contains allowed SSL/TLS protocols for this distribution.
-    description: 'A complex type that contains information about the SSL/TLS protocols that CloudFront can use when establishing an HTTPS connection with your origin. '
-  Origins:
-    type: object
-    required:
-      - Quantity
-      - Items
-    properties:
-      Quantity:
-        $ref: '#/definitions/integer'
-        description: The number of origins or origin groups for this distribution.
-      Items:
-        $ref: '#/definitions/OriginList'
-        description: A complex type that contains origins or origin groups for this distribution.
-    description: 'A complex type that contains information about origins and origin groups for this distribution. '
+  SslProtocolsList:
+    type: array
+    items:
+      $ref: '#/definitions/SslProtocol'
   PathList:
     type: array
     items:
       $ref: '#/definitions/string'
-  Paths:
-    type: object
-    required:
-      - Quantity
-    properties:
-      Quantity:
-        $ref: '#/definitions/integer'
-        description: The number of objects that you want to invalidate.
-      Items:
-        $ref: '#/definitions/PathList'
-        description: A complex type that contains a list of the paths that you want to invalidate.
-    description: 'A complex type that contains information about the objects that you want to invalidate. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects">Specifying the Objects to Invalidate</a> in the <i>Amazon CloudFront Developer Guide</i>. '
-  PriceClass:
-    type: string
-    enum:
-      - PriceClass_100
-      - PriceClass_200
-      - PriceClass_All
-  PublicKey:
-    type: object
-    required:
-      - Id
-      - CreatedTime
-      - PublicKeyConfig
-    properties:
-      Id:
-        $ref: '#/definitions/string'
-        description: A unique ID assigned to a public key you've added to CloudFront.
-      CreatedTime:
-        $ref: '#/definitions/timestamp'
-        description: A time you added a public key to CloudFront.
-      PublicKeyConfig:
-        $ref: '#/definitions/PublicKeyConfig'
-        description: A complex data type for a public key you add to CloudFront to use with features like field-level encryption.
-    description: A complex data type of public keys you add to CloudFront to use with features like field-level encryption.
-  PublicKeyConfig:
-    type: object
-    required:
-      - CallerReference
-      - Name
-      - EncodedKey
-    properties:
-      CallerReference:
-        $ref: '#/definitions/string'
-        description: A unique number that ensures that the request can't be replayed.
-      Name:
-        $ref: '#/definitions/string'
-        description: The name for a public key you add to CloudFront to use with features like field-level encryption.
-      EncodedKey:
-        $ref: '#/definitions/string'
-        description: The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
-      Comment:
-        $ref: '#/definitions/string'
-        description: An optional comment about a public key.
-    description: Information about a public key you add to CloudFront to use with features like field-level encryption.
-  PublicKeyList:
-    type: object
-    required:
-      - MaxItems
-      - Quantity
-    properties:
-      NextMarker:
-        $ref: '#/definitions/string'
-        description: 'If there are more elements to be listed, this element is present and contains the value that you can use for the <code>Marker</code> request parameter to continue listing your public keys where you left off.'
-      MaxItems:
-        $ref: '#/definitions/integer'
-        description: 'The maximum number of public keys you want in the response body. '
-      Quantity:
-        $ref: '#/definitions/integer'
-        description: The number of public keys you added to CloudFront to use with features like field-level encryption.
-      Items:
-        $ref: '#/definitions/PublicKeySummaryList'
-        description: An array of information about a public key you add to CloudFront to use with features like field-level encryption.
-    description: A list of public keys you've added to CloudFront to use with features like field-level encryption.
+  PublicKeySummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/PublicKeySummary'
   PublicKeySummary:
     type: object
     required:
@@ -4622,10 +4860,6 @@ definitions:
         $ref: '#/definitions/string'
         description: ' Comment for public key information summary. '
     description: 'A complex data type for public key information. '
-  PublicKeySummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/PublicKeySummary'
   QueryArgProfile:
     type: object
     required:
@@ -4639,22 +4873,6 @@ definitions:
         $ref: '#/definitions/string'
         description: ID of profile to use for field-level encryption query argument-profile mapping
     description: Query argument-profile mapping for field-level encryption.
-  QueryArgProfileConfig:
-    type: object
-    required:
-      - ForwardWhenQueryArgProfileIsUnknown
-    properties:
-      ForwardWhenQueryArgProfileIsUnknown:
-        $ref: '#/definitions/boolean'
-        description: 'Flag to set if you want a request to be forwarded to the origin even if the profile specified by the field-level encryption query argument, fle-profile, is unknown.'
-      QueryArgProfiles:
-        $ref: '#/definitions/QueryArgProfiles'
-        description: Profiles specified for query argument-profile mapping for field-level encryption.
-    description: Configuration for query argument-profile mapping for field-level encryption.
-  QueryArgProfileList:
-    type: array
-    items:
-      $ref: '#/definitions/QueryArgProfile'
   QueryArgProfiles:
     type: object
     required:
@@ -4667,32 +4885,14 @@ definitions:
         $ref: '#/definitions/QueryArgProfileList'
         description: Number of items for query argument-profile mapping for field-level encryption.
     description: Query argument-profile mapping for field-level encryption.
-  QueryStringCacheKeys:
-    type: object
-    required:
-      - Quantity
-    properties:
-      Quantity:
-        $ref: '#/definitions/integer'
-        description: The number of <code>whitelisted</code> query string parameters for this cache behavior.
-      Items:
-        $ref: '#/definitions/QueryStringCacheKeysList'
-        description: '(Optional) A list that contains the query string parameters that you want CloudFront to use as a basis for caching for this cache behavior. If <code>Quantity</code> is 0, you can omit <code>Items</code>. '
+  QueryArgProfileList:
+    type: array
+    items:
+      $ref: '#/definitions/QueryArgProfile'
   QueryStringCacheKeysList:
     type: array
     items:
       $ref: '#/definitions/string'
-  ResourceARN:
-    type: string
-    pattern: 'arn:aws:cloudfront::[0-9]+:.*'
-  Restrictions:
-    type: object
-    required:
-      - GeoRestriction
-    properties:
-      GeoRestriction:
-        $ref: '#/definitions/GeoRestriction'
-    description: A complex type that identifies ways in which you want to restrict distribution of your content.
   S3Origin:
     type: object
     required:
@@ -4706,15 +4906,6 @@ definitions:
         $ref: '#/definitions/string'
         description: '<p>The CloudFront origin access identity to associate with the RTMP distribution. Use an origin access identity to configure the distribution so that end users can only access objects in an Amazon S3 bucket through CloudFront.</p> <p>If you want end users to be able to access objects using either the CloudFront URL or the Amazon S3 URL, specify an empty <code>OriginAccessIdentity</code> element.</p> <p>To delete the origin access identity from an existing distribution, update the distribution configuration and include an empty <code>OriginAccessIdentity</code> element.</p> <p>To replace the origin access identity, update the distribution configuration and specify the new origin access identity.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html">Using an Origin Access Identity to Restrict Access to Your Amazon S3 Content</a> in the <i>Amazon Amazon CloudFront Developer Guide</i>.</p>'
     description: A complex type that contains information about the Amazon S3 bucket from which you want CloudFront to get your media files for distribution.
-  S3OriginConfig:
-    type: object
-    required:
-      - OriginAccessIdentity
-    properties:
-      OriginAccessIdentity:
-        $ref: '#/definitions/string'
-        description: '<p>The CloudFront origin access identity to associate with the origin. Use an origin access identity to configure the origin so that viewers can <i>only</i> access objects in an Amazon S3 bucket through CloudFront. The format of the value is:</p> <p>origin-access-identity/cloudfront/<i>ID-of-origin-access-identity</i> </p> <p>where <code> <i>ID-of-origin-access-identity</i> </code> is the value that CloudFront returned in the <code>ID</code> element when you created the origin access identity.</p> <p>If you want viewers to be able to access objects using either the CloudFront URL or the Amazon S3 URL, specify an empty <code>OriginAccessIdentity</code> element.</p> <p>To delete the origin access identity from an existing distribution, update the distribution configuration and include an empty <code>OriginAccessIdentity</code> element.</p> <p>To replace the origin access identity, update the distribution configuration and specify the new origin access identity.</p> <p>For more information about the origin access identity, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
-    description: 'A complex type that contains information about the Amazon S3 origin. If the origin is a custom origin, use the <code>CustomOriginConfig</code> element instead.'
   SSLSupportMethod:
     type: string
     enum:
@@ -4730,10 +4921,6 @@ definitions:
         $ref: '#/definitions/KeyPairIds'
         description: 'A complex type that lists the active CloudFront key pairs, if any, that are associated with <code>AwsAccountNumber</code>.'
     description: 'A complex type that lists the AWS accounts that were included in the <code>TrustedSigners</code> complex type, as well as their active CloudFront key pair IDs, if any. '
-  SignerList:
-    type: array
-    items:
-      $ref: '#/definitions/Signer'
   SslProtocol:
     type: string
     enum:
@@ -4741,135 +4928,33 @@ definitions:
       - TLSv1
       - TLSv1.1
       - TLSv1.2
-  SslProtocolsList:
-    type: array
-    items:
-      $ref: '#/definitions/SslProtocol'
   StatusCodeList:
     type: array
     description: List of status codes for origin failover.
     items:
       $ref: '#/definitions/integer'
     minItems: 1
-  StatusCodes:
+  StreamingLoggingConfig:
     type: object
     required:
-      - Quantity
-      - Items
-    properties:
-      Quantity:
-        $ref: '#/definitions/integer'
-        description: The number of status codes.
-      Items:
-        $ref: '#/definitions/StatusCodeList'
-        description: The items (status codes) for an origin group.
-    description: 'A complex data type for the status codes that you specify that, when returned by a primary origin, trigger CloudFront to failover to a second origin.'
-  StreamingDistribution:
-    type: object
-    required:
-      - Id
-      - ARN
-      - Status
-      - DomainName
-      - ActiveTrustedSigners
-      - StreamingDistributionConfig
-    properties:
-      Id:
-        $ref: '#/definitions/string'
-        description: 'The identifier for the RTMP distribution. For example: <code>EGTXBD79EXAMPLE</code>.'
-      ARN:
-        $ref: '#/definitions/string'
-        description: 'The ARN (Amazon Resource Name) for the distribution. For example: <code>arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5</code>, where <code>123456789012</code> is your AWS account ID.'
-      Status:
-        $ref: '#/definitions/string'
-        description: 'The current status of the RTMP distribution. When the status is <code>Deployed</code>, the distribution''s information is propagated to all CloudFront edge locations.'
-      LastModifiedTime:
-        $ref: '#/definitions/timestamp'
-        description: 'The date and time that the distribution was last modified. '
-      DomainName:
-        $ref: '#/definitions/string'
-        description: 'The domain name that corresponds to the streaming distribution, for example, <code>s5c39gqb8ow64r.cloudfront.net</code>. '
-      ActiveTrustedSigners:
-        $ref: '#/definitions/ActiveTrustedSigners'
-        description: '<p>A complex type that lists the AWS accounts, if any, that you included in the <code>TrustedSigners</code> complex type for this distribution. These are the accounts that you want to allow to create signed URLs for private content.</p> <p>The <code>Signer</code> complex type lists the AWS account number of the trusted signer or <code>self</code> if the signer is the AWS account that created the distribution. The <code>Signer</code> element also includes the IDs of any active CloudFront key pairs that are associated with the trusted signer''s AWS account. If no <code>KeyPairId</code> element appears for a <code>Signer</code>, that signer can''t create signed URLs.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>. </p>'
-      StreamingDistributionConfig:
-        $ref: '#/definitions/StreamingDistributionConfig'
-        description: The current configuration information for the RTMP distribution.
-    description: 'A streaming distribution. '
-  StreamingDistributionConfig:
-    type: object
-    required:
-      - CallerReference
-      - S3Origin
-      - Comment
-      - TrustedSigners
       - Enabled
+      - Bucket
+      - Prefix
     properties:
-      CallerReference:
-        $ref: '#/definitions/string'
-        description: '<p>A unique value (for example, a date-time stamp) that ensures that the request can''t be replayed.</p> <p>If the value of <code>CallerReference</code> is new (regardless of the content of the <code>StreamingDistributionConfig</code> object), CloudFront creates a new distribution.</p> <p>If <code>CallerReference</code> is a value that you already sent in a previous request to create a distribution, CloudFront returns a <code>DistributionAlreadyExists</code> error.</p>'
-      S3Origin:
-        $ref: '#/definitions/S3Origin'
-        description: 'A complex type that contains information about the Amazon S3 bucket from which you want CloudFront to get your media files for distribution. '
-      Aliases:
-        $ref: '#/definitions/Aliases'
-        description: 'A complex type that contains information about CNAMEs (alternate domain names), if any, for this streaming distribution. '
-      Comment:
-        $ref: '#/definitions/string'
-        description: 'Any comments you want to include about the streaming distribution. '
-      Logging:
-        $ref: '#/definitions/StreamingLoggingConfig'
-        description: 'A complex type that controls whether access logs are written for the streaming distribution. '
-      TrustedSigners:
-        $ref: '#/definitions/TrustedSigners'
-        description: 'A complex type that specifies any AWS accounts that you want to permit to create signed URLs for private content. If you want the distribution to use signed URLs, include this element; if you want the distribution to use public URLs, remove this element. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>. '
-      PriceClass:
-        $ref: '#/definitions/PriceClass'
-        description: 'A complex type that contains information about price class for this streaming distribution. '
       Enabled:
         $ref: '#/definitions/boolean'
-        description: Whether the streaming distribution is enabled to accept user requests for content.
-    description: The RTMP distribution's configuration information.
-  StreamingDistributionConfigWithTags:
-    type: object
-    required:
-      - StreamingDistributionConfig
-      - Tags
-    properties:
-      StreamingDistributionConfig:
-        $ref: '#/definitions/StreamingDistributionConfig'
-        description: A streaming distribution Configuration.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: A complex type that contains zero or more <code>Tag</code> elements.
-    description: A streaming distribution Configuration and a list of tags to be associated with the streaming distribution.
-  StreamingDistributionList:
-    type: object
-    required:
-      - Marker
-      - MaxItems
-      - IsTruncated
-      - Quantity
-    properties:
-      Marker:
+        description: 'Specifies whether you want CloudFront to save access logs to an Amazon S3 bucket. If you don''t want to enable logging when you create a streaming distribution or if you want to disable logging for an existing streaming distribution, specify <code>false</code> for <code>Enabled</code>, and specify <code>empty Bucket</code> and <code>Prefix</code> elements. If you specify <code>false</code> for <code>Enabled</code> but you specify values for <code>Bucket</code> and <code>Prefix</code>, the values are automatically deleted. '
+      Bucket:
         $ref: '#/definitions/string'
-        description: 'The value you provided for the <code>Marker</code> request parameter. '
-      NextMarker:
+        description: 'The Amazon S3 bucket to store the access logs in, for example, <code>myawslogbucket.s3.amazonaws.com</code>.'
+      Prefix:
         $ref: '#/definitions/string'
-        description: 'If <code>IsTruncated</code> is <code>true</code>, this element is present and contains the value you can use for the <code>Marker</code> request parameter to continue listing your RTMP distributions where they left off. '
-      MaxItems:
-        $ref: '#/definitions/integer'
-        description: 'The value you provided for the <code>MaxItems</code> request parameter. '
-      IsTruncated:
-        $ref: '#/definitions/boolean'
-        description: 'A flag that indicates whether more streaming distributions remain to be listed. If your results were truncated, you can make a follow-up pagination request using the <code>Marker</code> request parameter to retrieve more distributions in the list. '
-      Quantity:
-        $ref: '#/definitions/integer'
-        description: 'The number of streaming distributions that were created by the current AWS account. '
-      Items:
-        $ref: '#/definitions/StreamingDistributionSummaryList'
-        description: A complex type that contains one <code>StreamingDistributionSummary</code> element for each distribution that was created by the current AWS account.
-    description: 'A streaming distribution list. '
+        description: 'An optional string that you want CloudFront to prefix to the access log filenames for this streaming distribution, for example, <code>myprefix/</code>. If you want to enable logging, but you don''t want to specify a prefix, you still must include an empty <code>Prefix</code> element in the <code>Logging</code> element.'
+    description: A complex type that controls whether access logs are written for this streaming distribution.
+  StreamingDistributionSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/StreamingDistributionSummary'
   StreamingDistributionSummary:
     type: object
     required:
@@ -4919,27 +5004,17 @@ definitions:
         $ref: '#/definitions/boolean'
         description: Whether the distribution is enabled to accept end user requests for content.
     description: ' A summary of the information for an Amazon CloudFront streaming distribution.'
-  StreamingDistributionSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/StreamingDistributionSummary'
-  StreamingLoggingConfig:
-    type: object
-    required:
-      - Enabled
-      - Bucket
-      - Prefix
-    properties:
-      Enabled:
-        $ref: '#/definitions/boolean'
-        description: 'Specifies whether you want CloudFront to save access logs to an Amazon S3 bucket. If you don''t want to enable logging when you create a streaming distribution or if you want to disable logging for an existing streaming distribution, specify <code>false</code> for <code>Enabled</code>, and specify <code>empty Bucket</code> and <code>Prefix</code> elements. If you specify <code>false</code> for <code>Enabled</code> but you specify values for <code>Bucket</code> and <code>Prefix</code>, the values are automatically deleted. '
-      Bucket:
-        $ref: '#/definitions/string'
-        description: 'The Amazon S3 bucket to store the access logs in, for example, <code>myawslogbucket.s3.amazonaws.com</code>.'
-      Prefix:
-        $ref: '#/definitions/string'
-        description: 'An optional string that you want CloudFront to prefix to the access log filenames for this streaming distribution, for example, <code>myprefix/</code>. If you want to enable logging, but you don''t want to specify a prefix, you still must include an empty <code>Prefix</code> element in the <code>Logging</code> element.'
-    description: A complex type that controls whether access logs are written for this streaming distribution.
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    description: '<p> A string that contains <code>Tag</code> key.</p> <p>The string length should be between 1 and 128 characters. Valid characters include <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, space, and the special characters <code>_ - . : / = + @</code>.</p>'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -4952,12 +5027,6 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: '<p> A string that contains an optional <code>Tag</code> value.</p> <p>The string length should be between 0 and 256 characters. Valid characters include <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, space, and the special characters <code>_ - . : / = + @</code>.</p>'
     description: ' A complex type that contains <code>Tag</code> key and <code>Tag</code> value.'
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    description: '<p> A string that contains <code>Tag</code> key.</p> <p>The string length should be between 1 and 128 characters. Valid characters include <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, space, and the special characters <code>_ - . : / = + @</code>.</p>'
-    minLength: 1
-    maxLength: 128
   TagKeyList:
     type: array
     items:
@@ -4973,73 +5042,3 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Tag'
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  Tags:
-    type: object
-    properties:
-      Items:
-        $ref: '#/definitions/TagList'
-        description: ' A complex type that contains <code>Tag</code> elements.'
-    description: ' A complex type that contains zero or more <code>Tag</code> elements.'
-  TrustedSigners:
-    type: object
-    required:
-      - Enabled
-      - Quantity
-    properties:
-      Enabled:
-        $ref: '#/definitions/boolean'
-        description: Specifies whether you want to require viewers to use signed URLs to access the files specified by <code>PathPattern</code> and <code>TargetOriginId</code>.
-      Quantity:
-        $ref: '#/definitions/integer'
-        description: The number of trusted signers for this cache behavior.
-      Items:
-        $ref: '#/definitions/AwsAccountNumberList'
-        description: ' <b>Optional</b>: A complex type that contains trusted signers for this cache behavior. If <code>Quantity</code> is <code>0</code>, you can omit <code>Items</code>.'
-    description: '<p>A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content.</p> <p>If you want to require signed URLs in requests for objects in the target origin that match the <code>PathPattern</code> for this cache behavior, specify <code>true</code> for <code>Enabled</code>, and specify the applicable values for <code>Quantity</code> and <code>Items</code>. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon Amazon CloudFront Developer Guide</i>.</p> <p>If you don''t want to require signed URLs in requests for objects that match <code>PathPattern</code>, specify <code>false</code> for <code>Enabled</code> and <code>0</code> for <code>Quantity</code>. Omit <code>Items</code>.</p> <p>To add, change, or remove one or more trusted signers, change <code>Enabled</code> to <code>true</code> (if it''s currently <code>false</code>), change <code>Quantity</code> as applicable, and specify all of the trusted signers that you want to include in the updated distribution.</p> <p>For more information about updating the distribution configuration, see <a>DistributionConfig</a> .</p>'
-  ViewerCertificate:
-    type: object
-    properties:
-      CloudFrontDefaultCertificate:
-        $ref: '#/definitions/boolean'
-        description: 'For information about how and when to use <code>CloudFrontDefaultCertificate</code>, see <a>ViewerCertificate</a>.'
-      IAMCertificateId:
-        $ref: '#/definitions/string'
-        description: 'For information about how and when to use <code>IAMCertificateId</code>, see <a>ViewerCertificate</a>.'
-      ACMCertificateArn:
-        $ref: '#/definitions/string'
-        description: 'For information about how and when to use <code>ACMCertificateArn</code>, see <a>ViewerCertificate</a>.'
-      SSLSupportMethod:
-        $ref: '#/definitions/SSLSupportMethod'
-        description: '<p>If you specify a value for <a>ViewerCertificate$ACMCertificateArn</a> or for <a>ViewerCertificate$IAMCertificateId</a>, you must also specify how you want CloudFront to serve HTTPS requests: using a method that works for all clients or one that works for most clients:</p> <ul> <li> <p> <code>vip</code>: CloudFront uses dedicated IP addresses for your content and can respond to HTTPS requests from any viewer. However, you will incur additional monthly charges.</p> </li> <li> <p> <code>sni-only</code>: CloudFront can respond to HTTPS requests from viewers that support Server Name Indication (SNI). All modern browsers support SNI, but some browsers still in use don''t support SNI. If some of your users'' browsers don''t support SNI, we recommend that you do one of the following:</p> <ul> <li> <p>Use the <code>vip</code> option (dedicated IP addresses) instead of <code>sni-only</code>.</p> </li> <li> <p>Use the CloudFront SSL/TLS certificate instead of a custom certificate. This requires that you use the CloudFront domain name of your distribution in the URLs for your objects, for example, <code>https://d111111abcdef8.cloudfront.net/logo.png</code>.</p> </li> <li> <p>If you can control which browser your users use, upgrade the browser to one that supports SNI.</p> </li> <li> <p>Use HTTP instead of HTTPS.</p> </li> </ul> </li> </ul> <p>Don''t specify a value for <code>SSLSupportMethod</code> if you specified <code>&lt;CloudFrontDefaultCertificate&gt;true&lt;CloudFrontDefaultCertificate&gt;</code>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS.html">Using Alternate Domain Names and HTTPS</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
-      MinimumProtocolVersion:
-        $ref: '#/definitions/MinimumProtocolVersion'
-        description: '<p>Specify the security policy that you want CloudFront to use for HTTPS connections. A security policy determines two settings:</p> <ul> <li> <p>The minimum SSL/TLS protocol that CloudFront uses to communicate with viewers</p> </li> <li> <p>The cipher that CloudFront uses to encrypt the content that it returns to viewers</p> </li> </ul> <note> <p>On the CloudFront console, this setting is called <b>Security policy</b>.</p> </note> <p>We recommend that you specify <code>TLSv1.1_2016</code> unless your users are using browsers or devices that do not support TLSv1.1 or later.</p> <p>When both of the following are true, you must specify <code>TLSv1</code> or later for the security policy: </p> <ul> <li> <p>You''re using a custom certificate: you specified a value for <code>ACMCertificateArn</code> or for <code>IAMCertificateId</code> </p> </li> <li> <p>You''re using SNI: you specified <code>sni-only</code> for <code>SSLSupportMethod</code> </p> </li> </ul> <p>If you specify <code>true</code> for <code>CloudFrontDefaultCertificate</code>, CloudFront automatically sets the security policy to <code>TLSv1</code> regardless of the value that you specify for <code>MinimumProtocolVersion</code>.</p> <p>For information about the relationship between the security policy that you choose and the protocols and ciphers that CloudFront uses to communicate with viewers, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html#secure-connections-supported-ciphers"> Supported SSL/TLS Protocols and Ciphers for Communication Between Viewers and CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
-      Certificate:
-        $ref: '#/definitions/string'
-        description: '<p>This field has been deprecated. Use one of the following fields instead:</p> <ul> <li> <p> <a>ViewerCertificate$ACMCertificateArn</a> </p> </li> <li> <p> <a>ViewerCertificate$IAMCertificateId</a> </p> </li> <li> <p> <a>ViewerCertificate$CloudFrontDefaultCertificate</a> </p> </li> </ul>'
-      CertificateSource:
-        $ref: '#/definitions/CertificateSource'
-        description: '<p>This field has been deprecated. Use one of the following fields instead:</p> <ul> <li> <p> <a>ViewerCertificate$ACMCertificateArn</a> </p> </li> <li> <p> <a>ViewerCertificate$IAMCertificateId</a> </p> </li> <li> <p> <a>ViewerCertificate$CloudFrontDefaultCertificate</a> </p> </li> </ul>'
-    description: '<p>A complex type that specifies the following:</p> <ul> <li> <p>Whether you want viewers to use HTTP or HTTPS to request your objects.</p> </li> <li> <p>If you want viewers to use HTTPS, whether you''re using an alternate domain name such as <code>example.com</code> or the CloudFront domain name for your distribution, such as <code>d111111abcdef8.cloudfront.net</code>.</p> </li> <li> <p>If you''re using an alternate domain name, whether AWS Certificate Manager (ACM) provided the certificate, or you purchased a certificate from a third-party certificate authority and imported it into ACM or uploaded it to the IAM certificate store.</p> </li> </ul> <p>You must specify only one of the following values: </p> <ul> <li> <p> <a>ViewerCertificate$ACMCertificateArn</a> </p> </li> <li> <p> <a>ViewerCertificate$IAMCertificateId</a> </p> </li> <li> <p> <a>ViewerCertificate$CloudFrontDefaultCertificate</a> </p> </li> </ul> <p>Don''t specify <code>false</code> for <code>CloudFrontDefaultCertificate</code>.</p> <p> <b>If you want viewers to use HTTP instead of HTTPS to request your objects</b>: Specify the following value:</p> <p> <code>&lt;CloudFrontDefaultCertificate&gt;true&lt;CloudFrontDefaultCertificate&gt;</code> </p> <p>In addition, specify <code>allow-all</code> for <code>ViewerProtocolPolicy</code> for all of your cache behaviors.</p> <p> <b>If you want viewers to use HTTPS to request your objects</b>: Choose the type of certificate that you want to use based on whether you''re using an alternate domain name for your objects or the CloudFront domain name:</p> <ul> <li> <p> <b>If you''re using an alternate domain name, such as example.com</b>: Specify one of the following values, depending on whether ACM provided your certificate or you purchased your certificate from third-party certificate authority:</p> <ul> <li> <p> <code>&lt;ACMCertificateArn&gt;<i>ARN for ACM SSL/TLS certificate</i>&lt;ACMCertificateArn&gt;</code> where <code> <i>ARN for ACM SSL/TLS certificate</i> </code> is the ARN for the ACM SSL/TLS certificate that you want to use for this distribution.</p> </li> <li> <p> <code>&lt;IAMCertificateId&gt;<i>IAM certificate ID</i>&lt;IAMCertificateId&gt;</code> where <code> <i>IAM certificate ID</i> </code> is the ID that IAM returned when you added the certificate to the IAM certificate store.</p> </li> </ul> <p>If you specify <code>ACMCertificateArn</code> or <code>IAMCertificateId</code>, you must also specify a value for <code>SSLSupportMethod</code>.</p> <p>If you choose to use an ACM certificate or a certificate in the IAM certificate store, we recommend that you use only an alternate domain name in your object URLs (<code>https://example.com/logo.jpg</code>). If you use the domain name that is associated with your CloudFront distribution (such as <code>https://d111111abcdef8.cloudfront.net/logo.jpg</code>) and the viewer supports <code>SNI</code>, then CloudFront behaves normally. However, if the browser does not support SNI, the user''s experience depends on the value that you choose for <code>SSLSupportMethod</code>:</p> <ul> <li> <p> <code>vip</code>: The viewer displays a warning because there is a mismatch between the CloudFront domain name and the domain name in your SSL/TLS certificate.</p> </li> <li> <p> <code>sni-only</code>: CloudFront drops the connection with the browser without returning the object.</p> </li> </ul> </li> <li> <p> <b>If you''re using the CloudFront domain name for your distribution, such as <code>d111111abcdef8.cloudfront.net</code> </b>: Specify the following value:</p> <p> <code>&lt;CloudFrontDefaultCertificate&gt;true&lt;CloudFrontDefaultCertificate&gt; </code> </p> </li> </ul> <p>If you want viewers to use HTTPS, you must also specify one of the following values in your cache behaviors:</p> <ul> <li> <p> <code> &lt;ViewerProtocolPolicy&gt;https-only&lt;ViewerProtocolPolicy&gt;</code> </p> </li> <li> <p> <code>&lt;ViewerProtocolPolicy&gt;redirect-to-https&lt;ViewerProtocolPolicy&gt;</code> </p> </li> </ul> <p>You can also optionally require that CloudFront use HTTPS to communicate with your origin by specifying one of the following values for the applicable origins:</p> <ul> <li> <p> <code>&lt;OriginProtocolPolicy&gt;https-only&lt;OriginProtocolPolicy&gt; </code> </p> </li> <li> <p> <code>&lt;OriginProtocolPolicy&gt;match-viewer&lt;OriginProtocolPolicy&gt; </code> </p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS">Using Alternate Domain Names and HTTPS</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
-  ViewerProtocolPolicy:
-    type: string
-    enum:
-      - allow-all
-      - https-only
-      - redirect-to-https
-  boolean:
-    type: boolean
-  integer:
-    type: integer
-  long:
-    type: integer
-  string:
-    type: string
-  timestamp:
-    type: string
-    format: date-time

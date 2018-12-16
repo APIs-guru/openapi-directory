@@ -1412,11 +1412,21 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Specifies whether the trail is applied to all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations. If the trail is not an organization trail and this is set to true, the trail will be created in all AWS accounts that belong to the organization. If the trail is an organization trail and this is set to false, the trail will remain in the current AWS account but be deleted from all member accounts in the organization.'
     description: Specifies settings to update for the trail.
-  undefined: {}
+  String:
+    type: string
+  TagsList:
+    type: array
+    description: A list of tags.
+    items:
+      $ref: '#/definitions/Tag'
   Boolean:
     type: boolean
   ByteBuffer:
     type: string
+  DataResourceValues:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   DataResource:
     type: object
     properties:
@@ -1427,10 +1437,6 @@ definitions:
         $ref: '#/definitions/DataResourceValues'
         description: '<p>An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.</p> <ul> <li> <p>To log data events for all objects in all S3 buckets in your AWS account, specify the prefix as <code>arn:aws:s3:::</code>. </p> <note> <p>This will also enable logging of data event activity performed by any user or role in your AWS account, even if that activity is performed on a bucket that belongs to another AWS account. </p> </note> </li> <li> <p>To log data events for all objects in all S3 buckets that include <i>my-bucket</i> in their names, specify the prefix as <code>aws:s3:::my-bucket</code>. The trail logs data events for all objects in all buckets whose name contains a match for <i>my-bucket</i>. </p> </li> <li> <p>To log data events for all objects in an S3 bucket, specify the bucket and an empty object prefix such as <code>arn:aws:s3:::bucket-1/</code>. The trail logs data events for all objects in this S3 bucket.</p> </li> <li> <p>To log data events for specific objects, specify the S3 bucket and object prefix such as <code>arn:aws:s3:::bucket-1/example-images</code>. The trail logs data events for objects in this S3 bucket that match the prefix.</p> </li> <li> <p>To log data events for all functions in your AWS account, specify the prefix as <code>arn:aws:lambda</code>.</p> <note> <p>This will also enable logging of <code>Invoke</code> activity performed by any user or role in your AWS account, even if that activity is performed on a function that belongs to another AWS account. </p> </note> </li> <li> <p>To log data eents for a specific Lambda function, specify the function ARN.</p> <note> <p>Lambda function ARNs are exact. Unlike S3, you cannot use matching. For example, if you specify a function ARN <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>, data events will only be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>. They will not be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld2</i>.</p> </note> </li> </ul>'
     description: '<p>The Amazon S3 buckets or AWS Lambda functions that you specify in your event selectors for your trail to log data events. Data events provide insight into the resource operations performed on or within a resource itself. These are also known as data plane operations. You can specify up to 250 data resources for a trail.</p> <note> <p>The total number of allowed data resources is 250. This number can be distributed between 1 and 5 event selectors, but the total cannot exceed 250 across all selectors.</p> </note> <p>The following example demonstrates how logging works when you configure logging of all data events for an S3 bucket named <code>bucket-1</code>. In this example, the CloudTrail user spcified an empty prefix, and the option to log both <code>Read</code> and <code>Write</code> data events.</p> <ol> <li> <p>A user uploads an image file to <code>bucket-1</code>.</p> </li> <li> <p>The <code>PutObject</code> API operation is an Amazon S3 object-level API. It is recorded as a data event in CloudTrail. Because the CloudTrail user specified an S3 bucket with an empty prefix, events that occur on any object in that bucket are logged. The trail processes and logs the event.</p> </li> <li> <p>A user uploads an object to an Amazon S3 bucket named <code>arn:aws:s3:::bucket-2</code>.</p> </li> <li> <p>The <code>PutObject</code> API operation occurred for an object in an S3 bucket that the CloudTrail user didn''t specify for the trail. The trail doesn’t log the event.</p> </li> </ol> <p>The following example demonstrates how logging works when you configure logging of AWS Lambda data events for a Lambda function named <i>MyLambdaFunction</i>, but not for all AWS Lambda functions.</p> <ol> <li> <p>A user runs a script that includes a call to the <i>MyLambdaFunction</i> function and the <i>MyOtherLambdaFunction</i> function.</p> </li> <li> <p>The <code>Invoke</code> API operation on <i>MyLambdaFunction</i> is an AWS Lambda API. It is recorded as a data event in CloudTrail. Because the CloudTrail user specified logging data events for <i>MyLambdaFunction</i>, any invocations of that function are logged. The trail processes and logs the event. </p> </li> <li> <p>The <code>Invoke</code> API operation on <i>MyOtherLambdaFunction</i> is an AWS Lambda API. Because the CloudTrail user did not specify logging data events for all Lambda functions, the <code>Invoke</code> operation for <i>MyOtherLambdaFunction</i> does not match the function specified for the trail. The trail doesn’t log the event. </p> </li> </ol>'
-  DataResourceValues:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   DataResources:
     type: array
     items:
@@ -1438,6 +1444,19 @@ definitions:
   Date:
     type: string
     format: date-time
+  TrailNameList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  TrailList:
+    type: array
+    items:
+      $ref: '#/definitions/Trail'
+  ResourceList:
+    type: array
+    description: A list of resources referenced by the event returned.
+    items:
+      $ref: '#/definitions/Resource'
   Event:
     type: object
     properties:
@@ -1469,6 +1488,12 @@ definitions:
         $ref: '#/definitions/String'
         description: A JSON string that contains a representation of the event returned.
     description: Contains information about an event that was returned by a lookup request. The result includes a representation of a CloudTrail event.
+  ReadWriteType:
+    type: string
+    enum:
+      - ReadOnly
+      - WriteOnly
+      - All
   EventSelector:
     type: object
     properties:
@@ -1490,6 +1515,29 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Event'
+  PublicKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/PublicKey'
+  ResourceIdList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ResourceTagList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceTag'
+  LookupAttributeKey:
+    type: string
+    enum:
+      - EventId
+      - EventName
+      - ReadOnly
+      - Username
+      - ResourceType
+      - ResourceName
+      - EventSource
+      - AccessKeyId
   LookupAttribute:
     type: object
     required:
@@ -1503,17 +1551,6 @@ definitions:
         $ref: '#/definitions/String'
         description: Specifies a value for the specified AttributeKey.
     description: Specifies an attribute and value that filter the events returned.
-  LookupAttributeKey:
-    type: string
-    enum:
-      - EventId
-      - EventName
-      - ReadOnly
-      - Username
-      - ResourceType
-      - ResourceName
-      - EventSource
-      - AccessKeyId
   LookupAttributesList:
     type: array
     items:
@@ -1540,16 +1577,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The fingerprint of the public key.
     description: Contains information about a returned public key.
-  PublicKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/PublicKey'
-  ReadWriteType:
-    type: string
-    enum:
-      - ReadOnly
-      - WriteOnly
-      - All
   Resource:
     type: object
     properties:
@@ -1560,15 +1587,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The name of the resource referenced by the event returned. These are user-created names whose values will depend on the environment. For example, the resource name might be "auto-scaling-test-group" for an Auto Scaling Group or "i-1234567" for an EC2 Instance.'
     description: Specifies the type and name of a resource referenced by an event.
-  ResourceIdList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ResourceList:
-    type: array
-    description: A list of resources referenced by the event returned.
-    items:
-      $ref: '#/definitions/Resource'
   ResourceTag:
     type: object
     properties:
@@ -1579,12 +1597,6 @@ definitions:
         $ref: '#/definitions/TagsList'
         description: A list of tags.
     description: A resource tag.
-  ResourceTagList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceTag'
-  String:
-    type: string
   Tag:
     type: object
     required:
@@ -1597,11 +1609,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The value in a key-value pair of a tag. The value must be no longer than 256 Unicode characters.
     description: A custom key-value pair associated with a resource such as a CloudTrail trail.
-  TagsList:
-    type: array
-    description: A list of tags.
-    items:
-      $ref: '#/definitions/Tag'
   Trail:
     type: object
     properties:
@@ -1651,11 +1658,3 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Specifies whether the trail is an organization trail.
     description: The settings for a trail.
-  TrailList:
-    type: array
-    items:
-      $ref: '#/definitions/Trail'
-  TrailNameList:
-    type: array
-    items:
-      $ref: '#/definitions/String'

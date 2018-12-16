@@ -490,7 +490,8 @@ definitions:
     description: UpdateConfigurationSetEventDestinationRequest
   Boolean:
     type: boolean
-  undefined: {}
+  NonEmptyString:
+    type: string
   CallInstructionsMessageType:
     type: object
     properties:
@@ -498,6 +499,8 @@ definitions:
         $ref: '#/definitions/NonEmptyString'
         description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
     description: An object that defines a message that contains text formatted using Amazon Pinpoint Voice Instructions markup.
+  String:
+    type: string
   CloudWatchLogsDestination:
     type: object
     properties:
@@ -508,6 +511,38 @@ definitions:
         $ref: '#/definitions/String'
         description: The name of the Amazon CloudWatch Log Group that you want to record events in.
     description: An object that contains information about a event destination that sends data to Amazon CloudWatch Logs.
+  __string:
+    type: string
+  EventDestinationDefinition:
+    type: object
+    properties:
+      CloudWatchLogsDestination:
+        $ref: '#/definitions/CloudWatchLogsDestination'
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: 'Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.'
+      KinesisFirehoseDestination:
+        $ref: '#/definitions/KinesisFirehoseDestination'
+      MatchingEventTypes:
+        $ref: '#/definitions/EventTypes'
+    description: An object that defines a single event destination.
+  WordCharactersWithDelimiters:
+    type: string
+  KinesisFirehoseDestination:
+    type: object
+    properties:
+      DeliveryStreamArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of an IAM role that can write data to an Amazon Kinesis Data Firehose stream.
+      IamRoleArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose destination that you want to use in the event destination.
+    description: An object that contains information about a event destination that sends data to Amazon Kinesis Data Firehose.
+  EventTypes:
+    type: array
+    description: An array of EventDestination objects. Each EventDestination object includes ARNs and other information that define an event destination.
+    items:
+      $ref: '#/definitions/EventType'
   EventDestination:
     type: object
     properties:
@@ -524,19 +559,6 @@ definitions:
         $ref: '#/definitions/String'
         description: A name that identifies the event destination configuration.
     description: An object that defines an event destination.
-  EventDestinationDefinition:
-    type: object
-    properties:
-      CloudWatchLogsDestination:
-        $ref: '#/definitions/CloudWatchLogsDestination'
-      Enabled:
-        $ref: '#/definitions/Boolean'
-        description: 'Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.'
-      KinesisFirehoseDestination:
-        $ref: '#/definitions/KinesisFirehoseDestination'
-      MatchingEventTypes:
-        $ref: '#/definitions/EventTypes'
-    description: An object that defines a single event destination.
   EventDestinations:
     type: array
     description: An array of EventDestination objects. Each EventDestination object includes ARNs and other information that define an event destination.
@@ -553,23 +575,6 @@ definitions:
       - FAILED
       - NO_ANSWER
     description: The types of events that are sent to the event destination.
-  EventTypes:
-    type: array
-    description: An array of EventDestination objects. Each EventDestination object includes ARNs and other information that define an event destination.
-    items:
-      $ref: '#/definitions/EventType'
-  KinesisFirehoseDestination:
-    type: object
-    properties:
-      DeliveryStreamArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of an IAM role that can write data to an Amazon Kinesis Data Firehose stream.
-      IamRoleArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose destination that you want to use in the event destination.
-    description: An object that contains information about a event destination that sends data to Amazon Kinesis Data Firehose.
-  NonEmptyString:
-    type: string
   PlainTextMessageType:
     type: object
     properties:
@@ -596,8 +601,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.'
     description: An object that defines a message that contains SSML-formatted text.
-  String:
-    type: string
   VoiceMessageContent:
     type: object
     properties:
@@ -608,7 +611,3 @@ definitions:
       SSMLMessage:
         $ref: '#/definitions/SSMLMessageType'
     description: An object that contains a voice message and information about the recipient that you want to send it to.
-  WordCharactersWithDelimiters:
-    type: string
-  __string:
-    type: string

@@ -1870,7 +1870,6 @@ definitions:
     type: string
   AppId:
     type: string
-  undefined: {}
   AppIds:
     type: array
     items:
@@ -1927,6 +1926,28 @@ definitions:
       - DELETE_FAILED
   AppStatusMessage:
     type: string
+  Timestamp:
+    type: string
+    format: date-time
+  LaunchDetails:
+    type: object
+    properties:
+      latestLaunchTime:
+        $ref: '#/definitions/Timestamp'
+        description: Latest time this application was launched successfully.
+      stackName:
+        $ref: '#/definitions/StackName'
+        description: Name of the latest stack launched for this application.
+      stackId:
+        $ref: '#/definitions/StackId'
+        description: Identifier of the latest stack launched for this application.
+    description: Details about the latest launch of an application.
+  RoleName:
+    type: string
+  TotalServerGroups:
+    type: integer
+  TotalServers:
+    type: integer
   AppSummary:
     type: object
     properties:
@@ -1989,6 +2010,33 @@ definitions:
     type: string
   ClientToken:
     type: string
+  ConnectorId:
+    type: string
+  ConnectorVersion:
+    type: string
+  ConnectorStatus:
+    type: string
+    enum:
+      - HEALTHY
+      - UNHEALTHY
+  ConnectorCapabilityList:
+    type: array
+    items:
+      $ref: '#/definitions/ConnectorCapability'
+  VmManagerName:
+    type: string
+  VmManagerType:
+    type: string
+    enum:
+      - VSPHERE
+      - SCVMM
+      - HYPERV-MANAGER
+  VmManagerId:
+    type: string
+  IpAddress:
+    type: string
+  MacAddress:
+    type: string
   Connector:
     type: object
     properties:
@@ -2030,78 +2078,76 @@ definitions:
       - SCVMM
       - HYPERV-MANAGER
       - SNAPSHOT_BATCHING
-  ConnectorCapabilityList:
-    type: array
-    items:
-      $ref: '#/definitions/ConnectorCapability'
-  ConnectorId:
-    type: string
   ConnectorList:
     type: array
     items:
       $ref: '#/definitions/Connector'
-  ConnectorStatus:
+  ServerGroups:
+    type: array
+    items:
+      $ref: '#/definitions/ServerGroup'
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  ServerId:
     type: string
-    enum:
-      - HEALTHY
-      - UNHEALTHY
-  ConnectorVersion:
-    type: string
-  Description:
-    type: string
-  EC2KeyName:
-    type: string
-  Encrypted:
-    type: boolean
-  ForceStopAppReplication:
-    type: boolean
-  ForceTerminateApp:
-    type: boolean
   Frequency:
     type: integer
-  InstanceType:
-    type: string
-  IpAddress:
-    type: string
-  KeyName:
-    type: string
-  KmsKeyId:
-    type: string
-  LaunchDetails:
-    type: object
-    properties:
-      latestLaunchTime:
-        $ref: '#/definitions/Timestamp'
-        description: Latest time this application was launched successfully.
-      stackName:
-        $ref: '#/definitions/StackName'
-        description: Name of the latest stack launched for this application.
-      stackId:
-        $ref: '#/definitions/StackId'
-        description: Identifier of the latest stack launched for this application.
-    description: Details about the latest launch of an application.
-  LaunchOrder:
-    type: integer
+  RunOnce:
+    type: boolean
   LicenseType:
     type: string
     enum:
       - AWS
       - BYOL
-  LogicalId:
-    type: string
-  MacAddress:
-    type: string
-  MaxResults:
-    type: integer
-  NextToken:
+  Description:
     type: string
   NumberOfRecentAmisToKeep:
     type: integer
+  Encrypted:
+    type: boolean
+  KmsKeyId:
+    type: string
+  ReplicationJobId:
+    type: string
+  ForceStopAppReplication:
+    type: boolean
+  ForceTerminateApp:
+    type: boolean
+  EC2KeyName:
+    type: string
   OutputFormat:
     type: string
     enum:
       - JSON
       - YAML
+  S3Location:
+    type: object
+    properties:
+      bucket:
+        $ref: '#/definitions/BucketName'
+        description: Amazon S3 bucket name.
+      key:
+        $ref: '#/definitions/KeyName'
+        description: Amazon S3 bucket key.
+    description: Location of the Amazon S3 object in the customer's account.
+  ServerGroupLaunchConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/ServerGroupLaunchConfiguration'
+  ServerGroupReplicationConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/ServerGroupReplicationConfiguration'
+  NextToken:
+    type: string
+  MaxResults:
+    type: integer
+  ReplicationJobList:
+    type: array
+    items:
+      $ref: '#/definitions/ReplicationJob'
   ReplicationJob:
     type: object
     properties:
@@ -2160,12 +2206,61 @@ definitions:
         $ref: '#/definitions/ReplicationRunList'
         description: Information about the replication runs.
     description: Represents a replication job.
-  ReplicationJobId:
-    type: string
-  ReplicationJobList:
+  ReplicationRunList:
     type: array
     items:
-      $ref: '#/definitions/ReplicationJob'
+      $ref: '#/definitions/ReplicationRun'
+  VmServerAddressList:
+    type: array
+    items:
+      $ref: '#/definitions/VmServerAddress'
+  ServerCatalogStatus:
+    type: string
+    enum:
+      - NOT_IMPORTED
+      - IMPORTING
+      - AVAILABLE
+      - DELETED
+      - EXPIRED
+  ServerList:
+    type: array
+    items:
+      $ref: '#/definitions/Server'
+  InstanceType:
+    type: string
+  KeyName:
+    type: string
+  StackName:
+    type: string
+  StackId:
+    type: string
+  LaunchOrder:
+    type: integer
+  LogicalId:
+    type: string
+  ServerType:
+    type: string
+    enum:
+      - VIRTUAL_MACHINE
+  VmServer:
+    type: object
+    properties:
+      vmServerAddress:
+        $ref: '#/definitions/VmServerAddress'
+        description: Information about the VM server location.
+      vmName:
+        $ref: '#/definitions/VmName'
+        description: The name of the VM.
+      vmManagerName:
+        $ref: '#/definitions/VmManagerName'
+        description: The name of the VM manager.
+      vmManagerType:
+        $ref: '#/definitions/VmManagerType'
+        description: The type of VM management product.
+      vmPath:
+        $ref: '#/definitions/VmPath'
+        description: The VM folder path in the vCenter Server virtual machine inventory tree.
+    description: Represents a VM server.
   ReplicationJobState:
     type: string
     enum:
@@ -2181,6 +2276,35 @@ definitions:
     type: string
   ReplicationJobTerminated:
     type: boolean
+  ReplicationRunId:
+    type: string
+  ReplicationRunState:
+    type: string
+    enum:
+      - PENDING
+      - MISSED
+      - ACTIVE
+      - FAILED
+      - COMPLETED
+      - DELETING
+      - DELETED
+  ReplicationRunType:
+    type: string
+    enum:
+      - ON_DEMAND
+      - AUTOMATIC
+  ReplicationRunStageDetails:
+    type: object
+    properties:
+      stage:
+        $ref: '#/definitions/ReplicationRunStage'
+        description: String describing the current stage of a replication run.
+      stageProgress:
+        $ref: '#/definitions/ReplicationRunStageProgress'
+        description: String describing the progress of the current stage of a replication run.
+    description: Details of the current stage of a replication run.
+  ReplicationRunStatusMessage:
+    type: string
   ReplicationRun:
     type: object
     properties:
@@ -2218,57 +2342,10 @@ definitions:
         $ref: '#/definitions/KmsKeyId'
         description: '<p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer''s default KMS key for EBS is used. </p>'
     description: Represents a replication run.
-  ReplicationRunId:
-    type: string
-  ReplicationRunList:
-    type: array
-    items:
-      $ref: '#/definitions/ReplicationRun'
   ReplicationRunStage:
     type: string
-  ReplicationRunStageDetails:
-    type: object
-    properties:
-      stage:
-        $ref: '#/definitions/ReplicationRunStage'
-        description: String describing the current stage of a replication run.
-      stageProgress:
-        $ref: '#/definitions/ReplicationRunStageProgress'
-        description: String describing the progress of the current stage of a replication run.
-    description: Details of the current stage of a replication run.
   ReplicationRunStageProgress:
     type: string
-  ReplicationRunState:
-    type: string
-    enum:
-      - PENDING
-      - MISSED
-      - ACTIVE
-      - FAILED
-      - COMPLETED
-      - DELETING
-      - DELETED
-  ReplicationRunStatusMessage:
-    type: string
-  ReplicationRunType:
-    type: string
-    enum:
-      - ON_DEMAND
-      - AUTOMATIC
-  RoleName:
-    type: string
-  RunOnce:
-    type: boolean
-  S3Location:
-    type: object
-    properties:
-      bucket:
-        $ref: '#/definitions/BucketName'
-        description: Amazon S3 bucket name.
-      key:
-        $ref: '#/definitions/KeyName'
-        description: Amazon S3 bucket key.
-    description: Location of the Amazon S3 object in the customer's account.
   SecurityGroup:
     type: string
   Server:
@@ -2290,14 +2367,10 @@ definitions:
         $ref: '#/definitions/ReplicationJobTerminated'
         description: Indicates whether the replication job is deleted or failed.
     description: Represents a server.
-  ServerCatalogStatus:
+  ServerGroupId:
     type: string
-    enum:
-      - NOT_IMPORTED
-      - IMPORTING
-      - AVAILABLE
-      - DELETED
-      - EXPIRED
+  ServerGroupName:
+    type: string
   ServerGroup:
     type: object
     properties:
@@ -2311,8 +2384,10 @@ definitions:
         $ref: '#/definitions/ServerList'
         description: List of servers belonging to a server group.
     description: A logical grouping of servers.
-  ServerGroupId:
-    type: string
+  ServerLaunchConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/ServerLaunchConfiguration'
   ServerGroupLaunchConfiguration:
     type: object
     properties:
@@ -2326,12 +2401,10 @@ definitions:
         $ref: '#/definitions/ServerLaunchConfigurations'
         description: Launch configuration for servers in the server group.
     description: Launch configuration for a server group.
-  ServerGroupLaunchConfigurations:
+  ServerReplicationConfigurations:
     type: array
     items:
-      $ref: '#/definitions/ServerGroupLaunchConfiguration'
-  ServerGroupName:
-    type: string
+      $ref: '#/definitions/ServerReplicationConfiguration'
   ServerGroupReplicationConfiguration:
     type: object
     properties:
@@ -2342,16 +2415,17 @@ definitions:
         $ref: '#/definitions/ServerReplicationConfigurations'
         description: Replication configuration for servers in the server group.
     description: Replication configuration for a server group.
-  ServerGroupReplicationConfigurations:
-    type: array
-    items:
-      $ref: '#/definitions/ServerGroupReplicationConfiguration'
-  ServerGroups:
-    type: array
-    items:
-      $ref: '#/definitions/ServerGroup'
-  ServerId:
+  VPC:
     type: string
+  Subnet:
+    type: string
+  UserData:
+    type: object
+    properties:
+      s3Location:
+        $ref: '#/definitions/S3Location'
+        description: Amazon S3 location of the user-data script.
+    description: A script that runs on first launch of an Amazon EC2 instance. Used for configuring the server during launch.
   ServerLaunchConfiguration:
     type: object
     properties:
@@ -2383,28 +2457,6 @@ definitions:
         $ref: '#/definitions/AssociatePublicIpAddress'
         description: 'If true, a publicly accessible IP address is created when launching the server.'
     description: Launch configuration for a server.
-  ServerLaunchConfigurations:
-    type: array
-    items:
-      $ref: '#/definitions/ServerLaunchConfiguration'
-  ServerList:
-    type: array
-    items:
-      $ref: '#/definitions/Server'
-  ServerReplicationConfiguration:
-    type: object
-    properties:
-      server:
-        $ref: '#/definitions/Server'
-        description: Identifier of the server this replication configuration is associated with.
-      serverReplicationParameters:
-        $ref: '#/definitions/ServerReplicationParameters'
-        description: Parameters for replicating the server.
-    description: Replication configuration of a server.
-  ServerReplicationConfigurations:
-    type: array
-    items:
-      $ref: '#/definitions/ServerReplicationConfiguration'
   ServerReplicationParameters:
     type: object
     properties:
@@ -2430,15 +2482,19 @@ definitions:
         $ref: '#/definitions/KmsKeyId'
         description: '<p/> <p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer''s default KMS key for EBS is used. </p>'
     description: Replication parameters for replicating a server.
-  ServerType:
+  ServerReplicationConfiguration:
+    type: object
+    properties:
+      server:
+        $ref: '#/definitions/Server'
+        description: Identifier of the server this replication configuration is associated with.
+      serverReplicationParameters:
+        $ref: '#/definitions/ServerReplicationParameters'
+        description: Parameters for replicating the server.
+    description: Replication configuration of a server.
+  TagKey:
     type: string
-    enum:
-      - VIRTUAL_MACHINE
-  StackId:
-    type: string
-  StackName:
-    type: string
-  Subnet:
+  TagValue:
     type: string
   Tag:
     type: object
@@ -2450,65 +2506,12 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: Tag value.
     description: A label that can be assigned to an application.
-  TagKey:
-    type: string
-  TagValue:
-    type: string
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  Timestamp:
-    type: string
-    format: date-time
-  TotalServerGroups:
-    type: integer
-  TotalServers:
-    type: integer
-  UserData:
-    type: object
-    properties:
-      s3Location:
-        $ref: '#/definitions/S3Location'
-        description: Amazon S3 location of the user-data script.
-    description: A script that runs on first launch of an Amazon EC2 instance. Used for configuring the server during launch.
-  VPC:
-    type: string
   VmId:
     type: string
-  VmManagerId:
-    type: string
-  VmManagerName:
-    type: string
-  VmManagerType:
-    type: string
-    enum:
-      - VSPHERE
-      - SCVMM
-      - HYPERV-MANAGER
   VmName:
     type: string
   VmPath:
     type: string
-  VmServer:
-    type: object
-    properties:
-      vmServerAddress:
-        $ref: '#/definitions/VmServerAddress'
-        description: Information about the VM server location.
-      vmName:
-        $ref: '#/definitions/VmName'
-        description: The name of the VM.
-      vmManagerName:
-        $ref: '#/definitions/VmManagerName'
-        description: The name of the VM manager.
-      vmManagerType:
-        $ref: '#/definitions/VmManagerType'
-        description: The type of VM management product.
-      vmPath:
-        $ref: '#/definitions/VmPath'
-        description: The VM folder path in the vCenter Server virtual machine inventory tree.
-    description: Represents a VM server.
   VmServerAddress:
     type: object
     properties:
@@ -2519,7 +2522,3 @@ definitions:
         $ref: '#/definitions/VmId'
         description: The identifier of the VM.
     description: Represents a VM server location.
-  VmServerAddressList:
-    type: array
-    items:
-      $ref: '#/definitions/VmServerAddress'

@@ -1915,39 +1915,32 @@ definitions:
         $ref: '#/definitions/subscriptionARN'
         description: The ARN of the subscription to be deleted.
     description: Input for Unsubscribe action.
-  undefined: {}
+  action:
+    type: string
   ActionsList:
     type: array
     items:
       $ref: '#/definitions/action'
-  Binary:
+  topicARN:
+    type: string
+  label:
     type: string
   DelegatesList:
     type: array
     items:
       $ref: '#/definitions/delegate'
-  Endpoint:
-    type: object
-    properties:
-      EndpointArn:
-        $ref: '#/definitions/String'
-        description: EndpointArn for mobile app and device.
-      Attributes:
-        $ref: '#/definitions/MapStringToString'
-        description: Attributes for endpoint.
-    description: Endpoint for mobile app and device.
-  ListOfEndpoints:
-    type: array
-    items:
-      $ref: '#/definitions/Endpoint'
-  ListOfPlatformApplications:
-    type: array
-    items:
-      $ref: '#/definitions/PlatformApplication'
-  ListString:
-    type: array
-    items:
-      $ref: '#/definitions/String'
+  Binary:
+    type: string
+  PhoneNumber:
+    type: string
+  boolean:
+    type: boolean
+  token:
+    type: string
+  authenticateOnUnsubscribe:
+    type: string
+  subscriptionARN:
+    type: string
   String:
     type: string
   MapStringToString:
@@ -1959,6 +1952,76 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/String'
+  topicName:
+    type: string
+  TopicAttributesMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/attributeName'
+        value:
+          $ref: '#/definitions/attributeValue'
+  delegate:
+    type: string
+  Endpoint:
+    type: object
+    properties:
+      EndpointArn:
+        $ref: '#/definitions/String'
+        description: EndpointArn for mobile app and device.
+      Attributes:
+        $ref: '#/definitions/MapStringToString'
+        description: Attributes for endpoint.
+    description: Endpoint for mobile app and device.
+  ListString:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  SubscriptionAttributesMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/attributeName'
+        value:
+          $ref: '#/definitions/attributeValue'
+  ListOfEndpoints:
+    type: array
+    items:
+      $ref: '#/definitions/Endpoint'
+  PlatformApplication:
+    type: object
+    properties:
+      PlatformApplicationArn:
+        $ref: '#/definitions/String'
+        description: PlatformApplicationArn for platform application object.
+      Attributes:
+        $ref: '#/definitions/MapStringToString'
+        description: Attributes for platform application object.
+    description: Platform application object.
+  ListOfPlatformApplications:
+    type: array
+    items:
+      $ref: '#/definitions/PlatformApplication'
+  string:
+    type: string
+  PhoneNumberList:
+    type: array
+    items:
+      $ref: '#/definitions/PhoneNumber'
+  nextToken:
+    type: string
+  SubscriptionsList:
+    type: array
+    items:
+      $ref: '#/definitions/Subscription'
+  TopicsList:
+    type: array
+    items:
+      $ref: '#/definitions/Topic'
   MessageAttributeValue:
     type: object
     required:
@@ -1983,22 +2046,24 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/MessageAttributeValue'
-  PhoneNumber:
+  message:
     type: string
-  PhoneNumberList:
-    type: array
-    items:
-      $ref: '#/definitions/PhoneNumber'
-  PlatformApplication:
-    type: object
-    properties:
-      PlatformApplicationArn:
-        $ref: '#/definitions/String'
-        description: PlatformApplicationArn for platform application object.
-      Attributes:
-        $ref: '#/definitions/MapStringToString'
-        description: Attributes for platform application object.
-    description: Platform application object.
+  subject:
+    type: string
+  messageStructure:
+    type: string
+  messageId:
+    type: string
+  attributeName:
+    type: string
+  attributeValue:
+    type: string
+  protocol:
+    type: string
+  endpoint:
+    type: string
+  account:
+    type: string
   Subscription:
     type: object
     properties:
@@ -2018,23 +2083,6 @@ definitions:
         $ref: '#/definitions/topicARN'
         description: The ARN of the subscription's topic.
     description: A wrapper type for the attributes of an Amazon SNS subscription.
-  attributeName:
-    type: string
-  attributeValue:
-    type: string
-  SubscriptionAttributesMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/attributeName'
-        value:
-          $ref: '#/definitions/attributeValue'
-  SubscriptionsList:
-    type: array
-    items:
-      $ref: '#/definitions/Subscription'
   Topic:
     type: object
     properties:
@@ -2042,52 +2090,3 @@ definitions:
         $ref: '#/definitions/topicARN'
         description: The topic's ARN.
     description: 'A wrapper type for the topic''s Amazon Resource Name (ARN). To retrieve a topic''s attributes, use <code>GetTopicAttributes</code>.'
-  TopicAttributesMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/attributeName'
-        value:
-          $ref: '#/definitions/attributeValue'
-  TopicsList:
-    type: array
-    items:
-      $ref: '#/definitions/Topic'
-  account:
-    type: string
-  action:
-    type: string
-  authenticateOnUnsubscribe:
-    type: string
-  boolean:
-    type: boolean
-  delegate:
-    type: string
-  endpoint:
-    type: string
-  label:
-    type: string
-  message:
-    type: string
-  messageId:
-    type: string
-  messageStructure:
-    type: string
-  nextToken:
-    type: string
-  protocol:
-    type: string
-  string:
-    type: string
-  subject:
-    type: string
-  subscriptionARN:
-    type: string
-  token:
-    type: string
-  topicARN:
-    type: string
-  topicName:
-    type: string

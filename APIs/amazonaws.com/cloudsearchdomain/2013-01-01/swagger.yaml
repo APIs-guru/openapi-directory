@@ -296,7 +296,10 @@ definitions:
     type: integer
   Blob:
     type: string
-  undefined: {}
+  String:
+    type: string
+  Long:
+    type: integer
   Bucket:
     type: object
     properties:
@@ -307,6 +310,10 @@ definitions:
         $ref: '#/definitions/Long'
         description: The number of hits that contain the facet value in the specified facet field.
     description: 'A container for facet information. '
+  BucketList:
+    type: array
+    items:
+      $ref: '#/definitions/Bucket'
   BucketInfo:
     type: object
     properties:
@@ -314,10 +321,6 @@ definitions:
         $ref: '#/definitions/BucketList'
         description: A list of the calculated facet values and counts.
     description: A container for the calculated facet values and counts.
-  BucketList:
-    type: array
-    items:
-      $ref: '#/definitions/Bucket'
   ContentType:
     type: string
     enum:
@@ -342,8 +345,6 @@ definitions:
     type: number
     format: double
   Expr:
-    type: string
-  String:
     type: string
   Exprs:
     type: array
@@ -455,8 +456,6 @@ definitions:
         $ref: '#/definitions/HitList'
         description: A document that matches the search request.
     description: The collection of documents that match the search request.
-  Long:
-    type: integer
   Partial:
     type: boolean
   Query:
@@ -472,6 +471,14 @@ definitions:
       - dismax
   Return:
     type: string
+  Size:
+    type: integer
+  Sort:
+    type: string
+  Start:
+    type: integer
+  Stat:
+    type: string
   SearchStatus:
     type: object
     properties:
@@ -482,14 +489,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The encrypted resource ID for the request.
     description: Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).
-  Size:
-    type: integer
-  Sort:
-    type: string
-  Start:
-    type: integer
-  Stat:
-    type: string
   Stats:
     type: array
     description: The statistics calculated in the request.
@@ -500,6 +499,10 @@ definitions:
           $ref: '#/definitions/String'
         value:
           $ref: '#/definitions/FieldStats'
+  Suggestions:
+    type: array
+    items:
+      $ref: '#/definitions/SuggestionMatch'
   SuggestModel:
     type: object
     properties:
@@ -513,6 +516,10 @@ definitions:
         $ref: '#/definitions/Suggestions'
         description: The documents that match the query string.
     description: Container for the suggestion information returned in a <code>SuggestResponse</code>.
+  Suggester:
+    type: string
+  SuggestionsSize:
+    type: integer
   SuggestStatus:
     type: object
     properties:
@@ -523,8 +530,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The encrypted resource ID for the request.
     description: Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).
-  Suggester:
-    type: string
   SuggestionMatch:
     type: object
     properties:
@@ -538,9 +543,3 @@ definitions:
         $ref: '#/definitions/String'
         description: The document ID of the suggested document.
     description: 'An autocomplete suggestion that matches the query string specified in a <code>SuggestRequest</code>. '
-  Suggestions:
-    type: array
-    items:
-      $ref: '#/definitions/SuggestionMatch'
-  SuggestionsSize:
-    type: integer

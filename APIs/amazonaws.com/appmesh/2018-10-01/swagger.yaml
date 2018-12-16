@@ -1545,9 +1545,46 @@ definitions:
     description: ''
   ServiceName:
     type: string
-  undefined: {}
+  MeshData:
+    type: object
+    required:
+      - meshName
+      - metadata
+    properties:
+      meshName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the service mesh.
+      metadata:
+        $ref: '#/definitions/ResourceMetadata'
+        description: The associated metadata for the service mesh.
+      status:
+        $ref: '#/definitions/MeshStatus'
+        description: The status of the service mesh.
+    description: An object representing a service mesh returned by a describe operation.
   Long:
     type: integer
+  VirtualRouterData:
+    type: object
+    required:
+      - meshName
+      - virtualRouterName
+    properties:
+      meshName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the service mesh in which the virtual router resides.
+      metadata:
+        $ref: '#/definitions/ResourceMetadata'
+        description: The associated metadata for the virtual router.
+      spec:
+        $ref: '#/definitions/VirtualRouterSpec'
+        description: The specifications of the virtual router.
+      status:
+        $ref: '#/definitions/VirtualRouterStatus'
+        description: The current status of the virtual router.
+      virtualRouterName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the virtual router.
+    description: An object representing a virtual router returned by a describe operation.
   MeshStatusCode:
     type: string
     enum:
@@ -1558,6 +1595,14 @@ definitions:
     type: integer
     minimum: 1
     maximum: 65535
+  ResourceName:
+    type: string
+    minLength: 1
+    maxLength: 255
+  PercentInt:
+    type: integer
+    minimum: 0
+    maximum: 100
   WeightedTarget:
     type: object
     properties:
@@ -1572,25 +1617,6 @@ definitions:
                targets according to their relative weight. For example, a weighted target with a relative
                weight of 50 receives five times as much traffic as one with a relative weight of
                10.
-  VirtualNodeList:
-    type: array
-    items:
-      $ref: '#/definitions/VirtualNodeRef'
-  RouteList:
-    type: array
-    items:
-      $ref: '#/definitions/RouteRef'
-  ListVirtualRoutersLimit:
-    type: integer
-    minimum: 1
-    maximum: 100
-  DnsServiceDiscovery:
-    type: object
-    properties:
-      serviceName:
-        $ref: '#/definitions/ServiceName'
-        description: The DNS service name for your virtual node.
-    description: The DNS service discovery information for your virtual node.
   VirtualNodeRef:
     type: object
     properties:
@@ -1604,104 +1630,10 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: The name of the virtual node.
     description: An object representing a virtual node returned by a list operation.
-  ServiceDiscovery:
-    type: object
-    properties:
-      dns:
-        $ref: '#/definitions/DnsServiceDiscovery'
-        description: Specifies the DNS service name for the virtual node.
-    description: An object representing the service discovery information for a virtual node.
-  MeshStatus:
-    type: object
-    properties:
-      status:
-        $ref: '#/definitions/MeshStatusCode'
-        description: The current mesh status.
-    description: An object representing the status of a service mesh.
-  VirtualNodeData:
-    type: object
-    required:
-      - meshName
-      - virtualNodeName
-    properties:
-      meshName:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the service mesh in which the virtual node resides.
-      metadata:
-        $ref: '#/definitions/ResourceMetadata'
-        description: The associated metadata for the virtual node.
-      spec:
-        $ref: '#/definitions/VirtualNodeSpec'
-        description: The specifications of the virtual node.
-      status:
-        $ref: '#/definitions/VirtualNodeStatus'
-        description: The current status for the virtual node.
-      virtualNodeName:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the virtual node.
-    description: An object representing a virtual node returned by a describe operation.
-  VirtualNodeSpec:
-    type: object
-    properties:
-      backends:
-        $ref: '#/definitions/Backends'
-        description: The backends to which the virtual node is expected to send outbound traffic.
-      listeners:
-        $ref: '#/definitions/Listeners'
-        description: The listeners from which the virtual node is expected to receive inbound traffic.
-      serviceDiscovery:
-        $ref: '#/definitions/ServiceDiscovery'
-        description: The service discovery information for the virtual node.
-    description: An object representing the specification of a virtual node.
-  ServiceNames:
+  VirtualNodeList:
     type: array
     items:
-      $ref: '#/definitions/ServiceName'
-    maxItems: 10
-  DurationMillis:
-    type: integer
-  NonNegativeInt:
-    type: integer
-    minimum: 0
-  MeshRef:
-    type: object
-    properties:
-      arn:
-        $ref: '#/definitions/Arn'
-        description: The full Amazon Resource Name (ARN) of the service mesh.
-      meshName:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the service mesh.
-    description: An object representing a service mesh returned by a list operation.
-  HttpRouteAction:
-    type: object
-    properties:
-      weightedTargets:
-        $ref: '#/definitions/WeightedTargets'
-        description: |-
-          The targets that traffic is routed to when a request matches the route. You can specify
-                   one or more targets and their relative weights with which to distribute traffic.
-    description: |-
-      An object representing the traffic distribution requirements for matched HTTP
-               requests.
-  RouteStatus:
-    type: object
-    properties:
-      status:
-        $ref: '#/definitions/RouteStatusCode'
-        description: The current status for the route.
-    description: An object representing the current status of a route.
-  VirtualRouterStatus:
-    type: object
-    properties:
-      status:
-        $ref: '#/definitions/VirtualRouterStatusCode'
-        description: The current status of the virtual router.
-    description: 'An object representing the status of a virtual router. '
-  ResourceName:
-    type: string
-    minLength: 1
-    maxLength: 255
+      $ref: '#/definitions/VirtualNodeRef'
   RouteData:
     type: object
     required:
@@ -1728,64 +1660,53 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: The virtual router with which the route is associated.
     description: An object representing a route returned by a describe operation.
-  Arn:
-    type: string
-  Listeners:
-    type: array
-    items:
-      $ref: '#/definitions/Listener'
-  HttpRoute:
-    type: object
-    properties:
-      action:
-        $ref: '#/definitions/HttpRouteAction'
-        description: The action to take if a match is determined.
-      match:
-        $ref: '#/definitions/HttpRouteMatch'
-        description: The criteria for determining an HTTP request match.
-    description: An object representing the HTTP routing specification for a route.
-  Timestamp:
-    type: string
-    format: date-time
-  RouteSpec:
-    type: object
-    properties:
-      httpRoute:
-        $ref: '#/definitions/HttpRoute'
-        description: The HTTP routing information for the route.
-    description: An object representing the specification of a route.
-  VirtualRouterRef:
+  RouteRef:
     type: object
     properties:
       arn:
         $ref: '#/definitions/Arn'
-        description: The full Amazon Resource Name (ARN) for the virtual router.
+        description: The full Amazon Resource Name (ARN) for the route.
       meshName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the service mesh in which the virtual router resides.
+        description: The name of the service mesh in which the route resides.
+      routeName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the route.
       virtualRouterName:
         $ref: '#/definitions/ResourceName'
-        description: The name of the virtual router.
-    description: An object representing a virtual router returned by a list operation.
-  VirtualRouterStatusCode:
-    type: string
-    enum:
-      - ACTIVE
-      - DELETED
-      - INACTIVE
-  ListRoutesLimit:
+        description: The virtual router with which the route is associated.
+    description: An object representing a route returned by a list operation.
+  RouteList:
+    type: array
+    items:
+      $ref: '#/definitions/RouteRef'
+  ListVirtualRoutersLimit:
     type: integer
     minimum: 1
     maximum: 100
-  PortProtocol:
+  DnsServiceDiscovery:
+    type: object
+    properties:
+      serviceName:
+        $ref: '#/definitions/ServiceName'
+        description: The DNS service name for your virtual node.
+    description: The DNS service discovery information for your virtual node.
+  Arn:
     type: string
-    enum:
-      - http
-      - tcp
-  MeshList:
-    type: array
-    items:
-      $ref: '#/definitions/MeshRef'
+  ServiceDiscovery:
+    type: object
+    properties:
+      dns:
+        $ref: '#/definitions/DnsServiceDiscovery'
+        description: Specifies the DNS service name for the virtual node.
+    description: An object representing the service discovery information for a virtual node.
+  MeshStatus:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/MeshStatusCode'
+        description: The current mesh status.
+    description: An object representing the status of a service mesh.
   ResourceMetadata:
     type: object
     properties:
@@ -1819,6 +1740,209 @@ definitions:
           The version of the resource. Resources are created at version 1, and this version is
                    incremented each time they are updated.
     description: An object representing metadata for a resource.
+  VirtualNodeSpec:
+    type: object
+    properties:
+      backends:
+        $ref: '#/definitions/Backends'
+        description: The backends to which the virtual node is expected to send outbound traffic.
+      listeners:
+        $ref: '#/definitions/Listeners'
+        description: The listeners from which the virtual node is expected to receive inbound traffic.
+      serviceDiscovery:
+        $ref: '#/definitions/ServiceDiscovery'
+        description: The service discovery information for the virtual node.
+    description: An object representing the specification of a virtual node.
+  VirtualNodeStatus:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/VirtualNodeStatusCode'
+        description: The current status of the virtual node.
+    description: An object representing the current status of the virtual node.
+  VirtualNodeData:
+    type: object
+    required:
+      - meshName
+      - virtualNodeName
+    properties:
+      meshName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the service mesh in which the virtual node resides.
+      metadata:
+        $ref: '#/definitions/ResourceMetadata'
+        description: The associated metadata for the virtual node.
+      spec:
+        $ref: '#/definitions/VirtualNodeSpec'
+        description: The specifications of the virtual node.
+      status:
+        $ref: '#/definitions/VirtualNodeStatus'
+        description: The current status for the virtual node.
+      virtualNodeName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the virtual node.
+    description: An object representing a virtual node returned by a describe operation.
+  Backends:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceName'
+  Listeners:
+    type: array
+    items:
+      $ref: '#/definitions/Listener'
+  ServiceNames:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceName'
+    maxItems: 10
+  DurationMillis:
+    type: integer
+  NonNegativeInt:
+    type: integer
+    minimum: 0
+  MeshRef:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The full Amazon Resource Name (ARN) of the service mesh.
+      meshName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the service mesh.
+    description: An object representing a service mesh returned by a list operation.
+  WeightedTargets:
+    type: array
+    items:
+      $ref: '#/definitions/WeightedTarget'
+  HttpRouteAction:
+    type: object
+    properties:
+      weightedTargets:
+        $ref: '#/definitions/WeightedTargets'
+        description: |-
+          The targets that traffic is routed to when a request matches the route. You can specify
+                   one or more targets and their relative weights with which to distribute traffic.
+    description: |-
+      An object representing the traffic distribution requirements for matched HTTP
+               requests.
+  String:
+    type: string
+  VirtualRouterSpec:
+    type: object
+    properties:
+      serviceNames:
+        $ref: '#/definitions/ServiceNames'
+        description: The service mesh service names to associate with the virtual router.
+    description: An object representing the specification of a virtual router.
+  RouteStatusCode:
+    type: string
+    enum:
+      - ACTIVE
+      - DELETED
+      - INACTIVE
+  RouteStatus:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/RouteStatusCode'
+        description: The current status for the route.
+    description: An object representing the current status of a route.
+  ListMeshesLimit:
+    type: integer
+    minimum: 1
+    maximum: 100
+  VirtualRouterStatusCode:
+    type: string
+    enum:
+      - ACTIVE
+      - DELETED
+      - INACTIVE
+  VirtualRouterStatus:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/VirtualRouterStatusCode'
+        description: The current status of the virtual router.
+    description: 'An object representing the status of a virtual router. '
+  MeshList:
+    type: array
+    items:
+      $ref: '#/definitions/MeshRef'
+  RouteSpec:
+    type: object
+    properties:
+      httpRoute:
+        $ref: '#/definitions/HttpRoute'
+        description: The HTTP routing information for the route.
+    description: An object representing the specification of a route.
+  Listener:
+    type: object
+    properties:
+      healthCheck:
+        $ref: '#/definitions/HealthCheckPolicy'
+        description: |-
+          <p>The health check information for the listener.</p>
+                   <note>
+                      <p>Listener health checks are not available during the App Mesh preview.</p>
+                   </note>
+      portMapping:
+        $ref: '#/definitions/PortMapping'
+        description: The port mapping information for the listener.
+    description: An object representing a listener for a virtual node.
+  ListRoutesLimit:
+    type: integer
+    minimum: 1
+    maximum: 100
+  HttpRouteMatch:
+    type: object
+    properties:
+      prefix:
+        $ref: '#/definitions/String'
+        description: |-
+          Specifies the path with which to match requests. This parameter must always start with
+                      <code>/</code>, which by itself matches all requests to the virtual router service name.
+                   You can also match for path-based routing of requests. For example, if your virtual router
+                   service name is <code>my-service.local</code>, and you want the route to match requests to
+                      <code>my-service.local/metrics</code>, then your prefix should be
+                   <code>/metrics</code>.
+    description: |-
+      An object representing the requirements for a route to match HTTP requests for a virtual
+               router.
+  HttpRoute:
+    type: object
+    properties:
+      action:
+        $ref: '#/definitions/HttpRouteAction'
+        description: The action to take if a match is determined.
+      match:
+        $ref: '#/definitions/HttpRouteMatch'
+        description: The criteria for determining an HTTP request match.
+    description: An object representing the HTTP routing specification for a route.
+  Timestamp:
+    type: string
+    format: date-time
+  VirtualRouterRef:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/Arn'
+        description: The full Amazon Resource Name (ARN) for the virtual router.
+      meshName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the service mesh in which the virtual router resides.
+      virtualRouterName:
+        $ref: '#/definitions/ResourceName'
+        description: The name of the virtual router.
+    description: An object representing a virtual router returned by a list operation.
+  VirtualRouterList:
+    type: array
+    items:
+      $ref: '#/definitions/VirtualRouterRef'
+  PortProtocol:
+    type: string
+    enum:
+      - http
+      - tcp
   PortMapping:
     type: object
     properties:
@@ -1835,63 +1959,6 @@ definitions:
       - ACTIVE
       - DELETED
       - INACTIVE
-  VirtualRouterSpec:
-    type: object
-    properties:
-      serviceNames:
-        $ref: '#/definitions/ServiceNames'
-        description: The service mesh service names to associate with the virtual router.
-    description: An object representing the specification of a virtual router.
-  PercentInt:
-    type: integer
-    minimum: 0
-    maximum: 100
-  ListMeshesLimit:
-    type: integer
-    minimum: 1
-    maximum: 100
-  VirtualRouterData:
-    type: object
-    required:
-      - meshName
-      - virtualRouterName
-    properties:
-      meshName:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the service mesh in which the virtual router resides.
-      metadata:
-        $ref: '#/definitions/ResourceMetadata'
-        description: The associated metadata for the virtual router.
-      spec:
-        $ref: '#/definitions/VirtualRouterSpec'
-        description: The specifications of the virtual router.
-      status:
-        $ref: '#/definitions/VirtualRouterStatus'
-        description: The current status of the virtual router.
-      virtualRouterName:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the virtual router.
-    description: An object representing a virtual router returned by a describe operation.
-  VirtualRouterList:
-    type: array
-    items:
-      $ref: '#/definitions/VirtualRouterRef'
-  Listener:
-    type: object
-    properties:
-      healthCheck:
-        $ref: '#/definitions/HealthCheckPolicy'
-        description: |-
-          <p>The health check information for the listener.</p>
-                   <note>
-                      <p>Listener health checks are not available during the App Mesh preview.</p>
-                   </note>
-      portMapping:
-        $ref: '#/definitions/PortMapping'
-        description: The port mapping information for the listener.
-    description: An object representing a listener for a virtual node.
-  String:
-    type: string
   HealthCheckPolicy:
     type: object
     properties:
@@ -1927,75 +1994,7 @@ definitions:
                <note>
                   <p>Listener health checks are not available during the App Mesh preview.</p>
                </note>
-  MeshData:
-    type: object
-    required:
-      - meshName
-      - metadata
-    properties:
-      meshName:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the service mesh.
-      metadata:
-        $ref: '#/definitions/ResourceMetadata'
-        description: The associated metadata for the service mesh.
-      status:
-        $ref: '#/definitions/MeshStatus'
-        description: The status of the service mesh.
-    description: An object representing a service mesh returned by a describe operation.
   ListVirtualNodesLimit:
     type: integer
     minimum: 1
     maximum: 100
-  WeightedTargets:
-    type: array
-    items:
-      $ref: '#/definitions/WeightedTarget'
-  HttpRouteMatch:
-    type: object
-    properties:
-      prefix:
-        $ref: '#/definitions/String'
-        description: |-
-          Specifies the path with which to match requests. This parameter must always start with
-                      <code>/</code>, which by itself matches all requests to the virtual router service name.
-                   You can also match for path-based routing of requests. For example, if your virtual router
-                   service name is <code>my-service.local</code>, and you want the route to match requests to
-                      <code>my-service.local/metrics</code>, then your prefix should be
-                   <code>/metrics</code>.
-    description: |-
-      An object representing the requirements for a route to match HTTP requests for a virtual
-               router.
-  Backends:
-    type: array
-    items:
-      $ref: '#/definitions/ServiceName'
-  VirtualNodeStatus:
-    type: object
-    properties:
-      status:
-        $ref: '#/definitions/VirtualNodeStatusCode'
-        description: The current status of the virtual node.
-    description: An object representing the current status of the virtual node.
-  RouteRef:
-    type: object
-    properties:
-      arn:
-        $ref: '#/definitions/Arn'
-        description: The full Amazon Resource Name (ARN) for the route.
-      meshName:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the service mesh in which the route resides.
-      routeName:
-        $ref: '#/definitions/ResourceName'
-        description: The name of the route.
-      virtualRouterName:
-        $ref: '#/definitions/ResourceName'
-        description: The virtual router with which the route is associated.
-    description: An object representing a route returned by a list operation.
-  RouteStatusCode:
-    type: string
-    enum:
-      - ACTIVE
-      - DELETED
-      - INACTIVE

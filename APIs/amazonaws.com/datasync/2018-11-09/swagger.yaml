@@ -1444,17 +1444,12 @@ definitions:
     type: string
     pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$'
     maxLength: 128
-  undefined: {}
   AgentArnList:
     type: array
     items:
       $ref: '#/definitions/AgentArn'
     minItems: 1
     maxItems: 64
-  AgentList:
-    type: array
-    items:
-      $ref: '#/definitions/AgentListEntry'
   AgentListEntry:
     type: object
     properties:
@@ -1468,6 +1463,15 @@ definitions:
         $ref: '#/definitions/AgentStatus'
         description: The status of the agent.
     description: Represents a single entry in a list of agents. <code>AgentListEntry</code> returns an array that contains a list of agents when the <a>ListAgents</a> operation is called.
+  AgentList:
+    type: array
+    items:
+      $ref: '#/definitions/AgentListEntry'
+  TagValue:
+    type: string
+    pattern: '^[a-zA-Z0-9\s+=._:/-]{1,256}$'
+    minLength: 1
+    maxLength: 256
   AgentStatus:
     type: string
     enum:
@@ -1481,9 +1485,24 @@ definitions:
   BytesPerSecond:
     type: integer
     minimum: -1
-  Duration:
-    type: integer
-    minimum: 0
+  TaskExecutionArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}/execution/exec-[0-9a-f]{17}$'
+    maxLength: 128
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/TagListEntry'
+    minItems: 0
+    maxItems: 55
+  Subdirectory:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-\./]+$'
+    maxLength: 4096
+  EfsFilesystemArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn):elasticfilesystem:[a-z\-0-9]*:[0-9]{12}:file-system/fs-.*$'
+    maxLength: 128
   Ec2Config:
     type: object
     required:
@@ -1497,73 +1516,14 @@ definitions:
         $ref: '#/definitions/Ec2SecurityGroupArnList'
         description: The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.
     description: '<p>The subnet and the security group that the target Amazon EFS file system uses. The subnet must have at least one mount target for that file system. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified. </p> <p>The exact relationship between security group M (of the mount target) and security group S (which you provide for DataSync to use at this stage) is as follows: </p> <ul> <li> <p> Security group M (which you associate with the mount target) must allow inbound access for the Transmission Control Protocol (TCP) on the NFS port (2049) from security group S. You can enable inbound connections either by IP address (CIDR range) or security group. </p> </li> <li> <p>Security group S (provided to DataSync to access EFS) should have a rule that enables outbound connections to the NFS port on one of the file system’s mount targets. You can enable outbound connections either by IP address (CIDR range) or security group. For information about security groups and mount targets, see <a href="https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access">Security Groups for Amazon EC2 Instances and Mount Targets</a> in the <i>Amazon EFS User Guide.</i> </p> </li> </ul>'
-  Ec2SecurityGroupArn:
-    type: string
-    pattern: '^arn:(aws|aws-cn):ec2:[a-z\-0-9]*:[0-9]{12}:security-group/.*$'
-    maxLength: 128
-  Ec2SecurityGroupArnList:
-    type: array
-    items:
-      $ref: '#/definitions/Ec2SecurityGroupArn'
-    minItems: 1
-    maxItems: 5
-  Ec2SubnetArn:
-    type: string
-    pattern: '^arn:(aws|aws-cn):ec2:[a-z\-0-9]*:[0-9]{12}:subnet/.*$'
-    maxLength: 128
-  EfsFilesystemArn:
-    type: string
-    pattern: '^arn:(aws|aws-cn):elasticfilesystem:[a-z\-0-9]*:[0-9]{12}:file-system/fs-.*$'
-    maxLength: 128
-  Gid:
-    type: string
-    enum:
-      - NONE
-      - INT_VALUE
-      - NAME
-      - BOTH
-  IamRoleArn:
-    type: string
-    pattern: '^arn:(aws|aws-cn):iam::[0-9]{12}:role/.*$'
-    maxLength: 2048
   LocationArn:
     type: string
     pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$'
     maxLength: 128
-  LocationList:
-    type: array
-    items:
-      $ref: '#/definitions/LocationListEntry'
-  LocationListEntry:
-    type: object
-    properties:
-      LocationArn:
-        $ref: '#/definitions/LocationArn'
-        description: 'The Amazon Resource Name (ARN) of the location. For Network File System (NFS) or Amazon EFS, the location is the export path. For Amazon S3, the location is the prefix path that you want to mount and use as the root of the location.'
-      LocationUri:
-        $ref: '#/definitions/LocationUri'
-        description: '<p>Represents a list of URLs of a location. <code>LocationUri</code> returns an array that contains a list of locations when the <a>ListLocations</a> operation is called.</p> <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p> <p>TYPE designates the type of location. Valid values: NFS | EFS | S3.</p> <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a host name compliant with Domain Name Service (DNS).</p> <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it''s the export path to mount the location. For Amazon S3, it''s the prefix path that you mount to and treat as the root of the location.</p> <p/>'
-    description: Represents a single entry in a list of locations. <code>LocationListEntry</code> returns an array that contains a list of locations when the <a>ListLocations</a> operation is called.
-  LocationUri:
+  ServerHostname:
     type: string
-    pattern: '(efs|nfs|s3)://[a-zA-Z0-9.\-]+'
-  LogGroupArn:
-    type: string
-    pattern: '^arn:(aws|aws-cn):logs:[a-z\-0-9]*:[0-9]{12}:log-group:([^:\*]*)$'
-    maxLength: 562
-  MaxResults:
-    type: integer
-    minimum: 0
-    maximum: 100
-  Mtime:
-    type: string
-    enum:
-      - NONE
-      - PRESERVE
-  NextToken:
-    type: string
-    pattern: '[a-zA-Z0-9=_-]+'
-    maxLength: 93
+    pattern: '^(([a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9\-]*[A-Za-z0-9])$'
+    maxLength: 255
   OnPremConfig:
     type: object
     required:
@@ -1573,6 +1533,23 @@ definitions:
         $ref: '#/definitions/AgentArnList'
         description: ARNs)of the agents to use for an NFS location.
     description: A list of Amazon Resource Names (ARNs) of agents to use for a Network File System (NFS) location.
+  S3BucketArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn):s3:::([^/]*)$'
+    maxLength: 76
+  S3Config:
+    type: object
+    required:
+      - BucketAccessRoleArn
+    properties:
+      BucketAccessRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: 'The Amazon S3 bucket to access. This bucket is used as a parameter in the <a>CreateLocationS3</a> operation. '
+    description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket. For detailed information about using such a role, see <a href="https://alpha-aws-docs.aws.amazon.com/sync-service/latest/userguide/create-locations-cli.html#create-location-s3-cli">Components and Terminology</a> in the <i>AWS DataSync User Guide</i>.'
+  LogGroupArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn):logs:[a-z\-0-9]*:[0-9]{12}:log-group:([^:\*]*)$'
+    maxLength: 562
   Options:
     type: object
     properties:
@@ -1604,107 +1581,27 @@ definitions:
         $ref: '#/definitions/BytesPerSecond'
         description: 'A value that limits the bandwidth used by AWS DataSync. For example, if you want AWS DataSync to use a maximum of 1 MB, set this value to <code>1048576</code> (<code>=1024*1024</code>).'
     description: '<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don''t specify an option in <a>StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a>StartTaskExecution</a>.</p>'
-  PhaseStatus:
-    type: string
-    enum:
-      - PENDING
-      - SUCCESS
-      - ERROR
-  PosixPermissions:
-    type: string
-    enum:
-      - NONE
-      - BEST_EFFORT
-      - PRESERVE
-  PreserveDeletedFiles:
-    type: string
-    enum:
-      - PRESERVE
-      - REMOVE
-  PreserveDevices:
-    type: string
-    enum:
-      - NONE
-      - PRESERVE
-  S3BucketArn:
-    type: string
-    pattern: '^arn:(aws|aws-cn):s3:::([^/]*)$'
-    maxLength: 76
-  S3Config:
-    type: object
-    required:
-      - BucketAccessRoleArn
-    properties:
-      BucketAccessRoleArn:
-        $ref: '#/definitions/IamRoleArn'
-        description: 'The Amazon S3 bucket to access. This bucket is used as a parameter in the <a>CreateLocationS3</a> operation. '
-    description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket. For detailed information about using such a role, see <a href="https://alpha-aws-docs.aws.amazon.com/sync-service/latest/userguide/create-locations-cli.html#create-location-s3-cli">Components and Terminology</a> in the <i>AWS DataSync User Guide</i>.'
-  ServerHostname:
-    type: string
-    pattern: '^(([a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9\-]*[A-Za-z0-9])$'
-    maxLength: 255
-  Subdirectory:
-    type: string
-    pattern: '^[a-zA-Z0-9_\-\./]+$'
-    maxLength: 4096
-  TagKey:
-    type: string
-    pattern: '^[a-zA-Z0-9\s+=._:/-]{1,128}$'
-    minLength: 1
-    maxLength: 256
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-    minItems: 1
-    maxItems: 50
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/TagListEntry'
-    minItems: 0
-    maxItems: 55
-  TagListEntry:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/TagKey'
-        description: The key for an AWS resource tag.
-      Value:
-        $ref: '#/definitions/TagValue'
-        description: The value for an AWS resource tag.
-    description: Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a>ListTagsForResource</a> operation is called.
-  TagValue:
-    type: string
-    pattern: '^[a-zA-Z0-9\s+=._:/-]{1,256}$'
-    minLength: 1
-    maxLength: 256
-  TaggableResourceArn:
-    type: string
-    pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$'
-    maxLength: 128
   TaskArn:
     type: string
     pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$'
     maxLength: 128
-  TaskExecutionArn:
+  Time:
     type: string
-    pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}/execution/exec-[0-9a-f]{17}$'
-    maxLength: 128
-  TaskExecutionList:
-    type: array
-    items:
-      $ref: '#/definitions/TaskExecutionListEntry'
-  TaskExecutionListEntry:
-    type: object
-    properties:
-      TaskExecutionArn:
-        $ref: '#/definitions/TaskExecutionArn'
-        description: The Amazon Resource Name (ARN) of the task that was executed.
-      Status:
-        $ref: '#/definitions/TaskExecutionStatus'
-        description: The status of a task execution.
-    description: Represents a single entry in a list of task executions. <code>TaskExecutionListEntry</code> returns an array that contains a list of specific invocations of a task when <a>ListTaskExecutions</a> operation is called.
+    format: date-time
+  LocationUri:
+    type: string
+    pattern: '(efs|nfs|s3)://[a-zA-Z0-9.\-]+'
+  TaskExecutionStatus:
+    type: string
+    enum:
+      - LAUNCHING
+      - PREPARING
+      - TRANSFERRING
+      - VERIFYING
+      - SUCCESS
+      - ERROR
+  long:
+    type: integer
   TaskExecutionResultDetail:
     type: object
     properties:
@@ -1733,19 +1630,147 @@ definitions:
         $ref: '#/definitions/string'
         description: 'Detailed description of an error that was encountered during the task execution. You can use this information to help troubleshoot issues. '
     description: 'Describes the detailed result of a <code>TaskExecution</code> operation. This result includes the time in milliseconds spent in each phase, the status of the task execution, and the errors encountered.'
-  TaskExecutionStatus:
+  TaskStatus:
     type: string
     enum:
-      - LAUNCHING
-      - PREPARING
-      - TRANSFERRING
-      - VERIFYING
-      - SUCCESS
-      - ERROR
+      - AVAILABLE
+      - CREATING
+      - RUNNING
+      - UNAVAILABLE
+  string:
+    type: string
+  Duration:
+    type: integer
+    minimum: 0
+  Ec2SubnetArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn):ec2:[a-z\-0-9]*:[0-9]{12}:subnet/.*$'
+    maxLength: 128
+  Ec2SecurityGroupArnList:
+    type: array
+    items:
+      $ref: '#/definitions/Ec2SecurityGroupArn'
+    minItems: 1
+    maxItems: 5
+  Ec2SecurityGroupArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn):ec2:[a-z\-0-9]*:[0-9]{12}:security-group/.*$'
+    maxLength: 128
+  Gid:
+    type: string
+    enum:
+      - NONE
+      - INT_VALUE
+      - NAME
+      - BOTH
+  IamRoleArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn):iam::[0-9]{12}:role/.*$'
+    maxLength: 2048
+  MaxResults:
+    type: integer
+    minimum: 0
+    maximum: 100
+  NextToken:
+    type: string
+    pattern: '[a-zA-Z0-9=_-]+'
+    maxLength: 93
+  LocationList:
+    type: array
+    items:
+      $ref: '#/definitions/LocationListEntry'
+  TaggableResourceArn:
+    type: string
+    pattern: '^arn:(aws|aws-cn):datasync:[a-z\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$'
+    maxLength: 128
+  TaskExecutionList:
+    type: array
+    items:
+      $ref: '#/definitions/TaskExecutionListEntry'
   TaskList:
     type: array
     items:
       $ref: '#/definitions/TaskListEntry'
+  LocationListEntry:
+    type: object
+    properties:
+      LocationArn:
+        $ref: '#/definitions/LocationArn'
+        description: 'The Amazon Resource Name (ARN) of the location. For Network File System (NFS) or Amazon EFS, the location is the export path. For Amazon S3, the location is the prefix path that you want to mount and use as the root of the location.'
+      LocationUri:
+        $ref: '#/definitions/LocationUri'
+        description: '<p>Represents a list of URLs of a location. <code>LocationUri</code> returns an array that contains a list of locations when the <a>ListLocations</a> operation is called.</p> <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p> <p>TYPE designates the type of location. Valid values: NFS | EFS | S3.</p> <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a host name compliant with Domain Name Service (DNS).</p> <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it''s the export path to mount the location. For Amazon S3, it''s the prefix path that you mount to and treat as the root of the location.</p> <p/>'
+    description: Represents a single entry in a list of locations. <code>LocationListEntry</code> returns an array that contains a list of locations when the <a>ListLocations</a> operation is called.
+  Mtime:
+    type: string
+    enum:
+      - NONE
+      - PRESERVE
+  VerifyMode:
+    type: string
+    enum:
+      - POINT_IN_TIME_CONSISTENT
+      - NONE
+  Uid:
+    type: string
+    enum:
+      - NONE
+      - INT_VALUE
+      - NAME
+      - BOTH
+  PreserveDeletedFiles:
+    type: string
+    enum:
+      - PRESERVE
+      - REMOVE
+  PreserveDevices:
+    type: string
+    enum:
+      - NONE
+      - PRESERVE
+  PosixPermissions:
+    type: string
+    enum:
+      - NONE
+      - BEST_EFFORT
+      - PRESERVE
+  PhaseStatus:
+    type: string
+    enum:
+      - PENDING
+      - SUCCESS
+      - ERROR
+  TagKey:
+    type: string
+    pattern: '^[a-zA-Z0-9\s+=._:/-]{1,128}$'
+    minLength: 1
+    maxLength: 256
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+    minItems: 1
+    maxItems: 50
+  TagListEntry:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: The key for an AWS resource tag.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The value for an AWS resource tag.
+    description: Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a>ListTagsForResource</a> operation is called.
+  TaskExecutionListEntry:
+    type: object
+    properties:
+      TaskExecutionArn:
+        $ref: '#/definitions/TaskExecutionArn'
+        description: The Amazon Resource Name (ARN) of the task that was executed.
+      Status:
+        $ref: '#/definitions/TaskExecutionStatus'
+        description: The status of a task execution.
+    description: Represents a single entry in a list of task executions. <code>TaskExecutionListEntry</code> returns an array that contains a list of specific invocations of a task when <a>ListTaskExecutions</a> operation is called.
   TaskListEntry:
     type: object
     properties:
@@ -1759,29 +1784,3 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The name of the task.
     description: Represents a single entry in a list of tasks. <code>TaskListEntry</code> returns an array that contains a list of tasks when the <a>ListTasks</a> operation is called. A task includes the source and destination file systems to sync and the options to use for the tasks.
-  TaskStatus:
-    type: string
-    enum:
-      - AVAILABLE
-      - CREATING
-      - RUNNING
-      - UNAVAILABLE
-  Time:
-    type: string
-    format: date-time
-  Uid:
-    type: string
-    enum:
-      - NONE
-      - INT_VALUE
-      - NAME
-      - BOTH
-  VerifyMode:
-    type: string
-    enum:
-      - POINT_IN_TIME_CONSISTENT
-      - NONE
-  long:
-    type: integer
-  string:
-    type: string

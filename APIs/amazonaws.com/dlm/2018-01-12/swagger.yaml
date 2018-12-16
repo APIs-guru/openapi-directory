@@ -360,7 +360,44 @@ definitions:
     type: integer
     minimum: 1
     maximum: 1000
-  undefined: {}
+  ExecutionRoleArn:
+    type: string
+  PolicyDescription:
+    type: string
+    minLength: 0
+    maxLength: 500
+  SettablePolicyStateValues:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+  PolicyDetails:
+    type: object
+    properties:
+      ResourceTypes:
+        $ref: '#/definitions/ResourceTypeValuesList'
+        description: The resource type.
+      TargetTags:
+        $ref: '#/definitions/TargetTagList'
+        description: The single tag that identifies targeted resources for this policy.
+      Schedules:
+        $ref: '#/definitions/ScheduleList'
+        description: The schedule of policy-defined actions.
+    description: Specifies the configuration of a lifecycle policy.
+  PolicyId:
+    type: string
+  Interval:
+    type: integer
+    minimum: 1
+  IntervalUnitValues:
+    type: string
+    enum:
+      - HOURS
+  TimesList:
+    type: array
+    items:
+      $ref: '#/definitions/Time'
+    maxItems: 1
   CreateRule:
     type: object
     required:
@@ -377,21 +414,38 @@ definitions:
         $ref: '#/definitions/TimesList'
         description: '<p>The time, in UTC, to start the operation.</p> <p>The operation occurs within a one-hour window following the specified time.</p>'
     description: Specifies when to create snapshots of EBS volumes.
-  ExecutionRoleArn:
-    type: string
+  PolicyIdList:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyId'
   GettablePolicyStateValues:
     type: string
     enum:
       - ENABLED
       - DISABLED
       - ERROR
-  Interval:
-    type: integer
-    minimum: 1
-  IntervalUnitValues:
-    type: string
-    enum:
-      - HOURS
+  ResourceTypeValuesList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceTypeValues'
+    minItems: 1
+    maxItems: 1
+  TargetTagsFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
+    minItems: 1
+    maxItems: 50
+  TagsToAddFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
+    minItems: 0
+    maxItems: 50
+  LifecyclePolicySummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/LifecyclePolicySummary'
   LifecyclePolicy:
     type: object
     properties:
@@ -417,6 +471,9 @@ definitions:
         $ref: '#/definitions/PolicyDetails'
         description: The configuration of the lifecycle policy
     description: Detailed information about a lifecycle policy.
+  Timestamp:
+    type: string
+    format: date-time
   LifecyclePolicySummary:
     type: object
     properties:
@@ -430,43 +487,22 @@ definitions:
         $ref: '#/definitions/GettablePolicyStateValues'
         description: The activation state of the lifecycle policy.
     description: Summary information about a lifecycle policy.
-  LifecyclePolicySummaryList:
+  TargetTagList:
     type: array
     items:
-      $ref: '#/definitions/LifecyclePolicySummary'
-  PolicyDescription:
-    type: string
-    minLength: 0
-    maxLength: 500
-  PolicyDetails:
-    type: object
-    properties:
-      ResourceTypes:
-        $ref: '#/definitions/ResourceTypeValuesList'
-        description: The resource type.
-      TargetTags:
-        $ref: '#/definitions/TargetTagList'
-        description: The single tag that identifies targeted resources for this policy.
-      Schedules:
-        $ref: '#/definitions/ScheduleList'
-        description: The schedule of policy-defined actions.
-    description: Specifies the configuration of a lifecycle policy.
-  PolicyId:
-    type: string
-  PolicyIdList:
+      $ref: '#/definitions/Tag'
+    minItems: 1
+    maxItems: 50
+  ScheduleList:
     type: array
     items:
-      $ref: '#/definitions/PolicyId'
+      $ref: '#/definitions/Schedule'
+    minItems: 1
+    maxItems: 1
   ResourceTypeValues:
     type: string
     enum:
       - VOLUME
-  ResourceTypeValuesList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceTypeValues'
-    minItems: 1
-    maxItems: 1
   RetainRule:
     type: object
     required:
@@ -476,6 +512,16 @@ definitions:
         $ref: '#/definitions/Count'
         description: 'The number of snapshots to keep for each volume, up to a maximum of 1000.'
     description: Specifies the number of snapshots to keep for each EBS volume.
+  ScheduleName:
+    type: string
+    minLength: 0
+    maxLength: 500
+  TagsToAddList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 50
   Schedule:
     type: object
     properties:
@@ -494,21 +540,6 @@ definitions:
         $ref: '#/definitions/RetainRule'
         description: The retain rule.
     description: Specifies a schedule.
-  ScheduleList:
-    type: array
-    items:
-      $ref: '#/definitions/Schedule'
-    minItems: 1
-    maxItems: 1
-  ScheduleName:
-    type: string
-    minLength: 0
-    maxLength: 500
-  SettablePolicyStateValues:
-    type: string
-    enum:
-      - ENABLED
-      - DISABLED
   String:
     type: string
   Tag:
@@ -526,38 +557,6 @@ definitions:
     description: Specifies a tag for a resource.
   TagFilter:
     type: string
-  TagsToAddFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/TagFilter'
-    minItems: 0
-    maxItems: 50
-  TagsToAddList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 0
-    maxItems: 50
-  TargetTagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-    maxItems: 50
-  TargetTagsFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/TagFilter'
-    minItems: 1
-    maxItems: 50
   Time:
     type: string
     pattern: '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
-  TimesList:
-    type: array
-    items:
-      $ref: '#/definitions/Time'
-    maxItems: 1
-  Timestamp:
-    type: string
-    format: date-time

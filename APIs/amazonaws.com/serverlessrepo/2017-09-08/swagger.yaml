@@ -1239,7 +1239,8 @@ definitions:
       ReadmeUrl:
         $ref: '#/definitions/__string'
         description: <p>A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
-  undefined: {}
+  __string:
+    type: string
   ApplicationDependencySummary:
     type: object
     required:
@@ -1253,6 +1254,10 @@ definitions:
         $ref: '#/definitions/__string'
         description: The semantic version of the nested application.
     description: A nested application summary.
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
   ApplicationPolicyStatement:
     type: object
     required:
@@ -1314,10 +1319,126 @@ definitions:
       - CAPABILITY_AUTO_EXPAND
       - CAPABILITY_RESOURCE_POLICY
     description: Values that must be specified in order to deploy some applications.
+  Version:
+    type: object
+    required:
+      - TemplateUrl
+      - ParameterDefinitions
+      - ResourcesSupported
+      - CreationTime
+      - RequiredCapabilities
+      - ApplicationId
+      - SemanticVersion
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: The application Amazon Resource Name (ARN).
+      CreationTime:
+        $ref: '#/definitions/__string'
+        description: The date and time this resource was created.
+      ParameterDefinitions:
+        $ref: '#/definitions/__listOfParameterDefinition'
+        description: An array of parameter types supported by the application.
+      RequiredCapabilities:
+        $ref: '#/definitions/__listOfCapability'
+        description: |-
+          <p>A list of values that you must specify before you can deploy certain applications.
+           Some applications might include resources that can affect permissions in your AWS
+           account, for example, by creating new AWS Identity and Access Management (IAM) users.
+           For those applications, you must explicitly acknowledge their capabilities by
+           specifying this parameter.</p><p>The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
+           and CAPABILITY_RESOURCE_POLICY.</p><p>The following resources require you to specify CAPABILITY_IAM or
+           CAPABILITY_NAMED_IAM:
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html">AWS::IAM::InstanceProfile</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html">AWS::IAM::Policy</a>, and
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html">AWS::IAM::Role</a>.
+           If the application contains IAM resources, you can specify either CAPABILITY_IAM
+           or CAPABILITY_NAMED_IAM. If the application contains IAM resources
+           with custom names, you must specify CAPABILITY_NAMED_IAM.</p><p>The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html">AWS::Lambda::Permission</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html">AWS::IAM:Policy</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html">AWS::ApplicationAutoScaling::ScalingPolicy</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html">AWS::S3::BucketPolicy</a>,
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html">AWS::SQS::QueuePolicy</a>, and
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS::TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
+           all permissions associated with the application before deploying. If you don't specify
+           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
+           </p>
+      ResourcesSupported:
+        $ref: '#/definitions/__boolean'
+        description: |-
+          Whether all of the AWS resources contained in this application are supported in the region
+           in which it is being retrieved.
+      SemanticVersion:
+        $ref: '#/definitions/__string'
+        description: |-
+          <p>The semantic version of the application:</p><p>
+           <a href="https://semver.org/">https://semver.org/</a>
+           </p>
+      SourceCodeUrl:
+        $ref: '#/definitions/__string'
+        description: A link to a public repository for the source code of your application.
+      TemplateUrl:
+        $ref: '#/definitions/__string'
+        description: A link to the packaged AWS SAM template of your application.
+    description: Application version details.
+  __listOfParameterDefinition:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterDefinition'
+  __listOfCapability:
+    type: array
+    items:
+      $ref: '#/definitions/Capability'
+  __boolean:
+    type: boolean
+  __listOfParameterValue:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterValue'
+  RollbackConfiguration:
+    type: object
+    properties:
+      MonitoringTimeInMinutes:
+        $ref: '#/definitions/__integer'
+        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a></i> Data Type.'
+      RollbackTriggers:
+        $ref: '#/definitions/__listOfRollbackTrigger'
+        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a></i> Data Type.'
+    description: 'This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a></i> Data Type.'
+  __listOfTag:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  Status:
+    type: string
+    enum:
+      - PREPARING
+      - ACTIVE
+      - EXPIRED
+  __listOfApplicationPolicyStatement:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationPolicyStatement'
   MaxItems:
     type: integer
     minimum: 1
     maximum: 100
+  __listOfApplicationDependencySummary:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationDependencySummary'
+  __listOfVersionSummary:
+    type: array
+    items:
+      $ref: '#/definitions/VersionSummary'
+  __listOfApplicationSummary:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationSummary'
+  __integer:
+    type: integer
   ParameterDefinition:
     type: object
     required:
@@ -1400,16 +1521,10 @@ definitions:
         $ref: '#/definitions/__string'
         description: The input value associated with the parameter.
     description: Parameter value of the application.
-  RollbackConfiguration:
-    type: object
-    properties:
-      MonitoringTimeInMinutes:
-        $ref: '#/definitions/__integer'
-        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a></i> Data Type.'
-      RollbackTriggers:
-        $ref: '#/definitions/__listOfRollbackTrigger'
-        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a></i> Data Type.'
-    description: 'This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a></i> Data Type.'
+  __listOfRollbackTrigger:
+    type: array
+    items:
+      $ref: '#/definitions/RollbackTrigger'
   RollbackTrigger:
     type: object
     required:
@@ -1423,12 +1538,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a></i> Data Type.'
     description: 'This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a></i> Data Type.'
-  Status:
-    type: string
-    enum:
-      - PREPARING
-      - ACTIVE
-      - EXPIRED
   Tag:
     type: object
     required:
@@ -1446,70 +1555,6 @@ definitions:
            </i>
            Data Type.
     description: 'This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a></i> Data Type.'
-  Version:
-    type: object
-    required:
-      - TemplateUrl
-      - ParameterDefinitions
-      - ResourcesSupported
-      - CreationTime
-      - RequiredCapabilities
-      - ApplicationId
-      - SemanticVersion
-    properties:
-      ApplicationId:
-        $ref: '#/definitions/__string'
-        description: The application Amazon Resource Name (ARN).
-      CreationTime:
-        $ref: '#/definitions/__string'
-        description: The date and time this resource was created.
-      ParameterDefinitions:
-        $ref: '#/definitions/__listOfParameterDefinition'
-        description: An array of parameter types supported by the application.
-      RequiredCapabilities:
-        $ref: '#/definitions/__listOfCapability'
-        description: |-
-          <p>A list of values that you must specify before you can deploy certain applications.
-           Some applications might include resources that can affect permissions in your AWS
-           account, for example, by creating new AWS Identity and Access Management (IAM) users.
-           For those applications, you must explicitly acknowledge their capabilities by
-           specifying this parameter.</p><p>The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
-           and CAPABILITY_RESOURCE_POLICY.</p><p>The following resources require you to specify CAPABILITY_IAM or
-           CAPABILITY_NAMED_IAM:
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html">AWS::IAM::InstanceProfile</a>,
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html">AWS::IAM::Policy</a>, and
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html">AWS::IAM::Role</a>.
-           If the application contains IAM resources, you can specify either CAPABILITY_IAM
-           or CAPABILITY_NAMED_IAM. If the application contains IAM resources
-           with custom names, you must specify CAPABILITY_NAMED_IAM.</p><p>The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html">AWS::Lambda::Permission</a>,
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html">AWS::IAM:Policy</a>,
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html">AWS::ApplicationAutoScaling::ScalingPolicy</a>,
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html">AWS::S3::BucketPolicy</a>,
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html">AWS::SQS::QueuePolicy</a>, and
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS::TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
-           all permissions associated with the application before deploying. If you don't specify
-           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
-           </p>
-      ResourcesSupported:
-        $ref: '#/definitions/__boolean'
-        description: |-
-          Whether all of the AWS resources contained in this application are supported in the region
-           in which it is being retrieved.
-      SemanticVersion:
-        $ref: '#/definitions/__string'
-        description: |-
-          <p>The semantic version of the application:</p><p>
-           <a href="https://semver.org/">https://semver.org/</a>
-           </p>
-      SourceCodeUrl:
-        $ref: '#/definitions/__string'
-        description: A link to a public repository for the source code of your application.
-      TemplateUrl:
-        $ref: '#/definitions/__string'
-        description: A link to the packaged AWS SAM template of your application.
-    description: Application version details.
   VersionSummary:
     type: object
     required:
@@ -1533,49 +1578,3 @@ definitions:
         $ref: '#/definitions/__string'
         description: A link to a public repository for the source code of your application.
     description: An application version summary.
-  __boolean:
-    type: boolean
-  __integer:
-    type: integer
-  __listOfApplicationDependencySummary:
-    type: array
-    items:
-      $ref: '#/definitions/ApplicationDependencySummary'
-  __listOfApplicationPolicyStatement:
-    type: array
-    items:
-      $ref: '#/definitions/ApplicationPolicyStatement'
-  __listOfApplicationSummary:
-    type: array
-    items:
-      $ref: '#/definitions/ApplicationSummary'
-  __listOfCapability:
-    type: array
-    items:
-      $ref: '#/definitions/Capability'
-  __listOfParameterDefinition:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterDefinition'
-  __listOfParameterValue:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterValue'
-  __listOfRollbackTrigger:
-    type: array
-    items:
-      $ref: '#/definitions/RollbackTrigger'
-  __listOfTag:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  __listOfVersionSummary:
-    type: array
-    items:
-      $ref: '#/definitions/VersionSummary'
-  __listOf__string:
-    type: array
-    items:
-      $ref: '#/definitions/__string'
-  __string:
-    type: string

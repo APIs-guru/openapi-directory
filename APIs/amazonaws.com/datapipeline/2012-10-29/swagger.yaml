@@ -1425,7 +1425,60 @@ definitions:
         $ref: '#/definitions/ParameterValueList'
         description: The parameter values used with the pipeline.
     description: Contains the parameters for ValidatePipelineDefinition.
-  undefined: {}
+  id:
+    type: string
+    minLength: 1
+    maxLength: 1024
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  ParameterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterValue'
+  timestamp:
+    type: string
+    format: date-time
+  tagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+    minItems: 0
+    maxItems: 10
+  string:
+    type: string
+    minLength: 0
+    maxLength: 1024
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  cancelActive:
+    type: boolean
+  idList:
+    type: array
+    items:
+      $ref: '#/definitions/id'
+  boolean:
+    type: boolean
+  PipelineObjectList:
+    type: array
+    items:
+      $ref: '#/definitions/PipelineObject'
+  PipelineDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/PipelineDescription'
+  longString:
+    type: string
+    minLength: 0
+    maxLength: 20971520
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  fieldNameString:
+    type: string
+    minLength: 1
+    maxLength: 256
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  fieldStringValue:
+    type: string
+    minLength: 0
+    maxLength: 10240
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   Field:
     type: object
     required:
@@ -1441,6 +1494,10 @@ definitions:
         $ref: '#/definitions/fieldNameString'
         description: 'The field value, expressed as the identifier of another object.'
     description: A key-value pair that describes a property of a pipeline object. The value is specified as either a string value (<code>StringValue</code>) or a reference to another object (<code>RefValue</code>) but not as both.
+  ParameterObjectList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterObject'
   InstanceIdentity:
     type: object
     properties:
@@ -1451,6 +1508,24 @@ definitions:
         $ref: '#/definitions/string'
         description: A signature which can be used to verify the accuracy and authenticity of the information provided in the instance identity document.
     description: '<p><p>Identity information for the EC2 instance that is hosting the task runner. You can get this value by calling a metadata URI from the EC2 instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> Passing in this value proves that your task runner is running on an EC2 instance, and ensures the proper AWS Data Pipeline service charges are applied to your pipeline.</p></p>'
+  errorMessage:
+    type: string
+  pipelineList:
+    type: array
+    items:
+      $ref: '#/definitions/PipelineIdName'
+  OperatorType:
+    type: string
+    enum:
+      - EQ
+      - REF_EQ
+      - LE
+      - GE
+      - BETWEEN
+  stringList:
+    type: array
+    items:
+      $ref: '#/definitions/string'
   Operator:
     type: object
     properties:
@@ -1461,14 +1536,16 @@ definitions:
         $ref: '#/definitions/stringList'
         description: The value that the actual field value will be compared with.
     description: Contains a logical operation for comparing the value of a field with a specified value.
-  OperatorType:
+  attributeNameString:
     type: string
-    enum:
-      - EQ
-      - REF_EQ
-      - LE
-      - GE
-      - BETWEEN
+    minLength: 1
+    maxLength: 256
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  attributeValueString:
+    type: string
+    minLength: 0
+    maxLength: 10240
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   ParameterAttribute:
     type: object
     required:
@@ -1499,10 +1576,6 @@ definitions:
         $ref: '#/definitions/ParameterAttributeList'
         description: The attributes of the parameter object.
     description: Contains information about a parameter object.
-  ParameterObjectList:
-    type: array
-    items:
-      $ref: '#/definitions/ParameterObject'
   ParameterValue:
     type: object
     required:
@@ -1516,10 +1589,10 @@ definitions:
         $ref: '#/definitions/fieldStringValue'
         description: 'The field value, expressed as a String.'
     description: 'A value or list of parameter values. '
-  ParameterValueList:
+  fieldList:
     type: array
     items:
-      $ref: '#/definitions/ParameterValue'
+      $ref: '#/definitions/Field'
   PipelineDescription:
     type: object
     required:
@@ -1543,10 +1616,6 @@ definitions:
         $ref: '#/definitions/tagList'
         description: 'A list of tags to associated with a pipeline. Tags let you control access to pipelines. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
     description: Contains pipeline metadata.
-  PipelineDescriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/PipelineDescription'
   PipelineIdName:
     type: object
     properties:
@@ -1574,15 +1643,6 @@ definitions:
         $ref: '#/definitions/fieldList'
         description: Key-value pairs that define the properties of the object.
     description: 'Contains information about a pipeline object. This can be a logical, physical, or physical attempt pipeline object. The complete set of components of a pipeline defines the pipeline.'
-  PipelineObjectList:
-    type: array
-    items:
-      $ref: '#/definitions/PipelineObject'
-  id:
-    type: string
-    minLength: 1
-    maxLength: 1024
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   PipelineObjectMap:
     type: array
     items:
@@ -1592,40 +1652,6 @@ definitions:
           $ref: '#/definitions/id'
         value:
           $ref: '#/definitions/PipelineObject'
-  Query:
-    type: object
-    properties:
-      selectors:
-        $ref: '#/definitions/SelectorList'
-        description: List of selectors that define the query. An object must satisfy all of the selectors to match the query.
-    description: Defines the query to run against an object.
-  Selector:
-    type: object
-    properties:
-      fieldName:
-        $ref: '#/definitions/string'
-        description: 'The name of the field that the operator will be applied to. The field name is the "key" portion of the field definition in the pipeline definition syntax that is used by the AWS Data Pipeline API. If the field is not set on the object, the condition fails.'
-      operator:
-        $ref: '#/definitions/Operator'
-    description: A comparision that is used to determine whether a query should return this object.
-  SelectorList:
-    type: array
-    description: The list of Selectors that define queries on individual fields.
-    items:
-      $ref: '#/definitions/Selector'
-  Tag:
-    type: object
-    required:
-      - key
-      - value
-    properties:
-      key:
-        $ref: '#/definitions/tagKey'
-        description: 'The key name of a tag defined by a user. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
-      value:
-        $ref: '#/definitions/tagValue'
-        description: 'The optional value portion of a tag defined by a user. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
-    description: 'Tags are key/value pairs defined by a user and associated with a pipeline to control access. AWS Data Pipeline allows you to associate ten tags per pipeline. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
   TaskObject:
     type: object
     properties:
@@ -1642,12 +1668,73 @@ definitions:
         $ref: '#/definitions/PipelineObjectMap'
         description: Connection information for the location where the task runner will publish the output of the task.
     description: Contains information about a pipeline task that is assigned to a task runner.
+  ValidationErrors:
+    type: array
+    items:
+      $ref: '#/definitions/ValidationError'
+  ValidationWarnings:
+    type: array
+    items:
+      $ref: '#/definitions/ValidationWarning'
+  SelectorList:
+    type: array
+    description: The list of Selectors that define queries on individual fields.
+    items:
+      $ref: '#/definitions/Selector'
+  Query:
+    type: object
+    properties:
+      selectors:
+        $ref: '#/definitions/SelectorList'
+        description: List of selectors that define the query. An object must satisfy all of the selectors to match the query.
+    description: Defines the query to run against an object.
+  int:
+    type: integer
+  taskId:
+    type: string
+    minLength: 1
+    maxLength: 2048
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  Selector:
+    type: object
+    properties:
+      fieldName:
+        $ref: '#/definitions/string'
+        description: 'The name of the field that the operator will be applied to. The field name is the "key" portion of the field definition in the pipeline definition syntax that is used by the AWS Data Pipeline API. If the field is not set on the object, the condition fails.'
+      operator:
+        $ref: '#/definitions/Operator'
+    description: A comparision that is used to determine whether a query should return this object.
   TaskStatus:
     type: string
     enum:
       - FINISHED
       - FAILED
       - 'FALSE'
+  tagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  tagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    required:
+      - key
+      - value
+    properties:
+      key:
+        $ref: '#/definitions/tagKey'
+        description: 'The key name of a tag defined by a user. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
+      value:
+        $ref: '#/definitions/tagValue'
+        description: 'The optional value portion of a tag defined by a user. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
+    description: 'Tags are key/value pairs defined by a user and associated with a pipeline to control access. AWS Data Pipeline allows you to associate ten tags per pipeline. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
+  validationMessages:
+    type: array
+    items:
+      $ref: '#/definitions/validationMessage'
   ValidationError:
     type: object
     properties:
@@ -1658,10 +1745,6 @@ definitions:
         $ref: '#/definitions/validationMessages'
         description: A description of the validation error.
     description: Defines a validation error. Validation errors prevent pipeline activation. The set of validation errors that can be returned are defined by AWS Data Pipeline.
-  ValidationErrors:
-    type: array
-    items:
-      $ref: '#/definitions/ValidationError'
   ValidationWarning:
     type: object
     properties:
@@ -1672,92 +1755,8 @@ definitions:
         $ref: '#/definitions/validationMessages'
         description: A description of the validation warning.
     description: Defines a validation warning. Validation warnings do not prevent pipeline activation. The set of validation warnings that can be returned are defined by AWS Data Pipeline.
-  ValidationWarnings:
-    type: array
-    items:
-      $ref: '#/definitions/ValidationWarning'
-  attributeNameString:
-    type: string
-    minLength: 1
-    maxLength: 256
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  attributeValueString:
-    type: string
-    minLength: 0
-    maxLength: 10240
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  boolean:
-    type: boolean
-  cancelActive:
-    type: boolean
-  errorMessage:
-    type: string
-  fieldList:
-    type: array
-    items:
-      $ref: '#/definitions/Field'
-  fieldNameString:
-    type: string
-    minLength: 1
-    maxLength: 256
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  fieldStringValue:
-    type: string
-    minLength: 0
-    maxLength: 10240
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  idList:
-    type: array
-    items:
-      $ref: '#/definitions/id'
-  int:
-    type: integer
-  longString:
-    type: string
-    minLength: 0
-    maxLength: 20971520
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  pipelineList:
-    type: array
-    items:
-      $ref: '#/definitions/PipelineIdName'
-  string:
-    type: string
-    minLength: 0
-    maxLength: 1024
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  stringList:
-    type: array
-    items:
-      $ref: '#/definitions/string'
-  tagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  tagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 0
-    maxItems: 10
-  tagValue:
-    type: string
-    minLength: 0
-    maxLength: 256
-  taskId:
-    type: string
-    minLength: 1
-    maxLength: 2048
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  timestamp:
-    type: string
-    format: date-time
   validationMessage:
     type: string
     minLength: 0
     maxLength: 10000
     x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  validationMessages:
-    type: array
-    items:
-      $ref: '#/definitions/validationMessage'

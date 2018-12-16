@@ -2665,7 +2665,12 @@ definitions:
         description: The identifier of the sentiment detection job to stop.
   AnyLengthString:
     type: string
-  undefined: {}
+  Integer:
+    type: integer
+  ListOfDominantLanguages:
+    type: array
+    items:
+      $ref: '#/definitions/DominantLanguage'
   BatchDetectDominantLanguageItemResult:
     type: object
     properties:
@@ -2676,6 +2681,22 @@ definitions:
         $ref: '#/definitions/ListOfDominantLanguages'
         description: One or more <a>DominantLanguage</a> objects describing the dominant languages in the document.
     description: The result of calling the operation. The operation returns one object for each document that is successfully processed by the operation.
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ListOfDetectDominantLanguageResult:
+    type: array
+    items:
+      $ref: '#/definitions/BatchDetectDominantLanguageItemResult'
+  BatchItemErrorList:
+    type: array
+    items:
+      $ref: '#/definitions/BatchItemError'
+  ListOfEntities:
+    type: array
+    items:
+      $ref: '#/definitions/Entity'
   BatchDetectEntitiesItemResult:
     type: object
     properties:
@@ -2686,6 +2707,23 @@ definitions:
         $ref: '#/definitions/ListOfEntities'
         description: 'One or more <a>Entity</a> objects, one for each entity detected in the document.'
     description: The result of calling the operation. The operation returns one object for each document that is successfully processed by the operation.
+  LanguageCode:
+    type: string
+    enum:
+      - en
+      - es
+      - fr
+      - de
+      - it
+      - pt
+  ListOfDetectEntitiesResult:
+    type: array
+    items:
+      $ref: '#/definitions/BatchDetectEntitiesItemResult'
+  ListOfKeyPhrases:
+    type: array
+    items:
+      $ref: '#/definitions/KeyPhrase'
   BatchDetectKeyPhrasesItemResult:
     type: object
     properties:
@@ -2696,6 +2734,33 @@ definitions:
         $ref: '#/definitions/ListOfKeyPhrases'
         description: 'One or more <a>KeyPhrase</a> objects, one for each key phrase detected in the document.'
     description: The result of calling the operation. The operation returns one object for each document that is successfully processed by the operation.
+  ListOfDetectKeyPhrasesResult:
+    type: array
+    items:
+      $ref: '#/definitions/BatchDetectKeyPhrasesItemResult'
+  SentimentType:
+    type: string
+    enum:
+      - POSITIVE
+      - NEGATIVE
+      - NEUTRAL
+      - MIXED
+  SentimentScore:
+    type: object
+    properties:
+      Positive:
+        $ref: '#/definitions/Float'
+        description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>POSITIVE</code> sentiment.
+      Negative:
+        $ref: '#/definitions/Float'
+        description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>NEGATIVE</code> sentiment.
+      Neutral:
+        $ref: '#/definitions/Float'
+        description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>NEUTRAL</code> sentiment.
+      Mixed:
+        $ref: '#/definitions/Float'
+        description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>MIXED</code> sentiment.
+    description: Describes the level of confidence that Amazon Comprehend has in the accuracy of its detection of sentiments.
   BatchDetectSentimentItemResult:
     type: object
     properties:
@@ -2709,6 +2774,14 @@ definitions:
         $ref: '#/definitions/SentimentScore'
         description: The level of confidence that Amazon Comprehend has in the accuracy of its sentiment detection.
     description: The result of calling the operation. The operation returns one object for each document that is successfully processed by the operation.
+  ListOfDetectSentimentResult:
+    type: array
+    items:
+      $ref: '#/definitions/BatchDetectSentimentItemResult'
+  ListOfSyntaxTokens:
+    type: array
+    items:
+      $ref: '#/definitions/SyntaxToken'
   BatchDetectSyntaxItemResult:
     type: object
     properties:
@@ -2719,6 +2792,22 @@ definitions:
         $ref: '#/definitions/ListOfSyntaxTokens'
         description: 'The syntax tokens for the words in the document, one token for each word.'
     description: The result of calling the operation. The operation returns one object that is successfully processed by the operation.
+  SyntaxLanguageCode:
+    type: string
+    enum:
+      - en
+      - es
+      - fr
+      - de
+      - it
+      - pt
+  ListOfDetectSyntaxResult:
+    type: array
+    items:
+      $ref: '#/definitions/BatchDetectSyntaxItemResult'
+  String:
+    type: string
+    minLength: 1
   BatchItemError:
     type: object
     properties:
@@ -2732,10 +2821,9 @@ definitions:
         $ref: '#/definitions/String'
         description: A text description of the error.
     description: Describes an error that occurred while processing a document in a batch. The operation returns on <code>BatchItemError</code> object for each document that contained an error.
-  BatchItemErrorList:
-    type: array
-    items:
-      $ref: '#/definitions/BatchItemError'
+  Double:
+    type: number
+    format: double
   ClassifierEvaluationMetrics:
     type: object
     properties:
@@ -2777,22 +2865,52 @@ definitions:
     type: string
     pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
     maxLength: 63
-  DocumentClassificationJobFilter:
+  IamRoleArn:
+    type: string
+    pattern: 'arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+'
+    minLength: 20
+    maxLength: 2048
+  DocumentClassifierInputDataConfig:
     type: object
+    required:
+      - S3Uri
     properties:
-      JobName:
-        $ref: '#/definitions/JobName'
-        description: Filters on the name of the job.
-      JobStatus:
-        $ref: '#/definitions/JobStatus'
-        description: Filters the list based on job status. Returns only jobs with the specified status.
-      SubmitTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in ascending order, oldest to newest.'
-      SubmitTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in descending order, newest to oldest.'
-    description: 'Provides information for filtering a list of document classification jobs. For more information, see the operation. You can provide only one filter parameter in each request.'
+      S3Uri:
+        $ref: '#/definitions/S3Uri'
+        description: '<p>The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files.</p> <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.</p>'
+    description: '<p>The input properties for training a document classifier. </p> <p>For more information on how the input file is formatted, see <a>how-document-classification-training-data</a>. </p>'
+  DocumentClassifierArn:
+    type: string
+    pattern: 'arn:aws:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 256
+  EntityRecognizerInputDataConfig:
+    type: object
+    required:
+      - EntityTypes
+      - Documents
+    properties:
+      EntityTypes:
+        $ref: '#/definitions/EntityTypesList'
+        description: The entity types in the input data for an entity recognizer.
+      Documents:
+        $ref: '#/definitions/EntityRecognizerDocuments'
+        description: S3 location of the documents folder for an entity recognizer
+      Annotations:
+        $ref: '#/definitions/EntityRecognizerAnnotations'
+        description: S3 location of the annotations file for an entity recognizer.
+      EntityList:
+        $ref: '#/definitions/EntityRecognizerEntityList'
+        description: S3 location of the entity list for an entity recognizer.
+    description: Specifies the format and location of the input data.
+  EntityRecognizerArn:
+    type: string
+    pattern: 'arn:aws:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+    maxLength: 256
+  JobId:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+    minLength: 1
+    maxLength: 32
   DocumentClassificationJobProperties:
     type: object
     properties:
@@ -2827,36 +2945,6 @@ definitions:
         $ref: '#/definitions/IamRoleArn'
         description: The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
     description: Provides information about a document classification job.
-  DocumentClassificationJobPropertiesList:
-    type: array
-    items:
-      $ref: '#/definitions/DocumentClassificationJobProperties'
-  DocumentClassifierArn:
-    type: string
-    pattern: 'arn:aws:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
-    maxLength: 256
-  DocumentClassifierFilter:
-    type: object
-    properties:
-      Status:
-        $ref: '#/definitions/ModelStatus'
-        description: 'Filters the list of classifiers based on status. '
-      SubmitTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: 'Filters the list of classifiers based on the time that the classifier was submitted for processing. Returns only classifiers submitted before the specified time. Classifiers are returned in ascending order, oldest to newest.'
-      SubmitTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: 'Filters the list of classifiers based on the time that the classifier was submitted for processing. Returns only classifiers submitted after the specified time. Classifiers are returned in descending order, newest to oldest.'
-    description: 'Provides information for filtering a list of document classifiers. You can only specify one filtering parameter in a request. For more information, see the operation.'
-  DocumentClassifierInputDataConfig:
-    type: object
-    required:
-      - S3Uri
-    properties:
-      S3Uri:
-        $ref: '#/definitions/S3Uri'
-        description: '<p>The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files.</p> <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.</p>'
-    description: '<p>The input properties for training a document classifier. </p> <p>For more information on how the input file is formatted, see <a>how-document-classification-training-data</a>. </p>'
   DocumentClassifierProperties:
     type: object
     properties:
@@ -2894,36 +2982,6 @@ definitions:
         $ref: '#/definitions/IamRoleArn'
         description: The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
     description: Provides information about a document classifier.
-  DocumentClassifierPropertiesList:
-    type: array
-    items:
-      $ref: '#/definitions/DocumentClassifierProperties'
-  DominantLanguage:
-    type: object
-    properties:
-      LanguageCode:
-        $ref: '#/definitions/String'
-        description: 'The RFC 5646 language code for the dominant language. For more information about RFC 5646, see <a href="https://tools.ietf.org/html/rfc5646">Tags for Identifying Languages</a> on the <i>IETF Tools</i> web site.'
-      Score:
-        $ref: '#/definitions/Float'
-        description: The level of confidence that Amazon Comprehend has in the accuracy of the detection.
-    description: Returns the code for the dominant language in the input text and the level of confidence that Amazon Comprehend has in the accuracy of the detection.
-  DominantLanguageDetectionJobFilter:
-    type: object
-    properties:
-      JobName:
-        $ref: '#/definitions/JobName'
-        description: Filters on the name of the job.
-      JobStatus:
-        $ref: '#/definitions/JobStatus'
-        description: Filters the list of jobs based on job status. Returns only jobs with the specified status.
-      SubmitTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
-      SubmitTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
-    description: 'Provides information for filtering a list of dominant language detection jobs. For more information, see the operation.'
   DominantLanguageDetectionJobProperties:
     type: object
     properties:
@@ -2955,29 +3013,6 @@ definitions:
         $ref: '#/definitions/IamRoleArn'
         description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
     description: Provides information about a dominant language detection job.
-  DominantLanguageDetectionJobPropertiesList:
-    type: array
-    items:
-      $ref: '#/definitions/DominantLanguageDetectionJobProperties'
-  Double:
-    type: number
-    format: double
-  EntitiesDetectionJobFilter:
-    type: object
-    properties:
-      JobName:
-        $ref: '#/definitions/JobName'
-        description: Filters on the name of the job.
-      JobStatus:
-        $ref: '#/definitions/JobStatus'
-        description: Filters the list of jobs based on job status. Returns only jobs with the specified status.
-      SubmitTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
-      SubmitTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
-    description: 'Provides information for filtering a list of dominant language detection jobs. For more information, see the operation.'
   EntitiesDetectionJobProperties:
     type: object
     properties:
@@ -3015,10 +3050,294 @@ definitions:
         $ref: '#/definitions/IamRoleArn'
         description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
     description: Provides information about an entities detection job.
+  EntityRecognizerProperties:
+    type: object
+    properties:
+      EntityRecognizerArn:
+        $ref: '#/definitions/EntityRecognizerArn'
+        description: The Amazon Resource Name (ARN) that identifies the entity recognizer.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: ' The language of the input documents. All documents must be in the same language. Only English ("en") is currently supported.'
+      Status:
+        $ref: '#/definitions/ModelStatus'
+        description: Provides the status of the entity recognizer.
+      Message:
+        $ref: '#/definitions/AnyLengthString'
+        description: ' A description of the status of the recognizer.'
+      SubmitTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time that the recognizer was submitted for processing.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time that the recognizer creation completed.
+      TrainingStartTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time that training of the entity recognizer started.
+      TrainingEndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time that training of the entity recognizer was completed.
+      InputDataConfig:
+        $ref: '#/definitions/EntityRecognizerInputDataConfig'
+        description: The input data properties of an entity recognizer.
+      RecognizerMetadata:
+        $ref: '#/definitions/EntityRecognizerMetadata'
+        description: ' Provides information about an entity recognizer.'
+      DataAccessRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: ' The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.'
+    description: Describes information about an entity recognizer.
+  KeyPhrasesDetectionJobProperties:
+    type: object
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The identifier assigned to the key phrases detection job.
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: The name that you assigned the key phrases detection job.
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: 'The current status of the key phrases detection job. If the status is <code>FAILED</code>, the <code>Message</code> field shows the reason for the failure.'
+      Message:
+        $ref: '#/definitions/AnyLengthString'
+        description: A description of the status of a job.
+      SubmitTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time that the key phrases detection job was submitted for processing.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time that the key phrases detection job completed.
+      InputDataConfig:
+        $ref: '#/definitions/InputDataConfig'
+        description: The input data configuration that you supplied when you created the key phrases detection job.
+      OutputDataConfig:
+        $ref: '#/definitions/OutputDataConfig'
+        description: The output data configuration that you supplied when you created the key phrases detection job.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language code of the input documents.
+      DataAccessRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+    description: Provides information about a key phrases detection job.
+  SentimentDetectionJobProperties:
+    type: object
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The identifier assigned to the sentiment detection job.
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: The name that you assigned to the sentiment detection job
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: 'The current status of the sentiment detection job. If the status is <code>FAILED</code>, the <code>Messages</code> field shows the reason for the failure.'
+      Message:
+        $ref: '#/definitions/AnyLengthString'
+        description: A description of the status of a job.
+      SubmitTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time that the sentiment detection job was submitted for processing.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time that the sentiment detection job ended.
+      InputDataConfig:
+        $ref: '#/definitions/InputDataConfig'
+        description: The input data configuration that you supplied when you created the sentiment detection job.
+      OutputDataConfig:
+        $ref: '#/definitions/OutputDataConfig'
+        description: The output data configuration that you supplied when you created the sentiment detection job.
+      LanguageCode:
+        $ref: '#/definitions/LanguageCode'
+        description: The language code of the input documents.
+      DataAccessRoleArn:
+        $ref: '#/definitions/IamRoleArn'
+        description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+    description: Provides information about a sentiment detection job.
+  TopicsDetectionJobProperties:
+    type: object
+    properties:
+      JobId:
+        $ref: '#/definitions/JobId'
+        description: The identifier assigned to the topic detection job.
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: The name of the topic detection job.
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: 'The current status of the topic detection job. If the status is <code>Failed</code>, the reason for the failure is shown in the <code>Message</code> field.'
+      Message:
+        $ref: '#/definitions/AnyLengthString'
+        description: A description for the status of a job.
+      SubmitTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time that the topic detection job was submitted for processing.
+      EndTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time that the topic detection job was completed.
+      InputDataConfig:
+        $ref: '#/definitions/InputDataConfig'
+        description: The input data configuration supplied when you created the topic detection job.
+      OutputDataConfig:
+        $ref: '#/definitions/OutputDataConfig'
+        description: The output data configuration supplied when you created the topic detection job.
+      NumberOfTopics:
+        $ref: '#/definitions/Integer'
+        description: 'The number of topics to detect supplied when you created the topic detection job. The default is 10. '
+    description: Provides information about a topic detection job.
+  JobName:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+    minLength: 1
+    maxLength: 256
+  JobStatus:
+    type: string
+    enum:
+      - SUBMITTED
+      - IN_PROGRESS
+      - COMPLETED
+      - FAILED
+      - STOP_REQUESTED
+      - STOPPED
+  Timestamp:
+    type: string
+    format: date-time
+  DocumentClassificationJobFilter:
+    type: object
+    properties:
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: Filters on the name of the job.
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: Filters the list based on job status. Returns only jobs with the specified status.
+      SubmitTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in ascending order, oldest to newest.'
+      SubmitTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in descending order, newest to oldest.'
+    description: 'Provides information for filtering a list of document classification jobs. For more information, see the operation. You can provide only one filter parameter in each request.'
+  InputDataConfig:
+    type: object
+    required:
+      - S3Uri
+    properties:
+      S3Uri:
+        $ref: '#/definitions/S3Uri'
+        description: '<p>The Amazon S3 URI for the input data. The URI must be in same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of data files. </p> <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.</p>'
+      InputFormat:
+        $ref: '#/definitions/InputFormat'
+        description: '<p>Specifies how the text in an input file should be processed:</p> <ul> <li> <p> <code>ONE_DOC_PER_FILE</code> - Each file is considered a separate document. Use this option when you are processing large documents, such as newspaper articles or scientific papers.</p> </li> <li> <p> <code>ONE_DOC_PER_LINE</code> - Each line in a file is considered a separate document. Use this option when you are processing many short documents, such as text messages.</p> </li> </ul>'
+    description: The input properties for a topic detection job.
+  OutputDataConfig:
+    type: object
+    required:
+      - S3Uri
+    properties:
+      S3Uri:
+        $ref: '#/definitions/S3Uri'
+        description: '<p>When you use the <code>OutputDataConfig</code> object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of the output file.</p> <p>When the topic detection job is finished, the service creates an output file in a directory specific to the job. The <code>S3Uri</code> field contains the location of the output file, called <code>output.tar.gz</code>. It is a compressed archive that contains the ouput of the operation.</p>'
+    description: <p>Provides configuration parameters for the output of topic detection jobs.</p> <p/>
+  DocumentClassificationJobPropertiesList:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentClassificationJobProperties'
+  ModelStatus:
+    type: string
+    enum:
+      - SUBMITTED
+      - TRAINING
+      - DELETING
+      - IN_ERROR
+      - TRAINED
+  DocumentClassifierFilter:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/ModelStatus'
+        description: 'Filters the list of classifiers based on status. '
+      SubmitTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of classifiers based on the time that the classifier was submitted for processing. Returns only classifiers submitted before the specified time. Classifiers are returned in ascending order, oldest to newest.'
+      SubmitTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of classifiers based on the time that the classifier was submitted for processing. Returns only classifiers submitted after the specified time. Classifiers are returned in descending order, newest to oldest.'
+    description: 'Provides information for filtering a list of document classifiers. You can only specify one filtering parameter in a request. For more information, see the operation.'
+  S3Uri:
+    type: string
+    pattern: 's3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?'
+    maxLength: 1024
+  DocumentClassifierPropertiesList:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentClassifierProperties'
+  Float:
+    type: number
+    format: float
+  DominantLanguage:
+    type: object
+    properties:
+      LanguageCode:
+        $ref: '#/definitions/String'
+        description: 'The RFC 5646 language code for the dominant language. For more information about RFC 5646, see <a href="https://tools.ietf.org/html/rfc5646">Tags for Identifying Languages</a> on the <i>IETF Tools</i> web site.'
+      Score:
+        $ref: '#/definitions/Float'
+        description: The level of confidence that Amazon Comprehend has in the accuracy of the detection.
+    description: Returns the code for the dominant language in the input text and the level of confidence that Amazon Comprehend has in the accuracy of the detection.
+  DominantLanguageDetectionJobFilter:
+    type: object
+    properties:
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: Filters on the name of the job.
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: Filters the list of jobs based on job status. Returns only jobs with the specified status.
+      SubmitTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
+      SubmitTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
+    description: 'Provides information for filtering a list of dominant language detection jobs. For more information, see the operation.'
+  DominantLanguageDetectionJobPropertiesList:
+    type: array
+    items:
+      $ref: '#/definitions/DominantLanguageDetectionJobProperties'
+  EntitiesDetectionJobFilter:
+    type: object
+    properties:
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: Filters on the name of the job.
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: Filters the list of jobs based on job status. Returns only jobs with the specified status.
+      SubmitTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
+      SubmitTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
+    description: 'Provides information for filtering a list of dominant language detection jobs. For more information, see the operation.'
   EntitiesDetectionJobPropertiesList:
     type: array
     items:
       $ref: '#/definitions/EntitiesDetectionJobProperties'
+  EntityType:
+    type: string
+    enum:
+      - PERSON
+      - LOCATION
+      - ORGANIZATION
+      - COMMERCIAL_ITEM
+      - EVENT
+      - DATE
+      - QUANTITY
+      - TITLE
+      - OTHER
   Entity:
     type: object
     properties:
@@ -3047,10 +3366,6 @@ definitions:
         $ref: '#/definitions/S3Uri'
         description: ' Specifies the Amazon S3 location where the annotations for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.'
     description: Describes the annotations associated with a entity recognizer.
-  EntityRecognizerArn:
-    type: string
-    pattern: 'arn:aws:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
-    maxLength: 256
   EntityRecognizerDocuments:
     type: object
     required:
@@ -3095,25 +3410,14 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: 'Filters the list of entities based on the time that the list was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in ascending order, oldest to newest.'
     description: 'Provides information for filtering a list of entity recognizers. You can only specify one filtering parameter in a request. For more information, see the operation./&gt;'
-  EntityRecognizerInputDataConfig:
-    type: object
-    required:
-      - EntityTypes
-      - Documents
-    properties:
-      EntityTypes:
-        $ref: '#/definitions/EntityTypesList'
-        description: The entity types in the input data for an entity recognizer.
-      Documents:
-        $ref: '#/definitions/EntityRecognizerDocuments'
-        description: S3 location of the documents folder for an entity recognizer
-      Annotations:
-        $ref: '#/definitions/EntityRecognizerAnnotations'
-        description: S3 location of the annotations file for an entity recognizer.
-      EntityList:
-        $ref: '#/definitions/EntityRecognizerEntityList'
-        description: S3 location of the entity list for an entity recognizer.
-    description: Specifies the format and location of the input data.
+  EntityTypesList:
+    type: array
+    items:
+      $ref: '#/definitions/EntityTypesListItem'
+  EntityRecognizerMetadataEntityTypesList:
+    type: array
+    items:
+      $ref: '#/definitions/EntityRecognizerMetadataEntityTypesListItem'
   EntityRecognizerMetadata:
     type: object
     properties:
@@ -3130,10 +3434,6 @@ definitions:
         $ref: '#/definitions/EntityRecognizerMetadataEntityTypesList'
         description: Entity types from the metadata of an entity recognizer.
     description: Detailed information about an entity recognizer.
-  EntityRecognizerMetadataEntityTypesList:
-    type: array
-    items:
-      $ref: '#/definitions/EntityRecognizerMetadataEntityTypesListItem'
   EntityRecognizerMetadataEntityTypesListItem:
     type: object
     properties:
@@ -3141,67 +3441,14 @@ definitions:
         $ref: '#/definitions/AnyLengthString'
         description: 'Type of entity from the list of entity types in the metadata of an entity recognizer. '
     description: Individual item from the list of entity types in the metadata of an entity recognizer.
-  EntityRecognizerProperties:
-    type: object
-    properties:
-      EntityRecognizerArn:
-        $ref: '#/definitions/EntityRecognizerArn'
-        description: The Amazon Resource Name (ARN) that identifies the entity recognizer.
-      LanguageCode:
-        $ref: '#/definitions/LanguageCode'
-        description: ' The language of the input documents. All documents must be in the same language. Only English ("en") is currently supported.'
-      Status:
-        $ref: '#/definitions/ModelStatus'
-        description: Provides the status of the entity recognizer.
-      Message:
-        $ref: '#/definitions/AnyLengthString'
-        description: ' A description of the status of the recognizer.'
-      SubmitTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time that the recognizer was submitted for processing.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time that the recognizer creation completed.
-      TrainingStartTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time that training of the entity recognizer started.
-      TrainingEndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time that training of the entity recognizer was completed.
-      InputDataConfig:
-        $ref: '#/definitions/EntityRecognizerInputDataConfig'
-        description: The input data properties of an entity recognizer.
-      RecognizerMetadata:
-        $ref: '#/definitions/EntityRecognizerMetadata'
-        description: ' Provides information about an entity recognizer.'
-      DataAccessRoleArn:
-        $ref: '#/definitions/IamRoleArn'
-        description: ' The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.'
-    description: Describes information about an entity recognizer.
   EntityRecognizerPropertiesList:
     type: array
     items:
       $ref: '#/definitions/EntityRecognizerProperties'
-  EntityType:
-    type: string
-    enum:
-      - PERSON
-      - LOCATION
-      - ORGANIZATION
-      - COMMERCIAL_ITEM
-      - EVENT
-      - DATE
-      - QUANTITY
-      - TITLE
-      - OTHER
   EntityTypeName:
     type: string
     pattern: '[_A-Z0-9]+'
     maxLength: 64
-  EntityTypesList:
-    type: array
-    items:
-      $ref: '#/definitions/EntityTypesListItem'
   EntityTypesListItem:
     type: object
     required:
@@ -3211,52 +3458,11 @@ definitions:
         $ref: '#/definitions/EntityTypeName'
         description: Entity type of an item on an entity type list.
     description: Information about an individual item on a list of entity types.
-  Float:
-    type: number
-    format: float
-  IamRoleArn:
-    type: string
-    pattern: 'arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+'
-    minLength: 20
-    maxLength: 2048
-  InputDataConfig:
-    type: object
-    required:
-      - S3Uri
-    properties:
-      S3Uri:
-        $ref: '#/definitions/S3Uri'
-        description: '<p>The Amazon S3 URI for the input data. The URI must be in same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of data files. </p> <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.</p>'
-      InputFormat:
-        $ref: '#/definitions/InputFormat'
-        description: '<p>Specifies how the text in an input file should be processed:</p> <ul> <li> <p> <code>ONE_DOC_PER_FILE</code> - Each file is considered a separate document. Use this option when you are processing large documents, such as newspaper articles or scientific papers.</p> </li> <li> <p> <code>ONE_DOC_PER_LINE</code> - Each line in a file is considered a separate document. Use this option when you are processing many short documents, such as text messages.</p> </li> </ul>'
-    description: The input properties for a topic detection job.
   InputFormat:
     type: string
     enum:
       - ONE_DOC_PER_FILE
       - ONE_DOC_PER_LINE
-  Integer:
-    type: integer
-  JobId:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
-    minLength: 1
-    maxLength: 32
-  JobName:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
-    minLength: 1
-    maxLength: 256
-  JobStatus:
-    type: string
-    enum:
-      - SUBMITTED
-      - IN_PROGRESS
-      - COMPLETED
-      - FAILED
-      - STOP_REQUESTED
-      - STOPPED
   KeyPhrase:
     type: object
     properties:
@@ -3289,124 +3495,77 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
     description: 'Provides information for filtering a list of dominant language detection jobs. For more information, see the operation.'
-  KeyPhrasesDetectionJobProperties:
-    type: object
-    properties:
-      JobId:
-        $ref: '#/definitions/JobId'
-        description: The identifier assigned to the key phrases detection job.
-      JobName:
-        $ref: '#/definitions/JobName'
-        description: The name that you assigned the key phrases detection job.
-      JobStatus:
-        $ref: '#/definitions/JobStatus'
-        description: 'The current status of the key phrases detection job. If the status is <code>FAILED</code>, the <code>Message</code> field shows the reason for the failure.'
-      Message:
-        $ref: '#/definitions/AnyLengthString'
-        description: A description of the status of a job.
-      SubmitTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time that the key phrases detection job was submitted for processing.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time that the key phrases detection job completed.
-      InputDataConfig:
-        $ref: '#/definitions/InputDataConfig'
-        description: The input data configuration that you supplied when you created the key phrases detection job.
-      OutputDataConfig:
-        $ref: '#/definitions/OutputDataConfig'
-        description: The output data configuration that you supplied when you created the key phrases detection job.
-      LanguageCode:
-        $ref: '#/definitions/LanguageCode'
-        description: The language code of the input documents.
-      DataAccessRoleArn:
-        $ref: '#/definitions/IamRoleArn'
-        description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
-    description: Provides information about a key phrases detection job.
   KeyPhrasesDetectionJobPropertiesList:
     type: array
     items:
       $ref: '#/definitions/KeyPhrasesDetectionJobProperties'
-  LanguageCode:
-    type: string
-    enum:
-      - en
-      - es
-      - fr
-      - de
-      - it
-      - pt
-  ListOfDetectDominantLanguageResult:
-    type: array
-    items:
-      $ref: '#/definitions/BatchDetectDominantLanguageItemResult'
-  ListOfDetectEntitiesResult:
-    type: array
-    items:
-      $ref: '#/definitions/BatchDetectEntitiesItemResult'
-  ListOfDetectKeyPhrasesResult:
-    type: array
-    items:
-      $ref: '#/definitions/BatchDetectKeyPhrasesItemResult'
-  ListOfDetectSentimentResult:
-    type: array
-    items:
-      $ref: '#/definitions/BatchDetectSentimentItemResult'
-  ListOfDetectSyntaxResult:
-    type: array
-    items:
-      $ref: '#/definitions/BatchDetectSyntaxItemResult'
-  ListOfDominantLanguages:
-    type: array
-    items:
-      $ref: '#/definitions/DominantLanguage'
-  ListOfEntities:
-    type: array
-    items:
-      $ref: '#/definitions/Entity'
-  ListOfKeyPhrases:
-    type: array
-    items:
-      $ref: '#/definitions/KeyPhrase'
-  ListOfSyntaxTokens:
-    type: array
-    items:
-      $ref: '#/definitions/SyntaxToken'
   MaxResultsInteger:
     type: integer
     minimum: 1
     maximum: 500
-  ModelStatus:
-    type: string
-    enum:
-      - SUBMITTED
-      - TRAINING
-      - DELETING
-      - IN_ERROR
-      - TRAINED
+  SyntaxToken:
+    type: object
+    properties:
+      TokenId:
+        $ref: '#/definitions/Integer'
+        description: A unique identifier for a token.
+      Text:
+        $ref: '#/definitions/String'
+        description: The word that was recognized in the source text.
+      BeginOffset:
+        $ref: '#/definitions/Integer'
+        description: The zero-based offset from the beginning of the source text to the first character in the word.
+      EndOffset:
+        $ref: '#/definitions/Integer'
+        description: The zero-based offset from the beginning of the source text to the last character in the word.
+      PartOfSpeech:
+        $ref: '#/definitions/PartOfSpeechTag'
+        description: 'Provides the part of speech label and the confidence level that Amazon Comprehend has that the part of speech was correctly identified. For more information, see <a>how-syntax</a>.'
+    description: Represents a work in the input text that was recognized and assigned a part of speech. There is one syntax token record for each word in the source text.
+  SentimentDetectionJobFilter:
+    type: object
+    properties:
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: Filters on the name of the job.
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: Filters the list of jobs based on job status. Returns only jobs with the specified status.
+      SubmitTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
+      SubmitTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
+    description: 'Provides information for filtering a list of dominant language detection jobs. For more information, see the operation.'
+  SentimentDetectionJobPropertiesList:
+    type: array
+    items:
+      $ref: '#/definitions/SentimentDetectionJobProperties'
+  TopicsDetectionJobFilter:
+    type: object
+    properties:
+      JobName:
+        $ref: '#/definitions/JobName'
+        description: <p/>
+      JobStatus:
+        $ref: '#/definitions/JobStatus'
+        description: Filters the list of topic detection jobs based on job status. Returns only jobs with the specified status.
+      SubmitTimeBefore:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Only returns jobs submitted before the specified time. Jobs are returned in descending order, newest to oldest.'
+      SubmitTimeAfter:
+        $ref: '#/definitions/Timestamp'
+        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Only returns jobs submitted after the specified time. Jobs are returned in ascending order, oldest to newest.'
+    description: 'Provides information for filtering topic detection jobs. For more information, see .'
+  TopicsDetectionJobPropertiesList:
+    type: array
+    items:
+      $ref: '#/definitions/TopicsDetectionJobProperties'
   NumberOfTopicsInteger:
     type: integer
     minimum: 1
     maximum: 100
-  OutputDataConfig:
-    type: object
-    required:
-      - S3Uri
-    properties:
-      S3Uri:
-        $ref: '#/definitions/S3Uri'
-        description: '<p>When you use the <code>OutputDataConfig</code> object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of the output file.</p> <p>When the topic detection job is finished, the service creates an output file in a directory specific to the job. The <code>S3Uri</code> field contains the location of the output file, called <code>output.tar.gz</code>. It is a compressed archive that contains the ouput of the operation.</p>'
-    description: <p>Provides configuration parameters for the output of topic detection jobs.</p> <p/>
-  PartOfSpeechTag:
-    type: object
-    properties:
-      Tag:
-        $ref: '#/definitions/PartOfSpeechTagType'
-        description: Identifies the part of speech that the token represents.
-      Score:
-        $ref: '#/definitions/Float'
-        description: The confidence that Amazon Comprehend has that the part of speech was correctly identified.
-    description: 'Identifies the part of speech represented by the token and gives the confidence that Amazon Comprehend has that the part of speech was correctly identified. For more information about the parts of speech that Amazon Comprehend can identify, see <a>how-syntax</a>.'
   PartOfSpeechTagType:
     type: string
     enum:
@@ -3428,173 +3587,13 @@ definitions:
       - SCONJ
       - SYM
       - VERB
-  S3Uri:
-    type: string
-    pattern: 's3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?'
-    maxLength: 1024
-  SentimentDetectionJobFilter:
+  PartOfSpeechTag:
     type: object
     properties:
-      JobName:
-        $ref: '#/definitions/JobName'
-        description: Filters on the name of the job.
-      JobStatus:
-        $ref: '#/definitions/JobStatus'
-        description: Filters the list of jobs based on job status. Returns only jobs with the specified status.
-      SubmitTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
-      SubmitTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
-    description: 'Provides information for filtering a list of dominant language detection jobs. For more information, see the operation.'
-  SentimentDetectionJobProperties:
-    type: object
-    properties:
-      JobId:
-        $ref: '#/definitions/JobId'
-        description: The identifier assigned to the sentiment detection job.
-      JobName:
-        $ref: '#/definitions/JobName'
-        description: The name that you assigned to the sentiment detection job
-      JobStatus:
-        $ref: '#/definitions/JobStatus'
-        description: 'The current status of the sentiment detection job. If the status is <code>FAILED</code>, the <code>Messages</code> field shows the reason for the failure.'
-      Message:
-        $ref: '#/definitions/AnyLengthString'
-        description: A description of the status of a job.
-      SubmitTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time that the sentiment detection job was submitted for processing.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time that the sentiment detection job ended.
-      InputDataConfig:
-        $ref: '#/definitions/InputDataConfig'
-        description: The input data configuration that you supplied when you created the sentiment detection job.
-      OutputDataConfig:
-        $ref: '#/definitions/OutputDataConfig'
-        description: The output data configuration that you supplied when you created the sentiment detection job.
-      LanguageCode:
-        $ref: '#/definitions/LanguageCode'
-        description: The language code of the input documents.
-      DataAccessRoleArn:
-        $ref: '#/definitions/IamRoleArn'
-        description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
-    description: Provides information about a sentiment detection job.
-  SentimentDetectionJobPropertiesList:
-    type: array
-    items:
-      $ref: '#/definitions/SentimentDetectionJobProperties'
-  SentimentScore:
-    type: object
-    properties:
-      Positive:
+      Tag:
+        $ref: '#/definitions/PartOfSpeechTagType'
+        description: Identifies the part of speech that the token represents.
+      Score:
         $ref: '#/definitions/Float'
-        description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>POSITIVE</code> sentiment.
-      Negative:
-        $ref: '#/definitions/Float'
-        description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>NEGATIVE</code> sentiment.
-      Neutral:
-        $ref: '#/definitions/Float'
-        description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>NEUTRAL</code> sentiment.
-      Mixed:
-        $ref: '#/definitions/Float'
-        description: The level of confidence that Amazon Comprehend has in the accuracy of its detection of the <code>MIXED</code> sentiment.
-    description: Describes the level of confidence that Amazon Comprehend has in the accuracy of its detection of sentiments.
-  SentimentType:
-    type: string
-    enum:
-      - POSITIVE
-      - NEGATIVE
-      - NEUTRAL
-      - MIXED
-  String:
-    type: string
-    minLength: 1
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SyntaxLanguageCode:
-    type: string
-    enum:
-      - en
-      - es
-      - fr
-      - de
-      - it
-      - pt
-  SyntaxToken:
-    type: object
-    properties:
-      TokenId:
-        $ref: '#/definitions/Integer'
-        description: A unique identifier for a token.
-      Text:
-        $ref: '#/definitions/String'
-        description: The word that was recognized in the source text.
-      BeginOffset:
-        $ref: '#/definitions/Integer'
-        description: The zero-based offset from the beginning of the source text to the first character in the word.
-      EndOffset:
-        $ref: '#/definitions/Integer'
-        description: The zero-based offset from the beginning of the source text to the last character in the word.
-      PartOfSpeech:
-        $ref: '#/definitions/PartOfSpeechTag'
-        description: 'Provides the part of speech label and the confidence level that Amazon Comprehend has that the part of speech was correctly identified. For more information, see <a>how-syntax</a>.'
-    description: Represents a work in the input text that was recognized and assigned a part of speech. There is one syntax token record for each word in the source text.
-  Timestamp:
-    type: string
-    format: date-time
-  TopicsDetectionJobFilter:
-    type: object
-    properties:
-      JobName:
-        $ref: '#/definitions/JobName'
-        description: <p/>
-      JobStatus:
-        $ref: '#/definitions/JobStatus'
-        description: Filters the list of topic detection jobs based on job status. Returns only jobs with the specified status.
-      SubmitTimeBefore:
-        $ref: '#/definitions/Timestamp'
-        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Only returns jobs submitted before the specified time. Jobs are returned in descending order, newest to oldest.'
-      SubmitTimeAfter:
-        $ref: '#/definitions/Timestamp'
-        description: 'Filters the list of jobs based on the time that the job was submitted for processing. Only returns jobs submitted after the specified time. Jobs are returned in ascending order, oldest to newest.'
-    description: 'Provides information for filtering topic detection jobs. For more information, see .'
-  TopicsDetectionJobProperties:
-    type: object
-    properties:
-      JobId:
-        $ref: '#/definitions/JobId'
-        description: The identifier assigned to the topic detection job.
-      JobName:
-        $ref: '#/definitions/JobName'
-        description: The name of the topic detection job.
-      JobStatus:
-        $ref: '#/definitions/JobStatus'
-        description: 'The current status of the topic detection job. If the status is <code>Failed</code>, the reason for the failure is shown in the <code>Message</code> field.'
-      Message:
-        $ref: '#/definitions/AnyLengthString'
-        description: A description for the status of a job.
-      SubmitTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time that the topic detection job was submitted for processing.
-      EndTime:
-        $ref: '#/definitions/Timestamp'
-        description: The time that the topic detection job was completed.
-      InputDataConfig:
-        $ref: '#/definitions/InputDataConfig'
-        description: The input data configuration supplied when you created the topic detection job.
-      OutputDataConfig:
-        $ref: '#/definitions/OutputDataConfig'
-        description: The output data configuration supplied when you created the topic detection job.
-      NumberOfTopics:
-        $ref: '#/definitions/Integer'
-        description: 'The number of topics to detect supplied when you created the topic detection job. The default is 10. '
-    description: Provides information about a topic detection job.
-  TopicsDetectionJobPropertiesList:
-    type: array
-    items:
-      $ref: '#/definitions/TopicsDetectionJobProperties'
+        description: The confidence that Amazon Comprehend has that the part of speech was correctly identified.
+    description: 'Identifies the part of speech represented by the token and gives the confidence that Amazon Comprehend has that the part of speech was correctly identified. For more information about the parts of speech that Amazon Comprehend can identify, see <a>how-syntax</a>.'

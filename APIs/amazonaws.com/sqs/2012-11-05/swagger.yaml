@@ -1090,7 +1090,8 @@ definitions:
       TagKeys:
         $ref: '#/definitions/TagKeyList'
         description: The list of tags to be removed from the specified queue.
-  undefined: {}
+  String:
+    type: string
   AWSAccountIdList:
     type: array
     items:
@@ -1103,12 +1104,35 @@ definitions:
       $ref: '#/definitions/String'
     xml:
       wrapped: false
+  QueueAttributeName:
+    type: string
+    enum:
+      - All
+      - Policy
+      - VisibilityTimeout
+      - MaximumMessageSize
+      - MessageRetentionPeriod
+      - ApproximateNumberOfMessages
+      - ApproximateNumberOfMessagesNotVisible
+      - CreatedTimestamp
+      - LastModifiedTimestamp
+      - QueueArn
+      - ApproximateNumberOfMessagesDelayed
+      - DelaySeconds
+      - ReceiveMessageWaitTimeSeconds
+      - RedrivePolicy
+      - FifoQueue
+      - ContentBasedDeduplication
+      - KmsMasterKeyId
+      - KmsDataKeyReusePeriodSeconds
   AttributeNameList:
     type: array
     items:
       $ref: '#/definitions/QueueAttributeName'
     xml:
       wrapped: false
+  Boolean:
+    type: boolean
   BatchResultErrorEntry:
     type: object
     required:
@@ -1141,8 +1165,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Binary'
-  Boolean:
-    type: boolean
+  ChangeMessageVisibilityBatchRequestEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/ChangeMessageVisibilityBatchRequestEntry'
+    xml:
+      wrapped: false
+  Integer:
+    type: integer
   ChangeMessageVisibilityBatchRequestEntry:
     type: object
     required:
@@ -1159,10 +1189,10 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The new value (in seconds) for the message's visibility timeout.
     description: '<p>Encloses a receipt handle and an entry id for each message in <code> <a>ChangeMessageVisibilityBatch</a>.</code> </p> <important> <p>All of the following list parameters must be prefixed with <code>ChangeMessageVisibilityBatchRequestEntry.n</code>, where <code>n</code> is an integer value starting with <code>1</code>. For example, a parameter list for this action might look like this:</p> </important> <p> <code>&amp;ChangeMessageVisibilityBatchRequestEntry.1.Id=change_visibility_msg_2</code> </p> <p> <code>&amp;ChangeMessageVisibilityBatchRequestEntry.1.ReceiptHandle=your_receipt_handle</code> </p> <p> <code>&amp;ChangeMessageVisibilityBatchRequestEntry.1.VisibilityTimeout=45</code> </p>'
-  ChangeMessageVisibilityBatchRequestEntryList:
+  ChangeMessageVisibilityBatchResultEntryList:
     type: array
     items:
-      $ref: '#/definitions/ChangeMessageVisibilityBatchRequestEntry'
+      $ref: '#/definitions/ChangeMessageVisibilityBatchResultEntry'
     xml:
       wrapped: false
   ChangeMessageVisibilityBatchResultEntry:
@@ -1174,10 +1204,21 @@ definitions:
         $ref: '#/definitions/String'
         description: Represents a message whose visibility timeout has been changed successfully.
     description: 'Encloses the <code>Id</code> of an entry in <code> <a>ChangeMessageVisibilityBatch</a>.</code> '
-  ChangeMessageVisibilityBatchResultEntryList:
+  QueueAttributeMap:
     type: array
     items:
-      $ref: '#/definitions/ChangeMessageVisibilityBatchResultEntry'
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/QueueAttributeName'
+        value:
+          $ref: '#/definitions/String'
+    xml:
+      wrapped: false
+  DeleteMessageBatchRequestEntryList:
+    type: array
+    items:
+      $ref: '#/definitions/DeleteMessageBatchRequestEntry'
     xml:
       wrapped: false
   DeleteMessageBatchRequestEntry:
@@ -1193,10 +1234,10 @@ definitions:
         $ref: '#/definitions/String'
         description: A receipt handle.
     description: Encloses a receipt handle and an identifier for it.
-  DeleteMessageBatchRequestEntryList:
+  DeleteMessageBatchResultEntryList:
     type: array
     items:
-      $ref: '#/definitions/DeleteMessageBatchRequestEntry'
+      $ref: '#/definitions/DeleteMessageBatchResultEntry'
     xml:
       wrapped: false
   DeleteMessageBatchResultEntry:
@@ -1208,14 +1249,45 @@ definitions:
         $ref: '#/definitions/String'
         description: Represents a successfully deleted message.
     description: 'Encloses the <code>Id</code> of an entry in <code> <a>DeleteMessageBatch</a>.</code> '
-  DeleteMessageBatchResultEntryList:
+  QueueUrlList:
     type: array
     items:
-      $ref: '#/definitions/DeleteMessageBatchResultEntry'
+      $ref: '#/definitions/String'
     xml:
       wrapped: false
-  Integer:
-    type: integer
+  TagMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
+    xml:
+      wrapped: false
+  MessageSystemAttributeMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/MessageSystemAttributeName'
+        value:
+          $ref: '#/definitions/String'
+    xml:
+      wrapped: false
+  MessageBodyAttributeMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/MessageAttributeValue'
+    xml:
+      wrapped: false
   Message:
     type: object
     properties:
@@ -1249,6 +1321,10 @@ definitions:
       $ref: '#/definitions/MessageAttributeName'
     xml:
       wrapped: false
+  StringList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   MessageAttributeValue:
     type: object
     required:
@@ -1272,19 +1348,6 @@ definitions:
     description: '<p>The user-specified message attribute value. For string data types, the <code>Value</code> attribute has the same restrictions on the content as the message body. For more information, see <code> <a>SendMessage</a>.</code> </p> <p> <code>Name</code>, <code>type</code>, <code>value</code> and the message body must not be empty or null. All parts of the message attribute, including <code>Name</code>, <code>Type</code>, and <code>Value</code>, are part of the message size restriction (256 KB or 262,144 bytes).</p>'
     xml:
       wrapped: false
-  String:
-    type: string
-  MessageBodyAttributeMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/MessageAttributeValue'
-    xml:
-      wrapped: false
   MessageList:
     type: array
     items:
@@ -1301,53 +1364,10 @@ definitions:
       - SequenceNumber
       - MessageDeduplicationId
       - MessageGroupId
-  MessageSystemAttributeMap:
+  SendMessageBatchRequestEntryList:
     type: array
     items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/MessageSystemAttributeName'
-        value:
-          $ref: '#/definitions/String'
-    xml:
-      wrapped: false
-  QueueAttributeName:
-    type: string
-    enum:
-      - All
-      - Policy
-      - VisibilityTimeout
-      - MaximumMessageSize
-      - MessageRetentionPeriod
-      - ApproximateNumberOfMessages
-      - ApproximateNumberOfMessagesNotVisible
-      - CreatedTimestamp
-      - LastModifiedTimestamp
-      - QueueArn
-      - ApproximateNumberOfMessagesDelayed
-      - DelaySeconds
-      - ReceiveMessageWaitTimeSeconds
-      - RedrivePolicy
-      - FifoQueue
-      - ContentBasedDeduplication
-      - KmsMasterKeyId
-      - KmsDataKeyReusePeriodSeconds
-  QueueAttributeMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/QueueAttributeName'
-        value:
-          $ref: '#/definitions/String'
-    xml:
-      wrapped: false
-  QueueUrlList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
+      $ref: '#/definitions/SendMessageBatchRequestEntry'
     xml:
       wrapped: false
   SendMessageBatchRequestEntry:
@@ -1375,10 +1395,10 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>This parameter applies only to FIFO (first-in-first-out) queues.</p> <p>The tag that specifies that a message belongs to a specific message group. Messages that belong to the same message group are processed in a FIFO manner (however, messages in different message groups might be processed out of order). To interleave multiple ordered streams within a single queue, use <code>MessageGroupId</code> values (for example, session data for multiple users). In this scenario, multiple consumers can process the queue, but the session data of each user is processed in a FIFO fashion.</p> <ul> <li> <p>You must associate a non-empty <code>MessageGroupId</code> with a message. If you don''t provide a <code>MessageGroupId</code>, the action fails.</p> </li> <li> <p> <code>ReceiveMessage</code> might return messages with multiple <code>MessageGroupId</code> values. For each <code>MessageGroupId</code>, the messages are sorted by time sent. The caller can''t specify a <code>MessageGroupId</code>.</p> </li> </ul> <p>The length of <code>MessageGroupId</code> is 128 characters. Valid values: alphanumeric characters and punctuation <code>(!"#$%&amp;''()*+,-./:;&lt;=&gt;?@[\]^_`{|}~)</code>.</p> <p>For best practices of using <code>MessageGroupId</code>, see <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html">Using the MessageGroupId Property</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p> <important> <p> <code>MessageGroupId</code> is required for FIFO queues. You can''t use it for Standard queues.</p> </important>'
     description: Contains the details of a single Amazon SQS message along with an <code>Id</code>.
-  SendMessageBatchRequestEntryList:
+  SendMessageBatchResultEntryList:
     type: array
     items:
-      $ref: '#/definitions/SendMessageBatchRequestEntry'
+      $ref: '#/definitions/SendMessageBatchResultEntry'
     xml:
       wrapped: false
   SendMessageBatchResultEntry:
@@ -1404,16 +1424,6 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>This parameter applies only to FIFO (first-in-first-out) queues.</p> <p>The large, non-consecutive number that Amazon SQS assigns to each message.</p> <p>The length of <code>SequenceNumber</code> is 128 bits. As <code>SequenceNumber</code> continues to increase for a particular <code>MessageGroupId</code>.</p>'
     description: 'Encloses a <code>MessageId</code> for a successfully-enqueued message in a <code> <a>SendMessageBatch</a>.</code> '
-  SendMessageBatchResultEntryList:
-    type: array
-    items:
-      $ref: '#/definitions/SendMessageBatchResultEntry'
-    xml:
-      wrapped: false
-  StringList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   TagKey:
     type: string
   TagKeyList:
@@ -1424,14 +1434,3 @@ definitions:
       wrapped: false
   TagValue:
     type: string
-  TagMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-    xml:
-      wrapped: false

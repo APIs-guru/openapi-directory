@@ -723,39 +723,14 @@ definitions:
   Attributes:
     type: object
     properties: {}
-  undefined: {}
-  Device:
-    type: object
-    properties:
-      Attributes:
-        $ref: '#/definitions/Attributes'
-        description: The user specified attributes associated with the device for an event.
-      DeviceId:
-        $ref: '#/definitions/__string'
-        description: The unique identifier of the device.
-      Type:
-        $ref: '#/definitions/__string'
-        description: 'The device type, such as "button".'
   __string:
     type: string
-  DeviceAttributes:
-    type: array
-    description: |-
-
-       DeviceAttributes is a string-to-string map specified by the user.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
-  DeviceClaimResponse:
-    type: object
-    properties:
-      State:
-        $ref: '#/definitions/__string'
-        description: The device's final claim state.
+  __stringMin12Max40:
+    type: string
+    minLength: 12
+    maxLength: 40
+  __integer:
+    type: integer
   DeviceDescription:
     type: object
     properties:
@@ -778,6 +753,41 @@ definitions:
       Type:
         $ref: '#/definitions/__string'
         description: 'The type of the device, such as "button".'
+  Device:
+    type: object
+    properties:
+      Attributes:
+        $ref: '#/definitions/Attributes'
+        description: The user specified attributes associated with the device for an event.
+      DeviceId:
+        $ref: '#/definitions/__string'
+        description: The unique identifier of the device.
+      Type:
+        $ref: '#/definitions/__string'
+        description: 'The device type, such as "button".'
+  DeviceAttributes:
+    type: array
+    description: |-
+
+       DeviceAttributes is a string-to-string map specified by the user.
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
+  DeviceClaimResponse:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/__string'
+        description: The device's final claim state.
+  __boolean:
+    type: boolean
+  __doubleMin0Max100:
+    type: number
+    format: double
   DeviceEvent:
     type: object
     properties:
@@ -787,6 +797,10 @@ definitions:
       StdEvent:
         $ref: '#/definitions/__string'
         description: A serialized JSON object representing the device-type specific event.
+  __listOfDeviceEvent:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceEvent'
   DeviceEventsResponse:
     type: object
     properties:
@@ -811,41 +825,26 @@ definitions:
     type: object
     properties: {}
     description: 'On success, an empty object is returned.'
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 250
-  __boolean:
-    type: boolean
-  __double:
-    type: number
-    format: double
-  __doubleMin0Max100:
-    type: number
-    format: double
-  __integer:
-    type: integer
-  __listOfDeviceDescription:
-    type: array
-    items:
-      $ref: '#/definitions/DeviceDescription'
-  __listOfDeviceEvent:
-    type: array
-    items:
-      $ref: '#/definitions/DeviceEvent'
   __listOfDeviceMethod:
     type: array
     items:
       $ref: '#/definitions/DeviceMethod'
-  __long:
-    type: integer
-  __stringMin12Max40:
-    type: string
-    minLength: 12
-    maxLength: 40
   __timestampIso8601:
     type: string
     format: date-time
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 250
+  __listOfDeviceDescription:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceDescription'
+  __double:
+    type: number
+    format: double
+  __long:
+    type: integer
   __timestampUnix:
     type: string
     format: date-time

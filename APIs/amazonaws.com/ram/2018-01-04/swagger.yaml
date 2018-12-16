@@ -1434,87 +1434,54 @@ definitions:
         $ref: '#/definitions/String'
         description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
   MissingRequiredParameterException: {}
-  undefined: {}
-  Boolean:
-    type: boolean
-  DateTime:
+  String:
     type: string
-    format: date-time
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 500
-  Policy:
-    type: string
-  PolicyList:
-    type: array
-    items:
-      $ref: '#/definitions/Policy'
-  Principal:
+  ResourceShareInvitation:
     type: object
     properties:
-      id:
+      resourceShareInvitationArn:
         $ref: '#/definitions/String'
-        description: The ID of the principal.
+        description: The Amazon Resource Name (ARN) of the invitation.
+      resourceShareName:
+        $ref: '#/definitions/String'
+        description: The name of the resource share.
       resourceShareArn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the resource share.
-      creationTime:
+      senderAccountId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS account that sent the invitation.
+      receiverAccountId:
+        $ref: '#/definitions/String'
+        description: The ID of the AWS account that received the invitation.
+      invitationTimestamp:
         $ref: '#/definitions/DateTime'
-        description: The time when the principal was associated with the resource share.
-      lastUpdatedTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the association was last updated.
-      external:
-        $ref: '#/definitions/Boolean'
-        description: Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
-    description: Describes a principal for use with AWS Resource Access Manager.
-  PrincipalArnOrIdList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  PrincipalList:
-    type: array
-    items:
-      $ref: '#/definitions/Principal'
-  Resource:
-    type: object
-    properties:
-      arn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource.
-      type:
-        $ref: '#/definitions/String'
-        description: The resource type.
-      resourceShareArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource share.
+        description: The date and time when the invitation was sent.
       status:
-        $ref: '#/definitions/ResourceStatus'
-        description: The status of the resource.
-      statusMessage:
-        $ref: '#/definitions/String'
-        description: A message about the status of the resource.
-      creationTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the resource was associated with the resource share.
-      lastUpdatedTime:
-        $ref: '#/definitions/DateTime'
-        description: The time when the association was last updated.
-    description: Describes a resource associated with a resource share.
+        $ref: '#/definitions/ResourceShareInvitationStatus'
+        description: The status of the invitation.
+      resourceShareAssociations:
+        $ref: '#/definitions/ResourceShareAssociationList'
+        description: The resources associated with the resource share.
+    description: Describes an invitation to join a resource share.
   ResourceArnList:
     type: array
     items:
       $ref: '#/definitions/String'
-  ResourceList:
+  PrincipalArnOrIdList:
     type: array
     items:
-      $ref: '#/definitions/Resource'
-  ResourceOwner:
-    type: string
-    enum:
-      - SELF
-      - OTHER-ACCOUNTS
+      $ref: '#/definitions/String'
+  ResourceShareAssociationList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceShareAssociation'
+  Boolean:
+    type: boolean
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   ResourceShare:
     type: object
     properties:
@@ -1546,10 +1513,124 @@ definitions:
         $ref: '#/definitions/DateTime'
         description: The time when the resource share was last updated.
     description: Describes a resource share.
+  DateTime:
+    type: string
+    format: date-time
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 500
+  PolicyList:
+    type: array
+    items:
+      $ref: '#/definitions/Policy'
+  ResourceShareAssociationType:
+    type: string
+    enum:
+      - PRINCIPAL
+      - RESOURCE
   ResourceShareArnList:
     type: array
     items:
       $ref: '#/definitions/String'
+  ResourceShareAssociationStatus:
+    type: string
+    enum:
+      - ASSOCIATING
+      - ASSOCIATED
+      - FAILED
+      - DISASSOCIATING
+      - DISASSOCIATED
+  ResourceShareInvitationArnList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ResourceShareInvitationList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceShareInvitation'
+  ResourceShareStatus:
+    type: string
+    enum:
+      - PENDING
+      - ACTIVE
+      - FAILED
+      - DELETING
+      - DELETED
+  ResourceOwner:
+    type: string
+    enum:
+      - SELF
+      - OTHER-ACCOUNTS
+  TagFilters:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
+  ResourceShareList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceShare'
+  PrincipalList:
+    type: array
+    items:
+      $ref: '#/definitions/Principal'
+  ResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/Resource'
+  Policy:
+    type: string
+  Principal:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/String'
+        description: The ID of the principal.
+      resourceShareArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      creationTime:
+        $ref: '#/definitions/DateTime'
+        description: The time when the principal was associated with the resource share.
+      lastUpdatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time when the association was last updated.
+      external:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
+    description: Describes a principal for use with AWS Resource Access Manager.
+  ResourceStatus:
+    type: string
+    enum:
+      - AVAILABLE
+      - ZONAL_RESOURCE_INACCESSIBLE
+      - LIMIT_EXCEEDED
+      - UNAVAILABLE
+  Resource:
+    type: object
+    properties:
+      arn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource.
+      type:
+        $ref: '#/definitions/String'
+        description: The resource type.
+      resourceShareArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource share.
+      status:
+        $ref: '#/definitions/ResourceStatus'
+        description: The status of the resource.
+      statusMessage:
+        $ref: '#/definitions/String'
+        description: A message about the status of the resource.
+      creationTime:
+        $ref: '#/definitions/DateTime'
+        description: The time when the resource was associated with the resource share.
+      lastUpdatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time when the association was last updated.
+    description: Describes a resource associated with a resource share.
   ResourceShareAssociation:
     type: object
     properties:
@@ -1578,59 +1659,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Indicates whether the principal belongs to the same organization as the AWS account that owns the resource share.
     description: Describes an association with a resource share.
-  ResourceShareAssociationList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceShareAssociation'
-  ResourceShareAssociationStatus:
-    type: string
-    enum:
-      - ASSOCIATING
-      - ASSOCIATED
-      - FAILED
-      - DISASSOCIATING
-      - DISASSOCIATED
-  ResourceShareAssociationType:
-    type: string
-    enum:
-      - PRINCIPAL
-      - RESOURCE
-  ResourceShareInvitation:
-    type: object
-    properties:
-      resourceShareInvitationArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the invitation.
-      resourceShareName:
-        $ref: '#/definitions/String'
-        description: The name of the resource share.
-      resourceShareArn:
-        $ref: '#/definitions/String'
-        description: The Amazon Resource Name (ARN) of the resource share.
-      senderAccountId:
-        $ref: '#/definitions/String'
-        description: The ID of the AWS account that sent the invitation.
-      receiverAccountId:
-        $ref: '#/definitions/String'
-        description: The ID of the AWS account that received the invitation.
-      invitationTimestamp:
-        $ref: '#/definitions/DateTime'
-        description: The date and time when the invitation was sent.
-      status:
-        $ref: '#/definitions/ResourceShareInvitationStatus'
-        description: The status of the invitation.
-      resourceShareAssociations:
-        $ref: '#/definitions/ResourceShareAssociationList'
-        description: The resources associated with the resource share.
-    description: Describes an invitation to join a resource share.
-  ResourceShareInvitationArnList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  ResourceShareInvitationList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceShareInvitation'
   ResourceShareInvitationStatus:
     type: string
     enum:
@@ -1638,26 +1666,9 @@ definitions:
       - ACCEPTED
       - REJECTED
       - EXPIRED
-  ResourceShareList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceShare'
-  ResourceShareStatus:
+  TagKey:
     type: string
-    enum:
-      - PENDING
-      - ACTIVE
-      - FAILED
-      - DELETING
-      - DELETED
-  ResourceStatus:
-    type: string
-    enum:
-      - AVAILABLE
-      - ZONAL_RESOURCE_INACCESSIBLE
-      - LIMIT_EXCEEDED
-      - UNAVAILABLE
-  String:
+  TagValue:
     type: string
   Tag:
     type: object
@@ -1669,6 +1680,10 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value of the tag.
     description: Information about a tag.
+  TagValueList:
+    type: array
+    items:
+      $ref: '#/definitions/TagValue'
   TagFilter:
     type: object
     properties:
@@ -1679,23 +1694,7 @@ definitions:
         $ref: '#/definitions/TagValueList'
         description: The tag values.
     description: Used to filter information based on tags.
-  TagFilters:
-    type: array
-    items:
-      $ref: '#/definitions/TagFilter'
-  TagKey:
-    type: string
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValue:
-    type: string
-  TagValueList:
-    type: array
-    items:
-      $ref: '#/definitions/TagValue'

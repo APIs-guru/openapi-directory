@@ -1335,11 +1335,17 @@ definitions:
   AZ:
     type: string
     pattern: '[a-zA-Z0-9\-]*'
-  undefined: {}
   AZList:
     type: array
     items:
       $ref: '#/definitions/AZ'
+  String:
+    type: string
+    pattern: '[\w :+=./\\-]*'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   Boolean:
     type: boolean
   Certificate:
@@ -1374,19 +1380,32 @@ definitions:
       - READY
       - UPDATING
       - DEGRADED
-  EniId:
+  Label:
     type: string
-    pattern: 'eni-[0-9a-f]{8}'
-  ExternalId:
-    type: string
-    pattern: '[\w :+=./-]*'
+    pattern: '[a-zA-Z0-9_.-]{1,64}'
   HapgArn:
     type: string
     pattern: 'arn:aws(-iso)?:cloudhsm:[a-zA-Z0-9\-]*:[0-9]{12}:hapg-[0-9a-f]{8}'
-  HapgList:
-    type: array
-    items:
-      $ref: '#/definitions/HapgArn'
+  SubnetId:
+    type: string
+    pattern: 'subnet-[0-9a-f]{8}'
+  SshKey:
+    type: string
+    pattern: '[a-zA-Z0-9+/= ._:\\@-]*'
+  IpAddress:
+    type: string
+    pattern: '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
+  IamRoleArn:
+    type: string
+    pattern: 'arn:aws(-iso)?:iam::[0-9]{12}:role/[a-zA-Z0-9_\+=,\.\-@]{1,64}'
+  ExternalId:
+    type: string
+    pattern: '[\w :+=./-]*'
+  SubscriptionType:
+    type: string
+    enum:
+      - PRODUCTION
+    description: <p>Specifies the type of subscription for the HSM.</p> <ul> <li> <p> <b>PRODUCTION</b> - The HSM is being used in a production environment.</p> </li> <li> <p> <b>TRIAL</b> - The HSM is being used in a product trial.</p> </li> </ul>
   HsmArn:
     type: string
     pattern: 'arn:aws(-iso)?:cloudhsm:[a-zA-Z0-9\-]*:[0-9]{12}:hsm-[0-9a-f]{8}'
@@ -1396,6 +1415,13 @@ definitions:
     description: Contains a list of ARNs that identify the HSMs.
     items:
       $ref: '#/definitions/HsmArn'
+  Timestamp:
+    type: string
+    pattern: \d*
+  PartitionSerialList:
+    type: array
+    items:
+      $ref: '#/definitions/PartitionSerial'
   HsmSerialNumber:
     type: string
     pattern: '\d{1,16}'
@@ -1409,46 +1435,41 @@ definitions:
       - TERMINATING
       - TERMINATED
       - DEGRADED
-  IamRoleArn:
+  EniId:
     type: string
-    pattern: 'arn:aws(-iso)?:iam::[0-9]{12}:role/[a-zA-Z0-9_\+=,\.\-@]{1,64}'
-  IpAddress:
+    pattern: 'eni-[0-9a-f]{8}'
+  VpcId:
     type: string
-    pattern: '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
-  Label:
-    type: string
-    pattern: '[a-zA-Z0-9_.-]{1,64}'
+    pattern: 'vpc-[0-9a-f]{8}'
+  PartitionList:
+    type: array
+    items:
+      $ref: '#/definitions/PartitionArn'
+  HapgList:
+    type: array
+    items:
+      $ref: '#/definitions/HapgArn'
   PaginationToken:
     type: string
     pattern: '[a-zA-Z0-9+/]*'
   PartitionArn:
     type: string
     pattern: 'arn:aws(-iso)?:cloudhsm:[a-zA-Z0-9\-]*:[0-9]{12}:hsm-[0-9a-f]{8}/partition-[0-9]{6,12}'
-  PartitionList:
-    type: array
-    items:
-      $ref: '#/definitions/PartitionArn'
   PartitionSerial:
     type: string
     pattern: '\d{6,12}'
-  PartitionSerialList:
+  TagKeyList:
     type: array
     items:
-      $ref: '#/definitions/PartitionSerial'
-  SshKey:
+      $ref: '#/definitions/TagKey'
+  TagKey:
     type: string
-    pattern: '[a-zA-Z0-9+/= ._:\\@-]*'
-  String:
+    minLength: 1
+    maxLength: 128
+  TagValue:
     type: string
-    pattern: '[\w :+=./\\-]*'
-  SubnetId:
-    type: string
-    pattern: 'subnet-[0-9a-f]{8}'
-  SubscriptionType:
-    type: string
-    enum:
-      - PRODUCTION
-    description: <p>Specifies the type of subscription for the HSM.</p> <ul> <li> <p> <b>PRODUCTION</b> - The HSM is being used in a production environment.</p> </li> <li> <p> <b>TRIAL</b> - The HSM is being used in a product trial.</p> </li> </ul>
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -1462,25 +1483,3 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value of the tag.
     description: A key-value pair that identifies or specifies metadata about an AWS CloudHSM resource.
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValue:
-    type: string
-    minLength: 0
-    maxLength: 256
-  Timestamp:
-    type: string
-    pattern: \d*
-  VpcId:
-    type: string
-    pattern: 'vpc-[0-9a-f]{8}'

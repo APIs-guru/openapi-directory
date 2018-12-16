@@ -330,12 +330,39 @@ definitions:
   ContentType:
     type: string
     pattern: '^[\w\-\/\.\+]{1,255}$'
-  undefined: {}
+  PathNaming:
+    type: string
+    pattern: '(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+'
+    minLength: 1
+    maxLength: 900
   ETag:
     type: string
     pattern: '[0-9A-Fa-f]+'
     minLength: 1
     maxLength: 64
+  NonNegativeLong:
+    type: integer
+    minimum: 0
+  StringPrimitive:
+    type: string
+  TimeStamp:
+    type: string
+    format: date-time
+  RangePattern:
+    type: string
+    pattern: '^bytes=(?:\d+\-\d*|\d*\-\d+)$'
+  PayloadBlob:
+    type: string
+  statusCode:
+    type: integer
+  ItemName:
+    type: string
+    pattern: '[A-Za-z0-9_\.\-\~]+'
+  ItemType:
+    type: string
+    enum:
+      - OBJECT
+      - FOLDER
   Item:
     type: object
     properties:
@@ -362,53 +389,25 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Item'
-  ItemName:
-    type: string
-    pattern: '[A-Za-z0-9_\.\-\~]+'
-  ItemType:
-    type: string
-    enum:
-      - OBJECT
-      - FOLDER
-  ListLimit:
-    type: integer
-    minimum: 1
-    maximum: 1000
   ListPathNaming:
     type: string
     pattern: '/?(?:[A-Za-z0-9_\.\-\~]+/){0,10}(?:[A-Za-z0-9_\.\-\~]+)?/?'
     minLength: 0
     maxLength: 900
-  NonNegativeLong:
+  ListLimit:
     type: integer
-    minimum: 0
+    minimum: 1
+    maximum: 1000
   PaginationToken:
     type: string
-  PathNaming:
-    type: string
-    pattern: '(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+'
-    minLength: 1
-    maxLength: 900
-  PayloadBlob:
-    type: string
-  RangePattern:
-    type: string
-    pattern: '^bytes=(?:\d+\-\d*|\d*\-\d+)$'
-  SHA256Hash:
-    type: string
-    pattern: '[0-9A-Fa-f]{64}'
-    minLength: 64
-    maxLength: 64
   StorageClass:
     type: string
     enum:
       - TEMPORAL
     minLength: 1
     maxLength: 16
-  StringPrimitive:
+  SHA256Hash:
     type: string
-  TimeStamp:
-    type: string
-    format: date-time
-  statusCode:
-    type: integer
+    pattern: '[0-9A-Fa-f]{64}'
+    minLength: 64
+    maxLength: 64

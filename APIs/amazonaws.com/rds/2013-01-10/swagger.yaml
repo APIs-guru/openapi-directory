@@ -3136,12 +3136,57 @@ definitions:
       EC2SecurityGroupOwnerId:
         $ref: '#/definitions/String'
   AuthorizationNotFoundFault: {}
-  undefined: {}
+  String:
+    type: string
+  EventSubscription:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/String'
+      CustomerAwsId:
+        $ref: '#/definitions/String'
+      CustSubscriptionId:
+        $ref: '#/definitions/String'
+      SnsTopicArn:
+        $ref: '#/definitions/String'
+      Status:
+        $ref: '#/definitions/String'
+      SubscriptionCreationTime:
+        $ref: '#/definitions/String'
+      SourceType:
+        $ref: '#/definitions/String'
+      SourceIdsList:
+        $ref: '#/definitions/SourceIdsList'
+      EventCategoriesList:
+        $ref: '#/definitions/EventCategoriesList'
+      Enabled:
+        $ref: '#/definitions/Boolean'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   ApplyMethod:
     type: string
     enum:
       - immediate
       - pending-reboot
+  DBSecurityGroup:
+    type: object
+    properties:
+      OwnerId:
+        $ref: '#/definitions/String'
+      DBSecurityGroupName:
+        $ref: '#/definitions/String'
+      DBSecurityGroupDescription:
+        $ref: '#/definitions/String'
+      VpcId:
+        $ref: '#/definitions/String'
+      EC2SecurityGroups:
+        $ref: '#/definitions/EC2SecurityGroupList'
+      IPRanges:
+        $ref: '#/definitions/IPRangeList'
+  Boolean:
+    type: boolean
   AvailabilityZone:
     type: object
     properties:
@@ -3153,8 +3198,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AvailabilityZone'
-  Boolean:
-    type: boolean
   BooleanOptional:
     type: boolean
   CharacterSet:
@@ -3164,27 +3207,49 @@ definitions:
         $ref: '#/definitions/String'
       CharacterSetDescription:
         $ref: '#/definitions/String'
-  DBEngineVersion:
+  DBSnapshot:
     type: object
     properties:
+      DBSnapshotIdentifier:
+        $ref: '#/definitions/String'
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+      SnapshotCreateTime:
+        $ref: '#/definitions/TStamp'
       Engine:
+        $ref: '#/definitions/String'
+      AllocatedStorage:
+        $ref: '#/definitions/Integer'
+      Status:
+        $ref: '#/definitions/String'
+      Port:
+        $ref: '#/definitions/Integer'
+      AvailabilityZone:
+        $ref: '#/definitions/String'
+      VpcId:
+        $ref: '#/definitions/String'
+      InstanceCreateTime:
+        $ref: '#/definitions/TStamp'
+      MasterUsername:
         $ref: '#/definitions/String'
       EngineVersion:
         $ref: '#/definitions/String'
-      DBParameterGroupFamily:
+      LicenseModel:
         $ref: '#/definitions/String'
-      DBEngineDescription:
+      SnapshotType:
         $ref: '#/definitions/String'
-      DBEngineVersionDescription:
-        $ref: '#/definitions/String'
-      DefaultCharacterSet:
-        $ref: '#/definitions/CharacterSet'
-      SupportedCharacterSets:
-        $ref: '#/definitions/SupportedCharacterSetsList'
-  DBEngineVersionList:
+      Iops:
+        $ref: '#/definitions/IntegerOptional'
+  IntegerOptional:
+    type: integer
+  DBSecurityGroupNameList:
     type: array
     items:
-      $ref: '#/definitions/DBEngineVersion'
+      $ref: '#/definitions/String'
+  VpcSecurityGroupIdList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   DBInstance:
     type: object
     properties:
@@ -3248,10 +3313,6 @@ definitions:
         $ref: '#/definitions/String'
       PubliclyAccessible:
         $ref: '#/definitions/Boolean'
-  DBInstanceList:
-    type: array
-    items:
-      $ref: '#/definitions/DBInstance'
   DBParameterGroup:
     type: object
     properties:
@@ -3261,92 +3322,10 @@ definitions:
         $ref: '#/definitions/String'
       Description:
         $ref: '#/definitions/String'
-  DBParameterGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/DBParameterGroup'
-  DBParameterGroupStatus:
-    type: object
-    properties:
-      DBParameterGroupName:
-        $ref: '#/definitions/String'
-      ParameterApplyStatus:
-        $ref: '#/definitions/String'
-  DBParameterGroupStatusList:
-    type: array
-    items:
-      $ref: '#/definitions/DBParameterGroupStatus'
-  DBSecurityGroup:
-    type: object
-    properties:
-      OwnerId:
-        $ref: '#/definitions/String'
-      DBSecurityGroupName:
-        $ref: '#/definitions/String'
-      DBSecurityGroupDescription:
-        $ref: '#/definitions/String'
-      VpcId:
-        $ref: '#/definitions/String'
-      EC2SecurityGroups:
-        $ref: '#/definitions/EC2SecurityGroupList'
-      IPRanges:
-        $ref: '#/definitions/IPRangeList'
-  DBSecurityGroupMembership:
-    type: object
-    properties:
-      DBSecurityGroupName:
-        $ref: '#/definitions/String'
-      Status:
-        $ref: '#/definitions/String'
-  DBSecurityGroupMembershipList:
-    type: array
-    items:
-      $ref: '#/definitions/DBSecurityGroupMembership'
-  DBSecurityGroupNameList:
+  SubnetIdentifierList:
     type: array
     items:
       $ref: '#/definitions/String'
-  DBSecurityGroups:
-    type: array
-    items:
-      $ref: '#/definitions/DBSecurityGroup'
-  DBSnapshot:
-    type: object
-    properties:
-      DBSnapshotIdentifier:
-        $ref: '#/definitions/String'
-      DBInstanceIdentifier:
-        $ref: '#/definitions/String'
-      SnapshotCreateTime:
-        $ref: '#/definitions/TStamp'
-      Engine:
-        $ref: '#/definitions/String'
-      AllocatedStorage:
-        $ref: '#/definitions/Integer'
-      Status:
-        $ref: '#/definitions/String'
-      Port:
-        $ref: '#/definitions/Integer'
-      AvailabilityZone:
-        $ref: '#/definitions/String'
-      VpcId:
-        $ref: '#/definitions/String'
-      InstanceCreateTime:
-        $ref: '#/definitions/TStamp'
-      MasterUsername:
-        $ref: '#/definitions/String'
-      EngineVersion:
-        $ref: '#/definitions/String'
-      LicenseModel:
-        $ref: '#/definitions/String'
-      SnapshotType:
-        $ref: '#/definitions/String'
-      Iops:
-        $ref: '#/definitions/IntegerOptional'
-  DBSnapshotList:
-    type: array
-    items:
-      $ref: '#/definitions/DBSnapshot'
   DBSubnetGroup:
     type: object
     properties:
@@ -3360,10 +3339,178 @@ definitions:
         $ref: '#/definitions/String'
       Subnets:
         $ref: '#/definitions/SubnetList'
+  EventCategoriesList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  SourceIdsList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  OptionGroup:
+    type: object
+    properties:
+      OptionGroupName:
+        $ref: '#/definitions/String'
+      OptionGroupDescription:
+        $ref: '#/definitions/String'
+      EngineName:
+        $ref: '#/definitions/String'
+      MajorEngineVersion:
+        $ref: '#/definitions/String'
+      Options:
+        $ref: '#/definitions/OptionsList'
+      AllowsVpcAndNonVpcInstanceMemberships:
+        $ref: '#/definitions/Boolean'
+      VpcId:
+        $ref: '#/definitions/String'
+  SupportedCharacterSetsList:
+    type: array
+    items:
+      $ref: '#/definitions/CharacterSet'
+  DBEngineVersion:
+    type: object
+    properties:
+      Engine:
+        $ref: '#/definitions/String'
+      EngineVersion:
+        $ref: '#/definitions/String'
+      DBParameterGroupFamily:
+        $ref: '#/definitions/String'
+      DBEngineDescription:
+        $ref: '#/definitions/String'
+      DBEngineVersionDescription:
+        $ref: '#/definitions/String'
+      DefaultCharacterSet:
+        $ref: '#/definitions/CharacterSet'
+      SupportedCharacterSets:
+        $ref: '#/definitions/SupportedCharacterSetsList'
+  DBEngineVersionList:
+    type: array
+    items:
+      $ref: '#/definitions/DBEngineVersion'
+  Endpoint:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/String'
+      Port:
+        $ref: '#/definitions/Integer'
+  Integer:
+    type: integer
+  TStamp:
+    type: string
+    format: date-time
+  DBSecurityGroupMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/DBSecurityGroupMembership'
+  VpcSecurityGroupMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/VpcSecurityGroupMembership'
+  DBParameterGroupStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/DBParameterGroupStatus'
+  PendingModifiedValues:
+    type: object
+    properties:
+      DBInstanceClass:
+        $ref: '#/definitions/String'
+      AllocatedStorage:
+        $ref: '#/definitions/IntegerOptional'
+      MasterUserPassword:
+        $ref: '#/definitions/String'
+      Port:
+        $ref: '#/definitions/IntegerOptional'
+      BackupRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+      MultiAZ:
+        $ref: '#/definitions/BooleanOptional'
+      EngineVersion:
+        $ref: '#/definitions/String'
+      Iops:
+        $ref: '#/definitions/IntegerOptional'
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+  ReadReplicaDBInstanceIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  OptionGroupMembership:
+    type: object
+    properties:
+      OptionGroupName:
+        $ref: '#/definitions/String'
+      Status:
+        $ref: '#/definitions/String'
+  DBInstanceList:
+    type: array
+    items:
+      $ref: '#/definitions/DBInstance'
+  ParametersList:
+    type: array
+    items:
+      $ref: '#/definitions/Parameter'
+  DBParameterGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/DBParameterGroup'
+  DBParameterGroupStatus:
+    type: object
+    properties:
+      DBParameterGroupName:
+        $ref: '#/definitions/String'
+      ParameterApplyStatus:
+        $ref: '#/definitions/String'
+  EC2SecurityGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/EC2SecurityGroup'
+  IPRangeList:
+    type: array
+    items:
+      $ref: '#/definitions/IPRange'
+  DBSecurityGroupMembership:
+    type: object
+    properties:
+      DBSecurityGroupName:
+        $ref: '#/definitions/String'
+      Status:
+        $ref: '#/definitions/String'
+  DBSecurityGroups:
+    type: array
+    items:
+      $ref: '#/definitions/DBSecurityGroup'
+  DBSnapshotList:
+    type: array
+    items:
+      $ref: '#/definitions/DBSnapshot'
+  SubnetList:
+    type: array
+    items:
+      $ref: '#/definitions/Subnet'
   DBSubnetGroups:
     type: array
     items:
       $ref: '#/definitions/DBSubnetGroup'
+  EngineDefaults:
+    type: object
+    properties:
+      DBParameterGroupFamily:
+        $ref: '#/definitions/String'
+      Marker:
+        $ref: '#/definitions/String'
+      Parameters:
+        $ref: '#/definitions/ParametersList'
+  SourceType:
+    type: string
+    enum:
+      - db-instance
+      - db-parameter-group
+      - db-security-group
+      - db-snapshot
   Double:
     type: number
     format: double
@@ -3378,26 +3525,6 @@ definitions:
         $ref: '#/definitions/String'
       EC2SecurityGroupOwnerId:
         $ref: '#/definitions/String'
-  EC2SecurityGroupList:
-    type: array
-    items:
-      $ref: '#/definitions/EC2SecurityGroup'
-  Endpoint:
-    type: object
-    properties:
-      Address:
-        $ref: '#/definitions/String'
-      Port:
-        $ref: '#/definitions/Integer'
-  EngineDefaults:
-    type: object
-    properties:
-      DBParameterGroupFamily:
-        $ref: '#/definitions/String'
-      Marker:
-        $ref: '#/definitions/String'
-      Parameters:
-        $ref: '#/definitions/ParametersList'
   Event:
     type: object
     properties:
@@ -3411,10 +3538,6 @@ definitions:
         $ref: '#/definitions/EventCategoriesList'
       Date:
         $ref: '#/definitions/TStamp'
-  EventCategoriesList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   EventCategoriesMap:
     type: object
     properties:
@@ -3430,29 +3553,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Event'
-  EventSubscription:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/String'
-      CustomerAwsId:
-        $ref: '#/definitions/String'
-      CustSubscriptionId:
-        $ref: '#/definitions/String'
-      SnsTopicArn:
-        $ref: '#/definitions/String'
-      Status:
-        $ref: '#/definitions/String'
-      SubscriptionCreationTime:
-        $ref: '#/definitions/String'
-      SourceType:
-        $ref: '#/definitions/String'
-      SourceIdsList:
-        $ref: '#/definitions/SourceIdsList'
-      EventCategoriesList:
-        $ref: '#/definitions/EventCategoriesList'
-      Enabled:
-        $ref: '#/definitions/Boolean'
   EventSubscriptionsList:
     type: array
     items:
@@ -3464,15 +3564,15 @@ definitions:
         $ref: '#/definitions/String'
       CIDRIP:
         $ref: '#/definitions/String'
-  IPRangeList:
+  KeyList:
     type: array
     items:
-      $ref: '#/definitions/IPRange'
-  Integer:
-    type: integer
-  IntegerOptional:
-    type: integer
-  KeyList:
+      $ref: '#/definitions/String'
+  OptionConfigurationList:
+    type: array
+    items:
+      $ref: '#/definitions/OptionConfiguration'
+  OptionNamesList:
     type: array
     items:
       $ref: '#/definitions/String'
@@ -3502,34 +3602,14 @@ definitions:
         $ref: '#/definitions/DBSecurityGroupNameList'
       VpcSecurityGroupMemberships:
         $ref: '#/definitions/VpcSecurityGroupIdList'
-  OptionConfigurationList:
+  OptionsList:
     type: array
     items:
-      $ref: '#/definitions/OptionConfiguration'
-  OptionGroup:
-    type: object
-    properties:
-      OptionGroupName:
-        $ref: '#/definitions/String'
-      OptionGroupDescription:
-        $ref: '#/definitions/String'
-      EngineName:
-        $ref: '#/definitions/String'
-      MajorEngineVersion:
-        $ref: '#/definitions/String'
-      Options:
-        $ref: '#/definitions/OptionsList'
-      AllowsVpcAndNonVpcInstanceMemberships:
-        $ref: '#/definitions/Boolean'
-      VpcId:
-        $ref: '#/definitions/String'
-  OptionGroupMembership:
-    type: object
-    properties:
-      OptionGroupName:
-        $ref: '#/definitions/String'
-      Status:
-        $ref: '#/definitions/String'
+      $ref: '#/definitions/Option'
+  OptionsDependedOn:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   OptionGroupOption:
     type: object
     properties:
@@ -3557,18 +3637,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/OptionGroup'
-  OptionNamesList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  OptionsDependedOn:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  OptionsList:
-    type: array
-    items:
-      $ref: '#/definitions/Option'
   OrderableDBInstanceOption:
     type: object
     properties:
@@ -3615,46 +3683,6 @@ definitions:
         $ref: '#/definitions/String'
       ApplyMethod:
         $ref: '#/definitions/ApplyMethod'
-  ParametersList:
-    type: array
-    items:
-      $ref: '#/definitions/Parameter'
-  PendingModifiedValues:
-    type: object
-    properties:
-      DBInstanceClass:
-        $ref: '#/definitions/String'
-      AllocatedStorage:
-        $ref: '#/definitions/IntegerOptional'
-      MasterUserPassword:
-        $ref: '#/definitions/String'
-      Port:
-        $ref: '#/definitions/IntegerOptional'
-      BackupRetentionPeriod:
-        $ref: '#/definitions/IntegerOptional'
-      MultiAZ:
-        $ref: '#/definitions/BooleanOptional'
-      EngineVersion:
-        $ref: '#/definitions/String'
-      Iops:
-        $ref: '#/definitions/IntegerOptional'
-      DBInstanceIdentifier:
-        $ref: '#/definitions/String'
-  ReadReplicaDBInstanceIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  RecurringCharge:
-    type: object
-    properties:
-      RecurringChargeAmount:
-        $ref: '#/definitions/Double'
-      RecurringChargeFrequency:
-        $ref: '#/definitions/String'
-  RecurringChargeList:
-    type: array
-    items:
-      $ref: '#/definitions/RecurringCharge'
   ReservedDBInstance:
     type: object
     properties:
@@ -3686,6 +3714,17 @@ definitions:
         $ref: '#/definitions/String'
       RecurringCharges:
         $ref: '#/definitions/RecurringChargeList'
+  RecurringCharge:
+    type: object
+    properties:
+      RecurringChargeAmount:
+        $ref: '#/definitions/Double'
+      RecurringChargeFrequency:
+        $ref: '#/definitions/String'
+  RecurringChargeList:
+    type: array
+    items:
+      $ref: '#/definitions/RecurringCharge'
   ReservedDBInstanceList:
     type: array
     items:
@@ -3717,19 +3756,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReservedDBInstancesOffering'
-  SourceIdsList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SourceType:
-    type: string
-    enum:
-      - db-instance
-      - db-parameter-group
-      - db-security-group
-      - db-snapshot
-  String:
-    type: string
   Subnet:
     type: object
     properties:
@@ -3739,21 +3765,6 @@ definitions:
         $ref: '#/definitions/AvailabilityZone'
       SubnetStatus:
         $ref: '#/definitions/String'
-  SubnetIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  SubnetList:
-    type: array
-    items:
-      $ref: '#/definitions/Subnet'
-  SupportedCharacterSetsList:
-    type: array
-    items:
-      $ref: '#/definitions/CharacterSet'
-  TStamp:
-    type: string
-    format: date-time
   Tag:
     type: object
     properties:
@@ -3761,14 +3772,6 @@ definitions:
         $ref: '#/definitions/String'
       Value:
         $ref: '#/definitions/String'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  VpcSecurityGroupIdList:
-    type: array
-    items:
-      $ref: '#/definitions/String'
   VpcSecurityGroupMembership:
     type: object
     properties:
@@ -3776,7 +3779,3 @@ definitions:
         $ref: '#/definitions/String'
       Status:
         $ref: '#/definitions/String'
-  VpcSecurityGroupMembershipList:
-    type: array
-    items:
-      $ref: '#/definitions/VpcSecurityGroupMembership'

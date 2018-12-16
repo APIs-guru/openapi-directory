@@ -383,37 +383,15 @@ definitions:
   DescribeJobExecutionJobId:
     type: string
     pattern: '[a-zA-Z0-9_-]+|^\$next'
-  undefined: {}
-  DetailsKey:
+  ThingName:
     type: string
     pattern: '[a-zA-Z0-9:_-]+'
     minLength: 1
     maxLength: 128
-  DetailsValue:
-    type: string
-    pattern: '[^\p\{C\}]*\+'
-    minLength: 1
-    maxLength: 1024
-  DetailsMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DetailsKey'
-        value:
-          $ref: '#/definitions/DetailsValue'
-  ExecutionNumber:
-    type: integer
-  ExpectedVersion:
-    type: integer
-  IncludeExecutionState:
-    type: boolean
   IncludeJobDocument:
     type: boolean
-  JobDocument:
-    type: string
-    maxLength: 32768
+  ExecutionNumber:
+    type: integer
   JobExecution:
     type: object
     properties:
@@ -451,6 +429,60 @@ definitions:
         $ref: '#/definitions/JobDocument'
         description: The content of the job document.
     description: Contains data about a job execution.
+  DetailsKey:
+    type: string
+    pattern: '[a-zA-Z0-9:_-]+'
+    minLength: 1
+    maxLength: 128
+  DetailsValue:
+    type: string
+    pattern: '[^\p\{C\}]*\+'
+    minLength: 1
+    maxLength: 1024
+  DetailsMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DetailsKey'
+        value:
+          $ref: '#/definitions/DetailsValue'
+  ExpectedVersion:
+    type: integer
+  JobExecutionSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/JobExecutionSummary'
+  IncludeExecutionState:
+    type: boolean
+  JobDocument:
+    type: string
+    maxLength: 32768
+  JobId:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+    minLength: 1
+    maxLength: 64
+  JobExecutionStatus:
+    type: string
+    enum:
+      - QUEUED
+      - IN_PROGRESS
+      - SUCCEEDED
+      - FAILED
+      - TIMED_OUT
+      - REJECTED
+      - REMOVED
+      - CANCELED
+  QueuedAt:
+    type: integer
+  StartedAt:
+    type: integer
+  LastUpdatedAt:
+    type: integer
+  VersionNumber:
+    type: integer
   JobExecutionState:
     type: object
     properties:
@@ -464,17 +496,6 @@ definitions:
         $ref: '#/definitions/VersionNumber'
         description: The version of the job execution. Job execution versions are incremented each time they are updated by a device.
     description: Contains data about the state of a job execution.
-  JobExecutionStatus:
-    type: string
-    enum:
-      - QUEUED
-      - IN_PROGRESS
-      - SUCCEEDED
-      - FAILED
-      - TIMED_OUT
-      - REJECTED
-      - REMOVED
-      - CANCELED
   JobExecutionSummary:
     type: object
     properties:
@@ -497,27 +518,5 @@ definitions:
         $ref: '#/definitions/ExecutionNumber'
         description: A number that identifies a particular job execution on a particular device.
     description: Contains a subset of information about a job execution.
-  JobExecutionSummaryList:
-    type: array
-    items:
-      $ref: '#/definitions/JobExecutionSummary'
-  JobId:
-    type: string
-    pattern: '[a-zA-Z0-9_-]+'
-    minLength: 1
-    maxLength: 64
-  LastUpdatedAt:
-    type: integer
-  QueuedAt:
-    type: integer
-  StartedAt:
-    type: integer
   StepTimeoutInMinutes:
-    type: integer
-  ThingName:
-    type: string
-    pattern: '[a-zA-Z0-9:_-]+'
-    minLength: 1
-    maxLength: 128
-  VersionNumber:
     type: integer

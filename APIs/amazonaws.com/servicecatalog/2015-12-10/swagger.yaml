@@ -4781,7 +4781,25 @@ definitions:
   AcceptLanguage:
     type: string
     maxLength: 100
-  undefined: {}
+  Id:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-]*'
+    minLength: 1
+    maxLength: 100
+  PortfolioShareType:
+    type: string
+    enum:
+      - IMPORTED
+      - AWS_SERVICECATALOG
+      - AWS_ORGANIZATIONS
+  AccessLevelFilterKey:
+    type: string
+    enum:
+      - Account
+      - Role
+      - User
+  AccessLevelFilterValue:
+    type: string
   AccessLevelFilter:
     type: object
     properties:
@@ -4792,14 +4810,6 @@ definitions:
         $ref: '#/definitions/AccessLevelFilterValue'
         description: The user to which the access level applies. The only supported value is <code>Self</code>.
     description: The access level to use to filter results.
-  AccessLevelFilterKey:
-    type: string
-    enum:
-      - Account
-      - Role
-      - User
-  AccessLevelFilterValue:
-    type: string
   AccessStatus:
     type: string
     enum:
@@ -4813,6 +4823,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AccountId'
+  Tag:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: The tag key.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The value for this key.
+    description: Information about a tag. A tag is a key-value pair. Tags are propagated to the resources created when provisioning a product.
   AddTags:
     type: array
     items:
@@ -4826,8 +4849,33 @@ definitions:
       $ref: '#/definitions/AllowedValue'
   ApproximateCount:
     type: integer
+  PrincipalARN:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  PrincipalType:
+    type: string
+    enum:
+      - IAM
+  ResourceId:
+    type: string
+  TagOptionId:
+    type: string
+    minLength: 1
+    maxLength: 100
   AttributeValue:
     type: string
+  ServiceActionAssociations:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceActionAssociation'
+    minItems: 1
+    maxItems: 50
+  FailedServiceActionAssociations:
+    type: array
+    items:
+      $ref: '#/definitions/FailedServiceActionAssociation'
+    maxItems: 50
   CausingEntity:
     type: string
   ChangeAction:
@@ -4836,6 +4884,8 @@ definitions:
       - ADD
       - MODIFY
       - REMOVE
+  CloudWatchDashboardName:
+    type: string
   CloudWatchDashboard:
     type: object
     properties:
@@ -4843,8 +4893,6 @@ definitions:
         $ref: '#/definitions/CloudWatchDashboardName'
         description: The name of the CloudWatch dashboard.
     description: Information about a CloudWatch dashboard.
-  CloudWatchDashboardName:
-    type: string
   CloudWatchDashboards:
     type: array
     items:
@@ -4852,6 +4900,10 @@ definitions:
   ConstraintDescription:
     type: string
     maxLength: 2000
+  ConstraintType:
+    type: string
+    minLength: 1
+    maxLength: 1024
   ConstraintDetail:
     type: object
     properties:
@@ -4874,10 +4926,6 @@ definitions:
       $ref: '#/definitions/ConstraintDetail'
   ConstraintParameters:
     type: string
-  ConstraintSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/ConstraintSummary'
   ConstraintSummary:
     type: object
     properties:
@@ -4888,10 +4936,10 @@ definitions:
         $ref: '#/definitions/ConstraintDescription'
         description: The description of the constraint.
     description: Summary information about a constraint.
-  ConstraintType:
-    type: string
-    minLength: 1
-    maxLength: 1024
+  ConstraintSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ConstraintSummary'
   CopyOption:
     type: string
     enum:
@@ -4900,202 +4948,46 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CopyOption'
+  ProductArn:
+    type: string
+    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+    minLength: 1
+    maxLength: 1224
+  ProductViewName:
+    type: string
+    maxLength: 8191
+  SourceProvisioningArtifactProperties:
+    type: array
+    items:
+      $ref: '#/definitions/SourceProvisioningArtifactPropertiesMap'
+  IdempotencyToken:
+    type: string
+    pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
+    minLength: 1
+    maxLength: 128
   CopyProductStatus:
     type: string
     enum:
       - SUCCEEDED
       - IN_PROGRESS
       - FAILED
-  CreatedTime:
-    type: string
-    format: date-time
-  CreationTime:
-    type: string
-    format: date-time
-  DefaultValue:
-    type: string
-  Description:
-    type: string
-  Error:
-    type: string
-  ErrorCode:
-    type: string
-  ErrorDescription:
-    type: string
-  EvaluationType:
+  Status:
     type: string
     enum:
-      - STATIC
-      - DYNAMIC
-  FailedServiceActionAssociation:
-    type: object
-    properties:
-      ServiceActionId:
-        $ref: '#/definitions/Id'
-        description: 'The self-service action identifier. For example, <code>act-fs7abcd89wxyz</code>.'
-      ProductId:
-        $ref: '#/definitions/Id'
-        description: 'The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.'
-      ProvisioningArtifactId:
-        $ref: '#/definitions/Id'
-        description: 'The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.'
-      ErrorCode:
-        $ref: '#/definitions/ServiceActionAssociationErrorCode'
-        description: The error code. Valid values are listed below.
-      ErrorMessage:
-        $ref: '#/definitions/ServiceActionAssociationErrorMessage'
-        description: A text description of the error.
-    description: 'An object containing information about the error, along with identifying information about the self-service action and its associations.'
-  FailedServiceActionAssociations:
-    type: array
-    items:
-      $ref: '#/definitions/FailedServiceActionAssociation'
-    maxItems: 50
-  HasDefaultPath:
-    type: boolean
-  Id:
+      - AVAILABLE
+      - CREATING
+      - FAILED
+  PortfolioDisplayName:
     type: string
-    pattern: '^[a-zA-Z0-9_\-]*'
     minLength: 1
     maxLength: 100
-  IdempotencyToken:
-    type: string
-    pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
-    minLength: 1
-    maxLength: 128
-  IgnoreErrors:
-    type: boolean
-  InstructionType:
-    type: string
-  InstructionValue:
-    type: string
-  LastRequestId:
-    type: string
-  LaunchPathSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/LaunchPathSummary'
-  LaunchPathSummary:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/Id'
-        description: The identifier of the product path.
-      ConstraintSummaries:
-        $ref: '#/definitions/ConstraintSummaries'
-        description: The constraints on the portfolio-product relationship.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: The tags associated with this product path.
-      Name:
-        $ref: '#/definitions/PortfolioName'
-        description: The name of the portfolio to which the user was assigned.
-    description: Summary information about a product path for a user.
-  ListRecordHistorySearchFilter:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/SearchFilterKey'
-        description: <p>The filter key.</p> <ul> <li> <p> <code>product</code> - Filter results based on the specified product identifier.</p> </li> <li> <p> <code>provisionedproduct</code> - Filter results based on the provisioned product identifier.</p> </li> </ul>
-      Value:
-        $ref: '#/definitions/SearchFilterValue'
-        description: The filter value.
-    description: The search filter to use when listing history records.
-  ListTagOptionsFilters:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/TagOptionKey'
-        description: The TagOption key.
-      Value:
-        $ref: '#/definitions/TagOptionValue'
-        description: The TagOption value.
-      Active:
-        $ref: '#/definitions/TagOptionActive'
-        description: The active state.
-    description: Filters to use when listing TagOptions.
-  LogicalResourceId:
-    type: string
-  Message:
-    type: string
-  Namespaces:
-    type: array
-    items:
-      $ref: '#/definitions/AccountId'
-  NoEcho:
-    type: boolean
-  NotificationArn:
-    type: string
-    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
-    minLength: 1
-    maxLength: 1224
-  NotificationArns:
-    type: array
-    items:
-      $ref: '#/definitions/NotificationArn'
-    maxItems: 5
-  OrganizationNode:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/OrganizationNodeType'
-        description: The organization node type.
-      Value:
-        $ref: '#/definitions/OrganizationNodeValue'
-        description: The identifier of the organization node.
-    description: Information about the organization node.
-  OrganizationNodeType:
-    type: string
-    enum:
-      - ORGANIZATION
-      - ORGANIZATIONAL_UNIT
-      - ACCOUNT
-  OrganizationNodeValue:
-    type: string
-    pattern: '(^[0-9]{12}$)|(^arn:aws:organizations::\d{12}:organization\/o-[a-z0-9]{10,32})|(^o-[a-z0-9]{10,32}$)|(^arn:aws:organizations::\d{12}:ou\/o-[a-z0-9]{10,32}\/ou-[0-9a-z]{4,32}-[0-9a-z]{8,32}$)|(^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$)'
-  OrganizationNodes:
-    type: array
-    items:
-      $ref: '#/definitions/OrganizationNode'
-  OutputKey:
-    type: string
-  OutputValue:
-    type: string
-  PageSize:
-    type: integer
-    minimum: 0
-    maximum: 20
-  PageToken:
-    type: string
-    pattern: '[\u0009\u000a\u000d\u0020-\uD7FF\uE000-\uFFFD]*'
-    maxLength: 2024
-  ParameterConstraints:
-    type: object
-    properties:
-      AllowedValues:
-        $ref: '#/definitions/AllowedValues'
-        description: The values that the administrator has allowed for the parameter.
-    description: The constraints that the administrator has put on the parameter.
-  ParameterKey:
-    type: string
-    minLength: 1
-    maxLength: 1000
-  ParameterType:
-    type: string
-  ParameterValue:
-    type: string
-    maxLength: 4096
-  PhysicalId:
-    type: string
-  PhysicalResourceId:
-    type: string
-  PlanResourceType:
-    type: string
-    minLength: 1
-    maxLength: 256
   PortfolioDescription:
     type: string
     maxLength: 2000
+  ProviderName:
+    type: string
+    minLength: 1
+    maxLength: 50
   PortfolioDetail:
     type: object
     properties:
@@ -5118,86 +5010,62 @@ definitions:
         $ref: '#/definitions/ProviderName'
         description: The name of the portfolio provider.
     description: Information about a portfolio.
-  PortfolioDetails:
+  Tags:
     type: array
     items:
-      $ref: '#/definitions/PortfolioDetail'
-  PortfolioDisplayName:
-    type: string
-    minLength: 1
-    maxLength: 100
-  PortfolioName:
-    type: string
-  PortfolioShareToken:
-    type: string
-  PortfolioShareType:
-    type: string
-    enum:
-      - IMPORTED
-      - AWS_SERVICECATALOG
-      - AWS_ORGANIZATIONS
-  Principal:
+      $ref: '#/definitions/Tag'
+    maxItems: 50
+  OrganizationNode:
     type: object
     properties:
-      PrincipalARN:
-        $ref: '#/definitions/PrincipalARN'
-        description: 'The ARN of the principal (IAM user, role, or group).'
-      PrincipalType:
-        $ref: '#/definitions/PrincipalType'
-        description: The principal type. The supported value is <code>IAM</code>.
-    description: Information about a principal.
-  PrincipalARN:
+      Type:
+        $ref: '#/definitions/OrganizationNodeType'
+        description: The organization node type.
+      Value:
+        $ref: '#/definitions/OrganizationNodeValue'
+        description: The identifier of the organization node.
+    description: Information about the organization node.
+  PortfolioShareToken:
     type: string
-    minLength: 1
-    maxLength: 1000
-  PrincipalType:
+  ProductViewOwner:
     type: string
-    enum:
-      - IAM
-  Principals:
-    type: array
-    items:
-      $ref: '#/definitions/Principal'
-  ProductArn:
+    maxLength: 8191
+  ProductViewShortDescription:
     type: string
-    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
-    minLength: 1
-    maxLength: 1224
-  ProductSource:
+    maxLength: 8191
+  SupportDescription:
     type: string
-    enum:
-      - ACCOUNT
+    maxLength: 8191
+  SupportEmail:
+    type: string
+    maxLength: 254
+  SupportUrl:
+    type: string
+    maxLength: 2083
   ProductType:
     type: string
     enum:
       - CLOUD_FORMATION_TEMPLATE
       - MARKETPLACE
     maxLength: 8191
-  ProductViewAggregationType:
-    type: string
-  ProductViewAggregationValue:
+  ProvisioningArtifactProperties:
     type: object
+    required:
+      - Info
     properties:
-      Value:
-        $ref: '#/definitions/AttributeValue'
-        description: The value of the product view aggregation.
-      ApproximateCount:
-        $ref: '#/definitions/ApproximateCount'
-        description: An approximate count of the products that match the value.
-    description: 'A single product view aggregation value/count pair, containing metadata about each product to which the calling user has access.'
-  ProductViewAggregationValues:
-    type: array
-    items:
-      $ref: '#/definitions/ProductViewAggregationValue'
-  ProductViewAggregations:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ProductViewAggregationType'
-        value:
-          $ref: '#/definitions/ProductViewAggregationValues'
+      Name:
+        $ref: '#/definitions/ProvisioningArtifactName'
+        description: 'The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.'
+      Description:
+        $ref: '#/definitions/ProvisioningArtifactDescription'
+        description: 'The description of the provisioning artifact, including how it differs from the previous provisioning artifact.'
+      Info:
+        $ref: '#/definitions/ProvisioningArtifactInfo'
+        description: '<p>The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON format as follows:</p> <p> <code>"LoadTemplateFromURL": "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."</code> </p>'
+      Type:
+        $ref: '#/definitions/ProvisioningArtifactType'
+        description: <p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>
+    description: Information about a provisioning artifact (also known as a version) for a product.
   ProductViewDetail:
     type: object
     properties:
@@ -5214,53 +5082,159 @@ definitions:
         $ref: '#/definitions/CreatedTime'
         description: The UTC time stamp of the creation time.
     description: Information about a product view.
-  ProductViewDetails:
-    type: array
-    items:
-      $ref: '#/definitions/ProductViewDetail'
-  ProductViewDistributor:
+  ProvisioningArtifactDetail:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioning artifact.
+      Name:
+        $ref: '#/definitions/ProvisioningArtifactName'
+        description: The name of the provisioning artifact.
+      Description:
+        $ref: '#/definitions/ProvisioningArtifactName'
+        description: The description of the provisioning artifact.
+      Type:
+        $ref: '#/definitions/ProvisioningArtifactType'
+        description: <p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>
+      CreatedTime:
+        $ref: '#/definitions/CreationTime'
+        description: The UTC time stamp of the creation time.
+      Active:
+        $ref: '#/definitions/ProvisioningArtifactActive'
+        description: Indicates whether the product version is active.
+    description: Information about a provisioning artifact (also known as a version) for a product.
+  ProvisionedProductPlanName:
     type: string
-  ProductViewFilterBy:
+  ProvisionedProductPlanType:
     type: string
     enum:
-      - FullTextSearch
-      - Owner
-      - ProductType
-      - SourceProductId
-  ProductViewFilterValue:
-    type: string
-  ProductViewFilterValues:
+      - CLOUDFORMATION
+  NotificationArns:
     type: array
     items:
-      $ref: '#/definitions/ProductViewFilterValue'
-  ProductViewFilters:
+      $ref: '#/definitions/NotificationArn'
+    maxItems: 5
+  ProvisionedProductName:
+    type: string
+    pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]*'
+    minLength: 1
+    maxLength: 128
+  UpdateProvisioningParameters:
     type: array
+    items:
+      $ref: '#/definitions/UpdateProvisioningParameter'
+  ProvisioningArtifactInfo:
+    type: array
+    minItems: 1
+    maxItems: 100
     items:
       type: object
       properties:
         key:
-          $ref: '#/definitions/ProductViewFilterBy'
+          $ref: '#/definitions/ProvisioningArtifactInfoKey'
         value:
-          $ref: '#/definitions/ProductViewFilterValues'
-  ProductViewName:
+          $ref: '#/definitions/ProvisioningArtifactInfoValue'
+  ServiceActionName:
     type: string
-    maxLength: 8191
-  ProductViewOwner:
-    type: string
-    maxLength: 8191
-  ProductViewShortDescription:
-    type: string
-    maxLength: 8191
-  ProductViewSortBy:
+    pattern: '^[a-zA-Z0-9_\-.]*'
+    minLength: 1
+    maxLength: 256
+  ServiceActionDefinitionType:
     type: string
     enum:
-      - Title
-      - VersionCount
-      - CreationDate
-  ProductViewSummaries:
+      - SSM_AUTOMATION
+  ServiceActionDefinitionMap:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ServiceActionDefinitionKey'
+        value:
+          $ref: '#/definitions/ServiceActionDefinitionValue'
+  ServiceActionDescription:
+    type: string
+    maxLength: 1024
+  ServiceActionDetail:
+    type: object
+    properties:
+      ServiceActionSummary:
+        $ref: '#/definitions/ServiceActionSummary'
+        description: Summary information about the self-service action.
+      Definition:
+        $ref: '#/definitions/ServiceActionDefinitionMap'
+        description: A map that defines the self-service action.
+    description: An object containing detailed information about the self-service action.
+  TagOptionKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagOptionValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 256
+  TagOptionDetail:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagOptionKey'
+        description: The TagOption key.
+      Value:
+        $ref: '#/definitions/TagOptionValue'
+        description: The TagOption value.
+      Active:
+        $ref: '#/definitions/TagOptionActive'
+        description: The TagOption active state.
+      Id:
+        $ref: '#/definitions/TagOptionId'
+        description: The TagOption identifier.
+    description: Information about a TagOption.
+  CreatedTime:
+    type: string
+    format: date-time
+  CreationTime:
+    type: string
+    format: date-time
+  DefaultValue:
+    type: string
+  IgnoreErrors:
+    type: boolean
+  StatusDetail:
+    type: string
+  TagOptionDetails:
     type: array
     items:
-      $ref: '#/definitions/ProductViewSummary'
+      $ref: '#/definitions/TagOptionDetail'
+  OrganizationNodeValue:
+    type: string
+    pattern: '(^[0-9]{12}$)|(^arn:aws:organizations::\d{12}:organization\/o-[a-z0-9]{10,32})|(^o-[a-z0-9]{10,32}$)|(^arn:aws:organizations::\d{12}:ou\/o-[a-z0-9]{10,32}\/ou-[0-9a-z]{4,32}-[0-9a-z]{8,32}$)|(^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$)'
+  ShareStatus:
+    type: string
+    enum:
+      - NOT_STARTED
+      - IN_PROGRESS
+      - COMPLETED
+      - COMPLETED_WITH_ERRORS
+      - ERROR
+  ShareDetails:
+    type: object
+    properties:
+      SuccessfulShares:
+        $ref: '#/definitions/SuccessfulShares'
+        description: List of accounts for whom the operation succeeded.
+      ShareErrors:
+        $ref: '#/definitions/ShareErrors'
+        description: List of errors.
+    description: Information about the portfolio share operation.
+  ProvisioningArtifactSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningArtifactSummary'
   ProductViewSummary:
     type: object
     properties:
@@ -5298,12 +5272,499 @@ definitions:
         $ref: '#/definitions/SupportUrl'
         description: The URL information to obtain support for this Product.
     description: Summary information about a product view.
-  PropertyName:
+  ProvisioningArtifacts:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningArtifact'
+  ProvisionedProductDetail:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/ProvisionedProductNameOrArn'
+        description: The user-friendly name of the provisioned product.
+      Arn:
+        $ref: '#/definitions/ProvisionedProductNameOrArn'
+        description: The ARN of the provisioned product.
+      Type:
+        $ref: '#/definitions/ProvisionedProductType'
+        description: The type of provisioned product. The supported values are <code>CFN_STACK</code> and <code>CFN_STACKSET</code>.
+      Id:
+        $ref: '#/definitions/ProvisionedProductId'
+        description: The identifier of the provisioned product.
+      Status:
+        $ref: '#/definitions/ProvisionedProductStatus'
+        description: '<p>The current status of the provisioned product.</p> <ul> <li> <p> <code>AVAILABLE</code> - Stable state, ready to perform any operation. The most recent operation succeeded and completed.</p> </li> <li> <p> <code>UNDER_CHANGE</code> - Transitive state, operations performed might not have valid results. Wait for an <code>AVAILABLE</code> status before performing operations.</p> </li> <li> <p> <code>TAINTED</code> - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.</p> </li> <li> <p> <code>ERROR</code> - An unexpected error occurred, the provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.</p> </li> </ul>'
+      StatusMessage:
+        $ref: '#/definitions/ProvisionedProductStatusMessage'
+        description: The current status message of the provisioned product.
+      CreatedTime:
+        $ref: '#/definitions/CreatedTime'
+        description: The UTC time stamp of the creation time.
+      IdempotencyToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
+      LastRecordId:
+        $ref: '#/definitions/LastRequestId'
+        description: The record identifier of the last request performed on this provisioned product.
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: 'The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.'
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: 'The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.'
+    description: Information about a provisioned product.
+  PageSize:
+    type: integer
+    minimum: 0
+    maximum: 20
+  PageToken:
     type: string
-  ProviderName:
+    pattern: '[\u0009\u000a\u000d\u0020-\uD7FF\uE000-\uFFFD]*'
+    maxLength: 2024
+  ProvisionedProductPlanDetails:
+    type: object
+    properties:
+      CreatedTime:
+        $ref: '#/definitions/CreatedTime'
+        description: The UTC time stamp of the creation time.
+      PathId:
+        $ref: '#/definitions/Id'
+        description: 'The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.'
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: The product identifier.
+      PlanName:
+        $ref: '#/definitions/ProvisionedProductPlanName'
+        description: The name of the plan.
+      PlanId:
+        $ref: '#/definitions/Id'
+        description: The plan identifier.
+      ProvisionProductId:
+        $ref: '#/definitions/Id'
+        description: The product identifier.
+      ProvisionProductName:
+        $ref: '#/definitions/ProvisionedProductName'
+        description: The user-friendly name of the provisioned product.
+      PlanType:
+        $ref: '#/definitions/ProvisionedProductPlanType'
+        description: The plan type.
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioning artifact.
+      Status:
+        $ref: '#/definitions/ProvisionedProductPlanStatus'
+        description: The status.
+      UpdatedTime:
+        $ref: '#/definitions/UpdatedTime'
+        description: The time when the plan was last updated.
+      NotificationArns:
+        $ref: '#/definitions/NotificationArns'
+        description: Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related events.
+      ProvisioningParameters:
+        $ref: '#/definitions/UpdateProvisioningParameters'
+        description: Parameters specified by the administrator that are required for provisioning the product.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: One or more tags.
+      StatusMessage:
+        $ref: '#/definitions/StatusMessage'
+        description: The status message.
+    description: Information about a plan.
+  ResourceChanges:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceChange'
+  Verbose:
+    type: boolean
+  ProvisioningArtifactParameters:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningArtifactParameter'
+  UsageInstructions:
+    type: array
+    items:
+      $ref: '#/definitions/UsageInstruction'
+  TagOptionSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/TagOptionSummary'
+  ProvisioningArtifactPreferences:
+    type: object
+    properties:
+      StackSetAccounts:
+        $ref: '#/definitions/StackSetAccounts'
+        description: <p>One or more AWS accounts where stack instances are deployed from the stack set. These accounts can be scoped in <code>ProvisioningPreferences$StackSetAccounts</code> and <code>UpdateProvisioningPreferences$StackSetAccounts</code>.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p>
+      StackSetRegions:
+        $ref: '#/definitions/StackSetRegions'
+        description: <p>One or more AWS Regions where stack instances are deployed from the stack set. These regions can be scoped in <code>ProvisioningPreferences$StackSetRegions</code> and <code>UpdateProvisioningPreferences$StackSetRegions</code>.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p>
+    description: '<p>The user-defined preferences that will be applied during product provisioning, unless overridden by <code>ProvisioningPreferences</code> or <code>UpdateProvisioningPreferences</code>.</p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
+  RecordDetail:
+    type: object
+    properties:
+      RecordId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the record.
+      ProvisionedProductName:
+        $ref: '#/definitions/ProvisionedProductName'
+        description: The user-friendly name of the provisioned product.
+      Status:
+        $ref: '#/definitions/RecordStatus'
+        description: '<p>The status of the provisioned product.</p> <ul> <li> <p> <code>CREATED</code> - The request was created but the operation has not started.</p> </li> <li> <p> <code>IN_PROGRESS</code> - The requested operation is in progress.</p> </li> <li> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a rollback.</p> </li> <li> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> </li> <li> <p> <code>FAILED</code> - The requested operation has unsuccessfully completed. Investigate using the error messages returned.</p> </li> </ul>'
+      CreatedTime:
+        $ref: '#/definitions/CreatedTime'
+        description: The UTC time stamp of the creation time.
+      UpdatedTime:
+        $ref: '#/definitions/UpdatedTime'
+        description: The time when the record was last updated.
+      ProvisionedProductType:
+        $ref: '#/definitions/ProvisionedProductType'
+        description: The type of provisioned product. The supported values are <code>CFN_STACK</code> and <code>CFN_STACKSET</code>.
+      RecordType:
+        $ref: '#/definitions/RecordType'
+        description: <p>The record type.</p> <ul> <li> <p> <code>PROVISION_PRODUCT</code> </p> </li> <li> <p> <code>UPDATE_PROVISIONED_PRODUCT</code> </p> </li> <li> <p> <code>TERMINATE_PROVISIONED_PRODUCT</code> </p> </li> </ul>
+      ProvisionedProductId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioned product.
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: The product identifier.
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: The identifier of the provisioning artifact.
+      PathId:
+        $ref: '#/definitions/Id'
+        description: The path identifier.
+      RecordErrors:
+        $ref: '#/definitions/RecordErrors'
+        description: The errors that occurred.
+      RecordTags:
+        $ref: '#/definitions/RecordTags'
+        description: One or more tags.
+    description: Information about a request operation.
+  RecordOutputs:
+    type: array
+    items:
+      $ref: '#/definitions/RecordOutput'
+  Description:
+    type: string
+  Error:
+    type: string
+  ErrorCode:
+    type: string
+  ErrorDescription:
+    type: string
+  EvaluationType:
+    type: string
+    enum:
+      - STATIC
+      - DYNAMIC
+  ServiceActionAssociationErrorCode:
+    type: string
+    enum:
+      - DUPLICATE_RESOURCE
+      - INTERNAL_FAILURE
+      - LIMIT_EXCEEDED
+      - RESOURCE_NOT_FOUND
+      - THROTTLING
+  ServiceActionAssociationErrorMessage:
     type: string
     minLength: 1
-    maxLength: 50
+    maxLength: 1024
+  FailedServiceActionAssociation:
+    type: object
+    properties:
+      ServiceActionId:
+        $ref: '#/definitions/Id'
+        description: 'The self-service action identifier. For example, <code>act-fs7abcd89wxyz</code>.'
+      ProductId:
+        $ref: '#/definitions/Id'
+        description: 'The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.'
+      ProvisioningArtifactId:
+        $ref: '#/definitions/Id'
+        description: 'The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.'
+      ErrorCode:
+        $ref: '#/definitions/ServiceActionAssociationErrorCode'
+        description: The error code. Valid values are listed below.
+      ErrorMessage:
+        $ref: '#/definitions/ServiceActionAssociationErrorMessage'
+        description: A text description of the error.
+    description: 'An object containing information about the error, along with identifying information about the self-service action and its associations.'
+  HasDefaultPath:
+    type: boolean
+  InstructionType:
+    type: string
+  InstructionValue:
+    type: string
+  LastRequestId:
+    type: string
+  LaunchPathSummary:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/Id'
+        description: The identifier of the product path.
+      ConstraintSummaries:
+        $ref: '#/definitions/ConstraintSummaries'
+        description: The constraints on the portfolio-product relationship.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The tags associated with this product path.
+      Name:
+        $ref: '#/definitions/PortfolioName'
+        description: The name of the portfolio to which the user was assigned.
+    description: Summary information about a product path for a user.
+  LaunchPathSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/LaunchPathSummary'
+  PortfolioName:
+    type: string
+  PortfolioDetails:
+    type: array
+    items:
+      $ref: '#/definitions/PortfolioDetail'
+  OrganizationNodeType:
+    type: string
+    enum:
+      - ORGANIZATION
+      - ORGANIZATIONAL_UNIT
+      - ACCOUNT
+  OrganizationNodes:
+    type: array
+    items:
+      $ref: '#/definitions/OrganizationNode'
+  Principals:
+    type: array
+    items:
+      $ref: '#/definitions/Principal'
+  ProvisionedProductPlans:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisionedProductPlanSummary'
+  ProvisioningArtifactViews:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningArtifactView'
+  ProvisioningArtifactDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningArtifactDetail'
+  ListRecordHistorySearchFilter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/SearchFilterKey'
+        description: <p>The filter key.</p> <ul> <li> <p> <code>product</code> - Filter results based on the specified product identifier.</p> </li> <li> <p> <code>provisionedproduct</code> - Filter results based on the provisioned product identifier.</p> </li> </ul>
+      Value:
+        $ref: '#/definitions/SearchFilterValue'
+        description: The filter value.
+    description: The search filter to use when listing history records.
+  RecordDetails:
+    type: array
+    items:
+      $ref: '#/definitions/RecordDetail'
+  SearchFilterKey:
+    type: string
+  SearchFilterValue:
+    type: string
+  ResourceType:
+    type: string
+  ResourceDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceDetail'
+  ServiceActionSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceActionSummary'
+  TagOptionActive:
+    type: boolean
+  ListTagOptionsFilters:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagOptionKey'
+        description: The TagOption key.
+      Value:
+        $ref: '#/definitions/TagOptionValue'
+        description: The TagOption value.
+      Active:
+        $ref: '#/definitions/TagOptionActive'
+        description: The active state.
+    description: Filters to use when listing TagOptions.
+  LogicalResourceId:
+    type: string
+  Message:
+    type: string
+  Namespaces:
+    type: array
+    items:
+      $ref: '#/definitions/AccountId'
+  NoEcho:
+    type: boolean
+  NotificationArn:
+    type: string
+    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+    minLength: 1
+    maxLength: 1224
+  OutputKey:
+    type: string
+  OutputValue:
+    type: string
+  ParameterConstraints:
+    type: object
+    properties:
+      AllowedValues:
+        $ref: '#/definitions/AllowedValues'
+        description: The values that the administrator has allowed for the parameter.
+    description: The constraints that the administrator has put on the parameter.
+  ParameterKey:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  ParameterType:
+    type: string
+  ParameterValue:
+    type: string
+    maxLength: 4096
+  PhysicalId:
+    type: string
+  PhysicalResourceId:
+    type: string
+  PlanResourceType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  ResourceARN:
+    type: string
+    minLength: 1
+    maxLength: 150
+  Principal:
+    type: object
+    properties:
+      PrincipalARN:
+        $ref: '#/definitions/PrincipalARN'
+        description: 'The ARN of the principal (IAM user, role, or group).'
+      PrincipalType:
+        $ref: '#/definitions/PrincipalType'
+        description: The principal type. The supported value is <code>IAM</code>.
+    description: Information about a principal.
+  ProductSource:
+    type: string
+    enum:
+      - ACCOUNT
+  ProductViewAggregationType:
+    type: string
+  ProductViewAggregationValue:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/AttributeValue'
+        description: The value of the product view aggregation.
+      ApproximateCount:
+        $ref: '#/definitions/ApproximateCount'
+        description: An approximate count of the products that match the value.
+    description: 'A single product view aggregation value/count pair, containing metadata about each product to which the calling user has access.'
+  ProductViewAggregationValues:
+    type: array
+    items:
+      $ref: '#/definitions/ProductViewAggregationValue'
+  ProductViewAggregations:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ProductViewAggregationType'
+        value:
+          $ref: '#/definitions/ProductViewAggregationValues'
+  ProductViewDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ProductViewDetail'
+  ProductViewDistributor:
+    type: string
+  ProductViewFilterBy:
+    type: string
+    enum:
+      - FullTextSearch
+      - Owner
+      - ProductType
+      - SourceProductId
+  ProductViewFilterValue:
+    type: string
+  ProductViewFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/ProductViewFilterValue'
+  ProductViewFilters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ProductViewFilterBy'
+        value:
+          $ref: '#/definitions/ProductViewFilterValues'
+  ProductViewSortBy:
+    type: string
+    enum:
+      - Title
+      - VersionCount
+      - CreationDate
+  ProductViewSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ProductViewSummary'
+  PropertyName:
+    type: string
+  ProvisioningParameters:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningParameter'
+  ProvisioningPreferences:
+    type: object
+    properties:
+      StackSetAccounts:
+        $ref: '#/definitions/StackSetAccounts'
+        description: '<p>One or more AWS accounts that will have access to the provisioned product.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The AWS accounts specified should be within the list of accounts in the <code>STACKSET</code> constraint. To get the list of accounts in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all accounts from the <code>STACKSET</code> constraint.</p>'
+      StackSetRegions:
+        $ref: '#/definitions/StackSetRegions'
+        description: '<p>One or more AWS Regions where the provisioned product will be available.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The specified regions should be within the list of regions from the <code>STACKSET</code> constraint. To get the list of regions in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all regions from the <code>STACKSET</code> constraint.</p>'
+      StackSetFailureToleranceCount:
+        $ref: '#/definitions/StackSetFailureToleranceCount'
+        description: '<p>The number of accounts, per region, for which this operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn''t attempt the operation in any subsequent regions.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p> <p>The default value is <code>0</code> if no value is specified.</p>'
+      StackSetFailureTolerancePercentage:
+        $ref: '#/definitions/StackSetFailureTolerancePercentage'
+        description: '<p>The percentage of accounts, per region, for which this stack operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn''t attempt the operation in any subsequent regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p>'
+      StackSetMaxConcurrencyCount:
+        $ref: '#/definitions/StackSetMaxConcurrencyCount'
+        description: '<p>The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of <code>StackSetFailureToleranceCount</code>. <code>StackSetMaxConcurrentCount</code> is at most one more than the <code>StackSetFailureToleranceCount</code>.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>'
+      StackSetMaxConcurrencyPercentage:
+        $ref: '#/definitions/StackSetMaxConcurrencyPercentage'
+        description: '<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, AWS Service Catalog sets the number as <code>1</code> instead.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>'
+    description: The user-defined preferences that will be applied when updating a provisioned product. Not all preferences are applicable to all provisioned product types.
+  ProvisionedProductNameOrArn:
+    type: string
+    pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}|arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+    minLength: 1
+    maxLength: 1224
+  ProvisionedProductType:
+    type: string
+  ProvisionedProductStatus:
+    type: string
+    enum:
+      - AVAILABLE
+      - UNDER_CHANGE
+      - TAINTED
+      - ERROR
+      - PLAN_IN_PROGRESS
+  ProvisionedProductStatusMessage:
+    type: string
+  UserArn:
+    type: string
+  UserArnSession:
+    type: string
   ProvisionedProductAttribute:
     type: object
     properties:
@@ -5357,43 +5818,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ProvisionedProductAttribute'
-  ProvisionedProductDetail:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/ProvisionedProductNameOrArn'
-        description: The user-friendly name of the provisioned product.
-      Arn:
-        $ref: '#/definitions/ProvisionedProductNameOrArn'
-        description: The ARN of the provisioned product.
-      Type:
-        $ref: '#/definitions/ProvisionedProductType'
-        description: The type of provisioned product. The supported values are <code>CFN_STACK</code> and <code>CFN_STACKSET</code>.
-      Id:
-        $ref: '#/definitions/ProvisionedProductId'
-        description: The identifier of the provisioned product.
-      Status:
-        $ref: '#/definitions/ProvisionedProductStatus'
-        description: '<p>The current status of the provisioned product.</p> <ul> <li> <p> <code>AVAILABLE</code> - Stable state, ready to perform any operation. The most recent operation succeeded and completed.</p> </li> <li> <p> <code>UNDER_CHANGE</code> - Transitive state, operations performed might not have valid results. Wait for an <code>AVAILABLE</code> status before performing operations.</p> </li> <li> <p> <code>TAINTED</code> - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.</p> </li> <li> <p> <code>ERROR</code> - An unexpected error occurred, the provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.</p> </li> </ul>'
-      StatusMessage:
-        $ref: '#/definitions/ProvisionedProductStatusMessage'
-        description: The current status message of the provisioned product.
-      CreatedTime:
-        $ref: '#/definitions/CreatedTime'
-        description: The UTC time stamp of the creation time.
-      IdempotencyToken:
-        $ref: '#/definitions/IdempotencyToken'
-        description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
-      LastRecordId:
-        $ref: '#/definitions/LastRequestId'
-        description: The record identifier of the last request performed on this provisioned product.
-      ProductId:
-        $ref: '#/definitions/Id'
-        description: 'The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.'
-      ProvisioningArtifactId:
-        $ref: '#/definitions/Id'
-        description: 'The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.'
-    description: Information about a provisioned product.
+  ProvisionedProductId:
+    type: string
   ProvisionedProductDetails:
     type: array
     items:
@@ -5415,69 +5841,6 @@ definitions:
           $ref: '#/definitions/ProvisionedProductViewFilterBy'
         value:
           $ref: '#/definitions/ProvisionedProductViewFilterValues'
-  ProvisionedProductId:
-    type: string
-  ProvisionedProductName:
-    type: string
-    pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]*'
-    minLength: 1
-    maxLength: 128
-  ProvisionedProductNameOrArn:
-    type: string
-    pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}|arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
-    minLength: 1
-    maxLength: 1224
-  ProvisionedProductPlanDetails:
-    type: object
-    properties:
-      CreatedTime:
-        $ref: '#/definitions/CreatedTime'
-        description: The UTC time stamp of the creation time.
-      PathId:
-        $ref: '#/definitions/Id'
-        description: 'The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.'
-      ProductId:
-        $ref: '#/definitions/Id'
-        description: The product identifier.
-      PlanName:
-        $ref: '#/definitions/ProvisionedProductPlanName'
-        description: The name of the plan.
-      PlanId:
-        $ref: '#/definitions/Id'
-        description: The plan identifier.
-      ProvisionProductId:
-        $ref: '#/definitions/Id'
-        description: The product identifier.
-      ProvisionProductName:
-        $ref: '#/definitions/ProvisionedProductName'
-        description: The user-friendly name of the provisioned product.
-      PlanType:
-        $ref: '#/definitions/ProvisionedProductPlanType'
-        description: The plan type.
-      ProvisioningArtifactId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact.
-      Status:
-        $ref: '#/definitions/ProvisionedProductPlanStatus'
-        description: The status.
-      UpdatedTime:
-        $ref: '#/definitions/UpdatedTime'
-        description: The time when the plan was last updated.
-      NotificationArns:
-        $ref: '#/definitions/NotificationArns'
-        description: Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related events.
-      ProvisioningParameters:
-        $ref: '#/definitions/UpdateProvisioningParameters'
-        description: Parameters specified by the administrator that are required for provisioning the product.
-      Tags:
-        $ref: '#/definitions/Tags'
-        description: One or more tags.
-      StatusMessage:
-        $ref: '#/definitions/StatusMessage'
-        description: The status message.
-    description: Information about a plan.
-  ProvisionedProductPlanName:
-    type: string
   ProvisionedProductPlanStatus:
     type: string
     enum:
@@ -5487,6 +5850,12 @@ definitions:
       - EXECUTE_IN_PROGRESS
       - EXECUTE_SUCCESS
       - EXECUTE_FAILED
+  UpdatedTime:
+    type: string
+    format: date-time
+  StatusMessage:
+    type: string
+    pattern: '[\u0009\u000a\u000d\u0020-\uD7FF\uE000-\uFFFD]*'
   ProvisionedProductPlanSummary:
     type: object
     properties:
@@ -5509,28 +5878,15 @@ definitions:
         $ref: '#/definitions/Id'
         description: The identifier of the provisioning artifact.
     description: Summary information about a plan.
-  ProvisionedProductPlanType:
-    type: string
-    enum:
-      - CLOUDFORMATION
-  ProvisionedProductPlans:
-    type: array
-    items:
-      $ref: '#/definitions/ProvisionedProductPlanSummary'
-  ProvisionedProductStatus:
-    type: string
-    enum:
-      - AVAILABLE
-      - UNDER_CHANGE
-      - TAINTED
-      - ERROR
-      - PLAN_IN_PROGRESS
-  ProvisionedProductStatusMessage:
-    type: string
-  ProvisionedProductType:
-    type: string
   ProvisionedProductViewFilterValue:
     type: string
+  ProvisioningArtifactName:
+    type: string
+  ProvisioningArtifactDescription:
+    type: string
+  ProvisioningArtifactCreatedTime:
+    type: string
+    format: date-time
   ProvisioningArtifact:
     type: object
     properties:
@@ -5549,53 +5905,15 @@ definitions:
     description: Information about a provisioning artifact. A provisioning artifact is also known as a product version.
   ProvisioningArtifactActive:
     type: boolean
-  ProvisioningArtifactCreatedTime:
+  ProvisioningArtifactType:
     type: string
-    format: date-time
-  ProvisioningArtifactDescription:
-    type: string
-  ProvisioningArtifactDetail:
-    type: object
-    properties:
-      Id:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact.
-      Name:
-        $ref: '#/definitions/ProvisioningArtifactName'
-        description: The name of the provisioning artifact.
-      Description:
-        $ref: '#/definitions/ProvisioningArtifactName'
-        description: The description of the provisioning artifact.
-      Type:
-        $ref: '#/definitions/ProvisioningArtifactType'
-        description: <p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>
-      CreatedTime:
-        $ref: '#/definitions/CreationTime'
-        description: The UTC time stamp of the creation time.
-      Active:
-        $ref: '#/definitions/ProvisioningArtifactActive'
-        description: Indicates whether the product version is active.
-    description: Information about a provisioning artifact (also known as a version) for a product.
-  ProvisioningArtifactDetails:
-    type: array
-    items:
-      $ref: '#/definitions/ProvisioningArtifactDetail'
+    enum:
+      - CLOUD_FORMATION_TEMPLATE
+      - MARKETPLACE_AMI
+      - MARKETPLACE_CAR
   ProvisioningArtifactInfoKey:
     type: string
   ProvisioningArtifactInfoValue:
-    type: string
-  ProvisioningArtifactInfo:
-    type: array
-    minItems: 1
-    maxItems: 100
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ProvisioningArtifactInfoKey'
-        value:
-          $ref: '#/definitions/ProvisioningArtifactInfoValue'
-  ProvisioningArtifactName:
     type: string
   ProvisioningArtifactParameter:
     type: object
@@ -5619,48 +5937,20 @@ definitions:
         $ref: '#/definitions/ParameterConstraints'
         description: Constraints that the administrator has put on a parameter.
     description: Information about a parameter used to provision a product.
-  ProvisioningArtifactParameters:
+  StackSetAccounts:
     type: array
     items:
-      $ref: '#/definitions/ProvisioningArtifactParameter'
-  ProvisioningArtifactPreferences:
-    type: object
-    properties:
-      StackSetAccounts:
-        $ref: '#/definitions/StackSetAccounts'
-        description: <p>One or more AWS accounts where stack instances are deployed from the stack set. These accounts can be scoped in <code>ProvisioningPreferences$StackSetAccounts</code> and <code>UpdateProvisioningPreferences$StackSetAccounts</code>.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p>
-      StackSetRegions:
-        $ref: '#/definitions/StackSetRegions'
-        description: <p>One or more AWS Regions where stack instances are deployed from the stack set. These regions can be scoped in <code>ProvisioningPreferences$StackSetRegions</code> and <code>UpdateProvisioningPreferences$StackSetRegions</code>.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p>
-    description: '<p>The user-defined preferences that will be applied during product provisioning, unless overridden by <code>ProvisioningPreferences</code> or <code>UpdateProvisioningPreferences</code>.</p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a> in the <i>AWS CloudFormation User Guide</i>.</p>'
-  ProvisioningArtifactProperties:
-    type: object
-    required:
-      - Info
-    properties:
-      Name:
-        $ref: '#/definitions/ProvisioningArtifactName'
-        description: 'The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.'
-      Description:
-        $ref: '#/definitions/ProvisioningArtifactDescription'
-        description: 'The description of the provisioning artifact, including how it differs from the previous provisioning artifact.'
-      Info:
-        $ref: '#/definitions/ProvisioningArtifactInfo'
-        description: '<p>The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON format as follows:</p> <p> <code>"LoadTemplateFromURL": "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."</code> </p>'
-      Type:
-        $ref: '#/definitions/ProvisioningArtifactType'
-        description: <p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>
-    description: Information about a provisioning artifact (also known as a version) for a product.
+      $ref: '#/definitions/AccountId'
+  StackSetRegions:
+    type: array
+    items:
+      $ref: '#/definitions/Region'
   ProvisioningArtifactPropertyName:
     type: string
     enum:
       - Id
   ProvisioningArtifactPropertyValue:
     type: string
-  ProvisioningArtifactSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/ProvisioningArtifactSummary'
   ProvisioningArtifactSummary:
     type: object
     properties:
@@ -5680,12 +5970,6 @@ definitions:
         $ref: '#/definitions/ProvisioningArtifactInfo'
         description: The metadata for the provisioning artifact. This is used with AWS Marketplace products.
     description: Summary information about a provisioning artifact (also known as a version) for a product.
-  ProvisioningArtifactType:
-    type: string
-    enum:
-      - CLOUD_FORMATION_TEMPLATE
-      - MARKETPLACE_AMI
-      - MARKETPLACE_CAR
   ProvisioningArtifactView:
     type: object
     properties:
@@ -5696,14 +5980,6 @@ definitions:
         $ref: '#/definitions/ProvisioningArtifact'
         description: Information about a provisioning artifact. A provisioning artifact is also known as a product version.
     description: An object that contains summary information about a product view and a provisioning artifact.
-  ProvisioningArtifactViews:
-    type: array
-    items:
-      $ref: '#/definitions/ProvisioningArtifactView'
-  ProvisioningArtifacts:
-    type: array
-    items:
-      $ref: '#/definitions/ProvisioningArtifact'
   ProvisioningParameter:
     type: object
     properties:
@@ -5714,79 +5990,39 @@ definitions:
         $ref: '#/definitions/ParameterValue'
         description: The parameter value.
     description: Information about a parameter used to provision a product.
-  ProvisioningParameters:
+  StackSetFailureToleranceCount:
+    type: integer
+    minimum: 0
+  StackSetFailureTolerancePercentage:
+    type: integer
+    minimum: 0
+    maximum: 100
+  StackSetMaxConcurrencyCount:
+    type: integer
+    minimum: 1
+  StackSetMaxConcurrencyPercentage:
+    type: integer
+    minimum: 1
+    maximum: 100
+  RecordStatus:
+    type: string
+    enum:
+      - CREATED
+      - IN_PROGRESS
+      - IN_PROGRESS_IN_ERROR
+      - SUCCEEDED
+      - FAILED
+  RecordType:
+    type: string
+  RecordErrors:
     type: array
     items:
-      $ref: '#/definitions/ProvisioningParameter'
-  ProvisioningPreferences:
-    type: object
-    properties:
-      StackSetAccounts:
-        $ref: '#/definitions/StackSetAccounts'
-        description: '<p>One or more AWS accounts that will have access to the provisioned product.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The AWS accounts specified should be within the list of accounts in the <code>STACKSET</code> constraint. To get the list of accounts in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all accounts from the <code>STACKSET</code> constraint.</p>'
-      StackSetRegions:
-        $ref: '#/definitions/StackSetRegions'
-        description: '<p>One or more AWS Regions where the provisioned product will be available.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The specified regions should be within the list of regions from the <code>STACKSET</code> constraint. To get the list of regions in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all regions from the <code>STACKSET</code> constraint.</p>'
-      StackSetFailureToleranceCount:
-        $ref: '#/definitions/StackSetFailureToleranceCount'
-        description: '<p>The number of accounts, per region, for which this operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn''t attempt the operation in any subsequent regions.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p> <p>The default value is <code>0</code> if no value is specified.</p>'
-      StackSetFailureTolerancePercentage:
-        $ref: '#/definitions/StackSetFailureTolerancePercentage'
-        description: '<p>The percentage of accounts, per region, for which this stack operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn''t attempt the operation in any subsequent regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetFailureToleranceCount</code> or <code>StackSetFailureTolerancePercentage</code>, but not both.</p>'
-      StackSetMaxConcurrencyCount:
-        $ref: '#/definitions/StackSetMaxConcurrencyCount'
-        description: '<p>The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of <code>StackSetFailureToleranceCount</code>. <code>StackSetMaxConcurrentCount</code> is at most one more than the <code>StackSetFailureToleranceCount</code>.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>'
-      StackSetMaxConcurrencyPercentage:
-        $ref: '#/definitions/StackSetMaxConcurrencyPercentage'
-        description: '<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, AWS Service Catalog sets the number as <code>1</code> instead.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>'
-    description: The user-defined preferences that will be applied when updating a provisioned product. Not all preferences are applicable to all provisioned product types.
-  RecordDetail:
-    type: object
-    properties:
-      RecordId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the record.
-      ProvisionedProductName:
-        $ref: '#/definitions/ProvisionedProductName'
-        description: The user-friendly name of the provisioned product.
-      Status:
-        $ref: '#/definitions/RecordStatus'
-        description: '<p>The status of the provisioned product.</p> <ul> <li> <p> <code>CREATED</code> - The request was created but the operation has not started.</p> </li> <li> <p> <code>IN_PROGRESS</code> - The requested operation is in progress.</p> </li> <li> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a rollback.</p> </li> <li> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> </li> <li> <p> <code>FAILED</code> - The requested operation has unsuccessfully completed. Investigate using the error messages returned.</p> </li> </ul>'
-      CreatedTime:
-        $ref: '#/definitions/CreatedTime'
-        description: The UTC time stamp of the creation time.
-      UpdatedTime:
-        $ref: '#/definitions/UpdatedTime'
-        description: The time when the record was last updated.
-      ProvisionedProductType:
-        $ref: '#/definitions/ProvisionedProductType'
-        description: The type of provisioned product. The supported values are <code>CFN_STACK</code> and <code>CFN_STACKSET</code>.
-      RecordType:
-        $ref: '#/definitions/RecordType'
-        description: <p>The record type.</p> <ul> <li> <p> <code>PROVISION_PRODUCT</code> </p> </li> <li> <p> <code>UPDATE_PROVISIONED_PRODUCT</code> </p> </li> <li> <p> <code>TERMINATE_PROVISIONED_PRODUCT</code> </p> </li> </ul>
-      ProvisionedProductId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioned product.
-      ProductId:
-        $ref: '#/definitions/Id'
-        description: The product identifier.
-      ProvisioningArtifactId:
-        $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact.
-      PathId:
-        $ref: '#/definitions/Id'
-        description: The path identifier.
-      RecordErrors:
-        $ref: '#/definitions/RecordErrors'
-        description: The errors that occurred.
-      RecordTags:
-        $ref: '#/definitions/RecordTags'
-        description: One or more tags.
-    description: Information about a request operation.
-  RecordDetails:
+      $ref: '#/definitions/RecordError'
+  RecordTags:
     type: array
     items:
-      $ref: '#/definitions/RecordDetail'
+      $ref: '#/definitions/RecordTag'
+    maxItems: 50
   RecordError:
     type: object
     properties:
@@ -5797,10 +6033,6 @@ definitions:
         $ref: '#/definitions/ErrorDescription'
         description: The description of the error.
     description: The error code and description resulting from an operation.
-  RecordErrors:
-    type: array
-    items:
-      $ref: '#/definitions/RecordError'
   RecordOutput:
     type: object
     properties:
@@ -5814,28 +6046,6 @@ definitions:
         $ref: '#/definitions/Description'
         description: The description of the output.
     description: 'The output for the product created as the result of a request. For example, the output for a CloudFormation-backed product that creates an S3 bucket would include the S3 bucket URL.'
-  RecordOutputs:
-    type: array
-    items:
-      $ref: '#/definitions/RecordOutput'
-  RecordStatus:
-    type: string
-    enum:
-      - CREATED
-      - IN_PROGRESS
-      - IN_PROGRESS_IN_ERROR
-      - SUCCEEDED
-      - FAILED
-  RecordTag:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/RecordTagKey'
-        description: The key for this tag.
-      Value:
-        $ref: '#/definitions/RecordTagValue'
-        description: The value for this tag.
-    description: 'Information about a tag, which is a key-value pair.'
   RecordTagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
@@ -5846,13 +6056,16 @@ definitions:
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
     minLength: 1
     maxLength: 256
-  RecordTags:
-    type: array
-    items:
-      $ref: '#/definitions/RecordTag'
-    maxItems: 50
-  RecordType:
-    type: string
+  RecordTag:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/RecordTagKey'
+        description: The key for this tag.
+      Value:
+        $ref: '#/definitions/RecordTagValue'
+        description: The value for this tag.
+    description: 'Information about a tag, which is a key-value pair.'
   Region:
     type: string
   Replacement:
@@ -5867,10 +6080,6 @@ definitions:
       - NEVER
       - CONDITIONALLY
       - ALWAYS
-  ResourceARN:
-    type: string
-    minLength: 1
-    maxLength: 150
   ResourceAttribute:
     type: string
     enum:
@@ -5880,6 +6089,14 @@ definitions:
       - UPDATEPOLICY
       - DELETIONPOLICY
       - TAGS
+  Scope:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceAttribute'
+  ResourceChangeDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceChangeDetail'
   ResourceChange:
     type: object
     properties:
@@ -5905,6 +6122,19 @@ definitions:
         $ref: '#/definitions/ResourceChangeDetails'
         description: Information about the resource changes.
     description: Information about a resource change that will occur when a plan is executed.
+  ResourceTargetDefinition:
+    type: object
+    properties:
+      Attribute:
+        $ref: '#/definitions/ResourceAttribute'
+        description: The attribute to be changed.
+      Name:
+        $ref: '#/definitions/PropertyName'
+        description: 'If the attribute is <code>Properties</code>, the value is the name of the property. Otherwise, the value is null.'
+      RequiresRecreation:
+        $ref: '#/definitions/RequiresRecreation'
+        description: 'If the attribute is <code>Properties</code>, indicates whether a change to this property causes the resource to be re-created.'
+    description: Information about a change to a resource attribute.
   ResourceChangeDetail:
     type: object
     properties:
@@ -5918,14 +6148,17 @@ definitions:
         $ref: '#/definitions/CausingEntity'
         description: The ID of the entity that caused the change.
     description: Information about a change to a resource attribute.
-  ResourceChangeDetails:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceChangeDetail'
-  ResourceChanges:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceChange'
+  ResourceDetailId:
+    type: string
+  ResourceDetailARN:
+    type: string
+  ResourceDetailName:
+    type: string
+  ResourceDetailDescription:
+    type: string
+  ResourceDetailCreatedTime:
+    type: string
+    format: date-time
   ResourceDetail:
     type: object
     properties:
@@ -5945,50 +6178,19 @@ definitions:
         $ref: '#/definitions/ResourceDetailCreatedTime'
         description: The creation time of the resource.
     description: Information about a resource.
-  ResourceDetailARN:
+  SortOrder:
     type: string
-  ResourceDetailCreatedTime:
-    type: string
-    format: date-time
-  ResourceDetailDescription:
-    type: string
-  ResourceDetailId:
-    type: string
-  ResourceDetailName:
-    type: string
-  ResourceDetails:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceDetail'
-  ResourceId:
-    type: string
-  ResourceTargetDefinition:
-    type: object
-    properties:
-      Attribute:
-        $ref: '#/definitions/ResourceAttribute'
-        description: The attribute to be changed.
-      Name:
-        $ref: '#/definitions/PropertyName'
-        description: 'If the attribute is <code>Properties</code>, the value is the name of the property. Otherwise, the value is null.'
-      RequiresRecreation:
-        $ref: '#/definitions/RequiresRecreation'
-        description: 'If the attribute is <code>Properties</code>, indicates whether a change to this property causes the resource to be re-created.'
-    description: Information about a change to a resource attribute.
-  ResourceType:
-    type: string
-  Scope:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceAttribute'
-  SearchFilterKey:
-    type: string
-  SearchFilterValue:
+    enum:
+      - ASCENDING
+      - DESCENDING
+  SortField:
     type: string
   SearchProvisionedProductsPageSize:
     type: integer
     minimum: 0
     maximum: 100
+  TotalResultsCount:
+    type: integer
   ServiceActionAssociation:
     type: object
     required:
@@ -6006,24 +6208,6 @@ definitions:
         $ref: '#/definitions/Id'
         description: 'The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.'
     description: 'A self-service action association consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.'
-  ServiceActionAssociationErrorCode:
-    type: string
-    enum:
-      - DUPLICATE_RESOURCE
-      - INTERNAL_FAILURE
-      - LIMIT_EXCEEDED
-      - RESOURCE_NOT_FOUND
-      - THROTTLING
-  ServiceActionAssociationErrorMessage:
-    type: string
-    minLength: 1
-    maxLength: 1024
-  ServiceActionAssociations:
-    type: array
-    items:
-      $ref: '#/definitions/ServiceActionAssociation'
-    minItems: 1
-    maxItems: 50
   ServiceActionDefinitionKey:
     type: string
     enum:
@@ -6035,43 +6219,6 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1024
-  ServiceActionDefinitionMap:
-    type: array
-    minItems: 1
-    maxItems: 100
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ServiceActionDefinitionKey'
-        value:
-          $ref: '#/definitions/ServiceActionDefinitionValue'
-  ServiceActionDefinitionType:
-    type: string
-    enum:
-      - SSM_AUTOMATION
-  ServiceActionDescription:
-    type: string
-    maxLength: 1024
-  ServiceActionDetail:
-    type: object
-    properties:
-      ServiceActionSummary:
-        $ref: '#/definitions/ServiceActionSummary'
-        description: Summary information about the self-service action.
-      Definition:
-        $ref: '#/definitions/ServiceActionDefinitionMap'
-        description: A map that defines the self-service action.
-    description: An object containing detailed information about the self-service action.
-  ServiceActionName:
-    type: string
-    pattern: '^[a-zA-Z0-9_\-.]*'
-    minLength: 1
-    maxLength: 256
-  ServiceActionSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/ServiceActionSummary'
   ServiceActionSummary:
     type: object
     properties:
@@ -6088,16 +6235,14 @@ definitions:
         $ref: '#/definitions/ServiceActionDefinitionType'
         description: 'The self-service action definition type. For example, <code>SSM_AUTOMATION</code>.'
     description: Detailed information about the self-service action.
-  ShareDetails:
-    type: object
-    properties:
-      SuccessfulShares:
-        $ref: '#/definitions/SuccessfulShares'
-        description: List of accounts for whom the operation succeeded.
-      ShareErrors:
-        $ref: '#/definitions/ShareErrors'
-        description: List of errors.
-    description: Information about the portfolio share operation.
+  SuccessfulShares:
+    type: array
+    items:
+      $ref: '#/definitions/AccountId'
+  ShareErrors:
+    type: array
+    items:
+      $ref: '#/definitions/ShareError'
   ShareError:
     type: object
     properties:
@@ -6111,29 +6256,6 @@ definitions:
         $ref: '#/definitions/Error'
         description: Error type that happened when processing the operation.
     description: Errors that occurred during the portfolio share operation.
-  ShareErrors:
-    type: array
-    items:
-      $ref: '#/definitions/ShareError'
-  ShareStatus:
-    type: string
-    enum:
-      - NOT_STARTED
-      - IN_PROGRESS
-      - COMPLETED
-      - COMPLETED_WITH_ERRORS
-      - ERROR
-  SortField:
-    type: string
-  SortOrder:
-    type: string
-    enum:
-      - ASCENDING
-      - DESCENDING
-  SourceProvisioningArtifactProperties:
-    type: array
-    items:
-      $ref: '#/definitions/SourceProvisioningArtifactPropertiesMap'
   SourceProvisioningArtifactPropertiesMap:
     type: array
     items:
@@ -6143,115 +6265,26 @@ definitions:
           $ref: '#/definitions/ProvisioningArtifactPropertyName'
         value:
           $ref: '#/definitions/ProvisioningArtifactPropertyValue'
-  StackSetAccounts:
-    type: array
-    items:
-      $ref: '#/definitions/AccountId'
-  StackSetFailureToleranceCount:
-    type: integer
-    minimum: 0
-  StackSetFailureTolerancePercentage:
-    type: integer
-    minimum: 0
-    maximum: 100
-  StackSetMaxConcurrencyCount:
-    type: integer
-    minimum: 1
-  StackSetMaxConcurrencyPercentage:
-    type: integer
-    minimum: 1
-    maximum: 100
   StackSetOperationType:
     type: string
     enum:
       - CREATE
       - UPDATE
       - DELETE
-  StackSetRegions:
-    type: array
-    items:
-      $ref: '#/definitions/Region'
-  Status:
-    type: string
-    enum:
-      - AVAILABLE
-      - CREATING
-      - FAILED
-  StatusDetail:
-    type: string
-  StatusMessage:
-    type: string
-    pattern: '[\u0009\u000a\u000d\u0020-\uD7FF\uE000-\uFFFD]*'
-  SuccessfulShares:
-    type: array
-    items:
-      $ref: '#/definitions/AccountId'
-  SupportDescription:
-    type: string
-    maxLength: 8191
-  SupportEmail:
-    type: string
-    maxLength: 254
-  SupportUrl:
-    type: string
-    maxLength: 2083
-  Tag:
-    type: object
-    required:
-      - Key
-      - Value
-    properties:
-      Key:
-        $ref: '#/definitions/TagKey'
-        description: The tag key.
-      Value:
-        $ref: '#/definitions/TagValue'
-        description: The value for this key.
-    description: Information about a tag. A tag is a key-value pair. Tags are propagated to the resources created when provisioning a product.
   TagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 1
     maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 256
   TagKeys:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagOptionActive:
-    type: boolean
-  TagOptionDetail:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/TagOptionKey'
-        description: The TagOption key.
-      Value:
-        $ref: '#/definitions/TagOptionValue'
-        description: The TagOption value.
-      Active:
-        $ref: '#/definitions/TagOptionActive'
-        description: The TagOption active state.
-      Id:
-        $ref: '#/definitions/TagOptionId'
-        description: The TagOption identifier.
-    description: Information about a TagOption.
-  TagOptionDetails:
-    type: array
-    items:
-      $ref: '#/definitions/TagOptionDetail'
-  TagOptionId:
-    type: string
-    minLength: 1
-    maxLength: 100
-  TagOptionKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagOptionSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/TagOptionSummary'
   TagOptionSummary:
     type: object
     properties:
@@ -6262,44 +6295,10 @@ definitions:
         $ref: '#/definitions/TagOptionValues'
         description: The TagOption value.
     description: Summary information about a TagOption.
-  TagOptionValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 256
   TagOptionValues:
     type: array
     items:
       $ref: '#/definitions/TagOptionValue'
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    maxItems: 50
-  TotalResultsCount:
-    type: integer
-  UpdateProvisioningParameter:
-    type: object
-    properties:
-      Key:
-        $ref: '#/definitions/ParameterKey'
-        description: The parameter key.
-      Value:
-        $ref: '#/definitions/ParameterValue'
-        description: The parameter value.
-      UsePreviousValue:
-        $ref: '#/definitions/UsePreviousValue'
-        description: 'If set to true, <code>Value</code> is ignored and the previous parameter value is kept.'
-    description: The parameter key-value pair used to update a provisioned product.
-  UpdateProvisioningParameters:
-    type: array
-    items:
-      $ref: '#/definitions/UpdateProvisioningParameter'
   UpdateProvisioningPreferences:
     type: object
     properties:
@@ -6325,9 +6324,21 @@ definitions:
         $ref: '#/definitions/StackSetOperationType'
         description: '<p>Determines what action AWS Service Catalog performs to a stack set or a stack instance represented by the provisioned product. The default value is <code>UPDATE</code> if nothing is specified.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <dl> <dt>CREATE</dt> <dd> <p>Creates a new stack instance in the stack set represented by the provisioned product. In this case, only new stack instances are created based on accounts and regions; if new ProductId or ProvisioningArtifactID are passed, they will be ignored.</p> </dd> <dt>UPDATE</dt> <dd> <p>Updates the stack set represented by the provisioned product and also its stack instances.</p> </dd> <dt>DELETE</dt> <dd> <p>Deletes a stack instance in the stack set represented by the provisioned product.</p> </dd> </dl>'
     description: The user-defined preferences that will be applied when updating a provisioned product. Not all preferences are applicable to all provisioned product types.
-  UpdatedTime:
-    type: string
-    format: date-time
+  UsePreviousValue:
+    type: boolean
+  UpdateProvisioningParameter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/ParameterKey'
+        description: The parameter key.
+      Value:
+        $ref: '#/definitions/ParameterValue'
+        description: The parameter value.
+      UsePreviousValue:
+        $ref: '#/definitions/UsePreviousValue'
+        description: 'If set to true, <code>Value</code> is ignored and the previous parameter value is kept.'
+    description: The parameter key-value pair used to update a provisioned product.
   UsageInstruction:
     type: object
     properties:
@@ -6338,15 +6349,3 @@ definitions:
         $ref: '#/definitions/InstructionValue'
         description: The usage instruction value for this type.
     description: Additional information provided by the administrator.
-  UsageInstructions:
-    type: array
-    items:
-      $ref: '#/definitions/UsageInstruction'
-  UsePreviousValue:
-    type: boolean
-  UserArn:
-    type: string
-  UserArnSession:
-    type: string
-  Verbose:
-    type: boolean

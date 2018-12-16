@@ -3910,7 +3910,18 @@ definitions:
       MountPoint:
         $ref: '#/definitions/String'
         description: The new mount point.
-  undefined: {}
+  String:
+    type: string
+  StackConfigurationManager:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name. This parameter must be set to "Chef".
+      Version:
+        $ref: '#/definitions/String'
+        description: 'The Chef version. This parameter must be set to 12, 11.10, or 11.4 for Linux stacks, and to 12.2 for Windows stacks. The default value for Linux stacks is 11.4.'
+    description: Describes the configuration manager.
   AgentVersion:
     type: object
     properties:
@@ -3925,6 +3936,77 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AgentVersion'
+  DataSources:
+    type: array
+    items:
+      $ref: '#/definitions/DataSource'
+  AppType:
+    type: string
+    enum:
+      - aws-flow-ruby
+      - java
+      - rails
+      - php
+      - nodejs
+      - static
+      - other
+  Source:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/SourceType'
+        description: The repository type.
+      Url:
+        $ref: '#/definitions/String'
+        description: 'The source URL. The following is an example of an Amazon S3 source URL: <code>https://s3.amazonaws.com/opsworks-demo-bucket/opsworks_cookbook_demo.tar.gz</code>.'
+      Username:
+        $ref: '#/definitions/String'
+        description: '<p>This parameter depends on the repository type.</p> <ul> <li> <p>For Amazon S3 bundles, set <code>Username</code> to the appropriate IAM access key ID.</p> </li> <li> <p>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</p> </li> </ul>'
+      Password:
+        $ref: '#/definitions/String'
+        description: '<p>When included in a request, the parameter depends on the repository type.</p> <ul> <li> <p>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</p> </li> <li> <p>For HTTP bundles and Subversion repositories, set <code>Password</code> to the password.</p> </li> </ul> <p>For more information on how to safely handle IAM credentials, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html">http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html</a>.</p> <p>In responses, AWS OpsWorks Stacks returns <code>*****FILTERED*****</code> instead of the actual value.</p>'
+      SshKey:
+        $ref: '#/definitions/String'
+        description: '<p>In requests, the repository''s SSH key.</p> <p>In responses, AWS OpsWorks Stacks returns <code>*****FILTERED*****</code> instead of the actual value.</p>'
+      Revision:
+        $ref: '#/definitions/String'
+        description: The application's version. AWS OpsWorks Stacks enables you to easily deploy new versions of an application. One of the simplest approaches is to have branches or revisions in your repository that represent different versions that can potentially be deployed.
+    description: 'Contains the information required to retrieve an app or cookbook from a repository. For more information, see <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html">Creating Apps</a> or <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html">Custom Recipes and Cookbooks</a>.'
+  Strings:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  Boolean:
+    type: boolean
+  SslConfiguration:
+    type: object
+    required:
+      - Certificate
+      - PrivateKey
+    properties:
+      Certificate:
+        $ref: '#/definitions/String'
+        description: The contents of the certificate's domain.crt file.
+      PrivateKey:
+        $ref: '#/definitions/String'
+        description: The private key; the contents of the certificate's domain.kex file.
+      Chain:
+        $ref: '#/definitions/String'
+        description: Optional. Can be used to specify an intermediate certificate authority key or client authentication.
+    description: Describes an app's SSL configuration.
+  AppAttributes:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AppAttributesKeys'
+        value:
+          $ref: '#/definitions/String'
+  EnvironmentVariables:
+    type: array
+    items:
+      $ref: '#/definitions/EnvironmentVariable'
   App:
     type: object
     properties:
@@ -3978,27 +4060,6 @@ definitions:
       - RailsEnv
       - AutoBundleOnDeploy
       - AwsFlowRubySettings
-  String:
-    type: string
-  AppAttributes:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/AppAttributesKeys'
-        value:
-          $ref: '#/definitions/String'
-  AppType:
-    type: string
-    enum:
-      - aws-flow-ruby
-      - java
-      - rails
-      - php
-      - nodejs
-      - static
-      - other
   Apps:
     type: array
     items:
@@ -4008,6 +4069,15 @@ definitions:
     enum:
       - x86_64
       - i386
+  Integer:
+    type: integer
+  Minute:
+    type: integer
+    minimum: 1
+    maximum: 100
+  Double:
+    type: number
+    format: double
   AutoScalingThresholds:
     type: object
     properties:
@@ -4038,6 +4108,25 @@ definitions:
     enum:
       - load
       - timer
+  EbsBlockDevice:
+    type: object
+    properties:
+      SnapshotId:
+        $ref: '#/definitions/String'
+        description: The snapshot ID.
+      Iops:
+        $ref: '#/definitions/Integer'
+        description: 'The number of I/O operations per second (IOPS) that the volume supports. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html">EbsBlockDevice</a>.'
+      VolumeSize:
+        $ref: '#/definitions/Integer'
+        description: 'The volume size, in GiB. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html">EbsBlockDevice</a>.'
+      VolumeType:
+        $ref: '#/definitions/VolumeType'
+        description: '<p>The volume type. <code>gp2</code> for General Purpose (SSD) volumes, <code>io1</code> for Provisioned IOPS (SSD) volumes, <code>st1</code> for Throughput Optimized hard disk drives (HDD), <code>sc1</code> for Cold HDD,and <code>standard</code> for Magnetic volumes.</p> <p>If you specify the <code>io1</code> volume type, you must also specify a value for the <code>Iops</code> attribute. The maximum ratio of provisioned IOPS to requested volume size (in GiB) is 50:1. AWS uses the default volume size (in GiB) specified in the AMI attributes to set IOPS to 50 x (volume size).</p>'
+      DeleteOnTermination:
+        $ref: '#/definitions/Boolean'
+        description: Whether the volume is deleted on instance termination.
+    description: 'Describes an Amazon EBS volume. This data type maps directly to the Amazon EC2 <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html">EbsBlockDevice</a> data type.'
   BlockDeviceMapping:
     type: object
     properties:
@@ -4058,8 +4147,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BlockDeviceMapping'
-  Boolean:
-    type: boolean
   ChefConfiguration:
     type: object
     properties:
@@ -4070,6 +4157,25 @@ definitions:
         $ref: '#/definitions/String'
         description: The Berkshelf version.
     description: Describes the Chef configuration.
+  StackAttributes:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/StackAttributesKeys'
+        value:
+          $ref: '#/definitions/String'
+  RootDeviceType:
+    type: string
+    enum:
+      - ebs
+      - instance-store
+  CloudWatchLogsLogStreams:
+    type: array
+    description: Describes the Amazon CloudWatch logs configuration for a layer.
+    items:
+      $ref: '#/definitions/CloudWatchLogsLogStream'
   CloudWatchLogsConfiguration:
     type: object
     properties:
@@ -4182,6 +4288,12 @@ definitions:
       - start_of_file
       - end_of_file
     description: Specifies where to start to read data (start_of_file or end_of_file). The default is start_of_file. It's only used if there is no state persisted for that log stream.
+  CloudWatchLogsTimeZone:
+    type: string
+    enum:
+      - LOCAL
+      - UTC
+    description: 'The preferred time zone for logs streamed to CloudWatch Logs. Valid values are <code>LOCAL</code> and <code>UTC</code>, for Coordinated Universal Time.'
   CloudWatchLogsLogStream:
     type: object
     properties:
@@ -4219,17 +4331,8 @@ definitions:
         $ref: '#/definitions/Integer'
         description: 'Specifies the maximum size of log events in a batch, in bytes, up to 1048576 bytes. The default value is 32768 bytes. This size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.'
     description: 'Describes the Amazon CloudWatch logs configuration for a layer. For detailed information about members of this data type, see the <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html">CloudWatch Logs Agent Reference</a>.'
-  CloudWatchLogsLogStreams:
-    type: array
-    description: Describes the Amazon CloudWatch logs configuration for a layer.
-    items:
-      $ref: '#/definitions/CloudWatchLogsLogStream'
-  CloudWatchLogsTimeZone:
+  DateTime:
     type: string
-    enum:
-      - LOCAL
-      - UTC
-    description: 'The preferred time zone for logs streamed to CloudWatch Logs. Valid values are <code>LOCAL</code> and <code>UTC</code>, for Coordinated Universal Time.'
   Command:
     type: object
     properties:
@@ -4268,6 +4371,72 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Command'
+  DeploymentCommand:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/DeploymentCommandName'
+        description: '<p>Specifies the operation. You can specify only one command.</p> <p>For stacks, the following commands are available:</p> <ul> <li> <p> <code>execute_recipes</code>: Execute one or more recipes. To specify the recipes, set an <code>Args</code> parameter named <code>recipes</code> to the list of recipes to be executed. For example, to execute <code>phpapp::appsetup</code>, set <code>Args</code> to <code>{"recipes":["phpapp::appsetup"]}</code>.</p> </li> <li> <p> <code>install_dependencies</code>: Install the stack''s dependencies.</p> </li> <li> <p> <code>update_custom_cookbooks</code>: Update the stack''s custom cookbooks.</p> </li> <li> <p> <code>update_dependencies</code>: Update the stack''s dependencies.</p> </li> </ul> <note> <p>The update_dependencies and install_dependencies commands are supported only for Linux instances. You can run the commands successfully on Windows instances, but they do nothing.</p> </note> <p>For apps, the following commands are available:</p> <ul> <li> <p> <code>deploy</code>: Deploy an app. Ruby on Rails apps have an optional <code>Args</code> parameter named <code>migrate</code>. Set <code>Args</code> to {"migrate":["true"]} to migrate the database. The default setting is {"migrate":["false"]}.</p> </li> <li> <p> <code>rollback</code> Roll the app back to the previous version. When you update an app, AWS OpsWorks Stacks stores the previous version, up to a maximum of five versions. You can use this command to roll an app back as many as four versions.</p> </li> <li> <p> <code>start</code>: Start the app''s web or application server.</p> </li> <li> <p> <code>stop</code>: Stop the app''s web or application server.</p> </li> <li> <p> <code>restart</code>: Restart the app''s web or application server.</p> </li> <li> <p> <code>undeploy</code>: Undeploy the app.</p> </li> </ul>'
+      Args:
+        $ref: '#/definitions/DeploymentCommandArgs'
+        description: '<p>The arguments of those commands that take arguments. It should be set to a JSON object with the following format:</p> <p> <code>{"arg_name1" : ["value1", "value2", ...], "arg_name2" : ["value1", "value2", ...], ...}</code> </p> <p>The <code>update_dependencies</code> command takes two arguments:</p> <ul> <li> <p> <code>upgrade_os_to</code> - Specifies the desired Amazon Linux version for instances whose OS you want to upgrade, such as <code>Amazon Linux 2016.09</code>. You must also set the <code>allow_reboot</code> argument to true.</p> </li> <li> <p> <code>allow_reboot</code> - Specifies whether to allow AWS OpsWorks Stacks to reboot the instances if necessary, after installing the updates. This argument can be set to either <code>true</code> or <code>false</code>. The default value is <code>false</code>.</p> </li> </ul> <p>For example, to upgrade an instance to Amazon Linux 2016.09, set <code>Args</code> to the following.</p> <p> <code> { "upgrade_os_to":["Amazon Linux 2016.09"], "allow_reboot":["true"] } </code> </p>'
+    description: Used to specify a stack or deployment command.
+  LayerType:
+    type: string
+    enum:
+      - aws-flow-ruby
+      - ecs-cluster
+      - java-app
+      - lb
+      - web
+      - php-app
+      - rails-app
+      - nodejs-app
+      - memcached
+      - db-master
+      - monitoring-master
+      - custom
+  LayerAttributes:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/LayerAttributesKeys'
+        value:
+          $ref: '#/definitions/String'
+  VolumeConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/VolumeConfiguration'
+  Recipes:
+    type: object
+    properties:
+      Setup:
+        $ref: '#/definitions/Strings'
+        description: An array of custom recipe names to be run following a <code>setup</code> event.
+      Configure:
+        $ref: '#/definitions/Strings'
+        description: An array of custom recipe names to be run following a <code>configure</code> event.
+      Deploy:
+        $ref: '#/definitions/Strings'
+        description: An array of custom recipe names to be run following a <code>deploy</code> event.
+      Undeploy:
+        $ref: '#/definitions/Strings'
+        description: An array of custom recipe names to be run following a <code>undeploy</code> event.
+      Shutdown:
+        $ref: '#/definitions/Strings'
+        description: An array of custom recipe names to be run following a <code>shutdown</code> event.
+    description: '<p>AWS OpsWorks Stacks supports five lifecycle events: <b>setup</b>, <b>configuration</b>, <b>deploy</b>, <b>undeploy</b>, and <b>shutdown</b>. For each layer, AWS OpsWorks Stacks runs a set of standard recipes for each event. In addition, you can provide custom recipes for any or all layers and events. AWS OpsWorks Stacks runs custom event recipes after the standard recipes. <code>LayerCustomRecipes</code> specifies the custom recipes for a particular layer to be run in response to each of the five events. </p> <p>To specify a recipe, use the cookbook''s directory name in the repository followed by two colons and the recipe name, which is the recipe''s file name without the .rb extension. For example: phpapp2::dbsetup specifies the dbsetup.rb recipe in the repository''s phpapp2 folder.</p>'
+  LifecycleEventConfiguration:
+    type: object
+    properties:
+      Shutdown:
+        $ref: '#/definitions/ShutdownEventConfiguration'
+        description: A <code>ShutdownEventConfiguration</code> object that specifies the Shutdown event configuration.
+    description: Specifies the lifecycle event configuration
   Hour:
     type: string
   Switch:
@@ -4294,12 +4463,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The database name.
     description: Describes an app's data source.
-  DataSources:
-    type: array
-    items:
-      $ref: '#/definitions/DataSource'
-  DateTime:
-    type: string
   Deployment:
     type: object
     properties:
@@ -4339,31 +4502,6 @@ definitions:
         $ref: '#/definitions/Strings'
         description: The IDs of the target instances.
     description: Describes a deployment of a stack or app.
-  DeploymentCommand:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/DeploymentCommandName'
-        description: '<p>Specifies the operation. You can specify only one command.</p> <p>For stacks, the following commands are available:</p> <ul> <li> <p> <code>execute_recipes</code>: Execute one or more recipes. To specify the recipes, set an <code>Args</code> parameter named <code>recipes</code> to the list of recipes to be executed. For example, to execute <code>phpapp::appsetup</code>, set <code>Args</code> to <code>{"recipes":["phpapp::appsetup"]}</code>.</p> </li> <li> <p> <code>install_dependencies</code>: Install the stack''s dependencies.</p> </li> <li> <p> <code>update_custom_cookbooks</code>: Update the stack''s custom cookbooks.</p> </li> <li> <p> <code>update_dependencies</code>: Update the stack''s dependencies.</p> </li> </ul> <note> <p>The update_dependencies and install_dependencies commands are supported only for Linux instances. You can run the commands successfully on Windows instances, but they do nothing.</p> </note> <p>For apps, the following commands are available:</p> <ul> <li> <p> <code>deploy</code>: Deploy an app. Ruby on Rails apps have an optional <code>Args</code> parameter named <code>migrate</code>. Set <code>Args</code> to {"migrate":["true"]} to migrate the database. The default setting is {"migrate":["false"]}.</p> </li> <li> <p> <code>rollback</code> Roll the app back to the previous version. When you update an app, AWS OpsWorks Stacks stores the previous version, up to a maximum of five versions. You can use this command to roll an app back as many as four versions.</p> </li> <li> <p> <code>start</code>: Start the app''s web or application server.</p> </li> <li> <p> <code>stop</code>: Stop the app''s web or application server.</p> </li> <li> <p> <code>restart</code>: Restart the app''s web or application server.</p> </li> <li> <p> <code>undeploy</code>: Undeploy the app.</p> </li> </ul>'
-      Args:
-        $ref: '#/definitions/DeploymentCommandArgs'
-        description: '<p>The arguments of those commands that take arguments. It should be set to a JSON object with the following format:</p> <p> <code>{"arg_name1" : ["value1", "value2", ...], "arg_name2" : ["value1", "value2", ...], ...}</code> </p> <p>The <code>update_dependencies</code> command takes two arguments:</p> <ul> <li> <p> <code>upgrade_os_to</code> - Specifies the desired Amazon Linux version for instances whose OS you want to upgrade, such as <code>Amazon Linux 2016.09</code>. You must also set the <code>allow_reboot</code> argument to true.</p> </li> <li> <p> <code>allow_reboot</code> - Specifies whether to allow AWS OpsWorks Stacks to reboot the instances if necessary, after installing the updates. This argument can be set to either <code>true</code> or <code>false</code>. The default value is <code>false</code>.</p> </li> </ul> <p>For example, to upgrade an instance to Amazon Linux 2016.09, set <code>Args</code> to the following.</p> <p> <code> { "upgrade_os_to":["Amazon Linux 2016.09"], "allow_reboot":["true"] } </code> </p>'
-    description: Used to specify a stack or deployment command.
-  Strings:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  DeploymentCommandArgs:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/Strings'
   DeploymentCommandName:
     type: string
     enum:
@@ -4379,32 +4517,132 @@ definitions:
       - stop
       - restart
       - undeploy
+  DeploymentCommandArgs:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/Strings'
   Deployments:
     type: array
     items:
       $ref: '#/definitions/Deployment'
-  Double:
-    type: number
-    format: double
-  EbsBlockDevice:
+  EcsClusters:
+    type: array
+    items:
+      $ref: '#/definitions/EcsCluster'
+  ElasticIps:
+    type: array
+    items:
+      $ref: '#/definitions/ElasticIp'
+  ElasticLoadBalancers:
+    type: array
+    items:
+      $ref: '#/definitions/ElasticLoadBalancer'
+  Instances:
+    type: array
+    items:
+      $ref: '#/definitions/Instance'
+  Layers:
+    type: array
+    items:
+      $ref: '#/definitions/Layer'
+  LoadBasedAutoScalingConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBasedAutoScalingConfiguration'
+  SelfUserProfile:
     type: object
     properties:
-      SnapshotId:
+      IamUserArn:
         $ref: '#/definitions/String'
-        description: The snapshot ID.
-      Iops:
+        description: The user's IAM ARN.
+      Name:
+        $ref: '#/definitions/String'
+        description: The user's name.
+      SshUsername:
+        $ref: '#/definitions/String'
+        description: The user's SSH user name.
+      SshPublicKey:
+        $ref: '#/definitions/String'
+        description: The user's SSH public key.
+    description: Describes a user's SSH information.
+  OperatingSystems:
+    type: array
+    items:
+      $ref: '#/definitions/OperatingSystem'
+  Permissions:
+    type: array
+    items:
+      $ref: '#/definitions/Permission'
+  RaidArrays:
+    type: array
+    items:
+      $ref: '#/definitions/RaidArray'
+  RdsDbInstances:
+    type: array
+    items:
+      $ref: '#/definitions/RdsDbInstance'
+  ServiceErrors:
+    type: array
+    items:
+      $ref: '#/definitions/ServiceError'
+  Parameters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/String'
+        value:
+          $ref: '#/definitions/String'
+  StackSummary:
+    type: object
+    properties:
+      StackId:
+        $ref: '#/definitions/String'
+        description: The stack ID.
+      Name:
+        $ref: '#/definitions/String'
+        description: The stack name.
+      Arn:
+        $ref: '#/definitions/String'
+        description: The stack's ARN.
+      LayersCount:
         $ref: '#/definitions/Integer'
-        description: 'The number of I/O operations per second (IOPS) that the volume supports. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html">EbsBlockDevice</a>.'
-      VolumeSize:
+        description: The number of layers.
+      AppsCount:
         $ref: '#/definitions/Integer'
-        description: 'The volume size, in GiB. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html">EbsBlockDevice</a>.'
-      VolumeType:
-        $ref: '#/definitions/VolumeType'
-        description: '<p>The volume type. <code>gp2</code> for General Purpose (SSD) volumes, <code>io1</code> for Provisioned IOPS (SSD) volumes, <code>st1</code> for Throughput Optimized hard disk drives (HDD), <code>sc1</code> for Cold HDD,and <code>standard</code> for Magnetic volumes.</p> <p>If you specify the <code>io1</code> volume type, you must also specify a value for the <code>Iops</code> attribute. The maximum ratio of provisioned IOPS to requested volume size (in GiB) is 50:1. AWS uses the default volume size (in GiB) specified in the AMI attributes to set IOPS to 50 x (volume size).</p>'
-      DeleteOnTermination:
-        $ref: '#/definitions/Boolean'
-        description: Whether the volume is deleted on instance termination.
-    description: 'Describes an Amazon EBS volume. This data type maps directly to the Amazon EC2 <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html">EbsBlockDevice</a> data type.'
+        description: The number of apps.
+      InstancesCount:
+        $ref: '#/definitions/InstancesCount'
+        description: An <code>InstancesCount</code> object with the number of instances in each status.
+    description: 'Summarizes the number of layers, instances, and apps in a stack.'
+  Stacks:
+    type: array
+    items:
+      $ref: '#/definitions/Stack'
+  TimeBasedAutoScalingConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/TimeBasedAutoScalingConfiguration'
+  UserProfiles:
+    type: array
+    items:
+      $ref: '#/definitions/UserProfile'
+  Volumes:
+    type: array
+    items:
+      $ref: '#/definitions/Volume'
+  VolumeType:
+    type: string
+    enum:
+      - gp2
+      - io1
+      - standard
   EcsCluster:
     type: object
     properties:
@@ -4421,10 +4659,6 @@ definitions:
         $ref: '#/definitions/DateTime'
         description: The time and date that the cluster was registered with the stack.
     description: Describes a registered Amazon ECS cluster.
-  EcsClusters:
-    type: array
-    items:
-      $ref: '#/definitions/EcsCluster'
   ElasticIp:
     type: object
     properties:
@@ -4444,10 +4678,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the instance that the address is attached to.
     description: Describes an Elastic IP address.
-  ElasticIps:
-    type: array
-    items:
-      $ref: '#/definitions/ElasticIp'
   ElasticLoadBalancer:
     type: object
     properties:
@@ -4479,10 +4709,6 @@ definitions:
         $ref: '#/definitions/Strings'
         description: A list of the EC2 instances that the Elastic Load Balancing instance is managing traffic for.
     description: Describes an Elastic Load Balancing instance.
-  ElasticLoadBalancers:
-    type: array
-    items:
-      $ref: '#/definitions/ElasticLoadBalancer'
   EnvironmentVariable:
     type: object
     required:
@@ -4499,10 +4725,44 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: '(Optional) Whether the variable''s value will be returned by the <a>DescribeApps</a> action. To conceal an environment variable''s value, set <code>Secure</code> to <code>true</code>. <code>DescribeApps</code> then returns <code>*****FILTERED*****</code> instead of the actual value. The default value for <code>Secure</code> is <code>false</code>. '
     description: Represents an app's environment variable.
-  EnvironmentVariables:
-    type: array
-    items:
-      $ref: '#/definitions/EnvironmentVariable'
+  ValidForInMinutes:
+    type: integer
+    minimum: 60
+    maximum: 1440
+  TemporaryCredential:
+    type: object
+    properties:
+      Username:
+        $ref: '#/definitions/String'
+        description: The user name.
+      Password:
+        $ref: '#/definitions/String'
+        description: The password.
+      ValidForInMinutes:
+        $ref: '#/definitions/Integer'
+        description: 'The length of time (in minutes) that the grant is valid. When the grant expires, at the end of this period, the user will no longer be able to use the credentials to log in. If they are logged in at the time, they will be automatically logged out.'
+      InstanceId:
+        $ref: '#/definitions/String'
+        description: The instance's AWS OpsWorks Stacks ID.
+    description: Contains the data needed by RDP clients such as the Microsoft Remote Desktop Connection to log in to the instance.
+  ReportedOs:
+    type: object
+    properties:
+      Family:
+        $ref: '#/definitions/String'
+        description: The operating system family.
+      Name:
+        $ref: '#/definitions/String'
+        description: The operating system name.
+      Version:
+        $ref: '#/definitions/String'
+        description: The operating system version.
+    description: A registered instance's reported operating system.
+  VirtualizationType:
+    type: string
+    enum:
+      - paravirtual
+      - hvm
   Instance:
     type: object
     properties:
@@ -4640,10 +4900,6 @@ definitions:
         $ref: '#/definitions/String'
         description: A signature that can be used to verify the document's accuracy and authenticity.
     description: 'Contains a description of an Amazon EC2 instance from the Amazon EC2 metadata service. For more information, see <a href="http://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html">Instance Metadata and User Data</a>.'
-  Instances:
-    type: array
-    items:
-      $ref: '#/definitions/Instance'
   InstancesCount:
     type: object
     properties:
@@ -4708,8 +4964,6 @@ definitions:
         $ref: '#/definitions/Integer'
         description: The number of instances in the Unassigning state.
     description: Describes how many instances a stack has for each status.
-  Integer:
-    type: integer
   Layer:
     type: object
     properties:
@@ -4810,41 +5064,31 @@ definitions:
       - JvmOptions
       - JavaAppServer
       - JavaAppServerVersion
-  LayerAttributes:
+  ShutdownEventConfiguration:
+    type: object
+    properties:
+      ExecutionTimeout:
+        $ref: '#/definitions/Integer'
+        description: 'The time, in seconds, that AWS OpsWorks Stacks will wait after triggering a Shutdown event before shutting down an instance.'
+      DelayUntilElbConnectionsDrained:
+        $ref: '#/definitions/Boolean'
+        description: 'Whether to enable Elastic Load Balancing connection draining. For more information, see <a href="http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#conn-drain">Connection Draining</a> '
+    description: The Shutdown event configuration.
+  ResourceArn:
+    type: string
+  MaxResults:
+    type: integer
+  NextToken:
+    type: string
+  Tags:
     type: array
     items:
       type: object
       properties:
         key:
-          $ref: '#/definitions/LayerAttributesKeys'
+          $ref: '#/definitions/TagKey'
         value:
-          $ref: '#/definitions/String'
-  LayerType:
-    type: string
-    enum:
-      - aws-flow-ruby
-      - ecs-cluster
-      - java-app
-      - lb
-      - web
-      - php-app
-      - rails-app
-      - nodejs-app
-      - memcached
-      - db-master
-      - monitoring-master
-      - custom
-  Layers:
-    type: array
-    items:
-      $ref: '#/definitions/Layer'
-  LifecycleEventConfiguration:
-    type: object
-    properties:
-      Shutdown:
-        $ref: '#/definitions/ShutdownEventConfiguration'
-        description: A <code>ShutdownEventConfiguration</code> object that specifies the Shutdown event configuration.
-    description: Specifies the lifecycle event configuration
+          $ref: '#/definitions/TagValue'
   LoadBasedAutoScalingConfiguration:
     type: object
     properties:
@@ -4861,18 +5105,10 @@ definitions:
         $ref: '#/definitions/AutoScalingThresholds'
         description: 'An <code>AutoScalingThresholds</code> object that describes the downscaling configuration, which defines how and when AWS OpsWorks Stacks reduces the number of instances.'
     description: Describes a layer's load-based auto scaling configuration.
-  LoadBasedAutoScalingConfigurations:
+  OperatingSystemConfigurationManagers:
     type: array
     items:
-      $ref: '#/definitions/LoadBasedAutoScalingConfiguration'
-  MaxResults:
-    type: integer
-  Minute:
-    type: integer
-    minimum: 1
-    maximum: 100
-  NextToken:
-    type: string
+      $ref: '#/definitions/OperatingSystemConfigurationManager'
   OperatingSystem:
     type: object
     properties:
@@ -4908,23 +5144,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The versions of the configuration manager that are supported by an operating system.
     description: A block that contains information about the configuration manager (Chef) and the versions of the configuration manager that are supported for an operating system.
-  OperatingSystemConfigurationManagers:
-    type: array
-    items:
-      $ref: '#/definitions/OperatingSystemConfigurationManager'
-  OperatingSystems:
-    type: array
-    items:
-      $ref: '#/definitions/OperatingSystem'
-  Parameters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/String'
-        value:
-          $ref: '#/definitions/String'
   Permission:
     type: object
     properties:
@@ -4944,10 +5163,6 @@ definitions:
         $ref: '#/definitions/String'
         description: '<p>The user''s permission level, which must be the following:</p> <ul> <li> <p> <code>deny</code> </p> </li> <li> <p> <code>show</code> </p> </li> <li> <p> <code>deploy</code> </p> </li> <li> <p> <code>manage</code> </p> </li> <li> <p> <code>iam_only</code> </p> </li> </ul> <p>For more information on the permissions associated with these levels, see <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html">Managing User Permissions</a> </p>'
     description: Describes stack or user permissions.
-  Permissions:
-    type: array
-    items:
-      $ref: '#/definitions/Permission'
   RaidArray:
     type: object
     properties:
@@ -4991,10 +5206,6 @@ definitions:
         $ref: '#/definitions/Integer'
         description: 'For PIOPS volumes, the IOPS per disk.'
     description: Describes an instance's RAID array.
-  RaidArrays:
-    type: array
-    items:
-      $ref: '#/definitions/RaidArray'
   RdsDbInstance:
     type: object
     properties:
@@ -5026,65 +5237,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Set to <code>true</code> if AWS OpsWorks Stacks is unable to discover the Amazon RDS instance. AWS OpsWorks Stacks attempts to discover the instance only once. If this value is set to <code>true</code>, you must deregister the instance, and then register it again.'
     description: Describes an Amazon RDS instance.
-  RdsDbInstances:
-    type: array
-    items:
-      $ref: '#/definitions/RdsDbInstance'
-  Recipes:
-    type: object
-    properties:
-      Setup:
-        $ref: '#/definitions/Strings'
-        description: An array of custom recipe names to be run following a <code>setup</code> event.
-      Configure:
-        $ref: '#/definitions/Strings'
-        description: An array of custom recipe names to be run following a <code>configure</code> event.
-      Deploy:
-        $ref: '#/definitions/Strings'
-        description: An array of custom recipe names to be run following a <code>deploy</code> event.
-      Undeploy:
-        $ref: '#/definitions/Strings'
-        description: An array of custom recipe names to be run following a <code>undeploy</code> event.
-      Shutdown:
-        $ref: '#/definitions/Strings'
-        description: An array of custom recipe names to be run following a <code>shutdown</code> event.
-    description: '<p>AWS OpsWorks Stacks supports five lifecycle events: <b>setup</b>, <b>configuration</b>, <b>deploy</b>, <b>undeploy</b>, and <b>shutdown</b>. For each layer, AWS OpsWorks Stacks runs a set of standard recipes for each event. In addition, you can provide custom recipes for any or all layers and events. AWS OpsWorks Stacks runs custom event recipes after the standard recipes. <code>LayerCustomRecipes</code> specifies the custom recipes for a particular layer to be run in response to each of the five events. </p> <p>To specify a recipe, use the cookbook''s directory name in the repository followed by two colons and the recipe name, which is the recipe''s file name without the .rb extension. For example: phpapp2::dbsetup specifies the dbsetup.rb recipe in the repository''s phpapp2 folder.</p>'
-  ReportedOs:
-    type: object
-    properties:
-      Family:
-        $ref: '#/definitions/String'
-        description: The operating system family.
-      Name:
-        $ref: '#/definitions/String'
-        description: The operating system name.
-      Version:
-        $ref: '#/definitions/String'
-        description: The operating system version.
-    description: A registered instance's reported operating system.
-  ResourceArn:
-    type: string
-  RootDeviceType:
-    type: string
-    enum:
-      - ebs
-      - instance-store
-  SelfUserProfile:
-    type: object
-    properties:
-      IamUserArn:
-        $ref: '#/definitions/String'
-        description: The user's IAM ARN.
-      Name:
-        $ref: '#/definitions/String'
-        description: The user's name.
-      SshUsername:
-        $ref: '#/definitions/String'
-        description: The user's SSH user name.
-      SshPublicKey:
-        $ref: '#/definitions/String'
-        description: The user's SSH public key.
-    description: Describes a user's SSH information.
   ServiceError:
     type: object
     properties:
@@ -5107,42 +5259,31 @@ definitions:
         $ref: '#/definitions/DateTime'
         description: When the error occurred.
     description: Describes an AWS OpsWorks Stacks service error.
-  ServiceErrors:
-    type: array
-    items:
-      $ref: '#/definitions/ServiceError'
-  ShutdownEventConfiguration:
+  WeeklyAutoScalingSchedule:
     type: object
     properties:
-      ExecutionTimeout:
-        $ref: '#/definitions/Integer'
-        description: 'The time, in seconds, that AWS OpsWorks Stacks will wait after triggering a Shutdown event before shutting down an instance.'
-      DelayUntilElbConnectionsDrained:
-        $ref: '#/definitions/Boolean'
-        description: 'Whether to enable Elastic Load Balancing connection draining. For more information, see <a href="http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#conn-drain">Connection Draining</a> '
-    description: The Shutdown event configuration.
-  Source:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/SourceType'
-        description: The repository type.
-      Url:
-        $ref: '#/definitions/String'
-        description: 'The source URL. The following is an example of an Amazon S3 source URL: <code>https://s3.amazonaws.com/opsworks-demo-bucket/opsworks_cookbook_demo.tar.gz</code>.'
-      Username:
-        $ref: '#/definitions/String'
-        description: '<p>This parameter depends on the repository type.</p> <ul> <li> <p>For Amazon S3 bundles, set <code>Username</code> to the appropriate IAM access key ID.</p> </li> <li> <p>For HTTP bundles, Git repositories, and Subversion repositories, set <code>Username</code> to the user name.</p> </li> </ul>'
-      Password:
-        $ref: '#/definitions/String'
-        description: '<p>When included in a request, the parameter depends on the repository type.</p> <ul> <li> <p>For Amazon S3 bundles, set <code>Password</code> to the appropriate IAM secret access key.</p> </li> <li> <p>For HTTP bundles and Subversion repositories, set <code>Password</code> to the password.</p> </li> </ul> <p>For more information on how to safely handle IAM credentials, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html">http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html</a>.</p> <p>In responses, AWS OpsWorks Stacks returns <code>*****FILTERED*****</code> instead of the actual value.</p>'
-      SshKey:
-        $ref: '#/definitions/String'
-        description: '<p>In requests, the repository''s SSH key.</p> <p>In responses, AWS OpsWorks Stacks returns <code>*****FILTERED*****</code> instead of the actual value.</p>'
-      Revision:
-        $ref: '#/definitions/String'
-        description: The application's version. AWS OpsWorks Stacks enables you to easily deploy new versions of an application. One of the simplest approaches is to have branches or revisions in your repository that represent different versions that can potentially be deployed.
-    description: 'Contains the information required to retrieve an app or cookbook from a repository. For more information, see <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html">Creating Apps</a> or <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html">Custom Recipes and Cookbooks</a>.'
+      Monday:
+        $ref: '#/definitions/DailyAutoScalingSchedule'
+        description: The schedule for Monday.
+      Tuesday:
+        $ref: '#/definitions/DailyAutoScalingSchedule'
+        description: The schedule for Tuesday.
+      Wednesday:
+        $ref: '#/definitions/DailyAutoScalingSchedule'
+        description: The schedule for Wednesday.
+      Thursday:
+        $ref: '#/definitions/DailyAutoScalingSchedule'
+        description: The schedule for Thursday.
+      Friday:
+        $ref: '#/definitions/DailyAutoScalingSchedule'
+        description: The schedule for Friday.
+      Saturday:
+        $ref: '#/definitions/DailyAutoScalingSchedule'
+        description: The schedule for Saturday.
+      Sunday:
+        $ref: '#/definitions/DailyAutoScalingSchedule'
+        description: The schedule for Sunday.
+    description: '<p>Describes a time-based instance''s auto scaling schedule. The schedule consists of a set of key-value pairs.</p> <ul> <li> <p>The key is the time period (a UTC hour) and must be an integer from 0 - 23.</p> </li> <li> <p>The value indicates whether the instance should be online or offline for the specified period, and must be set to "on" or "off"</p> </li> </ul> <p>The default setting for all time periods is off, so you use the following parameters primarily to specify the online periods. You don''t have to explicitly specify offline periods unless you want to change an online period to an offline period.</p> <p>The following example specifies that the instance should be online for four hours, from UTC 1200 - 1600. It will be off for the remainder of the day.</p> <p> <code> { "12":"on", "13":"on", "14":"on", "15":"on" } </code> </p>'
   SourceType:
     type: string
     enum:
@@ -5150,22 +5291,6 @@ definitions:
       - svn
       - archive
       - s3
-  SslConfiguration:
-    type: object
-    required:
-      - Certificate
-      - PrivateKey
-    properties:
-      Certificate:
-        $ref: '#/definitions/String'
-        description: The contents of the certificate's domain.crt file.
-      PrivateKey:
-        $ref: '#/definitions/String'
-        description: The private key; the contents of the certificate's domain.kex file.
-      Chain:
-        $ref: '#/definitions/String'
-        description: Optional. Can be used to specify an intermediate certificate authority key or client authentication.
-    description: Describes an app's SSL configuration.
   Stack:
     type: object
     properties:
@@ -5239,51 +5364,6 @@ definitions:
     type: string
     enum:
       - Color
-  StackAttributes:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/StackAttributesKeys'
-        value:
-          $ref: '#/definitions/String'
-  StackConfigurationManager:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/String'
-        description: The name. This parameter must be set to "Chef".
-      Version:
-        $ref: '#/definitions/String'
-        description: 'The Chef version. This parameter must be set to 12, 11.10, or 11.4 for Linux stacks, and to 12.2 for Windows stacks. The default value for Linux stacks is 11.4.'
-    description: Describes the configuration manager.
-  StackSummary:
-    type: object
-    properties:
-      StackId:
-        $ref: '#/definitions/String'
-        description: The stack ID.
-      Name:
-        $ref: '#/definitions/String'
-        description: The stack name.
-      Arn:
-        $ref: '#/definitions/String'
-        description: The stack's ARN.
-      LayersCount:
-        $ref: '#/definitions/Integer'
-        description: The number of layers.
-      AppsCount:
-        $ref: '#/definitions/Integer'
-        description: The number of apps.
-      InstancesCount:
-        $ref: '#/definitions/InstancesCount'
-        description: An <code>InstancesCount</code> object with the number of instances in each status.
-    description: 'Summarizes the number of layers, instances, and apps in a stack.'
-  Stacks:
-    type: array
-    items:
-      $ref: '#/definitions/Stack'
   TagKey:
     type: string
   TagKeys:
@@ -5292,31 +5372,6 @@ definitions:
       $ref: '#/definitions/TagKey'
   TagValue:
     type: string
-  Tags:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-  TemporaryCredential:
-    type: object
-    properties:
-      Username:
-        $ref: '#/definitions/String'
-        description: The user name.
-      Password:
-        $ref: '#/definitions/String'
-        description: The password.
-      ValidForInMinutes:
-        $ref: '#/definitions/Integer'
-        description: 'The length of time (in minutes) that the grant is valid. When the grant expires, at the end of this period, the user will no longer be able to use the credentials to log in. If they are logged in at the time, they will be automatically logged out.'
-      InstanceId:
-        $ref: '#/definitions/String'
-        description: The instance's AWS OpsWorks Stacks ID.
-    description: Contains the data needed by RDP clients such as the Microsoft Remote Desktop Connection to log in to the instance.
   TimeBasedAutoScalingConfiguration:
     type: object
     properties:
@@ -5327,10 +5382,6 @@ definitions:
         $ref: '#/definitions/WeeklyAutoScalingSchedule'
         description: A <code>WeeklyAutoScalingSchedule</code> object with the instance schedule.
     description: Describes an instance's time-based auto scaling configuration.
-  TimeBasedAutoScalingConfigurations:
-    type: array
-    items:
-      $ref: '#/definitions/TimeBasedAutoScalingConfiguration'
   UserProfile:
     type: object
     properties:
@@ -5350,19 +5401,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Whether users can specify their own SSH public key through the My Settings page. For more information, see <a href="http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html">Managing User Permissions</a>.'
     description: Describes a user's SSH information.
-  UserProfiles:
-    type: array
-    items:
-      $ref: '#/definitions/UserProfile'
-  ValidForInMinutes:
-    type: integer
-    minimum: 60
-    maximum: 1440
-  VirtualizationType:
-    type: string
-    enum:
-      - paravirtual
-      - hvm
   Volume:
     type: object
     properties:
@@ -5438,42 +5476,3 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Specifies whether an Amazon EBS volume is encrypted. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a>.'
     description: Describes an Amazon EBS volume configuration.
-  VolumeConfigurations:
-    type: array
-    items:
-      $ref: '#/definitions/VolumeConfiguration'
-  VolumeType:
-    type: string
-    enum:
-      - gp2
-      - io1
-      - standard
-  Volumes:
-    type: array
-    items:
-      $ref: '#/definitions/Volume'
-  WeeklyAutoScalingSchedule:
-    type: object
-    properties:
-      Monday:
-        $ref: '#/definitions/DailyAutoScalingSchedule'
-        description: The schedule for Monday.
-      Tuesday:
-        $ref: '#/definitions/DailyAutoScalingSchedule'
-        description: The schedule for Tuesday.
-      Wednesday:
-        $ref: '#/definitions/DailyAutoScalingSchedule'
-        description: The schedule for Wednesday.
-      Thursday:
-        $ref: '#/definitions/DailyAutoScalingSchedule'
-        description: The schedule for Thursday.
-      Friday:
-        $ref: '#/definitions/DailyAutoScalingSchedule'
-        description: The schedule for Friday.
-      Saturday:
-        $ref: '#/definitions/DailyAutoScalingSchedule'
-        description: The schedule for Saturday.
-      Sunday:
-        $ref: '#/definitions/DailyAutoScalingSchedule'
-        description: The schedule for Sunday.
-    description: '<p>Describes a time-based instance''s auto scaling schedule. The schedule consists of a set of key-value pairs.</p> <ul> <li> <p>The key is the time period (a UTC hour) and must be an integer from 0 - 23.</p> </li> <li> <p>The value indicates whether the instance should be online or offline for the specified period, and must be set to "on" or "off"</p> </li> </ul> <p>The default setting for all time periods is off, so you use the following parameters primarily to specify the online periods. You don''t have to explicitly specify offline periods unless you want to change an online period to an offline period.</p> <p>The following example specifies that the instance should be online for four hours, from UTC 1200 - 1600. It will be off for the remainder of the day.</p> <p> <code> { "12":"on", "13":"on", "14":"on", "15":"on" } </code> </p>'

@@ -3837,7 +3837,10 @@ definitions:
         $ref: '#/definitions/Address'
         description: The email address to be verified.
     description: 'Represents a request to begin email address verification with Amazon SES. For information about email address verification, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html">Amazon SES Developer Guide</a>.'
-  undefined: {}
+  HeaderName:
+    type: string
+  HeaderValue:
+    type: string
   AddHeaderAction:
     type: object
     required:
@@ -3867,6 +3870,18 @@ definitions:
     enum:
       - UseDefaultValue
       - RejectMessage
+  Content:
+    type: object
+    required:
+      - Data
+    properties:
+      Data:
+        $ref: '#/definitions/MessageData'
+        description: The textual data of the content.
+      Charset:
+        $ref: '#/definitions/Charset'
+        description: The character set of the content.
+    description: '<p>Represents textual data, plus an optional character set specification.</p> <p>By default, the text must be 7-bit ASCII, due to the constraints of the SMTP protocol. If the text must contain any other characters, then you must also specify a character set. Examples include UTF-8, ISO-8859-1, and Shift_JIS.</p>'
   Body:
     type: object
     properties:
@@ -3877,6 +3892,12 @@ definitions:
         $ref: '#/definitions/Content'
         description: 'The content of the message, in HTML format. Use this for email clients that can process HTML. You can include clickable links, formatted text, and much more in an HTML message.'
     description: 'Represents the body of the message. You can specify text, HTML, or both. If you use both, then the message should display correctly in the widest variety of email clients.'
+  BounceSmtpReplyCode:
+    type: string
+  BounceStatusCode:
+    type: string
+  BounceMessage:
+    type: string
   BounceAction:
     type: object
     required:
@@ -3900,12 +3921,6 @@ definitions:
         $ref: '#/definitions/Address'
         description: The email address of the sender of the bounced email. This is the address from which the bounce message will be sent.
     description: '<p>When included in a receipt rule, this action rejects the received email by returning a bounce response to the sender and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS).</p> <p>For information about sending a bounce message in response to a received email, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-bounce.html">Amazon SES Developer Guide</a>.</p>'
-  BounceMessage:
-    type: string
-  BounceSmtpReplyCode:
-    type: string
-  BounceStatusCode:
-    type: string
   BounceType:
     type: string
     enum:
@@ -3915,6 +3930,34 @@ definitions:
       - ContentRejected
       - Undefined
       - TemporaryFailure
+  RecipientDsnFields:
+    type: object
+    required:
+      - Action
+      - Status
+    properties:
+      FinalRecipient:
+        $ref: '#/definitions/Address'
+        description: '<p>The email address that the message was ultimately delivered to. This corresponds to the <code>Final-Recipient</code> in the DSN. If not specified, <code>FinalRecipient</code> will be set to the <code>Recipient</code> specified in the <code>BouncedRecipientInfo</code> structure. Either <code>FinalRecipient</code> or the recipient in <code>BouncedRecipientInfo</code> must be a recipient of the original bounced message.</p> <note> <p>Do not prepend the <code>FinalRecipient</code> email address with <code>rfc 822;</code>, as described in <a href="https://tools.ietf.org/html/rfc3798">RFC 3798</a>.</p> </note>'
+      Action:
+        $ref: '#/definitions/DsnAction'
+        description: 'The action performed by the reporting mail transfer agent (MTA) as a result of its attempt to deliver the message to the recipient address. This is required by <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a>.'
+      RemoteMta:
+        $ref: '#/definitions/RemoteMta'
+        description: 'The MTA to which the remote MTA attempted to deliver the message, formatted as specified in <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a> (<code>mta-name-type; mta-name</code>). This parameter typically applies only to propagating synchronous bounces.'
+      Status:
+        $ref: '#/definitions/DsnStatus'
+        description: 'The status code that indicates what went wrong. This is required by <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a>.'
+      DiagnosticCode:
+        $ref: '#/definitions/DiagnosticCode'
+        description: 'An extended explanation of what went wrong; this is usually an SMTP response. See <a href="https://tools.ietf.org/html/rfc3463">RFC 3463</a> for the correct formatting of this parameter.'
+      LastAttemptDate:
+        $ref: '#/definitions/LastAttemptDate'
+        description: 'The time the final delivery attempt was made, in <a href="https://www.ietf.org/rfc/rfc0822.txt">RFC 822</a> date-time format.'
+      ExtensionFields:
+        $ref: '#/definitions/ExtensionFieldList'
+        description: Additional X-headers to include in the DSN.
+    description: '<p>Recipient-related information to include in the Delivery Status Notification (DSN) when an email that Amazon SES receives on your behalf bounces.</p> <p>For information about receiving email through Amazon SES, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html">Amazon SES Developer Guide</a>.</p>'
   BouncedRecipientInfo:
     type: object
     required:
@@ -3937,6 +3980,26 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BouncedRecipientInfo'
+  Destination:
+    type: object
+    properties:
+      ToAddresses:
+        $ref: '#/definitions/AddressList'
+        description: 'The To: field(s) of the message.'
+      CcAddresses:
+        $ref: '#/definitions/AddressList'
+        description: 'The CC: field(s) of the message.'
+      BccAddresses:
+        $ref: '#/definitions/AddressList'
+        description: 'The BCC: field(s) of the message.'
+    description: '<p>Represents the destination of the message, consisting of To:, CC:, and BCC: fields.</p> <note> <p>Amazon SES does not support the SMTPUTF8 extension, as described in <a href="https://tools.ietf.org/html/rfc6531">RFC6531</a>. For this reason, the <i>local part</i> of a destination email address (the part of the email address that precedes the @ sign) may only contain <a href="https://en.wikipedia.org/wiki/Email_address#Local-part">7-bit ASCII characters</a>. If the <i>domain part</i> of an address (the part after the @ sign) contains non-ASCII characters, they must be encoded using Punycode, as described in <a href="https://tools.ietf.org/html/rfc3492.html">RFC3492</a>.</p> </note>'
+  MessageTagList:
+    type: array
+    items:
+      $ref: '#/definitions/MessageTag'
+  TemplateData:
+    type: string
+    maxLength: 262144
   BulkEmailDestination:
     type: object
     required:
@@ -3955,23 +4018,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BulkEmailDestination'
-  BulkEmailDestinationStatus:
-    type: object
-    properties:
-      Status:
-        $ref: '#/definitions/BulkEmailStatus'
-        description: '<p>The status of a message sent using the <code>SendBulkTemplatedEmail</code> operation.</p> <p>Possible values for this parameter include:</p> <ul> <li> <p> <code>Success</code>: Amazon SES accepted the message, and will attempt to deliver it to the recipients.</p> </li> <li> <p> <code>MessageRejected</code>: The message was rejected because it contained a virus.</p> </li> <li> <p> <code>MailFromDomainNotVerified</code>: The sender''s email address or domain was not verified.</p> </li> <li> <p> <code>ConfigurationSetDoesNotExist</code>: The configuration set you specified does not exist.</p> </li> <li> <p> <code>TemplateDoesNotExist</code>: The template you specified does not exist.</p> </li> <li> <p> <code>AccountSuspended</code>: Your account has been shut down because of issues related to your email sending practices.</p> </li> <li> <p> <code>AccountThrottled</code>: The number of emails you can send has been reduced because your account has exceeded its allocated sending limit.</p> </li> <li> <p> <code>AccountDailyQuotaExceeded</code>: You have reached or exceeded the maximum number of emails you can send from your account in a 24-hour period.</p> </li> <li> <p> <code>InvalidSendingPoolName</code>: The configuration set you specified refers to an IP pool that does not exist.</p> </li> <li> <p> <code>AccountSendingPaused</code>: Email sending for the Amazon SES account was disabled using the <a>UpdateAccountSendingEnabled</a> operation.</p> </li> <li> <p> <code>ConfigurationSetSendingPaused</code>: Email sending for this configuration set was disabled using the <a>UpdateConfigurationSetSendingEnabled</a> operation.</p> </li> <li> <p> <code>InvalidParameterValue</code>: One or more of the parameters you specified when calling this operation was invalid. See the error message for additional information.</p> </li> <li> <p> <code>TransientFailure</code>: Amazon SES was unable to process your request because of a temporary issue.</p> </li> <li> <p> <code>Failed</code>: Amazon SES was unable to process your request. See the error message for additional information.</p> </li> </ul>'
-      Error:
-        $ref: '#/definitions/Error'
-        description: A description of an error that prevented a message being sent using the <code>SendBulkTemplatedEmail</code> operation.
-      MessageId:
-        $ref: '#/definitions/MessageId'
-        description: The unique message identifier returned from the <code>SendBulkTemplatedEmail</code> operation.
-    description: An object that contains the response from the <code>SendBulkTemplatedEmail</code> operation.
-  BulkEmailDestinationStatusList:
-    type: array
-    items:
-      $ref: '#/definitions/BulkEmailDestinationStatus'
   BulkEmailStatus:
     type: string
     enum:
@@ -3989,10 +4035,37 @@ definitions:
       - InvalidParameterValue
       - TransientFailure
       - Failed
+  Error:
+    type: string
+  MessageId:
+    type: string
+  BulkEmailDestinationStatus:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/BulkEmailStatus'
+        description: '<p>The status of a message sent using the <code>SendBulkTemplatedEmail</code> operation.</p> <p>Possible values for this parameter include:</p> <ul> <li> <p> <code>Success</code>: Amazon SES accepted the message, and will attempt to deliver it to the recipients.</p> </li> <li> <p> <code>MessageRejected</code>: The message was rejected because it contained a virus.</p> </li> <li> <p> <code>MailFromDomainNotVerified</code>: The sender''s email address or domain was not verified.</p> </li> <li> <p> <code>ConfigurationSetDoesNotExist</code>: The configuration set you specified does not exist.</p> </li> <li> <p> <code>TemplateDoesNotExist</code>: The template you specified does not exist.</p> </li> <li> <p> <code>AccountSuspended</code>: Your account has been shut down because of issues related to your email sending practices.</p> </li> <li> <p> <code>AccountThrottled</code>: The number of emails you can send has been reduced because your account has exceeded its allocated sending limit.</p> </li> <li> <p> <code>AccountDailyQuotaExceeded</code>: You have reached or exceeded the maximum number of emails you can send from your account in a 24-hour period.</p> </li> <li> <p> <code>InvalidSendingPoolName</code>: The configuration set you specified refers to an IP pool that does not exist.</p> </li> <li> <p> <code>AccountSendingPaused</code>: Email sending for the Amazon SES account was disabled using the <a>UpdateAccountSendingEnabled</a> operation.</p> </li> <li> <p> <code>ConfigurationSetSendingPaused</code>: Email sending for this configuration set was disabled using the <a>UpdateConfigurationSetSendingEnabled</a> operation.</p> </li> <li> <p> <code>InvalidParameterValue</code>: One or more of the parameters you specified when calling this operation was invalid. See the error message for additional information.</p> </li> <li> <p> <code>TransientFailure</code>: Amazon SES was unable to process your request because of a temporary issue.</p> </li> <li> <p> <code>Failed</code>: Amazon SES was unable to process your request. See the error message for additional information.</p> </li> </ul>'
+      Error:
+        $ref: '#/definitions/Error'
+        description: A description of an error that prevented a message being sent using the <code>SendBulkTemplatedEmail</code> operation.
+      MessageId:
+        $ref: '#/definitions/MessageId'
+        description: The unique message identifier returned from the <code>SendBulkTemplatedEmail</code> operation.
+    description: An object that contains the response from the <code>SendBulkTemplatedEmail</code> operation.
+  BulkEmailDestinationStatusList:
+    type: array
+    items:
+      $ref: '#/definitions/BulkEmailDestinationStatus'
   Charset:
     type: string
   Cidr:
     type: string
+  ReceiptRuleSetName:
+    type: string
+  CloudWatchDimensionConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/CloudWatchDimensionConfiguration'
   CloudWatchDestination:
     type: object
     required:
@@ -4002,6 +4075,16 @@ definitions:
         $ref: '#/definitions/CloudWatchDimensionConfigurations'
         description: A list of dimensions upon which to categorize your emails when you publish email sending events to Amazon CloudWatch.
     description: '<p>Contains information associated with an Amazon CloudWatch event destination to which email sending events are published.</p> <p>Event destinations, such as Amazon CloudWatch, are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
+  DimensionName:
+    type: string
+  DimensionValueSource:
+    type: string
+    enum:
+      - messageTag
+      - emailHeader
+      - linkTag
+  DefaultDimensionValue:
+    type: string
   CloudWatchDimensionConfiguration:
     type: object
     required:
@@ -4019,10 +4102,8 @@ definitions:
         $ref: '#/definitions/DefaultDimensionValue'
         description: '<p>The default value of the dimension that is published to Amazon CloudWatch if you do not provide the value of the dimension when you send an email. The default value must:</p> <ul> <li> <p>This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Contain less than 256 characters.</p> </li> </ul>'
     description: '<p>Contains the dimension configuration to use when you publish email sending events to Amazon CloudWatch.</p> <p>For information about publishing email sending events to Amazon CloudWatch, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
-  CloudWatchDimensionConfigurations:
-    type: array
-    items:
-      $ref: '#/definitions/CloudWatchDimensionConfiguration'
+  ConfigurationSetName:
+    type: string
   ConfigurationSet:
     type: object
     required:
@@ -4042,26 +4123,115 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ConfigurationSetAttribute'
-  ConfigurationSetName:
-    type: string
   ConfigurationSets:
     type: array
     items:
       $ref: '#/definitions/ConfigurationSet'
-  Content:
-    type: object
-    required:
-      - Data
-    properties:
-      Data:
-        $ref: '#/definitions/MessageData'
-        description: The textual data of the content.
-      Charset:
-        $ref: '#/definitions/Charset'
-        description: The character set of the content.
-    description: '<p>Represents textual data, plus an optional character set specification.</p> <p>By default, the text must be 7-bit ASCII, due to the constraints of the SMTP protocol. If the text must contain any other characters, then you must also specify a character set. Examples include UTF-8, ISO-8859-1, and Shift_JIS.</p>'
+  MessageData:
+    type: string
   Counter:
     type: integer
+  EventDestination:
+    type: object
+    required:
+      - Name
+      - MatchingEventTypes
+    properties:
+      Name:
+        $ref: '#/definitions/EventDestinationName'
+        description: '<p>The name of the event destination. The name must:</p> <ul> <li> <p>This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Contain less than 64 characters.</p> </li> </ul>'
+      Enabled:
+        $ref: '#/definitions/Enabled'
+        description: Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to <code>true</code> to enable publishing to this destination; set to <code>false</code> to prevent publishing to this destination. The default value is <code>false</code>.
+      MatchingEventTypes:
+        $ref: '#/definitions/EventTypes'
+        description: The type of email sending events to publish to the event destination.
+      KinesisFirehoseDestination:
+        $ref: '#/definitions/KinesisFirehoseDestination'
+        description: An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination.
+      CloudWatchDestination:
+        $ref: '#/definitions/CloudWatchDestination'
+        description: 'An object that contains the names, default values, and sources of the dimensions associated with an Amazon CloudWatch event destination.'
+      SNSDestination:
+        $ref: '#/definitions/SNSDestination'
+        description: An object that contains the topic ARN associated with an Amazon Simple Notification Service (Amazon SNS) event destination.
+    description: '<p>Contains information about the event destination that the specified email sending events will be published to.</p> <note> <p>When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose or Amazon Simple Notification Service (Amazon SNS).</p> </note> <p>Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS). For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
+  TrackingOptions:
+    type: object
+    properties:
+      CustomRedirectDomain:
+        $ref: '#/definitions/CustomRedirectDomain'
+        description: The custom subdomain that will be used to redirect email recipients to the Amazon SES event tracking domain.
+    description: '<p>A domain that is used to redirect email recipients to an Amazon SES-operated domain. This domain captures open and click events generated by Amazon SES emails.</p> <p>For more information, see <a href="ses/latest/DeveloperGuide/configure-custom-open-click-domains.html">Configuring Custom Domains to Handle Open and Click Tracking</a> in the <i>Amazon SES Developer Guide</i>.</p>'
+  TemplateName:
+    type: string
+  FromAddress:
+    type: string
+  Subject:
+    type: string
+  TemplateContent:
+    type: string
+  SuccessRedirectionURL:
+    type: string
+  FailureRedirectionURL:
+    type: string
+  ReceiptFilter:
+    type: object
+    required:
+      - Name
+      - IpFilter
+    properties:
+      Name:
+        $ref: '#/definitions/ReceiptFilterName'
+        description: '<p>The name of the IP address filter. The name must:</p> <ul> <li> <p>This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Start and end with a letter or number.</p> </li> <li> <p>Contain less than 64 characters.</p> </li> </ul>'
+      IpFilter:
+        $ref: '#/definitions/ReceiptIpFilter'
+        description: 'A structure that provides the IP addresses to block or allow, and whether to block or allow incoming mail from them.'
+    description: '<p>A receipt IP address filter enables you to specify whether to accept or reject mail originating from an IP address or range of IP addresses.</p> <p>For information about setting up IP address filters, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html">Amazon SES Developer Guide</a>.</p>'
+  ReceiptRuleName:
+    type: string
+  ReceiptRule:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/ReceiptRuleName'
+        description: '<p>The name of the receipt rule. The name must:</p> <ul> <li> <p>This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Start and end with a letter or number.</p> </li> <li> <p>Contain less than 64 characters.</p> </li> </ul>'
+      Enabled:
+        $ref: '#/definitions/Enabled'
+        description: 'If <code>true</code>, the receipt rule is active. The default value is <code>false</code>.'
+      TlsPolicy:
+        $ref: '#/definitions/TlsPolicy'
+        description: 'Specifies whether Amazon SES should require that incoming email is delivered over a connection encrypted with Transport Layer Security (TLS). If this parameter is set to <code>Require</code>, Amazon SES will bounce emails that are not received over TLS. The default is <code>Optional</code>.'
+      Recipients:
+        $ref: '#/definitions/RecipientsList'
+        description: 'The recipient domains and email addresses that the receipt rule applies to. If this field is not specified, this rule will match all recipients under all verified domains.'
+      Actions:
+        $ref: '#/definitions/ReceiptActionsList'
+        description: An ordered list of actions to perform on messages that match at least one of the recipient email addresses or domains specified in the receipt rule.
+      ScanEnabled:
+        $ref: '#/definitions/Enabled'
+        description: 'If <code>true</code>, then messages that this receipt rule applies to are scanned for spam and viruses. The default value is <code>false</code>.'
+    description: '<p>Receipt rules enable you to specify which actions Amazon SES should take when it receives mail on behalf of one or more email addresses or domains that you own.</p> <p>Each receipt rule defines a set of email addresses or domains that it applies to. If the email addresses or domains match at least one recipient address of the message, Amazon SES executes all of the receipt rule''s actions on the message.</p> <p>For information about setting up receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html">Amazon SES Developer Guide</a>.</p>'
+  Template:
+    type: object
+    required:
+      - TemplateName
+    properties:
+      TemplateName:
+        $ref: '#/definitions/TemplateName'
+        description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
+      SubjectPart:
+        $ref: '#/definitions/SubjectPart'
+        description: The subject line of the email.
+      TextPart:
+        $ref: '#/definitions/TextPart'
+        description: The email body that will be visible to recipients whose email clients do not display HTML.
+      HtmlPart:
+        $ref: '#/definitions/HtmlPart'
+        description: The HTML body of the email.
+    description: 'The content of the email, composed of a subject line, an HTML part, and a text-only part.'
   CustomMailFromStatus:
     type: string
     enum:
@@ -4094,32 +4264,48 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CustomVerificationEmailTemplate'
-  DefaultDimensionValue:
+  EventDestinationName:
     type: string
-  Destination:
+  Identity:
+    type: string
+  PolicyName:
+    type: string
+    minLength: 1
+    maxLength: 64
+  ReceiptFilterName:
+    type: string
+  ReceiptRuleSetMetadata:
     type: object
     properties:
-      ToAddresses:
-        $ref: '#/definitions/AddressList'
-        description: 'The To: field(s) of the message.'
-      CcAddresses:
-        $ref: '#/definitions/AddressList'
-        description: 'The CC: field(s) of the message.'
-      BccAddresses:
-        $ref: '#/definitions/AddressList'
-        description: 'The BCC: field(s) of the message.'
-    description: '<p>Represents the destination of the message, consisting of To:, CC:, and BCC: fields.</p> <note> <p>Amazon SES does not support the SMTPUTF8 extension, as described in <a href="https://tools.ietf.org/html/rfc6531">RFC6531</a>. For this reason, the <i>local part</i> of a destination email address (the part of the email address that precedes the @ sign) may only contain <a href="https://en.wikipedia.org/wiki/Email_address#Local-part">7-bit ASCII characters</a>. If the <i>domain part</i> of an address (the part after the @ sign) contains non-ASCII characters, they must be encoded using Punycode, as described in <a href="https://tools.ietf.org/html/rfc3492.html">RFC3492</a>.</p> </note>'
+      Name:
+        $ref: '#/definitions/ReceiptRuleSetName'
+        description: '<p>The name of the receipt rule set. The name must:</p> <ul> <li> <p>This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Start and end with a letter or number.</p> </li> <li> <p>Contain less than 64 characters.</p> </li> </ul>'
+      CreatedTimestamp:
+        $ref: '#/definitions/Timestamp'
+        description: The date and time the receipt rule set was created.
+    description: '<p>Information about a receipt rule set.</p> <p>A receipt rule set is a collection of rules that specify what Amazon SES should do with mail it receives on behalf of your account''s verified domains.</p> <p>For information about setting up receipt rule sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html">Amazon SES Developer Guide</a>.</p>'
+  ReceiptRulesList:
+    type: array
+    items:
+      $ref: '#/definitions/ReceiptRule'
+  EventDestinations:
+    type: array
+    items:
+      $ref: '#/definitions/EventDestination'
+  ReputationOptions:
+    type: object
+    properties:
+      SendingEnabled:
+        $ref: '#/definitions/Enabled'
+        description: 'Describes whether email sending is enabled or disabled for the configuration set. If the value is <code>true</code>, then Amazon SES will send emails that use the configuration set. If the value is <code>false</code>, Amazon SES will not send emails that use the configuration set. The default value is <code>true</code>. You can change this setting using <a>UpdateConfigurationSetSendingEnabled</a>.'
+      ReputationMetricsEnabled:
+        $ref: '#/definitions/Enabled'
+        description: '<p>Describes whether or not Amazon SES publishes reputation metrics for the configuration set, such as bounce and complaint rates, to Amazon CloudWatch.</p> <p>If the value is <code>true</code>, reputation metrics are published. If the value is <code>false</code>, reputation metrics are not published. The default value is <code>false</code>.</p>'
+      LastFreshStart:
+        $ref: '#/definitions/LastFreshStart'
+        description: '<p>The date and time at which the reputation metrics for the configuration set were last reset. Resetting these metrics is known as a <i>fresh start</i>.</p> <p>When you disable email sending for a configuration set using <a>UpdateConfigurationSetSendingEnabled</a> and later re-enable it, the reputation metrics for the configuration set (but not for the entire Amazon SES account) are reset.</p> <p>If email sending for the configuration set has never been disabled and later re-enabled, the value of this attribute is <code>null</code>.</p>'
+    description: Contains information about the reputation settings for a configuration set.
   DiagnosticCode:
-    type: string
-  DimensionName:
-    type: string
-  DimensionValueSource:
-    type: string
-    enum:
-      - messageTag
-      - emailHeader
-      - linkTag
-  Identity:
     type: string
   IdentityDkimAttributes:
     type: object
@@ -4160,39 +4346,32 @@ definitions:
     type: string
   Enabled:
     type: boolean
-  Error:
-    type: string
-  EventDestination:
-    type: object
-    required:
-      - Name
-      - MatchingEventTypes
-    properties:
-      Name:
-        $ref: '#/definitions/EventDestinationName'
-        description: '<p>The name of the event destination. The name must:</p> <ul> <li> <p>This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Contain less than 64 characters.</p> </li> </ul>'
-      Enabled:
-        $ref: '#/definitions/Enabled'
-        description: Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to <code>true</code> to enable publishing to this destination; set to <code>false</code> to prevent publishing to this destination. The default value is <code>false</code>.
-      MatchingEventTypes:
-        $ref: '#/definitions/EventTypes'
-        description: The type of email sending events to publish to the event destination.
-      KinesisFirehoseDestination:
-        $ref: '#/definitions/KinesisFirehoseDestination'
-        description: An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination.
-      CloudWatchDestination:
-        $ref: '#/definitions/CloudWatchDestination'
-        description: 'An object that contains the names, default values, and sources of the dimensions associated with an Amazon CloudWatch event destination.'
-      SNSDestination:
-        $ref: '#/definitions/SNSDestination'
-        description: An object that contains the topic ARN associated with an Amazon Simple Notification Service (Amazon SNS) event destination.
-    description: '<p>Contains information about the event destination that the specified email sending events will be published to.</p> <note> <p>When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose or Amazon Simple Notification Service (Amazon SNS).</p> </note> <p>Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS). For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
-  EventDestinationName:
-    type: string
-  EventDestinations:
+  EventTypes:
     type: array
     items:
-      $ref: '#/definitions/EventDestination'
+      $ref: '#/definitions/EventType'
+  KinesisFirehoseDestination:
+    type: object
+    required:
+      - IAMRoleARN
+      - DeliveryStreamARN
+    properties:
+      IAMRoleARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The ARN of the IAM role under which Amazon SES publishes email sending events to the Amazon Kinesis Firehose stream.
+      DeliveryStreamARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: The ARN of the Amazon Kinesis Firehose stream that email sending events should be published to.
+    description: '<p>Contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination.</p> <p>Event destinations, such as Amazon Kinesis Firehose, are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
+  SNSDestination:
+    type: object
+    required:
+      - TopicARN
+    properties:
+      TopicARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: 'The ARN of the Amazon SNS topic that email sending events will be published to. An example of an Amazon SNS topic ARN is <code>arn:aws:sns:us-west-2:123456789012:MyTopic</code>. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
+    description: '<p>Contains the topic ARN associated with an Amazon Simple Notification Service (Amazon SNS) event destination.</p> <p>Event destinations, such as Amazon SNS, are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
   EventType:
     type: string
     enum:
@@ -4204,11 +4383,11 @@ definitions:
       - open
       - click
       - renderingFailure
-  EventTypes:
-    type: array
-    items:
-      $ref: '#/definitions/EventType'
   Explanation:
+    type: string
+  ExtensionFieldName:
+    type: string
+  ExtensionFieldValue:
     type: string
   ExtensionField:
     type: object
@@ -4227,24 +4406,79 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ExtensionField'
-  ExtensionFieldName:
-    type: string
-  ExtensionFieldValue:
-    type: string
-  FailureRedirectionURL:
-    type: string
-  FromAddress:
-    type: string
-  HeaderName:
-    type: string
-  HeaderValue:
-    type: string
-  HtmlPart:
-    type: string
   IdentityList:
     type: array
     items:
       $ref: '#/definitions/Identity'
+  MailFromDomainAttributes:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Identity'
+        value:
+          $ref: '#/definitions/IdentityMailFromDomainAttributes'
+  NotificationAttributes:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Identity'
+        value:
+          $ref: '#/definitions/IdentityNotificationAttributes'
+  PolicyNameList:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyName'
+  PolicyMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/PolicyName'
+        value:
+          $ref: '#/definitions/Policy'
+  VerificationAttributes:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Identity'
+        value:
+          $ref: '#/definitions/IdentityVerificationAttributes'
+  Max24HourSend:
+    type: number
+    format: double
+  MaxSendRate:
+    type: number
+    format: double
+  SentLast24Hours:
+    type: number
+    format: double
+  SendDataPointList:
+    type: array
+    items:
+      $ref: '#/definitions/SendDataPoint'
+  HtmlPart:
+    type: string
+  VerificationStatus:
+    type: string
+    enum:
+      - Pending
+      - Success
+      - Failed
+      - TemporaryFailure
+      - NotStarted
+  VerificationTokenList:
+    type: array
+    items:
+      $ref: '#/definitions/VerificationToken'
+  MailFromDomainName:
+    type: string
   IdentityMailFromDomainAttributes:
     type: object
     required:
@@ -4262,6 +4496,8 @@ definitions:
         $ref: '#/definitions/BehaviorOnMXFailure'
         description: '<p>The action that Amazon SES takes if it cannot successfully read the required MX record when you send an email. A value of <code>UseDefaultValue</code> indicates that if Amazon SES cannot read the required MX record, it uses amazonses.com (or a subdomain of that) as the MAIL FROM domain. A value of <code>RejectMessage</code> indicates that if Amazon SES cannot read the required MX record, Amazon SES returns a <code>MailFromDomainNotVerified</code> error and does not send the email.</p> <p>The custom MAIL FROM setup states that result in this behavior are <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>.</p>'
     description: Represents the custom MAIL FROM domain attributes of a verified identity (email address or domain).
+  NotificationTopic:
+    type: string
   IdentityNotificationAttributes:
     type: object
     required:
@@ -4297,6 +4533,8 @@ definitions:
     enum:
       - EmailAddress
       - Domain
+  VerificationToken:
+    type: string
   IdentityVerificationAttributes:
     type: object
     required:
@@ -4314,19 +4552,6 @@ definitions:
     enum:
       - Event
       - RequestResponse
-  KinesisFirehoseDestination:
-    type: object
-    required:
-      - IAMRoleARN
-      - DeliveryStreamARN
-    properties:
-      IAMRoleARN:
-        $ref: '#/definitions/AmazonResourceName'
-        description: The ARN of the IAM role under which Amazon SES publishes email sending events to the Amazon Kinesis Firehose stream.
-      DeliveryStreamARN:
-        $ref: '#/definitions/AmazonResourceName'
-        description: The ARN of the Amazon Kinesis Firehose stream that email sending events should be published to.
-    description: '<p>Contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination.</p> <p>Event destinations, such as Amazon Kinesis Firehose, are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
   LambdaAction:
     type: object
     required:
@@ -4348,29 +4573,26 @@ definitions:
   LastFreshStart:
     type: string
     format: date-time
-  MailFromDomainAttributes:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Identity'
-        value:
-          $ref: '#/definitions/IdentityMailFromDomainAttributes'
-  MailFromDomainName:
+  NextToken:
     type: string
-  Max24HourSend:
-    type: number
-    format: double
   MaxItems:
     type: integer
   MaxResults:
     type: integer
     minimum: 1
     maximum: 50
-  MaxSendRate:
-    type: number
-    format: double
+  ReceiptFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/ReceiptFilter'
+  ReceiptRuleSetsLists:
+    type: array
+    items:
+      $ref: '#/definitions/ReceiptRuleSetMetadata'
+  TemplateMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/TemplateMetadata'
   Message:
     type: object
     required:
@@ -4384,7 +4606,7 @@ definitions:
         $ref: '#/definitions/Body'
         description: The message body.
     description: 'Represents the message to be sent, composed of a subject and a body.'
-  MessageData:
+  ReportingMta:
     type: string
   MessageDsn:
     type: object
@@ -4401,7 +4623,9 @@ definitions:
         $ref: '#/definitions/ExtensionFieldList'
         description: Additional X-headers to include in the DSN.
     description: '<p>Message-related information to include in the Delivery Status Notification (DSN) when an email that Amazon SES receives on your behalf bounces.</p> <p>For information about receiving email through Amazon SES, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html">Amazon SES Developer Guide</a>.</p>'
-  MessageId:
+  MessageTagName:
+    type: string
+  MessageTagValue:
     type: string
   MessageTag:
     type: object
@@ -4416,27 +4640,6 @@ definitions:
         $ref: '#/definitions/MessageTagValue'
         description: '<p>The value of the tag. The value must:</p> <ul> <li> <p>This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Contain less than 256 characters.</p> </li> </ul>'
     description: '<p>Contains the name and value of a tag that you can provide to <code>SendEmail</code> or <code>SendRawEmail</code> to apply to an email.</p> <p>Message tags, which you use with configuration sets, enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
-  MessageTagList:
-    type: array
-    items:
-      $ref: '#/definitions/MessageTag'
-  MessageTagName:
-    type: string
-  MessageTagValue:
-    type: string
-  NextToken:
-    type: string
-  NotificationAttributes:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Identity'
-        value:
-          $ref: '#/definitions/IdentityNotificationAttributes'
-  NotificationTopic:
-    type: string
   NotificationType:
     type: string
     enum:
@@ -4446,23 +4649,8 @@ definitions:
   Policy:
     type: string
     minLength: 1
-  PolicyName:
+  RawMessageData:
     type: string
-    minLength: 1
-    maxLength: 64
-  PolicyMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/PolicyName'
-        value:
-          $ref: '#/definitions/Policy'
-  PolicyNameList:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyName'
   RawMessage:
     type: object
     required:
@@ -4472,8 +4660,60 @@ definitions:
         $ref: '#/definitions/RawMessageData'
         description: '<p>The raw data of the message. This data needs to base64-encoded if you are accessing Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES using an AWS SDK, the SDK takes care of the base 64-encoding for you. In all cases, the client must ensure that the message format complies with Internet email standards regarding email header fields, MIME types, and MIME encoding.</p> <p>The To:, CC:, and BCC: headers in the raw message can contain a group list.</p> <p>If you are using <code>SendRawEmail</code> with sending authorization, you can include X-headers in the raw message to specify the "Source," "From," and "Return-Path" addresses. For more information, see the documentation for <code>SendRawEmail</code>. </p> <important> <p>Do not include these X-headers in the DKIM signature, because they are removed by Amazon SES before sending the email.</p> </important> <p>For more information, go to the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html">Amazon SES Developer Guide</a>.</p>'
     description: Represents the raw data of the message.
-  RawMessageData:
-    type: string
+  S3Action:
+    type: object
+    required:
+      - BucketName
+    properties:
+      TopicArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: 'The ARN of the Amazon SNS topic to notify when the message is saved to the Amazon S3 bucket. An example of an Amazon SNS topic ARN is <code>arn:aws:sns:us-west-2:123456789012:MyTopic</code>. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
+      BucketName:
+        $ref: '#/definitions/S3BucketName'
+        description: The name of the Amazon S3 bucket that incoming email will be saved to.
+      ObjectKeyPrefix:
+        $ref: '#/definitions/S3KeyPrefix'
+        description: The key prefix of the Amazon S3 bucket. The key prefix is similar to a directory name that enables you to store similar data under the same directory in a bucket.
+      KmsKeyArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: '<p>The customer master key that Amazon SES should use to encrypt your emails before saving them to the Amazon S3 bucket. You can use the default master key or a custom master key you created in AWS KMS as follows:</p> <ul> <li> <p>To use the default master key, provide an ARN in the form of <code>arn:aws:kms:REGION:ACCOUNT-ID-WITHOUT-HYPHENS:alias/aws/ses</code>. For example, if your AWS account ID is 123456789012 and you want to use the default master key in the US West (Oregon) region, the ARN of the default master key would be <code>arn:aws:kms:us-west-2:123456789012:alias/aws/ses</code>. If you use the default master key, you don''t need to perform any extra steps to give Amazon SES permission to use the key.</p> </li> <li> <p>To use a custom master key you created in AWS KMS, provide the ARN of the master key and ensure that you add a statement to your key''s policy to give Amazon SES permission to use it. For more information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.</p> </li> </ul> <p>For more information about key policies, see the <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html">AWS KMS Developer Guide</a>. If you do not specify a master key, Amazon SES will not encrypt your emails.</p> <important> <p>Your mail is encrypted by Amazon SES using the Amazon S3 encryption client before the mail is submitted to Amazon S3 for storage. It is not encrypted using Amazon S3 server-side encryption. This means that you must use the Amazon S3 encryption client to decrypt the email after retrieving it from Amazon S3, as the service has no access to use your AWS KMS keys for decryption. This encryption client is currently available with the <a href="http://aws.amazon.com/sdk-for-java/">AWS SDK for Java</a> and <a href="http://aws.amazon.com/sdk-for-ruby/">AWS SDK for Ruby</a> only. For more information about client-side encryption using AWS KMS master keys, see the <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html">Amazon S3 Developer Guide</a>.</p> </important>'
+    description: '<p>When included in a receipt rule, this action saves the received message to an Amazon Simple Storage Service (Amazon S3) bucket and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS).</p> <p>To enable Amazon SES to write emails to your Amazon S3 bucket, use an AWS KMS key to encrypt your emails, or publish to an Amazon SNS topic of another account, Amazon SES must have permission to access those resources. For information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.</p> <note> <p>When you save your emails to an Amazon S3 bucket, the maximum email size (including headers) is 30 MB. Emails larger than that will bounce.</p> </note> <p>For information about specifying Amazon S3 actions in receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-s3.html">Amazon SES Developer Guide</a>.</p>'
+  WorkmailAction:
+    type: object
+    required:
+      - OrganizationArn
+    properties:
+      TopicArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: 'The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the WorkMail action is called. An example of an Amazon SNS topic ARN is <code>arn:aws:sns:us-west-2:123456789012:MyTopic</code>. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
+      OrganizationArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: 'The ARN of the Amazon WorkMail organization. An example of an Amazon WorkMail organization ARN is <code>arn:aws:workmail:us-west-2:123456789012:organization/m-68755160c4cb4e29a2b2f8fb58f359d7</code>. For information about Amazon WorkMail organizations, see the <a href="http://docs.aws.amazon.com/workmail/latest/adminguide/organizations_overview.html">Amazon WorkMail Administrator Guide</a>.'
+    description: '<p>When included in a receipt rule, this action calls Amazon WorkMail and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS). You will typically not use this action directly because Amazon WorkMail adds the rule automatically during its setup procedure.</p> <p>For information using a receipt rule to call Amazon WorkMail, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-workmail.html">Amazon SES Developer Guide</a>.</p>'
+  StopAction:
+    type: object
+    required:
+      - Scope
+    properties:
+      Scope:
+        $ref: '#/definitions/StopScope'
+        description: The name of the RuleSet that is being stopped.
+      TopicArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: 'The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the stop action is taken. An example of an Amazon SNS topic ARN is <code>arn:aws:sns:us-west-2:123456789012:MyTopic</code>. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
+    description: '<p>When included in a receipt rule, this action terminates the evaluation of the receipt rule set and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS).</p> <p>For information about setting a stop action in a receipt rule, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-stop.html">Amazon SES Developer Guide</a>.</p>'
+  SNSAction:
+    type: object
+    required:
+      - TopicArn
+    properties:
+      TopicArn:
+        $ref: '#/definitions/AmazonResourceName'
+        description: 'The Amazon Resource Name (ARN) of the Amazon SNS topic to notify. An example of an Amazon SNS topic ARN is <code>arn:aws:sns:us-west-2:123456789012:MyTopic</code>. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
+      Encoding:
+        $ref: '#/definitions/SNSActionEncoding'
+        description: 'The encoding to use for the email within the Amazon SNS notification. UTF-8 is easier to use, but may not preserve all special characters when a message was encoded with a different encoding format. Base64 preserves all special characters. The default value is UTF-8.'
+    description: '<p>When included in a receipt rule, this action publishes a notification to Amazon Simple Notification Service (Amazon SNS). This action includes a complete copy of the email content in the Amazon SNS notifications. Amazon SNS notifications for all other actions simply provide information about the email. They do not include the email content itself.</p> <p>If you own the Amazon SNS topic, you don''t need to do anything to give Amazon SES permission to publish emails to it. However, if you don''t own the Amazon SNS topic, you need to attach a policy to the topic to give Amazon SES permissions to access it. For information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.</p> <important> <p>You can only publish emails that are 150 KB or less (including the header) to Amazon SNS. Larger emails will bounce. If you anticipate emails larger than 150 KB, use the S3 action instead.</p> </important> <p>For information about using a receipt rule to publish an Amazon SNS notification, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-sns.html">Amazon SES Developer Guide</a>.</p>'
   ReceiptAction:
     type: object
     properties:
@@ -4503,30 +4743,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReceiptAction'
-  ReceiptFilter:
-    type: object
-    required:
-      - Name
-      - IpFilter
-    properties:
-      Name:
-        $ref: '#/definitions/ReceiptFilterName'
-        description: '<p>The name of the IP address filter. The name must:</p> <ul> <li> <p>This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Start and end with a letter or number.</p> </li> <li> <p>Contain less than 64 characters.</p> </li> </ul>'
-      IpFilter:
-        $ref: '#/definitions/ReceiptIpFilter'
-        description: 'A structure that provides the IP addresses to block or allow, and whether to block or allow incoming mail from them.'
-    description: '<p>A receipt IP address filter enables you to specify whether to accept or reject mail originating from an IP address or range of IP addresses.</p> <p>For information about setting up IP address filters, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html">Amazon SES Developer Guide</a>.</p>'
-  ReceiptFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/ReceiptFilter'
-  ReceiptFilterName:
-    type: string
-  ReceiptFilterPolicy:
-    type: string
-    enum:
-      - Block
-      - Allow
   ReceiptIpFilter:
     type: object
     required:
@@ -4540,157 +4756,42 @@ definitions:
         $ref: '#/definitions/Cidr'
         description: 'A single IP address or a range of IP addresses that you want to block or allow, specified in Classless Inter-Domain Routing (CIDR) notation. An example of a single email address is 10.0.0.1. An example of a range of IP addresses is 10.0.0.1/24. For more information about CIDR notation, see <a href="https://tools.ietf.org/html/rfc2317">RFC 2317</a>.'
     description: '<p>A receipt IP address filter enables you to specify whether to accept or reject mail originating from an IP address or range of IP addresses.</p> <p>For information about setting up IP address filters, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html">Amazon SES Developer Guide</a>.</p>'
-  ReceiptRule:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/ReceiptRuleName'
-        description: '<p>The name of the receipt rule. The name must:</p> <ul> <li> <p>This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Start and end with a letter or number.</p> </li> <li> <p>Contain less than 64 characters.</p> </li> </ul>'
-      Enabled:
-        $ref: '#/definitions/Enabled'
-        description: 'If <code>true</code>, the receipt rule is active. The default value is <code>false</code>.'
-      TlsPolicy:
-        $ref: '#/definitions/TlsPolicy'
-        description: 'Specifies whether Amazon SES should require that incoming email is delivered over a connection encrypted with Transport Layer Security (TLS). If this parameter is set to <code>Require</code>, Amazon SES will bounce emails that are not received over TLS. The default is <code>Optional</code>.'
-      Recipients:
-        $ref: '#/definitions/RecipientsList'
-        description: 'The recipient domains and email addresses that the receipt rule applies to. If this field is not specified, this rule will match all recipients under all verified domains.'
-      Actions:
-        $ref: '#/definitions/ReceiptActionsList'
-        description: An ordered list of actions to perform on messages that match at least one of the recipient email addresses or domains specified in the receipt rule.
-      ScanEnabled:
-        $ref: '#/definitions/Enabled'
-        description: 'If <code>true</code>, then messages that this receipt rule applies to are scanned for spam and viruses. The default value is <code>false</code>.'
-    description: '<p>Receipt rules enable you to specify which actions Amazon SES should take when it receives mail on behalf of one or more email addresses or domains that you own.</p> <p>Each receipt rule defines a set of email addresses or domains that it applies to. If the email addresses or domains match at least one recipient address of the message, Amazon SES executes all of the receipt rule''s actions on the message.</p> <p>For information about setting up receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html">Amazon SES Developer Guide</a>.</p>'
-  ReceiptRuleName:
+  ReceiptFilterPolicy:
     type: string
-  ReceiptRuleNamesList:
-    type: array
-    items:
-      $ref: '#/definitions/ReceiptRuleName'
-  ReceiptRuleSetMetadata:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/ReceiptRuleSetName'
-        description: '<p>The name of the receipt rule set. The name must:</p> <ul> <li> <p>This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).</p> </li> <li> <p>Start and end with a letter or number.</p> </li> <li> <p>Contain less than 64 characters.</p> </li> </ul>'
-      CreatedTimestamp:
-        $ref: '#/definitions/Timestamp'
-        description: The date and time the receipt rule set was created.
-    description: '<p>Information about a receipt rule set.</p> <p>A receipt rule set is a collection of rules that specify what Amazon SES should do with mail it receives on behalf of your account''s verified domains.</p> <p>For information about setting up receipt rule sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html">Amazon SES Developer Guide</a>.</p>'
-  ReceiptRuleSetName:
+    enum:
+      - Block
+      - Allow
+  TlsPolicy:
     type: string
-  ReceiptRuleSetsLists:
-    type: array
-    items:
-      $ref: '#/definitions/ReceiptRuleSetMetadata'
-  ReceiptRulesList:
-    type: array
-    items:
-      $ref: '#/definitions/ReceiptRule'
-  Recipient:
-    type: string
-  RecipientDsnFields:
-    type: object
-    required:
-      - Action
-      - Status
-    properties:
-      FinalRecipient:
-        $ref: '#/definitions/Address'
-        description: '<p>The email address that the message was ultimately delivered to. This corresponds to the <code>Final-Recipient</code> in the DSN. If not specified, <code>FinalRecipient</code> will be set to the <code>Recipient</code> specified in the <code>BouncedRecipientInfo</code> structure. Either <code>FinalRecipient</code> or the recipient in <code>BouncedRecipientInfo</code> must be a recipient of the original bounced message.</p> <note> <p>Do not prepend the <code>FinalRecipient</code> email address with <code>rfc 822;</code>, as described in <a href="https://tools.ietf.org/html/rfc3798">RFC 3798</a>.</p> </note>'
-      Action:
-        $ref: '#/definitions/DsnAction'
-        description: 'The action performed by the reporting mail transfer agent (MTA) as a result of its attempt to deliver the message to the recipient address. This is required by <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a>.'
-      RemoteMta:
-        $ref: '#/definitions/RemoteMta'
-        description: 'The MTA to which the remote MTA attempted to deliver the message, formatted as specified in <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a> (<code>mta-name-type; mta-name</code>). This parameter typically applies only to propagating synchronous bounces.'
-      Status:
-        $ref: '#/definitions/DsnStatus'
-        description: 'The status code that indicates what went wrong. This is required by <a href="https://tools.ietf.org/html/rfc3464">RFC 3464</a>.'
-      DiagnosticCode:
-        $ref: '#/definitions/DiagnosticCode'
-        description: 'An extended explanation of what went wrong; this is usually an SMTP response. See <a href="https://tools.ietf.org/html/rfc3463">RFC 3463</a> for the correct formatting of this parameter.'
-      LastAttemptDate:
-        $ref: '#/definitions/LastAttemptDate'
-        description: 'The time the final delivery attempt was made, in <a href="https://www.ietf.org/rfc/rfc0822.txt">RFC 822</a> date-time format.'
-      ExtensionFields:
-        $ref: '#/definitions/ExtensionFieldList'
-        description: Additional X-headers to include in the DSN.
-    description: '<p>Recipient-related information to include in the Delivery Status Notification (DSN) when an email that Amazon SES receives on your behalf bounces.</p> <p>For information about receiving email through Amazon SES, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html">Amazon SES Developer Guide</a>.</p>'
+    enum:
+      - Require
+      - Optional
   RecipientsList:
     type: array
     items:
       $ref: '#/definitions/Recipient'
+  ReceiptRuleNamesList:
+    type: array
+    items:
+      $ref: '#/definitions/ReceiptRuleName'
+  Timestamp:
+    type: string
+    format: date-time
+  Recipient:
+    type: string
   RemoteMta:
     type: string
   RenderedTemplate:
     type: string
-  ReportingMta:
-    type: string
-  ReputationOptions:
-    type: object
-    properties:
-      SendingEnabled:
-        $ref: '#/definitions/Enabled'
-        description: 'Describes whether email sending is enabled or disabled for the configuration set. If the value is <code>true</code>, then Amazon SES will send emails that use the configuration set. If the value is <code>false</code>, Amazon SES will not send emails that use the configuration set. The default value is <code>true</code>. You can change this setting using <a>UpdateConfigurationSetSendingEnabled</a>.'
-      ReputationMetricsEnabled:
-        $ref: '#/definitions/Enabled'
-        description: '<p>Describes whether or not Amazon SES publishes reputation metrics for the configuration set, such as bounce and complaint rates, to Amazon CloudWatch.</p> <p>If the value is <code>true</code>, reputation metrics are published. If the value is <code>false</code>, reputation metrics are not published. The default value is <code>false</code>.</p>'
-      LastFreshStart:
-        $ref: '#/definitions/LastFreshStart'
-        description: '<p>The date and time at which the reputation metrics for the configuration set were last reset. Resetting these metrics is known as a <i>fresh start</i>.</p> <p>When you disable email sending for a configuration set using <a>UpdateConfigurationSetSendingEnabled</a> and later re-enable it, the reputation metrics for the configuration set (but not for the entire Amazon SES account) are reset.</p> <p>If email sending for the configuration set has never been disabled and later re-enabled, the value of this attribute is <code>null</code>.</p>'
-    description: Contains information about the reputation settings for a configuration set.
-  S3Action:
-    type: object
-    required:
-      - BucketName
-    properties:
-      TopicArn:
-        $ref: '#/definitions/AmazonResourceName'
-        description: 'The ARN of the Amazon SNS topic to notify when the message is saved to the Amazon S3 bucket. An example of an Amazon SNS topic ARN is <code>arn:aws:sns:us-west-2:123456789012:MyTopic</code>. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
-      BucketName:
-        $ref: '#/definitions/S3BucketName'
-        description: The name of the Amazon S3 bucket that incoming email will be saved to.
-      ObjectKeyPrefix:
-        $ref: '#/definitions/S3KeyPrefix'
-        description: The key prefix of the Amazon S3 bucket. The key prefix is similar to a directory name that enables you to store similar data under the same directory in a bucket.
-      KmsKeyArn:
-        $ref: '#/definitions/AmazonResourceName'
-        description: '<p>The customer master key that Amazon SES should use to encrypt your emails before saving them to the Amazon S3 bucket. You can use the default master key or a custom master key you created in AWS KMS as follows:</p> <ul> <li> <p>To use the default master key, provide an ARN in the form of <code>arn:aws:kms:REGION:ACCOUNT-ID-WITHOUT-HYPHENS:alias/aws/ses</code>. For example, if your AWS account ID is 123456789012 and you want to use the default master key in the US West (Oregon) region, the ARN of the default master key would be <code>arn:aws:kms:us-west-2:123456789012:alias/aws/ses</code>. If you use the default master key, you don''t need to perform any extra steps to give Amazon SES permission to use the key.</p> </li> <li> <p>To use a custom master key you created in AWS KMS, provide the ARN of the master key and ensure that you add a statement to your key''s policy to give Amazon SES permission to use it. For more information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.</p> </li> </ul> <p>For more information about key policies, see the <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html">AWS KMS Developer Guide</a>. If you do not specify a master key, Amazon SES will not encrypt your emails.</p> <important> <p>Your mail is encrypted by Amazon SES using the Amazon S3 encryption client before the mail is submitted to Amazon S3 for storage. It is not encrypted using Amazon S3 server-side encryption. This means that you must use the Amazon S3 encryption client to decrypt the email after retrieving it from Amazon S3, as the service has no access to use your AWS KMS keys for decryption. This encryption client is currently available with the <a href="http://aws.amazon.com/sdk-for-java/">AWS SDK for Java</a> and <a href="http://aws.amazon.com/sdk-for-ruby/">AWS SDK for Ruby</a> only. For more information about client-side encryption using AWS KMS master keys, see the <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html">Amazon S3 Developer Guide</a>.</p> </important>'
-    description: '<p>When included in a receipt rule, this action saves the received message to an Amazon Simple Storage Service (Amazon S3) bucket and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS).</p> <p>To enable Amazon SES to write emails to your Amazon S3 bucket, use an AWS KMS key to encrypt your emails, or publish to an Amazon SNS topic of another account, Amazon SES must have permission to access those resources. For information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.</p> <note> <p>When you save your emails to an Amazon S3 bucket, the maximum email size (including headers) is 30 MB. Emails larger than that will bounce.</p> </note> <p>For information about specifying Amazon S3 actions in receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-s3.html">Amazon SES Developer Guide</a>.</p>'
   S3BucketName:
     type: string
   S3KeyPrefix:
     type: string
-  SNSAction:
-    type: object
-    required:
-      - TopicArn
-    properties:
-      TopicArn:
-        $ref: '#/definitions/AmazonResourceName'
-        description: 'The Amazon Resource Name (ARN) of the Amazon SNS topic to notify. An example of an Amazon SNS topic ARN is <code>arn:aws:sns:us-west-2:123456789012:MyTopic</code>. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
-      Encoding:
-        $ref: '#/definitions/SNSActionEncoding'
-        description: 'The encoding to use for the email within the Amazon SNS notification. UTF-8 is easier to use, but may not preserve all special characters when a message was encoded with a different encoding format. Base64 preserves all special characters. The default value is UTF-8.'
-    description: '<p>When included in a receipt rule, this action publishes a notification to Amazon Simple Notification Service (Amazon SNS). This action includes a complete copy of the email content in the Amazon SNS notifications. Amazon SNS notifications for all other actions simply provide information about the email. They do not include the email content itself.</p> <p>If you own the Amazon SNS topic, you don''t need to do anything to give Amazon SES permission to publish emails to it. However, if you don''t own the Amazon SNS topic, you need to attach a policy to the topic to give Amazon SES permissions to access it. For information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.</p> <important> <p>You can only publish emails that are 150 KB or less (including the header) to Amazon SNS. Larger emails will bounce. If you anticipate emails larger than 150 KB, use the S3 action instead.</p> </important> <p>For information about using a receipt rule to publish an Amazon SNS notification, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-sns.html">Amazon SES Developer Guide</a>.</p>'
   SNSActionEncoding:
     type: string
     enum:
       - UTF-8
       - Base64
-  SNSDestination:
-    type: object
-    required:
-      - TopicARN
-    properties:
-      TopicARN:
-        $ref: '#/definitions/AmazonResourceName'
-        description: 'The ARN of the Amazon SNS topic that email sending events will be published to. An example of an Amazon SNS topic ARN is <code>arn:aws:sns:us-west-2:123456789012:MyTopic</code>. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
-    description: '<p>Contains the topic ARN associated with an Amazon Simple Notification Service (Amazon SNS) event destination.</p> <p>Event destinations, such as Amazon SNS, are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
   SendDataPoint:
     type: object
     properties:
@@ -4710,58 +4811,14 @@ definitions:
         $ref: '#/definitions/Counter'
         description: Number of emails rejected by Amazon SES.
     description: 'Represents sending statistics data. Each <code>SendDataPoint</code> contains statistics for a 15-minute period of sending activity. '
-  SendDataPointList:
-    type: array
-    items:
-      $ref: '#/definitions/SendDataPoint'
-  SentLast24Hours:
-    type: number
-    format: double
-  StopAction:
-    type: object
-    required:
-      - Scope
-    properties:
-      Scope:
-        $ref: '#/definitions/StopScope'
-        description: The name of the RuleSet that is being stopped.
-      TopicArn:
-        $ref: '#/definitions/AmazonResourceName'
-        description: 'The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the stop action is taken. An example of an Amazon SNS topic ARN is <code>arn:aws:sns:us-west-2:123456789012:MyTopic</code>. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
-    description: '<p>When included in a receipt rule, this action terminates the evaluation of the receipt rule set and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS).</p> <p>For information about setting a stop action in a receipt rule, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-stop.html">Amazon SES Developer Guide</a>.</p>'
   StopScope:
     type: string
     enum:
       - RuleSet
-  Subject:
-    type: string
   SubjectPart:
     type: string
-  SuccessRedirectionURL:
+  TextPart:
     type: string
-  Template:
-    type: object
-    required:
-      - TemplateName
-    properties:
-      TemplateName:
-        $ref: '#/definitions/TemplateName'
-        description: The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.
-      SubjectPart:
-        $ref: '#/definitions/SubjectPart'
-        description: The subject line of the email.
-      TextPart:
-        $ref: '#/definitions/TextPart'
-        description: The email body that will be visible to recipients whose email clients do not display HTML.
-      HtmlPart:
-        $ref: '#/definitions/HtmlPart'
-        description: The HTML body of the email.
-    description: 'The content of the email, composed of a subject line, an HTML part, and a text-only part.'
-  TemplateContent:
-    type: string
-  TemplateData:
-    type: string
-    maxLength: 262144
   TemplateMetadata:
     type: object
     properties:
@@ -4772,61 +4829,3 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The time and date the template was created.
     description: Contains information about an email template.
-  TemplateMetadataList:
-    type: array
-    items:
-      $ref: '#/definitions/TemplateMetadata'
-  TemplateName:
-    type: string
-  TextPart:
-    type: string
-  Timestamp:
-    type: string
-    format: date-time
-  TlsPolicy:
-    type: string
-    enum:
-      - Require
-      - Optional
-  TrackingOptions:
-    type: object
-    properties:
-      CustomRedirectDomain:
-        $ref: '#/definitions/CustomRedirectDomain'
-        description: The custom subdomain that will be used to redirect email recipients to the Amazon SES event tracking domain.
-    description: '<p>A domain that is used to redirect email recipients to an Amazon SES-operated domain. This domain captures open and click events generated by Amazon SES emails.</p> <p>For more information, see <a href="ses/latest/DeveloperGuide/configure-custom-open-click-domains.html">Configuring Custom Domains to Handle Open and Click Tracking</a> in the <i>Amazon SES Developer Guide</i>.</p>'
-  VerificationAttributes:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Identity'
-        value:
-          $ref: '#/definitions/IdentityVerificationAttributes'
-  VerificationStatus:
-    type: string
-    enum:
-      - Pending
-      - Success
-      - Failed
-      - TemporaryFailure
-      - NotStarted
-  VerificationToken:
-    type: string
-  VerificationTokenList:
-    type: array
-    items:
-      $ref: '#/definitions/VerificationToken'
-  WorkmailAction:
-    type: object
-    required:
-      - OrganizationArn
-    properties:
-      TopicArn:
-        $ref: '#/definitions/AmazonResourceName'
-        description: 'The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the WorkMail action is called. An example of an Amazon SNS topic ARN is <code>arn:aws:sns:us-west-2:123456789012:MyTopic</code>. For more information about Amazon SNS topics, see the <a href="http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html">Amazon SNS Developer Guide</a>.'
-      OrganizationArn:
-        $ref: '#/definitions/AmazonResourceName'
-        description: 'The ARN of the Amazon WorkMail organization. An example of an Amazon WorkMail organization ARN is <code>arn:aws:workmail:us-west-2:123456789012:organization/m-68755160c4cb4e29a2b2f8fb58f359d7</code>. For information about Amazon WorkMail organizations, see the <a href="http://docs.aws.amazon.com/workmail/latest/adminguide/organizations_overview.html">Amazon WorkMail Administrator Guide</a>.'
-    description: '<p>When included in a receipt rule, this action calls Amazon WorkMail and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS). You will typically not use this action directly because Amazon WorkMail adds the rule automatically during its setup procedure.</p> <p>For information using a receipt rule to call Amazon WorkMail, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-workmail.html">Amazon SES Developer Guide</a>.</p>'

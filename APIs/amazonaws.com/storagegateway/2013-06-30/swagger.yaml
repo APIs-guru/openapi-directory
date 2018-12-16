@@ -4494,11 +4494,53 @@ definitions:
       DeviceType:
         $ref: '#/definitions/DeviceType'
         description: '<p>The type of medium changer you want to select.</p> <p> Valid Values: "STK-L700", "AWS-Gateway-VTL"</p>'
-  undefined: {}
   ActivationKey:
     type: string
     minLength: 1
     maxLength: 50
+  GatewayName:
+    type: string
+    pattern: '^[ -\.0-\[\]-~]*[!-\.0-\[\]-~][ -\.0-\[\]-~]*$'
+    description: The name you configured for your gateway.
+    minLength: 2
+    maxLength: 255
+  GatewayTimezone:
+    type: string
+    minLength: 3
+    maxLength: 10
+  RegionId:
+    type: string
+    minLength: 1
+    maxLength: 25
+  GatewayType:
+    type: string
+    minLength: 2
+    maxLength: 20
+  TapeDriveType:
+    type: string
+    minLength: 2
+    maxLength: 50
+  MediumChangerType:
+    type: string
+    minLength: 2
+    maxLength: 50
+  GatewayARN:
+    type: string
+    description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.
+    minLength: 50
+    maxLength: 500
+  DiskIds:
+    type: array
+    items:
+      $ref: '#/definitions/DiskId'
+  ResourceARN:
+    type: string
+    minLength: 50
+    maxLength: 500
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   Authentication:
     type: string
     description: <p>The authentication method of the file share.</p> <p>Valid values are <code>ActiveDirectory</code> or <code>GuestAccess</code>. The default is <code>ActiveDirectory</code>.</p>
@@ -4516,6 +4558,59 @@ definitions:
     minimum: 51200
   Boolean:
     type: boolean
+  VolumeARN:
+    type: string
+    minLength: 50
+    maxLength: 500
+  VolumeId:
+    type: string
+    minLength: 12
+    maxLength: 30
+  VolumeType:
+    type: string
+    minLength: 3
+    maxLength: 100
+  VolumeStatus:
+    type: string
+    minLength: 3
+    maxLength: 50
+  long:
+    type: integer
+  DoubleObject:
+    type: number
+    format: double
+  SnapshotId:
+    type: string
+    pattern: '\Asnap-([0-9A-Fa-f]{8}|[0-9A-Fa-f]{17})\z'
+  VolumeiSCSIAttributes:
+    type: object
+    properties:
+      TargetARN:
+        $ref: '#/definitions/TargetARN'
+        description: The Amazon Resource Name (ARN) of the volume target.
+      NetworkInterfaceId:
+        $ref: '#/definitions/NetworkInterfaceId'
+        description: The network interface identifier.
+      NetworkInterfacePort:
+        $ref: '#/definitions/integer'
+        description: The port used to communicate with iSCSI targets.
+      LunNumber:
+        $ref: '#/definitions/PositiveIntObject'
+        description: The logical disk number.
+      ChapEnabled:
+        $ref: '#/definitions/boolean'
+        description: Indicates whether mutual CHAP is enabled for the iSCSI target.
+    description: Lists iSCSI information about a volume.
+  CreatedDate:
+    type: string
+    format: date-time
+  VolumeUsedInBytes:
+    type: integer
+  KMSKey:
+    type: string
+    description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+    minLength: 20
+    maxLength: 2048
   CachediSCSIVolume:
     type: object
     properties:
@@ -4556,10 +4651,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/CachediSCSIVolume'
-  ChapCredentials:
-    type: array
-    items:
-      $ref: '#/definitions/ChapInfo'
+  TapeARN:
+    type: string
+    pattern: '^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\-0-9]+:[0-9]+:tape\/[0-9A-Z]{7,16}$'
+    minLength: 50
+    maxLength: 500
   ChapInfo:
     type: object
     properties:
@@ -4576,29 +4672,234 @@ definitions:
         $ref: '#/definitions/ChapSecret'
         description: The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g. Windows client).
     description: Describes Challenge-Handshake Authentication Protocol (CHAP) information that supports authentication between your gateway and iSCSI initiators.
+  ChapCredentials:
+    type: array
+    items:
+      $ref: '#/definitions/ChapInfo'
+  TargetARN:
+    type: string
+    minLength: 50
+    maxLength: 800
   ChapSecret:
     type: string
     minLength: 1
     maxLength: 100
+  IqnName:
+    type: string
+    pattern: '[0-9a-z:.-]+'
+    minLength: 1
+    maxLength: 255
   ClientToken:
     type: string
     minLength: 5
     maxLength: 100
-  CreatedDate:
+  TargetName:
     type: string
-    format: date-time
+    pattern: '^[-\.;a-z0-9]+$'
+    minLength: 1
+    maxLength: 200
+  NetworkInterfaceId:
+    type: string
+    pattern: '\A(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}\z'
+  NFSFileShareDefaults:
+    type: object
+    properties:
+      FileMode:
+        $ref: '#/definitions/PermissionMode'
+        description: 'The Unix file mode in the form "nnnn". For example, "0666" represents the default file mode inside the file share. The default value is 0666. '
+      DirectoryMode:
+        $ref: '#/definitions/PermissionMode'
+        description: 'The Unix directory mode in the form "nnnn". For example, "0666" represents the default access mode for all directories inside the file share. The default value is 0777.'
+      GroupId:
+        $ref: '#/definitions/PermissionId'
+        description: 'The default group ID for the file share (unless the files have another group ID specified). The default value is nfsnobody. '
+      OwnerId:
+        $ref: '#/definitions/PermissionId'
+        description: 'The default owner ID for files in the file share (unless the files have another owner ID specified). The default value is nfsnobody. '
+    description: 'Describes Network File System (NFS) file share default values. Files and folders stored as Amazon S3 objects in S3 buckets don''t, by default, have Unix file permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that represent files and folders are assigned these default Unix permissions. This operation is only supported for file gateways.'
+  Role:
+    type: string
+    description: 'The ARN of the IAM role that file gateway assumes when it accesses the underlying storage. '
+    minLength: 20
+    maxLength: 2048
+  LocationARN:
+    type: string
+    description: 'The ARN of the backend storage used for storing file data. '
+    minLength: 16
+    maxLength: 310
+  StorageClass:
+    type: string
+    description: <p/>
+    minLength: 5
+    maxLength: 20
+  ObjectACL:
+    type: string
+    enum:
+      - private
+      - public-read
+      - public-read-write
+      - authenticated-read
+      - bucket-owner-read
+      - bucket-owner-full-control
+      - aws-exec-read
+    description: A value that sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
+  FileShareClientList:
+    type: array
+    description: 'The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks. '
+    items:
+      $ref: '#/definitions/IPV4AddressCIDR'
+    minItems: 1
+    maxItems: 100
+  Squash:
+    type: string
+    description: '<p>The user mapped to anonymous user. Valid options are the following: </p> <ul> <li> <p> <code>RootSquash</code> - Only root is mapped to anonymous user.</p> </li> <li> <p> <code>NoSquash</code> - No one is mapped to anonymous user</p> </li> <li> <p> <code>AllSquash</code> - Everyone is mapped to anonymous user.</p> </li> </ul>'
+    minLength: 5
+    maxLength: 15
+  FileShareARN:
+    type: string
+    description: 'The Amazon Resource Name (ARN) of the file share. '
+    minLength: 50
+    maxLength: 500
+  FileShareUserList:
+    type: array
+    items:
+      $ref: '#/definitions/FileShareUser'
+    minItems: 0
+    maxItems: 100
+  SnapshotDescription:
+    type: string
+    minLength: 1
+    maxLength: 255
+  string:
+    type: string
+  DiskId:
+    type: string
+    minLength: 1
+    maxLength: 300
+  boolean:
+    type: boolean
+  TapeSize:
+    type: integer
+  TapeBarcode:
+    type: string
+    pattern: '^[A-Z0-9]*$'
+    minLength: 7
+    maxLength: 16
+  NumTapesToCreate:
+    type: integer
+    minimum: 1
+    maximum: 10
+  TapeBarcodePrefix:
+    type: string
+    pattern: '^[A-Z]*$'
+    minLength: 1
+    maxLength: 4
+  TapeARNs:
+    type: array
+    description: 'The Amazon Resource Name (ARN) of each of the tapes you want to list. If you don''t specify a tape ARN, the response lists all tapes in both your VTL and VTS.'
+    items:
+      $ref: '#/definitions/TapeARN'
   DayOfWeek:
     type: integer
     minimum: 0
     maximum: 6
+  double:
+    type: number
+    format: double
+  VolumeARNs:
+    type: array
+    items:
+      $ref: '#/definitions/VolumeARN'
+  GatewayId:
+    type: string
+    minLength: 12
+    maxLength: 30
+  GatewayState:
+    type: string
+    minLength: 2
+    maxLength: 25
+  GatewayNetworkInterfaces:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkInterface'
+  NextUpdateAvailabilityDate:
+    type: string
+    minLength: 1
+    maxLength: 25
+  LastSoftwareUpdate:
+    type: string
+    minLength: 1
+    maxLength: 25
+  HourOfDay:
+    type: integer
+    minimum: 0
+    maximum: 23
+  MinuteOfHour:
+    type: integer
+    minimum: 0
+    maximum: 59
+  FileShareARNList:
+    type: array
+    items:
+      $ref: '#/definitions/FileShareARN'
+    minItems: 1
+    maxItems: 10
+  NFSFileShareInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/NFSFileShareInfo'
+  SMBFileShareInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/SMBFileShareInfo'
+  DomainName:
+    type: string
+    pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
+  RecurrenceInHours:
+    type: integer
+    minimum: 1
+    maximum: 24
   Description:
     type: string
     minLength: 1
     maxLength: 255
+  StorediSCSIVolumes:
+    type: array
+    items:
+      $ref: '#/definitions/StorediSCSIVolume'
+  Marker:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  PositiveIntObject:
+    type: integer
+    minimum: 1
+  TapeArchives:
+    type: array
+    items:
+      $ref: '#/definitions/TapeArchive'
+  TapeRecoveryPointInfos:
+    type: array
+    items:
+      $ref: '#/definitions/TapeRecoveryPointInfo'
+  Tapes:
+    type: array
+    items:
+      $ref: '#/definitions/Tape'
+  VTLDeviceARNs:
+    type: array
+    items:
+      $ref: '#/definitions/VTLDeviceARN'
+  VTLDevices:
+    type: array
+    items:
+      $ref: '#/definitions/VTLDevice'
   DeviceType:
     type: string
     minLength: 2
     maxLength: 50
+  integer:
+    type: integer
   DeviceiSCSIAttributes:
     type: object
     properties:
@@ -4615,6 +4916,18 @@ definitions:
         $ref: '#/definitions/boolean'
         description: Indicates whether mutual CHAP is enabled for the iSCSI target.
     description: Lists iSCSI information about a VTL device.
+  DiskAllocationType:
+    type: string
+    description: 'One of the <code>DiskAllocationType</code> enumeration values that identifies how a local disk is used. Valid values: "UPLOAD_BUFFER", "CACHE_STORAGE".'
+    minLength: 3
+    maxLength: 100
+  DiskAttributeList:
+    type: array
+    description: A list of values that represents attributes of a local disk.
+    items:
+      $ref: '#/definitions/DiskAttribute'
+    minItems: 0
+    maxItems: 10
   Disk:
     type: object
     properties:
@@ -4641,37 +4954,14 @@ definitions:
       DiskAttributeList:
         $ref: '#/definitions/DiskAttributeList'
     description: Represents a gateway's local disk.
-  DiskAllocationType:
-    type: string
-    description: 'One of the <code>DiskAllocationType</code> enumeration values that identifies how a local disk is used. Valid values: "UPLOAD_BUFFER", "CACHE_STORAGE".'
-    minLength: 3
-    maxLength: 100
   DiskAttribute:
     type: string
     minLength: 1
     maxLength: 64
-  DiskAttributeList:
-    type: array
-    description: A list of values that represents attributes of a local disk.
-    items:
-      $ref: '#/definitions/DiskAttribute'
-    minItems: 0
-    maxItems: 10
-  DiskId:
-    type: string
-    minLength: 1
-    maxLength: 300
-  DiskIds:
-    type: array
-    items:
-      $ref: '#/definitions/DiskId'
   Disks:
     type: array
     items:
       $ref: '#/definitions/Disk'
-  DomainName:
-    type: string
-    pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
   DomainUserName:
     type: string
     pattern: '^\w[\w\.\- ]*$'
@@ -4679,32 +4969,25 @@ definitions:
     type: string
     pattern: '^[ -~]+$'
     format: password
-  DoubleObject:
-    type: number
-    format: double
-  FileShareARN:
+  IPV4AddressCIDR:
     type: string
-    description: 'The Amazon Resource Name (ARN) of the file share. '
-    minLength: 50
-    maxLength: 500
-  FileShareARNList:
-    type: array
-    items:
-      $ref: '#/definitions/FileShareARN'
-    minItems: 1
-    maxItems: 10
-  FileShareClientList:
-    type: array
-    description: 'The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks. '
-    items:
-      $ref: '#/definitions/IPV4AddressCIDR'
-    minItems: 1
-    maxItems: 100
+    pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))?$'
   FileShareId:
     type: string
     description: 'The ID of the file share. '
     minLength: 12
     maxLength: 30
+  FileShareType:
+    type: string
+    enum:
+      - NFS
+      - SMB
+    description: The type of the file share.
+  FileShareStatus:
+    type: string
+    description: 'The status of the file share. Possible values are <code>CREATING</code>, <code>UPDATING</code>, <code>AVAILABLE</code> and <code>DELETING</code>. '
+    minLength: 3
+    maxLength: 50
   FileShareInfo:
     type: object
     properties:
@@ -4723,27 +5006,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/FileShareInfo'
-  FileShareStatus:
-    type: string
-    description: 'The status of the file share. Possible values are <code>CREATING</code>, <code>UPDATING</code>, <code>AVAILABLE</code> and <code>DELETING</code>. '
-    minLength: 3
-    maxLength: 50
-  FileShareType:
-    type: string
-    enum:
-      - NFS
-      - SMB
-    description: The type of the file share.
   FileShareUser:
     type: string
     minLength: 1
     maxLength: 64
-  FileShareUserList:
-    type: array
-    items:
-      $ref: '#/definitions/FileShareUser'
-    minItems: 0
-    maxItems: 100
   Folder:
     type: string
     minLength: 1
@@ -4755,15 +5021,10 @@ definitions:
       $ref: '#/definitions/Folder'
     minItems: 1
     maxItems: 50
-  GatewayARN:
+  GatewayOperationalState:
     type: string
-    description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.
-    minLength: 50
-    maxLength: 500
-  GatewayId:
-    type: string
-    minLength: 12
-    maxLength: 30
+    minLength: 2
+    maxLength: 25
   GatewayInfo:
     type: object
     properties:
@@ -4783,43 +5044,23 @@ definitions:
         $ref: '#/definitions/string'
         description: The name of the gateway.
     description: Describes a gateway object.
-  GatewayName:
-    type: string
-    pattern: '^[ -\.0-\[\]-~]*[!-\.0-\[\]-~][ -\.0-\[\]-~]*$'
-    description: The name you configured for your gateway.
-    minLength: 2
-    maxLength: 255
-  GatewayNetworkInterfaces:
-    type: array
-    items:
-      $ref: '#/definitions/NetworkInterface'
-  GatewayOperationalState:
-    type: string
-    minLength: 2
-    maxLength: 25
-  GatewayState:
-    type: string
-    minLength: 2
-    maxLength: 25
-  GatewayTimezone:
-    type: string
-    minLength: 3
-    maxLength: 10
-  GatewayType:
-    type: string
-    minLength: 2
-    maxLength: 20
+  NetworkInterface:
+    type: object
+    properties:
+      Ipv4Address:
+        $ref: '#/definitions/string'
+        description: The Internet Protocol version 4 (IPv4) address of the interface.
+      MacAddress:
+        $ref: '#/definitions/string'
+        description: <p>The Media Access Control (MAC) address of the interface.</p> <note> <p>This is currently unsupported and will not be returned in output.</p> </note>
+      Ipv6Address:
+        $ref: '#/definitions/string'
+        description: The Internet Protocol version 6 (IPv6) address of the interface. <i>Currently not supported</i>.
+    description: Describes a gateway's network interface.
   Gateways:
     type: array
     items:
       $ref: '#/definitions/GatewayInfo'
-  HourOfDay:
-    type: integer
-    minimum: 0
-    maximum: 23
-  IPV4AddressCIDR:
-    type: string
-    pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))?$'
   Initiator:
     type: string
     minLength: 1
@@ -4828,59 +5069,37 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Initiator'
-  IqnName:
-    type: string
-    pattern: '[0-9a-z:.-]+'
-    minLength: 1
-    maxLength: 255
-  KMSKey:
-    type: string
-    description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
-    minLength: 20
-    maxLength: 2048
-  LastSoftwareUpdate:
-    type: string
-    minLength: 1
-    maxLength: 25
+  TapeInfos:
+    type: array
+    description: 'An array of <a>TapeInfo</a> objects, where each object describes an a single tape. If there not tapes in the tape library or VTS, then the <code>TapeInfos</code> is an empty array.'
+    items:
+      $ref: '#/definitions/TapeInfo'
+  VolumeRecoveryPointInfos:
+    type: array
+    items:
+      $ref: '#/definitions/VolumeRecoveryPointInfo'
+  VolumeInfos:
+    type: array
+    items:
+      $ref: '#/definitions/VolumeInfo'
   LocalConsolePassword:
     type: string
     pattern: '^[ -~]+$'
     minLength: 6
     maxLength: 512
     format: password
-  LocationARN:
+  PermissionMode:
     type: string
-    description: 'The ARN of the backend storage used for storing file data. '
-    minLength: 16
-    maxLength: 310
-  Marker:
-    type: string
+    pattern: '^[0-7]{4}$'
     minLength: 1
-    maxLength: 1000
-  MediumChangerType:
-    type: string
-    minLength: 2
-    maxLength: 50
-  MinuteOfHour:
+    maxLength: 4
+  PermissionId:
     type: integer
     minimum: 0
-    maximum: 59
-  NFSFileShareDefaults:
-    type: object
-    properties:
-      FileMode:
-        $ref: '#/definitions/PermissionMode'
-        description: 'The Unix file mode in the form "nnnn". For example, "0666" represents the default file mode inside the file share. The default value is 0666. '
-      DirectoryMode:
-        $ref: '#/definitions/PermissionMode'
-        description: 'The Unix directory mode in the form "nnnn". For example, "0666" represents the default access mode for all directories inside the file share. The default value is 0777.'
-      GroupId:
-        $ref: '#/definitions/PermissionId'
-        description: 'The default group ID for the file share (unless the files have another group ID specified). The default value is nfsnobody. '
-      OwnerId:
-        $ref: '#/definitions/PermissionId'
-        description: 'The default owner ID for files in the file share (unless the files have another owner ID specified). The default value is nfsnobody. '
-    description: 'Describes Network File System (NFS) file share default values. Files and folders stored as Amazon S3 objects in S3 buckets don''t, by default, have Unix file permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that represent files and folders are assigned these default Unix permissions. This operation is only supported for file gateways.'
+    maximum: 4294967294
+  Path:
+    type: string
+    description: 'The file share path used by the NFS client to identify the mount point. '
   NFSFileShareInfo:
     type: object
     properties:
@@ -4924,82 +5143,15 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.
     description: 'The Unix file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported in file gateways.'
-  NFSFileShareInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/NFSFileShareInfo'
-  NetworkInterface:
-    type: object
-    properties:
-      Ipv4Address:
-        $ref: '#/definitions/string'
-        description: The Internet Protocol version 4 (IPv4) address of the interface.
-      MacAddress:
-        $ref: '#/definitions/string'
-        description: <p>The Media Access Control (MAC) address of the interface.</p> <note> <p>This is currently unsupported and will not be returned in output.</p> </note>
-      Ipv6Address:
-        $ref: '#/definitions/string'
-        description: The Internet Protocol version 6 (IPv6) address of the interface. <i>Currently not supported</i>.
-    description: Describes a gateway's network interface.
-  NetworkInterfaceId:
-    type: string
-    pattern: '\A(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}\z'
-  NextUpdateAvailabilityDate:
-    type: string
-    minLength: 1
-    maxLength: 25
   NotificationId:
     type: string
     description: The randomly generated ID of the notification that was sent. This ID is in UUID format.
     minLength: 1
     maxLength: 2048
-  NumTapesToCreate:
-    type: integer
-    minimum: 1
-    maximum: 10
-  ObjectACL:
-    type: string
-    enum:
-      - private
-      - public-read
-      - public-read-write
-      - authenticated-read
-      - bucket-owner-read
-      - bucket-owner-full-control
-      - aws-exec-read
-    description: A value that sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
-  Path:
-    type: string
-    description: 'The file share path used by the NFS client to identify the mount point. '
-  PermissionId:
-    type: integer
-    minimum: 0
-    maximum: 4294967294
-  PermissionMode:
-    type: string
-    pattern: '^[0-7]{4}$'
-    minLength: 1
-    maxLength: 4
-  PositiveIntObject:
-    type: integer
-    minimum: 1
-  RecurrenceInHours:
-    type: integer
-    minimum: 1
-    maximum: 24
-  RegionId:
-    type: string
-    minLength: 1
-    maxLength: 25
-  ResourceARN:
-    type: string
-    minLength: 50
-    maxLength: 500
-  Role:
-    type: string
-    description: 'The ARN of the IAM role that file gateway assumes when it accesses the underlying storage. '
-    minLength: 20
-    maxLength: 2048
+  TagKeys:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
   SMBFileShareInfo:
     type: object
     properties:
@@ -5046,33 +5198,12 @@ definitions:
       Authentication:
         $ref: '#/definitions/Authentication'
     description: 'The Windows file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported for file gateways.'
-  SMBFileShareInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/SMBFileShareInfo'
   SMBGuestPassword:
     type: string
     pattern: '^[ -~]+$'
     minLength: 6
     maxLength: 512
     format: password
-  SnapshotDescription:
-    type: string
-    minLength: 1
-    maxLength: 255
-  SnapshotId:
-    type: string
-    pattern: '\Asnap-([0-9A-Fa-f]{8}|[0-9A-Fa-f]{17})\z'
-  Squash:
-    type: string
-    description: '<p>The user mapped to anonymous user. Valid options are the following: </p> <ul> <li> <p> <code>RootSquash</code> - Only root is mapped to anonymous user.</p> </li> <li> <p> <code>NoSquash</code> - No one is mapped to anonymous user</p> </li> <li> <p> <code>AllSquash</code> - Everyone is mapped to anonymous user.</p> </li> </ul>'
-    minLength: 5
-    maxLength: 15
-  StorageClass:
-    type: string
-    description: <p/>
-    minLength: 5
-    maxLength: 20
   StorediSCSIVolume:
     type: object
     properties:
@@ -5115,10 +5246,14 @@ definitions:
       KMSKey:
         $ref: '#/definitions/KMSKey'
     description: Describes an iSCSI stored volume.
-  StorediSCSIVolumes:
-    type: array
-    items:
-      $ref: '#/definitions/StorediSCSIVolume'
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -5129,22 +5264,17 @@ definitions:
         $ref: '#/definitions/TagKey'
       Value:
         $ref: '#/definitions/TagValue'
-  TagKey:
+  Time:
     type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
-  TagKeys:
-    type: array
-    items:
-      $ref: '#/definitions/TagKey'
-  TagValue:
+    format: date-time
+  TapeStatus:
     type: string
-    maxLength: 256
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
+  VTLDeviceARN:
+    type: string
+    minLength: 50
+    maxLength: 500
+  TapeUsage:
+    type: integer
   Tape:
     type: object
     properties:
@@ -5175,16 +5305,8 @@ definitions:
       KMSKey:
         $ref: '#/definitions/KMSKey'
     description: Describes a virtual tape object.
-  TapeARN:
+  TapeArchiveStatus:
     type: string
-    pattern: '^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\-0-9]+:[0-9]+:tape\/[0-9A-Z]{7,16}$'
-    minLength: 50
-    maxLength: 500
-  TapeARNs:
-    type: array
-    description: 'The Amazon Resource Name (ARN) of each of the tapes you want to list. If you don''t specify a tape ARN, the response lists all tapes in both your VTL and VTS.'
-    items:
-      $ref: '#/definitions/TapeARN'
   TapeArchive:
     type: object
     properties:
@@ -5215,26 +5337,6 @@ definitions:
       KMSKey:
         $ref: '#/definitions/KMSKey'
     description: Represents a virtual tape that is archived in the virtual tape shelf (VTS).
-  TapeArchiveStatus:
-    type: string
-  TapeArchives:
-    type: array
-    items:
-      $ref: '#/definitions/TapeArchive'
-  TapeBarcode:
-    type: string
-    pattern: '^[A-Z0-9]*$'
-    minLength: 7
-    maxLength: 16
-  TapeBarcodePrefix:
-    type: string
-    pattern: '^[A-Z]*$'
-    minLength: 1
-    maxLength: 4
-  TapeDriveType:
-    type: string
-    minLength: 2
-    maxLength: 50
   TapeInfo:
     type: object
     properties:
@@ -5254,11 +5356,8 @@ definitions:
         $ref: '#/definitions/GatewayARN'
         description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and region.
     description: Describes a virtual tape.
-  TapeInfos:
-    type: array
-    description: 'An array of <a>TapeInfo</a> objects, where each object describes an a single tape. If there not tapes in the tape library or VTS, then the <code>TapeInfos</code> is an empty array.'
-    items:
-      $ref: '#/definitions/TapeInfo'
+  TapeRecoveryPointStatus:
+    type: string
   TapeRecoveryPointInfo:
     type: object
     properties:
@@ -5274,34 +5373,12 @@ definitions:
       TapeStatus:
         $ref: '#/definitions/TapeRecoveryPointStatus'
     description: Describes a recovery point.
-  TapeRecoveryPointInfos:
-    type: array
-    items:
-      $ref: '#/definitions/TapeRecoveryPointInfo'
-  TapeRecoveryPointStatus:
+  VTLDeviceType:
     type: string
-  TapeSize:
-    type: integer
-  TapeStatus:
+  VTLDeviceVendor:
     type: string
-  TapeUsage:
-    type: integer
-  Tapes:
-    type: array
-    items:
-      $ref: '#/definitions/Tape'
-  TargetARN:
+  VTLDeviceProductIdentifier:
     type: string
-    minLength: 50
-    maxLength: 800
-  TargetName:
-    type: string
-    pattern: '^[-\.;a-z0-9]+$'
-    minLength: 1
-    maxLength: 200
-  Time:
-    type: string
-    format: date-time
   VTLDevice:
     type: object
     properties:
@@ -5318,36 +5395,6 @@ definitions:
         $ref: '#/definitions/DeviceiSCSIAttributes'
         description: A list of iSCSI information about a VTL device.
     description: Represents a device object associated with a tape gateway.
-  VTLDeviceARN:
-    type: string
-    minLength: 50
-    maxLength: 500
-  VTLDeviceARNs:
-    type: array
-    items:
-      $ref: '#/definitions/VTLDeviceARN'
-  VTLDeviceProductIdentifier:
-    type: string
-  VTLDeviceType:
-    type: string
-  VTLDeviceVendor:
-    type: string
-  VTLDevices:
-    type: array
-    items:
-      $ref: '#/definitions/VTLDevice'
-  VolumeARN:
-    type: string
-    minLength: 50
-    maxLength: 500
-  VolumeARNs:
-    type: array
-    items:
-      $ref: '#/definitions/VolumeARN'
-  VolumeId:
-    type: string
-    minLength: 12
-    maxLength: 30
   VolumeInfo:
     type: object
     properties:
@@ -5368,10 +5415,6 @@ definitions:
         $ref: '#/definitions/long'
         description: '<p>The size of the volume in bytes.</p> <p>Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).</p>'
     description: Describes a storage volume object.
-  VolumeInfos:
-    type: array
-    items:
-      $ref: '#/definitions/VolumeInfo'
   VolumeRecoveryPointInfo:
     type: object
     properties:
@@ -5383,47 +5426,3 @@ definitions:
         $ref: '#/definitions/long'
       VolumeRecoveryPointTime:
         $ref: '#/definitions/string'
-  VolumeRecoveryPointInfos:
-    type: array
-    items:
-      $ref: '#/definitions/VolumeRecoveryPointInfo'
-  VolumeStatus:
-    type: string
-    minLength: 3
-    maxLength: 50
-  VolumeType:
-    type: string
-    minLength: 3
-    maxLength: 100
-  VolumeUsedInBytes:
-    type: integer
-  VolumeiSCSIAttributes:
-    type: object
-    properties:
-      TargetARN:
-        $ref: '#/definitions/TargetARN'
-        description: The Amazon Resource Name (ARN) of the volume target.
-      NetworkInterfaceId:
-        $ref: '#/definitions/NetworkInterfaceId'
-        description: The network interface identifier.
-      NetworkInterfacePort:
-        $ref: '#/definitions/integer'
-        description: The port used to communicate with iSCSI targets.
-      LunNumber:
-        $ref: '#/definitions/PositiveIntObject'
-        description: The logical disk number.
-      ChapEnabled:
-        $ref: '#/definitions/boolean'
-        description: Indicates whether mutual CHAP is enabled for the iSCSI target.
-    description: Lists iSCSI information about a volume.
-  boolean:
-    type: boolean
-  double:
-    type: number
-    format: double
-  integer:
-    type: integer
-  long:
-    type: integer
-  string:
-    type: string

@@ -1042,7 +1042,10 @@ definitions:
       AttributeValue:
         $ref: '#/definitions/AttributeValue'
         description: 'The value to set for the attribute. '
-  undefined: {}
+  String:
+    type: string
+  Integer:
+    type: integer
   AccountAttribute:
     type: object
     properties:
@@ -1061,6 +1064,21 @@ definitions:
     description: ' A list of individual account attributes. '
     items:
       $ref: '#/definitions/AccountAttribute'
+  ServerName:
+    type: string
+    pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
+    minLength: 1
+    maxLength: 40
+  NodeName:
+    type: string
+    pattern: '^[\-\p{Alnum}_:.]+$'
+    description: 'The node name that is used by <code>chef-client</code> or <code>puppet-agent</code>for a new node. We recommend to use a unique FQDN as hostname. For more information, see the <a href="http://docs.aws.amazon.com/https:/docs.chef.io/nodes.html#about-node-names">Chef</a> or <a href="http://docs.aws.amazon.com/https:/docs.puppet.com/puppet/4.10/man/agent.html">Puppet</a> documentation. '
+  EngineAttributes:
+    type: array
+    items:
+      $ref: '#/definitions/EngineAttribute'
+  NodeAssociationStatusToken:
+    type: string
   AttributeName:
     type: string
     pattern: '[A-Z][A-Z0-9_]*'
@@ -1068,6 +1086,32 @@ definitions:
     maxLength: 64
   AttributeValue:
     type: string
+  BackupId:
+    type: string
+    maxLength: 79
+  BackupType:
+    type: string
+    enum:
+      - AUTOMATED
+      - MANUAL
+  Timestamp:
+    type: string
+    format: date-time
+  TimeWindowDefinition:
+    type: string
+    pattern: '^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$'
+    description: '<p> <code>DDD:HH:MM</code> (weekly start time) or <code>HH:MM</code> (daily start time). </p> <p> Time windows always use coordinated universal time (UTC). Valid strings for day of week (<code>DDD</code>) are: <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thr</code>, <code>Fri</code>, <code>Sat</code>, or <code>Sun</code>.</p>'
+  Strings:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  BackupStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - OK
+      - FAILED
+      - DELETING
   Backup:
     type: object
     properties:
@@ -1144,79 +1188,23 @@ definitions:
         $ref: '#/definitions/String'
         description: ' The IAM user ARN of the requester for manual backups. This field is empty for automated backups. '
     description: 'Describes a single backup. '
-  BackupId:
-    type: string
-    maxLength: 79
   BackupRetentionCountDefinition:
     type: integer
     minimum: 1
-  BackupStatus:
-    type: string
-    enum:
-      - IN_PROGRESS
-      - OK
-      - FAILED
-      - DELETING
-  BackupType:
-    type: string
-    enum:
-      - AUTOMATED
-      - MANUAL
   Backups:
     type: array
     items:
       $ref: '#/definitions/Backup'
   Boolean:
     type: boolean
-  EngineAttribute:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/EngineAttributeName'
-        description: 'The name of the engine attribute. '
-      Value:
-        $ref: '#/definitions/EngineAttributeValue'
-        description: 'The value of the engine attribute. '
-    description: 'A name and value pair that is specific to the engine of the server. '
-  EngineAttributeName:
-    type: string
-  EngineAttributeValue:
-    type: string
-    format: password
-  EngineAttributes:
-    type: array
-    items:
-      $ref: '#/definitions/EngineAttribute'
   InstanceProfileArn:
     type: string
     pattern: 'arn:aws:iam::[0-9]{12}:instance-profile/.*'
-  Integer:
-    type: integer
   KeyPair:
     type: string
-  MaintenanceStatus:
+  ServiceRoleArn:
     type: string
-    enum:
-      - SUCCESS
-      - FAILED
-  MaxResults:
-    type: integer
-    minimum: 1
-  NextToken:
-    type: string
-  NodeAssociationStatus:
-    type: string
-    enum:
-      - SUCCESS
-      - FAILED
-      - IN_PROGRESS
-    description: '<p>The status of the association or disassociation request. </p> <p class="title"> <b>Possible values:</b> </p> <ul> <li> <p> <code>SUCCESS</code>: The association or disassociation succeeded. </p> </li> <li> <p> <code>FAILED</code>: The association or disassociation failed. </p> </li> <li> <p> <code>IN_PROGRESS</code>: The association or disassociation is still in progress. </p> </li> </ul>'
-  NodeAssociationStatusToken:
-    type: string
-  NodeName:
-    type: string
-    pattern: '^[\-\p{Alnum}_:.]+$'
-    description: 'The node name that is used by <code>chef-client</code> or <code>puppet-agent</code>for a new node. We recommend to use a unique FQDN as hostname. For more information, see the <a href="http://docs.aws.amazon.com/https:/docs.chef.io/nodes.html#about-node-names">Chef</a> or <a href="http://docs.aws.amazon.com/https:/docs.puppet.com/puppet/4.10/man/agent.html">Puppet</a> documentation. '
+    pattern: 'arn:aws:iam::[0-9]{12}:role/.*'
   Server:
     type: object
     properties:
@@ -1290,31 +1278,46 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The ARN of the server. '
     description: 'Describes a configuration management server. '
-  ServerEvent:
-    type: object
-    properties:
-      CreatedAt:
-        $ref: '#/definitions/Timestamp'
-        description: 'The time when the event occurred. '
-      ServerName:
-        $ref: '#/definitions/String'
-        description: 'The name of the server on or for which the event occurred. '
-      Message:
-        $ref: '#/definitions/String'
-        description: A human-readable informational or status message.
-      LogUrl:
-        $ref: '#/definitions/String'
-        description: The Amazon S3 URL of the event's log file.
-    description: 'An event that is related to the server, such as the start of maintenance or backup. '
+  NextToken:
+    type: string
+  MaxResults:
+    type: integer
+    minimum: 1
   ServerEvents:
     type: array
     items:
       $ref: '#/definitions/ServerEvent'
-  ServerName:
+  NodeAssociationStatus:
     type: string
-    pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
-    minLength: 1
-    maxLength: 40
+    enum:
+      - SUCCESS
+      - FAILED
+      - IN_PROGRESS
+    description: '<p>The status of the association or disassociation request. </p> <p class="title"> <b>Possible values:</b> </p> <ul> <li> <p> <code>SUCCESS</code>: The association or disassociation succeeded. </p> </li> <li> <p> <code>FAILED</code>: The association or disassociation failed. </p> </li> <li> <p> <code>IN_PROGRESS</code>: The association or disassociation is still in progress. </p> </li> </ul>'
+  Servers:
+    type: array
+    items:
+      $ref: '#/definitions/Server'
+  EngineAttributeName:
+    type: string
+  EngineAttributeValue:
+    type: string
+    format: password
+  EngineAttribute:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/EngineAttributeName'
+        description: 'The name of the engine attribute. '
+      Value:
+        $ref: '#/definitions/EngineAttributeValue'
+        description: 'The value of the engine attribute. '
+    description: 'A name and value pair that is specific to the engine of the server. '
+  MaintenanceStatus:
+    type: string
+    enum:
+      - SUCCESS
+      - FAILED
   ServerStatus:
     type: string
     enum:
@@ -1331,23 +1334,19 @@ definitions:
       - UNDER_MAINTENANCE
       - UNHEALTHY
       - TERMINATED
-  Servers:
-    type: array
-    items:
-      $ref: '#/definitions/Server'
-  ServiceRoleArn:
-    type: string
-    pattern: 'arn:aws:iam::[0-9]{12}:role/.*'
-  String:
-    type: string
-  Strings:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  TimeWindowDefinition:
-    type: string
-    pattern: '^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$'
-    description: '<p> <code>DDD:HH:MM</code> (weekly start time) or <code>HH:MM</code> (daily start time). </p> <p> Time windows always use coordinated universal time (UTC). Valid strings for day of week (<code>DDD</code>) are: <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thr</code>, <code>Fri</code>, <code>Sat</code>, or <code>Sun</code>.</p>'
-  Timestamp:
-    type: string
-    format: date-time
+  ServerEvent:
+    type: object
+    properties:
+      CreatedAt:
+        $ref: '#/definitions/Timestamp'
+        description: 'The time when the event occurred. '
+      ServerName:
+        $ref: '#/definitions/String'
+        description: 'The name of the server on or for which the event occurred. '
+      Message:
+        $ref: '#/definitions/String'
+        description: A human-readable informational or status message.
+      LogUrl:
+        $ref: '#/definitions/String'
+        description: The Amazon S3 URL of the event's log file.
+    description: 'An event that is related to the server, such as the start of maintenance or backup. '

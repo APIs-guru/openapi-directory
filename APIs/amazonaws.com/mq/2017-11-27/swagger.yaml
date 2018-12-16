@@ -1338,7 +1338,12 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
     description: Updates the information for an ActiveMQ user.
-  undefined: {}
+  __string:
+    type: string
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
   BrokerInstance:
     type: object
     properties:
@@ -1361,6 +1366,15 @@ definitions:
       - RUNNING
       - REBOOT_IN_PROGRESS
     description: The status of the broker.
+  __timestampIso8601:
+    type: string
+    format: date-time
+  DeploymentMode:
+    type: string
+    enum:
+      - SINGLE_INSTANCE
+      - ACTIVE_STANDBY_MULTI_AZ
+    description: The deployment mode of the broker.
   BrokerSummary:
     type: object
     properties:
@@ -1393,6 +1407,33 @@ definitions:
       - UPDATE
       - DELETE
     description: The type of change pending for the ActiveMQ user.
+  EngineType:
+    type: string
+    enum:
+      - ACTIVEMQ
+    description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
+  ConfigurationRevision:
+    type: object
+    properties:
+      Created:
+        $ref: '#/definitions/__timestampIso8601'
+        description: Required. The date and time of the configuration revision.
+      Description:
+        $ref: '#/definitions/__string'
+        description: The description of the configuration revision.
+      Revision:
+        $ref: '#/definitions/__integer'
+        description: Required. The revision number of the configuration.
+    description: Returns information about the specified configuration revision.
+  __mapOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
   Configuration:
     type: object
     properties:
@@ -1424,6 +1465,8 @@ definitions:
         $ref: '#/definitions/__mapOf__string'
         description: The list of all tags associated with this configuration.
     description: Returns information about all configurations.
+  __integer:
+    type: integer
   ConfigurationId:
     type: object
     properties:
@@ -1434,19 +1477,10 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The revision number of the configuration.
     description: A list of information about the configuration.
-  ConfigurationRevision:
-    type: object
-    properties:
-      Created:
-        $ref: '#/definitions/__timestampIso8601'
-        description: Required. The date and time of the configuration revision.
-      Description:
-        $ref: '#/definitions/__string'
-        description: The description of the configuration revision.
-      Revision:
-        $ref: '#/definitions/__integer'
-        description: Required. The revision number of the configuration.
-    description: Returns information about the specified configuration revision.
+  __listOfConfigurationId:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationId'
   Configurations:
     type: object
     properties:
@@ -1460,27 +1494,8 @@ definitions:
         $ref: '#/definitions/ConfigurationId'
         description: The pending configuration of the broker.
     description: Broker configuration information
-  DayOfWeek:
-    type: string
-    enum:
-      - MONDAY
-      - TUESDAY
-      - WEDNESDAY
-      - THURSDAY
-      - FRIDAY
-      - SATURDAY
-      - SUNDAY
-  DeploymentMode:
-    type: string
-    enum:
-      - SINGLE_INSTANCE
-      - ACTIVE_STANDBY_MULTI_AZ
-    description: The deployment mode of the broker.
-  EngineType:
-    type: string
-    enum:
-      - ACTIVEMQ
-    description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
+  __boolean:
+    type: boolean
   Logs:
     type: object
     properties:
@@ -1491,6 +1506,37 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Enables general logging.
     description: The list of information about logs to be enabled for the specified broker.
+  WeeklyStartTime:
+    type: object
+    properties:
+      DayOfWeek:
+        $ref: '#/definitions/DayOfWeek'
+        description: Required. The day of the week.
+      TimeOfDay:
+        $ref: '#/definitions/__string'
+        description: 'Required. The time, in 24-hour format.'
+      TimeZone:
+        $ref: '#/definitions/__string'
+        description: 'The time zone, UTC by default, in either the Country/City format, or the UTC offset format.'
+    description: The scheduled time period relative to UTC during which Amazon MQ begins to apply pending updates or patches to the broker.
+  __listOfUser:
+    type: array
+    items:
+      $ref: '#/definitions/User'
+  DayOfWeek:
+    type: string
+    enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+  __listOfBrokerInstance:
+    type: array
+    items:
+      $ref: '#/definitions/BrokerInstance'
   LogsSummary:
     type: object
     properties:
@@ -1510,9 +1556,42 @@ definitions:
         $ref: '#/definitions/PendingLogs'
         description: The list of information about logs pending to be deployed for the specified broker.
     description: The list of information about logs currently enabled and pending to be deployed for the specified broker.
+  __listOfUserSummary:
+    type: array
+    items:
+      $ref: '#/definitions/UserSummary'
+  UserPendingChanges:
+    type: object
+    properties:
+      ConsoleAccess:
+        $ref: '#/definitions/__boolean'
+        description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+      Groups:
+        $ref: '#/definitions/__listOf__string'
+        description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+      PendingChange:
+        $ref: '#/definitions/ChangeType'
+        description: Required. The type of change pending for the ActiveMQ user.
+    description: Returns information about the status of the changes pending for the ActiveMQ user.
   MaxResults:
     type: integer
     minimum: 1
+    maximum: 100
+  __listOfBrokerSummary:
+    type: array
+    items:
+      $ref: '#/definitions/BrokerSummary'
+  __listOfConfigurationRevision:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationRevision'
+  __listOfConfiguration:
+    type: array
+    items:
+      $ref: '#/definitions/Configuration'
+  __integerMin5Max100:
+    type: integer
+    minimum: 5
     maximum: 100
   PendingLogs:
     type: object
@@ -1524,6 +1603,13 @@ definitions:
         $ref: '#/definitions/__boolean'
         description: Enables general logging.
     description: The list of information about logs to be enabled for the specified broker.
+  SanitizationWarningReason:
+    type: string
+    enum:
+      - DISALLOWED_ELEMENT_REMOVED
+      - DISALLOWED_ATTRIBUTE_REMOVED
+      - INVALID_ATTRIBUTE_VALUE_REMOVED
+    description: The reason for which the XML elements or attributes were sanitized.
   SanitizationWarning:
     type: object
     properties:
@@ -1537,13 +1623,10 @@ definitions:
         $ref: '#/definitions/SanitizationWarningReason'
         description: Required. The reason for which the XML elements or attributes were sanitized.
     description: Returns information about the XML element or attribute that was sanitized in the configuration.
-  SanitizationWarningReason:
-    type: string
-    enum:
-      - DISALLOWED_ELEMENT_REMOVED
-      - DISALLOWED_ATTRIBUTE_REMOVED
-      - INVALID_ATTRIBUTE_VALUE_REMOVED
-    description: The reason for which the XML elements or attributes were sanitized.
+  __listOfSanitizationWarning:
+    type: array
+    items:
+      $ref: '#/definitions/SanitizationWarning'
   User:
     type: object
     properties:
@@ -1560,19 +1643,6 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
     description: An ActiveMQ user associated with the broker.
-  UserPendingChanges:
-    type: object
-    properties:
-      ConsoleAccess:
-        $ref: '#/definitions/__boolean'
-        description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-      Groups:
-        $ref: '#/definitions/__listOf__string'
-        description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
-      PendingChange:
-        $ref: '#/definitions/ChangeType'
-        description: Required. The type of change pending for the ActiveMQ user.
-    description: Returns information about the status of the changes pending for the ActiveMQ user.
   UserSummary:
     type: object
     properties:
@@ -1583,74 +1653,3 @@ definitions:
         $ref: '#/definitions/__string'
         description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
     description: Returns a list of all ActiveMQ users.
-  WeeklyStartTime:
-    type: object
-    properties:
-      DayOfWeek:
-        $ref: '#/definitions/DayOfWeek'
-        description: Required. The day of the week.
-      TimeOfDay:
-        $ref: '#/definitions/__string'
-        description: 'Required. The time, in 24-hour format.'
-      TimeZone:
-        $ref: '#/definitions/__string'
-        description: 'The time zone, UTC by default, in either the Country/City format, or the UTC offset format.'
-    description: The scheduled time period relative to UTC during which Amazon MQ begins to apply pending updates or patches to the broker.
-  __boolean:
-    type: boolean
-  __integer:
-    type: integer
-  __integerMin5Max100:
-    type: integer
-    minimum: 5
-    maximum: 100
-  __listOfBrokerInstance:
-    type: array
-    items:
-      $ref: '#/definitions/BrokerInstance'
-  __listOfBrokerSummary:
-    type: array
-    items:
-      $ref: '#/definitions/BrokerSummary'
-  __listOfConfiguration:
-    type: array
-    items:
-      $ref: '#/definitions/Configuration'
-  __listOfConfigurationId:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationId'
-  __listOfConfigurationRevision:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationRevision'
-  __listOfSanitizationWarning:
-    type: array
-    items:
-      $ref: '#/definitions/SanitizationWarning'
-  __listOfUser:
-    type: array
-    items:
-      $ref: '#/definitions/User'
-  __listOfUserSummary:
-    type: array
-    items:
-      $ref: '#/definitions/UserSummary'
-  __listOf__string:
-    type: array
-    items:
-      $ref: '#/definitions/__string'
-  __string:
-    type: string
-  __mapOf__string:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/__string'
-        value:
-          $ref: '#/definitions/__string'
-  __timestampIso8601:
-    type: string
-    format: date-time

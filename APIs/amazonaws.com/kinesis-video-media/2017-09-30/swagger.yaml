@@ -204,7 +204,8 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: The value for this input parameter is invalid.
-  undefined: {}
+  ErrorMessage:
+    type: string
   ContentType:
     type: string
     pattern: '^[a-zA-Z0-9_\.\-]+$'
@@ -215,15 +216,16 @@ definitions:
     pattern: '^[a-zA-Z0-9_\.\-]+$'
     minLength: 1
     maxLength: 128
-  ErrorMessage:
-    type: string
   FragmentNumberString:
     type: string
     pattern: '^[0-9]+$'
     minLength: 1
     maxLength: 128
-  Payload:
+  StreamName:
     type: string
+    pattern: '[a-zA-Z0-9_.-]+'
+    minLength: 1
+    maxLength: 256
   ResourceARN:
     type: string
     pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
@@ -247,6 +249,8 @@ definitions:
         $ref: '#/definitions/ContinuationToken'
         description: Continuation token that Kinesis Video Streams returned in the previous <code>GetMedia</code> response. The <code>GetMedia</code> API then starts with the chunk identified by the continuation token.
     description: '<p>Identifies the chunk on the Kinesis video stream where you want the <code>GetMedia</code> API to start returning media data. You have the following options to identify the starting chunk: </p> <ul> <li> <p>Choose the latest (or oldest) chunk.</p> </li> <li> <p>Identify a specific chunk. You can identify a specific chunk either by providing a fragment number or time stamp (server or producer). </p> </li> <li> <p>Each chunk''s metadata includes a continuation token as a Matroska (MKV) tag (<code>AWS_KINESISVIDEO_CONTINUATION_TOKEN</code>). If your previous <code>GetMedia</code> request terminated, you can use this tag value in your next <code>GetMedia</code> request. The API then starts returning chunks starting where the last API ended.</p> </li> </ul>'
+  Payload:
+    type: string
   StartSelectorType:
     type: string
     enum:
@@ -256,11 +260,6 @@ definitions:
       - NOW
       - EARLIEST
       - CONTINUATION_TOKEN
-  StreamName:
-    type: string
-    pattern: '[a-zA-Z0-9_.-]+'
-    minLength: 1
-    maxLength: 256
   Timestamp:
     type: string
     format: date-time

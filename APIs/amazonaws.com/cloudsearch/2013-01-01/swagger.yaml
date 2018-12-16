@@ -1519,7 +1519,32 @@ definitions:
   ARN:
     type: string
     description: 'The Amazon Resource Name (ARN) of the search domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
-  undefined: {}
+  PolicyDocument:
+    type: string
+    description: 'Access rules for a domain''s document or search service endpoints. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. The maximum size of a policy document is 100 KB.'
+  OptionStatus:
+    type: object
+    required:
+      - CreationDate
+      - UpdateDate
+      - State
+    properties:
+      CreationDate:
+        $ref: '#/definitions/UpdateTimestamp'
+        description: A timestamp for when this option was created.
+      UpdateDate:
+        $ref: '#/definitions/UpdateTimestamp'
+        description: A timestamp for when this option was last updated.
+      UpdateVersion:
+        $ref: '#/definitions/UIntValue'
+        description: A unique integer that indicates when this option was last updated.
+      State:
+        $ref: '#/definitions/OptionState'
+        description: '<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option''s latest value will not be deployed until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li> <code>Processing</code>: the option''s latest value is in the process of being activated. </li> <li> <code>Active</code>: the option''s latest value is completely deployed.</li> <li> <code>FailedToValidate</code>: the option value is not compatible with the domain''s data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li> </ul>'
+      PendingDeletion:
+        $ref: '#/definitions/Boolean'
+        description: Indicates that the option will be deleted once processing is complete.
+    description: The status of domain configuration option.
   AccessPoliciesStatus:
     type: object
     required:
@@ -1538,6 +1563,8 @@ definitions:
       - minimal
       - light
       - full
+  String:
+    type: string
   AnalysisOptions:
     type: object
     properties:
@@ -1557,19 +1584,12 @@ definitions:
         $ref: '#/definitions/AlgorithmicStemming'
         description: 'The level of algorithmic stemming to perform: <code>none</code>, <code>minimal</code>, <code>light</code>, or <code>full</code>. The available levels vary depending on the language. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings" target="_blank">Language Specific Text Processing Settings</a> in the <i>Amazon CloudSearch Developer Guide</i> '
     description: 'Synonyms, stopwords, and stemming options for an analysis scheme. Includes tokenization dictionary for Japanese.'
-  AnalysisScheme:
-    type: object
-    required:
-      - AnalysisSchemeName
-      - AnalysisSchemeLanguage
-    properties:
-      AnalysisSchemeName:
-        $ref: '#/definitions/StandardName'
-      AnalysisSchemeLanguage:
-        $ref: '#/definitions/AnalysisSchemeLanguage'
-      AnalysisOptions:
-        $ref: '#/definitions/AnalysisOptions'
-    description: 'Configuration information for an analysis scheme. Each analysis scheme has a unique name and specifies the language of the text to be processed. The following options can be configured for an analysis scheme: <code>Synonyms</code>, <code>Stopwords</code>, <code>StemmingDictionary</code>, <code>JapaneseTokenizationDictionary</code> and <code>AlgorithmicStemming</code>.'
+  StandardName:
+    type: string
+    pattern: '[a-z][a-z0-9_]*'
+    description: 'Names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore).'
+    minLength: 1
+    maxLength: 64
   AnalysisSchemeLanguage:
     type: string
     enum:
@@ -1609,6 +1629,19 @@ definitions:
       - zh-Hans
       - zh-Hant
     description: 'An <a href="http://tools.ietf.org/html/rfc4646" target="_blank">IETF RFC 4646</a> language code or <code>mul</code> for multiple languages.'
+  AnalysisScheme:
+    type: object
+    required:
+      - AnalysisSchemeName
+      - AnalysisSchemeLanguage
+    properties:
+      AnalysisSchemeName:
+        $ref: '#/definitions/StandardName'
+      AnalysisSchemeLanguage:
+        $ref: '#/definitions/AnalysisSchemeLanguage'
+      AnalysisOptions:
+        $ref: '#/definitions/AnalysisOptions'
+    description: 'Configuration information for an analysis scheme. Each analysis scheme has a unique name and specifies the language of the text to be processed. The following options can be configured for an analysis scheme: <code>Synonyms</code>, <code>Stopwords</code>, <code>StemmingDictionary</code>, <code>JapaneseTokenizationDictionary</code> and <code>AlgorithmicStemming</code>.'
   AnalysisSchemeStatus:
     type: object
     required:
@@ -1625,6 +1658,8 @@ definitions:
     description: A list of the analysis schemes configured for a domain.
     items:
       $ref: '#/definitions/AnalysisSchemeStatus'
+  MultiAZ:
+    type: boolean
   AvailabilityOptionsStatus:
     type: object
     required:
@@ -1637,89 +1672,25 @@ definitions:
       Status:
         $ref: '#/definitions/OptionStatus'
     description: The status and configuration of the domain's availability options.
+  ErrorCode:
+    type: string
+    description: A machine-parsable string error or warning code.
+  ErrorMessage:
+    type: string
+    description: A human-readable string error or warning message.
   Boolean:
     type: boolean
-  DateArrayOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceFields:
-        $ref: '#/definitions/FieldNameCommaList'
-        description: 'A list of source fields to map to the field. '
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-    description: Options for a field that contains an array of dates. Present if <code>IndexFieldType</code> specifies the field is of type <code>date-array</code>. All options are enabled by default.
-  DateOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceField:
-        $ref: '#/definitions/FieldName'
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-      SortEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the field can be used to sort the search results.
-    description: 'Options for a date field. Dates and times are specified in UTC (Coordinated Universal Time) according to IETF RFC3339: yyyy-mm-ddT00:00:00Z. Present if <code>IndexFieldType</code> specifies the field is of type <code>date</code>. All options are enabled by default.'
-  DocumentSuggesterOptions:
-    type: object
-    required:
-      - SourceField
-    properties:
-      SourceField:
-        $ref: '#/definitions/FieldName'
-        description: 'The name of the index field you want to use for suggestions. '
-      FuzzyMatching:
-        $ref: '#/definitions/SuggesterFuzzyMatching'
-        description: 'The level of fuzziness allowed when suggesting matches for a string: <code>none</code>, <code>low</code>, or <code>high</code>. With none, the specified string is treated as an exact prefix. With low, suggestions must differ from the specified string by no more than one character. With high, suggestions can differ by up to two characters. The default is none. '
-      SortExpression:
-        $ref: '#/definitions/String'
-        description: 'An expression that computes a score for each suggestion to control how they are sorted. The scores are rounded to the nearest integer, with a floor of 0 and a ceiling of 2^31-1. A document''s relevance score is not computed for suggestions, so sort expressions cannot reference the <code>_score</code> value. To sort suggestions using a numeric field or existing expression, simply specify the name of the field or expression. If no expression is configured for the suggester, the suggestions are sorted with the closest matches listed first.'
-    description: Options for a search suggester.
-  DomainId:
-    type: string
-    description: An internally generated unique identifier for a domain.
-    minLength: 1
-    maxLength: 64
   DomainName:
     type: string
     pattern: '[a-z][a-z0-9\-]+'
     description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
     minLength: 3
     maxLength: 28
-  DomainNameList:
+  FieldNameList:
     type: array
-    description: A list of domain names.
+    description: A list of field names.
     items:
-      $ref: '#/definitions/DomainName'
-  DomainNameMap:
-    type: array
-    description: A collection of domain names.
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DomainName'
-        value:
-          $ref: '#/definitions/APIVersion'
+      $ref: '#/definitions/FieldName'
   DomainStatus:
     type: object
     required:
@@ -1763,19 +1734,19 @@ definitions:
       Limits:
         $ref: '#/definitions/Limits'
     description: The current status of the search domain.
-  DomainStatusList:
-    type: array
-    description: A list that contains the status of each requested domain.
-    items:
-      $ref: '#/definitions/DomainStatus'
-  Double:
-    type: number
-    format: double
-  DoubleArrayOptions:
+  FieldValue:
+    type: string
+    description: The value of a field attribute.
+    minLength: 0
+    maxLength: 1024
+  FieldNameCommaList:
+    type: string
+    pattern: '\s*[a-z*][a-z0-9_]*\*?\s*(,\s*[a-z*][a-z0-9_]*\*?\s*)*'
+  DateArrayOptions:
     type: object
     properties:
       DefaultValue:
-        $ref: '#/definitions/Double'
+        $ref: '#/definitions/FieldValue'
         description: A value to use for the field if the field isn't specified for a document.
       SourceFields:
         $ref: '#/definitions/FieldNameCommaList'
@@ -1789,16 +1760,21 @@ definitions:
       ReturnEnabled:
         $ref: '#/definitions/Boolean'
         description: Whether the contents of the field can be returned in the search results.
-    description: Options for a field that contains an array of double-precision 64-bit floating point values. Present if <code>IndexFieldType</code> specifies the field is of type <code>double-array</code>. All options are enabled by default.
-  DoubleOptions:
+    description: Options for a field that contains an array of dates. Present if <code>IndexFieldType</code> specifies the field is of type <code>date-array</code>. All options are enabled by default.
+  FieldName:
+    type: string
+    pattern: '[a-z][a-z0-9_]*'
+    description: '<p>A string that represents the name of an index field. CloudSearch supports regular index fields as well as dynamic fields. A dynamic field''s name defines a pattern that begins or ends with a wildcard. Any document fields that don''t map to a regular index field but do match a dynamic field''s pattern are configured with the dynamic field''s indexing options. </p> <p>Regular field names begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Dynamic field names must begin or end with a wildcard (*). The wildcard can also be the only character in a dynamic field name. Multiple wildcards, and wildcards embedded within a string are not supported. </p> <p>The name <code>score</code> is reserved and cannot be used as a field name. To reference a document''s ID, you can use the name <code>_id</code>. </p>'
+    minLength: 1
+    maxLength: 64
+  DateOptions:
     type: object
     properties:
       DefaultValue:
-        $ref: '#/definitions/Double'
-        description: A value to use for the field if the field isn't specified for a document. This can be important if you are using the field in an expression and that field is not present in every document.
+        $ref: '#/definitions/FieldValue'
+        description: A value to use for the field if the field isn't specified for a document.
       SourceField:
         $ref: '#/definitions/FieldName'
-        description: 'The name of the source field to map to the field. '
       FacetEnabled:
         $ref: '#/definitions/Boolean'
         description: Whether facet information can be returned for the field.
@@ -1811,22 +1787,7 @@ definitions:
       SortEnabled:
         $ref: '#/definitions/Boolean'
         description: Whether the field can be used to sort the search results.
-    description: Options for a double-precision 64-bit floating point field. Present if <code>IndexFieldType</code> specifies the field is of type <code>double</code>. All options are enabled by default.
-  DynamicFieldName:
-    type: string
-    pattern: '([a-z][a-z0-9_]*\*?|\*[a-z0-9_]*)'
-    minLength: 1
-    maxLength: 64
-  DynamicFieldNameList:
-    type: array
-    items:
-      $ref: '#/definitions/DynamicFieldName'
-  ErrorCode:
-    type: string
-    description: A machine-parsable string error or warning code.
-  ErrorMessage:
-    type: string
-    description: A human-readable string error or warning message.
+    description: 'Options for a date field. Dates and times are specified in UTC (Coordinated Universal Time) according to IETF RFC3339: yyyy-mm-ddT00:00:00Z. Present if <code>IndexFieldType</code> specifies the field is of type <code>date</code>. All options are enabled by default.'
   Expression:
     type: object
     required:
@@ -1850,35 +1811,6 @@ definitions:
       Status:
         $ref: '#/definitions/OptionStatus'
     description: The value of an <code>Expression</code> and its current status.
-  ExpressionStatusList:
-    type: array
-    description: Contains the status of multiple expressions.
-    items:
-      $ref: '#/definitions/ExpressionStatus'
-  ExpressionValue:
-    type: string
-    description: 'The expression to evaluate for sorting while processing a search request. The <code>Expression</code> syntax is based on JavaScript expressions. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
-    minLength: 1
-    maxLength: 10240
-  FieldName:
-    type: string
-    pattern: '[a-z][a-z0-9_]*'
-    description: '<p>A string that represents the name of an index field. CloudSearch supports regular index fields as well as dynamic fields. A dynamic field''s name defines a pattern that begins or ends with a wildcard. Any document fields that don''t map to a regular index field but do match a dynamic field''s pattern are configured with the dynamic field''s indexing options. </p> <p>Regular field names begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Dynamic field names must begin or end with a wildcard (*). The wildcard can also be the only character in a dynamic field name. Multiple wildcards, and wildcards embedded within a string are not supported. </p> <p>The name <code>score</code> is reserved and cannot be used as a field name. To reference a document''s ID, you can use the name <code>_id</code>. </p>'
-    minLength: 1
-    maxLength: 64
-  FieldNameCommaList:
-    type: string
-    pattern: '\s*[a-z*][a-z0-9_]*\*?\s*(,\s*[a-z*][a-z0-9_]*\*?\s*)*'
-  FieldNameList:
-    type: array
-    description: A list of field names.
-    items:
-      $ref: '#/definitions/FieldName'
-  FieldValue:
-    type: string
-    description: The value of a field attribute.
-    minLength: 0
-    maxLength: 1024
   IndexField:
     type: object
     required:
@@ -1924,11 +1856,188 @@ definitions:
       Status:
         $ref: '#/definitions/OptionStatus'
     description: The value of an <code>IndexField</code> and its current status.
+  Suggester:
+    type: object
+    required:
+      - SuggesterName
+      - DocumentSuggesterOptions
+    properties:
+      SuggesterName:
+        $ref: '#/definitions/StandardName'
+      DocumentSuggesterOptions:
+        $ref: '#/definitions/DocumentSuggesterOptions'
+    description: 'Configuration information for a search suggester. Each suggester has a unique name and specifies the text field you want to use for suggestions. The following options can be configured for a suggester: <code>FuzzyMatching</code>, <code>SortExpression</code>. '
+  SuggesterStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/Suggester'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: The value of a <code>Suggester</code> and its current status.
+  DynamicFieldName:
+    type: string
+    pattern: '([a-z][a-z0-9_]*\*?|\*[a-z0-9_]*)'
+    minLength: 1
+    maxLength: 64
+  StandardNameList:
+    type: array
+    items:
+      $ref: '#/definitions/StandardName'
+  DomainNameList:
+    type: array
+    description: A list of domain names.
+    items:
+      $ref: '#/definitions/DomainName'
+  DomainStatusList:
+    type: array
+    description: A list that contains the status of each requested domain.
+    items:
+      $ref: '#/definitions/DomainStatus'
+  ExpressionStatusList:
+    type: array
+    description: Contains the status of multiple expressions.
+    items:
+      $ref: '#/definitions/ExpressionStatus'
+  DynamicFieldNameList:
+    type: array
+    items:
+      $ref: '#/definitions/DynamicFieldName'
   IndexFieldStatusList:
     type: array
     description: Contains the status of multiple index fields.
     items:
       $ref: '#/definitions/IndexFieldStatus'
+  ScalingParametersStatus:
+    type: object
+    required:
+      - Options
+      - Status
+    properties:
+      Options:
+        $ref: '#/definitions/ScalingParameters'
+      Status:
+        $ref: '#/definitions/OptionStatus'
+    description: 'The status and configuration of a search domain''s scaling parameters. '
+  SuggesterStatusList:
+    type: array
+    description: Contains the status of multiple suggesters.
+    items:
+      $ref: '#/definitions/SuggesterStatus'
+  SuggesterFuzzyMatching:
+    type: string
+    enum:
+      - none
+      - low
+      - high
+  DocumentSuggesterOptions:
+    type: object
+    required:
+      - SourceField
+    properties:
+      SourceField:
+        $ref: '#/definitions/FieldName'
+        description: 'The name of the index field you want to use for suggestions. '
+      FuzzyMatching:
+        $ref: '#/definitions/SuggesterFuzzyMatching'
+        description: 'The level of fuzziness allowed when suggesting matches for a string: <code>none</code>, <code>low</code>, or <code>high</code>. With none, the specified string is treated as an exact prefix. With low, suggestions must differ from the specified string by no more than one character. With high, suggestions can differ by up to two characters. The default is none. '
+      SortExpression:
+        $ref: '#/definitions/String'
+        description: 'An expression that computes a score for each suggestion to control how they are sorted. The scores are rounded to the nearest integer, with a floor of 0 and a ceiling of 2^31-1. A document''s relevance score is not computed for suggestions, so sort expressions cannot reference the <code>_score</code> value. To sort suggestions using a numeric field or existing expression, simply specify the name of the field or expression. If no expression is configured for the suggester, the suggestions are sorted with the closest matches listed first.'
+    description: Options for a search suggester.
+  DomainId:
+    type: string
+    description: An internally generated unique identifier for a domain.
+    minLength: 1
+    maxLength: 64
+  DomainNameMap:
+    type: array
+    description: A collection of domain names.
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DomainName'
+        value:
+          $ref: '#/definitions/APIVersion'
+  ServiceEndpoint:
+    type: object
+    properties:
+      Endpoint:
+        $ref: '#/definitions/ServiceUrl'
+    description: The endpoint to which service requests can be submitted.
+  SearchInstanceType:
+    type: string
+    description: The instance type (such as <code>search.m1.small</code>) that is being used to process search requests.
+  PartitionCount:
+    type: integer
+    description: The number of partitions used to hold the domain's index.
+    minimum: 1
+  InstanceCount:
+    type: integer
+    minimum: 1
+  Limits:
+    type: object
+    required:
+      - MaximumReplicationCount
+      - MaximumPartitionCount
+    properties:
+      MaximumReplicationCount:
+        $ref: '#/definitions/MaximumReplicationCount'
+      MaximumPartitionCount:
+        $ref: '#/definitions/MaximumPartitionCount'
+  Double:
+    type: number
+    format: double
+  DoubleArrayOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/Double'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceFields:
+        $ref: '#/definitions/FieldNameCommaList'
+        description: 'A list of source fields to map to the field. '
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+    description: Options for a field that contains an array of double-precision 64-bit floating point values. Present if <code>IndexFieldType</code> specifies the field is of type <code>double-array</code>. All options are enabled by default.
+  DoubleOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/Double'
+        description: A value to use for the field if the field isn't specified for a document. This can be important if you are using the field in an expression and that field is not present in every document.
+      SourceField:
+        $ref: '#/definitions/FieldName'
+        description: 'The name of the source field to map to the field. '
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+      SortEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the field can be used to sort the search results.
+    description: Options for a double-precision 64-bit floating point field. Present if <code>IndexFieldType</code> specifies the field is of type <code>double</code>. All options are enabled by default.
+  ExpressionValue:
+    type: string
+    description: 'The expression to evaluate for sorting while processing a search request. The <code>Expression</code> syntax is based on JavaScript expressions. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+    minLength: 1
+    maxLength: 10240
   IndexFieldType:
     type: string
     enum:
@@ -1944,28 +2053,6 @@ definitions:
       - text-array
       - date-array
     description: 'The type of field. The valid options for a field depend on the field type. For more information about the supported field types, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
-  InstanceCount:
-    type: integer
-    minimum: 1
-  IntArrayOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/Long'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceFields:
-        $ref: '#/definitions/FieldNameCommaList'
-        description: 'A list of source fields to map to the field. '
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-    description: Options for a field that contains an array of 64-bit signed integers. Present if <code>IndexFieldType</code> specifies the field is of type <code>int-array</code>. All options are enabled by default.
   IntOptions:
     type: object
     properties:
@@ -1988,56 +2075,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Whether the field can be used to sort the search results.
     description: Options for a 64-bit signed integer field. Present if <code>IndexFieldType</code> specifies the field is of type <code>int</code>. All options are enabled by default.
-  LatLonOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceField:
-        $ref: '#/definitions/FieldName'
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-      SortEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the field can be used to sort the search results.
-    description: Options for a latlon field. A latlon field contains a location stored as a latitude and longitude value pair. Present if <code>IndexFieldType</code> specifies the field is of type <code>latlon</code>. All options are enabled by default.
-  Limits:
-    type: object
-    required:
-      - MaximumReplicationCount
-      - MaximumPartitionCount
-    properties:
-      MaximumReplicationCount:
-        $ref: '#/definitions/MaximumReplicationCount'
-      MaximumPartitionCount:
-        $ref: '#/definitions/MaximumPartitionCount'
-  LiteralArrayOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceFields:
-        $ref: '#/definitions/FieldNameCommaList'
-        description: 'A list of source fields to map to the field. '
-      FacetEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether facet information can be returned for the field.
-      SearchEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field are searchable.
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-    description: Options for a field that contains an array of literal strings. Present if <code>IndexFieldType</code> specifies the field is of type <code>literal-array</code>. All options are enabled by default.
   LiteralOptions:
     type: object
     properties:
@@ -2059,166 +2096,6 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: Whether the field can be used to sort the search results.
     description: Options for literal field. Present if <code>IndexFieldType</code> specifies the field is of type <code>literal</code>. All options are enabled by default.
-  Long:
-    type: integer
-  MaximumPartitionCount:
-    type: integer
-    minimum: 1
-  MaximumReplicationCount:
-    type: integer
-    minimum: 1
-  MultiAZ:
-    type: boolean
-  OptionState:
-    type: string
-    enum:
-      - RequiresIndexDocuments
-      - Processing
-      - Active
-      - FailedToValidate
-    description: '<p>The state of processing a change to an option. One of:</p> <ul> <li>RequiresIndexDocuments: The option''s latest value will not be deployed until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li>Processing: The option''s latest value is in the process of being activated.</li> <li>Active: The option''s latest value is fully deployed. </li> <li>FailedToValidate: The option value is not compatible with the domain''s data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li> </ul>'
-  OptionStatus:
-    type: object
-    required:
-      - CreationDate
-      - UpdateDate
-      - State
-    properties:
-      CreationDate:
-        $ref: '#/definitions/UpdateTimestamp'
-        description: A timestamp for when this option was created.
-      UpdateDate:
-        $ref: '#/definitions/UpdateTimestamp'
-        description: A timestamp for when this option was last updated.
-      UpdateVersion:
-        $ref: '#/definitions/UIntValue'
-        description: A unique integer that indicates when this option was last updated.
-      State:
-        $ref: '#/definitions/OptionState'
-        description: '<p>The state of processing a change to an option. Possible values:</p> <ul> <li> <code>RequiresIndexDocuments</code>: the option''s latest value will not be deployed until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li> <code>Processing</code>: the option''s latest value is in the process of being activated. </li> <li> <code>Active</code>: the option''s latest value is completely deployed.</li> <li> <code>FailedToValidate</code>: the option value is not compatible with the domain''s data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li> </ul>'
-      PendingDeletion:
-        $ref: '#/definitions/Boolean'
-        description: Indicates that the option will be deleted once processing is complete.
-    description: The status of domain configuration option.
-  PartitionCount:
-    type: integer
-    description: The number of partitions used to hold the domain's index.
-    minimum: 1
-  PartitionInstanceType:
-    type: string
-    enum:
-      - search.m1.small
-      - search.m1.large
-      - search.m2.xlarge
-      - search.m2.2xlarge
-      - search.m3.medium
-      - search.m3.large
-      - search.m3.xlarge
-      - search.m3.2xlarge
-    description: The instance type (such as <code>search.m1.small</code>) on which an index partition is hosted.
-  PolicyDocument:
-    type: string
-    description: 'Access rules for a domain''s document or search service endpoints. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. The maximum size of a policy document is 100 KB.'
-  ScalingParameters:
-    type: object
-    properties:
-      DesiredInstanceType:
-        $ref: '#/definitions/PartitionInstanceType'
-        description: 'The instance type that you want to preconfigure for your domain. For example, <code>search.m1.small</code>.'
-      DesiredReplicationCount:
-        $ref: '#/definitions/UIntValue'
-        description: The number of replicas you want to preconfigure for each index partition.
-      DesiredPartitionCount:
-        $ref: '#/definitions/UIntValue'
-        description: The number of partitions you want to preconfigure for your domain. Only valid when you select <code>m2.2xlarge</code> as the desired instance type.
-    description: The desired instance type and desired number of replicas of each index partition.
-  ScalingParametersStatus:
-    type: object
-    required:
-      - Options
-      - Status
-    properties:
-      Options:
-        $ref: '#/definitions/ScalingParameters'
-      Status:
-        $ref: '#/definitions/OptionStatus'
-    description: 'The status and configuration of a search domain''s scaling parameters. '
-  SearchInstanceType:
-    type: string
-    description: The instance type (such as <code>search.m1.small</code>) that is being used to process search requests.
-  ServiceEndpoint:
-    type: object
-    properties:
-      Endpoint:
-        $ref: '#/definitions/ServiceUrl'
-    description: The endpoint to which service requests can be submitted.
-  ServiceUrl:
-    type: string
-    description: 'The endpoint to which service requests can be submitted. For example, <code>search-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com</code> or <code>doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com</code>.'
-  StandardName:
-    type: string
-    pattern: '[a-z][a-z0-9_]*'
-    description: 'Names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore).'
-    minLength: 1
-    maxLength: 64
-  StandardNameList:
-    type: array
-    items:
-      $ref: '#/definitions/StandardName'
-  String:
-    type: string
-  Suggester:
-    type: object
-    required:
-      - SuggesterName
-      - DocumentSuggesterOptions
-    properties:
-      SuggesterName:
-        $ref: '#/definitions/StandardName'
-      DocumentSuggesterOptions:
-        $ref: '#/definitions/DocumentSuggesterOptions'
-    description: 'Configuration information for a search suggester. Each suggester has a unique name and specifies the text field you want to use for suggestions. The following options can be configured for a suggester: <code>FuzzyMatching</code>, <code>SortExpression</code>. '
-  SuggesterFuzzyMatching:
-    type: string
-    enum:
-      - none
-      - low
-      - high
-  SuggesterStatus:
-    type: object
-    required:
-      - Options
-      - Status
-    properties:
-      Options:
-        $ref: '#/definitions/Suggester'
-      Status:
-        $ref: '#/definitions/OptionStatus'
-    description: The value of a <code>Suggester</code> and its current status.
-  SuggesterStatusList:
-    type: array
-    description: Contains the status of multiple suggesters.
-    items:
-      $ref: '#/definitions/SuggesterStatus'
-  TextArrayOptions:
-    type: object
-    properties:
-      DefaultValue:
-        $ref: '#/definitions/FieldValue'
-        description: A value to use for the field if the field isn't specified for a document.
-      SourceFields:
-        $ref: '#/definitions/FieldNameCommaList'
-        description: 'A list of source fields to map to the field. '
-      ReturnEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether the contents of the field can be returned in the search results.
-      HighlightEnabled:
-        $ref: '#/definitions/Boolean'
-        description: Whether highlights can be returned for the field.
-      AnalysisScheme:
-        $ref: '#/definitions/Word'
-        description: The name of an analysis scheme for a <code>text-array</code> field.
-    description: Options for a field that contains an array of text strings. Present if <code>IndexFieldType</code> specifies the field is of type <code>text-array</code>. A <code>text-array</code> field is always searchable. All options are enabled by default.
   TextOptions:
     type: object
     properties:
@@ -2240,12 +2117,134 @@ definitions:
         $ref: '#/definitions/Word'
         description: The name of an analysis scheme for a <code>text</code> field.
     description: Options for text field. Present if <code>IndexFieldType</code> specifies the field is of type <code>text</code>. A <code>text</code> field is always searchable. All options are enabled by default.
-  UIntValue:
+  LatLonOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceField:
+        $ref: '#/definitions/FieldName'
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+      SortEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the field can be used to sort the search results.
+    description: Options for a latlon field. A latlon field contains a location stored as a latitude and longitude value pair. Present if <code>IndexFieldType</code> specifies the field is of type <code>latlon</code>. All options are enabled by default.
+  IntArrayOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/Long'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceFields:
+        $ref: '#/definitions/FieldNameCommaList'
+        description: 'A list of source fields to map to the field. '
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+    description: Options for a field that contains an array of 64-bit signed integers. Present if <code>IndexFieldType</code> specifies the field is of type <code>int-array</code>. All options are enabled by default.
+  LiteralArrayOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceFields:
+        $ref: '#/definitions/FieldNameCommaList'
+        description: 'A list of source fields to map to the field. '
+      FacetEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether facet information can be returned for the field.
+      SearchEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field are searchable.
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+    description: Options for a field that contains an array of literal strings. Present if <code>IndexFieldType</code> specifies the field is of type <code>literal-array</code>. All options are enabled by default.
+  TextArrayOptions:
+    type: object
+    properties:
+      DefaultValue:
+        $ref: '#/definitions/FieldValue'
+        description: A value to use for the field if the field isn't specified for a document.
+      SourceFields:
+        $ref: '#/definitions/FieldNameCommaList'
+        description: 'A list of source fields to map to the field. '
+      ReturnEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether the contents of the field can be returned in the search results.
+      HighlightEnabled:
+        $ref: '#/definitions/Boolean'
+        description: Whether highlights can be returned for the field.
+      AnalysisScheme:
+        $ref: '#/definitions/Word'
+        description: The name of an analysis scheme for a <code>text-array</code> field.
+    description: Options for a field that contains an array of text strings. Present if <code>IndexFieldType</code> specifies the field is of type <code>text-array</code>. A <code>text-array</code> field is always searchable. All options are enabled by default.
+  Long:
     type: integer
-    minimum: 0
+  MaximumReplicationCount:
+    type: integer
+    minimum: 1
+  MaximumPartitionCount:
+    type: integer
+    minimum: 1
+  OptionState:
+    type: string
+    enum:
+      - RequiresIndexDocuments
+      - Processing
+      - Active
+      - FailedToValidate
+    description: '<p>The state of processing a change to an option. One of:</p> <ul> <li>RequiresIndexDocuments: The option''s latest value will not be deployed until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li>Processing: The option''s latest value is in the process of being activated.</li> <li>Active: The option''s latest value is fully deployed. </li> <li>FailedToValidate: The option value is not compatible with the domain''s data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li> </ul>'
   UpdateTimestamp:
     type: string
     format: date-time
+  UIntValue:
+    type: integer
+    minimum: 0
+  PartitionInstanceType:
+    type: string
+    enum:
+      - search.m1.small
+      - search.m1.large
+      - search.m2.xlarge
+      - search.m2.2xlarge
+      - search.m3.medium
+      - search.m3.large
+      - search.m3.xlarge
+      - search.m3.2xlarge
+    description: The instance type (such as <code>search.m1.small</code>) on which an index partition is hosted.
+  ScalingParameters:
+    type: object
+    properties:
+      DesiredInstanceType:
+        $ref: '#/definitions/PartitionInstanceType'
+        description: 'The instance type that you want to preconfigure for your domain. For example, <code>search.m1.small</code>.'
+      DesiredReplicationCount:
+        $ref: '#/definitions/UIntValue'
+        description: The number of replicas you want to preconfigure for each index partition.
+      DesiredPartitionCount:
+        $ref: '#/definitions/UIntValue'
+        description: The number of partitions you want to preconfigure for your domain. Only valid when you select <code>m2.2xlarge</code> as the desired instance type.
+    description: The desired instance type and desired number of replicas of each index partition.
+  ServiceUrl:
+    type: string
+    description: 'The endpoint to which service requests can be submitted. For example, <code>search-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com</code> or <code>doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com</code>.'
   Word:
     type: string
     pattern: '[\S]+'

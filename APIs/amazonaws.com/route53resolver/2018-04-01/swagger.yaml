@@ -1605,99 +1605,10 @@ definitions:
     type: string
     minLength: 1
     maxLength: 255
-  undefined: {}
-  Boolean:
-    type: boolean
-  CreatorRequestId:
-    type: string
-    minLength: 1
-    maxLength: 255
-  DomainName:
-    type: string
-    minLength: 1
-    maxLength: 256
-  Filter:
-    type: object
-    properties:
-      Name:
-        $ref: '#/definitions/FilterName'
-        description: 'When you''re using a <code>List</code> operation and you want the operation to return a subset of objects, such as resolver endpoints or resolver rules, the name of the parameter that you want to use to filter objects. For example, to list only inbound resolver endpoints, specify <code>Direction</code> for the value of <code>Name</code>.'
-      Values:
-        $ref: '#/definitions/FilterValues'
-        description: 'When you''re using a <code>List</code> operation and you want the operation to return a subset of objects, such as resolver endpoints or resolver rules, the value of the parameter that you want to use to filter objects. For example, to list only inbound resolver endpoints, specify <code>INBOUND</code> for the value of <code>Values</code>.'
-    description: 'For <code>List</code> operations, an optional specification to return a subset of objects, such as resolver endpoints or resolver rules.'
-  FilterName:
+  ResourceId:
     type: string
     minLength: 1
     maxLength: 64
-  FilterValue:
-    type: string
-    minLength: 1
-    maxLength: 64
-  FilterValues:
-    type: array
-    items:
-      $ref: '#/definitions/FilterValue'
-  Filters:
-    type: array
-    items:
-      $ref: '#/definitions/Filter'
-  Ip:
-    type: string
-    minLength: 7
-    maxLength: 36
-  IpAddressCount:
-    type: integer
-  IpAddressRequest:
-    type: object
-    required:
-      - SubnetId
-    properties:
-      SubnetId:
-        $ref: '#/definitions/SubnetId'
-        description: The subnet that contains the IP address.
-      Ip:
-        $ref: '#/definitions/Ip'
-        description: The IP address that you want to use for DNS queries.
-    description: 'In an <a>CreateResolverEndpoint</a> request, a subnet and IP address that you want to use for DNS queries.'
-  IpAddressResponse:
-    type: object
-    properties:
-      IpId:
-        $ref: '#/definitions/ResourceId'
-        description: The ID of one IP address.
-      SubnetId:
-        $ref: '#/definitions/SubnetId'
-        description: The ID of one subnet.
-      Ip:
-        $ref: '#/definitions/Ip'
-        description: One IP address that the resolver endpoint uses for DNS queries.
-      Status:
-        $ref: '#/definitions/IpAddressStatus'
-        description: A status code that gives the current status of the request.
-      StatusMessage:
-        $ref: '#/definitions/StatusMessage'
-        description: A message that provides additional information about the status of the request.
-      CreationTime:
-        $ref: '#/definitions/Rfc3339TimeString'
-        description: 'The date and time that the IP address was created, in Unix time format and Coordinated Universal Time (UTC).'
-      ModificationTime:
-        $ref: '#/definitions/Rfc3339TimeString'
-        description: 'The date and time that the IP address was last modified, in Unix time format and Coordinated Universal Time (UTC).'
-    description: 'In the response to a <a>GetResolverEndpoint</a> request, information about the IP addresses that the resolver endpoint uses for DNS queries.'
-  IpAddressStatus:
-    type: string
-    enum:
-      - CREATING
-      - FAILED_CREATION
-      - ATTACHING
-      - ATTACHED
-      - REMAP_DETACHING
-      - REMAP_ATTACHING
-      - DETACHING
-      - FAILED_RESOURCE_GONE
-      - DELETING
-      - DELETE_FAILED_FAS_EXPIRED
   IpAddressUpdate:
     type: object
     properties:
@@ -1711,30 +1622,6 @@ definitions:
         $ref: '#/definitions/Ip'
         description: The new IP address.
     description: 'In an <a>UpdateResolverEndpoint</a> request, information about an IP address to update.'
-  IpAddressesRequest:
-    type: array
-    items:
-      $ref: '#/definitions/IpAddressRequest'
-    minItems: 1
-    maxItems: 10
-  IpAddressesResponse:
-    type: array
-    items:
-      $ref: '#/definitions/IpAddressResponse'
-  MaxResults:
-    type: integer
-    minimum: 1
-    maximum: 100
-  Name:
-    type: string
-    pattern: '(?!^[0-9]+$)([a-zA-Z0-9-_'' '']+)'
-    maxLength: 64
-  NextToken:
-    type: string
-  Port:
-    type: integer
-    minimum: 0
-    maximum: 65535
   ResolverEndpoint:
     type: object
     properties:
@@ -1775,24 +1662,72 @@ definitions:
         $ref: '#/definitions/Rfc3339TimeString'
         description: 'The date and time that the endpoint was last modified, in Unix time format and Coordinated Universal Time (UTC).'
     description: 'In the response to a <a>CreateResolverEndpoint</a>, <a>DeleteResolverEndpoint</a>, <a>GetResolverEndpoint</a>, <a>ListResolverEndpoints</a>, or <a>UpdateResolverEndpoint</a> request, a complex type that contains settings for an existing inbound or outbound resolver endpoint.'
+  Name:
+    type: string
+    pattern: '(?!^[0-9]+$)([a-zA-Z0-9-_'' '']+)'
+    maxLength: 64
+  ResolverRuleAssociation:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ResourceId'
+        description: The ID of the association between a resolver rule and a VPC. Resolver assigns this value when you submit an <a>AssociateResolverRule</a> request.
+      ResolverRuleId:
+        $ref: '#/definitions/ResourceId'
+        description: The ID of the resolver rule that you associated with the VPC that is specified by <code>VPCId</code>.
+      Name:
+        $ref: '#/definitions/Name'
+        description: The name of an association between a resolver rule and a VPC.
+      VPCId:
+        $ref: '#/definitions/ResourceId'
+        description: The ID of the VPC that you associated the resolver rule with.
+      Status:
+        $ref: '#/definitions/ResolverRuleAssociationStatus'
+        description: A code that specifies the current status of the association between a resolver rule and a VPC.
+      StatusMessage:
+        $ref: '#/definitions/StatusMessage'
+        description: A detailed description of the status of the association between a resolver rule and a VPC.
+    description: 'In the response to an <a>AssociateResolverRule</a>, <a>DisassociateResolverRule</a>, or <a>ListResolverRuleAssociations</a> request, information about an association between a resolver rule and a VPC.'
+  Boolean:
+    type: boolean
+  CreatorRequestId:
+    type: string
+    minLength: 1
+    maxLength: 255
+  SecurityGroupIds:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceId'
   ResolverEndpointDirection:
     type: string
     enum:
       - INBOUND
       - OUTBOUND
-  ResolverEndpointStatus:
-    type: string
-    enum:
-      - CREATING
-      - OPERATIONAL
-      - UPDATING
-      - AUTO_RECOVERING
-      - ACTION_NEEDED
-      - DELETING
-  ResolverEndpoints:
+  IpAddressesRequest:
     type: array
     items:
-      $ref: '#/definitions/ResolverEndpoint'
+      $ref: '#/definitions/IpAddressRequest'
+    minItems: 1
+    maxItems: 10
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  RuleTypeOption:
+    type: string
+    enum:
+      - FORWARD
+      - SYSTEM
+      - RECURSIVE
+  DomainName:
+    type: string
+    minLength: 1
+    maxLength: 256
+  TargetList:
+    type: array
+    items:
+      $ref: '#/definitions/TargetAddress'
+    minItems: 1
   ResolverRule:
     type: object
     properties:
@@ -1833,28 +1768,150 @@ definitions:
         $ref: '#/definitions/ShareStatus'
         description: 'Whether the rules is shared and, if so, whether the current account is sharing the rule with another account, or another account is sharing the rule with the current account.'
     description: 'For queries that originate in your VPC, detailed information about a resolver rule, which specifies how to route DNS queries out of the VPC. The <code>ResolverRule</code> parameter appears in the response to a <a>CreateResolverRule</a>, <a>DeleteResolverRule</a>, <a>GetResolverRule</a>, <a>ListResolverRules</a>, or <a>UpdateResolverRule</a> request.'
-  ResolverRuleAssociation:
+  FilterName:
+    type: string
+    minLength: 1
+    maxLength: 64
+  FilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/FilterValue'
+  Filter:
     type: object
     properties:
-      Id:
-        $ref: '#/definitions/ResourceId'
-        description: The ID of the association between a resolver rule and a VPC. Resolver assigns this value when you submit an <a>AssociateResolverRule</a> request.
-      ResolverRuleId:
-        $ref: '#/definitions/ResourceId'
-        description: The ID of the resolver rule that you associated with the VPC that is specified by <code>VPCId</code>.
       Name:
-        $ref: '#/definitions/Name'
-        description: The name of an association between a resolver rule and a VPC.
-      VPCId:
+        $ref: '#/definitions/FilterName'
+        description: 'When you''re using a <code>List</code> operation and you want the operation to return a subset of objects, such as resolver endpoints or resolver rules, the name of the parameter that you want to use to filter objects. For example, to list only inbound resolver endpoints, specify <code>Direction</code> for the value of <code>Name</code>.'
+      Values:
+        $ref: '#/definitions/FilterValues'
+        description: 'When you''re using a <code>List</code> operation and you want the operation to return a subset of objects, such as resolver endpoints or resolver rules, the value of the parameter that you want to use to filter objects. For example, to list only inbound resolver endpoints, specify <code>INBOUND</code> for the value of <code>Values</code>.'
+    description: 'For <code>List</code> operations, an optional specification to return a subset of objects, such as resolver endpoints or resolver rules.'
+  FilterValue:
+    type: string
+    minLength: 1
+    maxLength: 64
+  Filters:
+    type: array
+    items:
+      $ref: '#/definitions/Filter'
+  ResolverRulePolicy:
+    type: string
+    maxLength: 5000
+  Ip:
+    type: string
+    minLength: 7
+    maxLength: 36
+  IpAddressCount:
+    type: integer
+  SubnetId:
+    type: string
+    minLength: 1
+    maxLength: 32
+  IpAddressRequest:
+    type: object
+    required:
+      - SubnetId
+    properties:
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: The subnet that contains the IP address.
+      Ip:
+        $ref: '#/definitions/Ip'
+        description: The IP address that you want to use for DNS queries.
+    description: 'In an <a>CreateResolverEndpoint</a> request, a subnet and IP address that you want to use for DNS queries.'
+  IpAddressStatus:
+    type: string
+    enum:
+      - CREATING
+      - FAILED_CREATION
+      - ATTACHING
+      - ATTACHED
+      - REMAP_DETACHING
+      - REMAP_ATTACHING
+      - DETACHING
+      - FAILED_RESOURCE_GONE
+      - DELETING
+      - DELETE_FAILED_FAS_EXPIRED
+  StatusMessage:
+    type: string
+    maxLength: 255
+  Rfc3339TimeString:
+    type: string
+    minLength: 20
+    maxLength: 40
+  IpAddressResponse:
+    type: object
+    properties:
+      IpId:
         $ref: '#/definitions/ResourceId'
-        description: The ID of the VPC that you associated the resolver rule with.
+        description: The ID of one IP address.
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: The ID of one subnet.
+      Ip:
+        $ref: '#/definitions/Ip'
+        description: One IP address that the resolver endpoint uses for DNS queries.
       Status:
-        $ref: '#/definitions/ResolverRuleAssociationStatus'
-        description: A code that specifies the current status of the association between a resolver rule and a VPC.
+        $ref: '#/definitions/IpAddressStatus'
+        description: A status code that gives the current status of the request.
       StatusMessage:
         $ref: '#/definitions/StatusMessage'
-        description: A detailed description of the status of the association between a resolver rule and a VPC.
-    description: 'In the response to an <a>AssociateResolverRule</a>, <a>DisassociateResolverRule</a>, or <a>ListResolverRuleAssociations</a> request, information about an association between a resolver rule and a VPC.'
+        description: A message that provides additional information about the status of the request.
+      CreationTime:
+        $ref: '#/definitions/Rfc3339TimeString'
+        description: 'The date and time that the IP address was created, in Unix time format and Coordinated Universal Time (UTC).'
+      ModificationTime:
+        $ref: '#/definitions/Rfc3339TimeString'
+        description: 'The date and time that the IP address was last modified, in Unix time format and Coordinated Universal Time (UTC).'
+    description: 'In the response to a <a>GetResolverEndpoint</a> request, information about the IP addresses that the resolver endpoint uses for DNS queries.'
+  IpAddressesResponse:
+    type: array
+    items:
+      $ref: '#/definitions/IpAddressResponse'
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  NextToken:
+    type: string
+  ResolverEndpoints:
+    type: array
+    items:
+      $ref: '#/definitions/ResolverEndpoint'
+  ResolverRuleAssociations:
+    type: array
+    items:
+      $ref: '#/definitions/ResolverRuleAssociation'
+  ResolverRules:
+    type: array
+    items:
+      $ref: '#/definitions/ResolverRule'
+  Port:
+    type: integer
+    minimum: 0
+    maximum: 65535
+  ResolverEndpointStatus:
+    type: string
+    enum:
+      - CREATING
+      - OPERATIONAL
+      - UPDATING
+      - AUTO_RECOVERING
+      - ACTION_NEEDED
+      - DELETING
+  ResolverRuleStatus:
+    type: string
+    enum:
+      - COMPLETE
+      - DELETING
+      - UPDATING
+      - FAILED
+  ShareStatus:
+    type: string
+    enum:
+      - NOT_SHARED
+      - SHARED_WITH_ME
+      - SHARED_BY_ME
   ResolverRuleAssociationStatus:
     type: string
     enum:
@@ -1863,10 +1920,6 @@ definitions:
       - DELETING
       - FAILED
       - OVERRIDDEN
-  ResolverRuleAssociations:
-    type: array
-    items:
-      $ref: '#/definitions/ResolverRuleAssociation'
   ResolverRuleConfig:
     type: object
     properties:
@@ -1880,51 +1933,10 @@ definitions:
         $ref: '#/definitions/ResourceId'
         description: The ID of the new outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify in <code>TargetIps</code>.
     description: 'In an <a>UpdateResolverRule</a> request, information about the changes that you want to make.'
-  ResolverRulePolicy:
+  TagKey:
     type: string
-    maxLength: 5000
-  ResolverRuleStatus:
+  TagValue:
     type: string
-    enum:
-      - COMPLETE
-      - DELETING
-      - UPDATING
-      - FAILED
-  ResolverRules:
-    type: array
-    items:
-      $ref: '#/definitions/ResolverRule'
-  ResourceId:
-    type: string
-    minLength: 1
-    maxLength: 64
-  Rfc3339TimeString:
-    type: string
-    minLength: 20
-    maxLength: 40
-  RuleTypeOption:
-    type: string
-    enum:
-      - FORWARD
-      - SYSTEM
-      - RECURSIVE
-  SecurityGroupIds:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceId'
-  ShareStatus:
-    type: string
-    enum:
-      - NOT_SHARED
-      - SHARED_WITH_ME
-      - SHARED_BY_ME
-  StatusMessage:
-    type: string
-    maxLength: 255
-  SubnetId:
-    type: string
-    minLength: 1
-    maxLength: 32
   Tag:
     type: object
     properties:
@@ -1935,18 +1947,10 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: 'The value for the tag. For example, if <code>Key</code> is <code>account-id</code>, then <code>Value</code> might be the ID of the customer account that you''re creating the resource for.'
     description: One tag that you want to add to the specified resource. A tag consists of a <code>Key</code> (a name for the tag) and a <code>Value</code>.
-  TagKey:
-    type: string
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValue:
-    type: string
   TargetAddress:
     type: object
     required:
@@ -1959,8 +1963,3 @@ definitions:
         $ref: '#/definitions/Port'
         description: The port at <code>Ip</code> that you want to forward DNS queries to.
     description: 'In a <a>CreateResolverRule</a> request, an array of the IPs that you want to forward DNS queries to.'
-  TargetList:
-    type: array
-    items:
-      $ref: '#/definitions/TargetAddress'
-    minItems: 1

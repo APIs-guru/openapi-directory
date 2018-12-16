@@ -1483,7 +1483,10 @@ definitions:
       description:
         $ref: '#/definitions/String'
         description: New description of the application to be updated.
-  undefined: {}
+  String:
+    type: string
+  Boolean:
+    type: boolean
   AgentConfigurationStatus:
     type: object
     properties:
@@ -1507,6 +1510,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AgentId'
+  AgentNetworkInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/AgentNetworkInfo'
+  AgentStatus:
+    type: string
+    enum:
+      - HEALTHY
+      - UNHEALTHY
+      - RUNNING
+      - UNKNOWN
+      - BLACKLISTED
+      - SHUTDOWN
   AgentInfo:
     type: object
     properties:
@@ -1551,19 +1567,6 @@ definitions:
         $ref: '#/definitions/String'
         description: The MAC address for the host where the agent/connector resides.
     description: Network details about the host where the agent/connector resides.
-  AgentNetworkInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/AgentNetworkInfo'
-  AgentStatus:
-    type: string
-    enum:
-      - HEALTHY
-      - UNHEALTHY
-      - RUNNING
-      - UNKNOWN
-      - BLACKLISTED
-      - SHUTDOWN
   AgentsInfo:
     type: array
     items:
@@ -1574,13 +1577,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ApplicationId'
-  Boolean:
-    type: boolean
+  ConfigurationIdList:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationId'
   BoxedInteger:
     type: integer
   Condition:
-    type: string
-  String:
     type: string
   Configuration:
     type: array
@@ -1593,10 +1596,6 @@ definitions:
           $ref: '#/definitions/String'
   ConfigurationId:
     type: string
-  ConfigurationIdList:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationId'
   ConfigurationItemType:
     type: string
     enum:
@@ -1604,6 +1603,13 @@ definitions:
       - PROCESS
       - CONNECTION
       - APPLICATION
+  TagKey:
+    type: string
+  TagValue:
+    type: string
+  TimeStamp:
+    type: string
+    format: date-time
   ConfigurationTag:
     type: object
     properties:
@@ -1635,6 +1641,35 @@ definitions:
     type: string
   ConfigurationsExportId:
     type: string
+  ContinuousExportStatus:
+    type: string
+    enum:
+      - START_IN_PROGRESS
+      - START_FAILED
+      - ACTIVE
+      - ERROR
+      - STOP_IN_PROGRESS
+      - STOP_FAILED
+      - INACTIVE
+  StringMax255:
+    type: string
+    minLength: 1
+    maxLength: 255
+  S3Bucket:
+    type: string
+  DataSource:
+    type: string
+    enum:
+      - AGENT
+  SchemaStorageConfig:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/DatabaseName'
+        value:
+          $ref: '#/definitions/String'
   ContinuousExportDescription:
     type: object
     properties:
@@ -1671,16 +1706,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ConfigurationsExportId'
-  ContinuousExportStatus:
-    type: string
-    enum:
-      - START_IN_PROGRESS
-      - START_FAILED
-      - ACTIVE
-      - ERROR
-      - STOP_IN_PROGRESS
-      - STOP_FAILED
-      - INACTIVE
+  TagSet:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  Integer:
+    type: integer
   CustomerAgentInfo:
     type: object
     required:
@@ -1747,14 +1778,16 @@ definitions:
         $ref: '#/definitions/Integer'
         description: Number of unknown discovery connectors.
     description: Inventory data for installed discovery connectors.
-  DataSource:
-    type: string
-    enum:
-      - AGENT
   DatabaseName:
     type: string
     minLength: 1
     maxLength: 252
+  Filters:
+    type: array
+    items:
+      $ref: '#/definitions/Filter'
+  NextToken:
+    type: string
   DescribeConfigurationsAttribute:
     type: array
     items:
@@ -1772,6 +1805,22 @@ definitions:
     type: integer
     minimum: 1
     maximum: 100
+  ExportIds:
+    type: array
+    items:
+      $ref: '#/definitions/ConfigurationsExportId'
+  ExportsInfo:
+    type: array
+    items:
+      $ref: '#/definitions/ExportInfo'
+  ExportFilters:
+    type: array
+    items:
+      $ref: '#/definitions/ExportFilter'
+  TagFilters:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilter'
   ExportDataFormat:
     type: string
     enum:
@@ -1781,6 +1830,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ExportDataFormat'
+  FilterName:
+    type: string
+  FilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/FilterValue'
   ExportFilter:
     type: object
     required:
@@ -1798,14 +1853,17 @@ definitions:
         $ref: '#/definitions/Condition'
         description: 'Supported condition: <code>EQUALS</code> '
     description: 'Used to select which agent''s data is to be exported. A single agent ID may be selected for export using the <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html">StartExportTask</a> action.'
-  ExportFilters:
-    type: array
-    items:
-      $ref: '#/definitions/ExportFilter'
-  ExportIds:
-    type: array
-    items:
-      $ref: '#/definitions/ConfigurationsExportId'
+  ExportStatus:
+    type: string
+    enum:
+      - FAILED
+      - SUCCEEDED
+      - IN_PROGRESS
+  ExportStatusMessage:
+    type: string
+  ExportRequestTime:
+    type: string
+    format: date-time
   ExportInfo:
     type: object
     required:
@@ -1839,21 +1897,6 @@ definitions:
         $ref: '#/definitions/TimeStamp'
         description: 'The <code>endTime</code> used in the <code>StartExportTask</code> request. If no <code>endTime</code> was requested, this result does not appear in <code>ExportInfo</code>.'
     description: Information regarding the export status of discovered data. The value is an array of objects.
-  ExportRequestTime:
-    type: string
-    format: date-time
-  ExportStatus:
-    type: string
-    enum:
-      - FAILED
-      - SUCCEEDED
-      - IN_PROGRESS
-  ExportStatusMessage:
-    type: string
-  ExportsInfo:
-    type: array
-    items:
-      $ref: '#/definitions/ExportInfo'
   Filter:
     type: object
     required:
@@ -1871,22 +1914,18 @@ definitions:
         $ref: '#/definitions/Condition'
         description: 'A conditional operator. The following operators are valid: EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS. If you specify multiple filters, the system utilizes all filters as though concatenated by <i>AND</i>. If you specify multiple values for a particular filter, the system differentiates the values using <i>OR</i>. Calling either <i>DescribeConfigurations</i> or <i>ListConfigurations</i> returns attributes of matching configuration items.'
     description: '<p>A filter that can use conditional operators.</p> <p>For more information about filters, see <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html">Querying Discovered Configuration Items</a>. </p>'
-  FilterName:
-    type: string
   FilterValue:
     type: string
-  FilterValues:
-    type: array
-    items:
-      $ref: '#/definitions/FilterValue'
-  Filters:
-    type: array
-    items:
-      $ref: '#/definitions/Filter'
-  Integer:
-    type: integer
   Long:
     type: integer
+  OrderByList:
+    type: array
+    items:
+      $ref: '#/definitions/OrderByElement'
+  NeighborDetailsList:
+    type: array
+    items:
+      $ref: '#/definitions/NeighborConnectionDetail'
   NeighborConnectionDetail:
     type: object
     required:
@@ -1910,12 +1949,11 @@ definitions:
         $ref: '#/definitions/Long'
         description: The number of open network connections with the neighboring server.
     description: Details about neighboring servers.
-  NeighborDetailsList:
-    type: array
-    items:
-      $ref: '#/definitions/NeighborConnectionDetail'
-  NextToken:
+  orderString:
     type: string
+    enum:
+      - ASC
+      - DESC
   OrderByElement:
     type: object
     required:
@@ -1928,25 +1966,6 @@ definitions:
         $ref: '#/definitions/orderString'
         description: Ordering direction.
     description: A field and direction for ordered output.
-  OrderByList:
-    type: array
-    items:
-      $ref: '#/definitions/OrderByElement'
-  S3Bucket:
-    type: string
-  SchemaStorageConfig:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/DatabaseName'
-        value:
-          $ref: '#/definitions/String'
-  StringMax255:
-    type: string
-    minLength: 1
-    maxLength: 255
   Tag:
     type: object
     required:
@@ -1973,23 +1992,3 @@ definitions:
         $ref: '#/definitions/FilterValues'
         description: Values for the tag filter.
     description: 'The tag filter. Valid names are: <code>tagKey</code>, <code>tagValue</code>, <code>configurationId</code>.'
-  TagFilters:
-    type: array
-    items:
-      $ref: '#/definitions/TagFilter'
-  TagKey:
-    type: string
-  TagSet:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValue:
-    type: string
-  TimeStamp:
-    type: string
-    format: date-time
-  orderString:
-    type: string
-    enum:
-      - ASC
-      - DESC

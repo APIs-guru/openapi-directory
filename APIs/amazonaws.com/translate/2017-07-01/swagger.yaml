@@ -434,7 +434,15 @@ definitions:
   UnsupportedLanguagePairException: {}
   DetectedLanguageLowConfidenceException: {}
   ServiceUnavailableException: {}
-  undefined: {}
+  ResourceName:
+    type: string
+    pattern: '^([A-Za-z0-9-]_?)+$'
+    minLength: 1
+    maxLength: 256
+  TermList:
+    type: array
+    items:
+      $ref: '#/definitions/Term'
   AppliedTerminology:
     type: object
     properties:
@@ -458,6 +466,15 @@ definitions:
     type: string
     pattern: '[\P{M}\p{M}]{0,256}'
     maxLength: 256
+  EncryptionKeyType:
+    type: string
+    enum:
+      - KMS
+  EncryptionKeyID:
+    type: string
+    pattern: '(arn:aws((-us-gov)|(-cn))?:kms:)?([a-z]{2}-[a-z]+-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))'
+    minLength: 1
+    maxLength: 400
   EncryptionKey:
     type: object
     required:
@@ -471,102 +488,11 @@ definitions:
         $ref: '#/definitions/EncryptionKeyID'
         description: The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
     description: The encryption key used to encrypt the custom terminologies used by Amazon Translate.
-  EncryptionKeyID:
-    type: string
-    pattern: '(arn:aws((-us-gov)|(-cn))?:kms:)?([a-z]{2}-[a-z]+-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))'
-    minLength: 1
-    maxLength: 400
-  EncryptionKeyType:
-    type: string
-    enum:
-      - KMS
-  Integer:
-    type: integer
-  LanguageCodeString:
-    type: string
-    minLength: 2
-    maxLength: 5
-  LanguageCodeStringList:
-    type: array
-    items:
-      $ref: '#/definitions/LanguageCodeString'
-  MaxResultsInteger:
-    type: integer
-    minimum: 1
-    maximum: 500
-  MergeStrategy:
-    type: string
-    enum:
-      - OVERWRITE
-  NextToken:
-    type: string
-    pattern: '\p{ASCII}{0,8192}'
-    maxLength: 8192
-  ResourceName:
-    type: string
-    pattern: '^([A-Za-z0-9-]_?)+$'
-    minLength: 1
-    maxLength: 256
-  ResourceNameList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceName'
-  String:
-    type: string
-    pattern: '[\P{M}\p{M}]{0,10000}'
-    maxLength: 10000
-  Term:
-    type: object
-    properties:
-      SourceText:
-        $ref: '#/definitions/String'
-        description: The source text of the term being translated by the custom terminology.
-      TargetText:
-        $ref: '#/definitions/String'
-        description: The target text of the term being translated by the custom terminology.
-    description: The term being translated by the custom terminology.
-  TermList:
-    type: array
-    items:
-      $ref: '#/definitions/Term'
-  TerminologyArn:
-    type: string
-    pattern: '^arn:aws((-us-gov)|(-cn))?:translate:[a-zA-Z0-9-]+:[0-9]{12}:terminology/.+?/.+?$'
-  TerminologyData:
-    type: object
-    required:
-      - File
-      - Format
-    properties:
-      File:
-        $ref: '#/definitions/TerminologyFile'
-        description: The file containing the custom terminology data.
-      Format:
-        $ref: '#/definitions/TerminologyDataFormat'
-        description: The data format of the custom terminology. Either CSV or TMX.
-    description: The data associated with the custom terminology.
   TerminologyDataFormat:
     type: string
     enum:
       - CSV
       - TMX
-  TerminologyDataLocation:
-    type: object
-    required:
-      - RepositoryType
-      - Location
-    properties:
-      RepositoryType:
-        $ref: '#/definitions/String'
-        description: The repository type for the custom terminology data.
-      Location:
-        $ref: '#/definitions/String'
-        description: The location of the custom terminology data.
-    description: The location of the custom terminology data.
-  TerminologyFile:
-    type: string
-    maxLength: 10485760
-    format: password
   TerminologyProperties:
     type: object
     properties:
@@ -601,10 +527,83 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: 'The time at which the custom terminology was last update, based on the timestamp.'
     description: The properties of the custom terminology.
+  TerminologyDataLocation:
+    type: object
+    required:
+      - RepositoryType
+      - Location
+    properties:
+      RepositoryType:
+        $ref: '#/definitions/String'
+        description: The repository type for the custom terminology data.
+      Location:
+        $ref: '#/definitions/String'
+        description: The location of the custom terminology data.
+    description: The location of the custom terminology data.
+  MergeStrategy:
+    type: string
+    enum:
+      - OVERWRITE
+  TerminologyData:
+    type: object
+    required:
+      - File
+      - Format
+    properties:
+      File:
+        $ref: '#/definitions/TerminologyFile'
+        description: The file containing the custom terminology data.
+      Format:
+        $ref: '#/definitions/TerminologyDataFormat'
+        description: The data format of the custom terminology. Either CSV or TMX.
+    description: The data associated with the custom terminology.
+  Integer:
+    type: integer
+  LanguageCodeString:
+    type: string
+    minLength: 2
+    maxLength: 5
+  LanguageCodeStringList:
+    type: array
+    items:
+      $ref: '#/definitions/LanguageCodeString'
+  NextToken:
+    type: string
+    pattern: '\p{ASCII}{0,8192}'
+    maxLength: 8192
+  MaxResultsInteger:
+    type: integer
+    minimum: 1
+    maximum: 500
   TerminologyPropertiesList:
     type: array
     items:
       $ref: '#/definitions/TerminologyProperties'
+  ResourceNameList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceName'
+  String:
+    type: string
+    pattern: '[\P{M}\p{M}]{0,10000}'
+    maxLength: 10000
+  Term:
+    type: object
+    properties:
+      SourceText:
+        $ref: '#/definitions/String'
+        description: The source text of the term being translated by the custom terminology.
+      TargetText:
+        $ref: '#/definitions/String'
+        description: The target text of the term being translated by the custom terminology.
+    description: The term being translated by the custom terminology.
+  TerminologyArn:
+    type: string
+    pattern: '^arn:aws((-us-gov)|(-cn))?:translate:[a-zA-Z0-9-]+:[0-9]{12}:terminology/.+?/.+?$'
+  TerminologyFile:
+    type: string
+    maxLength: 10485760
+    format: password
   Timestamp:
     type: string
     format: date-time

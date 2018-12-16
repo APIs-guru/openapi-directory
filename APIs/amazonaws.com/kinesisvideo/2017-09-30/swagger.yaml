@@ -814,74 +814,49 @@ definitions:
       - LIST_FRAGMENTS
       - GET_MEDIA_FOR_FRAGMENT_LIST
       - GET_HLS_STREAMING_SESSION_URL
-  undefined: {}
+  ErrorMessage:
+    type: string
   ComparisonOperator:
     type: string
     enum:
       - BEGINS_WITH
-  DataEndpoint:
-    type: string
-  DataRetentionChangeInHours:
-    type: integer
-    minimum: 1
-  DataRetentionInHours:
-    type: integer
-    minimum: 0
   DeviceName:
     type: string
     pattern: '[a-zA-Z0-9_.-]+'
     minLength: 1
     maxLength: 128
-  ErrorMessage:
+  StreamName:
     type: string
-  KmsKeyId:
-    type: string
+    pattern: '[a-zA-Z0-9_.-]+'
     minLength: 1
-    maxLength: 2048
-  ListStreamsInputLimit:
-    type: integer
-    minimum: 1
-    maximum: 10000
+    maxLength: 256
   MediaType:
     type: string
     pattern: '[\w\-\.\+]+/[\w\-\.\+]+'
     minLength: 1
     maxLength: 128
-  NextToken:
+  KmsKeyId:
     type: string
-    minLength: 0
-    maxLength: 512
+    minLength: 1
+    maxLength: 2048
+  DataRetentionInHours:
+    type: integer
+    minimum: 0
   ResourceARN:
     type: string
     pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
     minLength: 1
     maxLength: 1024
-  TagKey:
+  DataEndpoint:
     type: string
+  DataRetentionChangeInHours:
+    type: integer
+    minimum: 1
+  Version:
+    type: string
+    pattern: '[a-zA-Z0-9]+'
     minLength: 1
-    maxLength: 128
-  TagValue:
-    type: string
-    minLength: 0
-    maxLength: 256
-  ResourceTags:
-    type: array
-    minItems: 1
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-  Status:
-    type: string
-    enum:
-      - CREATING
-      - ACTIVE
-      - UPDATING
-      - DELETING
+    maxLength: 64
   StreamInfo:
     type: object
     properties:
@@ -913,15 +888,14 @@ definitions:
         $ref: '#/definitions/DataRetentionInHours'
         description: 'How long the stream retains data, in hours.'
     description: An object describing a Kinesis video stream.
-  StreamInfoList:
-    type: array
-    items:
-      $ref: '#/definitions/StreamInfo'
-  StreamName:
+  ListStreamsInputLimit:
+    type: integer
+    minimum: 1
+    maximum: 10000
+  NextToken:
     type: string
-    pattern: '[a-zA-Z0-9_.-]+'
-    minLength: 1
-    maxLength: 256
+    minLength: 0
+    maxLength: 512
   StreamNameCondition:
     type: object
     properties:
@@ -932,22 +906,47 @@ definitions:
         $ref: '#/definitions/StreamName'
         description: A value to compare.
     description: 'Specifies the condition that streams must satisfy to be returned when you list streams (see the <code>ListStreams</code> API). A condition has a comparison operation and a value. Currently, you can specify only the <code>BEGINS_WITH</code> operator, which finds streams whose names start with a given prefix. '
+  StreamInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/StreamInfo'
+  ResourceTags:
+    type: array
+    minItems: 1
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Status:
+    type: string
+    enum:
+      - CREATING
+      - ACTIVE
+      - UPDATING
+      - DELETING
+  Timestamp:
+    type: string
+    format: date-time
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 50
-  Timestamp:
-    type: string
-    format: date-time
   UpdateDataRetentionOperation:
     type: string
     enum:
       - INCREASE_DATA_RETENTION
       - DECREASE_DATA_RETENTION
-  Version:
-    type: string
-    pattern: '[a-zA-Z0-9]+'
-    minLength: 1
-    maxLength: 64

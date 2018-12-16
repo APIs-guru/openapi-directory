@@ -468,7 +468,21 @@ definitions:
     enum:
       - DEFAULT
     description: 'The distribution of broker nodes across Availability Zones. By default, broker nodes are distributed among three Availability Zones. Currently, the only supported value is DEFAULT. You can either specify this value explicitly or leave it out.'
-  undefined: {}
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
+  __stringMin5Max32:
+    type: string
+    minLength: 5
+    maxLength: 32
+  StorageInfo:
+    type: object
+    properties:
+      EbsStorageInfo:
+        $ref: '#/definitions/EBSStorageInfo'
+        description: EBS volume information.
+    description: Contains information about storage volumes attached to MSK broker nodes.
   BrokerNodeGroupInfo:
     type: object
     required:
@@ -493,6 +507,24 @@ definitions:
         $ref: '#/definitions/StorageInfo'
         description: Contains information about storage volumes attached to MSK broker nodes.
     description: Describes the setup to be used for Kafka broker nodes in the cluster.
+  __string:
+    type: string
+  __double:
+    type: number
+    format: double
+  BrokerSoftwareInfo:
+    type: object
+    properties:
+      ConfigurationArn:
+        $ref: '#/definitions/__string'
+        description: The Amazon Resource Name (ARN) of the configuration used for the cluster.
+      ConfigurationRevision:
+        $ref: '#/definitions/__string'
+        description: The revision of the configuration to use.
+      KafkaVersion:
+        $ref: '#/definitions/__string'
+        description: The version of Apache Kafka.
+    description: Information about the current software installed on the cluster.
   BrokerNodeInfo:
     type: object
     properties:
@@ -512,19 +544,33 @@ definitions:
         $ref: '#/definitions/BrokerSoftwareInfo'
         description: Information about the version of software currently deployed on the Kafka brokers in the cluster.
     description: BrokerNodeInfo
-  BrokerSoftwareInfo:
+  __timestampIso8601:
+    type: string
+    format: date-time
+  EncryptionInfo:
     type: object
     properties:
-      ConfigurationArn:
-        $ref: '#/definitions/__string'
-        description: The Amazon Resource Name (ARN) of the configuration used for the cluster.
-      ConfigurationRevision:
-        $ref: '#/definitions/__string'
-        description: The revision of the configuration to use.
-      KafkaVersion:
-        $ref: '#/definitions/__string'
-        description: The version of Apache Kafka.
-    description: Information about the current software installed on the cluster.
+      EncryptionAtRest:
+        $ref: '#/definitions/EncryptionAtRest'
+        description: The data volume encryption details.
+    description: 'Includes encryption-related information, such as the AWS KMS key used for encrypting data at rest.'
+  EnhancedMonitoring:
+    type: string
+    enum:
+      - DEFAULT
+      - PER_BROKER
+      - PER_TOPIC_PER_BROKER
+    description: 'Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.'
+  __integer:
+    type: integer
+  ClusterState:
+    type: string
+    enum:
+      - ACTIVE
+      - CREATING
+      - DELETING
+      - FAILED
+    description: The state of a Kafka cluster.
   ClusterInfo:
     type: object
     properties:
@@ -562,14 +608,22 @@ definitions:
         $ref: '#/definitions/__string'
         description: The connection string to use to connect to the Apache ZooKeeper cluster.
     description: Returns information about a cluster.
-  ClusterState:
+  __stringMin1Max64:
     type: string
-    enum:
-      - ACTIVE
-      - CREATING
-      - DELETING
-      - FAILED
-    description: The state of a Kafka cluster.
+    minLength: 1
+    maxLength: 64
+  __stringMin1Max128:
+    type: string
+    minLength: 1
+    maxLength: 128
+  __integerMin1Max15:
+    type: integer
+    minimum: 1
+    maximum: 15
+  __integerMin1Max16384:
+    type: integer
+    minimum: 1
+    maximum: 16384
   EBSStorageInfo:
     type: object
     properties:
@@ -586,24 +640,39 @@ definitions:
         $ref: '#/definitions/__string'
         description: The AWS KMS key used for data encryption.
     description: The data volume encryption details.
-  EncryptionInfo:
-    type: object
-    properties:
-      EncryptionAtRest:
-        $ref: '#/definitions/EncryptionAtRest'
-        description: The data volume encryption details.
-    description: 'Includes encryption-related information, such as the AWS KMS key used for encrypting data at rest.'
-  EnhancedMonitoring:
-    type: string
-    enum:
-      - DEFAULT
-      - PER_BROKER
-      - PER_TOPIC_PER_BROKER
-    description: 'Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.'
   MaxResults:
     type: integer
     minimum: 1
     maximum: 100
+  __listOfClusterInfo:
+    type: array
+    items:
+      $ref: '#/definitions/ClusterInfo'
+  __listOfNodeInfo:
+    type: array
+    items:
+      $ref: '#/definitions/NodeInfo'
+  NodeType:
+    type: string
+    enum:
+      - BROKER
+    description: The broker or Zookeeper node.
+  ZookeeperNodeInfo:
+    type: object
+    properties:
+      AttachedENIId:
+        $ref: '#/definitions/__string'
+        description: The attached elastic network interface of the broker.
+      ClientVpcIpAddress:
+        $ref: '#/definitions/__string'
+        description: The virtual private cloud (VPC) IP address of the client.
+      ZookeeperId:
+        $ref: '#/definitions/__double'
+        description: The role-specific ID for Zookeeper.
+      ZookeeperVersion:
+        $ref: '#/definitions/__string'
+        description: The version of Zookeeper.
+    description: Zookeeper node information.
   NodeInfo:
     type: object
     properties:
@@ -626,73 +695,3 @@ definitions:
         $ref: '#/definitions/ZookeeperNodeInfo'
         description: The ZookeeperNodeInfo.
     description: The node information object.
-  NodeType:
-    type: string
-    enum:
-      - BROKER
-    description: The broker or Zookeeper node.
-  StorageInfo:
-    type: object
-    properties:
-      EbsStorageInfo:
-        $ref: '#/definitions/EBSStorageInfo'
-        description: EBS volume information.
-    description: Contains information about storage volumes attached to MSK broker nodes.
-  ZookeeperNodeInfo:
-    type: object
-    properties:
-      AttachedENIId:
-        $ref: '#/definitions/__string'
-        description: The attached elastic network interface of the broker.
-      ClientVpcIpAddress:
-        $ref: '#/definitions/__string'
-        description: The virtual private cloud (VPC) IP address of the client.
-      ZookeeperId:
-        $ref: '#/definitions/__double'
-        description: The role-specific ID for Zookeeper.
-      ZookeeperVersion:
-        $ref: '#/definitions/__string'
-        description: The version of Zookeeper.
-    description: Zookeeper node information.
-  __double:
-    type: number
-    format: double
-  __integer:
-    type: integer
-  __integerMin1Max15:
-    type: integer
-    minimum: 1
-    maximum: 15
-  __integerMin1Max16384:
-    type: integer
-    minimum: 1
-    maximum: 16384
-  __listOfClusterInfo:
-    type: array
-    items:
-      $ref: '#/definitions/ClusterInfo'
-  __listOfNodeInfo:
-    type: array
-    items:
-      $ref: '#/definitions/NodeInfo'
-  __listOf__string:
-    type: array
-    items:
-      $ref: '#/definitions/__string'
-  __string:
-    type: string
-  __stringMin1Max128:
-    type: string
-    minLength: 1
-    maxLength: 128
-  __stringMin1Max64:
-    type: string
-    minLength: 1
-    maxLength: 64
-  __stringMin5Max32:
-    type: string
-    minLength: 5
-    maxLength: 32
-  __timestampIso8601:
-    type: string
-    format: date-time

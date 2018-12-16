@@ -698,9 +698,46 @@ definitions:
       QueryExecutionId:
         $ref: '#/definitions/QueryExecutionId'
         description: The unique ID of the query execution to stop.
-  undefined: {}
+  NamedQueryIdList:
+    type: array
+    items:
+      $ref: '#/definitions/NamedQueryId'
+    minItems: 1
+    maxItems: 50
+  NamedQueryList:
+    type: array
+    items:
+      $ref: '#/definitions/NamedQuery'
+  UnprocessedNamedQueryIdList:
+    type: array
+    items:
+      $ref: '#/definitions/UnprocessedNamedQueryId'
+  QueryExecutionIdList:
+    type: array
+    items:
+      $ref: '#/definitions/QueryExecutionId'
+    minItems: 1
+    maxItems: 50
+  QueryExecutionList:
+    type: array
+    items:
+      $ref: '#/definitions/QueryExecution'
+  UnprocessedQueryExecutionIdList:
+    type: array
+    items:
+      $ref: '#/definitions/UnprocessedQueryExecutionId'
   Boolean:
     type: boolean
+  String:
+    type: string
+  Integer:
+    type: integer
+  ColumnNullable:
+    type: string
+    enum:
+      - NOT_NULL
+      - NULLABLE
+      - UNKNOWN
   ColumnInfo:
     type: object
     required:
@@ -742,19 +779,33 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ColumnInfo'
-  ColumnNullable:
+  NameString:
     type: string
-    enum:
-      - NOT_NULL
-      - NULLABLE
-      - UNKNOWN
+    minLength: 1
+    maxLength: 128
+  DescriptionString:
+    type: string
+    minLength: 1
+    maxLength: 1024
   DatabaseString:
     type: string
     minLength: 1
     maxLength: 32
+  QueryString:
+    type: string
+    minLength: 1
+    maxLength: 262144
+  IdempotencyToken:
+    type: string
+    minLength: 32
+    maxLength: 128
+  NamedQueryId:
+    type: string
   Date:
     type: string
     format: date-time
+  datumString:
+    type: string
   Datum:
     type: object
     properties:
@@ -762,10 +813,12 @@ definitions:
         $ref: '#/definitions/datumString'
         description: The value of the datum.
     description: A piece of data (a field in the table).
-  DescriptionString:
+  EncryptionOption:
     type: string
-    minLength: 1
-    maxLength: 1024
+    enum:
+      - SSE_S3
+      - SSE_KMS
+      - CSE_KMS
   EncryptionConfiguration:
     type: object
     required:
@@ -778,12 +831,6 @@ definitions:
         $ref: '#/definitions/String'
         description: 'For <code>SSE-KMS</code> and <code>CSE-KMS</code>, this is the KMS key ARN or ID.'
     description: 'If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.'
-  EncryptionOption:
-    type: string
-    enum:
-      - SSE_S3
-      - SSE_KMS
-      - CSE_KMS
   ErrorCode:
     type: string
     description: 'The error code returned when the query execution failed to process, or when the processing request for the named query failed.'
@@ -791,30 +838,6 @@ definitions:
     maxLength: 256
   ErrorMessage:
     type: string
-  IdempotencyToken:
-    type: string
-    minLength: 32
-    maxLength: 128
-  Integer:
-    type: integer
-  Long:
-    type: integer
-  MaxNamedQueriesCount:
-    type: integer
-    minimum: 0
-    maximum: 50
-  MaxQueryExecutionsCount:
-    type: integer
-    minimum: 0
-    maximum: 50
-  MaxQueryResults:
-    type: integer
-    minimum: 0
-    maximum: 1000
-  NameString:
-    type: string
-    minLength: 1
-    maxLength: 128
   NamedQuery:
     type: object
     required:
@@ -838,18 +861,8 @@ definitions:
         $ref: '#/definitions/NamedQueryId'
         description: The unique identifier of the query.
     description: 'A query, where <code>QueryString</code> is the SQL query statements that comprise the query.'
-  NamedQueryId:
+  QueryExecutionId:
     type: string
-  NamedQueryIdList:
-    type: array
-    items:
-      $ref: '#/definitions/NamedQueryId'
-    minItems: 1
-    maxItems: 50
-  NamedQueryList:
-    type: array
-    items:
-      $ref: '#/definitions/NamedQuery'
   QueryExecution:
     type: object
     properties:
@@ -875,6 +888,50 @@ definitions:
         $ref: '#/definitions/QueryExecutionStatistics'
         description: 'The amount of data scanned during the query execution and the amount of time that it took to execute, and the type of statement that was run.'
     description: Information about a single instance of a query execution.
+  Token:
+    type: string
+  MaxQueryResults:
+    type: integer
+    minimum: 0
+    maximum: 1000
+  Long:
+    type: integer
+  ResultSet:
+    type: object
+    properties:
+      Rows:
+        $ref: '#/definitions/RowList'
+        description: The rows in the table.
+      ResultSetMetadata:
+        $ref: '#/definitions/ResultSetMetadata'
+        description: The metadata that describes the column structure and data types of a table of query results.
+    description: The metadata and rows that comprise a query result set. The metadata describes the column structure and data types.
+  MaxNamedQueriesCount:
+    type: integer
+    minimum: 0
+    maximum: 50
+  MaxQueryExecutionsCount:
+    type: integer
+    minimum: 0
+    maximum: 50
+  StatementType:
+    type: string
+    enum:
+      - DDL
+      - DML
+      - UTILITY
+  ResultConfiguration:
+    type: object
+    required:
+      - OutputLocation
+    properties:
+      OutputLocation:
+        $ref: '#/definitions/String'
+        description: 'The location in Amazon S3 where your query results are stored, such as <code>s3://path/to/query/bucket/</code>. For more information, see <a href="http://docs.aws.amazon.com/athena/latest/ug/querying.html">Queries and Query Result Files. </a> '
+      EncryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: 'If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.'
+    description: 'The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results.'
   QueryExecutionContext:
     type: object
     properties:
@@ -882,36 +939,6 @@ definitions:
         $ref: '#/definitions/DatabaseString'
         description: The name of the database.
     description: The database in which the query execution occurs.
-  QueryExecutionId:
-    type: string
-  QueryExecutionIdList:
-    type: array
-    items:
-      $ref: '#/definitions/QueryExecutionId'
-    minItems: 1
-    maxItems: 50
-  QueryExecutionList:
-    type: array
-    items:
-      $ref: '#/definitions/QueryExecution'
-  QueryExecutionState:
-    type: string
-    enum:
-      - QUEUED
-      - RUNNING
-      - SUCCEEDED
-      - FAILED
-      - CANCELLED
-  QueryExecutionStatistics:
-    type: object
-    properties:
-      EngineExecutionTimeInMillis:
-        $ref: '#/definitions/Long'
-        description: The number of milliseconds that the query took to execute.
-      DataScannedInBytes:
-        $ref: '#/definitions/Long'
-        description: The number of bytes in the data that was queried.
-    description: 'The amount of data scanned during the query execution and the amount of time that it took to execute, and the type of statement that was run.'
   QueryExecutionStatus:
     type: object
     properties:
@@ -928,32 +955,28 @@ definitions:
         $ref: '#/definitions/Date'
         description: The date and time that the query completed.
     description: 'The completion date, current state, submission time, and state change reason (if applicable) for the query execution.'
-  QueryString:
+  QueryExecutionStatistics:
+    type: object
+    properties:
+      EngineExecutionTimeInMillis:
+        $ref: '#/definitions/Long'
+        description: The number of milliseconds that the query took to execute.
+      DataScannedInBytes:
+        $ref: '#/definitions/Long'
+        description: The number of bytes in the data that was queried.
+    description: 'The amount of data scanned during the query execution and the amount of time that it took to execute, and the type of statement that was run.'
+  QueryExecutionState:
     type: string
-    minLength: 1
-    maxLength: 262144
-  ResultConfiguration:
-    type: object
-    required:
-      - OutputLocation
-    properties:
-      OutputLocation:
-        $ref: '#/definitions/String'
-        description: 'The location in Amazon S3 where your query results are stored, such as <code>s3://path/to/query/bucket/</code>. For more information, see <a href="http://docs.aws.amazon.com/athena/latest/ug/querying.html">Queries and Query Result Files. </a> '
-      EncryptionConfiguration:
-        $ref: '#/definitions/EncryptionConfiguration'
-        description: 'If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.'
-    description: 'The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results.'
-  ResultSet:
-    type: object
-    properties:
-      Rows:
-        $ref: '#/definitions/RowList'
-        description: The rows in the table.
-      ResultSetMetadata:
-        $ref: '#/definitions/ResultSetMetadata'
-        description: The metadata that describes the column structure and data types of a table of query results.
-    description: The metadata and rows that comprise a query result set. The metadata describes the column structure and data types.
+    enum:
+      - QUEUED
+      - RUNNING
+      - SUCCEEDED
+      - FAILED
+      - CANCELLED
+  RowList:
+    type: array
+    items:
+      $ref: '#/definitions/Row'
   ResultSetMetadata:
     type: object
     properties:
@@ -961,6 +984,10 @@ definitions:
         $ref: '#/definitions/ColumnInfoList'
         description: Information about the columns returned in a query result metadata.
     description: 'The metadata that describes the column structure and data types of a table of query results. '
+  datumList:
+    type: array
+    items:
+      $ref: '#/definitions/Datum'
   Row:
     type: object
     properties:
@@ -968,20 +995,6 @@ definitions:
         $ref: '#/definitions/datumList'
         description: The data that populates a row in a query result table.
     description: The rows that comprise a query result table.
-  RowList:
-    type: array
-    items:
-      $ref: '#/definitions/Row'
-  StatementType:
-    type: string
-    enum:
-      - DDL
-      - DML
-      - UTILITY
-  String:
-    type: string
-  Token:
-    type: string
   UnprocessedNamedQueryId:
     type: object
     properties:
@@ -995,10 +1008,6 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
         description: 'The error message returned when the processing request for the named query failed, if applicable.'
     description: Information about a named query ID that could not be processed.
-  UnprocessedNamedQueryIdList:
-    type: array
-    items:
-      $ref: '#/definitions/UnprocessedNamedQueryId'
   UnprocessedQueryExecutionId:
     type: object
     properties:
@@ -1012,13 +1021,3 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
         description: 'The error message returned when the query execution failed to process, if applicable.'
     description: Describes a query execution that failed to process.
-  UnprocessedQueryExecutionIdList:
-    type: array
-    items:
-      $ref: '#/definitions/UnprocessedQueryExecutionId'
-  datumList:
-    type: array
-    items:
-      $ref: '#/definitions/Datum'
-  datumString:
-    type: string

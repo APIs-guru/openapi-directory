@@ -187,7 +187,32 @@ definitions:
   Double:
     type: number
     format: double
-  undefined: {}
+  ProductCode:
+    type: string
+    minLength: 1
+    maxLength: 255
+  NonEmptyString:
+    type: string
+    pattern: \S+
+  EntitlementValue:
+    type: object
+    properties:
+      IntegerValue:
+        $ref: '#/definitions/Integer'
+        description: 'The IntegerValue field will be populated with an integer value when the entitlement is an integer type. Otherwise, the field will not be set.'
+      DoubleValue:
+        $ref: '#/definitions/Double'
+        description: 'The DoubleValue field will be populated with a double value when the entitlement is a double type. Otherwise, the field will not be set.'
+      BooleanValue:
+        $ref: '#/definitions/Boolean'
+        description: 'The BooleanValue field will be populated with a boolean value when the entitlement is a boolean type. Otherwise, the field will not be set.'
+      StringValue:
+        $ref: '#/definitions/String'
+        description: 'The StringValue field will be populated with a string value when the entitlement is a string type. Otherwise, the field will not be set.'
+    description: The EntitlementValue represents the amount of capacity that the customer is entitled to for the product.
+  Timestamp:
+    type: string
+    format: date-time
   Entitlement:
     type: object
     properties:
@@ -212,22 +237,10 @@ definitions:
     items:
       $ref: '#/definitions/Entitlement'
     minItems: 0
-  EntitlementValue:
-    type: object
-    properties:
-      IntegerValue:
-        $ref: '#/definitions/Integer'
-        description: 'The IntegerValue field will be populated with an integer value when the entitlement is an integer type. Otherwise, the field will not be set.'
-      DoubleValue:
-        $ref: '#/definitions/Double'
-        description: 'The DoubleValue field will be populated with a double value when the entitlement is a double type. Otherwise, the field will not be set.'
-      BooleanValue:
-        $ref: '#/definitions/Boolean'
-        description: 'The BooleanValue field will be populated with a boolean value when the entitlement is a boolean type. Otherwise, the field will not be set.'
-      StringValue:
-        $ref: '#/definitions/String'
-        description: 'The StringValue field will be populated with a string value when the entitlement is a string type. Otherwise, the field will not be set.'
-    description: The EntitlementValue represents the amount of capacity that the customer is entitled to for the product.
+  Integer:
+    type: integer
+  String:
+    type: string
   ErrorMessage:
     type: string
   FilterValue:
@@ -251,17 +264,3 @@ definitions:
           $ref: '#/definitions/GetEntitlementFilterName'
         value:
           $ref: '#/definitions/FilterValueList'
-  Integer:
-    type: integer
-  NonEmptyString:
-    type: string
-    pattern: \S+
-  ProductCode:
-    type: string
-    minLength: 1
-    maxLength: 255
-  String:
-    type: string
-  Timestamp:
-    type: string
-    format: date-time

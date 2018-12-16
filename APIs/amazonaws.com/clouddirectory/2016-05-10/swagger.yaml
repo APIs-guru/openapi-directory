@@ -5608,13 +5608,90 @@ definitions:
       DryRun:
         $ref: '#/definitions/Bool'
         description: 'Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded. If schema compatibility fails, an exception would be thrown else the call would succeed. This parameter is optional and defaults to false.'
-  undefined: {}
+  ExceptionMessage:
+    type: string
   Arn:
     type: string
+  SchemaFacet:
+    type: object
+    properties:
+      SchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'The ARN of the schema that contains the facet with no minor component. See <a>arns</a> and <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/inplaceschemaupgrade.html">In-Place Schema Upgrade</a> for a description of when to provide minor versions.'
+      FacetName:
+        $ref: '#/definitions/FacetName'
+        description: The name of the facet.
+    description: A facet.
+  AttributeKeyAndValueList:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeKeyAndValue'
+  ObjectReference:
+    type: object
+    properties:
+      Selector:
+        $ref: '#/definitions/SelectorObjectReference'
+        description: '<p>A path selector supports easy selection of an object by the parent/child links leading to it from the directory root. Use the link names from each parent/child link to construct the path. Path selectors start with a slash (/) and link names are separated by slashes. For more information about paths, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#accessingobjects">Accessing Objects</a>. You can identify an object in one of the following ways:</p> <ul> <li> <p> <i>$ObjectIdentifier</i> - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier</p> </li> <li> <p> <i>/some/path</i> - Identifies the object based on path</p> </li> <li> <p> <i>#SomeBatchReference</i> - Identifies the object in a batch call</p> </li> </ul>'
+    description: The reference that identifies an object.
   Arns:
     type: array
     items:
       $ref: '#/definitions/Arn'
+  LinkName:
+    type: string
+    pattern: '[^\/\[\]\(\):\{\}#@!?\s\\;]+'
+    minLength: 1
+    maxLength: 64
+  ObjectIdentifier:
+    type: string
+  TypedLinkSchemaAndFacetName:
+    type: object
+    required:
+      - SchemaArn
+      - TypedLinkName
+    properties:
+      SchemaArn:
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.'
+      TypedLinkName:
+        $ref: '#/definitions/TypedLinkName'
+        description: The unique name of the typed link facet.
+    description: Identifies the schema Amazon Resource Name (ARN) and facet name for the typed link.
+  AttributeNameAndValueList:
+    type: array
+    items:
+      $ref: '#/definitions/AttributeNameAndValue'
+  TypedLinkSpecifier:
+    type: object
+    required:
+      - TypedLinkFacet
+      - SourceObjectReference
+      - TargetObjectReference
+      - IdentityAttributeValues
+    properties:
+      TypedLinkFacet:
+        $ref: '#/definitions/TypedLinkSchemaAndFacetName'
+        description: Identifies the typed link facet that is associated with the typed link.
+      SourceObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Identifies the source object that the typed link will attach to.
+      TargetObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Identifies the target object that the typed link will attach to.
+      IdentityAttributeValues:
+        $ref: '#/definitions/AttributeNameAndValueList'
+        description: Identifies the attribute value to update.
+    description: 'Contains all the information that is used to uniquely identify a typed link. The parameters discussed in this topic are used to uniquely specify the typed link being operated on. The <a>AttachTypedLink</a> API returns a typed link specifier while the <a>DetachTypedLink</a> API accepts one as input. Similarly, the <a>ListIncomingTypedLinks</a> and <a>ListOutgoingTypedLinks</a> API operations provide typed link specifiers as output. You can also construct a typed link specifier from scratch.'
+  FacetName:
+    type: string
+    pattern: '^[a-zA-Z0-9._-]*$'
+    minLength: 1
+    maxLength: 64
+  AttributeName:
+    type: string
+    pattern: '^[a-zA-Z0-9._-]*$'
+    minLength: 1
+    maxLength: 64
   AttributeKey:
     type: object
     required:
@@ -5632,6 +5709,25 @@ definitions:
         $ref: '#/definitions/AttributeName'
         description: The name of the attribute.
     description: A unique identifier for an attribute.
+  TypedAttributeValue:
+    type: object
+    properties:
+      StringValue:
+        $ref: '#/definitions/StringAttributeValue'
+        description: A string data value.
+      BinaryValue:
+        $ref: '#/definitions/BinaryAttributeValue'
+        description: A binary data value.
+      BooleanValue:
+        $ref: '#/definitions/BooleanAttributeValue'
+        description: A Boolean data value.
+      NumberValue:
+        $ref: '#/definitions/NumberAttributeValue'
+        description: A number data value.
+      DatetimeValue:
+        $ref: '#/definitions/DatetimeAttributeValue'
+        description: A date and time value.
+    description: 'Represents the data for a typed attribute. You can set one, and only one, of the elements. Each attribute in an item is a name-value pair. Attributes have a single value.'
   AttributeKeyAndValue:
     type: object
     required:
@@ -5645,19 +5741,10 @@ definitions:
         $ref: '#/definitions/TypedAttributeValue'
         description: The value of the attribute.
     description: The combination of an attribute key and an attribute value.
-  AttributeKeyAndValueList:
-    type: array
-    items:
-      $ref: '#/definitions/AttributeKeyAndValue'
   AttributeKeyList:
     type: array
     items:
       $ref: '#/definitions/AttributeKey'
-  AttributeName:
-    type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
-    minLength: 1
-    maxLength: 64
   AttributeNameAndValue:
     type: object
     required:
@@ -5671,10 +5758,6 @@ definitions:
         $ref: '#/definitions/TypedAttributeValue'
         description: The value for the typed link.
     description: Identifies the attribute name and value for a typed link.
-  AttributeNameAndValueList:
-    type: array
-    items:
-      $ref: '#/definitions/AttributeNameAndValue'
   AttributeNameList:
     type: array
     items:
@@ -5789,6 +5872,10 @@ definitions:
         $ref: '#/definitions/TypedLinkSpecifier'
         description: Returns a typed link specifier as output.
     description: Represents the output of a <a>AttachTypedLink</a> response operation.
+  Bool:
+    type: boolean
+  BatchReferenceName:
+    type: string
   BatchCreateIndex:
     type: object
     required:
@@ -5818,6 +5905,10 @@ definitions:
         $ref: '#/definitions/ObjectIdentifier'
         description: The <code>ObjectIdentifier</code> of the index created by this operation.
     description: Represents the output of a <a>CreateIndex</a> response operation.
+  SchemaFacetList:
+    type: array
+    items:
+      $ref: '#/definitions/SchemaFacet'
   BatchCreateObject:
     type: object
     required:
@@ -5996,6 +6087,11 @@ definitions:
         $ref: '#/definitions/ObjectIdentifier'
         description: The <code>ObjectIdentifier</code> of the specified object.
     description: Represents the output of a <a>GetObjectInformation</a> response operation.
+  NextToken:
+    type: string
+  NumberResults:
+    type: integer
+    minimum: 1
   BatchListAttachedIndices:
     type: object
     required:
@@ -6011,6 +6107,10 @@ definitions:
         $ref: '#/definitions/NumberResults'
         description: The maximum number of results to retrieve.
     description: 'Lists indices attached to an object inside a <a>BatchRead</a> operation. For more information, see <a>ListAttachedIndices</a> and <a>BatchReadRequest$Operations</a>.'
+  IndexAttachmentList:
+    type: array
+    items:
+      $ref: '#/definitions/IndexAttachment'
   BatchListAttachedIndicesResponse:
     type: object
     properties:
@@ -6021,6 +6121,10 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: The pagination token.
     description: Represents the output of a <a>ListAttachedIndices</a> response operation.
+  TypedLinkAttributeRangeList:
+    type: array
+    items:
+      $ref: '#/definitions/TypedLinkAttributeRange'
   BatchListIncomingTypedLinks:
     type: object
     required:
@@ -6042,6 +6146,10 @@ definitions:
         $ref: '#/definitions/NumberResults'
         description: The maximum number of results to retrieve.
     description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object inside a <a>BatchRead</a> operation. For more information, see <a>ListIncomingTypedLinks</a> and <a>BatchReadRequest$Operations</a>.'
+  TypedLinkSpecifierList:
+    type: array
+    items:
+      $ref: '#/definitions/TypedLinkSpecifier'
   BatchListIncomingTypedLinksResponse:
     type: object
     properties:
@@ -6052,6 +6160,10 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: The pagination token.
     description: Represents the output of a <a>ListIncomingTypedLinks</a> response operation.
+  ObjectAttributeRangeList:
+    type: array
+    items:
+      $ref: '#/definitions/ObjectAttributeRange'
   BatchListIndex:
     type: object
     required:
@@ -6123,6 +6235,15 @@ definitions:
         $ref: '#/definitions/NumberResults'
         description: Maximum number of items to be retrieved in a single call. This is an approximate number.
     description: Represents the output of a <a>ListObjectChildren</a> operation.
+  LinkNameToObjectIdentifierMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/LinkName'
+        value:
+          $ref: '#/definitions/ObjectIdentifier'
   BatchListObjectChildrenResponse:
     type: object
     properties:
@@ -6148,6 +6269,10 @@ definitions:
         $ref: '#/definitions/NumberResults'
         description: The maximum number of results to retrieve.
     description: 'Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects inside a <a>BatchRead</a> operation. For more information, see <a>ListObjectParentPaths</a> and <a>BatchReadRequest$Operations</a>.'
+  PathToObjectIdentifiersList:
+    type: array
+    items:
+      $ref: '#/definitions/PathToObjectIdentifiers'
   BatchListObjectParentPathsResponse:
     type: object
     properties:
@@ -6173,6 +6298,10 @@ definitions:
         $ref: '#/definitions/NumberResults'
         description: The maximum number of results to retrieve.
     description: 'Returns policies attached to an object in pagination fashion inside a <a>BatchRead</a> operation. For more information, see <a>ListObjectPolicies</a> and <a>BatchReadRequest$Operations</a>.'
+  ObjectIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/ObjectIdentifier'
   BatchListObjectPoliciesResponse:
     type: object
     properties:
@@ -6254,6 +6383,10 @@ definitions:
         $ref: '#/definitions/NumberResults'
         description: The maximum number of results to retrieve.
     description: 'Lists all policies from the root of the Directory to the object specified inside a <a>BatchRead</a> operation. For more information, see <a>LookupPolicy</a> and <a>BatchReadRequest$Operations</a>.'
+  PolicyToPathList:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyToPath'
   BatchLookupPolicyResponse:
     type: object
     properties:
@@ -6266,16 +6399,6 @@ definitions:
     description: Represents the output of a <a>LookupPolicy</a> response operation.
   BatchOperationIndex:
     type: integer
-  BatchReadException:
-    type: object
-    properties:
-      Type:
-        $ref: '#/definitions/BatchReadExceptionType'
-        description: 'A type of exception, such as <code>InvalidArnException</code>.'
-      Message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: An exception message that is associated with the failure.
-    description: 'The batch read exception structure, which contains the exception type and message.'
   BatchReadExceptionType:
     type: string
     enum:
@@ -6292,6 +6415,16 @@ definitions:
       - DirectoryNotEnabledException
       - LimitExceededException
       - InternalServiceException
+  BatchReadException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/BatchReadExceptionType'
+        description: 'A type of exception, such as <code>InvalidArnException</code>.'
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+        description: An exception message that is associated with the failure.
+    description: 'The batch read exception structure, which contains the exception type and message.'
   BatchReadOperation:
     type: object
     properties:
@@ -6339,20 +6472,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/BatchReadOperation'
-  BatchReadOperationResponse:
-    type: object
-    properties:
-      SuccessfulResponse:
-        $ref: '#/definitions/BatchReadSuccessfulResponse'
-        description: Identifies which operation in a batch has succeeded.
-      ExceptionResponse:
-        $ref: '#/definitions/BatchReadException'
-        description: Identifies which operation in a batch has failed.
-    description: Represents the output of a <code>BatchRead</code> response operation.
-  BatchReadOperationResponseList:
-    type: array
-    items:
-      $ref: '#/definitions/BatchReadOperationResponse'
   BatchReadSuccessfulResponse:
     type: object
     properties:
@@ -6396,8 +6515,25 @@ definitions:
         $ref: '#/definitions/BatchGetLinkAttributesResponse'
         description: The list of attributes to retrieve from the typed link.
     description: Represents the output of a <code>BatchRead</code> success response operation.
-  BatchReferenceName:
+  BatchReadOperationResponse:
+    type: object
+    properties:
+      SuccessfulResponse:
+        $ref: '#/definitions/BatchReadSuccessfulResponse'
+        description: Identifies which operation in a batch has succeeded.
+      ExceptionResponse:
+        $ref: '#/definitions/BatchReadException'
+        description: Identifies which operation in a batch has failed.
+    description: Represents the output of a <code>BatchRead</code> response operation.
+  BatchReadOperationResponseList:
+    type: array
+    items:
+      $ref: '#/definitions/BatchReadOperationResponse'
+  ConsistencyLevel:
     type: string
+    enum:
+      - SERIALIZABLE
+      - EVENTUAL
   BatchRemoveFacetFromObject:
     type: object
     required:
@@ -6415,6 +6551,10 @@ definitions:
     type: object
     properties: {}
     description: An empty result that represents success.
+  LinkAttributeUpdateList:
+    type: array
+    items:
+      $ref: '#/definitions/LinkAttributeUpdate'
   BatchUpdateLinkAttributes:
     type: object
     required:
@@ -6432,6 +6572,10 @@ definitions:
     type: object
     properties: {}
     description: Represents the output of a <a>UpdateLinkAttributes</a> response operation.
+  ObjectAttributeUpdateList:
+    type: array
+    items:
+      $ref: '#/definitions/ObjectAttributeUpdate'
   BatchUpdateObjectAttributes:
     type: object
     required:
@@ -6581,21 +6725,63 @@ definitions:
       $ref: '#/definitions/BatchWriteOperationResponse'
   BinaryAttributeValue:
     type: string
-  Bool:
-    type: boolean
   BooleanAttributeValue:
     type: boolean
-  ConsistencyLevel:
+  DirectoryName:
+    type: string
+    pattern: '^[a-zA-Z0-9._-]*$'
+    minLength: 1
+    maxLength: 64
+  DirectoryArn:
+    type: string
+  FacetAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/FacetAttribute'
+  ObjectType:
     type: string
     enum:
-      - SERIALIZABLE
-      - EVENTUAL
+      - NODE
+      - LEAF_NODE
+      - POLICY
+      - INDEX
+  SchemaName:
+    type: string
+    pattern: '^[a-zA-Z0-9._-]*$'
+    minLength: 1
+    maxLength: 32
+  TypedLinkFacet:
+    type: object
+    required:
+      - Name
+      - Attributes
+      - IdentityAttributeOrder
+    properties:
+      Name:
+        $ref: '#/definitions/TypedLinkName'
+        description: The unique name of the typed link facet.
+      Attributes:
+        $ref: '#/definitions/TypedLinkAttributeDefinitionList'
+        description: 'A set of key-value pairs associated with the typed link. Typed link attributes are used when you have data values that are related to the link itself, and not to one of the two objects being linked. Identity attributes also serve to distinguish the link from others of the same type between the same objects.'
+      IdentityAttributeOrder:
+        $ref: '#/definitions/AttributeNameList'
+        description: 'The set of attributes that distinguish links made from this facet from each other, in the order of significance. Listing typed links can filter on the values of these attributes. See <a>ListOutgoingTypedLinks</a> and <a>ListIncomingTypedLinks</a> for details.'
+    description: 'Defines the typed links structure and its attributes. To create a typed link facet, use the <a>CreateTypedLinkFacet</a> API.'
   Date:
     type: string
     format: date-time
   DatetimeAttributeValue:
     type: string
     format: date-time
+  TypedLinkName:
+    type: string
+    pattern: '^[a-zA-Z0-9._-]*$'
+  DirectoryState:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+      - DELETED
   Directory:
     type: object
     properties:
@@ -6612,25 +6798,10 @@ definitions:
         $ref: '#/definitions/Date'
         description: The date and time when the directory was created.
     description: Directory structure that includes the directory name and directory ARN.
-  DirectoryArn:
-    type: string
   DirectoryList:
     type: array
     items:
       $ref: '#/definitions/Directory'
-  DirectoryName:
-    type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
-    minLength: 1
-    maxLength: 64
-  DirectoryState:
-    type: string
-    enum:
-      - ENABLED
-      - DISABLED
-      - DELETED
-  ExceptionMessage:
-    type: string
   Facet:
     type: object
     properties:
@@ -6641,24 +6812,6 @@ definitions:
         $ref: '#/definitions/ObjectType'
         description: The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.
     description: 'A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <code> <a>Rule</a>s</code>, and <code>ObjectTypes</code>. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html">Facets</a> for more information.'
-  FacetAttribute:
-    type: object
-    required:
-      - Name
-    properties:
-      Name:
-        $ref: '#/definitions/AttributeName'
-        description: The name of the facet attribute.
-      AttributeDefinition:
-        $ref: '#/definitions/FacetAttributeDefinition'
-        description: 'A facet attribute consists of either a definition or a reference. This structure contains the attribute definition. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
-      AttributeReference:
-        $ref: '#/definitions/FacetAttributeReference'
-        description: 'An attribute reference that is associated with the attribute. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
-      RequiredBehavior:
-        $ref: '#/definitions/RequiredAttributeBehavior'
-        description: The required behavior of the <code>FacetAttribute</code>.
-    description: An attribute that is associated with the <a>Facet</a>.
   FacetAttributeDefinition:
     type: object
     required:
@@ -6677,10 +6830,6 @@ definitions:
         $ref: '#/definitions/RuleMap'
         description: Validation rules attached to the attribute definition.
     description: 'A facet attribute definition. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
-  FacetAttributeList:
-    type: array
-    items:
-      $ref: '#/definitions/FacetAttribute'
   FacetAttributeReference:
     type: object
     required:
@@ -6694,6 +6843,29 @@ definitions:
         $ref: '#/definitions/AttributeName'
         description: 'The target attribute name that is associated with the facet reference. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
     description: The facet attribute reference that specifies the attribute definition that contains the attribute facet name and attribute name.
+  RequiredAttributeBehavior:
+    type: string
+    enum:
+      - REQUIRED_ALWAYS
+      - NOT_REQUIRED
+  FacetAttribute:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/AttributeName'
+        description: The name of the facet attribute.
+      AttributeDefinition:
+        $ref: '#/definitions/FacetAttributeDefinition'
+        description: 'A facet attribute consists of either a definition or a reference. This structure contains the attribute definition. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
+      AttributeReference:
+        $ref: '#/definitions/FacetAttributeReference'
+        description: 'An attribute reference that is associated with the attribute. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences">Attribute References</a> for more information.'
+      RequiredBehavior:
+        $ref: '#/definitions/RequiredAttributeBehavior'
+        description: The required behavior of the <code>FacetAttribute</code>.
+    description: An attribute that is associated with the <a>Facet</a>.
   FacetAttributeType:
     type: string
     enum:
@@ -6702,6 +6874,20 @@ definitions:
       - BOOLEAN
       - NUMBER
       - DATETIME
+  RuleMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/RuleKey'
+        value:
+          $ref: '#/definitions/Rule'
+  UpdateActionType:
+    type: string
+    enum:
+      - CREATE_OR_UPDATE
+      - DELETE
   FacetAttributeUpdate:
     type: object
     properties:
@@ -6716,15 +6902,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/FacetAttributeUpdate'
-  FacetName:
-    type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
-    minLength: 1
-    maxLength: 64
   FacetNameList:
     type: array
     items:
       $ref: '#/definitions/FacetName'
+  SchemaJsonDocument:
+    type: string
   IndexAttachment:
     type: object
     properties:
@@ -6735,10 +6918,6 @@ definitions:
         $ref: '#/definitions/ObjectIdentifier'
         description: 'In response to <a>ListIndex</a>, the <code>ObjectIdentifier</code> of the object attached to the index. In response to <a>ListAttachedIndices</a>, the <code>ObjectIdentifier</code> of the index attached to the object. This field will always contain the <code>ObjectIdentifier</code> of the object on the opposite side of the attachment specified in the query.'
     description: Represents an index and an attached object.
-  IndexAttachmentList:
-    type: array
-    items:
-      $ref: '#/definitions/IndexAttachment'
   LinkAttributeAction:
     type: object
     properties:
@@ -6759,33 +6938,32 @@ definitions:
         $ref: '#/definitions/LinkAttributeAction'
         description: The action to perform as part of the attribute update.
     description: Structure that contains attribute update information.
-  LinkAttributeUpdateList:
-    type: array
-    items:
-      $ref: '#/definitions/LinkAttributeUpdate'
-  LinkName:
-    type: string
-    pattern: '[^\/\[\]\(\):\{\}#@!?\s\\;]+'
-    minLength: 1
-    maxLength: 64
-  ObjectIdentifier:
-    type: string
-  LinkNameToObjectIdentifierMap:
+  ObjectIdentifierToLinkNameMap:
     type: array
     items:
       type: object
       properties:
         key:
-          $ref: '#/definitions/LinkName'
-        value:
           $ref: '#/definitions/ObjectIdentifier'
-  NextToken:
-    type: string
+        value:
+          $ref: '#/definitions/LinkName'
+  TagsNumberResults:
+    type: integer
+    minimum: 50
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  TypedLinkAttributeDefinitionList:
+    type: array
+    items:
+      $ref: '#/definitions/TypedLinkAttributeDefinition'
+  TypedLinkNameList:
+    type: array
+    items:
+      $ref: '#/definitions/TypedLinkName'
   NumberAttributeValue:
     type: string
-  NumberResults:
-    type: integer
-    minimum: 1
   ObjectAttributeAction:
     type: object
     properties:
@@ -6796,6 +6974,25 @@ definitions:
         $ref: '#/definitions/TypedAttributeValue'
         description: The value that you want to update to.
     description: The action to take on the object attribute.
+  TypedAttributeValueRange:
+    type: object
+    required:
+      - StartMode
+      - EndMode
+    properties:
+      StartMode:
+        $ref: '#/definitions/RangeMode'
+        description: The inclusive or exclusive range start.
+      StartValue:
+        $ref: '#/definitions/TypedAttributeValue'
+        description: The value to start the range at.
+      EndMode:
+        $ref: '#/definitions/RangeMode'
+        description: The inclusive or exclusive range end.
+      EndValue:
+        $ref: '#/definitions/TypedAttributeValue'
+        description: The attribute value to terminate the range at.
+    description: 'A range of attribute values. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters">Range Filters</a>.'
   ObjectAttributeRange:
     type: object
     properties:
@@ -6806,10 +7003,6 @@ definitions:
         $ref: '#/definitions/TypedAttributeValueRange'
         description: The range of attribute values being selected.
     description: A range of attributes.
-  ObjectAttributeRangeList:
-    type: array
-    items:
-      $ref: '#/definitions/ObjectAttributeRange'
   ObjectAttributeUpdate:
     type: object
     properties:
@@ -6820,37 +7013,8 @@ definitions:
         $ref: '#/definitions/ObjectAttributeAction'
         description: The action to perform as part of the attribute update.
     description: Structure that contains attribute update information.
-  ObjectAttributeUpdateList:
-    type: array
-    items:
-      $ref: '#/definitions/ObjectAttributeUpdate'
-  ObjectIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/ObjectIdentifier'
-  ObjectIdentifierToLinkNameMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ObjectIdentifier'
-        value:
-          $ref: '#/definitions/LinkName'
-  ObjectReference:
-    type: object
-    properties:
-      Selector:
-        $ref: '#/definitions/SelectorObjectReference'
-        description: '<p>A path selector supports easy selection of an object by the parent/child links leading to it from the directory root. Use the link names from each parent/child link to construct the path. Path selectors start with a slash (/) and link names are separated by slashes. For more information about paths, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#accessingobjects">Accessing Objects</a>. You can identify an object in one of the following ways:</p> <ul> <li> <p> <i>$ObjectIdentifier</i> - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier</p> </li> <li> <p> <i>/some/path</i> - Identifies the object based on path</p> </li> <li> <p> <i>#SomeBatchReference</i> - Identifies the object in a batch call</p> </li> </ul>'
-    description: The reference that identifies an object.
-  ObjectType:
+  SelectorObjectReference:
     type: string
-    enum:
-      - NODE
-      - LEAF_NODE
-      - POLICY
-      - INDEX
   PathString:
     type: string
   PathToObjectIdentifiers:
@@ -6863,10 +7027,8 @@ definitions:
         $ref: '#/definitions/ObjectIdentifierList'
         description: Lists <code>ObjectIdentifiers</code> starting from directory root to the object in the request.
     description: Returns the path to the <code>ObjectIdentifiers</code> that is associated with the directory.
-  PathToObjectIdentifiersList:
-    type: array
-    items:
-      $ref: '#/definitions/PathToObjectIdentifiers'
+  PolicyType:
+    type: string
   PolicyAttachment:
     type: object
     properties:
@@ -6894,12 +7056,11 @@ definitions:
         $ref: '#/definitions/PolicyAttachmentList'
         description: List of policy objects.
     description: Used when a regular object exists in a <a>Directory</a> and you want to find all of the policies that are associated with that object and the parent to that object.
-  PolicyToPathList:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyToPath'
-  PolicyType:
+  Version:
     type: string
+    pattern: '^[a-zA-Z0-9._-]*$'
+    minLength: 1
+    maxLength: 10
   RangeMode:
     type: string
     enum:
@@ -6908,11 +7069,22 @@ definitions:
       - LAST_BEFORE_MISSING_VALUES
       - INCLUSIVE
       - EXCLUSIVE
-  RequiredAttributeBehavior:
+  RuleType:
     type: string
     enum:
-      - REQUIRED_ALWAYS
-      - NOT_REQUIRED
+      - BINARY_LENGTH
+      - NUMBER_COMPARISON
+      - STRING_FROM_SET
+      - STRING_LENGTH
+  RuleParameterMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/RuleParameterKey'
+        value:
+          $ref: '#/definitions/RuleParameterValue'
   Rule:
     type: object
     properties:
@@ -6928,59 +7100,15 @@ definitions:
     pattern: '^[a-zA-Z0-9._-]*$'
     minLength: 1
     maxLength: 64
-  RuleMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/RuleKey'
-        value:
-          $ref: '#/definitions/Rule'
   RuleParameterKey:
     type: string
   RuleParameterValue:
     type: string
-  RuleParameterMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/RuleParameterKey'
-        value:
-          $ref: '#/definitions/RuleParameterValue'
-  RuleType:
-    type: string
-    enum:
-      - BINARY_LENGTH
-      - NUMBER_COMPARISON
-      - STRING_FROM_SET
-      - STRING_LENGTH
-  SchemaFacet:
-    type: object
-    properties:
-      SchemaArn:
-        $ref: '#/definitions/Arn'
-        description: 'The ARN of the schema that contains the facet with no minor component. See <a>arns</a> and <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/inplaceschemaupgrade.html">In-Place Schema Upgrade</a> for a description of when to provide minor versions.'
-      FacetName:
-        $ref: '#/definitions/FacetName'
-        description: The name of the facet.
-    description: A facet.
-  SchemaFacetList:
-    type: array
-    items:
-      $ref: '#/definitions/SchemaFacet'
-  SchemaJsonDocument:
-    type: string
-  SchemaName:
-    type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
-    minLength: 1
-    maxLength: 32
-  SelectorObjectReference:
-    type: string
   StringAttributeValue:
+    type: string
+  TagKey:
+    type: string
+  TagValue:
     type: string
   Tag:
     type: object
@@ -6992,59 +7120,10 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value that is associated with the tag.
     description: The tag structure that contains a tag key and value.
-  TagKey:
-    type: string
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValue:
-    type: string
-  TagsNumberResults:
-    type: integer
-    minimum: 50
-  TypedAttributeValue:
-    type: object
-    properties:
-      StringValue:
-        $ref: '#/definitions/StringAttributeValue'
-        description: A string data value.
-      BinaryValue:
-        $ref: '#/definitions/BinaryAttributeValue'
-        description: A binary data value.
-      BooleanValue:
-        $ref: '#/definitions/BooleanAttributeValue'
-        description: A Boolean data value.
-      NumberValue:
-        $ref: '#/definitions/NumberAttributeValue'
-        description: A number data value.
-      DatetimeValue:
-        $ref: '#/definitions/DatetimeAttributeValue'
-        description: A date and time value.
-    description: 'Represents the data for a typed attribute. You can set one, and only one, of the elements. Each attribute in an item is a name-value pair. Attributes have a single value.'
-  TypedAttributeValueRange:
-    type: object
-    required:
-      - StartMode
-      - EndMode
-    properties:
-      StartMode:
-        $ref: '#/definitions/RangeMode'
-        description: The inclusive or exclusive range start.
-      StartValue:
-        $ref: '#/definitions/TypedAttributeValue'
-        description: The value to start the range at.
-      EndMode:
-        $ref: '#/definitions/RangeMode'
-        description: The inclusive or exclusive range end.
-      EndValue:
-        $ref: '#/definitions/TypedAttributeValue'
-        description: The attribute value to terminate the range at.
-    description: 'A range of attribute values. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters">Range Filters</a>.'
   TypedLinkAttributeDefinition:
     type: object
     required:
@@ -7071,10 +7150,6 @@ definitions:
         $ref: '#/definitions/RequiredAttributeBehavior'
         description: The required behavior of the <code>TypedLinkAttributeDefinition</code>.
     description: A typed link attribute definition.
-  TypedLinkAttributeDefinitionList:
-    type: array
-    items:
-      $ref: '#/definitions/TypedLinkAttributeDefinition'
   TypedLinkAttributeRange:
     type: object
     required:
@@ -7087,27 +7162,6 @@ definitions:
         $ref: '#/definitions/TypedAttributeValueRange'
         description: The range of attribute values that are being selected.
     description: Identifies the range of attributes that are used by a specified filter.
-  TypedLinkAttributeRangeList:
-    type: array
-    items:
-      $ref: '#/definitions/TypedLinkAttributeRange'
-  TypedLinkFacet:
-    type: object
-    required:
-      - Name
-      - Attributes
-      - IdentityAttributeOrder
-    properties:
-      Name:
-        $ref: '#/definitions/TypedLinkName'
-        description: The unique name of the typed link facet.
-      Attributes:
-        $ref: '#/definitions/TypedLinkAttributeDefinitionList'
-        description: 'A set of key-value pairs associated with the typed link. Typed link attributes are used when you have data values that are related to the link itself, and not to one of the two objects being linked. Identity attributes also serve to distinguish the link from others of the same type between the same objects.'
-      IdentityAttributeOrder:
-        $ref: '#/definitions/AttributeNameList'
-        description: 'The set of attributes that distinguish links made from this facet from each other, in the order of significance. Listing typed links can filter on the values of these attributes. See <a>ListOutgoingTypedLinks</a> and <a>ListIncomingTypedLinks</a> for details.'
-    description: 'Defines the typed links structure and its attributes. To create a typed link facet, use the <a>CreateTypedLinkFacet</a> API.'
   TypedLinkFacetAttributeUpdate:
     type: object
     required:
@@ -7125,58 +7179,3 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TypedLinkFacetAttributeUpdate'
-  TypedLinkName:
-    type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
-  TypedLinkNameList:
-    type: array
-    items:
-      $ref: '#/definitions/TypedLinkName'
-  TypedLinkSchemaAndFacetName:
-    type: object
-    required:
-      - SchemaArn
-      - TypedLinkName
-    properties:
-      SchemaArn:
-        $ref: '#/definitions/Arn'
-        description: 'The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.'
-      TypedLinkName:
-        $ref: '#/definitions/TypedLinkName'
-        description: The unique name of the typed link facet.
-    description: Identifies the schema Amazon Resource Name (ARN) and facet name for the typed link.
-  TypedLinkSpecifier:
-    type: object
-    required:
-      - TypedLinkFacet
-      - SourceObjectReference
-      - TargetObjectReference
-      - IdentityAttributeValues
-    properties:
-      TypedLinkFacet:
-        $ref: '#/definitions/TypedLinkSchemaAndFacetName'
-        description: Identifies the typed link facet that is associated with the typed link.
-      SourceObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: Identifies the source object that the typed link will attach to.
-      TargetObjectReference:
-        $ref: '#/definitions/ObjectReference'
-        description: Identifies the target object that the typed link will attach to.
-      IdentityAttributeValues:
-        $ref: '#/definitions/AttributeNameAndValueList'
-        description: Identifies the attribute value to update.
-    description: 'Contains all the information that is used to uniquely identify a typed link. The parameters discussed in this topic are used to uniquely specify the typed link being operated on. The <a>AttachTypedLink</a> API returns a typed link specifier while the <a>DetachTypedLink</a> API accepts one as input. Similarly, the <a>ListIncomingTypedLinks</a> and <a>ListOutgoingTypedLinks</a> API operations provide typed link specifiers as output. You can also construct a typed link specifier from scratch.'
-  TypedLinkSpecifierList:
-    type: array
-    items:
-      $ref: '#/definitions/TypedLinkSpecifier'
-  UpdateActionType:
-    type: string
-    enum:
-      - CREATE_OR_UPDATE
-      - DELETE
-  Version:
-    type: string
-    pattern: '^[a-zA-Z0-9._-]*$'
-    minLength: 1
-    maxLength: 10

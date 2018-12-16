@@ -2461,13 +2461,16 @@ definitions:
     pattern: 'arn:.*'
     minLength: 1
     maxLength: 1224
-  undefined: {}
   Arns:
     type: array
     items:
       $ref: '#/definitions/Arn'
     minItems: 1
     maxItems: 100
+  SimulationJobs:
+    type: array
+    items:
+      $ref: '#/definitions/SimulationJob'
   Boolean:
     type: boolean
   ClientRequestToken:
@@ -2475,9 +2478,230 @@ definitions:
     pattern: '[a-zA-Z0-9_\-=]*'
     minLength: 1
     maxLength: 64
+  DeploymentConfig:
+    type: object
+    properties:
+      concurrentDeploymentPercentage:
+        $ref: '#/definitions/Percentage'
+        description: The percentage of robots receiving the deployment at the same time.
+      failureThresholdPercentage:
+        $ref: '#/definitions/Percentage'
+        description: The percentage of deployments that need to fail before stopping deployment.
+    description: Information about a deployment configuration.
+  DeploymentApplicationConfigs:
+    type: array
+    items:
+      $ref: '#/definitions/DeploymentApplicationConfig'
+    minItems: 1
+    maxItems: 1
+  DeploymentStatus:
+    type: string
+    enum:
+      - Pending
+      - Preparing
+      - InProgress
+      - Failed
+      - Succeeded
+  GenericString:
+    type: string
+  DeploymentJobErrorCode:
+    type: string
+    enum:
+      - ResourceNotFound
+      - FailureThresholdBreached
+      - RobotDeploymentNoResponse
+      - GreengrassDeploymentFailed
+      - MissingRobotArchitecture
+      - MissingRobotApplicationArchitecture
+      - MissingRobotDeploymentResource
+      - GreengrassGroupVersionDoesNotExist
+      - ExtractingBundleFailure
+      - PreLaunchFileFailure
+      - PostLaunchFileFailure
+      - BadPermissionError
+      - InternalServerError
   CreatedAt:
     type: string
     format: date-time
+  Name:
+    type: string
+    pattern: '[a-zA-Z0-9_\-]*'
+    minLength: 1
+    maxLength: 255
+  SourceConfigs:
+    type: array
+    items:
+      $ref: '#/definitions/SourceConfig'
+  RobotSoftwareSuite:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/RobotSoftwareSuiteType'
+        description: The name of the robot software suite.
+      version:
+        $ref: '#/definitions/RobotSoftwareSuiteVersionType'
+        description: The version of the robot software suite.
+    description: Information about a robot software suite.
+  Version:
+    type: string
+    pattern: '(\$LATEST)|[0-9]*'
+    minLength: 1
+    maxLength: 255
+  Sources:
+    type: array
+    items:
+      $ref: '#/definitions/Source'
+  LastUpdatedAt:
+    type: string
+    format: date-time
+  RevisionId:
+    type: string
+    pattern: '[a-zA-Z0-9_.\-]*'
+    minLength: 1
+    maxLength: 40
+  Id:
+    type: string
+    minLength: 1
+    maxLength: 1224
+  SimulationSoftwareSuite:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/SimulationSoftwareSuiteType'
+        description: The name of the simulation software suite.
+      version:
+        $ref: '#/definitions/SimulationSoftwareSuiteVersionType'
+        description: The version of the simulation software suite.
+    description: Information about a simulation software suite.
+  RenderingEngine:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/RenderingEngineType'
+        description: The name of the rendering engine.
+      version:
+        $ref: '#/definitions/RenderingEngineVersionType'
+        description: The version of the rendering engine.
+    description: Information about a rendering engine.
+  OutputLocation:
+    type: object
+    properties:
+      s3Bucket:
+        $ref: '#/definitions/S3Bucket'
+        description: The S3 bucket for output.
+      s3Prefix:
+        $ref: '#/definitions/S3Key'
+        description: The S3 folder in the <code>s3Bucket</code> where output files will be placed.
+    description: The output location.
+  JobDuration:
+    type: integer
+  IamRole:
+    type: string
+    pattern: 'arn:.*'
+    minLength: 1
+    maxLength: 255
+  FailureBehavior:
+    type: string
+    enum:
+      - Fail
+      - Continue
+  RobotApplicationConfigs:
+    type: array
+    items:
+      $ref: '#/definitions/RobotApplicationConfig'
+    minItems: 1
+    maxItems: 1
+  SimulationApplicationConfigs:
+    type: array
+    items:
+      $ref: '#/definitions/SimulationApplicationConfig'
+    minItems: 1
+    maxItems: 1
+  VPCConfig:
+    type: object
+    required:
+      - subnets
+    properties:
+      subnets:
+        $ref: '#/definitions/Subnets'
+        description: A list of one or more subnet IDs in your VPC.
+      securityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: A list of one or more security groups IDs in your VPC.
+      assignPublicIp:
+        $ref: '#/definitions/Boolean'
+        description: A boolean indicating whether to assign a public IP address.
+    description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and two subnet IDs.'
+  SimulationJobStatus:
+    type: string
+    enum:
+      - Pending
+      - Preparing
+      - Running
+      - Restarting
+      - Completed
+      - Failed
+      - RunningFailed
+      - Terminating
+      - Terminated
+      - Canceled
+  SimulationJobErrorCode:
+    type: string
+    enum:
+      - InternalServiceError
+      - RobotApplicationCrash
+      - SimulationApplicationCrash
+      - BadPermissionsRobotApplication
+      - BadPermissionsSimulationApplication
+      - BadPermissionsS3Output
+      - BadPermissionsCloudwatchLogs
+      - SubnetIpLimitExceeded
+      - ENILimitExceeded
+      - BadPermissionsUserCredentials
+      - InvalidBundleRobotApplication
+      - InvalidBundleSimulationApplication
+      - RobotApplicationVersionMismatchedEtag
+      - SimulationApplicationVersionMismatchedEtag
+  SimulationTimeMillis:
+    type: integer
+  VPCConfigResponse:
+    type: object
+    properties:
+      subnets:
+        $ref: '#/definitions/Subnets'
+        description: A list of subnet IDs associated with the simulation job.
+      securityGroups:
+        $ref: '#/definitions/SecurityGroups'
+        description: A list of security group IDs associated with the simulation job.
+      vpcId:
+        $ref: '#/definitions/GenericString'
+        description: The VPC ID associated with your simulation job.
+      assignPublicIp:
+        $ref: '#/definitions/Boolean'
+        description: A boolean indicating if a public IP was assigned.
+    description: VPC configuration associated with your simulation job.
+  DeploymentLaunchConfig:
+    type: object
+    required:
+      - packageName
+      - launchFile
+    properties:
+      packageName:
+        $ref: '#/definitions/GenericString'
+        description: The package name.
+      preLaunchFile:
+        $ref: '#/definitions/GenericString'
+        description: The deployment pre-launch file. This file will be executed prior to the deployment launch file.
+      launchFile:
+        $ref: '#/definitions/GenericString'
+        description: The deployment launch file.
+      postLaunchFile:
+        $ref: '#/definitions/GenericString'
+        description: The deployment post-launch file. This file will be executed after the deployment launch file.
+      environmentVariables:
+        $ref: '#/definitions/EnvironmentVariableMap'
+        description: An array of key/value pairs specifying environment variables for the deployment application.
+    description: Configuration information for a deployment launch.
   DeploymentApplicationConfig:
     type: object
     required:
@@ -2495,22 +2719,10 @@ definitions:
         $ref: '#/definitions/DeploymentLaunchConfig'
         description: 'The launch configuration, usually <code>roslaunch</code>.'
     description: Information about a deployment application configuration.
-  DeploymentApplicationConfigs:
-    type: array
-    items:
-      $ref: '#/definitions/DeploymentApplicationConfig'
-    minItems: 1
-    maxItems: 1
-  DeploymentConfig:
-    type: object
-    properties:
-      concurrentDeploymentPercentage:
-        $ref: '#/definitions/Percentage'
-        description: The percentage of robots receiving the deployment at the same time.
-      failureThresholdPercentage:
-        $ref: '#/definitions/Percentage'
-        description: The percentage of deployments that need to fail before stopping deployment.
-    description: Information about a deployment configuration.
+  Percentage:
+    type: integer
+    minimum: 1
+    maximum: 100
   DeploymentJob:
     type: object
     properties:
@@ -2539,67 +2751,12 @@ definitions:
         $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the deployment job was created.'
     description: Information about a deployment job.
-  DeploymentJobErrorCode:
-    type: string
-    enum:
-      - ResourceNotFound
-      - FailureThresholdBreached
-      - RobotDeploymentNoResponse
-      - GreengrassDeploymentFailed
-      - MissingRobotArchitecture
-      - MissingRobotApplicationArchitecture
-      - MissingRobotDeploymentResource
-      - GreengrassGroupVersionDoesNotExist
-      - ExtractingBundleFailure
-      - PreLaunchFileFailure
-      - PostLaunchFileFailure
-      - BadPermissionError
-      - InternalServerError
   DeploymentJobs:
     type: array
     items:
       $ref: '#/definitions/DeploymentJob'
     minItems: 0
     maxItems: 200
-  DeploymentLaunchConfig:
-    type: object
-    required:
-      - packageName
-      - launchFile
-    properties:
-      packageName:
-        $ref: '#/definitions/GenericString'
-        description: The package name.
-      preLaunchFile:
-        $ref: '#/definitions/GenericString'
-        description: The deployment pre-launch file. This file will be executed prior to the deployment launch file.
-      launchFile:
-        $ref: '#/definitions/GenericString'
-        description: The deployment launch file.
-      postLaunchFile:
-        $ref: '#/definitions/GenericString'
-        description: The deployment post-launch file. This file will be executed after the deployment launch file.
-      environmentVariables:
-        $ref: '#/definitions/EnvironmentVariableMap'
-        description: An array of key/value pairs specifying environment variables for the deployment application.
-    description: Configuration information for a deployment launch.
-  DeploymentStatus:
-    type: string
-    enum:
-      - Pending
-      - Preparing
-      - InProgress
-      - Failed
-      - Succeeded
-  EnvironmentVariableKey:
-    type: string
-    pattern: '[A-Z_][A-Z0-9_]*'
-    minLength: 1
-    maxLength: 1024
-  EnvironmentVariableValue:
-    type: string
-    minLength: 1
-    maxLength: 1024
   EnvironmentVariableMap:
     type: array
     minItems: 0
@@ -2611,11 +2768,41 @@ definitions:
           $ref: '#/definitions/EnvironmentVariableKey'
         value:
           $ref: '#/definitions/EnvironmentVariableValue'
-  FailureBehavior:
+  RobotDeploymentSummary:
+    type: array
+    items:
+      $ref: '#/definitions/RobotDeployment'
+  Robots:
+    type: array
+    items:
+      $ref: '#/definitions/Robot'
+    minItems: 0
+    maxItems: 1000
+  RobotStatus:
     type: string
     enum:
-      - Fail
-      - Continue
+      - Available
+      - Registered
+      - PendingNewDeployment
+      - Deploying
+      - Failed
+      - InSync
+      - NoResponse
+  EnvironmentVariableKey:
+    type: string
+    pattern: '[A-Z_][A-Z0-9_]*'
+    minLength: 1
+    maxLength: 1024
+  EnvironmentVariableValue:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  FilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/Name'
+    minItems: 1
+    maxItems: 1
   Filter:
     type: object
     properties:
@@ -2626,12 +2813,6 @@ definitions:
         $ref: '#/definitions/FilterValues'
         description: A list of values.
     description: Information about a filter.
-  FilterValues:
-    type: array
-    items:
-      $ref: '#/definitions/Name'
-    minItems: 1
-    maxItems: 1
   Filters:
     type: array
     items:
@@ -2666,22 +2847,6 @@ definitions:
       $ref: '#/definitions/Fleet'
     minItems: 0
     maxItems: 200
-  GenericString:
-    type: string
-  IamRole:
-    type: string
-    pattern: 'arn:.*'
-    minLength: 1
-    maxLength: 255
-  Id:
-    type: string
-    minLength: 1
-    maxLength: 1224
-  JobDuration:
-    type: integer
-  LastUpdatedAt:
-    type: string
-    format: date-time
   LaunchConfig:
     type: object
     required:
@@ -2698,32 +2863,44 @@ definitions:
         $ref: '#/definitions/EnvironmentVariableMap'
         description: The environment variables for the application launch.
     description: Information about a launch configuration.
-  MaxResults:
-    type: integer
-  Name:
-    type: string
-    pattern: '[a-zA-Z0-9_\-]*'
-    minLength: 1
-    maxLength: 255
-  OutputLocation:
-    type: object
-    properties:
-      s3Bucket:
-        $ref: '#/definitions/S3Bucket'
-        description: The S3 bucket for output.
-      s3Prefix:
-        $ref: '#/definitions/S3Key'
-        description: The S3 folder in the <code>s3Bucket</code> where output files will be placed.
-    description: The output location.
   PaginationToken:
     type: string
     pattern: '[a-zA-Z0-9_.\-\/+=]*'
     minLength: 1
     maxLength: 2048
-  Percentage:
+  MaxResults:
     type: integer
-    minimum: 1
-    maximum: 100
+  VersionQualifier:
+    type: string
+    pattern: ALL
+  RobotApplicationSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/RobotApplicationSummary'
+    minItems: 0
+    maxItems: 100
+  SimulationApplicationSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SimulationApplicationSummary'
+    minItems: 0
+    maxItems: 100
+  SimulationJobSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/SimulationJobSummary'
+    minItems: 0
+    maxItems: 100
+  S3Bucket:
+    type: string
+    pattern: '[a-z0-9][a-z0-9\-]*[a-z0-9]'
+    minLength: 3
+    maxLength: 63
+  S3Key:
+    type: string
+    pattern: .*
+    minLength: 1
+    maxLength: 1024
   ProgressDetail:
     type: object
     properties:
@@ -2734,16 +2911,6 @@ definitions:
         $ref: '#/definitions/GenericString'
         description: The Amazon Resource Name (ARN) of the deployment job.
     description: Information about the progress of a deployment job.
-  RenderingEngine:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/RenderingEngineType'
-        description: The name of the rendering engine.
-      version:
-        $ref: '#/definitions/RenderingEngineVersionType'
-        description: The version of the rendering engine.
-    description: Information about a rendering engine.
   RenderingEngineType:
     type: string
     enum:
@@ -2751,11 +2918,6 @@ definitions:
   RenderingEngineVersionType:
     type: string
     pattern: 1.x
-  RevisionId:
-    type: string
-    pattern: '[a-zA-Z0-9_.\-]*'
-    minLength: 1
-    maxLength: 40
   Robot:
     type: object
     properties:
@@ -2803,24 +2965,12 @@ definitions:
         $ref: '#/definitions/LaunchConfig'
         description: The launch configuration for the robot application.
     description: Application configuration information for a robot.
-  RobotApplicationConfigs:
-    type: array
-    items:
-      $ref: '#/definitions/RobotApplicationConfig'
-    minItems: 1
-    maxItems: 1
   RobotApplicationNames:
     type: array
     items:
       $ref: '#/definitions/Name'
     minItems: 1
     maxItems: 1
-  RobotApplicationSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/RobotApplicationSummary'
-    minItems: 0
-    maxItems: 100
   RobotApplicationSummary:
     type: object
     properties:
@@ -2862,20 +3012,6 @@ definitions:
         $ref: '#/definitions/DeploymentJobErrorCode'
         description: The robot deployment failure code.
     description: Information about a robot deployment.
-  RobotDeploymentSummary:
-    type: array
-    items:
-      $ref: '#/definitions/RobotDeployment'
-  RobotSoftwareSuite:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/RobotSoftwareSuiteType'
-        description: The name of the robot software suite.
-      version:
-        $ref: '#/definitions/RobotSoftwareSuiteVersionType'
-        description: The version of the robot software suite.
-    description: Information about a robot software suite.
   RobotSoftwareSuiteType:
     type: string
     enum:
@@ -2884,34 +3020,8 @@ definitions:
     type: string
     enum:
       - Kinetic
-  RobotStatus:
-    type: string
-    enum:
-      - Available
-      - Registered
-      - PendingNewDeployment
-      - Deploying
-      - Failed
-      - InSync
-      - NoResponse
-  Robots:
-    type: array
-    items:
-      $ref: '#/definitions/Robot'
-    minItems: 0
-    maxItems: 1000
-  S3Bucket:
-    type: string
-    pattern: '[a-z0-9][a-z0-9\-]*[a-z0-9]'
-    minLength: 3
-    maxLength: 63
   S3Etag:
     type: string
-  S3Key:
-    type: string
-    pattern: .*
-    minLength: 1
-    maxLength: 1024
   SecurityGroups:
     type: array
     items:
@@ -2934,24 +3044,12 @@ definitions:
         $ref: '#/definitions/LaunchConfig'
         description: The launch configuration for the simulation application.
     description: Information about a simulation application configuration.
-  SimulationApplicationConfigs:
-    type: array
-    items:
-      $ref: '#/definitions/SimulationApplicationConfig'
-    minItems: 1
-    maxItems: 1
   SimulationApplicationNames:
     type: array
     items:
       $ref: '#/definitions/Name'
     minItems: 1
     maxItems: 1
-  SimulationApplicationSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/SimulationApplicationSummary'
-    minItems: 0
-    maxItems: 100
   SimulationApplicationSummary:
     type: object
     properties:
@@ -3014,42 +3112,6 @@ definitions:
         $ref: '#/definitions/VPCConfigResponse'
         description: VPC configuration information.
     description: Information about a simulation job.
-  SimulationJobErrorCode:
-    type: string
-    enum:
-      - InternalServiceError
-      - RobotApplicationCrash
-      - SimulationApplicationCrash
-      - BadPermissionsRobotApplication
-      - BadPermissionsSimulationApplication
-      - BadPermissionsS3Output
-      - BadPermissionsCloudwatchLogs
-      - SubnetIpLimitExceeded
-      - ENILimitExceeded
-      - BadPermissionsUserCredentials
-      - InvalidBundleRobotApplication
-      - InvalidBundleSimulationApplication
-      - RobotApplicationVersionMismatchedEtag
-      - SimulationApplicationVersionMismatchedEtag
-  SimulationJobStatus:
-    type: string
-    enum:
-      - Pending
-      - Preparing
-      - Running
-      - Restarting
-      - Completed
-      - Failed
-      - RunningFailed
-      - Terminating
-      - Terminated
-      - Canceled
-  SimulationJobSummaries:
-    type: array
-    items:
-      $ref: '#/definitions/SimulationJobSummary'
-    minItems: 0
-    maxItems: 100
   SimulationJobSummary:
     type: object
     properties:
@@ -3072,20 +3134,6 @@ definitions:
         $ref: '#/definitions/RobotApplicationNames'
         description: A list of simulation job robot application names.
     description: Summary information for a simulation job.
-  SimulationJobs:
-    type: array
-    items:
-      $ref: '#/definitions/SimulationJob'
-  SimulationSoftwareSuite:
-    type: object
-    properties:
-      name:
-        $ref: '#/definitions/SimulationSoftwareSuiteType'
-        description: The name of the simulation software suite.
-      version:
-        $ref: '#/definitions/SimulationSoftwareSuiteVersionType'
-        description: The version of the simulation software suite.
-    description: Information about a simulation software suite.
   SimulationSoftwareSuiteType:
     type: string
     enum:
@@ -3093,8 +3141,6 @@ definitions:
   SimulationSoftwareSuiteVersionType:
     type: string
     pattern: '7'
-  SimulationTimeMillis:
-    type: integer
   Source:
     type: object
     properties:
@@ -3124,56 +3170,9 @@ definitions:
         $ref: '#/definitions/Architecture'
         description: The target processor architecture for the application.
     description: Information about a source configuration.
-  SourceConfigs:
-    type: array
-    items:
-      $ref: '#/definitions/SourceConfig'
-  Sources:
-    type: array
-    items:
-      $ref: '#/definitions/Source'
   Subnets:
     type: array
     items:
       $ref: '#/definitions/GenericString'
     minItems: 1
     maxItems: 16
-  VPCConfig:
-    type: object
-    required:
-      - subnets
-    properties:
-      subnets:
-        $ref: '#/definitions/Subnets'
-        description: A list of one or more subnet IDs in your VPC.
-      securityGroups:
-        $ref: '#/definitions/SecurityGroups'
-        description: A list of one or more security groups IDs in your VPC.
-      assignPublicIp:
-        $ref: '#/definitions/Boolean'
-        description: A boolean indicating whether to assign a public IP address.
-    description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and two subnet IDs.'
-  VPCConfigResponse:
-    type: object
-    properties:
-      subnets:
-        $ref: '#/definitions/Subnets'
-        description: A list of subnet IDs associated with the simulation job.
-      securityGroups:
-        $ref: '#/definitions/SecurityGroups'
-        description: A list of security group IDs associated with the simulation job.
-      vpcId:
-        $ref: '#/definitions/GenericString'
-        description: The VPC ID associated with your simulation job.
-      assignPublicIp:
-        $ref: '#/definitions/Boolean'
-        description: A boolean indicating if a public IP was assigned.
-    description: VPC configuration associated with your simulation job.
-  Version:
-    type: string
-    pattern: '(\$LATEST)|[0-9]*'
-    minLength: 1
-    maxLength: 255
-  VersionQualifier:
-    type: string
-    pattern: ALL

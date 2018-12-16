@@ -893,7 +893,37 @@ definitions:
       ResourceQuery:
         $ref: '#/definitions/ResourceQuery'
         description: The resource query that determines which AWS resources are members of the resource group.
-  undefined: {}
+  GroupName:
+    type: string
+    pattern: '[a-zA-Z0-9_\.-]+'
+    minLength: 1
+    maxLength: 128
+  GroupDescription:
+    type: string
+    pattern: '[\sa-zA-Z0-9_\.-]*'
+    maxLength: 512
+  ResourceQuery:
+    type: object
+    required:
+      - Type
+      - Query
+    properties:
+      Type:
+        $ref: '#/definitions/QueryType'
+        description: '<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Key":"Stage","Values":["Deploy"]}</code>, and <code>{"Key":"Version","Values":["2"]}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {"Key":"Stage","Values":["Test","Deploy"]}, and {"Key":"Version","Values":["1"]}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Key":"Stage","Values":["Deploy"]}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Key":"Stage","Values":["Archived"]}</code>, and <code>{"Key":"Version","Values":["4"]}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>'
+      Query:
+        $ref: '#/definitions/Query'
+        description: The query that defines a group or a search.
+    description: The query that is used to define a resource group or a search for resources.
+  Tags:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
   Group:
     type: object
     required:
@@ -910,13 +940,32 @@ definitions:
         $ref: '#/definitions/GroupDescription'
         description: The description of the resource group.
     description: A resource group.
+  GroupQuery:
+    type: object
+    required:
+      - GroupName
+      - ResourceQuery
+    properties:
+      GroupName:
+        $ref: '#/definitions/GroupName'
+        description: The name of a resource group that is associated with a specific resource query.
+      ResourceQuery:
+        $ref: '#/definitions/ResourceQuery'
+        description: The resource query which determines which AWS resources are members of the associated resource group.
+    description: The underlying resource query of a resource group. Resources that match query results are part of the group.
   GroupArn:
     type: string
     pattern: 'arn:aws:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}'
-  GroupDescription:
+  GroupFilterName:
     type: string
-    pattern: '[\sa-zA-Z0-9_\.-]*'
-    maxLength: 512
+    enum:
+      - resource-type
+  GroupFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/GroupFilterValue'
+    minItems: 1
+    maxItems: 5
   GroupFilter:
     type: object
     required:
@@ -934,20 +983,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/GroupFilter'
-  GroupFilterName:
-    type: string
-    enum:
-      - resource-type
   GroupFilterValue:
     type: string
     minLength: 1
     maxLength: 128
-  GroupFilterValues:
-    type: array
-    items:
-      $ref: '#/definitions/GroupFilterValue'
-    minItems: 1
-    maxItems: 5
   GroupIdentifier:
     type: object
     properties:
@@ -966,33 +1005,34 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Group'
-  GroupName:
-    type: string
-    pattern: '[a-zA-Z0-9_\.-]+'
-    minLength: 1
-    maxLength: 128
-  GroupQuery:
-    type: object
-    required:
-      - GroupName
-      - ResourceQuery
-    properties:
-      GroupName:
-        $ref: '#/definitions/GroupName'
-        description: The name of a resource group that is associated with a specific resource query.
-      ResourceQuery:
-        $ref: '#/definitions/ResourceQuery'
-        description: The resource query which determines which AWS resources are members of the associated resource group.
-    description: The underlying resource query of a resource group. Resources that match query results are part of the group.
+  ResourceFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceFilter'
   MaxResults:
     type: integer
     minimum: 1
     maximum: 50
   NextToken:
     type: string
+  ResourceIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceIdentifier'
+  QueryErrorList:
+    type: array
+    items:
+      $ref: '#/definitions/QueryError'
   Query:
     type: string
     maxLength: 2048
+  QueryErrorCode:
+    type: string
+    enum:
+      - CLOUDFORMATION_STACK_INACTIVE
+      - CLOUDFORMATION_STACK_NOT_EXISTING
+  QueryErrorMessage:
+    type: string
   QueryError:
     type: object
     properties:
@@ -1003,17 +1043,6 @@ definitions:
         $ref: '#/definitions/QueryErrorMessage'
         description: 'A message that explains the <code>ErrorCode</code> value. Messages might state that the specified CloudFormation stack does not exist (or no longer exists). For <code>CLOUDFORMATION_STACK_INACTIVE</code>, the message typically states that the CloudFormation stack has a status that is not (or no longer) active, such as <code>CREATE_FAILED</code>.'
     description: 'A two-part error structure that can occur in <code>ListGroupResources</code> or <code>SearchResources</code> operations on CloudFormation stack-based queries. The error occurs if the CloudFormation stack on which the query is based either does not exist, or has a status that renders the stack inactive. A <code>QueryError</code> occurrence does not necessarily mean that AWS Resource Groups could not complete the operation, but the resulting group might have no member resources.'
-  QueryErrorCode:
-    type: string
-    enum:
-      - CLOUDFORMATION_STACK_INACTIVE
-      - CLOUDFORMATION_STACK_NOT_EXISTING
-  QueryErrorList:
-    type: array
-    items:
-      $ref: '#/definitions/QueryError'
-  QueryErrorMessage:
-    type: string
   QueryType:
     type: string
     enum:
@@ -1022,6 +1051,16 @@ definitions:
   ResourceArn:
     type: string
     pattern: 'arn:aws:[a-z0-9\-]*:([a-z]{2}-[a-z]+-\d{1})?:([0-9]{12})?:.+'
+  ResourceFilterName:
+    type: string
+    enum:
+      - resource-type
+  ResourceFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceFilterValue'
+    minItems: 1
+    maxItems: 5
   ResourceFilter:
     type: object
     required:
@@ -1035,25 +1074,14 @@ definitions:
         $ref: '#/definitions/ResourceFilterValues'
         description: 'One or more filter values. Allowed filter values vary by resource filter name, and are case-sensitive.'
     description: A filter name and value pair that is used to obtain more specific results from a list of resources.
-  ResourceFilterList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceFilter'
-  ResourceFilterName:
-    type: string
-    enum:
-      - resource-type
   ResourceFilterValue:
     type: string
     pattern: 'AWS::[a-zA-Z0-9]+::[a-zA-Z0-9]+'
     minLength: 1
     maxLength: 128
-  ResourceFilterValues:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceFilterValue'
-    minItems: 1
-    maxItems: 5
+  ResourceType:
+    type: string
+    pattern: 'AWS::[a-zA-Z0-9]+::\w+'
   ResourceIdentifier:
     type: object
     properties:
@@ -1064,26 +1092,6 @@ definitions:
         $ref: '#/definitions/ResourceType'
         description: 'The resource type of a resource, such as <code>AWS::EC2::Instance</code>.'
     description: 'The ARN of a resource, and its resource type.'
-  ResourceIdentifierList:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceIdentifier'
-  ResourceQuery:
-    type: object
-    required:
-      - Type
-      - Query
-    properties:
-      Type:
-        $ref: '#/definitions/QueryType'
-        description: '<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{"Key":"Stage","Values":["Deploy"]}</code>, and <code>{"Key":"Version","Values":["2"]}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {"Key":"Stage","Values":["Test","Deploy"]}, and {"Key":"Version","Values":["1"]}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{"Key":"Stage","Values":["Deploy"]}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{"Key":"Stage","Values":["Archived"]}</code>, and <code>{"Key":"Version","Values":["4"]}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>'
-      Query:
-        $ref: '#/definitions/Query'
-        description: The query that defines a group or a search.
-    description: The query that is used to define a resource group or a search for resources.
-  ResourceType:
-    type: string
-    pattern: 'AWS::[a-zA-Z0-9]+::\w+'
   TagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -1098,12 +1106,3 @@ definitions:
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
     minLength: 0
     maxLength: 256
-  Tags:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'

@@ -965,7 +965,25 @@ definitions:
       TagKeyList:
         $ref: '#/definitions/TagKeyList'
         description: 'A list of one or more tag keys for the tags that you are removing. Specify only the tag keys, not the tag values.'
-  undefined: {}
+  BackupId:
+    type: string
+    pattern: 'backup-[2-7a-zA-Z]{11,16}'
+  BackupState:
+    type: string
+    enum:
+      - CREATE_IN_PROGRESS
+      - READY
+      - DELETED
+      - PENDING_DELETION
+  ClusterId:
+    type: string
+    pattern: 'cluster-[2-7a-zA-Z]{11,16}'
+  Timestamp:
+    type: string
+    format: date-time
+  Region:
+    type: string
+    pattern: '[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d'
   Backup:
     type: object
     required:
@@ -995,20 +1013,10 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The date and time when the backup will be permanently deleted.
     description: Contains information about a backup of an AWS CloudHSM cluster.
-  BackupId:
-    type: string
-    pattern: 'backup-[2-7a-zA-Z]{11,16}'
   BackupPolicy:
     type: string
     enum:
       - DEFAULT
-  BackupState:
-    type: string
-    enum:
-      - CREATE_IN_PROGRESS
-      - READY
-      - DELETED
-      - PENDING_DELETION
   Backups:
     type: array
     items:
@@ -1038,6 +1046,48 @@ definitions:
         $ref: '#/definitions/Cert'
         description: The cluster certificate issued (signed) by the issuing certificate authority (CA) of the cluster's owner.
     description: Contains one or more certificates or a certificate signing request (CSR).
+  Hsms:
+    type: array
+    items:
+      $ref: '#/definitions/Hsm'
+  HsmType:
+    type: string
+    pattern: (hsm1\.medium)
+  PreCoPassword:
+    type: string
+    minLength: 7
+    maxLength: 32
+  SecurityGroup:
+    type: string
+    pattern: 'sg-[0-9a-fA-F]'
+  ClusterState:
+    type: string
+    enum:
+      - CREATE_IN_PROGRESS
+      - UNINITIALIZED
+      - INITIALIZE_IN_PROGRESS
+      - INITIALIZED
+      - ACTIVE
+      - UPDATE_IN_PROGRESS
+      - DELETE_IN_PROGRESS
+      - DELETED
+      - DEGRADED
+  StateMessage:
+    type: string
+    pattern: .*
+    maxLength: 300
+  ExternalSubnetMapping:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ExternalAz'
+        value:
+          $ref: '#/definitions/SubnetId'
+  VpcId:
+    type: string
+    pattern: 'vpc-[0-9a-fA-F]'
   Cluster:
     type: object
     properties:
@@ -1081,21 +1131,6 @@ definitions:
         $ref: '#/definitions/Certificates'
         description: Contains one or more certificates or a certificate signing request (CSR).
     description: Contains information about an AWS CloudHSM cluster.
-  ClusterId:
-    type: string
-    pattern: 'cluster-[2-7a-zA-Z]{11,16}'
-  ClusterState:
-    type: string
-    enum:
-      - CREATE_IN_PROGRESS
-      - UNINITIALIZED
-      - INITIALIZE_IN_PROGRESS
-      - INITIALIZED
-      - ACTIVE
-      - UPDATE_IN_PROGRESS
-      - DELETE_IN_PROGRESS
-      - DELETED
-      - DEGRADED
   Clusters:
     type: array
     items:
@@ -1111,40 +1146,18 @@ definitions:
         $ref: '#/definitions/BackupId'
       SourceCluster:
         $ref: '#/definitions/ClusterId'
-  EniId:
-    type: string
-    pattern: 'eni-[0-9a-fA-F]{8,17}'
+  SubnetIds:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+    minItems: 1
+    maxItems: 10
   ExternalAz:
     type: string
     pattern: '[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d[a-z]'
-  SubnetId:
+  IpAddress:
     type: string
-    pattern: 'subnet-[0-9a-fA-F]{8,17}'
-  ExternalSubnetMapping:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/ExternalAz'
-        value:
-          $ref: '#/definitions/SubnetId'
-  Field:
-    type: string
-    pattern: '[a-zA-Z0-9_-]+'
-  Strings:
-    type: array
-    items:
-      $ref: '#/definitions/String'
-  Filters:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/Field'
-        value:
-          $ref: '#/definitions/Strings'
+    pattern: '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
   Hsm:
     type: object
     required:
@@ -1178,6 +1191,36 @@ definitions:
   HsmId:
     type: string
     pattern: 'hsm-[2-7a-zA-Z]{11,16}'
+  EniId:
+    type: string
+    pattern: 'eni-[0-9a-fA-F]{8,17}'
+  NextToken:
+    type: string
+    pattern: .*
+    maxLength: 256
+  MaxSize:
+    type: integer
+    minimum: 1
+    maximum: 100
+  Filters:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/Field'
+        value:
+          $ref: '#/definitions/Strings'
+  SubnetId:
+    type: string
+    pattern: 'subnet-[0-9a-fA-F]{8,17}'
+  Field:
+    type: string
+    pattern: '[a-zA-Z0-9_-]+'
+  Strings:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   HsmState:
     type: string
     enum:
@@ -1186,46 +1229,24 @@ definitions:
       - DEGRADED
       - DELETE_IN_PROGRESS
       - DELETED
-  HsmType:
-    type: string
-    pattern: (hsm1\.medium)
-  Hsms:
-    type: array
-    items:
-      $ref: '#/definitions/Hsm'
-  IpAddress:
-    type: string
-    pattern: '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
-  MaxSize:
-    type: integer
-    minimum: 1
-    maximum: 100
-  NextToken:
-    type: string
-    pattern: .*
-    maxLength: 256
-  PreCoPassword:
-    type: string
-    minLength: 7
-    maxLength: 32
-  Region:
-    type: string
-    pattern: '[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d'
-  SecurityGroup:
-    type: string
-    pattern: 'sg-[0-9a-fA-F]'
-  StateMessage:
-    type: string
-    pattern: .*
-    maxLength: 300
   String:
     type: string
-  SubnetIds:
+  TagList:
     type: array
     items:
-      $ref: '#/definitions/SubnetId'
+      $ref: '#/definitions/Tag'
     minItems: 1
-    maxItems: 10
+    maxItems: 50
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 0
+    maxLength: 256
   Tag:
     type: object
     required:
@@ -1239,31 +1260,9 @@ definitions:
         $ref: '#/definitions/TagValue'
         description: The value of the tag.
     description: Contains a tag. A tag is a key-value pair.
-  TagKey:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 1
-    maxLength: 128
   TagKeyList:
     type: array
     items:
       $ref: '#/definitions/TagKey'
     minItems: 1
     maxItems: 50
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-    minItems: 1
-    maxItems: 50
-  TagValue:
-    type: string
-    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
-    minLength: 0
-    maxLength: 256
-  Timestamp:
-    type: string
-    format: date-time
-  VpcId:
-    type: string
-    pattern: 'vpc-[0-9a-fA-F]'

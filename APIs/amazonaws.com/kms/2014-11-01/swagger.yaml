@@ -3218,11 +3218,6 @@ definitions:
       - RSAES_PKCS1_V1_5
       - RSAES_OAEP_SHA_1
       - RSAES_OAEP_SHA_256
-  undefined: {}
-  AliasList:
-    type: array
-    items:
-      $ref: '#/definitions/AliasListEntry'
   AliasListEntry:
     type: object
     properties:
@@ -3236,6 +3231,10 @@ definitions:
         $ref: '#/definitions/KeyIdType'
         description: String that contains the key identifier referred to by the alias.
     description: Contains information about an alias.
+  AliasList:
+    type: array
+    items:
+      $ref: '#/definitions/AliasListEntry'
   AliasNameType:
     type: string
     pattern: '^[a-zA-Z0-9:/_-]+$'
@@ -3244,6 +3243,10 @@ definitions:
   ArnType:
     type: string
     minLength: 20
+    maxLength: 2048
+  KeyIdType:
+    type: string
+    minLength: 1
     maxLength: 2048
   BooleanType:
     type: boolean
@@ -3255,6 +3258,10 @@ definitions:
     type: string
     minLength: 19
     maxLength: 24
+  CustomKeyStoreIdType:
+    type: string
+    minLength: 1
+    maxLength: 64
   ConnectionErrorCodeType:
     type: string
     enum:
@@ -3271,73 +3278,27 @@ definitions:
       - FAILED
       - DISCONNECTED
       - DISCONNECTING
-  CustomKeyStoreIdType:
-    type: string
-    minLength: 1
-    maxLength: 64
   CustomKeyStoreNameType:
     type: string
     minLength: 1
     maxLength: 256
-  CustomKeyStoresList:
+  TrustAnchorCertificateType:
+    type: string
+    minLength: 1
+    maxLength: 5000
+  KeyStorePasswordType:
+    type: string
+    minLength: 1
+    format: password
+  PrincipalIdType:
+    type: string
+    pattern: '^[\w+=,.@:/-]+$'
+    minLength: 1
+    maxLength: 256
+  GrantOperationList:
     type: array
     items:
-      $ref: '#/definitions/CustomKeyStoresListEntry'
-  CustomKeyStoresListEntry:
-    type: object
-    properties:
-      CustomKeyStoreId:
-        $ref: '#/definitions/CustomKeyStoreIdType'
-        description: A unique identifier for the custom key store.
-      CustomKeyStoreName:
-        $ref: '#/definitions/CustomKeyStoreNameType'
-        description: The user-specified friendly name for the custom key store.
-      CloudHsmClusterId:
-        $ref: '#/definitions/CloudHsmClusterIdType'
-        description: A unique identifier for the AWS CloudHSM cluster that is associated with the custom key store.
-      TrustAnchorCertificate:
-        $ref: '#/definitions/TrustAnchorCertificateType'
-        description: 'The trust anchor certificate of the associated AWS CloudHSM cluster. When you <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr">initialize the cluster</a>, you create this certificate and save it in the <code>customerCA.crt</code> file.'
-      ConnectionState:
-        $ref: '#/definitions/ConnectionStateType'
-        description: '<p>Indicates whether the custom key store is connected to its AWS CloudHSM cluster.</p> <p>You can create and use CMKs in your custom key stores only when its connection state is <code>CONNECTED</code>.</p> <p>The value is <code>DISCONNECTED</code> if the key store has never been connected or you use the <a>DisconnectCustomKeyStore</a> operation to disconnect it. If the value is <code>CONNECTED</code> but you are having trouble using the custom key store, make sure that its associated AWS CloudHSM cluster is active and contains at least one active HSM.</p> <p>A value of <code>FAILED</code> indicates that an attempt to connect was unsuccessful. For help resolving a connection failure, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html">Troubleshooting a Custom Key Store</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
-      ConnectionErrorCode:
-        $ref: '#/definitions/ConnectionErrorCodeType'
-        description: '<p>Describes the connection error. Valid values are:</p> <ul> <li> <p> <code>CLUSTER_NOT_FOUND</code> - AWS KMS cannot find the AWS CloudHSM cluster with the specified cluster ID.</p> </li> <li> <p> <code>INSUFFICIENT_CLOUDHSM_HSMS</code> - The associated AWS CloudHSM cluster does not contain any active HSMs. To connect a custom key store to its AWS CloudHSM cluster, the cluster must contain at least one active HSM.</p> </li> <li> <p> <code>INVALID_CREDENTIALS</code> - AWS KMS does not have the correct password for the <code>kmsuser</code> crypto user in the AWS CloudHSM cluster.</p> </li> <li> <p> <code>NETWORK_ERRORS</code> - Network errors are preventing AWS KMS from connecting to the custom key store.</p> </li> <li> <p> <code>USER_LOCKED_OUT</code> - The <code>kmsuser</code> CU account is locked out of the associated AWS CloudHSM cluster due to too many failed password attempts. Before you can connect your custom key store to its AWS CloudHSM cluster, you must change the <code>kmsuser</code> account password and update the password value for the custom key store.</p> </li> </ul> <p>For help with connection failures, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html">Troubleshooting Custom Key Stores</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
-      CreationDate:
-        $ref: '#/definitions/DateType'
-        description: The date and time when the custom key store was created.
-    description: Contains information about each custom key store in the custom key store list.
-  DataKeySpec:
-    type: string
-    enum:
-      - AES_256
-      - AES_128
-  DateType:
-    type: string
-    format: date-time
-  DescriptionType:
-    type: string
-    minLength: 0
-    maxLength: 8192
-  EncryptionContextKey:
-    type: string
-  EncryptionContextValue:
-    type: string
-  EncryptionContextType:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/EncryptionContextKey'
-        value:
-          $ref: '#/definitions/EncryptionContextValue'
-  ExpirationModelType:
-    type: string
-    enum:
-      - KEY_MATERIAL_EXPIRES
-      - KEY_MATERIAL_DOES_NOT_EXPIRE
+      $ref: '#/definitions/GrantOperation'
   GrantConstraints:
     type: object
     properties:
@@ -3348,99 +3309,48 @@ definitions:
         $ref: '#/definitions/EncryptionContextType'
         description: 'A list of key-value pairs that must be present in the encryption context of certain subsequent operations that the grant allows. When certain subsequent operations allowed by the grant include encryption context that matches this list, the grant allows the operation. Otherwise, the grant does not allow the operation.'
     description: '<p>A structure that you can use to allow certain operations in the grant only when the desired encryption context is present. For more information about encryption context, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html">Encryption Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>Grant constraints apply only to operations that accept encryption context as input. For example, the <code> <a>DescribeKey</a> </code> operation does not accept encryption context as input. A grant that allows the <code>DescribeKey</code> operation does so regardless of the grant constraints. In constrast, the <code> <a>Encrypt</a> </code> operation accepts encryption context as input. A grant that allows the <code>Encrypt</code> operation does so only when the encryption context of the <code>Encrypt</code> operation satisfies the grant constraints.</p>'
-  GrantIdType:
-    type: string
-    minLength: 1
-    maxLength: 128
-  GrantList:
-    type: array
-    items:
-      $ref: '#/definitions/GrantListEntry'
-  GrantListEntry:
-    type: object
-    properties:
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: The unique identifier for the customer master key (CMK) to which the grant applies.
-      GrantId:
-        $ref: '#/definitions/GrantIdType'
-        description: The unique identifier for the grant.
-      Name:
-        $ref: '#/definitions/GrantNameType'
-        description: 'The friendly name that identifies the grant. If a name was provided in the <a>CreateGrant</a> request, that name is returned. Otherwise this value is null.'
-      CreationDate:
-        $ref: '#/definitions/DateType'
-        description: The date and time when the grant was created.
-      GranteePrincipal:
-        $ref: '#/definitions/PrincipalIdType'
-        description: The principal that receives the grant's permissions.
-      RetiringPrincipal:
-        $ref: '#/definitions/PrincipalIdType'
-        description: The principal that can retire the grant.
-      IssuingAccount:
-        $ref: '#/definitions/PrincipalIdType'
-        description: The AWS account under which the grant was issued.
-      Operations:
-        $ref: '#/definitions/GrantOperationList'
-        description: The list of operations permitted by the grant.
-      Constraints:
-        $ref: '#/definitions/GrantConstraints'
-        description: A list of key-value pairs that must be present in the encryption context of certain subsequent operations that the grant allows.
-    description: Contains information about an entry in a list of grants.
-  GrantNameType:
-    type: string
-    pattern: '^[a-zA-Z0-9:/_-]+$'
-    minLength: 1
-    maxLength: 256
-  GrantOperation:
-    type: string
-    enum:
-      - Decrypt
-      - Encrypt
-      - GenerateDataKey
-      - GenerateDataKeyWithoutPlaintext
-      - ReEncryptFrom
-      - ReEncryptTo
-      - CreateGrant
-      - RetireGrant
-      - DescribeKey
-  GrantOperationList:
-    type: array
-    items:
-      $ref: '#/definitions/GrantOperation'
   GrantTokenList:
     type: array
     items:
       $ref: '#/definitions/GrantTokenType'
     minItems: 0
     maxItems: 10
+  GrantNameType:
+    type: string
+    pattern: '^[a-zA-Z0-9:/_-]+$'
+    minLength: 1
+    maxLength: 256
   GrantTokenType:
     type: string
     minLength: 1
     maxLength: 8192
-  KeyIdType:
+  GrantIdType:
     type: string
     minLength: 1
-    maxLength: 2048
-  KeyList:
-    type: array
-    items:
-      $ref: '#/definitions/KeyListEntry'
-  KeyListEntry:
-    type: object
-    properties:
-      KeyId:
-        $ref: '#/definitions/KeyIdType'
-        description: Unique identifier of the key.
-      KeyArn:
-        $ref: '#/definitions/ArnType'
-        description: ARN of the key.
-    description: Contains information about each entry in the key list.
-  KeyManagerType:
+    maxLength: 128
+  PolicyType:
+    type: string
+    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+    minLength: 1
+    maxLength: 131072
+  DescriptionType:
+    type: string
+    minLength: 0
+    maxLength: 8192
+  KeyUsageType:
     type: string
     enum:
-      - AWS
-      - CUSTOMER
+      - ENCRYPT_DECRYPT
+  OriginType:
+    type: string
+    enum:
+      - AWS_KMS
+      - EXTERNAL
+      - AWS_CLOUDHSM
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   KeyMetadata:
     type: object
     required:
@@ -3492,22 +3402,57 @@ definitions:
         $ref: '#/definitions/KeyManagerType'
         description: 'The CMK''s manager. CMKs are either customer-managed or AWS-managed. For more information about the difference, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">Customer Master Keys</a> in the <i>AWS Key Management Service Developer Guide</i>.'
     description: <p>Contains metadata about a customer master key (CMK).</p> <p>This data type is used as a response element for the <a>CreateKey</a> and <a>DescribeKey</a> operations.</p>
-  KeyState:
+  CustomKeyStoresListEntry:
+    type: object
+    properties:
+      CustomKeyStoreId:
+        $ref: '#/definitions/CustomKeyStoreIdType'
+        description: A unique identifier for the custom key store.
+      CustomKeyStoreName:
+        $ref: '#/definitions/CustomKeyStoreNameType'
+        description: The user-specified friendly name for the custom key store.
+      CloudHsmClusterId:
+        $ref: '#/definitions/CloudHsmClusterIdType'
+        description: A unique identifier for the AWS CloudHSM cluster that is associated with the custom key store.
+      TrustAnchorCertificate:
+        $ref: '#/definitions/TrustAnchorCertificateType'
+        description: 'The trust anchor certificate of the associated AWS CloudHSM cluster. When you <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr">initialize the cluster</a>, you create this certificate and save it in the <code>customerCA.crt</code> file.'
+      ConnectionState:
+        $ref: '#/definitions/ConnectionStateType'
+        description: '<p>Indicates whether the custom key store is connected to its AWS CloudHSM cluster.</p> <p>You can create and use CMKs in your custom key stores only when its connection state is <code>CONNECTED</code>.</p> <p>The value is <code>DISCONNECTED</code> if the key store has never been connected or you use the <a>DisconnectCustomKeyStore</a> operation to disconnect it. If the value is <code>CONNECTED</code> but you are having trouble using the custom key store, make sure that its associated AWS CloudHSM cluster is active and contains at least one active HSM.</p> <p>A value of <code>FAILED</code> indicates that an attempt to connect was unsuccessful. For help resolving a connection failure, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html">Troubleshooting a Custom Key Store</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+      ConnectionErrorCode:
+        $ref: '#/definitions/ConnectionErrorCodeType'
+        description: '<p>Describes the connection error. Valid values are:</p> <ul> <li> <p> <code>CLUSTER_NOT_FOUND</code> - AWS KMS cannot find the AWS CloudHSM cluster with the specified cluster ID.</p> </li> <li> <p> <code>INSUFFICIENT_CLOUDHSM_HSMS</code> - The associated AWS CloudHSM cluster does not contain any active HSMs. To connect a custom key store to its AWS CloudHSM cluster, the cluster must contain at least one active HSM.</p> </li> <li> <p> <code>INVALID_CREDENTIALS</code> - AWS KMS does not have the correct password for the <code>kmsuser</code> crypto user in the AWS CloudHSM cluster.</p> </li> <li> <p> <code>NETWORK_ERRORS</code> - Network errors are preventing AWS KMS from connecting to the custom key store.</p> </li> <li> <p> <code>USER_LOCKED_OUT</code> - The <code>kmsuser</code> CU account is locked out of the associated AWS CloudHSM cluster due to too many failed password attempts. Before you can connect your custom key store to its AWS CloudHSM cluster, you must change the <code>kmsuser</code> account password and update the password value for the custom key store.</p> </li> </ul> <p>For help with connection failures, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html">Troubleshooting Custom Key Stores</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+      CreationDate:
+        $ref: '#/definitions/DateType'
+        description: The date and time when the custom key store was created.
+    description: Contains information about each custom key store in the custom key store list.
+  CustomKeyStoresList:
+    type: array
+    items:
+      $ref: '#/definitions/CustomKeyStoresListEntry'
+  DateType:
+    type: string
+    format: date-time
+  DataKeySpec:
     type: string
     enum:
-      - Enabled
-      - Disabled
-      - PendingDeletion
-      - PendingImport
-      - Unavailable
-  KeyStorePasswordType:
+      - AES_256
+      - AES_128
+  EncryptionContextType:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/EncryptionContextKey'
+        value:
+          $ref: '#/definitions/EncryptionContextValue'
+  PlaintextType:
     type: string
     minLength: 1
+    maxLength: 4096
     format: password
-  KeyUsageType:
-    type: string
-    enum:
-      - ENCRYPT_DECRYPT
   LimitType:
     type: integer
     minimum: 1
@@ -3517,43 +3462,117 @@ definitions:
     pattern: '[\u0020-\u00FF]*'
     minLength: 1
     maxLength: 1024
+  EncryptionContextKey:
+    type: string
+  EncryptionContextValue:
+    type: string
+  ExpirationModelType:
+    type: string
+    enum:
+      - KEY_MATERIAL_EXPIRES
+      - KEY_MATERIAL_DOES_NOT_EXPIRE
   NumberOfBytesType:
     type: integer
     minimum: 1
     maximum: 1024
-  OriginType:
-    type: string
-    enum:
-      - AWS_KMS
-      - EXTERNAL
-      - AWS_CLOUDHSM
-  PendingWindowInDaysType:
-    type: integer
-    minimum: 1
-    maximum: 365
-  PlaintextType:
-    type: string
-    minLength: 1
-    maxLength: 4096
-    format: password
-  PolicyNameList:
-    type: array
-    items:
-      $ref: '#/definitions/PolicyNameType'
   PolicyNameType:
     type: string
     pattern: '[\w]+'
     minLength: 1
     maxLength: 128
-  PolicyType:
+  WrappingKeySpec:
     type: string
-    pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
-    minLength: 1
-    maxLength: 131072
-  PrincipalIdType:
+    enum:
+      - RSA_2048
+  GrantListEntry:
+    type: object
+    properties:
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: The unique identifier for the customer master key (CMK) to which the grant applies.
+      GrantId:
+        $ref: '#/definitions/GrantIdType'
+        description: The unique identifier for the grant.
+      Name:
+        $ref: '#/definitions/GrantNameType'
+        description: 'The friendly name that identifies the grant. If a name was provided in the <a>CreateGrant</a> request, that name is returned. Otherwise this value is null.'
+      CreationDate:
+        $ref: '#/definitions/DateType'
+        description: The date and time when the grant was created.
+      GranteePrincipal:
+        $ref: '#/definitions/PrincipalIdType'
+        description: The principal that receives the grant's permissions.
+      RetiringPrincipal:
+        $ref: '#/definitions/PrincipalIdType'
+        description: The principal that can retire the grant.
+      IssuingAccount:
+        $ref: '#/definitions/PrincipalIdType'
+        description: The AWS account under which the grant was issued.
+      Operations:
+        $ref: '#/definitions/GrantOperationList'
+        description: The list of operations permitted by the grant.
+      Constraints:
+        $ref: '#/definitions/GrantConstraints'
+        description: A list of key-value pairs that must be present in the encryption context of certain subsequent operations that the grant allows.
+    description: Contains information about an entry in a list of grants.
+  GrantList:
+    type: array
+    items:
+      $ref: '#/definitions/GrantListEntry'
+  GrantOperation:
     type: string
-    pattern: '^[\w+=,.@:/-]+$'
+    enum:
+      - Decrypt
+      - Encrypt
+      - GenerateDataKey
+      - GenerateDataKeyWithoutPlaintext
+      - ReEncryptFrom
+      - ReEncryptTo
+      - CreateGrant
+      - RetireGrant
+      - DescribeKey
+  KeyListEntry:
+    type: object
+    properties:
+      KeyId:
+        $ref: '#/definitions/KeyIdType'
+        description: Unique identifier of the key.
+      KeyArn:
+        $ref: '#/definitions/ArnType'
+        description: ARN of the key.
+    description: Contains information about each entry in the key list.
+  KeyList:
+    type: array
+    items:
+      $ref: '#/definitions/KeyListEntry'
+  KeyManagerType:
+    type: string
+    enum:
+      - AWS
+      - CUSTOMER
+  KeyState:
+    type: string
+    enum:
+      - Enabled
+      - Disabled
+      - PendingDeletion
+      - PendingImport
+      - Unavailable
+  PolicyNameList:
+    type: array
+    items:
+      $ref: '#/definitions/PolicyNameType'
+  PendingWindowInDaysType:
+    type: integer
+    minimum: 1
+    maximum: 365
+  TagKeyType:
+    type: string
     minLength: 1
+    maxLength: 128
+  TagValueType:
+    type: string
+    minLength: 0
     maxLength: 256
   Tag:
     type: object
@@ -3572,23 +3591,3 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagKeyType'
-  TagKeyType:
-    type: string
-    minLength: 1
-    maxLength: 128
-  TagList:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TagValueType:
-    type: string
-    minLength: 0
-    maxLength: 256
-  TrustAnchorCertificateType:
-    type: string
-    minLength: 1
-    maxLength: 5000
-  WrappingKeySpec:
-    type: string
-    enum:
-      - RSA_2048

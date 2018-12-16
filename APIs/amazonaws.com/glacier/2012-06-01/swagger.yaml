@@ -2390,7 +2390,18 @@ definitions:
         $ref: '#/definitions/Stream'
         description: The data to upload.
     description: Provides options to upload a part of an archive in a multipart upload operation.
-  undefined: {}
+  string:
+    type: string
+  Grant:
+    type: object
+    properties:
+      Grantee:
+        $ref: '#/definitions/Grantee'
+        description: The grantee.
+      Permission:
+        $ref: '#/definitions/Permission'
+        description: 'Specifies the permission given to the grantee. '
+    description: Contains information about a grant.
   AccessControlPolicyList:
     type: array
     items:
@@ -2401,6 +2412,21 @@ definitions:
       - ArchiveRetrieval
       - InventoryRetrieval
       - Select
+  TagMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
+  FileHeaderInfo:
+    type: string
+    enum:
+      - USE
+      - IGNORE
+      - NONE
   CSVInput:
     type: object
     properties:
@@ -2423,6 +2449,11 @@ definitions:
         $ref: '#/definitions/string'
         description: A value used as an escape character where the field delimiter is part of the value.
     description: Contains information about the comma-separated value (CSV) file to select from.
+  QuoteFields:
+    type: string
+    enum:
+      - ALWAYS
+      - ASNEEDED
   CSVOutput:
     type: object
     properties:
@@ -2452,6 +2483,10 @@ definitions:
       - authenticated-read
       - bucket-owner-read
       - bucket-owner-full-control
+  DataRetrievalRulesList:
+    type: array
+    items:
+      $ref: '#/definitions/DataRetrievalRule'
   DataRetrievalPolicy:
     type: object
     properties:
@@ -2459,6 +2494,8 @@ definitions:
         $ref: '#/definitions/DataRetrievalRulesList'
         description: 'The policy rule. Although this is a list type, currently there must be only one rule, which contains a Strategy field and optionally a BytesPerHour field.'
     description: Data retrieval policy.
+  NullableLong:
+    type: integer
   DataRetrievalRule:
     type: object
     properties:
@@ -2469,12 +2506,15 @@ definitions:
         $ref: '#/definitions/NullableLong'
         description: <p>The maximum number of bytes that can be retrieved in an hour.</p> <p>This field is required only if the value of the Strategy field is <code>BytesPerHour</code>. Your PUT operation will be rejected if the Strategy field is not set to <code>BytesPerHour</code> and you set this field.</p>
     description: Data retrieval policy rule.
-  DataRetrievalRulesList:
-    type: array
-    items:
-      $ref: '#/definitions/DataRetrievalRule'
   DateTime:
     type: string
+  long:
+    type: integer
+  EncryptionType:
+    type: string
+    enum:
+      - 'aws:kms'
+      - AES256
   Encryption:
     type: object
     properties:
@@ -2488,31 +2528,83 @@ definitions:
         $ref: '#/definitions/string'
         description: 'Optional. If the encryption type is <code>aws:kms</code>, you can use this value to specify the encryption context for the job results.'
     description: 'Contains information about the encryption used to store the job results in Amazon S3. '
-  EncryptionType:
-    type: string
-    enum:
-      - 'aws:kms'
-      - AES256
   ExpressionType:
     type: string
     enum:
       - SQL
-  FileHeaderInfo:
+  Stream:
     type: string
-    enum:
-      - USE
-      - IGNORE
-      - NONE
-  Grant:
+  httpstatus:
+    type: integer
+  VaultAccessPolicy:
     type: object
     properties:
-      Grantee:
-        $ref: '#/definitions/Grantee'
-        description: The grantee.
-      Permission:
-        $ref: '#/definitions/Permission'
-        description: 'Specifies the permission given to the grantee. '
-    description: Contains information about a grant.
+      Policy:
+        $ref: '#/definitions/string'
+        description: The vault access policy.
+    description: Contains the vault access policy.
+  VaultNotificationConfig:
+    type: object
+    properties:
+      SNSTopic:
+        $ref: '#/definitions/string'
+        description: The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name (ARN).
+      Events:
+        $ref: '#/definitions/NotificationEventList'
+        description: A list of one or more events for which Amazon Glacier will send a notification to the specified Amazon SNS topic.
+    description: Represents a vault's notification configuration.
+  boolean:
+    type: boolean
+  StatusCode:
+    type: string
+    enum:
+      - InProgress
+      - Succeeded
+      - Failed
+  Size:
+    type: integer
+  InventoryRetrievalJobDescription:
+    type: object
+    properties:
+      Format:
+        $ref: '#/definitions/string'
+        description: 'The output format for the vault inventory list, which is set by the <b>InitiateJob</b> request when initiating a job to retrieve a vault inventory. Valid values are <code>CSV</code> and <code>JSON</code>.'
+      StartDate:
+        $ref: '#/definitions/DateTime'
+        description: 'The start of the date range in Universal Coordinated Time (UTC) for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+      EndDate:
+        $ref: '#/definitions/DateTime'
+        description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+      Limit:
+        $ref: '#/definitions/string'
+        description: 'The maximum number of inventory items returned per vault inventory retrieval request. This limit is set when initiating the job with the a <b>InitiateJob</b> request. '
+      Marker:
+        $ref: '#/definitions/string'
+        description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering"> Range Inventory Retrieval</a>.'
+    description: Describes the options for a range inventory retrieval job.
+  SelectParameters:
+    type: object
+    properties:
+      InputSerialization:
+        $ref: '#/definitions/InputSerialization'
+        description: Describes the serialization format of the object.
+      ExpressionType:
+        $ref: '#/definitions/ExpressionType'
+        description: 'The type of the provided expression, for example <code>SQL</code>.'
+      Expression:
+        $ref: '#/definitions/string'
+        description: The expression that is used to select the object.
+      OutputSerialization:
+        $ref: '#/definitions/OutputSerialization'
+        description: Describes how the results of the select job are serialized.
+    description: Contains information about the parameters used for a select.
+  OutputLocation:
+    type: object
+    properties:
+      S3:
+        $ref: '#/definitions/S3Location'
+        description: Describes an S3 location that will receive the results of the job request.
+    description: Contains information about the location where the select job results are stored.
   Grantee:
     type: object
     required:
@@ -2534,52 +2626,20 @@ definitions:
         $ref: '#/definitions/string'
         description: Email address of the grantee.
     description: Contains information about the grantee.
-  InputSerialization:
-    type: object
-    properties:
-      csv:
-        $ref: '#/definitions/CSVInput'
-        description: Describes the serialization of a CSV-encoded object.
-    description: Describes how the archive is serialized.
-  InventoryRetrievalJobDescription:
-    type: object
-    properties:
-      Format:
-        $ref: '#/definitions/string'
-        description: 'The output format for the vault inventory list, which is set by the <b>InitiateJob</b> request when initiating a job to retrieve a vault inventory. Valid values are <code>CSV</code> and <code>JSON</code>.'
-      StartDate:
-        $ref: '#/definitions/DateTime'
-        description: 'The start of the date range in Universal Coordinated Time (UTC) for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
-      EndDate:
-        $ref: '#/definitions/DateTime'
-        description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
-      Limit:
-        $ref: '#/definitions/string'
-        description: 'The maximum number of inventory items returned per vault inventory retrieval request. This limit is set when initiating the job with the a <b>InitiateJob</b> request. '
-      Marker:
-        $ref: '#/definitions/string'
-        description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>. For more information, see <a href="http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering"> Range Inventory Retrieval</a>.'
-    description: Describes the options for a range inventory retrieval job.
-  InventoryRetrievalJobInput:
-    type: object
-    properties:
-      StartDate:
-        $ref: '#/definitions/string'
-        description: 'The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
-      EndDate:
-        $ref: '#/definitions/string'
-        description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
-      Limit:
-        $ref: '#/definitions/string'
-        description: Specifies the maximum number of inventory items returned per vault inventory retrieval request. Valid values are greater than or equal to 1.
-      Marker:
-        $ref: '#/definitions/string'
-        description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>.'
-    description: Provides options for specifying a range inventory retrieval job.
-  JobList:
-    type: array
-    items:
-      $ref: '#/definitions/GlacierJobDescription'
+  Permission:
+    type: string
+    enum:
+      - FULL_CONTROL
+      - WRITE
+      - WRITE_ACP
+      - READ
+      - READ_ACP
+  Type:
+    type: string
+    enum:
+      - AmazonCustomerByEmail
+      - CanonicalUser
+      - Group
   JobParameters:
     type: object
     properties:
@@ -2614,70 +2674,60 @@ definitions:
         $ref: '#/definitions/OutputLocation'
         description: Contains information about the location where the select job results are stored.
     description: Provides options for defining a job.
-  NotificationEventList:
-    type: array
-    items:
-      $ref: '#/definitions/string'
-  NullableLong:
-    type: integer
-  OutputLocation:
+  VaultLockPolicy:
     type: object
     properties:
-      S3:
-        $ref: '#/definitions/S3Location'
-        description: Describes an S3 location that will receive the results of the job request.
-    description: Contains information about the location where the select job results are stored.
-  OutputSerialization:
+      Policy:
+        $ref: '#/definitions/string'
+        description: The vault lock policy.
+    description: Contains the vault lock policy.
+  InputSerialization:
     type: object
     properties:
       csv:
-        $ref: '#/definitions/CSVOutput'
-        description: Describes the serialization of CSV-encoded query results.
-    description: Describes how the select output is serialized.
+        $ref: '#/definitions/CSVInput'
+        description: Describes the serialization of a CSV-encoded object.
+    description: Describes how the archive is serialized.
+  InventoryRetrievalJobInput:
+    type: object
+    properties:
+      StartDate:
+        $ref: '#/definitions/string'
+        description: 'The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+      EndDate:
+        $ref: '#/definitions/string'
+        description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+      Limit:
+        $ref: '#/definitions/string'
+        description: Specifies the maximum number of inventory items returned per vault inventory retrieval request. Valid values are greater than or equal to 1.
+      Marker:
+        $ref: '#/definitions/string'
+        description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>.'
+    description: Provides options for specifying a range inventory retrieval job.
+  JobList:
+    type: array
+    items:
+      $ref: '#/definitions/GlacierJobDescription'
+  UploadsList:
+    type: array
+    items:
+      $ref: '#/definitions/UploadListElement'
   PartList:
     type: array
     items:
       $ref: '#/definitions/PartListElement'
-  PartListElement:
-    type: object
-    properties:
-      RangeInBytes:
-        $ref: '#/definitions/string'
-        description: 'The byte range of a part, inclusive of the upper value of the range.'
-      SHA256TreeHash:
-        $ref: '#/definitions/string'
-        description: The SHA256 tree hash value that Amazon Glacier calculated for the part. This field is never <code>null</code>.
-    description: A list of the part sizes of the multipart upload.
-  Permission:
-    type: string
-    enum:
-      - FULL_CONTROL
-      - WRITE
-      - WRITE_ACP
-      - READ
-      - READ_ACP
-  ProvisionedCapacityDescription:
-    type: object
-    properties:
-      CapacityId:
-        $ref: '#/definitions/string'
-        description: The ID that identifies the provisioned capacity unit.
-      StartDate:
-        $ref: '#/definitions/string'
-        description: 'The date that the provisioned capacity unit was purchased, in Universal Coordinated Time (UTC).'
-      ExpirationDate:
-        $ref: '#/definitions/string'
-        description: 'The date that the provisioned capacity unit expires, in Universal Coordinated Time (UTC).'
-    description: The definition for a provisioned capacity unit.
   ProvisionedCapacityList:
     type: array
     items:
       $ref: '#/definitions/ProvisionedCapacityDescription'
-  QuoteFields:
-    type: string
-    enum:
-      - ALWAYS
-      - ASNEEDED
+  VaultList:
+    type: array
+    items:
+      $ref: '#/definitions/DescribeVaultOutput'
+  NotificationEventList:
+    type: array
+    items:
+      $ref: '#/definitions/string'
   S3Location:
     type: object
     properties:
@@ -2706,61 +2756,59 @@ definitions:
         $ref: '#/definitions/StorageClass'
         description: The storage class used to store the job results.
     description: Contains information about the location in Amazon S3 where the select job results are stored.
-  SelectParameters:
+  OutputSerialization:
     type: object
     properties:
-      InputSerialization:
-        $ref: '#/definitions/InputSerialization'
-        description: Describes the serialization format of the object.
-      ExpressionType:
-        $ref: '#/definitions/ExpressionType'
-        description: 'The type of the provided expression, for example <code>SQL</code>.'
-      Expression:
+      csv:
+        $ref: '#/definitions/CSVOutput'
+        description: Describes the serialization of CSV-encoded query results.
+    description: Describes how the select output is serialized.
+  PartListElement:
+    type: object
+    properties:
+      RangeInBytes:
         $ref: '#/definitions/string'
-        description: The expression that is used to select the object.
-      OutputSerialization:
-        $ref: '#/definitions/OutputSerialization'
-        description: Describes how the results of the select job are serialized.
-    description: Contains information about the parameters used for a select.
-  Size:
-    type: integer
-  StatusCode:
-    type: string
-    enum:
-      - InProgress
-      - Succeeded
-      - Failed
+        description: 'The byte range of a part, inclusive of the upper value of the range.'
+      SHA256TreeHash:
+        $ref: '#/definitions/string'
+        description: The SHA256 tree hash value that Amazon Glacier calculated for the part. This field is never <code>null</code>.
+    description: A list of the part sizes of the multipart upload.
+  ProvisionedCapacityDescription:
+    type: object
+    properties:
+      CapacityId:
+        $ref: '#/definitions/string'
+        description: The ID that identifies the provisioned capacity unit.
+      StartDate:
+        $ref: '#/definitions/string'
+        description: 'The date that the provisioned capacity unit was purchased, in Universal Coordinated Time (UTC).'
+      ExpirationDate:
+        $ref: '#/definitions/string'
+        description: 'The date that the provisioned capacity unit expires, in Universal Coordinated Time (UTC).'
+    description: The definition for a provisioned capacity unit.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/string'
+  hashmap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/string'
+        value:
+          $ref: '#/definitions/string'
   StorageClass:
     type: string
     enum:
       - STANDARD
       - REDUCED_REDUNDANCY
       - STANDARD_IA
-  Stream:
-    type: string
   TagKey:
     type: string
-  TagKeyList:
-    type: array
-    items:
-      $ref: '#/definitions/string'
   TagValue:
     type: string
-  TagMap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
-  Type:
-    type: string
-    enum:
-      - AmazonCustomerByEmail
-      - CanonicalUser
-      - Group
   UploadListElement:
     type: object
     properties:
@@ -2780,52 +2828,3 @@ definitions:
         $ref: '#/definitions/string'
         description: The UTC time at which the multipart upload was initiated.
     description: A list of in-progress multipart uploads for a vault.
-  UploadsList:
-    type: array
-    items:
-      $ref: '#/definitions/UploadListElement'
-  VaultAccessPolicy:
-    type: object
-    properties:
-      Policy:
-        $ref: '#/definitions/string'
-        description: The vault access policy.
-    description: Contains the vault access policy.
-  VaultList:
-    type: array
-    items:
-      $ref: '#/definitions/DescribeVaultOutput'
-  VaultLockPolicy:
-    type: object
-    properties:
-      Policy:
-        $ref: '#/definitions/string'
-        description: The vault lock policy.
-    description: Contains the vault lock policy.
-  VaultNotificationConfig:
-    type: object
-    properties:
-      SNSTopic:
-        $ref: '#/definitions/string'
-        description: The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name (ARN).
-      Events:
-        $ref: '#/definitions/NotificationEventList'
-        description: A list of one or more events for which Amazon Glacier will send a notification to the specified Amazon SNS topic.
-    description: Represents a vault's notification configuration.
-  boolean:
-    type: boolean
-  string:
-    type: string
-  hashmap:
-    type: array
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/string'
-        value:
-          $ref: '#/definitions/string'
-  httpstatus:
-    type: integer
-  long:
-    type: integer

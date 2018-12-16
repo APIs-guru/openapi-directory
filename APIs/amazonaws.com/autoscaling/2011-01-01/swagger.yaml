@@ -3276,11 +3276,6 @@ definitions:
       ServiceLinkedRoleARN:
         $ref: '#/definitions/ResourceName'
         description: The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf.
-  undefined: {}
-  Activities:
-    type: array
-    items:
-      $ref: '#/definitions/Activity'
   Activity:
     type: object
     required:
@@ -3321,6 +3316,43 @@ definitions:
         $ref: '#/definitions/XmlString'
         description: The details about the activity.
     description: 'Describes scaling activity, which is a long-running process that represents a change to your Auto Scaling group, such as changing its size or replacing an instance.'
+  Activities:
+    type: array
+    items:
+      $ref: '#/definitions/Activity'
+  XmlString:
+    type: string
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  XmlStringMaxLen255:
+    type: string
+    minLength: 1
+    maxLength: 255
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  XmlStringMaxLen1023:
+    type: string
+    minLength: 1
+    maxLength: 1023
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  TimestampType:
+    type: string
+    format: date-time
+  ScalingActivityStatusCode:
+    type: string
+    enum:
+      - PendingSpotBidPlacement
+      - WaitingForSpotInstanceRequestId
+      - WaitingForSpotInstanceId
+      - WaitingForInstanceId
+      - PreInService
+      - InProgress
+      - WaitingForELBConnectionDraining
+      - MidLifecycleAction
+      - WaitingForInstanceWarmup
+      - Successful
+      - Failed
+      - Cancelled
+  Progress:
+    type: integer
   ActivityIds:
     type: array
     items:
@@ -3336,6 +3368,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AdjustmentType'
+  ResourceName:
+    type: string
+    minLength: 1
+    maxLength: 1600
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   Alarm:
     type: object
     properties:
@@ -3356,6 +3393,88 @@ definitions:
     minLength: 1
     maxLength: 255
   AssociatePublicIpAddress:
+    type: boolean
+  InstanceIds:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen19'
+  TargetGroupARNs:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen511'
+  LoadBalancerNames:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen255'
+  LaunchTemplateSpecification:
+    type: object
+    properties:
+      LaunchTemplateId:
+        $ref: '#/definitions/XmlStringMaxLen255'
+        description: The ID of the launch template. You must specify either a template ID or a template name.
+      LaunchTemplateName:
+        $ref: '#/definitions/LaunchTemplateName'
+        description: The name of the launch template. You must specify either a template name or a template ID.
+      Version:
+        $ref: '#/definitions/XmlStringMaxLen255'
+        description: 'The version number, <code>$Latest</code>, or <code>$Default</code>. If the value is <code>$Latest</code>, Amazon EC2 Auto Scaling selects the latest version of the launch template when launching instances. If the value is <code>$Default</code>, Amazon EC2 Auto Scaling selects the default version of the launch template when launching instances. The default value is <code>$Default</code>.'
+    description: '<p>Describes a launch template and the launch template version.</p> <p>The launch template that is specified must be configured for use with an Auto Scaling group. For more information, see <a href="http://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html">Creating a Launch Template for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+  MixedInstancesPolicy:
+    type: object
+    properties:
+      LaunchTemplate:
+        $ref: '#/definitions/LaunchTemplate'
+        description: '<p>The launch template and overrides.</p> <p>This parameter is required when creating an Auto Scaling group with a mixed instances policy, but is not required when updating the group.</p>'
+      InstancesDistribution:
+        $ref: '#/definitions/InstancesDistribution'
+        description: '<p>The instances distribution to use. </p> <p>If you leave this parameter unspecified when creating the group, the default values are used.</p>'
+    description: '<p>Describes a mixed instances policy for an Auto Scaling group. With mixed instances, your Auto Scaling group can provision a combination of On-Demand Instances and Spot Instances across multiple instance types. For more information, see <a href="http://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options">Using Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>When you create your Auto Scaling group, you can specify a launch configuration or template as a parameter for the top-level object, or you can specify a mixed instances policy, but not both at the same time.</p>'
+  AutoScalingGroupMinSize:
+    type: integer
+  AutoScalingGroupMaxSize:
+    type: integer
+  AutoScalingGroupDesiredCapacity:
+    type: integer
+  Cooldown:
+    type: integer
+  AvailabilityZones:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen255'
+    minItems: 1
+  XmlStringMaxLen32:
+    type: string
+    minLength: 1
+    maxLength: 32
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  HealthCheckGracePeriod:
+    type: integer
+  Instances:
+    type: array
+    items:
+      $ref: '#/definitions/Instance'
+  SuspendedProcesses:
+    type: array
+    items:
+      $ref: '#/definitions/SuspendedProcess'
+  XmlStringMaxLen2047:
+    type: string
+    minLength: 1
+    maxLength: 2047
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  EnabledMetrics:
+    type: array
+    items:
+      $ref: '#/definitions/EnabledMetric'
+  TagDescriptionList:
+    type: array
+    items:
+      $ref: '#/definitions/TagDescription'
+  TerminationPolicies:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen1600'
+  InstanceProtected:
     type: boolean
   AutoScalingGroup:
     type: object
@@ -3445,20 +3564,21 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf.
     description: Describes an Auto Scaling group.
-  AutoScalingGroupDesiredCapacity:
-    type: integer
-  AutoScalingGroupMaxSize:
-    type: integer
-  AutoScalingGroupMinSize:
-    type: integer
   AutoScalingGroupNames:
     type: array
     items:
       $ref: '#/definitions/ResourceName'
+  MaxRecords:
+    type: integer
   AutoScalingGroups:
     type: array
     items:
       $ref: '#/definitions/AutoScalingGroup'
+  XmlStringMaxLen19:
+    type: string
+    minLength: 1
+    maxLength: 19
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   AutoScalingInstanceDetails:
     type: object
     required:
@@ -3502,11 +3622,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/XmlStringMaxLen255'
-  AvailabilityZones:
+  FailedScheduledUpdateGroupActionRequests:
     type: array
     items:
-      $ref: '#/definitions/XmlStringMaxLen255'
-    minItems: 1
+      $ref: '#/definitions/FailedScheduledUpdateGroupActionRequest'
+  ScheduledActionNames:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceName'
+  ScheduledUpdateGroupActionRequests:
+    type: array
+    items:
+      $ref: '#/definitions/ScheduledUpdateGroupActionRequest'
   BlockDeviceEbsDeleteOnTermination:
     type: boolean
   BlockDeviceEbsEncrypted:
@@ -3523,6 +3650,30 @@ definitions:
     type: string
     minLength: 1
     maxLength: 255
+  Ebs:
+    type: object
+    properties:
+      SnapshotId:
+        $ref: '#/definitions/XmlStringMaxLen255'
+        description: The ID of the snapshot.
+      VolumeSize:
+        $ref: '#/definitions/BlockDeviceEbsVolumeSize'
+        description: '<p>The volume size, in GiB. For <code>standard</code> volumes, specify a value from 1 to 1,024. For <code>io1</code> volumes, specify a value from 4 to 16,384. For <code>gp2</code> volumes, specify a value from 1 to 16,384. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.</p> <p>Default: If you create a volume from a snapshot and you don''t specify a volume size, the default is the snapshot size.</p>'
+      VolumeType:
+        $ref: '#/definitions/BlockDeviceEbsVolumeType'
+        description: '<p>The volume type. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Valid values: <code>standard</code> | <code>io1</code> | <code>gp2</code> </p>'
+      DeleteOnTermination:
+        $ref: '#/definitions/BlockDeviceEbsDeleteOnTermination'
+        description: Indicates whether the volume is deleted on instance termination. The default is <code>true</code>.
+      Iops:
+        $ref: '#/definitions/BlockDeviceEbsIops'
+        description: '<p>The number of I/O operations per second (IOPS) to provision for the volume.</p> <p>Constraint: Required when the volume type is <code>io1</code>.</p>'
+      Encrypted:
+        $ref: '#/definitions/BlockDeviceEbsEncrypted'
+        description: 'Indicates whether the volume should be encrypted. Encrypted EBS volumes must be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are automatically encrypted. There is no way to create an encrypted volume from an unencrypted snapshot or an unencrypted volume from an encrypted snapshot. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+    description: Describes an Amazon EBS volume.
+  NoDevice:
+    type: boolean
   BlockDeviceMapping:
     type: object
     required:
@@ -3549,8 +3700,69 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/XmlStringMaxLen255'
-  Cooldown:
-    type: integer
+  LifecycleActionToken:
+    type: string
+    minLength: 36
+    maxLength: 36
+  LifecycleActionResult:
+    type: string
+  LifecycleHookSpecifications:
+    type: array
+    items:
+      $ref: '#/definitions/LifecycleHookSpecification'
+  Tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  SecurityGroups:
+    type: array
+    items:
+      $ref: '#/definitions/XmlString'
+  XmlStringUserData:
+    type: string
+    maxLength: 21847
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  InstanceMonitoring:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/MonitoringEnabled'
+        description: 'If <code>true</code>, detailed monitoring is enabled. Otherwise, basic monitoring is enabled.'
+    description: Describes whether detailed monitoring is enabled for the Auto Scaling instances.
+  SpotPrice:
+    type: string
+    minLength: 1
+    maxLength: 255
+  XmlStringMaxLen1600:
+    type: string
+    minLength: 1
+    maxLength: 1600
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  EbsOptimized:
+    type: boolean
+  XmlStringMaxLen64:
+    type: string
+    minLength: 1
+    maxLength: 64
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  MetricName:
+    type: string
+  MetricNamespace:
+    type: string
+  MetricDimensions:
+    type: array
+    items:
+      $ref: '#/definitions/MetricDimension'
+  MetricStatistic:
+    type: string
+    enum:
+      - Average
+      - Minimum
+      - Maximum
+      - SampleCount
+      - Sum
+  MetricUnit:
+    type: string
   CustomizedMetricSpecification:
     type: object
     required:
@@ -3574,31 +3786,64 @@ definitions:
         $ref: '#/definitions/MetricUnit'
         description: The unit of the metric.
     description: Configures a customized metric for a target tracking policy.
-  DisableScaleIn:
+  ForceDelete:
     type: boolean
-  Ebs:
-    type: object
-    properties:
-      SnapshotId:
-        $ref: '#/definitions/XmlStringMaxLen255'
-        description: The ID of the snapshot.
-      VolumeSize:
-        $ref: '#/definitions/BlockDeviceEbsVolumeSize'
-        description: '<p>The volume size, in GiB. For <code>standard</code> volumes, specify a value from 1 to 1,024. For <code>io1</code> volumes, specify a value from 4 to 16,384. For <code>gp2</code> volumes, specify a value from 1 to 16,384. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.</p> <p>Default: If you create a volume from a snapshot and you don''t specify a volume size, the default is the snapshot size.</p>'
-      VolumeType:
-        $ref: '#/definitions/BlockDeviceEbsVolumeType'
-        description: '<p>The volume type. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Valid values: <code>standard</code> | <code>io1</code> | <code>gp2</code> </p>'
-      DeleteOnTermination:
-        $ref: '#/definitions/BlockDeviceEbsDeleteOnTermination'
-        description: Indicates whether the volume is deleted on instance termination. The default is <code>true</code>.
-      Iops:
-        $ref: '#/definitions/BlockDeviceEbsIops'
-        description: '<p>The number of I/O operations per second (IOPS) to provision for the volume.</p> <p>Constraint: Required when the volume type is <code>io1</code>.</p>'
-      Encrypted:
-        $ref: '#/definitions/BlockDeviceEbsEncrypted'
-        description: 'Indicates whether the volume should be encrypted. Encrypted EBS volumes must be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are automatically encrypted. There is no way to create an encrypted volume from an unencrypted snapshot or an unencrypted volume from an encrypted snapshot. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
-    description: Describes an Amazon EBS volume.
-  EbsOptimized:
+  MaxNumberOfAutoScalingGroups:
+    type: integer
+  MaxNumberOfLaunchConfigurations:
+    type: integer
+  NumberOfAutoScalingGroups:
+    type: integer
+  NumberOfLaunchConfigurations:
+    type: integer
+  LifecycleHooks:
+    type: array
+    items:
+      $ref: '#/definitions/LifecycleHook'
+  LifecycleHookNames:
+    type: array
+    items:
+      $ref: '#/definitions/AsciiStringMaxLen255'
+    maxItems: 50
+  LoadBalancerTargetGroupStates:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerTargetGroupState'
+  LoadBalancerStates:
+    type: array
+    items:
+      $ref: '#/definitions/LoadBalancerState'
+  MetricCollectionTypes:
+    type: array
+    items:
+      $ref: '#/definitions/MetricCollectionType'
+  MetricGranularityTypes:
+    type: array
+    items:
+      $ref: '#/definitions/MetricGranularityType'
+  NotificationConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/NotificationConfiguration'
+  PolicyNames:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceName'
+  PolicyTypes:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen64'
+  Filters:
+    type: array
+    items:
+      $ref: '#/definitions/Filter'
+  ShouldDecrementDesiredCapacity:
+    type: boolean
+  Metrics:
+    type: array
+    items:
+      $ref: '#/definitions/XmlStringMaxLen255'
+  DisableScaleIn:
     type: boolean
   EnabledMetric:
     type: object
@@ -3610,12 +3855,13 @@ definitions:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The granularity of the metric. The only valid value is <code>1Minute</code>.
     description: Describes an enabled metric.
-  EnabledMetrics:
-    type: array
-    items:
-      $ref: '#/definitions/EnabledMetric'
   EstimatedInstanceWarmup:
     type: integer
+  HonorCooldown:
+    type: boolean
+  MetricScale:
+    type: number
+    format: double
   FailedScheduledUpdateGroupActionRequest:
     type: object
     required:
@@ -3631,10 +3877,10 @@ definitions:
         $ref: '#/definitions/XmlString'
         description: The error message accompanying the error code.
     description: 'Describes a scheduled action that could not be created, updated, or deleted.'
-  FailedScheduledUpdateGroupActionRequests:
+  Values:
     type: array
     items:
-      $ref: '#/definitions/FailedScheduledUpdateGroupActionRequest'
+      $ref: '#/definitions/XmlString'
   Filter:
     type: object
     properties:
@@ -3645,20 +3891,26 @@ definitions:
         $ref: '#/definitions/Values'
         description: The value of the filter.
     description: Describes a filter.
-  Filters:
-    type: array
-    items:
-      $ref: '#/definitions/Filter'
-  ForceDelete:
-    type: boolean
   GlobalTimeout:
-    type: integer
-  HealthCheckGracePeriod:
     type: integer
   HeartbeatTimeout:
     type: integer
-  HonorCooldown:
-    type: boolean
+  LifecycleState:
+    type: string
+    enum:
+      - Pending
+      - 'Pending:Wait'
+      - 'Pending:Proceed'
+      - Quarantined
+      - InService
+      - Terminating
+      - 'Terminating:Wait'
+      - 'Terminating:Proceed'
+      - Terminated
+      - Detaching
+      - Detached
+      - EnteringStandby
+      - Standby
   Instance:
     type: object
     required:
@@ -3690,23 +3942,14 @@ definitions:
         $ref: '#/definitions/InstanceProtected'
         description: Indicates whether the instance is protected from termination by Amazon EC2 Auto Scaling when scaling in.
     description: Describes an EC2 instance.
-  InstanceIds:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen19'
-  InstanceMonitoring:
-    type: object
-    properties:
-      Enabled:
-        $ref: '#/definitions/MonitoringEnabled'
-        description: 'If <code>true</code>, detailed monitoring is enabled. Otherwise, basic monitoring is enabled.'
-    description: Describes whether detailed monitoring is enabled for the Auto Scaling instances.
-  InstanceProtected:
+  MonitoringEnabled:
     type: boolean
-  Instances:
-    type: array
-    items:
-      $ref: '#/definitions/Instance'
+  OnDemandBaseCapacity:
+    type: integer
+  OnDemandPercentageAboveBaseCapacity:
+    type: integer
+  SpotInstancePools:
+    type: integer
   InstancesDistribution:
     type: object
     properties:
@@ -3803,6 +4046,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LaunchConfiguration'
+  Overrides:
+    type: array
+    items:
+      $ref: '#/definitions/LaunchTemplateOverrides'
   LaunchTemplate:
     type: object
     properties:
@@ -3825,25 +4072,8 @@ definitions:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: '<p>The instance type. </p> <p>For information about available instance types, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes">Available Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> </p>'
     description: 'Describes an override for a launch template. '
-  LaunchTemplateSpecification:
-    type: object
-    properties:
-      LaunchTemplateId:
-        $ref: '#/definitions/XmlStringMaxLen255'
-        description: The ID of the launch template. You must specify either a template ID or a template name.
-      LaunchTemplateName:
-        $ref: '#/definitions/LaunchTemplateName'
-        description: The name of the launch template. You must specify either a template name or a template ID.
-      Version:
-        $ref: '#/definitions/XmlStringMaxLen255'
-        description: 'The version number, <code>$Latest</code>, or <code>$Default</code>. If the value is <code>$Latest</code>, Amazon EC2 Auto Scaling selects the latest version of the launch template when launching instances. If the value is <code>$Default</code>, Amazon EC2 Auto Scaling selects the default version of the launch template when launching instances. The default value is <code>$Default</code>.'
-    description: '<p>Describes a launch template and the launch template version.</p> <p>The launch template that is specified must be configured for use with an Auto Scaling group. For more information, see <a href="http://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html">Creating a Launch Template for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
-  LifecycleActionResult:
+  LifecycleTransition:
     type: string
-  LifecycleActionToken:
-    type: string
-    minLength: 36
-    maxLength: 36
   LifecycleHook:
     type: object
     properties:
@@ -3875,11 +4105,11 @@ definitions:
         $ref: '#/definitions/LifecycleActionResult'
         description: Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. The valid values are <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.
     description: '<p>Describes a lifecycle hook, which tells Amazon EC2 Auto Scaling that you want to perform an action whenever it launches instances or whenever it terminates instances.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Lifecycle Hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
-  LifecycleHookNames:
-    type: array
-    items:
-      $ref: '#/definitions/AsciiStringMaxLen255'
-    maxItems: 50
+  NotificationTargetResourceName:
+    type: string
+    minLength: 0
+    maxLength: 1600
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   LifecycleHookSpecification:
     type: object
     required:
@@ -3908,36 +4138,6 @@ definitions:
         $ref: '#/definitions/ResourceName'
         description: The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target.
     description: '<p>Describes a lifecycle hook, which tells Amazon EC2 Auto Scaling that you want to perform an action whenever it launches instances or whenever it terminates instances.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Lifecycle Hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
-  LifecycleHookSpecifications:
-    type: array
-    items:
-      $ref: '#/definitions/LifecycleHookSpecification'
-  LifecycleHooks:
-    type: array
-    items:
-      $ref: '#/definitions/LifecycleHook'
-  LifecycleState:
-    type: string
-    enum:
-      - Pending
-      - 'Pending:Wait'
-      - 'Pending:Proceed'
-      - Quarantined
-      - InService
-      - Terminating
-      - 'Terminating:Wait'
-      - 'Terminating:Proceed'
-      - Terminated
-      - Detaching
-      - Detached
-      - EnteringStandby
-      - Standby
-  LifecycleTransition:
-    type: string
-  LoadBalancerNames:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen255'
   LoadBalancerState:
     type: object
     properties:
@@ -3948,10 +4148,11 @@ definitions:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: '<p>One of the following load balancer states:</p> <ul> <li> <p> <code>Adding</code> - The instances in the group are being registered with the load balancer.</p> </li> <li> <p> <code>Added</code> - All instances in the group are registered with the load balancer.</p> </li> <li> <p> <code>InService</code> - At least one instance in the group passed an ELB health check.</p> </li> <li> <p> <code>Removing</code> - The instances in the group are being deregistered from the load balancer. If connection draining is enabled, Elastic Load Balancing waits for in-flight requests to complete before deregistering the instances.</p> </li> <li> <p> <code>Removed</code> - All instances in the group are deregistered from the load balancer.</p> </li> </ul>'
     description: '<p>Describes the state of a Classic Load Balancer.</p> <p>If you specify a load balancer when creating the Auto Scaling group, the state of the load balancer is <code>InService</code>.</p> <p>If you attach a load balancer to an existing Auto Scaling group, the initial state is <code>Adding</code>. The state transitions to <code>Added</code> after all instances in the group are registered with the load balancer. If Elastic Load Balancing health checks are enabled for the load balancer, the state transitions to <code>InService</code> after at least one instance in the group passes the health check. If EC2 health checks are enabled instead, the load balancer remains in the <code>Added</code> state.</p>'
-  LoadBalancerStates:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerState'
+  XmlStringMaxLen511:
+    type: string
+    minLength: 1
+    maxLength: 511
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   LoadBalancerTargetGroupState:
     type: object
     properties:
@@ -3962,16 +4163,6 @@ definitions:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: '<p>The state of the target group.</p> <ul> <li> <p> <code>Adding</code> - The Auto Scaling instances are being registered with the target group.</p> </li> <li> <p> <code>Added</code> - All Auto Scaling instances are registered with the target group.</p> </li> <li> <p> <code>InService</code> - At least one Auto Scaling instance passed an ELB health check.</p> </li> <li> <p> <code>Removing</code> - The Auto Scaling instances are being deregistered from the target group. If connection draining is enabled, Elastic Load Balancing waits for in-flight requests to complete before deregistering the instances.</p> </li> <li> <p> <code>Removed</code> - All Auto Scaling instances are deregistered from the target group.</p> </li> </ul>'
     description: '<p>Describes the state of a target group.</p> <p>If you attach a target group to an existing Auto Scaling group, the initial state is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. If EC2 health checks are enabled instead, the target group remains in the <code>Added</code> state.</p>'
-  LoadBalancerTargetGroupStates:
-    type: array
-    items:
-      $ref: '#/definitions/LoadBalancerTargetGroupState'
-  MaxNumberOfAutoScalingGroups:
-    type: integer
-  MaxNumberOfLaunchConfigurations:
-    type: integer
-  MaxRecords:
-    type: integer
   MetricCollectionType:
     type: object
     properties:
@@ -3979,10 +4170,10 @@ definitions:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: '<p>One of the following metrics:</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> </ul>'
     description: Describes a metric.
-  MetricCollectionTypes:
-    type: array
-    items:
-      $ref: '#/definitions/MetricCollectionType'
+  MetricDimensionName:
+    type: string
+  MetricDimensionValue:
+    type: string
   MetricDimension:
     type: object
     required:
@@ -3996,14 +4187,6 @@ definitions:
         $ref: '#/definitions/MetricDimensionValue'
         description: The value of the dimension.
     description: Describes the dimension of a metric.
-  MetricDimensionName:
-    type: string
-  MetricDimensionValue:
-    type: string
-  MetricDimensions:
-    type: array
-    items:
-      $ref: '#/definitions/MetricDimension'
   MetricGranularityType:
     type: object
     properties:
@@ -4011,25 +4194,6 @@ definitions:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The granularity. The only valid value is <code>1Minute</code>.
     description: Describes a granularity of a metric.
-  MetricGranularityTypes:
-    type: array
-    items:
-      $ref: '#/definitions/MetricGranularityType'
-  MetricName:
-    type: string
-  MetricNamespace:
-    type: string
-  MetricScale:
-    type: number
-    format: double
-  MetricStatistic:
-    type: string
-    enum:
-      - Average
-      - Minimum
-      - Maximum
-      - SampleCount
-      - Sum
   MetricType:
     type: string
     enum:
@@ -4037,30 +4201,10 @@ definitions:
       - ASGAverageNetworkIn
       - ASGAverageNetworkOut
       - ALBRequestCountPerTarget
-  MetricUnit:
-    type: string
-  Metrics:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen255'
   MinAdjustmentMagnitude:
     type: integer
   MinAdjustmentStep:
     type: integer
-  MixedInstancesPolicy:
-    type: object
-    properties:
-      LaunchTemplate:
-        $ref: '#/definitions/LaunchTemplate'
-        description: '<p>The launch template and overrides.</p> <p>This parameter is required when creating an Auto Scaling group with a mixed instances policy, but is not required when updating the group.</p>'
-      InstancesDistribution:
-        $ref: '#/definitions/InstancesDistribution'
-        description: '<p>The instances distribution to use. </p> <p>If you leave this parameter unspecified when creating the group, the default values are used.</p>'
-    description: '<p>Describes a mixed instances policy for an Auto Scaling group. With mixed instances, your Auto Scaling group can provision a combination of On-Demand Instances and Spot Instances across multiple instance types. For more information, see <a href="http://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options">Using Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>When you create your Auto Scaling group, you can specify a launch configuration or template as a parameter for the top-level object, or you can specify a mixed instances policy, but not both at the same time.</p>'
-  MonitoringEnabled:
-    type: boolean
-  NoDevice:
-    type: boolean
   NotificationConfiguration:
     type: object
     properties:
@@ -4074,37 +4218,12 @@ definitions:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: '<p>One of the following event notification types:</p> <ul> <li> <p> <code>autoscaling:EC2_INSTANCE_LAUNCH</code> </p> </li> <li> <p> <code>autoscaling:EC2_INSTANCE_LAUNCH_ERROR</code> </p> </li> <li> <p> <code>autoscaling:EC2_INSTANCE_TERMINATE</code> </p> </li> <li> <p> <code>autoscaling:EC2_INSTANCE_TERMINATE_ERROR</code> </p> </li> <li> <p> <code>autoscaling:TEST_NOTIFICATION</code> </p> </li> </ul>'
     description: Describes a notification.
-  NotificationConfigurations:
+  ScalingPolicies:
     type: array
     items:
-      $ref: '#/definitions/NotificationConfiguration'
-  NotificationTargetResourceName:
-    type: string
-    minLength: 0
-    maxLength: 1600
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  NumberOfAutoScalingGroups:
-    type: integer
-  NumberOfLaunchConfigurations:
-    type: integer
-  OnDemandBaseCapacity:
-    type: integer
-  OnDemandPercentageAboveBaseCapacity:
-    type: integer
-  Overrides:
-    type: array
-    items:
-      $ref: '#/definitions/LaunchTemplateOverrides'
+      $ref: '#/definitions/ScalingPolicy'
   PolicyIncrement:
     type: integer
-  PolicyNames:
-    type: array
-    items:
-      $ref: '#/definitions/ResourceName'
-  PolicyTypes:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen64'
   PredefinedMetricSpecification:
     type: object
     required:
@@ -4134,36 +4253,32 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ProcessType'
-  Progress:
-    type: integer
   PropagateAtLaunch:
     type: boolean
   ProtectedFromScaleIn:
     type: boolean
-  ResourceName:
-    type: string
-    minLength: 1
-    maxLength: 1600
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  ScalingActivityStatusCode:
-    type: string
-    enum:
-      - PendingSpotBidPlacement
-      - WaitingForSpotInstanceRequestId
-      - WaitingForSpotInstanceId
-      - WaitingForInstanceId
-      - PreInService
-      - InProgress
-      - WaitingForELBConnectionDraining
-      - MidLifecycleAction
-      - WaitingForInstanceWarmup
-      - Successful
-      - Failed
-      - Cancelled
-  ScalingPolicies:
+  StepAdjustments:
     type: array
     items:
-      $ref: '#/definitions/ScalingPolicy'
+      $ref: '#/definitions/StepAdjustment'
+  TargetTrackingConfiguration:
+    type: object
+    required:
+      - TargetValue
+    properties:
+      PredefinedMetricSpecification:
+        $ref: '#/definitions/PredefinedMetricSpecification'
+        description: A predefined metric. You can specify either a predefined metric or a customized metric.
+      CustomizedMetricSpecification:
+        $ref: '#/definitions/CustomizedMetricSpecification'
+        description: A customized metric.
+      TargetValue:
+        $ref: '#/definitions/MetricScale'
+        description: The target value for the metric.
+      DisableScaleIn:
+        $ref: '#/definitions/DisableScaleIn'
+        description: 'Indicates whether scaling in by the target tracking policy is disabled. If scaling in is disabled, the target tracking policy doesn''t remove instances from the Auto Scaling group. Otherwise, the target tracking policy can remove instances from the Auto Scaling group. The default is disabled.'
+    description: Represents a target tracking policy configuration.
   ScalingPolicy:
     type: object
     properties:
@@ -4210,10 +4325,10 @@ definitions:
         $ref: '#/definitions/TargetTrackingConfiguration'
         description: A target tracking policy.
     description: Describes a scaling policy.
-  ScheduledActionNames:
+  ScheduledUpdateGroupActions:
     type: array
     items:
-      $ref: '#/definitions/ResourceName'
+      $ref: '#/definitions/ScheduledUpdateGroupAction'
   ScheduledUpdateGroupAction:
     type: object
     properties:
@@ -4275,28 +4390,8 @@ definitions:
         $ref: '#/definitions/AutoScalingGroupDesiredCapacity'
         description: The number of EC2 instances that should be running in the group.
     description: '<p>Describes one or more scheduled scaling action updates for a specified Auto Scaling group. Used in combination with <a>BatchPutScheduledUpdateGroupAction</a>. </p> <p>When updating a scheduled scaling action, all optional parameters are left unchanged if not specified. </p>'
-  ScheduledUpdateGroupActionRequests:
-    type: array
-    items:
-      $ref: '#/definitions/ScheduledUpdateGroupActionRequest'
-  ScheduledUpdateGroupActions:
-    type: array
-    items:
-      $ref: '#/definitions/ScheduledUpdateGroupAction'
-  SecurityGroups:
-    type: array
-    items:
-      $ref: '#/definitions/XmlString'
-  ShouldDecrementDesiredCapacity:
-    type: boolean
   ShouldRespectGracePeriod:
     type: boolean
-  SpotInstancePools:
-    type: integer
-  SpotPrice:
-    type: string
-    minLength: 1
-    maxLength: 255
   StepAdjustment:
     type: object
     required:
@@ -4312,10 +4407,6 @@ definitions:
         $ref: '#/definitions/PolicyIncrement'
         description: 'The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity.'
     description: '<p>Describes an adjustment based on the difference between the value of the aggregated CloudWatch metric and the breach threshold that you''ve defined for the alarm.</p> <p>For the following examples, suppose that you have an alarm with a breach threshold of 50:</p> <ul> <li> <p>To trigger the adjustment when the metric is greater than or equal to 50 and less than 60, specify a lower bound of 0 and an upper bound of 10.</p> </li> <li> <p>To trigger the adjustment when the metric is greater than 40 and less than or equal to 50, specify a lower bound of -10 and an upper bound of 0.</p> </li> </ul> <p>There are a few rules for the step adjustments for your step policy:</p> <ul> <li> <p>The ranges of your step adjustments can''t overlap or have a gap.</p> </li> <li> <p>At most, one step adjustment can have a null lower bound. If one step adjustment has a negative lower bound, then there must be a step adjustment with a null lower bound.</p> </li> <li> <p>At most, one step adjustment can have a null upper bound. If one step adjustment has a positive upper bound, then there must be a step adjustment with a null upper bound.</p> </li> <li> <p>The upper and lower bound can''t be null in the same step adjustment.</p> </li> </ul>'
-  StepAdjustments:
-    type: array
-    items:
-      $ref: '#/definitions/StepAdjustment'
   SuspendedProcess:
     type: object
     properties:
@@ -4326,10 +4417,16 @@ definitions:
         $ref: '#/definitions/XmlStringMaxLen255'
         description: The reason that the process was suspended.
     description: 'Describes an automatic scaling process that has been suspended. For more information, see <a>ProcessType</a>.'
-  SuspendedProcesses:
-    type: array
-    items:
-      $ref: '#/definitions/SuspendedProcess'
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
   Tag:
     type: object
     required:
@@ -4370,101 +4467,3 @@ definitions:
         $ref: '#/definitions/PropagateAtLaunch'
         description: Determines whether the tag is added to new instances as they are launched in the group.
     description: Describes a tag for an Auto Scaling group.
-  TagDescriptionList:
-    type: array
-    items:
-      $ref: '#/definitions/TagDescription'
-  TagKey:
-    type: string
-    minLength: 1
-    maxLength: 128
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  TagValue:
-    type: string
-    minLength: 0
-    maxLength: 256
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  Tags:
-    type: array
-    items:
-      $ref: '#/definitions/Tag'
-  TargetGroupARNs:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen511'
-  TargetTrackingConfiguration:
-    type: object
-    required:
-      - TargetValue
-    properties:
-      PredefinedMetricSpecification:
-        $ref: '#/definitions/PredefinedMetricSpecification'
-        description: A predefined metric. You can specify either a predefined metric or a customized metric.
-      CustomizedMetricSpecification:
-        $ref: '#/definitions/CustomizedMetricSpecification'
-        description: A customized metric.
-      TargetValue:
-        $ref: '#/definitions/MetricScale'
-        description: The target value for the metric.
-      DisableScaleIn:
-        $ref: '#/definitions/DisableScaleIn'
-        description: 'Indicates whether scaling in by the target tracking policy is disabled. If scaling in is disabled, the target tracking policy doesn''t remove instances from the Auto Scaling group. Otherwise, the target tracking policy can remove instances from the Auto Scaling group. The default is disabled.'
-    description: Represents a target tracking policy configuration.
-  TerminationPolicies:
-    type: array
-    items:
-      $ref: '#/definitions/XmlStringMaxLen1600'
-  TimestampType:
-    type: string
-    format: date-time
-  Values:
-    type: array
-    items:
-      $ref: '#/definitions/XmlString'
-  XmlString:
-    type: string
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  XmlStringMaxLen1023:
-    type: string
-    minLength: 1
-    maxLength: 1023
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  XmlStringMaxLen1600:
-    type: string
-    minLength: 1
-    maxLength: 1600
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  XmlStringMaxLen19:
-    type: string
-    minLength: 1
-    maxLength: 19
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  XmlStringMaxLen2047:
-    type: string
-    minLength: 1
-    maxLength: 2047
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  XmlStringMaxLen255:
-    type: string
-    minLength: 1
-    maxLength: 255
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  XmlStringMaxLen32:
-    type: string
-    minLength: 1
-    maxLength: 32
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  XmlStringMaxLen511:
-    type: string
-    minLength: 1
-    maxLength: 511
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  XmlStringMaxLen64:
-    type: string
-    minLength: 1
-    maxLength: 64
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
-  XmlStringUserData:
-    type: string
-    maxLength: 21847
-    x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
