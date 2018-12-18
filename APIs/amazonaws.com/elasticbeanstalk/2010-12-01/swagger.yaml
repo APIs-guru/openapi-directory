@@ -1774,7 +1774,7 @@ definitions:
         description: '<p>Indicates if there is an in-progress environment configuration update or application version deployment that you can cancel.</p> <p> <code>true:</code> There is an update in progress. </p> <p> <code>false:</code> There are no updates currently in progress. </p>'
       Health:
         $ref: '#/definitions/EnvironmentHealth'
-        description: '<p>Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:</p> <ul> <li> <p> <code>Red</code>: Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.</p> </li> <li> <p> <code>Yellow</code>: Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.</p> </li> <li> <p> <code>Green</code>: Indicates the environment is healthy and fully functional.</p> </li> <li> <p> <code>Grey</code>: Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an <code>UpdateEnvironment</code> or <code>RestartEnvironement</code> request.</p> </li> </ul> <p> Default: <code>Grey</code> </p>'
+        description: '<p>Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:</p> <ul> <li> <p> <code>Red</code>: Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.</p> </li> <li> <p> <code>Yellow</code>: Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.</p> </li> <li> <p> <code>Green</code>: Indicates the environment is healthy and fully functional.</p> </li> <li> <p> <code>Grey</code>: Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an <code>UpdateEnvironment</code> or <code>RestartEnvironment</code> request.</p> </li> </ul> <p> Default: <code>Grey</code> </p>'
       HealthStatus:
         $ref: '#/definitions/EnvironmentHealthStatus'
         description: 'Returns the health status of the application running in your environment. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and Statuses</a>.'
@@ -3453,10 +3453,10 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/String'
-        description: The name of this environment tier.
+        description: '<p>The name of this environment tier.</p> <p>Valid values:</p> <ul> <li> <p>For <i>Web server tier</i> – <code>WebServer</code> </p> </li> <li> <p>For <i>Worker tier</i> – <code>Worker</code> </p> </li> </ul>'
       Type:
         $ref: '#/definitions/String'
-        description: The type of this environment tier.
+        description: '<p>The type of this environment tier.</p> <p>Valid values:</p> <ul> <li> <p>For <i>Web server tier</i> – <code>Standard</code> </p> </li> <li> <p>For <i>Worker tier</i> – <code>SQS/HTTP</code> </p> </li> </ul>'
       Version:
         $ref: '#/definitions/String'
         description: '<p>The version of this environment tier. When you don''t set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.</p> <note> <p>This member is deprecated. Any specific version that you set may become out of date. We recommend leaving it unspecified.</p> </note>'
@@ -3802,7 +3802,7 @@ definitions:
         description: The time stamp when this information was retrieved.
       Message:
         $ref: '#/definitions/Message'
-        description: The retrieved information.
+        description: <p>The retrieved information. Currently contains a presigned Amazon S3 URL. The files are deleted after 15 minutes.</p> <p>Anyone in possession of this URL can access the files before they are deleted. Make the URL available only to trusted parties.</p>
     description: The information retrieved from the Amazon EC2 instances.
   EnvironmentInfoDescriptionList:
     type: array
@@ -3826,6 +3826,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/LaunchConfiguration'
+  LaunchTemplateList:
+    type: array
+    items:
+      $ref: '#/definitions/LaunchTemplate'
   LoadBalancerList:
     type: array
     items:
@@ -3853,6 +3857,9 @@ definitions:
       LaunchConfigurations:
         $ref: '#/definitions/LaunchConfigurationList'
         description: The Auto Scaling launch configurations in use by this environment.
+      LaunchTemplates:
+        $ref: '#/definitions/LaunchTemplateList'
+        description: The Amazon EC2 launch templates in use by this environment.
       LoadBalancers:
         $ref: '#/definitions/LoadBalancerList'
         description: The LoadBalancers in use by this environment.
@@ -3998,6 +4005,13 @@ definitions:
         $ref: '#/definitions/ResourceId'
         description: The name of the launch configuration.
     description: Describes an Auto Scaling launch configuration.
+  LaunchTemplate:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ResourceId'
+        description: The ID of the launch template.
+    description: Describes an Amazon EC2 launch template.
   LaunchedAt:
     type: string
     format: date-time

@@ -272,6 +272,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ApplySecurityGroupsToClientVpnTargetNetwork':
+    post:
+      operationId: ApplySecurityGroupsToClientVpnTargetNetwork
+      description: Applies a security group to the association between the target network and the Client VPN endpoint. This action replaces the existing security groups with the specified security groups.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApplySecurityGroupsToClientVpnTargetNetworkResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ApplySecurityGroupsToClientVpnTargetNetworkRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#AssignIpv6Addresses':
     post:
       operationId: AssignIpv6Addresses
@@ -335,6 +360,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AssociateAddressRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AssociateClientVpnTargetNetwork':
+    post:
+      operationId: AssociateClientVpnTargetNetwork
+      description: Associates a target network with a Client VPN endpoint. A target network is a subnet in a VPC. You can associate multiple subnets from the same VPC with a Client VPN endpoint. You can associate only one subnet in each Availability Zone. We recommend that you associate at least two subnets to provide Availability Zone redundancy.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateClientVpnTargetNetworkResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateClientVpnTargetNetworkRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -606,6 +656,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AttachVpnGatewayRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AuthorizeClientVpnIngress':
+    post:
+      operationId: AuthorizeClientVpnIngress
+      description: Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as firewall rules that grant access to networks. You must configure ingress authorization rules to enable clients to access resources in AWS or on-premises networks.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AuthorizeClientVpnIngressResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AuthorizeClientVpnIngressRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -998,6 +1073,56 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateCapacityReservationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateClientVpnEndpoint':
+    post:
+      operationId: CreateClientVpnEndpoint
+      description: Creates a Client VPN endpoint. A Client VPN endpoint is the resource you create and configure to enable and manage client VPN sessions. It is the destination endpoint at which all client VPN sessions are terminated.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateClientVpnEndpointResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateClientVpnEndpointRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateClientVpnRoute':
+    post:
+      operationId: CreateClientVpnRoute
+      description: Adds a route to a network to a Client VPN endpoint. Each Client VPN endpoint has a route table that describes the available destination network routes. Each route in the route table specifies the path for traﬃc to speciﬁc resources or networks.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateClientVpnRouteResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateClientVpnRouteRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2015,6 +2140,56 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateVpnGatewayRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteClientVpnEndpoint':
+    post:
+      operationId: DeleteClientVpnEndpoint
+      description: Deletes the specified Client VPN endpoint. You must disassociate all target networks before you can delete a Client VPN endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteClientVpnEndpointResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteClientVpnEndpointRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteClientVpnRoute':
+    post:
+      operationId: DeleteClientVpnRoute
+      description: 'Deletes a route from a Client VPN endpoint. You can only delete routes that you manually added using the <b>CreateClientVpnRoute</b> action. You cannot delete routes that were automatically added when associating a subnet. To remove routes that have been automatically added, disassociate the target subnet from the Client VPN endpoint.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteClientVpnRouteResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteClientVpnRouteRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3123,6 +3298,131 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeClassicLinkInstancesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeClientVpnAuthorizationRules':
+    post:
+      operationId: DescribeClientVpnAuthorizationRules
+      description: Describes the authorization rules for a specified Client VPN endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeClientVpnAuthorizationRulesResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeClientVpnAuthorizationRulesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeClientVpnConnections':
+    post:
+      operationId: DescribeClientVpnConnections
+      description: Describes active client connections and connections that have been terminated within the last 60 minutes for the specified Client VPN endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeClientVpnConnectionsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeClientVpnConnectionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeClientVpnEndpoints':
+    post:
+      operationId: DescribeClientVpnEndpoints
+      description: Describes one or more Client VPN endpoints in the account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeClientVpnEndpointsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeClientVpnEndpointsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeClientVpnRoutes':
+    post:
+      operationId: DescribeClientVpnRoutes
+      description: Describes the routes for the specified Client VPN endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeClientVpnRoutesResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeClientVpnRoutesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeClientVpnTargetNetworks':
+    post:
+      operationId: DescribeClientVpnTargetNetworks
+      description: Describes the target networks associated with the specified Client VPN endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeClientVpnTargetNetworksResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeClientVpnTargetNetworksRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5558,6 +5858,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateClientVpnTargetNetwork':
+    post:
+      operationId: DisassociateClientVpnTargetNetwork
+      description: '<p>Disassociates a target network from the specified Client VPN endpoint. When you disassociate the last target network from a Client VPN, the following happens:</p> <ul> <li> <p>The route that was automatically added for the VPC is deleted</p> </li> <li> <p>All active client connections are terminated</p> </li> <li> <p>New client connections are disallowed</p> </li> <li> <p>The Client VPN endpoint''s status changes to <code>pending-associate</code> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateClientVpnTargetNetworkResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateClientVpnTargetNetworkRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DisassociateIamInstanceProfile':
     post:
       operationId: DisassociateIamInstanceProfile
@@ -5792,6 +6117,56 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/EnableVpcClassicLinkDnsSupportRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ExportClientVpnClientCertificateRevocationList':
+    post:
+      operationId: ExportClientVpnClientCertificateRevocationList
+      description: Downloads the client certificate revocation list for the specified Client VPN endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExportClientVpnClientCertificateRevocationListResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ExportClientVpnClientCertificateRevocationListRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ExportClientVpnClientConfiguration':
+    post:
+      operationId: ExportClientVpnClientConfiguration
+      description: Downloads the contents of the client configuration file for the specified Client VPN endpoint. The client configuration file includes the Client VPN endpoint and certificate information clients need to establish a connection with the Client VPN endpoint.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExportClientVpnClientConfigurationResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ExportClientVpnClientConfigurationRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -6052,6 +6427,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ImportClientVpnClientCertificateRevocationList':
+    post:
+      operationId: ImportClientVpnClientCertificateRevocationList
+      description: <p>Uploads a client certificate revocation list to the specified Client VPN endpoint. Uploading a client certificate revocation list overwrites the existing client certificate revocation list.</p> <p>Uploading a client certificate revocation list resets existing client connections.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ImportClientVpnClientCertificateRevocationListResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ImportClientVpnClientCertificateRevocationListRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ImportImage':
     post:
       operationId: ImportImage
@@ -6192,6 +6592,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ModifyCapacityReservationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyClientVpnEndpoint':
+    post:
+      operationId: ModifyClientVpnEndpoint
+      description: 'Modifies the specified Client VPN endpoint. You can only modify an endpoint''s server certificate information, client connection logging information, DNS server, and description. Modifying the DNS server resets existing client connections.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyClientVpnEndpointResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyClientVpnEndpointRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -7516,6 +7941,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RevokeClientVpnIngress':
+    post:
+      operationId: RevokeClientVpnIngress
+      description: 'Removes an ingress authorization rule from a Client VPN endpoint. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RevokeClientVpnIngressResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RevokeClientVpnIngressRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#RevokeSecurityGroupEgress':
     post:
       operationId: RevokeSecurityGroupEgress
@@ -7677,6 +8127,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopInstancesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#TerminateClientVpnConnections':
+    post:
+      operationId: TerminateClientVpnConnections
+      description: 'Terminates active Client VPN endpoint connections. This action can be used to terminate a specific client connection, or up to five connections established by a specific user.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TerminateClientVpnConnectionsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TerminateClientVpnConnectionsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -8020,6 +8495,31 @@ definitions:
       TagSpecifications:
         $ref: '#/definitions/TagSpecificationList'
         description: The tags to apply to the Dedicated Host during creation.
+  ApplySecurityGroupsToClientVpnTargetNetworkResult:
+    type: object
+    properties:
+      SecurityGroupIds:
+        $ref: '#/definitions/ClientVpnSecurityGroupIdSet'
+        description: The IDs of the applied security groups.
+  ApplySecurityGroupsToClientVpnTargetNetworkRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+      - VpcId
+      - SecurityGroupIds
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint.
+      VpcId:
+        $ref: '#/definitions/String'
+        description: The ID of the VPC in which the associated target network is located.
+      SecurityGroupIds:
+        $ref: '#/definitions/ClientVpnSecurityGroupIdSet'
+        description: The IDs of the security groups to apply to the associated target network. Up to 5 security groups can be applied to an associated target network.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   AssignIpv6AddressesResult:
     type: object
     properties:
@@ -8099,6 +8599,30 @@ definitions:
       PrivateIpAddress:
         $ref: '#/definitions/String'
         description: '[EC2-VPC] The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.'
+  AssociateClientVpnTargetNetworkResult:
+    type: object
+    properties:
+      AssociationId:
+        $ref: '#/definitions/String'
+        description: The unique ID of the target network association.
+      Status:
+        $ref: '#/definitions/AssociationStatus'
+        description: The current state of the target network association.
+  AssociateClientVpnTargetNetworkRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+      - SubnetId
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint.
+      SubnetId:
+        $ref: '#/definitions/String'
+        description: The ID of the subnet to associate with the Client VPN endpoint.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   AssociateDhcpOptionsRequest:
     type: object
     required:
@@ -8392,6 +8916,36 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for AttachVpnGateway.
+  AuthorizeClientVpnIngressResult:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/ClientVpnAuthorizationRuleStatus'
+        description: The current state of the authorization rule.
+  AuthorizeClientVpnIngressRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+      - TargetNetworkCidr
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint.
+      TargetNetworkCidr:
+        $ref: '#/definitions/String'
+        description: 'The IPv4 address range, in CIDR notation, of the network for which access is being authorized.'
+      AccessGroupId:
+        $ref: '#/definitions/String'
+        description: The ID of the Active Directory group to grant access.
+      AuthorizeAllGroups:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether to grant access to all clients. Use <code>true</code> to grant all clients who successfully establish a VPN connection access to the network.
+      Description:
+        $ref: '#/definitions/String'
+        description: A brief description of the authorization rule.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   AuthorizeSecurityGroupEgressRequest:
     type: object
     required:
@@ -8860,6 +9414,81 @@ definitions:
       TagSpecifications:
         $ref: '#/definitions/TagSpecificationList'
         description: The tags to apply to the Capacity Reservation during launch.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  CreateClientVpnEndpointResult:
+    type: object
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint.
+      Status:
+        $ref: '#/definitions/ClientVpnEndpointStatus'
+        description: The current state of the Client VPN endpoint.
+      DnsName:
+        $ref: '#/definitions/String'
+        description: The DNS name to be used by clients when establishing their VPN session.
+  CreateClientVpnEndpointRequest:
+    type: object
+    required:
+      - ClientCidrBlock
+      - ServerCertificateArn
+      - AuthenticationOptions
+      - ConnectionLogOptions
+    properties:
+      ClientCidrBlock:
+        $ref: '#/definitions/String'
+        description: 'The IPv4 address range, in CIDR notation, from which to assign client IP addresses. The address range cannot overlap with the local CIDR of the VPC in which the associated subnet is located, or the routes that you add manually. The address range cannot be changed after the Client VPN endpoint has been created. The CIDR block should be /22 or greater.'
+      ServerCertificateArn:
+        $ref: '#/definitions/String'
+        description: 'The ARN of the server certificate. For more information, see the <a href="acm/latest/userguide/acm-overview.html">AWS Certificate Manager User Guide</a> .'
+      AuthenticationOptions:
+        $ref: '#/definitions/ClientVpnAuthenticationRequestList'
+        description: Information about the authentication method to be used to authenticate clients.
+      ConnectionLogOptions:
+        $ref: '#/definitions/ConnectionLogOptions'
+        description: '<p>Information about the client connection logging options.</p> <p>If you enable client connection logging, data about client connections is sent to a Cloudwatch Logs log stream. The following information is logged:</p> <ul> <li> <p>Client connection requests</p> </li> <li> <p>Client connection results (successful and unsuccessful)</p> </li> <li> <p>Reasons for unsuccessful client connection requests</p> </li> <li> <p>Client connection termination time</p> </li> </ul>'
+      DnsServers:
+        $ref: '#/definitions/ValueStringList'
+        description: 'Information about the DNS servers to be used for DNS resolution. A Client VPN endpoint can have up to two DNS servers. If no DNS server is specified, the DNS address of the VPC that is to be associated with Client VPN endpoint is used as the DNS server.'
+      TransportProtocol:
+        $ref: '#/definitions/TransportProtocol'
+        description: '<p>The transport protocol to be used by the VPN session.</p> <p>Default value: <code>udp</code> </p>'
+      Description:
+        $ref: '#/definitions/String'
+        description: A brief description of the Client VPN endpoint.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      ClientToken:
+        $ref: '#/definitions/String'
+        description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html"> How to Ensure Idempotency</a>.'
+  CreateClientVpnRouteResult:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/ClientVpnRouteStatus'
+        description: The current state of the route.
+  CreateClientVpnRouteRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+      - DestinationCidrBlock
+      - TargetVpcSubnetId
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint to which to add the route.
+      DestinationCidrBlock:
+        $ref: '#/definitions/String'
+        description: '<p>The IPv4 address range, in CIDR notation, of the route destination. For example:</p> <ul> <li> <p>To add a route for Internet access, enter <code>0.0.0.0/0</code> </p> </li> <li> <p>To add a route for a peered VPC, enter the peered VPC''s IPv4 CIDR range</p> </li> <li> <p>To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection''s IPv4 CIDR range</p> </li> </ul> <p>Route address ranges cannot overlap with the CIDR range specified for client allocation.</p>'
+      TargetVpcSubnetId:
+        $ref: '#/definitions/String'
+        description: The ID of the subnet through which you want to route traffic. The specified subnet must be an existing target network of the Client VPN endpoint.
+      Description:
+        $ref: '#/definitions/String'
+        description: A brief description of the route.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -9875,7 +10504,7 @@ definitions:
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       Resources:
         $ref: '#/definitions/ResourceIdList'
-        description: 'The IDs of one or more resources, separated by spaces.'
+        description: '<p>The IDs of one or more resources, separated by spaces.</p> <p>Constraints: Up to 1000 resource IDs. We recommend breaking up this request into smaller batches.</p>'
       Tags:
         $ref: '#/definitions/TagList'
         description: 'One or more tags. The <code>value</code> parameter is required, but if you don''t want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. '
@@ -10021,7 +10650,7 @@ definitions:
         description: The ID of the volume.
       Iops:
         $ref: '#/definitions/Integer'
-        description: '<p>The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-10,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most regions. Maximum <code>io1</code>IOPS of 64,000 is guaranteed only on <a href="AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>'
+        description: '<p>The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-16,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most regions. Maximum <code>io1</code>IOPS of 64,000 is guaranteed only on <a href="AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>'
       Tags:
         $ref: '#/definitions/TagList'
         description: Any tags assigned to the volume.
@@ -10047,7 +10676,7 @@ definitions:
         description: 'Specifies whether the volume should be encrypted. Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are automatically encrypted. There is no way to create an encrypted volume from an unencrypted snapshot or vice versa. If your AMI uses encrypted volumes, you can only launch it on supported instance types. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       Iops:
         $ref: '#/definitions/Integer'
-        description: '<p>The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed only on <a href="AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This parameter is valid only for Provisioned IOPS SSD (io1) volumes.</p>'
+        description: '<p>The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000 IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed only on <a href="AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This parameter is valid only for Provisioned IOPS SSD (io1) volumes.</p>'
       KmsKeyId:
         $ref: '#/definitions/String'
         description: '<p>An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set. </p> <p>The CMK identifier may be provided in any of the following formats: </p> <ul> <li> <p>Key ID</p> </li> <li> <p>Key alias</p> </li> <li> <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>. </p> </li> <li> <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p> </li> </ul> <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. The action will eventually fail. </p>'
@@ -10299,6 +10928,47 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     description: Contains the parameters for CreateVpnGateway.
+  DeleteClientVpnEndpointResult:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/ClientVpnEndpointStatus'
+        description: The current state of the Client VPN endpoint.
+  DeleteClientVpnEndpointRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN to be deleted.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  DeleteClientVpnRouteResult:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/ClientVpnRouteStatus'
+        description: The current state of the route.
+  DeleteClientVpnRouteRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+      - DestinationCidrBlock
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint from which the route is to be deleted.
+      TargetVpcSubnetId:
+        $ref: '#/definitions/String'
+        description: The ID of the target subnet used by the route.
+      DestinationCidrBlock:
+        $ref: '#/definitions/String'
+        description: 'The IPv4 address range, in CIDR notation, of the route to be deleted.'
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   DeleteCustomerGatewayRequest:
     type: object
     required:
@@ -10691,7 +11361,7 @@ definitions:
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       Resources:
         $ref: '#/definitions/ResourceIdList'
-        description: 'The IDs of one or more resources, separated by spaces.'
+        description: '<p>The IDs of one or more resources, separated by spaces.</p> <p>Constraints: Up to 1000 resource IDs. We recommend breaking up this request into smaller batches.</p>'
       Tags:
         $ref: '#/definitions/TagList'
         description: '<p>One or more tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string.</p> <p>If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete AWS-generated tags (tags that have the <code>aws:</code> prefix).</p>'
@@ -11151,6 +11821,152 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to retrieve the next page of results.
+  DescribeClientVpnAuthorizationRulesResult:
+    type: object
+    properties:
+      AuthorizationRules:
+        $ref: '#/definitions/AuthorizationRuleSet'
+        description: Information about the authorization rules.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DescribeClientVpnAuthorizationRulesRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to retrieve the next page of results.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: One or more filters. Filter names and values are case-sensitive.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
+  DescribeClientVpnConnectionsResult:
+    type: object
+    properties:
+      Connections:
+        $ref: '#/definitions/ClientVpnConnectionSet'
+        description: Information about the active and terminated client connections.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DescribeClientVpnConnectionsRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: One or more filters. Filter names and values are case-sensitive.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to retrieve the next page of results.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  DescribeClientVpnEndpointsResult:
+    type: object
+    properties:
+      ClientVpnEndpoints:
+        $ref: '#/definitions/EndpointSet'
+        description: Information about the Client VPN endpoints.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DescribeClientVpnEndpointsRequest:
+    type: object
+    properties:
+      ClientVpnEndpointIds:
+        $ref: '#/definitions/ValueStringList'
+        description: The ID of the Client VPN endpoint.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to retrieve the next page of results.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: One or more filters. Filter names and values are case-sensitive.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  DescribeClientVpnRoutesResult:
+    type: object
+    properties:
+      Routes:
+        $ref: '#/definitions/ClientVpnRouteSet'
+        description: Information about the Client VPN endpoint routes.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DescribeClientVpnRoutesRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: One or more filters. Filter names and values are case-sensitive.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to retrieve the next page of results.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  DescribeClientVpnTargetNetworksResult:
+    type: object
+    properties:
+      ClientVpnTargetNetworks:
+        $ref: '#/definitions/TargetNetworkSet'
+        description: Information about the associated target networks.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+  DescribeClientVpnTargetNetworksRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint.
+      AssociationIds:
+        $ref: '#/definitions/ValueStringList'
+        description: The IDs of the target network associations.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the nextToken value.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token to retrieve the next page of results.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: One or more filters. Filter names and values are case-sensitive.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   DescribeConversionTasksResult:
     type: object
     properties:
@@ -12997,9 +13813,6 @@ definitions:
     description: Contains the parameters for DescribeSpotDatafeedSubscription.
   DescribeSpotFleetInstancesResponse:
     type: object
-    required:
-      - ActiveInstances
-      - SpotFleetRequestId
     example:
       ActiveInstances:
         - InstanceId: i-1234567890abcdef0
@@ -13039,11 +13852,6 @@ definitions:
     description: Contains the parameters for DescribeSpotFleetInstances.
   DescribeSpotFleetRequestHistoryResponse:
     type: object
-    required:
-      - HistoryRecords
-      - LastEvaluatedTime
-      - SpotFleetRequestId
-      - StartTime
     example:
       HistoryRecords:
         - EventInformation:
@@ -13114,8 +13922,6 @@ definitions:
     description: Contains the parameters for DescribeSpotFleetRequestHistory.
   DescribeSpotFleetRequestsResponse:
     type: object
-    required:
-      - SpotFleetRequestConfigs
     example:
       SpotFleetRequestConfigs:
         - SpotFleetRequestConfig:
@@ -14145,6 +14951,30 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  DisassociateClientVpnTargetNetworkResult:
+    type: object
+    properties:
+      AssociationId:
+        $ref: '#/definitions/String'
+        description: The ID of the target network association.
+      Status:
+        $ref: '#/definitions/AssociationStatus'
+        description: The current state of the target network association.
+  DisassociateClientVpnTargetNetworkRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+      - AssociationId
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint from which to disassociate the target network.
+      AssociationId:
+        $ref: '#/definitions/String'
+        description: The ID of the target network association.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   DisassociateIamInstanceProfileResult:
     type: object
     example:
@@ -14320,6 +15150,43 @@ definitions:
       VpcId:
         $ref: '#/definitions/String'
         description: The ID of the VPC.
+  ExportClientVpnClientCertificateRevocationListResult:
+    type: object
+    properties:
+      CertificateRevocationList:
+        $ref: '#/definitions/String'
+        description: Information about the client certificate revocation list.
+      Status:
+        $ref: '#/definitions/ClientCertificateRevocationListStatus'
+        description: The current state of the client certificate revocation list.
+  ExportClientVpnClientCertificateRevocationListRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  ExportClientVpnClientConfigurationResult:
+    type: object
+    properties:
+      ClientConfiguration:
+        $ref: '#/definitions/String'
+        description: the contents of the client configuration file.
+  ExportClientVpnClientConfigurationRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   ExportTransitGatewayRoutesResult:
     type: object
     properties:
@@ -14636,6 +15503,27 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  ImportClientVpnClientCertificateRevocationListResult:
+    type: object
+    properties:
+      Return:
+        $ref: '#/definitions/Boolean'
+        description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
+  ImportClientVpnClientCertificateRevocationListRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+      - CertificateRevocationList
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint to which the client certificate revocation list applies.
+      CertificateRevocationList:
+        $ref: '#/definitions/String'
+        description: 'The client certificate revocation list file. For more information, see <a href="vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate">Generate a Client Certificate Revocation List</a> in the <i>AWS Client VPN Admin Guide</i>.'
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   ImportImageResult:
     type: object
     properties:
@@ -14865,6 +15753,35 @@ definitions:
       EndDateType:
         $ref: '#/definitions/EndDateType'
         description: '<p>Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:</p> <ul> <li> <p> <code>unlimited</code> - The Capacity Reservation remains active until you explicitly cancel it. Do not provide an <code>EndDate</code> value if <code>EndDateType</code> is <code>unlimited</code>.</p> </li> <li> <p> <code>limited</code> - The Capacity Reservation expires automatically at a specified date and time. You must provide an <code>EndDate</code> value if <code>EndDateType</code> is <code>limited</code>.</p> </li> </ul>'
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+  ModifyClientVpnEndpointResult:
+    type: object
+    properties:
+      Return:
+        $ref: '#/definitions/Boolean'
+        description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
+  ModifyClientVpnEndpointRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint to modify.
+      ServerCertificateArn:
+        $ref: '#/definitions/String'
+        description: The ARN of the server certificate to be used. The server certificate must be provisioned in AWS Certificate Manager (ACM).
+      ConnectionLogOptions:
+        $ref: '#/definitions/ConnectionLogOptions'
+        description: '<p>Information about the client connection logging options.</p> <p>If you enable client connection logging, data about client connections is sent to a Cloudwatch Logs log stream. The following information is logged:</p> <ul> <li> <p>Client connection requests</p> </li> <li> <p>Client connection results (successful and unsuccessful)</p> </li> <li> <p>Reasons for unsuccessful client connection requests</p> </li> <li> <p>Client connection termination time</p> </li> </ul>'
+      DnsServers:
+        $ref: '#/definitions/DnsServersOptionsModifyStructure'
+        description: Information about the DNS servers to be used by Client VPN connections. A Client VPN endpoint can have up to two DNS servers.
+      Description:
+        $ref: '#/definitions/String'
+        description: A brief description of the Client VPN endpoint.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -16116,8 +17033,6 @@ definitions:
         description: The status of all instances listed.
   RequestSpotFleetResponse:
     type: object
-    required:
-      - SpotFleetRequestId
     example:
       SpotFleetRequestId: sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE
     properties:
@@ -16328,6 +17243,33 @@ definitions:
       PublicIp:
         $ref: '#/definitions/String'
         description: The Elastic IP address.
+  RevokeClientVpnIngressResult:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/ClientVpnAuthorizationRuleStatus'
+        description: The current state of the authorization rule.
+  RevokeClientVpnIngressRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+      - TargetNetworkCidr
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint with which the authorization rule is associated.
+      TargetNetworkCidr:
+        $ref: '#/definitions/String'
+        description: 'The IPv4 address range, in CIDR notation, of the network for which access is being removed.'
+      AccessGroupId:
+        $ref: '#/definitions/String'
+        description: 'The ID of the Active Directory group for which to revoke access. '
+      RevokeAllGroups:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether access should be revoked for all clients.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   RevokeSecurityGroupEgressRequest:
     type: object
     required:
@@ -16681,6 +17623,35 @@ definitions:
       Force:
         $ref: '#/definitions/Boolean'
         description: '<p>Forces the instances to stop. The instances do not have an opportunity to flush file system caches or file system metadata. If you use this option, you must perform file system check and repair procedures. This option is not recommended for Windows instances.</p> <p>Default: <code>false</code> </p>'
+  TerminateClientVpnConnectionsResult:
+    type: object
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint.
+      Username:
+        $ref: '#/definitions/String'
+        description: The user who established the terminated client connections.
+      ConnectionStatuses:
+        $ref: '#/definitions/TerminateConnectionStatusSet'
+        description: The current state of the client connections.
+  TerminateClientVpnConnectionsRequest:
+    type: object
+    required:
+      - ClientVpnEndpointId
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint to which the client is connected.
+      ConnectionId:
+        $ref: '#/definitions/String'
+        description: The ID of the client connection to be terminated.
+      Username:
+        $ref: '#/definitions/String'
+        description: The name of the user who initiated the connection. Use this option to terminate all active connections for the specified user. This option can only be used if the user has established up to five connections.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
   TerminateInstancesResult:
     type: object
     example:
@@ -17110,6 +18081,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AllowedPrincipal'
+  ClientVpnSecurityGroupIdSet:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   ArchitectureValues:
     type: string
     enum:
@@ -17124,6 +18099,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  AssociationStatus:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/AssociationStatusCode'
+        description: The state of the target network association.
+      Message:
+        $ref: '#/definitions/String'
+        description: 'A message about the status of the target network association, if applicable.'
+    description: Describes the state of a target network association.
   IamInstanceProfileSpecification:
     type: object
     properties:
@@ -17211,10 +18196,36 @@ definitions:
         $ref: '#/definitions/VpcCidrBlockState'
         description: Information about the state of the CIDR block.
     description: Describes an IPv4 CIDR block associated with a VPC.
+  AssociatedNetworkType:
+    type: string
+    enum:
+      - vpc
+  AssociatedTargetNetwork:
+    type: object
+    properties:
+      NetworkId:
+        $ref: '#/definitions/String'
+        description: ' <b>The ID of the subnet.</b> '
+      NetworkType:
+        $ref: '#/definitions/AssociatedNetworkType'
+        description: ' <b>The target network type.</b> '
+    description: Describes a target network that is associated with a Client VPN endpoint. A target network is a subnet in a VPC.
+  AssociatedTargetNetworkSet:
+    type: array
+    items:
+      $ref: '#/definitions/AssociatedTargetNetwork'
   AssociationIdList:
     type: array
     items:
       $ref: '#/definitions/String'
+  AssociationStatusCode:
+    type: string
+    enum:
+      - associating
+      - associated
+      - association-failed
+      - disassociating
+      - disassociated
   GroupIdStringList:
     type: array
     items:
@@ -17250,6 +18261,42 @@ definitions:
         $ref: '#/definitions/String'
         description: The attribute value. The value is case-sensitive.
     description: Describes a value for a resource attribute that is a String.
+  ClientVpnAuthorizationRuleStatus:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/ClientVpnAuthorizationRuleStatusCode'
+        description: The state of the authorization rule.
+      Message:
+        $ref: '#/definitions/String'
+        description: 'A message about the status of the authorization rule, if applicable.'
+    description: Describes the state of an authorization rule.
+  AuthorizationRule:
+    type: object
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint with which the authorization rule is associated.
+      Description:
+        $ref: '#/definitions/String'
+        description: A brief description of the authorization rule.
+      GroupId:
+        $ref: '#/definitions/String'
+        description: The ID of the Active Directory group to which the authorization rule grants access.
+      AccessAll:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the authorization rule grants access to all clients.
+      DestinationCidr:
+        $ref: '#/definitions/String'
+        description: 'The IPv4 address range, in CIDR notation, of the network to which the authorization rule applies.'
+      Status:
+        $ref: '#/definitions/ClientVpnAuthorizationRuleStatus'
+        description: The current state of the authorization rule.
+    description: ' <b>Information about an authorization rule.</b> '
+  AuthorizationRuleSet:
+    type: array
+    items:
+      $ref: '#/definitions/AuthorizationRule'
   IpPermissionList:
     type: array
     items:
@@ -17356,7 +18403,7 @@ definitions:
         description: Indicates whether the EBS volume is deleted on instance termination.
       Iops:
         $ref: '#/definitions/Integer'
-        description: '<p>The number of I/O operations per second (IOPS) that the volume supports. For <code>io1</code>, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code>, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-10,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most regions. Maximum <code>io1</code>IOPS of 64,000 is guaranteed only on <a href="AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>'
+        description: '<p>The number of I/O operations per second (IOPS) that the volume supports. For <code>io1</code>, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code>, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-16,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most Regions. Maximum <code>io1</code>IOPS of 64,000 is guaranteed only on <a href="AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>'
       SnapshotId:
         $ref: '#/definitions/String'
         description: The ID of the snapshot.
@@ -17490,9 +18537,6 @@ definitions:
       $ref: '#/definitions/ReservedInstancesListing'
   CancelSpotFleetRequestsError:
     type: object
-    required:
-      - Code
-      - Message
     properties:
       Code:
         $ref: '#/definitions/CancelBatchErrorCode'
@@ -17503,9 +18547,6 @@ definitions:
     description: Describes a Spot Fleet error.
   CancelSpotFleetRequestsErrorItem:
     type: object
-    required:
-      - Error
-      - SpotFleetRequestId
     properties:
       Error:
         $ref: '#/definitions/CancelSpotFleetRequestsError'
@@ -17524,10 +18565,6 @@ definitions:
       $ref: '#/definitions/CancelSpotFleetRequestsSuccessItem'
   CancelSpotFleetRequestsSuccessItem:
     type: object
-    required:
-      - CurrentSpotFleetRequestState
-      - PreviousSpotFleetRequestState
-      - SpotFleetRequestId
     properties:
       CurrentSpotFleetRequestState:
         $ref: '#/definitions/BatchState'
@@ -17695,6 +18732,20 @@ definitions:
         $ref: '#/definitions/CapacityReservationTargetResponse'
         description: Information about the targeted Capacity Reservation.
     description: 'Describes the instance''s Capacity Reservation targeting preferences. The action returns the <code>capacityReservationPreference</code> response element if the instance is configured to run in On-Demand capacity, or if it is configured in run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). The action returns the <code>capacityReservationTarget</code> response element if the instance explicily targets a specific Capacity Reservation.'
+  CertificateAuthentication:
+    type: object
+    properties:
+      ClientRootCertificateChain:
+        $ref: '#/definitions/String'
+        description: ' <b>The ARN of the client certificate. </b> '
+    description: ' <b>Information about the client certificate used for authentication.</b> '
+  CertificateAuthenticationRequest:
+    type: object
+    properties:
+      ClientRootCertificateChainArn:
+        $ref: '#/definitions/String'
+        description: ' <b>The ARN of the client certificate. The certificate must be signed by a certificate authority (CA) and it must be provisioned in AWS Certificate Manager (ACM).</b> '
+    description: ' <b>Information about the client certificate to be used for authentication.</b> '
   CidrAuthorizationContext:
     type: object
     required:
@@ -17759,8 +18810,6 @@ definitions:
       $ref: '#/definitions/ClassicLinkInstance'
   ClassicLoadBalancer:
     type: object
-    required:
-      - Name
     properties:
       Name:
         $ref: '#/definitions/String'
@@ -17774,13 +18823,26 @@ definitions:
     maxItems: 5
   ClassicLoadBalancersConfig:
     type: object
-    required:
-      - ClassicLoadBalancers
     properties:
       ClassicLoadBalancers:
         $ref: '#/definitions/ClassicLoadBalancers'
         description: One or more Classic Load Balancers.
     description: Describes the Classic Load Balancers to attach to a Spot Fleet. Spot Fleet registers the running Spot Instances with these Classic Load Balancers.
+  ClientCertificateRevocationListStatusCode:
+    type: string
+    enum:
+      - pending
+      - active
+  ClientCertificateRevocationListStatus:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/ClientCertificateRevocationListStatusCode'
+        description: The state of the client certificate revocation list.
+      Message:
+        $ref: '#/definitions/String'
+        description: 'A message about the status of the client certificate revocation list, if applicable.'
+    description: Describes the state of a client certificate revocation list.
   Double:
     type: number
     format: double
@@ -17800,6 +18862,274 @@ definitions:
         $ref: '#/definitions/DateTime'
         description: The time that the disk upload starts.
     description: Describes the client-specific data.
+  ClientVpnAuthenticationType:
+    type: string
+    enum:
+      - certificate-authentication
+      - directory-service-authentication
+  DirectoryServiceAuthentication:
+    type: object
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/String'
+        description: The ID of the Active Directory used for authentication.
+    description: Describes an Active Directory.
+  ClientVpnAuthentication:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/ClientVpnAuthenticationType'
+        description: The authentication type used.
+      ActiveDirectory:
+        $ref: '#/definitions/DirectoryServiceAuthentication'
+        description: 'Information about the Active Directory, if applicable.'
+      MutualAuthentication:
+        $ref: '#/definitions/CertificateAuthentication'
+        description: 'Information about the authentication certificates, if applicable.'
+    description: 'Describes the authentication methods used by a Client VPN endpoint. Client VPN supports Active Directory and mutual authentication. For more information, see <a href="vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication">Authentication</a> in the <i>AWS Client VPN Admin Guide</i>.'
+  ClientVpnAuthenticationList:
+    type: array
+    items:
+      $ref: '#/definitions/ClientVpnAuthentication'
+  DirectoryServiceAuthenticationRequest:
+    type: object
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/String'
+        description: The ID of the Active Directory to be used for authentication.
+    description: Describes the Active Directory to be used for client authentication.
+  ClientVpnAuthenticationRequest:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/ClientVpnAuthenticationType'
+        description: 'The type of client authentication to be used. Specify <code>certificate-authentication</code> to use certificate-based authentication, or <code>directory-service-authentication</code> to use Active Directory authentication.'
+      ActiveDirectory:
+        $ref: '#/definitions/DirectoryServiceAuthenticationRequest'
+        description: 'Information about the Active Directory to be used, if applicable. You must provide this information if <b>Type</b> is <code>directory-service-authentication</code>.'
+      MutualAuthentication:
+        $ref: '#/definitions/CertificateAuthenticationRequest'
+        description: 'Information about the authentication certificates to be used, if applicable. You must provide this information if <b>Type</b> is <code>certificate-authentication</code>.'
+    description: 'Describes the authentication method to be used by a Client VPN endpoint. Client VPN supports Active Directory and mutual authentication. For more information, see <a href="vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication">Athentication</a> in the <i>AWS Client VPN Admin Guide</i>.'
+  ClientVpnAuthenticationRequestList:
+    type: array
+    items:
+      $ref: '#/definitions/ClientVpnAuthenticationRequest'
+  ClientVpnAuthorizationRuleStatusCode:
+    type: string
+    enum:
+      - authorizing
+      - active
+      - failed
+      - revoking
+  ClientVpnConnectionStatus:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/ClientVpnConnectionStatusCode'
+        description: The state of the client connection.
+      Message:
+        $ref: '#/definitions/String'
+        description: 'A message about the status of the client connection, if applicable.'
+    description: Describes the status of a client connection.
+  ClientVpnConnection:
+    type: object
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint to which the client is connected.
+      Timestamp:
+        $ref: '#/definitions/String'
+        description: ' <b>The current date and time.</b> '
+      ConnectionId:
+        $ref: '#/definitions/String'
+        description: The ID of the client connection.
+      Username:
+        $ref: '#/definitions/String'
+        description: The username of the client who established the client connection. This information is only provided if Active Directory client authentication is used.
+      ConnectionEstablishedTime:
+        $ref: '#/definitions/String'
+        description: The date and time the client connection was established.
+      IngressBytes:
+        $ref: '#/definitions/String'
+        description: The number of bytes sent by the client.
+      EgressBytes:
+        $ref: '#/definitions/String'
+        description: The number of bytes received by the client.
+      IngressPackets:
+        $ref: '#/definitions/String'
+        description: The number of packets sent by the client.
+      EgressPackets:
+        $ref: '#/definitions/String'
+        description: The number of packets received by the client.
+      ClientIp:
+        $ref: '#/definitions/String'
+        description: The IP address of the client.
+      CommonName:
+        $ref: '#/definitions/String'
+        description: ' <b>The common name associated with the client. This is either the name of the client certificate, or the Active Directory user name.</b> '
+      Status:
+        $ref: '#/definitions/ClientVpnConnectionStatus'
+        description: The current state of the client connection.
+      ConnectionEndTime:
+        $ref: '#/definitions/String'
+        description: The date and time the client connection was terminated.
+    description: Describes a client connection.
+  ClientVpnConnectionSet:
+    type: array
+    items:
+      $ref: '#/definitions/ClientVpnConnection'
+  ClientVpnConnectionStatusCode:
+    type: string
+    enum:
+      - active
+      - failed-to-terminate
+      - terminating
+      - terminated
+  ClientVpnEndpointStatus:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/ClientVpnEndpointStatusCode'
+        description: '<p>The state of the Client VPN endpoint. Possible states include:</p> <ul> <li> <p> <code>pending-associate</code> - The Client VPN endpoint has been created but no target networks have been associated. The Client VPN endpoint cannot accept connections.</p> </li> <li> <p> <code>available</code> - The Client VPN endpoint has been created and a target network has been associated. The Client VPN endpoint can accept connections.</p> </li> <li> <p> <code>deleting</code> - The Client VPN endpoint is being deleted. The Client VPN endpoint cannot accept connections.</p> </li> <li> <p> <code>deleted</code> - The Client VPN endpoint has been deleted. The Client VPN endpoint cannot accept connections.</p> </li> </ul>'
+      Message:
+        $ref: '#/definitions/String'
+        description: A message about the status of the Client VPN endpoint.
+    description: Describes the state of a Client VPN endpoint.
+  VpnProtocol:
+    type: string
+    enum:
+      - openvpn
+  TransportProtocol:
+    type: string
+    enum:
+      - tcp
+      - udp
+  ConnectionLogResponseOptions:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether client connection logging is enabled for the Client VPN endpoint.
+      CloudwatchLogGroup:
+        $ref: '#/definitions/String'
+        description: The name of the Amazon CloudWatch Logs log group to which connection logging data is published.
+      CloudwatchLogStream:
+        $ref: '#/definitions/String'
+        description: The name of the Amazon CloudWatch Logs log stream to which connection logging data is published.
+    description: Information about the client connection logging options for a Client VPN endpoint.
+  ClientVpnEndpoint:
+    type: object
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint.
+      Description:
+        $ref: '#/definitions/String'
+        description: A brief description of the endpoint.
+      Status:
+        $ref: '#/definitions/ClientVpnEndpointStatus'
+        description: The current state of the Client VPN endpoint.
+      CreationTime:
+        $ref: '#/definitions/String'
+        description: The date and time the Client VPN endpoint was created.
+      DeletionTime:
+        $ref: '#/definitions/String'
+        description: 'The date and time the Client VPN endpoint was deleted, if applicable. Information about deleted Client VPN endpoints is retained for 24 hours, unless a new Client VPN is created with the same name.'
+      DnsName:
+        $ref: '#/definitions/String'
+        description: The DNS name to be used by clients when establishing a connection.
+      ClientCidrBlock:
+        $ref: '#/definitions/String'
+        description: 'The IPv4 address range, in CIDR notation, from which client IP addresses are assigned.'
+      SplitTunnel:
+        $ref: '#/definitions/Boolean'
+        description: ' <b>Indicates whether VPN split tunneling is supported.</b> '
+      VpnProtocol:
+        $ref: '#/definitions/VpnProtocol'
+        description: The protocol used by the VPN session.
+      TransportProtocol:
+        $ref: '#/definitions/TransportProtocol'
+        description: ' <b>The transport protocol used by the Client VPN endpoint.</b> '
+      AssociatedTargetNetworks:
+        $ref: '#/definitions/AssociatedTargetNetworkSet'
+        description: Information about the associated target networks. A target network is a subnet in a VPC.
+      ServerCertificateArn:
+        $ref: '#/definitions/String'
+        description: The ARN of the server certificate.
+      AuthenticationOptions:
+        $ref: '#/definitions/ClientVpnAuthenticationList'
+        description: Information about the authentication method used by the Client VPN endpoint.
+      ConnectionLogOptions:
+        $ref: '#/definitions/ConnectionLogResponseOptions'
+        description: Information about the client connection logging options for the Client VPN endpoint.
+    description: Describes a Client VPN endpoint.
+  ClientVpnEndpointStatusCode:
+    type: string
+    enum:
+      - pending-associate
+      - available
+      - deleting
+      - deleted
+  ClientVpnRouteStatus:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/ClientVpnRouteStatusCode'
+        description: The state of the Client VPN endpoint route.
+      Message:
+        $ref: '#/definitions/String'
+        description: 'A message about the status of the Client VPN endpoint route, if applicable.'
+    description: Describes the state of a Client VPN endpoint route.
+  ClientVpnRoute:
+    type: object
+    properties:
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint with which the route is associated.
+      DestinationCidr:
+        $ref: '#/definitions/String'
+        description: 'The IPv4 address range, in CIDR notation, of the route destination.'
+      TargetSubnet:
+        $ref: '#/definitions/String'
+        description: The ID of the subnet through which traffic is routed.
+      Type:
+        $ref: '#/definitions/String'
+        description: ' <b>The route type.</b> '
+      Origin:
+        $ref: '#/definitions/String'
+        description: Indicates how the route was associated with the Client VPN endpoint. <code>associate</code> indicates that the route was automatically added when the target network was associated with the Client VPN endpoint. <code>add-route</code> indicates that the route was manually added using the <b>CreateClientVpnRoute</b> action.
+      Status:
+        $ref: '#/definitions/ClientVpnRouteStatus'
+        description: The current state of the route.
+      Description:
+        $ref: '#/definitions/String'
+        description: A brief description of the route.
+    description: ' <b>Information about a Client VPN endpoint route.</b> '
+  ClientVpnRouteSet:
+    type: array
+    items:
+      $ref: '#/definitions/ClientVpnRoute'
+  ClientVpnRouteStatusCode:
+    type: string
+    enum:
+      - creating
+      - active
+      - failed
+      - deleting
+  ConnectionLogOptions:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether connection logging is enabled.
+      CloudwatchLogGroup:
+        $ref: '#/definitions/String'
+        description: The name of the CloudWatch Logs log group.
+      CloudwatchLogStream:
+        $ref: '#/definitions/String'
+        description: The name of the CloudWatch Logs log stream to which the connection data is published.
+    description: Describes the client connection logging options for the Client VPN endpoint.
   ConnectionNotificationType:
     type: string
     enum:
@@ -18473,7 +19803,7 @@ definitions:
     description: Describes an internet gateway.
   LaunchTemplateName:
     type: string
-    pattern: '[a-zA-Z0-9\(\)\.-/_]+'
+    pattern: '[a-zA-Z0-9\(\)\.\-/_]+'
     minLength: 3
     maxLength: 128
   VersionDescription:
@@ -19362,6 +20692,14 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  EndpointSet:
+    type: array
+    items:
+      $ref: '#/definitions/ClientVpnEndpoint'
+  TargetNetworkSet:
+    type: array
+    items:
+      $ref: '#/definitions/TargetNetwork'
   DescribeConversionTaskList:
     type: array
     items:
@@ -20131,6 +21469,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DnsEntry'
+  DnsServersOptionsModifyStructure:
+    type: object
+    properties:
+      CustomDnsServers:
+        $ref: '#/definitions/ValueStringList'
+        description: 'The IPv4 address range, in CIDR notation, of the DNS servers to be used. You can specify up to two DNS servers. Ensure that the DNS servers can be reached by the clients. The specified values overwrite the existing values.'
+      Enabled:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether DNS servers should be used. Specify <code>False</code> to delete the existing DNS servers.
+    description: Information about the DNS server to be used.
   EbsInstanceBlockDevice:
     type: object
     properties:
@@ -20894,10 +22242,6 @@ definitions:
     description: 'Indicates whether your instance is configured for hibernation. This parameter is valid only if the instance meets the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites">hibernation prerequisites</a>. Hibernation is currently supported only for Amazon Linux. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate Your Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
   HistoryRecord:
     type: object
-    required:
-      - EventInformation
-      - EventType
-      - Timestamp
     properties:
       EventInformation:
         $ref: '#/definitions/EventInformation'
@@ -22871,8 +24215,6 @@ definitions:
       - closed
   TargetGroupsConfig:
     type: object
-    required:
-      - TargetGroups
     properties:
       TargetGroups:
         $ref: '#/definitions/TargetGroups'
@@ -24487,11 +25829,6 @@ definitions:
       $ref: '#/definitions/SpotFleetTagSpecification'
   SpotFleetRequestConfig:
     type: object
-    required:
-      - CreateTime
-      - SpotFleetRequestConfig
-      - SpotFleetRequestId
-      - SpotFleetRequestState
     properties:
       ActivityStatus:
         $ref: '#/definitions/ActivityStatus'
@@ -24784,8 +26121,6 @@ definitions:
     description: Details about the target configuration.
   TargetGroup:
     type: object
-    required:
-      - Arn
     properties:
       Arn:
         $ref: '#/definitions/String'
@@ -24797,6 +26132,28 @@ definitions:
       $ref: '#/definitions/TargetGroup'
     minItems: 1
     maxItems: 5
+  TargetNetwork:
+    type: object
+    properties:
+      AssociationId:
+        $ref: '#/definitions/String'
+        description: The ID of the association.
+      VpcId:
+        $ref: '#/definitions/String'
+        description: The ID of the VPC in which the target network (subnet) is located.
+      TargetNetworkId:
+        $ref: '#/definitions/String'
+        description: The ID of the subnet specified as the target network.
+      ClientVpnEndpointId:
+        $ref: '#/definitions/String'
+        description: The ID of the Client VPN endpoint with which the target network is associated.
+      Status:
+        $ref: '#/definitions/AssociationStatus'
+        description: The current state of the target network association.
+      SecurityGroups:
+        $ref: '#/definitions/ValueStringList'
+        description: The IDs of the security groups applied to the target network association.
+    description: Describes a target network associated with a Client VPN endpoint.
   TargetReservationValue:
     type: object
     properties:
@@ -24812,6 +26169,23 @@ definitions:
     enum:
       - UP
       - DOWN
+  TerminateConnectionStatusSet:
+    type: array
+    items:
+      $ref: '#/definitions/TerminateConnectionStatus'
+  TerminateConnectionStatus:
+    type: object
+    properties:
+      ConnectionId:
+        $ref: '#/definitions/String'
+        description: The ID of the client connection.
+      PreviousStatus:
+        $ref: '#/definitions/ClientVpnConnectionStatus'
+        description: The state of the client connection.
+      CurrentStatus:
+        $ref: '#/definitions/ClientVpnConnectionStatus'
+        description: 'A message about the status of the client connection, if applicable.'
+    description: Information about a terminated Client VPN endpoint client connection.
   TransitGatewayState:
     type: string
     enum:
@@ -25062,9 +26436,6 @@ definitions:
     description: Describes the T2 or T3 instance whose credit option for CPU usage was not modified.
   UnsuccessfulItemError:
     type: object
-    required:
-      - Code
-      - Message
     properties:
       Code:
         $ref: '#/definitions/String'
@@ -25075,8 +26446,6 @@ definitions:
     description: 'Information about the error that occurred. For more information about errors, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html">Error Codes</a>.'
   UnsuccessfulItem:
     type: object
-    required:
-      - Error
     properties:
       Error:
         $ref: '#/definitions/UnsuccessfulItemError'
