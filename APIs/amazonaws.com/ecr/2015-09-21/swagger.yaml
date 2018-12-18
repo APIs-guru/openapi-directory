@@ -285,10 +285,18 @@ paths:
           schema:
             $ref: '#/definitions/InvalidParameterException'
         '482':
+          description: InvalidTagParameterException
+          schema:
+            $ref: '#/definitions/InvalidTagParameterException'
+        '483':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '484':
           description: RepositoryAlreadyExistsException
           schema:
             $ref: '#/definitions/RepositoryAlreadyExistsException'
-        '483':
+        '485':
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
@@ -814,6 +822,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: List the tags for an Amazon ECR resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: RepositoryNotFoundException
+          schema:
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '482':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#PutImage':
     post:
       operationId: PutImage
@@ -982,6 +1027,96 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#TagResource':
+    post:
+      operationId: TagResource
+      description: Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InvalidTagParameterException
+          schema:
+            $ref: '#/definitions/InvalidTagParameterException'
+        '482':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '483':
+          description: RepositoryNotFoundException
+          schema:
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '484':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UntagResource':
+    post:
+      operationId: UntagResource
+      description: Deletes specified tags from a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: InvalidTagParameterException
+          schema:
+            $ref: '#/definitions/InvalidTagParameterException'
+        '482':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '483':
+          description: RepositoryNotFoundException
+          schema:
+            $ref: '#/definitions/RepositoryNotFoundException'
+        '484':
+          description: ServerException
+          schema:
+            $ref: '#/definitions/ServerException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UploadLayerPart':
     post:
       operationId: UploadLayerPart
@@ -1056,27 +1191,9 @@ definitions:
       layerDigests:
         $ref: '#/definitions/BatchedOperationLayerDigestList'
         description: The digests of the image layers to check.
-  RepositoryNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: The specified repository could not be found. Check the spelling of the specified repository and ensure that you are performing operations on the correct registry.
-  InvalidParameterException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: The specified parameter is invalid. Review the available parameters for the API request.
-  ServerException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: These errors are usually caused by a server-side issue.
+  RepositoryNotFoundException: {}
+  InvalidParameterException: {}
+  ServerException: {}
   BatchDeleteImageResponse:
     type: object
     example:
@@ -1190,41 +1307,11 @@ definitions:
       layerDigests:
         $ref: '#/definitions/LayerDigestList'
         description: The <code>sha256</code> digest of the image layer.
-  UploadNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: 'The upload could not be found, or the specified upload id is not valid for this repository.'
-  InvalidLayerException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: The layer digest calculation performed by Amazon ECR upon receipt of the image layer does not match the digest specified.
-  LayerPartTooSmallException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: Layer parts must be at least 5 MiB in size.
-  LayerAlreadyExistsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: The image layer already exists in the associated repository.
-  EmptyUploadException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: The specified layer upload does not contain any layer parts.
+  UploadNotFoundException: {}
+  InvalidLayerException: {}
+  LayerPartTooSmallException: {}
+  LayerAlreadyExistsException: {}
+  EmptyUploadException: {}
   CreateRepositoryResponse:
     type: object
     example:
@@ -1246,20 +1333,13 @@ definitions:
       repositoryName:
         $ref: '#/definitions/RepositoryName'
         description: The name to use for the repository. The repository name may be specified on its own (such as <code>nginx-web-app</code>) or it can be prepended with a namespace to group the repository into a category (such as <code>project-a/nginx-web-app</code>).
-  RepositoryAlreadyExistsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: The specified repository already exists in the specified registry.
-  LimitExceededException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: 'The operation did not succeed because it would have exceeded a service limit for your account. For more information, see <a href="http://docs.aws.amazon.com/AmazonECR/latest/userguide/service_limits.html">Amazon ECR Default Service Limits</a> in the Amazon Elastic Container Registry User Guide.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: <p/>
+  InvalidTagParameterException: {}
+  TooManyTagsException: {}
+  RepositoryAlreadyExistsException: {}
+  LimitExceededException: {}
   DeleteLifecyclePolicyResponse:
     type: object
     properties:
@@ -1286,12 +1366,7 @@ definitions:
       repositoryName:
         $ref: '#/definitions/RepositoryName'
         description: The name of the repository.
-  LifecyclePolicyNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: 'The lifecycle policy could not be found, and no policy is set to the repository.'
+  LifecyclePolicyNotFoundException: {}
   DeleteRepositoryResponse:
     type: object
     example:
@@ -1320,13 +1395,7 @@ definitions:
       force:
         $ref: '#/definitions/ForceFlag'
         description: ' If a repository contains images, forces the deletion.'
-  RepositoryNotEmptyException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: 'The specified repository contains images. To delete a repository that contains images, you must force the deletion with the <code>force</code> parameter.'
+  RepositoryNotEmptyException: {}
   DeleteRepositoryPolicyResponse:
     type: object
     example:
@@ -1356,13 +1425,7 @@ definitions:
       repositoryName:
         $ref: '#/definitions/RepositoryName'
         description: The name of the repository that is associated with the repository policy to delete.
-  RepositoryPolicyNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: The specified repository and registry combination does not have an associated repository policy.
+  RepositoryPolicyNotFoundException: {}
   DescribeImagesResponse:
     type: object
     properties:
@@ -1382,7 +1445,7 @@ definitions:
         description: 'The AWS account ID associated with the registry that contains the repository in which to describe images. If you do not specify a registry, the default registry is assumed.'
       repositoryName:
         $ref: '#/definitions/RepositoryName'
-        description: 'A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.'
+        description: A list of repositories to describe.
       imageIds:
         $ref: '#/definitions/ImageIdentifierList'
         description: The list of image IDs for the requested repository.
@@ -1391,16 +1454,11 @@ definitions:
         description: The <code>nextToken</code> value returned from a previous paginated <code>DescribeImages</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify images with <code>imageIds</code>.
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of repository results returned by <code>DescribeImages</code> in paginated output. When this parameter is used, <code>DescribeImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify images with <code>imageIds</code>.'
+        description: 'The maximum number of repository results returned by <code>DescribeImages</code> in paginated output. When this parameter is used, <code>DescribeImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify images with <code>imageIds</code>.'
       filter:
         $ref: '#/definitions/DescribeImagesFilter'
         description: The filter key and value with which to filter your <code>DescribeImages</code> results.
-  ImageNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The image requested does not exist in the specified repository.
+  ImageNotFoundException: {}
   DescribeRepositoriesResponse:
     type: object
     example:
@@ -1433,7 +1491,7 @@ definitions:
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeRepositories</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify repositories with <code>repositoryNames</code>.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of repository results returned by <code>DescribeRepositories</code> in paginated output. When this parameter is used, <code>DescribeRepositories</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeRepositories</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeRepositories</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify repositories with <code>repositoryNames</code>.'
+        description: 'The maximum number of repository results returned by <code>DescribeRepositories</code> in paginated output. When this parameter is used, <code>DescribeRepositories</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeRepositories</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeRepositories</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify repositories with <code>repositoryNames</code>.'
   GetAuthorizationTokenResponse:
     type: object
     example:
@@ -1476,20 +1534,8 @@ definitions:
       layerDigest:
         $ref: '#/definitions/LayerDigest'
         description: The digest of the image layer to download.
-  LayersNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: 'The specified layers could not be found, or the specified layer is not valid for this repository.'
-  LayerInaccessibleException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: The specified layer is not available because it is not associated with an image. Unassociated image layers may be cleaned up at any time.
+  LayersNotFoundException: {}
+  LayerInaccessibleException: {}
   GetLifecyclePolicyResponse:
     type: object
     properties:
@@ -1558,17 +1604,12 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'The <code>nextToken</code> value returned from a previous paginated&#x2028; <code>GetLifecyclePolicyPreviewRequest</code> request where <code>maxResults</code> was used and the&#x2028; results exceeded the value of that parameter. Pagination continues from the end of the&#x2028; previous results that returned the <code>nextToken</code> value. This value is&#x2028; <code>null</code> when there are no more results to return. This option cannot be used when you specify images with <code>imageIds</code>.'
       maxResults:
-        $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of repository results returned by <code>GetLifecyclePolicyPreviewRequest</code> in&#x2028; paginated output. When this parameter is used, <code>GetLifecyclePolicyPreviewRequest</code> only returns&#x2028; <code>maxResults</code> results in a single page along with a <code>nextToken</code>&#x2028; response element. The remaining results of the initial request can be seen by sending&#x2028; another <code>GetLifecyclePolicyPreviewRequest</code> request with the returned <code>nextToken</code>&#x2028; value. This value can be between 1 and 100. If this&#x2028; parameter is not used, then <code>GetLifecyclePolicyPreviewRequest</code> returns up to&#x2028; 100 results and a <code>nextToken</code> value, if&#x2028; applicable. This option cannot be used when you specify images with <code>imageIds</code>.'
+        $ref: '#/definitions/LifecyclePreviewMaxResults'
+        description: 'The maximum number of repository results returned by <code>GetLifecyclePolicyPreviewRequest</code> in&#x2028; paginated output. When this parameter is used, <code>GetLifecyclePolicyPreviewRequest</code> only returns&#x2028; <code>maxResults</code> results in a single page along with a <code>nextToken</code>&#x2028; response element. The remaining results of the initial request can be seen by sending&#x2028; another <code>GetLifecyclePolicyPreviewRequest</code> request with the returned <code>nextToken</code>&#x2028; value. This value can be between 1 and 1000. If this&#x2028; parameter is not used, then <code>GetLifecyclePolicyPreviewRequest</code> returns up to&#x2028; 100 results and a <code>nextToken</code> value, if&#x2028; applicable. This option cannot be used when you specify images with <code>imageIds</code>.'
       filter:
         $ref: '#/definitions/LifecyclePolicyPreviewFilter'
         description: 'An optional parameter that filters results based on image tag status and all tags, if tagged.'
-  LifecyclePolicyPreviewNotFoundException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: There is no dry run for this repository.
+  LifecyclePolicyPreviewNotFoundException: {}
   GetRepositoryPolicyResponse:
     type: object
     example:
@@ -1660,10 +1701,24 @@ definitions:
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListImages</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of image results returned by <code>ListImages</code> in paginated output. When this parameter is used, <code>ListImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.'
+        description: 'The maximum number of image results returned by <code>ListImages</code> in paginated output. When this parameter is used, <code>ListImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>ListImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.'
       filter:
         $ref: '#/definitions/ListImagesFilter'
         description: The filter key and value with which to filter your <code>ListImages</code> results.
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagList'
+        description: The tags for the resource.
+  ListTagsForResourceRequest:
+    type: object
+    required:
+      - resourceArn
+    properties:
+      resourceArn:
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the only supported resource is an Amazon ECR repository.'
   PutImageResponse:
     type: object
     properties:
@@ -1688,13 +1743,7 @@ definitions:
       imageTag:
         $ref: '#/definitions/ImageTag'
         description: The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
-  ImageAlreadyExistsException:
-    type: object
-    properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: 'The specified image has already been pushed, and there were no changes to the manifest or image tag after the last push.'
+  ImageAlreadyExistsException: {}
   PutLifecyclePolicyResponse:
     type: object
     properties:
@@ -1781,12 +1830,37 @@ definitions:
       lifecyclePolicyText:
         $ref: '#/definitions/LifecyclePolicyText'
         description: 'The policy to be evaluated against. If you do not specify a policy, the current policy for the repository is used.'
-  LifecyclePolicyPreviewInProgressException:
+  LifecyclePolicyPreviewInProgressException: {}
+  TagResourceResponse:
     type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - resourceArn
+      - tags
     properties:
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-    description: The previous lifecycle policy preview request has not completed. Please try again later.
+      resourceArn:
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) of the the resource to which to add tags. Currently, the only supported resource is an Amazon ECR repository.'
+      tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    required:
+      - resourceArn
+      - tagKeys
+    properties:
+      resourceArn:
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Name (ARN) of the resource from which to remove tags. Currently, the only supported resource is an Amazon ECR repository.'
+      tagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: The keys of the tags to be removed.
   UploadLayerPartResponse:
     type: object
     properties:
@@ -1829,25 +1903,7 @@ definitions:
       layerPartBlob:
         $ref: '#/definitions/LayerPartBlob'
         description: The base64-encoded layer part payload.
-  InvalidLayerPartException:
-    type: object
-    properties:
-      registryId:
-        $ref: '#/definitions/RegistryId'
-        description: The registry ID associated with the exception.
-      repositoryName:
-        $ref: '#/definitions/RepositoryName'
-        description: The repository name associated with the exception.
-      uploadId:
-        $ref: '#/definitions/UploadId'
-        description: The upload ID associated with the exception.
-      lastValidByteReceived:
-        $ref: '#/definitions/PartSize'
-        description: The last valid byte received from the layer part upload that is associated with the exception.
-      message:
-        $ref: '#/definitions/ExceptionMessage'
-        description: The error message associated with the exception.
-    description: 'The layer part size is not valid, or the first byte specified is not consecutive to the last byte of a previous layer part upload.'
+  InvalidLayerPartException: {}
   Arn:
     type: string
   Base64:
@@ -1933,6 +1989,10 @@ definitions:
   LayerDigest:
     type: string
     pattern: '[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   Repository:
     type: object
     properties:
@@ -1958,7 +2018,7 @@ definitions:
   LifecyclePolicyText:
     type: string
     minLength: 100
-    maxLength: 10240
+    maxLength: 30720
   EvaluationTimestamp:
     type: string
     format: date-time
@@ -1973,6 +2033,7 @@ definitions:
     enum:
       - TAGGED
       - UNTAGGED
+      - ANY
   DescribeImagesFilter:
     type: object
     properties:
@@ -1985,7 +2046,7 @@ definitions:
   MaxResults:
     type: integer
     minimum: 1
-    maximum: 100
+    maximum: 1000
   ImageDetailList:
     type: array
     items:
@@ -2000,8 +2061,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Repository'
-  ExceptionMessage:
-    type: string
   GetAuthorizationTokenRegistryIdList:
     type: array
     items:
@@ -2010,6 +2069,10 @@ definitions:
     maxItems: 10
   Url:
     type: string
+  LifecyclePreviewMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
   LifecyclePolicyPreviewFilter:
     type: object
     properties:
@@ -2214,3 +2277,21 @@ definitions:
         $ref: '#/definitions/TagStatus'
         description: The tag status with which to filter your <a>ListImages</a> results. You can filter results based on whether they are <code>TAGGED</code> or <code>UNTAGGED</code>.
     description: An object representing a filter on a <a>ListImages</a> operation.
+  TagKey:
+    type: string
+  TagValue:
+    type: string
+  Tag:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: One part of a key-value pair that make up a tag. A <code>key</code> is a general label that acts like a category for more specific tag values.
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a descriptor within a tag category (key).
+    description: 'The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
