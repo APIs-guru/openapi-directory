@@ -411,7 +411,7 @@ paths:
   '/#GetExecutionHistory':
     post:
       operationId: GetExecutionHistory
-      description: '<p>Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the <code>timeStamp</code> of the events. Use the <code>reverseOrder</code> parameter to get the latest events first.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>'
+      description: '<p>Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the <code>timeStamp</code> of the events. Use the <code>reverseOrder</code> parameter to get the latest events first.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>'
       responses:
         '200':
           description: Success
@@ -458,7 +458,7 @@ paths:
   '/#ListActivities':
     post:
       operationId: ListActivities
-      description: '<p>Lists the existing activities.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>'
+      description: '<p>Lists the existing activities.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>'
       responses:
         '200':
           description: Success
@@ -497,7 +497,7 @@ paths:
   '/#ListExecutions':
     post:
       operationId: ListExecutions
-      description: '<p>Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>'
+      description: '<p>Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>'
       responses:
         '200':
           description: Success
@@ -544,7 +544,7 @@ paths:
   '/#ListStateMachines':
     post:
       operationId: ListStateMachines
-      description: '<p>Lists the existing state machines.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>'
+      description: '<p>Lists the existing state machines.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>'
       responses:
         '200':
           description: Success
@@ -570,6 +570,39 @@ paths:
           in: query
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: List tags for a given resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceOutput'
+        '480':
+          description: InvalidArn
+          schema:
+            $ref: '#/definitions/InvalidArn'
+        '481':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -771,6 +804,76 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopExecutionInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#TagResource':
+    post:
+      operationId: TagResource
+      description: Add a tag to a Step Functions resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceOutput'
+        '480':
+          description: InvalidArn
+          schema:
+            $ref: '#/definitions/InvalidArn'
+        '481':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
+        '482':
+          description: TooManyTags
+          schema:
+            $ref: '#/definitions/TooManyTags'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UntagResource':
+    post:
+      operationId: UntagResource
+      description: Remove a tag from a Step Functions resource
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceOutput'
+        '480':
+          description: InvalidArn
+          schema:
+            $ref: '#/definitions/InvalidArn'
+        '481':
+          description: ResourceNotFound
+          schema:
+            $ref: '#/definitions/ResourceNotFound'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1070,7 +1173,7 @@ definitions:
         description: The list of events that occurred in the execution.
       nextToken:
         $ref: '#/definitions/PageToken'
-        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   GetExecutionHistoryInput:
     type: object
     required:
@@ -1087,7 +1190,7 @@ definitions:
         description: Lists events in descending order of their <code>timeStamp</code>.
       nextToken:
         $ref: '#/definitions/PageToken'
-        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   InvalidToken: {}
   ListActivitiesOutput:
     type: object
@@ -1099,7 +1202,7 @@ definitions:
         description: The list of activities.
       nextToken:
         $ref: '#/definitions/PageToken'
-        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListActivitiesInput:
     type: object
     properties:
@@ -1108,7 +1211,7 @@ definitions:
         description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
       nextToken:
         $ref: '#/definitions/PageToken'
-        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListExecutionsOutput:
     type: object
     required:
@@ -1119,7 +1222,7 @@ definitions:
         description: The list of matching executions.
       nextToken:
         $ref: '#/definitions/PageToken'
-        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListExecutionsInput:
     type: object
     required:
@@ -1136,7 +1239,7 @@ definitions:
         description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
       nextToken:
         $ref: '#/definitions/PageToken'
-        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListStateMachinesOutput:
     type: object
     required:
@@ -1146,7 +1249,7 @@ definitions:
         $ref: '#/definitions/StateMachineList'
       nextToken:
         $ref: '#/definitions/PageToken'
-        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
   ListStateMachinesInput:
     type: object
     properties:
@@ -1155,7 +1258,22 @@ definitions:
         description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
       nextToken:
         $ref: '#/definitions/PageToken'
-        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+        description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+  ListTagsForResourceOutput:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagList'
+        description: An array of tags associated with the resource.
+  ListTagsForResourceInput:
+    type: object
+    required:
+      - resourceArn
+    properties:
+      resourceArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+  ResourceNotFound: {}
   SendTaskFailureOutput:
     type: object
     properties: {}
@@ -1253,6 +1371,37 @@ definitions:
       cause:
         $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
+  TagResourceOutput:
+    type: object
+    properties: {}
+  TagResourceInput:
+    type: object
+    required:
+      - resourceArn
+      - tags
+    properties:
+      resourceArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+      tags:
+        $ref: '#/definitions/TagList'
+        description: '<p>The list of tags to add to a resource.</p> <p>Tags may only contain unicode letters, digits, whitespace, or these symbols: <code>_ . : / = + - @</code>.</p>'
+  TooManyTags: {}
+  UntagResourceOutput:
+    type: object
+    properties: {}
+  UntagResourceInput:
+    type: object
+    required:
+      - resourceArn
+      - tagKeys
+    properties:
+      resourceArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+      tagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: The list of tags to remove from the resource.
   UpdateStateMachineOutput:
     type: object
     required:
@@ -1568,10 +1717,10 @@ definitions:
     properties:
       resourceType:
         $ref: '#/definitions/Name'
-        description: The action of the connected service called by a task state.
+        description: The action of the resource called by a task state.
       resource:
         $ref: '#/definitions/Name'
-        description: The service name of the connected service in a task state.
+        description: The service name of the resource in a task state.
       error:
         $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
@@ -1589,15 +1738,16 @@ definitions:
     properties:
       resourceType:
         $ref: '#/definitions/Name'
-        description: The action of the connected service called by a task state.
+        description: The action of the resource called by a task state.
       resource:
         $ref: '#/definitions/Name'
-        description: The service name of the connected service in a task state.
+        description: The service name of the resource in a task state.
       region:
         $ref: '#/definitions/Name'
+        description: The region of the scheduled task
       parameters:
         $ref: '#/definitions/ConnectorParameters'
-        description: The JSON data passed to the connected service referenced in a task state.
+        description: The JSON data passed to the resource referenced in a task state.
       timeoutInSeconds:
         $ref: '#/definitions/TimeoutInSeconds'
         description: The maximum allowed duration of the task.
@@ -1610,10 +1760,10 @@ definitions:
     properties:
       resourceType:
         $ref: '#/definitions/Name'
-        description: The action of the connected service called by a task state.
+        description: The action of the resource called by a task state.
       resource:
         $ref: '#/definitions/Name'
-        description: The service name of the connected service in a task state.
+        description: The service name of the resource in a task state.
       error:
         $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
@@ -1629,10 +1779,10 @@ definitions:
     properties:
       resourceType:
         $ref: '#/definitions/Name'
-        description: The action of the connected service called by a task state.
+        description: The action of the resource called by a task state.
       resource:
         $ref: '#/definitions/Name'
-        description: The service name of the connected service in a task state.
+        description: The service name of the resource in a task state.
     description: Contains details about the start of a task during an execution.
   TaskSubmitFailedEventDetails:
     type: object
@@ -1642,17 +1792,17 @@ definitions:
     properties:
       resourceType:
         $ref: '#/definitions/Name'
-        description: The action of the connected service called by a task state.
+        description: The action of the resource called by a task state.
       resource:
         $ref: '#/definitions/Name'
-        description: The service name of the connected service in a task state.
+        description: The service name of the resource in a task state.
       error:
         $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
         $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
-    description: <p/>
+    description: Contains details about a task that failed to submit during an execution.
   TaskSubmittedEventDetails:
     type: object
     required:
@@ -1661,14 +1811,14 @@ definitions:
     properties:
       resourceType:
         $ref: '#/definitions/Name'
-        description: The action of the connected service called by a task state.
+        description: The action of the resource called by a task state.
       resource:
         $ref: '#/definitions/Name'
-        description: The service name of the connected service in a task state.
+        description: The service name of the resource in a task state.
       output:
         $ref: '#/definitions/SensitiveData'
-        description: The response from a connected service when a task has started.
-    description: <p/>
+        description: The response from a resource when a task has started.
+    description: Contains details about a task submitted to a resource .
   TaskSucceededEventDetails:
     type: object
     required:
@@ -1677,14 +1827,14 @@ definitions:
     properties:
       resourceType:
         $ref: '#/definitions/Name'
-        description: The action of the connected service called by a task state.
+        description: The action of the resource called by a task state.
       resource:
         $ref: '#/definitions/Name'
-        description: The service name of the connected service in a task state.
+        description: The service name of the resource in a task state.
       output:
         $ref: '#/definitions/SensitiveData'
-        description: The full JSON response from a connected service when a task has succeeded. This response becomes the output of the related task.
-    description: Contains details about the start of connected service by a task state.
+        description: The full JSON response from a resource when a task has succeeded. This response becomes the output of the related task.
+    description: Contains details about the successful completion of a task state.
   TaskTimedOutEventDetails:
     type: object
     required:
@@ -1693,17 +1843,17 @@ definitions:
     properties:
       resourceType:
         $ref: '#/definitions/Name'
-        description: The action of the connected service called by a task state.
+        description: The action of the resource called by a task state.
       resource:
         $ref: '#/definitions/Name'
-        description: The service name of the connected service in a task state.
+        description: The service name of the resource in a task state.
       error:
         $ref: '#/definitions/SensitiveError'
         description: The error code of the failure.
       cause:
         $ref: '#/definitions/SensitiveCause'
         description: A more detailed explanation of the cause of the failure.
-    description: Contains details about a connected service timeout that occured during an execution.
+    description: Contains details about a resource timeout that occurred during an execution.
   LambdaFunctionFailedEventDetails:
     type: object
     properties:
@@ -1871,6 +2021,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/StateMachineListItem'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   StateMachineListItem:
     type: object
     required:
@@ -1888,3 +2042,25 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: The date the state machine is created.
     description: Contains details about the state machine.
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    properties:
+      key:
+        $ref: '#/definitions/TagKey'
+        description: The key of a tag.
+      value:
+        $ref: '#/definitions/TagValue'
+        description: The value of a tag.
+    description: Tags are key-value pairs that can be associated with Step Functions state machines and activities.
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'

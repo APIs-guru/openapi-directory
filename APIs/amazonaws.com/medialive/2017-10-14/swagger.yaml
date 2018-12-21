@@ -4259,6 +4259,12 @@ definitions:
       - DISABLED
       - ENABLED
     description: Placeholder documentation for H264SpatialAq
+  H264SubGopLength:
+    type: string
+    enum:
+      - DYNAMIC
+      - FIXED
+    description: Placeholder documentation for H264SubGopLength
   H264Syntax:
     type: string
     enum:
@@ -4402,6 +4408,9 @@ definitions:
       SpatialAq:
         $ref: '#/definitions/H264SpatialAq'
         description: 'If set to enabled, adjust quantization within each frame based on spatial variation of content complexity.'
+      SubgopLength:
+        $ref: '#/definitions/H264SubGopLength'
+        description: 'If set to fixed, use gopNumBFrames B-frames per sub-GOP. If set to dynamic, optimize the number of B-frames used for each sub-GOP to improve visual quality.'
       Syntax:
         $ref: '#/definitions/H264Syntax'
         description: Produces a bitstream compliant with SMPTE RP-2027.
@@ -4770,7 +4779,7 @@ definitions:
         description: 'Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.'
       SegmentationMode:
         $ref: '#/definitions/HlsSegmentationMode'
-        description: 'When set to useInputSegmentation, the output segment or fragment points are set by the RAI markers from the input streams.'
+        description: useInputSegmentation has been deprecated. The configured segment size is always used.
       SegmentsPerSubdirectory:
         $ref: '#/definitions/__integerMin1'
         description: Number of segments to write to a subdirectory before starting a new one. directoryStructure must be subdirectoryPerStream for this setting to have an effect.
@@ -4845,6 +4854,15 @@ definitions:
       M3u8Settings:
         $ref: '#/definitions/M3u8Settings'
     description: Placeholder documentation for StandardHlsSettings
+  HlsTimedMetadataScheduleActionSettings:
+    type: object
+    required:
+      - Id3
+    properties:
+      Id3:
+        $ref: '#/definitions/__string'
+        description: 'Base64 string formatted according to the ID3 specification: http://id3.org/id3v2.4.0-structure'
+    description: Settings for the action to emit HLS metadata
   HlsWebdavHttpTransferMode:
     type: string
     enum:
@@ -5478,7 +5496,7 @@ definitions:
         description: 'Number of seconds before initiating a restart due to output failure, due to exhausting the numRetries on one segment, or exceeding filecacheDuration.'
       SegmentationMode:
         $ref: '#/definitions/SmoothGroupSegmentationMode'
-        description: 'When set to useInputSegmentation, the output segment or fragment points are set by the RAI markers from the input streams.'
+        description: useInputSegmentation has been deprecated. The configured segment size is always used.
       SendDelayMs:
         $ref: '#/definitions/__integerMin0Max10000'
         description: Number of milliseconds to delay the output from the second pipeline.
@@ -5877,6 +5895,9 @@ definitions:
   ScheduleActionSettings:
     type: object
     properties:
+      HlsTimedMetadataSettings:
+        $ref: '#/definitions/HlsTimedMetadataScheduleActionSettings'
+        description: Settings to emit HLS metadata
       InputSwitchSettings:
         $ref: '#/definitions/InputSwitchScheduleActionSettings'
         description: Settings to switch an input

@@ -410,7 +410,7 @@ definitions:
       ConfigurationSetName:
         $ref: '#/definitions/WordCharactersWithDelimiters'
         description: The name that you want to give the configuration set.
-    description: CreateConfigurationSetRequest
+    description: A request to create a new configuration set.
   TooManyRequestsException: {}
   BadRequestException: {}
   LimitExceededException: {}
@@ -428,7 +428,7 @@ definitions:
       EventDestinationName:
         $ref: '#/definitions/NonEmptyString'
         description: A name that identifies the event destination.
-    description: CreateConfigurationSetEventDestinationRequest
+    description: Create a new event destination in a configuration set.
   NotFoundException: {}
   DeleteConfigurationSetResponse:
     type: object
@@ -510,7 +510,7 @@ definitions:
       LogGroupArn:
         $ref: '#/definitions/String'
         description: The name of the Amazon CloudWatch Log Group that you want to record events in.
-    description: An object that contains information about a event destination that sends data to Amazon CloudWatch Logs.
+    description: An object that contains information about an event destination that sends data to Amazon CloudWatch Logs.
   __string:
     type: string
   EventDestinationDefinition:
@@ -525,6 +525,8 @@ definitions:
         $ref: '#/definitions/KinesisFirehoseDestination'
       MatchingEventTypes:
         $ref: '#/definitions/EventTypes'
+      SnsDestination:
+        $ref: '#/definitions/SnsDestination'
     description: An object that defines a single event destination.
   WordCharactersWithDelimiters:
     type: string
@@ -537,12 +539,19 @@ definitions:
       IamRoleArn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose destination that you want to use in the event destination.
-    description: An object that contains information about a event destination that sends data to Amazon Kinesis Data Firehose.
+    description: An object that contains information about an event destination that sends data to Amazon Kinesis Data Firehose.
   EventTypes:
     type: array
     description: An array of EventDestination objects. Each EventDestination object includes ARNs and other information that define an event destination.
     items:
       $ref: '#/definitions/EventType'
+  SnsDestination:
+    type: object
+    properties:
+      TopicArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish events to.
+    description: An object that contains information about an event destination that sends data to Amazon SNS.
   EventDestination:
     type: object
     properties:
@@ -558,6 +567,8 @@ definitions:
       Name:
         $ref: '#/definitions/String'
         description: A name that identifies the event destination configuration.
+      SnsDestination:
+        $ref: '#/definitions/SnsDestination'
     description: An object that defines an event destination.
   EventDestinations:
     type: array

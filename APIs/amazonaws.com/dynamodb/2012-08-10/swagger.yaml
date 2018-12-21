@@ -1189,6 +1189,10 @@ paths:
           schema:
             $ref: '#/definitions/TransactionCanceledException'
         '482':
+          description: ProvisionedThroughputExceededException
+          schema:
+            $ref: '#/definitions/ProvisionedThroughputExceededException'
+        '483':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -1234,6 +1238,10 @@ paths:
           schema:
             $ref: '#/definitions/IdempotentParameterMismatchException'
         '484':
+          description: ProvisionedThroughputExceededException
+          schema:
+            $ref: '#/definitions/ProvisionedThroughputExceededException'
+        '485':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -2541,7 +2549,7 @@ definitions:
         $ref: '#/definitions/ReturnItemCollectionMetrics'
         description: 'Determines whether item collection metrics are returned. If set to <code>SIZE</code>, the response includes statistics about item collections (if any), that were modified during the operation and are returned in the response. If set to <code>NONE</code> (the default), no statistics are returned. '
       ClientRequestToken:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/ClientRequestToken'
         description: '<p>Providing a <code>ClientRequestToken</code> makes the call to <code>TransactWriteItems</code> idempotent, meaning that multiple identical calls have the same effect as one single call.</p> <p>Although multiple identical calls using the same client request token produce the same result on the server (no side effects), the responses to the calls may not be the same. If the <code>ReturnConsumedCapacity&gt;</code> parameter is set, then the initial <code>TransactWriteItems</code> call returns the amount of write capacity units consumed in making the changes, and subsequent <code>TransactWriteItems</code> calls with the same client token return the amount of read capacity units consumed in reading the item.</p> <p>A client request token is valid for 10 minutes after the first request that uses it completes. After 10 minutes, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 10 minutes or the result may not be idempotent.</p> <p>If you submit a request with the same client token but a change in other parameters within the 10 minute idempotency window, DynamoDB returns an <code>IdempotentParameterMismatch</code> exception.</p>'
   TransactionInProgressException: {}
   IdempotentParameterMismatchException: {}
@@ -3361,6 +3369,10 @@ definitions:
         $ref: '#/definitions/ConsumedCapacityUnits'
         description: The total number of capacity units consumed on a table or an index.
     description: Represents the amount of provisioned throughput capacity consumed on a table or an index.
+  ClientRequestToken:
+    type: string
+    minLength: 1
+    maxLength: 36
   ComparisonOperator:
     type: string
     enum:
