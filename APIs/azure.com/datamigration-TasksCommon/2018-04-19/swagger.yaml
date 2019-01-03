@@ -1,0 +1,1320 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Database Migration Service Resource Provider
+  version: '2018-04-19'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/stable/2018-04-19/definitions/TasksCommon.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: datamigration-TasksCommon
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  BackupMode:
+    description: An enumeration of backup modes
+    enum:
+      - CreateBackup
+      - ExistingBackup
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: BackupMode
+  BackupType:
+    description: Enum of the different backup types.
+    enum:
+      - Database
+      - TransactionLog
+      - File
+      - DifferentialDatabase
+      - DifferentialFile
+      - Partial
+      - DifferentialPartial
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: BackupType
+  BlobShare:
+    description: Blob container storage information.
+    properties:
+      sasUri:
+        description: SAS URI of Azure Storage Account Container.
+        type: string
+    required:
+      - sasUri
+    type: object
+  ConnectToSourceNonSqlTaskOutput:
+    description: 'Output for connect to Oracle, MySQL type source'
+    properties:
+      databases:
+        description: List of databases on the server
+        items:
+          type: string
+        readOnly: true
+        type: array
+      id:
+        description: Result identifier
+        readOnly: true
+        type: string
+      serverProperties:
+        $ref: '#/definitions/ServerProperties'
+        description: Server properties
+        readOnly: true
+      sourceServerBrandVersion:
+        description: Server brand version
+        readOnly: true
+        type: string
+      validationErrors:
+        description: Validation errors associated with the task
+        items:
+          description: Exception object for all custom exceptions
+          properties:
+            actionableMessage:
+              description: Actionable steps for this exception
+              type: string
+            filePath:
+              description: The path to the file where exception occurred
+              readOnly: true
+              type: string
+            hResult:
+              description: Coded numerical value that is assigned to a specific exception
+              readOnly: true
+              type: integer
+            lineNumber:
+              description: The line number where exception occurred
+              readOnly: true
+              type: string
+            message:
+              description: Error message
+              readOnly: true
+              type: string
+            stackTrace:
+              description: Stack trace
+              readOnly: true
+              type: string
+          type: object
+        readOnly: true
+        type: array
+    type: object
+  DataItemMigrationSummaryResult:
+    description: Basic summary of a data item migration
+    properties:
+      endedOn:
+        description: Migration end time
+        format: date-time
+        readOnly: true
+        type: string
+      errorPrefix:
+        description: Wildcard string prefix to use for querying all errors of the item
+        readOnly: true
+        type: string
+      itemsCompletedCount:
+        description: Number of successfully completed items
+        format: int64
+        readOnly: true
+        type: integer
+      itemsCount:
+        description: Number of items
+        format: int64
+        readOnly: true
+        type: integer
+      name:
+        description: Name of the item
+        readOnly: true
+        type: string
+      resultPrefix:
+        description: Wildcard string prefix to use for querying all sub-tem results of the item
+        readOnly: true
+        type: string
+      startedOn:
+        description: Migration start time
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        $ref: '#/definitions/MigrationState'
+        description: Current state of migration
+        readOnly: true
+      statusMessage:
+        description: Status message
+        readOnly: true
+        type: string
+    type: object
+  DataMigrationError:
+    description: Migration Task errors
+    properties:
+      message:
+        description: Error description
+        readOnly: true
+        type: string
+      type:
+        $ref: '#/definitions/ErrorType'
+        description: Type of error.
+    type: object
+  DataMigrationProjectMetadata:
+    description: Common metadata for migration projects
+    properties:
+      selectedMigrationTables:
+        description: List of tables selected for migration
+        items:
+          $ref: '#/definitions/MigrationTableMetadata'
+        readOnly: true
+        type: array
+      sourceServerName:
+        description: Source server name
+        readOnly: true
+        type: string
+      sourceServerPort:
+        description: Source server port number
+        readOnly: true
+        type: string
+      sourceUsername:
+        description: Source username
+        readOnly: true
+        type: string
+      targetDbName:
+        description: Target database name
+        readOnly: true
+        type: string
+      targetServerName:
+        description: Target server name
+        readOnly: true
+        type: string
+      targetUsername:
+        description: Target username
+        readOnly: true
+        type: string
+      targetUsingWinAuth:
+        description: Whether target connection is Windows authentication
+        readOnly: true
+        type: boolean
+    type: object
+  Database:
+    description: Information about a single database
+    properties:
+      collation:
+        description: Collation name of the database
+        readOnly: true
+        type: string
+      compatibilityLevel:
+        $ref: '#/definitions/DatabaseCompatLevel'
+        description: SQL Server compatibility level of database
+        readOnly: true
+      databaseState:
+        $ref: '#/definitions/DatabaseState'
+        description: State of the database
+        readOnly: true
+      fqdn:
+        description: Fully qualified name
+        readOnly: true
+        type: string
+      id:
+        description: Unique identifier for the database
+        readOnly: true
+        type: string
+      installId:
+        description: Install id of the database
+        readOnly: true
+        type: string
+      name:
+        description: Name of the database
+        readOnly: true
+        type: string
+      serverCoreCount:
+        description: Number of cores on the server
+        readOnly: true
+        type: integer
+      serverDefaultBackupPath:
+        description: Default path of the backup folder
+        readOnly: true
+        type: string
+      serverDefaultDataPath:
+        description: Default path of the data files
+        readOnly: true
+        type: string
+      serverDefaultLogPath:
+        description: Default path of the log files
+        readOnly: true
+        type: string
+      serverEdition:
+        description: Edition of the server
+        readOnly: true
+        type: string
+      serverId:
+        description: The unique Server Id
+        readOnly: true
+        type: string
+      serverLevel:
+        description: 'Product level of the server (RTM, SP, CTP).'
+        readOnly: true
+        type: string
+      serverName:
+        description: Name of the server
+        readOnly: true
+        type: string
+      serverVersion:
+        description: Version of the server
+        readOnly: true
+        type: string
+      serverVisibleOnlineCoreCount:
+        description: Number of cores on the server that have VISIBLE ONLINE status
+        readOnly: true
+        type: integer
+    type: object
+  DatabaseBackupInfo:
+    description: Information about backup files when existing backup mode is used.
+    properties:
+      backupFiles:
+        description: The list of backup files for the current database.
+        items:
+          type: string
+        readOnly: true
+        type: array
+      backupFinishDate:
+        description: Date and time when the backup operation finished.
+        format: date-time
+        readOnly: true
+        type: string
+      backupType:
+        $ref: '#/definitions/BackupType'
+        description: Backup Type.
+        readOnly: true
+      databaseName:
+        description: Database name.
+        readOnly: true
+        type: string
+      familyCount:
+        description: Number of files in the backup set.
+        readOnly: true
+        type: integer
+      isCompressed:
+        description: Whether the backup set is compressed
+        readOnly: true
+        type: boolean
+      isDamaged:
+        description: 'Database was damaged when backed up, but the backup operation was requested to continue despite errors.'
+        readOnly: true
+        type: boolean
+      position:
+        description: Position of current database backup in the file.
+        readOnly: true
+        type: integer
+    type: object
+  DatabaseCompatLevel:
+    description: An enumeration of SQL Server database compatibility levels
+    enum:
+      - CompatLevel80
+      - CompatLevel90
+      - CompatLevel100
+      - CompatLevel110
+      - CompatLevel120
+      - CompatLevel130
+      - CompatLevel140
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: DatabaseCompatLevel
+  DatabaseFileInfo:
+    description: Database file specific information
+    properties:
+      databaseName:
+        description: Name of the database
+        type: string
+      fileType:
+        $ref: '#/definitions/DatabaseFileType'
+        description: Database file type
+      id:
+        description: Unique identifier for database file
+        type: string
+      logicalName:
+        description: Logical name of the file
+        type: string
+      physicalFullName:
+        description: Operating-system full path of the file
+        type: string
+      restoreFullName:
+        description: Suggested full path of the file for restoring
+        type: string
+      sizeMB:
+        description: Size of the file in megabytes
+        format: double
+        type: number
+    type: object
+  DatabaseFileInput:
+    description: Database file specific information for input
+    properties:
+      fileType:
+        $ref: '#/definitions/DatabaseFileType'
+        description: Database file type
+      id:
+        description: Unique identifier for database file
+        type: string
+      logicalName:
+        description: Logical name of the file
+        type: string
+      physicalFullName:
+        description: Operating-system full path of the file
+        type: string
+      restoreFullName:
+        description: Suggested full path of the file for restoring
+        type: string
+    type: object
+  DatabaseFileType:
+    description: An enumeration of SQL Server database file types
+    enum:
+      - Rows
+      - Log
+      - Filestream
+      - NotSupported
+      - Fulltext
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: DatabaseFileType
+  DatabaseMigrationStage:
+    description: Current stage of migration
+    enum:
+      - None
+      - Initialize
+      - Backup
+      - FileCopy
+      - Restore
+      - Completed
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: DatabaseMigrationStage
+  DatabaseMigrationState:
+    description: Database level migration state.
+    enum:
+      - UNDEFINED
+      - INITIAL
+      - FULL_BACKUP_UPLOAD_START
+      - LOG_SHIPPING_START
+      - UPLOAD_LOG_FILES_START
+      - CUTOVER_START
+      - POST_CUTOVER_COMPLETE
+      - COMPLETED
+      - CANCELLED
+      - FAILED
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: DatabaseMigrationState
+  DatabaseObjectName:
+    description: A representation of the name of an object in a database
+    properties:
+      databaseName:
+        description: The unescaped name of the database containing the object
+        readOnly: true
+        type: string
+      objectName:
+        description: The unescaped name of the object
+        readOnly: true
+        type: string
+      objectType:
+        $ref: '#/definitions/DatabaseObjectType'
+        description: Type of the object in the database
+      schemaName:
+        description: The unescaped name of the schema containing the object
+        readOnly: true
+        type: string
+    type: object
+  DatabaseObjectType:
+    description: An enumeration of type of objects
+    enum:
+      - StoredProcedures
+      - Table
+      - User
+      - View
+      - Function
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ObjectType
+  DatabaseState:
+    description: An enumeration of SQL Server Database states
+    enum:
+      - Online
+      - Restoring
+      - Recovering
+      - RecoveryPending
+      - Suspect
+      - Emergency
+      - Offline
+      - Copying
+      - OfflineSecondary
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: DatabaseState
+  DatabaseTable:
+    description: Table properties
+    properties:
+      hasRows:
+        description: Indicates whether table is empty or not
+        readOnly: true
+        type: boolean
+      name:
+        description: Schema-qualified name of the table
+        readOnly: true
+        type: string
+    type: object
+  ErrorType:
+    description: Error type
+    enum:
+      - Default
+      - Warning
+      - Error
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ErrorType
+  FileShare:
+    description: 'File share information with Path, Username, and Password.'
+    properties:
+      password:
+        description: Password credential used to connect to the share location.
+        type: string
+      path:
+        description: The folder path for this share.
+        type: string
+      userName:
+        description: User name credential to connect to the share location
+        type: string
+    required:
+      - path
+    type: object
+  GetProjectDetailsNonSqlTaskInput:
+    description: Input for the task that reads configuration from project artifacts
+    properties:
+      projectLocation:
+        description: A URL that points to the location to access project artifacts
+        type: string
+      projectName:
+        description: Name of the migration project
+        type: string
+    required:
+      - projectName
+      - projectLocation
+    type: object
+  LoginMigrationStage:
+    description: Enum of the different stage of login migration.
+    enum:
+      - None
+      - Initialize
+      - LoginMigration
+      - EstablishUserMapping
+      - AssignRoleMembership
+      - AssignRoleOwnership
+      - EstablishServerPermissions
+      - EstablishObjectPermissions
+      - Completed
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: LoginMigrationStage
+  LoginType:
+    description: Enum mapping of SMO LoginType.
+    enum:
+      - WindowsUser
+      - WindowsGroup
+      - SqlLogin
+      - Certificate
+      - AsymmetricKey
+      - ExternalUser
+      - ExternalGroup
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: LoginType
+  MigrateSqlServerSqlDbDatabaseInput:
+    description: Database specific information for SQL to Azure SQL DB migration task inputs
+    properties:
+      makeSourceDbReadOnly:
+        description: Whether to set database read only before migration
+        type: boolean
+      name:
+        description: Name of the database
+        type: string
+      tableMap:
+        additionalProperties:
+          type: string
+        description: Mapping of source to target tables
+        type: object
+      targetDatabaseName:
+        description: 'Name of target database. Note: Target database will be truncated before starting migration.'
+        type: string
+    type: object
+  MigrateSqlServerSqlDbSyncDatabaseInput:
+    description: Database specific information for SQL to Azure SQL DB sync migration task inputs
+    properties:
+      id:
+        description: Unique identifier for database
+        type: string
+      migrationSetting:
+        additionalProperties:
+          type: string
+        description: Migration settings which tune the migration behavior
+        type: object
+      name:
+        description: Name of database
+        type: string
+      schemaName:
+        description: Schema name to be migrated
+        type: string
+      sourceSetting:
+        additionalProperties:
+          type: string
+        description: Source settings to tune source endpoint migration behavior
+        type: object
+      tableMap:
+        additionalProperties:
+          type: string
+        description: Mapping of source to target tables
+        type: object
+      targetDatabaseName:
+        description: Target database name
+        type: string
+      targetSetting:
+        additionalProperties:
+          type: string
+        description: Target settings to tune target endpoint migration behavior
+        type: object
+    type: object
+  MigrateSqlServerSqlMIDatabaseInput:
+    description: Database specific information for SQL to Azure SQL DB Managed Instance migration task inputs
+    properties:
+      backupFilePaths:
+        description: The list of backup files to be used in case of existing backups.
+        items:
+          type: string
+        type: array
+      backupFileShare:
+        description: 'File share information with Path, Username, and Password.'
+        properties:
+          password:
+            description: Password credential used to connect to the share location.
+            type: string
+          path:
+            description: The folder path for this share.
+            type: string
+          userName:
+            description: User name credential to connect to the share location
+            type: string
+        required:
+          - path
+        type: object
+      name:
+        description: Name of the database
+        type: string
+      restoreDatabaseName:
+        description: Name of the database at destination
+        type: string
+    required:
+      - name
+      - restoreDatabaseName
+    type: object
+  MigrateSqlServerSqlServerDatabaseInput:
+    description: Database specific information for SQL to SQL migration task inputs
+    properties:
+      backupAndRestoreFolder:
+        description: The backup and restore folder
+        type: string
+      databaseFiles:
+        description: The list of database files
+        items:
+          $ref: '#/definitions/DatabaseFileInput'
+        type: array
+      name:
+        description: Name of the database
+        type: string
+      restoreDatabaseName:
+        description: Name of the database at destination
+        type: string
+    type: object
+  MigrationEligibilityInfo:
+    description: Information about migration eligibility of a server object
+    properties:
+      isEligibileForMigration:
+        description: Whether object is eligible for migration or not.
+        readOnly: true
+        type: boolean
+      validationMessages:
+        description: Information about eligibility failure for the server object.
+        items:
+          type: string
+        readOnly: true
+        type: array
+    type: object
+  MigrationState:
+    description: Current state of migration
+    enum:
+      - None
+      - InProgress
+      - Failed
+      - Warning
+      - Completed
+      - Skipped
+      - Stopped
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: MigrationState
+  MigrationStatus:
+    description: Current status of migration
+    enum:
+      - Default
+      - Connecting
+      - SourceAndTargetSelected
+      - SelectLogins
+      - Configured
+      - Running
+      - Error
+      - Stopped
+      - Completed
+      - CompletedWithWarnings
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: MigrationStatus
+  MigrationTableMetadata:
+    description: Metadata for tables selected in migration project
+    properties:
+      sourceTableName:
+        description: Source table name
+        readOnly: true
+        type: string
+      targetTableName:
+        description: Target table name
+        readOnly: true
+        type: string
+    type: object
+  NonSqlDataMigrationTable:
+    description: Defines metadata for table to be migrated
+    properties:
+      sourceName:
+        description: Source table name
+        type: string
+    type: object
+  NonSqlDataMigrationTableResult:
+    description: Object used to report the data migration results of a table
+    properties:
+      elapsedTimeInMiliseconds:
+        description: Time taken to migrate the data
+        format: double
+        readOnly: true
+        type: number
+      errors:
+        description: 'List of errors, if any, during migration'
+        items:
+          $ref: '#/definitions/DataMigrationError'
+        readOnly: true
+        type: array
+      resultCode:
+        description: Result code of the data migration
+        enum:
+          - Initial
+          - Completed
+          - ObjectNotExistsInSource
+          - ObjectNotExistsInTarget
+          - TargetObjectIsInaccessible
+          - FatalError
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DataMigrationResultCode
+      sourceName:
+        description: Name of the source table
+        readOnly: true
+        type: string
+      sourceRowCount:
+        description: Number of rows in the source table
+        format: int64
+        readOnly: true
+        type: integer
+      targetName:
+        description: Name of the target table
+        readOnly: true
+        type: string
+      targetRowCount:
+        description: Number of rows in the target table
+        format: int64
+        readOnly: true
+        type: integer
+    type: object
+  NonSqlMigrationTaskInput:
+    description: Base class for non sql migration task input
+    properties:
+      projectLocation:
+        description: A URL that points to the drop location to access project artifacts
+        type: string
+      projectName:
+        description: Name of the migration project
+        type: string
+      selectedTables:
+        description: Metadata of the tables selected for migration
+        items:
+          $ref: '#/definitions/NonSqlDataMigrationTable'
+        type: array
+      targetConnectionInfo:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Information for connecting to SQL database server
+        properties:
+          additionalSettings:
+            description: Additional connection settings
+            type: string
+          authentication:
+            description: An enumeration of possible authentication types when connecting
+            enum:
+              - None
+              - WindowsAuthentication
+              - SqlAuthentication
+              - ActiveDirectoryIntegrated
+              - ActiveDirectoryPassword
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: AuthenticationType
+          dataSource:
+            description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+            type: string
+          encryptConnection:
+            default: true
+            description: Whether to encrypt the connection
+            type: boolean
+          platform:
+            description: An enumeration of source platform types
+            enum:
+              - SqlOnPrem
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: SqlSourcePlatform
+          trustServerCertificate:
+            default: false
+            description: Whether to trust the server certificate
+            type: boolean
+        required:
+          - dataSource
+        type: object
+        x-ms-discriminator-value: SqlConnectionInfo
+      targetDatabaseName:
+        description: Target database name
+        type: string
+    required:
+      - targetConnectionInfo
+      - targetDatabaseName
+      - projectName
+      - projectLocation
+      - selectedTables
+    type: object
+  NonSqlMigrationTaskOutput:
+    description: Base class for non sql migration task output
+    properties:
+      dataMigrationTableResults:
+        additionalProperties:
+          $ref: '#/definitions/NonSqlDataMigrationTableResult'
+        description: Results of the migration. The key contains the table name and the value the table result object
+        readOnly: true
+        type: string
+      endedOn:
+        description: Migration end time
+        format: date-time
+        readOnly: true
+        type: string
+      id:
+        description: Result identifier
+        readOnly: true
+        type: string
+      progressMessage:
+        description: Message about the progress of the migration
+        readOnly: true
+        type: string
+      sourceServerName:
+        description: Name of source server
+        readOnly: true
+        type: string
+      startedOn:
+        description: Migration start time
+        format: date-time
+        readOnly: true
+        type: string
+      status:
+        $ref: '#/definitions/MigrationStatus'
+        description: Current state of migration
+        readOnly: true
+      targetServerName:
+        description: Name of target server
+        readOnly: true
+        type: string
+    type: object
+  SchemaMigrationStage:
+    description: Current stage of schema migration
+    enum:
+      - NotStarted
+      - ValidatingInputs
+      - CollectingObjects
+      - DownloadingScript
+      - GeneratingScript
+      - UploadingScript
+      - DeployingSchema
+      - Completed
+      - CompletedWithWarnings
+      - Failed
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: SchemaMigrationStage
+  ServerProperties:
+    description: 'Server properties for Oracle, MySQL type source'
+    properties:
+      serverDatabaseCount:
+        description: Number of databases in the server
+        readOnly: true
+        type: integer
+      serverEdition:
+        description: Edition of the database server
+        readOnly: true
+        type: string
+      serverName:
+        description: Name of the server
+        readOnly: true
+        type: string
+      serverOperatingSystemVersion:
+        description: Version of the operating system
+        readOnly: true
+        type: string
+      serverPlatform:
+        description: Name of the server platform
+        readOnly: true
+        type: string
+      serverVersion:
+        description: Version of the database server
+        readOnly: true
+        type: string
+    type: object
+  SqlMigrationTaskInput:
+    description: Base class for migration task input
+    properties:
+      sourceConnectionInfo:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Information for connecting to SQL database server
+        properties:
+          additionalSettings:
+            description: Additional connection settings
+            type: string
+          authentication:
+            description: An enumeration of possible authentication types when connecting
+            enum:
+              - None
+              - WindowsAuthentication
+              - SqlAuthentication
+              - ActiveDirectoryIntegrated
+              - ActiveDirectoryPassword
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: AuthenticationType
+          dataSource:
+            description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+            type: string
+          encryptConnection:
+            default: true
+            description: Whether to encrypt the connection
+            type: boolean
+          platform:
+            description: An enumeration of source platform types
+            enum:
+              - SqlOnPrem
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: SqlSourcePlatform
+          trustServerCertificate:
+            default: false
+            description: Whether to trust the server certificate
+            type: boolean
+        required:
+          - dataSource
+        type: object
+        x-ms-discriminator-value: SqlConnectionInfo
+      targetConnectionInfo:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Information for connecting to SQL database server
+        properties:
+          additionalSettings:
+            description: Additional connection settings
+            type: string
+          authentication:
+            description: An enumeration of possible authentication types when connecting
+            enum:
+              - None
+              - WindowsAuthentication
+              - SqlAuthentication
+              - ActiveDirectoryIntegrated
+              - ActiveDirectoryPassword
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: AuthenticationType
+          dataSource:
+            description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+            type: string
+          encryptConnection:
+            default: true
+            description: Whether to encrypt the connection
+            type: boolean
+          platform:
+            description: An enumeration of source platform types
+            enum:
+              - SqlOnPrem
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: SqlSourcePlatform
+          trustServerCertificate:
+            default: false
+            description: Whether to trust the server certificate
+            type: boolean
+        required:
+          - dataSource
+        type: object
+        x-ms-discriminator-value: SqlConnectionInfo
+    required:
+      - sourceConnectionInfo
+      - targetConnectionInfo
+    type: object
+  SqlServerSqlMISyncTaskInput:
+    description: Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.
+    properties:
+      azureApp:
+        description: Azure Active Directory Application
+        properties:
+          appKey:
+            description: Key used to authenticate to the Azure Active Directory Application
+            type: string
+          applicationId:
+            description: Application ID of the Azure Active Directory Application
+            type: string
+          tenantId:
+            description: Tenant id of the customer
+            type: string
+        required:
+          - applicationId
+          - appKey
+          - tenantId
+        type: object
+      backupFileShare:
+        description: 'File share information with Path, Username, and Password.'
+        properties:
+          password:
+            description: Password credential used to connect to the share location.
+            type: string
+          path:
+            description: The folder path for this share.
+            type: string
+          userName:
+            description: User name credential to connect to the share location
+            type: string
+        required:
+          - path
+        type: object
+      selectedDatabases:
+        description: Databases to migrate
+        items:
+          description: Database specific information for SQL to Azure SQL DB Managed Instance migration task inputs
+          properties:
+            backupFilePaths:
+              description: The list of backup files to be used in case of existing backups.
+              items:
+                type: string
+              type: array
+            backupFileShare:
+              description: 'File share information with Path, Username, and Password.'
+              properties:
+                password:
+                  description: Password credential used to connect to the share location.
+                  type: string
+                path:
+                  description: The folder path for this share.
+                  type: string
+                userName:
+                  description: User name credential to connect to the share location
+                  type: string
+              required:
+                - path
+              type: object
+            name:
+              description: Name of the database
+              type: string
+            restoreDatabaseName:
+              description: Name of the database at destination
+              type: string
+          required:
+            - name
+            - restoreDatabaseName
+          type: object
+        type: array
+      sourceConnectionInfo:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Information for connecting to SQL database server
+        properties:
+          additionalSettings:
+            description: Additional connection settings
+            type: string
+          authentication:
+            description: An enumeration of possible authentication types when connecting
+            enum:
+              - None
+              - WindowsAuthentication
+              - SqlAuthentication
+              - ActiveDirectoryIntegrated
+              - ActiveDirectoryPassword
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: AuthenticationType
+          dataSource:
+            description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+            type: string
+          encryptConnection:
+            default: true
+            description: Whether to encrypt the connection
+            type: boolean
+          platform:
+            description: An enumeration of source platform types
+            enum:
+              - SqlOnPrem
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: SqlSourcePlatform
+          trustServerCertificate:
+            default: false
+            description: Whether to trust the server certificate
+            type: boolean
+        required:
+          - dataSource
+        type: object
+        x-ms-discriminator-value: SqlConnectionInfo
+      storageResourceId:
+        description: Fully qualified resourceId of storage
+        type: string
+      targetConnectionInfo:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Properties required to create a connection to Azure SQL database Managed instance
+        properties:
+          managedInstanceResourceId:
+            description: Resource id for Azure SQL database Managed instance
+            type: string
+        required:
+          - managedInstanceResourceId
+        type: object
+        x-ms-discriminator-value: MiSqlConnectionInfo
+    required:
+      - selectedDatabases
+      - azureApp
+      - sourceConnectionInfo
+      - targetConnectionInfo
+      - storageResourceId
+    type: object
+  StartMigrationScenarioServerRoleResult:
+    description: Server role migration result
+    properties:
+      exceptionsAndWarnings:
+        description: Migration exceptions and warnings.
+        items:
+          description: Exception object for all custom exceptions
+          properties:
+            actionableMessage:
+              description: Actionable steps for this exception
+              type: string
+            filePath:
+              description: The path to the file where exception occurred
+              readOnly: true
+              type: string
+            hResult:
+              description: Coded numerical value that is assigned to a specific exception
+              readOnly: true
+              type: integer
+            lineNumber:
+              description: The line number where exception occurred
+              readOnly: true
+              type: string
+            message:
+              description: Error message
+              readOnly: true
+              type: string
+            stackTrace:
+              description: Stack trace
+              readOnly: true
+              type: string
+          type: object
+        readOnly: true
+        type: array
+      name:
+        description: Name of server role.
+        readOnly: true
+        type: string
+      state:
+        description: Current state of migration
+        enum:
+          - None
+          - InProgress
+          - Failed
+          - Warning
+          - Completed
+          - Skipped
+          - Stopped
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MigrationState
+    type: object
+  SyncDatabaseMigrationReportingState:
+    description: Enum of the different state of database level online migration.
+    enum:
+      - UNDEFINED
+      - CONFIGURING
+      - INITIALIAZING
+      - STARTING
+      - RUNNING
+      - READY_TO_COMPLETE
+      - COMPLETING
+      - COMPLETE
+      - CANCELLING
+      - CANCELLED
+      - FAILED
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: SyncDatabaseMigrationReportingState
+  SyncMigrationDatabaseErrorEvent:
+    description: Database migration errors for online migration
+    properties:
+      eventText:
+        description: Event text.
+        readOnly: true
+        type: string
+      eventTypeString:
+        description: Event type.
+        readOnly: true
+        type: string
+      timestampString:
+        description: String value of timestamp.
+        readOnly: true
+        type: string
+    type: object
+  SyncTableMigrationState:
+    description: Enum of the different state of table level online migration.
+    enum:
+      - BEFORE_LOAD
+      - FULL_LOAD
+      - COMPLETED
+      - CANCELED
+      - ERROR
+      - FAILED
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: SyncTableMigrationState

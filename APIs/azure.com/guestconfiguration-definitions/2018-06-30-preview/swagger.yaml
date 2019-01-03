@@ -1,0 +1,152 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Common types
+  version: 2018-06-30-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/common/v1/definitions.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: guestconfiguration-definitions
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  ResourceGroupNameParameter:
+    description: The resource group name.
+    in: path
+    name: resourceGroupName
+    pattern: '^[-\w\._]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: Subscription ID which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+  VmNameParameter:
+    description: The name of the virtual machine.
+    in: path
+    name: vmName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths: {}
+definitions:
+  ErrorResponse:
+    description: Error response of an operation failure
+    properties:
+      message:
+        description: Error message indicating why the operation failed.
+        type: string
+  Operation:
+    description: GuestConfiguration REST API operation
+    properties:
+      display:
+        description: 'Provider, Resource, Operation and description values.'
+        properties:
+          description:
+            description: Description about operation.
+            type: string
+          operation:
+            description: 'Operation type: Read, write, delete, etc.'
+            type: string
+          provider:
+            description: 'Service provider: Microsoft.GuestConfiguration'
+            type: string
+          resource:
+            description: 'Resource on which the operation is performed:  For ex. '
+            type: string
+      name:
+        description: 'Operation name: For ex. providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/write or read'
+        type: string
+      properties:
+        description: 'Provider, Resource, Operation and description values.'
+        properties:
+          statusCode:
+            description: 'Service provider: Microsoft.GuestConfiguration'
+            type: string
+        x-ms-client-flatten: true
+    type: object
+  OperationList:
+    description: The response model for the list of Automation operations
+    properties:
+      value:
+        description: List of Automation operations supported by the Automation resource provider.
+        items:
+          $ref: '#/definitions/Operation'
+        type: array
+  ProxyResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: ARM proxy resource.
+    properties: {}
+    type: object
+  Resource:
+    description: The core properties of ARM resources
+    properties:
+      id:
+        description: ARM resource id of the guest configuration assignment.
+        readOnly: true
+        type: string
+      location:
+        description: Region where the VM is located.
+        readOnly: true
+        type: string
+      name:
+        description: Name of the guest configuration assignment.
+        readOnly: true
+        type: string
+      type:
+        description: The type of the resource.
+        readOnly: true
+        type: string
+    type: object
+    x-ms-azure-resource: true
+  TrackedResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The resource model definition for a ARM tracked top level resource
+    properties:
+      location:
+        description: The Azure Region where the resource lives
+        type: string
+        x-ms-mutability:
+          - read
+          - create
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+        x-ms-mutability:
+          - read
+          - create
+          - update
+    type: object

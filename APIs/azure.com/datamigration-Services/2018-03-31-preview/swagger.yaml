@@ -1,0 +1,257 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Data Migration Service Resource Provider
+  version: 2018-03-31-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Services.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: datamigration-Services
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  AvailableServiceSku:
+    description: Describes the available service SKU.
+    properties:
+      capacity:
+        description: A description of the scaling capacities of the SKU
+        properties:
+          default:
+            description: The default capacity
+            type: integer
+          maximum:
+            description: The maximum capacity
+            type: integer
+          minimum:
+            description: 'The minimum capacity, usually 0 or 1.'
+            type: integer
+          scaleType:
+            description: The scalability approach
+            enum:
+              - none
+              - manual
+              - automatic
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: ServiceScalability
+        type: object
+      resourceType:
+        description: 'The resource type, including the provider namespace'
+        type: string
+      sku:
+        description: 'SKU name, tier, etc.'
+        properties:
+          family:
+            description: SKU family
+            type: string
+          name:
+            description: The name of the SKU
+            type: string
+          size:
+            description: SKU size
+            type: string
+          tier:
+            description: 'The tier of the SKU, such as "Free", "Basic", "Standard", or "Premium"'
+            type: string
+        type: object
+    type: object
+  DataMigrationService:
+    allOf:
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
+        description: ARM tracked top level resource.
+        properties:
+          location:
+            description: Resource location.
+            type: string
+            x-ms-mutability:
+              - read
+              - create
+          tags:
+            additionalProperties:
+              type: string
+            description: Resource tags.
+            type: object
+            x-ms-mutability:
+              - read
+              - create
+              - update
+        required:
+          - location
+    description: A Data Migration Service resource
+    properties:
+      etag:
+        description: HTTP strong entity tag value. Ignored if submitted
+        type: string
+      kind:
+        description: The resource kind. Only 'vm' (the default) is supported.
+        type: string
+      properties:
+        $ref: '#/definitions/DataMigrationServiceProperties'
+        description: Custom service properties
+        x-ms-client-flatten: true
+      sku:
+        $ref: '#/definitions/ServiceSku'
+        description: Service SKU
+    type: object
+  DataMigrationServiceList:
+    description: OData page of service objects
+    properties:
+      nextLink:
+        description: URL to load the next page of services
+        type: string
+      value:
+        description: List of services
+        items:
+          $ref: '#/definitions/DataMigrationService'
+        type: array
+    type: object
+  DataMigrationServiceProperties:
+    description: Properties of the Data Migration service instance
+    properties:
+      provisioningState:
+        description: The resource's provisioning state
+        enum:
+          - Accepted
+          - Deleting
+          - Deploying
+          - Stopped
+          - Stopping
+          - Starting
+          - FailedToStart
+          - FailedToStop
+          - Succeeded
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ServiceProvisioningState
+      publicKey:
+        description: 'The public key of the service, used to encrypt secrets sent to the service'
+        type: string
+      virtualSubnetId:
+        description: The ID of the Microsoft.Network/virtualNetworks/subnets resource to which the service should be joined
+        type: string
+    required:
+      - virtualSubnetId
+    type: object
+  DataMigrationServiceStatusResponse:
+    description: Service health status
+    properties:
+      agentVersion:
+        description: The DMS instance agent version
+        type: string
+      status:
+        description: 'The machine-readable status, such as ''Initializing'', ''Offline'', ''Online'', ''Deploying'', ''Deleting'', ''Stopped'', ''Stopping'', ''Starting'', ''FailedToStart'', ''FailedToStop'' or ''Failed'''
+        type: string
+      supportedTaskTypes:
+        description: The list of supported task types
+        items:
+          description: Migration task type
+          type: string
+        type: array
+      vmSize:
+        description: 'The services virtual machine size, such as ''Standard_D2_v2'''
+        type: string
+    type: object
+  ServiceOperation:
+    description: Description of an action supported by the Data Migration Service
+    properties:
+      display:
+        description: Localized display text
+        properties:
+          description:
+            description: The localized operation description
+            type: string
+          operation:
+            description: The localized operation name
+            type: string
+          provider:
+            description: The localized resource provider name
+            type: string
+          resource:
+            description: The localized resource type name
+            type: string
+        type: object
+      name:
+        description: 'The fully qualified action name, e.g. Microsoft.DataMigration/services/read'
+        type: string
+    type: object
+  ServiceOperationList:
+    description: OData page of action (operation) objects
+    properties:
+      nextLink:
+        description: URL to load the next page of actions
+        type: string
+      value:
+        description: List of actions
+        items:
+          $ref: '#/definitions/ServiceOperation'
+        type: array
+    type: object
+  ServiceSku:
+    description: An Azure SKU instance
+    properties:
+      capacity:
+        description: 'The capacity of the SKU, if it supports scaling'
+        type: integer
+      family:
+        description: 'The SKU family, used when the service has multiple performance classes within a tier, such as ''A'', ''D'', etc. for virtual machines'
+        type: string
+      name:
+        description: 'The unique name of the SKU, such as ''P3'''
+        type: string
+      size:
+        description: 'The size of the SKU, used when the name alone does not denote a service size or when a SKU has multiple performance classes within a family, e.g. ''A1'' for virtual machines'
+        type: string
+      tier:
+        description: 'The tier of the SKU, such as ''Free'', ''Basic'', ''Standard'', or ''Premium'''
+        type: string
+    type: object
+  ServiceSkuList:
+    description: OData page of available SKUs
+    properties:
+      nextLink:
+        description: URL to load the next page of service SKUs
+        type: string
+      value:
+        description: List of service SKUs
+        items:
+          $ref: '#/definitions/AvailableServiceSku'
+        type: array
+    type: object

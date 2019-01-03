@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/microsoft.insights/stable/2018-04-16/scheduledQueryRule_API.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: monitor-scheduledQueryRule_API
@@ -751,7 +751,7 @@ definitions:
   AlertingAction:
     allOf:
       - $ref: '#/definitions/Action'
-    description: Specifiy action need to be taken when rule type is Alert
+    description: Specify action need to be taken when rule type is Alert
     properties:
       aznsAction:
         $ref: '#/definitions/AzNsActionGroup'
@@ -781,7 +781,7 @@ definitions:
           type: string
         type: array
       customWebhookPayload:
-        description: Custom payload to be sent for all webook URI in Azure action group
+        description: Custom payload to be sent for all webhook URI in Azure action group
         type: string
       emailSubject:
         description: Custom subject override for all email ids in Azure action group
@@ -886,7 +886,7 @@ definitions:
         readOnly: true
         type: string
       provisioningState:
-        description: Provisioning state of the scheduledquery rule
+        description: Provisioning state of the scheduled query rule
         enum:
           - Succeeded
           - Deploying
@@ -899,7 +899,7 @@ definitions:
           name: provisioningState
       schedule:
         $ref: '#/definitions/Schedule'
-        description: 'Schedule (Frequnecy, Time Window) for rule. Required for action type - AlertingAction'
+        description: 'Schedule (Frequency, Time Window) for rule. Required for action type - AlertingAction'
       source:
         $ref: '#/definitions/Source'
         description: Data Source against which rule will Query Data
@@ -952,7 +952,7 @@ definitions:
   LogToMetricAction:
     allOf:
       - $ref: '#/definitions/Action'
-    description: Specifiy action need to be taken when rule type is converting log to metric
+    description: Specify action need to be taken when rule type is converting log to metric
     properties:
       criteria:
         $ref: '#/definitions/Criteria'
@@ -971,7 +971,7 @@ definitions:
       modelAsString: true
       name: metricTriggerType
   QueryType:
-    description: Set value to 'ResultAcount'
+    description: Set value to 'ResultAccount'
     enum:
       - ResultCount
     type: string

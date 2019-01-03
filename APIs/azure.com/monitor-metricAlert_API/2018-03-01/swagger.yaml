@@ -14,7 +14,7 @@ info:
     name: MonitorManagementClient
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/microsoft.insights/stable/2018-03-01/metricAlert_API.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2018-03-01/metricAlert_API.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: monitor-metricAlert_API
@@ -165,7 +165,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts':
     get:
-      description: Retrieve alert rule defintions in a resource group.
+      description: Retrieve alert rule definitions in a resource group.
       operationId: MetricAlerts_ListByResourceGroup
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -258,7 +258,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}':
     delete:
-      description: Delete an alert rule defitiniton.
+      description: Delete an alert rule definition.
       operationId: MetricAlerts_Delete
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -287,7 +287,7 @@ paths:
               body: null
               headers: {}
     get:
-      description: Retrieve an alert rule definiton.
+      description: Retrieve an alert rule definition.
       operationId: MetricAlerts_Get
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -1026,7 +1026,7 @@ definitions:
   MetricAlertMultipleResourceMultipleMetricCriteria:
     allOf:
       - $ref: '#/definitions/MetricAlertCriteria'
-    description: Speficies the metric alert criteria for multiple resource that has multiple metric criteria.
+    description: Specifies the metric alert criteria for multiple resource that has multiple metric criteria.
     properties:
       allOf:
         description: 'the list of multiple metric criteria for this ''all of'' operation. '

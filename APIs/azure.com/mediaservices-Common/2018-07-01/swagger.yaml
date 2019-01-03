@@ -1,0 +1,71 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Media Services
+  version: '2018-07-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/stable/2018-07-01/Common.json'
+      version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: mediaservices-Common
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: Impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  ProxyResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The resource model definition for a ARM proxy resource.
+  Resource:
+    description: The core properties of ARM resources.
+    properties:
+      id:
+        description: Fully qualified resource ID for the resource.
+        readOnly: true
+        type: string
+      name:
+        description: The name of the resource.
+        readOnly: true
+        type: string
+      type:
+        description: The type of the resource.
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  TrackedResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The resource model definition for a ARM tracked resource.
+    properties:
+      location:
+        description: The Azure Region of the resource.
+        type: string
+        x-ms-mutability:
+          - read
+          - create
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+        x-ms-mutability:
+          - read
+          - create
+          - update

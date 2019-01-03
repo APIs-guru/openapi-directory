@@ -13,7 +13,7 @@ info:
     name: MonitorManagementClient
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/microsoft.insights/preview/2017-11-01-preview/baseline_API.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/Microsoft.Insights/preview/2017-11-01-preview/baseline_API.json'
       version: '2.0'
   x-preferred: false
   x-providerName: azure.com
@@ -252,7 +252,7 @@ definitions:
           $ref: '#/definitions/BaselineMetadataValue'
         type: array
       timespan:
-        description: 'The timespan for which the data was retrieved. Its value consists of two datatimes concatenated, separated by ''/''.  This may be adjusted in the future and returned back from what was originally requested.'
+        description: 'The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by ''/''.  This may be adjusted in the future and returned back from what was originally requested.'
         type: string
       timestamps:
         description: the array of timestamps of the baselines.

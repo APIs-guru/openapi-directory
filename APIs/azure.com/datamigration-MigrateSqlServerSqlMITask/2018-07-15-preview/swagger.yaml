@@ -1,0 +1,692 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Database Migration Service Resource Provider
+  version: 2018-07-15-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSqlServerSqlMITask.json'
+      version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: datamigration-MigrateSqlServerSqlMITask
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  MigrateSqlServerSqlMITaskInput:
+    allOf:
+      - description: Base class for migration task input
+        properties:
+          sourceConnectionInfo:
+            allOf:
+              - description: Defines the connection properties of a server
+                discriminator: type
+                properties:
+                  password:
+                    description: Password credential.
+                    type: string
+                  type:
+                    description: Type of connection info
+                    type: string
+                  userName:
+                    description: User name
+                    type: string
+                required:
+                  - type
+                type: object
+                x-ms-discriminator-value: Unknown
+            description: Information for connecting to SQL database server
+            properties:
+              additionalSettings:
+                description: Additional connection settings
+                type: string
+              authentication:
+                description: An enumeration of possible authentication types when connecting
+                enum:
+                  - None
+                  - WindowsAuthentication
+                  - SqlAuthentication
+                  - ActiveDirectoryIntegrated
+                  - ActiveDirectoryPassword
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: AuthenticationType
+              dataSource:
+                description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+                type: string
+              encryptConnection:
+                default: true
+                description: Whether to encrypt the connection
+                type: boolean
+              platform:
+                description: An enumeration of source platform types
+                enum:
+                  - SqlOnPrem
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: SqlSourcePlatform
+              trustServerCertificate:
+                default: false
+                description: Whether to trust the server certificate
+                type: boolean
+            required:
+              - dataSource
+            type: object
+            x-ms-discriminator-value: SqlConnectionInfo
+          targetConnectionInfo:
+            allOf:
+              - description: Defines the connection properties of a server
+                discriminator: type
+                properties:
+                  password:
+                    description: Password credential.
+                    type: string
+                  type:
+                    description: Type of connection info
+                    type: string
+                  userName:
+                    description: User name
+                    type: string
+                required:
+                  - type
+                type: object
+                x-ms-discriminator-value: Unknown
+            description: Information for connecting to SQL database server
+            properties:
+              additionalSettings:
+                description: Additional connection settings
+                type: string
+              authentication:
+                description: An enumeration of possible authentication types when connecting
+                enum:
+                  - None
+                  - WindowsAuthentication
+                  - SqlAuthentication
+                  - ActiveDirectoryIntegrated
+                  - ActiveDirectoryPassword
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: AuthenticationType
+              dataSource:
+                description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+                type: string
+              encryptConnection:
+                default: true
+                description: Whether to encrypt the connection
+                type: boolean
+              platform:
+                description: An enumeration of source platform types
+                enum:
+                  - SqlOnPrem
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: SqlSourcePlatform
+              trustServerCertificate:
+                default: false
+                description: Whether to trust the server certificate
+                type: boolean
+            required:
+              - dataSource
+            type: object
+            x-ms-discriminator-value: SqlConnectionInfo
+        required:
+          - sourceConnectionInfo
+          - targetConnectionInfo
+        type: object
+    description: Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance.
+    properties:
+      backupBlobShare:
+        description: Blob container storage information.
+        properties:
+          sasUri:
+            description: SAS URI of Azure Storage Account Container.
+            type: string
+        required:
+          - sasUri
+        type: object
+      backupFileShare:
+        description: 'File share information with Path, Username, and Password.'
+        properties:
+          password:
+            description: Password credential used to connect to the share location.
+            type: string
+          path:
+            description: The folder path for this share.
+            type: string
+          userName:
+            description: User name credential to connect to the share location
+            type: string
+        required:
+          - path
+        type: object
+      backupMode:
+        description: An enumeration of backup modes
+        enum:
+          - CreateBackup
+          - ExistingBackup
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: BackupMode
+      selectedAgentJobs:
+        description: Agent Jobs to migrate.
+        items:
+          type: string
+        type: array
+      selectedDatabases:
+        description: Databases to migrate
+        items:
+          description: Database specific information for SQL to Azure SQL DB Managed Instance migration task inputs
+          properties:
+            backupFilePaths:
+              description: The list of backup files to be used in case of existing backups.
+              items:
+                type: string
+              type: array
+            backupFileShare:
+              description: 'File share information with Path, Username, and Password.'
+              properties:
+                password:
+                  description: Password credential used to connect to the share location.
+                  type: string
+                path:
+                  description: The folder path for this share.
+                  type: string
+                userName:
+                  description: User name credential to connect to the share location
+                  type: string
+              required:
+                - path
+              type: object
+            name:
+              description: Name of the database
+              type: string
+            restoreDatabaseName:
+              description: Name of the database at destination
+              type: string
+          required:
+            - name
+            - restoreDatabaseName
+          type: object
+        type: array
+      selectedLogins:
+        description: Logins to migrate.
+        items:
+          type: string
+        type: array
+    required:
+      - selectedDatabases
+      - backupBlobShare
+    type: object
+  MigrateSqlServerSqlMITaskOutput:
+    description: Output for task that migrates SQL Server databases to Azure SQL Database Managed Instance.
+    discriminator: resultType
+    properties:
+      id:
+        description: Result identifier
+        readOnly: true
+        type: string
+      resultType:
+        description: Result type
+        readOnly: true
+        type: string
+    type: object
+  MigrateSqlServerSqlMITaskOutputAgentJobLevel:
+    allOf:
+      - $ref: '#/definitions/MigrateSqlServerSqlMITaskOutput'
+    properties:
+      endedOn:
+        description: Migration end time
+        format: date-time
+        readOnly: true
+        type: string
+      exceptionsAndWarnings:
+        description: Migration errors and warnings per job
+        items:
+          description: Exception object for all custom exceptions
+          properties:
+            actionableMessage:
+              description: Actionable steps for this exception
+              type: string
+            filePath:
+              description: The path to the file where exception occurred
+              type: string
+            hResult:
+              description: Coded numerical value that is assigned to a specific exception
+              type: integer
+            lineNumber:
+              description: The line number where exception occurred
+              type: string
+            message:
+              description: Error message
+              type: string
+            stackTrace:
+              description: Stack trace
+              type: string
+          type: object
+        readOnly: true
+        type: array
+      isEnabled:
+        description: The state of the original Agent Job.
+        readOnly: true
+        type: boolean
+      message:
+        description: Migration progress message
+        readOnly: true
+        type: string
+      name:
+        description: Agent Job name.
+        readOnly: true
+        type: string
+      startedOn:
+        description: Migration start time
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        description: Current state of migration
+        enum:
+          - None
+          - InProgress
+          - Failed
+          - Warning
+          - Completed
+          - Skipped
+          - Stopped
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MigrationState
+    type: object
+    x-ms-discriminator-value: AgentJobLevelOutput
+  MigrateSqlServerSqlMITaskOutputDatabaseLevel:
+    allOf:
+      - $ref: '#/definitions/MigrateSqlServerSqlMITaskOutput'
+    properties:
+      databaseName:
+        description: Name of the database
+        readOnly: true
+        type: string
+      endedOn:
+        description: Migration end time
+        format: date-time
+        readOnly: true
+        type: string
+      exceptionsAndWarnings:
+        description: Migration exceptions and warnings
+        items:
+          description: Exception object for all custom exceptions
+          properties:
+            actionableMessage:
+              description: Actionable steps for this exception
+              type: string
+            filePath:
+              description: The path to the file where exception occurred
+              type: string
+            hResult:
+              description: Coded numerical value that is assigned to a specific exception
+              type: integer
+            lineNumber:
+              description: The line number where exception occurred
+              type: string
+            message:
+              description: Error message
+              type: string
+            stackTrace:
+              description: Stack trace
+              type: string
+          type: object
+        readOnly: true
+        type: array
+      message:
+        description: Migration progress message
+        readOnly: true
+        type: string
+      sizeMB:
+        description: Size of the database in megabytes
+        format: double
+        readOnly: true
+        type: number
+      stage:
+        description: Current stage of migration
+        enum:
+          - None
+          - Initialize
+          - Backup
+          - FileCopy
+          - Restore
+          - Completed
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DatabaseMigrationStage
+      startedOn:
+        description: Migration start time
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        description: Current state of migration
+        enum:
+          - None
+          - InProgress
+          - Failed
+          - Warning
+          - Completed
+          - Skipped
+          - Stopped
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MigrationState
+    type: object
+    x-ms-discriminator-value: DatabaseLevelOutput
+  MigrateSqlServerSqlMITaskOutputError:
+    allOf:
+      - $ref: '#/definitions/MigrateSqlServerSqlMITaskOutput'
+    properties:
+      error:
+        description: Exception object for all custom exceptions
+        properties:
+          actionableMessage:
+            description: Actionable steps for this exception
+            type: string
+          filePath:
+            description: The path to the file where exception occurred
+            type: string
+          hResult:
+            description: Coded numerical value that is assigned to a specific exception
+            type: integer
+          lineNumber:
+            description: The line number where exception occurred
+            type: string
+          message:
+            description: Error message
+            type: string
+          stackTrace:
+            description: Stack trace
+            type: string
+        type: object
+      id:
+        description: Unique identifier for the exception
+        readOnly: true
+        type: string
+    type: object
+    x-ms-discriminator-value: ErrorOutput
+  MigrateSqlServerSqlMITaskOutputLoginLevel:
+    allOf:
+      - $ref: '#/definitions/MigrateSqlServerSqlMITaskOutput'
+    properties:
+      endedOn:
+        description: Login migration end time
+        format: date-time
+        readOnly: true
+        type: string
+      exceptionsAndWarnings:
+        description: Login migration errors and warnings per login
+        items:
+          description: Exception object for all custom exceptions
+          properties:
+            actionableMessage:
+              description: Actionable steps for this exception
+              type: string
+            filePath:
+              description: The path to the file where exception occurred
+              type: string
+            hResult:
+              description: Coded numerical value that is assigned to a specific exception
+              type: integer
+            lineNumber:
+              description: The line number where exception occurred
+              type: string
+            message:
+              description: Error message
+              type: string
+            stackTrace:
+              description: Stack trace
+              type: string
+          type: object
+        readOnly: true
+        type: array
+      loginName:
+        description: Login name.
+        readOnly: true
+        type: string
+      message:
+        description: Login migration progress message
+        readOnly: true
+        type: string
+      stage:
+        description: Enum of the different stage of login migration.
+        enum:
+          - None
+          - Initialize
+          - LoginMigration
+          - EstablishUserMapping
+          - AssignRoleMembership
+          - AssignRoleOwnership
+          - EstablishServerPermissions
+          - EstablishObjectPermissions
+          - Completed
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: LoginMigrationStage
+      startedOn:
+        description: Login migration start time
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        description: Current state of migration
+        enum:
+          - None
+          - InProgress
+          - Failed
+          - Warning
+          - Completed
+          - Skipped
+          - Stopped
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MigrationState
+    type: object
+    x-ms-discriminator-value: LoginLevelOutput
+  MigrateSqlServerSqlMITaskOutputMigrationLevel:
+    allOf:
+      - $ref: '#/definitions/MigrateSqlServerSqlMITaskOutput'
+    properties:
+      agentJobs:
+        additionalProperties:
+          type: string
+        description: Selected agent jobs as a map from name to id
+        readOnly: true
+        type: string
+      databases:
+        additionalProperties:
+          type: string
+        description: Selected databases as a map from database name to database id
+        readOnly: true
+        type: string
+      endedOn:
+        description: Migration end time
+        format: date-time
+        readOnly: true
+        type: string
+      exceptionsAndWarnings:
+        description: Migration exceptions and warnings.
+        items:
+          description: Exception object for all custom exceptions
+          properties:
+            actionableMessage:
+              description: Actionable steps for this exception
+              type: string
+            filePath:
+              description: The path to the file where exception occurred
+              type: string
+            hResult:
+              description: Coded numerical value that is assigned to a specific exception
+              type: integer
+            lineNumber:
+              description: The line number where exception occurred
+              type: string
+            message:
+              description: Error message
+              type: string
+            stackTrace:
+              description: Stack trace
+              type: string
+          type: object
+        readOnly: true
+        type: array
+      logins:
+        additionalProperties:
+          type: string
+        description: Selected logins as a map from name to id
+        readOnly: true
+        type: string
+      message:
+        description: Migration progress message
+        readOnly: true
+        type: string
+      orphanedUsersInfo:
+        description: List of orphaned users.
+        items:
+          description: Information of orphaned users on the SQL server database.
+          properties:
+            databaseName:
+              description: Parent database of the user
+              type: string
+            name:
+              description: Name of the orphaned user
+              type: string
+          type: object
+        readOnly: true
+        type: array
+      serverRoleResults:
+        additionalProperties:
+          description: Server role migration result
+          properties:
+            exceptionsAndWarnings:
+              description: Migration exceptions and warnings.
+              items:
+                description: Exception object for all custom exceptions
+                properties:
+                  actionableMessage:
+                    description: Actionable steps for this exception
+                    type: string
+                  filePath:
+                    description: The path to the file where exception occurred
+                    type: string
+                  hResult:
+                    description: Coded numerical value that is assigned to a specific exception
+                    type: integer
+                  lineNumber:
+                    description: The line number where exception occurred
+                    type: string
+                  message:
+                    description: Error message
+                    type: string
+                  stackTrace:
+                    description: Stack trace
+                    type: string
+                type: object
+              readOnly: true
+              type: array
+            name:
+              description: Name of server role.
+              readOnly: true
+              type: string
+            state:
+              description: Current state of migration
+              enum:
+                - None
+                - InProgress
+                - Failed
+                - Warning
+                - Completed
+                - Skipped
+                - Stopped
+              type: string
+              x-ms-enum:
+                modelAsString: true
+                name: MigrationState
+          type: object
+        description: Map of server role migration results.
+        readOnly: true
+        type: string
+      sourceServerBrandVersion:
+        description: Source server brand version
+        readOnly: true
+        type: string
+      sourceServerVersion:
+        description: Source server version
+        readOnly: true
+        type: string
+      startedOn:
+        description: Migration start time
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        description: Current state of migration
+        enum:
+          - None
+          - InProgress
+          - Failed
+          - Warning
+          - Completed
+          - Skipped
+          - Stopped
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MigrationState
+      status:
+        description: Current status of migration
+        enum:
+          - Default
+          - Connecting
+          - SourceAndTargetSelected
+          - SelectLogins
+          - Configured
+          - Running
+          - Error
+          - Stopped
+          - Completed
+          - CompletedWithWarnings
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MigrationStatus
+      targetServerBrandVersion:
+        description: Target server brand version
+        readOnly: true
+        type: string
+      targetServerVersion:
+        description: Target server version
+        readOnly: true
+        type: string
+    type: object
+    x-ms-discriminator-value: MigrationLevelOutput

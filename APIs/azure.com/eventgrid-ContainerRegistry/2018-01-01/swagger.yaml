@@ -1,0 +1,117 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  description: Describes the schema of the Azure Container Registry events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.
+  title: Schema of Azure Container Registry events published to Azure Event Grid
+  version: '2018-01-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventgrid/data-plane/Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: eventgrid-ContainerRegistry
+  x-tags:
+    - Azure
+    - Microsoft
+paths: {}
+definitions:
+  ContainerRegistryEventActor:
+    description: 'The agent that initiated the event. For most situations, this could be from the authorization context of the request.'
+    properties:
+      name:
+        description: The subject or username associated with the request context that generated the event.
+        type: string
+  ContainerRegistryEventData:
+    description: The content of the event request message.
+    properties:
+      action:
+        description: The action that encompasses the provided event.
+        type: string
+      actor:
+        $ref: '#/definitions/ContainerRegistryEventActor'
+        description: 'The agent that initiated the event. For most situations, this could be from the authorization context of the request.'
+      id:
+        description: The event ID.
+        type: string
+      request:
+        $ref: '#/definitions/ContainerRegistryEventRequest'
+        description: The request that generated the event.
+      source:
+        $ref: '#/definitions/ContainerRegistryEventSource'
+        description: 'The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it.'
+      target:
+        $ref: '#/definitions/ContainerRegistryEventTarget'
+        description: The target of the event.
+      timestamp:
+        description: The time at which the event occurred.
+        format: date-time
+        type: string
+  ContainerRegistryEventRequest:
+    description: The request that generated the event.
+    properties:
+      addr:
+        description: The IP or hostname and possibly port of the client connection that initiated the event. This is the RemoteAddr from the standard http request.
+        type: string
+      host:
+        description: 'The externally accessible hostname of the registry instance, as specified by the http host header on incoming requests.'
+        type: string
+      id:
+        description: The ID of the request that initiated the event.
+        type: string
+      method:
+        description: The request method that generated the event.
+        type: string
+      useragent:
+        description: The user agent header of the request.
+        type: string
+  ContainerRegistryEventSource:
+    description: 'The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it.'
+    properties:
+      addr:
+        description: 'The IP or hostname and the port of the registry node that generated the event. Generally, this will be resolved by os.Hostname() along with the running port.'
+        type: string
+      instanceID:
+        description: The running instance of an application. Changes after each restart.
+        type: string
+  ContainerRegistryEventTarget:
+    description: The target of the event.
+    properties:
+      digest:
+        description: 'The digest of the content, as defined by the Registry V2 HTTP API Specification.'
+        type: string
+      length:
+        description: The number of bytes of the content. Same as Size field.
+        format: int64
+        type: integer
+      mediaType:
+        description: The MIME type of the referenced object.
+        type: string
+      repository:
+        description: The repository name.
+        type: string
+      size:
+        description: The number of bytes of the content. Same as Length field.
+        format: int64
+        type: integer
+      tag:
+        description: The tag name.
+        type: string
+      url:
+        description: The direct URL to the content.
+        type: string
+  ContainerRegistryImageDeletedEventData:
+    allOf:
+      - $ref: '#/definitions/ContainerRegistryEventData'
+    description: Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImageDeleted event.
+    properties: {}
+  ContainerRegistryImagePushedEventData:
+    allOf:
+      - $ref: '#/definitions/ContainerRegistryEventData'
+    description: Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event.
+    properties: {}

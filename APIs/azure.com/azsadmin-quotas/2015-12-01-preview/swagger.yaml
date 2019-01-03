@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/storage/Microsoft.Storage.Admin/preview/2016-05-01/quotas.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/storage/Microsoft.Storage.Admin/preview/2015-12-01/quotas.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: azsadmin-quotas
@@ -82,7 +82,7 @@ parameters:
           properties:
             capacityInGb:
               default: 500
-              description: Maxium capacity (GB).
+              description: Maximum capacity (GB).
               format: int32
               type: integer
             numberOfStorageAccounts:
@@ -161,7 +161,7 @@ paths:
                       properties:
                         capacityInGb:
                           default: 500
-                          description: Maxium capacity (GB).
+                          description: Maximum capacity (GB).
                           format: int32
                           type: integer
                         numberOfStorageAccounts:
@@ -307,7 +307,7 @@ paths:
                 properties:
                   capacityInGb:
                     default: 500
-                    description: Maxium capacity (GB).
+                    description: Maximum capacity (GB).
                     format: int32
                     type: integer
                   numberOfStorageAccounts:
@@ -336,8 +336,8 @@ paths:
                 location: local
                 name: local/TestCreateQuota
                 properties:
-                  capacityInGb: -100000000
-                  numberOfStorageAccounts: -1000000000
+                  capacityInGb: 2048
+                  numberOfStorageAccounts: 20
                 type: Microsoft.Storage.Admin/locations/quotas
             '404': {}
     put:
@@ -405,7 +405,7 @@ paths:
                 properties:
                   capacityInGb:
                     default: 500
-                    description: Maxium capacity (GB).
+                    description: Maximum capacity (GB).
                     format: int32
                     type: integer
                   numberOfStorageAccounts:
@@ -454,7 +454,7 @@ paths:
                 properties:
                   capacityInGb:
                     default: 500
-                    description: Maxium capacity (GB).
+                    description: Maximum capacity (GB).
                     format: int32
                     type: integer
                   numberOfStorageAccounts:
@@ -527,7 +527,7 @@ definitions:
         properties:
           capacityInGb:
             default: 500
-            description: Maxium capacity (GB).
+            description: Maximum capacity (GB).
             format: int32
             type: integer
           numberOfStorageAccounts:
@@ -580,7 +580,7 @@ definitions:
               properties:
                 capacityInGb:
                   default: 500
-                  description: Maxium capacity (GB).
+                  description: Maximum capacity (GB).
                   format: int32
                   type: integer
                 numberOfStorageAccounts:
@@ -597,7 +597,7 @@ definitions:
     properties:
       capacityInGb:
         default: 500
-        description: Maxium capacity (GB).
+        description: Maximum capacity (GB).
         format: int32
         type: integer
       numberOfStorageAccounts:

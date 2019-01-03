@@ -1,0 +1,182 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Data Migration Service Resource Provider
+  version: 2018-03-31-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-03-31-preview/definitions/Projects.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: datamigration-Projects
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  DatabaseInfo:
+    description: Project Database Details
+    properties:
+      sourceDatabaseName:
+        description: Name of the database
+        type: string
+    required:
+      - sourceDatabaseName
+    type: object
+  Project:
+    allOf:
+      - allOf:
+          - description: ARM resource.
+            properties:
+              id:
+                description: Resource ID.
+                readOnly: true
+                type: string
+              name:
+                description: Resource name.
+                readOnly: true
+                type: string
+              type:
+                description: Resource type.
+                readOnly: true
+                type: string
+            x-ms-azure-resource: true
+        description: ARM tracked top level resource.
+        properties:
+          location:
+            description: Resource location.
+            type: string
+            x-ms-mutability:
+              - read
+              - create
+          tags:
+            additionalProperties:
+              type: string
+            description: Resource tags.
+            type: object
+            x-ms-mutability:
+              - read
+              - create
+              - update
+        required:
+          - location
+    description: A project resource
+    properties:
+      properties:
+        $ref: '#/definitions/ProjectProperties'
+        description: Project properties
+        x-ms-client-flatten: true
+    type: object
+  ProjectList:
+    description: OData page of project resources
+    properties:
+      nextLink:
+        description: URL to load the next page of projects
+        type: string
+      value:
+        description: List of projects
+        items:
+          $ref: '#/definitions/Project'
+        type: array
+    type: object
+  ProjectProperties:
+    description: Project-specific properties
+    properties:
+      creationTime:
+        description: UTC Date and time when project was created
+        format: date-time
+        readOnly: true
+        type: string
+      databasesInfo:
+        description: List of DatabaseInfo
+        items:
+          $ref: '#/definitions/DatabaseInfo'
+        type: array
+      provisioningState:
+        description: The project's provisioning state
+        enum:
+          - Deleting
+          - Succeeded
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProjectProvisioningState
+      sourceConnectionInfo:
+        description: Defines the connection properties of a server
+        discriminator: type
+        properties:
+          password:
+            description: Password credential.
+            type: string
+          type:
+            description: Type of connection info
+            type: string
+          userName:
+            description: User name
+            type: string
+        required:
+          - type
+        type: object
+        x-ms-discriminator-value: Unknown
+      sourcePlatform:
+        $ref: '#/definitions/ProjectSourcePlatform'
+        description: Source platform for the project
+      targetConnectionInfo:
+        description: Defines the connection properties of a server
+        discriminator: type
+        properties:
+          password:
+            description: Password credential.
+            type: string
+          type:
+            description: Type of connection info
+            type: string
+          userName:
+            description: User name
+            type: string
+        required:
+          - type
+        type: object
+        x-ms-discriminator-value: Unknown
+      targetPlatform:
+        $ref: '#/definitions/ProjectTargetPlatform'
+        description: Target platform for the project
+    required:
+      - sourcePlatform
+      - targetPlatform
+    type: object
+  ProjectSourcePlatform:
+    description: Source platform of the project
+    enum:
+      - SQL
+      - Unknown
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ProjectSourcePlatform
+  ProjectTargetPlatform:
+    description: Target platform of the project
+    enum:
+      - SQLDB
+      - SQLMI
+      - Unknown
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ProjectTargetPlatform

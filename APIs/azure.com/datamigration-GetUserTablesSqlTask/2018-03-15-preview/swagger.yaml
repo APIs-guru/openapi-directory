@@ -1,0 +1,144 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Data Migration Service Resource Provider
+  version: 2018-03-15-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-03-15-preview/definitions/GetUserTablesSqlTask.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: datamigration-GetUserTablesSqlTask
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  DatabaseTable:
+    description: Table properties
+    properties:
+      hasRows:
+        description: Indicates whether table is empty or not
+        readOnly: true
+        type: boolean
+      name:
+        description: Schema-qualified name of the table
+        readOnly: true
+        type: string
+    type: object
+  GetUserTablesSqlTaskInput:
+    description: Input for the task that collects user tables for the given list of databases
+    properties:
+      connectionInfo:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Information for connecting to SQL database server
+        properties:
+          additionalSettings:
+            description: Additional connection settings
+            type: string
+          authentication:
+            description: An enumeration of possible authentication types when connecting
+            enum:
+              - None
+              - WindowsAuthentication
+              - SqlAuthentication
+              - ActiveDirectoryIntegrated
+              - ActiveDirectoryPassword
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: AuthenticationType
+          dataSource:
+            description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+            type: string
+          encryptConnection:
+            default: true
+            description: Whether to encrypt the connection
+            type: boolean
+          trustServerCertificate:
+            default: false
+            description: Whether to trust the server certificate
+            type: boolean
+        required:
+          - dataSource
+        type: object
+        x-ms-discriminator-value: SqlConnectionInfo
+      selectedDatabases:
+        description: List of database names to collect tables for
+        items:
+          type: string
+        type: array
+    required:
+      - connectionInfo
+      - selectedDatabases
+    type: object
+  GetUserTablesSqlTaskOutput:
+    description: Output of the task that collects user tables for the given list of databases
+    properties:
+      databasesToTables:
+        additionalProperties:
+          items:
+            $ref: '#/definitions/DatabaseTable'
+          type: array
+        description: Mapping from database name to list of tables
+        readOnly: true
+        type: string
+      id:
+        description: Result identifier
+        readOnly: true
+        type: string
+      validationErrors:
+        description: Validation errors
+        items:
+          description: Exception object for all custom exceptions
+          properties:
+            filePath:
+              description: The path to the file where exception occurred
+              type: string
+            hResult:
+              description: Coded numerical value that is assigned to a specific exception
+              type: integer
+            lineNumber:
+              description: The line number where exception occurred
+              type: string
+            message:
+              description: Error message
+              type: string
+            stackTrace:
+              description: Stack trace
+              type: string
+          type: object
+        readOnly: true
+        type: array
+    type: object

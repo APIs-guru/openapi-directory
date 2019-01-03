@@ -1,0 +1,159 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Database Migration Service Resource Provider
+  version: '2018-04-19'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToTargetAzureDbForPostgreSqlSyncTask.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: datamigration-ConnectToTargetAzureDbForPostgreSqlSyncTask
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  ConnectToTargetAzureDbForPostgreSqlSyncTaskInput:
+    description: Input for the task that validates connection to Azure Database for PostgreSQL and target server requirements
+    properties:
+      sourceConnectionInfo:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Information for connecting to PostgreSQL server
+        properties:
+          databaseName:
+            description: Name of the database
+            type: string
+          port:
+            description: Port for Server
+            type: integer
+          serverName:
+            description: Name of the server
+            type: string
+        required:
+          - serverName
+          - port
+        type: object
+        x-ms-discriminator-value: PostgreSqlConnectionInfo
+      targetConnectionInfo:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Information for connecting to PostgreSQL server
+        properties:
+          databaseName:
+            description: Name of the database
+            type: string
+          port:
+            description: Port for Server
+            type: integer
+          serverName:
+            description: Name of the server
+            type: string
+        required:
+          - serverName
+          - port
+        type: object
+        x-ms-discriminator-value: PostgreSqlConnectionInfo
+    required:
+      - sourceConnectionInfo
+      - targetConnectionInfo
+    type: object
+  ConnectToTargetAzureDbForPostgreSqlSyncTaskOutput:
+    description: Output for the task that validates connection to Azure Database for PostgreSQL and target server requirements
+    properties:
+      databases:
+        description: List of databases on target server
+        items:
+          type: string
+        readOnly: true
+        type: array
+      id:
+        description: Result identifier
+        readOnly: true
+        type: string
+      targetServerBrandVersion:
+        description: Target server brand version
+        readOnly: true
+        type: string
+      targetServerVersion:
+        description: Version of the target server
+        readOnly: true
+        type: string
+      validationErrors:
+        description: Validation errors associated with the task
+        items:
+          description: Exception object for all custom exceptions
+          properties:
+            actionableMessage:
+              description: Actionable steps for this exception
+              type: string
+            filePath:
+              description: The path to the file where exception occurred
+              readOnly: true
+              type: string
+            hResult:
+              description: Coded numerical value that is assigned to a specific exception
+              readOnly: true
+              type: integer
+            lineNumber:
+              description: The line number where exception occurred
+              readOnly: true
+              type: string
+            message:
+              description: Error message
+              readOnly: true
+              type: string
+            stackTrace:
+              description: Stack trace
+              readOnly: true
+              type: string
+          type: object
+        readOnly: true
+        type: array
+    type: object

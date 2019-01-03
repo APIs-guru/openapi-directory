@@ -1,0 +1,618 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Database Migration Service Resource Provider
+  version: '2018-04-19'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/stable/2018-04-19/definitions/MigrateSqlServerSqlMiSyncTask.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: datamigration-MigrateSqlServerSqlMiSyncTask
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  MigrateSqlServerSqlMISyncTaskInput:
+    allOf:
+      - description: Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.
+        properties:
+          azureApp:
+            description: Azure Active Directory Application
+            properties:
+              appKey:
+                description: Key used to authenticate to the Azure Active Directory Application
+                type: string
+              applicationId:
+                description: Application ID of the Azure Active Directory Application
+                type: string
+              tenantId:
+                description: Tenant id of the customer
+                type: string
+            required:
+              - applicationId
+              - appKey
+              - tenantId
+            type: object
+          backupFileShare:
+            description: 'File share information with Path, Username, and Password.'
+            properties:
+              password:
+                description: Password credential used to connect to the share location.
+                type: string
+              path:
+                description: The folder path for this share.
+                type: string
+              userName:
+                description: User name credential to connect to the share location
+                type: string
+            required:
+              - path
+            type: object
+          selectedDatabases:
+            description: Databases to migrate
+            items:
+              description: Database specific information for SQL to Azure SQL DB Managed Instance migration task inputs
+              properties:
+                backupFilePaths:
+                  description: The list of backup files to be used in case of existing backups.
+                  items:
+                    type: string
+                  type: array
+                backupFileShare:
+                  description: 'File share information with Path, Username, and Password.'
+                  properties:
+                    password:
+                      description: Password credential used to connect to the share location.
+                      type: string
+                    path:
+                      description: The folder path for this share.
+                      type: string
+                    userName:
+                      description: User name credential to connect to the share location
+                      type: string
+                  required:
+                    - path
+                  type: object
+                name:
+                  description: Name of the database
+                  type: string
+                restoreDatabaseName:
+                  description: Name of the database at destination
+                  type: string
+              required:
+                - name
+                - restoreDatabaseName
+              type: object
+            type: array
+          sourceConnectionInfo:
+            allOf:
+              - description: Defines the connection properties of a server
+                discriminator: type
+                properties:
+                  password:
+                    description: Password credential.
+                    type: string
+                  type:
+                    description: Type of connection info
+                    type: string
+                  userName:
+                    description: User name
+                    type: string
+                required:
+                  - type
+                type: object
+                x-ms-discriminator-value: Unknown
+            description: Information for connecting to SQL database server
+            properties:
+              additionalSettings:
+                description: Additional connection settings
+                type: string
+              authentication:
+                description: An enumeration of possible authentication types when connecting
+                enum:
+                  - None
+                  - WindowsAuthentication
+                  - SqlAuthentication
+                  - ActiveDirectoryIntegrated
+                  - ActiveDirectoryPassword
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: AuthenticationType
+              dataSource:
+                description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+                type: string
+              encryptConnection:
+                default: true
+                description: Whether to encrypt the connection
+                type: boolean
+              platform:
+                description: An enumeration of source platform types
+                enum:
+                  - SqlOnPrem
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: SqlSourcePlatform
+              trustServerCertificate:
+                default: false
+                description: Whether to trust the server certificate
+                type: boolean
+            required:
+              - dataSource
+            type: object
+            x-ms-discriminator-value: SqlConnectionInfo
+          storageResourceId:
+            description: Fully qualified resourceId of storage
+            type: string
+          targetConnectionInfo:
+            allOf:
+              - description: Defines the connection properties of a server
+                discriminator: type
+                properties:
+                  password:
+                    description: Password credential.
+                    type: string
+                  type:
+                    description: Type of connection info
+                    type: string
+                  userName:
+                    description: User name
+                    type: string
+                required:
+                  - type
+                type: object
+                x-ms-discriminator-value: Unknown
+            description: Properties required to create a connection to Azure SQL database Managed instance
+            properties:
+              managedInstanceResourceId:
+                description: Resource id for Azure SQL database Managed instance
+                type: string
+            required:
+              - managedInstanceResourceId
+            type: object
+            x-ms-discriminator-value: MiSqlConnectionInfo
+        required:
+          - selectedDatabases
+          - azureApp
+          - sourceConnectionInfo
+          - targetConnectionInfo
+          - storageResourceId
+        type: object
+    description: Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.
+    type: object
+  MigrateSqlServerSqlMISyncTaskOutput:
+    description: Output for task that migrates SQL Server databases to Azure SQL Database Managed Instance using Log Replay Service.
+    discriminator: resultType
+    properties:
+      id:
+        description: Result identifier
+        readOnly: true
+        type: string
+      resultType:
+        description: Result type
+        readOnly: true
+        type: string
+    type: object
+  MigrateSqlServerSqlMISyncTaskOutputDatabaseLevel:
+    allOf:
+      - $ref: '#/definitions/MigrateSqlServerSqlMISyncTaskOutput'
+    properties:
+      activeBackupSets:
+        description: Backup sets that are currently active (Either being uploaded or getting restored)
+        items:
+          description: Information of backup set
+          properties:
+            backupFinishedDate:
+              description: Date and time that the backup operation finished
+              format: date-time
+              type: string
+            backupSetId:
+              description: Id for the set of backup files
+              type: string
+            backupStartDate:
+              description: Date and time that the backup operation began
+              format: date-time
+              type: string
+            backupType:
+              description: Enum of the different backup types.
+              enum:
+                - Database
+                - TransactionLog
+                - File
+                - DifferentialDatabase
+                - DifferentialFile
+                - Partial
+                - DifferentialPartial
+              type: string
+              x-ms-enum:
+                modelAsString: true
+                name: BackupType
+            databaseName:
+              description: Name of the database to which the backup set belongs
+              type: string
+            firstLsn:
+              description: First log sequence number of the backup file
+              type: string
+            isBackupRestored:
+              description: Whether the backup set is restored or not
+              type: boolean
+            lastLsn:
+              description: Last log sequence number of the backup file
+              type: string
+            lastModifiedTime:
+              description: Last modified time of the backup file in share location
+              format: date-time
+              type: string
+            listOfBackupFiles:
+              description: List of files in the backup set
+              items:
+                description: Information of the backup file
+                properties:
+                  familySequenceNumber:
+                    description: Sequence number of the backup file in the backup set
+                    type: integer
+                  fileLocation:
+                    description: Location of the backup file in shared folder
+                    type: string
+                  status:
+                    description: An enumeration of Status of the log backup file.
+                    enum:
+                      - Arrived
+                      - Queued
+                      - Uploading
+                      - Uploaded
+                      - Restoring
+                      - Restored
+                      - Cancelled
+                    type: string
+                    x-ms-enum:
+                      modelAsString: true
+                      name: BackupFileStatus
+                readOnly: true
+                type: object
+              type: array
+          readOnly: true
+          type: object
+        readOnly: true
+        type: array
+      containerName:
+        description: Name of container created in the Azure Storage account where backups are copied to
+        readOnly: true
+        type: string
+      endedOn:
+        description: Database migration end time
+        format: date-time
+        readOnly: true
+        type: string
+      errorPrefix:
+        description: prefix string to use for querying errors for this database
+        readOnly: true
+        type: string
+      exceptionsAndWarnings:
+        description: Migration exceptions and warnings
+        items:
+          description: Exception object for all custom exceptions
+          properties:
+            actionableMessage:
+              description: Actionable steps for this exception
+              type: string
+            filePath:
+              description: The path to the file where exception occurred
+              readOnly: true
+              type: string
+            hResult:
+              description: Coded numerical value that is assigned to a specific exception
+              readOnly: true
+              type: integer
+            lineNumber:
+              description: The line number where exception occurred
+              readOnly: true
+              type: string
+            message:
+              description: Error message
+              readOnly: true
+              type: string
+            stackTrace:
+              description: Stack trace
+              readOnly: true
+              type: string
+          type: object
+        readOnly: true
+        type: array
+      fullBackupSetInfo:
+        description: Information of backup set
+        properties:
+          backupFinishedDate:
+            description: Date and time that the backup operation finished
+            format: date-time
+            type: string
+          backupSetId:
+            description: Id for the set of backup files
+            type: string
+          backupStartDate:
+            description: Date and time that the backup operation began
+            format: date-time
+            type: string
+          backupType:
+            description: Enum of the different backup types.
+            enum:
+              - Database
+              - TransactionLog
+              - File
+              - DifferentialDatabase
+              - DifferentialFile
+              - Partial
+              - DifferentialPartial
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: BackupType
+          databaseName:
+            description: Name of the database to which the backup set belongs
+            type: string
+          firstLsn:
+            description: First log sequence number of the backup file
+            type: string
+          isBackupRestored:
+            description: Whether the backup set is restored or not
+            type: boolean
+          lastLsn:
+            description: Last log sequence number of the backup file
+            type: string
+          lastModifiedTime:
+            description: Last modified time of the backup file in share location
+            format: date-time
+            type: string
+          listOfBackupFiles:
+            description: List of files in the backup set
+            items:
+              description: Information of the backup file
+              properties:
+                familySequenceNumber:
+                  description: Sequence number of the backup file in the backup set
+                  type: integer
+                fileLocation:
+                  description: Location of the backup file in shared folder
+                  type: string
+                status:
+                  description: An enumeration of Status of the log backup file.
+                  enum:
+                    - Arrived
+                    - Queued
+                    - Uploading
+                    - Uploaded
+                    - Restoring
+                    - Restored
+                    - Cancelled
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: BackupFileStatus
+              readOnly: true
+              type: object
+            type: array
+        readOnly: true
+        type: object
+      isFullBackupRestored:
+        description: Whether full backup has been applied to the target database or not
+        readOnly: true
+        type: boolean
+      lastRestoredBackupSetInfo:
+        description: Information of backup set
+        properties:
+          backupFinishedDate:
+            description: Date and time that the backup operation finished
+            format: date-time
+            type: string
+          backupSetId:
+            description: Id for the set of backup files
+            type: string
+          backupStartDate:
+            description: Date and time that the backup operation began
+            format: date-time
+            type: string
+          backupType:
+            description: Enum of the different backup types.
+            enum:
+              - Database
+              - TransactionLog
+              - File
+              - DifferentialDatabase
+              - DifferentialFile
+              - Partial
+              - DifferentialPartial
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: BackupType
+          databaseName:
+            description: Name of the database to which the backup set belongs
+            type: string
+          firstLsn:
+            description: First log sequence number of the backup file
+            type: string
+          isBackupRestored:
+            description: Whether the backup set is restored or not
+            type: boolean
+          lastLsn:
+            description: Last log sequence number of the backup file
+            type: string
+          lastModifiedTime:
+            description: Last modified time of the backup file in share location
+            format: date-time
+            type: string
+          listOfBackupFiles:
+            description: List of files in the backup set
+            items:
+              description: Information of the backup file
+              properties:
+                familySequenceNumber:
+                  description: Sequence number of the backup file in the backup set
+                  type: integer
+                fileLocation:
+                  description: Location of the backup file in shared folder
+                  type: string
+                status:
+                  description: An enumeration of Status of the log backup file.
+                  enum:
+                    - Arrived
+                    - Queued
+                    - Uploading
+                    - Uploaded
+                    - Restoring
+                    - Restored
+                    - Cancelled
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: BackupFileStatus
+              readOnly: true
+              type: object
+            type: array
+        readOnly: true
+        type: object
+      migrationState:
+        description: Database level migration state.
+        enum:
+          - UNDEFINED
+          - INITIAL
+          - FULL_BACKUP_UPLOAD_START
+          - LOG_SHIPPING_START
+          - UPLOAD_LOG_FILES_START
+          - CUTOVER_START
+          - POST_CUTOVER_COMPLETE
+          - COMPLETED
+          - CANCELLED
+          - FAILED
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DatabaseMigrationState
+      sourceDatabaseName:
+        description: Name of the database
+        readOnly: true
+        type: string
+      startedOn:
+        description: Database migration start time
+        format: date-time
+        readOnly: true
+        type: string
+    type: object
+    x-ms-discriminator-value: DatabaseLevelOutput
+  MigrateSqlServerSqlMISyncTaskOutputError:
+    allOf:
+      - $ref: '#/definitions/MigrateSqlServerSqlMISyncTaskOutput'
+    properties:
+      error:
+        description: Exception object for all custom exceptions
+        properties:
+          actionableMessage:
+            description: Actionable steps for this exception
+            type: string
+          filePath:
+            description: The path to the file where exception occurred
+            readOnly: true
+            type: string
+          hResult:
+            description: Coded numerical value that is assigned to a specific exception
+            readOnly: true
+            type: integer
+          lineNumber:
+            description: The line number where exception occurred
+            readOnly: true
+            type: string
+          message:
+            description: Error message
+            readOnly: true
+            type: string
+          stackTrace:
+            description: Stack trace
+            readOnly: true
+            type: string
+        type: object
+      id:
+        description: Unique identifier for the exception
+        readOnly: true
+        type: string
+    type: object
+    x-ms-discriminator-value: ErrorOutput
+  MigrateSqlServerSqlMISyncTaskOutputMigrationLevel:
+    allOf:
+      - $ref: '#/definitions/MigrateSqlServerSqlMISyncTaskOutput'
+    properties:
+      databaseCount:
+        description: Count of databases
+        readOnly: true
+        type: integer
+      databaseErrorCount:
+        description: Number of database level errors
+        readOnly: true
+        type: integer
+      endedOn:
+        description: Migration end time
+        format: date-time
+        readOnly: true
+        type: string
+      sourceServerBrandVersion:
+        description: Source server brand version
+        readOnly: true
+        type: string
+      sourceServerName:
+        description: Source server name
+        readOnly: true
+        type: string
+      sourceServerVersion:
+        description: Source server version
+        readOnly: true
+        type: string
+      startedOn:
+        description: Migration start time
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        description: Current state of migration
+        enum:
+          - None
+          - InProgress
+          - Failed
+          - Warning
+          - Completed
+          - Skipped
+          - Stopped
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MigrationState
+      targetServerBrandVersion:
+        description: Target server brand version
+        readOnly: true
+        type: string
+      targetServerName:
+        description: Target server name
+        readOnly: true
+        type: string
+      targetServerVersion:
+        description: Target server version
+        readOnly: true
+        type: string
+    type: object
+    x-ms-discriminator-value: MigrationLevelOutput

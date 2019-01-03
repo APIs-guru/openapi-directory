@@ -1,0 +1,243 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Data Migration Service Resource Provider
+  version: 2018-03-15-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-03-15-preview/definitions/Common.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: datamigration-Common
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  ApiError:
+    description: Error information.
+    properties:
+      error:
+        $ref: '#/definitions/ODataError'
+        description: Error information in OData format
+    type: object
+  AuthenticationType:
+    description: An enumeration of possible authentication types when connecting
+    enum:
+      - None
+      - WindowsAuthentication
+      - SqlAuthentication
+      - ActiveDirectoryIntegrated
+      - ActiveDirectoryPassword
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: AuthenticationType
+  ConnectionInfo:
+    description: Defines the connection properties of a server
+    discriminator: type
+    properties:
+      password:
+        description: Password credential.
+        type: string
+      type:
+        description: Type of connection info
+        type: string
+      userName:
+        description: User name
+        type: string
+    required:
+      - type
+    type: object
+    x-ms-discriminator-value: Unknown
+  NameAvailabilityRequest:
+    description: A resource type and proposed name
+    properties:
+      name:
+        description: The proposed resource name
+        type: string
+      type:
+        description: The resource type chain (e.g. virtualMachines/extensions)
+        type: string
+    type: object
+  NameAvailabilityResponse:
+    description: Indicates whether a proposed resource name is available
+    properties:
+      message:
+        description: 'The localized reason why the name is not available, if nameAvailable is false'
+        type: string
+      nameAvailable:
+        description: 'If true, the name is valid and available. If false, ''reason'' describes why not.'
+        type: boolean
+      reason:
+        description: 'The reason why the name is not available, if nameAvailable is false'
+        enum:
+          - AlreadyExists
+          - Invalid
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: NameCheckFailureReason
+    type: object
+  ODataError:
+    description: Error information in OData format.
+    properties:
+      code:
+        description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+        type: string
+      details:
+        description: Inner errors that caused this error
+        items:
+          $ref: '#/definitions/ODataError'
+        type: array
+      message:
+        description: The human-readable description of the error
+        type: string
+    type: object
+  Quota:
+    description: Describes a quota for or usage details about a resource
+    properties:
+      currentValue:
+        description: 'The current value of the quota. If null or missing, the current value cannot be determined in the context of the request.'
+        format: double
+        type: number
+      id:
+        description: The resource ID of the quota object
+        type: string
+      limit:
+        description: 'The maximum value of the quota. If null or missing, the quota has no maximum, in which case it merely tracks usage.'
+        format: double
+        type: number
+      name:
+        description: The name of the quota
+        properties:
+          localizedValue:
+            description: The localized name of the quota
+            type: string
+          value:
+            description: The unlocalized name (or ID) of the quota
+            type: string
+        type: object
+      unit:
+        description: 'The unit for the quota, such as Count, Bytes, BytesPerSecond, etc.'
+        type: string
+    type: object
+  QuotaList:
+    description: OData page of quota objects
+    properties:
+      nextLink:
+        description: 'URL to load the next page of quotas, or null or missing if this is the last page'
+        type: string
+      value:
+        description: List of quotas
+        items:
+          $ref: '#/definitions/Quota'
+        type: array
+    type: object
+  ReportableException:
+    description: Exception object for all custom exceptions
+    properties:
+      filePath:
+        description: The path to the file where exception occurred
+        type: string
+      hResult:
+        description: Coded numerical value that is assigned to a specific exception
+        type: integer
+      lineNumber:
+        description: The line number where exception occurred
+        type: string
+      message:
+        description: Error message
+        type: string
+      stackTrace:
+        description: Stack trace
+        type: string
+    type: object
+  Resource:
+    description: ARM resource.
+    properties:
+      id:
+        description: Resource ID.
+        readOnly: true
+        type: string
+      name:
+        description: Resource name.
+        readOnly: true
+        type: string
+      type:
+        description: Resource type.
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  ServerLevelPermissionsGroup:
+    description: Permission group for validations. These groups will run a set of permissions for validating user activity. Select the permission group for the activity that you are performing.
+    enum:
+      - Default
+      - MigrationFromSqlServerToAzureDB
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ServerLevelPermissionsGroup
+  SqlConnectionInfo:
+    allOf:
+      - $ref: '#/definitions/ConnectionInfo'
+    description: Information for connecting to SQL database server
+    properties:
+      additionalSettings:
+        description: Additional connection settings
+        type: string
+      authentication:
+        $ref: '#/definitions/AuthenticationType'
+        description: Authentication type to use for connection
+      dataSource:
+        description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+        type: string
+      encryptConnection:
+        default: true
+        description: Whether to encrypt the connection
+        type: boolean
+      trustServerCertificate:
+        default: false
+        description: Whether to trust the server certificate
+        type: boolean
+    required:
+      - dataSource
+    type: object
+    x-ms-discriminator-value: SqlConnectionInfo
+  TrackedResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: ARM tracked top level resource.
+    properties:
+      location:
+        description: Resource location.
+        type: string
+        x-ms-mutability:
+          - read
+          - create
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+        x-ms-mutability:
+          - read
+          - create
+          - update
+    required:
+      - location

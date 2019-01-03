@@ -17,7 +17,7 @@ info:
   version: v1
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/data-plane/microsoft.insights/preview/v1/AppInsights.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/data-plane/Microsoft.Insights/preview/v1/AppInsights.json'
       version: '2.0'
   x-providerName: applicationinsights.io
   x-serviceName: applicationinsights-AppInsights
@@ -733,7 +733,7 @@ paths:
           description: An error response object.
           schema:
             $ref: '#/definitions/errorResponse'
-      summary: Retrieve metric metatadata
+      summary: Retrieve metric metadata
       x-ms-examples:
         metricMetadata:
           description: Gets metadata data for metrics.
@@ -4038,7 +4038,7 @@ definitions:
         description: The method that threw the exception
         type: string
       outerAssembly:
-        description: The outer assmebly of the exception
+        description: The outer assembly of the exception
         type: string
       outerMessage:
         description: The outer message of the exception

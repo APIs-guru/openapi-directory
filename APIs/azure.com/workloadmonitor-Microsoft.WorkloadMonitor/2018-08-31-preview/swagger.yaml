@@ -15,7 +15,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/workloadmonitor/resource-manager/microsoft.workloadmonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/workloadmonitor/resource-manager/Microsoft.WorkloadMonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: workloadmonitor-Microsoft.WorkloadMonitor
@@ -114,6 +114,15 @@ parameters:
     format: uuid
     in: path
     name: monitorInstanceId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  notificationSettingName:
+    description: Default string modeled as parameter for URL to work correctly.
+    enum:
+      - default
+    in: path
+    name: notificationSettingName
     required: true
     type: string
     x-ms-parameter-location: method
@@ -1715,7 +1724,7 @@ paths:
                 nextLink: null
                 value:
                   - etag: null
-                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/components/ComponentId='d91ce384-b682-883a-d02b-129bf37f218b'
+                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/components/ComponentId='d91ce384-b682-883a-d02b-129bf37f218b'
                     name: ComponentId='d91ce384-b682-883a-d02b-129bf37f218b'
                     properties:
                       aggregateProperties:
@@ -1763,7 +1772,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/components
                   - etag: null
-                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/components/ComponentId='06400e6a-6bac-1717-1e0d-e28f31a2e88b'
+                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/components/ComponentId='06400e6a-6bac-1717-1e0d-e28f31a2e88b'
                     name: ComponentId='06400e6a-6bac-1717-1e0d-e28f31a2e88b'
                     properties:
                       aggregateProperties:
@@ -1811,7 +1820,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/components
                   - etag: null
-                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/components/ComponentId='804fc44e-c49d-58f0-3b03-bf24f7d11663'
+                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/components/ComponentId='804fc44e-c49d-58f0-3b03-bf24f7d11663'
                     name: ComponentId='804fc44e-c49d-58f0-3b03-bf24f7d11663'
                     properties:
                       aggregateProperties:
@@ -1859,7 +1868,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/components
                   - etag: null
-                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/components/ComponentId='1a526816-f757-7328-d0b2-7daf65fd919b'
+                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/components/ComponentId='1a526816-f757-7328-d0b2-7daf65fd919b'
                     name: ComponentId='1a526816-f757-7328-d0b2-7daf65fd919b'
                     properties:
                       aggregateProperties:
@@ -1907,7 +1916,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/components
                   - etag: null
-                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/components/ComponentId='767aea7b-2a28-8c7b-9a61-153eeced9466'
+                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/components/ComponentId='767aea7b-2a28-8c7b-9a61-153eeced9466'
                     name: ComponentId='767aea7b-2a28-8c7b-9a61-153eeced9466'
                     properties:
                       aggregateProperties:
@@ -1955,7 +1964,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/components
                   - etag: null
-                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/components/ComponentId='ebf38b50-d78a-817b-89ee-0e5870c643ef'
+                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/components/ComponentId='ebf38b50-d78a-817b-89ee-0e5870c643ef'
                     name: ComponentId='ebf38b50-d78a-817b-89ee-0e5870c643ef'
                     properties:
                       aggregateProperties:
@@ -2003,7 +2012,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/components
                   - etag: null
-                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/components/ComponentId='05a70c91-2163-d974-638d-2ddda2308153'
+                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/components/ComponentId='05a70c91-2163-d974-638d-2ddda2308153'
                     name: ComponentId='05a70c91-2163-d974-638d-2ddda2308153'
                     properties:
                       aggregateProperties:
@@ -2051,7 +2060,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/components
                   - etag: null
-                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/components/ComponentId='3d945642-b98c-37b1-a75c-ee03cdb599ad'
+                    id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/components/ComponentId='3d945642-b98c-37b1-a75c-ee03cdb599ad'
                     name: ComponentId='3d945642-b98c-37b1-a75c-ee03cdb599ad'
                     properties:
                       aggregateProperties:
@@ -2165,7 +2174,7 @@ paths:
             '200':
               body:
                 etag: null
-                id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/components/ComponentId='d91ce384-b682-883a-d02b-129bf37f218b'
+                id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/components/ComponentId='d91ce384-b682-883a-d02b-129bf37f218b'
                 name: ComponentId='d91ce384-b682-883a-d02b-129bf37f218b'
                 properties:
                   aggregateProperties:
@@ -2259,7 +2268,7 @@ paths:
                 nextLink: null
                 value:
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=052f9b7d-7bf0-7f61-966b-f372e207ef4e'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=052f9b7d-7bf0-7f61-966b-f372e207ef4e'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=052f9b7d-7bf0-7f61-966b-f372e207ef4e'''
                     properties:
                       aggregateProperties:
@@ -2308,7 +2317,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=b974db31-cf93-9d6b-740a-9f8508b92712'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=b974db31-cf93-9d6b-740a-9f8508b92712'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=b974db31-cf93-9d6b-740a-9f8508b92712'''
                     properties:
                       aggregateProperties:
@@ -2357,7 +2366,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=a6c69968-61aa-a6b9-db6e-83a0da6110ea'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=a6c69968-61aa-a6b9-db6e-83a0da6110ea'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=a6c69968-61aa-a6b9-db6e-83a0da6110ea'''
                     properties:
                       aggregateProperties:
@@ -2406,7 +2415,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=c9db5e55-f3c8-7366-6b98-bc727e726a4b'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=c9db5e55-f3c8-7366-6b98-bc727e726a4b'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=c9db5e55-f3c8-7366-6b98-bc727e726a4b'''
                     properties:
                       aggregateProperties:
@@ -2455,7 +2464,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     properties:
                       aggregateProperties:
@@ -2504,7 +2513,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=b787a678-ce4b-c473-b6b4-6e1dbf184a61'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=b787a678-ce4b-c473-b6b4-6e1dbf184a61'''
                     name: 'ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=b787a678-ce4b-c473-b6b4-6e1dbf184a61'''
                     properties:
                       aggregateProperties:
@@ -2553,7 +2562,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=9a86ee3f-d133-b183-a400-6ad3a3834c86'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=9a86ee3f-d133-b183-a400-6ad3a3834c86'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=9a86ee3f-d133-b183-a400-6ad3a3834c86'''
                     properties:
                       aggregateProperties:
@@ -2602,7 +2611,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=6799aaae-533c-9a8d-331f-ea833db85d1d'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=6799aaae-533c-9a8d-331f-ea833db85d1d'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=6799aaae-533c-9a8d-331f-ea833db85d1d'''
                     properties:
                       aggregateProperties:
@@ -2651,7 +2660,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=75472fe7-e406-32a6-4198-0502ecee1bfe'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=75472fe7-e406-32a6-4198-0502ecee1bfe'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=75472fe7-e406-32a6-4198-0502ecee1bfe'''
                     properties:
                       aggregateProperties:
@@ -2700,7 +2709,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=f69b8b3f-3ba6-adf0-cdec-7c01b385d13c'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=f69b8b3f-3ba6-adf0-cdec-7c01b385d13c'''
                     name: 'ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=f69b8b3f-3ba6-adf0-cdec-7c01b385d13c'''
                     properties:
                       aggregateProperties:
@@ -2749,7 +2758,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=887e162a-74f4-2951-64e5-87dd5f076342'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=887e162a-74f4-2951-64e5-87dd5f076342'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=887e162a-74f4-2951-64e5-87dd5f076342'''
                     properties:
                       aggregateProperties:
@@ -2798,7 +2807,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=a6c69968-61aa-a6b9-db6e-83a0da6110ea'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=a6c69968-61aa-a6b9-db6e-83a0da6110ea'''
                     name: 'ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=a6c69968-61aa-a6b9-db6e-83a0da6110ea'''
                     properties:
                       aggregateProperties:
@@ -2847,7 +2856,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     properties:
                       aggregateProperties:
@@ -2896,7 +2905,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=3c184dff-8813-38f9-e965-2a9561425180'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=3c184dff-8813-38f9-e965-2a9561425180'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=3c184dff-8813-38f9-e965-2a9561425180'''
                     properties:
                       aggregateProperties:
@@ -2945,7 +2954,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=4585a2f7-87c5-54e7-2b76-81af1073aec8'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=4585a2f7-87c5-54e7-2b76-81af1073aec8'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=4585a2f7-87c5-54e7-2b76-81af1073aec8'''
                     properties:
                       aggregateProperties:
@@ -2994,7 +3003,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=37232a87-988f-6256-3033-ea0c102c2d43'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=37232a87-988f-6256-3033-ea0c102c2d43'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=37232a87-988f-6256-3033-ea0c102c2d43'''
                     properties:
                       aggregateProperties:
@@ -3043,7 +3052,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=50fd1db1-7111-d67e-3f81-e73203d073e3'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=50fd1db1-7111-d67e-3f81-e73203d073e3'''
                     name: 'ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=50fd1db1-7111-d67e-3f81-e73203d073e3'''
                     properties:
                       aggregateProperties:
@@ -3092,7 +3101,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=41eccc60-5578-2eea-e104-8bf7022ed5af'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=41eccc60-5578-2eea-e104-8bf7022ed5af'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=41eccc60-5578-2eea-e104-8bf7022ed5af'''
                     properties:
                       aggregateProperties:
@@ -3141,7 +3150,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=e80001dc-3aa8-e5c8-f782-5b4ef144fd5c'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=e80001dc-3aa8-e5c8-f782-5b4ef144fd5c'''
                     name: 'ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=e80001dc-3aa8-e5c8-f782-5b4ef144fd5c'''
                     properties:
                       aggregateProperties:
@@ -3190,7 +3199,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=c688a072-2a8f-6409-1895-a0cc363cb326'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=c688a072-2a8f-6409-1895-a0cc363cb326'''
                     name: 'ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=c688a072-2a8f-6409-1895-a0cc363cb326'''
                     properties:
                       aggregateProperties:
@@ -3239,7 +3248,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     name: 'ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     properties:
                       aggregateProperties:
@@ -3288,7 +3297,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=850400b6-9fd2-d927-bc47-9934dfe28845'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=850400b6-9fd2-d927-bc47-9934dfe28845'''
                     name: 'ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=850400b6-9fd2-d927-bc47-9934dfe28845'''
                     properties:
                       aggregateProperties:
@@ -3337,7 +3346,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=94df5e8c-989a-f595-86b0-0baba4662bfb'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=94df5e8c-989a-f595-86b0-0baba4662bfb'''
                     name: 'ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=94df5e8c-989a-f595-86b0-0baba4662bfb'''
                     properties:
                       aggregateProperties:
@@ -3386,7 +3395,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=33f2143c-d677-6d10-c676-2f2bac54bbbd'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=33f2143c-d677-6d10-c676-2f2bac54bbbd'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=33f2143c-d677-6d10-c676-2f2bac54bbbd'''
                     properties:
                       aggregateProperties:
@@ -3435,7 +3444,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=99dbb2f7-9335-40c1-562e-0bee9e43b029'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=99dbb2f7-9335-40c1-562e-0bee9e43b029'''
                     name: 'ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=99dbb2f7-9335-40c1-562e-0bee9e43b029'''
                     properties:
                       aggregateProperties:
@@ -3484,7 +3493,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=99dbb2f7-9335-40c1-562e-0bee9e43b029'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=99dbb2f7-9335-40c1-562e-0bee9e43b029'''
                     name: 'ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=99dbb2f7-9335-40c1-562e-0bee9e43b029'''
                     properties:
                       aggregateProperties:
@@ -3533,7 +3542,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=850400b6-9fd2-d927-bc47-9934dfe28845'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=850400b6-9fd2-d927-bc47-9934dfe28845'''
                     name: 'ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=850400b6-9fd2-d927-bc47-9934dfe28845'''
                     properties:
                       aggregateProperties:
@@ -3582,7 +3591,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=584e5846-a4a3-a17a-26fd-25014f727ee9'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=584e5846-a4a3-a17a-26fd-25014f727ee9'''
                     name: 'ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=584e5846-a4a3-a17a-26fd-25014f727ee9'''
                     properties:
                       aggregateProperties:
@@ -3631,7 +3640,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=8966cbe8-38d2-57be-5937-3d43e38a3df5'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=8966cbe8-38d2-57be-5937-3d43e38a3df5'''
                     name: 'ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=8966cbe8-38d2-57be-5937-3d43e38a3df5'''
                     properties:
                       aggregateProperties:
@@ -3680,7 +3689,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=584e5846-a4a3-a17a-26fd-25014f727ee9'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=584e5846-a4a3-a17a-26fd-25014f727ee9'''
                     name: 'ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=584e5846-a4a3-a17a-26fd-25014f727ee9'''
                     properties:
                       aggregateProperties:
@@ -3729,7 +3738,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=f69b8b3f-3ba6-adf0-cdec-7c01b385d13c'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=f69b8b3f-3ba6-adf0-cdec-7c01b385d13c'''
                     name: 'ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=f69b8b3f-3ba6-adf0-cdec-7c01b385d13c'''
                     properties:
                       aggregateProperties:
@@ -3778,7 +3787,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=8966cbe8-38d2-57be-5937-3d43e38a3df5'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=8966cbe8-38d2-57be-5937-3d43e38a3df5'''
                     name: 'ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=8966cbe8-38d2-57be-5937-3d43e38a3df5'''
                     properties:
                       aggregateProperties:
@@ -3827,7 +3836,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=07cacb31-615d-5c7a-e118-fd55c17b5a2c'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=07cacb31-615d-5c7a-e118-fd55c17b5a2c'''
                     name: 'ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=07cacb31-615d-5c7a-e118-fd55c17b5a2c'''
                     properties:
                       aggregateProperties:
@@ -3876,7 +3885,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=194d2011-69ed-50bb-4d50-a394d48fb048'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=194d2011-69ed-50bb-4d50-a394d48fb048'''
                     name: 'ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=194d2011-69ed-50bb-4d50-a394d48fb048'''
                     properties:
                       aggregateProperties:
@@ -3925,7 +3934,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=c688a072-2a8f-6409-1895-a0cc363cb326'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=c688a072-2a8f-6409-1895-a0cc363cb326'''
                     name: 'ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=c688a072-2a8f-6409-1895-a0cc363cb326'''
                     properties:
                       aggregateProperties:
@@ -3974,7 +3983,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=728733ca-14e2-9ddc-8ec8-5de911bdf35f'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=728733ca-14e2-9ddc-8ec8-5de911bdf35f'''
                     name: 'ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=728733ca-14e2-9ddc-8ec8-5de911bdf35f'''
                     properties:
                       aggregateProperties:
@@ -4023,7 +4032,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=1aa535e9-d09c-3557-297f-62923069ba81'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=1aa535e9-d09c-3557-297f-62923069ba81'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=1aa535e9-d09c-3557-297f-62923069ba81'''
                     properties:
                       aggregateProperties:
@@ -4072,7 +4081,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     name: 'ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     properties:
                       aggregateProperties:
@@ -4121,7 +4130,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     name: 'ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     properties:
                       aggregateProperties:
@@ -4170,7 +4179,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=c2396f9e-22eb-9a72-0149-ea3b9a219e64'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=c2396f9e-22eb-9a72-0149-ea3b9a219e64'''
                     name: 'ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=c2396f9e-22eb-9a72-0149-ea3b9a219e64'''
                     properties:
                       aggregateProperties:
@@ -4219,7 +4228,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=b12539ea-7122-af29-6af6-0047432bab6a'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=b12539ea-7122-af29-6af6-0047432bab6a'''
                     name: 'ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=b12539ea-7122-af29-6af6-0047432bab6a'''
                     properties:
                       aggregateProperties:
@@ -4268,7 +4277,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     name: 'ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     properties:
                       aggregateProperties:
@@ -4317,7 +4326,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=c2396f9e-22eb-9a72-0149-ea3b9a219e64'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=c2396f9e-22eb-9a72-0149-ea3b9a219e64'''
                     name: 'ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=c2396f9e-22eb-9a72-0149-ea3b9a219e64'''
                     properties:
                       aggregateProperties:
@@ -4366,7 +4375,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     name: 'ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     properties:
                       aggregateProperties:
@@ -4415,7 +4424,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     name: 'ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     properties:
                       aggregateProperties:
@@ -4464,7 +4473,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=22e3b675-109e-9292-952e-7554604e3605'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=22e3b675-109e-9292-952e-7554604e3605'''
                     name: 'ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=22e3b675-109e-9292-952e-7554604e3605'''
                     properties:
                       aggregateProperties:
@@ -4513,7 +4522,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     name: 'ComponentId=''804fc44e-c49d-58f0-3b03-bf24f7d11663'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     properties:
                       aggregateProperties:
@@ -4562,7 +4571,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=062d163a-0742-73d9-1d9d-a582c82127e4'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=062d163a-0742-73d9-1d9d-a582c82127e4'''
                     name: 'ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=062d163a-0742-73d9-1d9d-a582c82127e4'''
                     properties:
                       aggregateProperties:
@@ -4611,7 +4620,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=062d163a-0742-73d9-1d9d-a582c82127e4'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=062d163a-0742-73d9-1d9d-a582c82127e4'''
                     name: 'ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=062d163a-0742-73d9-1d9d-a582c82127e4'''
                     properties:
                       aggregateProperties:
@@ -4660,7 +4669,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=22e3b675-109e-9292-952e-7554604e3605'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=22e3b675-109e-9292-952e-7554604e3605'''
                     name: 'ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=22e3b675-109e-9292-952e-7554604e3605'''
                     properties:
                       aggregateProperties:
@@ -4709,7 +4718,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=8a16058b-d31e-c156-3460-2c6cae7bfc49'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=8a16058b-d31e-c156-3460-2c6cae7bfc49'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=8a16058b-d31e-c156-3460-2c6cae7bfc49'''
                     properties:
                       aggregateProperties:
@@ -4758,7 +4767,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=08ec2bb4-32be-2fae-2d5a-6b65feb200a6'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=08ec2bb4-32be-2fae-2d5a-6b65feb200a6'''
                     name: 'ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=08ec2bb4-32be-2fae-2d5a-6b65feb200a6'''
                     properties:
                       aggregateProperties:
@@ -4807,7 +4816,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=b8375781-0835-15b6-c782-f497b54b65ea'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=b8375781-0835-15b6-c782-f497b54b65ea'''
                     name: 'ComponentId=''06400e6a-6bac-1717-1e0d-e28f31a2e88b'',MonitorId=b8375781-0835-15b6-c782-f497b54b65ea'''
                     properties:
                       aggregateProperties:
@@ -4856,7 +4865,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     name: 'ComponentId=''1a526816-f757-7328-d0b2-7daf65fd919b'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     properties:
                       aggregateProperties:
@@ -4905,7 +4914,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     name: 'ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     properties:
                       aggregateProperties:
@@ -4954,7 +4963,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     name: 'ComponentId=''767aea7b-2a28-8c7b-9a61-153eeced9466'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     properties:
                       aggregateProperties:
@@ -5003,7 +5012,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     name: 'ComponentId=''ebf38b50-d78a-817b-89ee-0e5870c643ef'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     properties:
                       aggregateProperties:
@@ -5052,7 +5061,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     name: 'ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=7db3eece-fd0d-fddd-3af7-f8371a914874'''
                     properties:
                       aggregateProperties:
@@ -5101,7 +5110,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=08ec2bb4-32be-2fae-2d5a-6b65feb200a6'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=08ec2bb4-32be-2fae-2d5a-6b65feb200a6'''
                     name: 'ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=08ec2bb4-32be-2fae-2d5a-6b65feb200a6'''
                     properties:
                       aggregateProperties:
@@ -5150,7 +5159,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     name: 'ComponentId=''05a70c91-2163-d974-638d-2ddda2308153'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     properties:
                       aggregateProperties:
@@ -5199,7 +5208,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     name: 'ComponentId=''3d945642-b98c-37b1-a75c-ee03cdb599ad'',MonitorId=e3ab86a1-34fa-35b5-b864-da4db993c0f5'''
                     properties:
                       aggregateProperties:
@@ -5248,7 +5257,7 @@ paths:
                       workspaceId: d00ad535-951e-4c6b-ae1b-5d4a5c7a8a3d
                     type: Microsoft.WorkloadMonitor/workloadInsights/healthInstances
                   - etag: null
-                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=7af5bcb4-31e9-5ec9-268f-178c265a6c2c'''
+                    id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=7af5bcb4-31e9-5ec9-268f-178c265a6c2c'''
                     name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=7af5bcb4-31e9-5ec9-268f-178c265a6c2c'''
                     properties:
                       aggregateProperties:
@@ -5363,7 +5372,7 @@ paths:
             '200':
               body:
                 etag: null
-                id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=052f9b7d-7bf0-7f61-966b-f372e207ef4e'''
+                id: '/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/healthInstances/ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=052f9b7d-7bf0-7f61-966b-f372e207ef4e'''
                 name: 'ComponentId=''d91ce384-b682-883a-d02b-129bf37f218b'',MonitorId=052f9b7d-7bf0-7f61-966b-f372e207ef4e'''
                 properties:
                   aggregateProperties:
@@ -7192,13 +7201,151 @@ paths:
           responses:
             '200':
               body:
-                nextLink: null
                 value:
-                  - etag: null
-                    properties:
-                      actionGroups: []
+                  - properties:
+                      actionGroupResourceIds: []
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/notificationSettings/{notificationSettingName}':
+    get:
+      consumes: []
+      operationId: NotificationSettings_Get
+      parameters:
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The Namespace of the resource.
+          in: path
+          name: resourceNamespace
+          required: true
+          type: string
+        - description: The type of the resource.
+          in: path
+          name: resourceType
+          required: true
+          type: string
+        - description: Name of the resource.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+        - $ref: '#/parameters/notificationSettingName'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK. At least one component found.
+          schema:
+            $ref: '#/definitions/NotificationSetting'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Get a of notification setting for a resource.
+      tags:
+        - WLIExtension
+      x-ms-examples:
+        NotificationSettings_Get:
+          parameters:
+            api-version: 2018-08-31-preview
+            notificationSettingName: default
+            resourceGroupName: viv_rg
+            resourceName: Canary-WLI-2
+            resourceNamespace: Microsoft.Compute
+            resourceType: virtualMachines
+            subscriptionId: a7f23fdb-e626-4f95-89aa-3a360a90861e
+          responses:
+            '200':
+              body:
+                etag: null
+                id: /subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.Compute/virtualMachines/Canary-WLI-2/providers/Microsoft.WorkloadMonitor/notificationSettings/default
+                name: default
+                properties:
+                  actionGroupResourceIds: []
+                type: Microsoft.WorkloadMonitor/virtualMachines/notificationSettings
+    put:
+      consumes:
+        - application/json
+      operationId: NotificationSettings_Update
+      parameters:
+        - description: The ID of the target subscription.
+          in: path
+          minLength: 1
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          maxLength: 90
+          minLength: 1
+          name: resourceGroupName
+          pattern: '^[-\w\._\(\)]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The Namespace of the resource.
+          in: path
+          name: resourceNamespace
+          required: true
+          type: string
+        - description: The type of the resource.
+          in: path
+          name: resourceType
+          required: true
+          type: string
+        - description: Name of the resource.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+        - $ref: '#/parameters/notificationSettingName'
+        - $ref: '#/parameters/api-version'
+        - description: Body of the NotificationSetting PUT object.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/NotificationSetting'
+      responses:
+        '200':
+          description: OK. At least one component found.
+          schema:
+            $ref: '#/definitions/NotificationSetting'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Update notification settings for a resource.
+      tags:
+        - WLIExtension
+      x-ms-examples:
+        NotificationSettings_Update:
+          parameters:
+            api-version: 2018-08-31-preview
+            body:
+              properties:
+                actionGroupResourceIds:
+                  - /subscriptions/12c5bb75-2c2c-44b1-8d7d-cbf4d12ff5c1/resourceGroups/vgajulaRG/providers/microsoft.insights/actiongroups/wli-we
+            notificationSettingName: default
+            resourceGroupName: viv_rg
+            resourceName: Canary-WLI-2
+            resourceNamespace: Microsoft.Compute
+            resourceType: virtualMachines
+            subscriptionId: a7f23fdb-e626-4f95-89aa-3a360a90861e
+          responses:
+            '200':
+              body: {}
 definitions:
   Component:
     allOf:
@@ -7432,7 +7579,7 @@ definitions:
     description: Criteria for monitor configuration
     properties:
       comparisonOperator:
-        description: Comparison enum on theshold of this criteria
+        description: Comparison enum on threshold of this criteria
         enum:
           - Equals
           - GreaterThan
@@ -7459,7 +7606,7 @@ definitions:
           modelAsString: false
           name: HealthState
       threshold:
-        description: Treshold value for this criteria
+        description: Threshold value for this criteria
         format: double
         readOnly: true
         type: number
@@ -7672,7 +7819,7 @@ definitions:
         readOnly: true
         type: string
       criteria:
-        description: 'Collection of MonitorCriteria. For PATCH calls, instead of partial list, complete list of expected criteria should be passed for proper updation.'
+        description: 'Collection of MonitorCriteria. For PATCH calls, instead of partial list, complete list of expected criteria should be passed for proper updating.'
         items:
           $ref: '#/definitions/MonitorCriteria'
         readOnly: true
@@ -7790,7 +7937,7 @@ definitions:
                 type: string
             x-ms-azure-resource: true
         description: The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
-    description: Model for component.
+    description: Model for NotificationSetting.
     properties:
       etag:
         description: For optimistic concurrency control.
@@ -7798,14 +7945,14 @@ definitions:
         type: string
       properties:
         $ref: '#/definitions/NotificationSettingProperties'
-        description: Properties of the component.
+        description: Properties of Notification Settings
         readOnly: true
         x-ms-client-flatten: true
     type: object
   NotificationSettingProperties:
     description: Model for properties of a NotificationSetting.
     properties:
-      actionGroups:
+      actionGroupResourceIds:
         description: List of action group resource ids to be notified
         items:
           type: string
@@ -7820,12 +7967,11 @@ definitions:
         readOnly: true
         type: string
       value:
-        description: Collection of components.
         items:
           $ref: '#/definitions/NotificationSetting'
-        readOnly: true
         type: array
     type: object
+    x-ms-azure-resource: true
   Operation:
     description: Operation supported by the resource provider.
     properties:

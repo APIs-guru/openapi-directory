@@ -13,7 +13,7 @@ info:
     name: MonitorManagementClient
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/microsoft.insights/stable/2015-04-01/operations_API.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: monitor-operations_API
@@ -177,8 +177,11 @@ paths:
                     name: Microsoft.Insights/AutoscaleSettings/providers/Microsoft.Insights/MetricDefinitions/Read
                     properties:
                       serviceSpecification:
+                        legacyMetricSpecifications: null
+                        logSpecifications: null
                         metricSpecifications:
                           - aggregationType: Average
+                            availabilities: null
                             category: Metric
                             dimensions:
                               - displayName: Metric Trigger Source
@@ -190,6 +193,7 @@ paths:
                             name: ObservedMetricValue
                             unit: Count
                           - aggregationType: Average
+                            availabilities: null
                             category: Metric
                             dimensions:
                               - displayName: Metric Trigger Rule
@@ -201,13 +205,16 @@ paths:
                             name: MetricThreshold
                             unit: Count
                           - aggregationType: Average
+                            availabilities: null
                             category: ScaleAction
+                            dimensions: null
                             displayDescription: The capacity reported to autoscale when it executed.
                             displayName: Observed Capacity
                             fillGapWithZero: false
                             name: ObservedCapacity
                             unit: Count
                           - aggregationType: Total
+                            availabilities: null
                             category: ScaleAction
                             dimensions:
                               - displayName: Scale Direction
@@ -467,12 +474,36 @@ paths:
                     name: Microsoft.Insights/Webtests/Delete
                     properties: {}
                   - display:
-                      description: Reading a webtest configuration
-                      operation: Webtest read
-                      provider: Microsoft Monitoring Insights
+                      description: Reading a Workbooks configuration
+                      operation: Workbooks read
+                      provider: Microsoft Application Insights
                       publisher: Microsoft
-                      resource: Web tests
-                    name: Microsoft.Insights/Webtests/Read
+                      resource: Workbooks
+                    name: Microsoft.Insights/Workbooks/Read
+                    properties: {}
+                  - display:
+                      description: Writing to a Workbooks configuration
+                      operation: Workbooks write
+                      provider: Microsoft Application Insights
+                      publisher: Microsoft
+                      resource: Workbooks
+                    name: Microsoft.Insights/Workbooks/Write
+                    properties: {}
+                  - display:
+                      description: Deleting a Workbooks configuration
+                      operation: Workbooks delete
+                      provider: Microsoft Application Insights
+                      publisher: Microsoft
+                      resource: Workbooks
+                    name: Microsoft.Insights/Workbooks/Delete
+                    properties: {}
+                  - display:
+                      description: Reading a Workbooks configuration
+                      operation: Workbooks read
+                      provider: Microsoft Application Insights
+                      publisher: Microsoft
+                      resource: Workbooks
+                    name: Microsoft.Insights/Workbooks/Read
                     properties: {}
 definitions:
   Operation:

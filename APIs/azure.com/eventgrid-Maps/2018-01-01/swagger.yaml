@@ -1,0 +1,100 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  description: Describes the schema of the Azure Maps events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.
+  title: Schema of Azure Maps events published to Azure Event Grid
+  version: '2018-01-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventgrid/data-plane/Microsoft.Maps/stable/2018-01-01/Maps.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: eventgrid-Maps
+  x-tags:
+    - Azure
+    - Microsoft
+paths: {}
+definitions:
+  MapsGeofenceDetail:
+    description: Lists detail generated during processing.
+    properties:
+      code:
+        description: The detail code which identifies each detail item being returned.
+        enum:
+          - ExpiredGeofencingData
+          - GeofencingEventPublished
+          - InvalidTimeGeofencingData
+        type: string
+        x-ms-enum:
+          name: MapsGeofenceDetailCodeType
+      message:
+        description: Text description of the detail.
+        type: string
+      type:
+        description: The type of the detail.
+        enum:
+          - Information
+          - Warning
+        type: string
+        x-ms-enum:
+          name: MapsGeofenceDetailType
+          values:
+            - description: Useful information to inform clients.
+              value: Information
+            - description: The detail serves as a warning to client.
+              value: Warning
+    type: object
+  MapsGeofenceEnteredEventData:
+    allOf:
+      - $ref: '#/definitions/MapsGeofenceEventProperties'
+    description: Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event.
+    properties: {}
+  MapsGeofenceEventProperties:
+    description: 'Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult).'
+    properties:
+      details:
+        description: List details generated during processing.
+        items:
+          $ref: '#/definitions/MapsGeofenceDetail'
+        type: array
+      geometries:
+        description: Lists the fence geometries that either fully contain the coordinate position or have an overlap with the searchBuffer around the fence.
+        items:
+          $ref: '#/definitions/MapsGeofenceGeometry'
+        type: array
+    type: object
+  MapsGeofenceExitedEventData:
+    allOf:
+      - $ref: '#/definitions/MapsGeofenceEventProperties'
+    description: Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event.
+    properties: {}
+  MapsGeofenceGeometry:
+    description: The geofence geometry.
+    properties:
+      distance:
+        description: 'Distance from the coordinate to the closest border line of the polygon, point or point on the polyline. If the coordinate is outside, then the distance is positive. Negative means the coordinate is inside. If the coordinate is inside the polygon, but more than the value of searchBuffer away from the closest polygon border line, point or polyline, then the value is -999. A value of -999 means that there is great confidence the coordinate is well within the geofence.'
+        type: number
+      geometryId:
+        description: The unique ID for the geofence geometry.
+        type: string
+      nearestLat:
+        description: Latitude of the nearest point of the geometry/geometry border. Void if distance = -999.
+        type: number
+      nearestLon:
+        description: Longitude of the nearest point of the geometry/geometry border. Void if distance = -999.
+        type: number
+      udId:
+        description: The unique ID returned from user upload service when uploading a geofence.
+        type: string
+    type: object
+  MapsGeofenceResultEventData:
+    allOf:
+      - $ref: '#/definitions/MapsGeofenceEventProperties'
+    description: Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event.
+    properties: {}

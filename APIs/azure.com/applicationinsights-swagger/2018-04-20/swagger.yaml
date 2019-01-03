@@ -20,7 +20,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/data-plane/microsoft.insights/preview/2018-04-20/swagger.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/applicationinsights/data-plane/Microsoft.Insights/preview/2018-04-20/swagger.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: applicationinsights-swagger
@@ -714,7 +714,7 @@ paths:
           description: An error response object.
           schema:
             $ref: '#/definitions/errorResponse'
-      summary: Retrieve metric metatadata
+      summary: Retrieve metric metadata
       x-ms-examples:
         metricMetadata:
           description: Gets metadata data for metrics.
@@ -4046,7 +4046,7 @@ definitions:
         description: The method that threw the exception
         type: string
       outerAssembly:
-        description: The outer assmebly of the exception
+        description: The outer assembly of the exception
         type: string
       outerMessage:
         description: The outer message of the exception

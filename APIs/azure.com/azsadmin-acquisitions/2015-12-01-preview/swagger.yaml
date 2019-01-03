@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/storage/Microsoft.Storage.Admin/preview/2016-05-01/acquisitions.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/storage/Microsoft.Storage.Admin/preview/2015-12-01/acquisitions.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: azsadmin-acquisitions
@@ -38,7 +38,7 @@ parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/acquisitions':
     get:
-      description: Returns a list of BLOB acquistions.
+      description: Returns a list of BLOB acquisitions.
       operationId: Acquisitions_List
       parameters:
         - description: Subscription Id.
@@ -115,7 +115,7 @@ paths:
                       readOnly: true
                       type: string
                     container:
-                      description: The container associated with the the page BLOB.
+                      description: The container associated with the page BLOB.
                       readOnly: true
                       type: string
                     filePath:
@@ -153,7 +153,7 @@ paths:
       tags:
         - Acquisitions
       x-ms-examples:
-        Returns a list of page BLOB acquistions.:
+        Returns a list of page BLOB acquisitions.:
           parameters:
             api-version: 2015-12-01-preview
             farmId: 3cf03497-c44a-4e51-a56f-3987d88c70af
@@ -207,7 +207,7 @@ definitions:
             readOnly: true
             type: string
           container:
-            description: The container associated with the the page BLOB.
+            description: The container associated with the page BLOB.
             readOnly: true
             type: string
           filePath:
@@ -283,7 +283,7 @@ definitions:
               readOnly: true
               type: string
             container:
-              description: The container associated with the the page BLOB.
+              description: The container associated with the page BLOB.
               readOnly: true
               type: string
             filePath:
@@ -328,7 +328,7 @@ definitions:
         readOnly: true
         type: string
       container:
-        description: The container associated with the the page BLOB.
+        description: The container associated with the page BLOB.
         readOnly: true
         type: string
       filePath:

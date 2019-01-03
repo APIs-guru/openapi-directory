@@ -23,7 +23,7 @@ info:
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/content/v2sandbox/rest'
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: content
 externalDocs:
@@ -1220,13 +1220,13 @@ definitions:
         description: |-
           The type of instrument.
 
-          Acceptable values are:  
-          - "AMEX" 
-          - "DISCOVER" 
-          - "JCB" 
-          - "MASTERCARD" 
-          - "UNIONPAY" 
-          - "VISA" 
+          Acceptable values are:
+          - "AMEX"
+          - "DISCOVER"
+          - "JCB"
+          - "MASTERCARD"
+          - "UNIONPAY"
+          - "VISA"
           - ""
         type: string
     type: object
@@ -1320,22 +1320,22 @@ definitions:
         description: |-
           The carrier handling the shipment.
 
-          Acceptable values are:  
-          - "gsx" 
-          - "ups" 
-          - "usps" 
-          - "fedex" 
-          - "dhl" 
-          - "ecourier" 
-          - "cxt" 
-          - "google" 
-          - "ontrac" 
-          - "emsy" 
-          - "ont" 
-          - "deliv" 
-          - "dynamex" 
-          - "lasership" 
-          - "mpx" 
+          Acceptable values are:
+          - "gsx"
+          - "ups"
+          - "usps"
+          - "fedex"
+          - "dhl"
+          - "ecourier"
+          - "cxt"
+          - "google"
+          - "ontrac"
+          - "emsy"
+          - "ont"
+          - "deliv"
+          - "dynamex"
+          - "lasership"
+          - "mpx"
           - "uds"
         type: string
       creationDate:

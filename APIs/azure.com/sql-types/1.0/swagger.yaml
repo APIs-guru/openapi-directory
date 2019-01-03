@@ -1,0 +1,129 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Common types
+  version: '1.0'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/common/v1/types.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: sql-types
+  x-tags:
+    - Azure
+    - Microsoft
+parameters:
+  ApiVersionParameter:
+    description: The API version to use for the request.
+    in: query
+    name: api-version
+    required: true
+    type: string
+    x-ms-parameter-location: client
+  ResourceGroupParameter:
+    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+    in: path
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: The subscription ID that identifies an Azure subscription.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+    x-ms-parameter-location: client
+paths: {}
+definitions:
+  ProxyResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: ARM proxy resource.
+    properties: {}
+    type: object
+  Resource:
+    description: ARM resource.
+    properties:
+      id:
+        description: Resource ID.
+        readOnly: true
+        type: string
+      name:
+        description: Resource name.
+        readOnly: true
+        type: string
+      type:
+        description: Resource type.
+        readOnly: true
+        type: string
+    type: object
+    x-ms-azure-resource: true
+  ResourceIdentity:
+    description: Azure Active Directory identity configuration for a resource.
+    properties:
+      principalId:
+        description: The Azure Active Directory principal id.
+        format: uuid
+        readOnly: true
+        type: string
+      tenantId:
+        description: The Azure Active Directory tenant id.
+        format: uuid
+        readOnly: true
+        type: string
+      type:
+        description: The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.
+        enum:
+          - SystemAssigned
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: IdentityType
+    type: object
+  Sku:
+    description: The resource model definition representing SKU
+    properties:
+      capacity:
+        description: If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.
+        format: int32
+        type: integer
+      family:
+        description: 'If the service has different generations of hardware, for the same SKU, then that can be captured here.'
+        type: string
+      name:
+        description: The name of the SKU. Ex - P3. It is typically a letter+number code
+        type: string
+      size:
+        description: 'The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. '
+        type: string
+      tier:
+        description: 'This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.'
+        type: string
+    required:
+      - name
+  TrackedResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: ARM tracked top level resource.
+    properties:
+      location:
+        description: Resource location.
+        type: string
+        x-ms-mutability:
+          - read
+          - create
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+    required:
+      - location
+    type: object

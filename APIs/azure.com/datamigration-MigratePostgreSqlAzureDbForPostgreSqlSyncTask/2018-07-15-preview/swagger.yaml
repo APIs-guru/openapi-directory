@@ -1,0 +1,407 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Database Migration Service Resource Provider
+  version: 2018-07-15-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json'
+      version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: datamigration-MigratePostgreSqlAzureDbForPostgreSqlSyncTask
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseInput:
+    description: Database specific information for PostgreSQL to Azure Database for PostgreSQL migration task inputs
+    properties:
+      migrationSetting:
+        additionalProperties:
+          type: string
+        description: Migration settings which tune the migration behavior
+        type: object
+      name:
+        description: Name of the database
+        type: string
+      sourceSetting:
+        additionalProperties:
+          type: string
+        description: Source settings to tune source endpoint migration behavior
+        type: object
+      targetDatabaseName:
+        description: 'Name of target database. Note: Target database will be truncated before starting migration.'
+        type: string
+      targetSetting:
+        additionalProperties:
+          type: string
+        description: Target settings to tune target endpoint migration behavior
+        type: object
+    type: object
+  MigratePostgreSqlAzureDbForPostgreSqlSyncTaskInput:
+    description: Input for the task that migrates PostgreSQL databases to Azure Database for PostgreSQL for online migrations
+    properties:
+      selectedDatabases:
+        description: Databases to migrate
+        items:
+          $ref: '#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseInput'
+        type: array
+      sourceConnectionInfo:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Information for connecting to PostgreSQL server
+        properties:
+          databaseName:
+            description: Name of the database
+            type: string
+          port:
+            description: Port for Server
+            type: integer
+          serverName:
+            description: Name of the server
+            type: string
+        required:
+          - serverName
+          - port
+        type: object
+        x-ms-discriminator-value: PostgreSqlConnectionInfo
+      targetConnectionInfo:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Information for connecting to PostgreSQL server
+        properties:
+          databaseName:
+            description: Name of the database
+            type: string
+          port:
+            description: Port for Server
+            type: integer
+          serverName:
+            description: Name of the server
+            type: string
+        required:
+          - serverName
+          - port
+        type: object
+        x-ms-discriminator-value: PostgreSqlConnectionInfo
+    required:
+      - targetConnectionInfo
+      - sourceConnectionInfo
+      - selectedDatabases
+    type: object
+  MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput:
+    description: Output for the task that migrates PostgreSQL databases to Azure Database for PostgreSQL for online migrations
+    discriminator: resultType
+    properties:
+      id:
+        description: Result identifier
+        readOnly: true
+        type: string
+      resultType:
+        description: Result type
+        readOnly: true
+        type: string
+    type: object
+  MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseError:
+    allOf:
+      - $ref: '#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput'
+    properties:
+      errorMessage:
+        description: Error message
+        type: string
+      events:
+        description: List of error events.
+        items:
+          description: Database migration errors for online migration
+          properties:
+            eventText:
+              description: Event text.
+              readOnly: true
+              type: string
+            eventTypeString:
+              description: Event type.
+              readOnly: true
+              type: string
+            timestampString:
+              description: String value of timestamp.
+              readOnly: true
+              type: string
+          type: object
+        type: array
+    type: object
+    x-ms-discriminator-value: DatabaseLevelErrorOutput
+  MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseLevel:
+    allOf:
+      - $ref: '#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput'
+    properties:
+      appliedChanges:
+        description: Number of applied changes
+        format: int64
+        readOnly: true
+        type: integer
+      cdcDeleteCounter:
+        description: Number of cdc deletes
+        format: int64
+        readOnly: true
+        type: integer
+      cdcInsertCounter:
+        description: Number of cdc inserts
+        format: int64
+        readOnly: true
+        type: integer
+      cdcUpdateCounter:
+        description: Number of cdc updates
+        format: int64
+        readOnly: true
+        type: integer
+      databaseName:
+        description: Name of the database
+        readOnly: true
+        type: string
+      endedOn:
+        description: Migration end time
+        format: date-time
+        readOnly: true
+        type: string
+      fullLoadCompletedTables:
+        description: Number of tables completed in full load
+        format: int64
+        readOnly: true
+        type: integer
+      fullLoadErroredTables:
+        description: Number of tables errored in full load
+        format: int64
+        readOnly: true
+        type: integer
+      fullLoadLoadingTables:
+        description: Number of tables loading in full load
+        format: int64
+        readOnly: true
+        type: integer
+      fullLoadQueuedTables:
+        description: Number of tables queued in full load
+        format: int64
+        readOnly: true
+        type: integer
+      incomingChanges:
+        description: Number of incoming changes
+        format: int64
+        readOnly: true
+        type: integer
+      initializationCompleted:
+        description: Indicates if initial load (full load) has been completed
+        readOnly: true
+        type: boolean
+      latency:
+        description: CDC apply latency
+        format: int64
+        readOnly: true
+        type: integer
+      migrationState:
+        description: Enum of the different state of database level online migration.
+        enum:
+          - UNDEFINED
+          - CONFIGURING
+          - INITIALIAZING
+          - STARTING
+          - RUNNING
+          - READY_TO_COMPLETE
+          - COMPLETING
+          - COMPLETE
+          - CANCELLING
+          - CANCELLED
+          - FAILED
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SyncDatabaseMigrationReportingState
+      startedOn:
+        description: Migration start time
+        format: date-time
+        readOnly: true
+        type: string
+    type: object
+    x-ms-discriminator-value: DatabaseLevelOutput
+  MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputError:
+    allOf:
+      - $ref: '#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput'
+    properties:
+      error:
+        description: Exception object for all custom exceptions
+        properties:
+          actionableMessage:
+            description: Actionable steps for this exception
+            type: string
+          filePath:
+            description: The path to the file where exception occurred
+            type: string
+          hResult:
+            description: Coded numerical value that is assigned to a specific exception
+            type: integer
+          lineNumber:
+            description: The line number where exception occurred
+            type: string
+          message:
+            description: Error message
+            type: string
+          stackTrace:
+            description: Stack trace
+            type: string
+        type: object
+    type: object
+    x-ms-discriminator-value: ErrorOutput
+  MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputMigrationLevel:
+    allOf:
+      - $ref: '#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput'
+    properties:
+      endedOn:
+        description: Migration end time
+        format: date-time
+        readOnly: true
+        type: string
+      sourceServer:
+        description: Source server name
+        readOnly: true
+        type: string
+      sourceServerVersion:
+        description: Source server version
+        readOnly: true
+        type: string
+      startedOn:
+        description: Migration start time
+        format: date-time
+        readOnly: true
+        type: string
+      targetServer:
+        description: Target server name
+        readOnly: true
+        type: string
+      targetServerVersion:
+        description: Target server version
+        readOnly: true
+        type: string
+    type: object
+    x-ms-discriminator-value: MigrationLevelOutput
+  MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputTableLevel:
+    allOf:
+      - $ref: '#/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput'
+    properties:
+      cdcDeleteCounter:
+        description: Number of applied deletes
+        format: int64
+        readOnly: true
+        type: integer
+      cdcInsertCounter:
+        description: Number of applied inserts
+        format: int64
+        readOnly: true
+        type: integer
+      cdcUpdateCounter:
+        description: Number of applied updates
+        format: int64
+        readOnly: true
+        type: integer
+      dataErrorsCounter:
+        description: Number of data errors occurred
+        format: int64
+        readOnly: true
+        type: integer
+      databaseName:
+        description: Name of the database
+        readOnly: true
+        type: string
+      fullLoadEndedOn:
+        description: Full load end time
+        format: date-time
+        readOnly: true
+        type: string
+      fullLoadEstFinishTime:
+        description: Estimate to finish full load
+        format: date-time
+        readOnly: true
+        type: string
+      fullLoadStartedOn:
+        description: Full load start time
+        format: date-time
+        readOnly: true
+        type: string
+      fullLoadTotalRows:
+        description: Number of rows applied in full load
+        format: int64
+        readOnly: true
+        type: integer
+      lastModifiedTime:
+        description: Last modified time on target
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        description: Enum of the different state of table level online migration.
+        enum:
+          - BEFORE_LOAD
+          - FULL_LOAD
+          - COMPLETED
+          - CANCELED
+          - ERROR
+          - FAILED
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SyncTableMigrationState
+      tableName:
+        description: Name of the table
+        readOnly: true
+        type: string
+      totalChangesApplied:
+        description: Total number of applied changes
+        format: int64
+        readOnly: true
+        type: integer
+    type: object
+    x-ms-discriminator-value: TableLevelOutput

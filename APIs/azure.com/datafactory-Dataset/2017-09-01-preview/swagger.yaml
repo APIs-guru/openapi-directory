@@ -1,0 +1,1124 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: DataFactoryManagementClient
+  version: 2017-09-01-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/Dataset.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: datafactory-Dataset
+  x-tags:
+    - Azure
+    - Microsoft
+paths: {}
+definitions:
+  AmazonMWSObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Amazon Marketplace Web Service dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: AmazonMWSObject
+  AmazonS3Dataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: A single Amazon Simple Storage Service (S3) object or a set of S3 objects.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AmazonS3DatasetTypeProperties'
+        description: Amazon S3 dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AmazonS3Object
+  AmazonS3DatasetTypeProperties:
+    description: Amazon S3 dataset properties.
+    properties:
+      bucketName:
+        description: 'The name of the Amazon S3 bucket. Type: string (or Expression with resultType string).'
+        type: object
+      compression:
+        $ref: '#/definitions/DatasetCompression'
+        description: The data compression method used for the Amazon S3 object.
+      format:
+        $ref: '#/definitions/DatasetStorageFormat'
+        description: The format of files.
+      key:
+        description: 'The key of the Amazon S3 object. Type: string (or Expression with resultType string).'
+        type: object
+      prefix:
+        description: 'The prefix filter for the S3 object name. Type: string (or Expression with resultType string).'
+        type: object
+      version:
+        description: 'The version for the S3 object. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - bucketName
+  AvroFormat:
+    allOf:
+      - $ref: '#/definitions/DatasetStorageFormat'
+    description: The data stored in Avro format.
+    type: object
+  AzureBlobDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Azure Blob storage.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureBlobDatasetTypeProperties'
+        description: Azure Blob dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureBlob
+  AzureBlobDatasetTypeProperties:
+    description: Azure Blob dataset properties.
+    properties:
+      compression:
+        $ref: '#/definitions/DatasetCompression'
+        description: The data compression method used for the blob storage.
+      fileName:
+        description: 'The name of the Azure Blob. Type: string (or Expression with resultType string).'
+        type: object
+      folderPath:
+        description: 'The path of the Azure Blob storage. Type: string (or Expression with resultType string).'
+        type: object
+      format:
+        $ref: '#/definitions/DatasetStorageFormat'
+        description: The format of the Azure Blob storage.
+      tableRootLocation:
+        description: 'The root of blob path. Type: string (or Expression with resultType string).'
+        type: object
+  AzureDataLakeStoreDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Azure Data Lake Store dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureDataLakeStoreDatasetTypeProperties'
+        description: Azure Data Lake Store dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureDataLakeStoreFile
+  AzureDataLakeStoreDatasetTypeProperties:
+    description: Azure Data Lake Store dataset properties.
+    properties:
+      compression:
+        $ref: '#/definitions/DatasetCompression'
+        description: The data compression method used for the item(s) in the Azure Data Lake Store.
+      fileName:
+        description: 'The name of the file in the Azure Data Lake Store. Type: string (or Expression with resultType string).'
+        type: object
+      folderPath:
+        description: 'Path to the folder in the Azure Data Lake Store. Type: string (or Expression with resultType string).'
+        type: object
+      format:
+        $ref: '#/definitions/DatasetStorageFormat'
+        description: The format of the Data Lake Store.
+    required:
+      - folderPath
+  AzureMySqlTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Azure MySQL database dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureMySqlTableDatasetTypeProperties'
+        description: Azure MySQL database dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureMySqlTable
+  AzureMySqlTableDatasetTypeProperties:
+    description: Azure MySQL database dataset properties.
+    properties:
+      tableName:
+        description: 'The Azure MySQL database table name. Type: string (or Expression with resultType string).'
+        type: object
+  AzurePostgreSqlTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Azure PostgreSQL dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: AzurePostgreSqlTable
+  AzureSearchIndexDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Azure Search Index.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureSearchIndexDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureSearchIndex
+  AzureSearchIndexDatasetTypeProperties:
+    description: Properties specific to this dataset type.
+    properties:
+      indexName:
+        description: 'The name of the Azure Search Index. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - indexName
+  AzureSqlDWTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Azure SQL Data Warehouse dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureSqlDWTableDatasetTypeProperties'
+        description: Azure SQL Data Warehouse dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureSqlDWTable
+  AzureSqlDWTableDatasetTypeProperties:
+    description: Azure SQL Data Warehouse dataset properties.
+    properties:
+      tableName:
+        description: 'The table name of the Azure SQL Data Warehouse. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - tableName
+  AzureSqlTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Azure SQL Server database dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureSqlTableDatasetTypeProperties'
+        description: Azure SQL dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureSqlTable
+  AzureSqlTableDatasetTypeProperties:
+    description: Azure SQL dataset properties.
+    properties:
+      tableName:
+        description: 'The table name of the Azure SQL database. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - tableName
+  AzureTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Azure Table storage dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureTableDatasetTypeProperties'
+        description: Azure Table dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureTable
+  AzureTableDatasetTypeProperties:
+    description: Azure Table dataset properties.
+    properties:
+      tableName:
+        description: 'The table name of the Azure Table storage. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - tableName
+  CassandraTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Cassandra database dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/CassandraTableDatasetTypeProperties'
+        description: Cassandra dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: CassandraTable
+  CassandraTableDatasetTypeProperties:
+    description: Cassandra dataset properties.
+    properties:
+      keyspace:
+        description: 'The keyspace of the Cassandra database. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: 'The table name of the Cassandra database. Type: string (or Expression with resultType string).'
+        type: object
+  CompressionLevel:
+    description: All available compression levels.
+    enum:
+      - Optimal
+      - Fastest
+    title: Microsoft.Azure.Management.DataFactories.Models.CompressionLevel
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: DatasetCompressionLevel
+  ConcurObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Concur Service dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: ConcurObject
+  CouchbaseTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Couchbase server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: CouchbaseTable
+  CustomDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The custom dataset.
+    properties:
+      typeProperties:
+        description: Custom dataset properties.
+        type: object
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+  Dataset:
+    additionalProperties:
+      type: object
+    description: 'The Azure Data Factory nested object which identifies data within different data stores, such as tables, files, folders, and documents.'
+    discriminator: type
+    properties:
+      annotations:
+        description: List of tags that can be used for describing the Dataset.
+        items:
+          type: object
+        type: array
+      description:
+        description: Dataset description.
+        type: string
+      folder:
+        description: 'The folder that this Dataset is in. If not specified, Dataset will appear at the root level.'
+        properties:
+          name:
+            description: The name of the folder that this Dataset is in.
+            type: string
+        type: object
+      linkedServiceName:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+      parameters:
+        additionalProperties:
+          description: Definition of a single parameter for an entity.
+          properties:
+            defaultValue:
+              description: Default value of parameter.
+              type: object
+            type:
+              description: Parameter type.
+              enum:
+                - Object
+                - String
+                - Int
+                - Float
+                - Bool
+                - Array
+                - SecureString
+              type: string
+              x-ms-enum:
+                modelAsString: true
+                name: ParameterType
+          required:
+            - type
+          type: object
+        description: Definition of all parameters for an entity.
+        type: object
+      structure:
+        description: 'Columns that define the structure of the dataset. Type: array (or Expression with resultType array), itemType: DatasetDataElement.'
+        type: object
+      type:
+        description: Type of dataset.
+        type: string
+    required:
+      - type
+      - linkedServiceName
+    type: object
+  DatasetBZip2Compression:
+    allOf:
+      - $ref: '#/definitions/DatasetCompression'
+    description: The BZip2 compression method used on a dataset.
+    properties: {}
+    type: object
+    x-ms-discriminator-value: BZip2
+  DatasetCompression:
+    additionalProperties:
+      type: object
+    description: The compression method used on a dataset.
+    discriminator: type
+    properties:
+      type:
+        description: Type of dataset compression.
+        type: string
+    required:
+      - type
+    type: object
+  DatasetDataElement:
+    description: Columns that define the structure of the dataset.
+    properties:
+      name:
+        description: 'Name of the column. Type: string (or Expression with resultType string).'
+        type: object
+      type:
+        description: 'Type of the column. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  DatasetDeflateCompression:
+    allOf:
+      - $ref: '#/definitions/DatasetCompression'
+    description: The Deflate compression method used on a dataset.
+    properties:
+      level:
+        $ref: '#/definitions/CompressionLevel'
+        description: The Deflate compression level.
+    type: object
+    x-ms-discriminator-value: Deflate
+  DatasetGZipCompression:
+    allOf:
+      - $ref: '#/definitions/DatasetCompression'
+    description: The GZip compression method used on a dataset.
+    properties:
+      level:
+        $ref: '#/definitions/CompressionLevel'
+        description: The GZip compression level.
+    type: object
+    x-ms-discriminator-value: GZip
+  DatasetStorageFormat:
+    additionalProperties:
+      type: object
+    description: The format definition of a storage.
+    discriminator: type
+    properties:
+      deserializer:
+        description: 'Deserializer. Type: string (or Expression with resultType string).'
+        type: object
+      serializer:
+        description: 'Serializer. Type: string (or Expression with resultType string).'
+        type: object
+      type:
+        description: Type of dataset storage format.
+        type: string
+    required:
+      - type
+    type: object
+  DatasetZipDeflateCompression:
+    allOf:
+      - $ref: '#/definitions/DatasetCompression'
+    description: The ZipDeflate compression method used on a dataset.
+    properties:
+      level:
+        $ref: '#/definitions/CompressionLevel'
+        description: The ZipDeflate compression level.
+    type: object
+    x-ms-discriminator-value: ZipDeflate
+  DocumentDbCollectionDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Microsoft Azure Document Database Collection dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/DocumentDbCollectionDatasetTypeProperties'
+        description: DocumentDB Collection dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: DocumentDbCollection
+  DocumentDbCollectionDatasetTypeProperties:
+    description: DocumentDB Collection dataset properties.
+    properties:
+      collectionName:
+        description: 'Document Database collection name. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - collectionName
+  DrillTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Drill server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: DrillTable
+  DynamicsEntityDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Dynamics entity dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/DynamicsEntityDatasetTypeProperties'
+        description: Dynamics entity dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: DynamicsEntity
+  DynamicsEntityDatasetTypeProperties:
+    description: Dynamics entity dataset properties.
+    properties:
+      entityName:
+        description: 'The logical name of the entity. Type: string (or Expression with resultType string).'
+        type: object
+  EloquaObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Eloqua server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: EloquaObject
+  FileShareDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: An on-premises file system dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/FileShareDatasetTypeProperties'
+        description: On-premises file system dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: FileShare
+  FileShareDatasetTypeProperties:
+    description: On-premises file system dataset properties.
+    properties:
+      compression:
+        $ref: '#/definitions/DatasetCompression'
+        description: The data compression method used for the file system.
+      fileFilter:
+        description: 'Specify a filter to be used to select a subset of files in the folderPath rather than all files. Type: string (or Expression with resultType string).'
+        type: object
+      fileName:
+        description: 'The name of the on-premises file system. Type: string (or Expression with resultType string).'
+        type: object
+      folderPath:
+        description: 'The path of the on-premises file system. Type: string (or Expression with resultType string).'
+        type: object
+      format:
+        $ref: '#/definitions/DatasetStorageFormat'
+        description: The format of the files.
+  GenericDatasetTypeProperties:
+    description: Properties specific to this dataset type.
+    properties:
+      tableName:
+        description: 'The table name. Type: string (or Expression with resultType string).'
+        type: object
+  GoogleBigQueryObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Google BigQuery service dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: GoogleBigQueryObject
+  GreenplumTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Greenplum Database dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: GreenplumTable
+  HBaseObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: HBase server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: HBaseObject
+  HiveObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Hive Server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: HiveObject
+  HttpDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: A file in an HTTP web server.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/HttpDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: HttpFile
+  HttpDatasetTypeProperties:
+    description: Properties specific to this dataset type.
+    properties:
+      additionalHeaders:
+        description: "The headers for the HTTP Request. e.g. request-header-name-1:request-header-value-1\r\n...\r\nrequest-header-name-n:request-header-value-n Type: string (or Expression with resultType string)."
+        type: object
+      compression:
+        $ref: '#/definitions/DatasetCompression'
+        description: The data compression method used on files.
+      format:
+        $ref: '#/definitions/DatasetStorageFormat'
+        description: The format of files.
+      relativeUrl:
+        description: 'The relative URL based on the URL in the HttpLinkedService refers to an HTTP file Type: string (or Expression with resultType string).'
+        type: object
+      requestBody:
+        description: 'The body for the HTTP request. Type: string (or Expression with resultType string).'
+        type: object
+      requestMethod:
+        description: 'The HTTP method for the HTTP request. Type: string (or Expression with resultType string).'
+        type: object
+  HubspotObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Hubspot Service dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: HubspotObject
+  ImpalaObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Impala server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: ImpalaObject
+  JiraObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Jira Service dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: JiraObject
+  JsonFormat:
+    allOf:
+      - $ref: '#/definitions/DatasetStorageFormat'
+    description: The data stored in JSON format.
+    properties:
+      encodingName:
+        description: 'The code page name of the preferred encoding. If not provided, the default value is ''utf-8'', unless the byte order mark (BOM) denotes another Unicode encoding. The full list of supported values can be found in the ''Name'' column of the table of encodings in the following reference: https://go.microsoft.com/fwlink/?linkid=861078. Type: string (or Expression with resultType string).'
+        type: object
+      filePattern:
+        $ref: '#/definitions/JsonFormatFilePattern'
+        description: 'File pattern of JSON. To be more specific, the way of separating a collection of JSON objects. The default value is ''setOfObjects''. It is case-sensitive.'
+      jsonNodeReference:
+        description: 'The JSONPath of the JSON array element to be flattened. Example: "$.ArrayPath". Type: string (or Expression with resultType string).'
+        type: object
+      jsonPathDefinition:
+        description: 'The JSONPath definition for each column mapping with a customized column name to extract data from JSON file. For fields under root object, start with "$"; for fields inside the array chosen by jsonNodeReference property, start from the array element. Example: {"Column1": "$.Column1Path", "Column2": "Column2PathInArray"}. Type: object (or Expression with resultType object).'
+        type: object
+      nestingSeparator:
+        description: 'The character used to separate nesting levels. Default value is ''.'' (dot). Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  JsonFormatFilePattern:
+    description: JSON format file pattern. A property of JsonFormat.
+    enum:
+      - setOfObjects
+      - arrayOfObjects
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: JsonFormatFilePattern
+  MagentoObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Magento server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: MagentoObject
+  MariaDBTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: MariaDB server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: MariaDBTable
+  MarketoObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Marketo server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: MarketoObject
+  MongoDbCollectionDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The MongoDB database dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/MongoDbCollectionDatasetTypeProperties'
+        description: MongoDB database dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: MongoDbCollection
+  MongoDbCollectionDatasetTypeProperties:
+    description: MongoDB database dataset properties.
+    properties:
+      collectionName:
+        description: 'The table name of the MongoDB database. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - collectionName
+  NetezzaTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Netezza dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: NetezzaTable
+  ODataResourceDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Open Data Protocol (OData) resource dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/ODataResourceDatasetTypeProperties'
+        description: OData dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: ODataResource
+  ODataResourceDatasetTypeProperties:
+    description: OData dataset properties.
+    properties:
+      path:
+        description: 'The OData resource path. Type: string (or Expression with resultType string).'
+        type: object
+  OracleTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The on-premises Oracle database dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/OracleTableDatasetTypeProperties'
+        description: On-premises Oracle dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: OracleTable
+  OracleTableDatasetTypeProperties:
+    description: On-premises Oracle dataset properties.
+    properties:
+      tableName:
+        description: 'The table name of the on-premises Oracle database. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - tableName
+  OrcFormat:
+    allOf:
+      - $ref: '#/definitions/DatasetStorageFormat'
+    description: The data stored in Optimized Row Columnar (ORC) format.
+    type: object
+  ParquetFormat:
+    allOf:
+      - $ref: '#/definitions/DatasetStorageFormat'
+    description: The data stored in Parquet format.
+    type: object
+  PaypalObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Paypal Service dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: PaypalObject
+  PhoenixObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Phoenix server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: PhoenixObject
+  PrestoObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Presto server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: PrestoObject
+  QuickBooksObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: QuickBooks server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: QuickBooksObject
+  RelationalTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The relational table dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/RelationalTableDatasetTypeProperties'
+        description: Relational table dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: RelationalTable
+  RelationalTableDatasetTypeProperties:
+    description: Relational table dataset properties.
+    properties:
+      tableName:
+        description: 'The relational table name. Type: string (or Expression with resultType string).'
+        type: object
+  ResponsysObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Responsys dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: ResponsysObject
+  SalesforceMarketingCloudObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Salesforce Marketing Cloud dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: SalesforceMarketingCloudObject
+  SalesforceObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Salesforce object dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SalesforceObjectDatasetTypeProperties'
+        description: Salesforce object dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: SalesforceObject
+  SalesforceObjectDatasetTypeProperties:
+    description: Salesforce object dataset properties.
+    properties:
+      objectApiName:
+        description: 'The Salesforce object API name. Type: string (or Expression with resultType string).'
+        type: object
+  SapCloudForCustomerResourceDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The path of the SAP Cloud for Customer OData entity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SapCloudForCustomerResourceDatasetTypeProperties'
+        description: SAP Cloud For Customer OData resource dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: SapCloudForCustomerResource
+  SapCloudForCustomerResourceDatasetTypeProperties:
+    description: Sap Cloud For Customer OData resource dataset properties.
+    properties:
+      path:
+        description: 'The path of the SAP Cloud for Customer OData entity. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - path
+  SapEccResourceDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The path of the SAP ECC OData entity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SapEccResourceDatasetTypeProperties'
+        description: SAP ECC OData resource dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: SapEccResource
+  SapEccResourceDatasetTypeProperties:
+    description: Sap ECC OData resource dataset properties.
+    properties:
+      path:
+        description: 'The path of the SAP ECC OData entity. Type: string (or Expression with resultType string).'
+        type: string
+    required:
+      - path
+  ServiceNowObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: ServiceNow server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: ServiceNowObject
+  ShopifyObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Shopify Service dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: ShopifyObject
+  SparkObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Spark Server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: SparkObject
+  SqlServerTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The on-premises SQL Server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SqlServerTableDatasetTypeProperties'
+        description: On-premises SQL Server dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: SqlServerTable
+  SqlServerTableDatasetTypeProperties:
+    description: On-premises SQL Server dataset properties.
+    properties:
+      tableName:
+        description: 'The table name of the SQL Server dataset. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - tableName
+  SquareObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Square Service dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: SquareObject
+  TextFormat:
+    allOf:
+      - $ref: '#/definitions/DatasetStorageFormat'
+    description: The data stored in text format.
+    properties:
+      columnDelimiter:
+        description: 'The column delimiter. Type: string (or Expression with resultType string).'
+        type: object
+      encodingName:
+        description: 'The code page name of the preferred encoding. If miss, the default value is ΓÇ£utf-8ΓÇ¥, unless BOM denotes another Unicode encoding. Refer to the ΓÇ£NameΓÇ¥ column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string).'
+        type: object
+      escapeChar:
+        description: 'The escape character. Type: string (or Expression with resultType string).'
+        type: object
+      firstRowAsHeader:
+        description: 'When used as input, treat the first row of data as headers. When used as output,write the headers into the output as the first row of data. The default value is false. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      nullValue:
+        description: 'The null value string. Type: string (or Expression with resultType string).'
+        type: object
+      quoteChar:
+        description: 'The quote character. Type: string (or Expression with resultType string).'
+        type: object
+      rowDelimiter:
+        description: 'The row delimiter. Type: string (or Expression with resultType string).'
+        type: object
+      skipLineCount:
+        description: 'The number of lines/rows to be skipped when parsing text files. The default value is 0. Type: integer (or Expression with resultType integer).'
+        type: object
+      treatEmptyAsNull:
+        description: 'Treat empty column values in the text file as null. The default value is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
+    type: object
+  VerticaTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Vertica dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: VerticaTable
+  WebTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The dataset points to a HTML table in the web page.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/WebTableDatasetTypeProperties'
+        description: Web table dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: WebTable
+  WebTableDatasetTypeProperties:
+    description: Web table dataset properties.
+    properties:
+      index:
+        description: 'The zero-based index of the table in the web page. Type: integer (or Expression with resultType integer), minimum: 0.'
+        type: object
+      path:
+        description: 'The relative URL to the web page from the linked service URL. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - index
+  XeroObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Xero Service dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: XeroObject
+  ZohoObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Zoho server dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: ZohoObject

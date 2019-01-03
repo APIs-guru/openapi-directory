@@ -1,0 +1,2739 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: DataFactoryManagementClient
+  version: 2017-09-01-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: datafactory-Pipeline
+  x-tags:
+    - Azure
+    - Microsoft
+paths: {}
+definitions:
+  Activity:
+    additionalProperties:
+      type: object
+    description: A pipeline activity.
+    discriminator: type
+    properties:
+      dependsOn:
+        description: Activity depends on condition.
+        items:
+          $ref: '#/definitions/ActivityDependency'
+        type: array
+      description:
+        description: Activity description.
+        type: string
+      name:
+        description: Activity name.
+        type: string
+      type:
+        description: Type of activity.
+        type: string
+      userProperties:
+        description: Activity user properties.
+        items:
+          $ref: '#/definitions/UserProperty'
+        type: array
+    required:
+      - name
+      - type
+    type: object
+  ActivityDependency:
+    additionalProperties:
+      type: object
+    description: Activity dependency information.
+    properties:
+      activity:
+        description: Activity name.
+        type: string
+      dependencyConditions:
+        description: Match-Condition for the dependency.
+        items:
+          enum:
+            - Succeeded
+            - Failed
+            - Skipped
+            - Completed
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: DependencyCondition
+        type: array
+    required:
+      - activity
+      - dependencyConditions
+    type: object
+  ActivityPolicy:
+    additionalProperties:
+      type: object
+    description: Execution policy for an activity.
+    properties:
+      retry:
+        description: 'Maximum ordinary retry attempts. Default is 0. Type: integer (or Expression with resultType integer), minimum: 0.'
+        type: object
+      retryIntervalInSeconds:
+        description: Interval between each retry attempt (in seconds). The default is 30 sec.
+        maximum: 86400
+        minimum: 30
+        type: integer
+      secureInput:
+        description: 'When set to true, Input from activity is considered as secure and will not be logged to monitoring.'
+        type: boolean
+      secureOutput:
+        description: 'When set to true, Output from activity is considered as secure and will not be logged to monitoring.'
+        type: boolean
+      timeout:
+        description: 'Specifies the timeout for the activity to run. The default timeout is 7 days. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
+        type: object
+    type: object
+  AmazonMWSSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Amazon Marketplace Web Service source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  AmazonRedshiftSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for Amazon Redshift Source.
+    properties:
+      query:
+        description: 'Database query. Type: string (or Expression with resultType string).'
+        type: object
+      redshiftUnloadSettings:
+        $ref: '#/definitions/RedshiftUnloadSettings'
+        description: 'The Amazon S3 settings needed for the interim Amazon S3 when copying from Amazon Redshift with unload. With this, data from Amazon Redshift source will be unloaded into S3 first and then copied into the targeted sink from the interim S3.'
+    type: object
+  AppendVariableActivity:
+    allOf:
+      - $ref: '#/definitions/ControlActivity'
+    description: Append value for a Variable of type Array.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AppendVariableActivityTypeProperties'
+        description: Append Variable activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: AppendVariable
+  AppendVariableActivityTypeProperties:
+    description: AppendVariable activity properties.
+    properties:
+      value:
+        description: Value to be appended. Could be a static value or Expression
+        type: object
+      variableName:
+        description: Name of the variable whose value needs to be appended to.
+        type: string
+  AzureDataLakeStoreSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Azure Data Lake Store sink.
+    properties:
+      copyBehavior:
+        $ref: '#/definitions/CopyBehaviorType'
+        description: The type of copy behavior for copy sink.
+    type: object
+  AzureDataLakeStoreSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Azure Data Lake source.
+    properties:
+      recursive:
+        description: 'If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
+    type: object
+  AzureMLBatchExecutionActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Azure ML Batch Execution activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureMLBatchExecutionActivityTypeProperties'
+        description: Azure ML Batch Execution activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: AzureMLBatchExecution
+  AzureMLBatchExecutionActivityTypeProperties:
+    description: Azure ML Batch Execution activity properties.
+    properties:
+      globalParameters:
+        additionalProperties:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        description: 'Key,Value pairs to be passed to the Azure ML Batch Execution Service endpoint. Keys must match the names of web service parameters defined in the published Azure ML web service. Values will be passed in the GlobalParameters property of the Azure ML batch execution request.'
+        type: object
+      webServiceInputs:
+        additionalProperties:
+          $ref: '#/definitions/AzureMLWebServiceFile'
+        description: 'Key,Value pairs, mapping the names of Azure ML endpoint''s Web Service Inputs to AzureMLWebServiceFile objects specifying the input Blob locations.. This information will be passed in the WebServiceInputs property of the Azure ML batch execution request.'
+        type: object
+      webServiceOutputs:
+        additionalProperties:
+          $ref: '#/definitions/AzureMLWebServiceFile'
+        description: 'Key,Value pairs, mapping the names of Azure ML endpoint''s Web Service Outputs to AzureMLWebServiceFile objects specifying the output Blob locations. This information will be passed in the WebServiceOutputs property of the Azure ML batch execution request.'
+        type: object
+  AzureMLUpdateResourceActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Azure ML Update Resource management activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureMLUpdateResourceActivityTypeProperties'
+        description: Azure ML Update Resource management activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: AzureMLUpdateResource
+  AzureMLUpdateResourceActivityTypeProperties:
+    description: Azure ML Update Resource activity properties.
+    properties:
+      trainedModelFilePath:
+        description: 'The relative file path in trainedModelLinkedService to represent the .ilearner file that will be uploaded by the update operation.  Type: string (or Expression with resultType string).'
+        type: object
+      trainedModelLinkedServiceName:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+      trainedModelName:
+        description: 'Name of the Trained Model module in the Web Service experiment to be updated. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - trainedModelName
+      - trainedModelLinkedServiceName
+      - trainedModelFilePath
+  AzureMLWebServiceFile:
+    description: Azure ML WebService Input/Output file
+    properties:
+      filePath:
+        description: 'The relative file path, including container name, in the Azure Blob Storage specified by the LinkedService. Type: string (or Expression with resultType string).'
+        type: object
+      linkedServiceName:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+    required:
+      - linkedServiceName
+      - filePath
+    type: object
+  AzureMySqlSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Azure MySQL source.
+    properties:
+      query:
+        description: 'Database query. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  AzurePostgreSqlSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Azure PostgreSQL source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  AzureQueueSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Azure Queue sink.
+    properties: {}
+    type: object
+  AzureSearchIndexSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Azure Search Index sink.
+    properties:
+      writeBehavior:
+        description: Specify the write behavior when upserting documents into Azure Search Index.
+        enum:
+          - Merge
+          - Upload
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AzureSearchIndexWriteBehaviorType
+    type: object
+  AzureTableSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Azure Table sink.
+    properties:
+      azureTableDefaultPartitionKeyValue:
+        description: 'Azure Table default partition key value. Type: string (or Expression with resultType string).'
+        type: object
+      azureTableInsertType:
+        description: 'Azure Table insert type. Type: string (or Expression with resultType string).'
+        type: object
+      azureTablePartitionKeyName:
+        description: 'Azure Table partition key name. Type: string (or Expression with resultType string).'
+        type: object
+      azureTableRowKeyName:
+        description: 'Azure Table row key name. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  AzureTableSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Azure Table source.
+    properties:
+      azureTableSourceIgnoreTableNotFound:
+        description: 'Azure Table source ignore table not found. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      azureTableSourceQuery:
+        description: 'Azure Table source query. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  BlobSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Azure Blob sink.
+    properties:
+      blobWriterAddHeader:
+        description: 'Blob writer add header. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      blobWriterDateTimeFormat:
+        description: 'Blob writer date time format. Type: string (or Expression with resultType string).'
+        type: object
+      blobWriterOverwriteFiles:
+        description: 'Blob writer overwrite files. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      copyBehavior:
+        $ref: '#/definitions/CopyBehaviorType'
+        description: The type of copy behavior for copy sink.
+    type: object
+  BlobSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Azure Blob source.
+    properties:
+      recursive:
+        description: 'If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      skipHeaderLineCount:
+        description: 'Number of header lines to skip from each blob. Type: integer (or Expression with resultType integer).'
+        type: object
+      treatEmptyAsNull:
+        description: 'Treat empty as null. Type: boolean (or Expression with resultType boolean).'
+        type: object
+    type: object
+  CassandraSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for a Cassandra database.
+    properties:
+      consistencyLevel:
+        description: The consistency level specifies how many Cassandra servers must respond to a read request before returning data to the client application. Cassandra checks the specified number of Cassandra servers for data to satisfy the read request. Must be one of cassandraSourceReadConsistencyLevels. The default value is 'ONE'. It is case-insensitive.
+        enum:
+          - ALL
+          - EACH_QUORUM
+          - QUORUM
+          - LOCAL_QUORUM
+          - ONE
+          - TWO
+          - THREE
+          - LOCAL_ONE
+          - SERIAL
+          - LOCAL_SERIAL
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: CassandraSourceReadConsistencyLevels
+      query:
+        description: 'Database query. Should be a SQL-92 query expression or Cassandra Query Language (CQL) command. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  ConcurSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Concur Service source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  ControlActivity:
+    allOf:
+      - $ref: '#/definitions/Activity'
+    description: 'Base class for all control activities like IfCondition, ForEach , Until.'
+    properties: {}
+    x-ms-discriminator-value: Container
+  CopyActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Copy activity.
+    properties:
+      inputs:
+        description: List of inputs for the activity.
+        items:
+          description: Dataset reference type.
+          properties:
+            parameters:
+              additionalProperties:
+                type: object
+              description: An object mapping parameter names to argument values.
+              type: object
+            referenceName:
+              description: Reference dataset name.
+              type: string
+            type:
+              description: Dataset reference type.
+              enum:
+                - DatasetReference
+              type: string
+          required:
+            - type
+            - referenceName
+        type: array
+      outputs:
+        description: List of outputs for the activity.
+        items:
+          description: Dataset reference type.
+          properties:
+            parameters:
+              additionalProperties:
+                type: object
+              description: An object mapping parameter names to argument values.
+              type: object
+            referenceName:
+              description: Reference dataset name.
+              type: string
+            type:
+              description: Dataset reference type.
+              enum:
+                - DatasetReference
+              type: string
+          required:
+            - type
+            - referenceName
+        type: array
+      typeProperties:
+        $ref: '#/definitions/CopyActivityTypeProperties'
+        description: Copy activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: Copy
+  CopyActivityTypeProperties:
+    description: Copy activity properties.
+    properties:
+      dataIntegrationUnits:
+        description: 'Maximum number of data integration units that can be used to perform this data movement. Type: integer (or Expression with resultType integer), minimum: 0.'
+        type: object
+      enableSkipIncompatibleRow:
+        description: 'Whether to skip incompatible row. Default value is false. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      enableStaging:
+        description: 'Specifies whether to copy data via an interim staging. Default value is false. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      parallelCopies:
+        description: 'Maximum number of concurrent sessions opened on the source or sink to avoid overloading the data store. Type: integer (or Expression with resultType integer), minimum: 0.'
+        type: object
+      redirectIncompatibleRowSettings:
+        $ref: '#/definitions/RedirectIncompatibleRowSettings'
+        description: Redirect incompatible row settings when EnableSkipIncompatibleRow is true.
+      sink:
+        $ref: '#/definitions/CopySink'
+        description: Copy activity sink.
+      source:
+        $ref: '#/definitions/CopySource'
+        description: Copy activity source.
+      stagingSettings:
+        $ref: '#/definitions/StagingSettings'
+        description: Specifies interim staging settings when EnableStaging is true.
+      translator:
+        $ref: '#/definitions/CopyTranslator'
+        description: 'Copy activity translator. If not specified, tabular translator is used.'
+    required:
+      - source
+      - sink
+  CopyBehaviorType:
+    description: All available types of copy behavior.
+    enum:
+      - PreserveHierarchy
+      - FlattenHierarchy
+      - MergeFiles
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: CopyBehaviorType
+  CopySink:
+    additionalProperties:
+      type: object
+    description: A copy activity sink.
+    discriminator: type
+    properties:
+      sinkRetryCount:
+        description: 'Sink retry count. Type: integer (or Expression with resultType integer).'
+        type: object
+      sinkRetryWait:
+        description: 'Sink retry wait. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
+        type: object
+      type:
+        description: Copy sink type.
+        type: string
+      writeBatchSize:
+        description: 'Write batch size. Type: integer (or Expression with resultType integer), minimum: 0.'
+        type: object
+      writeBatchTimeout:
+        description: 'Write batch timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
+        type: object
+    required:
+      - type
+    type: object
+  CopySource:
+    additionalProperties:
+      type: object
+    description: A copy activity source.
+    discriminator: type
+    properties:
+      sourceRetryCount:
+        description: 'Source retry count. Type: integer (or Expression with resultType integer).'
+        type: object
+      sourceRetryWait:
+        description: 'Source retry wait. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
+        type: object
+      type:
+        description: Copy source type.
+        type: string
+    required:
+      - type
+    type: object
+  CopyTranslator:
+    additionalProperties:
+      type: object
+    description: A copy activity translator.
+    discriminator: type
+    properties:
+      type:
+        description: Copy translator type.
+        type: string
+    required:
+      - type
+    type: object
+  CouchbaseSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Couchbase server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  CustomActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Custom activity type.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/CustomActivityTypeProperties'
+        description: Custom activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: Custom
+  CustomActivityReferenceObject:
+    description: Reference objects for custom activity
+    properties:
+      datasets:
+        description: Dataset references.
+        items:
+          description: Dataset reference type.
+          properties:
+            parameters:
+              additionalProperties:
+                type: object
+              description: An object mapping parameter names to argument values.
+              type: object
+            referenceName:
+              description: Reference dataset name.
+              type: string
+            type:
+              description: Dataset reference type.
+              enum:
+                - DatasetReference
+              type: string
+          required:
+            - type
+            - referenceName
+        type: array
+      linkedServices:
+        description: Linked service references.
+        items:
+          description: Linked service reference type.
+          properties:
+            parameters:
+              additionalProperties:
+                type: object
+              description: An object mapping parameter names to argument values.
+              type: object
+            referenceName:
+              description: Reference LinkedService name.
+              type: string
+            type:
+              description: Linked service reference type.
+              enum:
+                - LinkedServiceReference
+              type: string
+          required:
+            - type
+            - referenceName
+        type: array
+  CustomActivityTypeProperties:
+    description: Custom activity properties.
+    properties:
+      command:
+        description: 'Command for custom activity Type: string (or Expression with resultType string).'
+        type: object
+      extendedProperties:
+        additionalProperties:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        description: User defined property bag. There is no restriction on the keys or values that can be used. The user specified custom activity has the full responsibility to consume and interpret the content defined.
+        type: object
+      folderPath:
+        description: 'Folder path for resource files Type: string (or Expression with resultType string).'
+        type: object
+      referenceObjects:
+        $ref: '#/definitions/CustomActivityReferenceObject'
+        description: Reference objects
+      resourceLinkedService:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+    required:
+      - command
+  DataLakeAnalyticsUSQLActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Data Lake Analytics U-SQL activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/DataLakeAnalyticsUSQLActivityTypeProperties'
+        description: Data Lake Analytics U-SQL activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: DataLakeAnalyticsU-SQL
+  DataLakeAnalyticsUSQLActivityTypeProperties:
+    description: DataLakeAnalyticsU-SQL activity properties.
+    properties:
+      compilationMode:
+        description: 'Compilation mode of U-SQL. Must be one of these values : Semantic, Full and SingleBox. Type: string (or Expression with resultType string).'
+        type: object
+      degreeOfParallelism:
+        description: 'The maximum number of nodes simultaneously used to run the job. Default value is 1. Type: integer (or Expression with resultType integer), minimum: 1.'
+        type: object
+      parameters:
+        additionalProperties:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        description: Parameters for U-SQL job request.
+        type: object
+      priority:
+        description: 'Determines which jobs out of all that are queued should be selected to run first. The lower the number, the higher the priority. Default value is 1000. Type: integer (or Expression with resultType integer), minimum: 1.'
+        type: object
+      runtimeVersion:
+        description: 'Runtime version of the U-SQL engine to use. Type: string (or Expression with resultType string).'
+        type: object
+      scriptLinkedService:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+      scriptPath:
+        description: 'Case-sensitive path to folder that contains the U-SQL script. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - scriptPath
+      - scriptLinkedService
+  DatabricksNotebookActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: DatabricksNotebook activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/DatabricksNotebookActivityTypeProperties'
+        description: Databricks Notebook activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: DatabricksNotebook
+  DatabricksNotebookActivityTypeProperties:
+    description: Databricks Notebook activity properties.
+    properties:
+      baseParameters:
+        additionalProperties:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        description: 'Base parameters to be used for each run of this job.If the notebook takes a parameter that is not specified, the default value from the notebook will be used.'
+        type: object
+      libraries:
+        description: A list of libraries to be installed on the cluster that will execute the job.
+        items:
+          additionalProperties:
+            type: object
+          description: Databricks library definition.
+          type: object
+        type: array
+      notebookPath:
+        description: 'The absolute path of the notebook to be run in the Databricks Workspace. This path must begin with a slash. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - notebookPath
+  DatabricksSparkJarActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: DatabricksSparkJar activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/DatabricksSparkJarActivityTypeProperties'
+        description: Databricks SparkJar activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: DatabricksSparkJar
+  DatabricksSparkJarActivityTypeProperties:
+    description: Databricks SparkJar activity properties.
+    properties:
+      libraries:
+        description: A list of libraries to be installed on the cluster that will execute the job.
+        items:
+          additionalProperties:
+            type: object
+          description: Databricks library definition.
+          type: object
+        type: array
+      mainClassName:
+        description: 'The full name of the class containing the main method to be executed. This class must be contained in a JAR provided as a library. Type: string (or Expression with resultType string).'
+        type: object
+      parameters:
+        description: Parameters that will be passed to the main method.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
+    required:
+      - mainClassName
+  DatabricksSparkPythonActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: DatabricksSparkPython activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/DatabricksSparkPythonActivityTypeProperties'
+        description: Databricks SparkPython activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: DatabricksSparkPython
+  DatabricksSparkPythonActivityTypeProperties:
+    description: Databricks SparkPython activity properties.
+    properties:
+      libraries:
+        description: A list of libraries to be installed on the cluster that will execute the job.
+        items:
+          additionalProperties:
+            type: object
+          description: Databricks library definition.
+          type: object
+        type: array
+      parameters:
+        description: Command line parameters that will be passed to the Python file.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
+      pythonFile:
+        description: 'The URI of the Python file to be executed. DBFS paths are supported. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - pythonFile
+  DeleteActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Delete activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/DeleteActivityTypeProperties'
+        description: Delete activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: Delete
+  DeleteActivityTypeProperties:
+    description: Delete activity properties.
+    properties:
+      dataset:
+        description: Dataset reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference dataset name.
+            type: string
+          type:
+            description: Dataset reference type.
+            enum:
+              - DatasetReference
+            type: string
+        required:
+          - type
+          - referenceName
+      enableLogging:
+        description: 'Whether to record detailed logs of delete-activity execution. Default value is false. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      logStorageSettings:
+        $ref: '#/definitions/LogStorageSettings'
+        description: Log storage settings customer need to provide when enableLogging is true.
+      maxConcurrentConnections:
+        description: The max concurrent connections to connect data source at the same time.
+        minimum: 1
+        type: integer
+      recursive:
+        description: 'If true, files or sub-folders under current folder path will be deleted recursively. Default is false. Type: boolean (or Expression with resultType boolean).'
+        type: object
+    required:
+      - dataset
+  DistcpSettings:
+    description: Distcp settings.
+    properties:
+      distcpOptions:
+        description: 'Specifies the Distcp options. Type: string (or Expression with resultType string).'
+        type: object
+      resourceManagerEndpoint:
+        description: 'Specifies the Yarn ResourceManager endpoint. Type: string (or Expression with resultType string).'
+        type: object
+      tempScriptPath:
+        description: 'Specifies an existing folder path which will be used to store temp Distcp command script. The script file is generated by ADF and will be removed after Copy job finished. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - resourceManagerEndpoint
+      - tempScriptPath
+    type: object
+  DocumentDbCollectionSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Document Database Collection sink.
+    properties:
+      nestingSeparator:
+        description: 'Nested properties separator. Default is . (dot). Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  DocumentDbCollectionSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Document Database Collection source.
+    properties:
+      nestingSeparator:
+        description: 'Nested properties separator. Type: string (or Expression with resultType string).'
+        type: object
+      query:
+        description: 'Documents query. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  DrillSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Drill server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  DynamicsSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Dynamics sink.
+    properties:
+      ignoreNullValues:
+        description: 'The flag indicating whether ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      writeBehavior:
+        description: The write behavior for the operation.
+        enum:
+          - Upsert
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DynamicsSinkWriteBehavior
+    required:
+      - writeBehavior
+    type: object
+  DynamicsSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Dynamics source.
+    properties:
+      query:
+        description: 'FetchXML is a proprietary query language that is used in Microsoft Dynamics (online & on-premises). Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  EloquaSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Eloqua server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  ExecutePipelineActivity:
+    allOf:
+      - $ref: '#/definitions/ControlActivity'
+    description: Execute pipeline activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/ExecutePipelineActivityTypeProperties'
+        description: Execute pipeline activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: ExecutePipeline
+  ExecutePipelineActivityTypeProperties:
+    description: Execute pipeline activity properties.
+    properties:
+      parameters:
+        additionalProperties:
+          type: object
+        description: An object mapping parameter names to argument values.
+        type: object
+      pipeline:
+        description: Pipeline reference type.
+        properties:
+          name:
+            description: Reference name.
+            type: string
+          referenceName:
+            description: Reference pipeline name.
+            type: string
+          type:
+            description: Pipeline reference type.
+            enum:
+              - PipelineReference
+            type: string
+        required:
+          - type
+          - referenceName
+      waitOnCompletion:
+        description: Defines whether activity execution will wait for the dependent pipeline execution to finish. Default is false.
+        type: boolean
+    required:
+      - pipeline
+  ExecuteSSISPackageActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Execute SSIS package activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/ExecuteSSISPackageActivityTypeProperties'
+        description: Execute SSIS package activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: ExecuteSSISPackage
+  ExecuteSSISPackageActivityTypeProperties:
+    description: Execute SSIS package activity properties.
+    properties:
+      connectVia:
+        description: Integration runtime reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference integration runtime name.
+            type: string
+          type:
+            description: Type of integration runtime.
+            enum:
+              - IntegrationRuntimeReference
+            type: string
+        required:
+          - type
+          - referenceName
+      environmentPath:
+        description: The environment path to execute the SSIS package.
+        type: string
+      loggingLevel:
+        description: The logging level of SSIS package execution.
+        type: string
+      packageConnectionManagers:
+        additionalProperties:
+          $ref: '#/definitions/SSISConnectionManager'
+        description: The package level connection managers to execute the SSIS package.
+        type: object
+      packageLocation:
+        $ref: '#/definitions/SSISPackageLocation'
+        description: SSIS package location.
+      packageParameters:
+        additionalProperties:
+          $ref: '#/definitions/SSISExecutionParameter'
+        description: The package level parameters to execute the SSIS package.
+        type: object
+      projectConnectionManagers:
+        additionalProperties:
+          $ref: '#/definitions/SSISConnectionManager'
+        description: The project level connection managers to execute the SSIS package.
+        type: object
+      projectParameters:
+        additionalProperties:
+          $ref: '#/definitions/SSISExecutionParameter'
+        description: The project level parameters to execute the SSIS package.
+        type: object
+      propertyOverrides:
+        additionalProperties:
+          $ref: '#/definitions/SSISPropertyOverride'
+        description: The property overrides to execute the SSIS package.
+        type: object
+      runtime:
+        description: Specifies the runtime to execute SSIS package.
+        enum:
+          - x64
+          - x86
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SSISExecutionRuntime
+    required:
+      - packageLocation
+      - connectVia
+  ExecutionActivity:
+    allOf:
+      - $ref: '#/definitions/Activity'
+    description: Base class for all execution activities.
+    properties:
+      linkedServiceName:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+      policy:
+        $ref: '#/definitions/ActivityPolicy'
+        description: Activity policy.
+    x-ms-discriminator-value: Execution
+  FileSystemSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity file system sink.
+    properties:
+      copyBehavior:
+        $ref: '#/definitions/CopyBehaviorType'
+        description: The type of copy behavior for copy sink.
+    type: object
+  FileSystemSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity file system source.
+    properties:
+      recursive:
+        description: 'If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
+    type: object
+  FilterActivity:
+    allOf:
+      - $ref: '#/definitions/ControlActivity'
+    description: Filter and return results from input array based on the conditions.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/FilterActivityTypeProperties'
+        description: Filter activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: Filter
+  FilterActivityTypeProperties:
+    description: Filter activity properties.
+    properties:
+      condition:
+        description: Azure Data Factory expression definition.
+        properties:
+          type:
+            description: Expression type.
+            enum:
+              - Expression
+            type: string
+          value:
+            description: Expression value.
+            type: string
+        required:
+          - type
+          - value
+        type: object
+      items:
+        description: Azure Data Factory expression definition.
+        properties:
+          type:
+            description: Expression type.
+            enum:
+              - Expression
+            type: string
+          value:
+            description: Expression value.
+            type: string
+        required:
+          - type
+          - value
+        type: object
+    required:
+      - condition
+      - items
+  ForEachActivity:
+    allOf:
+      - $ref: '#/definitions/ControlActivity'
+    description: This activity is used for iterating over a collection and execute given activities.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/ForEachActivityTypeProperties'
+        description: ForEach activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: ForEach
+  ForEachActivityTypeProperties:
+    description: ForEach activity properties.
+    properties:
+      activities:
+        description: List of activities to execute .
+        items:
+          $ref: '#/definitions/Activity'
+        type: array
+      batchCount:
+        description: Batch count to be used for controlling the number of parallel execution (when isSequential is set to false).
+        maximum: 50
+        type: integer
+      isSequential:
+        description: Should the loop be executed in sequence or in parallel (max 50)
+        type: boolean
+      items:
+        description: Azure Data Factory expression definition.
+        properties:
+          type:
+            description: Expression type.
+            enum:
+              - Expression
+            type: string
+          value:
+            description: Expression value.
+            type: string
+        required:
+          - type
+          - value
+        type: object
+    required:
+      - items
+      - activities
+  GetMetadataActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Activity to get metadata of dataset
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GetMetadataActivityTypeProperties'
+        description: GetMetadata activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: GetMetadata
+  GetMetadataActivityTypeProperties:
+    description: GetMetadata activity properties.
+    properties:
+      dataset:
+        description: Dataset reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference dataset name.
+            type: string
+          type:
+            description: Dataset reference type.
+            enum:
+              - DatasetReference
+            type: string
+        required:
+          - type
+          - referenceName
+      fieldList:
+        description: Fields of metadata to get from dataset.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
+    required:
+      - dataset
+  GoogleBigQuerySource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Google BigQuery service source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  GreenplumSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Greenplum Database source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  HBaseSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity HBase server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  HDInsightActivityDebugInfoOption:
+    description: The HDInsightActivityDebugInfoOption settings to use.
+    enum:
+      - None
+      - Always
+      - Failure
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: HDInsightActivityDebugInfoOption
+  HDInsightHiveActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: HDInsight Hive activity type.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/HDInsightHiveActivityTypeProperties'
+        description: HDInsight Hive activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: HDInsightHive
+  HDInsightHiveActivityTypeProperties:
+    description: HDInsight Hive activity properties.
+    properties:
+      arguments:
+        description: User specified arguments to HDInsightActivity.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
+      defines:
+        additionalProperties:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        description: Allows user to specify defines for Hive job request.
+        type: object
+      getDebugInfo:
+        $ref: '#/definitions/HDInsightActivityDebugInfoOption'
+        description: Debug info option.
+      queryTimeout:
+        description: Query timeout value (in minutes).  Effective when the HDInsight cluster is with ESP (Enterprise Security Package)
+        type: integer
+      scriptLinkedService:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+      scriptPath:
+        description: 'Script path. Type: string (or Expression with resultType string).'
+        type: object
+      storageLinkedServices:
+        description: Storage linked service references.
+        items:
+          description: Linked service reference type.
+          properties:
+            parameters:
+              additionalProperties:
+                type: object
+              description: An object mapping parameter names to argument values.
+              type: object
+            referenceName:
+              description: Reference LinkedService name.
+              type: string
+            type:
+              description: Linked service reference type.
+              enum:
+                - LinkedServiceReference
+              type: string
+          required:
+            - type
+            - referenceName
+        type: array
+      variables:
+        description: User specified arguments under hivevar namespace.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
+  HDInsightMapReduceActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: HDInsight MapReduce activity type.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/HDInsightMapReduceActivityTypeProperties'
+        description: HDInsight MapReduce activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: HDInsightMapReduce
+  HDInsightMapReduceActivityTypeProperties:
+    description: HDInsight MapReduce activity properties.
+    properties:
+      arguments:
+        description: User specified arguments to HDInsightActivity.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
+      className:
+        description: 'Class name. Type: string (or Expression with resultType string).'
+        type: object
+      defines:
+        additionalProperties:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        description: Allows user to specify defines for the MapReduce job request.
+        type: object
+      getDebugInfo:
+        $ref: '#/definitions/HDInsightActivityDebugInfoOption'
+        description: Debug info option.
+      jarFilePath:
+        description: 'Jar path. Type: string (or Expression with resultType string).'
+        type: object
+      jarLibs:
+        description: Jar libs.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
+      jarLinkedService:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+      storageLinkedServices:
+        description: Storage linked service references.
+        items:
+          description: Linked service reference type.
+          properties:
+            parameters:
+              additionalProperties:
+                type: object
+              description: An object mapping parameter names to argument values.
+              type: object
+            referenceName:
+              description: Reference LinkedService name.
+              type: string
+            type:
+              description: Linked service reference type.
+              enum:
+                - LinkedServiceReference
+              type: string
+          required:
+            - type
+            - referenceName
+        type: array
+    required:
+      - className
+      - jarFilePath
+  HDInsightPigActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: HDInsight Pig activity type.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/HDInsightPigActivityTypeProperties'
+        description: HDInsight Pig activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: HDInsightPig
+  HDInsightPigActivityTypeProperties:
+    description: HDInsight Pig activity properties.
+    properties:
+      arguments:
+        description: User specified arguments to HDInsightActivity.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
+      defines:
+        additionalProperties:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        description: Allows user to specify defines for Pig job request.
+        type: object
+      getDebugInfo:
+        $ref: '#/definitions/HDInsightActivityDebugInfoOption'
+        description: Debug info option.
+      scriptLinkedService:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+      scriptPath:
+        description: 'Script path. Type: string (or Expression with resultType string).'
+        type: object
+      storageLinkedServices:
+        description: Storage linked service references.
+        items:
+          description: Linked service reference type.
+          properties:
+            parameters:
+              additionalProperties:
+                type: object
+              description: An object mapping parameter names to argument values.
+              type: object
+            referenceName:
+              description: Reference LinkedService name.
+              type: string
+            type:
+              description: Linked service reference type.
+              enum:
+                - LinkedServiceReference
+              type: string
+          required:
+            - type
+            - referenceName
+        type: array
+  HDInsightSparkActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: HDInsight Spark activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/HDInsightSparkActivityTypeProperties'
+        description: HDInsight spark activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: HDInsightSpark
+  HDInsightSparkActivityTypeProperties:
+    description: HDInsight spark activity properties.
+    properties:
+      arguments:
+        description: The user-specified arguments to HDInsightSparkActivity.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
+      className:
+        description: The application's Java/Spark main class.
+        type: string
+      entryFilePath:
+        description: 'The relative path to the root folder of the code/package to be executed. Type: string (or Expression with resultType string).'
+        type: object
+      getDebugInfo:
+        $ref: '#/definitions/HDInsightActivityDebugInfoOption'
+        description: Debug info option.
+      proxyUser:
+        description: 'The user to impersonate that will execute the job. Type: string (or Expression with resultType string).'
+        type: object
+      rootPath:
+        description: 'The root path in ''sparkJobLinkedService'' for all the job’s files. Type: string (or Expression with resultType string).'
+        type: object
+      sparkConfig:
+        additionalProperties:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        description: Spark configuration property.
+        type: object
+      sparkJobLinkedService:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+    required:
+      - rootPath
+      - entryFilePath
+  HDInsightStreamingActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: HDInsight streaming activity type.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/HDInsightStreamingActivityTypeProperties'
+        description: HDInsight streaming activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: HDInsightStreaming
+  HDInsightStreamingActivityTypeProperties:
+    description: HDInsight streaming activity properties.
+    properties:
+      arguments:
+        description: User specified arguments to HDInsightActivity.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
+      combiner:
+        description: 'Combiner executable name. Type: string (or Expression with resultType string).'
+        type: object
+      commandEnvironment:
+        description: Command line environment values.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
+      defines:
+        additionalProperties:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        description: Allows user to specify defines for streaming job request.
+        type: object
+      fileLinkedService:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+      filePaths:
+        description: Paths to streaming job files. Can be directories.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
+      getDebugInfo:
+        $ref: '#/definitions/HDInsightActivityDebugInfoOption'
+        description: Debug info option.
+      input:
+        description: 'Input blob path. Type: string (or Expression with resultType string).'
+        type: object
+      mapper:
+        description: 'Mapper executable name. Type: string (or Expression with resultType string).'
+        type: object
+      output:
+        description: 'Output blob path. Type: string (or Expression with resultType string).'
+        type: object
+      reducer:
+        description: 'Reducer executable name. Type: string (or Expression with resultType string).'
+        type: object
+      storageLinkedServices:
+        description: Storage linked service references.
+        items:
+          description: Linked service reference type.
+          properties:
+            parameters:
+              additionalProperties:
+                type: object
+              description: An object mapping parameter names to argument values.
+              type: object
+            referenceName:
+              description: Reference LinkedService name.
+              type: string
+            type:
+              description: Linked service reference type.
+              enum:
+                - LinkedServiceReference
+              type: string
+          required:
+            - type
+            - referenceName
+        type: array
+    required:
+      - mapper
+      - reducer
+      - input
+      - output
+      - filePaths
+  HdfsSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity HDFS source.
+    properties:
+      distcpSettings:
+        $ref: '#/definitions/DistcpSettings'
+        description: Specifies Distcp-related settings.
+      recursive:
+        description: 'If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
+    type: object
+  HiveSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Hive Server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  HttpSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for an HTTP file.
+    properties:
+      httpRequestTimeout:
+        description: 'Specifies the timeout for a HTTP client to get HTTP response from HTTP server. The default value is equivalent to System.Net.HttpWebRequest.Timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
+        type: object
+    type: object
+  HubspotSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Hubspot Service source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  IfConditionActivity:
+    allOf:
+      - $ref: '#/definitions/ControlActivity'
+    description: This activity evaluates a boolean expression and executes either the activities under the ifTrueActivities property or the ifFalseActivities property depending on the result of the expression.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/IfConditionActivityTypeProperties'
+        description: IfCondition activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: IfCondition
+  IfConditionActivityTypeProperties:
+    description: IfCondition activity properties.
+    properties:
+      expression:
+        description: Azure Data Factory expression definition.
+        properties:
+          type:
+            description: Expression type.
+            enum:
+              - Expression
+            type: string
+          value:
+            description: Expression value.
+            type: string
+        required:
+          - type
+          - value
+        type: object
+      ifFalseActivities:
+        description: 'List of activities to execute if expression is evaluated to false. This is an optional property and if not provided, the activity will exit without any action.'
+        items:
+          $ref: '#/definitions/Activity'
+        type: array
+      ifTrueActivities:
+        description: 'List of activities to execute if expression is evaluated to true. This is an optional property and if not provided, the activity will exit without any action.'
+        items:
+          $ref: '#/definitions/Activity'
+        type: array
+    required:
+      - expression
+  ImpalaSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Impala server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  JiraSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Jira Service source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  LogStorageSettings:
+    additionalProperties:
+      type: object
+    description: Log storage settings.
+    properties:
+      linkedServiceName:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+      path:
+        description: 'The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - linkedServiceName
+    type: object
+  LookupActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Lookup activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/LookupActivityTypeProperties'
+        description: Lookup activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: Lookup
+  LookupActivityTypeProperties:
+    description: Lookup activity properties.
+    properties:
+      dataset:
+        description: Dataset reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference dataset name.
+            type: string
+          type:
+            description: Dataset reference type.
+            enum:
+              - DatasetReference
+            type: string
+        required:
+          - type
+          - referenceName
+      firstRowOnly:
+        description: 'Whether to return first row or all rows. Default value is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      source:
+        $ref: '#/definitions/CopySource'
+        description: 'Dataset-specific source properties, same as copy activity source.'
+    required:
+      - source
+      - dataset
+  MagentoSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Magento server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  MariaDBSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity MariaDB server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  MarketoSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Marketo server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  MongoDbSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for a MongoDB database.
+    properties:
+      query:
+        description: 'Database query. Should be a SQL-92 query expression. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  NetezzaSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Netezza source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  OdbcSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity ODBC sink.
+    properties:
+      preCopyScript:
+        description: 'A query to execute before starting the copy. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  OracleSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Oracle sink.
+    properties:
+      preCopyScript:
+        description: 'SQL pre-copy script. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  OracleSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Oracle source.
+    properties:
+      oracleReaderQuery:
+        description: 'Oracle reader query. Type: string (or Expression with resultType string).'
+        type: object
+      queryTimeout:
+        description: 'Query timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
+        type: object
+    type: object
+  PaypalSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Paypal Service source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  PhoenixSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Phoenix server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  Pipeline:
+    description: A data factory pipeline.
+    properties:
+      activities:
+        description: List of activities in pipeline.
+        items:
+          $ref: '#/definitions/Activity'
+        type: array
+      annotations:
+        description: List of tags that can be used for describing the Pipeline.
+        items:
+          type: object
+        type: array
+      concurrency:
+        description: The max number of concurrent runs for the pipeline.
+        minimum: 1
+        type: integer
+      description:
+        description: The description of the pipeline.
+        type: string
+      folder:
+        description: 'The folder that this Pipeline is in. If not specified, Pipeline will appear at the root level.'
+        properties:
+          name:
+            description: The name of the folder that this Pipeline is in.
+            type: string
+        type: object
+      parameters:
+        additionalProperties:
+          description: Definition of a single parameter for an entity.
+          properties:
+            defaultValue:
+              description: Default value of parameter.
+              type: object
+            type:
+              description: Parameter type.
+              enum:
+                - Object
+                - String
+                - Int
+                - Float
+                - Bool
+                - Array
+                - SecureString
+              type: string
+              x-ms-enum:
+                modelAsString: true
+                name: ParameterType
+          required:
+            - type
+          type: object
+        description: Definition of all parameters for an entity.
+        type: object
+      variables:
+        additionalProperties:
+          description: Definition of a single variable for a Pipeline.
+          properties:
+            defaultValue:
+              description: Default value of variable.
+              type: object
+            type:
+              description: Variable type.
+              enum:
+                - String
+                - Bool
+                - Array
+              type: string
+              x-ms-enum:
+                modelAsString: true
+                name: VariableType
+          required:
+            - type
+          type: object
+        description: Definition of variable for a Pipeline.
+        type: object
+    type: object
+  PolybaseSettings:
+    additionalProperties:
+      type: object
+    description: PolyBase settings.
+    properties:
+      rejectSampleValue:
+        description: 'Determines the number of rows to attempt to retrieve before the PolyBase recalculates the percentage of rejected rows. Type: integer (or Expression with resultType integer), minimum: 0.'
+        type: object
+      rejectType:
+        $ref: '#/definitions/PolybaseSettingsRejectType'
+        description: Reject type.
+      rejectValue:
+        description: 'Specifies the value or the percentage of rows that can be rejected before the query fails. Type: number (or Expression with resultType number), minimum: 0.'
+        type: object
+      useTypeDefault:
+        description: 'Specifies how to handle missing values in delimited text files when PolyBase retrieves data from the text file. Type: boolean (or Expression with resultType boolean).'
+        type: object
+    type: object
+  PolybaseSettingsRejectType:
+    description: Indicates whether the RejectValue property is specified as a literal value or a percentage.
+    enum:
+      - value
+      - percentage
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: PolybaseSettingsRejectType
+  PrestoSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Presto server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  QuickBooksSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity QuickBooks server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  RedirectIncompatibleRowSettings:
+    additionalProperties:
+      type: object
+    description: Redirect incompatible row settings
+    properties:
+      linkedServiceName:
+        description: 'Name of the Azure Storage, Storage SAS, or Azure Data Lake Store linked service used for redirecting incompatible row. Must be specified if redirectIncompatibleRowSettings is specified. Type: string (or Expression with resultType string).'
+        type: object
+      path:
+        description: 'The path for storing the redirect incompatible row data. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - linkedServiceName
+    type: object
+  RedshiftUnloadSettings:
+    description: 'The Amazon S3 settings needed for the interim Amazon S3 when copying from Amazon Redshift with unload. With this, data from Amazon Redshift source will be unloaded into S3 first and then copied into the targeted sink from the interim S3.'
+    properties:
+      bucketName:
+        description: 'The bucket of the interim Amazon S3 which will be used to store the unloaded data from Amazon Redshift source. The bucket must be in the same region as the Amazon Redshift source. Type: string (or Expression with resultType string).'
+        type: object
+      s3LinkedServiceName:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+    required:
+      - s3LinkedServiceName
+      - bucketName
+    type: object
+  RelationalSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for various relational databases.
+    properties:
+      query:
+        description: 'Database query. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  ResponsysSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Responsys source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  SSISConnectionManager:
+    additionalProperties:
+      $ref: '#/definitions/SSISExecutionParameter'
+    description: SSIS Connection Manager.
+    type: object
+  SSISExecutionParameter:
+    description: SSIS execution parameter.
+    properties:
+      value:
+        description: 'SSIS package execution parameter value. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - value
+    type: object
+  SSISPackageLocation:
+    description: SSIS package location.
+    properties:
+      packagePath:
+        description: The SSIS package path.
+        type: string
+    required:
+      - packagePath
+    type: object
+  SSISPropertyOverride:
+    description: SSIS property override.
+    properties:
+      isSensitive:
+        description: Whether SSIS package property override value is sensitive data. Value will be encrypted in SSISDB if it is true
+        type: boolean
+      value:
+        description: 'SSIS package property override value. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - value
+    type: object
+  SalesforceMarketingCloudSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Salesforce Marketing Cloud source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  SalesforceSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Salesforce sink.
+    properties:
+      externalIdFieldName:
+        description: 'The name of the external ID field for upsert operation. Default value is ''Id'' column. Type: string (or Expression with resultType string).'
+        type: object
+      ignoreNullValues:
+        description: 'The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      writeBehavior:
+        description: The write behavior for the operation. Default is Insert.
+        enum:
+          - Insert
+          - Upsert
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SalesforceSinkWriteBehavior
+    type: object
+  SalesforceSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Salesforce source.
+    properties:
+      query:
+        description: 'Database query. Type: string (or Expression with resultType string).'
+        type: object
+      readBehavior:
+        description: The read behavior for the operation. Default is Query.
+        enum:
+          - Query
+          - QueryAll
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SalesforceSourceReadBehavior
+    type: object
+  SapCloudForCustomerSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity SAP Cloud for Customer sink.
+    properties:
+      writeBehavior:
+        description: The write behavior for the operation. Default is 'Insert'.
+        enum:
+          - Insert
+          - Update
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SapCloudForCustomerSinkWriteBehavior
+    type: object
+  SapCloudForCustomerSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for SAP Cloud for Customer source.
+    properties:
+      query:
+        description: 'SAP Cloud for Customer OData query. For example, "$top=1". Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  SapEccSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for SAP ECC source.
+    properties:
+      query:
+        description: 'SAP ECC OData query. For example, "$top=1". Type: string (or Expression with resultType string).'
+        type: string
+    type: object
+  ServiceNowSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity ServiceNow server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  SetVariableActivity:
+    allOf:
+      - $ref: '#/definitions/ControlActivity'
+    description: Set value for a Variable.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SetVariableActivityTypeProperties'
+        description: Set Variable activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: SetVariable
+  SetVariableActivityTypeProperties:
+    description: SetVariable activity properties.
+    properties:
+      value:
+        description: Value to be set. Could be a static value or Expression
+        type: object
+      variableName:
+        description: Name of the variable whose value needs to be set.
+        type: string
+  ShopifySource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Shopify Service source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  SparkSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Spark Server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  SqlDWSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity SQL Data Warehouse sink.
+    properties:
+      allowPolyBase:
+        description: 'Indicates to use PolyBase to copy data into SQL Data Warehouse when applicable. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      polyBaseSettings:
+        $ref: '#/definitions/PolybaseSettings'
+        description: Specifies PolyBase-related settings when allowPolyBase is true.
+      preCopyScript:
+        description: 'SQL pre-copy script. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  SqlDWSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity SQL Data Warehouse source.
+    properties:
+      sqlReaderQuery:
+        description: 'SQL Data Warehouse reader query. Type: string (or Expression with resultType string).'
+        type: object
+      sqlReaderStoredProcedureName:
+        description: 'Name of the stored procedure for a SQL Data Warehouse source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string).'
+        type: object
+      storedProcedureParameters:
+        description: 'Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}". Type: object (or Expression with resultType object), itemType: StoredProcedureParameter.'
+        type: object
+    type: object
+  SqlServerStoredProcedureActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: SQL stored procedure activity type.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SqlServerStoredProcedureActivityTypeProperties'
+        description: SQL stored procedure activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+      - linkedServiceName
+    x-ms-discriminator-value: SqlServerStoredProcedure
+  SqlServerStoredProcedureActivityTypeProperties:
+    description: SQL stored procedure activity properties.
+    properties:
+      storedProcedureName:
+        description: 'Stored procedure name. Type: string (or Expression with resultType string).'
+        type: object
+      storedProcedureParameters:
+        additionalProperties:
+          $ref: '#/definitions/StoredProcedureParameter'
+        description: 'Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".'
+        type: object
+    required:
+      - storedProcedureName
+  SqlSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity SQL sink.
+    properties:
+      preCopyScript:
+        description: 'SQL pre-copy script. Type: string (or Expression with resultType string).'
+        type: object
+      sqlWriterStoredProcedureName:
+        description: 'SQL writer stored procedure name. Type: string (or Expression with resultType string).'
+        type: object
+      sqlWriterTableType:
+        description: 'SQL writer table type. Type: string (or Expression with resultType string).'
+        type: object
+      storedProcedureParameters:
+        additionalProperties:
+          $ref: '#/definitions/StoredProcedureParameter'
+        description: SQL stored procedure parameters.
+        type: object
+    type: object
+  SqlSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity SQL source.
+    properties:
+      sqlReaderQuery:
+        description: 'SQL reader query. Type: string (or Expression with resultType string).'
+        type: object
+      sqlReaderStoredProcedureName:
+        description: 'Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string).'
+        type: object
+      storedProcedureParameters:
+        additionalProperties:
+          $ref: '#/definitions/StoredProcedureParameter'
+        description: 'Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".'
+        type: object
+    type: object
+  SquareSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Square Service source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  StagingSettings:
+    additionalProperties:
+      type: object
+    description: Staging settings.
+    properties:
+      enableCompression:
+        description: 'Specifies whether to use compression when copying data via an interim staging. Default value is false. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      linkedServiceName:
+        description: Linked service reference type.
+        properties:
+          parameters:
+            additionalProperties:
+              type: object
+            description: An object mapping parameter names to argument values.
+            type: object
+          referenceName:
+            description: Reference LinkedService name.
+            type: string
+          type:
+            description: Linked service reference type.
+            enum:
+              - LinkedServiceReference
+            type: string
+        required:
+          - type
+          - referenceName
+      path:
+        description: 'The path to storage for storing the interim data. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - linkedServiceName
+    type: object
+  StoredProcedureParameter:
+    description: SQL stored procedure parameter.
+    properties:
+      type:
+        $ref: '#/definitions/StoredProcedureParameterType'
+        description: Stored procedure parameter type.
+      value:
+        description: 'Stored procedure parameter value. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  StoredProcedureParameterType:
+    description: Stored procedure parameter type.
+    enum:
+      - String
+      - Int
+      - Decimal
+      - Guid
+      - Boolean
+      - Date
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: StoredProcedureParameterType
+  TabularTranslator:
+    allOf:
+      - $ref: '#/definitions/CopyTranslator'
+    description: A copy activity tabular translator.
+    properties:
+      columnMappings:
+        description: 'Column mappings. Example: "UserId: MyUserId, Group: MyGroup, Name: MyName" Type: string (or Expression with resultType string).'
+        type: object
+      schemaMapping:
+        description: 'The schema mapping to map between tabular data and hierarchical data. Example: {"Column1": "$.Column1", "Column2": "$.Column2.Property1", "Column3": "$.Column2.Property2"}. Type: object (or Expression with resultType object).'
+        type: object
+    type: object
+  UntilActivity:
+    allOf:
+      - $ref: '#/definitions/ControlActivity'
+    description: 'This activity executes inner activities until the specified boolean expression results to true or timeout is reached, whichever is earlier.'
+    properties:
+      typeProperties:
+        $ref: '#/definitions/UntilActivityTypeProperties'
+        description: Until activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: Until
+  UntilActivityTypeProperties:
+    description: Until activity properties.
+    properties:
+      activities:
+        description: List of activities to execute.
+        items:
+          $ref: '#/definitions/Activity'
+        type: array
+      expression:
+        description: Azure Data Factory expression definition.
+        properties:
+          type:
+            description: Expression type.
+            enum:
+              - Expression
+            type: string
+          value:
+            description: Expression value.
+            type: string
+        required:
+          - type
+          - value
+        type: object
+      timeout:
+        description: 'Specifies the timeout for the activity to run. If there is no value specified, it takes the value of TimeSpan.FromDays(7) which is 1 week as default. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])). Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
+        type: object
+    required:
+      - expression
+      - activities
+  UserProperty:
+    description: User property.
+    properties:
+      name:
+        description: User property name.
+        type: string
+      value:
+        description: 'User property value. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - name
+      - value
+    type: object
+  VerticaSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Vertica source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  WaitActivity:
+    allOf:
+      - $ref: '#/definitions/ControlActivity'
+    description: This activity suspends pipeline execution for the specified interval.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/WaitActivityTypeProperties'
+        description: Wait activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: Wait
+  WaitActivityTypeProperties:
+    description: Wait activity properties.
+    properties:
+      waitTimeInSeconds:
+        description: Duration in seconds.
+        type: integer
+    required:
+      - waitTimeInSeconds
+  WebActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Web activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/WebActivityTypeProperties'
+        description: Web activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: WebActivity
+  WebActivityAuthentication:
+    description: Web activity authentication properties.
+    properties:
+      password:
+        allOf:
+          - description: The base definition of a secret type.
+            discriminator: type
+            properties:
+              type:
+                description: Type of the secret.
+                type: string
+            required:
+              - type
+            type: object
+        description: Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.
+        properties:
+          value:
+            description: Value of secure string.
+            type: string
+        required:
+          - value
+        type: object
+        x-ms-discriminator-value: SecureString
+      pfx:
+        allOf:
+          - description: The base definition of a secret type.
+            discriminator: type
+            properties:
+              type:
+                description: Type of the secret.
+                type: string
+            required:
+              - type
+            type: object
+        description: Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.
+        properties:
+          value:
+            description: Value of secure string.
+            type: string
+        required:
+          - value
+        type: object
+        x-ms-discriminator-value: SecureString
+      resource:
+        description: Resource for which Azure Auth token will be requested when using MSI Authentication.
+        type: string
+      type:
+        description: Web activity authentication (Basic/ClientCertificate/MSI)
+        type: string
+      username:
+        description: Web activity authentication user name for basic authentication.
+        type: string
+    required:
+      - type
+  WebActivityMethod:
+    description: The list of HTTP methods supported by a WebActivity.
+    enum:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: WebActivityMethod
+  WebActivityTypeProperties:
+    description: Web activity type properties.
+    properties:
+      authentication:
+        $ref: '#/definitions/WebActivityAuthentication'
+        description: Authentication method used for calling the endpoint.
+      body:
+        description: 'Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string).'
+        type: object
+      datasets:
+        description: List of datasets passed to web endpoint.
+        items:
+          description: Dataset reference type.
+          properties:
+            parameters:
+              additionalProperties:
+                type: object
+              description: An object mapping parameter names to argument values.
+              type: object
+            referenceName:
+              description: Reference dataset name.
+              type: string
+            type:
+              description: Dataset reference type.
+              enum:
+                - DatasetReference
+              type: string
+          required:
+            - type
+            - referenceName
+        type: array
+      headers:
+        description: 'Represents the headers that will be sent to the request. For example, to set the language and type on a request: "headers" : { "Accept-Language": "en-us", "Content-Type": "application/json" }. Type: string (or Expression with resultType string).'
+        type: object
+      linkedServices:
+        description: List of linked services passed to web endpoint.
+        items:
+          description: Linked service reference type.
+          properties:
+            parameters:
+              additionalProperties:
+                type: object
+              description: An object mapping parameter names to argument values.
+              type: object
+            referenceName:
+              description: Reference LinkedService name.
+              type: string
+            type:
+              description: Linked service reference type.
+              enum:
+                - LinkedServiceReference
+              type: string
+          required:
+            - type
+            - referenceName
+        type: array
+      method:
+        $ref: '#/definitions/WebActivityMethod'
+        description: Rest API method for target endpoint.
+      url:
+        description: 'Web activity target endpoint and path. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - method
+      - url
+  WebSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for web page table.
+    properties: {}
+    type: object
+  XeroSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Xero Service source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  ZohoSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Zoho server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object

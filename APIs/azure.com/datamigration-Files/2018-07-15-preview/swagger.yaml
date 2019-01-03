@@ -1,0 +1,103 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Data Migration Service Resource Provider
+  version: 2018-07-15-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Files.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: datamigration-Files
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  FileList:
+    description: OData page of files
+    properties:
+      nextLink:
+        description: URL to load the next page of files
+        type: string
+      value:
+        description: List of files
+        items:
+          $ref: '#/definitions/ProjectFile'
+        type: array
+    type: object
+  FileStorageInfo:
+    description: File storage information.
+    properties:
+      headers:
+        additionalProperties:
+          type: string
+        type: object
+      uri:
+        description: A URI that can be used to access the file content.
+        type: string
+    type: object
+    x-ms-discriminator-value: Unknown
+  ProjectFile:
+    allOf:
+      - description: ARM resource.
+        properties:
+          id:
+            description: Resource ID.
+            readOnly: true
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: A file resource
+    properties:
+      etag:
+        description: HTTP strong entity tag value. This is ignored if submitted.
+        type: string
+      properties:
+        $ref: '#/definitions/ProjectFileProperties'
+        description: Custom file properties
+    type: object
+  ProjectFileProperties:
+    description: Base class for file properties.
+    properties:
+      extension:
+        description: Optional File extension. If submitted it should not have a leading period and must match the extension from filePath.
+        type: string
+      filePath:
+        description: Relative path of this file resource. This property can be set when creating or updating the file resource.
+        type: string
+      lastModified:
+        description: Modification DateTime.
+        format: date-time
+        readOnly: true
+        type: string
+      mediaType:
+        description: File content type. This property can be modified to reflect the file content type.
+        type: string
+      size:
+        description: File size.
+        format: int64
+        readOnly: true
+        type: integer
+    type: object

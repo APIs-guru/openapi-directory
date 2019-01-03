@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/storage/Microsoft.Storage.Admin/preview/2016-05-01/storage.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/storage/Microsoft.Storage.Admin/preview/2015-12-01/storage.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: azsadmin-storage
@@ -702,7 +702,7 @@ definitions:
             format: float
             type: number
           frontEndMaxMillisecondsBetweenMemorySamples:
-            description: Maxium interval (in millisecond) between memory samples of front end.
+            description: Maximum interval (in millisecond) between memory samples of front end.
             format: int32
             type: integer
           frontEndMemoryThrottleThresholdSettings:
@@ -769,7 +769,7 @@ definitions:
         format: float
         type: number
       frontEndMaxMillisecondsBetweenMemorySamples:
-        description: Maxium interval (in millisecond) between memory samples of front end.
+        description: Maximum interval (in millisecond) between memory samples of front end.
         format: int32
         type: integer
       frontEndMemoryThrottleThresholdSettings:

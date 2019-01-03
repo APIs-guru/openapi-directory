@@ -1,0 +1,680 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  description: Describes the schema of the Azure Media Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.
+  title: Schema of Azure Media Services events published to Azure Event Grid
+  version: '2018-01-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventgrid/data-plane/Microsoft.Media/stable/2018-01-01/MediaServices.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: eventgrid-MediaServices
+  x-tags:
+    - Azure
+    - Microsoft
+paths: {}
+definitions:
+  MediaJobCanceledEventData:
+    allOf:
+      - $ref: '#/definitions/MediaJobStateChangeEventData'
+    description: Job canceled event data
+    properties:
+      outputs:
+        description: Gets the Job outputs.
+        items:
+          $ref: '#/definitions/MediaJobOutput'
+        type: array
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobCanceled'
+  MediaJobCancelingEventData:
+    allOf:
+      - $ref: '#/definitions/MediaJobStateChangeEventData'
+    description: Job canceling event data
+    properties: {}
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobCanceling'
+  MediaJobError:
+    description: Details of JobOutput errors.
+    properties:
+      category:
+        description: Helps with categorization of errors.
+        enum:
+          - Service
+          - Download
+          - Upload
+          - Configuration
+          - Content
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsExtensible: true
+          name: MediaJobErrorCategory
+          values:
+            - description: The error is service related.
+              value: Service
+            - description: The error is download related.
+              value: Download
+            - description: The error is upload related.
+              value: Upload
+            - description: The error is configuration related.
+              value: Configuration
+            - description: The error is related to data in the input files.
+              value: Content
+        x-nullable: false
+      code:
+        description: Error code describing the error.
+        enum:
+          - ServiceError
+          - ServiceTransientError
+          - DownloadNotAccessible
+          - DownloadTransientError
+          - UploadNotAccessible
+          - UploadTransientError
+          - ConfigurationUnsupported
+          - ContentMalformed
+          - ContentUnsupported
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsExtensible: true
+          name: MediaJobErrorCode
+          values:
+            - description: 'Fatal service error, please contact support.'
+              value: ServiceError
+            - description: 'Transient error, please retry, if retry is unsuccessful, please contact support.'
+              value: ServiceTransientError
+            - description: 'While trying to download the input files, the files were not accessible, please check the availability of the source.'
+              value: DownloadNotAccessible
+            - description: 'While trying to download the input files, there was an issue during transfer (storage service, network errors), see details and check your source.'
+              value: DownloadTransientError
+            - description: 'While trying to upload the output files, the destination was not reachable, please check the availability of the destination.'
+              value: UploadNotAccessible
+            - description: 'While trying to upload the output files, there was an issue during transfer (storage service, network errors), see details and check your destination.'
+              value: UploadTransientError
+            - description: 'There was a problem with the combination of input files and the configuration settings applied, fix the configuration settings and retry with the same input, or change input to match the configuration.'
+              value: ConfigurationUnsupported
+            - description: 'There was a problem with the input content (for example: zero byte files, or corrupt/non-decodable files), check the input files.'
+              value: ContentMalformed
+            - description: 'There was a problem with the format of the input (not valid media file, or an unsupported file/codec), check the validity of the input files.'
+              value: ContentUnsupported
+        x-nullable: false
+      details:
+        description: An array of details about specific errors that led to this reported error.
+        items:
+          $ref: '#/definitions/MediaJobErrorDetail'
+        readOnly: true
+        type: array
+      message:
+        description: A human-readable language-dependent representation of the error.
+        readOnly: true
+        type: string
+      retry:
+        description: 'Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal.'
+        enum:
+          - DoNotRetry
+          - MayRetry
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsExtensible: true
+          name: MediaJobRetry
+          values:
+            - description: Issue needs to be investigated and then the job resubmitted with corrections or retried once the underlying issue has been corrected.
+              value: DoNotRetry
+            - description: Issue may be resolved after waiting for a period of time and resubmitting the same Job.
+              value: MayRetry
+        x-nullable: false
+    type: object
+  MediaJobErrorDetail:
+    description: Details of JobOutput errors.
+    properties:
+      code:
+        description: Code describing the error detail.
+        readOnly: true
+        type: string
+      message:
+        description: A human-readable representation of the error.
+        readOnly: true
+        type: string
+    type: object
+  MediaJobErroredEventData:
+    allOf:
+      - $ref: '#/definitions/MediaJobStateChangeEventData'
+    description: Job error state event data
+    properties:
+      outputs:
+        description: Gets the Job outputs.
+        items:
+          $ref: '#/definitions/MediaJobOutput'
+        type: array
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobErrored'
+  MediaJobFinishedEventData:
+    allOf:
+      - $ref: '#/definitions/MediaJobStateChangeEventData'
+    description: Job finished event data
+    properties:
+      outputs:
+        description: Gets the Job outputs.
+        items:
+          $ref: '#/definitions/MediaJobOutput'
+        type: array
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobFinished'
+  MediaJobOutput:
+    description: The event data for a Job output.
+    discriminator: '@odata.type'
+    properties:
+      '@odata.type':
+        description: The discriminator for derived types.
+        type: string
+      error:
+        $ref: '#/definitions/MediaJobError'
+        description: Gets the Job output error.
+      label:
+        description: Gets the Job output label.
+        type: string
+      progress:
+        description: Gets the Job output progress.
+        format: int64
+        type: integer
+      state:
+        description: Gets the Job output state.
+        enum:
+          - Canceled
+          - Canceling
+          - Error
+          - Finished
+          - Processing
+          - Queued
+          - Scheduled
+        type: string
+        x-ms-enum:
+          modelAsExtensible: true
+          name: MediaJobState
+          values:
+            - description: The job was canceled. This is a final state for the job.
+              value: Canceled
+            - description: The job is in the process of being canceled. This is a transient state for the job.
+              value: Canceling
+            - description: The job has encountered an error. This is a final state for the job.
+              value: Error
+            - description: The job is finished. This is a final state for the job.
+              value: Finished
+            - description: The job is processing. This is a transient state for the job.
+              value: Processing
+            - description: 'The job is in a queued state, waiting for resources to become available. This is a transient state.'
+              value: Queued
+            - description: 'The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states.'
+              value: Scheduled
+    required:
+      - progress
+      - state
+    type: object
+  MediaJobOutputAsset:
+    allOf:
+      - $ref: '#/definitions/MediaJobOutput'
+    description: The event data for a Job output asset.
+    properties:
+      assetName:
+        description: Gets the Job output asset name.
+        type: string
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobOutputAsset'
+  MediaJobOutputCanceledEventData:
+    allOf:
+      - $ref: '#/definitions/MediaJobOutputStateChangeEventData'
+    description: Job output canceled event data
+    properties: {}
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobOutputCanceled'
+  MediaJobOutputCancelingEventData:
+    allOf:
+      - $ref: '#/definitions/MediaJobOutputStateChangeEventData'
+    description: Job output canceling event data
+    properties: {}
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobOutputCanceling'
+  MediaJobOutputErroredEventData:
+    allOf:
+      - $ref: '#/definitions/MediaJobOutputStateChangeEventData'
+    description: Job output error event data
+    properties: {}
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobOutputErrored'
+  MediaJobOutputFinishedEventData:
+    allOf:
+      - $ref: '#/definitions/MediaJobOutputStateChangeEventData'
+    description: Job output finished event data
+    properties: {}
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobOutputFinished'
+  MediaJobOutputProcessingEventData:
+    allOf:
+      - $ref: '#/definitions/MediaJobOutputStateChangeEventData'
+    description: Job output processing event data
+    properties: {}
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobOutputProcessing'
+  MediaJobOutputScheduledEventData:
+    allOf:
+      - $ref: '#/definitions/MediaJobOutputStateChangeEventData'
+    description: Job output scheduled event data
+    properties: {}
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobOutputScheduled'
+  MediaJobOutputStateChangeEventData:
+    description: Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputStateChange event.
+    properties:
+      jobCorrelationData:
+        additionalProperties:
+          type: string
+        description: Gets the Job correlation data.
+        type: object
+      output:
+        $ref: '#/definitions/MediaJobOutput'
+        description: Gets the output.
+      previousState:
+        description: The previous state of the Job.
+        enum:
+          - Canceled
+          - Canceling
+          - Error
+          - Finished
+          - Processing
+          - Queued
+          - Scheduled
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsExtensible: true
+          name: MediaJobState
+          values:
+            - description: The job was canceled. This is a final state for the job.
+              value: Canceled
+            - description: The job is in the process of being canceled. This is a transient state for the job.
+              value: Canceling
+            - description: The job has encountered an error. This is a final state for the job.
+              value: Error
+            - description: The job is finished. This is a final state for the job.
+              value: Finished
+            - description: The job is processing. This is a transient state for the job.
+              value: Processing
+            - description: 'The job is in a queued state, waiting for resources to become available. This is a transient state.'
+              value: Queued
+            - description: 'The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states.'
+              value: Scheduled
+        x-nullable: false
+    type: object
+  MediaJobProcessingEventData:
+    allOf:
+      - $ref: '#/definitions/MediaJobStateChangeEventData'
+    description: Job processing event data
+    properties: {}
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobProcessing'
+  MediaJobScheduledEventData:
+    allOf:
+      - $ref: '#/definitions/MediaJobStateChangeEventData'
+    description: Job scheduled event data
+    properties: {}
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobScheduled'
+  MediaJobStateChangeEventData:
+    description: Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobStateChange event.
+    properties:
+      correlationData:
+        additionalProperties:
+          type: string
+        description: Gets the Job correlation data.
+        type: object
+      previousState:
+        description: The previous state of the Job.
+        enum:
+          - Canceled
+          - Canceling
+          - Error
+          - Finished
+          - Processing
+          - Queued
+          - Scheduled
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsExtensible: true
+          name: MediaJobState
+          values:
+            - description: The job was canceled. This is a final state for the job.
+              value: Canceled
+            - description: The job is in the process of being canceled. This is a transient state for the job.
+              value: Canceling
+            - description: The job has encountered an error. This is a final state for the job.
+              value: Error
+            - description: The job is finished. This is a final state for the job.
+              value: Finished
+            - description: The job is processing. This is a transient state for the job.
+              value: Processing
+            - description: 'The job is in a queued state, waiting for resources to become available. This is a transient state.'
+              value: Queued
+            - description: 'The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states.'
+              value: Scheduled
+        x-nullable: false
+      state:
+        description: The new state of the Job.
+        enum:
+          - Canceled
+          - Canceling
+          - Error
+          - Finished
+          - Processing
+          - Queued
+          - Scheduled
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsExtensible: true
+          name: MediaJobState
+          values:
+            - description: The job was canceled. This is a final state for the job.
+              value: Canceled
+            - description: The job is in the process of being canceled. This is a transient state for the job.
+              value: Canceling
+            - description: The job has encountered an error. This is a final state for the job.
+              value: Error
+            - description: The job is finished. This is a final state for the job.
+              value: Finished
+            - description: The job is processing. This is a transient state for the job.
+              value: Processing
+            - description: 'The job is in a queued state, waiting for resources to become available. This is a transient state.'
+              value: Queued
+            - description: 'The job is being scheduled to run on an available resource. This is a transient state, between queued and processing states.'
+              value: Scheduled
+        x-nullable: false
+    type: object
+  MediaLiveEventConnectionRejectedEventData:
+    description: Encoder connection rejected event data.
+    properties:
+      encoderIp:
+        description: Gets the remote IP.
+        readOnly: true
+        type: string
+      encoderPort:
+        description: Gets the remote port.
+        readOnly: true
+        type: string
+      ingestUrl:
+        description: Gets the ingest URL provided by the live event.
+        readOnly: true
+        type: string
+      resultCode:
+        description: Gets the result code.
+        readOnly: true
+        type: string
+      streamId:
+        description: Gets the stream Id.
+        readOnly: true
+        type: string
+    type: object
+  MediaLiveEventEncoderConnectedEventData:
+    description: Encoder connect event data.
+    properties:
+      encoderIp:
+        description: Gets the remote IP.
+        readOnly: true
+        type: string
+      encoderPort:
+        description: Gets the remote port.
+        readOnly: true
+        type: string
+      ingestUrl:
+        description: Gets the ingest URL provided by the live event.
+        readOnly: true
+        type: string
+      streamId:
+        description: Gets the stream Id.
+        readOnly: true
+        type: string
+    type: object
+  MediaLiveEventEncoderDisconnectedEventData:
+    description: Encoder disconnected event data.
+    properties:
+      encoderIp:
+        description: Gets the remote IP.
+        readOnly: true
+        type: string
+      encoderPort:
+        description: Gets the remote port.
+        readOnly: true
+        type: string
+      ingestUrl:
+        description: Gets the ingest URL provided by the live event.
+        readOnly: true
+        type: string
+      resultCode:
+        description: Gets the result code.
+        readOnly: true
+        type: string
+      streamId:
+        description: Gets the stream Id.
+        readOnly: true
+        type: string
+    type: object
+  MediaLiveEventIncomingDataChunkDroppedEventData:
+    description: Ingest fragment dropped event data.
+    properties:
+      bitrate:
+        description: Gets the bitrate of the track.
+        format: int64
+        readOnly: true
+        type: integer
+      resultCode:
+        description: Gets the result code for fragment drop operation.
+        readOnly: true
+        type: string
+      timescale:
+        description: Gets the timescale of the Timestamp.
+        readOnly: true
+        type: string
+      timestamp:
+        description: Gets the timestamp of the data chunk dropped.
+        readOnly: true
+        type: string
+      trackName:
+        description: Gets the name of the track for which fragment is dropped.
+        readOnly: true
+        type: string
+      trackType:
+        description: Gets the type of the track (Audio / Video).
+        readOnly: true
+        type: string
+    type: object
+  MediaLiveEventIncomingStreamReceivedEventData:
+    description: Encoder connect event data.
+    properties:
+      bitrate:
+        description: Gets the bitrate of the track.
+        format: int64
+        readOnly: true
+        type: integer
+      duration:
+        description: Gets the duration of the first data chunk.
+        readOnly: true
+        type: string
+      encoderIp:
+        description: Gets the remote IP.
+        readOnly: true
+        type: string
+      encoderPort:
+        description: Gets the remote port.
+        readOnly: true
+        type: string
+      ingestUrl:
+        description: Gets the ingest URL provided by the live event.
+        readOnly: true
+        type: string
+      timescale:
+        description: Gets the timescale in which timestamp is represented.
+        readOnly: true
+        type: string
+      timestamp:
+        description: Gets the first timestamp of the data chunk received.
+        readOnly: true
+        type: string
+      trackName:
+        description: Gets the track name.
+        readOnly: true
+        type: string
+      trackType:
+        description: Gets the type of the track (Audio / Video).
+        readOnly: true
+        type: string
+    type: object
+  MediaLiveEventIncomingStreamsOutOfSyncEventData:
+    description: Incoming streams out of sync event data.
+    properties:
+      maxLastTimestamp:
+        description: Gets the maximum timestamp among all the tracks (audio or video).
+        readOnly: true
+        type: string
+      minLastTimestamp:
+        description: Gets the minimum last timestamp received.
+        readOnly: true
+        type: string
+      timescaleOfMaxLastTimestamp:
+        description: Gets the timescale in which "MaxLastTimestamp" is represented.
+        readOnly: true
+        type: string
+      timescaleOfMinLastTimestamp:
+        description: Gets the timescale in which "MinLastTimestamp" is represented.
+        readOnly: true
+        type: string
+      typeOfStreamWithMaxLastTimestamp:
+        description: Gets the type of stream with maximum last timestamp.
+        readOnly: true
+        type: string
+      typeOfStreamWithMinLastTimestamp:
+        description: Gets the type of stream with minimum last timestamp.
+        readOnly: true
+        type: string
+    type: object
+  MediaLiveEventIncomingVideoStreamsOutOfSyncEventData:
+    description: Incoming video stream out of synch event data.
+    properties:
+      firstDuration:
+        description: Gets the duration of the data chunk with first timestamp.
+        readOnly: true
+        type: string
+      firstTimestamp:
+        description: Gets the first timestamp received for one of the quality levels.
+        readOnly: true
+        type: string
+      secondDuration:
+        description: Gets the duration of the data chunk with second timestamp.
+        readOnly: true
+        type: string
+      secondTimestamp:
+        description: Gets the timestamp received for some other quality levels.
+        readOnly: true
+        type: string
+      timescale:
+        description: Gets the timescale in which both the timestamps and durations are represented.
+        readOnly: true
+        type: string
+    type: object
+  MediaLiveEventIngestHeartbeatEventData:
+    description: Ingest fragment dropped event data.
+    properties:
+      bitrate:
+        description: Gets the bitrate of the track.
+        format: int64
+        readOnly: true
+        type: integer
+      discontinuityCount:
+        description: Gets the fragment Discontinuity count.
+        format: int64
+        readOnly: true
+        type: integer
+      healthy:
+        description: Gets a value indicating whether preview is healthy or not.
+        readOnly: true
+        type: boolean
+      incomingBitrate:
+        description: Gets the incoming bitrate.
+        format: int64
+        readOnly: true
+        type: integer
+      lastTimestamp:
+        description: Gets the last timestamp.
+        readOnly: true
+        type: string
+      nonincreasingCount:
+        description: Gets Non increasing count.
+        format: int64
+        readOnly: true
+        type: integer
+      overlapCount:
+        description: Gets the fragment Overlap count.
+        format: int64
+        readOnly: true
+        type: integer
+      state:
+        description: Gets the state of the live event.
+        readOnly: true
+        type: string
+      timescale:
+        description: Gets the timescale of the last timestamp.
+        readOnly: true
+        type: string
+      trackName:
+        description: Gets the track name.
+        readOnly: true
+        type: string
+      trackType:
+        description: Gets the type of the track (Audio / Video).
+        readOnly: true
+        type: string
+      unexpectedBitrate:
+        description: Gets a value indicating whether unexpected bitrate is present or not.
+        readOnly: true
+        type: boolean
+    type: object
+  MediaLiveEventTrackDiscontinuityDetectedEventData:
+    description: Ingest track discontinuity detected event data.
+    properties:
+      bitrate:
+        description: Gets the bitrate.
+        format: int64
+        readOnly: true
+        type: integer
+      discontinuityGap:
+        description: Gets the discontinuity gap between PreviousTimestamp and NewTimestamp.
+        readOnly: true
+        type: string
+      newTimestamp:
+        description: Gets the timestamp of the current fragment.
+        readOnly: true
+        type: string
+      previousTimestamp:
+        description: Gets the timestamp of the previous fragment.
+        readOnly: true
+        type: string
+      timescale:
+        description: Gets the timescale in which both timestamps and discontinuity gap are represented.
+        readOnly: true
+        type: string
+      trackName:
+        description: Gets the track name.
+        readOnly: true
+        type: string
+      trackType:
+        description: Gets the type of the track (Audio / Video).
+        readOnly: true
+        type: string
+    type: object

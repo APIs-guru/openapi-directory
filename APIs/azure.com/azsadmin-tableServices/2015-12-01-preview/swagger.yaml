@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/storage/Microsoft.Storage.Admin/preview/2016-05-01/tableServices.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/storage/Microsoft.Storage.Admin/preview/2015-12-01/tableServices.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: azsadmin-tableServices
@@ -38,7 +38,7 @@ parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/tableservices/{serviceType}':
     get:
-      description: Returns the table servie.
+      description: Returns the table service.
       operationId: TableServices_Get
       parameters:
         - description: Subscription Id.
@@ -152,7 +152,7 @@ paths:
                             format: float
                             type: number
                           frontEndMaxMillisecondsBetweenMemorySamples:
-                            description: Maxium interval (in millisecond) between memory samples of front end.
+                            description: Maximum interval (in millisecond) between memory samples of front end.
                             format: int32
                             type: integer
                           frontEndMemoryThrottleThresholdSettings:
@@ -203,7 +203,7 @@ paths:
       tags:
         - TableServices
       x-ms-examples:
-        Returns the table servie.:
+        Returns the table service.:
           parameters:
             api-version: 2015-12-01-preview
             farmId: 3cf03497-c44a-4e51-a56f-3987d88c70af
@@ -1116,7 +1116,7 @@ definitions:
                     format: float
                     type: number
                   frontEndMaxMillisecondsBetweenMemorySamples:
-                    description: Maxium interval (in millisecond) between memory samples of front end.
+                    description: Maximum interval (in millisecond) between memory samples of front end.
                     format: int32
                     type: integer
                   frontEndMemoryThrottleThresholdSettings:
@@ -1207,7 +1207,7 @@ definitions:
                 format: float
                 type: number
               frontEndMaxMillisecondsBetweenMemorySamples:
-                description: Maxium interval (in millisecond) between memory samples of front end.
+                description: Maximum interval (in millisecond) between memory samples of front end.
                 format: int32
                 type: integer
               frontEndMemoryThrottleThresholdSettings:

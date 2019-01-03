@@ -1,0 +1,338 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Database Migration Service Resource Provider
+  version: 2018-07-15-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrationValidation.json'
+      version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: datamigration-MigrationValidation
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  DataIntegrityValidationResult:
+    description: Results for checksum based Data Integrity validation results
+    properties:
+      failedObjects:
+        additionalProperties:
+          type: string
+        description: List of failed table names of source and target pair
+        type: object
+      validationErrors:
+        $ref: '#/definitions/ValidationError'
+        description: List of errors that happened while performing data integrity validation
+        type: array
+    type: object
+  ExecutionStatistics:
+    description: Description about the errors happen while performing migration validation
+    properties:
+      cpuTimeMs:
+        description: CPU Time in millisecond(s) for the query execution
+        format: float
+        type: number
+      elapsedTimeMs:
+        description: Time taken in millisecond(s) for executing the query
+        format: float
+        type: number
+      executionCount:
+        description: No. of query executions
+        format: int64
+        type: integer
+      hasErrors:
+        description: Indicates whether the query resulted in an error
+        type: boolean
+      sqlErrors:
+        description: List of sql Errors
+        items:
+          type: string
+        type: array
+      waitStats:
+        additionalProperties:
+          $ref: '#/definitions/WaitStatistics'
+          type: object
+        description: Dictionary of sql query execution wait types and the respective statistics
+        type: object
+    type: object
+  MigrationReportResult:
+    description: 'Migration validation report result, contains the url for downloading the generated report.'
+    properties:
+      id:
+        description: Migration validation result identifier
+        type: string
+      reportUrl:
+        description: The url of the report.
+        type: string
+    type: object
+  MigrationValidationDatabaseLevelResult:
+    description: Database level validation results
+    properties:
+      dataIntegrityValidationResult:
+        $ref: '#/definitions/DataIntegrityValidationResult'
+        description: Provides data integrity validation result between the source and target tables that are migrated.
+        readOnly: true
+      endedOn:
+        description: Validation end time
+        format: date-time
+        readOnly: true
+        type: string
+      id:
+        description: Result identifier
+        readOnly: true
+        type: string
+      migrationId:
+        description: Migration Identifier
+        readOnly: true
+        type: string
+      queryAnalysisValidationResult:
+        $ref: '#/definitions/QueryAnalysisValidationResult'
+        description: Results of some of the query execution result between source and target database
+        readOnly: true
+      schemaValidationResult:
+        $ref: '#/definitions/SchemaComparisonValidationResult'
+        description: Provides schema comparison result between source and target database
+        readOnly: true
+      sourceDatabaseName:
+        description: Name of the source database
+        readOnly: true
+        type: string
+      startedOn:
+        description: Validation start time
+        format: date-time
+        readOnly: true
+        type: string
+      status:
+        $ref: '#/definitions/ValidationStatus'
+        description: Current status of validation at the database level
+        readOnly: true
+      targetDatabaseName:
+        description: Name of the target database
+        readOnly: true
+        type: string
+    type: object
+  MigrationValidationDatabaseSummaryResult:
+    description: Migration Validation Database level summary result
+    properties:
+      endedOn:
+        description: Validation end time
+        format: date-time
+        readOnly: true
+        type: string
+      id:
+        description: Result identifier
+        readOnly: true
+        type: string
+      migrationId:
+        description: Migration Identifier
+        readOnly: true
+        type: string
+      sourceDatabaseName:
+        description: Name of the source database
+        readOnly: true
+        type: string
+      startedOn:
+        description: Validation start time
+        format: date-time
+        readOnly: true
+        type: string
+      status:
+        $ref: '#/definitions/ValidationStatus'
+        description: Current status of validation at the database level
+        readOnly: true
+      targetDatabaseName:
+        description: Name of the target database
+        readOnly: true
+        type: string
+    type: object
+  MigrationValidationOptions:
+    description: Types of validations to run after the migration
+    properties:
+      enableDataIntegrityValidation:
+        description: Allows to perform a checksum based data integrity validation between source and target for the selected database / tables .
+        type: boolean
+      enableQueryAnalysisValidation:
+        description: Allows to perform a quick and intelligent query analysis by retrieving queries from the source database and executes them in the target. The result will have execution statistics for executions in source and target databases for the extracted queries.
+        type: boolean
+      enableSchemaValidation:
+        description: Allows to compare the schema information between source and target.
+        type: boolean
+    type: object
+  MigrationValidationResult:
+    description: Migration Validation Result
+    properties:
+      id:
+        description: Migration validation result identifier
+        readOnly: true
+        type: string
+      migrationId:
+        description: Migration Identifier
+        readOnly: true
+        type: string
+      status:
+        $ref: '#/definitions/ValidationStatus'
+        description: Current status of validation at the migration level. Status from the database validation result status will be aggregated here.
+        readOnly: true
+      summaryResults:
+        additionalProperties:
+          $ref: '#/definitions/MigrationValidationDatabaseSummaryResult'
+        description: Validation summary results for each database
+        type: object
+    type: object
+  QueryAnalysisValidationResult:
+    description: Results for query analysis comparison between the source and target
+    properties:
+      queryResults:
+        $ref: '#/definitions/QueryExecutionResult'
+        description: List of queries executed and it's execution results in source and target
+        type: array
+      validationErrors:
+        $ref: '#/definitions/ValidationError'
+        description: Errors that are part of the execution
+        type: array
+    type: object
+  QueryExecutionResult:
+    description: Describes query analysis results for execution in source and target
+    properties:
+      queryText:
+        description: Query text retrieved from the source server
+        type: string
+      sourceResult:
+        $ref: '#/definitions/ExecutionStatistics'
+        description: Query analysis result from the source
+        type: object
+      statementsInBatch:
+        description: Total no. of statements in the batch
+        format: int64
+        type: integer
+      targetResult:
+        $ref: '#/definitions/ExecutionStatistics'
+        description: Query analysis result from the target
+        type: object
+    type: object
+  SchemaComparisonValidationResult:
+    description: Results for schema comparison between the source and target
+    properties:
+      schemaDifferences:
+        $ref: '#/definitions/SchemaComparisonValidationResultType'
+        description: List of schema differences between the source and target databases
+        type: array
+      sourceDatabaseObjectCount:
+        additionalProperties:
+          format: int64
+          type: integer
+        description: Count of source database objects
+        type: object
+      targetDatabaseObjectCount:
+        additionalProperties:
+          format: int64
+          type: integer
+        description: Count of target database objects
+        type: object
+      validationErrors:
+        $ref: '#/definitions/ValidationError'
+        description: List of errors that happened while performing schema compare validation
+        type: array
+    type: object
+  SchemaComparisonValidationResultType:
+    description: Description about the errors happen while performing migration validation
+    properties:
+      objectName:
+        description: Name of the object that has the difference
+        type: string
+      objectType:
+        description: An enumeration of type of objects
+        enum:
+          - StoredProcedures
+          - Table
+          - User
+          - View
+          - Function
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ObjectType
+      updateAction:
+        $ref: '#/definitions/UpdateActionType'
+        description: Update action type with respect to target
+        type: string
+    type: object
+  Severity:
+    description: Severity of the validation error
+    enum:
+      - Message
+      - Warning
+      - Error
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: Severity
+  UpdateActionType:
+    description: 'Type of the actual difference for the compared object, while performing schema comparison'
+    enum:
+      - DeletedOnTarget
+      - ChangedOnTarget
+      - AddedOnTarget
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: UpdateActionType
+  ValidationError:
+    description: Description about the errors happen while performing migration validation
+    properties:
+      severity:
+        $ref: '#/definitions/Severity'
+        description: Severity of the error
+        type: string
+      text:
+        description: Error Text
+        type: string
+    type: object
+  ValidationStatus:
+    description: Current status of the validation
+    enum:
+      - Default
+      - NotStarted
+      - Initialized
+      - InProgress
+      - Completed
+      - CompletedWithIssues
+      - Stopped
+      - Failed
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ValidationStatus
+  WaitStatistics:
+    description: Wait statistics gathered during query batch execution
+    properties:
+      waitCount:
+        description: Total no. of waits
+        format: int64
+        type: integer
+      waitTimeMs:
+        default: 0
+        description: 'Total wait time in millisecond(s) '
+        format: float
+        type: number
+      waitType:
+        description: Type of the Wait
+        type: string
+    type: object

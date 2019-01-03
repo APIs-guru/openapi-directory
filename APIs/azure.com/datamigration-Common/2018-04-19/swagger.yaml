@@ -1,0 +1,434 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Database Migration Service Resource Provider
+  version: '2018-04-19'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/stable/2018-04-19/definitions/Common.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: datamigration-Common
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  ApiError:
+    description: Error information.
+    properties:
+      error:
+        $ref: '#/definitions/ODataError'
+        description: Error information in OData format
+    type: object
+  AuthenticationType:
+    description: An enumeration of possible authentication types when connecting
+    enum:
+      - None
+      - WindowsAuthentication
+      - SqlAuthentication
+      - ActiveDirectoryIntegrated
+      - ActiveDirectoryPassword
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: AuthenticationType
+  AzureActiveDirectoryApp:
+    description: Azure Active Directory Application
+    properties:
+      appKey:
+        description: Key used to authenticate to the Azure Active Directory Application
+        type: string
+      applicationId:
+        description: Application ID of the Azure Active Directory Application
+        type: string
+      tenantId:
+        description: Tenant id of the customer
+        type: string
+    required:
+      - applicationId
+      - appKey
+      - tenantId
+    type: object
+  BackupFileInfo:
+    description: Information of the backup file
+    properties:
+      familySequenceNumber:
+        description: Sequence number of the backup file in the backup set
+        type: integer
+      fileLocation:
+        description: Location of the backup file in shared folder
+        type: string
+      status:
+        $ref: '#/definitions/BackupFileStatus'
+        description: Status of the backup file during migration
+    readOnly: true
+    type: object
+  BackupFileStatus:
+    description: An enumeration of Status of the log backup file.
+    enum:
+      - Arrived
+      - Queued
+      - Uploading
+      - Uploaded
+      - Restoring
+      - Restored
+      - Cancelled
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: BackupFileStatus
+  BackupSetInfo:
+    description: Information of backup set
+    properties:
+      backupFinishedDate:
+        description: Date and time that the backup operation finished
+        format: date-time
+        type: string
+      backupSetId:
+        description: Id for the set of backup files
+        type: string
+      backupStartDate:
+        description: Date and time that the backup operation began
+        format: date-time
+        type: string
+      backupType:
+        $ref: '#/definitions/BackupType'
+        description: Enum of the different backup types
+      databaseName:
+        description: Name of the database to which the backup set belongs
+        type: string
+      firstLsn:
+        description: First log sequence number of the backup file
+        type: string
+      isBackupRestored:
+        description: Whether the backup set is restored or not
+        type: boolean
+      lastLsn:
+        description: Last log sequence number of the backup file
+        type: string
+      lastModifiedTime:
+        description: Last modified time of the backup file in share location
+        format: date-time
+        type: string
+      listOfBackupFiles:
+        description: List of files in the backup set
+        items:
+          $ref: '#/definitions/BackupFileInfo'
+        type: array
+    readOnly: true
+    type: object
+  BackupType:
+    description: Enum of the different backup types.
+    enum:
+      - Database
+      - TransactionLog
+      - File
+      - DifferentialDatabase
+      - DifferentialFile
+      - Partial
+      - DifferentialPartial
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: BackupType
+  ConnectionInfo:
+    description: Defines the connection properties of a server
+    discriminator: type
+    properties:
+      password:
+        description: Password credential.
+        type: string
+      type:
+        description: Type of connection info
+        type: string
+      userName:
+        description: User name
+        type: string
+    required:
+      - type
+    type: object
+    x-ms-discriminator-value: Unknown
+  MiSqlConnectionInfo:
+    allOf:
+      - $ref: '#/definitions/ConnectionInfo'
+    description: Properties required to create a connection to Azure SQL database Managed instance
+    properties:
+      managedInstanceResourceId:
+        description: Resource id for Azure SQL database Managed instance
+        type: string
+    required:
+      - managedInstanceResourceId
+    type: object
+    x-ms-discriminator-value: MiSqlConnectionInfo
+  MySqlConnectionInfo:
+    allOf:
+      - $ref: '#/definitions/ConnectionInfo'
+    description: Information for connecting to MySQL server
+    properties:
+      port:
+        description: Port for Server
+        type: integer
+      serverName:
+        description: Name of the server
+        type: string
+    required:
+      - serverName
+      - port
+    type: object
+    x-ms-discriminator-value: MySqlConnectionInfo
+  MySqlTargetPlatform:
+    description: An enumeration of possible target types when migrating from MySQL
+    enum:
+      - SqlServer
+      - AzureDbForMySQL
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: MySqlTargetPlatformType
+  NameAvailabilityRequest:
+    description: A resource type and proposed name
+    properties:
+      name:
+        description: The proposed resource name
+        type: string
+      type:
+        description: The resource type chain (e.g. virtualMachines/extensions)
+        type: string
+    type: object
+  NameAvailabilityResponse:
+    description: Indicates whether a proposed resource name is available
+    properties:
+      message:
+        description: 'The localized reason why the name is not available, if nameAvailable is false'
+        readOnly: true
+        type: string
+      nameAvailable:
+        description: 'If true, the name is valid and available. If false, ''reason'' describes why not.'
+        readOnly: true
+        type: boolean
+      reason:
+        description: 'The reason why the name is not available, if nameAvailable is false'
+        enum:
+          - AlreadyExists
+          - Invalid
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: NameCheckFailureReason
+    type: object
+  ODataError:
+    description: Error information in OData format.
+    properties:
+      code:
+        description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+        readOnly: true
+        type: string
+      details:
+        description: Inner errors that caused this error
+        items:
+          $ref: '#/definitions/ODataError'
+        readOnly: true
+        type: array
+      message:
+        description: The human-readable description of the error
+        readOnly: true
+        type: string
+    type: object
+  OrphanedUserInfo:
+    description: Information of orphaned users on the SQL server database.
+    properties:
+      databaseName:
+        description: Parent database of the user
+        type: string
+      name:
+        description: Name of the orphaned user
+        type: string
+    type: object
+  PostgreSqlConnectionInfo:
+    allOf:
+      - $ref: '#/definitions/ConnectionInfo'
+    description: Information for connecting to PostgreSQL server
+    properties:
+      databaseName:
+        description: Name of the database
+        type: string
+      port:
+        description: Port for Server
+        type: integer
+      serverName:
+        description: Name of the server
+        type: string
+    required:
+      - serverName
+      - port
+    type: object
+    x-ms-discriminator-value: PostgreSqlConnectionInfo
+  Quota:
+    description: Describes a quota for or usage details about a resource
+    properties:
+      currentValue:
+        description: 'The current value of the quota. If null or missing, the current value cannot be determined in the context of the request.'
+        format: double
+        type: number
+      id:
+        description: The resource ID of the quota object
+        type: string
+      limit:
+        description: 'The maximum value of the quota. If null or missing, the quota has no maximum, in which case it merely tracks usage.'
+        format: double
+        type: number
+      name:
+        description: The name of the quota
+        properties:
+          localizedValue:
+            description: The localized name of the quota
+            type: string
+          value:
+            description: The unlocalized name (or ID) of the quota
+            type: string
+        type: object
+      unit:
+        description: 'The unit for the quota, such as Count, Bytes, BytesPerSecond, etc.'
+        type: string
+    type: object
+  QuotaList:
+    description: OData page of quota objects
+    properties:
+      nextLink:
+        description: 'URL to load the next page of quotas, or null or missing if this is the last page'
+        type: string
+      value:
+        description: List of quotas
+        items:
+          $ref: '#/definitions/Quota'
+        type: array
+    type: object
+  ReportableException:
+    description: Exception object for all custom exceptions
+    properties:
+      actionableMessage:
+        description: Actionable steps for this exception
+        type: string
+      filePath:
+        description: The path to the file where exception occurred
+        readOnly: true
+        type: string
+      hResult:
+        description: Coded numerical value that is assigned to a specific exception
+        readOnly: true
+        type: integer
+      lineNumber:
+        description: The line number where exception occurred
+        readOnly: true
+        type: string
+      message:
+        description: Error message
+        readOnly: true
+        type: string
+      stackTrace:
+        description: Stack trace
+        readOnly: true
+        type: string
+    type: object
+  Resource:
+    description: ARM resource.
+    properties:
+      id:
+        description: Resource ID.
+        readOnly: true
+        type: string
+      name:
+        description: Resource name.
+        readOnly: true
+        type: string
+      type:
+        description: Resource type.
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  ServerLevelPermissionsGroup:
+    description: Permission group for validations. These groups will run a set of permissions for validating user activity. Select the permission group for the activity that you are performing.
+    enum:
+      - Default
+      - MigrationFromSqlServerToAzureDB
+      - MigrationFromSqlServerToAzureMI
+      - MigrationFromMySQLToAzureDBForMySQL
+    type: string
+    x-ms-enum:
+      name: ServerLevelPermissionsGroup
+  SqlConnectionInfo:
+    allOf:
+      - $ref: '#/definitions/ConnectionInfo'
+    description: Information for connecting to SQL database server
+    properties:
+      additionalSettings:
+        description: Additional connection settings
+        type: string
+      authentication:
+        $ref: '#/definitions/AuthenticationType'
+        description: Authentication type to use for connection
+      dataSource:
+        description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+        type: string
+      encryptConnection:
+        default: true
+        description: Whether to encrypt the connection
+        type: boolean
+      platform:
+        $ref: '#/definitions/SqlServerSourcePlatform'
+        description: Server platform type for connection
+      trustServerCertificate:
+        default: false
+        description: Whether to trust the server certificate
+        type: boolean
+    required:
+      - dataSource
+    type: object
+    x-ms-discriminator-value: SqlConnectionInfo
+  SqlServerSourcePlatform:
+    description: An enumeration of source platform types
+    enum:
+      - SqlOnPrem
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: SqlSourcePlatform
+  TrackedResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: ARM tracked top level resource.
+    properties:
+      location:
+        description: Resource location.
+        type: string
+        x-ms-mutability:
+          - read
+          - create
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+        x-ms-mutability:
+          - read
+          - create
+          - update
+    required:
+      - location

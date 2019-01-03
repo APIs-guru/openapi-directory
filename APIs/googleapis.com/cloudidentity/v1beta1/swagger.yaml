@@ -1,0 +1,740 @@
+swagger: '2.0'
+schemes:
+  - https
+host: cloudidentity.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: API for provisioning and managing identity resources.
+  title: Cloud Identity
+  version: v1beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.18
+      format: google
+      url: 'https://cloudidentity.googleapis.com/$discovery/rest?version=v1beta1'
+      version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: cloudidentity
+externalDocs:
+  url: 'https://cloud.google.com/identity/'
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: groups
+paths:
+  /v1beta1/groups:
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a Group.
+      operationId: cloudidentity.groups.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Group'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      tags:
+        - groups
+  '/v1beta1/groups:lookup':
+    get:
+      description: |-
+        Looks up [resource
+        name](https://cloud.google.com/apis/design/resource_names) of a Group by
+        its EntityKey.
+      operationId: cloudidentity.groups.lookup
+      parameters:
+        - description: |-
+            The id of the entity within the given namespace. The id must be unique
+            within its namespace.
+          in: query
+          name: groupKey.id
+          type: string
+        - description: |-
+            Namespaces provide isolation for ids, i.e an id only needs to be unique
+            within its namespace.
+
+            Namespaces are currently only created as part of IdentitySource creation
+            from Admin Console. A namespace `"identitysources/{identity_source_id}"` is
+            created corresponding to every Identity Source `identity_source_id`.
+          in: query
+          name: groupKey.namespace
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LookupGroupNameResponse'
+      tags:
+        - groups
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1beta1/groups:search':
+    get:
+      description: Searches for Groups.
+      operationId: cloudidentity.groups.search
+      parameters:
+        - description: |-
+            The max number of groups to return.
+            GroupView | Default | Maximum
+            --------- | ------- | -------
+            BASIC     | 200     | 1000
+            FULL      | 50      | 500
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'The next_page_token value returned from a previous search request, if any.'
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            Query string for performing search on groups.
+            Users can search on namespace and label attributes of groups.
+            EXACT match ('=') is supported on namespace, and CONTAINS match (':') is
+            supported on labels. This is a `required` field.
+            Multiple queries can be combined using `AND` operator. The operator is case
+            sensitive.
+            An example query would be:
+            "namespace=<namespace_value> AND labels:<labels_value>".
+          in: query
+          name: query
+          type: string
+        - description: 'Group resource view to be returned. Defaults to [GroupView.BASIC]().'
+          enum:
+            - BASIC
+            - FULL
+          in: query
+          name: view
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SearchGroupsResponse'
+      tags:
+        - groups
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1beta1/{name}':
+    delete:
+      description: Deletes a Membership.
+      operationId: cloudidentity.groups.memberships.delete
+      parameters:
+        - description: |-
+            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+            Membership to be deleted.
+
+            Format: `groups/{group_id}/memberships/{member_id}`, where `group_id` is
+            the unique id assigned to the Group to which Membership belongs to, and
+            member_id is the unique id assigned to the member.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      tags:
+        - groups
+    get:
+      description: Retrieves a Membership.
+      operationId: cloudidentity.groups.memberships.get
+      parameters:
+        - description: |-
+            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+            Membership to be retrieved.
+
+            Format: `groups/{group_id}/memberships/{member_id}`, where `group_id` is
+            the unique id assigned to the Group to which Membership belongs to, and
+            `member_id` is the unique id assigned to the member.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Membership'
+      tags:
+        - groups
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: Updates a Group.
+      operationId: cloudidentity.groups.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Group'
+        - description: |-
+            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+            Group in the format: `groups/{group_id}`, where group_id is the unique id
+            assigned to the Group.
+
+            Must be left blank while creating a Group
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: 'Editable fields: `display_name`, `description`'
+          in: query
+          name: updateMask
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      tags:
+        - groups
+  '/v1beta1/{parent}/memberships':
+    get:
+      description: List Memberships within a Group.
+      operationId: cloudidentity.groups.memberships.list
+      parameters:
+        - description: |-
+            Maximum number of Memberships to return.
+
+            MembershipView | Default | Maximum
+            -------------- | ------- | -------
+            BASIC          | 200     | 1000
+            FULL           | 50      | 500
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'The next_page_token value returned from a previous list request, if any'
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+            Group to list Memberships within.
+
+            Format: `groups/{group_id}`, where `group_id` is the unique id assigned to
+            the Group.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: Membership resource view to be returned. Defaults to MembershipView.BASIC.
+          enum:
+            - BASIC
+            - FULL
+          in: query
+          name: view
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListMembershipsResponse'
+      tags:
+        - groups
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a Membership.
+      operationId: cloudidentity.groups.memberships.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Membership'
+        - description: |-
+            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+            Group to create Membership within. Format: `groups/{group_id}`, where
+            `group_id` is the unique id assigned to the Group.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      tags:
+        - groups
+  '/v1beta1/{parent}/memberships:lookup':
+    get:
+      description: |-
+        Looks up [resource
+        name](https://cloud.google.com/apis/design/resource_names) of a Membership
+        within a Group by member's EntityKey.
+      operationId: cloudidentity.groups.memberships.lookup
+      parameters:
+        - description: |-
+            The id of the entity within the given namespace. The id must be unique
+            within its namespace.
+          in: query
+          name: memberKey.id
+          type: string
+        - description: |-
+            Namespaces provide isolation for ids, i.e an id only needs to be unique
+            within its namespace.
+
+            Namespaces are currently only created as part of IdentitySource creation
+            from Admin Console. A namespace `"identitysources/{identity_source_id}"` is
+            created corresponding to every Identity Source `identity_source_id`.
+          in: query
+          name: memberKey.namespace
+          type: string
+        - description: |-
+            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+            Group to lookup Membership within.
+
+            Format: `groups/{group_id}`, where `group_id` is the unique id assigned to
+            the Group.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LookupMembershipNameResponse'
+      tags:
+        - groups
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+definitions:
+  EntityKey:
+    description: |-
+      An EntityKey uniquely identifies an Entity. Namespaces are used to provide
+      isolation for ids.  A single Id can be reused across namespaces but the
+      combination of a namespace and an id must be unique.
+    properties:
+      id:
+        description: |-
+          The id of the entity within the given namespace. The id must be unique
+          within its namespace.
+        type: string
+      namespace:
+        description: |-
+          Namespaces provide isolation for ids, i.e an id only needs to be unique
+          within its namespace.
+
+          Namespaces are currently only created as part of IdentitySource creation
+          from Admin Console. A namespace `"identitysources/{identity_source_id}"` is
+          created corresponding to every Identity Source `identity_source_id`.
+        type: string
+    type: object
+  Group:
+    description: Resource representing a Group
+    properties:
+      additionalGroupKeys:
+        description: Optional. Additional entity key aliases for a Group
+        items:
+          $ref: '#/definitions/EntityKey'
+        type: array
+      createTime:
+        description: |-
+          The time when the Group was created.
+          Output only
+        format: google-datetime
+        type: string
+      description:
+        description: |-
+          An extended description to help users determine the purpose of a Group. For
+          example, you can include information about who should join the Group, the
+          types of messages to send to the Group, links to FAQs about the Group, or
+          related Groups. Maximum length is 4,096 characters.
+        type: string
+      displayName:
+        description: The Group's display name.
+        type: string
+      groupKey:
+        $ref: '#/definitions/EntityKey'
+        description: |-
+          EntityKey of the Group.
+
+          Must be set when creating a Group, read-only afterwards.
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Labels for Group resource.
+          Required.
+          For creating Groups under a namespace, set label key to
+          'labels/system/groups/external' and label value as empty.
+        type: object
+      name:
+        description: |-
+          [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+          Group in the format: `groups/{group_id}`, where group_id is the unique id
+          assigned to the Group.
+
+          Must be left blank while creating a Group
+        type: string
+      parent:
+        description: |-
+          The entity under which this Group resides in Cloud Identity resource
+          hierarchy. Must be set when creating a Group, read-only afterwards.
+
+          Currently allowed types: 'identitysources'.
+        type: string
+      updateTime:
+        description: |-
+          The time when the Group was last updated.
+          Output only
+        format: google-datetime
+        type: string
+    type: object
+  ListMembershipsResponse:
+    properties:
+      memberships:
+        description: List of Memberships
+        items:
+          $ref: '#/definitions/Membership'
+        type: array
+      nextPageToken:
+        description: |-
+          Token to retrieve the next page of results, or empty if there are no
+          more results available for listing.
+        type: string
+    type: object
+  LookupGroupNameResponse:
+    properties:
+      name:
+        description: |-
+          [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+          Group in the format: `groups/{group_id}`, where `group_id` is the unique id
+          assigned to the Group.
+        type: string
+    type: object
+  LookupMembershipNameResponse:
+    properties:
+      name:
+        description: |-
+          [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+          Membership being looked up.
+
+          Format: `groups/{group_id}/memberships/{member_id}`, where `group_id` is
+          the unique id assigned to the Group to which Membership belongs to, and
+          `member_id` is the unique id assigned to the member.
+        type: string
+    type: object
+  Membership:
+    description: Resource representing a Membership within a Group
+    properties:
+      createTime:
+        description: Creation timestamp of the Membership.
+        format: google-datetime
+        type: string
+      memberKey:
+        $ref: '#/definitions/EntityKey'
+        description: |-
+          EntityKey of the entity to be added as the member. Must be set while
+          creating a Membership, read-only afterwards.
+
+          Currently allowed entity types: `Users`, `Groups`.
+      name:
+        description: |-
+          [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+          Membership in the format: `groups/{group_id}/memberships/{member_id}`,
+          where group_id is the unique id assigned to the Group to which Membership
+          belongs to, and member_id is the unique id assigned to the member
+
+          Must be left blank while creating a Membership.
+        type: string
+      roles:
+        description: |-
+          Roles for a member within the Group.
+
+          Currently supported MembershipRoles: `"MEMBER"`.
+        items:
+          $ref: '#/definitions/MembershipRole'
+        type: array
+      updateTime:
+        description: Last updated timestamp of the Membership.
+        format: google-datetime
+        type: string
+    type: object
+  MembershipRole:
+    description: Resource representing a role within a Membership.
+    properties:
+      name:
+        description: |-
+          MembershipRole in string format.
+
+          Currently supported MembershipRoles: `"MEMBER"`.
+        type: string
+    type: object
+  Operation:
+    description: |-
+      This resource represents a long-running operation that is the result of a
+      network API call.
+    properties:
+      done:
+        description: |-
+          If the value is `false`, it means the operation is still in progress.
+          If `true`, the operation is completed, and either `error` or `response` is
+          available.
+        type: boolean
+      error:
+        $ref: '#/definitions/Status'
+        description: The error result of the operation in case of failure or cancellation.
+      metadata:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          Service-specific metadata associated with the operation.  It typically
+          contains progress information and common metadata such as create time.
+          Some services might not provide such metadata.  Any method that returns a
+          long-running operation should document the metadata type, if any.
+        type: object
+      name:
+        description: |-
+          The server-assigned name, which is only unique within the same service that
+          originally returns it. If you use the default HTTP mapping, the
+          `name` should have the format of `operations/some/unique/name`.
+        type: string
+      response:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          The normal response of the operation in case of success.  If the original
+          method returns no data on success, such as `Delete`, the response is
+          `google.protobuf.Empty`.  If the original method is standard
+          `Get`/`Create`/`Update`, the response should be the resource.  For other
+          methods, the response should have the type `XxxResponse`, where `Xxx`
+          is the original method name.  For example, if the original method name
+          is `TakeSnapshot()`, the inferred response type is
+          `TakeSnapshotResponse`.
+        type: object
+    type: object
+  SearchGroupsResponse:
+    properties:
+      groups:
+        description: List of Groups satisfying the search query.
+        items:
+          $ref: '#/definitions/Group'
+        type: array
+      nextPageToken:
+        description: |-
+          Token to retrieve the next page of results, or empty if there are no
+          more results available for specified query.
+        type: string
+    type: object
+  Status:
+    description: |-
+      The `Status` type defines a logical error model that is suitable for different
+      programming environments, including REST APIs and RPC APIs. It is used by
+      [gRPC](https://github.com/grpc). The error model is designed to be:
+
+      - Simple to use and understand for most users
+      - Flexible enough to meet unexpected needs
+
+      # Overview
+
+      The `Status` message contains three pieces of data: error code, error message,
+      and error details. The error code should be an enum value of
+      google.rpc.Code, but it may accept additional error codes if needed.  The
+      error message should be a developer-facing English message that helps
+      developers *understand* and *resolve* the error. If a localized user-facing
+      error message is needed, put the localized message in the error details or
+      localize it in the client. The optional error details may contain arbitrary
+      information about the error. There is a predefined set of error detail types
+      in the package `google.rpc` that can be used for common error conditions.
+
+      # Language mapping
+
+      The `Status` message is the logical representation of the error model, but it
+      is not necessarily the actual wire format. When the `Status` message is
+      exposed in different client libraries and different wire protocols, it can be
+      mapped differently. For example, it will likely be mapped to some exceptions
+      in Java, but more likely mapped to some error codes in C.
+
+      # Other uses
+
+      The error model and the `Status` message can be used in a variety of
+      environments, either with or without APIs, to provide a
+      consistent developer experience across different environments.
+
+      Example uses of this error model include:
+
+      - Partial errors. If a service needs to return partial errors to the client,
+          it may embed the `Status` in the normal response to indicate the partial
+          errors.
+
+      - Workflow errors. A typical workflow has multiple steps. Each step may
+          have a `Status` message for error reporting.
+
+      - Batch operations. If a client uses batch request and batch response, the
+          `Status` message should be used directly inside batch response, one for
+          each error sub-response.
+
+      - Asynchronous operations. If an API call embeds asynchronous operation
+          results in its response, the status of those operations should be
+          represented directly using the `Status` message.
+
+      - Logging. If some API errors are stored in logs, the message `Status` could
+          be used directly after any stripping needed for security/privacy reasons.
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: |-
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          type: object
+        type: array
+      message:
+        description: |-
+          A developer-facing error message, which should be in English. Any
+          user-facing error message should be localized and sent in the
+          google.rpc.Status.details field, or localized by the client.
+        type: string
+    type: object
