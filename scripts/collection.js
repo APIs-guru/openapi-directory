@@ -279,7 +279,10 @@ function validateCollection(dir, command) {
 
   Promise.mapSeries(_.toPairs(specs), ([filename, swagger]) => {
     console.error('======================== ' + filename + ' ================');
-    assert(!_.isEmpty(swagger.paths), 'Definition should have operations');
+    //assert(!_.isEmpty(swagger.paths), 'Definition should have operations');
+    if (_.isEmpty(swagger.paths)) {
+      warnings.push('Definition should have operations: '+filename);
+    }
     //FIXME: we can't do this check yet because of Amazon AWS and some others
     //_.each(swagger.paths, function (path, key) {
     //  assert(key.indexOf('?') === -1, 'Path contains hard-coded query parameters');
@@ -370,8 +373,10 @@ function validatePreferred(specs) {
         else console.warn('In validatePreferred (2). Not found',id,version);
       }
       assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}": "${typeof value}"`);
-      //assert.fail(value !== true || !seenTrue,true,`Multiple preferred versions in "${id}" "${version}": "${value}"`,validatePreferred);
-      assert(value !== true || !seenTrue,`Multiple preferred versions in "${id}" "${version}": "${value}"`,validatePreferred);
+      //assert(value !== true || !seenTrue,`Multiple preferred versions in "${id}" "${version}": "${value}"`,validatePreferred);
+      if (value === true && seenTrue) {
+        warnings.push(`Multiple preferred versions in "${id}" "${version}": "${value}"`,validatePreferred);
+      }
       seenTrue = value || seenTrue;
       if ((version > maxVersion) && (version.indexOf('alpha')<0) && (version.indexOf('beta')<0)) {
         maxVersion = version;
